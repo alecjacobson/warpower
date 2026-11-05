@@ -18,6 +18,6 @@ pip install 'https://github.com/NVIDIA/warp/releases/download/v1.19.0/warp_lang-
 
 # Best measured result
 
-On the paper's five-cluster distribution with 100,000 sites, Warpower constructs Voronoi adjacency on an NVIDIA L40 in **30.7 ms**, versus **66.0 ms** for Paragram: **2.15× faster**. All Warpower cells report success; Paragram reports four boundary failures and one empty cell.
+On the paper's five-cluster distribution with 100,000 sites, Warpower constructs Voronoi adjacency on an NVIDIA L40 in **30.4 ms**, versus **66.0 ms** for Paragram: **2.17× faster**. All Warpower cells report success; Paragram reports four boundary failures and one empty cell.
 
 Both timings include construction allocation calls, use resident GPU inputs, and average ten runs after three warm-ups. Warp retains up to 32 GiB in its allocator; PyTorch uses its normal caching allocator. Neither measured run was CPU-throttled. An independent double-precision audit of all 359 disagreeing rows finds no extra or missing Warpower edges; shared rows were not audited. Broader performance and numerical evaluation remain in progress. [Warpower measurements](results/warpower-l40/matrix/cluster5-100000-voronoi.json), [Paragram measurements](results/paragram-l40/matrix/cluster5-100000-voronoi.json), [adjacency audit](results/warpower-l40/consistency-cluster5-100k-voronoi-audit.json), [reproduction](docs/benchmarks.md).

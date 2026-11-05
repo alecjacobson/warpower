@@ -1,0 +1,72 @@
+{
+  "backend": "warpower",
+  "points_sha256": "4038ac6008224d1fb95fdcc930acc6ec6a635131ff82caa6c3da28fb65fe39cb",
+  "weights_sha256": null,
+  "distribution": "uniform",
+  "n": 1000000,
+  "seed": 42,
+  "weighted": false,
+  "memory": {
+    "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+    "interval_seconds": 0.001,
+    "before_construction_bytes": 1137836032,
+    "peak_bytes": 4849795072,
+    "samples": 1486,
+    "error": null
+  },
+  "cpu_quota_during_measurement": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "cpu_throttled": false,
+  "mempool_retain_mb": 32768,
+  "warmup": 3,
+  "repeats": 10,
+  "seconds": [
+    0.12100890651345253,
+    0.1179966889321804,
+    0.11749598383903503,
+    0.11794765293598175,
+    0.11906496435403824,
+    0.11953471973538399,
+    0.11925122141838074,
+    0.12001431360840797,
+    0.11838217452168465,
+    0.11772506684064865
+  ],
+  "mean_seconds": 0.11884216926991939,
+  "median_seconds": 0.11872356943786144,
+  "nnz": 15436276,
+  "status_counts": {
+    "0": 1000000
+  },
+  "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+  "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+  "python": "3.10.12",
+  "versions": {
+    "warp": "1.19.0",
+    "warpower_source_sha256": "17ce6b20b8698c8ee458b4c806d7d1f32f0e049d7eaf27887d46824802228bf0",
+    "warpower_dirty": false,
+    "warpower_commit": "f25be4ca828ac35b32f7a4de709399ba85373602",
+    "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+  },
+  "diagnostics": {
+    "retried_cells": 1,
+    "double_precision_cells": 0,
+    "consistency_retried_cells": 4,
+    "asymmetric_cells_remaining": 0,
+    "chunk_size": 1000000,
+    "leaf_size": 4,
+    "knn_requested": 8,
+    "knn_effective": 0,
+    "warm_start": "nearest leaf"
+  }
+}

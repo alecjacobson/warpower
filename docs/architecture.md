@@ -5,6 +5,52 @@ bounded convex cell against candidate bisectors, then emits its active neighbor
 planes. The final pass produces symmetric CSR adjacency. All project GPU code is
 written as NVIDIA Warp kernels; sorting and scans use Warp's supplied primitives.
 
+## Comparison with Paragram
+
+This comparison describes the code we benchmarked: Paragram
+[`4f36b1f`](https://github.com/zenseact/paragram/tree/4f36b1f2c8738912c5efc056a06023d4c1d2da07)
+and Warpower's implementation at
+[`d38b80c`](https://github.com/alecjacobson/warpower/tree/d38b80c).
+GPU-dependent defaults below refer to the NVIDIA L40 path. Links in the table
+point to the corresponding source files.
+
+| Aspect | Paragram | Warpower |
+| --- | --- | --- |
+| GPU implementation and dependencies | Handwritten C++/CUDA extension loaded through PyTorch; cuBQL supplies the BVH builder. Source builds use NVCC. [Backend][p-backend] | Python-defined Warp kernels; Warp supplies compilation, radix sorting, and scans. No project C++/CUDA extension; PyTorch is optional. [Package dependencies](../pyproject.toml), [hierarchy](../warpower/_bvh.py) |
+| Shared construction method | One GPU thread clips each bounded convex cell against candidate bisectors, represents vertices by triples of incident planes, and exports active neighbor planes. Scratch storage is interleaved across 32 cells for coalesced access. [Clipper][p-cell] | Retains that construction method and 32-cell storage layout. One generic clipper serves Voronoi/power construction and float32/float64 recovery. Plane triples use three 10-bit indices packed into a `uint32`, allowing larger retry capacities. [Clipper](../warpower/_cell.py) |
+| Plane coordinates | Normalized plane equations in world coordinates, with the offset formed from the sum and difference of the two site positions. [Bisectors][p-cell] | Also normalizes planes, but expresses them relative to the seed, using position differences and weight differences. This reduces sensitivity to large world-coordinate offsets. [Clipping](../warpower/_cell.py) |
+| Spatial hierarchy | cuBQL's default spatial-median GPU builder; power diagrams add node maximum weights through bottom-up propagation with atomic arrival counters. [Builder][p-builder], [cuBQL configuration][p-cubql] | 63-bit Morton sorting followed by a Karras binary radix tree. A temporary segment tree supplies subtree bounds and maximum weights through ordered kernel launches. This adds temporary arrays and avoids a custom inter-block publication protocol. [Builder](../warpower/_bvh.py) |
+| Initialization and tuning | Default leaf threshold 17 on L40; the separate KNN pass is disabled on this path. Traversal first descends to a nearby leaf. CSR initial guesses are supported. [Entry point][p-entry], [traversal][p-traversal] | Default leaf threshold 4; starts with a nearby leaf and supports CSR initial guesses. Accepts `knn` for compatibility but keeps the separate KNN pass disabled on all devices; reports requested/effective values in diagnostics. [API](../warpower/_api.py), [traversal](../warpower/_construct.py) |
+| Candidate rejection | Directional cell-box bounds and distance-to-bisector tests; weighted traversal also uses each node's maximum weight. [Traversal][p-power-traversal], [clipper][p-cell] | Uses directional bounds plus an extra test minimizing the bisector expression over a node box for every current cell vertex. Weighted rejection checks the signed numerator before squaring. [Bounds and traversal](../warpower/_construct.py), [clipper](../warpower/_cell.py) |
+| Traversal queue overflow | Best-first traversal uses 64 entries. When full, a nearer incoming entry replaces the farthest queued entry; otherwise the incoming entry is discarded. [Voronoi][p-traversal], [power][p-power-traversal] | Starts with 128 entries. Compacts entries rejected by the updated cell bounds; if still full, records failure and retries with capacity up to 512. Does not evict a potentially valid candidate to fit the queue. [Traversal](../warpower/_construct.py), [retry schedule](../warpower/_api.py) |
+| Capacity and precision recovery | Float32 clipping with fixed limits of 64 planes and 64 vertices. The public construction call returns statuses without an automatic larger-capacity or float64 retry. [Clipper][p-cell], [entry point][p-entry] | Starts at 64, retries failures at 128 in float32, then at 128/256/512 in float64. Retains successful rows and reuses failed candidates as retry seeds. Sparse retries use one active cell per GPU warp; float64 Cartesian vertex positions are cached. [Retry schedule](../warpower/_api.py), [scratch storage](../warpower/_cell.py) |
+| Failed-cell output | Exports active neighbor planes even when a cell's final status is unsuccessful; callers must inspect status. [Power entry point][p-entry], [Voronoi entry point][p-voronoi-entry] | Unresolved failed cells have explicit statuses and empty CSR rows. Candidate IDs retained for retries are never emitted as partial failed-cell adjacency. [Emission](../warpower/_cell.py) |
+| Adjacency consistency and CSR | Gathers and reorders raw rows, scans counts, then checks reverse connections and inserts missing reverse edges with atomics. Does not reclip cells to resolve one-sided facets. [Assembly][p-adjacency], [entry point][p-entry] | Checks raw facet reciprocity first and retries both endpoints of one-sided facets in float64, for up to three passes. If reciprocal, scans counts and copies rows directly; otherwise uses the general symmetric compactor and reports unresolved asymmetry. [Assembly](../warpower/_adjacency.py), [recovery](../warpower/_api.py) |
+| Exactly coincident sites | No global duplicate-ownership pass in the construction pipeline. [Entry point][p-entry] | GPU hash pass selects the greatest weight, then the lowest input index. Other coincident sites are empty and excluded from neighbors; signed zeros are treated as the same position. [Ownership](../warpower/_canonical.py) |
+| Python interface | Float32 CUDA PyTorch inputs; immutable result with int32 `adjacency`, `offsets`, and `status` tensors. [API][p-api] | Also accepts native CUDA Warp arrays and NumPy inputs. Preserves the three result fields for PyTorch callers, adds diagnostics and `chunk_size`, and honors the current PyTorch CUDA stream. [API](../warpower/_api.py), [compatibility details](api.md) |
+| Chunking and allocator policy | Chunks temporary clipping storage using `PARAGRAM_NUM_CHUNKS` or `PARAGRAM_MEM_FRAC` (default 0.5); tensor allocations use PyTorch's cache. [Chunking][p-chunking] | Adds `chunk_size` and `WARPOWER_*` equivalents, with fallback to the Paragram environment variables. The published benchmarks configure 32 GiB of Warp allocator retention; the library leaves that global policy to the application. Inputs, hierarchy, and output stay resident. [API](../warpower/_api.py), [benchmark policy](benchmarks.md) |
+
+Both implementations use floating-point predicates; neither this comparison nor
+successful statuses establish exact geometric equivalence. The
+[numerical audit](numerical-audit.md) records observed adjacency differences and
+the scope of independent checks. The [full benchmark report](../results/summary/report.md)
+records timings and memory costs, including slower cases; it measures the whole
+pipeline and does not attribute the aggregate speedup to any single change above.
+
+[p-backend]: https://github.com/zenseact/paragram/blob/4f36b1f2c8738912c5efc056a06023d4c1d2da07/paragram/_backend.py
+[p-cell]: https://github.com/zenseact/paragram/blob/4f36b1f2c8738912c5efc056a06023d4c1d2da07/paragram/csrc/laguerre/faster_convex_cell.cuh
+[p-builder]: https://github.com/zenseact/paragram/blob/4f36b1f2c8738912c5efc056a06023d4c1d2da07/paragram/csrc/laguerre/pwr_bvh.cu
+[p-cubql]: https://github.com/NVIDIA/cuBQL/blob/d18c5fa1a5c98665d13484841ae65774da7751e8/cuBQL/bvh.h
+[p-entry]: https://github.com/zenseact/paragram/blob/4f36b1f2c8738912c5efc056a06023d4c1d2da07/paragram/csrc/laguerre/laguerre_ultra.cu
+[p-voronoi-entry]: https://github.com/zenseact/paragram/blob/4f36b1f2c8738912c5efc056a06023d4c1d2da07/paragram/csrc/laguerre/voronoi_ultra.cu
+[p-traversal]: https://github.com/zenseact/paragram/blob/4f36b1f2c8738912c5efc056a06023d4c1d2da07/paragram/csrc/laguerre/voronoi_bvh.cuh
+[p-power-traversal]: https://github.com/zenseact/paragram/blob/4f36b1f2c8738912c5efc056a06023d4c1d2da07/paragram/csrc/laguerre/pwr_bvh.cuh
+[p-adjacency]: https://github.com/zenseact/paragram/blob/4f36b1f2c8738912c5efc056a06023d4c1d2da07/paragram/csrc/laguerre/adjacency.cuh
+[p-api]: https://github.com/zenseact/paragram/blob/4f36b1f2c8738912c5efc056a06023d4c1d2da07/paragram/_api.py
+[p-chunking]: https://github.com/zenseact/paragram/blob/4f36b1f2c8738912c5efc056a06023d4c1d2da07/paragram/csrc/laguerre/chunking.h
+
+## Cell construction and recovery
+
 The clipper and directional bounds follow
 [Paragram](https://arxiv.org/abs/2605.06408). Plane coordinates are relative to the
 seed, avoiding subtraction of large squared world coordinates. Signed power

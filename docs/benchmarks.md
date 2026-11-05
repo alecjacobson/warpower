@@ -75,6 +75,13 @@ and is an approximate device-wide peak. The separate process is necessary becaus
 the CUDA reference holds Python's GIL during construction. Run on an otherwise
 idle GPU. Device index 0 is used by both the benchmark and sampler.
 
+Run CPU-intensive audits separately from timing. This VM exposes 128 logical
+CPUs but its cgroup permits only four CPU cores; simultaneous audits can throttle
+benchmark host code. Results now record throttled periods and time at each
+visible cgroup CPU limit during measurement. The matrix will not reuse a
+throttled result, and the summary rejects one. Historical results collected
+before this check are preserved in archives and excluded from the final matrix.
+
 ## Correctness
 
 Status counts accompany every timing. Timing alone does not imply correct or

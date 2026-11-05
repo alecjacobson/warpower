@@ -27,6 +27,10 @@ def load_pairs(root):
         if not other.exists():
             continue
         w, p = json.loads(path.read_text()), json.loads(other.read_text())
+        if p.get("cpu_throttled", True) or w.get("cpu_throttled", True):
+            raise ValueError(
+                f"{path.name}: CPU throttling detected or not measured; rerun in isolation"
+            )
         if (w["warmup"], w["repeats"]) != (3, 10):
             raise ValueError(f"{path.name}: expected three warm-ups and ten measured calls")
         for field in (

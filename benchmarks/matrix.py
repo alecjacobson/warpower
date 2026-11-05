@@ -100,6 +100,7 @@ def main():
                 if output.exists():
                     old = json.loads(output.read_text())
                     matches = all(old.get(k) == v for k, v in expected.items())
+                    matches &= not old.get("cpu_throttled", True)
                     matches &= (
                         old.get("versions", {}).get("benchmark_source_sha256") == benchmark_source
                     )
@@ -156,6 +157,7 @@ def main():
                             seconds=measured["mean_seconds"],
                             status_counts=measured["status_counts"],
                             memory=measured["memory"],
+                            cpu_throttled=measured["cpu_throttled"],
                         )
                 except subprocess.TimeoutExpired:
                     result = {"backend": backend, "case": name, "timeout": args.job_timeout}

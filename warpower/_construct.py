@@ -1,11 +1,12 @@
 """Fused best-first traversal and clipping kernels."""
 
 from functools import lru_cache
+from typing import Any
 
 import warp as wp
 
 from ._bvh import Tree, directional_radius_squared, distance_squared
-from ._cell import Cell, Scratch, clip, emit, init_cell
+from ._cell import Cell, Cell64, Scratch, Scratch64, clip, emit, init_cell, position
 
 wp.set_module_options({"enable_backward": False})
 
@@ -23,14 +24,15 @@ def node_distance(tree: Tree, node: int, p: wp.vec3, weight: float, weighted: bo
 
 
 @wp.func(inline=True)
-def node_radius(tree: Tree, node: int, p: wp.vec3, lo: wp.vec3, hi: wp.vec3):
-    return directional_radius_squared(p, tree.lower[node], tree.upper[node], lo, hi) * 1.000002
+def node_radius(tree: Tree, node: int, p: wp.vec3, lo: Any, hi: Any):
+    return (
+        directional_radius_squared(p, tree.lower[node], tree.upper[node], wp.vec3(lo), wp.vec3(hi))
+        * 1.000002
+    )
 
 
 @wp.func(inline=True)
-def node_may_clip(
-    tree: Tree, node: int, p: wp.vec3, wi: float, s: Scratch, cell: Cell, weighted: bool
-):
+def node_may_clip(tree: Tree, node: int, p: wp.vec3, wi: float, s: Any, cell: Any, weighted: bool):
     lower = tree.lower[node] - p
     upper = tree.upper[node] - p
     delta = float(0.0)
@@ -40,8 +42,7 @@ def node_may_clip(
     # This is |x-clamp(x,box)|^2-|x|^2. If every vertex remains on the
     # seed's side, no site's bisector in the node can cut this convex cell.
     for k in range(cell.nv):
-        h = s.positions[cell.base + 32 * k]
-        x = wp.vec3(h[0], h[1], h[2]) / h[3]
+        x = wp.vec3(position(s, cell.base + 32 * k))
         q = wp.min(wp.max(x, lower), upper)
         q2 = wp.dot(q, q)
         products = wp.cw_mul(x, q)
@@ -57,9 +58,13 @@ def node_may_clip(
 
 
 @lru_cache(maxsize=None)
-def make_construct_kernel(weighted=False, queue_capacity=64):
+def make_construct_kernel(weighted=False, queue_capacity=64, robust=False, lane_stride=1):
     weighted_mode = wp.constant(weighted)
     queue_size = wp.constant(queue_capacity)
+    vector = wp.vec3d if robust else wp.vec3
+    scratch_type = Scratch64 if robust else Scratch
+    cell_type = Cell64 if robust else Cell
+    stride = wp.constant(lane_stride)
 
     @wp.kernel(enable_backward=False, module="unique", module_options={"fast_math": True})
     def construct(
@@ -69,20 +74,26 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
         jobs: wp.array[int],
         chunk_offset: int,
         output_by_job: bool,
-        scratch: Scratch,
+        scratch: scratch_type,
         neighbors: wp.array2d[int],
         counts: wp.array[int],
         status: wp.array[int],
+        seed_neighbors: wp.array2d[int],
+        seed_by_job: bool,
         hints: wp.array[int],
         hint_offsets: wp.array[int],
         use_hints: bool,
     ):
-        slot = wp.tid()
+        if wp.tid() % stride != 0:
+            return
+        slot = wp.tid() // stride
         job = chunk_offset + slot
         i = jobs[job]
         output = i
         if output_by_job:
             output = job
+            if status[output] == 0 or status[output] == 3:
+                return
         if tree.owners[i] != i:
             counts[output] = 0
             status[output] = 3
@@ -93,7 +104,20 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
             wi = weights[i]
         lower = tree.lower[1] - wp.vec3(1.00001)
         upper = tree.upper[1] + wp.vec3(1.00001)
-        cell = init_cell(scratch, slot, p, lower, upper)
+        cell = init_cell(scratch, slot, p, lower, upper, cell_type())
+        if output_by_job:
+            seed_row = i
+            if seed_by_job:
+                seed_row = job
+            for k in range(seed_neighbors.shape[1]):
+                j = seed_neighbors[seed_row, k]
+                if j >= 0:
+                    wj = float(0.0)
+                    if wp.static(weighted_mode):
+                        wj = weights[j]
+                    cell = clip(scratch, cell, i, j, vector(points[j]) - vector(p), wi, wj, True)
+                    if cell.status != 0:
+                        break
         if use_hints:
             for h in range(hint_offsets[i], hint_offsets[i + 1]):
                 j = hints[h]
@@ -102,7 +126,7 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
                     wj = float(0.0)
                     if wp.static(weighted_mode):
                         wj = weights[j]
-                    cell = clip(scratch, cell, i, j, points[j] - p, wi, wj, True)
+                    cell = clip(scratch, cell, i, j, vector(points[j]) - vector(p), wi, wj, True)
                 if cell.status != 0:
                     break
 
@@ -188,7 +212,16 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
                     wj = float(0.0)
                     if wp.static(weighted_mode):
                         wj = weights[j]
-                    cell = clip(scratch, cell, i, j, points[j] - p, wi, wj, use_hints)
+                    cell = clip(
+                        scratch,
+                        cell,
+                        i,
+                        j,
+                        vector(points[j]) - vector(p),
+                        wi,
+                        wj,
+                        use_hints or output_by_job,
+                    )
                     if cell.status != 0:
                         break
             node = int(-1)

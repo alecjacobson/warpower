@@ -32,7 +32,8 @@ in each direction.
 | 4 | Traversal queue capacity exhausted |
 | 5 | Inconsistent floating-point clipping boundary |
 
-Failed cells are retried with larger capacity before return. Remaining failures
+Failed cells are retried with larger capacity and, when needed, double-precision
+clipping before return. Remaining failures
 are explicit; they produce no partial neighbor list. Inspect `status` when using
 difficult geometry. Floating-point predicates are not exact.
 

@@ -12,11 +12,28 @@ from benchmarks.fetch_scenes import SCENES
 DISTRIBUTIONS = ("uniform", "gradient", "cluster5", "cluster10")
 SIZES = (100000, 500000, 1000000, 2000000, 5000000, 10000000, 15000000)
 MODES = ("voronoi", "power")
+LABELS = {
+    "uniform": "Uniform",
+    "gradient": "Gradient",
+    "cluster5": "Five clusters",
+    "cluster10": "Ten clusters",
+}
+MARKERS = {"uniform": "o", "gradient": "s", "cluster5": "^", "cluster10": "D"}
 
 
 def expected_cases():
     synthetic = {(d, n, mode) for d in DISTRIBUTIONS for n in SIZES for mode in MODES}
     return synthetic, {(scene, mode) for scene in SCENES for mode in MODES}
+
+
+def aggregate(rows):
+    if not rows:
+        return None
+    return {
+        "cases": len(rows),
+        "geometric_mean_speedup": math.exp(sum(math.log(r["speedup"]) for r in rows) / len(rows)),
+        "warpower_faster_cases": sum(r["speedup"] > 1 for r in rows),
+    }
 
 
 def load_pairs(root):
@@ -124,7 +141,7 @@ def plots(rows, output):
                         color=colors[backend],
                         label=f"{backend.title()} {mode}",
                     )
-        axis.set(title=distribution, xlabel="Sites", ylabel="Construction time (ms)")
+        axis.set(title=LABELS[distribution], xlabel="Sites", ylabel="Construction time (ms)")
         axis.grid(True, which="both", alpha=0.2)
     axes.flat[0].legend(fontsize=8)
     figure.suptitle("NVIDIA L40 · fresh construction · mean of 10 runs")
@@ -142,8 +159,8 @@ def plots(rows, output):
                 axis.semilogx(
                     [r["n"] for r in group],
                     [r["speedup"] for r in group],
-                    marker="o",
-                    label=distribution,
+                    marker=MARKERS[distribution],
+                    label=LABELS[distribution],
                 )
         axis.axhline(1, color="black", linestyle="--", linewidth=1)
         axis.set(title=mode.title(), xlabel="Sites", ylabel="Paragram time / Warpower time")
@@ -176,6 +193,8 @@ def plots(rows, output):
         axis.legend()
         figure.savefig(output / "scene-speedup.svg")
         plt.close(figure)
+    for path in output.glob("*.svg"):
+        path.write_text("\n".join(line.rstrip() for line in path.read_text().splitlines()) + "\n")
 
 
 def main():
@@ -199,7 +218,7 @@ def main():
         if "warpower_source_sha256" in item["versions"]
     )
     with (args.output / "measurements.csv").open("w") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     summary = {
@@ -213,10 +232,35 @@ def main():
         "warpower_asymmetric_cells_total": sum(
             r["warpower_asymmetric_cells_remaining"] for r in rows
         ),
+        "groups": {
+            "synthetic": aggregate([r for r in rows if r["distribution"] in DISTRIBUTIONS]),
+            "real_scenes": aggregate([r for r in rows if r["distribution"] in SCENES]),
+        },
+        "slowest_relative_case": min(rows, key=lambda r: r["speedup"]),
+        "largest_memory_ratio_case": max(
+            rows, key=lambda r: r["warpower_peak_gib"] / r["paragram_peak_gib"]
+        ),
         "provenance": provenance,
         "rows": rows,
     }
     (args.output / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+    worst = summary["slowest_relative_case"]
+    memory = summary["largest_memory_ratio_case"]
+    tradeoffs = (
+        f"The lowest time ratio is {worst['speedup']:.3f}× on {worst['distribution']} "
+        f"{worst['n']:,}-site {worst['mode']}. "
+        f"The largest relative memory peak is {memory['warpower_peak_gib'] / memory['paragram_peak_gib']:.2f}× "
+        f"on {memory['distribution']} {memory['n']:,}-site {memory['mode']}: "
+        f"{memory['warpower_peak_gib']:.2f} GiB for Warpower versus "
+        f"{memory['paragram_peak_gib']:.2f} GiB for Paragram."
+    )
+    groups = []
+    for name, stats in summary["groups"].items():
+        if stats:
+            groups.append(
+                f"{name.replace('_', ' ').capitalize()}: {stats['geometric_mean_speedup']:.3f}× "
+                f"geometric mean, faster in {stats['warpower_faster_cases']}/{stats['cases']} cases."
+            )
     lines = [
         "# NVIDIA L40 benchmark comparison",
         "",
@@ -225,13 +269,20 @@ def main():
         f"{summary['geometric_mean_speedup']:.3f}×; "
         f"Warpower is faster in {summary['warpower_faster_cases']} cases.",
         "",
+        " ".join(groups),
+        "",
+        tradeoffs,
+        "",
         "Ratios divide Paragram construction time by Warpower construction time; above 1 "
         "favors Warpower. Timings include allocation calls, hierarchy building, retries, "
         "and CSR output. Each case uses resident GPU inputs, three warm-ups, and ten "
         f"measured calls. Warp retains {pool / 1024:g} GiB in its allocator; "
-        "PyTorch uses its normal cache.",
+        "PyTorch uses its normal cache. Every included measurement passed the CPU-throttling check. "
+        "Exact package, driver, compiler, and chunking settings are in the "
+        "[environment record](../environment-l40.json).",
         "",
-        "Failure counts exclude legitimately empty cells. A successful status does not "
+        "Status and adjacency statistics describe the final measured call. "
+        "Failure counts exclude cells marked empty. A successful status does not "
         "prove geometric correctness. The methods and numerical limits are documented in "
         "[benchmark reproduction](../../docs/benchmarks.md) and "
         "[independent audits](../../docs/numerical-audit.md). "

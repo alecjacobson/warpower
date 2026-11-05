@@ -1,0 +1,73 @@
+{
+  "backend": "warpower",
+  "points_sha256": "a7f88a6445a468bd627d49ec64bc1bd3fffdde75845d7a8a8afa1fb240e82e07",
+  "weights_sha256": "a9d86289319c01522e283585d853344df7b7cf94e03bc7de7e36c824fca351db",
+  "distribution": "cluster10",
+  "n": 15000000,
+  "seed": 42,
+  "weighted": true,
+  "memory": {
+    "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+    "interval_seconds": 0.001,
+    "before_construction_bytes": 1372717056,
+    "peak_bytes": 30697193472,
+    "samples": 26828,
+    "error": null
+  },
+  "cpu_quota_during_measurement": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "cpu_throttled": false,
+  "mempool_retain_mb": 32768,
+  "warmup": 3,
+  "repeats": 10,
+  "seconds": [
+    2.1905169636011124,
+    2.1862728372216225,
+    2.1919913217425346,
+    2.1997517980635166,
+    2.1875471100211143,
+    2.1976322531700134,
+    2.198070738464594,
+    2.1915637962520123,
+    2.2023306116461754,
+    2.1938141994178295
+  ],
+  "mean_seconds": 2.1939491629600525,
+  "median_seconds": 2.192902760580182,
+  "nnz": 226979622,
+  "status_counts": {
+    "0": 14829780,
+    "3": 170220
+  },
+  "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+  "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+  "python": "3.10.12",
+  "versions": {
+    "warp": "1.19.0",
+    "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+    "warpower_dirty": false,
+    "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+    "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+  },
+  "diagnostics": {
+    "retried_cells": 345,
+    "double_precision_cells": 12,
+    "consistency_retried_cells": 105,
+    "asymmetric_cells_remaining": 0,
+    "chunk_size": 3698464,
+    "leaf_size": 4,
+    "knn_requested": 8,
+    "knn_effective": 0,
+    "warm_start": "nearest leaf"
+  }
+}

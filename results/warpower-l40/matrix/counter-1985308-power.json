@@ -1,0 +1,73 @@
+{
+  "backend": "warpower",
+  "points_sha256": "07e325a6287d10c4b63107ebb5425e73a6ffaf285ba6ee462239decfd800c2f0",
+  "weights_sha256": "e84f1b7c51ac727d5c1802651322f7f68ce52384375b177bd47a8ab9c9500d61",
+  "distribution": "counter",
+  "n": 1985308,
+  "seed": 42,
+  "weighted": true,
+  "memory": {
+    "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+    "interval_seconds": 0.001,
+    "before_construction_bytes": 1137836032,
+    "peak_bytes": 8538685440,
+    "samples": 2942,
+    "error": null
+  },
+  "cpu_quota_during_measurement": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "cpu_throttled": false,
+  "mempool_retain_mb": 32768,
+  "warmup": 3,
+  "repeats": 10,
+  "seconds": [
+    0.2579513303935528,
+    0.27034055441617966,
+    0.26097771897912025,
+    0.2596478760242462,
+    0.2596050314605236,
+    0.26849526166915894,
+    0.26317980885505676,
+    0.2596909739077091,
+    0.2602965906262398,
+    0.2811124809086323
+  ],
+  "mean_seconds": 0.2641297627240419,
+  "median_seconds": 0.26063715480268,
+  "nnz": 28751730,
+  "status_counts": {
+    "0": 1899859,
+    "3": 85449
+  },
+  "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+  "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+  "python": "3.10.12",
+  "versions": {
+    "warp": "1.19.0",
+    "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+    "warpower_dirty": false,
+    "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+    "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+  },
+  "diagnostics": {
+    "retried_cells": 429,
+    "double_precision_cells": 12,
+    "consistency_retried_cells": 12,
+    "asymmetric_cells_remaining": 0,
+    "chunk_size": 1985308,
+    "leaf_size": 4,
+    "knn_requested": 8,
+    "knn_effective": 0,
+    "warm_start": "nearest leaf"
+  }
+}

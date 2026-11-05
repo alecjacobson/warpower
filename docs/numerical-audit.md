@@ -48,4 +48,8 @@ excludes the two initial 100,000-site single-precision clipping kernels; recover
 and adjacency kernels remain instrumented. The two ten-cluster regressions run
 outside the sanitizer, and two other tests are CPU-only oracle checks.
 
+Run the full test suite with `python -m pytest -q` from the checkout.
+The [validation record](../results/validation/validation.json) includes the
+sanitizer commands, their instrumentation scope, and links to the test logs.
+
 See [benchmark reproduction](benchmarks.md) and [the construction algorithm](architecture.md).

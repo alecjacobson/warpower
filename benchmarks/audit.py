@@ -47,6 +47,8 @@ def main():
     parser.add_argument("b", type=Path)
     parser.add_argument("--a-label", default="a")
     parser.add_argument("--b-label", default="b")
+    parser.add_argument("--a-version", default="unspecified")
+    parser.add_argument("--b-version", default="unspecified")
     parser.add_argument("--distribution", default="uniform")
     parser.add_argument("--n", type=int, default=100000)
     parser.add_argument("--seed", type=int, default=42)
@@ -74,6 +76,11 @@ def main():
     record = {
         "a": args.a_label,
         "b": args.b_label,
+        "a_version": args.a_version,
+        "b_version": args.b_version,
+        "a_edges_sha256": hashlib.sha256(ea.tobytes()).hexdigest(),
+        "b_edges_sha256": hashlib.sha256(eb.tobytes()).hexdigest(),
+        "oracle_source_sha256": hashlib.sha256(Path("tests/oracle.py").read_bytes()).hexdigest(),
         "n": args.n,
         "distribution": args.distribution,
         "seed": args.seed,

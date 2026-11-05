@@ -36,6 +36,10 @@ Failed cells are retried with larger capacity and, when needed, double-precision
 clipping before return. Remaining failures
 are explicit; they produce no partial neighbor list. Inspect `status` when using
 difficult geometry. Floating-point predicates are not exact.
+One-sided facets also trigger double-precision recovery of both cells before
+symmetrization. `diagnostics["consistency_retried_cells"]` counts these recovery
+jobs, including repeated jobs, and `diagnostics["asymmetric_cells_remaining"]`
+reports unresolved consistency after up to three passes.
 
 Keyword arguments match Paragram: `debug`, `knn`, `leaf_size`, `initial_guesses`,
 and `initial_guesses_offsets`. Initial guesses are flat int32 CSR hints; both

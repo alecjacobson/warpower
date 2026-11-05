@@ -261,8 +261,9 @@ def merge_retry(
     counts: wp.array[int],
     status: wp.array[int],
     source: wp.array[int],
+    first: int,
 ):
-    j = wp.tid()
+    j = first + wp.tid()
     i = jobs[j]
     counts[i] = retry_counts[j]
     status[i] = retry_status[j]

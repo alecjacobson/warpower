@@ -12,6 +12,15 @@ distances are handled before squaring. Failed cells produce explicit status code
 and are retried with larger storage; traversal never silently discards a valid
 candidate to fit a queue.
 
+Recovery first increases single-precision capacity, then retries unresolved cells
+with double-precision planes, homogeneous vertex coordinates, and clipping tests.
+The same generic Warp clipping algorithm serves both precisions. Valid candidate
+IDs from a failed attempt seed the retry; failed cells still emit no partial CSR
+row. Completed retry rows are retained. Sparse retry jobs use separate GPU warps
+so a few difficult cells can run across multiple multiprocessors. Double-precision
+Cartesian coordinates are cached when a vertex is created, avoiding repeated
+division during bounds updates and candidate rejection.
+
 ## Spatial hierarchy
 
 Points are sorted by 63-bit Morton codes. A

@@ -60,3 +60,28 @@ def test_separated_clusters_with_tight_pruning(weighted):
     )
     assert np.all(np.isin(result.status.numpy(), [0, 3]))
     assert csr_sets(result.adjacency.numpy(), result.offsets.numpy()) == reference_cells(p, w)[0]
+
+
+@pytest.mark.parametrize("weighted", [False, True])
+def test_double_precision_retry_matches_oracle(weighted):
+    rng = np.random.default_rng(22)
+    p = rng.normal(size=(48, 3)).astype(np.float32)
+    w = rng.normal(0, 0.05, len(p)).astype(np.float32) if weighted else None
+    result = (
+        warpower.power_diagram(p, w, _capacity=8)
+        if weighted
+        else warpower.voronoi_diagram(p, _capacity=8)
+    )
+    assert result.diagnostics["retried_cells"] > 0
+    assert np.all(np.isin(result.status.numpy(), [0, 3]))
+    assert csr_sets(result.adjacency.numpy(), result.offsets.numpy()) == reference_cells(p, w)[0]
+
+
+@pytest.mark.parametrize("weighted", [False, True])
+def test_ten_cluster_boundary_recovery(weighted):
+    from benchmarks.datasets import generate
+
+    p, w = generate(100000, "cluster10", weighted=weighted)
+    result = warpower.power_diagram(p, w) if weighted else warpower.voronoi_diagram(p)
+    assert result.diagnostics["retried_cells"] > 0
+    assert np.all(np.isin(result.status.numpy(), [0, 3] if weighted else [0]))

@@ -5,6 +5,8 @@ across 32 independent cells, so each vertex/plane loop uses coalesced loads.
 All planes and vertices use coordinates relative to the cell's seed.
 """
 
+from typing import Any
+
 import warp as wp
 
 wp.set_module_options({"enable_backward": False})
@@ -21,6 +23,17 @@ class Scratch:
 
 
 @wp.struct
+class Scratch64:
+    planes: wp.array[wp.vec4d]
+    vertices: wp.array[wp.uint32]
+    positions: wp.array[wp.vec4d]
+    cartesian: wp.array[wp.vec3d]
+    next: wp.array[int]
+    neighbors: wp.array[int]
+    capacity: int
+
+
+@wp.struct
 class Cell:
     base: int
     nv: int
@@ -29,6 +42,57 @@ class Cell:
     lo: wp.vec3
     hi: wp.vec3
     r2: float
+
+
+@wp.struct
+class Cell64:
+    base: int
+    nv: int
+    np: int
+    status: int
+    lo: wp.vec3d
+    hi: wp.vec3d
+    r2: wp.float64
+
+
+@wp.func(inline=True)
+def set_position(s: Scratch, at: int, h: wp.vec4):
+    s.positions[at] = h
+
+
+@wp.func(inline=True)
+def set_position(s: Scratch64, at: int, h: wp.vec4d):  # noqa: F811
+    s.positions[at] = h
+    inverse_w = wp.float64(1.0) / h[3]
+    s.cartesian[at] = wp.vec3d(h[0], h[1], h[2]) * inverse_w
+
+
+@wp.func(inline=True)
+def position(s: Scratch, at: int):
+    h = s.positions[at]
+    return wp.vec3(h[0], h[1], h[2]) * (1.0 / h[3])
+
+
+@wp.func(inline=True)
+def position(s: Scratch64, at: int):  # noqa: F811
+    return s.cartesian[at]
+
+
+@wp.func(inline=True)
+def swap_positions(s: Scratch, a: int, b: int):
+    h = s.positions[a]
+    s.positions[a] = s.positions[b]
+    s.positions[b] = h
+
+
+@wp.func(inline=True)
+def swap_positions(s: Scratch64, a: int, b: int):  # noqa: F811
+    h = s.positions[a]
+    p = s.cartesian[a]
+    s.positions[a] = s.positions[b]
+    s.cartesian[a] = s.cartesian[b]
+    s.positions[b] = h
+    s.cartesian[b] = p
 
 
 @wp.func(inline=True)
@@ -42,34 +106,34 @@ def plane_at(v: wp.uint32, i: int):
 
 
 @wp.func(inline=True)
-def coordinates(s: Scratch, base: int, v: wp.uint32):
+def coordinates(s: Any, base: int, v: wp.uint32):
     a = s.planes[base + 32 * plane_at(v, 0)]
     b = s.planes[base + 32 * plane_at(v, 1)]
     c = s.planes[base + 32 * plane_at(v, 2)]
-    na = wp.vec3(a[0], a[1], a[2])
-    nb = wp.vec3(b[0], b[1], b[2])
-    nc = wp.vec3(c[0], c[1], c[2])
-    bc = wp.cross(nb, nc)
-    x = -a[3] * bc - b[3] * wp.cross(nc, na) - c[3] * wp.cross(na, nb)
-    return wp.vec4(x[0], x[1], x[2], wp.dot(na, bc))
+    bc0 = b[1] * c[2] - b[2] * c[1]
+    bc1 = b[2] * c[0] - b[0] * c[2]
+    bc2 = b[0] * c[1] - b[1] * c[0]
+    x0 = -a[3] * bc0 - b[3] * (c[1] * a[2] - c[2] * a[1]) - c[3] * (a[1] * b[2] - a[2] * b[1])
+    x1 = -a[3] * bc1 - b[3] * (c[2] * a[0] - c[0] * a[2]) - c[3] * (a[2] * b[0] - a[0] * b[2])
+    x2 = -a[3] * bc2 - b[3] * (c[0] * a[1] - c[1] * a[0]) - c[3] * (a[0] * b[1] - a[1] * b[0])
+    return type(a)(x0, x1, x2, a[0] * bc0 + a[1] * bc1 + a[2] * bc2)
 
 
 @wp.func(inline=True)
-def init_cell(s: Scratch, slot: int, seed: wp.vec3, lower: wp.vec3, upper: wp.vec3):
-    cell = Cell()
+def init_cell(s: Any, slot: int, seed: wp.vec3, lower: wp.vec3, upper: wp.vec3, cell: Any):
     cell.base = (slot // 32) * (32 * s.capacity) + slot % 32
     cell.nv = 8
     cell.np = 6
     cell.status = 0
-    cell.lo = lower - seed
-    cell.hi = upper - seed
-    cell.r2 = 0.0
+    cell.lo = type(cell.lo)(lower) - type(cell.lo)(seed)
+    cell.hi = type(cell.hi)(upper) - type(cell.hi)(seed)
+    cell.r2 = cell.lo.dtype(0.0)
     for axis in range(3):
-        low = wp.vec4(0.0)
-        high = wp.vec4(0.0)
-        low[axis] = 1.0
+        low = s.planes.dtype(s.planes.dtype.dtype(0.0))
+        high = s.planes.dtype(s.planes.dtype.dtype(0.0))
+        low[axis] = low.dtype(1.0)
         low[3] = -cell.lo[axis]
-        high[axis] = -1.0
+        high[axis] = high.dtype(-1.0)
         high[3] = cell.hi[axis]
         s.planes[cell.base + 32 * (2 * axis)] = low
         s.planes[cell.base + 32 * (2 * axis + 1)] = high
@@ -87,18 +151,17 @@ def init_cell(s: Scratch, slot: int, seed: wp.vec3, lower: wp.vec3, upper: wp.ve
         s.neighbors[cell.base + 32 * i] = -1
     for i in range(8):
         at = cell.base + 32 * i
-        s.positions[at] = coordinates(s, cell.base, s.vertices[at])
+        set_position(s, at, coordinates(s, cell.base, s.vertices[at]))
     return cell
 
 
 @wp.func(inline=True)
-def update_bounds(s: Scratch, cell: Cell):
-    lo = wp.vec3(1.0e30)
-    hi = wp.vec3(-1.0e30)
-    r2 = float(0.0)
+def update_bounds(s: Any, cell: Any):
+    lo = type(cell.lo)(cell.lo.dtype(1.0e30))
+    hi = type(cell.hi)(cell.hi.dtype(-1.0e30))
+    r2 = cell.lo.dtype(0.0)
     for i in range(cell.nv):
-        h = s.positions[cell.base + 32 * i]
-        p = wp.vec3(h[0], h[1], h[2]) / h[3]
+        p = position(s, cell.base + 32 * i)
         lo = wp.min(lo, p)
         hi = wp.max(hi, p)
         r2 = wp.max(r2, wp.dot(p, p))
@@ -109,7 +172,7 @@ def update_bounds(s: Scratch, cell: Cell):
 
 
 @wp.func(inline=True)
-def collect_planes(s: Scratch, cell: Cell):
+def collect_planes(s: Any, cell: Any):
     for i in range(cell.np):
         s.next[cell.base + 32 * i] = -1
     for i in range(cell.nv):
@@ -137,19 +200,21 @@ def collect_planes(s: Scratch, cell: Cell):
 
 
 @wp.func(inline=True)
-def outside(h: wp.vec4, plane: wp.vec4):
+def outside(h: Any, plane: Any):
     # Homogeneous determinants may have either orientation.
     value = wp.dot(h, plane)
-    return (value > 0.0 and h[3] < 0.0) or (value < 0.0 and h[3] > 0.0)
+    return (value > h.dtype(0.0) and h[3] < h.dtype(0.0)) or (
+        value < h.dtype(0.0) and h[3] > h.dtype(0.0)
+    )
 
 
 @wp.func(inline=True)
 def clip(
-    s: Scratch,
-    cell: Cell,
+    s: Any,
+    cell: Any,
     i: int,
     j: int,
-    q: wp.vec3,
+    q: Any,
     wi: float,
     wj: float,
     check_duplicate: bool = True,
@@ -157,21 +222,21 @@ def clip(
     if cell.status != 0 or i == j:
         return cell
     d2 = wp.dot(q, q)
-    if d2 == 0.0:
+    if d2 == q.dtype(0.0):
         # A deterministic owner for exactly coincident equal-weight sites.
         if wj > wi or (wj == wi and j < i):
             cell.status = 3
             cell.nv = 0
         return cell
-    numerator = d2 + wi - wj
-    if numerator > 0.0 and numerator * numerator > 4.0 * cell.r2 * d2:
+    numerator = d2 + q.dtype(wi) - q.dtype(wj)
+    if numerator > q.dtype(0.0) and numerator * numerator > q.dtype(4.0) * cell.r2 * d2:
         return cell
-    if numerator < 0.0 and numerator * numerator > 4.0 * cell.r2 * d2:
+    if numerator < q.dtype(0.0) and numerator * numerator > q.dtype(4.0) * cell.r2 * d2:
         cell.status = 3
         cell.nv = 0
         return cell
-    inv_length = 1.0 / wp.sqrt(d2)
-    plane = wp.vec4(-q[0], -q[1], -q[2], 0.5 * numerator) * inv_length
+    inv_length = q.dtype(1.0) / wp.sqrt(d2)
+    plane = s.planes.dtype(-q[0], -q[1], -q[2], q.dtype(0.5) * numerator) * inv_length
     # Do not insert duplicate hint planes, including roundoff re-clips.
     if check_duplicate:
         for k in range(cell.np):
@@ -185,11 +250,9 @@ def clip(
             cell.nv -= 1
             last = cell.base + 32 * cell.nv
             v = s.vertices[at]
-            h = s.positions[at]
             s.vertices[at] = s.vertices[last]
-            s.positions[at] = s.positions[last]
             s.vertices[last] = v
-            s.positions[last] = h
+            swap_positions(s, at, last)
             removed += 1
         else:
             k += 1
@@ -272,7 +335,7 @@ def clip(
         v = encode(new_plane, edge, following)
         at = cell.base + 32 * cell.nv
         s.vertices[at] = v
-        s.positions[at] = coordinates(s, cell.base, v)
+        set_position(s, at, coordinates(s, cell.base, v))
         cell.nv += 1
         edge = following
         iterations += 1
@@ -286,8 +349,8 @@ def clip(
 
 @wp.func(inline=True)
 def emit(
-    s: Scratch,
-    cell: Cell,
+    s: Any,
+    cell: Any,
     index: int,
     neighbors: wp.array2d[int],
     counts: wp.array[int],
@@ -312,6 +375,14 @@ def emit(
                     return
                 neighbors[index, count] = j
                 count += 1
+    elif cell.status != 3:
+        # Valid candidate IDs remain useful even if floating-point topology
+        # failed. They seed a higher-precision retry, never a partial CSR row.
+        for k in range(neighbors.shape[1]):
+            j = int(-1)
+            if k < cell.np:
+                j = s.neighbors[cell.base + 32 * k]
+            neighbors[index, k] = j
     counts[index] = count
 
 
@@ -329,7 +400,7 @@ def clip_candidates(
 ):
     i = wp.tid()
     p = points[i]
-    cell = init_cell(scratch, i, p, lower, upper)
+    cell = init_cell(scratch, i, p, lower, upper, Cell())
     for k in range(candidates.shape[1]):
         j = candidates[i, k]
         if j >= 0:
@@ -339,12 +410,15 @@ def clip_candidates(
     emit(scratch, cell, i, neighbors, counts, status)
 
 
-def allocate_scratch(n, capacity=64, device="cuda:0"):
-    scratch = Scratch()
+def allocate_scratch(n, capacity=64, device="cuda:0", robust=False):
+    scratch = Scratch64() if robust else Scratch()
+    vector = wp.vec4d if robust else wp.vec4
     scratch.capacity = capacity
     size = ((n + 31) // 32) * 32 * capacity
-    scratch.planes = wp.empty(size, dtype=wp.vec4, device=device)
-    scratch.positions = wp.empty(size, dtype=wp.vec4, device=device)
+    scratch.planes = wp.empty(size, dtype=vector, device=device)
+    scratch.positions = wp.empty(size, dtype=vector, device=device)
+    if robust:
+        scratch.cartesian = wp.empty(size, dtype=wp.vec3d, device=device)
     scratch.vertices = wp.empty(size, dtype=wp.uint32, device=device)
     scratch.next = wp.empty(size, dtype=int, device=device)
     scratch.neighbors = wp.empty(size, dtype=int, device=device)

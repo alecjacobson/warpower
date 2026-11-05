@@ -86,7 +86,7 @@ def _hints_array(value, device):
     return result
 
 
-def _chunk_size(n, capacity, device, chunk_size):
+def _chunk_size(n, capacity, device, chunk_size, bytes_per_slot=44):
     if chunk_size is not None:
         chunk_size = operator.index(chunk_size)
         if chunk_size < 1:
@@ -101,7 +101,7 @@ def _chunk_size(n, capacity, device, chunk_size):
     if not 0 < fraction < 1:
         raise ValueError("memory fraction must lie between 0 and 1")
     budget = int(device.free_memory * fraction)
-    per_cell = capacity * 44
+    per_cell = capacity * bytes_per_slot
     return max(32, min(n, (budget // per_cell // 32) * 32))
 
 
@@ -186,6 +186,8 @@ def _build(
                         neighbors,
                         counts,
                         status,
+                        neighbors,
+                        False,
                         hints,
                         offsets,
                         use_hints,
@@ -203,21 +205,32 @@ def _build(
             hierarchy.temporaries = ()
             retry_neighbors = wp.empty((0, 1), dtype=int, device=device)
             retried = 0
+            robust_retried = 0
             if failed:
-                # All initially failed cells are retried together. Increase both
-                # independent capacities, and retain explicit final failures.
+                # First increase single-precision capacity, then use double
+                # precision for unresolved cells. Keep completed retry rows.
                 retried = failed
-                for capacity, queue in ((128, 128), (256, 256), (512, 512)):
-                    retry_neighbors = wp.empty((failed, capacity), dtype=int, device=device)
-                    retry_counts = wp.empty(failed, dtype=int, device=device)
-                    retry_status = wp.empty(failed, dtype=int, device=device)
-                    retry_size = _chunk_size(failed, capacity, device, chunk_size)
-                    retry_scratch = allocate_scratch(retry_size, capacity, device)
-                    kernel = make_construct_kernel(weights is not None, queue)
+                retry_neighbors = wp.empty((failed, 512), dtype=int, device=device)
+                retry_counts = wp.empty(failed, dtype=int, device=device)
+                retry_status = wp.full(failed, 1, dtype=int, device=device)
+                remaining = failed
+                for attempt, (capacity, queue, robust) in enumerate(
+                    ((128, 128, False), (128, 128, True), (256, 256, True), (512, 512, True))
+                ):
+                    if attempt == 1:
+                        robust_retried = remaining
+                    retry_size = _chunk_size(
+                        failed, capacity, device, chunk_size, bytes_per_slot=100 if robust else 44
+                    )
+                    retry_scratch = allocate_scratch(retry_size, capacity, device, robust=robust)
+                    retry_stride = 32
+                    kernel = make_construct_kernel(
+                        weights is not None, queue, robust=robust, lane_stride=retry_stride
+                    )
                     for start in range(0, failed, retry_size):
                         wp.launch(
                             kernel,
-                            min(retry_size, failed - start),
+                            min(retry_size, failed - start) * retry_stride,
                             inputs=[
                                 p,
                                 w,
@@ -229,6 +242,8 @@ def _build(
                                 retry_neighbors,
                                 retry_counts,
                                 retry_status,
+                                neighbors if attempt == 0 else retry_neighbors,
+                                attempt > 0,
                                 hints,
                                 offsets,
                                 use_hints,
@@ -248,13 +263,15 @@ def _build(
                     wp.launch(
                         collect_failures, failed, inputs=[retry_status, tmp, check], device=device
                     )
-                    if int(check.numpy()[0]) == 0:
+                    remaining = int(check.numpy()[0])
+                    if remaining == 0:
                         break
             adjacency, final_offsets = compact(neighbors, retry_neighbors, source, counts)
             # Scratch and queue work complete before their Python owners leave scope.
             wp.synchronize_stream(stream)
             diagnostics = {
                 "retried_cells": retried,
+                "double_precision_cells": robust_retried,
                 "chunk_size": size,
                 "leaf_size": leaf_size,
                 "knn_requested": knn,

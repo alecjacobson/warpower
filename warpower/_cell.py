@@ -275,7 +275,14 @@ def clip(s: Scratch, cell: Cell, i: int, j: int, q: wp.vec3, wi: float, wj: floa
 
 
 @wp.func(inline=True)
-def emit(s: Scratch, cell: Cell, index: int, neighbors: wp.array2d[int], counts: wp.array[int], status: wp.array[int]):
+def emit(
+    s: Scratch,
+    cell: Cell,
+    index: int,
+    neighbors: wp.array2d[int],
+    counts: wp.array[int],
+    status: wp.array[int],
+):
     status[index] = cell.status
     count = int(0)
     if cell.status == 0:
@@ -289,16 +296,27 @@ def emit(s: Scratch, cell: Cell, index: int, neighbors: wp.array2d[int], counts:
             at = cell.base + 32 * k
             j = s.neighbors[at]
             if s.next[at] != 0 and j >= 0:
+                if count >= neighbors.shape[1]:
+                    status[index] = 1
+                    counts[index] = 0
+                    return
                 neighbors[index, count] = j
                 count += 1
     counts[index] = count
 
 
 @wp.kernel(enable_backward=False)
-def clip_candidates(points: wp.array[wp.vec3], weights: wp.array[float],
-                    candidates: wp.array2d[int], lower: wp.vec3, upper: wp.vec3,
-                    scratch: Scratch, neighbors: wp.array2d[int], counts: wp.array[int],
-                    status: wp.array[int]):
+def clip_candidates(
+    points: wp.array[wp.vec3],
+    weights: wp.array[float],
+    candidates: wp.array2d[int],
+    lower: wp.vec3,
+    upper: wp.vec3,
+    scratch: Scratch,
+    neighbors: wp.array2d[int],
+    counts: wp.array[int],
+    status: wp.array[int],
+):
     i = wp.tid()
     p = points[i]
     cell = init_cell(scratch, i, p, lower, upper)

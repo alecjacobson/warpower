@@ -1,0 +1,27 @@
+{
+  "implementation_commit": "d38b80c",
+  "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+  "pytest": {
+    "command": "python -m pytest -q",
+    "passed": 51,
+    "log": "pytest.txt"
+  },
+  "memcheck_small": {
+    "command": "compute-sanitizer --tool memcheck --error-exitcode 99 python -m pytest -q tests/test_api.py tests/test_bvh.py tests/test_cell.py tests/test_diagram.py -k 'not ten_cluster_boundary and not one_sided'",
+    "passed": 45,
+    "deselected": 4,
+    "errors": 0,
+    "log": "memcheck-small.txt"
+  },
+  "memcheck_recovery": {
+    "command": "compute-sanitizer --tool memcheck --error-exitcode 99 --kernel-name-exclude kns=construct_edaddc80 --kernel-name-exclude kns=construct_dbe50658 python -m pytest -q tests/test_diagram.py -k one_sided",
+    "passed": 2,
+    "errors": 0,
+    "scope": "Initial large single-precision clipping kernels excluded; recovery and adjacency kernels instrumented.",
+    "log": "memcheck-recovery.txt"
+  },
+  "wheel_smoke": {
+    "build": "uv build --wheel",
+    "outcome": "Built wheel installed in a separate target directory and imported outside the checkout; three-site CUDA construction returned six directed edges and all successful statuses."
+  }
+}

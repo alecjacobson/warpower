@@ -1,0 +1,49 @@
+{
+  "backend": "paragram",
+  "points_sha256": "4038ac6008224d1fb95fdcc930acc6ec6a635131ff82caa6c3da28fb65fe39cb",
+  "weights_sha256": "572c45cdc481fe6433fe2f888c8b3e6bebbf2bf5e11644f4ccf14d9fdfb48ed4",
+  "distribution": "uniform",
+  "n": 1000000,
+  "seed": 42,
+  "weighted": true,
+  "memory": {
+    "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+    "interval_seconds": 0.001,
+    "before_construction_bytes": 1137836032,
+    "peak_bytes": 4241620992,
+    "samples": 1769,
+    "error": null
+  },
+  "mempool_retain_mb": null,
+  "warmup": 3,
+  "repeats": 10,
+  "seconds": [
+    0.10425644367933273,
+    0.10395793244242668,
+    0.10442492365837097,
+    0.10372663661837578,
+    0.10392066463828087,
+    0.10396731644868851,
+    0.10418197140097618,
+    0.10401903465390205,
+    0.10398700833320618,
+    0.10379161313176155
+  ],
+  "mean_seconds": 0.10402335450053216,
+  "median_seconds": 0.10397716239094734,
+  "nnz": 15176886,
+  "status_counts": {
+    "0": 994835,
+    "1": 2,
+    "2": 3,
+    "3": 5160
+  },
+  "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+  "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+  "python": "3.10.12",
+  "versions": {
+    "torch": "2.7.1+cu126",
+    "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+    "benchmark_source_sha256": "83786b809112faa38d8926cb467317edc0d34f3d512c555746392163436a5145"
+  }
+}

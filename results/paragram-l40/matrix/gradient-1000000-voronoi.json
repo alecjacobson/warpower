@@ -1,0 +1,62 @@
+{
+  "backend": "paragram",
+  "points_sha256": "79e9ee66d48cbf65ea966117e2001c616dae6507c12fbe5172256f9e5be6fe07",
+  "weights_sha256": null,
+  "distribution": "gradient",
+  "n": 1000000,
+  "seed": 42,
+  "weighted": false,
+  "memory": {
+    "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+    "interval_seconds": 0.001,
+    "before_construction_bytes": 1116864512,
+    "peak_bytes": 4237426688,
+    "samples": 1558,
+    "error": null
+  },
+  "cpu_quota_during_measurement": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "cpu_throttled": false,
+  "mempool_retain_mb": null,
+  "warmup": 3,
+  "repeats": 10,
+  "seconds": [
+    0.09539281949400902,
+    0.09620637819170952,
+    0.09614656493067741,
+    0.0965552106499672,
+    0.09667183458805084,
+    0.09671909734606743,
+    0.0979275330901146,
+    0.09625102952122688,
+    0.09662878513336182,
+    0.09671764448285103
+  ],
+  "mean_seconds": 0.09652168974280358,
+  "median_seconds": 0.0965919978916645,
+  "nnz": 15439892,
+  "status_counts": {
+    "0": 999994,
+    "1": 2,
+    "2": 2,
+    "5": 2
+  },
+  "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+  "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+  "python": "3.10.12",
+  "versions": {
+    "torch": "2.7.1+cu126",
+    "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+    "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+  }
+}

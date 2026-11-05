@@ -1,5 +1,10 @@
 # Reproduction
 
+The [complete L40 comparison](../results/summary/report.md) contains all 74 paired
+cases, exported figures, failure and empty-cell counts, and memory measurements.
+The underlying [CSV](../results/summary/measurements.csv) and
+[JSON with provenance](../results/summary/summary.json) are available separately.
+
 Run commands from the checkout using its Python environment. Install the optional
 dependencies with `pip install -e '.[dev,datasets]' ninja`. To build the CUDA
 reference, install a compatible CUDA toolkit and the pinned upstream source:
@@ -16,6 +21,9 @@ python -m benchmarks.summarize --require-complete
 
 The runner defaults to the local L40's CUDA architecture (`8.9`) and toolkit path
 (`/usr/local/cuda-12.6`). Set `CUDA_HOME` and `TORCH_CUDA_ARCH_LIST` when needed.
+The [environment record](../results/environment-l40.json) includes exact package
+versions (including the CUDA 12 Warp wheel), GPU driver, reference compiler and
+submodule revision, and the chunking environment used for the measurements.
 Results are written under `results/{backend}-l40/matrix`; detailed logs and a
 progress journal are under `.work/matrix`. The runner executes one GPU job at a
 time and resumes matching completed cases. Changed results are archived.
@@ -84,7 +92,8 @@ before this check are preserved in archives and excluded from the final matrix.
 
 ## Correctness
 
-Status counts accompany every timing. Timing alone does not imply correct or
+Status counts accompany every timing and describe the final measured call.
+Timing alone does not imply correct or
 complete output. Small cases use an independent double-precision all-halfspace
 oracle; it finds an interior point by linear programming and identifies faces
 from Qhull's dual hull vertices. This is a floating-point oracle, not an exact

@@ -1,0 +1,2870 @@
+{
+  "complete": true,
+  "paired_cases": 74,
+  "missing_cases": [],
+  "geometric_mean_speedup": 1.2201853222246923,
+  "warpower_faster_cases": 62,
+  "paragram_failed_cells_total": 57838,
+  "warpower_failed_cells_total": 0,
+  "warpower_asymmetric_cells_total": 0,
+  "groups": {
+    "synthetic": {
+      "cases": 56,
+      "geometric_mean_speedup": 1.1409091088015282,
+      "warpower_faster_cases": 44
+    },
+    "real_scenes": {
+      "cases": 18,
+      "geometric_mean_speedup": 1.50380554673741,
+      "warpower_faster_cases": 18
+    }
+  },
+  "slowest_relative_case": {
+    "distribution": "uniform",
+    "n": 1000000,
+    "mode": "power",
+    "paragram_ms": 104.44341413676739,
+    "warpower_ms": 124.60383102297783,
+    "speedup": 0.8382038760710919,
+    "paragram_failed": 5,
+    "paragram_empty": 5160,
+    "paragram_peak_gib": 3.9503173828125,
+    "warpower_failed": 0,
+    "warpower_empty": 5260,
+    "warpower_peak_gib": 4.5167236328125,
+    "warpower_asymmetric_cells_remaining": 0,
+    "warpower_consistency_retried_cells": 8
+  },
+  "largest_memory_ratio_case": {
+    "distribution": "cluster5",
+    "n": 10000000,
+    "mode": "voronoi",
+    "paragram_ms": 1537.3787268996239,
+    "warpower_ms": 1357.8799448907375,
+    "speedup": 1.1321904655004902,
+    "paragram_failed": 2248,
+    "paragram_empty": 166,
+    "paragram_peak_gib": 17.1358642578125,
+    "warpower_failed": 0,
+    "warpower_empty": 0,
+    "warpower_peak_gib": 27.2042236328125,
+    "warpower_asymmetric_cells_remaining": 0,
+    "warpower_consistency_retried_cells": 40
+  },
+  "provenance": [
+    {
+      "path": "paragram-l40/matrix/bicycle-4199873-power.json",
+      "sha256": "4c7cf6a7ebe36441b2f64b5365a615a4b763c8c3ad369500b142fe3bf1764b4d",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/bicycle-4199873-power.json",
+      "sha256": "49ce6a0b8e971b925dc5d0c2c593d66c79b2aedc88153194e7e0e6a878501d8d",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/bicycle-4199873-voronoi.json",
+      "sha256": "76c5ba8d01e7de001b24bf9fbcf81a6df5cdca969966516fe8eeaf87b1ef9b9f",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/bicycle-4199873-voronoi.json",
+      "sha256": "fc56c527563a499afa16ec9d6442836075380ebf45c9b3ff8384cf689a6b9274",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/bonsai-1968522-power.json",
+      "sha256": "d56753e407d0c0fa71eb71d7e3efa080d70e37b621c71969d671c3cb9df71ca2",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/bonsai-1968522-power.json",
+      "sha256": "c3eee6dee93df0e9106e3bb25ff890c357f35885a0aa7a2f70799f6fbda2b389",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/bonsai-1968522-voronoi.json",
+      "sha256": "0a33dd661298d45e1ed7996748196d8b90925d592ff673d1f15bbf2dab7dca87",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/bonsai-1968522-voronoi.json",
+      "sha256": "43d6dfecec9dbe43b6c6143cbe30b71cb944b803dd2d8a6357456f67e7d384dd",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-100000-power.json",
+      "sha256": "8357f2f1d05cfe0082597e30a28f6aa3d19b32bf09acf95f9c877bdfb073dc9d",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-100000-power.json",
+      "sha256": "86637a53310aff25ce67932ecd624861d5fb8bd08a4ea5ad98192bfd67ea1cd0",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-100000-voronoi.json",
+      "sha256": "50c458ed79c9d7233e4b6726f4b3c74726c62c561327fe823028b7553999d81c",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-100000-voronoi.json",
+      "sha256": "eeb43e7687875b8a129831fb3c2eb9aa41ab33e17299b4b010e125b23477f3f6",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-1000000-power.json",
+      "sha256": "2b5f6118cfe3510ecb7801e05d5651022a34e3cbbccf9acb794f1d6da729aa33",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-1000000-power.json",
+      "sha256": "ce9169bf31bfcef5c4a9cf973a746ec36d8f8925f25218b63218ecd09bb2d38a",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-1000000-voronoi.json",
+      "sha256": "be7961aed9017f861806a7e5ad503e908f40fa90c12edf96dae2832813e0def0",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-1000000-voronoi.json",
+      "sha256": "0df5a0c495e5fc83539533ba8622ed261ac655d0b7c88eb87383eaa58c08a8d8",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-10000000-power.json",
+      "sha256": "5c0bcf2757b4e38033d3dc8fa4e1275690bc9b77bf462a36a44068d72a250eb7",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-10000000-power.json",
+      "sha256": "8273a6466d012194a6b9790501fdfb9ba96f0f87b077283a3cac674dc4929817",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-10000000-voronoi.json",
+      "sha256": "1702d8488931309b796bbb6772bbb9bc091292a1a0d146a00c88f62ce885ee0d",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-10000000-voronoi.json",
+      "sha256": "95f9967206682ad76ccd59ba5c8b879113b44722f22a14b959be51dcc1cbe378",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-15000000-power.json",
+      "sha256": "05e45d3ff4d16104aa51d24af9b458f152ef713b21d7e0b458e2f0f364d39ec0",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-15000000-power.json",
+      "sha256": "a91c21e9e1c6665bbad5c5451664522ab436d92bf90f4d3b86d299464b5528db",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-15000000-voronoi.json",
+      "sha256": "adc1acffa6296f6b5f7ea731f321b8fca48bdd75a1395cef5d303e5efe509ce3",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-15000000-voronoi.json",
+      "sha256": "0a18ce3d13dc2be46bcba086ccf4f07e73c1bf7caab178061424840c4d10d39f",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-2000000-power.json",
+      "sha256": "cf07245d5623c0e95bd75a1bce6c52267116b5c576eb14c61fd5788ac5eb8462",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-2000000-power.json",
+      "sha256": "26a1de69982849c27b63634889427193ad5134f33c532e113d65dfb77a099ec5",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "f1ec25b86dbd160c547eb63cb8964a2384f86ecf",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-2000000-voronoi.json",
+      "sha256": "23135620aa4870789f7fee5eae770825ddb926145765a9f5a94b7e03e0168459",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-2000000-voronoi.json",
+      "sha256": "f0c49253f31bc295d3f030e392eef64f5cce26916c605c94a88d686619490e39",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "f1ec25b86dbd160c547eb63cb8964a2384f86ecf",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-500000-power.json",
+      "sha256": "25f68e17fa89214ce5116c31eec57f925c3ca5f51973f4afbdfc51f8bf3bc97a",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-500000-power.json",
+      "sha256": "3ab016f04eec6b9042d413785b8e8920bca7e26c6beb4b4bc659b4d59a5970ab",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-500000-voronoi.json",
+      "sha256": "8039d42cd35f2b75d3f5b53e51f5c2c9885a61a347c6de471a2ae91a1a103761",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-500000-voronoi.json",
+      "sha256": "13e715acbe76242f7ced57445cd232965d587b4e054e2352823acf2bafe70c38",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-5000000-power.json",
+      "sha256": "0ffa2e876b76dfae0d4ef75c7a5d617e55ca6e63728974e640fd24e2fb399efc",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-5000000-power.json",
+      "sha256": "50b84429c85d801e6b03dacea94b8f676d60cd5a1118d438c030686e3d55f0db",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster10-5000000-voronoi.json",
+      "sha256": "4e5f7dc1550f8a007fc0114298d7ec19d2135afbeb963188787ecff2771506b7",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster10-5000000-voronoi.json",
+      "sha256": "06dcab5eddd562d84ddf555cb2a05e80805f5992fd7602c86b6711ca9e15f098",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-100000-power.json",
+      "sha256": "d4e2af7e9dd34c79c719562c6ce6338111f5a64fd0f683ca4ae7e09325358530",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-100000-power.json",
+      "sha256": "f94a8687aff9654a2d6163198bcd2feefd837f3834a1024a80d155db67c84417",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-100000-voronoi.json",
+      "sha256": "5150152cc1228f5d624e1d8630a1d1125987feebd28ff8e731b8c3d3b81dd4cb",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-100000-voronoi.json",
+      "sha256": "4dcbcf0a9d9a69dacdb8af513111857af2fa0d5ea85b0788c2d6bcba38b20729",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-1000000-power.json",
+      "sha256": "147b34396e28b86f30912a318e97b3f483bb77a7e4b6f21ff49bb9df0e4c39ad",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-1000000-power.json",
+      "sha256": "ebc63d334ca7adf8d81dde1d973b9db1baef4bc9ac58bdaaea8a970272e54945",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-1000000-voronoi.json",
+      "sha256": "252486a61616e637acdd362dd70e1391ab4641a5f30444dea0e4527c0355e836",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-1000000-voronoi.json",
+      "sha256": "f3aad8924e561d91b676a979366d93a167633d1219b1a69fe929d87634136dcd",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-10000000-power.json",
+      "sha256": "169bd9e1b40f46e5357fb45498270d36cc97dae91bf9965554d3528ac9d5af69",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-10000000-power.json",
+      "sha256": "f79c05a49400bf5fd4acc8f15980ada8cccd44829c31005e0a872d100d5c6c97",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-10000000-voronoi.json",
+      "sha256": "11bc62111387920d5384f06f9815e37a7d516ceca80c9426fcefb3a6de7fff3c",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-10000000-voronoi.json",
+      "sha256": "03ecdf79fe774eb511b7eba1d311d461d305fe2cdbd219865362e382e80b65cd",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-15000000-power.json",
+      "sha256": "f241714ae0918f2a0c79cc5830a9ceaf8b7582347c9231c68e3ba9038568ed4c",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-15000000-power.json",
+      "sha256": "a59b3a30fbebd5044e03505056f533f2428d7d3d5b4757013be71b8405c25045",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-15000000-voronoi.json",
+      "sha256": "eafdfac93e6308753dde5f3081e428fd51e563515356fbc65e7a0cde83cc049b",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-15000000-voronoi.json",
+      "sha256": "b1f93c878eed2d4729c33670af131534b8a9ddd59aca169325a215873bd128e3",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-2000000-power.json",
+      "sha256": "6e3def5ffe698038ed859a0044dea8bbf8718068317281494254d2a062bf8f6e",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-2000000-power.json",
+      "sha256": "e9b270a3f77fc8e7500e4f1fc52dee51795b15d1f7b2090d2f286e9b3bda5cab",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "f1ec25b86dbd160c547eb63cb8964a2384f86ecf",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-2000000-voronoi.json",
+      "sha256": "a22e228dfdb5a7d7d04476b302b8ee7926d42e9573bf0b2098117284a139d50a",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-2000000-voronoi.json",
+      "sha256": "fcec06571b68bac75500f2215d7bdd4208f5dd124933393c27d1f6494a0757dd",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-500000-power.json",
+      "sha256": "2b61c5ea228be134022f6c4115470f277c57cb12aa0410cee1b684025b2b8ad8",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-500000-power.json",
+      "sha256": "cddcef744e4df30021d4b6b66b9c473ca323d20bc5b9850b66535f5b9aae4ec1",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-500000-voronoi.json",
+      "sha256": "b5c3be3f28528d83b15786bec6f90af6f28447cdf34290ed9b4f0221a4fa30ad",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-500000-voronoi.json",
+      "sha256": "e3b53d1d3626521e448d72e3555720190b7d2991f0dab68f6435178a37023919",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-5000000-power.json",
+      "sha256": "70e247632c920546c35e7d418a332da2114b137f2d5b43272c11678030c7b620",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-5000000-power.json",
+      "sha256": "c8b6c15b8d55fc188414eb6edde9ea3a4181659c72b2cdcf5db8cf2598dcb55a",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/cluster5-5000000-voronoi.json",
+      "sha256": "31cb9cef07e46a8a1f4d9b689886e4d9309a6cbce695c06fe3415b81186fb33a",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/cluster5-5000000-voronoi.json",
+      "sha256": "86aa70742178ee7c4c89af95e036e48cc35a80cab86320e40574757b9fc17109",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/counter-1985308-power.json",
+      "sha256": "1b6aa1e29ca26dd31196fff301944b5f4e0a68c5d3dabcfce1cf0f8702726a59",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/counter-1985308-power.json",
+      "sha256": "b872ab5f1004253f585e9e3b31c47cff79f35a81b97f31540ba90368199b92c8",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/counter-1985308-voronoi.json",
+      "sha256": "bf4e1baff0b1b7a003bfb40f1c5227800a91c0e56fa3e896f50eb99798789377",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/counter-1985308-voronoi.json",
+      "sha256": "20cb1864c65dcc617bc042665a833a1ff1b77069896b21358eb81b1f19e57082",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/drjohnson-2847252-power.json",
+      "sha256": "03e777acc8ea1b07926ba48e56322e3df9cfb58b40786b1722cdd79547e31681",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/drjohnson-2847252-power.json",
+      "sha256": "06586d9d06d7ec0e8c4a11687e779872aaafbb186c355ce60748494366d12dc5",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/drjohnson-2847252-voronoi.json",
+      "sha256": "63fff343f910ca7701ba70f5200c99ef243fed28d195455a009e4a02b04a860f",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/drjohnson-2847252-voronoi.json",
+      "sha256": "6c1304dff4e6911fc22b805fcd1ef919daf873c97418511ce606f31ffa759a52",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/garden-4064598-power.json",
+      "sha256": "4acb603d3faf20eca5728af76d7671469af7ccb401cd31fb0fbdeb75dc9dcc0a",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/garden-4064598-power.json",
+      "sha256": "1a067b834337d9544121411547d21abc82a476feb1da6809f39c23db25fb73c7",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/garden-4064598-voronoi.json",
+      "sha256": "0912a255451fa34bcd6ad66bff4e95c7f80d11a7cf5fa2a6dc8a35081d6a4166",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/garden-4064598-voronoi.json",
+      "sha256": "9e4ec3a0691436576b85aa04114b7db6d8f107b0798d9152dd82979c3224f002",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-100000-power.json",
+      "sha256": "f80dffd643fa3e9cfde84fa288f31be039933cb2ef598d681389b2bd030ac259",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-100000-power.json",
+      "sha256": "b129bf4adc7448899939c3aa500251c02aec3ed14af513a715c6aecc76eafc76",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-100000-voronoi.json",
+      "sha256": "b9a598c47c05c0e6eda5b60eef021d533ac7cac237a92962a8eaa700fdd8738b",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-100000-voronoi.json",
+      "sha256": "fffe7ffa56d23daf39ac6aa821f7b153cadd788e8a300e2706a1d2818b02f258",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-1000000-power.json",
+      "sha256": "abf4b6284590cf1c4f9dccbb95cad21cfbc69502a6e9a0b68d5851efce533b9d",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-1000000-power.json",
+      "sha256": "bd7cd8db3ba52bb79093712fe43b314e1dcab05bec62871e08f66f9268928185",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-1000000-voronoi.json",
+      "sha256": "74dcf59e3cefde650b925967a4efabccd7157c98577f6883eeaed39f6d8b4743",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-1000000-voronoi.json",
+      "sha256": "759682ef0883a3561175b4ca5ffe389a0bcb4d4e1f814de55038a734d8c2864c",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-10000000-power.json",
+      "sha256": "994de2be459f5b37c7990811f2d69fe81361d982dd038427d9d41dd669afb00a",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-10000000-power.json",
+      "sha256": "2e7f8971c8890755c912b7185a001cbfd3049ee2cfeeb6f4ef06d83edcaf30e2",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-10000000-voronoi.json",
+      "sha256": "fdaa52608bfd299e6351f9272b1dbc77990f2759c285f3d61c8c98c00f428ae4",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-10000000-voronoi.json",
+      "sha256": "6fbe40bc9a3fce5d37ac18af9d70458dcce3e70ae9f2b8e1db1f4a722322f726",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-15000000-power.json",
+      "sha256": "363b07c95c251aee4f9c411203ba6f05504df10a95bb464dc7343aa86c2f366d",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-15000000-power.json",
+      "sha256": "dca86cbabea17b1bf82df6b4e5c31616f58b2d95b7659c8a26c05ec1f8285b47",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-15000000-voronoi.json",
+      "sha256": "7402b66344d27429b23357e5800922ddc5bf93aac246653cb18535f502320182",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-15000000-voronoi.json",
+      "sha256": "1e7ba6ac47be6b8e358463cc5c8392b025d7ab438c88780a7cd7f035714c7b93",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-2000000-power.json",
+      "sha256": "c2243e58955560a7371ad1b1bd4de159626ad3819532210f6dd9d44121e1319b",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-2000000-power.json",
+      "sha256": "a51f332ef9ca3b2a03e019185e695c6ef81878c64cc7d050f48b4e10a3ef47ef",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-2000000-voronoi.json",
+      "sha256": "154d0a429f0f015a88b03da071116afb636c8975a28f036dcdd50d45740afaad",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-2000000-voronoi.json",
+      "sha256": "554bb2574f017ae78b1e2898e6c470e203c1ad6cc5db757a6b72793bac0733a4",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-500000-power.json",
+      "sha256": "a0ae9adcd0c647c9ee08bd99e39dbff4169d9e19f5ed9b904eab1b68d708ae8a",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-500000-power.json",
+      "sha256": "026bd101ed8850f8e70e3df5b6ec07df06e15c9e03049a2e1d63e4e780621580",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-500000-voronoi.json",
+      "sha256": "597c223df124cf7ab2b37fe2995cfdc550df53399c81611706bb3d91055d3ec1",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-500000-voronoi.json",
+      "sha256": "18c48f74dda2d153a42e0d9bbb5f08e1ebd581ec50eefdfd8adeb1d9f6fa5749",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-5000000-power.json",
+      "sha256": "f72e1910c14d1b127c1dd7437d5a89aae6dcefd2db010cbee2017bd464f68984",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-5000000-power.json",
+      "sha256": "7bdfa6ec1edad62fad6e2412a8365244a2f1b99320dc2d57b678b98563c052a1",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/gradient-5000000-voronoi.json",
+      "sha256": "b9c4d3cae17dad9cffaddd16bbc8274331542d0dac30deb159e8b8e439d79be9",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/gradient-5000000-voronoi.json",
+      "sha256": "e7c5629c3f671a1fc5c169d986dfb01b770fbcc9ced63ad94253929865a2c08c",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/kitchen-2045196-power.json",
+      "sha256": "9312e9291c1a6034cbcedf8ceef3a4708c122f4340c07937d18e938aff84c2fd",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/kitchen-2045196-power.json",
+      "sha256": "9bd01c8c9d515dc74362bd926eea1f83f941f1c591849674d69633859455dce9",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/kitchen-2045196-voronoi.json",
+      "sha256": "39a6f13e7a3467875caaaee0df0766e1b39e21868545d57a66c173e235bd7e93",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/kitchen-2045196-voronoi.json",
+      "sha256": "cdf2f60c960dca59af3eb4f603ae9c13c3f47cb9417d8f28779cdf50173344e8",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/playroom-3181453-power.json",
+      "sha256": "ac9eb582a1f7e7e0edc2d7a49db63e0cd2212f13e558d7084d2b475daf78030b",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/playroom-3181453-power.json",
+      "sha256": "b2e30ea7c705ebdee77ec7a65c6d84820eb5771828a30017f58633ea9be6cec1",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/playroom-3181453-voronoi.json",
+      "sha256": "d7917a4196fbb3168e7f1d7a6cece332242500b89c77b8df9c7d2fdce58c024e",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/playroom-3181453-voronoi.json",
+      "sha256": "5bac3cfa65057641f3584b737bfa177fec36316536a3039b0e0878faa758c342",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/room-1888510-power.json",
+      "sha256": "155aaf3fe95b3ec9022a406e3b8869d5ad0dd90cb355cce78affa7d99be442f5",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/room-1888510-power.json",
+      "sha256": "e80a9577836836ea6ebd8802c28924f709dc871693dbe79d5f20cd2d6719b985",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/room-1888510-voronoi.json",
+      "sha256": "f492b8b482e24285c15f3982f82d9eef1ec88c307257fbab703534d34e6118e1",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/room-1888510-voronoi.json",
+      "sha256": "c2cbc1f1311e8ef57bcd24fee7ab52b086608ea7e4e8f52ce44eb0fdb5eea2ac",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/stump-4186146-power.json",
+      "sha256": "e68dc0a6e21c169358aaebb161b5259f5350a67ec940454abef0a5423a86850e",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/stump-4186146-power.json",
+      "sha256": "0711b8d35642471127d8f35c86cdbe3ea51952c98c2744253a937e747eba813b",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/stump-4186146-voronoi.json",
+      "sha256": "1446e13e3bc413ebb86689ff3383a2ede5597fb43f99848fa45f3cf631839f5c",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/stump-4186146-voronoi.json",
+      "sha256": "9f155df93b8a4f0a025ea37d82b5c3639bcad37b1f0813697014eb6677322a0d",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-100000-power.json",
+      "sha256": "b182ce4e3d9784386481afe4acae29d59ee7cfc09a771dc0f105698787f97237",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-100000-power.json",
+      "sha256": "8e56397df25708aa9c3e53b49d41ab25ede16a7a77e0b4a87d904b089fc2e2a4",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-100000-voronoi.json",
+      "sha256": "92cd331a8e29557651266ebc5d82e35faa3fb018dda5ab665c773b4af58dce16",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-100000-voronoi.json",
+      "sha256": "a61b31742cc5da81826df0fcc552451fe0c26a148a48624c6cdb765ba33add71",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-1000000-power.json",
+      "sha256": "c3c99410a24a9aaa6b5f502d5dd79170bd52320d7d1e5cdbf9c73bb63adb4318",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-1000000-power.json",
+      "sha256": "92b48124202ff703142d423c2be3e0d2a818c58ad2f8cd36919e5668f6c2ca42",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-1000000-voronoi.json",
+      "sha256": "df67757e55a9dcb547767b9968bd74256fb80328e21e24c3eb6019e641646429",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-1000000-voronoi.json",
+      "sha256": "4dd0262dfdafd76bd22db7953a01d6ce8287d85df263ce715b5e018ffc2d7449",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-10000000-power.json",
+      "sha256": "7446c20c7ebe0298f64ba2dcbefc04a285eda9ec31d84b2b74af26fa57cd4f79",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-10000000-power.json",
+      "sha256": "2e72e5d8ff0faf34e612940df196caf25f1fc2ff12227859d5ec991961a0c6af",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-10000000-voronoi.json",
+      "sha256": "de5417cd5ecc38d4e12a8a685094423f5e6ccc463a3087ac8ead3a994c7df3da",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-10000000-voronoi.json",
+      "sha256": "6b47cd498ac027b81fb4fc941f6d631371c614c76fe6341834e2ebbb1b89a8b1",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-15000000-power.json",
+      "sha256": "dd8879ce5735612d5a0e09247b1e511ee38891dbc28ce78a4143d4c71cedb41f",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-15000000-power.json",
+      "sha256": "e8cc482387de750f69da948cda5327b6c45588a67c937b30f0da630d9181c83a",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-15000000-voronoi.json",
+      "sha256": "99866d8512eb26576b3be4051cec1160c91ab7df565d0f5e6bab3dd54d91a520",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-15000000-voronoi.json",
+      "sha256": "4e48792920cf48f689165613f5d6ec8fabd0389d506cd6362e06dac0b757ecf0",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "e2baa9b7158541947dd1406702ebc5dc480872dd",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-2000000-power.json",
+      "sha256": "28091d79e5e9270332107e8ee7ae97fb72abf59dfefd2682ba2ba569a47f24ef",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-2000000-power.json",
+      "sha256": "618c504d7cb6a8959d2b3477aba80b920a211b50971f201ada424931aef8c9fa",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-2000000-voronoi.json",
+      "sha256": "70afe6cf9ec06e0832cd411f53a7c67cec2cea58b68c6ca427c6d824b5d2d37d",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-2000000-voronoi.json",
+      "sha256": "d8a4bae37e68f71380c3cb52ce8547d941abbb3bea22034e6f87183385092289",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-500000-power.json",
+      "sha256": "7554dc16fdc7382880d3eb36fe403d76d4de438a4f01b7682d1dd31e822e5dec",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-500000-power.json",
+      "sha256": "cc3a607681dae2076f739d2e480ec12d6873aa7b319bca870abe8b5f8a854bd7",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-500000-voronoi.json",
+      "sha256": "c40fbda4e96609a2b6c108e3ec3e5b1406418a0632951b07bbb1aeb1834351f7",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-500000-voronoi.json",
+      "sha256": "dd84dcb760f7fa88b1df638627c56bb53cd58c33890dee6f58bf4c774ca4bf54",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "d38b80c908c9e4e83726241313f72862ca69581a",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-5000000-power.json",
+      "sha256": "2b6feec9cddf74c04a7182ae652348557c80a019c27015fe5c3d3b5d7eef1daa",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-5000000-power.json",
+      "sha256": "f1d9286ca1be8014c7527b7bbbd694456862a6c8ce4a0c7add3eaec07139bce5",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "f1ec25b86dbd160c547eb63cb8964a2384f86ecf",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    },
+    {
+      "path": "paragram-l40/matrix/uniform-5000000-voronoi.json",
+      "sha256": "5b622194835ed4923ab1074935151eac9ee04eb82add9767db85a484c08d068b",
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": null
+    },
+    {
+      "path": "warpower-l40/matrix/uniform-5000000-voronoi.json",
+      "sha256": "f822f3f6d1b2f5ace1f7e0cbb1d417bee632db5250595d63f9294c3b8082c082",
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "726adb0c6c3952a5085aa1a50212c1326511986180cf78cd78c712c905d0caad",
+        "warpower_dirty": false,
+        "warpower_commit": "f1ec25b86dbd160c547eb63cb8964a2384f86ecf",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "mempool_retain_mb": 32768
+    }
+  ],
+  "rows": [
+    {
+      "distribution": "bicycle",
+      "n": 4199873,
+      "mode": "power",
+      "paragram_ms": 1046.4990004897118,
+      "warpower_ms": 557.1881167590618,
+      "speedup": 1.8781789650805436,
+      "paragram_failed": 5712,
+      "paragram_empty": 928015,
+      "paragram_peak_gib": 13.0147705078125,
+      "warpower_failed": 0,
+      "warpower_empty": 947960,
+      "warpower_peak_gib": 15.1202392578125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 20
+    },
+    {
+      "distribution": "bicycle",
+      "n": 4199873,
+      "mode": "voronoi",
+      "paragram_ms": 760.8416073024273,
+      "warpower_ms": 492.4940846860409,
+      "speedup": 1.5448746106005615,
+      "paragram_failed": 1477,
+      "paragram_empty": 1,
+      "paragram_peak_gib": 12.9971923828125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 14.7237548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 10
+    },
+    {
+      "distribution": "bonsai",
+      "n": 1968522,
+      "mode": "power",
+      "paragram_ms": 525.9372256696224,
+      "warpower_ms": 269.36560794711113,
+      "speedup": 1.9525032526531305,
+      "paragram_failed": 3062,
+      "paragram_empty": 394951,
+      "paragram_peak_gib": 6.6866455078125,
+      "warpower_failed": 0,
+      "warpower_empty": 405652,
+      "warpower_peak_gib": 7.8897705078125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 18
+    },
+    {
+      "distribution": "bonsai",
+      "n": 1968522,
+      "mode": "voronoi",
+      "paragram_ms": 422.290525957942,
+      "warpower_ms": 231.57791569828987,
+      "speedup": 1.823535394921341,
+      "paragram_failed": 613,
+      "paragram_empty": 6,
+      "paragram_peak_gib": 6.6866455078125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 7.9210205078125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 4
+    },
+    {
+      "distribution": "cluster10",
+      "n": 100000,
+      "mode": "power",
+      "paragram_ms": 65.88773280382156,
+      "warpower_ms": 40.65522514283657,
+      "speedup": 1.620646117991821,
+      "paragram_failed": 2,
+      "paragram_empty": 1059,
+      "paragram_peak_gib": 1.4249267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 1093,
+      "warpower_peak_gib": 1.6300048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 2
+    },
+    {
+      "distribution": "cluster10",
+      "n": 100000,
+      "mode": "voronoi",
+      "paragram_ms": 62.13045418262482,
+      "warpower_ms": 39.51416313648224,
+      "speedup": 1.5723591049625858,
+      "paragram_failed": 1,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 1.4249267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 1.6300048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 2
+    },
+    {
+      "distribution": "cluster10",
+      "n": 500000,
+      "mode": "power",
+      "paragram_ms": 99.10939075052738,
+      "warpower_ms": 82.1005042642355,
+      "speedup": 1.207171522741807,
+      "paragram_failed": 27,
+      "paragram_empty": 5478,
+      "paragram_peak_gib": 2.5343017578125,
+      "warpower_failed": 0,
+      "warpower_empty": 5678,
+      "warpower_peak_gib": 2.9112548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 6
+    },
+    {
+      "distribution": "cluster10",
+      "n": 500000,
+      "mode": "voronoi",
+      "paragram_ms": 93.78500990569592,
+      "warpower_ms": 75.08167251944542,
+      "speedup": 1.2491065630085225,
+      "paragram_failed": 22,
+      "paragram_empty": 1,
+      "paragram_peak_gib": 2.5343017578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 2.9112548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 2
+    },
+    {
+      "distribution": "cluster10",
+      "n": 1000000,
+      "mode": "power",
+      "paragram_ms": 145.04133015871048,
+      "warpower_ms": 149.43183921277523,
+      "speedup": 0.9706186507695116,
+      "paragram_failed": 71,
+      "paragram_empty": 11000,
+      "paragram_peak_gib": 3.9503173828125,
+      "warpower_failed": 0,
+      "warpower_empty": 11444,
+      "warpower_peak_gib": 4.4737548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 12
+    },
+    {
+      "distribution": "cluster10",
+      "n": 1000000,
+      "mode": "voronoi",
+      "paragram_ms": 134.40939337015152,
+      "warpower_ms": 135.20900309085846,
+      "speedup": 0.9940861207284428,
+      "paragram_failed": 53,
+      "paragram_empty": 2,
+      "paragram_peak_gib": 3.9464111328125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 4.4737548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 4
+    },
+    {
+      "distribution": "cluster10",
+      "n": 2000000,
+      "mode": "power",
+      "paragram_ms": 278.7341073155403,
+      "warpower_ms": 270.3824609518051,
+      "speedup": 1.0308882696545316,
+      "paragram_failed": 170,
+      "paragram_empty": 21848,
+      "paragram_peak_gib": 6.7706298828125,
+      "warpower_failed": 0,
+      "warpower_empty": 22696,
+      "warpower_peak_gib": 7.5675048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 8
+    },
+    {
+      "distribution": "cluster10",
+      "n": 2000000,
+      "mode": "voronoi",
+      "paragram_ms": 248.85161854326725,
+      "warpower_ms": 240.4335144907236,
+      "speedup": 1.035012190668903,
+      "paragram_failed": 132,
+      "paragram_empty": 10,
+      "paragram_peak_gib": 6.7706298828125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 7.5675048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 8
+    },
+    {
+      "distribution": "cluster10",
+      "n": 5000000,
+      "mode": "power",
+      "paragram_ms": 775.4560634493828,
+      "warpower_ms": 736.2049303948879,
+      "speedup": 1.05331549876125,
+      "paragram_failed": 685,
+      "paragram_empty": 55139,
+      "paragram_peak_gib": 15.2647705078125,
+      "warpower_failed": 0,
+      "warpower_empty": 57059,
+      "warpower_peak_gib": 17.2042236328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 29
+    },
+    {
+      "distribution": "cluster10",
+      "n": 5000000,
+      "mode": "voronoi",
+      "paragram_ms": 697.347167134285,
+      "warpower_ms": 599.8337857425213,
+      "speedup": 1.1625673373350485,
+      "paragram_failed": 527,
+      "paragram_empty": 43,
+      "paragram_peak_gib": 15.2452392578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 17.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 28
+    },
+    {
+      "distribution": "cluster10",
+      "n": 10000000,
+      "mode": "power",
+      "paragram_ms": 1699.912816658616,
+      "warpower_ms": 1438.038282468915,
+      "speedup": 1.1821053982930818,
+      "paragram_failed": 1923,
+      "paragram_empty": 109565,
+      "paragram_peak_gib": 17.1749267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 113371,
+      "warpower_peak_gib": 27.1925048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 56
+    },
+    {
+      "distribution": "cluster10",
+      "n": 10000000,
+      "mode": "voronoi",
+      "paragram_ms": 1537.9612319171429,
+      "warpower_ms": 1269.6346051990986,
+      "speedup": 1.211341614051207,
+      "paragram_failed": 1635,
+      "paragram_empty": 147,
+      "paragram_peak_gib": 17.1358642578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 27.1925048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 52
+    },
+    {
+      "distribution": "cluster10",
+      "n": 15000000,
+      "mode": "power",
+      "paragram_ms": 2658.2185190171003,
+      "warpower_ms": 2193.9491629600525,
+      "speedup": 1.2116135432375563,
+      "paragram_failed": 3591,
+      "paragram_empty": 164878,
+      "paragram_peak_gib": 25.1905517578125,
+      "warpower_failed": 0,
+      "warpower_empty": 170220,
+      "warpower_peak_gib": 28.5889892578125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 105
+    },
+    {
+      "distribution": "cluster10",
+      "n": 15000000,
+      "mode": "voronoi",
+      "paragram_ms": 2428.6612931638956,
+      "warpower_ms": 2064.783327654004,
+      "speedup": 1.1762305810185556,
+      "paragram_failed": 3088,
+      "paragram_empty": 266,
+      "paragram_peak_gib": 25.1339111328125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 28.1729736328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 101
+    },
+    {
+      "distribution": "cluster5",
+      "n": 100000,
+      "mode": "power",
+      "paragram_ms": 66.08072742819786,
+      "warpower_ms": 30.511657893657684,
+      "speedup": 2.165753419840675,
+      "paragram_failed": 6,
+      "paragram_empty": 1091,
+      "paragram_peak_gib": 1.4249267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 1129,
+      "warpower_peak_gib": 1.6300048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 2
+    },
+    {
+      "distribution": "cluster5",
+      "n": 100000,
+      "mode": "voronoi",
+      "paragram_ms": 65.98638817667961,
+      "warpower_ms": 30.398468300700188,
+      "speedup": 2.1707142453345156,
+      "paragram_failed": 4,
+      "paragram_empty": 1,
+      "paragram_peak_gib": 1.4249267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 1.6300048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 2
+    },
+    {
+      "distribution": "cluster5",
+      "n": 500000,
+      "mode": "power",
+      "paragram_ms": 89.06042389571667,
+      "warpower_ms": 91.68259017169476,
+      "speedup": 0.9713995179339117,
+      "paragram_failed": 30,
+      "paragram_empty": 5475,
+      "paragram_peak_gib": 2.5343017578125,
+      "warpower_failed": 0,
+      "warpower_empty": 5672,
+      "warpower_peak_gib": 2.9542236328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 2
+    },
+    {
+      "distribution": "cluster5",
+      "n": 500000,
+      "mode": "voronoi",
+      "paragram_ms": 82.40957334637642,
+      "warpower_ms": 76.96141079068184,
+      "speedup": 1.0707908352994253,
+      "paragram_failed": 18,
+      "paragram_empty": 3,
+      "paragram_peak_gib": 2.5343017578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 2.8800048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 0
+    },
+    {
+      "distribution": "cluster5",
+      "n": 1000000,
+      "mode": "power",
+      "paragram_ms": 138.15188258886337,
+      "warpower_ms": 128.0802272260189,
+      "speedup": 1.0786355207277338,
+      "paragram_failed": 80,
+      "paragram_empty": 10929,
+      "paragram_peak_gib": 3.9503173828125,
+      "warpower_failed": 0,
+      "warpower_empty": 11299,
+      "warpower_peak_gib": 4.4425048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 0
+    },
+    {
+      "distribution": "cluster5",
+      "n": 1000000,
+      "mode": "voronoi",
+      "paragram_ms": 128.0638888478279,
+      "warpower_ms": 118.99487264454365,
+      "speedup": 1.0762135040084864,
+      "paragram_failed": 65,
+      "paragram_empty": 2,
+      "paragram_peak_gib": 3.9464111328125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 4.4737548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 4
+    },
+    {
+      "distribution": "cluster5",
+      "n": 2000000,
+      "mode": "power",
+      "paragram_ms": 288.042563945055,
+      "warpower_ms": 261.61421053111553,
+      "speedup": 1.101020328216445,
+      "paragram_failed": 197,
+      "paragram_empty": 21981,
+      "paragram_peak_gib": 6.7706298828125,
+      "warpower_failed": 0,
+      "warpower_empty": 22778,
+      "warpower_peak_gib": 7.5987548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 12
+    },
+    {
+      "distribution": "cluster5",
+      "n": 2000000,
+      "mode": "voronoi",
+      "paragram_ms": 257.9815547913313,
+      "warpower_ms": 247.03713916242123,
+      "speedup": 1.0443027136163294,
+      "paragram_failed": 183,
+      "paragram_empty": 11,
+      "paragram_peak_gib": 6.7706298828125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 7.6417236328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 10
+    },
+    {
+      "distribution": "cluster5",
+      "n": 5000000,
+      "mode": "power",
+      "paragram_ms": 773.954289779067,
+      "warpower_ms": 671.8116637319326,
+      "speedup": 1.1520405666667488,
+      "paragram_failed": 873,
+      "paragram_empty": 54692,
+      "paragram_peak_gib": 15.2647705078125,
+      "warpower_failed": 0,
+      "warpower_empty": 56624,
+      "warpower_peak_gib": 17.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 28
+    },
+    {
+      "distribution": "cluster5",
+      "n": 5000000,
+      "mode": "voronoi",
+      "paragram_ms": 699.2327410727739,
+      "warpower_ms": 593.819635361433,
+      "speedup": 1.177517042943823,
+      "paragram_failed": 753,
+      "paragram_empty": 57,
+      "paragram_peak_gib": 15.2452392578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 17.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 16
+    },
+    {
+      "distribution": "cluster5",
+      "n": 10000000,
+      "mode": "power",
+      "paragram_ms": 1690.3570037335157,
+      "warpower_ms": 1447.486500442028,
+      "speedup": 1.1677877501567862,
+      "paragram_failed": 2619,
+      "paragram_empty": 109920,
+      "paragram_peak_gib": 17.1749267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 113568,
+      "warpower_peak_gib": 27.1925048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 52
+    },
+    {
+      "distribution": "cluster5",
+      "n": 10000000,
+      "mode": "voronoi",
+      "paragram_ms": 1537.3787268996239,
+      "warpower_ms": 1357.8799448907375,
+      "speedup": 1.1321904655004902,
+      "paragram_failed": 2248,
+      "paragram_empty": 166,
+      "paragram_peak_gib": 17.1358642578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 27.2042236328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 40
+    },
+    {
+      "distribution": "cluster5",
+      "n": 15000000,
+      "mode": "power",
+      "paragram_ms": 2664.4629552960396,
+      "warpower_ms": 2203.7389054894447,
+      "speedup": 1.2090647166317867,
+      "paragram_failed": 4893,
+      "paragram_empty": 165012,
+      "paragram_peak_gib": 25.1905517578125,
+      "warpower_failed": 0,
+      "warpower_empty": 170211,
+      "warpower_peak_gib": 28.5772705078125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 58
+    },
+    {
+      "distribution": "cluster5",
+      "n": 15000000,
+      "mode": "voronoi",
+      "paragram_ms": 2436.229944974184,
+      "warpower_ms": 1922.8485193103552,
+      "speedup": 1.2669900517425872,
+      "paragram_failed": 4338,
+      "paragram_empty": 304,
+      "paragram_peak_gib": 25.1339111328125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 28.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 56
+    },
+    {
+      "distribution": "counter",
+      "n": 1985308,
+      "mode": "power",
+      "paragram_ms": 355.45864552259445,
+      "warpower_ms": 264.12976272404194,
+      "speedup": 1.3457727817442948,
+      "paragram_failed": 992,
+      "paragram_empty": 82614,
+      "paragram_peak_gib": 6.7315673828125,
+      "warpower_failed": 0,
+      "warpower_empty": 85449,
+      "warpower_peak_gib": 7.9522705078125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 12
+    },
+    {
+      "distribution": "counter",
+      "n": 1985308,
+      "mode": "voronoi",
+      "paragram_ms": 324.81481321156025,
+      "warpower_ms": 237.52047829329967,
+      "speedup": 1.367523404910233,
+      "paragram_failed": 588,
+      "paragram_empty": 3,
+      "paragram_peak_gib": 6.7315673828125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 7.9835205078125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 10
+    },
+    {
+      "distribution": "drjohnson",
+      "n": 2847252,
+      "mode": "power",
+      "paragram_ms": 462.5109985470772,
+      "warpower_ms": 367.2612939029932,
+      "speedup": 1.259351328945769,
+      "paragram_failed": 1057,
+      "paragram_empty": 91517,
+      "paragram_peak_gib": 9.1807861328125,
+      "warpower_failed": 0,
+      "warpower_empty": 94573,
+      "warpower_peak_gib": 10.7335205078125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 14
+    },
+    {
+      "distribution": "drjohnson",
+      "n": 2847252,
+      "mode": "voronoi",
+      "paragram_ms": 423.03621359169483,
+      "warpower_ms": 339.4117396324873,
+      "speedup": 1.2463806173874705,
+      "paragram_failed": 751,
+      "paragram_empty": 9,
+      "paragram_peak_gib": 9.1690673828125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 10.7335205078125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 16
+    },
+    {
+      "distribution": "garden",
+      "n": 4064598,
+      "mode": "power",
+      "paragram_ms": 795.1005201786757,
+      "warpower_ms": 519.3705625832081,
+      "speedup": 1.5308925408172183,
+      "paragram_failed": 2714,
+      "paragram_empty": 290519,
+      "paragram_peak_gib": 12.6085205078125,
+      "warpower_failed": 0,
+      "warpower_empty": 300820,
+      "warpower_peak_gib": 14.4210205078125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 20
+    },
+    {
+      "distribution": "garden",
+      "n": 4064598,
+      "mode": "voronoi",
+      "paragram_ms": 705.217158049345,
+      "warpower_ms": 462.9311412572861,
+      "speedup": 1.5233737703063752,
+      "paragram_failed": 1110,
+      "paragram_empty": 4,
+      "paragram_peak_gib": 12.5928955078125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 14.4522705078125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 18
+    },
+    {
+      "distribution": "gradient",
+      "n": 100000,
+      "mode": "power",
+      "paragram_ms": 14.63584154844284,
+      "warpower_ms": 15.279688313603401,
+      "speedup": 0.9578625720665159,
+      "paragram_failed": 1,
+      "paragram_empty": 621,
+      "paragram_peak_gib": 1.4249267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 633,
+      "warpower_peak_gib": 1.6729736328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 0
+    },
+    {
+      "distribution": "gradient",
+      "n": 100000,
+      "mode": "voronoi",
+      "paragram_ms": 12.875750288367271,
+      "warpower_ms": 12.787017226219177,
+      "speedup": 1.0069393088769876,
+      "paragram_failed": 0,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 1.4249267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 1.6300048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 0
+    },
+    {
+      "distribution": "gradient",
+      "n": 500000,
+      "mode": "power",
+      "paragram_ms": 55.23087419569492,
+      "warpower_ms": 59.418391063809395,
+      "speedup": 0.9295249030957856,
+      "paragram_failed": 2,
+      "paragram_empty": 3139,
+      "paragram_peak_gib": 2.5343017578125,
+      "warpower_failed": 0,
+      "warpower_empty": 3210,
+      "warpower_peak_gib": 2.9542236328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 0
+    },
+    {
+      "distribution": "gradient",
+      "n": 500000,
+      "mode": "voronoi",
+      "paragram_ms": 70.85350714623928,
+      "warpower_ms": 51.80075317621231,
+      "speedup": 1.3678084352405957,
+      "paragram_failed": 3,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 2.5343017578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 2.9112548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 2
+    },
+    {
+      "distribution": "gradient",
+      "n": 1000000,
+      "mode": "power",
+      "paragram_ms": 106.28396794199944,
+      "warpower_ms": 115.59607870876789,
+      "speedup": 0.9194426759905122,
+      "paragram_failed": 5,
+      "paragram_empty": 6314,
+      "paragram_peak_gib": 3.9503173828125,
+      "warpower_failed": 0,
+      "warpower_empty": 6482,
+      "warpower_peak_gib": 4.4737548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 10
+    },
+    {
+      "distribution": "gradient",
+      "n": 1000000,
+      "mode": "voronoi",
+      "paragram_ms": 96.52168974280357,
+      "warpower_ms": 110.60001961886883,
+      "speedup": 0.8727095173709768,
+      "paragram_failed": 6,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 3.9464111328125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 4.5167236328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 6
+    },
+    {
+      "distribution": "gradient",
+      "n": 2000000,
+      "mode": "power",
+      "paragram_ms": 236.26274466514587,
+      "warpower_ms": 233.61534848809242,
+      "speedup": 1.0113322870016326,
+      "paragram_failed": 15,
+      "paragram_empty": 12731,
+      "paragram_peak_gib": 6.7706298828125,
+      "warpower_failed": 0,
+      "warpower_empty": 13059,
+      "warpower_peak_gib": 7.5987548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 12
+    },
+    {
+      "distribution": "gradient",
+      "n": 2000000,
+      "mode": "voronoi",
+      "paragram_ms": 211.9672667235136,
+      "warpower_ms": 207.50071331858635,
+      "speedup": 1.0215254845802362,
+      "paragram_failed": 11,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 6.7706298828125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 7.5987548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 10
+    },
+    {
+      "distribution": "gradient",
+      "n": 5000000,
+      "mode": "power",
+      "paragram_ms": 736.3247159868479,
+      "warpower_ms": 639.8915600031614,
+      "speedup": 1.150702340851644,
+      "paragram_failed": 46,
+      "paragram_empty": 31271,
+      "paragram_peak_gib": 15.2647705078125,
+      "warpower_failed": 0,
+      "warpower_empty": 32061,
+      "warpower_peak_gib": 17.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 32
+    },
+    {
+      "distribution": "gradient",
+      "n": 5000000,
+      "mode": "voronoi",
+      "paragram_ms": 669.0164715051651,
+      "warpower_ms": 547.483504936099,
+      "speedup": 1.221984709079502,
+      "paragram_failed": 19,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 15.2452392578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 17.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 24
+    },
+    {
+      "distribution": "gradient",
+      "n": 10000000,
+      "mode": "power",
+      "paragram_ms": 1620.1638374477625,
+      "warpower_ms": 1314.1449604183435,
+      "speedup": 1.2328653887102388,
+      "paragram_failed": 73,
+      "paragram_empty": 63000,
+      "paragram_peak_gib": 17.1749267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 64672,
+      "warpower_peak_gib": 27.1925048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 64
+    },
+    {
+      "distribution": "gradient",
+      "n": 10000000,
+      "mode": "voronoi",
+      "paragram_ms": 1483.12778621912,
+      "warpower_ms": 1156.461587548256,
+      "speedup": 1.2824704271962974,
+      "paragram_failed": 65,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 17.1358642578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 27.1925048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 38
+    },
+    {
+      "distribution": "gradient",
+      "n": 15000000,
+      "mode": "power",
+      "paragram_ms": 2526.5003088861704,
+      "warpower_ms": 1991.753014177084,
+      "speedup": 1.2684807257239288,
+      "paragram_failed": 159,
+      "paragram_empty": 94307,
+      "paragram_peak_gib": 25.1905517578125,
+      "warpower_failed": 0,
+      "warpower_empty": 96908,
+      "warpower_peak_gib": 28.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 74
+    },
+    {
+      "distribution": "gradient",
+      "n": 15000000,
+      "mode": "voronoi",
+      "paragram_ms": 2320.6296138465405,
+      "warpower_ms": 1766.453517973423,
+      "speedup": 1.3137224332451725,
+      "paragram_failed": 99,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 25.1339111328125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 28.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 52
+    },
+    {
+      "distribution": "kitchen",
+      "n": 2045196,
+      "mode": "power",
+      "paragram_ms": 379.5184329152107,
+      "warpower_ms": 268.7162943184376,
+      "speedup": 1.4123387414142776,
+      "paragram_failed": 936,
+      "paragram_empty": 42390,
+      "paragram_peak_gib": 6.8936767578125,
+      "warpower_failed": 0,
+      "warpower_empty": 43572,
+      "warpower_peak_gib": 7.7237548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 12
+    },
+    {
+      "distribution": "kitchen",
+      "n": 2045196,
+      "mode": "voronoi",
+      "paragram_ms": 354.1896004229784,
+      "warpower_ms": 245.36656476557255,
+      "speedup": 1.4435120806348545,
+      "paragram_failed": 717,
+      "paragram_empty": 2,
+      "paragram_peak_gib": 6.8936767578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 7.7237548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 10
+    },
+    {
+      "distribution": "playroom",
+      "n": 3181453,
+      "mode": "power",
+      "paragram_ms": 513.2548149675131,
+      "warpower_ms": 405.06801418960094,
+      "speedup": 1.2670830502239385,
+      "paragram_failed": 1178,
+      "paragram_empty": 127981,
+      "paragram_peak_gib": 10.1300048828125,
+      "warpower_failed": 0,
+      "warpower_empty": 132640,
+      "warpower_peak_gib": 11.8077392578125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 22
+    },
+    {
+      "distribution": "playroom",
+      "n": 3181453,
+      "mode": "voronoi",
+      "paragram_ms": 466.73327945172787,
+      "warpower_ms": 369.84211951494217,
+      "speedup": 1.2619797876560437,
+      "paragram_failed": 611,
+      "paragram_empty": 1,
+      "paragram_peak_gib": 10.1163330078125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 11.7647705078125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 18
+    },
+    {
+      "distribution": "room",
+      "n": 1888510,
+      "mode": "power",
+      "paragram_ms": 395.83671167492867,
+      "warpower_ms": 236.39637120068073,
+      "speedup": 1.6744618780078329,
+      "paragram_failed": 886,
+      "paragram_empty": 82650,
+      "paragram_peak_gib": 6.4639892578125,
+      "warpower_failed": 0,
+      "warpower_empty": 85476,
+      "warpower_peak_gib": 7.2550048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 16
+    },
+    {
+      "distribution": "room",
+      "n": 1888510,
+      "mode": "voronoi",
+      "paragram_ms": 363.35163600742817,
+      "warpower_ms": 216.12925380468369,
+      "speedup": 1.6811774880590185,
+      "paragram_failed": 524,
+      "paragram_empty": 2,
+      "paragram_peak_gib": 6.4639892578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 7.2550048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 14
+    },
+    {
+      "distribution": "stump",
+      "n": 4186146,
+      "mode": "power",
+      "paragram_ms": 908.250704780221,
+      "warpower_ms": 564.2263695597649,
+      "speedup": 1.6097275026136753,
+      "paragram_failed": 4701,
+      "paragram_empty": 612406,
+      "paragram_peak_gib": 12.9678955078125,
+      "warpower_failed": 0,
+      "warpower_empty": 632116,
+      "warpower_peak_gib": 14.7960205078125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 12
+    },
+    {
+      "distribution": "stump",
+      "n": 4186146,
+      "mode": "voronoi",
+      "paragram_ms": 738.0278173834085,
+      "warpower_ms": 490.5371129512787,
+      "speedup": 1.5045300302419955,
+      "paragram_failed": 1034,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 12.9522705078125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 14.4425048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 8
+    },
+    {
+      "distribution": "uniform",
+      "n": 100000,
+      "mode": "power",
+      "paragram_ms": 16.85713827610016,
+      "warpower_ms": 14.698279276490211,
+      "speedup": 1.1468783494312171,
+      "paragram_failed": 0,
+      "paragram_empty": 524,
+      "paragram_peak_gib": 1.4249267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 544,
+      "warpower_peak_gib": 1.6729736328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 0
+    },
+    {
+      "distribution": "uniform",
+      "n": 100000,
+      "mode": "voronoi",
+      "paragram_ms": 13.044186308979988,
+      "warpower_ms": 12.732291594147682,
+      "speedup": 1.024496353427506,
+      "paragram_failed": 0,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 1.4249267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 1.6300048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 0
+    },
+    {
+      "distribution": "uniform",
+      "n": 500000,
+      "mode": "power",
+      "paragram_ms": 53.6234226077795,
+      "warpower_ms": 62.60502338409424,
+      "speedup": 0.8565354616799544,
+      "paragram_failed": 6,
+      "paragram_empty": 2575,
+      "paragram_peak_gib": 2.5343017578125,
+      "warpower_failed": 0,
+      "warpower_empty": 2638,
+      "warpower_peak_gib": 2.9542236328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 4
+    },
+    {
+      "distribution": "uniform",
+      "n": 500000,
+      "mode": "voronoi",
+      "paragram_ms": 46.91164381802082,
+      "warpower_ms": 52.81418152153492,
+      "speedup": 0.8882395308709395,
+      "paragram_failed": 4,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 2.5343017578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 2.9112548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 2
+    },
+    {
+      "distribution": "uniform",
+      "n": 1000000,
+      "mode": "power",
+      "paragram_ms": 104.44341413676739,
+      "warpower_ms": 124.60383102297783,
+      "speedup": 0.8382038760710919,
+      "paragram_failed": 5,
+      "paragram_empty": 5160,
+      "paragram_peak_gib": 3.9503173828125,
+      "warpower_failed": 0,
+      "warpower_empty": 5260,
+      "warpower_peak_gib": 4.5167236328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 8
+    },
+    {
+      "distribution": "uniform",
+      "n": 1000000,
+      "mode": "voronoi",
+      "paragram_ms": 95.60142681002617,
+      "warpower_ms": 102.01037786900997,
+      "speedup": 0.9371735386843343,
+      "paragram_failed": 5,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 3.9464111328125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 4.4737548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 4
+    },
+    {
+      "distribution": "uniform",
+      "n": 2000000,
+      "mode": "power",
+      "paragram_ms": 230.18618822097778,
+      "warpower_ms": 249.71749261021614,
+      "speedup": 0.9217863987617209,
+      "paragram_failed": 11,
+      "paragram_empty": 10539,
+      "paragram_peak_gib": 6.7706298828125,
+      "warpower_failed": 0,
+      "warpower_empty": 10768,
+      "warpower_peak_gib": 7.6417236328125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 10
+    },
+    {
+      "distribution": "uniform",
+      "n": 2000000,
+      "mode": "voronoi",
+      "paragram_ms": 208.17085318267345,
+      "warpower_ms": 206.79844841361046,
+      "speedup": 1.0066364364896883,
+      "paragram_failed": 6,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 6.7706298828125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 7.5987548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 10
+    },
+    {
+      "distribution": "uniform",
+      "n": 5000000,
+      "mode": "power",
+      "paragram_ms": 725.5835819989443,
+      "warpower_ms": 631.8110011518002,
+      "speedup": 1.148418721225486,
+      "paragram_failed": 43,
+      "paragram_empty": 25945,
+      "paragram_peak_gib": 15.2647705078125,
+      "warpower_failed": 0,
+      "warpower_empty": 26567,
+      "warpower_peak_gib": 17.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 32
+    },
+    {
+      "distribution": "uniform",
+      "n": 5000000,
+      "mode": "voronoi",
+      "paragram_ms": 658.8944502174854,
+      "warpower_ms": 538.5750275105238,
+      "speedup": 1.2234032707812665,
+      "paragram_failed": 33,
+      "paragram_empty": 1,
+      "paragram_peak_gib": 15.2452392578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 17.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 12
+    },
+    {
+      "distribution": "uniform",
+      "n": 10000000,
+      "mode": "power",
+      "paragram_ms": 1602.9996823519468,
+      "warpower_ms": 1301.4279019087553,
+      "speedup": 1.2317237704838566,
+      "paragram_failed": 67,
+      "paragram_empty": 51941,
+      "paragram_peak_gib": 17.1749267578125,
+      "warpower_failed": 0,
+      "warpower_empty": 53227,
+      "warpower_peak_gib": 27.1925048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 36
+    },
+    {
+      "distribution": "uniform",
+      "n": 10000000,
+      "mode": "voronoi",
+      "paragram_ms": 1471.1255695670843,
+      "warpower_ms": 1136.960108578205,
+      "speedup": 1.2939113329198164,
+      "paragram_failed": 48,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 17.1358642578125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 27.1925048828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 44
+    },
+    {
+      "distribution": "uniform",
+      "n": 15000000,
+      "mode": "power",
+      "paragram_ms": 2505.680201947689,
+      "warpower_ms": 1989.112800732255,
+      "speedup": 1.259697389220596,
+      "paragram_failed": 137,
+      "paragram_empty": 77967,
+      "paragram_peak_gib": 25.1905517578125,
+      "warpower_failed": 0,
+      "warpower_empty": 79894,
+      "warpower_peak_gib": 28.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 52
+    },
+    {
+      "distribution": "uniform",
+      "n": 15000000,
+      "mode": "voronoi",
+      "paragram_ms": 2311.999697610736,
+      "warpower_ms": 1765.2767851948738,
+      "speedup": 1.3097094557641893,
+      "paragram_failed": 72,
+      "paragram_empty": 0,
+      "paragram_peak_gib": 25.1339111328125,
+      "warpower_failed": 0,
+      "warpower_empty": 0,
+      "warpower_peak_gib": 28.1612548828125,
+      "warpower_asymmetric_cells_remaining": 0,
+      "warpower_consistency_retried_cells": 64
+    }
+  ]
+}

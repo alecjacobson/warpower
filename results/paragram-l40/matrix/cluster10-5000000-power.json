@@ -1,0 +1,63 @@
+{
+  "backend": "paragram",
+  "points_sha256": "547c4224ed5ae8f92802c8fe4da6460494225a0539dfce454bf6810c39e454da",
+  "weights_sha256": "a89305a585929fedbb3efb32ecf622550b92f5f643af2bdc1b5a969fa4c6d04d",
+  "distribution": "cluster10",
+  "n": 5000000,
+  "seed": 42,
+  "weighted": true,
+  "memory": {
+    "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+    "interval_seconds": 0.001,
+    "before_construction_bytes": 1186070528,
+    "peak_bytes": 16390422528,
+    "samples": 9761,
+    "error": null
+  },
+  "cpu_quota_during_measurement": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "cpu_throttled": false,
+  "mempool_retain_mb": null,
+  "warmup": 3,
+  "repeats": 10,
+  "seconds": [
+    0.7736080624163151,
+    0.7734075337648392,
+    0.7785413339734077,
+    0.773944441229105,
+    0.7833527736365795,
+    0.7727816887199879,
+    0.7791233286261559,
+    0.7734986543655396,
+    0.772857915610075,
+    0.773444902151823
+  ],
+  "mean_seconds": 0.7754560634493828,
+  "median_seconds": 0.7735533583909273,
+  "nnz": 75690850,
+  "status_counts": {
+    "0": 4944176,
+    "1": 68,
+    "2": 82,
+    "3": 55139,
+    "5": 535
+  },
+  "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+  "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+  "python": "3.10.12",
+  "versions": {
+    "torch": "2.7.1+cu126",
+    "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+    "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+  }
+}

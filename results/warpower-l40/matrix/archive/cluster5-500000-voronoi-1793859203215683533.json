@@ -1,0 +1,59 @@
+{
+  "backend": "warpower",
+  "points_sha256": "4587e3595a9ab641a78ef4cfdf2e5ad024b898bba128b499ff0bde231cece91b",
+  "weights_sha256": null,
+  "distribution": "cluster5",
+  "n": 500000,
+  "seed": 42,
+  "weighted": false,
+  "memory": {
+    "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+    "interval_seconds": 0.001,
+    "before_construction_bytes": 1137836032,
+    "peak_bytes": 3092381696,
+    "samples": 1176,
+    "error": null
+  },
+  "mempool_retain_mb": 32768,
+  "warmup": 3,
+  "repeats": 10,
+  "seconds": [
+    0.08712217956781387,
+    0.09986305609345436,
+    0.09566892310976982,
+    0.08145008981227875,
+    0.12080124765634537,
+    0.0956556461751461,
+    0.10211467742919922,
+    0.09770926088094711,
+    0.08126073703169823,
+    0.0816166028380394
+  ],
+  "mean_seconds": 0.09432624205946923,
+  "median_seconds": 0.09566228464245796,
+  "nnz": 7753140,
+  "status_counts": {
+    "0": 500000
+  },
+  "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+  "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+  "python": "3.10.12",
+  "versions": {
+    "warp": "1.19.0",
+    "warpower_source_sha256": "17ce6b20b8698c8ee458b4c806d7d1f32f0e049d7eaf27887d46824802228bf0",
+    "warpower_dirty": false,
+    "warpower_commit": "33494f5463bf33fce47fd1279b7bfc2dc23f4356",
+    "benchmark_source_sha256": "83786b809112faa38d8926cb467317edc0d34f3d512c555746392163436a5145"
+  },
+  "diagnostics": {
+    "retried_cells": 17,
+    "double_precision_cells": 1,
+    "consistency_retried_cells": 0,
+    "asymmetric_cells_remaining": 0,
+    "chunk_size": 500000,
+    "leaf_size": 4,
+    "knn_requested": 8,
+    "knn_effective": 0,
+    "warm_start": "nearest leaf"
+  }
+}

@@ -67,7 +67,7 @@ roundoff margin. This is a conservative geometric bound in exact arithmetic;
 the implementation uses floating-point arithmetic and does not claim exact
 predicates.
 
-## Validation and remaining work
+## Validation
 
 Small diagrams are compared against an independent double-precision all-halfspace
 oracle. Hierarchy tests verify exact subtree bounds, maximum weights, permutation,
@@ -75,7 +75,7 @@ leaf coverage, and coincident Morton keys. Queue retries, chunking, strong weigh
 and separated clusters are exercised separately. CUDA memory checks cover the
 clipper and complete pipeline.
 
-Performance and API completion are tracked in
-[issue 5](https://github.com/alecjacobson/warpower/issues/5) and
-[issue 4](https://github.com/alecjacobson/warpower/issues/4). Floating-point boundary
-failures can still occur; callers should inspect `status`.
+The [full benchmark report](../results/summary/report.md) covers the paper's
+synthetic sizes and nine real scenes on the L40. The [API guide](api.md) documents
+inputs, outputs, statuses, and memory controls. Floating-point predicates are
+not exact; callers should inspect `status` and consistency diagnostics.

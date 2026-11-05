@@ -10,7 +10,8 @@ from pathlib import Path
 
 import numpy as np
 
-from benchmarks.datasets import generate
+from benchmarks.datasets import generate, generate_weights
+from benchmarks.memory import MemorySampler
 
 
 def main():
@@ -25,11 +26,23 @@ def main():
     parser.add_argument("--input", type=Path, help="NPZ with points and optional weights")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--save-diagram", type=Path)
+    parser.add_argument(
+        "--mempool-retain-mb",
+        type=int,
+        default=0,
+        help="Warp allocator reserve policy (no geometry preallocation)",
+    )
     args = parser.parse_args()
     if args.input:
         data = np.load(args.input)
         points = data["points"].astype(np.float32)
-        weights = data["weights"].astype(np.float32) if args.weighted else None
+        weights = None
+        if args.weighted:
+            weights = (
+                data["weights"].astype(np.float32)
+                if "weights" in data
+                else generate_weights(points, args.seed)
+            )
     else:
         points, weights = generate(args.n, args.distribution, args.seed, args.weighted)
 
@@ -51,6 +64,7 @@ def main():
         import warpower as lib
 
         wp.init()
+        wp.set_mempool_release_threshold("cuda:0", args.mempool_retain_mb * 1024**2)
         p = wp.array(points, dtype=wp.vec3, device="cuda:0")
         w = wp.array(weights, device="cuda:0") if weights is not None else None
         synchronize = wp.synchronize
@@ -73,6 +87,14 @@ def main():
     def build():
         return lib.voronoi_diagram(p) if w is None else lib.power_diagram(p, w)
 
+    versions["benchmark_source_sha256"] = hashlib.sha256(
+        b"".join(
+            (Path("benchmarks") / name).read_bytes()
+            for name in ("datasets.py", "memory.py", "run.py")
+        )
+    ).hexdigest()
+    memory = MemorySampler()
+    memory.start()
     for _ in range(args.warmup):
         result = build()
         synchronize()
@@ -86,6 +108,7 @@ def main():
         times.append(time.perf_counter() - start)
         if len(times) < args.repeats:
             del result
+    memory_record = memory.finish()
     adjacency, offsets, status = (
         as_numpy(getattr(result, name)) for name in ("adjacency", "offsets", "status")
     )
@@ -100,6 +123,8 @@ def main():
         "n": len(points),
         "seed": args.seed,
         "weighted": args.weighted,
+        "memory": memory_record,
+        "mempool_retain_mb": args.mempool_retain_mb if args.backend == "warpower" else None,
         "warmup": args.warmup,
         "repeats": args.repeats,
         "seconds": times,

@@ -1,0 +1,82 @@
+# Reproduction
+
+Run commands from the checkout using its Python environment. Install the optional
+dependencies with `pip install -e '.[dev,datasets]' ninja`. To build the CUDA
+reference, install a compatible CUDA toolkit and the pinned upstream source:
+
+```sh
+git clone --recursive https://github.com/zenseact/paragram ../paragram
+git -C ../paragram checkout 4f36b1f2c8738912c5efc056a06023d4c1d2da07
+git -C ../paragram submodule update --init --recursive
+pip install -e ../paragram
+python -m benchmarks.fetch_scenes
+python -m benchmarks.matrix
+```
+
+The runner defaults to the local L40's CUDA architecture (`8.9`) and toolkit path
+(`/usr/local/cuda-12.6`). Set `CUDA_HOME` and `TORCH_CUDA_ARCH_LIST` when needed.
+Results are written under `results/{backend}-l40/matrix`; detailed logs and a
+progress journal are under `.work/matrix`. The runner executes one GPU job at a
+time and resumes matching completed cases. Changed results are archived.
+
+The matrix follows the [paper's benchmark definitions](https://arxiv.org/html/2605.06408v1#S5):
+uniform, linear-gradient, five-cluster, and ten-cluster distributions at 0.1, 0.5,
+1, 2, 5, 10, and 15 million sites. Power weights use Gaussian standard deviation
+equal to the squared median nearest-neighbor distance divided by three. Nine
+public Radiant Foam scenes are tested in both modes. Each case uses three warm-up
+and ten measured runs. The original paper's GPUs differ from the L40 used here.
+
+Synthetic seed 42 and extracted checkpoint hashes make inputs reproducible. The
+public v1 checkpoint point counts agree with the rounded scene counts in the
+paper; exact identity to the authors' evaluation files is not independently
+verified. Geometry is extracted using `torch.load(weights_only=True)`. Large
+checkpoints and point arrays are not included in the repository.
+
+## Timing and memory
+
+Timings are synchronized wall time for a fresh library construction call, with
+GPU inputs resident. Construction allocation calls, hierarchy building, retries,
+and CSR output are included. Input generation/upload, output download, and JIT
+compilation are excluded. No precomputed geometry or hierarchy is reused.
+
+The matrix retains up to 1 GiB in Warp's normal CUDA allocator between calls;
+PyTorch uses its normal caching allocator. This is recorded in every result.
+The library itself does not change the application's global allocator policy.
+For the measured repeated-call configuration:
+
+```python
+import warp as wp
+wp.set_mempool_release_threshold("cuda:0", 1024**3)
+```
+
+Pass `--mempool-retain-mb 0` to measure Warp's default release policy. At 100k
+uniform sites, an alternating diagnostic measured approximately 19.5 ms with
+release-at-synchronization and 13.5 ms with 1 GiB retention. Every construction
+still performs its own allocations.
+
+Peak device memory is sampled through NVML in a separate process at approximately
+1 ms intervals. It includes inputs, CUDA contexts, and cached allocator reserves,
+and is an approximate device-wide peak. The separate process is necessary because
+the CUDA reference holds Python's GIL during construction. Run on an otherwise
+idle GPU. Device index 0 is used by both the benchmark and sampler.
+
+## Correctness
+
+Status counts accompany every timing. Timing alone does not imply correct or
+complete output. Small cases use an independent double-precision all-halfspace
+oracle; it finds an interior point by linear programming and identifies faces
+from Qhull's dual hull vertices. This is a floating-point oracle, not an exact
+predicate implementation.
+
+Save a graph with `benchmarks.run --save-diagram PATH`, compare unordered CSR
+edges with `python -m benchmarks.compare A.npz B.npz --output comparison.json`,
+and audit every disagreeing synthetic row with:
+
+```sh
+python -m benchmarks.audit A.npz B.npz --distribution cluster5 --n 100000 \
+    --a-label paragram --b-label warpower --output audit.json
+```
+
+The audit considers every input site's halfspace for each audited cell. It checks
+only rows where the implementations disagree; agreement elsewhere is not proof
+that both are correct. Published audits retain per-cell discrepancies.

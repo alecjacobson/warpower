@@ -14,6 +14,51 @@ from benchmarks.datasets import generate, generate_weights
 from benchmarks.memory import MemorySampler
 
 
+def cpu_quota_snapshot():
+    """Read visible cgroup-v2 CPU limits, including limiting ancestors."""
+    records = {}
+    try:
+        line = next(
+            line
+            for line in Path("/proc/self/cgroup").read_text().splitlines()
+            if line.startswith("0::")
+        )
+        current = Path("/sys/fs/cgroup") / line[3:].lstrip("/")
+        root = Path("/sys/fs/cgroup")
+        while current == root or root in current.parents:
+            maximum = current / "cpu.max"
+            if maximum.exists():
+                quota, period = maximum.read_text().split()
+                if quota != "max":
+                    stats = dict(
+                        line.split() for line in (current / "cpu.stat").read_text().splitlines()
+                    )
+                    # Hierarchy depth identifies the limit without publishing
+                    # container identifiers from the host's cgroup paths.
+                    depth = len(current.relative_to(root).parts)
+                    records[str(depth)] = {
+                        "cpu_cores": int(quota) / int(period),
+                        "throttled_periods": int(stats["nr_throttled"]),
+                        "throttled_usec": int(stats["throttled_usec"]),
+                    }
+            current = current.parent
+    except (OSError, ValueError, KeyError, StopIteration):
+        pass
+    return records
+
+
+def cpu_quota_delta(before, after):
+    return {
+        level: {
+            "cpu_cores": record["cpu_cores"],
+            "throttled_periods": record["throttled_periods"] - before[level]["throttled_periods"],
+            "throttled_usec": record["throttled_usec"] - before[level]["throttled_usec"],
+        }
+        for level, record in after.items()
+        if level in before
+    }
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--backend", choices=["paragram", "warpower"], required=True)
@@ -100,6 +145,7 @@ def main():
         synchronize()
         del result
     times = []
+    cpu_before = cpu_quota_snapshot()
     for _ in range(args.repeats):
         synchronize()
         start = time.perf_counter()
@@ -108,6 +154,7 @@ def main():
         times.append(time.perf_counter() - start)
         if len(times) < args.repeats:
             del result
+    cpu_limits = cpu_quota_delta(cpu_before, cpu_quota_snapshot())
     memory_record = memory.finish()
     adjacency, offsets, status = (
         as_numpy(getattr(result, name)) for name in ("adjacency", "offsets", "status")
@@ -124,6 +171,8 @@ def main():
         "seed": args.seed,
         "weighted": args.weighted,
         "memory": memory_record,
+        "cpu_quota_during_measurement": cpu_limits,
+        "cpu_throttled": any(r["throttled_periods"] > 0 for r in cpu_limits.values()),
         "mempool_retain_mb": args.mempool_retain_mb if args.backend == "warpower" else None,
         "warmup": args.warmup,
         "repeats": args.repeats,

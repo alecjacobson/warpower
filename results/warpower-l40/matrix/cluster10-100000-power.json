@@ -11,27 +11,40 @@
     "interval_seconds": 0.001,
     "before_construction_bytes": 1137836032,
     "peak_bytes": 1750204416,
-    "samples": 452,
+    "samples": 559,
     "error": null
   },
-  "mempool_retain_mb": 1024,
+  "cpu_quota_during_measurement": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "cpu_throttled": false,
+  "mempool_retain_mb": 32768,
   "warmup": 3,
   "repeats": 10,
   "seconds": [
-    0.03310889005661011,
-    0.031720563769340515,
-    0.033103641122579575,
-    0.03191189467906952,
-    0.03262053057551384,
-    0.03243035450577736,
-    0.03245935216546059,
-    0.031947966665029526,
-    0.03186061605811119,
-    0.03190355747938156
+    0.040835753083229065,
+    0.042315345257520676,
+    0.0425950326025486,
+    0.04257376119494438,
+    0.04058419167995453,
+    0.040423501282930374,
+    0.041418977081775665,
+    0.04118216037750244,
+    0.04074215143918991,
+    0.04099511727690697
   ],
-  "mean_seconds": 0.03230673670768738,
-  "median_seconds": 0.03218916058540344,
-  "nnz": 1504506,
+  "mean_seconds": 0.04136659912765026,
+  "median_seconds": 0.041088638827204704,
+  "nnz": 1504504,
   "status_counts": {
     "0": 98907,
     "3": 1093
@@ -41,14 +54,16 @@
   "python": "3.10.12",
   "versions": {
     "warp": "1.19.0",
-    "warpower_source_sha256": "ef503c44f9f3e572141a97e4e5a3d442fae3e746ed9861d53eb4eede1a508f56",
+    "warpower_source_sha256": "17ce6b20b8698c8ee458b4c806d7d1f32f0e049d7eaf27887d46824802228bf0",
     "warpower_dirty": false,
-    "warpower_commit": "d9ea6df84c01b11c6e52eda5eb0eecec3269d1ca",
-    "benchmark_source_sha256": "83786b809112faa38d8926cb467317edc0d34f3d512c555746392163436a5145"
+    "warpower_commit": "9f180f6d854d50bb3e3e826c064e2dd7e5d2593d",
+    "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
   },
   "diagnostics": {
     "retried_cells": 23,
     "double_precision_cells": 3,
+    "consistency_retried_cells": 2,
+    "asymmetric_cells_remaining": 0,
     "chunk_size": 100000,
     "leaf_size": 4,
     "knn_requested": 8,

@@ -49,7 +49,7 @@ def main():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--warmup", type=int, default=3)
     parser.add_argument("--repeats", type=int, default=10)
-    parser.add_argument("--mempool-retain-mb", type=int, default=1024)
+    parser.add_argument("--mempool-retain-mb", type=int, default=32768)
     parser.add_argument("--job-timeout", type=int, default=900)
     args = parser.parse_args()
     source = source_digest()
@@ -100,6 +100,7 @@ def main():
                 if output.exists():
                     old = json.loads(output.read_text())
                     matches = all(old.get(k) == v for k, v in expected.items())
+                    matches &= not old.get("cpu_throttled", True)
                     matches &= (
                         old.get("versions", {}).get("benchmark_source_sha256") == benchmark_source
                     )
@@ -156,6 +157,7 @@ def main():
                             seconds=measured["mean_seconds"],
                             status_counts=measured["status_counts"],
                             memory=measured["memory"],
+                            cpu_throttled=measured["cpu_throttled"],
                         )
                 except subprocess.TimeoutExpired:
                     result = {"backend": backend, "case": name, "timeout": args.job_timeout}

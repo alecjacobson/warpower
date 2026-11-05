@@ -21,6 +21,13 @@ so a few difficult cells can run across multiple multiprocessors. Double-precisi
 Cartesian coordinates are cached when a vertex is created, avoiding repeated
 division during bounds updates and candidate rejection.
 
+After explicit failures are recovered, a GPU pass checks whether each directed
+facet is present in the opposite cell. One-sided facets identify possible
+numerical errors even when both cells report success. Both endpoints are retried
+in double precision before CSR symmetrization. Up to three consistency passes
+handle newly exposed neighbors; diagnostics report any remaining asymmetric
+cells. This improves floating-point consistency without claiming exact geometry.
+
 ## Spatial hierarchy
 
 Points are sorted by 63-bit Morton codes. A

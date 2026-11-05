@@ -10,28 +10,41 @@
     "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
     "interval_seconds": 0.001,
     "before_construction_bytes": 1137836032,
-    "peak_bytes": 1796341760,
-    "samples": 324,
+    "peak_bytes": 1750204416,
+    "samples": 433,
     "error": null
   },
-  "mempool_retain_mb": 1024,
+  "cpu_quota_during_measurement": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "cpu_throttled": false,
+  "mempool_retain_mb": 32768,
   "warmup": 3,
   "repeats": 10,
   "seconds": [
-    0.021741047501564026,
-    0.02233891934156418,
-    0.02206207811832428,
-    0.021887775510549545,
-    0.02266019955277443,
-    0.022286299616098404,
-    0.021857768297195435,
-    0.02225687727332115,
-    0.021962210536003113,
-    0.021335270255804062
+    0.030262429267168045,
+    0.031994398683309555,
+    0.031212642788887024,
+    0.029450591653585434,
+    0.03055393323302269,
+    0.03075072541832924,
+    0.030636414885520935,
+    0.031124677509069443,
+    0.030537135899066925,
+    0.030167892575263977
   ],
-  "mean_seconds": 0.02203884460031986,
-  "median_seconds": 0.022012144327163696,
-  "nnz": 1545594,
+  "mean_seconds": 0.030669084191322325,
+  "median_seconds": 0.030595174059271812,
+  "nnz": 1545592,
   "status_counts": {
     "0": 100000
   },
@@ -40,14 +53,16 @@
   "python": "3.10.12",
   "versions": {
     "warp": "1.19.0",
-    "warpower_source_sha256": "ef503c44f9f3e572141a97e4e5a3d442fae3e746ed9861d53eb4eede1a508f56",
+    "warpower_source_sha256": "17ce6b20b8698c8ee458b4c806d7d1f32f0e049d7eaf27887d46824802228bf0",
     "warpower_dirty": false,
-    "warpower_commit": "d9ea6df84c01b11c6e52eda5eb0eecec3269d1ca",
-    "benchmark_source_sha256": "83786b809112faa38d8926cb467317edc0d34f3d512c555746392163436a5145"
+    "warpower_commit": "3317ba709206652175e650647852b60503e8b7e1",
+    "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
   },
   "diagnostics": {
     "retried_cells": 8,
     "double_precision_cells": 0,
+    "consistency_retried_cells": 2,
+    "asymmetric_cells_remaining": 0,
     "chunk_size": 100000,
     "leaf_size": 4,
     "knn_requested": 8,

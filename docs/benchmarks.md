@@ -44,14 +44,14 @@ GPU inputs resident. Construction allocation calls, hierarchy building, retries,
 and CSR output are included. Input generation/upload, output download, and JIT
 compilation are excluded. No precomputed geometry or hierarchy is reused.
 
-The matrix retains up to 1 GiB in Warp's normal CUDA allocator between calls;
+The L40 matrix retains up to 32 GiB in Warp's normal CUDA allocator between calls;
 PyTorch uses its normal caching allocator. This is recorded in every result.
 The library itself does not change the application's global allocator policy.
 For the measured repeated-call configuration:
 
 ```python
 import warp as wp
-wp.set_mempool_release_threshold("cuda:0", 1024**3)
+wp.set_mempool_release_threshold("cuda:0", 32 * 1024**3)
 ```
 
 Pass `--mempool-retain-mb 0` to measure Warp's default release policy. At 100k
@@ -59,11 +59,28 @@ uniform sites, an alternating diagnostic measured approximately 19.5 ms with
 release-at-synchronization and 13.5 ms with 1 GiB retention. Every construction
 still performs its own allocations.
 
+The initial 1 GiB policy was too small for million-site scratch allocations.
+An alternating one-million-site diagnostic measured about 151 ms with 1 GiB
+retention versus 101 ms with 8 GiB, while the clipping kernel remained about
+88–90 ms. At 15 million uniform sites, six repeated constructions measured
+approximately 2.33 s with 1 GiB versus 1.73 s with 32 GiB (after initial warm-up).
+These diagnostics preceded consistency recovery and are not the final matrix.
+Retention does not preallocate geometry or scratch arrays. Chunking still uses
+current OS-reported free memory conservatively; the 32 GiB diagnostic settled
+at approximately 3.79 million cells per chunk on repeated calls.
+
 Peak device memory is sampled through NVML in a separate process at approximately
 1 ms intervals. It includes inputs, CUDA contexts, and cached allocator reserves,
 and is an approximate device-wide peak. The separate process is necessary because
 the CUDA reference holds Python's GIL during construction. Run on an otherwise
 idle GPU. Device index 0 is used by both the benchmark and sampler.
+
+Run CPU-intensive audits separately from timing. This VM exposes 128 logical
+CPUs but its cgroup permits only four CPU cores; simultaneous audits can throttle
+benchmark host code. Results now record throttled periods and time at each
+visible cgroup CPU limit during measurement. The matrix will not reuse a
+throttled result, and the summary rejects one. Historical results collected
+before this check are preserved in archives and excluded from the final matrix.
 
 ## Correctness
 

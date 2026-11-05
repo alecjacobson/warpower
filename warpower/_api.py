@@ -9,7 +9,7 @@ import numpy as np
 import warp as wp
 
 from . import _bvh, _validation
-from ._adjacency import compact
+from ._adjacency import asymmetric_cells, compact, gather_repair_seeds
 from ._cell import allocate_scratch
 from ._construct import collect_failures, make_construct_kernel, merge_retry
 
@@ -254,7 +254,7 @@ def _build(
                     wp.launch(
                         merge_retry,
                         failed,
-                        inputs=[failures, retry_counts, retry_status, counts, status, source],
+                        inputs=[failures, retry_counts, retry_status, counts, status, source, 0],
                         device=device,
                     )
                     # Only a scalar diagnostic is copied, rather than all statuses.
@@ -266,12 +266,91 @@ def _build(
                     remaining = int(check.numpy()[0])
                     if remaining == 0:
                         break
+            # A one-sided facet can survive single-precision clipping without
+            # an explicit topology failure. Recompute both endpoints in float64
+            # before making the output symmetric. New rows append to the retry
+            # buffer so existing source indices remain valid.
+            consistency_retried = 0
+            repair_jobs, repair_count = asymmetric_cells(neighbors, retry_neighbors, source, counts)
+            for _ in range(3):
+                if repair_count == 0:
+                    break
+                first = len(retry_neighbors)
+                total = first + repair_count
+                jobs = wp.empty(total, dtype=int, device=device)
+                wp.copy(jobs, repair_jobs, dest_offset=first, count=repair_count)
+                repaired = wp.empty((total, 512), dtype=int, device=device)
+                if first:
+                    wp.copy(repaired, retry_neighbors, count=first * 512)
+                wp.launch(
+                    gather_repair_seeds,
+                    (repair_count, 512),
+                    inputs=[jobs, first, counts, neighbors, retry_neighbors, source, repaired],
+                    device=device,
+                )
+                repair_counts = wp.empty(total, dtype=int, device=device)
+                repair_status = wp.full(total, 1, dtype=int, device=device)
+                consistency_retried += repair_count
+                for capacity in (128, 256, 512):
+                    repair_size = _chunk_size(
+                        repair_count, capacity, device, chunk_size, bytes_per_slot=100
+                    )
+                    repair_scratch = allocate_scratch(repair_size, capacity, device, robust=True)
+                    kernel = make_construct_kernel(
+                        weights is not None, capacity, robust=True, lane_stride=32
+                    )
+                    for start in range(0, repair_count, repair_size):
+                        wp.launch(
+                            kernel,
+                            min(repair_size, repair_count - start) * 32,
+                            inputs=[
+                                p,
+                                w,
+                                hierarchy.tree,
+                                jobs,
+                                first + start,
+                                True,
+                                repair_scratch,
+                                repaired,
+                                repair_counts,
+                                repair_status,
+                                repaired,
+                                True,
+                                hints,
+                                offsets,
+                                use_hints,
+                            ],
+                            block_dim=32,
+                            device=device,
+                        )
+                    check = wp.zeros(1, dtype=int, device=device)
+                    tmp = wp.empty(repair_count, dtype=int, device=device)
+                    wp.launch(
+                        collect_failures,
+                        repair_count,
+                        inputs=[repair_status[first:], tmp, check],
+                        device=device,
+                    )
+                    if int(check.numpy()[0]) == 0:
+                        break
+                wp.launch(
+                    merge_retry,
+                    repair_count,
+                    inputs=[jobs, repair_counts, repair_status, counts, status, source, first],
+                    device=device,
+                )
+                retry_neighbors = repaired
+                repair_jobs, repair_count = asymmetric_cells(
+                    neighbors, retry_neighbors, source, counts
+                )
             adjacency, final_offsets = compact(neighbors, retry_neighbors, source, counts)
             # Scratch and queue work complete before their Python owners leave scope.
             wp.synchronize_stream(stream)
             diagnostics = {
                 "retried_cells": retried,
                 "double_precision_cells": robust_retried,
+                "consistency_retried_cells": consistency_retried,
+                "asymmetric_cells_remaining": repair_count,
                 "chunk_size": size,
                 "leaf_size": leaf_size,
                 "knn_requested": knn,

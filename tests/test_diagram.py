@@ -85,3 +85,21 @@ def test_ten_cluster_boundary_recovery(weighted):
     result = warpower.power_diagram(p, w) if weighted else warpower.voronoi_diagram(p)
     assert result.diagnostics["retried_cells"] > 0
     assert np.all(np.isin(result.status.numpy(), [0, 3] if weighted else [0]))
+
+
+@pytest.mark.parametrize("weighted", [False, True])
+def test_clustered_one_sided_facet_recovery(weighted):
+    from benchmarks.datasets import generate
+
+    points, weights = generate(100000, "cluster5", 42, weighted)
+    result = (
+        warpower.power_diagram(points, weights) if weighted else warpower.voronoi_diagram(points)
+    )
+    # These hull cells previously disagreed on one facet despite successful
+    # statuses. Check their complete neighborhoods against all input halfspaces.
+    ids = [26333, 78334]
+    expected, _ = reference_cells(points, weights, indices=ids)
+    adjacency, offsets = result.adjacency.numpy(), result.offsets.numpy()
+    actual = [set(adjacency[offsets[i] : offsets[i + 1]]) for i in ids]
+    assert actual == expected
+    assert result.diagnostics["asymmetric_cells_remaining"] == 0

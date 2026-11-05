@@ -49,7 +49,7 @@ def main():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--warmup", type=int, default=3)
     parser.add_argument("--repeats", type=int, default=10)
-    parser.add_argument("--mempool-retain-mb", type=int, default=1024)
+    parser.add_argument("--mempool-retain-mb", type=int, default=32768)
     parser.add_argument("--job-timeout", type=int, default=900)
     args = parser.parse_args()
     source = source_digest()

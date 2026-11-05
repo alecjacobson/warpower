@@ -18,6 +18,6 @@ pip install 'https://github.com/NVIDIA/warp/releases/download/v1.19.0/warp_lang-
 
 # Best measured result
 
-The initial complete implementation constructs 100,000 uniformly distributed Voronoi cells on an NVIDIA L40 in **281.2 ms** with all cells reporting success. Paragram takes **13.0 ms** on the same dataset; performance parity has not yet been reached.
+On the paper's five-cluster distribution with 100,000 sites, Warpower constructs Voronoi adjacency on an NVIDIA L40 in **32.9 ms**, versus **65.7 ms** for Paragram: **2.00× faster**. All Warpower cells report success; Paragram reports four boundary failures and one empty cell.
 
-Both timings include construction allocations, use resident GPU inputs, and average ten runs after three warm-ups. [Reproducible measurements](results/warpower-l40/initial-uniform-100k.json).
+Both timings include construction allocations, use resident GPU inputs, and average ten runs after three warm-ups. Adjacency is not identical: the edge sets differ on 816 of 1,545,814 directed edges in their union. Broader performance and numerical parity remain in progress. [Warpower measurements](results/warpower-l40/radix-cluster5-100k.json), [Paragram measurements](results/paragram-l40/radix-cluster5-100k.json), [adjacency comparison](results/warpower-l40/radix-cluster5-100k-comparison.json).

@@ -9,8 +9,12 @@ from warpower._cell import allocate_scratch, clip_candidates
 def compute(points, weights=None, device="cuda:0", capacity=128):
     points = np.asarray(points, dtype=np.float32)
     n = len(points)
-    weights = np.zeros(n, dtype=np.float32) if weights is None else np.asarray(weights, dtype=np.float32)
-    order = np.argsort(np.linalg.norm(points[:, None] - points[None, :], axis=2), axis=1).astype(np.int32)
+    weights = (
+        np.zeros(n, dtype=np.float32) if weights is None else np.asarray(weights, dtype=np.float32)
+    )
+    order = np.argsort(np.linalg.norm(points[:, None] - points[None, :], axis=2), axis=1).astype(
+        np.int32
+    )
     scratch = allocate_scratch(n, capacity, device)
     neighbors = wp.empty((n, capacity), dtype=int, device=device)
     counts = wp.empty(n, dtype=int, device=device)
@@ -18,9 +22,23 @@ def compute(points, weights=None, device="cuda:0", capacity=128):
     p_gpu = wp.array(points, dtype=wp.vec3, device=device)
     w_gpu = wp.array(weights, device=device)
     order_gpu = wp.array(order, device=device)
-    wp.launch(clip_candidates, n, inputs=[p_gpu, w_gpu, order_gpu,
-              wp.vec3(points.min(axis=0) - 1.00001), wp.vec3(points.max(axis=0) + 1.00001),
-              scratch, neighbors, counts, status], device=device, block_dim=32)
+    wp.launch(
+        clip_candidates,
+        n,
+        inputs=[
+            p_gpu,
+            w_gpu,
+            order_gpu,
+            wp.vec3(points.min(axis=0) - 1.00001),
+            wp.vec3(points.max(axis=0) + 1.00001),
+            scratch,
+            neighbors,
+            counts,
+            status,
+        ],
+        device=device,
+        block_dim=32,
+    )
     adj, sizes = neighbors.numpy(), counts.numpy()
     return [set(map(int, row[:size])) for row, size in zip(adj, sizes)], status.numpy()
 

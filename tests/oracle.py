@@ -22,13 +22,22 @@ def reference_cells(points, weights=None, padding=1.00001):
         norms = np.linalg.norm(a, axis=1)
         zero = norms == 0
         if np.any(b[zero] > 0):
-            neighbors.append(set()); vertices.append(np.empty((0, 3))); continue
+            neighbors.append(set())
+            vertices.append(np.empty((0, 3)))
+            continue
         active = ~zero
         a, b, norms = a[active], b[active], norms[active]
-        result = linprog([0, 0, 0, -1], A_ub=np.column_stack((a, norms)), b_ub=-b,
-                         bounds=[(None, None)] * 3 + [(0, None)], method="highs")
+        result = linprog(
+            [0, 0, 0, -1],
+            A_ub=np.column_stack((a, norms)),
+            b_ub=-b,
+            bounds=[(None, None)] * 3 + [(0, None)],
+            method="highs",
+        )
         if not result.success or result.x[3] < 1e-11:
-            neighbors.append(set()); vertices.append(np.empty((0, 3))); continue
+            neighbors.append(set())
+            vertices.append(np.empty((0, 3)))
+            continue
         v = HalfspaceIntersection(np.column_stack((a, b)), result.x[:3]).intersections
         row = set()
         for j, normal, offset in zip(ids, normals, offsets):
@@ -44,5 +53,4 @@ def reference_cells(points, weights=None, padding=1.00001):
 
 
 def csr_sets(adjacency, offsets):
-    return [set(map(int, adjacency[offsets[i]:offsets[i + 1]]))
-            for i in range(len(offsets) - 1)]
+    return [set(map(int, adjacency[offsets[i] : offsets[i + 1]])) for i in range(len(offsets) - 1)]

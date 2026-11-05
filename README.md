@@ -18,4 +18,6 @@ pip install 'https://github.com/NVIDIA/warp/releases/download/v1.19.0/warp_lang-
 
 # Best measured result
 
-No validated performance result yet. Benchmarks are being established on an NVIDIA L40.
+The initial complete implementation constructs 100,000 uniformly distributed Voronoi cells on an NVIDIA L40 in **281.2 ms** with all cells reporting success. Paragram takes **13.0 ms** on the same dataset; performance parity has not yet been reached.
+
+Both timings include construction allocations, use resident GPU inputs, and average ten runs after three warm-ups. [Reproducible measurements](results/warpower-l40/initial-uniform-100k.json).

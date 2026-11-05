@@ -1,0 +1,58 @@
+{
+  "backend": "warpower",
+  "points_sha256": "e9759410b554ee52e428ba05655d7b9e4ecdb2455852f8441514a442e456b56d",
+  "weights_sha256": "26907a4dc20f046b1353c05f93a0acf656753c39361a43b640c408ed72c933e5",
+  "distribution": "cluster5",
+  "n": 100000,
+  "seed": 42,
+  "weighted": true,
+  "memory": {
+    "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+    "interval_seconds": 0.001,
+    "before_construction_bytes": 1137836032,
+    "peak_bytes": 1750204416,
+    "samples": 320,
+    "error": null
+  },
+  "mempool_retain_mb": 1024,
+  "warmup": 3,
+  "repeats": 10,
+  "seconds": [
+    0.022587541490793228,
+    0.020992044359445572,
+    0.02249962091445923,
+    0.022974248975515366,
+    0.02287466824054718,
+    0.023700430989265442,
+    0.022835828363895416,
+    0.02243760973215103,
+    0.022588547319173813,
+    0.022483468055725098
+  ],
+  "mean_seconds": 0.022597400844097136,
+  "median_seconds": 0.02258804440498352,
+  "nnz": 1505688,
+  "status_counts": {
+    "0": 98871,
+    "3": 1129
+  },
+  "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+  "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+  "python": "3.10.12",
+  "versions": {
+    "warp": "1.19.0",
+    "warpower_source_sha256": "ef503c44f9f3e572141a97e4e5a3d442fae3e746ed9861d53eb4eede1a508f56",
+    "warpower_dirty": false,
+    "warpower_commit": "d9ea6df84c01b11c6e52eda5eb0eecec3269d1ca",
+    "benchmark_source_sha256": "83786b809112faa38d8926cb467317edc0d34f3d512c555746392163436a5145"
+  },
+  "diagnostics": {
+    "retried_cells": 12,
+    "double_precision_cells": 0,
+    "chunk_size": 100000,
+    "leaf_size": 4,
+    "knn_requested": 8,
+    "knn_effective": 0,
+    "warm_start": "nearest leaf"
+  }
+}

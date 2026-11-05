@@ -1,6 +1,7 @@
 """Run in separate processes for clean comparisons. See --help."""
 
 import argparse
+import hashlib
 import json
 import platform
 import subprocess
@@ -56,6 +57,14 @@ def main():
         as_numpy = lambda a: a.numpy()
         versions = {
             "warp": wp.__version__,
+            "warpower_source_sha256": hashlib.sha256(
+                b"".join(p.read_bytes() for p in sorted(Path("warpower").glob("*.py")))
+            ).hexdigest(),
+            "warpower_dirty": bool(
+                subprocess.check_output(
+                    ["git", "status", "--porcelain", "--", "warpower"], text=True
+                ).strip()
+            ),
             "warpower_commit": subprocess.check_output(
                 ["git", "rev-parse", "HEAD"], text=True
             ).strip(),
@@ -83,6 +92,10 @@ def main():
     unique, counts = np.unique(status, return_counts=True)
     record = {
         "backend": args.backend,
+        "points_sha256": hashlib.sha256(points.tobytes()).hexdigest(),
+        "weights_sha256": hashlib.sha256(weights.tobytes()).hexdigest()
+        if weights is not None
+        else None,
         "distribution": args.distribution,
         "n": len(points),
         "seed": args.seed,

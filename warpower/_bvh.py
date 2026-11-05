@@ -14,6 +14,10 @@ class Tree:
     upper: wp.array[wp.vec3]
     weight: wp.array[float]
     ids: wp.array[int]
+    left: wp.array[int]
+    right: wp.array[int]
+    start: wp.array[int]
+    count: wp.array[int]
     leaf_base: int
     leaf_size: int
     n: int
@@ -104,6 +108,110 @@ def merge_level(tree: Tree, first: int):
     tree.weight[node] = wp.max(tree.weight[left], tree.weight[right])
 
 
+@wp.func(inline=True)
+def leading_zeros(x: wp.uint64):
+    # Warp exposes population count; spreading the top bit turns it into clz.
+    x = x | (x >> wp.uint64(1))
+    x = x | (x >> wp.uint64(2))
+    x = x | (x >> wp.uint64(4))
+    x = x | (x >> wp.uint64(8))
+    x = x | (x >> wp.uint64(16))
+    x = x | (x >> wp.uint64(32))
+    return int(wp.bit_count(~x))
+
+
+@wp.func(inline=True)
+def prefix(keys: wp.array[wp.uint64], a: int, b: int, n: int):
+    if b < 0 or b >= n:
+        return -1
+    x = keys[a] ^ keys[b]
+    if x == wp.uint64(0):
+        return 64 + leading_zeros(wp.uint64(a ^ b))
+    return leading_zeros(x)
+
+
+@wp.kernel(enable_backward=False)
+def radix_nodes(keys: wp.array[wp.uint64], segment: Tree, tree: Tree):
+    # Karras binary radix tree. Internal node i uses storage i+1; point leaves
+    # use storage N+i. Small radix subtrees become spatially aligned leaves.
+    i = wp.tid()
+    if i == tree.n - 1:
+        return
+    direction = int(1)
+    if prefix(keys, i, i + 1, tree.n) < prefix(keys, i, i - 1, tree.n):
+        direction = -1
+    minimum = prefix(keys, i, i - direction, tree.n)
+    limit = int(2)
+    while prefix(keys, i, i + limit * direction, tree.n) > minimum:
+        limit *= 2
+    length = int(0)
+    step = limit // 2
+    while step >= 1:
+        if prefix(keys, i, i + (length + step) * direction, tree.n) > minimum:
+            length += step
+        step //= 2
+    other = i + length * direction
+    first = wp.min(i, other)
+    last = wp.max(i, other)
+    common = prefix(keys, first, last, tree.n)
+    split = first
+    step = last - first
+    while step > 1:
+        step = (step + 1) // 2
+        candidate = split + step
+        if candidate < last and prefix(keys, first, candidate, tree.n) > common:
+            split = candidate
+    node = i + 1
+    left = split + 1
+    right = split + 2
+    if split == first:
+        left = tree.n + split
+    if split + 1 == last:
+        right = tree.n + split + 1
+    tree.left[node] = left
+    tree.right[node] = right
+    tree.start[node] = first
+    tree.count[node] = 0
+    if last - first + 1 <= tree.leaf_size:
+        tree.count[node] = last - first + 1
+
+    # A precomputed segment tree answers exact range bounds without inter-block
+    # publication or custom CUDA memory fences. Each query visits O(log N) nodes.
+    lo = wp.vec3(1.0e30)
+    hi = wp.vec3(-1.0e30)
+    weight = float(-1.0e30)
+    a = first + segment.leaf_base
+    b = last + 1 + segment.leaf_base
+    while a < b:
+        if (a & 1) != 0:
+            lo = wp.min(lo, segment.lower[a])
+            hi = wp.max(hi, segment.upper[a])
+            weight = wp.max(weight, segment.weight[a])
+            a += 1
+        if (b & 1) != 0:
+            b -= 1
+            lo = wp.min(lo, segment.lower[b])
+            hi = wp.max(hi, segment.upper[b])
+            weight = wp.max(weight, segment.weight[b])
+        a //= 2
+        b //= 2
+    tree.lower[node] = lo
+    tree.upper[node] = hi
+    tree.weight[node] = weight
+
+
+@wp.kernel(enable_backward=False)
+def radix_leaves(points: wp.array[wp.vec3], weights: wp.array[float], tree: Tree):
+    i = wp.tid()
+    node = tree.n + i
+    p = points[tree.ids[i]]
+    tree.lower[node] = p
+    tree.upper[node] = p
+    tree.weight[node] = weights[tree.ids[i]]
+    tree.start[node] = i
+    tree.count[node] = 1
+
+
 @dataclass
 class Hierarchy:
     tree: Tree
@@ -132,8 +240,8 @@ def build(points, weights, leaf_size=17):
     wp.launch(morton_keys, n, inputs=[points, bounds, keys, ids], device=device)
     radix_sort_pairs(keys, ids, n, end_bit=63)
     tree = Tree()
-    tree.leaf_base = 1 << (((n + leaf_size - 1) // leaf_size - 1).bit_length())
-    tree.leaf_size = leaf_size
+    tree.leaf_base = 1 << ((n - 1).bit_length())
+    tree.leaf_size = 1
     tree.n = n
     tree.ids = ids
     tree.lower = wp.empty(2 * tree.leaf_base, dtype=wp.vec3, device=device)
@@ -144,7 +252,22 @@ def build(points, weights, leaf_size=17):
     while level:
         wp.launch(merge_level, level, inputs=[tree, level], device=device)
         level //= 2
-    return Hierarchy(tree, bounds, (keys, partial_lo, partial_hi))
+    segment = tree
+    tree = Tree()
+    tree.n = n
+    tree.leaf_base = n
+    tree.leaf_size = leaf_size
+    tree.ids = ids
+    tree.lower = wp.empty(2 * n, dtype=wp.vec3, device=device)
+    tree.upper = wp.empty(2 * n, dtype=wp.vec3, device=device)
+    tree.weight = wp.empty(2 * n, dtype=float, device=device)
+    tree.left = wp.empty(2 * n, dtype=int, device=device)
+    tree.right = wp.empty(2 * n, dtype=int, device=device)
+    tree.start = wp.empty(2 * n, dtype=int, device=device)
+    tree.count = wp.empty(2 * n, dtype=int, device=device)
+    wp.launch(radix_nodes, n, inputs=[keys, segment, tree], device=device)
+    wp.launch(radix_leaves, n, inputs=[points, weights, tree], device=device)
+    return Hierarchy(tree, bounds, (keys, partial_lo, partial_hi, segment))
 
 
 @wp.func(inline=True)

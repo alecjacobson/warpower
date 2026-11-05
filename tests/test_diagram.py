@@ -45,3 +45,18 @@ def test_strong_weight_eliminates_cell():
     result = warpower.power_diagram(p, np.array([0, 100], dtype=np.float32))
     assert result.offsets.numpy().tolist() == [0, 0, 0]
     assert result.status.numpy().tolist() == [3, 0]
+
+
+@pytest.mark.parametrize("weighted", [False, True])
+def test_separated_clusters_with_tight_pruning(weighted):
+    rng = np.random.default_rng(17)
+    centers = np.array([[-5, 0, 0], [4, 2, 0], [0, -4, 3]])
+    p = (centers[np.arange(120) % 3] + rng.normal(0, 0.1, (120, 3))).astype(np.float32)
+    w = rng.normal(0, 0.001, len(p)).astype(np.float32) if weighted else None
+    result = (
+        warpower.power_diagram(p, w, leaf_size=4)
+        if weighted
+        else warpower.voronoi_diagram(p, leaf_size=4)
+    )
+    assert np.all(np.isin(result.status.numpy(), [0, 3]))
+    assert csr_sets(result.adjacency.numpy(), result.offsets.numpy()) == reference_cells(p, w)[0]

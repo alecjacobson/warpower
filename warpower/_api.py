@@ -110,7 +110,7 @@ def _build(
     leaf_size=-1,
     chunk_size=None,
     _capacity=64,
-    _queue_capacity=64,
+    _queue_capacity=128,
 ):
     started = time.perf_counter()
     p, torch_output = _points_array(points)
@@ -118,7 +118,7 @@ def _build(
         raise ValueError("diagram construction requires a CUDA device")
     if knn < 0:
         raise ValueError("knn must be nonnegative")
-    leaf_size = 17 if leaf_size == -1 else int(leaf_size)
+    leaf_size = 4 if leaf_size == -1 else int(leaf_size)
     if leaf_size < 1:
         raise ValueError("leaf_size must be positive or -1")
     n, device = len(p), p.device

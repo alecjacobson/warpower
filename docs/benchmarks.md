@@ -11,6 +11,7 @@ git -C ../paragram submodule update --init --recursive
 pip install -e ../paragram
 python -m benchmarks.fetch_scenes
 python -m benchmarks.matrix
+python -m benchmarks.summarize --require-complete
 ```
 
 The runner defaults to the local L40's CUDA architecture (`8.9`) and toolkit path
@@ -18,6 +19,10 @@ The runner defaults to the local L40's CUDA architecture (`8.9`) and toolkit pat
 Results are written under `results/{backend}-l40/matrix`; detailed logs and a
 progress journal are under `.work/matrix`. The runner executes one GPU job at a
 time and resumes matching completed cases. Changed results are archived.
+The summary command writes CSV, JSON, a Markdown table, and standalone SVG plots
+under `results/summary`. It checks input and harness compatibility, rejects mixed
+Warpower implementations, and excludes archived measurements. Omit
+`--require-complete` to inspect a clearly labeled partial matrix.
 
 The matrix follows the [paper's benchmark definitions](https://arxiv.org/html/2605.06408v1#S5):
 uniform, linear-gradient, five-cluster, and ten-cluster distributions at 0.1, 0.5,

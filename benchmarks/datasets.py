@@ -4,6 +4,13 @@ import numpy as np
 from scipy.spatial import cKDTree
 
 
+def generate_weights(points, seed=42, rng=None):
+    rng = np.random.default_rng(seed) if rng is None else rng
+    distances = cKDTree(points).query(points, k=2, workers=-1)[0][:, 1]
+    sigma = float(np.median(distances)) ** 2 / 3
+    return rng.normal(0, sigma, len(points)).astype(np.float32)
+
+
 def generate(n, distribution="uniform", seed=42, weighted=False):
     rng = np.random.default_rng(seed)
     if distribution == "uniform":
@@ -22,7 +29,5 @@ def generate(n, distribution="uniform", seed=42, weighted=False):
     weights = None
     if weighted:
         # Evaluate all sites, rather than an approximate sampled median.
-        distances = cKDTree(points).query(points, k=2, workers=-1)[0][:, 1]
-        sigma = float(np.median(distances)) ** 2 / 3
-        weights = rng.normal(0, sigma, n).astype(np.float32)
+        weights = generate_weights(points, rng=rng)
     return points, weights

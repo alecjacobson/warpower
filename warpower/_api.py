@@ -343,7 +343,9 @@ def _build(
                 repair_jobs, repair_count = asymmetric_cells(
                     neighbors, retry_neighbors, source, counts
                 )
-            adjacency, final_offsets = compact(neighbors, retry_neighbors, source, counts)
+            adjacency, final_offsets = compact(
+                neighbors, retry_neighbors, source, counts, already_symmetric=repair_count == 0
+            )
             # Scratch and queue work complete before their Python owners leave scope.
             wp.synchronize_stream(stream)
             diagnostics = {

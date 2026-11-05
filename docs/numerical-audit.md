@@ -27,6 +27,11 @@ implementation identifiers, the oracle source hash, and the SciPy version:
 - [Uniform power](../results/warpower-l40/consistency-uniform-100k-power-audit.json)
 - [Five-cluster power](../results/warpower-l40/consistency-cluster5-100k-power-audit.json)
 
+The subsequent direct-CSR optimization (`d38b80c`) produces identical full
+directed edge sets and status arrays on all three audited inputs. The
+[equivalence record](../results/warpower-l40/direct-csr-audit-equivalence.json)
+matches their canonical graph hashes to the original audit reports.
+
 ## Recovery and validation
 
 Single-precision clipping can lose a consistent polygon boundary even when its

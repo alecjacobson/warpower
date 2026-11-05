@@ -27,6 +27,10 @@ numerical errors even when both cells report success. Both endpoints are retried
 in double precision before CSR symmetrization. Up to three consistency passes
 handle newly exposed neighbors; diagnostics report any remaining asymmetric
 cells. This improves floating-point consistency without claiming exact geometry.
+When all directed facets are reciprocal, CSR output scans the existing row
+counts and copies each row directly. It avoids repeating reverse-neighbor
+searches and atomic symmetrization. Unresolved cases use the general symmetric
+compactor.
 
 ## Spatial hierarchy
 

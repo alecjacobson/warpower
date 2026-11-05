@@ -75,6 +75,8 @@ def load_pairs(root):
                     "mempool_retain_mb": record["mempool_retain_mb"],
                 }
             )
+        row["warpower_asymmetric_cells_remaining"] = w["diagnostics"]["asymmetric_cells_remaining"]
+        row["warpower_consistency_retried_cells"] = w["diagnostics"]["consistency_retried_cells"]
         rows.append(row)
     if not rows:
         raise ValueError("No matching completed benchmark pairs")
@@ -208,6 +210,9 @@ def main():
         "warpower_faster_cases": sum(r["speedup"] > 1 for r in rows),
         "paragram_failed_cells_total": sum(r["paragram_failed"] for r in rows),
         "warpower_failed_cells_total": sum(r["warpower_failed"] for r in rows),
+        "warpower_asymmetric_cells_total": sum(
+            r["warpower_asymmetric_cells_remaining"] for r in rows
+        ),
         "provenance": provenance,
         "rows": rows,
     }

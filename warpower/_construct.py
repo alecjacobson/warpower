@@ -80,6 +80,13 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
         slot = wp.tid()
         job = chunk_offset + slot
         i = jobs[job]
+        output = i
+        if output_by_job:
+            output = job
+        if tree.owners[i] != i:
+            counts[output] = 0
+            status[output] = 3
+            return
         p = points[i]
         wi = float(0.0)
         if wp.static(weighted_mode):
@@ -91,6 +98,7 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
             for h in range(hint_offsets[i], hint_offsets[i + 1]):
                 j = hints[h]
                 if j >= 0 and j < tree.n:
+                    j = tree.owners[j]
                     wj = float(0.0)
                     if wp.static(weighted_mode):
                         wj = weights[j]
@@ -175,6 +183,8 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
                 end = start + tree.count[node]
                 for k in range(start, end):
                     j = tree.ids[k]
+                    if tree.owners[j] != j:
+                        continue
                     wj = float(0.0)
                     if wp.static(weighted_mode):
                         wj = weights[j]
@@ -197,9 +207,6 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
                     tree, candidate, p, wi, scratch, cell, wp.static(weighted_mode)
                 ):
                     node = candidate
-        output = i
-        if output_by_job:
-            output = job
         emit(scratch, cell, output, neighbors, counts, status)
 
     return construct

@@ -5,6 +5,8 @@ from dataclasses import dataclass
 import warp as wp
 from warp.utils import radix_sort_pairs
 
+from ._canonical import canonicalize
+
 wp.set_module_options({"enable_backward": False})
 
 
@@ -14,6 +16,7 @@ class Tree:
     upper: wp.array[wp.vec3]
     weight: wp.array[float]
     ids: wp.array[int]
+    owners: wp.array[int]
     left: wp.array[int]
     right: wp.array[int]
     start: wp.array[int]
@@ -267,7 +270,8 @@ def build(points, weights, leaf_size=17):
     tree.count = wp.empty(2 * n, dtype=int, device=device)
     wp.launch(radix_nodes, n, inputs=[keys, segment, tree], device=device)
     wp.launch(radix_leaves, n, inputs=[points, weights, tree], device=device)
-    return Hierarchy(tree, bounds, (keys, partial_lo, partial_hi, segment))
+    tree.owners, canonical_buffers = canonicalize(points, weights)
+    return Hierarchy(tree, bounds, (keys, partial_lo, partial_hi, segment, canonical_buffers))
 
 
 @wp.func(inline=True)

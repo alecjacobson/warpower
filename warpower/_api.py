@@ -1,5 +1,6 @@
 """Native Warp interface and optional zero-copy PyTorch compatibility."""
 
+import operator
 import os
 import time
 from dataclasses import dataclass, field
@@ -7,7 +8,7 @@ from dataclasses import dataclass, field
 import numpy as np
 import warp as wp
 
-from . import _bvh
+from . import _bvh, _validation
 from ._adjacency import compact
 from ._cell import allocate_scratch
 from ._construct import collect_failures, make_construct_kernel, merge_retry
@@ -51,17 +52,21 @@ def _weights_array(weights, n, device):
     elif isinstance(weights, np.ndarray):
         if weights.dtype != np.float32:
             raise ValueError("weights must have dtype float32")
-        result = wp.array(weights.reshape(-1), device=device)
+        result = wp.array(weights, device=device)
     elif type(weights).__module__.startswith("torch"):
         import torch
 
         if not weights.is_cuda or weights.dtype != torch.float32:
             raise ValueError("weights must be a float32 CUDA tensor")
-        result = wp.from_torch(weights.contiguous().reshape(-1))
+        result = wp.from_torch(weights.contiguous())
     else:
         raise TypeError("weights must be a Warp array, NumPy array, or PyTorch tensor")
     if result.dtype != wp.float32 or result.size != n or result.device != device:
         raise ValueError("weights must contain N float32 values on the points device")
+    if result.shape not in ((n,), (n, 1)):
+        raise ValueError("weights must have shape (N,) or (N, 1)")
+    if not result.is_contiguous:
+        result = wp.clone(result)
     return result.reshape((n,))
 
 
@@ -83,9 +88,10 @@ def _hints_array(value, device):
 
 def _chunk_size(n, capacity, device, chunk_size):
     if chunk_size is not None:
+        chunk_size = operator.index(chunk_size)
         if chunk_size < 1:
             raise ValueError("chunk_size must be positive")
-        return min(n, int(chunk_size))
+        return min(n, chunk_size)
     forced = os.environ.get("WARPOWER_NUM_CHUNKS", os.environ.get("PARAGRAM_NUM_CHUNKS", "0"))
     if int(forced) > 0:
         return max(1, (n + int(forced) - 1) // int(forced))
@@ -116,9 +122,11 @@ def _build(
     p, torch_output = _points_array(points)
     if not p.device.is_cuda:
         raise ValueError("diagram construction requires a CUDA device")
+    knn = operator.index(knn)
     if knn < 0:
         raise ValueError("knn must be nonnegative")
-    leaf_size = 4 if leaf_size == -1 else int(leaf_size)
+    leaf_size = operator.index(leaf_size)
+    leaf_size = 4 if leaf_size == -1 else leaf_size
     if leaf_size < 1:
         raise ValueError("leaf_size must be positive or -1")
     n, device = len(p), p.device
@@ -129,6 +137,25 @@ def _build(
     else:
         stream = wp.get_stream(device)
     with wp.ScopedStream(stream):
+        w = _weights_array(weights, n, device)
+        use_hints = initial_guesses is not None
+        if use_hints != (initial_guesses_offsets is not None):
+            raise ValueError(
+                "initial_guesses and initial_guesses_offsets must be provided together"
+            )
+        hints = (
+            _hints_array(initial_guesses, device)
+            if use_hints
+            else wp.empty(0, dtype=int, device=device)
+        )
+        offsets = (
+            _hints_array(initial_guesses_offsets, device)
+            if use_hints
+            else wp.empty(0, dtype=int, device=device)
+        )
+        if use_hints and len(offsets) != n + 1:
+            raise ValueError("initial_guesses_offsets must have shape (N + 1,)")
+        _validation.check(p, w, hints, offsets, use_hints)
         if n == 0:
             result = Diagram(
                 wp.empty(0, dtype=int, device=device),
@@ -136,24 +163,6 @@ def _build(
                 wp.empty(0, dtype=int, device=device),
             )
         else:
-            w = _weights_array(weights, n, device)
-            use_hints = initial_guesses is not None
-            if use_hints != (initial_guesses_offsets is not None):
-                raise ValueError(
-                    "initial_guesses and initial_guesses_offsets must be provided together"
-                )
-            hints = (
-                _hints_array(initial_guesses, device)
-                if use_hints
-                else wp.empty(0, dtype=int, device=device)
-            )
-            offsets = (
-                _hints_array(initial_guesses_offsets, device)
-                if use_hints
-                else wp.empty(0, dtype=int, device=device)
-            )
-            if use_hints and len(offsets) != n + 1:
-                raise ValueError("initial_guesses_offsets must have shape (N + 1,)")
             hierarchy = _bvh.build(p, w, leaf_size)
             neighbors = wp.empty((n, _capacity), dtype=int, device=device)
             counts = wp.empty(n, dtype=int, device=device)
@@ -188,6 +197,10 @@ def _build(
             failure_count = wp.zeros(1, dtype=int, device=device)
             wp.launch(collect_failures, n, inputs=[status, failures, failure_count], device=device)
             failed = int(failure_count.numpy()[0])
+            # The scalar transfer has synchronized construction. Release large
+            # temporary buffers before allocating retry storage.
+            del scratch
+            hierarchy.temporaries = ()
             retry_neighbors = wp.empty((0, 1), dtype=int, device=device)
             retried = 0
             if failed:
@@ -240,7 +253,14 @@ def _build(
             adjacency, final_offsets = compact(neighbors, retry_neighbors, source, counts)
             # Scratch and queue work complete before their Python owners leave scope.
             wp.synchronize_stream(stream)
-            diagnostics = {"retried_cells": retried, "chunk_size": size, "leaf_size": leaf_size}
+            diagnostics = {
+                "retried_cells": retried,
+                "chunk_size": size,
+                "leaf_size": leaf_size,
+                "knn_requested": knn,
+                "knn_effective": 0,
+                "warm_start": "CSR hints" if use_hints else "nearest leaf",
+            }
             result = Diagram(adjacency, final_offsets, status, diagnostics)
     if torch_output:
         result = Diagram(

@@ -5,13 +5,14 @@ from scipy.optimize import linprog
 from scipy.spatial import HalfspaceIntersection
 
 
-def reference_cells(points, weights=None, padding=1.00001):
+def reference_cells(points, weights=None, padding=1.00001, indices=None):
     points = np.asarray(points, dtype=np.float64)
     n = len(points)
     weights = np.zeros(n) if weights is None else np.asarray(weights, dtype=np.float64)
     lo, hi = points.min(axis=0) - padding, points.max(axis=0) + padding
     neighbors, vertices = [], []
-    for i, p in enumerate(points):
+    for i in range(n) if indices is None else indices:
+        p = points[i]
         ids = np.arange(n)[np.arange(n) != i]
         q = points[ids] - p
         normals = 2 * q
@@ -38,15 +39,12 @@ def reference_cells(points, weights=None, padding=1.00001):
             neighbors.append(set())
             vertices.append(np.empty((0, 3)))
             continue
-        v = HalfspaceIntersection(np.column_stack((a, b)), result.x[:3]).intersections
-        row = set()
-        for j, normal, offset in zip(ids, normals, offsets):
-            length = np.linalg.norm(normal)
-            if length == 0:
-                continue
-            on = v[np.abs(v @ normal + offset) <= 2e-7 * length]
-            if len(on) >= 3 and np.linalg.matrix_rank(on - on[0], tol=1e-8) >= 2:
-                row.add(int(j))
+        intersection = HalfspaceIntersection(np.column_stack((a, b)), result.x[:3])
+        v = intersection.intersections
+        # Vertices of the dual hull correspond directly to nonredundant primal
+        # facets. This avoids a tolerance-based face-area classification.
+        plane_ids = np.concatenate((ids, np.full(6, -1)))[active]
+        row = {int(plane_ids[j]) for j in intersection.dual_vertices if plane_ids[j] >= 0}
         neighbors.append(row)
         vertices.append(v + p)
     return neighbors, vertices

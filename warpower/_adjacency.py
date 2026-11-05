@@ -121,20 +121,48 @@ def fill_symmetric(
                 adjacency[pos] = i
 
 
-def compact(neighbors, retry, source, counts):
+@wp.kernel(enable_backward=False)
+def fill_direct(
+    counts: wp.array[int],
+    base: wp.array2d[int],
+    retry: wp.array2d[int],
+    source: wp.array[int],
+    offsets: wp.array[int],
+    adjacency: wp.array[int],
+):
+    i = wp.tid()
+    start = offsets[i]
+    for k in range(counts[i]):
+        adjacency[start + k] = neighbor_at(i, k, base, retry, source)
+
+
+def compact(neighbors, retry, source, counts, already_symmetric=False):
     n, device = len(counts), counts.device
     sizes = wp.zeros(n + 1, dtype=int, device=device)
     offsets = wp.empty(n + 1, dtype=int, device=device)
-    wp.launch(count_symmetric, n, inputs=[counts, neighbors, retry, source, sizes], device=device)
+    if already_symmetric:
+        wp.copy(sizes, counts, dest_offset=1, count=n)
+    else:
+        wp.launch(
+            count_symmetric, n, inputs=[counts, neighbors, retry, source, sizes], device=device
+        )
     array_scan(sizes, offsets)
     # Only the final count crosses to the host; all adjacency processing is GPU.
     total = int(offsets[n : n + 1].numpy()[0])
     adjacency = wp.empty(total, dtype=int, device=device)
-    heads = wp.clone(offsets)
-    wp.launch(
-        fill_symmetric,
-        n,
-        inputs=[counts, neighbors, retry, source, heads, adjacency],
-        device=device,
-    )
+    if already_symmetric:
+        wp.launch(
+            fill_direct,
+            n,
+            inputs=[counts, neighbors, retry, source, offsets, adjacency],
+            device=device,
+        )
+    else:
+        heads = wp.clone(offsets)
+        wp.launch(
+            fill_symmetric,
+            n,
+            inputs=[counts, neighbors, retry, source, heads, adjacency],
+            device=device,
+        )
     return adjacency, offsets

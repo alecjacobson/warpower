@@ -87,6 +87,12 @@ def main():
     def build():
         return lib.voronoi_diagram(p) if w is None else lib.power_diagram(p, w)
 
+    versions["benchmark_source_sha256"] = hashlib.sha256(
+        b"".join(
+            (Path("benchmarks") / name).read_bytes()
+            for name in ("datasets.py", "memory.py", "run.py")
+        )
+    ).hexdigest()
     memory = MemorySampler()
     memory.start()
     for _ in range(args.warmup):

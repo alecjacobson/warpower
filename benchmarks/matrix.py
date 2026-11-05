@@ -53,6 +53,12 @@ def main():
     parser.add_argument("--job-timeout", type=int, default=900)
     args = parser.parse_args()
     source = source_digest()
+    benchmark_source = hashlib.sha256(
+        b"".join(
+            (Path("benchmarks") / name).read_bytes()
+            for name in ("datasets.py", "memory.py", "run.py")
+        )
+    ).hexdigest()
     cases = [(d, n, None) for n in args.sizes for d in args.distributions]
     cases += [(scene, None, Path("data/radfoam") / f"{scene}.npz") for scene in args.scenes]
     cache_dir = Path("data/matrix")
@@ -94,6 +100,9 @@ def main():
                 if output.exists():
                     old = json.loads(output.read_text())
                     matches = all(old.get(k) == v for k, v in expected.items())
+                    matches &= (
+                        old.get("versions", {}).get("benchmark_source_sha256") == benchmark_source
+                    )
                     if backend == "warpower":
                         matches &= old.get("versions", {}).get("warpower_source_sha256") == source
                     if matches:

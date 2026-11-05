@@ -5,7 +5,7 @@ from functools import lru_cache
 import warp as wp
 
 from ._bvh import Tree, directional_radius_squared, distance_squared
-from ._cell import Scratch, clip, emit, init_cell
+from ._cell import Cell, Scratch, clip, emit, init_cell
 
 wp.set_module_options({"enable_backward": False})
 
@@ -27,12 +27,41 @@ def node_radius(tree: Tree, node: int, p: wp.vec3, lo: wp.vec3, hi: wp.vec3):
     return directional_radius_squared(p, tree.lower[node], tree.upper[node], lo, hi) * 1.000002
 
 
+@wp.func(inline=True)
+def node_may_clip(
+    tree: Tree, node: int, p: wp.vec3, wi: float, s: Scratch, cell: Cell, weighted: bool
+):
+    lower = tree.lower[node] - p
+    upper = tree.upper[node] - p
+    delta = float(0.0)
+    if weighted:
+        delta = wi - tree.weight[node]
+    # For each cell vertex x, minimize |q|^2-2*x.q over the node's box.
+    # This is |x-clamp(x,box)|^2-|x|^2. If every vertex remains on the
+    # seed's side, no site's bisector in the node can cut this convex cell.
+    for k in range(cell.nv):
+        h = s.positions[cell.base + 32 * k]
+        x = wp.vec3(h[0], h[1], h[2]) / h[3]
+        q = wp.min(wp.max(x, lower), upper)
+        q2 = wp.dot(q, q)
+        products = wp.cw_mul(x, q)
+        value = q2 - 2.0 * (products[0] + products[1] + products[2]) + delta
+        scale = (
+            q2
+            + 2.0 * (wp.abs(products[0]) + wp.abs(products[1]) + wp.abs(products[2]))
+            + wp.abs(delta)
+        )
+        if value <= 1.0e-5 * (scale + 1.0e-20):
+            return True
+    return False
+
+
 @lru_cache(maxsize=None)
 def make_construct_kernel(weighted=False, queue_capacity=64):
     weighted_mode = wp.constant(weighted)
     queue_size = wp.constant(queue_capacity)
 
-    @wp.kernel(enable_backward=False, module="unique")
+    @wp.kernel(enable_backward=False, module="unique", module_options={"fast_math": True})
     def construct(
         points: wp.array[wp.vec3],
         weights: wp.array[float],
@@ -65,7 +94,7 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
                     wj = float(0.0)
                     if wp.static(weighted_mode):
                         wj = weights[j]
-                    cell = clip(scratch, cell, i, j, points[j] - p, wi, wj)
+                    cell = clip(scratch, cell, i, j, points[j] - p, wi, wj, True)
                 if cell.status != 0:
                     break
 
@@ -73,10 +102,31 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
         queue_dist = wp.zeros(shape=queue_size, dtype=float)
         size = int(0)
         node = int(1)
+        # Start with the nearest leaf before directional priorities. With the
+        # initial world box, a distant direction can have the largest radius;
+        # prioritizing d^2-r^2 immediately would clip far-away sites first.
+        if not use_hints:
+            while tree.count[node] == 0:
+                left = tree.left[node]
+                right = tree.right[node]
+                dl = node_distance(tree, left, p, wi, wp.static(weighted_mode))
+                dr = node_distance(tree, right, p, wi, wp.static(weighted_mode))
+                if size == queue_size:
+                    cell.status = 4
+                    break
+                if dl < dr:
+                    node = left
+                    queue_nodes[size] = right
+                    queue_dist[size] = dr
+                else:
+                    node = right
+                    queue_nodes[size] = left
+                    queue_dist[size] = dl
+                size += 1
         while node >= 0 and cell.status == 0:
-            while node < tree.leaf_base:
-                left = 2 * node
-                right = left + 1
+            while tree.count[node] == 0:
+                left = tree.left[node]
+                right = tree.right[node]
                 dl = node_distance(tree, left, p, wi, wp.static(weighted_mode))
                 dr = node_distance(tree, right, p, wi, wp.static(weighted_mode))
                 rl = node_radius(tree, left, p, cell.lo, cell.hi)
@@ -100,22 +150,35 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
                         far_d = dl
                 if far >= 0:
                     if size == queue_size:
-                        cell.status = 4
-                        break
+                        kept = int(0)
+                        for k in range(size):
+                            queued = queue_nodes[k]
+                            if queue_dist[k] <= node_radius(
+                                tree, queued, p, cell.lo, cell.hi
+                            ) and node_may_clip(
+                                tree, queued, p, wi, scratch, cell, wp.static(weighted_mode)
+                            ):
+                                queue_nodes[kept] = queued
+                                queue_dist[kept] = queue_dist[k]
+                                kept += 1
+                        size = kept
+                        if size == queue_size:
+                            cell.status = 4
+                            break
                     queue_nodes[size] = far
                     queue_dist[size] = far_d
                     size += 1
             if cell.status != 0:
                 break
-            if node >= tree.leaf_base:
-                start = (node - tree.leaf_base) * tree.leaf_size
-                end = wp.min(start + tree.leaf_size, tree.n)
+            if node >= 0:
+                start = tree.start[node]
+                end = start + tree.count[node]
                 for k in range(start, end):
                     j = tree.ids[k]
                     wj = float(0.0)
                     if wp.static(weighted_mode):
                         wj = weights[j]
-                    cell = clip(scratch, cell, i, j, points[j] - p, wi, wj)
+                    cell = clip(scratch, cell, i, j, points[j] - p, wi, wj, use_hints)
                     if cell.status != 0:
                         break
             node = int(-1)
@@ -130,7 +193,9 @@ def make_construct_kernel(weighted=False, queue_capacity=64):
                 size -= 1
                 queue_nodes[nearest] = queue_nodes[size]
                 queue_dist[nearest] = queue_dist[size]
-                if best <= node_radius(tree, candidate, p, cell.lo, cell.hi):
+                if best <= node_radius(tree, candidate, p, cell.lo, cell.hi) and node_may_clip(
+                    tree, candidate, p, wi, scratch, cell, wp.static(weighted_mode)
+                ):
                     node = candidate
         output = i
         if output_by_job:

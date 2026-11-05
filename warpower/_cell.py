@@ -144,7 +144,16 @@ def outside(h: wp.vec4, plane: wp.vec4):
 
 
 @wp.func(inline=True)
-def clip(s: Scratch, cell: Cell, i: int, j: int, q: wp.vec3, wi: float, wj: float):
+def clip(
+    s: Scratch,
+    cell: Cell,
+    i: int,
+    j: int,
+    q: wp.vec3,
+    wi: float,
+    wj: float,
+    check_duplicate: bool = True,
+):
     if cell.status != 0 or i == j:
         return cell
     d2 = wp.dot(q, q)
@@ -164,9 +173,10 @@ def clip(s: Scratch, cell: Cell, i: int, j: int, q: wp.vec3, wi: float, wj: floa
     inv_length = 1.0 / wp.sqrt(d2)
     plane = wp.vec4(-q[0], -q[1], -q[2], 0.5 * numerator) * inv_length
     # Do not insert duplicate hint planes, including roundoff re-clips.
-    for k in range(cell.np):
-        if s.neighbors[cell.base + 32 * k] == j:
-            return cell
+    if check_duplicate:
+        for k in range(cell.np):
+            if s.neighbors[cell.base + 32 * k] == j:
+                return cell
     removed = int(0)
     k = int(0)
     while k < cell.nv:

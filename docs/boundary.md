@@ -112,6 +112,12 @@ current convex hull, so ODT energy alone can increase during accepted boundary
 fitting. This acceptance rule is a practical heuristic, not a theorem about a
 single global objective. Fixed-hull `ODTWorkspace` retains its separate behavior.
 
+Unassigned sites additionally use a [material-domain trust region](vtm-domain.md)
+to prevent interior ODT updates from crossing the input surface when quadrature
+has missed a nearby site. Exterior sites that lose their assignment move back
+toward the surface. This guard runs entirely on device and preserves inactive
+and selectively masked directions.
+
 The internal core currently returns `full_tetrahedra` and a device
 `full_tetrahedra_count`, covering the convex hull. This includes the torus hole
 and exterior of other nonconvex domains. Do not use those outputs as a finished

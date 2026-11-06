@@ -1,0 +1,39 @@
+digraph dot {
+subgraph cluster_1 {
+label="graph_1" graph[style="dashed"];
+"graph_1_node_0"[style="bold" shape="record" label="{KERNEL
+| {ID | 0 (topoId: 4) | produce_0664362e_cuda_kernel_forward\<\<\<1,256,0\>\>\>}
+| {{node handle | func handle} | {0x000055E563190D90 | 0x000055E5631403F0}}
+| {accessPolicyWindow | {base_ptr | num_bytes | hitRatio | hitProp | missProp} | {0x0000000000000000 | 0 | 0.000000 | N | N}}
+| {cooperative | 0}
+| {priority | 0}
+}"];
+
+"graph_1_node_1"[style="solid" style="solid" shape="record" label="{MEMSET
+| {{ID | node handle | dptr | pitch | value | elementSize | width | height} | {1 (topoId: 3) | 0x000055E563191498 | 0x0000000302001800 | 0 | 0 | 1 | 4 | 1}}}"];
+
+"graph_1_node_2"[style="solid" style="solid" shape="record" label="{MEMSET
+| {{ID | node handle | dptr | pitch | value | elementSize | width | height} | {2 (topoId: 2) | 0x000055E563191BA0 | 0x0000000302001A00 | 0 | 0 | 1 | 8 | 1}}}"];
+
+"graph_1_node_3"[style="bold" shape="record" label="{KERNEL
+| {ID | 3 (topoId: 1) | constrain_539a6380_cuda_kernel_forward\<\<\<1,256,0\>\>\>}
+| {{node handle | func handle} | {0x000055E5631922A8 | 0x000055E563179040}}
+| {accessPolicyWindow | {base_ptr | num_bytes | hitRatio | hitProp | missProp} | {0x0000000000000000 | 0 | 0.000000 | N | N}}
+| {cooperative | 0}
+| {priority | 0}
+}"];
+
+"graph_1_node_4"[style="bold" shape="record" label="{KERNEL
+| {ID | 4 (topoId: 0) | consume_aaa17c8e_cuda_kernel_forward\<\<\<1,256,0\>\>\>}
+| {{node handle | func handle} | {0x000055E5631929B0 | 0x000055E56311E660}}
+| {accessPolicyWindow | {base_ptr | num_bytes | hitRatio | hitProp | missProp} | {0x0000000000000000 | 0 | 0.000000 | N | N}}
+| {cooperative | 0}
+| {priority | 0}
+}"];
+
+"graph_1_node_0" -> "graph_1_node_1" [headlabel=0];
+"graph_1_node_1" -> "graph_1_node_2" [headlabel=0];
+"graph_1_node_2" -> "graph_1_node_3" [headlabel=0];
+"graph_1_node_3" -> "graph_1_node_4" [headlabel=0];
+}
+}

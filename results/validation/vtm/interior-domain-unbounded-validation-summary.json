@@ -1,0 +1,144 @@
+{
+  "baseline": "8ed677d95cd587beecef9b338b34be05f80f920f",
+  "source_commit": "41b1775cb6a40620065704f3bb8e1323f1da7c3d",
+  "unchanged_runtime_files": [
+    "warpower/__init__.py",
+    "warpower/_active_sites.py",
+    "warpower/_adjacency.py",
+    "warpower/_api.py",
+    "warpower/_automatic_sizing.py",
+    "warpower/_boundary.py",
+    "warpower/_bvh.py",
+    "warpower/_canonical.py",
+    "warpower/_cell.py",
+    "warpower/_construct.py",
+    "warpower/_delaunay_certificate.py",
+    "warpower/_delaunay_recovery.py",
+    "warpower/_domain.py",
+    "warpower/_domain_topology.py",
+    "warpower/_extraction.py",
+    "warpower/_facet_completion.py",
+    "warpower/_facet_seeds.py",
+    "warpower/_fast_candidates.py",
+    "warpower/_filtered_predicates.py",
+    "warpower/_graded_odt.py",
+    "warpower/_graph.py",
+    "warpower/_graph_construct.py",
+    "warpower/_graph_tetrahedra.py",
+    "warpower/_halfspace_predicates.py",
+    "warpower/_integer.py",
+    "warpower/_jitter.py",
+    "warpower/_mesh_api.py",
+    "warpower/_mesh_topology.py",
+    "warpower/_mesher.py",
+    "warpower/_odt.py",
+    "warpower/_poles.py",
+    "warpower/_predicates.py",
+    "warpower/_quality_moves.py",
+    "warpower/_refinement.py",
+    "warpower/_sampling.py",
+    "warpower/_selective.py",
+    "warpower/_site_bvh.py",
+    "warpower/_sizing.py",
+    "warpower/_sphere_bounds.py",
+    "warpower/_stable_center.py",
+    "warpower/_stable_volume.py",
+    "warpower/_surface_bvh.py",
+    "warpower/_symbolic_bounds.py",
+    "warpower/_symbolic_cell.py",
+    "warpower/_symbolic_delaunay.py",
+    "warpower/_symbolic_tetrahedra.py",
+    "warpower/_teleport.py",
+    "warpower/_tetrahedra.py",
+    "warpower/_triangle_contact.py",
+    "warpower/_validation.py",
+    "warpower/_voronoi_volume.py",
+    "warpower/_vtm_controls.py"
+  ],
+  "changed_existing_runtime_files": [
+    "warpower/_vtm.py"
+  ],
+  "new_runtime_files": [
+    "warpower/_vtm_domain.py"
+  ],
+  "README_unchanged": true,
+  "scope": "VTM material-direction guard. Standalone diagram/Delaunay/ODT sources and README unchanged. Full hand validity and CPU target remain unresolved.",
+  "canonical_outputs_equal": {
+    "torus1000": {
+      "points": true,
+      "tetrahedra": true,
+      "full_tetrahedra": true,
+      "boundary": true,
+      "roles": true,
+      "input_points": true,
+      "input_faces": true
+    },
+    "graded1000": {
+      "points": true,
+      "tetrahedra": true,
+      "boundary": true,
+      "full_tetrahedra": true,
+      "radius_ratio": false,
+      "roles": true,
+      "input_points": true,
+      "input_faces": true,
+      "radius_ratio_aligned_with_cells": true
+    }
+  },
+  "performance": {
+    "before": {
+      "torus1000_ms": 3206.71728515625,
+      "graded1000_ms": 5890.24169921875,
+      "delaunay1000_ms": 9.182592391967773,
+      "delaunay100000_ms": 183.19068908691406,
+      "diagram100000_ms": 18.207263201475143,
+      "diagram_status_counts": {
+        "0": 100000
+      }
+    },
+    "after": {
+      "torus1000_ms": 3556.39306640625,
+      "graded1000_ms": 6332.64013671875,
+      "delaunay1000_ms": 9.182527542114258,
+      "delaunay100000_ms": 183.17138671875,
+      "diagram100000_ms": 18.738169223070145,
+      "diagram_status_counts": {
+        "0": 100000
+      }
+    }
+  },
+  "hand": {
+    "public_error": [
+      64
+    ],
+    "public_valid": [
+      0
+    ],
+    "rounds": [
+      4,
+      3,
+      0
+    ],
+    "steps": [
+      100,
+      0
+    ],
+    "full_count": 5851,
+    "material_count": 3615,
+    "boundary_count": 1608,
+    "bad_edges": 13,
+    "bounds": [
+      [
+        -1.399999976158142,
+        -1.0,
+        -0.11999999731779099
+      ],
+      [
+        1.0,
+        2.0,
+        0.11999999731779099
+      ]
+    ],
+    "outside_input_box": 0
+  }
+}

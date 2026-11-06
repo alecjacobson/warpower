@@ -224,6 +224,9 @@ Device conflict resolution reserves distinct corner sites; crease and surface
 membership evolves with the positions. An internal VTM core combines these
 targets with interior ODT, reconstruction, and complete rollback. Boundary-first
 acceptance is a heuristic because fitting changes the optimization domain.
+Unassigned interior sites additionally use a [material-domain trust region](vtm-domain.md),
+and unassigned exterior sites move toward the surface, preventing missed boundary
+samples from letting unconstrained ODT updates drive sites away from the shape.
 
 [`ExtractionWorkspace`](extraction.md) independently selects tetrahedra using the
 paper's circumcenter thickening rule. Fixed-buffer face/edge tables expose the

@@ -77,6 +77,8 @@ cost are included in the raw complete-mesher records.
 The [result summary](../results/validation/vtm/reuse-cells-summary.json) includes
 all independent checks, source hashes and exact coordinate differences. The same
 directory contains before/after timing JSON and the five new mesh-array exports.
+The [provenance manifest](../results/validation/vtm/reuse-cells-provenance.json)
+records their hashes and the validated revisions.
 These are improvements over the preceding Warpower implementation. The
 [quality-matched CPU performance goal](cpu-mesher-baseline.md) remains open;
 neither these timings nor mean quality imply that it has been achieved.
@@ -90,7 +92,7 @@ the [complete torus mesher](../results/validation/vtm/reuse-cells-integrated-mem
 also passes padded checking with its nested optimization/refinement loops. The
 six-phase producer/consumer audit passes
 [allocation-lifetime checking](../results/validation/vtm/reuse-cells-lifetime.txt),
-both with zero errors. The phases cover fresh construction, unchanged topology,
+with zero errors. The phases cover fresh construction, unchanged topology,
 three-round facet completion, duplicate-site fallback, invalid input and recovery.
 
 The [native trace summary](../results/validation/vtm/reuse-cells-device-audit.json)

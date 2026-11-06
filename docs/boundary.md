@@ -96,10 +96,10 @@ subject to the [surface-domain contract](domains.md).
 ## Boundary/interior integration under development
 
 The internal `warpower._vtm.VTMWorkspace` combines these evolving boundary roles
-with uniform interior ODT displacements, reconstruction, device backtracking,
+with uniform or graded interior ODT displacements, reconstruction, device backtracking,
 and complete point/connectivity rollback. It is not yet exported as the public
-full-mesher API: initial sampling, graded interior energy, refinement, and
-the full public API are still under development. The independent
+full-mesher API: refinement and the complete public interface remain under
+development. Independent [sizing and initial sampling](sizing.md) are available. The independent
 [domain extractor](extraction.md) can now consume its full-hull output in the
 same captured loop.
 
@@ -124,3 +124,63 @@ sites as well as corners. Finite construction recovery can still exhaust its
 budget; failures publish a zero tetrahedron count. The explicit
 `certified_delaunay=False` option selects the earlier floating-point constructor
 for comparisons. Existing boundary benchmark records predate this change.
+
+
+### Active prefixes for staged meshing
+
+The internal core accepts `active_count=device_int32_scalar`. Its point array
+is a fixed capacity; the device scalar chooses the active prefix on each run.
+Valid counts are in `[4, capacity]`, and the active sites must also satisfy the
+boundary corner budget. A producer may change the count before replay. Newly
+active positions must already contain valid coordinates.
+
+Only active sites participate in boundary fitting, reconstruction, and updates.
+Inactive input positions remain unchanged and can contain arbitrary values,
+including NaNs, or valid positions reserved for a later growth stage. An optional
+private reconstruction array copies the live prefix and fills its tail with the
+first live point. Canonical duplicate ownership then removes those private tail
+slots; output tetrahedra reference only active input indices. Rollback restores
+both the input prefix and the private mesh coordinates.
+
+A count outside `[4, capacity]` sets core `error=8`, clears the full-hull output
+count and current energy/volume, and executes no optimization. Histories are
+invalidated and the iteration count is zero. For example, a failed sampler's
+zero output count propagates directly to this guard. Corrected counts recover on
+the next replay. Child diagnostics can retain earlier results when the guard
+skips the body; consume the parent error/count before inspecting them.
+
+```python
+from warpower._vtm import VTMWorkspace  # Developing core, not the final public API.
+
+core = VTMWorkspace(domain, points, active_count=active_count, max_iterations=20)
+with wp.ScopedCapture() as capture:
+    # A producer writes points and active_count on device.
+    core.run()
+    # A consumer checks core.error and core.full_tetrahedra_count.
+```
+
+With `active_count=None`, the original fixed-budget path runs directly, without
+the extra guard, private point array, or copy kernels. The active-prefix option
+is a foundation for refinement; it does not itself insert or relocate sites
+between optimization runs.
+
+
+The active-prefix [full suite](../results/validation/vtm/active-full-tests.txt)
+passes 269 tests. All eight new cases pass [padded memory checking](../results/validation/vtm/active-memcheck.txt),
+and both captured integration cases pass [lifetime checking](../results/validation/vtm/active-lifetime.txt)
+with zero errors under the [documented diagnostic settings](cuda-validation.md).
+An [installed wheel](../results/validation/vtm/active-wheel.json) handles device
+counts `24 → 40 → 0 → 72`, skips the invalid zero-count body, and recovers.
+The [native trace](../results/validation/vtm/active-device-audit.json) records
+1,084 kernel activities for three changing-count replays; all 58 graph copies
+are device-to-device, with no host/allocation/free nodes or CPU transfer calls.
+
+The [source audit](../results/validation/vtm/active-isolation.json) finds every
+preexisting runtime module except the core wrapper unchanged from `79bc791`;
+all preexisting VTM kernel/function ASTs are identical. For the default uniform
+1,000-site torus, 20 iterations and five timed replays give
+[520.48 ms before](../results/validation/vtm/active-core-before.json) and
+[520.74 ms after](../results/validation/vtm/active-core-after.json), a 0.05%
+difference within measurement variation. Both produce 5,902 full-hull tetrahedra,
+accept all 20 steps, and have matching energy histories within `2e-14` relative
+roundoff, with no observed CPU quota throttling. These remain core-only timings.

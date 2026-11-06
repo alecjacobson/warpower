@@ -1,8 +1,8 @@
 """Developing fixed-budget VTM core; public full-mesher API is tracked in #38.
 
 This layer combines evolving boundary constraints and interior ODT updates. It
-currently returns full-hull connectivity; domain extraction and initialization
-are separate milestones. Its acceptance rule is a boundary-first heuristic,
+returns full-hull connectivity; domain extraction and initialization are separate
+services. Its acceptance rule is a boundary-first heuristic,
 not a global energy minimization theorem.
 """
 
@@ -200,7 +200,7 @@ def final_count(error: wp.array[int], count: wp.array[int]):
 
 
 class VTMWorkspace:
-    """Internal fixed-budget core with optional sampled sizing."""
+    """Internal VTM core with optional sampled sizing and a device active prefix."""
 
     def __init__(
         self,
@@ -217,6 +217,7 @@ class VTMWorkspace:
         chunk_size=None,
         certified_delaunay=True,
         sizing=None,
+        active_count=None,
     ):
         self.max_iterations = operator.index(max_iterations)
         self.max_backtracks = operator.index(max_backtracks)
@@ -230,16 +231,42 @@ class VTMWorkspace:
             raise ValueError("tolerance must be nonnegative and finite")
         self.damping, self.step_limit, self.tolerance = damping, step_limit, tolerance
         self.domain = domain
+        self.active_count = active_count
+        self._propose, self._propose_args = propose, []
+        mesh_points = points
+        if active_count is not None:
+            from . import _active_sites
+            from ._domain import _contiguous_points
+
+            self._active = _active_sites
+            self._input_points = _contiguous_points(points)
+            if (
+                not isinstance(active_count, wp.array)
+                or active_count.dtype != wp.int32
+                or active_count.shape != (1,)
+                or active_count.device != self._input_points.device
+                or not active_count.is_contiguous
+            ):
+                raise ValueError("active_count must be one contiguous device int32")
+            mesh_points = wp.empty_like(self._input_points)
+            wp.launch(
+                self._active.prepare_mesh,
+                len(mesh_points),
+                inputs=[self._input_points, active_count, mesh_points],
+                device=mesh_points.device,
+            )
+            self._propose, self._propose_args = self._active.propose_active, [active_count]
         mesh_type = DelaunayWorkspace if certified_delaunay else DiagramWorkspace
         mesh_options = {} if certified_delaunay else dict(adjacency=False, return_tetrahedra=True)
         self.mesh = mesh_type(
-            points,
+            mesh_points,
             tetrahedra_capacity=tetrahedra_capacity,
             tetrahedra_cell_capacity=tetrahedra_cell_capacity,
             chunk_size=chunk_size,
             **mesh_options,
         )
-        self.points, self.device, self.n = self.mesh.points, self.mesh.device, self.mesh.n
+        self.points = self.mesh.points if active_count is None else self._input_points
+        self.device, self.n = self.mesh.device, self.mesh.n
         if self.n < 4:
             raise ValueError("Tetrahedral meshing needs at least four sites")
         self.sizing = sizing
@@ -261,11 +288,14 @@ class VTMWorkspace:
                 crease_sizing=self._crease_sizing.values,
             )
             wp.load_module(module="warpower._graded_odt", device=self.device)
-        self.boundary = BoundaryWorkspace(domain, self.points, **boundary_options)
+        self.boundary = BoundaryWorkspace(
+            domain, self.points, active_count=active_count, **boundary_options
+        )
         self.full_tetrahedra = self.mesh.tetrahedra
         self.full_tetrahedra_count = self.mesh.tetrahedra_count
         with wp.ScopedDevice(self.device):
             self.error = wp.zeros(1, dtype=int)
+            self._active_ready = wp.zeros(1, dtype=int) if active_count is not None else None
             self.iterations = wp.zeros(1, dtype=int)
             self.termination = wp.zeros(1, dtype=int)
             self.rejected_steps = wp.zeros(1, dtype=int)
@@ -336,6 +366,33 @@ class VTMWorkspace:
         self.last_geometry_error.zero_()
         self.last_boundary_error.zero_()
         self.energy_history.fill_(float("nan"))
+        if self.active_count is None:
+            self._record_valid()
+        else:
+            self._launch(
+                self._active.validate,
+                1,
+                [self.active_count, self.n, self.error, self._active_ready],
+            )
+            self.full_tetrahedra_count.zero_()
+            self.energy.zero_()
+            self.volume.zero_()
+            self.minimum_radius_ratio.zero_()
+            wp.capture_if(self._active_ready, self._record_valid)
+
+    def _prepare_mesh(self):
+        if self.active_count is not None:
+            self._launch(
+                self._active.prepare_mesh,
+                self.n,
+                [self.points, self.active_count, self.mesh.points],
+            )
+
+    def _reconstruct(self):
+        self._prepare_mesh()
+        self.mesh.run()
+
+    def _record_valid(self):
         if self.sizing is not None:
             self._surface_sizing.run()
             self._crease_sizing.run()
@@ -345,7 +402,7 @@ class VTMWorkspace:
             self.n,
             [self.points, self.boundary.targets, self.boundary.roles, self.boundary.error],
         )
-        self.mesh.run()
+        self._reconstruct()
         self._evaluate(True)
         self.boundary.run()
         self._launch(
@@ -397,11 +454,12 @@ class VTMWorkspace:
     def _try_step(self):
         self._max_move.zero_()
         self._launch(
-            propose,
+            self._propose,
             self.n,
-            [self._original, self.points, self._direction, self._edge, self._alpha, self._max_move],
+            [self._original, self.points, self._direction, self._edge, self._alpha, self._max_move]
+            + self._propose_args,
         )
-        self.mesh.run()
+        self._reconstruct()
         self._evaluate(False)
         self.boundary.run()
         self._launch(
@@ -449,6 +507,7 @@ class VTMWorkspace:
 
     def _restore(self):
         wp.copy(self.points, self._original)
+        self._prepare_mesh()
         wp.copy(self.full_tetrahedra, self._old_tets)
         wp.copy(self.full_tetrahedra_count, self._old_count)
         self.mesh.error.zero_()

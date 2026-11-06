@@ -216,6 +216,7 @@ class DiagramWorkspace:
         adjacency=True,
         adjacency_capacity=None,
         tetrahedra_capacity=None,
+        tetrahedra_cell_capacity=512,
         chunk_size=None,
         leaf_size=4,
         max_expansions=12,
@@ -244,6 +245,14 @@ class DiagramWorkspace:
         self.weighted = weights is not None
         self._adjacency = bool(adjacency)
         self._tetrahedra = bool(return_tetrahedra)
+        self.tetrahedra_cell_capacity = operator.index(tetrahedra_cell_capacity)
+        if self.tetrahedra_cell_capacity not in (512, 1024):
+            raise ValueError("tetrahedra_cell_capacity must be 512 or 1024")
+        if not self._tetrahedra and self.tetrahedra_cell_capacity != 512:
+            raise ValueError("Larger tetrahedron cells require return_tetrahedra=True")
+        self._tet_capacities = (128, 256, 512)
+        if self.tetrahedra_cell_capacity == 1024:
+            self._tet_capacities += (1024,)
         if not self._adjacency and not self._tetrahedra:
             raise ValueError("Request adjacency, tetrahedra, or both")
         self.chunk_size = max(1, _chunk_size(self.n, 64, self.device, chunk_size))
@@ -311,9 +320,11 @@ class DiagramWorkspace:
                     length = blocks
                 self._scratch = allocate_scratch(self.chunk_size, 64, self.device)
                 self._retry32 = allocate_scratch(self.retry_chunk, 128, self.device)
-            self._scratch64 = allocate_scratch(self.retry_chunk, 512, self.device, robust=True)
+            self._scratch64 = allocate_scratch(
+                self.retry_chunk, self.tetrahedra_cell_capacity, self.device, robust=True
+            )
             self._robust = {}
-            for capacity in (128, 256, 512):
+            for capacity in self._tet_capacities:
                 scratch = Scratch64()
                 for name in ("planes", "vertices", "positions", "cartesian", "next", "neighbors"):
                     setattr(scratch, name, getattr(self._scratch64, name))
@@ -606,7 +617,7 @@ class DiagramWorkspace:
         self._tet_status.fill_(1)
         self._job_count.fill_(self.n)
         wp.copy(self._jobs, self._ids, count=self.n)
-        for capacity in (128, 256, 512):
+        for capacity in self._tet_capacities:
             self._launch(begin_chunks, 1, [self._job_count, self._cursor, self._chunks])
 
             def body(capacity=capacity):

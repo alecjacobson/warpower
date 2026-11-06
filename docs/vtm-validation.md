@@ -124,8 +124,38 @@ python -m benchmarks.graph_capture --optimizer --dot results/local/odt-loop.dot 
 
 The built wheel passes a captured CUDA ODT smoke test from outside the checkout,
 including lazy import, energy decrease, and exact packaged-source matching.
-All pre-existing geometry implementation files remain byte-identical to the
-pre-VTM revision ([source audit](../results/validation/vtm/odt-standalone-isolation.json));
+At the initial optimizer milestone (#45), all pre-existing geometry implementation
+files were byte-identical to the pre-VTM revision ([source audit](../results/validation/vtm/odt-standalone-isolation.json));
 only optional modules and lazy exports were added. The standalone performance
 baseline above still describes those unchanged execution paths. The new optimizer
 has its own costs and does not run during standalone geometry calls.
+
+## Larger intermediate-cell recovery
+
+`DiagramWorkspace(..., tetrahedra_cell_capacity=1024)` adds an optional recovery
+stage while retaining the default 512-cell path. `ODTWorkspace` opts into the
+larger reserve by default. The 10-bit packed plane indices bound the supported
+maximum at 1024; no IDs are wrapped. Scratch allocation doubles for the opt-in
+at a fixed retry chunk, and can be reduced with `chunk_size`.
+
+The saved failing 100k input now produces all **626,008 tetrahedra**, exactly
+matching CGAL 6.2.1
+([full comparison](../results/validation/vtm/large-cells/full-mesh-recovery.json)).
+A compact [401-site fixture](../tests/data/intermediate-cell-capacity.json)
+preserves the clipping order and box: it reaches 512 distinct intermediate
+vertices, then finishes with only 312 when given the larger capacity. All 305
+finite dual tetrahedra incident to its seed match the independent CGAL star.
+Captured tests force the larger recovery branch, including odd-sized chunks and
+weighted/unweighted geometry.
+
+The 100k optimizer now completes **20/20 iterations without rejection**, reducing
+energy by **50.73%** and returning 610,832 tetrahedra with the original hull and
+volume ([trajectory record](../results/validation/vtm/large-cells/trajectory.json)).
+Its measured 58.06-second warm run encountered CPU throttling and remains a
+diagnostic measurement, not a clean performance claim. Worst boundary quality
+is still poor; boundary fitting and reconstruction speed remain open milestones.
+
+The full suite passes 111 tests. The 17 optimizer and large-cell tests pass CUDA
+memcheck without errors. All ten standalone paired performance cases have equal
+outputs and no statistically significant regression above 2%, with no CPU
+throttling ([measurements](../results/validation/vtm/large-cell-default-performance.json)).

@@ -32,10 +32,16 @@ def main():
     parser.add_argument("--n", type=int, default=100000)
     parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument("--iterations", type=int, default=7)
+    parser.add_argument("--cell-capacity", type=int, choices=(512, 1024), default=512)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     source = np.random.default_rng(args.seed).uniform(-1, 1, (args.n, 3)).astype(np.float32)
-    workspace = warpower.ODTWorkspace(source, max_iterations=args.iterations, max_backtracks=0)
+    workspace = warpower.ODTWorkspace(
+        source,
+        max_iterations=args.iterations,
+        max_backtracks=0,
+        tetrahedra_cell_capacity=args.cell_capacity,
+    )
     saved = wp.zeros_like(workspace.points)
     status = wp.zeros(args.n, dtype=int, device=workspace.device)
     seen = wp.zeros(1, dtype=int, device=workspace.device)
@@ -66,6 +72,7 @@ def main():
     record = {
         "n": args.n,
         "seed": args.seed,
+        "cell_capacity": args.cell_capacity,
         "requested_iterations": args.iterations,
         "accepted_iterations": int(workspace.iterations.numpy()[0]),
         "error": int(workspace.error.numpy()[0]),

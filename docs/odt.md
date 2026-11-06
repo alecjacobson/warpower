@@ -65,6 +65,7 @@ recovered through backtracking. Robust construction is separately tracked in
 | `max_backtracks=12` | Maximum halvings after the first rejected attempt |
 | `fixed=None` | Optional contiguous CUDA int32 mask pinning additional sites |
 | `tetrahedra_capacity`, `chunk_size` | Forwarded to the full-hull workspace |
+| `tetrahedra_cell_capacity=1024` | Larger clipping recovery for difficult intermediate cells; set 512 for the smaller reserve |
 
 Every `run()` uses the current sites as its initial state, rediscovers their hull,
 and resets iteration counters and history. An uploaded NumPy input is copied;

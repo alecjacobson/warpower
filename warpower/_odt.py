@@ -292,6 +292,7 @@ class ODTWorkspace:
         step_limit=0.5,
         max_backtracks=12,
         tetrahedra_capacity=None,
+        tetrahedra_cell_capacity=1024,
         chunk_size=None,
     ):
         self.max_iterations = operator.index(max_iterations)
@@ -311,6 +312,7 @@ class ODTWorkspace:
             adjacency=False,
             return_tetrahedra=True,
             tetrahedra_capacity=tetrahedra_capacity,
+            tetrahedra_cell_capacity=tetrahedra_cell_capacity,
             chunk_size=chunk_size,
         )
         self.points, self.device = self.mesh.points, self.mesh.device

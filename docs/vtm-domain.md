@@ -64,10 +64,47 @@ inactive NaNs, a captured changing-input loop, and rollback on query failure.
 The real hand regression checks both uniform and graded updates and verifies
 physical tetrahedron orientations using independent integer arithmetic.
 
-Validation of the optimized cache and bounded search is in progress. Initial
-unbounded-query measurements showed a material full-mesher slowdown and are
-retained as rejected performance results; they are not evidence for the final
-optimized implementation.
+The [full suite](../results/validation/vtm/interior-domain-full-suite.txt) passes
+494 tests. All 12 new cases pass
+[padded memory checking](../results/validation/vtm/interior-domain-memcheck.txt)
+with zero errors, and the changing-input loop passes
+[allocation/lifetime checking](../results/validation/vtm/interior-domain-lifetime.txt).
+The [native audit](../results/validation/vtm/interior-domain-device-audit.json)
+records 12 kernel activities and eight memory clears across four graph launches,
+with one final synchronization and no CPU transfers, host callbacks, allocations,
+or frees during replay. Instrumented checks use the
+[documented diagnostic stack settings](cuda-validation.md).
+
+Fresh paired L40 measurements include the complete pipeline and domain refit:
+
+| 1,000-site case | Before | With guard | Change |
+|---|---:|---:|---:|
+| Uniform torus | 3,203.27 ms | 3,259.05 ms | +1.74% |
+| Graded torus | 5,894.21 ms | 5,947.09 ms | +0.90% |
+
+Positions, roles, and oriented connectivity match bitwise after sorting rows.
+Graded quality arrays also match after aligning tetrahedron rows. Workspace
+storage grows by 4,000 bytes at this capacity. These are correctness costs, not
+a speedup claim. The initial unbounded-query implementation added 11% / 7.5%;
+its [rejected measurements](../results/validation/vtm/interior-domain-unbounded-validation-summary.json)
+remain available. The [final report](../results/validation/vtm/interior-domain-validation-summary.json)
+includes raw paired results and confirms that 52 other existing runtime modules
+and the README are unchanged.
+
+Independent Delaunay medians are 9.175 → 9.181 ms at 1,000 sites and
+182.969 → 182.629 ms at 100,000 sites. Short eager-diagram runs were noisy, so
+an [alternating-order follow-up](../results/validation/vtm/interior-domain-diagram-repeat-summary.json)
+uses two processes per revision and 15 measured calls per process. The per-run
+medians span 18.14–18.19 ms before and 18.13–18.31 ms after; the data show no
+consistent diagram regression. Both the short and longer records are retained.
+All reported measurement windows have zero recorded CPU throttling.
+
+The complete guarded hand reaches 1,000 sites with no rejected growth batches
+and no sites outside the input bounding box. Its 5,851-cell full Delaunay mesh
+is certified. The diagnostic material candidate contains 3,615 cells and 1,608
+boundary faces, with 13 independently counted nonmanifold edges. Public output
+therefore remains invalid with zero published counts. The saved candidate and
+edge-incidence diagnostic are linked from the final report.
 
 The complete hand still requires the extraction work in
 [#112](https://github.com/alecjacobson/warpower/issues/112). Its failure gate

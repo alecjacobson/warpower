@@ -100,9 +100,12 @@ and fixed-budget device initial sampling. The internal
 deduplicated Voronoi-center insertions and certified transactional reconstruction.
 Optional [selective optimization](selective.md) limits updates to poor retained
 tetrahedra and one neighbor ring, with an additional minimum-quality guard.
-Boundary jitter, worst-element relocation, the final
-public mesher API, and measured CPU outperformance remain necessary to complete
-the goal.
+[Tangential boundary jitter](jitter.md) and [interior teleportation/insertion](interior-improvement.md)
+now provide optional quality transactions with complete device rollback.
+The final public mesher/scheduler, broader examples, and measured CPU
+outperformance remain necessary to complete the goal. The scheduler must also
+handle invalid coarse material boundaries explicitly; [#76](https://github.com/alecjacobson/warpower/issues/76)
+tracks recovery within a bounded refinement/fitting budget.
 
 Additional findings are tracked in
 [#42](https://github.com/alecjacobson/warpower/issues/42) (old-connectivity line-search stalls),

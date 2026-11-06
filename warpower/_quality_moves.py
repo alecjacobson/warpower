@@ -482,12 +482,15 @@ class QualityMove:
 
     def _build(self):
         c = self.core
-        self._launch(apply_proposal, 1, [self._state, self.points])
+        self._apply()
         c._reconstruct()
         c._evaluate(True)
         c.boundary.run()
         self._launch(geometry_ready, 1, [self._state, c.mesh.error, c._invalid, c.boundary.error])
         wp.capture_if(self.ready, self._quality)
+
+    def _apply(self):
+        self._launch(apply_proposal, 1, [self._state, self.points])
 
     def _quality(self):
         c = self.core

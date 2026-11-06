@@ -112,6 +112,8 @@ def main():
     wp.synchronize()
     setup_seconds = time.perf_counter() - start
     begin, end = wp.Event(enable_timing=True), wp.Event(enable_timing=True)
+    setup_quota = cpu_quota_delta(quota, cpu_quota_snapshot())
+    first_quota = cpu_quota_snapshot()
     wall_start = time.perf_counter()
     wp.record_event(begin)
     wp.capture_launch(captured.graph)
@@ -119,6 +121,8 @@ def main():
     wp.synchronize_event(end)
     first_seconds = time.perf_counter() - wall_start
     first_gpu_ms = wp.get_event_elapsed_time(begin, end)
+    first_quota_delta = cpu_quota_delta(first_quota, cpu_quota_snapshot())
+    replay_quota = cpu_quota_snapshot()
     samples = []
     for _ in range(args.repeats):
         wp.record_event(begin)
@@ -126,6 +130,7 @@ def main():
         wp.record_event(end)
         wp.synchronize_event(end)
         samples.append(wp.get_event_elapsed_time(begin, end))
+    replay_quota_delta = cpu_quota_delta(replay_quota, cpu_quota_snapshot())
     quota_delta = cpu_quota_delta(quota, cpu_quota_snapshot())
     result = dict(
         scope="Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
@@ -141,6 +146,9 @@ def main():
         additional_replay_gpu_ms=samples,
         median_additional_replay_ms=float(np.median(samples)) if samples else None,
         cpu_quota_delta=quota_delta,
+        setup_cpu_quota_delta=setup_quota,
+        first_replay_cpu_quota_delta=first_quota_delta,
+        additional_replays_cpu_quota_delta=replay_quota_delta,
         valid=int(mesh.valid.numpy()[0]),
         error=int(mesh.error.numpy()[0]),
         status=int(mesh.status.numpy()[0]),

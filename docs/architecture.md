@@ -282,6 +282,13 @@ restore the last valid mesh on failure. The output counts and diagnostics stay
 on device for downstream captured consumers. This lazy API adds no work to the
 independent geometry routines.
 
+At capacities of 256–2,048 sites, the VTM core first attempts to
+[reuse Delaunay fragments](delaunay-reuse.md) from the preceding reconstruction.
+It checks them against current original-coordinate sites, completes surviving
+facets with a four-round budget, and requires the full final certificate. The
+ordinary constructor handles any failed attempt. Fresh meshing initialization
+clears the fragment; standalone diagram and Delaunay APIs keep their existing paths.
+
 Broader example validation, integrated time-to-quality comparisons and CPU
 performance work remain tracked in the [full VTM implementation plan](vtm.md).
 An energy decrease alone does not establish good worst-element quality or a

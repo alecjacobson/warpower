@@ -94,6 +94,9 @@ selects a nonconvex domain mesh and measures topology, quality, and approximatio
 error. Both compose in a captured producer/consumer loop. The optional
 [certified Delaunay constructor](delaunay-recovery.md) handles recovered
 candidates with exact original-input certification and explicit finite failure.
+For capacities of 256–2,048 sites, the VTM core additionally
+[recertifies and completes previous Delaunay fragments](delaunay-reuse.md) before
+falling back to full reconstruction. Standalone geometry defaults are unchanged.
 The [sampled sizing layer](sizing.md) supplies device Lipschitz extension and
 graded interior/boundary updates, pole-based automatic feature-size estimates,
 and fixed-budget device initial sampling. The internal

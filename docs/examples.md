@@ -157,6 +157,9 @@ mesh with one closed boundary, no cavity and Euler characteristic two.
 | Setup, including graph construction | 1.140 s |
 
 These measurements use an NVIDIA L40, Warp 1.19.0 and runtime commit `cf35509`.
+The later [fragment-reuse optimization](delaunay-reuse.md) reduces the same
+complete hand solve to 3.366 s; the original gallery artifacts below retain their
+historical timing and provenance.
 Four complete captured executions finished, with zero observed CPU quota
 throttling in setup or timing windows. The saved final mesh passes independent
 NumPy quality/incidence checks. CGAL 6.2.1 exact predicates additionally check

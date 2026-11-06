@@ -1,0 +1,610 @@
+{
+  "scope": "Pure-Warp internal VTM cell reuse at capacities 256\u20132,048. Before ea54594; after runtime 8a721a7. Complete resident solves including fresh sampling and domain refits; setup, I/O and independent checks excluded. This compares the preceding Warpower implementation, not a CPU implementation.",
+  "cases": {
+    "torus256": {
+      "before_ms": 1694.2713623046875,
+      "before_counts": [
+        256,
+        1280,
+        792,
+        424
+      ],
+      "after_ms": 1225.1329345703125,
+      "after_counts": [
+        256,
+        1280,
+        792,
+        424
+      ],
+      "speedup": 1.382928590438159,
+      "points_bitwise_equal": true,
+      "point_components_changed": 0,
+      "max_absolute_coordinate_difference": 0.0,
+      "roles_equal": true,
+      "tetrahedra_sets_equal": true,
+      "full_tetrahedra_sets_equal": true,
+      "boundary_sets_equal": true,
+      "independent_full_hull": {
+        "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+        "CGAL": "6.2.1",
+        "sites": 256,
+        "tetrahedra": 1280,
+        "sphere_tests": 322560,
+        "cospherical_ties": 0,
+        "hull_faces": 280,
+        "hull_support_tests": 71680,
+        "valid": true
+      },
+      "independent_material_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 256,
+        "referenced_vertices": 256,
+        "tetrahedra": 792,
+        "boundary_triangles": 424,
+        "components": 1,
+        "boundary_euler": 0,
+        "volume": 16.72847867511622,
+        "input_volume": 19.0696379411241,
+        "relative_volume_error": -0.12276894156228924,
+        "mean_radius_ratio": 0.8183368623618364,
+        "radius_ratio_percentiles": {
+          "0": 0.17781770342116124,
+          "1": 0.2265011763212563,
+          "5": 0.49613358668739815,
+          "50": 0.854087277646947,
+          "95": 0.9536479263537172,
+          "100": 0.9850991502077673
+        },
+        "dihedral_degrees_min": 8.333575949956147,
+        "dihedral_degrees_max": 165.73894776528883,
+        "output_to_input": {
+          "area": 52.36811725628275,
+          "squared_integral": 0.11486152725168272,
+          "rms": 0.04683319784273168,
+          "max_sample": 0.09406692687205856
+        },
+        "input_to_output": {
+          "area": 55.01379994263034,
+          "squared_integral": 0.12939668566701,
+          "rms": 0.048498214988955034,
+          "max_sample": 0.12254696887544296
+        },
+        "two_sided_area_weighted_rms": 0.04769347984202445,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.6142884955063835
+      },
+      "oriented_boundary_equal": true,
+      "max_radius_ratio_percentile_difference": 2.220446049250313e-16
+    },
+    "torus1000": {
+      "before_ms": 3259.210205078125,
+      "before_counts": [
+        1000,
+        5826,
+        4225,
+        1122
+      ],
+      "after_ms": 2224.34326171875,
+      "after_counts": [
+        1000,
+        5826,
+        4225,
+        1122
+      ],
+      "speedup": 1.4652460621386887,
+      "points_bitwise_equal": true,
+      "point_components_changed": 0,
+      "max_absolute_coordinate_difference": 0.0,
+      "roles_equal": true,
+      "tetrahedra_sets_equal": true,
+      "full_tetrahedra_sets_equal": true,
+      "boundary_sets_equal": true,
+      "independent_full_hull": {
+        "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+        "CGAL": "6.2.1",
+        "sites": 1000,
+        "tetrahedra": 5826,
+        "sphere_tests": 5802696,
+        "cospherical_ties": 0,
+        "hull_faces": 672,
+        "hull_support_tests": 672000,
+        "valid": true
+      },
+      "independent_material_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 1000,
+        "referenced_vertices": 1000,
+        "tetrahedra": 4225,
+        "boundary_triangles": 1122,
+        "components": 1,
+        "boundary_euler": 0,
+        "volume": 18.099110914765088,
+        "input_volume": 19.0696379411241,
+        "relative_volume_error": -0.05089383602118891,
+        "mean_radius_ratio": 0.8411199405310115,
+        "radius_ratio_percentiles": {
+          "0": 0.09285808866135435,
+          "1": 0.3064781115473784,
+          "5": 0.5938737287257491,
+          "50": 0.8744211904981686,
+          "95": 0.9642281426853946,
+          "100": 0.9959915151012726
+        },
+        "dihedral_degrees_min": 3.0619168350385793,
+        "dihedral_degrees_max": 171.8139964582497,
+        "output_to_input": {
+          "area": 53.90312396538547,
+          "squared_integral": 0.020967998284203638,
+          "rms": 0.019722933864496917,
+          "max_sample": 0.09508842540135239
+        },
+        "input_to_output": {
+          "area": 55.01379994263034,
+          "squared_integral": 0.022138023448406662,
+          "rms": 0.020060123372006574,
+          "max_sample": 0.08560797998543272
+        },
+        "two_sided_area_weighted_rms": 0.019893962187454615,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.25623276268099726
+      },
+      "oriented_boundary_equal": true,
+      "max_radius_ratio_percentile_difference": 3.3306690738754696e-16
+    },
+    "torus2048": {
+      "before_ms": 4735.919921875,
+      "before_counts": [
+        2048,
+        12089,
+        9337,
+        1942
+      ],
+      "after_ms": 3800.854248046875,
+      "after_counts": [
+        2048,
+        12089,
+        9337,
+        1942
+      ],
+      "speedup": 1.2460146095601068,
+      "points_bitwise_equal": true,
+      "point_components_changed": 0,
+      "max_absolute_coordinate_difference": 0.0,
+      "roles_equal": true,
+      "tetrahedra_sets_equal": true,
+      "full_tetrahedra_sets_equal": true,
+      "boundary_sets_equal": true,
+      "independent_full_hull": {
+        "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+        "CGAL": "6.2.1",
+        "sites": 2048,
+        "tetrahedra": 12089,
+        "sphere_tests": 24709916,
+        "cospherical_ties": 0,
+        "hull_faces": 1202,
+        "hull_support_tests": 2461696,
+        "valid": true
+      },
+      "independent_material_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 2048,
+        "referenced_vertices": 2048,
+        "tetrahedra": 9337,
+        "boundary_triangles": 1942,
+        "components": 1,
+        "boundary_euler": 0,
+        "volume": 18.51553699558807,
+        "input_volume": 19.0696379411241,
+        "relative_volume_error": -0.029056710318610568,
+        "mean_radius_ratio": 0.8478893796618504,
+        "radius_ratio_percentiles": {
+          "0": 0.06303233858367754,
+          "1": 0.32654413890403516,
+          "5": 0.611146231804215,
+          "50": 0.8794935983739586,
+          "95": 0.9669168605022641,
+          "100": 0.9985626829782401
+        },
+        "dihedral_degrees_min": 2.961423863013921,
+        "dihedral_degrees_max": 174.71351636208388,
+        "output_to_input": {
+          "area": 54.30993723381499,
+          "squared_integral": 0.006933096890953009,
+          "rms": 0.011298583104958843,
+          "max_sample": 0.08199608277502594
+        },
+        "input_to_output": {
+          "area": 55.01379994263034,
+          "squared_integral": 0.007165126735376088,
+          "rms": 0.01141237717120465,
+          "max_sample": 0.07138986843271708
+        },
+        "two_sided_area_weighted_rms": 0.011355988991064358,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.1462642989233363
+      },
+      "oriented_boundary_equal": true,
+      "max_radius_ratio_percentile_difference": 6.661338147750939e-16
+    },
+    "graded-torus": {
+      "before_ms": 5947.4560546875,
+      "before_counts": [
+        1000,
+        5829,
+        4318,
+        1062
+      ],
+      "after_ms": 3714.635009765625,
+      "after_counts": [
+        1000,
+        5829,
+        4318,
+        1062
+      ],
+      "speedup": 1.6010876005453776,
+      "points_bitwise_equal": true,
+      "point_components_changed": 0,
+      "max_absolute_coordinate_difference": 0.0,
+      "roles_equal": true,
+      "tetrahedra_sets_equal": true,
+      "full_tetrahedra_sets_equal": true,
+      "boundary_sets_equal": true,
+      "independent_full_hull": {
+        "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+        "CGAL": "6.2.1",
+        "sites": 1000,
+        "tetrahedra": 5829,
+        "sphere_tests": 5805684,
+        "cospherical_ties": 0,
+        "hull_faces": 654,
+        "hull_support_tests": 654000,
+        "valid": true
+      },
+      "independent_material_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 1000,
+        "referenced_vertices": 1000,
+        "tetrahedra": 4318,
+        "boundary_triangles": 1062,
+        "components": 1,
+        "boundary_euler": 0,
+        "volume": 17.705399745728197,
+        "input_volume": 19.0696379411241,
+        "relative_volume_error": -0.07153980582158259,
+        "mean_radius_ratio": 0.8434823019168575,
+        "radius_ratio_percentiles": {
+          "0": 0.09825068466442465,
+          "1": 0.3157296471230952,
+          "5": 0.6093410824932923,
+          "50": 0.8746048673109794,
+          "95": 0.9655134006099177,
+          "100": 0.9969946194432132
+        },
+        "dihedral_degrees_min": 5.026539262175364,
+        "dihedral_degrees_max": 171.82395929897632,
+        "output_to_input": {
+          "area": 53.36245809982569,
+          "squared_integral": 0.04738795481013123,
+          "rms": 0.02979998664293357,
+          "max_sample": 0.08013220133303886
+        },
+        "input_to_output": {
+          "area": 55.01379994263034,
+          "squared_integral": 0.05249811082305713,
+          "rms": 0.030891287953589648,
+          "max_sample": 0.09965260622581941
+        },
+        "two_sided_area_weighted_rms": 0.030358854287341103,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.39101979950382854
+      },
+      "oriented_boundary_equal": true,
+      "max_radius_ratio_percentile_difference": 2.220446049250313e-16
+    },
+    "thin-hand": {
+      "before_ms": 16268.0830078125,
+      "before_counts": [
+        1000,
+        5529,
+        3242,
+        1626
+      ],
+      "after_ms": 3365.563232421875,
+      "after_counts": [
+        1000,
+        5529,
+        3242,
+        1626
+      ],
+      "speedup": 4.833688118260643,
+      "points_bitwise_equal": false,
+      "point_components_changed": 4,
+      "max_absolute_coordinate_difference": 1.0706496453294356e-18,
+      "roles_equal": true,
+      "tetrahedra_sets_equal": true,
+      "full_tetrahedra_sets_equal": true,
+      "boundary_sets_equal": true,
+      "independent_full_hull": {
+        "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+        "CGAL": "6.2.1",
+        "sites": 1000,
+        "tetrahedra": 5529,
+        "sphere_tests": 5506884,
+        "cospherical_ties": 12,
+        "hull_faces": 246,
+        "hull_support_tests": 246000,
+        "valid": true
+      },
+      "independent_material_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 1000,
+        "referenced_vertices": 1000,
+        "tetrahedra": 3242,
+        "boundary_triangles": 1626,
+        "components": 1,
+        "boundary_euler": 2,
+        "volume": 1.0422081268489216,
+        "input_volume": 1.0409999770894647,
+        "relative_volume_error": 0.0011605665572009816,
+        "mean_radius_ratio": 0.8214515054147905,
+        "radius_ratio_percentiles": {
+          "0": 0.0935228943771039,
+          "1": 0.324998846325074,
+          "5": 0.5774246183575668,
+          "50": 0.8543456390861244,
+          "95": 0.9585420086638176,
+          "100": 0.9975849913787387
+        },
+        "dihedral_degrees_min": 4.618891168217468,
+        "dihedral_degrees_max": 172.2142195568803,
+        "output_to_input": {
+          "area": 13.14280621801895,
+          "squared_integral": 3.985033297445586e-05,
+          "rms": 0.001741293284010306,
+          "max_sample": 0.05049706747134525
+        },
+        "input_to_output": {
+          "area": 13.142227057326567,
+          "squared_integral": 6.405677736500614e-06,
+          "rms": 0.0006981489028741439,
+          "max_sample": 0.028005039958049077
+        },
+        "two_sided_area_weighted_rms": 0.0013265689316562263,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.03446203269781718
+      },
+      "oriented_boundary_equal": true,
+      "max_radius_ratio_percentile_difference": 1.2212453270876722e-15
+    }
+  },
+  "standalone": {
+    "before": {
+      "delaunay1000_ms": 9.167488098144531,
+      "delaunay100000_ms": 183.22601318359375,
+      "diagram100000_ms": 18.959950655698776
+    },
+    "after": {
+      "delaunay1000_ms": 9.181376457214355,
+      "delaunay100000_ms": 182.9779815673828,
+      "diagram100000_ms": 18.245652318000793
+    }
+  },
+  "source_isolation": {
+    "__init__.py": {
+      "sha256": "bc95cfd203def8ddac4d3171fee33feb98bbbef10a8ea5f98eef824140244874",
+      "same_as_main": true
+    },
+    "_active_sites.py": {
+      "sha256": "3c17ffe07d129ee4c46317f1ce1ede2ed0d96a0f237ddb718f77e401a95f7cc1",
+      "same_as_main": true
+    },
+    "_adjacency.py": {
+      "sha256": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+      "same_as_main": true
+    },
+    "_api.py": {
+      "sha256": "f84bec46306a84d7f1b72c6dc1d9dc560cb2905ad74bda63f4bffb97e4e5ad97",
+      "same_as_main": true
+    },
+    "_automatic_sizing.py": {
+      "sha256": "f6aab578b13d3689648452c49c4e4474b40005a8215bc6787cf6811037fd713b",
+      "same_as_main": true
+    },
+    "_boundary.py": {
+      "sha256": "943da5c28b9b24ac5e769ff69e0b740d74a35eba7c99b3cd7732f17934f71e91",
+      "same_as_main": true
+    },
+    "_bvh.py": {
+      "sha256": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+      "same_as_main": true
+    },
+    "_canonical.py": {
+      "sha256": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+      "same_as_main": true
+    },
+    "_cell.py": {
+      "sha256": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+      "same_as_main": true
+    },
+    "_construct.py": {
+      "sha256": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+      "same_as_main": true
+    },
+    "_delaunay_certificate.py": {
+      "sha256": "419a0b6b4030f9b8c1c069b53892ae27669176430729cdb8bffb286ced0f7527",
+      "same_as_main": true
+    },
+    "_delaunay_recovery.py": {
+      "sha256": "bd2d7a682eecb2f0244602670109901d78ea3bcf1d180ac22c4c0b4ea0291ec2",
+      "same_as_main": true
+    },
+    "_domain.py": {
+      "sha256": "db605f2e5d07a4efea6640f63985368d3b8af49b71ee84befcffefe108018d4b",
+      "same_as_main": true
+    },
+    "_domain_topology.py": {
+      "sha256": "3c0746b94c2940d275be28626e8dd257aa0b5a284d8459bd4cec226e4935826b",
+      "same_as_main": true
+    },
+    "_extraction.py": {
+      "sha256": "ccea8b602c74a50553c8aa28b0e3f6b358b955f44e884919f9fdc9dbb467177d",
+      "same_as_main": true
+    },
+    "_facet_completion.py": {
+      "sha256": "8efa841a727ef3b830d8db6c6ecb10bb229e74ca10fdd9dcc6386ad380727fa8",
+      "same_as_main": true
+    },
+    "_facet_seeds.py": {
+      "sha256": "c581702a7965325071e79eaf1e420d64bb40902f82d15aaf77835f488a93d0de",
+      "same_as_main": true
+    },
+    "_fast_candidates.py": {
+      "sha256": "740377dd16ccfec7b0bc630e4d2a483312a2a8cf398e067d37b3973e18d9a483",
+      "same_as_main": true
+    },
+    "_filtered_predicates.py": {
+      "sha256": "a9a74285885f362deb634972709ae6fe47dbdb33320e3b8627d3b85669578564",
+      "same_as_main": true
+    },
+    "_graded_odt.py": {
+      "sha256": "37538c9d51d3282a9ec85b6e1e7f6eeba6876598d5cb79f30d0dd8d736d45778",
+      "same_as_main": true
+    },
+    "_graph.py": {
+      "sha256": "d7e489b28717f72a25e866b59f1c9dba3855222e83cd97e848bf7e6b68bf18e2",
+      "same_as_main": true
+    },
+    "_graph_construct.py": {
+      "sha256": "9f305d39185abc6602b85431b887c3bd2b5152864ec18ef35e6a71e3a6690e42",
+      "same_as_main": true
+    },
+    "_graph_tetrahedra.py": {
+      "sha256": "ddbb067ef02cfd20032cc29d870bb19b9d30b4cd2a649516be5c547ce5b94540",
+      "same_as_main": true
+    },
+    "_halfspace_predicates.py": {
+      "sha256": "46779c8236dab4048344523a653ed1b864ba77082163f533b991fb85540db164",
+      "same_as_main": true
+    },
+    "_integer.py": {
+      "sha256": "94205ab5790a308f51b083fedc8cb905050602369061d65d231b91f175a0d641",
+      "same_as_main": true
+    },
+    "_jitter.py": {
+      "sha256": "b184d21b47ce3e96fcf1587722d9be3c276240fc776ce85ffa10b3442dd85435",
+      "same_as_main": true
+    },
+    "_mesh_api.py": {
+      "sha256": "37cf23ecf09d34a7bc0a77ebe73d8e2102c37064b1ab4923acccca993ea0678f",
+      "same_as_main": true
+    },
+    "_mesh_topology.py": {
+      "sha256": "5dcb12b58e59446e5dbf4db6a1bda2eab3a32a55c833e453e3b9d48f3dfbcc24",
+      "same_as_main": true
+    },
+    "_mesher.py": {
+      "sha256": "ceae1f2f8372aaec96c78568a41e01d4b3c0dac3778602e40bbaf7af6da95eaf",
+      "same_as_main": false
+    },
+    "_odt.py": {
+      "sha256": "53d23df8f23de165d98598c7fbbf53e2944f82ee82f6a74c2b135e142dd589f0",
+      "same_as_main": true
+    },
+    "_poles.py": {
+      "sha256": "b93f434020a357025dc3a067bbb0e8ed2c4c0ab66ecee0108db5a2c6762ea18d",
+      "same_as_main": true
+    },
+    "_predicates.py": {
+      "sha256": "20a204a1f6774353d3ce5d35e241db53a0ac075ef40714542f0067010aa50d26",
+      "same_as_main": true
+    },
+    "_quality_moves.py": {
+      "sha256": "f249cd9991a00c066976776fd5719cc33fa3df6eff8a5d183e288ad5466b97d7",
+      "same_as_main": true
+    },
+    "_refinement.py": {
+      "sha256": "64426a0f960aa497aee1a066e299befc0755edf33e123b6fc01d6ff47a508811",
+      "same_as_main": true
+    },
+    "_reuse_delaunay.py": {
+      "sha256": "8f78fd028a4de3729811afe4ae8573684e94584dd17fd4a0edcbb1944f99e1da",
+      "same_as_main": false
+    },
+    "_sampling.py": {
+      "sha256": "f532d220d67dfe030fdd688c3a337ea3bbd4f5c7c62e9b80bd56e515193ab4a2",
+      "same_as_main": true
+    },
+    "_selective.py": {
+      "sha256": "91d97125b6108812aee4432a059679b4fa8698b646d9aa8dd747689a73d063e3",
+      "same_as_main": true
+    },
+    "_site_bvh.py": {
+      "sha256": "60a307c003c02f931cc1d6ee2f4ca1b417d34be6a4fae3f6d968be17dda7c92b",
+      "same_as_main": true
+    },
+    "_sizing.py": {
+      "sha256": "fe30bc06b3ad23479367a00afb2356e1103e74beb5e764e5f47e91ba8a343464",
+      "same_as_main": true
+    },
+    "_sphere_bounds.py": {
+      "sha256": "865f1d7eb961ffab42d98213ff52e52cb7a60973233cb03923d3f559e1e72c3c",
+      "same_as_main": true
+    },
+    "_stable_center.py": {
+      "sha256": "1d3f4a58c799f675edde5dea9f77dd50c36b68b7f8580e809a1b88d761d770d3",
+      "same_as_main": true
+    },
+    "_stable_volume.py": {
+      "sha256": "c326ad964bd1bf1f11fcd0682e1cacc8df56b7a3ccb3815ceef3694c3ac36a90",
+      "same_as_main": true
+    },
+    "_surface_bvh.py": {
+      "sha256": "0a6c21c635b40ea5dc40a906e565d76d67042a9de88e34cca74cf324de88d610",
+      "same_as_main": true
+    },
+    "_symbolic_bounds.py": {
+      "sha256": "b071b45a8a19b93a322406680d10b6137c9cc7677efeb8776b98b7ae8c678db6",
+      "same_as_main": true
+    },
+    "_symbolic_cell.py": {
+      "sha256": "b3fbd57892ec33cef5e03b094d9cf454d17ffa9ae0ac4d886cce6ca210ecb7a2",
+      "same_as_main": true
+    },
+    "_symbolic_delaunay.py": {
+      "sha256": "79760a7f1770a8902288f4a8f750eb2170ba87899260a637817b65cc2f2aa451",
+      "same_as_main": true
+    },
+    "_symbolic_tetrahedra.py": {
+      "sha256": "52af32e5cfd0686fb82548a512f1b89c703057a45e0eb7597b9918d7a931e29a",
+      "same_as_main": true
+    },
+    "_teleport.py": {
+      "sha256": "4123f2a28bfc4324c5340adf85e93538885cd54b5e3f5b11107bc07183e7ab4f",
+      "same_as_main": true
+    },
+    "_tetrahedra.py": {
+      "sha256": "5db1eb6583f84bf99a81c9aca8aabb1d8fdc8772d6db7fe9bb87d812ad09f2ec",
+      "same_as_main": true
+    },
+    "_triangle_contact.py": {
+      "sha256": "4be0ea7041d13f1d5f05f500fe54e6dec98f9ce881ae687ad6167eda1df0e8f0",
+      "same_as_main": true
+    },
+    "_validation.py": {
+      "sha256": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75",
+      "same_as_main": true
+    },
+    "_voronoi_volume.py": {
+      "sha256": "8fa28f4fb2597e55ed7da37116ee40d77d0f9f6ba687c8fc1d51a61b17a4bc2d",
+      "same_as_main": true
+    },
+    "_vtm.py": {
+      "sha256": "400f6a68bb57d39843c02348646c8918ec2e7e6caca20726492c642cb756bfd2",
+      "same_as_main": false
+    },
+    "_vtm_controls.py": {
+      "sha256": "a2c08f2f50c4bc189e2bc82a38f50b4137229081ff13344d4b319e11cbff9880",
+      "same_as_main": true
+    },
+    "_vtm_domain.py": {
+      "sha256": "7e7d79477224b3ddbcd5c11a47bee237ed96474660987268d43dac554aadf76a",
+      "same_as_main": true
+    }
+  },
+  "readme_unchanged": true
+}

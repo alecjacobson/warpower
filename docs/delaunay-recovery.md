@@ -36,8 +36,14 @@ APIs remain available with their existing numerical contract.
 
 ## Construction and certification
 
-The first replay starts with the existing unweighted full-hull constructor. Both its
-successful outputs and every recovery candidate undergo the new certificate.
+The first replay starts with unweighted full-hull construction. With the default
+`fast_candidates=True`, buffers with at least 32,768 distinct sites first use
+[float32 interior candidates and compact float64 repair](fast-candidates.md).
+The exact original-coordinate certificate remains mandatory. A rejected fast
+candidate falls back to the complete original float64 constructor. Smaller
+buffers and smaller distinct active prefixes use the original constructor;
+`fast_candidates=False` disables the fast path. All successful outputs and
+recovery candidates undergo the same certificate.
 Recovery runs the regular builder on a normalized copy with small auxiliary
 weights. The default starts at `1e-5 * h(i)`, for a fixed float32 hash direction
 `h`, and divides the amplitude by ten on each failed attempt. There are six

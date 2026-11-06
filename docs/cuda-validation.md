@@ -74,3 +74,49 @@ The middle command reproduces the allocation-tracking report in the recorded
 environment. These controls are validation settings, not required production
 configuration, and no checker result here proves arbitrary pooled-memory
 lifetime correctness.
+
+## Conditional native radix-sort scratch
+
+A larger capture test exposed a distinct residual case, tracked in
+[#91](https://github.com/alecjacobson/warpower/issues/91). Disabling Warp's array
+memory pool does not force native sort scratch to use synchronous allocation:
+Warp 1.19.0's [native sort implementation](https://github.com/NVIDIA/warp/blob/v1.19.0/warp/native/sort.cu) chooses asynchronous side-stream allocation for child
+captures whenever the device supports it. It synchronizes that side stream and
+retains the scratch allocation until graph destruction.
+
+[`benchmarks.radix_capture`](../benchmarks/radix_capture.py) isolates the report
+without importing Warpower geometry. It retains all input/output arrays, warms
+the sort, synchronizes before and after capture, and verifies all sorted keys and
+payloads after three replays. On this environment, full allocation-order tracking
+reports native CUB scratch accesses before allocation for conditional sorts with
+8,192 and 32,768 keys. The controls are:
+
+| Sort case, diagnostic array pool disabled | Checker setting | Observed result |
+|---|---|---|
+| 32,768 keys, conditional graph | Padded ordinary memcheck | [Pass, zero errors](../results/validation/vtm/radix-normal.txt) |
+| 32,768 keys, conditional graph | Padded use-after-free tracking | [Pass, zero errors](../results/validation/vtm/radix-afterfree.txt) |
+| 32,768 keys, top-level graph | Padded full allocation-order tracking | [Pass, zero errors](../results/validation/vtm/radix-top.txt) |
+| 1,000 keys, conditional graph | Padded full allocation-order tracking | [Pass, zero errors](../results/validation/vtm/radix-tiny.txt) |
+| 8,192 keys, conditional graph | Padded full allocation-order tracking | [Native scratch report](../results/validation/vtm/radix-small.txt) |
+| 32,768 keys, conditional graph | Padded full allocation-order tracking | [Native scratch report](../results/validation/vtm/radix-fail.txt) |
+
+These controls isolate a checker/runtime interaction with conditional native
+sort scratch. They do not establish that arbitrary application lifetimes are
+correct. Full allocation-order tracking is not reported as passing for the
+larger geometry test. Native replay audits and ordinary memory checks remain
+separate requirements; geometry comparisons do not substitute for either.
+The diagnostic configuration does not change production allocation, graph
+structure or numerical predicates.
+
+Reproduce with the installed Compute Sanitizer:
+
+```bash
+compute-sanitizer --tool memcheck --padding 32 --track-stream-ordered-races all \
+  python -m benchmarks.radix_capture --disable-mempool --n 32768 --depth 1
+compute-sanitizer --tool memcheck --padding 32 --track-stream-ordered-races use-after-free \
+  python -m benchmarks.radix_capture --disable-mempool --n 32768 --depth 1
+```
+
+The first command reproduces the report; the second passes in this environment.
+`--depth 0` selects a top-level sort control, whose graph allocation nodes make
+it unsuitable as a replacement for the allocation-free geometry graph.

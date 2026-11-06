@@ -28,6 +28,9 @@ def main():
     parser.add_argument("--profile", action="store_true")
     parser.add_argument("--no-cache", action="store_true", help="Compare without strategy reuse")
     parser.add_argument(
+        "--no-fast", action="store_true", help="Disable float32 interior candidates"
+    )
+    parser.add_argument(
         "--symbolic-first",
         action="store_true",
         help="Start with the symbolic strategy for isolated measurements",
@@ -55,7 +58,9 @@ def main():
         points = boundary.points.numpy()
     else:
         points = rng.uniform(-1, 1, (args.n, 3)).astype(np.float32)
-    workspace = DelaunayWorkspace(points, cache_strategy=not args.no_cache)
+    workspace = DelaunayWorkspace(
+        points, cache_strategy=not args.no_cache, fast_candidates=not args.no_fast
+    )
     if args.symbolic_first:
         workspace._preferred.fill_(2)
     begin, end = wp.Event(enable_timing=True), wp.Event(enable_timing=True)
@@ -136,6 +141,11 @@ def main():
         certificate_error=int(workspace.certificate_error.numpy()[0]),
         attempts=int(workspace.attempts.numpy()[0]),
         cache_strategy=workspace.cache_strategy,
+        fast_candidates=workspace.fast_candidates,
+        fast_attempted=int(workspace.fast_attempted.numpy()[0]),
+        fast_accepted=int(workspace.fast_accepted.numpy()[0]),
+        fast_error=int(workspace.fast_error.numpy()[0]),
+        fast_repaired_cells=int(workspace.fast_repaired_cells.numpy()[0]),
         symbolic_first=args.symbolic_first,
         recovery_first=int(workspace.recovery_first.numpy()[0]),
         base_attempted=int(workspace.base_attempted.numpy()[0]),

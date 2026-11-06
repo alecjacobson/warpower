@@ -168,7 +168,11 @@ symbolic cell fallback. That fallback defines topology with incident plane IDs
 and the certificate's exact tie rule. Conservative cached Cartesian intervals
 prove strict signs and directional bounds reject irrelevant sites; uncertain
 cases retain the exact site/box predicates. See [symbolic geometry](symbolic-bounds.md). It is an independent API used
-by the developing VTM core. The original diagram and tetrahedralization paths
+by the VTM core. Large inputs can first use
+[float32 interior candidates with float64 cell repair](fast-candidates.md),
+followed by the same exact certificate and full original-constructor fallback.
+This optimization owns separate scratch and leaves the basic construction
+kernels intact. The original diagram and tetrahedralization paths
 above are unchanged; certification and recovery costs apply only to this API.
 
 ## Captured device execution

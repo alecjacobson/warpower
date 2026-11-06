@@ -1,0 +1,280 @@
+{
+  "scope": "Fresh native CGAL Mesh_3 with feature protection and optional ODT. Complete time includes domain construction, meshing and optimization; file I/O, triangulation validation, serialization and independent quality checks are separate. No GPU speedup is inferred by this runner.",
+  "platform": "Linux-5.15.0-113-generic-x86_64-with-glibc2.35",
+  "binary_sha256": "710b380dc8b5f9417a935583ffbf3e48d71d9afa1f1724911853238bb8316a97",
+  "surface_sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+  "points_float32_sha256": "49a8f28e19cd34f3a612eee6d1f5f175e85d884a4bc38fbe3f717d718335395f",
+  "parameters": {
+    "binary": "/home/horde/projects/power-diagram/.work/vtm/cpu-mesh3-target-sequential",
+    "surface": "/home/horde/projects/power-diagram/.work/vtm/gallery-torus/input.off",
+    "size": 0.32,
+    "facet_distance": 0.025,
+    "odt_iterations": 50,
+    "convergence": 0.02,
+    "freeze_bound": 0.01,
+    "threads": 1,
+    "repeats": 3,
+    "output": "/home/horde/projects/power-diagram/.work/vtm/native-torus-sequential"
+  },
+  "median_complete_seconds": 0.239990409,
+  "runs": [
+    {
+      "cgal": "6.2.1",
+      "concurrency": "sequential",
+      "threads": 1,
+      "seed": 2026,
+      "size": 0.32,
+      "facet_distance": 0.025,
+      "facet_angle": 25,
+      "feature_angle": 45,
+      "cell_radius_edge_ratio": 2,
+      "odt_convergence": 0.02,
+      "odt_freeze_bound": 0.01,
+      "requested_odt_iterations": 50,
+      "odt_return_code": 5,
+      "vertices": 855,
+      "triangulation_vertices": 855,
+      "tetrahedra": 2975,
+      "input_seconds": 0.00395988,
+      "domain_seconds": 0.002223134,
+      "mesh_seconds": 0.03801914,
+      "odt_seconds": 0.199748135,
+      "complete_seconds": 0.239990409,
+      "validation_seconds": 0.005679838,
+      "output_seconds": 0.003715254,
+      "command": [
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-mesh3-target-sequential",
+        "/home/horde/projects/power-diagram/.work/vtm/gallery-torus/input.off",
+        "/home/horde/projects/power-diagram/.work/vtm/native-torus-sequential/mesh-0.txt",
+        "0.32",
+        "0.025",
+        "50",
+        "1",
+        "0.02",
+        "0.01"
+      ],
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "mesh_sha256": "f970a3ff34f624c59f76cbcedfa7ab55b075c048b58784a079546170bd35f458",
+      "independent_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 855,
+        "referenced_vertices": 855,
+        "tetrahedra": 2975,
+        "boundary_triangles": 1300,
+        "components": 1,
+        "boundary_euler": 0,
+        "volume": 18.563305491057058,
+        "input_volume": 19.0696379411241,
+        "relative_volume_error": -0.026551760008779457,
+        "mean_radius_ratio": 0.8142758664907175,
+        "radius_ratio_percentiles": {
+          "0": 0.0719445003119862,
+          "1": 0.37692489002238344,
+          "5": 0.5907625267771036,
+          "50": 0.8356656040823789,
+          "95": 0.9658858588739851,
+          "100": 0.9976630857476539
+        },
+        "dihedral_degrees_min": 3.180647866367836,
+        "dihedral_degrees_max": 174.14652635305944,
+        "output_to_input": {
+          "area": 54.48550953831464,
+          "squared_integral": 0.006140005936564125,
+          "rms": 0.0106155839016253,
+          "max_sample": 0.026562907453710947
+        },
+        "input_to_output": {
+          "area": 55.01379994263034,
+          "squared_integral": 0.006757274241004396,
+          "rms": 0.01108281159914055,
+          "max_sample": 0.03291354525335176
+        },
+        "two_sided_area_weighted_rms": 0.010852839415411672,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.13978376957496147
+      }
+    },
+    {
+      "cgal": "6.2.1",
+      "concurrency": "sequential",
+      "threads": 1,
+      "seed": 2026,
+      "size": 0.32,
+      "facet_distance": 0.025,
+      "facet_angle": 25,
+      "feature_angle": 45,
+      "cell_radius_edge_ratio": 2,
+      "odt_convergence": 0.02,
+      "odt_freeze_bound": 0.01,
+      "requested_odt_iterations": 50,
+      "odt_return_code": 5,
+      "vertices": 855,
+      "triangulation_vertices": 855,
+      "tetrahedra": 2975,
+      "input_seconds": 0.003107763,
+      "domain_seconds": 0.001877395,
+      "mesh_seconds": 0.035509277,
+      "odt_seconds": 0.199296477,
+      "complete_seconds": 0.236683149,
+      "validation_seconds": 0.005625825,
+      "output_seconds": 0.003681576,
+      "command": [
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-mesh3-target-sequential",
+        "/home/horde/projects/power-diagram/.work/vtm/gallery-torus/input.off",
+        "/home/horde/projects/power-diagram/.work/vtm/native-torus-sequential/mesh-1.txt",
+        "0.32",
+        "0.025",
+        "50",
+        "1",
+        "0.02",
+        "0.01"
+      ],
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "mesh_sha256": "f970a3ff34f624c59f76cbcedfa7ab55b075c048b58784a079546170bd35f458",
+      "independent_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 855,
+        "referenced_vertices": 855,
+        "tetrahedra": 2975,
+        "boundary_triangles": 1300,
+        "components": 1,
+        "boundary_euler": 0,
+        "volume": 18.563305491057058,
+        "input_volume": 19.0696379411241,
+        "relative_volume_error": -0.026551760008779457,
+        "mean_radius_ratio": 0.8142758664907175,
+        "radius_ratio_percentiles": {
+          "0": 0.0719445003119862,
+          "1": 0.37692489002238344,
+          "5": 0.5907625267771036,
+          "50": 0.8356656040823789,
+          "95": 0.9658858588739851,
+          "100": 0.9976630857476539
+        },
+        "dihedral_degrees_min": 3.180647866367836,
+        "dihedral_degrees_max": 174.14652635305944,
+        "output_to_input": {
+          "area": 54.48550953831464,
+          "squared_integral": 0.006140005936564125,
+          "rms": 0.0106155839016253,
+          "max_sample": 0.026562907453710947
+        },
+        "input_to_output": {
+          "area": 55.01379994263034,
+          "squared_integral": 0.006757274241004396,
+          "rms": 0.01108281159914055,
+          "max_sample": 0.03291354525335176
+        },
+        "two_sided_area_weighted_rms": 0.010852839415411672,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.13978376957496147
+      }
+    },
+    {
+      "cgal": "6.2.1",
+      "concurrency": "sequential",
+      "threads": 1,
+      "seed": 2026,
+      "size": 0.32,
+      "facet_distance": 0.025,
+      "facet_angle": 25,
+      "feature_angle": 45,
+      "cell_radius_edge_ratio": 2,
+      "odt_convergence": 0.02,
+      "odt_freeze_bound": 0.01,
+      "requested_odt_iterations": 50,
+      "odt_return_code": 5,
+      "vertices": 855,
+      "triangulation_vertices": 855,
+      "tetrahedra": 2975,
+      "input_seconds": 0.003586808,
+      "domain_seconds": 0.001849695,
+      "mesh_seconds": 0.036090004,
+      "odt_seconds": 0.316693636,
+      "complete_seconds": 0.354633335,
+      "validation_seconds": 0.005719846,
+      "output_seconds": 0.003750036,
+      "command": [
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-mesh3-target-sequential",
+        "/home/horde/projects/power-diagram/.work/vtm/gallery-torus/input.off",
+        "/home/horde/projects/power-diagram/.work/vtm/native-torus-sequential/mesh-2.txt",
+        "0.32",
+        "0.025",
+        "50",
+        "1",
+        "0.02",
+        "0.01"
+      ],
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 2,
+          "throttled_usec": 5886248
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 2,
+          "throttled_usec": 5799872
+        }
+      },
+      "mesh_sha256": "f970a3ff34f624c59f76cbcedfa7ab55b075c048b58784a079546170bd35f458",
+      "independent_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 855,
+        "referenced_vertices": 855,
+        "tetrahedra": 2975,
+        "boundary_triangles": 1300,
+        "components": 1,
+        "boundary_euler": 0,
+        "volume": 18.563305491057058,
+        "input_volume": 19.0696379411241,
+        "relative_volume_error": -0.026551760008779457,
+        "mean_radius_ratio": 0.8142758664907175,
+        "radius_ratio_percentiles": {
+          "0": 0.0719445003119862,
+          "1": 0.37692489002238344,
+          "5": 0.5907625267771036,
+          "50": 0.8356656040823789,
+          "95": 0.9658858588739851,
+          "100": 0.9976630857476539
+        },
+        "dihedral_degrees_min": 3.180647866367836,
+        "dihedral_degrees_max": 174.14652635305944,
+        "output_to_input": {
+          "area": 54.48550953831464,
+          "squared_integral": 0.006140005936564125,
+          "rms": 0.0106155839016253,
+          "max_sample": 0.026562907453710947
+        },
+        "input_to_output": {
+          "area": 55.01379994263034,
+          "squared_integral": 0.006757274241004396,
+          "rms": 0.01108281159914055,
+          "max_sample": 0.03291354525335176
+        },
+        "two_sided_area_weighted_rms": 0.010852839415411672,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.13978376957496147
+      }
+    }
+  ]
+}

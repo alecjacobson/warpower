@@ -1,0 +1,28 @@
+{
+  "compiler": "c++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "cgal_version": "6.2.1",
+  "source_sha256": "2be80a2312f8093dc9fea912b5e5aaa8b6b160dc084dee5a1926cfa9223e0f29",
+  "cgal_source_revision": "44ab808c25399fc6dbd89a6e114f3fd6b5ae8142",
+  "builds": [
+    {
+      "mode": "sequential",
+      "binary_sha256": "710b380dc8b5f9417a935583ffbf3e48d71d9afa1f1724911853238bb8316a97",
+      "flags": "-O3 -DNDEBUG -std=c++17",
+      "libraries": [
+        "gmp",
+        "mpfr"
+      ]
+    },
+    {
+      "mode": "parallel",
+      "binary_sha256": "8ba8e92a0a0f006ead4115212e168990c18c82d56455e54641facc69915b1f82",
+      "flags": "-O3 -DNDEBUG -std=c++17 -DWARPOWER_CGAL_PARALLEL -DCGAL_LINKED_WITH_TBB",
+      "libraries": [
+        "gmp",
+        "mpfr",
+        "tbb",
+        "tbbmalloc"
+      ]
+    }
+  ]
+}

@@ -46,3 +46,86 @@ The complete suite passes **94 tests**, including the nine new standalone API
 tests ([test output](../results/validation/vtm/geometry-tests.txt)).
 A built wheel also passes a CUDA standalone-mesh smoke test from outside the
 checkout; imports remain lazy and installed source files match the measured tree.
+
+## Fixed-boundary ODT foundation
+
+The uniform interior optimizer is implemented in the optional
+[`ODTWorkspace`](odt.md). The complete suite passes **104 tests**
+([output](../results/validation/vtm/odt-tests.txt)); all ten optimizer tests also
+pass CUDA memcheck with **zero errors and no exclusions**
+([output](../results/validation/vtm/odt-memcheck.txt)). Checks include independent
+quadratic quadrature and circumcenter linear solves, an energy finite-difference
+check, a nearly flat tetrahedron, changing topology, fixed hull/volume, energy
+backtracking, and complete rollback after injected reconstruction failure.
+
+A captured outer device loop produces new sites, optimizes them, and consumes
+tetrahedra without host readback, allocation, or synchronization. The
+[Nsight/DOT audit](../results/validation/vtm/odt-device-audit.json) records 146 kernel,
+55 memset, 16 conditional, and 12 device-to-device copy nodes. There are no host
+copy/callback/allocation/free nodes. Three profiled graph replays perform three
+optimizer iterations each; CPU CUDA calls consist of graph submission, profiler
+start, a capture-state query, and one final synchronization outside construction.
+
+The initial trajectory measurements are deliberately reported separately from
+full-mesher performance:
+
+| Uniform sites | Accepted/requested steps | Energy decrease | Mean warmed run | Result |
+|---|---:|---:|---:|---|
+| 1,000 | 20/20 | 47.72% | 0.197 s | Iteration budget reached |
+| 10,000 | 20/20 | 52.05% | 2.849 s | Iteration budget reached |
+| 100,000 | 6/20 | 48.44% | 95.57 s, diagnostic only | Cell-construction failure; valid previous mesh restored |
+
+[Raw records](../results/validation/vtm/odt-core.json) include source hashes,
+energy histories, quality, rejection counts, and CPU quota counters. The 100k run
+experienced CPU throttling and is **not a clean timing result**. It also did not
+complete the requested iteration budget. Numerical recovery and trajectory costs
+are open work in [#32](https://github.com/alecjacobson/warpower/issues/32) and
+[#43](https://github.com/alecjacobson/warpower/issues/43). No CPU speedup is claimed.
+
+All runs retain the original hull and volume. Minimum radius ratios remain
+extremely poor (around 1e-13), and can worsen as sites approach the fixed boundary.
+These measurements establish the interior energy/reconstruction loop, not a
+high-quality boundary-fitted mesher. The later boundary and quality stages are
+required before claiming the full VTM result.
+
+After 20 iterations, complete optimized meshes at 1k and 10k sites match SciPy's
+independent Delaunay result exactly (5,934 and 61,244 tetrahedra respectively;
+[comparisons](../results/validation/vtm/odt-reference-comparisons.json)).
+The same optimized meshes also match CGAL 6.2.1's complete tetrahedron sets
+([native reference records](../results/validation/vtm/odt-cgal-comparisons.json),
+[reference source and instructions](../benchmarks/cpu/README.md)). CGAL also
+constructs the saved failing 100k candidate: the GPU failure is isolated to site
+34817, whose final star has 305 tets and 157 neighbors. Its clipping status is a
+vertex-capacity overflow, tracked in
+[#44](https://github.com/alecjacobson/warpower/issues/44).
+
+Generate an instrumented failure snapshot (when the failure still reproduces):
+
+```bash
+python -m benchmarks.odt_failure --output results/local/odt-failure.npz
+```
+
+The sidecar JSON says whether a failed candidate was captured. The `points` and
+`status` arrays are present only on capture; `last_valid_points` always records
+the optimizer's returned state. This diagnostic uses private mesh state and is
+not part of the production API.
+
+Reproduce the device audit with:
+
+```bash
+nsys profile --trace=cuda --cuda-graph-trace=node --cuda-event-trace=false \
+  --sample=none --cpuctxsw=none --capture-range=cudaProfilerApi \
+  --capture-range-end=stop --output=results/local/odt-loop \
+  python -m benchmarks.graph_capture --optimizer --dot results/local/odt-loop.dot
+nsys export --type sqlite --output results/local/odt-loop.sqlite results/local/odt-loop.nsys-rep
+python -m benchmarks.graph_capture --optimizer --dot results/local/odt-loop.dot \
+  --analyze results/local/odt-loop.sqlite --output results/local/odt-audit.json
+```
+
+The built wheel passes a captured CUDA ODT smoke test from outside the checkout,
+including lazy import, energy decrease, and exact packaged-source matching.
+All pre-existing geometry implementation files remain byte-identical to the
+pre-VTM revision ([source audit](../results/validation/vtm/odt-standalone-isolation.json));
+only optional modules and lazy exports were added. The standalone performance
+baseline above still describes those unchanged execution paths. The new optimizer
+has its own costs and does not run during standalone geometry calls.

@@ -75,3 +75,14 @@ investigation trigger from noisy individual samples; all changes remain visible.
 Persistent-memory measurements are allocator deltas around workspace creation
 and include capture-runtime storage. `--quick` provides small smoke cases and is
 not release performance evidence.
+
+## Current implementation and follow-up work
+
+The [fixed-boundary ODT workspace](odt.md) provides the interior optimizer and
+captured failure recovery. See [validation and known limits](vtm-validation.md).
+It is not yet the full boundary-fitted mesher or a CPU speedup result.
+
+Additional findings are tracked in
+[#42](https://github.com/alecjacobson/warpower/issues/42) (old-connectivity line-search stalls),
+[#43](https://github.com/alecjacobson/warpower/issues/43) (trajectory reconstruction costs), and
+[#44](https://github.com/alecjacobson/warpower/issues/44) (intermediate high-valence cell capacity).

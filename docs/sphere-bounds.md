@@ -98,3 +98,15 @@ python -m benchmarks.delaunay_recovery --case random --n 100000 --repeats 5 \
   --output results/local/sphere-box-100k.json
 python -m pytest -q tests/test_sphere_bounds.py
 ```
+
+The complete [365-test regression suite](../results/validation/vtm/sphere-box-full-tests.txt)
+passes. Five [padded pooled-memory cases](../results/validation/vtm/sphere-box-memcheck.txt)
+cover the interval bounds, invalid certificates and one-ULP perturbations; one
+[captured changing-input lifetime case](../results/validation/vtm/sphere-box-lifetime.txt)
+uses synchronous diagnostic allocations and stream-ordered race tracking. All
+six finish with zero sanitizer errors, using the documented 32 KiB diagnostic
+stack without changing production settings. The [native trace](../results/validation/vtm/sphere-box-device-audit.json)
+records 321 kernel activities across three replays; all 21 graph copies are
+device-to-device, with no host/callback or allocation/free nodes. The
+[isolation record](../results/validation/vtm/sphere-box-isolation.json) checks all
+other runtime modules against the preceding main revision.

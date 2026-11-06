@@ -139,8 +139,8 @@ a captured producer/consumer loop that changes input, rejects NaNs, and recovers
 [seed tests](../results/validation/vtm/facet-seeds-focused.txt) retain the scope.
 The complete 384-site hand constructor (including seed construction and all
 attempted strategies) returns the same 2,164 canonical tetrahedra as main.
-The first replay takes 3,955 ms versus 37,731 ms (9.54×); subsequent cached replays
-take 179 ms versus 6,473 ms (36.1×) on the L40. These are device event timings, excluding
+The first replay takes 3,955 ms versus 37,663 ms (9.52×); subsequent cached replays
+take 179 ms versus 6,498 ms (36.2×) on the L40. These are device event timings, excluding
 setup and output validation. The complete 1,000-site torus mesher remains about
 3,202 ms versus 3,204 ms. These are GPU version comparisons, not CPU speedup claims.
 
@@ -186,11 +186,11 @@ facet-enabled audit paths.
 | Corner cloud, 200 sites | 6.067 | 6.082 |
 | Torus boundary, 128 sites | 227.764 | 227.940 |
 | Fitted hand, 256 sites | 13.394 | 13.423 |
-| Refined hand, 384 sites, cached | 6,473.251 | 179.302 |
+| Refined hand, 384 sites, cached | 6,498.236 | 179.302 |
 | Complete torus mesher, 1,000 sites | 3,204.364 | 3,202.189 |
 
 Standalone cases use five serial CUDA-event samples per version. The refined-hand
-main reference has two cached samples and the final version has five; torus
+main reference has three cached samples and the final version has five; torus
 meshing uses three complete solves per version. No timing window was CPU-quota
 throttled. Positions and oriented connectivity match on the saved refined-hand
 and full-torus outputs. The 47 other existing runtime modules and README are

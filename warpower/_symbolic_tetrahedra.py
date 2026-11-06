@@ -10,6 +10,14 @@ from ._tetrahedra import sorted4
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
 
 
+@wp.func(inline=True)
+def distance_order(p: wp.vec3, lower: wp.vec3, upper: wp.vec3):
+    # An ordering heuristic only; never rejects a node or changes a predicate.
+    # Finite float32 coordinate differences and squares fit in float64.
+    d = wp.max(wp.max(wp.vec3d(lower) - wp.vec3d(p), wp.vec3d(p) - wp.vec3d(upper)), wp.vec3d(0.0))
+    return wp.dot(d, d)
+
+
 @wp.kernel(enable_backward=False)
 def build_cells(
     points: wp.array[wp.vec3],
@@ -49,9 +57,13 @@ def build_cells(
                     if cell.status != 0:
                         break
         else:
+            left, right = tree.left[node], tree.right[node]
+            left_near = distance_order(points[i], tree.lower[left], tree.upper[left]) <= distance_order(
+                points[i], tree.lower[right], tree.upper[right]
+            )
             for side in range(2):
                 child = tree.left[node]
-                if side == 1:
+                if (side == 0 and left_near) or (side == 1 and not left_near):
                     child = tree.right[node]
                 if size == 128:
                     cell.status = 4

@@ -4,6 +4,7 @@ from ._api import Diagram, power_diagram, voronoi_diagram
 
 __all__ = [
     "BoundaryWorkspace",
+    "DelaunayWorkspace",
     "Diagram",
     "DiagramWorkspace",
     "DomainQueryWorkspace",
@@ -18,6 +19,10 @@ __all__ = [
 
 
 def __getattr__(name):
+    if name == "DelaunayWorkspace":
+        from ._delaunay_recovery import DelaunayWorkspace
+
+        return DelaunayWorkspace
     if name == "ExtractionWorkspace":
         from ._extraction import ExtractionWorkspace
 

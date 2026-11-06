@@ -77,6 +77,21 @@ def test_sharp_cube_preserves_corners_and_improves_crease_approximation():
     assert np.all(np.diff(history[:, 2]) <= 1e-10 * history[0, 2])
 
 
+def test_exact_corner_initialization_recovers_without_full_boundary_prefit():
+    domain = warpower.SurfaceDomain(*cube(), surface_subdivisions=16)
+    original = np.random.default_rng(2026).uniform(-0.9, 0.9, (200, 3)).astype(np.float32)
+    workspace = VTMWorkspace(domain, original, max_iterations=3).run()
+    assert workspace.error.numpy()[0] == 0
+    assert workspace.mesh.error.numpy()[0] == 0
+    assert workspace.mesh.certificate_error.numpy()[0] == 0
+    assert workspace.iterations.numpy()[0] == 3
+    points = workspace.points.numpy()
+    tets = workspace.full_tetrahedra.numpy()[: workspace.full_tetrahedra_count.numpy()[0]]
+    check_mesh(points, tets)
+    corners = workspace.boundary.corner_sites.numpy()[:8]
+    np.testing.assert_array_equal(points[corners], domain.corner_points.numpy()[:8])
+
+
 @wp.kernel
 def fail_after_initial(error: wp.array[int], count: wp.array[int], calls: wp.array[int]):
     calls[0] += 1
@@ -196,12 +211,12 @@ def test_captured_producer_complete_core_consumer_has_no_host_or_alloc_nodes(mon
     np.testing.assert_allclose(volume.numpy(), workspace.volume.numpy(), rtol=1e-12)
 
 
-def test_initial_geometry_failure_publishes_no_tetrahedra():
-    # Corner-only initial cube facets are cospherical: explicitly record the
-    # unresolved #32 case. No mesh is presented as a successful result.
+def test_explicit_legacy_geometry_failure_publishes_no_tetrahedra():
+    # The comparison opt-out preserves the old constructor and its explicit
+    # failure contract. The default certified constructor now recovers this case.
     domain = warpower.SurfaceDomain(*cube(), surface_subdivisions=16)
     points = np.random.default_rng(2026).uniform(-0.9, 0.9, (200, 3)).astype(np.float32)
-    workspace = VTMWorkspace(domain, points, max_iterations=2).run()
+    workspace = VTMWorkspace(domain, points, max_iterations=2, certified_delaunay=False).run()
     assert workspace.error.numpy()[0] & 1
     assert workspace.mesh.error.numpy()[0] & 16
     assert workspace.full_tetrahedra_count.numpy()[0] == 0

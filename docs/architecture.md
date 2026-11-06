@@ -159,6 +159,12 @@ the complete tetrahedral dual.
 The [validation report](tetrahedra-validation.md) records independent mesh
 comparisons and paired default-performance checks.
 
+The newer optional [`DelaunayWorkspace`](delaunay-recovery.md) adds exact
+original-coordinate certification, consistent symbolic lifting for ties, and
+finite normalized/weighted candidate recovery. It is an independent API used
+by the developing VTM core. The original diagram and tetrahedralization paths
+above are unchanged; certification and recovery costs apply only to this API.
+
 ## Captured device execution
 
 The optional [`DiagramWorkspace`](graphs.md) API owns persistent arrays and

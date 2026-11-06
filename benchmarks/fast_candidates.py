@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 import warp as wp
 
-from tests.test_fast_candidates import producer
+from tests.test_fast_candidates import cloud, producer
 from warpower import DelaunayWorkspace
 
 wp.set_module_options({"enable_backward": False})
@@ -50,15 +50,15 @@ def advance(
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--n", type=int, default=8192)
+    parser.add_argument("--n", type=int, default=32768)
     parser.add_argument("--no-fast", action="store_true")
     parser.add_argument("--profile", action="store_true")
     parser.add_argument("--dot", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    if args.n < 8192:
-        parser.error("n must be at least 8192 to exercise fast construction")
-    points = np.random.default_rng(8701).uniform(-1, 1, (args.n, 3)).astype(np.float32)
+    if args.n < 32768:
+        parser.error("n must be at least 32768 to exercise fast construction")
+    points = cloud(args.n)
     mesh = DelaunayWorkspace(points, fast_candidates=not args.no_fast)
     source = wp.array(points, dtype=wp.vec3, device=mesh.device)
     invalid = wp.array([np.nan], dtype=float, device=mesh.device)

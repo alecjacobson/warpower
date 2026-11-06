@@ -1,0 +1,479 @@
+{
+  "scope": "NVIDIA L40, Warp1.19.0; original versus hybrid full exact-certified Delaunay with threshold8192 experiment. Final threshold32768 removes fast path below32768; larger candidates unchanged. Five warmed CUDA-event samples, first replay separately, no CPU-quota throttling. Setup/uploads/host validation excluded; not a CPU speedup claim.",
+  "records": [
+    {
+      "n": 10000,
+      "before": {
+        "case": "random",
+        "n": 10000,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 248.80303955078125,
+        "full": {
+          "median_ms": 49.464576721191406,
+          "samples_ms": [
+            49.530975341796875,
+            49.464576721191406,
+            49.4384651184082,
+            49.50521469116211,
+            49.295326232910156
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 39.66953659057617,
+          "samples_ms": [
+            39.6649284362793,
+            39.64876937866211,
+            39.672672271728516,
+            39.66953659057617,
+            39.67923355102539
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 39.64195251464844,
+          "samples_ms": [
+            39.62201690673828,
+            39.67804718017578,
+            39.63737487792969,
+            39.64195251464844,
+            39.642879486083984
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 9.663840293884277,
+          "samples_ms": [
+            9.7708158493042,
+            9.663840293884277,
+            9.648896217346191,
+            9.713567733764648,
+            9.629216194152832
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 66504,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 0,
+        "cache_strategy": true,
+        "fast_candidates": false,
+        "fast_attempted": 0,
+        "fast_accepted": 0,
+        "fast_error": 0,
+        "fast_repaired_cells": 0,
+        "symbolic_first": false,
+        "recovery_first": 0,
+        "base_attempted": 1,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 851497,
+        "certificate_node_visits": 3909260
+      },
+      "after": {
+        "case": "random",
+        "n": 10000,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 242.2394561767578,
+        "full": {
+          "median_ms": 47.2891845703125,
+          "samples_ms": [
+            47.085601806640625,
+            47.2891845703125,
+            47.812862396240234,
+            47.61065673828125,
+            46.576416015625
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 36.77088165283203,
+          "samples_ms": [
+            35.8502082824707,
+            39.74806213378906,
+            37.817630767822266,
+            35.135520935058594,
+            36.77088165283203
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 39.669761657714844,
+          "samples_ms": [
+            39.72140884399414,
+            39.669761657714844,
+            39.68057632446289,
+            39.63676834106445,
+            39.65459060668945
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 9.738495826721191,
+          "samples_ms": [
+            9.706432342529297,
+            9.864704132080078,
+            9.71168041229248,
+            9.738495826721191,
+            9.763808250427246
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 66504,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 0,
+        "cache_strategy": true,
+        "fast_candidates": true,
+        "fast_attempted": 1,
+        "fast_accepted": 1,
+        "fast_error": 0,
+        "fast_repaired_cells": 497,
+        "symbolic_first": false,
+        "recovery_first": 0,
+        "base_attempted": 1,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 851497,
+        "certificate_node_visits": 3909260
+      }
+    },
+    {
+      "n": 100000,
+      "before": {
+        "case": "random",
+        "n": 100000,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 3383.178466796875,
+        "full": {
+          "median_ms": 562.9978637695312,
+          "samples_ms": [
+            562.9978637695312,
+            563.1124267578125,
+            562.6826171875,
+            562.6780395507812,
+            563.020263671875
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 472.87017822265625,
+          "samples_ms": [
+            472.87017822265625,
+            472.9004821777344,
+            473.0369873046875,
+            472.81158447265625,
+            472.8548583984375
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 474.5218811035156,
+          "samples_ms": [
+            474.63262939453125,
+            474.30609130859375,
+            474.60418701171875,
+            474.5218811035156,
+            474.385986328125
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 89.98995208740234,
+          "samples_ms": [
+            89.60518646240234,
+            89.99820709228516,
+            89.5250244140625,
+            89.98995208740234,
+            90.16604614257812
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 671908,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 0,
+        "cache_strategy": true,
+        "fast_candidates": false,
+        "fast_attempted": 0,
+        "fast_accepted": 0,
+        "fast_error": 0,
+        "fast_repaired_cells": 0,
+        "symbolic_first": false,
+        "recovery_first": 0,
+        "base_attempted": 1,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 8793024,
+        "certificate_node_visits": 46061402
+      },
+      "after": {
+        "case": "random",
+        "n": 100000,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 1451.807861328125,
+        "full": {
+          "median_ms": 263.0709533691406,
+          "samples_ms": [
+            261.90057373046875,
+            262.9110107421875,
+            264.1432189941406,
+            263.85150146484375,
+            263.0709533691406
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 173.11990356445312,
+          "samples_ms": [
+            173.11990356445312,
+            172.1405487060547,
+            174.74172973632812,
+            171.72189331054688,
+            176.1835174560547
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 474.4246520996094,
+          "samples_ms": [
+            474.52728271484375,
+            474.3940734863281,
+            474.41900634765625,
+            474.54547119140625,
+            474.4246520996094
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 89.8144302368164,
+          "samples_ms": [
+            89.76643371582031,
+            89.8144302368164,
+            89.90995025634766,
+            89.87590026855469,
+            89.80502319335938
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 671908,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 0,
+        "cache_strategy": true,
+        "fast_candidates": true,
+        "fast_attempted": 1,
+        "fast_accepted": 1,
+        "fast_error": 0,
+        "fast_repaired_cells": 1512,
+        "symbolic_first": false,
+        "recovery_first": 0,
+        "base_attempted": 1,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 8793024,
+        "certificate_node_visits": 46061402
+      }
+    }
+  ]
+}

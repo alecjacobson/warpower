@@ -244,7 +244,7 @@ class DelaunayWorkspace:
             tetrahedra_cell_capacity=tetrahedra_cell_capacity,
             chunk_size=chunk_size,
         )
-        self.fast_candidates = bool(fast_candidates) and len(points) >= 8192
+        self.fast_candidates = bool(fast_candidates) and len(points) >= 32768
         builder = DiagramWorkspace
         if self.fast_candidates:
             from ._fast_candidates import CandidateWorkspace

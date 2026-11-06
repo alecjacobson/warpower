@@ -139,7 +139,7 @@ def count_distinct(owners: wp.array[int], count: wp.array[int]):
 def choose(
     enabled: wp.array[int], count: wp.array[int], fast: wp.array[int], original: wp.array[int]
 ):
-    fast[0] = int(enabled[0] != 0 and count[0] >= 8192)
+    fast[0] = int(enabled[0] != 0 and count[0] >= 32768)
     original[0] = 1 - fast[0]
 
 

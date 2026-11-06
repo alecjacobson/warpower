@@ -5,9 +5,9 @@ power-diagram, original Delaunay/regular-mesh APIs and their kernels retain thei
 implementations. No float32 candidate is accepted without the existing exact
 original-coordinate certificate.
 
-`fast_candidates=True` is the default. Buffers smaller than 8,192 sites keep the
+`fast_candidates=True` is the default. Buffers smaller than 32,768 sites keep the
 original constructor. Larger buffers also count distinct canonical sites on
-device each reconstruction: fewer than 8,192 distinct sites select the original
+device each reconstruction: fewer than 32,768 distinct sites select the original
 float64 path. This protects coarse active prefixes during progressive meshing.
 `fast_candidates=False` disables the new path for comparisons.
 
@@ -46,7 +46,7 @@ Diagnostics are device scalars, reset per replay:
 
 | Field | Meaning |
 |---|---|
-| `fast_candidates` | Setup Boolean: the option is enabled and the buffer has at least 8,192 sites |
+| `fast_candidates` | Setup Boolean: the option is enabled and the buffer has at least 32,768 sites |
 | `fast_attempted` | The distinct-site gate selected the hybrid candidate in this replay |
 | `fast_accepted` | That candidate passed the exact certificate |
 | `fast_error` | Rejected fast attempt: bit 1 for construction, bit 2 for certification |
@@ -57,12 +57,58 @@ output count govern whether the final mesh can be consumed. A successful origina
 fallback can leave `fast_error` nonzero. `base_attempted` continues to describe
 the unweighted construction path, which may now include both builders.
 
-## Integration status
+## Validation and measured scope
 
-Ten focused tests pass, including independent SciPy connectivity, large storage
-with a small distinct prefix, injected construction/certificate failures, cached
-and uncached fallback, invalid-input recovery, fixed-pointer producer/consumer
-capture, disabling the option, and fresh-mesher preference reset. Full regression,
-paired complete-pipeline timing, independent large reference, padded memory and
-native changing-input capture checks are pending. This page does not claim a
-native CPU speedup; the overall meshing performance goal remains open.
+The [focused cases](../results/validation/vtm/fast-candidate-focused-tests.txt)
+cover independent SciPy connectivity, large storage with a small distinct
+prefix, injected construction/certificate failures, cached and uncached
+fallback, invalid-input recovery, a fixed-pointer producer/consumer graph,
+disabling the option, fresh-mesher preference reset, and a natural float32
+construction failure. That natural failure falls back to a matching original
+mesh; it is not hidden by the successful random-cloud examples. Failed fast
+attempts can add work to a first call before the cached original path takes over.
+
+The [100,000-site reference](../results/validation/vtm/fast-candidate-100k-cgal.json)
+matches all 671,908 tetrahedra against native CGAL 6.2.1 and the preceding
+certified constructor. The [isolation record](../results/validation/vtm/fast-candidate-isolation.json)
+confirms that all 44 other pre-existing runtime modules and the main README
+retain their contents. The changed existing modules are the optional certified
+wrapper and the complete mesher's fresh-solve preference reset.
+
+The [paired experiment](../results/validation/vtm/fast-candidate-performance.json)
+on an NVIDIA L40 with Warp 1.19.0 reduced complete certified reconstruction of
+100,000 random sites from 563.00 to 263.07 ms (2.14×). First replay fell from
+3,383.18 to 1,451.81 ms (2.33×). Five warmed samples exclude allocation, compilation,
+input upload and host validation; both timing windows were unthrottled. The fast
+pass repaired 1,512 cells in float64, and required no auxiliary or symbolic
+recovery. These measurements concern reconstruction, not complete VTM or a CPU
+comparison.
+
+The original [cutoff experiment](../results/validation/vtm/fast-candidate-distributions.json)
+showed a 13.4% regression at 8,192 sites (34.71 to 39.38 ms), a small gain at
+10,000, and larger gains at 32,768. Consequently the automatic cutoff is now
+32,768. The smaller measurements are retained as experimental evidence, not as
+performance claims for the final default. A final-policy distribution matrix,
+full regression, padded memory and native changing-input checks are pending.
+
+The complete default 10,000-site torus solve was effectively unchanged:
+[76,883.76 ms before](../results/validation/vtm/fast-candidate-mesher-before10000.json)
+and [76,967.00 ms with the provisional cutoff](../results/validation/vtm/fast-candidate-mesher-after10000.json).
+Each is the median of three unthrottled full replays, including domain refit,
+sampling, growth, fitting, quality rounds and extraction. Point positions,
+roles and canonical full/material/boundary connectivity are
+[identical](../results/validation/vtm/fast-candidate-mesher-equivalence.json).
+There are 60,013 full cells, 51,140 retained cells and 6,166 boundary triangles.
+Minimum radius ratio is 0.03132, median 0.89041, relative volume error −0.894%,
+and directed surface RMS 0.003791. The final cutoff keeps this size on the
+original constructor. This optimization does not establish an end-to-end VTM
+speedup on that case. The native CPU performance goal remains open.
+
+Reproduce standalone comparisons from a source checkout with the development
+extra installed:
+
+```bash
+python -m benchmarks.delaunay_recovery --case random --n 100000 --repeats 5 --no-fast --output original.json
+python -m benchmarks.delaunay_recovery --case random --n 100000 --repeats 5 --output hybrid.json
+python -m benchmarks.fast_candidate_matrix --output distributions.json
+```

@@ -9,8 +9,11 @@ from warpower import DelaunayWorkspace
 wp.set_module_options({"enable_backward": False})
 
 
-def cloud():
-    return np.random.default_rng(8701).uniform(-1, 1, (8192, 3)).astype(np.float32)
+def cloud(n=32768):
+    # Same nondegenerate case as the paired distribution matrix.
+    rng = np.random.default_rng(8721)
+    rng.uniform(-1, 1, (8192, 3))
+    return rng.uniform(-1, 1, (n, 3)).astype(np.float32)
 
 
 def test_large_interior_candidates_match_scipy_and_keep_original_scratch():
@@ -114,15 +117,25 @@ def producer(
     points[i] = p
 
 
-def test_captured_producer_gate_fallback_and_consumer_with_fixed_storage(monkeypatch, tmp_path):
-    from tests.test_delaunay_recovery import consume
+@wp.kernel
+def consume(
+    tets: wp.array2d[int], count: wp.array[int], error: wp.array[int], total: wp.array[wp.int64]
+):
+    i = wp.tid()
+    if error[0] == 0 and i < count[0]:
+        value = wp.int64(0)
+        for k in range(4):
+            value += wp.int64(tets[i, k])
+        wp.atomic_add(total, 0, value)
 
+
+def test_captured_producer_gate_fallback_and_consumer_with_fixed_storage(monkeypatch, tmp_path):
     p = cloud()
     w = DelaunayWorkspace(p)
     source = wp.array(p, dtype=wp.vec3, device=w.device)
     invalid = wp.array([np.nan], dtype=float, device=w.device)
     phase = wp.zeros(1, dtype=int, device=w.device)
-    total = wp.zeros(1, dtype=int, device=w.device)
+    total = wp.zeros(1, dtype=wp.int64, device=w.device)
     wp.load_module(module=__name__, device=w.device)
     wp.load_module(module="tests.test_delaunay_recovery", device=w.device)
 
@@ -193,7 +206,7 @@ def test_fresh_meshing_resets_fast_preference_but_small_active_prefix_stays_floa
 
     domain = SurfaceDomain(*cube(), surface_subdivisions=4)
     mesh = VariationalMeshingWorkspace(
-        domain, 8192, target_count=128, initial_count=64, quality_rounds=0
+        domain, 32768, target_count=128, initial_count=64, quality_rounds=0
     )
     assert mesh.core.mesh.fast_candidates
     mesh.core.mesh._fast_available.zero_()
@@ -202,3 +215,26 @@ def test_fresh_meshing_resets_fast_preference_but_small_active_prefix_stays_floa
     assert mesh.point_count.numpy()[0] == 128
     assert mesh.core.mesh._fast_available.numpy()[0] == 1
     assert mesh.core.mesh.fast_attempted.numpy()[0] == 0
+
+
+def test_small_buffer_retains_original_constructor_without_candidate_scratch():
+    p = cloud()[:8192]
+    w = DelaunayWorkspace(p).run()
+    assert not w.fast_candidates
+    assert not hasattr(w._base, "_fast_scratch")
+    assert w.fast_attempted.numpy()[0] == 0
+    assert tet_set(valid(w, p)) == reference(p)
+
+
+def test_natural_float32_construction_failure_uses_original_and_caches_preference():
+    p = np.random.default_rng(8701).uniform(-1, 1, (32768, 3)).astype(np.float32)
+    w = DelaunayWorkspace(p).run()
+    assert w.fast_attempted.numpy()[0] == 1
+    assert w.fast_accepted.numpy()[0] == 0
+    assert w.fast_error.numpy()[0] == 1
+    assert w._fast_available.numpy()[0] == 0
+    cells = tet_set(valid(w, p))
+    assert cells == reference(p)
+    w.run()
+    assert w.fast_attempted.numpy()[0] == 0
+    assert tet_set(valid(w, p)) == cells

@@ -218,3 +218,66 @@ nsys export --type sqlite --output results/local/domain-loop.sqlite results/loca
 python -m benchmarks.graph_capture --domain --dot results/local/domain-loop.dot \
   --analyze results/local/domain-loop.sqlite --output results/local/domain-audit.json
 ```
+
+## Boundary fitting and interior integration
+
+The independent [`BoundaryWorkspace`](boundary.md) and internal uniform VTM core
+pass **149 total tests** ([output](../results/validation/vtm/boundary-tests.txt)).
+Their 16 tests pass CUDA memcheck with **zero errors**
+([output](../results/validation/vtm/boundary-memcheck.txt)). Independent checks cover
+nearest-site assignments, nonuniform weighted moments, corner conflicts, evolving
+roles, device active counts, invalid-input recovery, and complete position and
+connectivity rollback after injected reconstruction failures.
+
+| Example | Sites | Accepted steps | Median resident loop | Boundary objective reduction |
+|---|---:|---:|---:|---:|
+| Torus | 1,000 | 20/20 | 313.35 ms | 66.33% surface error |
+| Cube with boundary initialization | 200 | 12/12 | 51.87 ms | 63.67% crease error |
+
+These NVIDIA L40 measurements include a changing-input producer, optimization,
+and full-hull volume consumer. The cube also includes one complete boundary
+initialization pass and preserves its eight corners exactly. Five warmed timing
+samples per case have no CPU quota throttling
+([torus](../results/validation/vtm/boundary-torus.json),
+[cube](../results/validation/vtm/boundary-cube.json)). The torus uses 110,592
+surface quadrature samples. Both final full tetrahedron sets match SciPy and
+native CGAL 6.2.1 exactly
+([CGAL check](../results/validation/vtm/boundary-cgal.json)).
+
+These are intermediate pipeline measurements, not CPU speedup or final mesh
+quality claims. Full-hull output fills nonconvex holes and contains very poor
+boundary elements; extraction and worst-element improvements are still required.
+Corner-only cube initialization exposes an unresolved cospherical-facet case
+in [#32](https://github.com/alecjacobson/warpower/issues/32); complete boundary
+initialization avoids that case without claiming a general numerical fix.
+
+The [native replay audit](../results/validation/vtm/boundary-device-audit.json)
+has 316 kernel, 109 memset, 28 conditional, and 24 device-to-device copy nodes.
+It has no allocation/free nodes, host callbacks, or host transfers. Three profiled
+replays execute 1,848 kernel activities, including device corner-matching and
+optimization loops. A top-level native radix sort originally added graph memory
+nodes ([#50](https://github.com/alecjacobson/warpower/issues/50)); the site hierarchy
+now rebuilds inside the device input-validity conditional, matching the existing
+diagram workspace's capture pattern.
+
+All prior geometry, ODT, and domain implementation modules remain byte-identical
+to `df60928` ([source audit](../results/validation/vtm/boundary-standalone-isolation.json)).
+The prior standalone performance gate therefore still covers their unchanged
+execution paths. An installed wheel passes captured boundary/core smoke checks
+outside the source checkout, with exact source matching
+([package record](../results/validation/vtm/boundary-wheel.json)).
+
+```bash
+python -m benchmarks.vtm_core --case torus --n 1000 --iterations 20 --reference \
+  --output results/local/boundary-torus.json
+python -m benchmarks.vtm_core --case cube --n 200 --iterations 12 --reference \
+  --output results/local/boundary-cube.json
+nsys profile --trace=cuda --cuda-graph-trace=node --cuda-event-trace=false \
+  --sample=none --cpuctxsw=none --capture-range=cudaProfilerApi \
+  --capture-range-end=stop --output=results/local/boundary-loop \
+  python -m benchmarks.vtm_core --case cube --n 200 --iterations 3 --repeats 1 \
+  --profile --dot results/local/boundary-loop.dot
+nsys export --type sqlite --output results/local/boundary-loop.sqlite results/local/boundary-loop.nsys-rep
+python -m benchmarks.graph_capture --vtm-core --dot results/local/boundary-loop.dot \
+  --analyze results/local/boundary-loop.sqlite --output results/local/boundary-audit.json
+```

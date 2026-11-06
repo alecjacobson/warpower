@@ -27,6 +27,11 @@ def main():
     parser.add_argument("--dot", type=Path)
     parser.add_argument("--profile", action="store_true")
     parser.add_argument("--no-cache", action="store_true", help="Compare without strategy reuse")
+    parser.add_argument(
+        "--symbolic-first",
+        action="store_true",
+        help="Start with the symbolic strategy for isolated measurements",
+    )
     args = parser.parse_args()
     rng = np.random.default_rng(2026)
     if args.case in ("cube", "grid"):
@@ -51,6 +56,8 @@ def main():
     else:
         points = rng.uniform(-1, 1, (args.n, 3)).astype(np.float32)
     workspace = DelaunayWorkspace(points, cache_strategy=not args.no_cache)
+    if args.symbolic_first:
+        workspace._preferred.fill_(2)
     begin, end = wp.Event(enable_timing=True), wp.Event(enable_timing=True)
     wp.record_event(begin)
     workspace.run()
@@ -129,6 +136,7 @@ def main():
         certificate_error=int(workspace.certificate_error.numpy()[0]),
         attempts=int(workspace.attempts.numpy()[0]),
         cache_strategy=workspace.cache_strategy,
+        symbolic_first=args.symbolic_first,
         recovery_first=int(workspace.recovery_first.numpy()[0]),
         base_attempted=int(workspace.base_attempted.numpy()[0]),
         symbolic_attempted=int(workspace.symbolic_attempted.numpy()[0]),

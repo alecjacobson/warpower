@@ -47,8 +47,10 @@ Only the original-coordinate certificate can accept a candidate.
 
 If those attempts fail, the default `symbolic_recovery=True` enables an
 original-coordinate symbolic cell constructor. It stores incident plane IDs and
-classifies vertices with filtered/exact predicates; it does not construct rounded
-Cartesian intersections. Site bisectors and clipping-box planes use the same
+classifies vertices with filtered/exact predicates. Conservative cached Cartesian
+intervals accept only strict signs; uncertain cases and exact ties use the
+original symbolic predicates. Rounded Cartesian intersections never define its
+topology. Site bisectors and clipping-box planes use the same
 symbolic lifting rule as the certificate. This resolves the structured torus
 boundary case tracked in [#61](https://github.com/alecjacobson/warpower/issues/61).
 The resulting candidate still must pass the complete original-input certificate.
@@ -158,10 +160,11 @@ robustness path has measurable extra cost. Recovery and certification optimizati
 is tracked in [#56](https://github.com/alecjacobson/warpower/issues/56); it is not
 a claim of performance parity with the original constructor.
 
-The symbolic path shares existing integer cell scratch and candidate buffers;
-it adds only fixed scalar state and two box corners. It currently examines all
-sites for each cell, so its worst-case cost is high. Conservative pruning and
-selective recovery are tracked in [#62](https://github.com/alecjacobson/warpower/issues/62).
+The symbolic path shares existing integer and floating-point cell scratch and
+candidate buffers; it adds only fixed scalar state and two box corners.
+[Conservative directional bounds and cached vertex intervals](symbolic-bounds.md)
+prune provably irrelevant sites and avoid repeated exact predicates. The remaining
+worst-case cost is high; this fallback does not claim ordinary-builder throughput.
 Setup includes compiling this optional kernel; cold compilation can be substantial.
 
 The developing internal `VTMWorkspace` uses this certified constructor by default.

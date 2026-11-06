@@ -3,11 +3,20 @@
 import warp as wp
 
 from . import _bvh
+from . import _symbolic_bounds as sb
 from ._cell import Scratch64, plane_at
 from ._symbolic_cell import clip_symbolic, init_symbolic
 from ._tetrahedra import sorted4
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
+
+
+@wp.func(inline=True)
+def distance_order(p: wp.vec3, lower: wp.vec3, upper: wp.vec3):
+    # An ordering heuristic only; never rejects a node or changes a predicate.
+    # Finite float32 coordinate differences and squares fit in float64.
+    d = wp.max(wp.max(wp.vec3d(lower) - wp.vec3d(p), wp.vec3d(p) - wp.vec3d(upper)), wp.vec3d(0.0))
+    return wp.dot(d, d)
 
 
 @wp.kernel(enable_backward=False)
@@ -34,24 +43,36 @@ def build_cells(
     if tree.owners[i] != i:
         status[i] = 3
         return
-    cell = init_symbolic(scratch, slot)
+    cell = init_symbolic(scratch, slot, bounds)
+    cell.lo = wp.vec3d(bounds[0])
+    cell.hi = wp.vec3d(bounds[1])
     nodes = wp.zeros(shape=128, dtype=int)
     nodes[0] = 1
     size = int(1)
     while size > 0 and cell.status == 0:
         size -= 1
         node = nodes[size]
+        if sb.outside(cell.lo, cell.hi, points[i], tree.lower[node], tree.upper[node]):
+            continue
         if tree.count[node] > 0:
             for k in range(tree.start[node], tree.start[node] + tree.count[node]):
                 j = tree.ids[k]
-                if tree.owners[j] == j:
+                if tree.owners[j] == j and not sb.outside(
+                    cell.lo, cell.hi, points[i], points[j], points[j]
+                ):
                     cell = clip_symbolic(scratch, cell, i, j, points, bounds)
                     if cell.status != 0:
                         break
+                    if cell.changed != 0:
+                        cell = sb.update(scratch, cell, points, bounds, i)
         else:
+            left, right = tree.left[node], tree.right[node]
+            left_near = distance_order(
+                points[i], tree.lower[left], tree.upper[left]
+            ) <= distance_order(points[i], tree.lower[right], tree.upper[right])
             for side in range(2):
                 child = tree.left[node]
-                if side == 1:
+                if (side == 0 and left_near) or (side == 1 and not left_near):
                     child = tree.right[node]
                 if size == 128:
                     cell.status = 4

@@ -66,3 +66,24 @@ def test_boundary_compaction_reserves_all_four_faces_of_one_tetrahedron():
     assert len(cells) == 1
     assert w._certificate._boundary_count.numpy()[0] == 4
     assert len(w._certificate._boundary) == 4
+
+
+def test_partitioned_support_search_covers_unbalanced_trees_and_coincident_sites():
+    from scipy.spatial import Delaunay
+
+    from tests.test_delaunay_recovery import certificate
+
+    rng = np.random.default_rng(8421)
+    unique = rng.uniform(-1, 1, (64, 3)).astype(np.float32)
+    unique[:48] *= 2.0**-12
+    # Different radix depths, early leaves, and canonical duplicate ownership.
+    points = np.concatenate([unique, np.repeat(unique[:1], 192, axis=0)])
+    cells = Delaunay(unique).simplices.astype(np.int32)
+    for row in cells:
+        a, b, c, d = points[row].astype(np.float64)
+        if np.linalg.det(np.stack([b - a, c - a, d - a])) < 0:
+            row[0], row[1] = row[1], row[0]
+    assert certificate(points, cells) == 0
+    # Removing a cell leaves only valid lower facets, so rejection requires
+    # complete support-face traversal rather than a nonempty-sphere shortcut.
+    assert certificate(points, cells[1:]) & 64

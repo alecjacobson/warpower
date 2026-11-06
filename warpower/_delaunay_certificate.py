@@ -319,38 +319,58 @@ def check_faces(
     count: wp.array[int],
     tree: Tree,
     error: wp.array[int],
+    depth: int,
+    workers: int,
 ):
-    slot = wp.tid()
-    if slot >= count[0]:
-        return
-    ids = face_vertices(tets, boundary[slot])
-    a, b, c = points[ids[0]], points[ids[1]], points[ids[2]]
-    plane = halfspace(a, b, c)
-    stack = wp.zeros(shape=128, dtype=int)
-    stack[0] = 1
-    size = int(1)
-    while size > 0:
-        size -= 1
-        node = stack[size]
-        if inside_halfspace(plane, tree.lower[node], tree.upper[node]):
-            continue
-        if tree.count[node] > 0:
-            for k in range(tree.start[node], tree.start[node] + tree.count[node]):
-                q = tree.ids[k]
-                if q == ids[0] or q == ids[1] or q == ids[2]:
-                    continue
-                result = fp.orient3d(a, b, c, points[q])
-                if result.valid == 0:
-                    wp.atomic_or(error, 0, 2)
-                elif result.sign > 0:
-                    wp.atomic_or(error, 0, 64)
+    tid = wp.tid()
+    pieces = 1 << depth
+    worker, lane = tid // pieces, tid % pieces
+    # Partition the radix tree by path bits. An early leaf belongs only to
+    # the lane whose unused bits are zero, so every subtree is covered once.
+    root = int(1)
+    live = bool(True)
+    for level in range(depth):
+        if tree.count[root] > 0:
+            live = (lane >> level) == 0
+            break
+        if ((lane >> level) & 1) == 0:
+            root = tree.left[root]
         else:
-            if size > 125:
-                wp.atomic_or(error, 0, 16)
-                return
-            stack[size] = tree.left[node]
-            stack[size + 1] = tree.right[node]
-            size += 2
+            root = tree.right[root]
+    if not live:
+        return
+    # Fixed launch size, device count, and a strided tail cover even malformed
+    # candidates exposing all four faces per tetrahedron.
+    for slot in range(worker, count[0], workers):
+        ids = face_vertices(tets, boundary[slot])
+        a, b, c = points[ids[0]], points[ids[1]], points[ids[2]]
+        plane = halfspace(a, b, c)
+        stack = wp.zeros(shape=128, dtype=int)
+        stack[0] = root
+        size = int(1)
+        while size > 0:
+            size -= 1
+            node = stack[size]
+            if inside_halfspace(plane, tree.lower[node], tree.upper[node]):
+                continue
+            if tree.count[node] > 0:
+                for k in range(tree.start[node], tree.start[node] + tree.count[node]):
+                    q = tree.ids[k]
+                    # Coincident sites have exactly the same plane sign.
+                    if tree.owners[q] != q or q == ids[0] or q == ids[1] or q == ids[2]:
+                        continue
+                    result = fp.orient3d(a, b, c, points[q])
+                    if result.valid == 0:
+                        wp.atomic_or(error, 0, 2)
+                    elif result.sign > 0:
+                        wp.atomic_or(error, 0, 64)
+            else:
+                if size > 125:
+                    wp.atomic_or(error, 0, 16)
+                    return
+                stack[size] = tree.left[node]
+                stack[size + 1] = tree.right[node]
+                size += 2
 
 
 @wp.kernel
@@ -384,6 +404,8 @@ class DelaunayCertificate:
             self._parents = wp.empty(m, dtype=int)
             self._boundary = wp.empty(4 * m, dtype=int)
             self._boundary_count = wp.zeros(1, dtype=int)
+            self._face_depth = 5 if n >= 128 else 0
+            self._face_workers = min(n, 4096)
             self._ready = wp.empty(1, dtype=int)
             wp.load_module(module=__name__, device=self.device)
 
@@ -473,7 +495,7 @@ class DelaunayCertificate:
         )
         self._launch(
             check_faces,
-            len(self._boundary),
+            self._face_workers * (1 << self._face_depth),
             [
                 self.points,
                 self.tetrahedra,
@@ -481,5 +503,7 @@ class DelaunayCertificate:
                 self._boundary_count,
                 tree,
                 self.error,
+                self._face_depth,
+                self._face_workers,
             ],
         )

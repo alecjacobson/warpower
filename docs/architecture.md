@@ -164,9 +164,10 @@ comparisons and paired default-performance checks.
 The newer optional [`DelaunayWorkspace`](delaunay-recovery.md) adds exact
 original-coordinate certification, consistent symbolic lifting for ties, and
 finite normalized/weighted candidate recovery, and an original-coordinate
-symbolic cell fallback. That fallback stores only incident plane IDs and uses
-exact site/box predicates with the certificate's tie rule; its current traversal
-has no approximate geometric pruning. It is an independent API used
+symbolic cell fallback. That fallback defines topology with incident plane IDs
+and the certificate's exact tie rule. Conservative cached Cartesian intervals
+prove strict signs and directional bounds reject irrelevant sites; uncertain
+cases retain the exact site/box predicates. See [symbolic geometry](symbolic-bounds.md). It is an independent API used
 by the developing VTM core. The original diagram and tetrahedralization paths
 above are unchanged; certification and recovery costs apply only to this API.
 

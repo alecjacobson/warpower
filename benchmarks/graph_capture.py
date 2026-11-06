@@ -24,6 +24,9 @@ def main():
     parser.add_argument(
         "--extraction", action="store_true", help="Analyze a benchmarks.extraction trace"
     )
+    parser.add_argument(
+        "--recovery", action="store_true", help="Analyze a benchmarks.delaunay_recovery trace"
+    )
     args = parser.parse_args()
     if args.analyze:
         database = sqlite3.connect(args.analyze)
@@ -57,7 +60,9 @@ def main():
             )
         report = {
             "scope": (
-                "Three warmed producer/extraction/topology/consumer replays, optionally including VTM optimization; one final synchronization outside geometry"
+                "Three warmed fixed-input certified Delaunay/recovery replays; one final synchronization outside geometry"
+                if args.recovery
+                else "Three warmed producer/extraction/topology/consumer replays, optionally including VTM optimization; one final synchronization outside geometry"
                 if args.extraction
                 else "Three warmed changing-input producer/boundary/interior VTM/full-hull consumer "
                 "replays; one final synchronization outside geometry"
@@ -81,6 +86,7 @@ def main():
             "dot_sha256": hashlib.sha256(args.dot.read_bytes()).hexdigest(),
             "sqlite_sha256": hashlib.sha256(args.analyze.read_bytes()).hexdigest(),
         }
+        assert report["gpu_kernel_activities"] > 0, "Record with --cuda-graph-trace=node"
         assert set(observed_copies) <= {"CUDA_MEMCPY_KIND_DTOD"}
         assert not any(re.search(r"(alloc|free|memcpy)", name, re.I) for name in calls)
         assert set(node_types) <= {"KERNEL", "MEMSET", "MEMCPY", "CONDITIONAL"}
@@ -92,10 +98,8 @@ def main():
         print(json.dumps(report, indent=2))
         return
 
-    if args.domain or args.vtm_core or args.extraction:
-        parser.error(
-            "Record with benchmarks.domain, benchmarks.vtm_core or benchmarks.extraction; use this flag with --analyze"
-        )
+    if args.domain or args.vtm_core or args.extraction or args.recovery:
+        parser.error("Record with the matching benchmark module; use this flag with --analyze")
 
     import numpy as np
     import torch

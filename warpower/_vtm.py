@@ -12,6 +12,7 @@ import operator
 import warp as wp
 
 from ._boundary import BoundaryWorkspace
+from ._delaunay_recovery import DelaunayWorkspace
 from ._graph import DiagramWorkspace
 from ._odt import accumulate_tets
 
@@ -214,6 +215,7 @@ class VTMWorkspace:
         tetrahedra_capacity=None,
         tetrahedra_cell_capacity=1024,
         chunk_size=None,
+        certified_delaunay=True,
     ):
         self.max_iterations = operator.index(max_iterations)
         self.max_backtracks = operator.index(max_backtracks)
@@ -227,13 +229,14 @@ class VTMWorkspace:
             raise ValueError("tolerance must be nonnegative and finite")
         self.damping, self.step_limit, self.tolerance = damping, step_limit, tolerance
         self.domain = domain
-        self.mesh = DiagramWorkspace(
+        mesh_type = DelaunayWorkspace if certified_delaunay else DiagramWorkspace
+        mesh_options = {} if certified_delaunay else dict(adjacency=False, return_tetrahedra=True)
+        self.mesh = mesh_type(
             points,
-            adjacency=False,
-            return_tetrahedra=True,
             tetrahedra_capacity=tetrahedra_capacity,
             tetrahedra_cell_capacity=tetrahedra_cell_capacity,
             chunk_size=chunk_size,
+            **mesh_options,
         )
         self.points, self.device, self.n = self.mesh.points, self.mesh.device, self.mesh.n
         if self.n < 4:

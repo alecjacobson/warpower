@@ -3,8 +3,8 @@
 The private `warpower._predicates` module provides exact orientation and weighted
 in-sphere signs for **finite float32 coordinates and weights**. It is the
 certification foundation for [Delaunay recovery](https://github.com/alecjacobson/warpower/issues/32),
-not a completed recovery algorithm. No existing diagram, tetrahedralization,
-optimizer, or extraction path imports it yet.
+and is now used by the optional [certified constructor](delaunay-recovery.md).
+The original diagram and tetrahedralization paths do not import it.
 
 `orient3d(a,b,c,d)` uses the sign convention of `det(b-a,c-a,d-a)`.
 `power_sphere(a,b,c,d,q,wa,wb,wc,wd,wq)` is positive when `q` lies inside
@@ -30,7 +30,7 @@ CUDA code, or CPU predicate fallback is involved.
 **Calling kernels must compile with `fast_math=False` and `fuse_fp=False`.**
 Warp functions compile into their caller's module; setting these options on the
 function's defining module alone does not protect another kernel's compilation.
-Future recovery kernels will set these options explicitly. Enabling reassociation
+The recovery kernels set these options explicitly. Enabling reassociation
 or contraction invalidates the error-free arithmetic assumptions.
 
 Homogeneous determinants use original coordinates directly. They do not first
@@ -43,9 +43,15 @@ float64 range. This argument does not extend to arbitrary float64 input sites.
 Expansions reserve 64 float64 components and compress longer intermediate sums.
 Every append checks capacity. The implementation deliberately reports a capacity
 failure rather than relying on a claim that every possible input must fit. The
-current path evaluates all determinant terms; adaptive filters and construction
-recovery are subsequent work. It must not be mistaken for a fast general-purpose
-Delaunay predicate replacement already used by the library.
+exact fallback evaluates all determinant terms. The optional
+`_filtered_predicates` module first evaluates a float64 center/error ball for
+each arithmetic operation, accepting a sign only when the ball excludes zero
+(or is exactly zero). It falls back to these expansions otherwise. A rounded
+normal operation's absolute error is bounded by `2^-52 * abs(result)`; positive
+error sums/products receive additional outward padding. The finite float32
+input and degree-five arithmetic restriction keeps intermediate values in
+float64 range. Tests independently check that the rational determinant lies in
+the reported ball, including extreme bit patterns and cancellation.
 
 ## Validation
 
@@ -69,7 +75,7 @@ compute-sanitizer --tool memcheck --padding 32 --error-exitcode 99 \
   python -m benchmarks.memcheck -- -q tests/test_predicates.py
 ```
 
-Construction still needs a deterministic candidate-generation/recovery policy,
-certification against original positions and weights, and complete mesh
-validation. Exact final checks by themselves do not resolve failed cell
-construction or establish the overall VTM goal.
+The [optional constructor](delaunay-recovery.md) adds finite candidate recovery,
+original-coordinate certification, and consistent symbolic lifting for ordinary
+Delaunay meshes. Weighted regular recovery remains outside its scope. These
+components do not by themselves establish the overall VTM goal.

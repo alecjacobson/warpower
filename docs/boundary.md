@@ -99,7 +99,7 @@ The internal `warpower._vtm.VTMWorkspace` combines these evolving boundary roles
 with uniform interior ODT displacements, reconstruction, device backtracking,
 and complete point/connectivity rollback. It is not yet exported as the public
 full-mesher API: initial sampling, graded interior energy, refinement, and
-remaining numerical recovery are still under development. The independent
+the full public API are still under development. The independent
 [domain extractor](extraction.md) can now consume its full-hull output in the
 same captured loop.
 
@@ -116,10 +116,11 @@ and exterior of other nonconvex domains. Do not use those outputs as a finished
 domain mesh before applying `ExtractionWorkspace`. `termination=2` means exhausted backtracking and
 restoration of the last valid state; it is not convergence.
 
-Sharp domains require boundary-aware initialization. Snapping only cube corners
-can produce cospherical square facets that the current constructor rejects
-([#32](https://github.com/alecjacobson/warpower/issues/32)). The cube integration
-example explicitly performs one complete boundary fitting pass before the core,
-which provides surface/crease sites as well as corners. This removes that
-particular initial degeneracy; arbitrary degenerate inputs remain a separate
-robustness requirement. Failures publish a zero tetrahedron count.
+The core now uses [exact-certified Delaunay recovery](delaunay-recovery.md) by
+default. It can recover the cospherical cube-face configuration produced by
+snapping only the eight corners. The cube integration example also demonstrates
+a complete boundary fitting pass before optimization, supplying surface/crease
+sites as well as corners. Finite construction recovery can still exhaust its
+budget; failures publish a zero tetrahedron count. The explicit
+`certified_delaunay=False` option selects the earlier floating-point constructor
+for comparisons. Existing boundary benchmark records predate this change.

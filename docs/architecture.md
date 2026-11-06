@@ -241,6 +241,13 @@ marks poor-element vertices, and expands one neighbor ring in separate device
 passes. Masked updates and an additional retained-quality guard share the existing
 reconstruction/backtracking mechanism; default kernels and graph work are unchanged.
 
+The optional [boundary-jitter workspace](jitter.md) searches a tangent disk at a
+surface vertex of a poor tetrahedron. Fixed buffers hold the original state and
+device-seeded proposals. Each trial is reconstructed and certified; retained
+quality, boundary fitting, topology counts, and volume guards determine whether
+it commits or restores the original mesh. Corners and crease sites stay fixed.
+This separate stage adds no work to the standalone geometry or default VTM paths.
+
 Further worst-element improvement, the full mesher API, and performance work remain tracked in
 the [full VTM implementation plan](vtm.md). An energy decrease alone does not
 establish good worst-element quality or a CPU performance advantage.

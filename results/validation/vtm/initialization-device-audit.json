@@ -1,0 +1,30 @@
+{
+  "scope": "Three warmed producer/domain/automatic-sizing/sampling/consumer replays; one final synchronization outside geometry",
+  "gpu_kernel_activities": 684,
+  "gpu_memset_activities": 27,
+  "gpu_memcpy_activities": 6,
+  "gpu_memcpy_kinds": {
+    "CUDA_MEMCPY_KIND_DTOD": 6
+  },
+  "cuda_api_calls": {
+    "cuCtxSynchronize": 1,
+    "cuProfilerStart": 1,
+    "cudaGraphLaunch_v10000": 3,
+    "cudaStreamIsCapturing_v10000": 1
+  },
+  "dot_node_types": {
+    "KERNEL": 456,
+    "MEMCPY": 28,
+    "MEMSET": 99,
+    "CONDITIONAL": 59
+  },
+  "dot_copy_kinds": {
+    "DtoD (DEVICE to DEVICE)": 28
+  },
+  "copy_trace_limit": "Nsight may omit graph copy activity records; both observed copy kinds and all DOT copy nodes are checked for device-to-device direction.",
+  "dot_sha256": "fbaa94b61fa81a6540cd620f5fb465842c9f9613ad093358a2952599f61a2701",
+  "sqlite_sha256": "16299b631d8c8e06463683c324e09df11cf58cff3b2866ab4438bc26d549c777",
+  "record_command": "From .work/vtm/initialization-wheel-run: OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 PYTHONPATH=/home/horde/projects/power-diagram/.work/vtm/initialization-wheel-install nsys profile --trace=cuda --cuda-graph-trace=node --cuda-event-trace=false --capture-range=cudaProfilerApi --capture-range-end=stop --force-overwrite=true -o /home/horde/projects/power-diagram/.work/vtm/initialization-loop /home/horde/projects/power-diagram/.venv/bin/python smoke.py --profile",
+  "scope_details": "1000 sites; cube with eight control vertices; device producer changes boundary scale, device seed advances, consumer reduces active points; installed wheel sources byte-identical to PR runtime",
+  "smoke_script_sha256": "0e5434d964c48c281f2246b2ede0e1472c845e0e7b73652530b42bd1f963a121"
+}

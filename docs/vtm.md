@@ -94,9 +94,9 @@ error. Both compose in a captured producer/consumer loop. The optional
 [certified Delaunay constructor](delaunay-recovery.md) handles recovered
 candidates with exact original-input certification and explicit finite failure.
 The [sampled sizing layer](sizing.md) supplies device Lipschitz extension and
-graded interior/boundary updates. Automatic feature-size estimation,
-initialization, refinement, and the final public mesher API remain necessary to
-complete the goal.
+graded interior/boundary updates, pole-based automatic feature-size estimates,
+and fixed-budget device initial sampling. Refinement, the final public mesher
+API, and measured CPU outperformance remain necessary to complete the goal.
 
 Additional findings are tracked in
 [#42](https://github.com/alecjacobson/warpower/issues/42) (old-connectivity line-search stalls),

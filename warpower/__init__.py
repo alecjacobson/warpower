@@ -15,6 +15,7 @@ __all__ = [
     "SizingField",
     "SizingQueryWorkspace",
     "SurfaceDomain",
+    "VariationalMeshingWorkspace",
     "delaunay_tetrahedra",
     "power_diagram",
     "regular_tetrahedra",
@@ -23,6 +24,10 @@ __all__ = [
 
 
 def __getattr__(name):
+    if name == "VariationalMeshingWorkspace":
+        from ._mesher import VariationalMeshingWorkspace
+
+        return VariationalMeshingWorkspace
     if name == "AutomaticSizingWorkspace":
         from ._automatic_sizing import AutomaticSizingWorkspace
 

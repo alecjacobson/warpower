@@ -57,7 +57,16 @@ def main():
     parser.add_argument("--n", type=int, default=1000)
     parser.add_argument("--initial", type=int, default=256)
     parser.add_argument("--seed", type=int, default=2026)
-    parser.add_argument("--subdivisions", type=int, default=4)
+    parser.add_argument(
+        "--subdivisions",
+        type=int,
+        help="Surface quadrature subdivisions (20 for thin-hand, otherwise 4)",
+    )
+    parser.add_argument(
+        "--crease-subdivisions",
+        type=int,
+        help="Crease quadrature subdivisions (20 for thin-hand, otherwise 4)",
+    )
     parser.add_argument("--quality-rounds", type=int, default=4)
     parser.add_argument("--automatic-sizing", action="store_true")
     parser.add_argument(
@@ -70,8 +79,15 @@ def main():
     )
     parser.add_argument("--output", type=Path, required=True, help="Output directory")
     args = parser.parse_args()
+    default_subdivisions = 20 if args.case == "thin-hand" else 4
+    if args.subdivisions is None:
+        args.subdivisions = default_subdivisions
+    if args.crease_subdivisions is None:
+        args.crease_subdivisions = default_subdivisions
     if args.n < 4 or args.initial < 4 or args.repeats < 0:
         parser.error("Require n>=4, initial>=4, repeats>=0")
+    if min(args.subdivisions, args.crease_subdivisions) < 1:
+        parser.error("Quadrature subdivisions must be positive")
     if args.automatic_sizing and args.case.startswith("graded-"):
         parser.error("Use either the prescribed graded case or --automatic-sizing")
     points, faces = surface(args.case, args.input)
@@ -80,7 +96,12 @@ def main():
     wp.init()
     quota = cpu_quota_snapshot()
     start = time.perf_counter()
-    domain = SurfaceDomain(points, faces, surface_subdivisions=args.subdivisions)
+    domain = SurfaceDomain(
+        points,
+        faces,
+        surface_subdivisions=args.subdivisions,
+        crease_subdivisions=args.crease_subdivisions,
+    )
     sizing = None
     if args.case.startswith("graded-"):
         # Relative sizes from 0.35 on the left to at most1 on the right.
@@ -139,6 +160,8 @@ def main():
         warp=wp.__version__,
         input_points=len(points),
         input_faces=len(faces),
+        surface_quadrature_capacity=len(domain.surface_points),
+        crease_quadrature_capacity=len(domain.crease_points),
         input_off_sha256=hashlib.sha256((args.output / "input.off").read_bytes()).hexdigest(),
         setup_seconds=setup_seconds,
         first_replay_wall_seconds=first_seconds,

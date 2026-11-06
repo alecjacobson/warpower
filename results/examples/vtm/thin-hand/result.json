@@ -1,0 +1,167 @@
+{
+  "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+  "parameters": {
+    "case": "thin-hand",
+    "input": null,
+    "n": 1000,
+    "initial": 256,
+    "seed": 2026,
+    "subdivisions": 20,
+    "crease_subdivisions": 20,
+    "quality_rounds": 4,
+    "automatic_sizing": false,
+    "repeats": 3,
+    "independent_quality": true,
+    "output": "../hand-gallery-final"
+  },
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "input_points": 46,
+  "input_faces": 88,
+  "surface_quadrature_capacity": 105600,
+  "crease_quadrature_capacity": 10560,
+  "input_off_sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+  "setup_seconds": 1.1397585533559322,
+  "first_replay_wall_seconds": 16.41916998103261,
+  "first_replay_gpu_ms": 16418.923828125,
+  "additional_replay_gpu_ms": [
+    16275.494140625,
+    16270.9296875,
+    16275.23046875
+  ],
+  "median_additional_replay_ms": 16275.23046875,
+  "cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "setup_cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "first_replay_cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "additional_replays_cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "valid": 1,
+  "error": 0,
+  "status": 1,
+  "counts": [
+    1000,
+    5529,
+    3242,
+    1626
+  ],
+  "topology": [
+    1,
+    1,
+    0,
+    2
+  ],
+  "rounds": [
+    4,
+    2,
+    4
+  ],
+  "steps": [
+    80,
+    25
+  ],
+  "moves": [
+    4,
+    0
+  ],
+  "last_errors": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "quality": {
+    "radius_ratio_percentiles": {
+      "0": 0.09352289437710375,
+      "1": 0.32499884632507425,
+      "5": 0.5774246183575668,
+      "50": 0.8543456390861242,
+      "95": 0.9585420086638178,
+      "100": 0.9975849913787375
+    },
+    "volume": 1.0422081268489227,
+    "relative_volume_error": 0.0011605665572021779,
+    "directed_surface_rms": 0.001741293284010306
+  },
+  "independent_quality": {
+    "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+    "sites": 1000,
+    "referenced_vertices": 1000,
+    "tetrahedra": 3242,
+    "boundary_triangles": 1626,
+    "components": 1,
+    "boundary_euler": 2,
+    "volume": 1.0422081268489216,
+    "input_volume": 1.0409999770894647,
+    "relative_volume_error": 0.0011605665572009816,
+    "mean_radius_ratio": 0.8214515054147905,
+    "radius_ratio_percentiles": {
+      "0": 0.0935228943771039,
+      "1": 0.324998846325074,
+      "5": 0.5774246183575668,
+      "50": 0.8543456390861244,
+      "95": 0.9585420086638176,
+      "100": 0.9975849913787387
+    },
+    "dihedral_degrees_min": 4.618891168217468,
+    "dihedral_degrees_max": 172.2142195568803,
+    "output_to_input": {
+      "area": 13.14280621801895,
+      "squared_integral": 3.9850332974455835e-05,
+      "rms": 0.0017412932840103054,
+      "max_sample": 0.05049706747134525
+    },
+    "input_to_output": {
+      "area": 13.142227057326567,
+      "squared_integral": 6.405677736500614e-06,
+      "rms": 0.0006981489028741439,
+      "max_sample": 0.028005039958049077
+    },
+    "two_sided_area_weighted_rms": 0.001326568931656226,
+    "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.034462032697817176
+  }
+}

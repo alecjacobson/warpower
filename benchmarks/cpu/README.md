@@ -47,6 +47,28 @@ and orientations can differ between implementations. Degenerate inputs can have
 multiple valid Delaunay triangulations, so exact set equality alone is not a
 suitable correctness criterion for those cases.
 
+`check_delaunay.cpp` independently checks a supplied full-hull triangulation
+without requiring CGAL to choose the same cospherical diagonals. Compile it with:
+
+```bash
+g++ -O3 -std=c++17 -frounding-math -I/path/to/CGAL-6.2.1/include \
+  benchmarks/cpu/check_delaunay.cpp -lgmp -lmpfr -o results/local/check-delaunay
+results/local/check-delaunay results/local/points.txt results/local/tets.txt
+```
+
+The two inputs use the point and tetrahedron formats described above. Use
+`full_tetrahedra` from a gallery NPZ export: the nonconvex material subset is
+not the full convex hull. On the original coordinates, CGAL's exact predicates
+check positive cell orientation, every site's exclusion from each open
+circumsphere (cospherical ties are allowed), paired-face orientation, and
+supporting hull planes. The program also checks cell uniqueness, distinct-site
+coverage and hull-edge incidence. It prints JSON on success and exits nonzero
+on malformed input or failed checks. This deliberately exhaustive O(sites ×
+cells) check is an offline validator for small examples, not a meshing benchmark
+or part of the device pipeline. The
+[thin-hand check record](../../results/examples/vtm/thin-hand/export-and-native-check.json)
+contains the full-hull result and positive/negative fixture inputs and outcomes.
+
 `surface_intersections.cpp` and `triangle_contact.cpp` are additional independent
 CGAL 6.2.1 references for [surface-contact validation](../../docs/domains.md).
 Both use `Exact_predicates_exact_constructions_kernel`. Compile with the same

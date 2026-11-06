@@ -13,19 +13,17 @@ From a source checkout:
 pip install -e '.[dev,bench]'
 python -m examples.vtm_gallery --case torus --n 1000 --output results/local/torus
 python -m examples.vtm_gallery --case graded-torus --n 1000 --output results/local/graded-torus
-python -m examples.vtm_gallery --case thin-hand --n 2000 --output results/local/thin-hand
+python -m examples.vtm_gallery --case thin-hand --n 1000 --output results/local/thin-hand
 python -m examples.vtm_gallery --case cavity --n 1000 --output results/local/cavity
 python -m examples.vtm_gallery --case disconnected --n 1000 --output results/local/disconnected
 ```
 
-The uniform and prescribed-graded torus have completed full solves with
-independent quality and topology checks. The broader gallery is still tracked
-in [issue #39](https://github.com/alecjacobson/warpower/issues/39). The thin hand
-currently encounters a slow exact Delaunay recovery after refinement
-([issue #93](https://github.com/alecjacobson/warpower/issues/93)); a 1,000-site
-attempt exceeded ten minutes without a completed mesh. The cavity and separated
-components have validated input surfaces, but their full gallery solves have
-not yet been validated. These commands expose those outstanding cases too.
+The uniform and prescribed-graded torus and the thin hand have completed full
+solves with independent quality and topology checks. The broader gallery is
+still tracked in [issue #39](https://github.com/alecjacobson/warpower/issues/39).
+The cavity and separated components have validated input surfaces, but their
+full gallery solves have not yet been validated. These commands expose those
+outstanding cases too.
 
 The thin hand is a new extruded palm with five narrow fingers and sharp corners,
 not the scanned hand from Alliez et al. The torus tests nonconvex topology;
@@ -134,4 +132,65 @@ Reproduce the measured configurations with:
 ```bash
 python -m examples.vtm_gallery --case torus --n 1000 --repeats 3 --independent-quality --output results/local/torus
 python -m examples.vtm_gallery --case graded-torus --n 1000 --repeats 3 --independent-quality --output results/local/graded-torus
+```
+
+## Published thin-hand result
+
+The procedural hand has 46 input vertices, 88 triangles, a thin palm and five
+sharp-edged fingers. It exercises thin geometry and feature fitting inspired by
+the paper; it is not a reproduction of the paper's scanned hand. The example
+starts with 256 sites and reaches 1,000 sites after four growth rounds. Two
+extraction-recovery rounds and four quality rounds produce a connected material
+mesh with one closed boundary, no cavity and Euler characteristic two.
+
+| Measurement | Thin hand |
+| --- | ---: |
+| Full-hull / material tetrahedra | 5,529 / 3,242 |
+| Boundary triangles | 1,626 |
+| Minimum / mean / median radius ratio, 3r/R | 0.09352 / 0.82145 / 0.85435 |
+| First percentile radius ratio | 0.32500 |
+| Minimum / maximum dihedral angle | 4.62° / 172.21° |
+| Two-sided sampled boundary RMS / box diagonal | 0.03446% |
+| Relative volume error | +0.1161% |
+| Complete resident solve, median of 3 additional replays | 16.275 s |
+| First complete replay | 16.419 s |
+| Setup, including graph construction | 1.140 s |
+
+These measurements use an NVIDIA L40, Warp 1.19.0 and runtime commit `cf35509`.
+Four complete captured executions finished, with zero observed CPU quota
+throttling in setup or timing windows. The saved final mesh passes independent
+NumPy quality/incidence checks. CGAL 6.2.1 exact predicates additionally check
+every full-hull cell's original-coordinate orientation and empty circumsphere,
+face pairing, and hull support against every site. The VTU round trip exactly
+reproduces the NPZ coordinates, connectivity and quality. CGAL and NumPy run
+offline after GPU timing; they are not runtime dependencies or CPU fallbacks.
+These results do not establish a CPU speedup, a prescribed minimum quality of
+0.3, or a maximum boundary-distance guarantee.
+
+![Thin-hand centroid cutaway](../results/examples/vtm/thin-hand/cutaway.png)
+
+Download the [material mesh](../results/examples/vtm/thin-hand/mesh.vtu),
+[full array export](../results/examples/vtm/thin-hand/mesh.npz),
+[raw measurements](../results/examples/vtm/thin-hand/result.json) and
+[independent check record](../results/examples/vtm/thin-hand/export-and-native-check.json).
+Input/output surfaces and hashes are also included in the gallery and its
+[provenance manifest](../results/examples/vtm/provenance.json).
+
+The thin-hand runner defaults to surface and crease subdivisions **20/20**;
+other examples retain **4/4**, and explicit arguments override either default.
+This increases quadrature density without subdividing the input geometry.
+It reserves 105,600 surface samples and 10,560 crease-sample slots. On the same
+runtime and 1,000-site target, both 4/4 and 20/4 fail material-boundary validation
+and publish zero mesh counts. Increasing surface sampling alone is insufficient.
+The [coarse diagnostic records](../results/examples/vtm/thin-hand/coarse-comparison.json)
+retain those failures; their times are not comparable clean benchmark samples.
+General coarse-boundary recovery remains open in
+[issue #112](https://github.com/alecjacobson/warpower/issues/112), and representable
+boundary updates in [issue #117](https://github.com/alecjacobson/warpower/issues/117).
+
+Reproduce the measured configuration and preview with:
+
+```bash
+python -m examples.vtm_gallery --case thin-hand --n 1000 --subdivisions 20 --crease-subdivisions 20 --repeats 3 --independent-quality --output results/local/thin-hand
+python -m examples.vtm_render results/local/thin-hand/mesh.npz --axis z --fraction 0.5 --title 'Thin hand · variational tetrahedral mesh' --output results/local/thin-hand/cutaway.png
 ```

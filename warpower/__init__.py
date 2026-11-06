@@ -3,12 +3,14 @@
 from ._api import Diagram, power_diagram, voronoi_diagram
 
 __all__ = [
+    "AutomaticSizingWorkspace",
     "BoundaryWorkspace",
     "DelaunayWorkspace",
     "Diagram",
     "DiagramWorkspace",
     "DomainQueryWorkspace",
     "ExtractionWorkspace",
+    "InitialSamplingWorkspace",
     "ODTWorkspace",
     "SizingField",
     "SizingQueryWorkspace",
@@ -21,6 +23,14 @@ __all__ = [
 
 
 def __getattr__(name):
+    if name == "AutomaticSizingWorkspace":
+        from ._automatic_sizing import AutomaticSizingWorkspace
+
+        return AutomaticSizingWorkspace
+    if name == "InitialSamplingWorkspace":
+        from ._sampling import InitialSamplingWorkspace
+
+        return InitialSamplingWorkspace
     if name in ("SizingField", "SizingQueryWorkspace"):
         from . import _sizing
 

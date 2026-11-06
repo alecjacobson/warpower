@@ -223,6 +223,13 @@ compose in capture. The internal VTM core optionally uses centroid-evaluated
 inverse-cubed sizing for interior contributions and shares the field with its
 surface and crease quadrature. The uniform standalone ODT kernel is unchanged.
 
-Automatic sizing, initialization, refinement, and further performance work remain
-tracked in the [full VTM implementation plan](vtm.md). An energy decrease alone does not
+[`AutomaticSizingWorkspace`](sizing.md#automatic-feature-size-estimates) derives
+sampled feature sizes from certified control-site Delaunay cells and finite
+Voronoi poles. [`InitialSamplingWorkspace`](sizing.md#device-initial-sampling)
+uses a conservative grid proposal and bounded rejection to generate exactly the
+requested number of unique interior sites at uniform or inverse-cubed sizing
+density. Both are separate lazy APIs with fixed storage and captured refits/runs.
+
+Refinement, the full mesher API, and further performance work remain tracked in
+the [full VTM implementation plan](vtm.md). An energy decrease alone does not
 establish good worst-element quality or a CPU performance advantage.

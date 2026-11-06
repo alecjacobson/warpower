@@ -192,7 +192,13 @@ closest-point and oriented-ray queries, manifold/intersection validation, and
 surface/crease/corner quadrature. `DomainQueryWorkspace` composes these queries
 with upstream and downstream device kernels. See [domain API](domains.md).
 
-This is the fixed-boundary optimizer foundation. Boundary fitting, graded sizing,
-refinement, nonconvex extraction, and stronger numerical recovery remain tracked
+The independent [`BoundaryWorkspace`](boundary.md) rebuilds a site hierarchy,
+assigns surface/crease quadrature, and accumulates weighted centroid targets.
+Device conflict resolution reserves distinct corner sites; crease and surface
+membership evolves with the positions. An internal VTM core combines these
+targets with interior ODT, reconstruction, and complete rollback. Boundary-first
+acceptance is a heuristic because fitting changes the optimization domain.
+
+Graded sizing, refinement, nonconvex extraction, and stronger numerical recovery remain tracked
 in the [full VTM implementation plan](vtm.md). An energy decrease alone does not
 establish good worst-element quality or a CPU performance advantage.

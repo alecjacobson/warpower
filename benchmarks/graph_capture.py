@@ -18,6 +18,9 @@ def main():
         "--optimizer", action="store_true", help="Audit three ODT iterations per replay"
     )
     parser.add_argument("--domain", action="store_true", help="Analyze a benchmarks.domain trace")
+    parser.add_argument(
+        "--vtm-core", action="store_true", help="Analyze a benchmarks.vtm_core trace"
+    )
     args = parser.parse_args()
     if args.analyze:
         database = sqlite3.connect(args.analyze)
@@ -51,7 +54,10 @@ def main():
             )
         report = {
             "scope": (
-                "Three warmed replays of a deforming surface/refit/query/consumer graph; "
+                "Three warmed changing-input producer/boundary/interior VTM/full-hull consumer "
+                "replays; one final synchronization outside geometry"
+                if args.vtm_core
+                else "Three warmed replays of a deforming surface/refit/query/consumer graph; "
                 "one final synchronization outside geometry"
                 if args.domain
                 else "Three warmed replays of a changing 1000-site producer/ODT/consumer graph, "
@@ -80,6 +86,11 @@ def main():
             args.output.write_text(json.dumps(report, indent=2) + "\n")
         print(json.dumps(report, indent=2))
         return
+
+    if args.domain or args.vtm_core:
+        parser.error(
+            "Record with benchmarks.domain or benchmarks.vtm_core; use this flag with --analyze"
+        )
 
     import numpy as np
     import torch

@@ -85,7 +85,11 @@ It is not yet the full boundary-fitted mesher or a CPU speedup result.
 The [surface-domain layer](domains.md) provides captured refits, geometric queries,
 device input validation, and surface/feature quadrature. It supports nonconvex
 boundaries, cavities, and disconnected components independently of tetrahedral
-meshing. Boundary fitting and the full pipeline remain subsequent milestones.
+meshing. The independent [boundary fitter](boundary.md) now provides evolving
+surface/crease membership and exact corner anchors. Its integration with interior
+ODT runs in a captured loop, with device backtracking and rollback. The internal
+core still returns full-hull connectivity; the remaining stages are necessary
+before it can be used as a complete domain mesher.
 
 Additional findings are tracked in
 [#42](https://github.com/alecjacobson/warpower/issues/42) (old-connectivity line-search stalls),
@@ -94,3 +98,6 @@ Additional findings are tracked in
 Domain work also uncovered
 [#47](https://github.com/alecjacobson/warpower/issues/47) (native refit allocations)
 and [#48](https://github.com/alecjacobson/warpower/issues/48) (surface query performance).
+Boundary work also exposed [#50](https://github.com/alecjacobson/warpower/issues/50)
+(native radix-sort capture allocations), resolved by rebuilding in an input-validity
+conditional graph whose scratch storage belongs to capture setup.

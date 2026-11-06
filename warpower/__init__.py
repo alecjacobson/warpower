@@ -3,6 +3,7 @@
 from ._api import Diagram, power_diagram, voronoi_diagram
 
 __all__ = [
+    "BoundaryWorkspace",
     "Diagram",
     "DiagramWorkspace",
     "DomainQueryWorkspace",
@@ -16,6 +17,10 @@ __all__ = [
 
 
 def __getattr__(name):
+    if name == "BoundaryWorkspace":
+        from ._boundary import BoundaryWorkspace
+
+        return BoundaryWorkspace
     if name in ("SurfaceDomain", "DomainQueryWorkspace"):
         from . import _domain
 

@@ -158,3 +158,20 @@ the complete tetrahedral dual.
 
 The [validation report](tetrahedra-validation.md) records independent mesh
 comparisons and paired default-performance checks.
+
+## Captured device execution
+
+The optional [`DiagramWorkspace`](graphs.md) API owns persistent arrays and
+captures construction with CUDA conditional nodes. Scalar counts, input errors,
+retry decisions, bounding-box expansion, and mesh validation outcomes remain on
+the device. Output capacities are fixed at setup; GPU counts delimit their valid
+prefixes. Both counts and CSR offsets are cleared before consumers run if an
+error occurs.
+
+This path reuses the eager hierarchy, clipper, and geometric predicates, with
+device-count traversal and validation variants. Failed cells and inconsistent
+adjacency trigger conditional recovery graphs. A preallocated hierarchical Warp
+tile scan replaces the native allocating scan in conditional branches. Optional
+tetrahedralization retains its last successful domain scale as a starting point
+and validates the current mesh on every replay. The original eager construction
+kernels are unchanged.

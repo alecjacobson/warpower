@@ -73,7 +73,7 @@ def main():
         ["git", "ls-tree", "-r", "--name-only", args.baseline_ref, "warpower"], text=True
     ).splitlines()
     for path in paths:
-        if path.endswith(".py") and path != "warpower/_api.py":
+        if path.endswith(".py") and path not in ("warpower/_api.py", "warpower/__init__.py"):
             old = subprocess.check_output(["git", "show", f"{args.baseline_ref}:{path}"])
             assert old == Path(path).read_bytes(), path
             kernel_hashes[path] = hashlib.sha256(old).hexdigest()
@@ -82,6 +82,7 @@ def main():
     sys.modules[baseline.__name__] = baseline
     exec(compile(source, "<baseline-api>", "exec"), baseline.__dict__)
     assert "warpower._tetrahedra" not in sys.modules
+    assert "warpower._graph" not in sys.modules
     wp.set_mempool_release_threshold("cuda:0", 32 * 1024**3)
     records = []
     for distribution, n, weighted in [
@@ -142,6 +143,7 @@ def main():
             flush=True,
         )
     assert "warpower._tetrahedra" not in sys.modules
+    assert "warpower._graph" not in sys.modules
     report = {
         "baseline_ref": args.baseline_ref,
         "warmups_per_implementation": 5,

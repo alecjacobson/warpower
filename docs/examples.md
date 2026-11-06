@@ -58,3 +58,14 @@ input triangles. That brute-force validation may be slow on large surfaces; it
 is excluded from replay timing. Boundary RMS uses three quadrature samples per
 triangle and is not a Hausdorff bound. Invalid solves save diagnostics and do not
 export an empty mesh as a successful result.
+
+Create a static cutaway preview from an exported mesh:
+
+```bash
+python -m examples.vtm_render results/local/torus/mesh.npz --output results/local/torus/cutaway.png
+```
+
+The preview removes whole tetrahedra according to their centroid coordinate;
+it is not a geometric clipping operation on the saved mesh. Face colors show
+radius ratio with directional lighting. Mesh generation and export do not
+require the renderer.

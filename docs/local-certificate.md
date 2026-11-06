@@ -97,3 +97,20 @@ certificate; global statistics retain their previous interpretation. The choice
 of the first sixteen faces is a performance heuristic only: any one verified
 anchor suffices, and no anchor falls back. Face output order is unspecified, so
 branch choice can vary without changing the acceptance condition.
+
+## Relation to published results
+
+The local-to-global lifting step is the standard Delaunay Lemma, including its
+weighted form; see Shewchuk, *General-Dimensional Constrained Delaunay and
+Constrained Regular Triangulations, I*, §3.2, Theorem 13
+([author manuscript](https://people.eecs.berkeley.edu/~jrs/papers/cdtj1.pdf)).
+Its premise is a triangulation, so it cannot by itself validate an arbitrary
+candidate collection. The coverage argument above is the additional obligation
+for this implementation.
+
+Lipman's *Bijective Mappings of Meshes with Boundary and the Degree in Mesh
+Processing* develops degree-based sufficient conditions for orientation-preserving
+simplicial maps ([paper](https://arxiv.org/abs/1310.0955)). Its stated setting is a
+manifold mesh with boundary. We do not assume that unverified candidates already
+form such a mesh, or cite that theorem as a substitute for the chain-coverage
+argument here.

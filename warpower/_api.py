@@ -20,6 +20,7 @@ class Diagram:
     offsets: object
     status: object
     diagnostics: dict = field(default_factory=dict)
+    tetrahedra: object = None
 
 
 def _points_array(points):
@@ -372,11 +373,46 @@ def _build(
     return result
 
 
-def voronoi_diagram(points, **kwargs):
-    return _build(points, **kwargs)
+def _with_tetrahedra(result, points, weights, kwargs):
+    # Keep all imports, allocations, and GPU work for meshing behind the opt-in.
+    from ._tetrahedra import build
+
+    p, torch_output = _points_array(points)
+    if torch_output:
+        import torch
+
+        stream = wp.stream_from_torch(torch.cuda.current_stream(points.device))
+    else:
+        stream = wp.get_stream(p.device)
+    with wp.ScopedStream(stream):
+        w = _weights_array(weights, len(p), p.device)
+        leaf_size = kwargs.get("leaf_size", -1)
+        tetrahedra, extra = build(
+            p, w, chunk_size=kwargs.get("chunk_size"), leaf_size=4 if leaf_size == -1 else leaf_size
+        )
+        wp.synchronize_stream(stream)
+        if torch_output:
+            tetrahedra = wp.to_torch(tetrahedra)
+    return Diagram(
+        result.adjacency, result.offsets, result.status, {**result.diagnostics, **extra}, tetrahedra
+    )
 
 
-def power_diagram(points, weights, **kwargs):
+def voronoi_diagram(points, *, return_tetrahedra=False, **kwargs):
+    if not isinstance(return_tetrahedra, (bool, np.bool_)):
+        raise TypeError("return_tetrahedra must be a boolean")
+    result = _build(points, **kwargs)
+    if return_tetrahedra:
+        result = _with_tetrahedra(result, points, None, kwargs)
+    return result
+
+
+def power_diagram(points, weights, *, return_tetrahedra=False, **kwargs):
     if weights is None:
         raise TypeError("power_diagram requires weights")
-    return _build(points, weights, **kwargs)
+    if not isinstance(return_tetrahedra, (bool, np.bool_)):
+        raise TypeError("return_tetrahedra must be a boolean")
+    result = _build(points, weights, **kwargs)
+    if return_tetrahedra:
+        result = _with_tetrahedra(result, points, weights, kwargs)
+    return result

@@ -8,7 +8,9 @@ cases retain the original-coordinate symbolic predicates.
 import warp as wp
 
 from . import _filtered_predicates as fp
-from ._cell import Scratch64, encode, plane_at
+from . import _halfspace_predicates as hp
+from . import _symbolic_bounds as sb
+from ._cell import Scratch64, encode, plane_at, swap_positions
 from ._delaunay_certificate import symbolic_sphere
 from ._halfspace_predicates import classify
 
@@ -27,7 +29,7 @@ class SymbolicCell:
 
 
 @wp.func(inline=True)
-def init_symbolic(s: Scratch64, slot: int):
+def init_symbolic(s: Scratch64, slot: int, bounds: wp.array[wp.vec3]):
     cell = SymbolicCell()
     cell.base = (slot // 32) * (32 * s.capacity) + slot % 32
     cell.nv = 8
@@ -43,6 +45,15 @@ def init_symbolic(s: Scratch64, slot: int):
     s.vertices[cell.base + 32 * 5] = encode(4, 0, 3)
     s.vertices[cell.base + 32 * 6] = encode(2, 4, 1)
     s.vertices[cell.base + 32 * 7] = encode(4, 3, 1)
+    for k in range(8):
+        at = cell.base + 32 * k
+        v = s.vertices[at]
+        position = wp.vec4d(0.0)
+        for j in range(3):
+            plane = plane_at(v, j)
+            position[plane // 2] = wp.float64(bounds[plane % 2][plane // 2])
+        s.positions[at] = position
+        s.cartesian[at] = wp.vec3d(0.0)
     return cell
 
 
@@ -93,6 +104,7 @@ def clip_symbolic(
     cell.changed = 0
     if cell.status != 0 or i == j:
         return cell
+    query_plane = hp.row(points, bounds, i, j, 0, -1)
     removed = int(0)
     k = int(0)
     while k < cell.nv:
@@ -101,11 +113,12 @@ def clip_symbolic(
         ia = s.neighbors[cell.base + 32 * plane_at(planes, 0)]
         ib = s.neighbors[cell.base + 32 * plane_at(planes, 1)]
         ic = s.neighbors[cell.base + 32 * plane_at(planes, 2)]
-        relation = fp.predicate(fp.scalar(wp.float64(0.0)))
-        if ia >= 0 and ib >= 0 and ic >= 0:
-            relation = site_relation(points, i, ia, ib, ic, j)
-        else:
-            relation = classify(points, bounds, i, wp.vec4i(ia, ib, ic, j))
+        relation = sb.relation(s.positions[at], s.cartesian[at], query_plane)
+        if relation.valid == 0:
+            if ia >= 0 and ib >= 0 and ic >= 0:
+                relation = site_relation(points, i, ia, ib, ic, j)
+            else:
+                relation = classify(points, bounds, i, wp.vec4i(ia, ib, ic, j))
         if relation.valid == 0:
             cell.status = 6
             return cell
@@ -115,6 +128,7 @@ def clip_symbolic(
             v = s.vertices[at]
             s.vertices[at] = s.vertices[last]
             s.vertices[last] = v
+            swap_positions(s, at, last)
             removed += 1
         else:
             k += 1
@@ -179,6 +193,7 @@ def clip_symbolic(
             last = cell.base + 32 * (cell.nv + removed - 1)
             s.vertices[at] = s.vertices[last]
             s.vertices[last] = v
+            swap_positions(s, at, last)
             removed -= 1
             vertex = cell.nv
     if first == -1:
@@ -197,6 +212,14 @@ def clip_symbolic(
         v = encode(new_plane, edge, following)
         at = cell.base + 32 * cell.nv
         s.vertices[at] = v
+        ids = wp.vec3i(0)
+        for k in range(3):
+            ids[k] = s.neighbors[cell.base + 32 * plane_at(v, k)]
+        center = sb.centered(sb.vertex_box(points, bounds, i, ids))
+        s.positions[at] = wp.vec4d(
+            center.value[0], center.value[1], center.value[2], wp.float64(0.0)
+        )
+        s.cartesian[at] = center.error
         cell.nv += 1
         edge = following
         iterations += 1

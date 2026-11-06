@@ -43,7 +43,7 @@ def build_cells(
     if tree.owners[i] != i:
         status[i] = 3
         return
-    cell = init_symbolic(scratch, slot)
+    cell = init_symbolic(scratch, slot, bounds)
     cell.lo = wp.vec3d(bounds[0])
     cell.hi = wp.vec3d(bounds[1])
     nodes = wp.zeros(shape=128, dtype=int)

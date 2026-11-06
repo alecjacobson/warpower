@@ -4,6 +4,7 @@ import numpy as np
 import warp as wp
 
 from tests.test_sphere_bounds import det
+from warpower import _halfspace_predicates as hp
 from warpower import _symbolic_bounds as sb
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
@@ -158,3 +159,56 @@ def test_touching_limiting_cell_and_nonfinite_boxes_do_not_prune():
     )
     hi[3, 0] = np.inf
     np.testing.assert_array_equal(evaluate_rejection(lo, hi, p, q, q), [0, 1, 0, 0])
+
+
+@wp.kernel
+def cached_sides(
+    points: wp.array[wp.vec3], bounds: wp.array[wp.vec3], valid: wp.array[int], signs: wp.array[int]
+):
+    i = wp.tid()
+    owner = 5 * i
+    box = sb.vertex_box(points, bounds, owner, wp.vec3i(owner + 1, owner + 2, owner + 3))
+    center = sb.centered(box)
+    value = wp.vec4d(center.value[0], center.value[1], center.value[2], wp.float64(0.0))
+    result = sb.relation(value, center.error, hp.row(points, bounds, owner, owner + 4, 0, -1))
+    valid[i] = result.valid
+    signs[i] = result.sign
+
+
+def test_cached_vertex_plane_filter_matches_rationals_and_defers_exact_ties():
+    rng = np.random.default_rng(6217)
+    checks, filtered, ties = 0, 0, 0
+    for exponent, shift in [(-140, 0), (0, 0), (120, 0), (0, 4096), (100, 4096)]:
+        raw = rng.uniform(-1, 1, (100, 5, 3))
+        raw[::7, 4] = raw[::7, 1]
+        raw[0] = [[-1, -1, -1], [-1, -1, 1], [-1, 1, -1], [1, -1, -1], [1, 1, 1]]
+        points = ((raw + shift) * 2.0**exponent).astype(np.float32)
+        bounds = ((np.array([[-4] * 3, [4] * 3], float) + shift) * 2.0**exponent).astype(np.float32)
+        valid = wp.empty(len(points), dtype=int, device="cuda:0")
+        signs = wp.empty_like(valid)
+        wp.launch(
+            cached_sides,
+            len(points),
+            inputs=[
+                wp.array(points.reshape(-1, 3), dtype=wp.vec3, device=valid.device),
+                wp.array(bounds, dtype=wp.vec3, device=valid.device),
+                valid,
+                signs,
+            ],
+        )
+        for p, accepted, sign in zip(points, valid.numpy(), signs.numpy()):
+            c = intersection(p, bounds, [1, 2, 3])
+            if c is None or not all(
+                F(float(bounds[0, k])) <= c[k] <= F(float(bounds[1, k])) for k in range(3)
+            ):
+                continue
+            row = rational_row(p, bounds, 4)
+            side = sum(x * y for x, y in zip(row[:3], c)) + row[3]
+            checks += 1
+            if side == 0:
+                ties += 1
+                assert accepted == 0
+            if accepted:
+                filtered += 1
+                assert int(sign) == int(side > 0) - int(side < 0)
+    assert checks > 300 and filtered > 200 and ties > 40

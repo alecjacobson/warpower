@@ -5,14 +5,15 @@ A strict separating gap at every limiting vertex persists for sufficiently
 small positive infinitesimals. Uncertain bounds retain the initial box.
 """
 
+from typing import Any
+
 import warp as wp
 
 from . import _filtered_predicates as fp
 from . import _halfspace_predicates as hp
-from ._cell import Scratch64, plane_at
+from ._cell import Scratch64
 from ._delaunay_certificate import cofactor
 from ._sphere_bounds import MIN64, quotient
-from ._symbolic_cell import SymbolicCell
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
 
@@ -73,23 +74,67 @@ def vertex_box(points: wp.array[wp.vec3], bounds: wp.array[wp.vec3], owner: int,
     return result
 
 
+@wp.struct
+class Center:
+    value: wp.vec3d
+    error: wp.vec3d
+
+
+@wp.func
+def centered(box: Box):
+    result = Center()
+    for axis in range(3):
+        lo, hi = box.lower[axis], box.upper[axis]
+        result.value[axis] = wp.float64(0.5) * (lo + hi)
+        # Error of midpoint/radius arithmetic, including possible underflow.
+        error = wp.float64(0.5) * (hi - lo)
+        error += wp.float64(16.0) * fp.EPS * (wp.abs(lo) + wp.abs(hi))
+        result.error[axis] = (
+            error * (wp.float64(1.0) + wp.float64(16.0) * fp.EPS) + wp.float64(16.0) * MIN64
+        )
+    return result
+
+
+@wp.func
+def relation(value: wp.vec4d, error: wp.vec3d, plane: hp.Plane):
+    x, y, z = fp.Ball(), fp.Ball(), fp.Ball()
+    x.value = value[0]
+    x.error = error[0]
+    y.value = value[1]
+    y.error = error[1]
+    z.value = value[2]
+    z.error = error[2]
+    side = fp.plus(
+        fp.plus(fp.times(x, plane.x), fp.times(y, plane.y)), fp.plus(fp.times(z, plane.z), plane.w)
+    )
+    result = fp.predicate(side)
+    result.valid = int(
+        wp.isfinite(side.value)
+        and wp.isfinite(side.error)
+        and wp.abs(side.value) > side.error + wp.float64(16.0) * MIN64
+    )
+    return result
+
+
 @wp.func(inline=False)
 def update(
     scratch: Scratch64,
-    cell: SymbolicCell,
+    cell: Any,
     points: wp.array[wp.vec3],
     bounds: wp.array[wp.vec3],
     owner: int,
 ):
     lo, hi = wp.vec3d(bounds[1]), wp.vec3d(bounds[0])
     for k in range(cell.nv):
-        v = scratch.vertices[cell.base + 32 * k]
-        ids = wp.vec3i(0)
-        for j in range(3):
-            ids[j] = scratch.neighbors[cell.base + 32 * plane_at(v, j)]
-        box = vertex_box(points, bounds, owner, ids)
-        lo = wp.min(lo, box.lower)
-        hi = wp.max(hi, box.upper)
+        at = cell.base + 32 * k
+        value = scratch.positions[at]
+        error = scratch.cartesian[at]
+        for axis in range(3):
+            ball = fp.Ball()
+            ball.value = value[axis]
+            ball.error = error[axis]
+            lo[axis] = wp.min(lo[axis], wp.max(lower(ball), wp.float64(bounds[0][axis])))
+            hi[axis] = wp.max(hi[axis], wp.min(upper(ball), wp.float64(bounds[1][axis])))
     cell.lo = lo
     cell.hi = hi
     return cell

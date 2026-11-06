@@ -279,6 +279,12 @@ class VTMWorkspace:
 
             mesh_type = ReuseDelaunayWorkspace
         mesh_options = {} if certified_delaunay else dict(adjacency=False, return_tetrahedra=True)
+        if certified_delaunay and active_count is not None and len(mesh_points) > 2048:
+            from ._active_delaunay import ActiveDelaunayWorkspace
+
+            mesh_type = ActiveDelaunayWorkspace
+            mesh_options = dict(active_count=active_count)
+            self.reuses_delaunay_cells = True
         self.mesh = mesh_type(
             mesh_points,
             tetrahedra_capacity=tetrahedra_capacity,

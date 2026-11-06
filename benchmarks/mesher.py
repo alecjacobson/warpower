@@ -32,6 +32,7 @@ def main():
         "--case", choices=["cube", "torus", "cavity", "disconnected"], default="torus"
     )
     parser.add_argument("--n", type=int, default=1000)
+    parser.add_argument("--capacity", type=int, help="Reserved site capacity (defaults to --n)")
     parser.add_argument("--initial", type=int, default=256)
     parser.add_argument("--growth-iterations", type=int, default=5)
     parser.add_argument("--polish-iterations", type=int, default=20)
@@ -57,7 +58,8 @@ def main():
     domain = warpower.SurfaceDomain(*surface(args.case), surface_subdivisions=args.subdivisions)
     mesh = warpower.VariationalMeshingWorkspace(
         domain,
-        args.n,
+        args.n if args.capacity is None else args.capacity,
+        target_count=args.n,
         initial_count=args.initial,
         seed=args.seed,
         growth_iterations=args.growth_iterations,
@@ -133,6 +135,12 @@ def main():
         last_bad_extraction=int(mesh.last_bad_extraction.numpy()[0]),
         topology=mesh.topology.numpy().tolist(),
     )
+    if hasattr(mesh.core.mesh, "route_calls"):
+        result["reconstruction_routing"] = dict(
+            capacities=list(mesh.core.mesh.capacities),
+            calls=mesh.core.mesh.route_calls.numpy().tolist(),
+            last_capacity=int(mesh.core.mesh.selected_capacity.numpy()[0]),
+        )
     if result["valid"]:
         result["quality"] = metrics(mesh.extraction)
         result["quality"]["relative_volume_error"] = float(

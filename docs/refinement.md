@@ -3,8 +3,8 @@
 The private `warpower._refinement.RefinementWorkspace` performs one transactional
 Voronoi-center insertion batch. It implements the progressive growth stage in
 [Alliez et al., section 3.6](https://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Alliez05.pdf).
-The public mesher and its complete stage scheduler remain under development in
-[#38](https://github.com/alecjacobson/warpower/issues/38).
+The [public mesher](mesher.md) composes it with initialization, fitting, quality
+improvement, and final extraction.
 
 ```python
 import warp as wp
@@ -34,7 +34,7 @@ contiguous device int32 scalar, and defaults to the point capacity. A device
 producer can change the target between replays. All buffers, including sorting,
 deduplication, and rollback storage, are allocated at setup. Replays use Warp
 kernels, GPU radix sorting/scans, and device conditional graphs; no host geometry,
-readback, allocation, synchronization, or numerical fallback is performed.
+readback, allocation, or synchronization occurs during replay.
 
 ## Candidate selection
 

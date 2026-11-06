@@ -69,8 +69,8 @@ error in the first version; the local-offset calculation addresses that loss.
 
 Only refinement uses the new helper. Independently callable power-diagram,
 Delaunay, ODT, extraction, and fixed-site VTM routines retain their code paths.
-All arithmetic runs in Warp on device; no host predicates, counts, allocations,
-or numerical fallbacks occur during replay.
+All arithmetic and fallbacks run in Warp on device. There are no host geometry
+decisions, count readbacks, or workspace allocations during replay.
 
 Tests compare with independent Python `Fraction` circumcenters and exact
 nearest-even rounding. They cover six real cospherical hand parents, every
@@ -79,5 +79,41 @@ vertex permutation and three scales, 96 finite float32 bit-pattern clouds,
 unrepresentable centers, coplanarity, and nonfinite input. A separate FMA-enabled
 caller checks the filter under both compilation policies. A captured
 producer/consumer loop switches between exact and fast paths, rejects invalid
-input, and recovers. The initial 18 focused helper/refinement tests pass. Full
-examples, performance and instrumented validation are still in progress before merge.
+input, and recovers. All 19 focused helper/refinement tests and all 482 suite
+tests pass (277.91 s for the complete suite).
+
+Eight arithmetic/capture tests pass padded CUDA memory checking in 2.20 s with
+zero errors. The four-phase resident center loop also passes full allocation/
+lifetime checking with pooling disabled. Native tracing records 12 GPU kernels,
+four graph launches and one final synchronization; its three-node graph contains
+only kernels, with no copies, host callbacks, or allocation/free nodes. Diagnostic
+memory checking uses the documented 32 KiB stack.
+
+Final L40 medians use three captured replays, with no CPU quota throttling:
+
+| Complete 1,000-site solve | Before, ms | After, ms |
+|---|---:|---:|
+| Uniform torus | 3,207.373 | 3,204.864 |
+| Graded torus | 5,895.893 | 5,894.622 |
+
+Sites, roles, and oriented full/material/boundary connectivity match bit for bit
+after sorting rows, for both examples. Graded per-cell radius ratios also match
+after aligning them with their cells; raw row order can differ. The uniform
+baseline reuses PR111's measured runtime, byte-identical to main `095595c`; the
+graded before/after pair was run afresh. Fifty-one other existing runtime modules
+and README remain byte-for-byte unchanged, including independent geometry paths.
+
+The final thin-hand attempt reaches all 1,000 sites with no rejected growth
+batches in 11.428 s, compared with the previous 41.257 s attempt. These are first
+complete attempts with zero CPU throttling, not successful material meshes or
+a CPU speedup claim. The final 5,655-cell full mesh still yields a nonmanifold
+material boundary (20 edges of incidence four), and the public result correctly
+fails with error 64 and zero counts. A diagnostic sweep over 15 extraction
+tolerances from 0 to 0.9 finds no valid boundary, so changing that scalar alone
+is not adopted as recovery. This remains [#112](https://github.com/alecjacobson/warpower/issues/112).
+
+The raw suite/memory/native results, before/after measurements, output/source
+audits, and invalid-hand diagnostics are saved under
+[`results/validation/vtm/stable-center-*`](../results/validation/vtm/).
+Prototype timing records and the rejected global-radius calculation are retained
+separately from the final results. The overall CPU performance goal remains open.

@@ -170,6 +170,43 @@ def finalize(
         count[0] = 0
 
 
+@wp.kernel
+def fast_preference(available: wp.array[int], cache: bool):
+    if not cache:
+        available[0] = 1
+
+
+@wp.kernel
+def finish_fast(
+    attempted: wp.array[int],
+    repairs: wp.array[int],
+    base_error: wp.array[int],
+    certificate_error: wp.array[int],
+    error: wp.array[int],
+    available: wp.array[int],
+    reported_attempt: wp.array[int],
+    accepted: wp.array[int],
+    fast_error: wp.array[int],
+    repaired_cells: wp.array[int],
+    fallback: wp.array[int],
+    cache: bool,
+):
+    reported_attempt[0] = attempted[0]
+    repaired_cells[0] = repairs[0]
+    accepted[0] = int(attempted[0] != 0 and error[0] == 0)
+    fallback[0] = int(attempted[0] != 0 and error[0] == 2)
+    if attempted[0] != 0:
+        fast_error[0] = int(base_error[0] != 0) | (int(certificate_error[0] != 0) << 1)
+        if cache and error[0] != 0:
+            available[0] = 0
+
+
+@wp.kernel
+def fast_invalid_reset(error: wp.array[int], available: wp.array[int]):
+    if error[0] == 1:
+        available[0] = 1
+
+
 class DelaunayWorkspace:
     """Exact-certified ordinary Delaunay output, with bounded recovery attempts.
 
@@ -188,6 +225,7 @@ class DelaunayWorkspace:
         chunk_size=None,
         max_attempts=6,
         cache_strategy=True,
+        fast_candidates=True,
         symbolic_recovery=True,
         symbolic_max_expansions=16,
     ):
@@ -206,7 +244,13 @@ class DelaunayWorkspace:
             tetrahedra_cell_capacity=tetrahedra_cell_capacity,
             chunk_size=chunk_size,
         )
-        self._base = DiagramWorkspace(points, **settings)
+        self.fast_candidates = bool(fast_candidates) and len(points) >= 8192
+        builder = DiagramWorkspace
+        if self.fast_candidates:
+            from ._fast_candidates import CandidateWorkspace
+
+            builder = CandidateWorkspace
+        self._base = builder(points, **settings)
         self.points, self.device, self.n = self._base.points, self._base.device, self._base.n
         if self.n < 4:
             raise ValueError("DelaunayWorkspace requires at least four sites")
@@ -249,6 +293,12 @@ class DelaunayWorkspace:
             else:
                 self.symbolic_error = wp.zeros(1, dtype=int)
                 self.symbolic_expansions = wp.zeros(1, dtype=int)
+            self.fast_attempted = wp.zeros(1, dtype=int)
+            self.fast_accepted = wp.zeros(1, dtype=int)
+            self.fast_error = wp.zeros(1, dtype=int)
+            self.fast_repaired_cells = wp.zeros(1, dtype=int)
+            self._fast_available = wp.ones(1, dtype=int) if self.fast_candidates else None
+            self._fast_fallback = wp.empty(1, dtype=int) if self.fast_candidates else None
             self._preferred = wp.zeros(1, dtype=int)
             self._used = wp.zeros(1, dtype=int)
             self._valid = wp.empty(1, dtype=int)
@@ -284,6 +334,12 @@ class DelaunayWorkspace:
         wp.launch(kernel, dim, inputs=args, device=self.device)
 
     def _record(self):
+        if self.fast_candidates:
+            self.fast_attempted.zero_()
+            self.fast_accepted.zero_()
+            self.fast_error.zero_()
+            self.fast_repaired_cells.zero_()
+            self._launch(fast_preference, 1, [self._fast_available, self.cache_strategy])
         self._launch(reset, 1, [self._state, self.cache_strategy])
         wp.capture_if(self.recovery_first, self._preferred_path)
         self._launch(fallback_ready, 1, [self.error, self.base_attempted, self._ready])
@@ -300,6 +356,9 @@ class DelaunayWorkspace:
             ],
         )
 
+        if self.fast_candidates:
+            self._launch(fast_invalid_reset, 1, [self.error, self._fast_available])
+
     def _fallback_path(self):
         self._base_path()
         self._launch(fallback_ready, 1, [self.error, self.attempts, self._running])
@@ -315,6 +374,35 @@ class DelaunayWorkspace:
 
     def _base_path(self):
         self.base_attempted.fill_(1)
+        if self.fast_candidates:
+            wp.copy(self._base.enabled, self._fast_available)
+        self._base_attempt()
+        if self.fast_candidates:
+            self._launch(
+                finish_fast,
+                1,
+                [
+                    self._base.attempted,
+                    self._base.repaired_cells,
+                    self.base_error,
+                    self.certificate_error,
+                    self.error,
+                    self._fast_available,
+                    self.fast_attempted,
+                    self.fast_accepted,
+                    self.fast_error,
+                    self.fast_repaired_cells,
+                    self._fast_fallback,
+                    self.cache_strategy,
+                ],
+            )
+            wp.capture_if(self._fast_fallback, self._original_after_fast)
+
+    def _original_after_fast(self):
+        self._base.enabled.zero_()
+        self._base_attempt()
+
+    def _base_attempt(self):
         self._base.run()
         self._launch(
             prepare,

@@ -1,0 +1,301 @@
+{
+  "scope": "Offline independent validation after all timed GPU runs; CGAL is not used in the device mesher.",
+  "vtu_roundtrip": "passed; float32 points, integer connectivity/offsets/types and float64 quality equal NPZ",
+  "cgal_full_hull": {
+    "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+    "CGAL": "6.2.1",
+    "sites": 1000,
+    "tetrahedra": 5529,
+    "sphere_tests": 5506884,
+    "cospherical_ties": 12,
+    "hull_faces": 246,
+    "hull_support_tests": 246000,
+    "valid": true
+  },
+  "cgal_fixtures": {
+    "valid_interior_star": {
+      "points": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.25,
+          0.25,
+          0.25
+        ]
+      ],
+      "tetrahedra": [
+        [
+          0,
+          1,
+          2,
+          4
+        ],
+        [
+          0,
+          1,
+          4,
+          3
+        ],
+        [
+          0,
+          4,
+          2,
+          3
+        ],
+        [
+          4,
+          1,
+          2,
+          3
+        ]
+      ],
+      "exit_code": 0,
+      "stdout": "{\"scope\":\"Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.\",\"CGAL\":\"6.2.1\",\"sites\":5,\"tetrahedra\":4,\"sphere_tests\":4,\"cospherical_ties\":0,\"hull_faces\":4,\"hull_support_tests\":20,\"valid\":true}",
+      "stderr": ""
+    },
+    "inverted_cell": {
+      "points": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.25,
+          0.25,
+          0.25
+        ]
+      ],
+      "tetrahedra": [
+        [
+          1,
+          0,
+          2,
+          4
+        ],
+        [
+          1,
+          0,
+          4,
+          3
+        ],
+        [
+          4,
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          4,
+          2,
+          3
+        ]
+      ],
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "nonpositive physical cell orientation"
+    },
+    "missing_cell": {
+      "points": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.25,
+          0.25,
+          0.25
+        ]
+      ],
+      "tetrahedra": [
+        [
+          0,
+          1,
+          2,
+          4
+        ],
+        [
+          0,
+          1,
+          4,
+          3
+        ],
+        [
+          0,
+          4,
+          2,
+          3
+        ]
+      ],
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "exposed face does not support the input convex hull"
+    },
+    "duplicate_cell": {
+      "points": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.25,
+          0.25,
+          0.25
+        ]
+      ],
+      "tetrahedra": [
+        [
+          0,
+          1,
+          2,
+          4
+        ],
+        [
+          0,
+          1,
+          4,
+          3
+        ],
+        [
+          0,
+          4,
+          2,
+          3
+        ],
+        [
+          4,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          2,
+          4
+        ]
+      ],
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "duplicate cell"
+    },
+    "nonempty_sphere": {
+      "points": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.25,
+          0.25,
+          0.25
+        ]
+      ],
+      "tetrahedra": [
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "site strictly inside a cell circumsphere"
+    }
+  },
+  "full_hull_input_sha256": {
+    "hand-gallery-native-points.txt": "2b0c983ac5a1125c231de585da75ec571ae4db55640beabb644cd05a48d7cba5",
+    "hand-gallery-native-tets.txt": "3fd9719ff3746eb79c9b274c66f426a17d8bef5aff8da2b4febe4f4f9b78578e"
+  },
+  "cgal_checker_source_sha256": "1a2b1ec4537bbad7a2ac5edd237d853c88bc2167e864eac2686fd9e98ccc3fcd",
+  "render": {
+    "module": "examples.vtm_render",
+    "axis": "z",
+    "fraction": 0.5,
+    "title": "Thin hand \u00b7 variational tetrahedral mesh",
+    "visual_review": "Five separated fingers and the palm are visible; the centroid cutaway shows interior cells. This is visual review, not a geometry certificate."
+  }
+}

@@ -246,7 +246,7 @@ def check_spheres(
                 # The node's interval can straddle the sphere while an individual
                 # leaf point is provably outside. Reuse its cached cofactors;
                 # uncertain signs and exact ties retain the symbolic predicate.
-                if outside(shape, points[q], points[q]):
+                if points.shape[0] >= 32 and outside(shape, points[q], points[q]):
                     continue
                 result = symbolic_sphere(points, ids, q)
                 if result.valid == 0:

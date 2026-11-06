@@ -59,7 +59,7 @@ point cloud. This is a conservative pretest, not a replacement predicate.
 ## Cached-cofactor leaf points
 
 A BVH leaf can overlap the sphere even when most of its sites are outside.
-For each surviving site, `outside(shape, point, point)` evaluates the existing
+For buffers of at least 32 sites, `outside(shape, point, point)` evaluates the existing
 polynomial interval with both endpoints equal. It reuses the center numerators
 and positive orientation determinant already computed for the tetrahedron.
 For exact relative coordinates `x,y,z`, the expression is
@@ -69,7 +69,9 @@ Such a point has a strictly negative ordinary sphere determinant, so symbolic
 tie breaking cannot change its classification. Every uncertain result still
 uses the original symbolic/exact predicate.
 
-This introduces no division, new tolerance, scratch storage or kernel launch.
+Smaller buffers retain the original leaf predicate: the extra test can cost
+more than it saves on tiny, cospherical meshes. This introduces no division,
+new tolerance, scratch storage or kernel launch.
 The certificate still checks every global lower facet, hull support, face
 incidence and canonical-site coverage. The leaf-query statistic counts points
 before this filter, preserving its previous meaning.

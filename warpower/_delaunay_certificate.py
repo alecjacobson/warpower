@@ -8,6 +8,7 @@ paired interior faces and supporting hull faces then establish completeness.
 import warp as wp
 
 from . import _filtered_predicates as fp
+from . import _sphere_bounds as sb
 from ._bvh import Tree
 from ._canonical import mix
 from ._domain import _Scan
@@ -223,6 +224,7 @@ def check_spheres(
         return
     ids = wp.vec4i(tets[i, 0], tets[i, 1], tets[i, 2], tets[i, 3])
     shape = sphere(points[ids[0]], points[ids[1]], points[ids[2]], points[ids[3]])
+    box = sb.bounds(shape.origin, shape.nx, shape.ny, shape.nz, shape.determinant)
     stack = wp.zeros(shape=128, dtype=int)
     size = int(1)
     stack[0] = 1
@@ -231,6 +233,8 @@ def check_spheres(
         size -= 1
         node = stack[size]
         visits += 1
+        if sb.outside(box, tree.lower[node], tree.upper[node]):
+            continue
         if outside(shape, tree.lower[node], tree.upper[node]):
             continue
         if tree.count[node] > 0:

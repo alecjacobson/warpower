@@ -605,6 +605,9 @@ class VariationalMeshingWorkspace:
         wp.capture_if(self.ready, self._solve)
 
     def _solve(self):
+        # Fresh samples start a new trajectory. Keep recovery reuse within it,
+        # but do not inherit the preceding solve's most expensive strategy.
+        self.core.mesh._preferred.zero_()
         wp.copy(self.points, self.sampler.points, count=self.initial_count)
         self._launch(start_growth, 1, [self._state])
         if self.refinement is not None:

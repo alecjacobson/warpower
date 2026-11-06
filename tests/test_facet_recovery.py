@@ -33,10 +33,16 @@ def check_hand(workspace, points, expected):
     assert workspace.facet_rounds.numpy()[0] > 0
 
 
+# The supported 512-plane reserve bounds legacy clipping in instrumented tests.
+# Default 1024-plane construction is also covered by the complete hand benchmark.
 def test_refined_hand_completes_without_symbolic_cells_and_reuses_certified_strategy():
     points, expected = hand()
     w = DelaunayWorkspace(
-        points, facet_recovery=True, symbolic_recovery=False, max_attempts=1
+        points,
+        facet_recovery=True,
+        symbolic_recovery=False,
+        max_attempts=1,
+        tetrahedra_cell_capacity=512,
     ).run()
     check_hand(w, points, expected)
     assert w.base_attempted.numpy()[0] == 1
@@ -63,7 +69,11 @@ def test_structured_torus_uses_filtered_facets_and_matches_complete_symbolic_mes
     reference = DelaunayWorkspace(points, facet_recovery=False).run()
     expected = valid(reference, points)
     w = DelaunayWorkspace(
-        points, facet_recovery=True, symbolic_recovery=False, max_attempts=1
+        points,
+        facet_recovery=True,
+        symbolic_recovery=False,
+        max_attempts=1,
+        tetrahedra_cell_capacity=512,
     ).run()
     actual = valid(w, points)
     np.testing.assert_array_equal(canonical(actual), canonical(expected))
@@ -93,7 +103,12 @@ def test_structured_torus_uses_filtered_facets_and_matches_complete_symbolic_mes
 def test_exhausted_completion_returns_zero_count_then_accepts_changed_input():
     points, expected = hand()
     w = DelaunayWorkspace(
-        points, facet_recovery=True, facet_max_rounds=0, symbolic_recovery=False, max_attempts=1
+        points,
+        facet_recovery=True,
+        facet_max_rounds=0,
+        symbolic_recovery=False,
+        max_attempts=1,
+        tetrahedra_cell_capacity=512,
     ).run()
     assert w.error.numpy()[0] == 2
     assert w.tetrahedra_count.numpy()[0] == 0
@@ -122,7 +137,11 @@ def discard_candidates(error: wp.array[int], count: wp.array[int], raw_count: wp
 def test_failed_cached_completion_falls_back_to_current_base_mesh():
     points, expected = hand()
     w = DelaunayWorkspace(
-        points, facet_recovery=True, symbolic_recovery=False, max_attempts=1
+        points,
+        facet_recovery=True,
+        symbolic_recovery=False,
+        max_attempts=1,
+        tetrahedra_cell_capacity=512,
     ).run()
     check_hand(w, points, expected)
     changed = np.random.default_rng(28).normal(size=points.shape).astype(np.float32)

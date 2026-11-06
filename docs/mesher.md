@@ -288,3 +288,10 @@ python -m benchmarks.recovery_policy --policy reset --repeats 3 --reference \
 python -m benchmarks.mesher_policy --repeats 5 \
   --output results/local/mesher-policy-torus.json
 ```
+
+The reset change passes all [17 scheduler tests](../results/validation/vtm/mesher-reset-tests.txt).
+Its [native audit](../results/validation/vtm/mesher-reset-device-audit.json) records
+46,550 kernel activities across the five phases; the graph adds one memset node,
+with no host/callback or allocation/free nodes and only device-to-device copies.
+The [isolation check](../results/validation/vtm/recovery-reset-isolation.json)
+confirms every numerical kernel and all other runtime modules are unchanged.

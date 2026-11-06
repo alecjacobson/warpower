@@ -425,15 +425,16 @@ def check_faces_with_anchors(
         ids = face_vertices(tets, boundary[slot])
         a, b, c = points[ids[0]], points[ids[1]], points[ids[2]]
         plane = halfspace(a, b, c)
+        # Each lane may independently abandon strict pruning after finding a
+        # coplanar witness. The shared flag is only OR-written, avoiding a
+        # contended atomic read at every visited node.
+        strict = bool(slot < anchors.shape[0])
         stack = wp.zeros(shape=128, dtype=int)
         stack[0] = root
         size = int(1)
         while size > 0:
             size -= 1
             node = stack[size]
-            strict = bool(False)
-            if slot < anchors.shape[0]:
-                strict = wp.atomic_add(anchors, slot, 0) == 0
             if anchor_halfspace(plane, tree.lower[node], tree.upper[node], strict):
                 continue
             if tree.count[node] > 0:
@@ -447,8 +448,9 @@ def check_faces_with_anchors(
                         wp.atomic_or(error, 0, 2)
                     elif result.sign > 0:
                         wp.atomic_or(error, 0, 64)
-                    elif result.sign == 0 and slot < anchors.shape[0]:
+                    elif result.sign == 0 and strict:
                         wp.atomic_or(anchors, slot, 1)
+                        strict = False
             else:
                 if size > 125:
                     wp.atomic_or(error, 0, 16)

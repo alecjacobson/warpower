@@ -20,9 +20,10 @@ finite collection of tetrahedra with vertices in P. Require:
 The implementation already establishes 1–3 and 5. For condition 4 it examines
 up to sixteen boundary faces during the existing hull-support traversal. Strict
 negative interval bounds may prune subtrees. An exact zero at any other canonical
-site disqualifies that face. Once disqualified, its remaining traversal can use
-the original nonpositive bound. Atomic operations communicate this monotone flag
-between the existing 32 traversal lanes. Failure to find an anchor is not an
+site disqualifies that face. After a lane finds such a witness, that lane can
+use the original nonpositive bound for its remaining traversal. The existing
+32 lanes OR-write a shared disqualification flag; they do not need to repeatedly
+read one another's flags while traversing. Failure to find an anchor is not an
 input error: the global sphere check is used instead.
 
 ## Coverage argument

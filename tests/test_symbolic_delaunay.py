@@ -12,7 +12,7 @@ from warpower import DelaunayWorkspace
 
 def test_structured_torus_uses_original_coordinate_symbolic_recovery():
     points, _ = torus(16, 8)
-    w = DelaunayWorkspace(points).run()
+    w = DelaunayWorkspace(points, facet_recovery=False).run()
     tets = valid(w, points)
     assert w.base_error.numpy()[0] == 2
     assert w.attempts.numpy()[0] == w.max_attempts

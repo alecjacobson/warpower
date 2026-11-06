@@ -51,7 +51,16 @@ attempts by default (`max_attempts` accepts 1 through 12). Neither normalization
 roundoff nor finite auxiliary weights are assumed to preserve the desired mesh.
 Only the original-coordinate certificate can accept a candidate.
 
-If those attempts fail, the default `symbolic_recovery=True` enables an
+If those attempts fail, `facet_recovery=None` automatically enables
+[certified fragment completion](facet-completion.md) for 256–2,048-site buffers
+when symbolic recovery is enabled. It filters exact lower facets from raw
+auxiliary candidates, extends missing neighbors, and requires a complete global
+certificate before publication. Explicit `facet_recovery=True/False` overrides
+the setup choice. `facet_max_rounds` bounds extension to 0–64 rounds (default 64).
+It adds fixed setup storage; ordinary successful builders skip its geometry work.
+A successful completion becomes another current-input-certified strategy hint.
+
+After failed completion (or when disabled), default `symbolic_recovery=True` enables an
 original-coordinate symbolic cell constructor. It stores incident plane IDs and
 classifies vertices with filtered/exact predicates. Conservative cached Cartesian
 intervals accept only strict signs; uncertain cases and exact ties use the
@@ -137,7 +146,7 @@ has no volumetric result and reports an error.
 `auxiliary_level` reports the last attempted amplitude exponent (zero when no
 auxiliary attempt ran); amplitude is `1e-5 * 0.1**auxiliary_level`.
 `attempts` counts normalized recovery attempts; `recovered` is one when auxiliary
-or symbolic recovery supplied the output. `recovery_first` indicates that this replay tried
+or symbolic recovery or facet completion supplied the output. `recovery_first` indicates that this replay tried
 the cached strategy first. `base_attempted` indicates whether the original
 constructor ran; its error is zero when skipped. `base_error` and `candidate_error` expose the
 underlying builders' codes. A zero candidate code with zero attempts means no
@@ -169,6 +178,11 @@ enlargements in this replay. All are device scalars and reset each replay.
 | 16 | Certificate rejected a property that box expansion cannot repair |
 | 32 | Box-attempt budget exhausted |
 | 64 | Expanded box cannot be represented by finite float32 bounds |
+
+`facet_attempted` counts fragment-completion trials; `facet_recovered` indicates
+that completion supplied the public result. `facet_seeds`, `facet_rounds`, and
+`facet_error` describe the last trial, with masks documented in
+[fragment completion](facet-completion.md). These device scalars reset each replay.
 
 The default tetrahedron capacity is `8*N`; the worst-case Delaunay size can be
 quadratic, so applications may need `tetrahedra_capacity`. Cell capacity is 1024

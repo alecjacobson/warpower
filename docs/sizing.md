@@ -287,3 +287,22 @@ confirms that all 30 preexisting runtime modules except lazy exports match
 `471f5cd` byte-for-byte. Default imports do not load the new optional modules.
 Standalone diagram, Delaunay, regular-mesh, and uniform-optimizer computation
 therefore uses the same implementation validated in the preceding milestone.
+
+
+The final [full suite](../results/validation/vtm/initialization-full-tests.txt)
+passes 261 tests, including 15 automatic-sizing and 18 sampling cases. The
+[padded memory run](../results/validation/vtm/initialization-memcheck.txt) passes
+22 selected cases with zero errors: all 18 sampler cases plus cube/sphere poles,
+captured automatic-field recovery, and failed control-mesh invalidation. The
+[graph-lifetime run](../results/validation/vtm/initialization-lifetime.txt) checks
+both captured services with the synchronous allocator and reports zero errors.
+The [documented diagnostic stack allowance](cuda-validation.md) applies.
+
+The [installed wheel](../results/validation/vtm/initialization-wheel.json)
+passes a changing producer/domain/automatic-field/sampler/consumer graph with
+1,000 active sites on each replay and device seed advancement. Its source files
+match the repository. The [native trace](../results/validation/vtm/initialization-device-audit.json)
+records 684 kernel activities across three replays. Its 28 graph copy nodes and
+six observed copy activities are all device-to-device; there are no graph host,
+allocation, or free nodes, and no replay-time CPU allocation or transfer calls.
+One final synchronization occurs outside the captured work.

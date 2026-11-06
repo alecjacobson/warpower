@@ -27,6 +27,9 @@ def main():
     parser.add_argument(
         "--recovery", action="store_true", help="Analyze a benchmarks.delaunay_recovery trace"
     )
+    parser.add_argument(
+        "--initialization", action="store_true", help="Analyze an automatic sizing/sampling trace"
+    )
     args = parser.parse_args()
     if args.analyze:
         database = sqlite3.connect(args.analyze)
@@ -60,7 +63,10 @@ def main():
             )
         report = {
             "scope": (
-                "Three warmed fixed-input certified Delaunay/recovery replays; one final synchronization outside geometry"
+                "Three warmed producer/domain/automatic-sizing/sampling/consumer replays; "
+                "one final synchronization outside geometry"
+                if args.initialization
+                else "Three warmed fixed-input certified Delaunay/recovery replays; one final synchronization outside geometry"
                 if args.recovery
                 else "Three warmed producer/extraction/topology/consumer replays, optionally including VTM optimization; one final synchronization outside geometry"
                 if args.extraction
@@ -98,7 +104,7 @@ def main():
         print(json.dumps(report, indent=2))
         return
 
-    if args.domain or args.vtm_core or args.extraction or args.recovery:
+    if args.domain or args.vtm_core or args.extraction or args.recovery or args.initialization:
         parser.error("Record with the matching benchmark module; use this flag with --analyze")
 
     import numpy as np

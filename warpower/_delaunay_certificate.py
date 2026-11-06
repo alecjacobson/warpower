@@ -259,25 +259,42 @@ def check_spheres(
     wp.atomic_add(statistics, 1, visits)
 
 
+@wp.struct
+class Halfspace:
+    origin: wp.vec3
+    nx: fp.Ball
+    ny: fp.Ball
+    nz: fp.Ball
+
+
 @wp.func
-def inside_halfspace(a: wp.vec3, b: wp.vec3, c: wp.vec3, lo: wp.vec3, hi: wp.vec3):
+def halfspace(a: wp.vec3, b: wp.vec3, c: wp.vec3):
     ux, uy, uz = fp.difference(b[0], a[0]), fp.difference(b[1], a[1]), fp.difference(b[2], a[2])
     vx, vy, vz = fp.difference(c[0], a[0]), fp.difference(c[1], a[1]), fp.difference(c[2], a[2])
-    x = fp.minus(interval(lo[0], hi[0]), fp.scalar(wp.float64(a[0])))
-    y = fp.minus(interval(lo[1], hi[1]), fp.scalar(wp.float64(a[1])))
-    z = fp.minus(interval(lo[2], hi[2]), fp.scalar(wp.float64(a[2])))
-    value = fp.det3(ux, uy, uz, vx, vy, vz, x, y, z)
+    result = Halfspace()
+    result.origin = a
+    result.nx = fp.cross2(uy, uz, vy, vz)
+    result.ny = fp.cross2(uz, ux, vz, vx)
+    result.nz = fp.cross2(ux, uy, vx, vy)
+    return result
+
+
+@wp.func
+def inside_halfspace(plane: Halfspace, lo: wp.vec3, hi: wp.vec3):
+    x = fp.minus(interval(lo[0], hi[0]), fp.scalar(wp.float64(plane.origin[0])))
+    y = fp.minus(interval(lo[1], hi[1]), fp.scalar(wp.float64(plane.origin[1])))
+    z = fp.minus(interval(lo[2], hi[2]), fp.scalar(wp.float64(plane.origin[2])))
+    value = fp.plus(fp.plus(fp.times(plane.nx, x), fp.times(plane.ny, y)), fp.times(plane.nz, z))
     return wp.isfinite(value.value) and wp.isfinite(value.error) and value.value <= -value.error
 
 
 @wp.kernel
-def check_faces(
-    points: wp.array[wp.vec3],
-    tets: wp.array2d[int],
+def collect_boundary_faces(
     table: wp.array[int],
     occurrences: wp.array[int],
     balance: wp.array[int],
-    tree: Tree,
+    boundary: wp.array[int],
+    count: wp.array[int],
     error: wp.array[int],
 ):
     slot = wp.tid()
@@ -289,33 +306,71 @@ def check_faces(
     if n != 1:
         wp.atomic_or(error, 0, 32)
         return
-    ids = face_vertices(tets, table[slot])
-    a, b, c = points[ids[0]], points[ids[1]], points[ids[2]]
-    stack = wp.zeros(shape=128, dtype=int)
-    stack[0] = 1
-    size = int(1)
-    while size > 0:
-        size -= 1
-        node = stack[size]
-        if inside_halfspace(a, b, c, tree.lower[node], tree.upper[node]):
-            continue
-        if tree.count[node] > 0:
-            for k in range(tree.start[node], tree.start[node] + tree.count[node]):
-                q = tree.ids[k]
-                if q == ids[0] or q == ids[1] or q == ids[2]:
-                    continue
-                result = fp.orient3d(a, b, c, points[q])
-                if result.valid == 0:
-                    wp.atomic_or(error, 0, 2)
-                elif result.sign > 0:
-                    wp.atomic_or(error, 0, 64)
+    # There are at most four occupied face slots per input tetrahedron.
+    at = wp.atomic_add(count, 0, 1)
+    boundary[at] = table[slot]
+
+
+@wp.kernel
+def check_faces(
+    points: wp.array[wp.vec3],
+    tets: wp.array2d[int],
+    boundary: wp.array[int],
+    count: wp.array[int],
+    tree: Tree,
+    error: wp.array[int],
+    depth: int,
+    workers: int,
+):
+    tid = wp.tid()
+    pieces = 1 << depth
+    worker, lane = tid // pieces, tid % pieces
+    # Partition the radix tree by path bits. An early leaf belongs only to
+    # the lane whose unused bits are zero, so every subtree is covered once.
+    root = int(1)
+    live = bool(True)
+    for level in range(depth):
+        if tree.count[root] > 0:
+            live = (lane >> level) == 0
+            break
+        if ((lane >> level) & 1) == 0:
+            root = tree.left[root]
         else:
-            if size > 125:
-                wp.atomic_or(error, 0, 16)
-                return
-            stack[size] = tree.left[node]
-            stack[size + 1] = tree.right[node]
-            size += 2
+            root = tree.right[root]
+    if not live:
+        return
+    # Fixed launch size, device count, and a strided tail cover even malformed
+    # candidates exposing all four faces per tetrahedron.
+    for slot in range(worker, count[0], workers):
+        ids = face_vertices(tets, boundary[slot])
+        a, b, c = points[ids[0]], points[ids[1]], points[ids[2]]
+        plane = halfspace(a, b, c)
+        stack = wp.zeros(shape=128, dtype=int)
+        stack[0] = root
+        size = int(1)
+        while size > 0:
+            size -= 1
+            node = stack[size]
+            if inside_halfspace(plane, tree.lower[node], tree.upper[node]):
+                continue
+            if tree.count[node] > 0:
+                for k in range(tree.start[node], tree.start[node] + tree.count[node]):
+                    q = tree.ids[k]
+                    # Coincident sites have exactly the same plane sign.
+                    if tree.owners[q] != q or q == ids[0] or q == ids[1] or q == ids[2]:
+                        continue
+                    result = fp.orient3d(a, b, c, points[q])
+                    if result.valid == 0:
+                        wp.atomic_or(error, 0, 2)
+                    elif result.sign > 0:
+                        wp.atomic_or(error, 0, 64)
+            else:
+                if size > 125:
+                    wp.atomic_or(error, 0, 16)
+                    return
+                stack[size] = tree.left[node]
+                stack[size + 1] = tree.right[node]
+                size += 2
 
 
 @wp.kernel
@@ -347,6 +402,10 @@ class DelaunayCertificate:
             self._occurrences = wp.empty_like(self._table)
             self._balance = wp.empty_like(self._table)
             self._parents = wp.empty(m, dtype=int)
+            self._boundary = wp.empty(4 * m, dtype=int)
+            self._boundary_count = wp.zeros(1, dtype=int)
+            self._face_depth = 5
+            self._face_workers = min(max(n, 128), 4096)
             self._ready = wp.empty(1, dtype=int)
             wp.load_module(module=__name__, device=self.device)
 
@@ -421,16 +480,30 @@ class DelaunayCertificate:
                 self._parents,
             ],
         )
+        self._boundary_count.zero_()
         self._launch(
-            check_faces,
+            collect_boundary_faces,
             len(self._table),
             [
-                self.points,
-                self.tetrahedra,
                 self._table,
                 self._occurrences,
                 self._balance,
+                self._boundary,
+                self._boundary_count,
+                self.error,
+            ],
+        )
+        self._launch(
+            check_faces,
+            self._face_workers * (1 << self._face_depth),
+            [
+                self.points,
+                self.tetrahedra,
+                self._boundary,
+                self._boundary_count,
                 tree,
                 self.error,
+                self._face_depth,
+                self._face_workers,
             ],
         )

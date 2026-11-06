@@ -1,0 +1,1387 @@
+{
+  "scope": "CUDA event stage medians on NVIDIA L40; setup/JIT/upload excluded, current geometry rebuilt/certified per replay. Baseline production source matches main04a0d8d; >=128-site measurements use the final identical launch configuration, while cube/grid are rerun after raising the worker minimum. All measured windows unthrottled.",
+  "baseline": "04a0d8d3c1258306ccbf5ebef9c80eb881233da0",
+  "certificate_source_sha256": "7300574cd69229acd91ca071eb2cb5f3fc10f8b948974e76b82a7e52259a2df1",
+  "records": [
+    {
+      "case": "random",
+      "n": 1000,
+      "full_speedup": 1.2241284897336098,
+      "certificate_speedup": 2.7852109581948548,
+      "before": {
+        "case": "random",
+        "n": 1000,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 83.79529571533203,
+        "full": {
+          "median_ms": 12.535584449768066,
+          "samples_ms": [
+            12.535584449768066,
+            12.455904006958008,
+            12.54537582397461,
+            12.487296104431152,
+            12.578720092773438
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 8.846272468566895,
+          "samples_ms": [
+            8.851967811584473,
+            8.841343879699707,
+            8.846272468566895,
+            8.867551803588867,
+            8.832703590393066
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 8.861536026000977,
+          "samples_ms": [
+            8.86457633972168,
+            8.861536026000977,
+            8.860416412353516,
+            8.867551803588867,
+            8.857728004455566
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 3.6424319744110107,
+          "samples_ms": [
+            3.6479039192199707,
+            3.6420159339904785,
+            3.639103889465332,
+            3.6424319744110107,
+            3.693056106567383
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 6318,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 0,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 0,
+        "base_attempted": 1,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 78406,
+        "certificate_node_visits": 276750
+      },
+      "after": {
+        "case": "random",
+        "n": 1000,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 80.60307312011719,
+        "full": {
+          "median_ms": 10.240415573120117,
+          "samples_ms": [
+            10.240415573120117,
+            10.26137638092041,
+            10.210944175720215,
+            10.249759674072266,
+            10.202367782592773
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 8.866304397583008,
+          "samples_ms": [
+            8.87724781036377,
+            8.868448257446289,
+            8.863264083862305,
+            8.866304397583008,
+            8.859647750854492
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 8.8886079788208,
+          "samples_ms": [
+            8.8886079788208,
+            8.891103744506836,
+            8.88368034362793,
+            8.886303901672363,
+            8.889663696289062
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 1.3077759742736816,
+          "samples_ms": [
+            1.3227519989013672,
+            1.3072960376739502,
+            1.3162879943847656,
+            1.3077759742736816,
+            1.3021759986877441
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 6318,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 0,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 0,
+        "base_attempted": 1,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 78406,
+        "certificate_node_visits": 276750
+      }
+    },
+    {
+      "case": "cube",
+      "n": 8,
+      "full_speedup": 1.0102652624860453,
+      "certificate_speedup": 1.037188338768384,
+      "before": {
+        "case": "cube",
+        "n": 8,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 207.7176055908203,
+        "full": {
+          "median_ms": 0.529088020324707,
+          "samples_ms": [
+            0.5396159887313843,
+            0.5297920107841492,
+            0.529088020324707,
+            0.5290560126304626,
+            0.5284479856491089
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 183.00537109375,
+          "samples_ms": [
+            183.00537109375,
+            183.10182189941406,
+            183.01145935058594,
+            182.97576904296875,
+            182.97581481933594
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 0.29526400566101074,
+          "samples_ms": [
+            0.3028480112552643,
+            0.2953279912471771,
+            0.29526400566101074,
+            0.29526400566101074,
+            0.2948479950428009
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 0.15440000593662262,
+          "samples_ms": [
+            0.15865600109100342,
+            0.15452800691127777,
+            0.15440000593662262,
+            0.15404799580574036,
+            0.15388800203800201
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 6,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 1,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 1,
+        "base_attempted": 0,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 24,
+        "certificate_node_visits": 18
+      },
+      "after": {
+        "case": "cube",
+        "n": 8,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 204.89219665527344,
+        "full": {
+          "median_ms": 0.5237119793891907,
+          "samples_ms": [
+            0.5312960147857666,
+            0.5243840217590332,
+            0.5234559774398804,
+            0.5234240293502808,
+            0.5235199928283691,
+            0.5239999890327454,
+            0.5237119793891907
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 182.99424743652344,
+          "samples_ms": [
+            182.9971160888672,
+            183.00067138671875,
+            182.97640991210938,
+            182.97938537597656,
+            183.16656494140625,
+            182.9857635498047,
+            182.99424743652344
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 0.29555198550224304,
+          "samples_ms": [
+            0.3023039996623993,
+            0.2964160144329071,
+            0.2958720028400421,
+            0.29555198550224304,
+            0.2951039969921112,
+            0.2951680123806,
+            0.2951360046863556
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 0.1488640010356903,
+          "samples_ms": [
+            0.15427200496196747,
+            0.14982399344444275,
+            0.14873600006103516,
+            0.14880000054836273,
+            0.1488640010356903,
+            0.1488959938287735,
+            0.1483840048313141
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 6,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 1,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 1,
+        "base_attempted": 0,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 24,
+        "certificate_node_visits": 18
+      }
+    },
+    {
+      "case": "grid",
+      "n": 64,
+      "full_speedup": 1.0576638693649796,
+      "certificate_speedup": 1.2067334348508116,
+      "before": {
+        "case": "grid",
+        "n": 64,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 1847.08984375,
+        "full": {
+          "median_ms": 2.3383679389953613,
+          "samples_ms": [
+            2.3438398838043213,
+            2.335263967514038,
+            2.3383679389953613,
+            2.34006404876709,
+            2.3316800594329834
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 1822.3253173828125,
+          "samples_ms": [
+            1822.3316650390625,
+            1822.3253173828125,
+            1822.324951171875,
+            1822.326416015625,
+            1822.3248291015625
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 1.5491199493408203,
+          "samples_ms": [
+            1.5491199493408203,
+            1.5504000186920166,
+            1.551743984222412,
+            1.5421439409255981,
+            1.5375679731369019
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 0.7019519805908203,
+          "samples_ms": [
+            0.707647979259491,
+            0.7019519805908203,
+            0.7019199728965759,
+            0.7004160284996033,
+            0.7030400037765503
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 158,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 1,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 1,
+        "base_attempted": 0,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 1632,
+        "certificate_node_visits": 2216
+      },
+      "after": {
+        "case": "grid",
+        "n": 64,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 1853.6419677734375,
+        "full": {
+          "median_ms": 2.2108800411224365,
+          "samples_ms": [
+            2.224832057952881,
+            2.2027840614318848,
+            2.2112960815429688,
+            2.2060799598693848,
+            2.207871913909912,
+            2.2197439670562744,
+            2.2108800411224365
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 1822.32080078125,
+          "samples_ms": [
+            1822.3289794921875,
+            1822.3199462890625,
+            1822.322021484375,
+            1822.32080078125,
+            1822.2906494140625,
+            1822.32080078125,
+            1822.3177490234375
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 1.5474239587783813,
+          "samples_ms": [
+            1.5485440492630005,
+            1.5438400506973267,
+            1.5475519895553589,
+            1.5474239587783813,
+            1.5414719581604004,
+            1.5472320318222046,
+            1.547935962677002
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 0.5816959738731384,
+          "samples_ms": [
+            0.5872960090637207,
+            0.5831999778747559,
+            0.5810239911079407,
+            0.5818880200386047,
+            0.5812479853630066,
+            0.5813760161399841,
+            0.5816959738731384
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 158,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 1,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 1,
+        "base_attempted": 0,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 1632,
+        "certificate_node_visits": 2216
+      }
+    },
+    {
+      "case": "corner-cloud",
+      "n": 200,
+      "full_speedup": 1.0123905124102477,
+      "certificate_speedup": 1.0493694092547448,
+      "before": {
+        "case": "corner-cloud",
+        "n": 200,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 50.35424041748047,
+        "full": {
+          "median_ms": 8.463552474975586,
+          "samples_ms": [
+            8.463552474975586,
+            8.472576141357422,
+            8.442560195922852,
+            8.36457633972168,
+            8.514944076538086
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 10.188863754272461,
+          "samples_ms": [
+            10.186367988586426,
+            10.182975769042969,
+            10.200544357299805,
+            10.192352294921875,
+            10.188863754272461
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 5.325247764587402,
+          "samples_ms": [
+            5.327360153198242,
+            5.33238410949707,
+            5.3212480545043945,
+            5.325247764587402,
+            5.318943977355957
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 3.0832319259643555,
+          "samples_ms": [
+            3.0941760540008545,
+            3.0897281169891357,
+            3.0710079669952393,
+            3.0832319259643555,
+            3.066848039627075
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 1207,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 1,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 1,
+        "base_attempted": 0,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 14653,
+        "certificate_node_visits": 39499
+      },
+      "after": {
+        "case": "corner-cloud",
+        "n": 200,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 50.195457458496094,
+        "full": {
+          "median_ms": 8.359968185424805,
+          "samples_ms": [
+            8.40550422668457,
+            8.359968185424805,
+            8.326815605163574,
+            8.077759742736816,
+            8.381952285766602
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 10.180416107177734,
+          "samples_ms": [
+            10.191424369812012,
+            10.182016372680664,
+            10.180416107177734,
+            10.173952102661133,
+            10.174079895019531
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 5.319968223571777,
+          "samples_ms": [
+            5.319968223571777,
+            5.325791835784912,
+            5.315584182739258,
+            5.326047897338867,
+            5.316287994384766
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 2.938175916671753,
+          "samples_ms": [
+            2.9651520252227783,
+            2.9630720615386963,
+            2.938175916671753,
+            2.934335947036743,
+            2.9366719722747803
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 1207,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 1,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 1,
+        "base_attempted": 0,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 14653,
+        "certificate_node_visits": 39499
+      }
+    },
+    {
+      "case": "torus-boundary",
+      "n": 128,
+      "full_speedup": 1.0062785327069064,
+      "certificate_speedup": 1.0026574868625153,
+      "before": {
+        "case": "torus-boundary",
+        "n": 128,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 3084.536865234375,
+        "full": {
+          "median_ms": 1228.6544189453125,
+          "samples_ms": [
+            1228.5989990234375,
+            1233.0538330078125,
+            1228.6544189453125,
+            1232.7794189453125,
+            1228.5274658203125
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 1427.8267822265625,
+          "samples_ms": [
+            1427.8599853515625,
+            1427.8267822265625,
+            1427.8193359375,
+            1427.8497314453125,
+            1427.8211669921875
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 5.158815860748291,
+          "samples_ms": [
+            5.167391777038574,
+            5.154816150665283,
+            5.163104057312012,
+            5.158815860748291,
+            5.157120227813721
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 91.18911743164062,
+          "samples_ms": [
+            91.19235229492188,
+            91.18921661376953,
+            91.1858901977539,
+            91.18720245361328,
+            91.18911743164062
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 519,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 0,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 1,
+        "base_attempted": 0,
+        "symbolic_attempted": 1,
+        "symbolic_recovered": 1,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 15424,
+        "certificate_node_visits": 21851
+      },
+      "after": {
+        "case": "torus-boundary",
+        "n": 128,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 3086.58837890625,
+        "full": {
+          "median_ms": 1220.9884033203125,
+          "samples_ms": [
+            1221.0738525390625,
+            1220.9906005859375,
+            1220.9873046875,
+            1220.9884033203125,
+            1220.9686279296875
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 1427.8330078125,
+          "samples_ms": [
+            1427.8487548828125,
+            1427.814208984375,
+            1427.8330078125,
+            1427.847412109375,
+            1427.8123779296875
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 5.162752151489258,
+          "samples_ms": [
+            5.162752151489258,
+            5.16374397277832,
+            5.163296222686768,
+            5.159071922302246,
+            5.158847808837891
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 90.94742584228516,
+          "samples_ms": [
+            90.94742584228516,
+            91.00240325927734,
+            90.92371368408203,
+            91.01107025146484,
+            90.93389129638672
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 519,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 0,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 1,
+        "base_attempted": 0,
+        "symbolic_attempted": 1,
+        "symbolic_recovered": 1,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 15424,
+        "certificate_node_visits": 21851
+      }
+    },
+    {
+      "case": "random100k",
+      "n": 100000,
+      "full_speedup": 1.358373410916903,
+      "certificate_speedup": 3.2371879239596164,
+      "before": {
+        "case": "random",
+        "n": 100000,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 3576.85400390625,
+        "full": {
+          "median_ms": 765.0573120117188,
+          "samples_ms": [
+            765.0573120117188,
+            765.5939331054688,
+            764.630126953125
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 472.9784851074219,
+          "samples_ms": [
+            472.9005432128906,
+            472.9784851074219,
+            473.0403747558594
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 474.5604248046875,
+          "samples_ms": [
+            474.6686096191406,
+            474.387939453125,
+            474.5604248046875
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 291.2569885253906,
+          "samples_ms": [
+            290.8034973144531,
+            291.9757080078125,
+            291.2569885253906
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 671908,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 0,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 0,
+        "base_attempted": 1,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 8793024,
+        "certificate_node_visits": 46061402
+      },
+      "after": {
+        "case": "random",
+        "n": 100000,
+        "seed": 2026,
+        "device": "NVIDIA L40",
+        "warp": "1.19.0",
+        "first_replay_ms": 3376.830810546875,
+        "full": {
+          "median_ms": 563.2157592773438,
+          "samples_ms": [
+            563.4767456054688,
+            562.65380859375,
+            563.2157592773438
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "base": {
+          "median_ms": 473.0061950683594,
+          "samples_ms": [
+            473.0061950683594,
+            472.9780578613281,
+            473.11602783203125
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "auxiliary": {
+          "median_ms": 474.4349060058594,
+          "samples_ms": [
+            474.56854248046875,
+            474.399169921875,
+            474.4349060058594
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "certificate": {
+          "median_ms": 89.97222137451172,
+          "samples_ms": [
+            90.17401885986328,
+            89.97222137451172,
+            89.88050842285156
+          ],
+          "cpu": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          }
+        },
+        "tetrahedra": 671908,
+        "error": 0,
+        "base_error": 0,
+        "candidate_error": 0,
+        "certificate_error": 0,
+        "attempts": 0,
+        "cache_strategy": true,
+        "symbolic_first": false,
+        "recovery_first": 0,
+        "base_attempted": 1,
+        "symbolic_attempted": 0,
+        "symbolic_recovered": 0,
+        "symbolic_error": 0,
+        "symbolic_expansions": 0,
+        "certificate_point_tests": 8793024,
+        "certificate_node_visits": 46061402
+      }
+    }
+  ]
+}

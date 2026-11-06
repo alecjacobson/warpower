@@ -1,0 +1,128 @@
+{
+  "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+  "parameters": {
+    "case": "graded-torus",
+    "input": null,
+    "n": 1000,
+    "initial": 256,
+    "seed": 2026,
+    "subdivisions": 4,
+    "quality_rounds": 4,
+    "automatic_sizing": false,
+    "repeats": 3,
+    "independent_quality": true,
+    "output": "/home/horde/projects/power-diagram/.work/vtm/gallery-current-graded-torus"
+  },
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "input_points": 1152,
+  "input_faces": 2304,
+  "input_off_sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+  "setup_seconds": 0.8066061735153198,
+  "first_replay_wall_seconds": 6.76611177995801,
+  "first_replay_gpu_ms": 6765.97265625,
+  "additional_replay_gpu_ms": [
+    6659.3681640625,
+    6658.58544921875,
+    6665.01904296875
+  ],
+  "median_additional_replay_ms": 6659.3681640625,
+  "cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "valid": 1,
+  "error": 0,
+  "status": 1,
+  "counts": [
+    1000,
+    5829,
+    4318,
+    1062
+  ],
+  "topology": [
+    1,
+    1,
+    0,
+    0
+  ],
+  "rounds": [
+    4,
+    0,
+    4
+  ],
+  "steps": [
+    40,
+    20
+  ],
+  "moves": [
+    4,
+    2
+  ],
+  "last_errors": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "quality": {
+    "radius_ratio_percentiles": {
+      "0": 0.09825068466442469,
+      "1": 0.3157296471230954,
+      "5": 0.6093410824932921,
+      "50": 0.8746048673109792,
+      "95": 0.965513400609918,
+      "100": 0.9969946194432132
+    },
+    "volume": 17.705399745728155,
+    "relative_volume_error": -0.07153980582158502,
+    "directed_surface_rms": 0.02979998664293346
+  },
+  "independent_quality": {
+    "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+    "sites": 1000,
+    "referenced_vertices": 1000,
+    "tetrahedra": 4318,
+    "boundary_triangles": 1062,
+    "components": 1,
+    "boundary_euler": 0,
+    "volume": 17.7053997457282,
+    "input_volume": 19.0696379411241,
+    "relative_volume_error": -0.07153980582158237,
+    "mean_radius_ratio": 0.8434823019168575,
+    "radius_ratio_percentiles": {
+      "0": 0.09825068466442465,
+      "1": 0.3157296471230952,
+      "5": 0.6093410824932923,
+      "50": 0.8746048673109794,
+      "95": 0.9655134006099179,
+      "100": 0.9969946194432132
+    },
+    "dihedral_degrees_min": 5.026539262175364,
+    "dihedral_degrees_max": 171.82395929897632,
+    "output_to_input": {
+      "area": 53.36245809982569,
+      "squared_integral": 0.047387954810131236,
+      "rms": 0.029799986642933575,
+      "max_sample": 0.08013220133303886
+    },
+    "input_to_output": {
+      "area": 55.01379994263034,
+      "squared_integral": 0.05249811082305713,
+      "rms": 0.030891287953589648,
+      "max_sample": 0.09965260622581941
+    },
+    "two_sided_area_weighted_rms": 0.030358854287341103,
+    "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.39101979950382854
+  }
+}

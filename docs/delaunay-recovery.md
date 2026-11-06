@@ -99,6 +99,11 @@ interval with equal box endpoints; only a strictly negative result skips the
 original predicate. Uncertain leaves use exact dyadic-integer arithmetic. Exact zero-volume candidates are discarded; negative
 original orientations reject the candidate.
 
+For 128–512-site buffers, global certification instead partitions point queries
+over 32 workers per tetrahedron with the same conservative bounds and exact
+signs. Larger/smaller buffers retain the hierarchy, and local certification is
+unchanged. See [parallel certificate measurements](parallel-certificate.md).
+
 Cospherical ties use **one consistent symbolic lifting**. First evaluate the
 ordinary determinant. At exact zero, evaluate its coefficient for infinitesimal
 weights `epsilon * h(i)`. The determinant is affine in the weights, so this is

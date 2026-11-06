@@ -43,7 +43,17 @@ the core error namespace; the parent mesher reports child errors through its
 existing stage diagnostics.
 
 The guard runs once per core optimization step, before reconstruction and
-backtracking. It adds no workspace arrays or host decisions. It applies to
+backtracking. For an interior site, it bounds the closest-point search to the
+radius that could actually restrict the proposed displacement. A missing hit
+inside that expanded cutoff leaves the direction unchanged.
+
+One int32 per site records a known interior classification. A constrained move
+stays in the material, so later unassigned steps can reuse that classification.
+Any boundary role invalidates it, including a masked boundary step. Every core
+call clears the cache, so new input positions, domain refits, external quality
+moves, and changing active prefixes cannot inherit an old classification.
+Backtracking restores an interior position and therefore preserves the fact
+being cached. There are no host decisions. The guard applies to
 uniform, graded, active-prefix and selective VTM paths. Independently callable
 power diagrams, Delaunay reconstruction, boundary fitting, and fixed-hull ODT
 do not call it.
@@ -53,6 +63,11 @@ disconnected material, exterior recovery, unchanged boundary roles and masks,
 inactive NaNs, a captured changing-input loop, and rollback on query failure.
 The real hand regression checks both uniform and graded updates and verifies
 physical tetrahedron orientations using independent integer arithmetic.
+
+Validation of the optimized cache and bounded search is in progress. Initial
+unbounded-query measurements showed a material full-mesher slowdown and are
+retained as rejected performance results; they are not evidence for the final
+optimized implementation.
 
 The complete hand still requires the extraction work in
 [#112](https://github.com/alecjacobson/warpower/issues/112). Its failure gate

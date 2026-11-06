@@ -21,6 +21,7 @@ def arrays(points, directions, roles=None):
         wp.array(np.asarray(directions, np.float64), dtype=wp.vec3d),
         wp.ones(n, dtype=wp.float64),
         wp.zeros(1, dtype=int),
+        wp.zeros(n, dtype=int),
     )
 
 
@@ -59,9 +60,13 @@ def test_trust_ball_preserves_material_and_boundary_mask(scale, damping):
         )
         * scale
     )
-    p, roles, delta, edge, error = arrays(original, initial, [0, 0, 0, 0, 1, 2, 3, 0])
+    p, roles, delta, edge, error, interior = arrays(original, initial, [0, 0, 0, 0, 1, 2, 3, 0])
     edge.fill_(scale)
-    wp.launch(constrain, len(p), inputs=[domain.tree, p, roles, delta, edge, 0.25, damping, error])
+    wp.launch(
+        constrain,
+        len(p),
+        inputs=[domain.tree, p, roles, delta, edge, 0.25, damping, error, interior],
+    )
     assert error.numpy()[0] == 0
     d = delta.numpy()
     for alpha in [damping, damping / 2, damping / 32]:
@@ -84,13 +89,50 @@ def test_material_trust_region_respects_cavity_and_disconnected_gap():
     ]
     for surface, point, direction in cases:
         domain = SurfaceDomain(*surface)
-        p, roles, delta, edge, error = arrays([point], [direction])
-        wp.launch(constrain, 1, inputs=[domain.tree, p, roles, delta, edge, 0.5, 1.0, error])
+        p, roles, delta, edge, error, interior = arrays([point], [direction])
+        wp.launch(
+            constrain, 1, inputs=[domain.tree, p, roles, delta, edge, 0.5, 1.0, error, interior]
+        )
         assert error.numpy()[0] == 0
         movement = delta.numpy()[0]
         assert 0 < np.linalg.norm(movement) < 0.01
         samples = p.numpy().astype(float) + np.linspace(0, 1, 17)[:, None] * movement
         assert solid_angle_inside(*surface, samples).all()
+
+
+def test_cached_interior_classification_is_invalidated_by_boundary_membership():
+    domain = SurfaceDomain(*cube())
+    p, roles, delta, edge, error, interior = arrays([[0.99, 0, 0]], [[1, 0, 0]])
+
+    def run():
+        wp.launch(
+            constrain,
+            1,
+            inputs=[domain.tree, p, roles, delta, edge, 0.5, 0.5, error, interior],
+        )
+        assert error.numpy()[0] == 0
+
+    run()
+    assert interior.numpy()[0] == 1
+    moved = (p.numpy().astype(float) + 0.5 * delta.numpy()).astype(np.float32)
+    assert solid_angle_inside(*cube(), moved).all()
+    p.assign(moved)
+    delta.assign(np.array([[0.01, 0, 0]], np.float64))
+    run()
+    assert interior.numpy()[0] == 1
+    assert solid_angle_inside(*cube(), p.numpy().astype(float) + 0.5 * delta.numpy()).all()
+    # A boundary centroid can lie outside a nonconvex input, then lose its
+    # quadrature assignment. Even a masked boundary step invalidates the cache.
+    p.assign(np.array([[1.5, 0, 0]], np.float32))
+    roles.fill_(1)
+    delta.zero_()
+    run()
+    assert interior.numpy()[0] == 0
+    roles.zero_()
+    delta.assign(np.array([[1, 0, 0]], np.float64))
+    run()
+    np.testing.assert_array_equal(delta.numpy(), [[-0.5, 0, 0]])
+    assert interior.numpy()[0] == 0
 
 
 @pytest.mark.parametrize("graded", [False, True])
@@ -154,7 +196,7 @@ def test_captured_changing_producer_guard_consumer_recovers_without_host_work(
     monkeypatch, tmp_path
 ):
     domain = SurfaceDomain(*cube())
-    p, roles, delta, edge, error = arrays(np.zeros((2, 3)), np.zeros((2, 3)))
+    p, roles, delta, edge, error, interior = arrays(np.zeros((2, 3)), np.zeros((2, 3)))
     phase = wp.zeros(1, dtype=int)
     output = wp.empty((4, 3), dtype=wp.float64)
     wp.load_module(module=__name__, device=p.device)
@@ -170,7 +212,12 @@ def test_captured_changing_producer_guard_consumer_recovers_without_host_work(
         with wp.ScopedCapture() as capture:
             wp.launch(produce, 1, inputs=[phase, p, delta])
             error.zero_()
-            wp.launch(constrain, 2, inputs=[domain.tree, p, roles, delta, edge, 0.25, 0.5, error])
+            interior.zero_()
+            wp.launch(
+                constrain,
+                2,
+                inputs=[domain.tree, p, roles, delta, edge, 0.25, 0.5, error, interior],
+            )
             wp.launch(consume, 1, inputs=[phase, delta, error, output])
         for _ in range(4):
             wp.capture_launch(capture.graph)

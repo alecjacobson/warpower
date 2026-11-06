@@ -330,6 +330,7 @@ class VTMWorkspace:
             self._moment = wp.zeros(self.n, dtype=wp.vec3d)
             self._edge = wp.empty(self.n, dtype=wp.float64)
             self._direction = wp.empty(self.n, dtype=wp.vec3d)
+            self._interior_known = wp.zeros(self.n, dtype=int)
             self._original = wp.empty_like(self.points)
             self._old_tets = wp.empty_like(self.full_tetrahedra)
             self._old_count = wp.empty_like(self.full_tetrahedra_count)
@@ -386,6 +387,7 @@ class VTMWorkspace:
         )
 
     def _record(self):
+        self._interior_known.zero_()
         if self.selection is not None:
             self.selection.reset()
         self.iterations.zero_()
@@ -495,6 +497,7 @@ class VTMWorkspace:
                 self.step_limit,
                 self.damping,
                 self.error,
+                self._interior_known,
             ],
         )
         self._launch(

@@ -15,7 +15,7 @@ from warpower._vtm_domain import constrain
 
 def audit(profile=False, dot=None):
     domain = SurfaceDomain(*cube())
-    points, roles, delta, edge, error = arrays(np.zeros((2, 3)), np.zeros((2, 3)))
+    points, roles, delta, edge, error, interior = arrays(np.zeros((2, 3)), np.zeros((2, 3)))
     phase = wp.zeros(1, dtype=int)
     output = wp.empty((4, 3), dtype=wp.float64)
     for module in ["tests.test_vtm_domain", "warpower._vtm_domain"]:
@@ -23,7 +23,12 @@ def audit(profile=False, dot=None):
     with wp.ScopedCapture() as capture:
         wp.launch(produce, 1, inputs=[phase, points, delta])
         error.zero_()
-        wp.launch(constrain, 2, inputs=[domain.tree, points, roles, delta, edge, 0.25, 0.5, error])
+        interior.zero_()
+        wp.launch(
+            constrain,
+            2,
+            inputs=[domain.tree, points, roles, delta, edge, 0.25, 0.5, error, interior],
+        )
         wp.launch(consume, 1, inputs=[phase, delta, error, output])
     if dot:
         wp.capture_debug_dot_print(capture.graph, str(dot), verbose=True)

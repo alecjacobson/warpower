@@ -248,6 +248,13 @@ quality, boundary fitting, topology counts, and volume guards determine whether
 it commits or restores the original mesh. Corners and crease sites stay fixed.
 This separate stage adds no work to the standalone geometry or default VTM paths.
 
+The optional [interior improvement workspace](interior-improvement.md) moves a
+dense interior site to a poor interior tetrahedron's centroid, or inserts one
+when the device target allows growth. A fresh full-hull face table identifies
+bounded cells; signed circumcentric flags provide actual Voronoi volumes for
+sizing-normalized donor selection. It shares the quality transaction and
+restores the active prefix and all geometry if the candidate fails its guards.
+
 Further worst-element improvement, the full mesher API, and performance work remain tracked in
 the [full VTM implementation plan](vtm.md). An energy decrease alone does not
 establish good worst-element quality or a CPU performance advantage.

@@ -184,6 +184,14 @@ def test_nonfinite_input_is_invalid():
     np.testing.assert_array_equal(valid, 0)
 
 
+def test_exact_radius_is_stable_for_translated_small_cells():
+    origin = np.array([2.0**80, 2.0**81, -(2.0**79)], np.float32)
+    steps = np.spacing(np.abs(origin)).astype(np.float64)
+    offsets = np.array([[0, 0, 0], [1, 2, -1], [-2, 1, 1], [3, -1, 2]], np.float64)
+    source = (origin.astype(np.float64) + steps * offsets).astype(np.float32)
+    assert_reference([source[list(order)] for order in permutations(range(4))], exact=True)
+
+
 @wp.kernel
 def produce(source: wp.array2d[wp.vec3], points: wp.array2d[wp.vec3], phase: wp.array[int]):
     i = wp.tid()

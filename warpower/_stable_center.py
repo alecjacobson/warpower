@@ -172,27 +172,28 @@ def exact_center(p0: wp.vec3, p1: wp.vec3, p2: wp.vec3, p3: wp.vec3):
     sign = denominator.sign
     positive_d = denominator
     positive_d.sign = 1
+    d_value = integer.predicate(positive_d, 3 * base).estimate
+    offset = wp.vec3d()
     for axis in range(3):
-        n = integer.plus(
-            integer.times(denominator, integer.from_float(p0[axis], base)),
+        relative_n = integer.plus(
             integer.plus(
-                integer.plus(
-                    integer.times(norms.x, cofactor(b, c, axis)),
-                    integer.times(norms.y, cofactor(c, a, axis)),
-                ),
-                integer.times(norms.z, cofactor(a, b, axis)),
+                integer.times(norms.x, cofactor(b, c, axis)),
+                integer.times(norms.y, cofactor(c, a, axis)),
             ),
+            integer.times(norms.z, cofactor(a, b, axis)),
         )
+        n = integer.plus(integer.times(denominator, integer.from_float(p0[axis], base)), relative_n)
         n.sign *= sign
         rounded = round_ratio(n, positive_d, base)
         if rounded.valid == 0:
             return result
         result.point[axis] = rounded.value
-        result.wide[axis] = (
-            integer.predicate(n, 4 * base).estimate
-            / integer.predicate(positive_d, 3 * base).estimate
-        )
-    result.radius = wp.length(result.wide - wp.vec3d(p0))
+        result.wide[axis] = integer.predicate(n, 4 * base).estimate / d_value
+        relative_n.sign *= sign
+        offset[axis] = integer.predicate(relative_n, 4 * base).estimate / d_value
+    # Evaluate the local offset directly: subtracting approximate global centers
+    # loses radius accuracy for small cells far from the coordinate origin.
+    result.radius = wp.length(offset)
     result.valid = int(wp.isfinite(result.radius) and result.radius > wp.float64(0.0))
     return result
 

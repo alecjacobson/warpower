@@ -55,7 +55,7 @@ with float64 geometric arithmetic. Shared-edge/vertex ray hits trigger two
 alternative directions on device; unresolved classification is reported rather
 than guessed. After bounding-box filtering, intersections between triangles
 without shared vertex indices use filtered float64 orientation signs with exact
-expansion fallback. Plane separation and segment/triangle tests handle crossing,
+dyadic-integer fallback. Plane separation and segment/triangle tests handle crossing,
 coplanar overlap, and unindexed touching without a geometric tolerance. Shared
 indexed contact retains the separate float64 edge/cone tests.
 

@@ -19,6 +19,8 @@ def render(mesh, output, axis=0, fraction=0.5, title="Variational tetrahedral me
     coordinate = p[t].mean(axis=1)[:, axis]
     cut = p[:, axis].min() + fraction * np.ptp(p[:, axis])
     selected = np.flatnonzero(coordinate <= cut)
+    if not len(selected):
+        raise ValueError("This cut removes every tetrahedron; increase --fraction")
     cells = t[selected]
     faces = np.concatenate(
         [cells[:, [1, 2, 3]], cells[:, [0, 3, 2]], cells[:, [0, 1, 3]], cells[:, [0, 2, 1]]]
@@ -55,7 +57,7 @@ def render(mesh, output, axis=0, fraction=0.5, title="Variational tetrahedral me
     fig.text(
         0.055,
         0.89,
-        f"{len(p):,} sites  ·  {len(t):,} tetrahedra  ·  complete device meshing",
+        f"{len(p):,} sites  ·  {len(t):,} tetrahedra",
         color="#52677a",
         fontsize=11,
     )

@@ -2,8 +2,9 @@
 
 The exact Delaunay certificate first rejects BVH nodes disjoint from an outward
 float32 box of the tetrahedron's original-coordinate circumsphere. Nodes that
-survive still use the existing float64 polynomial interval test and exact leaf
-predicates. An uncertain or nonfinite box disables this new rejection test.
+survive still use the existing float64 polynomial interval test. At leaves, the
+same polynomial interval test first rejects individual points using the cached
+cofactors; uncertain points retain the symbolic/exact predicate. An uncertain or nonfinite box disables this new rejection test.
 Only strict separation permits rejection; touching boxes and exact ties survive.
 No output, failure code, certificate tolerance, or construction policy changes.
 
@@ -54,6 +55,33 @@ hull tetrahedra can have enormous circumspheres. Retaining the original
 polynomial test on surviving nodes is essential: its approximate supporting
 halfspace can prune cases where a sphere's axis-aligned box covers the entire
 point cloud. This is a conservative pretest, not a replacement predicate.
+
+## Cached-cofactor leaf points
+
+A BVH leaf can overlap the sphere even when most of its sites are outside.
+For buffers of at least 32 sites, `outside(shape, point, point)` evaluates the existing
+polynomial interval with both endpoints equal. It reuses the center numerators
+and positive orientation determinant already computed for the tetrahedron.
+For exact relative coordinates `x,y,z`, the expression is
+`x*Nx + y*Ny + z*Nz - D*(x*x + y*y + z*z)`. The existing Ball operations enclose
+its exact value; rejection requires a finite upper endpoint strictly below zero.
+Such a point has a strictly negative ordinary sphere determinant, so symbolic
+tie breaking cannot change its classification. Every uncertain result still
+uses the original symbolic/exact predicate.
+
+Smaller buffers retain the original leaf predicate: the extra test can cost
+more than it saves on tiny, cospherical meshes. This introduces no division,
+new tolerance, scratch storage or kernel launch.
+The certificate still checks every global lower facet, hull support, face
+incidence and canonical-site coverage. The leaf-query statistic counts points
+before this filter, preserving its previous meaning.
+
+`tests/test_sphere_points.py` compares the filter against exact rational centers
+and squared radii on 2,395 queries, spanning exponents -140 through 120, nearly
+flat tetrahedra, translations, vertex ties and neighboring float32 values.
+Separate cases retain all 88 cospherical cube queries and an exactly outside
+point with a determinant too small for the filter to resolve. In that last case,
+the filter must defer rather than infer a sign from a tolerance.
 
 ## Independent checks
 
@@ -110,3 +138,50 @@ records 321 kernel activities across three replays; all 21 graph copies are
 device-to-device, with no host/callback or allocation/free nodes. The
 [isolation record](../results/validation/vtm/sphere-box-isolation.json) checks all
 other runtime modules against the preceding main revision.
+
+## Cached point-filter measurements
+
+The [paired final matrix](../results/validation/vtm/certpoint-performance.json)
+uses the preceding main revision and the guarded leaf filter. On L40 / Warp 1.19.0,
+medians in milliseconds are:
+
+| Input | Complete before | Complete after | Certificate before | Certificate after |
+|---|---:|---:|---:|---:|
+| Random1000 | 10.288 | 9.740 | 1.366 | 0.849 |
+| Random10000 | 49.350 | 45.628 | 9.594 | 6.085 |
+| Random100000 | 263.447 | 228.383 | 90.066 | 54.742 |
+| Cube8 | 0.525 | 0.525 | 0.150 | 0.152 |
+| Grid64 | 2.217 | 2.191 | 0.597 | 0.562 |
+| Torus boundary128 | 1220.889 | 1220.672 | 90.985 | 90.705 |
+
+The 100k certificate improves 1.65× and complete certified reconstruction 1.15×.
+The full torus1000 mesher improves 3942.56 → 3632.24 ms (1.085×), including domain
+refit, fresh sampling, refinement, fitting, four quality rounds and extraction.
+[Points, roles, full/material tetrahedra and boundary connectivity are unchanged](../results/validation/vtm/certpoint-torus-equivalence.json).
+Independent Delaunay and topology checks pass. Scalar reductions can differ at
+roundoff level because tetrahedron row order is unspecified.
+
+Random timings use five samples, structured cases three, and the full mesher
+three additional replays. All recorded timing windows have zero CPU quota
+throttling. First replays are reported separately in the raw records; allocation,
+compilation and serialization are outside these resident-device timings. These
+are internal improvements, not the outstanding native CPU performance target.
+
+A split filter/exact work-queue experiment was approximately flat and was not
+adopted. An initial unguarded leaf filter added about 0.011 ms to the tiny
+cospherical cube, so buffers smaller than 32 sites retain the original leaf
+predicate. The [other runtime modules and flagship README remain byte-identical](../results/validation/vtm/certpoint-isolation.json).
+
+All 671,908 tetrahedra in the 100k case match both the saved native CGAL 6.2.1
+reference and the preceding certified constructor on identical original
+float32 sites ([independent comparison](../results/validation/vtm/certpoint-cgal.json)).
+The final [391-test suite](../results/validation/vtm/certpoint-full-tests.txt) passes.
+
+Six [padded memory cases](../results/validation/vtm/certpoint-memcheck.txt) and one
+[captured changing-input lifetime case](../results/validation/vtm/certpoint-lifetime.txt)
+pass with zero sanitizer errors, using the documented diagnostic stack and
+synchronous allocations for lifetime tracking. The [native graph audit](../results/validation/vtm/certpoint-device-audit.json)
+records 552 kernel activities across four producer/reconstruction/consumer replays.
+All 21 graph copy nodes are device-to-device; there are no host callbacks,
+allocation/free nodes or host transfers. The [functional replay record](../results/validation/vtm/certpoint-native-run.json)
+covers 32,768 sites, a moved point, a sparse 128-site prefix and invalid input.

@@ -243,6 +243,11 @@ def check_spheres(
                 if tree.owners[q] != q or q == ids[0] or q == ids[1] or q == ids[2] or q == ids[3]:
                     continue
                 queries += 1
+                # The node's interval can straddle the sphere while an individual
+                # leaf point is provably outside. Reuse its cached cofactors;
+                # uncertain signs and exact ties retain the symbolic predicate.
+                if points.shape[0] >= 32 and outside(shape, points[q], points[q]):
+                    continue
                 result = symbolic_sphere(points, ids, q)
                 if result.valid == 0:
                     wp.atomic_or(error, 0, 2)

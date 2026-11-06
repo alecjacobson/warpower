@@ -24,6 +24,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--dot", type=Path)
     parser.add_argument("--profile", action="store_true")
+    parser.add_argument("--no-cache", action="store_true", help="Compare without strategy reuse")
     args = parser.parse_args()
     rng = np.random.default_rng(2026)
     if args.case in ("cube", "grid"):
@@ -43,10 +44,14 @@ def main():
         points = boundary.points.numpy()
     else:
         points = rng.uniform(-1, 1, (args.n, 3)).astype(np.float32)
-    workspace = DelaunayWorkspace(points).run()
-    wp.synchronize()
-    assert workspace.error.numpy()[0] == 0
+    workspace = DelaunayWorkspace(points, cache_strategy=not args.no_cache)
     begin, end = wp.Event(enable_timing=True), wp.Event(enable_timing=True)
+    wp.record_event(begin)
+    workspace.run()
+    wp.record_event(end)
+    wp.synchronize_event(end)
+    first_replay_ms = wp.get_event_elapsed_time(begin, end)
+    assert workspace.error.numpy()[0] == 0
 
     def measure(graph):
         wp.capture_launch(graph)
@@ -106,6 +111,7 @@ def main():
         seed=2026,
         device=workspace.device.name,
         warp=wp.__version__,
+        first_replay_ms=first_replay_ms,
         full=full,
         base=base,
         auxiliary=auxiliary,
@@ -116,6 +122,9 @@ def main():
         candidate_error=int(workspace.candidate_error.numpy()[0]),
         certificate_error=int(workspace.certificate_error.numpy()[0]),
         attempts=int(workspace.attempts.numpy()[0]),
+        cache_strategy=workspace.cache_strategy,
+        recovery_first=int(workspace.recovery_first.numpy()[0]),
+        base_attempted=int(workspace.base_attempted.numpy()[0]),
         certificate_point_tests=int(workspace._certificate.statistics.numpy()[0]),
         certificate_node_visits=int(workspace._certificate.statistics.numpy()[1]),
     )

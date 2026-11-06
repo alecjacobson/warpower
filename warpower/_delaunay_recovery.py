@@ -4,8 +4,10 @@ import operator
 
 import warp as wp
 
+from . import _canonical, _validation
 from ._delaunay_certificate import DelaunayCertificate, direction
-from ._graph import DiagramWorkspace
+from ._graph import DiagramWorkspace, input_ready
+from ._site_bvh import SiteHierarchy
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
 
@@ -14,15 +16,9 @@ wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": 
 def prepare(
     base_error: wp.array[int],
     certificate_error: wp.array[int],
-    attempts: wp.array[int],
-    recovered: wp.array[int],
-    error: wp.array[int],
     ready: wp.array[int],
 ):
-    attempts[0] = 0
-    recovered[0] = 0
     certificate_error[0] = 0
-    error[0] = wp.where(base_error[0] == 1, 1, 0)
     ready[0] = int(base_error[0] == 0)
 
 
@@ -33,7 +29,25 @@ def begin_retry(
     error: wp.array[int],
     running: wp.array[int],
 ):
-    running[0] = int(error[0] == 0 and (base_error[0] != 0 or certificate_error[0] != 0))
+    error[0] = 0
+    if base_error[0] == 1:
+        error[0] = 1
+    elif base_error[0] != 0 or certificate_error[0] != 0:
+        error[0] = 2
+    running[0] = int(error[0] == 2)
+
+
+@wp.kernel
+def choose_strategy(
+    preferred: wp.array[int], cache: bool, normal: wp.array[int], recovery_first: wp.array[int]
+):
+    normal[0] = int(not (cache and preferred[0] != 0))
+    recovery_first[0] = 1 - normal[0]
+
+
+@wp.kernel
+def fallback_ready(error: wp.array[int], ready: wp.array[int]):
+    ready[0] = int(error[0] == 2)
 
 
 @wp.kernel
@@ -78,13 +92,21 @@ def finish_retry(
     if candidate_error[0] == 0 and certificate_error[0] == 0:
         recovered[0] = 1
         running[0] = 0
+        error[0] = 0
     elif attempts[0] >= maximum:
         error[0] = 2
         running[0] = 0
 
 
 @wp.kernel
-def finalize(error: wp.array[int], count: wp.array[int]):
+def finalize(
+    error: wp.array[int],
+    count: wp.array[int],
+    recovered: wp.array[int],
+    preferred: wp.array[int],
+    cache: bool,
+):
+    preferred[0] = int(cache and error[0] == 0 and recovered[0] != 0)
     if error[0] != 0:
         count[0] = 0
 
@@ -106,8 +128,10 @@ class DelaunayWorkspace:
         tetrahedra_cell_capacity=1024,
         chunk_size=None,
         max_attempts=6,
+        cache_strategy=True,
     ):
         self.max_attempts = operator.index(max_attempts)
+        self.cache_strategy = bool(cache_strategy)
         if not 1 <= self.max_attempts <= 12:
             raise ValueError("max_attempts must be in [1, 12]")
         settings = dict(
@@ -125,6 +149,8 @@ class DelaunayWorkspace:
             self._normalized = wp.zeros_like(self.points)
             self._weights = wp.zeros(self.n, dtype=float)
             self._auxiliary = DiagramWorkspace(self._normalized, self._weights, **settings)
+            self._original = SiteHierarchy(self.points)
+            self._original.tree.owners = self._base._hierarchy.owners
             self._candidate = wp.empty_like(self._base.tetrahedra)
             self._candidate_count = wp.empty(1, dtype=int)
             self._certificate = DelaunayCertificate(
@@ -138,6 +164,10 @@ class DelaunayWorkspace:
             self.error = wp.zeros(1, dtype=int)
             self.attempts = wp.zeros(1, dtype=int)
             self.recovered = wp.zeros(1, dtype=int)
+            self.base_attempted = wp.zeros(1, dtype=int)
+            self.recovery_first = wp.zeros(1, dtype=int)
+            self._preferred = wp.zeros(1, dtype=int)
+            self._normal = wp.empty(1, dtype=int)
             self._ready = wp.empty(1, dtype=int)
             self._running = wp.empty(1, dtype=int)
             wp.load_module(module=__name__, device=self.device)
@@ -151,7 +181,35 @@ class DelaunayWorkspace:
 
     def _record(self):
         self.tetrahedra_count.zero_()
+        self.error.zero_()
+        self.attempts.zero_()
+        self.recovered.zero_()
+        self.base_attempted.zero_()
+        self.base_error.zero_()
         self.candidate_error.zero_()
+        self.certificate_error.zero_()
+        self._running.zero_()
+        self._launch(
+            choose_strategy,
+            1,
+            [self._preferred, self.cache_strategy, self._normal, self.recovery_first],
+        )
+        wp.capture_if(self._normal, self._normal_path)
+        wp.capture_if(self.recovery_first, self._preferred_path)
+        self._launch(
+            finalize,
+            1,
+            [
+                self.error,
+                self.tetrahedra_count,
+                self.recovered,
+                self._preferred,
+                self.cache_strategy,
+            ],
+        )
+
+    def _base_path(self):
+        self.base_attempted.fill_(1)
         self._base.run()
         self._launch(
             prepare,
@@ -159,9 +217,6 @@ class DelaunayWorkspace:
             [
                 self.base_error,
                 self.certificate_error,
-                self.attempts,
-                self.recovered,
-                self.error,
                 self._ready,
             ],
         )
@@ -171,17 +226,66 @@ class DelaunayWorkspace:
         self._launch(
             begin_retry, 1, [self.base_error, self.certificate_error, self.error, self._running]
         )
-        wp.capture_while(self._running, self._retry)
-        self._launch(finalize, 1, [self.error, self.tetrahedra_count])
 
-    def _retry(self):
+    def _normal_path(self):
+        self._base_path()
+        wp.capture_while(
+            self._running, lambda: self._retry(self._base._hierarchy, self._base._bounds)
+        )
+
+    def _preferred_path(self):
+        self._base._validation.zero_()
+        self._launch(
+            _validation.validate,
+            self.n + 1,
+            [
+                self.points,
+                self._base.weights,
+                self._base._empty,
+                self._base._empty,
+                False,
+                self._base._validation,
+            ],
+        )
+        self._launch(input_ready, 1, [self._base._validation, self.error, self._ready])
+        wp.copy(self._running, self._ready)
+        wp.capture_if(self._ready, self._refresh_original)
+        wp.capture_while(
+            self._running, lambda: self._retry(self._original.tree, self._original._bounds)
+        )
+        # A changed input may favor the original builder. Retry it once after
+        # auxiliary exhaustion; never turn stale connectivity into a success.
+        self._launch(fallback_ready, 1, [self.error, self._ready])
+        wp.capture_if(self._ready, self._base_path)
+
+    def _refresh_original(self):
+        self._original.rebuild()
+        self._base._owner_table.fill_(-1)
+        self._launch(
+            _canonical.insert,
+            self.n,
+            [
+                self.points,
+                self._base.weights,
+                self._base._bits,
+                self._base._owner_table,
+                self._base._buckets,
+            ],
+        )
+        self._launch(
+            _canonical.resolve,
+            self.n,
+            [self._base._owner_table, self._base._buckets, self._original.tree.owners],
+        )
+
+    def _retry(self, tree, bounds):
         self._launch(
             normalize,
             self.n,
             [
                 self.points,
-                self._base._bounds,
-                self._base._hierarchy.owners,
+                bounds,
+                tree.owners,
                 self.attempts,
                 self._normalized,
                 self._weights,
@@ -193,7 +297,7 @@ class DelaunayWorkspace:
         self._launch(
             candidate_ready, 1, [self.candidate_error, self.certificate_error, self._ready]
         )
-        wp.capture_if(self._ready, self._certificate.run)
+        wp.capture_if(self._ready, lambda: self._certificate.run(tree))
         self._launch(
             finish_retry,
             1,

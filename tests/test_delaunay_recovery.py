@@ -224,3 +224,101 @@ def test_capture_connectivity_changing_producer_and_consumer(tmp_path):
     wp.capture_debug_dot_print(capture.graph, str(path))
     dot = path.read_text().lower()
     assert "host" not in dot and "mem_alloc" not in dot and "mem_free" not in dot
+
+
+@wp.kernel
+def produce_cached(
+    source: wp.array[wp.vec3],
+    alternate: wp.array[wp.vec3],
+    points: wp.array[wp.vec3],
+    phase: wp.array[int],
+):
+    i = wp.tid()
+    p = source[i]
+    if phase[0] == 1 or phase[0] == 2:
+        p = p * 2.0 + wp.vec3(0.125, 2.25, -1.0)
+    if phase[0] == 2 and i == points.shape[0] - 1:
+        p = source[0] * 2.0 + wp.vec3(0.125, 2.25, -1.0)
+    if phase[0] == 3:
+        p = alternate[i]
+    points[i] = p
+
+
+def test_cached_strategy_rebuilds_current_bounds_owners_and_connectivity_in_capture(tmp_path):
+    original = np.array(list(product(range(4), repeat=3)), np.float32)
+    alternate = np.random.default_rng(116).uniform(-1, 1, original.shape).astype(np.float32)
+    w = DelaunayWorkspace(original)
+    source = wp.array(original, dtype=wp.vec3, device=w.device)
+    alternative = wp.array(alternate, dtype=wp.vec3, device=w.device)
+    phase = wp.zeros(1, dtype=int, device=w.device)
+    wp.load_module(module=__name__, device=w.device)
+    with wp.ScopedCapture() as capture:
+        wp.launch(produce_cached, len(original), inputs=[source, alternative, w.points, phase])
+        w.run()
+    previous_recovered = 0
+    for step in [0, 1, 2, 3, 0]:
+        phase.fill_(step)
+        wp.capture_launch(capture.graph)
+        expected = original.copy()
+        if step in [1, 2]:
+            expected = expected * 2 + np.array([0.125, 2.25, -1], np.float32)
+        if step == 2:
+            expected[-1] = expected[0]
+        if step == 3:
+            expected = alternate.copy()
+        tets = valid(w, expected)
+        assert w.recovery_first.numpy()[0] == previous_recovered
+        if step in [1, 2]:
+            assert w.base_attempted.numpy()[0] == 0
+        if step == 3:
+            assert tet_set(tets) == reference(expected)
+        previous_recovered = int(w.recovered.numpy()[0])
+    path = tmp_path / "cached.dot"
+    wp.capture_debug_dot_print(capture.graph, str(path))
+    dot = path.read_text().lower()
+    assert "host" not in dot and "mem_alloc" not in dot and "mem_free" not in dot
+
+
+@wp.kernel
+def fail_candidate(error: wp.array[int], count: wp.array[int]):
+    error[0] = 2
+    count[0] = 0
+
+
+def test_exhausted_cached_candidates_fall_back_to_current_base_mesh():
+    original = np.array(list(product([-1, 1], repeat=3)), np.float32)
+    w = DelaunayWorkspace(original, max_attempts=2).run()
+    valid(w, original)
+    changed = np.random.default_rng(131).uniform(-1, 1, original.shape).astype(np.float32)
+    w.points.assign(changed)
+    real_run = w._auxiliary.run
+
+    def fail_run(stream=None):
+        real_run(stream)
+        wp.launch(fail_candidate, 1, inputs=[w._auxiliary.error, w._auxiliary.tetrahedra_count])
+
+    w._auxiliary.run = fail_run
+    wp.load_module(module=__name__, device=w.device)
+    with wp.ScopedCapture() as capture:
+        w.run()
+    wp.capture_launch(capture.graph)
+    assert tet_set(valid(w, changed)) == reference(changed)
+    assert w.recovery_first.numpy()[0] == 1
+    assert w.base_attempted.numpy()[0] == 1
+    assert w.attempts.numpy()[0] == 2
+    assert w.recovered.numpy()[0] == 0
+    wp.capture_launch(capture.graph)
+    assert tet_set(valid(w, changed)) == reference(changed)
+    assert w.recovery_first.numpy()[0] == 0
+    assert w.attempts.numpy()[0] == 0
+
+
+def test_strategy_cache_can_be_disabled_for_comparisons():
+    original = np.array(list(product([-1, 1], repeat=3)), np.float32)
+    w = DelaunayWorkspace(original, cache_strategy=False)
+    for _ in range(2):
+        w.run()
+        valid(w, original)
+        assert w.base_attempted.numpy()[0] == 1
+        assert w.recovery_first.numpy()[0] == 0
+        assert w.recovered.numpy()[0] == 1

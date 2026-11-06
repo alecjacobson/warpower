@@ -31,7 +31,7 @@ Warp functions compile into their caller's module; setting these options on the
 function's defining module alone does not protect another kernel's compilation.
 The recovery kernels set these options explicitly for the interval filters.
 
-The unchanged `_filtered_predicates` module first evaluates a float64
+The unchanged executable code in `_filtered_predicates` first evaluates a float64
 center/error ball for each arithmetic operation, accepting a sign only when
 the ball excludes zero (or is exactly zero). It falls back to exact integers
 otherwise. A rounded normal operation's absolute error is bounded by

@@ -59,27 +59,96 @@ mixed determinant is below `2^654`. Both are normal finite float64 values, as
 are the powers used to recover the estimate. Calling kernels retain
 `fast_math=False` and `fuse_fp=False` for the interval-filter arithmetic contract.
 
-## Validation in progress
+## Validation and measured effect
 
-The integrated implementation passes 16 targeted tests: the existing exact,
-filtered and mixed-halfspace rational-oracle tests, plus signed integer
-arithmetic, long carries/borrows, explicit overflow and all power-of-two
-exponents from −800 through 800. Random raw float32 bit patterns exercise the
-full exponent range. Invalid-input and capacity failures remain explicit.
+The integrated implementation passes **410 tests**, including 16 targeted
+predicate/arithmetic tests. Independent rational/integer oracles cover raw
+float32 bit patterns across the exponent range, subnormals, exact ties, weighted
+queries, one-ULP changes, mixed box/site planes, invalid inputs, long
+carries/borrows, explicit capacity overflow and all internal powers from −800
+through 800. All 16 targeted tests pass padded CUDA memcheck with zero errors.
+The direct exact-predicate producer/consumer graph also passes full allocation
+and lifetime tracking, using the documented diagnostic 32 KiB stack and
+synchronous allocations. These diagnostic settings are not runtime changes.
 
-The private prototype reduced the same 384-site hand diagnostic from 41.033 to
-10.718 seconds, both with one symbolic box and the same unsuccessful output.
-Starting the symbolic strategy with a box factor of 4,096 produced a complete
-2,164-tetrahedron hull in 6.678 seconds. This is a diagnostic configuration, not
-a new default, a complete hand VTM solve, or a CPU speedup result. All three
-measurement windows observed zero CPU quota throttling; setup/compilation is
-excluded. The successful mesh passes the preceding expansion-based global
-symbolic certificate. It differs from native CGAL in 33 cells on each side;
-independent Python-integer queries against every site confirm that every such
-cell has an empty open sphere and one or two additional exactly cospherical
-sites. The differences are tie choices, not a connectivity-equivalence claim.
+A native trace of four warmed Delaunay producer/consumer replays exercises local
+certification, global fallback, invalid input and recovery. It records 514 GPU
+kernels, four graph launches and one final synchronization; all 21 graph copy
+nodes are device-to-device, with no host or allocation/free nodes. Setup, graph
+instantiation, warmup and final readback are outside the trace. The direct exact
+predicate graph is separately checked by the test and lifetime run; the native
+Delaunay trace is not a count of integer-fallback invocations.
 
-Full integration, regression timing, native graph and memory checks are still
-pending. [Issue #102](https://github.com/alecjacobson/warpower/issues/102) tracks
+All 671,908 oriented output cells on the 100,000-site random fixture agree in
+canonical connectivity with the saved native CGAL 6.2.1 reference and preceding
+constructor. A forced global certificate also passes. Full torus VTM points,
+roles, input arrays and oriented full/material/boundary connectivity are
+unchanged. The 384-site hand result also matches the preceding constructor.
+
+The complete hand hull passes an independent global certificate using the
+preceding expansion arithmetic. Against native CGAL it has 33 different cells
+on each side: Python-integer queries against every original site establish
+empty open spheres and one or two additional exactly cospherical sites for
+every differing cell. These are alternate tie choices, not an assertion of
+identical CGAL connectivity on this fixture.
+
+### Performance
+
+NVIDIA L40, Warp 1.19.0; resident-device operation times exclude setup/JIT and
+readback, but include every attempted recovery strategy. Five samples per
+standalone case, three complete VTM replays, two cached refined-hand replays.
+The first refined-hand run is reported separately because it discovers the
+successful strategy and box extent.
+
+| Complete operation | Expansion baseline | Integer fallback | Ratio |
+|---|---:|---:|---:|
+| Random 1,000-site Delaunay | 9.157 ms | 9.186 ms | 1.00× |
+| Random 10,000-site Delaunay | 40.696 ms | 40.676 ms | 1.00× |
+| Random 100,000-site Delaunay, initial five samples | 181.190 ms | 184.013 ms | 0.98× |
+| Random 100,000-site Delaunay, ABBA follow-up | 182.939 ms | 182.041 ms | 1.00× |
+| Cube | 0.525 ms | 0.526 ms | 1.00× |
+| Grid | 2.193 ms | 2.197 ms | 1.00× |
+| Corner cloud | 8.066 ms | 6.820 ms | 1.18× |
+| Torus boundary, 128 sites | 1,143.839 ms | 228.214 ms | 5.01× |
+| Fitted hand, 256 sites | 15.893 ms | 13.447 ms | 1.18× |
+| Refined hand, 384 sites, first run | 195,746.500 ms | 38,786.0 ms | 5.05× |
+| Refined hand, 384 sites, cached repeats | 35,624.156 ms | 6,494.056 ms | 5.49× |
+| Full torus VTM, 1,000 sites | 3,199.471 ms | 3,207.572 ms | 1.00× |
+
+The initial 1.56% random-100k difference did not persist in alternating version
+batches: 30 samples per version give medians shown above and means 182.793 /
+182.427 ms. Small cases and the full torus remain within about 0.3% in this
+matrix; this does not establish literally zero overhead on every input. All
+full-operation timing windows were free of CPU quota throttling. One follow-up
+batch's separate auxiliary/certificate stage measurements were throttled;
+those raw records are retained and excluded from clean stage comparisons.
+
+The refined-hand benchmark uses the normal automatic recovery and initial box
+factor one. Both versions produce 2,164 cells, try six auxiliary candidates,
+and enlarge the symbolic box four times to factor 4,096. There is no diagnostic
+strategy override, site snapping or jitter in these measurements. This remains
+a standalone Delaunay fixture, **not a complete hand VTM solve or a CPU
+speedup**. The wide CPU performance target remains open.
+
+```bash
+python -m benchmarks.refined_hand --repeats 3 --output refined-hand.json
+python -m benchmarks.delaunay_recovery --case torus-boundary --repeats 5 --output torus.json
+```
+
+[Timing summary and source hashes](../results/validation/vtm/integer-performance.json),
+[410-test record](../results/validation/vtm/integer-integrated-all-tests.txt),
+[padded memcheck](../results/validation/vtm/integer-memcheck.txt),
+[lifetime check](../results/validation/vtm/integer-lifetime.txt),
+[native trace audit](../results/validation/vtm/integer-device-audit.json),
+[100k CGAL comparison](../results/validation/vtm/integer-cgal.json),
+[oriented output equivalence](../results/validation/vtm/integer-output-equivalence.json),
+[independent hand validation](../results/validation/vtm/hand-integer-independent-validation.json),
+and [source isolation](../results/validation/vtm/integer-isolation.json) retain
+the evidence and scope. Existing diagram paths and README are unchanged;
+filtered-predicate executable code and symbolic tie rules are unchanged.
+
+[Issue #102](https://github.com/alecjacobson/warpower/issues/102) tracks this
 adoption; the complete thin-hand example remains open in
-[issue #93](https://github.com/alecjacobson/warpower/issues/93).
+[issue #93](https://github.com/alecjacobson/warpower/issues/93). Filling certified
+partial meshes instead of repeating whole-cell clipping is tracked in
+[issue #104](https://github.com/alecjacobson/warpower/issues/104).

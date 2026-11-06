@@ -14,6 +14,7 @@ def main():
     parser.add_argument("--dot", type=Path, required=True)
     parser.add_argument("--analyze", type=Path, help="Nsight exported SQLite database")
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--scope", help="Describe the actual profiled phases when using --analyze")
     parser.add_argument(
         "--optimizer", action="store_true", help="Audit three ODT iterations per replay"
     )
@@ -92,6 +93,8 @@ def main():
             "dot_sha256": hashlib.sha256(args.dot.read_bytes()).hexdigest(),
             "sqlite_sha256": hashlib.sha256(args.analyze.read_bytes()).hexdigest(),
         }
+        if args.scope:
+            report["scope"] = args.scope
         assert report["gpu_kernel_activities"] > 0, "Record with --cuda-graph-trace=node"
         assert set(observed_copies) <= {"CUDA_MEMCPY_KIND_DTOD"}
         assert not any(re.search(r"(alloc|free|memcpy)", name, re.I) for name in calls)

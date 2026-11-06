@@ -1,0 +1,49 @@
+{
+  "tool": "CUDA Compute Sanitizer 12.9 memcheck",
+  "diagnostic_stack_bytes": 32768,
+  "allocation_padding_bytes": 32,
+  "production_context_unchanged": true,
+  "completed": [
+    {
+      "file": "mesher-lifetime.txt",
+      "tests": 2,
+      "seconds": 425.29,
+      "errors": 0,
+      "mempool": false,
+      "track_stream_ordered_races": "all",
+      "selection": "failed_optional_stages or failed_restore"
+    },
+    {
+      "file": "mesher-pooled-memcheck.txt",
+      "tests": 2,
+      "seconds": 59.77,
+      "errors": 0,
+      "mempool": true,
+      "selection": "inadequate_topology or failed_insertion_batch"
+    }
+  ],
+  "interrupted": [
+    {
+      "file": "mesher-lifetime-partial.txt",
+      "completed_tests": 1,
+      "planned_tests": 2,
+      "reported_errors": 0,
+      "process_exit_code": 15,
+      "elapsed_more_than_minutes": 17,
+      "selection": "full_device_producer or failed_optional_stages",
+      "unfinished": "full_device_producer_mesher_consumer_with_changing_input_and_recovery",
+      "reason": "Long instrumented symbolic-reconstruction trajectory; stopped and replaced by focused lifetime/rollback tests. Not a passed complete matrix."
+    },
+    {
+      "file": "mesher-pooled-partial.txt",
+      "completed_tests": 2,
+      "planned_tests": 4,
+      "reported_errors": 0,
+      "process_exit_code": 15,
+      "elapsed_more_than_minutes": 12,
+      "selection": "coarse_graded or fixed_budget_skips or failed_insertion_batch",
+      "unfinished": "coarse graded recovery-enabled case; insertion fallback had not yet run",
+      "reason": "Long instrumented symbolic-reconstruction trajectory; smaller recovery-exhaustion and insertion-fallback cases subsequently completed. Not a passed complete matrix."
+    }
+  ]
+}

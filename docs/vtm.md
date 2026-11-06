@@ -3,8 +3,9 @@
 The [implementation goal](https://github.com/alecjacobson/warpower/issues/29)
 tracks a pure-Warp, device-resident implementation of
 [Alliez et al., Variational Tetrahedral Meshing (2005)](https://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Alliez05.pdf).
-This is work in progress; the existing diagram and full-hull tetrahedron routines
-are not yet a complete nonconvex-domain mesher.
+The [public mesher](mesher.md) now composes the numerical stages in a captured
+nonconvex-domain pipeline. Broad example validation and the CPU performance goal
+remain work in progress.
 
 The target includes ODT relocation, boundary and sharp-feature fitting, graded
 sizing, initial sampling, refinement, final domain extraction, and GPU convergence
@@ -102,10 +103,12 @@ Optional [selective optimization](selective.md) limits updates to poor retained
 tetrahedra and one neighbor ring, with an additional minimum-quality guard.
 [Tangential boundary jitter](jitter.md) and [interior teleportation/insertion](interior-improvement.md)
 now provide optional quality transactions with complete device rollback.
-The final public mesher/scheduler, broader examples, and measured CPU
-outperformance remain necessary to complete the goal. The scheduler must also
-handle invalid coarse material boundaries explicitly; [#76](https://github.com/alecjacobson/warpower/issues/76)
-tracks recovery within a bounded refinement/fitting budget.
+The [public scheduler](mesher.md) initializes, grows, fits, improves and extracts
+the mesh in one device graph. It checks input/output topology invariants, retries
+failed insertion batches with a single insertion, repairs coarse invalid material
+boundaries with bounded additional fitting, and restores optional quality stages
+that invalidate the last good mesh. Broader examples, integrated time-to-quality
+comparisons and measured CPU outperformance remain necessary to complete the goal.
 
 Additional findings are tracked in
 [#42](https://github.com/alecjacobson/warpower/issues/42) (old-connectivity line-search stalls),

@@ -255,6 +255,15 @@ bounded cells; signed circumcentric flags provide actual Voronoi volumes for
 sizing-normalized donor selection. It shares the quality transaction and
 restores the active prefix and all geometry if the candidate fails its guards.
 
-Further worst-element improvement, the full mesher API, and performance work remain tracked in
-the [full VTM implementation plan](vtm.md). An energy decrease alone does not
-establish good worst-element quality or a CPU performance advantage.
+The public [`VariationalMeshingWorkspace`](mesher.md) owns these stages and a
+single reusable optimization core. Device budgets and conditional loops control
+initialization, growth, fitting, extraction recovery, and quality rounds.
+Input/output topology counts gate publication; optional quality-stage checkpoints
+restore the last valid mesh on failure. The output counts and diagnostics stay
+on device for downstream captured consumers. This lazy API adds no work to the
+independent geometry routines.
+
+Broader example validation, integrated time-to-quality comparisons and CPU
+performance work remain tracked in the [full VTM implementation plan](vtm.md).
+An energy decrease alone does not establish good worst-element quality or a
+CPU performance advantage.

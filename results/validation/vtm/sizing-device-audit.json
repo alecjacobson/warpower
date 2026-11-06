@@ -1,0 +1,26 @@
+{
+  "scope": "Three warmed producer/sizing-refit/graded-boundary-and-interior-VTM/full-hull-consumer replays; 150 sites and 3 iterations each; one final synchronization outside geometry",
+  "gpu_kernel_activities": 2145,
+  "gpu_memset_activities": 129,
+  "gpu_memcpy_activities": 0,
+  "gpu_memcpy_kinds": {},
+  "cuda_api_calls": {
+    "cuCtxSynchronize": 1,
+    "cuProfilerStart": 1,
+    "cudaGraphLaunch_v10000": 3,
+    "cudaStreamIsCapturing_v10000": 1
+  },
+  "dot_node_types": {
+    "KERNEL": 882,
+    "MEMSET": 245,
+    "CONDITIONAL": 97,
+    "MEMCPY": 64
+  },
+  "dot_copy_kinds": {
+    "DtoD (DEVICE to DEVICE)": 64
+  },
+  "copy_trace_limit": "Nsight may omit graph copy activity records; both observed copy kinds and all DOT copy nodes are checked for device-to-device direction.",
+  "dot_sha256": "1b99b0ddc6c7eab1247b1256eb7ea06cf748eacababa85ffd80527aeff23577a",
+  "sqlite_sha256": "7d53d45d93864ed5693519cad04135b260008f82e89f0b37a58e2336ddf5a47e",
+  "record_command": "nsys profile --trace=cuda --cuda-graph-trace=node --cuda-event-trace=false --capture-range=cudaProfilerApi --capture-range-end=stop --force-overwrite=true -o .work/vtm/sizing-loop .venv/bin/python -m benchmarks.vtm_core --case torus --graded --n 150 --iterations 3 --repeats 1 --profile --dot .work/vtm/sizing-loop.dot --output .work/vtm/sizing-loop-benchmark.json"
+}

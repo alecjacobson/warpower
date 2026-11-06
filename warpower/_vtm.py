@@ -200,7 +200,7 @@ def final_count(error: wp.array[int], count: wp.array[int]):
 
 
 class VTMWorkspace:
-    """Internal uniform fixed-budget core; initialization/extraction are pending."""
+    """Internal fixed-budget core with optional sampled sizing."""
 
     def __init__(
         self,
@@ -216,6 +216,7 @@ class VTMWorkspace:
         tetrahedra_cell_capacity=1024,
         chunk_size=None,
         certified_delaunay=True,
+        sizing=None,
     ):
         self.max_iterations = operator.index(max_iterations)
         self.max_backtracks = operator.index(max_backtracks)
@@ -241,7 +242,26 @@ class VTMWorkspace:
         self.points, self.device, self.n = self.mesh.points, self.mesh.device, self.mesh.n
         if self.n < 4:
             raise ValueError("Tetrahedral meshing needs at least four sites")
-        self.boundary = BoundaryWorkspace(domain, self.points)
+        self.sizing = sizing
+        self._accumulate = accumulate_tets
+        self._sizing_args = []
+        boundary_options = {}
+        if sizing is not None:
+            from ._graded_odt import accumulate_graded_tets
+            from ._sizing import SizingField, SizingQueryWorkspace
+
+            if not isinstance(sizing, SizingField) or sizing.device != self.device:
+                raise ValueError("sizing must be a SizingField on the input device")
+            self._surface_sizing = SizingQueryWorkspace(sizing, domain.surface_points)
+            self._crease_sizing = SizingQueryWorkspace(sizing, domain.crease_points)
+            self._accumulate = accumulate_graded_tets
+            self._sizing_args = [sizing.data]
+            boundary_options = dict(
+                surface_sizing=self._surface_sizing.values,
+                crease_sizing=self._crease_sizing.values,
+            )
+            wp.load_module(module="warpower._graded_odt", device=self.device)
+        self.boundary = BoundaryWorkspace(domain, self.points, **boundary_options)
         self.full_tetrahedra = self.mesh.tetrahedra
         self.full_tetrahedra_count = self.mesh.tetrahedra_count
         with wp.ScopedDevice(self.device):
@@ -290,7 +310,7 @@ class VTMWorkspace:
             self._edge.fill_(1e300)
             self.minimum_radius_ratio.fill_(1)
         self._launch(
-            accumulate_tets,
+            self._accumulate,
             len(self.full_tetrahedra),
             [
                 self.points,
@@ -305,7 +325,8 @@ class VTMWorkspace:
                 self.volume,
                 self.minimum_radius_ratio,
                 compute_directions,
-            ],
+            ]
+            + self._sizing_args,
         )
 
     def _record(self):
@@ -315,6 +336,9 @@ class VTMWorkspace:
         self.last_geometry_error.zero_()
         self.last_boundary_error.zero_()
         self.energy_history.fill_(float("nan"))
+        if self.sizing is not None:
+            self._surface_sizing.run()
+            self._crease_sizing.run()
         self.boundary.run()
         self._launch(
             anchor_corners,

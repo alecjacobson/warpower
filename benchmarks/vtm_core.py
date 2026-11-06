@@ -21,6 +21,12 @@ def advance(phase: wp.array[int]):
     phase[0] += 1
 
 
+@wp.kernel
+def sizing_producer(values: wp.array[float], phase: wp.array[int]):
+    i = wp.tid()
+    values[i] = 0.25 + 0.5 * float(i) + 0.015 * float(phase[0] % 3)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--case", choices=["torus", "cube"], default="torus")
@@ -33,6 +39,7 @@ def main():
     parser.add_argument("--reference", action="store_true")
     parser.add_argument("--dot", type=Path)
     parser.add_argument("--profile", action="store_true")
+    parser.add_argument("--graded", action="store_true", help="Include changing sizing and refit")
     parser.add_argument(
         "--corner-only", action="store_true", help="Skip the cube's full boundary prefit"
     )
@@ -48,7 +55,15 @@ def main():
         domain = warpower.SurfaceDomain(*cube(), surface_subdivisions=16)
     base = wp.array(source, dtype=wp.vec3, device="cuda:0")
     points = wp.clone(base)
-    core = VTMWorkspace(domain, points, max_iterations=args.iterations)
+    sizing, options = None, {}
+    if args.graded:
+        sizing = warpower.SizingField(
+            np.array([[-2, 0, 0], [2, 0, 0]], np.float32),
+            wp.array([0.25, 0.75], dtype=float, device="cuda:0"),
+            gradation=0.35,
+        )
+        options["sizing"] = sizing
+    core = VTMWorkspace(domain, points, max_iterations=args.iterations, **options)
     boundary_init = (
         warpower.BoundaryWorkspace(domain, points)
         if args.case == "cube" and not args.corner_only
@@ -60,6 +75,9 @@ def main():
     wp.load_module(module="tests.test_vtm_core", device="cuda:0")
     with wp.ScopedCapture() as capture:
         wp.launch(produce, len(base), inputs=[base, points, phase])
+        if sizing is not None:
+            wp.launch(sizing_producer, len(sizing.values), inputs=[sizing.values, phase])
+            sizing.refit()
         if boundary_init is not None:
             boundary_init.run()
             boundary_init.apply()
@@ -118,18 +136,28 @@ def main():
         feature_edges=int(domain.feature_count.numpy()[0]),
         corners=int(domain.corner_count.numpy()[0]),
         full_boundary_prefit=boundary_init is not None,
+        graded=sizing is not None,
         roles=core.boundary.role_counts.numpy().tolist(),
         full_hull_tetrahedra=n_tets,
         full_hull_volume=float(core.volume.numpy()[0]),
         minimum_full_hull_radius_ratio=float(core.minimum_radius_ratio.numpy()[0]),
-        energy_history_columns=["full_hull_odt", "sampled_surface", "sampled_crease"],
+        energy_history_columns=[
+            "full_hull_density_weighted_odt" if sizing is not None else "full_hull_odt",
+            "sampled_surface",
+            "sampled_crease",
+        ],
         energy_history=core.energy_history.numpy()[: n_iterations + 1].tolist(),
         gpu_milliseconds=samples,
         median_gpu_milliseconds=float(np.median(samples)),
         setup_seconds=setup,
         cpu_quota_delta=cpu,
         cpu_throttled=any(v["throttled_periods"] for v in cpu.values()),
-        scope="Resident producer, optional boundary initialization, uniform fixed-budget VTM core and volume consumer; full-hull connectivity, no domain extraction; three cycling input translations",
+        scope="Resident producer, optional boundary initialization, fixed-budget VTM core and volume consumer; full-hull connectivity, no domain extraction; three cycling input translations"
+        + (
+            "; changing sizing producer and field refit included"
+            if sizing is not None
+            else "; uniform sizing"
+        ),
     )
     assert result["error"] == 0
     assert np.isclose(volume.numpy()[0], core.volume.numpy()[0], rtol=1e-12)

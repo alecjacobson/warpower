@@ -12,7 +12,7 @@ from . import _sphere_bounds as sb
 from ._bvh import Tree
 from ._canonical import mix
 from ._domain import _Scan
-from ._mesh_topology import face_vertices, identity, index_faces
+from ._mesh_topology import face_vertices, identity, index_faces, sorted_face
 
 wp.set_module_options(
     {"enable_backward": False, "fast_math": False, "fuse_fp": False, "block_dim": 32}
@@ -378,6 +378,145 @@ def check_faces(
                 size += 2
 
 
+@wp.func
+def anchor_halfspace(plane: Halfspace, lo: wp.vec3, hi: wp.vec3, strict: bool):
+    x = fp.minus(interval(lo[0], hi[0]), fp.scalar(wp.float64(plane.origin[0])))
+    y = fp.minus(interval(lo[1], hi[1]), fp.scalar(wp.float64(plane.origin[1])))
+    z = fp.minus(interval(lo[2], hi[2]), fp.scalar(wp.float64(plane.origin[2])))
+    value = fp.plus(fp.plus(fp.times(plane.nx, x), fp.times(plane.ny, y)), fp.times(plane.nz, z))
+    finite = wp.isfinite(value.value) and wp.isfinite(value.error)
+    if strict:
+        return finite and value.value < -value.error
+    return finite and value.value <= -value.error
+
+
+@wp.kernel
+def check_faces_with_anchors(
+    points: wp.array[wp.vec3],
+    tets: wp.array2d[int],
+    boundary: wp.array[int],
+    count: wp.array[int],
+    tree: Tree,
+    error: wp.array[int],
+    depth: int,
+    workers: int,
+    anchors: wp.array[int],
+):
+    tid = wp.tid()
+    pieces = 1 << depth
+    worker, lane = tid // pieces, tid % pieces
+    # Partition the radix tree by path bits. An early leaf belongs only to
+    # the lane whose unused bits are zero, so every subtree is covered once.
+    root = int(1)
+    live = bool(True)
+    for level in range(depth):
+        if tree.count[root] > 0:
+            live = (lane >> level) == 0
+            break
+        if ((lane >> level) & 1) == 0:
+            root = tree.left[root]
+        else:
+            root = tree.right[root]
+    if not live:
+        return
+    # Fixed launch size, device count, and a strided tail cover even malformed
+    # candidates exposing all four faces per tetrahedron.
+    for slot in range(worker, count[0], workers):
+        ids = face_vertices(tets, boundary[slot])
+        a, b, c = points[ids[0]], points[ids[1]], points[ids[2]]
+        plane = halfspace(a, b, c)
+        stack = wp.zeros(shape=128, dtype=int)
+        stack[0] = root
+        size = int(1)
+        while size > 0:
+            size -= 1
+            node = stack[size]
+            strict = bool(False)
+            if slot < anchors.shape[0]:
+                strict = wp.atomic_add(anchors, slot, 0) == 0
+            if anchor_halfspace(plane, tree.lower[node], tree.upper[node], strict):
+                continue
+            if tree.count[node] > 0:
+                for k in range(tree.start[node], tree.start[node] + tree.count[node]):
+                    q = tree.ids[k]
+                    # Coincident sites have exactly the same plane sign.
+                    if tree.owners[q] != q or q == ids[0] or q == ids[1] or q == ids[2]:
+                        continue
+                    result = fp.orient3d(a, b, c, points[q])
+                    if result.valid == 0:
+                        wp.atomic_or(error, 0, 2)
+                    elif result.sign > 0:
+                        wp.atomic_or(error, 0, 64)
+                    elif result.sign == 0 and slot < anchors.shape[0]:
+                        wp.atomic_or(anchors, slot, 1)
+            else:
+                if size > 125:
+                    wp.atomic_or(error, 0, 16)
+                    return
+                stack[size] = tree.left[node]
+                stack[size + 1] = tree.right[node]
+                size += 2
+
+
+@wp.kernel
+def select_certificate(
+    anchors: wp.array[int],
+    boundary_count: wp.array[int],
+    error: wp.array[int],
+    local: wp.array[int],
+    global_check: wp.array[int],
+):
+    found = bool(False)
+    for i in range(wp.min(anchors.shape[0], boundary_count[0])):
+        found = found or anchors[i] == 0
+    local[0] = int(found and error[0] == 0)
+    global_check[0] = 1 - local[0]
+
+
+@wp.kernel
+def check_local_spheres(
+    points: wp.array[wp.vec3],
+    tets: wp.array2d[int],
+    count: wp.array[int],
+    table: wp.array[int],
+    error: wp.array[int],
+    statistics: wp.array[int],
+):
+    face = wp.tid()
+    if face >= 4 * count[0]:
+        return
+    i = face // 4
+    ids = wp.vec4i(tets[i, 0], tets[i, 1], tets[i, 2], tets[i, 3])
+    key = sorted_face(face_vertices(tets, face))
+    slot = int(
+        (
+            wp.uint32(key[0]) * wp.uint32(73856093)
+            ^ wp.uint32(key[1]) * wp.uint32(19349663)
+            ^ wp.uint32(key[2]) * wp.uint32(83492791)
+        )
+        & wp.uint32(table.shape[0] - 1)
+    )
+    other = int(-1)
+    for _ in range(table.shape[0]):
+        other = table[slot]
+        if other < 0:
+            wp.atomic_or(error, 0, 32)
+            return
+        if sorted_face(face_vertices(tets, other)) == key:
+            break
+        slot = (slot + 1) & (table.shape[0] - 1)
+    # Boundary faces and the representative of each paired face skip.
+    # The other incident tetrahedron tests the representative's opposite site.
+    if other != face:
+        query = tets[other // 4, other % 4]
+        result = symbolic_sphere(points, ids, query)
+        wp.atomic_add(statistics, 0, 1)
+        if result.valid == 0:
+            wp.atomic_or(error, 0, 2)
+        elif result.sign >= 0:
+            wp.atomic_or(error, 0, 8)
+
+
 @wp.kernel
 def coverage(
     owners: wp.array[int], used: wp.array[int], count: wp.array[int], error: wp.array[int]
@@ -412,6 +551,9 @@ class DelaunayCertificate:
             self._face_depth = 5
             self._face_workers = min(max(n, 128), 4096)
             self._ready = wp.empty(1, dtype=int)
+            self._anchors = wp.zeros(16, dtype=int) if n >= 128 else None
+            self._local = wp.zeros(1, dtype=int) if n >= 128 else None
+            self._global = wp.zeros(1, dtype=int) if n >= 128 else None
             wp.load_module(module=__name__, device=self.device)
 
     def _launch(self, kernel, dim, args):
@@ -456,7 +598,7 @@ class DelaunayCertificate:
             [tree.owners, self._used, self.tetrahedra_count, self.error],
         )
 
-    def _check(self, tree):
+    def _global_spheres(self, tree):
         self._launch(
             check_spheres,
             len(self.tetrahedra),
@@ -469,6 +611,12 @@ class DelaunayCertificate:
                 self.statistics,
             ],
         )
+
+    def _check(self, tree):
+        if self._anchors is None:
+            self._global_spheres(tree)
+        else:
+            self._anchors.zero_()
         self._table.fill_(-1)
         self._occurrences.zero_()
         self._balance.zero_()
@@ -499,7 +647,7 @@ class DelaunayCertificate:
             ],
         )
         self._launch(
-            check_faces,
+            check_faces if self._anchors is None else check_faces_with_anchors,
             self._face_workers * (1 << self._face_depth),
             [
                 self.points,
@@ -510,5 +658,28 @@ class DelaunayCertificate:
                 self.error,
                 self._face_depth,
                 self._face_workers,
-            ],
+            ]
+            + ([] if self._anchors is None else [self._anchors]),
         )
+        if self._anchors is not None:
+            self._launch(
+                select_certificate,
+                1,
+                [self._anchors, self._boundary_count, self.error, self._local, self._global],
+            )
+            wp.capture_if(
+                self._local,
+                lambda: self._launch(
+                    check_local_spheres,
+                    4 * len(self.tetrahedra),
+                    [
+                        self.points,
+                        self.tetrahedra,
+                        self.tetrahedra_count,
+                        self._table,
+                        self.error,
+                        self.statistics,
+                    ],
+                ),
+            )
+            wp.capture_if(self._global, lambda: self._global_spheres(tree))

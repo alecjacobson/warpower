@@ -4,7 +4,8 @@ from fractions import Fraction
 import numpy as np
 import warp as wp
 
-from warpower._predicates import Expansion, add, empty_expansion, grow, orient3d, power_sphere
+from warpower import _integer as integer
+from warpower._predicates import orient3d, power_sphere
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
 NAN = wp.constant(float("nan"))
@@ -154,21 +155,21 @@ def test_translated_scaled_nearly_flat_clouds_and_cancellation():
 
 @wp.kernel
 def invalid_and_overflow(output: wp.array[int]):
-    expansion = empty_expansion()
-    # Directly exercise the bounded expansion API's explicit failure contract.
-    expansion.count = 64
-    for i in range(64):
-        expansion.values[i] = wp.float64(2.0) ** wp.float64(-1000 + 15 * i)
-    expansion = grow(expansion, wp.float64(2.0) ** wp.float64(1000))
-    output[0] = expansion.valid
-    bad = Expansion()
+    value = integer.empty()
+    value.count = 48
+    value.sign = 1
+    for i in range(48):
+        value.words[i] = wp.uint32(0xFFFFFFFF)
+    overflow = integer.plus(value, integer.from_float(1.0, 0))
+    output[0] = overflow.valid
+    bad = integer.Big()
     bad.valid = 0
-    output[1] = add(empty_expansion(), bad, wp.float64(1.0)).valid
+    output[1] = integer.plus(integer.empty(), bad).valid
     p = orient3d(wp.vec3(NAN), wp.vec3(0.0), wp.vec3(1.0), wp.vec3(2.0))
     output[2] = p.valid
 
 
-def test_nonfinite_inputs_and_expansion_failure_are_not_reported_as_exact_zero():
+def test_nonfinite_inputs_and_capacity_failure_are_not_reported_as_exact_zero():
     out = wp.empty(3, dtype=int, device="cuda:0")
     wp.launch(invalid_and_overflow, 1, inputs=[out])
     np.testing.assert_array_equal(out.numpy(), 0)

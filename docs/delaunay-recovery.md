@@ -386,3 +386,43 @@ and 519.95 ms after for 20 iterations, five warmed repetitions, no rejected
 steps, and 5,902 full-hull tetrahedra. Energy histories agree within `6.2e-15`
 relative to `max(1, abs(energy))`. This core timing includes its producer and
 consumer, but excludes domain extraction, initialization, and refinement.
+
+## Auxiliary amplitude ordering
+
+For the saved procedural hand after five fitting steps, the fifth normalized
+auxiliary amplitude passes the original-coordinate certificate. Earlier replays
+retried the four unsuccessful levels every time. A retained amplitude hint now
+tries that same fifth level first and visits every other level only if needed.
+
+The [paired timing matrix](../results/validation/vtm/amplitude-performance.json)
+on L40 / Warp 1.19.0 measures complete captured reconstruction:
+
+| Input | Before | After |
+|---|---:|---:|
+| Fitted hand, 256 sites | 129.432 ms | 25.736 ms |
+| Random, 1000 sites | 9.769 ms | 9.776 ms |
+| Cube, 8 sites | 0.526 ms | 0.525 ms |
+| Complete torus mesher, 1000 sites | 3636.673 ms | 3635.219 ms |
+
+The hand improves **5.03×** across ten warmed samples with identical 1,430
+canonical tetrahedra. Its first solve still tries five amplitudes and takes
+about 1.09 seconds. Random and cube use five samples; the complete torus uses
+three. All timing windows have zero CPU quota throttling. Torus points, roles,
+full/material tetrahedra and boundary connectivity are identical. This does not
+resolve the later 384-site hand insertion in #93 or establish CPU outperformance.
+
+The [395-test suite](../results/validation/vtm/amplitude-full-tests.txt) passes.
+Two [captured lifetime cases](../results/validation/vtm/amplitude-lifetime.txt)
+pass padded memory and full stream-ordered race tracking with zero errors using
+the documented diagnostic stack and synchronous allocations. A
+[native trace](../results/validation/vtm/amplitude-device-audit.json) covers
+original hand, exact scale by two, invalid input and restored original. Its
+[device consumer](../results/validation/vtm/amplitude-native-run.json) observes
+attempt counts 5, 1, 0, 5 and no stale cells after failure. All 21 graph copy
+nodes are device-to-device, with no host/callback or allocation/free nodes.
+[Other runtime modules and the flagship README are unchanged](../results/validation/vtm/amplitude-isolation.json).
+
+```bash
+python -m benchmarks.delaunay_recovery --case fitted-hand --repeats 10 --output hand.json
+python -m benchmarks.amplitude_order --output hand-loop.json --dot hand-loop.dot
+```

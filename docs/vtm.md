@@ -82,7 +82,15 @@ The [fixed-boundary ODT workspace](odt.md) provides the interior optimizer and
 captured failure recovery. See [validation and known limits](vtm-validation.md).
 It is not yet the full boundary-fitted mesher or a CPU speedup result.
 
+The [surface-domain layer](domains.md) provides captured refits, geometric queries,
+device input validation, and surface/feature quadrature. It supports nonconvex
+boundaries, cavities, and disconnected components independently of tetrahedral
+meshing. Boundary fitting and the full pipeline remain subsequent milestones.
+
 Additional findings are tracked in
 [#42](https://github.com/alecjacobson/warpower/issues/42) (old-connectivity line-search stalls),
 [#43](https://github.com/alecjacobson/warpower/issues/43) (trajectory reconstruction costs), and
 [#44](https://github.com/alecjacobson/warpower/issues/44) (intermediate high-valence cell capacity).
+Domain work also uncovered
+[#47](https://github.com/alecjacobson/warpower/issues/47) (native refit allocations)
+and [#48](https://github.com/alecjacobson/warpower/issues/48) (surface query performance).

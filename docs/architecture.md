@@ -186,6 +186,12 @@ Per-site displacement limits account for the hull and float32 storage; captured
 conditional loops handle energy rejection, convergence, and complete rollback.
 The optimizer is a separate layer; standalone geometry calls retain their default execution path.
 
+`SurfaceDomain` supplies an independent, fixed-buffer triangle hierarchy for
+boundary geometry. It refits triangle bounds in pure Warp and provides float64
+closest-point and oriented-ray queries, manifold/intersection validation, and
+surface/crease/corner quadrature. `DomainQueryWorkspace` composes these queries
+with upstream and downstream device kernels. See [domain API](domains.md).
+
 This is the fixed-boundary optimizer foundation. Boundary fitting, graded sizing,
 refinement, nonconvex extraction, and stronger numerical recovery remain tracked
 in the [full VTM implementation plan](vtm.md). An energy decrease alone does not

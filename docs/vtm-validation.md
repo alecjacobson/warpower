@@ -2,10 +2,11 @@
 
 ## Standalone geometry baseline
 
-The first VTM preparation change adds lazy standalone `delaunay_tetrahedra` and
-`regular_tetrahedra` functions. Every existing geometry implementation file is
-byte-identical to commit `3091289464af368d2a61f843d169d7f4863d1cfd`; only the package's
-lazy exports and the new wrapper module differ. No VTM optimization runs yet.
+The first VTM preparation change (#41) added lazy standalone `delaunay_tetrahedra`
+and `regular_tetrahedra` functions. At that milestone, every existing geometry
+implementation file was byte-identical to commit
+`3091289464af368d2a61f843d169d7f4863d1cfd`; only the package's lazy exports and the
+new wrapper module differed. Later milestones and their evidence appear below.
 
 A paired baseline/current run on the NVIDIA L40 covers four eager diagram cases
 (up to one million sites), two graph diagram cases, and four full-mesh graph
@@ -159,3 +160,61 @@ The full suite passes 111 tests. The 17 optimizer and large-cell tests pass CUDA
 memcheck without errors. All ten standalone paired performance cases have equal
 outputs and no statistically significant regression above 2%, with no CPU
 throttling ([measurements](../results/validation/vtm/large-cell-default-performance.json)).
+
+## Captured surface-domain services
+
+The domain milestone supplies `SurfaceDomain` and `DomainQueryWorkspace`, with
+pure-Warp triangle hierarchy refitting, float64 closest-point and oriented-ray
+queries, surface quadrature, crease/corner detection, and device input validation.
+It does not yet perform boundary-fitted tetrahedral meshing.
+
+The full suite passes **133 tests**. All **22 domain tests** pass CUDA memcheck
+with zero errors. Independent references include brute-force triangle-distance
+minima and all-triangle float64 solid-angle sums, alongside analytic sphere,
+torus, box, cavity, and disconnected-component checks. Degree-two surface
+integrals and crease integrals agree with closed-form values; tests cover sharp
+corners, illegal shared-vertex/edge contact, nonmanifold vertex links, reversed
+orientation, invalid indices, nonfinite inputs, and recovery after a bad refit.
+Thin-triangle and `2e-7`-thick box cases exercise float64 geometric calculations.
+
+The first native audit found allocation/free nodes inside `Warp.Mesh.refit()`;
+[#47](https://github.com/alecjacobson/warpower/issues/47) records that finding.
+The final implementation uses Warp-owned hierarchy arrays instead. Its
+[replay audit](../results/validation/vtm/domain-device-audit.json) contains **33
+kernel nodes, two memsets, and two device-to-device copies**, with no host,
+allocation, or free nodes. Three changing-input replays produce 99 kernel
+activities and six observed device-to-device copies. Runtime calls are three
+graph launches, profiler/capture bookkeeping, and one final synchronization
+outside the geometry operation. A test now inspects native DOT node types in
+addition to forbidding Python allocation/readback/synchronization calls.
+
+On NVIDIA L40, 100,000 signed queries against a 9,216-triangle torus take a median
+**51.76 ms**. Deforming and refitting that surface, validating it, updating 110,592
+surface samples, querying, and consuming the results takes **62.83 ms**. Neither
+20-sample measurement encountered CPU throttling
+([raw measurements](../results/validation/vtm/domain-performance.json)). These
+are domain-service timings, not a full-mesher speedup result. Query performance
+remains tracked in [#48](https://github.com/alecjacobson/warpower/issues/48).
+
+All pre-existing geometry and ODT implementation modules are byte-identical to
+revision `9692137`; package exports remain lazy
+([isolation audit](../results/validation/vtm/domain-standalone-isolation.json)).
+The standalone paired performance evidence from the preceding milestone still
+applies to those unchanged execution paths.
+An installed wheel passes a captured domain-refit/query smoke test outside the
+checkout, with lazy imports and exact installed-source matching
+([package record](../results/validation/vtm/domain-wheel.json)).
+
+Reproduce the domain measurement and replay audit:
+
+```bash
+python -m benchmarks.domain --output results/local/domain-performance.json
+nsys profile --trace=cuda --cuda-graph-trace=node --cuda-event-trace=false \
+  --sample=none --cpuctxsw=none --capture-range=cudaProfilerApi \
+  --capture-range-end=stop --output=results/local/domain-loop \
+  python -m benchmarks.domain --queries 1000 --repeats 1 --profile \
+  --dot results/local/domain-loop.dot
+nsys export --type sqlite --output results/local/domain-loop.sqlite results/local/domain-loop.nsys-rep
+python -m benchmarks.graph_capture --domain --dot results/local/domain-loop.dot \
+  --analyze results/local/domain-loop.sqlite --output results/local/domain-audit.json
+```

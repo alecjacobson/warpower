@@ -5,7 +5,9 @@ from ._api import Diagram, power_diagram, voronoi_diagram
 __all__ = [
     "Diagram",
     "DiagramWorkspace",
+    "DomainQueryWorkspace",
     "ODTWorkspace",
+    "SurfaceDomain",
     "delaunay_tetrahedra",
     "power_diagram",
     "regular_tetrahedra",
@@ -14,6 +16,10 @@ __all__ = [
 
 
 def __getattr__(name):
+    if name in ("SurfaceDomain", "DomainQueryWorkspace"):
+        from . import _domain
+
+        return getattr(_domain, name)
     if name == "ODTWorkspace":
         from ._odt import ODTWorkspace
 

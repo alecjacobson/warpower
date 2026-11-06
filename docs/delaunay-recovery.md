@@ -77,8 +77,11 @@ retry limits are device values or fixed setup parameters.
 
 The certificate uses [exact predicates](exact-predicates.md) with conservative
 float64 filters. Every positive-volume candidate tetrahedron must have an empty
-sphere against all original sites. BVH nodes are skipped only when interval
-bounds prove a strictly negative determinant. Uncertain leaves use exact
+sphere against all original sites. A [conservative circumsphere box](sphere-bounds.md)
+first skips strictly disjoint BVH nodes using float32 comparisons. Surviving nodes
+retain the original float64 interval test, which can prove a strictly negative
+determinant even for large, nearly flat hull spheres. Uncertain/nonfinite boxes
+disable the new pretest. Uncertain leaves use exact
 expansion arithmetic. Exact zero-volume candidates are discarded; negative
 original orientations reject the candidate.
 

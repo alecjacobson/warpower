@@ -41,11 +41,13 @@ def quotient(a: fp.Ball, b: fp.Ball):
     # adds a.error+b.error*|q|. Divide by a downward-padded positive lower
     # bound on the denominator, then pad the positive arithmetic and division.
     denominator = (b.value - b.error) * (wp.float64(1.0) - wp.float64(4.0) * fp.EPS)
+    denominator -= wp.float64(16.0) * MIN64
     if denominator <= wp.float64(0.0) or not wp.isfinite(q):
         return result
     numerator = (a.error + wp.abs(q) * b.error + (fp.EPS * b.value) * wp.abs(q)) * (
         wp.float64(1.0) + wp.float64(16.0) * fp.EPS
     )
+    numerator += wp.float64(16.0) * MIN64
     error = (numerator / denominator) * (wp.float64(1.0) + wp.float64(16.0) * fp.EPS)
     error += wp.float64(16.0) * MIN64
     if wp.isfinite(error):

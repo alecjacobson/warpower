@@ -154,3 +154,28 @@ Samples and compact feature ordering are reproducible for identical inputs.
 Refitting updates positions, weights, features, corners, and all device counts.
 The sizing weights required by Alliez et al. (`dA/mu^4` and `dL/mu^3`) are applied
 by the fitting layer; these base quadrature weights contain area/length only.
+
+## Exact-contact validation record
+
+On the NVIDIA L40 with Warp 1.19.0, the contact change passes
+[388 repository tests](../results/validation/vtm/domain-contact-tests.txt),
+[three padded memory cases](../results/validation/vtm/domain-contact-memcheck.txt)
+and [a captured refit with full allocation/lifetime tracking](../results/validation/vtm/domain-contact-lifetime.txt)
+using the documented diagnostic allocator/stack settings. A
+[native producer/refit/query/consumer trace](../results/validation/vtm/domain-contact-device-audit.json)
+contains 33 kernel, two memset and two device-to-device copy graph nodes, with
+no host callback, allocation/free or host-transfer nodes.
+
+The complete 1,000-site torus solve takes 3,940.59 ms (median of three additional
+replays), versus 3,936.47 ms in the preceding gallery run. Both timing windows
+were unthrottled; the difference is approximately 0.1%.
+[Points, roles and all canonical connectivity are identical](../results/validation/vtm/domain-contact-torus-equivalence.json),
+and independent Delaunay/topology checks pass. This is an internal regression
+control, not a CPU comparison.
+
+The stricter intersection check has a measurable cost: a deforming
+9,216-triangle domain plus 1,000 queries takes 28.007 → 30.160 ms (ten-replay
+medians). Queries alone remain 17.481 → 17.482 ms. These
+[before](../results/validation/vtm/domain-contact-domain-before.json)/[after](../results/validation/vtm/domain-contact-domain-after.json)
+measurements include no CPU throttling. The
+[other runtime modules and flagship README remain unchanged](../results/validation/vtm/domain-contact-scope.json).

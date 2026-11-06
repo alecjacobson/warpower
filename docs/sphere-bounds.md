@@ -2,8 +2,9 @@
 
 The exact Delaunay certificate first rejects BVH nodes disjoint from an outward
 float32 box of the tetrahedron's original-coordinate circumsphere. Nodes that
-survive still use the existing float64 polynomial interval test and exact leaf
-predicates. An uncertain or nonfinite box disables this new rejection test.
+survive still use the existing float64 polynomial interval test. At leaves, the
+same polynomial interval test first rejects individual points using the cached
+cofactors; uncertain points retain the symbolic/exact predicate. An uncertain or nonfinite box disables this new rejection test.
 Only strict separation permits rejection; touching boxes and exact ties survive.
 No output, failure code, certificate tolerance, or construction policy changes.
 
@@ -54,6 +55,31 @@ hull tetrahedra can have enormous circumspheres. Retaining the original
 polynomial test on surviving nodes is essential: its approximate supporting
 halfspace can prune cases where a sphere's axis-aligned box covers the entire
 point cloud. This is a conservative pretest, not a replacement predicate.
+
+## Cached-cofactor leaf points
+
+A BVH leaf can overlap the sphere even when most of its sites are outside.
+For each surviving site, `outside(shape, point, point)` evaluates the existing
+polynomial interval with both endpoints equal. It reuses the center numerators
+and positive orientation determinant already computed for the tetrahedron.
+For exact relative coordinates `x,y,z`, the expression is
+`x*Nx + y*Ny + z*Nz - D*(x*x + y*y + z*z)`. The existing Ball operations enclose
+its exact value; rejection requires a finite upper endpoint strictly below zero.
+Such a point has a strictly negative ordinary sphere determinant, so symbolic
+tie breaking cannot change its classification. Every uncertain result still
+uses the original symbolic/exact predicate.
+
+This introduces no division, new tolerance, scratch storage or kernel launch.
+The certificate still checks every global lower facet, hull support, face
+incidence and canonical-site coverage. The leaf-query statistic counts points
+before this filter, preserving its previous meaning.
+
+`tests/test_sphere_points.py` compares the filter against exact rational centers
+and squared radii on 2,395 queries, spanning exponents -140 through 120, nearly
+flat tetrahedra, translations, vertex ties and neighboring float32 values.
+Separate cases retain all 88 cospherical cube queries and an exactly outside
+point with a determinant too small for the filter to resolve. In that last case,
+the filter must defer rather than infer a sign from a tolerance.
 
 ## Independent checks
 

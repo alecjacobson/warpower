@@ -61,7 +61,7 @@ def test_point_rejection_proves_strictly_outside_with_exact_rational_spheres():
 
 def test_exact_outside_point_near_sphere_requires_fallback():
     tetrahedron = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]], np.float32)
-    query = np.array([1, 1, -2.0**-100], np.float32)
+    query = np.array([1, 1, -(2.0**-100)], np.float32)
     determinant, center, radius2 = exact_sphere(tetrahedron)
     assert determinant > 0
     assert sum((Fraction(float(x)) - c) ** 2 for x, c in zip(query, center)) > radius2

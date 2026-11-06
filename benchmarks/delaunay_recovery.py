@@ -91,7 +91,7 @@ def main():
     full = measure(workspace.graph)
     base = measure(workspace._base.graph)
     attempts = wp.full(
-        1, max(0, int(workspace.attempts.numpy()[0]) - 1), dtype=int, device=workspace.device
+        1, int(workspace.auxiliary_level.numpy()[0]), dtype=int, device=workspace.device
     )
     wp.launch(
         normalize,

@@ -73,8 +73,13 @@ comparisons.
 After an auxiliary or symbolic candidate succeeds, later replays try that construction
 strategy first. Each replay rebuilds the original-site hierarchy and coincident
 ownership from current input, constructs new connectivity, and certifies it
-again. The auxiliary strategy normalizes a fresh copy of current positions. The cache retains a strategy choice only;
-it does not reuse connectivity as success. If auxiliary attempts are exhausted,
+again. The auxiliary strategy normalizes a fresh copy of current positions.
+It tries the last certified amplitude level first, then every remaining level in
+ascending order. Each level still appears exactly once in the finite attempt
+budget; a previously successful level never bypasses the original-coordinate
+certificate. Failure, invalid input, or success through another strategy clears
+the amplitude preference. Fresh full-mesher sampling also clears both preferences.
+The cache retains construction hints only; it does not reuse connectivity as success. If auxiliary attempts are exhausted,
 the original constructor gets another chance on the current input. Invalid
 input clears the preference, and every failure still publishes a zero count.
 Each construction strategy runs at most once per replay, with its own finite
@@ -124,6 +129,8 @@ are not a universal exact constructor**: small perturbations can still fail to
 resolve construction, capacity, or expansion problems. Entirely coplanar input
 has no volumetric result and reports an error.
 
+`auxiliary_level` reports the last attempted amplitude exponent (zero when no
+auxiliary attempt ran); amplitude is `1e-5 * 0.1**auxiliary_level`.
 `attempts` counts normalized recovery attempts; `recovered` is one when auxiliary
 or symbolic recovery supplied the output. `recovery_first` indicates that this replay tried
 the cached strategy first. `base_attempted` indicates whether the original

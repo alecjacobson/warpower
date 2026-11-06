@@ -48,14 +48,14 @@ timing; these costs are paid once when creating a workspace.
 
 | Output / input | Eager mean (ms) | Graph mean (ms) | Speedup |
 |---|---:|---:|---:|
-| Voronoi adjacency, 100,000 uniform | 12.799 | 11.057 | 1.16× |
-| Voronoi adjacency, 100,000 five-cluster | 30.293 | 27.716 | 1.09× |
-| Voronoi adjacency, 1,000,000 uniform | 102.417 | 99.998 | 1.02× |
-| Power adjacency, 1,000,000 uniform | 115.092 | 113.221 | 1.02× |
-| Adjacency + Delaunay, 1,000 uniform | 127.370 | 11.106 | 11.47× |
-| Adjacency + Delaunay, 10,000 uniform | 249.362 | 42.955 | 5.81× |
-| Adjacency + Delaunay, 100,000 uniform | 2,441.762 | 487.260 | 5.01× |
-| Adjacency + regular mesh, 100,000 uniform | 2,472.789 | 492.192 | 5.02× |
+| Voronoi adjacency, 100,000 uniform | 12.680 | 11.072 | 1.15× |
+| Voronoi adjacency, 100,000 five-cluster | 29.694 | 27.569 | 1.08× |
+| Voronoi adjacency, 1,000,000 uniform | 102.293 | 100.168 | 1.02× |
+| Power adjacency, 1,000,000 uniform | 115.047 | 113.276 | 1.02× |
+| Adjacency + Delaunay, 1,000 uniform | 127.461 | 11.118 | 11.46× |
+| Adjacency + Delaunay, 10,000 uniform | 250.100 | 42.975 | 5.82× |
+| Adjacency + Delaunay, 100,000 uniform | 2,442.804 | 487.385 | 5.01× |
+| Adjacency + regular mesh, 100,000 uniform | 2,469.018 | 492.210 | 5.02× |
 
 Each graph output matched the eager API's complete CSR rows and tetrahedron set.
 At 100,000 sites this includes 671,908 unweighted tetrahedra and 667,413 weighted
@@ -97,9 +97,10 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 python -m benchmarks.default_path \
 
 ## Correctness and memory safety
 
-The [full suite](../results/validation/graphs/pytest.txt) passes **83 tests**.
-The 13 new graph tests cover changing input and topology within captured
-producer/construction/consumer pipelines, full independent weighted and
+The [full suite](../results/validation/graphs/pytest.txt) passes **85 tests**.
+The 15 new graph tests cover changing input and topology within captured
+producer/construction/consumer pipelines, a device-controlled outer loop,
+overflowed CSR totals, full independent weighted and
 unweighted references, volume and face checks, fixed-capacity overflow, invalid
 input followed by successful replay, duplicate ownership, hidden weighted sites,
 far-away dual vertices, domain reuse, small inputs, multi-level prefix scans,
@@ -111,7 +112,7 @@ A built wheel also passed a captured CUDA smoke test outside the checkout,
 including lazy import and full-hull tetrahedra. Every packaged source file matched
 the hashes recorded by the performance run.
 
-[CUDA memcheck](../results/validation/graphs/memcheck.txt) passes all 13 graph tests
+[CUDA memcheck](../results/validation/graphs/memcheck.txt) passes all 15 graph tests
 with **zero errors and no kernel exclusions**:
 
 ```bash

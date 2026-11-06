@@ -30,8 +30,15 @@ launches its internally captured graph. Python is used for setup and graph
 submission, not for convergence decisions during execution. Setup may allocate,
 compile, upload NumPy inputs, and prepare native sorting scratch. Replays keep
 geometry, bounds, counters, validation results, and decisions on the device.
+The constructor finishes initialization on its setup stream before returning,
+so the prepared workspace can then be used on another properly ordered stream.
 CUDA conditional graphs require Warp's CUDA toolkit and the NVIDIA driver to
 support CUDA 12.4 or newer.
+
+`run()` can also be nested inside a `wp.capture_while` body alongside producer
+and consumer kernels. Updating that loop's condition on the GPU allows multiple
+construction/consumption iterations in a single graph launch, with no host
+intervention between iterations.
 
 ## Outputs and capacities
 
@@ -87,7 +94,7 @@ valid prefixes are unspecified and may contain old data.
 |---:|---|
 | 1 | Nonfinite point or weight input |
 | 2 | Cell construction exhausted its capacity/numerical recovery |
-| 4 | Adjacency capacity exceeded |
+| 4 | Adjacency capacity exceeded or CSR count overflow |
 | 8 | Tetrahedron candidate capacity exceeded |
 | 16 | Detected cospherical/copower or near-coplanar ambiguity |
 | 32 | Power-sphere or mesh topology validation failed |

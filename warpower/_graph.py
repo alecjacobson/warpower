@@ -100,8 +100,8 @@ def adjacency_ready(
 ):
     total = offsets[offsets.shape[0] - 1]
     count[0] = total
-    ready[0] = int(total <= capacity)
-    if total > capacity:
+    ready[0] = int(total >= 0 and total <= capacity)
+    if total < 0 or total > capacity:
         wp.atomic_or(error, 0, 4)
 
 
@@ -328,6 +328,9 @@ class DiagramWorkspace:
             with wp.ScopedCapture(device=self.device) as capture:
                 self._record()
             self.graph = capture.graph
+            # Initial fills/native primitive setup must finish before run() may
+            # use a different stream. This barrier is outside captured execution.
+            wp.synchronize_stream(wp.get_stream(self.device))
 
     def _tree(self, base, leaf_size):
         tree = bvh.Tree()

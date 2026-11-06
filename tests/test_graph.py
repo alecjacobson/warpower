@@ -26,6 +26,11 @@ def advance(phase: wp.array[int]):
 
 
 @wp.kernel
+def decrement(remaining: wp.array[int]):
+    remaining[0] -= 1
+
+
+@wp.kernel
 def consume(
     points: wp.array[wp.vec3],
     tets: wp.array2d[int],
@@ -163,6 +168,18 @@ def test_capacity_failure_zeroes_visible_output(mode, bit):
     assert not workspace.offsets.numpy().any()
 
 
+def test_overflowed_csr_total_disables_output_writes():
+    from warpower._graph import adjacency_ready
+
+    offsets = wp.array(np.array([0, -2147483648], np.int32), device="cuda:0")
+    count = wp.zeros(1, dtype=int, device="cuda:0")
+    error = wp.zeros(1, dtype=int, device="cuda:0")
+    ready = wp.ones(1, dtype=int, device="cuda:0")
+    wp.launch(adjacency_ready, 1, inputs=[offsets, 100, count, error, ready])
+    assert ready.numpy()[0] == 0
+    assert error.numpy()[0] == 4
+
+
 def test_invalid_and_degenerate_then_valid_replay():
     cube = np.array([[x, y, z] for x in (-1, 1) for y in (-1, 1) for z in (-1, 1)], np.float32)
     points = wp.array(cube, dtype=wp.vec3, device="cuda:0")
@@ -266,3 +283,44 @@ def test_torch_producer_and_consumer_on_shared_stream():
     assert total.item() == workspace.adjacency_count.numpy()[0]
     expected = warpower.voronoi_diagram(points)
     assert rows(workspace) == rows(expected)
+
+
+def test_device_controlled_outer_loop():
+    p = np.random.default_rng(71).normal(size=(40, 3)).astype(np.float32)
+    base = wp.array(p, dtype=wp.vec3, device="cuda:0")
+    points = wp.clone(base)
+    weights = wp.zeros(len(p), dtype=float, device="cuda:0")
+    phase = wp.zeros(1, dtype=int, device="cuda:0")
+    remaining = wp.zeros(1, dtype=int, device="cuda:0")
+    volume = wp.zeros(1, dtype=wp.float64, device="cuda:0")
+    workspace = warpower.DiagramWorkspace(points, weights, return_tetrahedra=True)
+
+    def body():
+        wp.launch(produce, len(p), inputs=[base, points, weights, phase])
+        workspace.run()
+        volume.zero_()
+        wp.launch(
+            consume,
+            len(workspace.tetrahedra),
+            inputs=[
+                points,
+                workspace.tetrahedra,
+                workspace.tetrahedra_count,
+                workspace.error,
+                volume,
+            ],
+        )
+        wp.launch(advance, 1, inputs=[phase])
+        wp.launch(decrement, 1, inputs=[remaining])
+
+    with wp.ScopedCapture() as capture:
+        remaining.fill_(3)
+        wp.capture_while(remaining, body)
+    for expected_phase in (3, 6):
+        wp.capture_launch(capture.graph)
+        assert phase.numpy()[0] == expected_phase
+        assert remaining.numpy()[0] == 0
+        assert workspace.error.numpy()[0] == 0
+        tets = workspace.tetrahedra.numpy()[: int(workspace.tetrahedra_count.numpy()[0])]
+        assert tet_set(tets) == reference(points.numpy(), weights.numpy())
+        assert volume.numpy()[0] > 0

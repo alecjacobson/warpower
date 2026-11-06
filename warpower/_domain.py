@@ -9,6 +9,8 @@ import warp as wp
 from ._api import _points_array
 from ._graph import scan_add, scan_blocks
 from ._surface_bvh import SurfaceHierarchy, SurfaceTree, closest_point, material_side
+from ._triangle_contact import check_intersections
+from ._triangle_contact import excess_contact as excess_contact
 
 wp.set_module_options({"enable_backward": False, "fast_math": False})
 
@@ -143,128 +145,6 @@ def face_geometry(
     else:
         normals[f] = wp.vec3(cross / norm)
         areas[f] = norm * wp.float64(0.5)
-
-
-@wp.func
-def in_cone(direction: wp.vec3d, a: wp.vec3d, b: wp.vec3d):
-    normal = wp.cross(a, b)
-    return wp.dot(wp.cross(direction, b), normal) >= wp.float64(0.0) and wp.dot(
-        wp.cross(a, direction), normal
-    ) >= wp.float64(0.0)
-
-
-@wp.func
-def excess_contact(points: wp.array[wp.vec3], left: wp.vec3i, right: wp.vec3i):
-    """Exclude legal indexed contact, including coplanar adjacent triangles."""
-    shared = int(0)
-    common = int(-1)
-    unique_left = int(-1)
-    unique_right = int(-1)
-    for k in range(3):
-        if left[k] == right[0] or left[k] == right[1] or left[k] == right[2]:
-            shared += 1
-            common = left[k]
-        else:
-            unique_left = left[k]
-        if right[k] != left[0] and right[k] != left[1] and right[k] != left[2]:
-            unique_right = right[k]
-    if shared == 0:
-        return (
-            wp.intersect_tri_tri(
-                points[left[0]],
-                points[left[1]],
-                points[left[2]],
-                points[right[0]],
-                points[right[1]],
-                points[right[2]],
-            )
-            != 0
-        )
-    if shared == 3:
-        return True
-    origin = wp.vec3d(points[common])
-    if shared == 2:
-        edge = wp.vec3d(0.0)
-        for k in range(3):
-            if left[k] != common and left[k] != unique_left:
-                edge = wp.vec3d(points[left[k]]) - origin
-        a = wp.cross(edge, wp.vec3d(points[unique_left]) - origin)
-        b = wp.cross(edge, wp.vec3d(points[unique_right]) - origin)
-        parallel = wp.length_sq(wp.cross(a, b)) <= wp.float64(1.0e-24) * wp.length_sq(
-            a
-        ) * wp.length_sq(b)
-        return parallel and wp.dot(a, b) > wp.float64(0.0)
-    # Noncoplanar planes intersect along a line through the common vertex.
-    # Extra contact exists iff either ray lies in both triangle tangent cones.
-    a, b, c, d = wp.vec3d(0.0), wp.vec3d(0.0), wp.vec3d(0.0), wp.vec3d(0.0)
-    for k in range(3):
-        if left[k] == common:
-            a = wp.vec3d(points[left[(k + 1) % 3]]) - origin
-            b = wp.vec3d(points[left[(k + 2) % 3]]) - origin
-        if right[k] == common:
-            c = wp.vec3d(points[right[(k + 1) % 3]]) - origin
-            d = wp.vec3d(points[right[(k + 2) % 3]]) - origin
-    na, nb = wp.cross(a, b), wp.cross(c, d)
-    direction = wp.cross(na, nb)
-    parallel = wp.length_sq(direction) <= wp.float64(1.0e-24) * wp.length_sq(na) * wp.length_sq(nb)
-    if parallel:
-        return in_cone(a, c, d) or in_cone(b, c, d) or in_cone(c, a, b) or in_cone(d, a, b)
-    return (in_cone(direction, a, b) and in_cone(direction, c, d)) or (
-        in_cone(-direction, a, b) and in_cone(-direction, c, d)
-    )
-
-
-@wp.kernel
-def check_intersections(tree: SurfaceTree, error: wp.array[int]):
-    f = wp.tid()
-    if error[0] != 0:
-        return
-    a, b, c = tree.indices[3 * f], tree.indices[3 * f + 1], tree.indices[3 * f + 2]
-    p, q, r = tree.points[a], tree.points[b], tree.points[c]
-    lo, hi = wp.min(p, wp.min(q, r)), wp.max(p, wp.max(q, r))
-    stack = wp.zeros(shape=64, dtype=int)
-    stack[0] = 1
-    size = int(1)
-    while size > 0:
-        size -= 1
-        node = stack[size]
-        lower, upper = tree.lower[node], tree.upper[node]
-        if (
-            lower[0] > hi[0]
-            or lower[1] > hi[1]
-            or lower[2] > hi[2]
-            or upper[0] < lo[0]
-            or upper[1] < lo[1]
-            or upper[2] < lo[2]
-        ):
-            continue
-        if node >= tree.leaf_base:
-            first = 4 * (node - tree.leaf_base)
-            for j in range(first, wp.min(first + 4, tree.n)):
-                other = tree.ids[j]
-                if other > f:
-                    right = wp.vec3i(
-                        tree.indices[3 * other],
-                        tree.indices[3 * other + 1],
-                        tree.indices[3 * other + 2],
-                    )
-                    x, y, z = tree.points[right[0]], tree.points[right[1]], tree.points[right[2]]
-                    face_lower, face_upper = wp.min(x, wp.min(y, z)), wp.max(x, wp.max(y, z))
-                    if (
-                        face_lower[0] > hi[0]
-                        or face_lower[1] > hi[1]
-                        or face_lower[2] > hi[2]
-                        or face_upper[0] < lo[0]
-                        or face_upper[1] < lo[1]
-                        or face_upper[2] < lo[2]
-                    ):
-                        continue
-                    if excess_contact(tree.points, wp.vec3i(a, b, c), right):
-                        wp.atomic_or(error, 0, 16)
-        else:
-            stack[size] = 2 * node
-            stack[size + 1] = 2 * node + 1
-            size += 2
 
 
 @wp.kernel
@@ -642,6 +522,7 @@ class SurfaceDomain:
             self._feature_direction = wp.zeros(n, dtype=wp.vec3d)
             self._scan_edges, self._scan_corners = _Scan(m, self.device), _Scan(n, self.device)
             wp.load_module(module=__name__, device=self.device)
+            wp.load_module(module="warpower._triangle_contact", device=self.device)
             wp.load_module(module="warpower._graph", device=self.device)
             self.refit()
         wp.synchronize_device(self.device)

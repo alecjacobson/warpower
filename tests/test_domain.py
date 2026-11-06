@@ -7,6 +7,8 @@ import warpower
 from warpower._domain import excess_contact
 from warpower._surface_bvh import SurfaceTree, material_side, ray_count
 
+wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
+
 
 def convex_surface(points):
     points = np.asarray(points, np.float32)

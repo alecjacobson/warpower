@@ -49,12 +49,25 @@ links are rejected on device. Geometry validation checks triangle intersections,
 including excess contact between triangles sharing an edge or vertex, and tests
 which side of each face contains material.
 
-This is floating-point validation, not an exact-predicate certificate. The
+The complete domain validator is not an exact-predicate certificate. The
 hierarchy, closest-point regions, and oriented ray counts use pure Warp kernels
 with float64 geometric arithmetic. Shared-edge/vertex ray hits trigger two
 alternative directions on device; unresolved classification is reported rather
-than guessed. Intersections between triangles without shared vertex indices use
-Warp's built-in triangle predicate after bounding-box filtering.
+than guessed. After bounding-box filtering, intersections between triangles
+without shared vertex indices use filtered float64 orientation signs with exact
+expansion fallback. Plane separation and segment/triangle tests handle crossing,
+coplanar overlap, and unindexed touching without a geometric tolerance. Shared
+indexed contact retains the separate float64 edge/cone tests.
+
+The exact-sign path fixes eight false intersection reports in the CGAL-distributed
+fandisk and bunny surfaces ([#92](https://github.com/alecjacobson/warpower/issues/92)).
+Warp 1.19's native triangle test uses a fixed plane threshold, including its
+float64 overload, so casting coordinates alone does not fix the issue. Independent
+CGAL exact checks found all eight pairs disjoint and both complete surfaces free
+of self-intersections using the same float32 coordinates. Both surfaces now pass
+the normal device validator; no geometry checks are disabled. The reduced
+fixtures are also checked against an independent arbitrary-precision integer
+separating-axis oracle across all windings, pair orders, and power-of-two scales.
 
 Faces with twice-area at most `1e-12` times the sum of squared edge lengths are
 rejected before division. Material-side orientation is checked at each face

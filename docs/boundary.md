@@ -163,3 +163,24 @@ With `active_count=None`, the original fixed-budget path runs directly, without
 the extra guard, private point array, or copy kernels. The active-prefix option
 is a foundation for refinement; it does not itself insert or relocate sites
 between optimization runs.
+
+
+The active-prefix [full suite](../results/validation/vtm/active-full-tests.txt)
+passes 269 tests. All eight new cases pass [padded memory checking](../results/validation/vtm/active-memcheck.txt),
+and both captured integration cases pass [lifetime checking](../results/validation/vtm/active-lifetime.txt)
+with zero errors under the [documented diagnostic settings](cuda-validation.md).
+An [installed wheel](../results/validation/vtm/active-wheel.json) handles device
+counts `24 → 40 → 0 → 72`, skips the invalid zero-count body, and recovers.
+The [native trace](../results/validation/vtm/active-device-audit.json) records
+1,084 kernel activities for three changing-count replays; all 58 graph copies
+are device-to-device, with no host/allocation/free nodes or CPU transfer calls.
+
+The [source audit](../results/validation/vtm/active-isolation.json) finds every
+preexisting runtime module except the core wrapper unchanged from `79bc791`;
+all preexisting VTM kernel/function ASTs are identical. For the default uniform
+1,000-site torus, 20 iterations and five timed replays give
+[520.48 ms before](../results/validation/vtm/active-core-before.json) and
+[520.74 ms after](../results/validation/vtm/active-core-after.json), a 0.05%
+difference within measurement variation. Both produce 5,902 full-hull tetrahedra,
+accept all 20 steps, and have matching energy histories within `2e-14` relative
+roundoff, with no observed CPU quota throttling. These remain core-only timings.

@@ -1,0 +1,92 @@
+{
+  "title": "Warpower \u2014 From points to power",
+  "duration_seconds": 24,
+  "width": 1920,
+  "height": 1080,
+  "frames_per_second": 24,
+  "expected_frames": 576,
+  "construction": "warpower.power_diagram",
+  "sites": 416,
+  "displayed_cells": 176,
+  "boundary_sites": 240,
+  "maximum_halfspace_violation": 6.661338147750939e-16,
+  "mesh_checks": "All 176 meshes closed, Euler characteristic 2, outward orientation, positive volume, and within library bounding domain.",
+  "cell_volume_range": [
+    0.05906160159523387,
+    0.5224755917261548
+  ],
+  "source_implementation": "d38b80c",
+  "renderer": "Blender 4.5.3 LTS / Cycles / OptiX / NVIDIA L40 / 32 samples / denoising",
+  "presentation_effects": [
+    "beveled edges",
+    "cell scaling",
+    "radial explosion",
+    "camera orbit"
+  ],
+  "audio": "Original synthesized ambient pads and bells; 48 kHz stereo",
+  "audio_peak_dbfs": -13.113027749583047,
+  "audio_rms_dbfs": -24.385331031820527,
+  "benchmark_card": {
+    "distribution": "cluster5",
+    "sites": 100000,
+    "mode": "voronoi",
+    "gpu": "NVIDIA L40",
+    "warpower_ms": 30.398468300700188,
+    "paragram_ms": 65.98638817667961,
+    "ratio": 2.1707142453345156,
+    "scope": "Separate existing benchmark input, not the visual scene"
+  },
+  "sha256": {
+    "geometry.json": "722d42b3bb7ef8b46eed7d073b0ce4f985b16662a91d82fb12eed3107dfd73a1",
+    "sites.npz": "c76954b4fb8b1017f8a041a72ce326d825f1505ad05c8b00bae1d5c4b6eb2694",
+    "score.wav": "fc6ba910660d9018506ab84713abec20750911601f79b69c4e608b24ae5c689d",
+    "warpower-showcase.blend": "6b68f058091abab34c41e6647c4b4cbfa33707534eba6248f450ea0e012d7ae6",
+    "warpower-showcase.mp4": "990000fa5f3243c4dae8b46cc15c98a25891ab083ed5108d1b8ede8ae002999b",
+    "poster.jpg": "1e7fbe5ec06da596703082bc7d7487ef5d970c27e2dc8956f4efb20bf28f396a"
+  },
+  "packages": {
+    "warp-lang": "1.19.0+cu12",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "Pillow": "12.3.0",
+    "imageio-ffmpeg": "0.8.1"
+  },
+  "validation_scope": "Presentation meshes checked against all site halfspaces and for closed, outward-oriented polyhedral topology; this is not an exact-predicate guarantee.",
+  "benchmark_report": "https://github.com/alecjacobson/warpower/blob/04b491702952feb4f38627b76b77fa3cc0217637/results/summary/report.md",
+  "source_scripts_sha256": {
+    "showcase/build_scene.py": "170b994ac673af3033dde1cda20d69fb7dd635b04c6b8f29787f63019600c41a",
+    "showcase/finish_video.py": "5b018a0ce557aa1301d8e5bfa622626f993763059c99992037b74a785793033d",
+    "showcase/make_geometry.py": "007f53b96776e649bd50b775a4cc5fea398573fe97577ccb83854852b3f997ff",
+    "showcase/render.py": "ad437c9ecdda7c1a38a4ddea31050c4148385c50bffd83a7bbf54866dfe545d2"
+  },
+  "video_validation": {
+    "metadata": {
+      "ffmpeg_version": "n9.0.2-17-g2a571b6068-20260930 built with gcc 16.2.0 (crosstool-NG 1.29.0.7_b1a94f6)",
+      "codec": "h264",
+      "pix_fmt": "yuv420p(tv, bt709, progressive)",
+      "audio_codec": "aac",
+      "fps": 24.0,
+      "source_size": [
+        1920,
+        1080
+      ],
+      "size": [
+        1920,
+        1080
+      ],
+      "rotate": 0,
+      "duration": 24.0
+    },
+    "decoded_frames": 576,
+    "decoded_seconds": 24.0,
+    "complete_audio_video_decode": "passed with ffmpeg -xerror",
+    "fast_start": true,
+    "representative_frames_seconds": [
+      2,
+      7.5,
+      14,
+      21
+    ]
+  },
+  "visual_review": "Inspected final exported frames at 2, 7.5, 14, and 21 seconds; framing, typography, and seamless backdrop verified."
+}

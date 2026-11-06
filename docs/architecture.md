@@ -246,8 +246,9 @@ requested number of unique interior sites at uniform or inverse-cubed sizing
 density. Both are separate lazy APIs with fixed storage and captured refits/runs.
 
 The internal [refinement workspace](refinement.md) ranks material-interior
-Voronoi centers by circumradius over sizing, removes coincident float32 positions,
-and appends a bounded batch to the device active prefix. Reconstruction and
+Voronoi centers by circumradius over sizing, certifies their
+[float32 rounding](stable-centers.md), removes coincident positions, and appends
+a bounded batch to the device active prefix. Reconstruction and
 statistics either commit together or restore the prior state entirely on device.
 It uses separate fixed buffers and adds no work to existing geometry calls.
 

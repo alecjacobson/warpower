@@ -10,6 +10,7 @@ from . import _bvh, _canonical
 from ._domain import _Scan
 from ._site_bvh import nearest_site
 from ._sizing import SizingData, sizing_value
+from ._stable_center import circumcenter
 from ._surface_bvh import SurfaceTree, material_side
 from ._tetrahedra import sorted4
 
@@ -118,30 +119,13 @@ def candidates(
     keys[i] = (wp.uint64(vertices[2]) << wp.uint64(32)) | wp.uint64(vertices[3])
     # A canonical ordering makes geometric scores independent of tet row order
     # and positive-orientation permutations. Its determinant may have either sign.
-    p0 = wp.vec3d(points[vertices[0]])
-    a = wp.vec3d(points[vertices[1]]) - p0
-    b = wp.vec3d(points[vertices[2]]) - p0
-    c = wp.vec3d(points[vertices[3]]) - p0
-    det = wp.dot(a, wp.cross(b, c))
-    if det == wp.float64(0.0) or not wp.isfinite(det):
+    sphere = circumcenter(
+        points[vertices[0]], points[vertices[1]], points[vertices[2]], points[vertices[3]]
+    )
+    if sphere.valid == 0:
         wp.atomic_add(state.invalid_candidates, 0, 1)
         return
-    offset = (
-        wp.dot(a, a) * wp.cross(b, c)
-        + wp.dot(b, b) * wp.cross(c, a)
-        + wp.dot(c, c) * wp.cross(a, b)
-    ) / (wp.float64(2.0) * det)
-    radius = wp.length(offset)
-    center = wp.vec3(p0 + offset)
-    if (
-        not wp.isfinite(center[0])
-        or not wp.isfinite(center[1])
-        or not wp.isfinite(center[2])
-        or not wp.isfinite(radius)
-        or radius <= wp.float64(0.0)
-    ):
-        wp.atomic_add(state.invalid_candidates, 0, 1)
-        return
+    center, radius = sphere.point, sphere.radius
     if material_side(domain, wp.vec3d(center)) != 1:
         return
     nearest = nearest_site(sites, site_points, wp.vec3d(center), state.active, occupied, False)

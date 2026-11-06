@@ -3,8 +3,8 @@
 The private `warpower._refinement.RefinementWorkspace` performs one transactional
 Voronoi-center insertion batch. It implements the progressive growth stage in
 [Alliez et al., section 3.6](https://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Alliez05.pdf).
-The public mesher and its complete stage scheduler remain under development in
-[#38](https://github.com/alecjacobson/warpower/issues/38).
+The [public mesher](mesher.md) composes it with initialization, fitting, quality
+improvement, and final extraction.
 
 ```python
 import warp as wp
@@ -34,17 +34,19 @@ contiguous device int32 scalar, and defaults to the point capacity. A device
 producer can change the target between replays. All buffers, including sorting,
 deduplication, and rollback storage, are allocated at setup. Replays use Warp
 kernels, GPU radix sorting/scans, and device conditional graphs; no host geometry,
-readback, allocation, synchronization, or numerical fallback is performed.
+readback, allocation, or synchronization occurs during replay.
 
 ## Candidate selection
 
-Each current tetrahedron contributes its float64 circumcenter and circumradius.
-The center is rounded to the actual float32 insertion position and retained only
+Each current tetrahedron contributes a circumcenter and float64 circumradius.
+The center's float32 rounding is certified, with an exact integer fallback when
+the ordinary arithmetic is uncertain; see [consistent centers](stable-centers.md).
+The actual float32 insertion position is retained only
 when it is finite, classified inside the material, and distinct from existing
 sites. Ambiguous material queries are excluded. Priority is descending `R / mu`,
 where sizing is evaluated at the rounded insertion position. Uniform sizing uses
-`mu=1`. This is a geometric heuristic; certification applies to the subsequently
-reconstructed Delaunay mesh, not to exact circumcenter arithmetic.
+`mu=1`. Ranking and material queries remain geometric heuristics. Both the center's
+rounding and the subsequently reconstructed Delaunay mesh are certified.
 
 Canonical vertex order makes the calculation independent of tetrahedron row and
 positive-orientation permutation. Stable device sorting breaks equal priorities

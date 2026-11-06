@@ -17,6 +17,7 @@ def main():
     parser.add_argument(
         "--optimizer", action="store_true", help="Audit three ODT iterations per replay"
     )
+    parser.add_argument("--domain", action="store_true", help="Analyze a benchmarks.domain trace")
     args = parser.parse_args()
     if args.analyze:
         database = sqlite3.connect(args.analyze)
@@ -40,9 +41,20 @@ def main():
         dot = args.dot.read_text()
         node_types = dict(collections.Counter(re.findall(r'label="\{\s*([A-Z0-9_]+)\s*\n', dot)))
         copy_kinds = dict(collections.Counter(re.findall(r"\{kind \| ([^}]+)\}", dot)))
+        observed_copies = {}
+        if "CUPTI_ACTIVITY_KIND_MEMCPY" in tables:
+            observed_copies = dict(
+                database.execute(
+                    "select e.name,count(*) from CUPTI_ACTIVITY_KIND_MEMCPY m "
+                    "join ENUM_CUDA_MEMCPY_OPER e on m.copyKind=e.id group by e.name"
+                )
+            )
         report = {
             "scope": (
-                "Three warmed replays of a changing 1000-site producer/ODT/consumer graph, "
+                "Three warmed replays of a deforming surface/refit/query/consumer graph; "
+                "one final synchronization outside geometry"
+                if args.domain
+                else "Three warmed replays of a changing 1000-site producer/ODT/consumer graph, "
                 "three optimizer iterations each; one final synchronization outside construction"
                 if args.optimizer
                 else "Three warmed replays of a changing 1000-site weighted producer/diagram/tetrahedra/consumer graph; one final synchronization outside construction"
@@ -50,14 +62,15 @@ def main():
             "gpu_kernel_activities": count("CUPTI_ACTIVITY_KIND_KERNEL"),
             "gpu_memset_activities": count("CUPTI_ACTIVITY_KIND_MEMSET"),
             "gpu_memcpy_activities": count("CUPTI_ACTIVITY_KIND_MEMCPY"),
+            "gpu_memcpy_kinds": observed_copies,
             "cuda_api_calls": calls,
             "dot_node_types": node_types,
             "dot_copy_kinds": copy_kinds,
-            "copy_trace_limit": "Nsight omitted activity records for graph DtoD copies; DOT node directions establish that all captured copies stay on device.",
+            "copy_trace_limit": "Nsight may omit graph copy activity records; both observed copy kinds and all DOT copy nodes are checked for device-to-device direction.",
             "dot_sha256": hashlib.sha256(args.dot.read_bytes()).hexdigest(),
             "sqlite_sha256": hashlib.sha256(args.analyze.read_bytes()).hexdigest(),
         }
-        assert report["gpu_memcpy_activities"] == 0
+        assert set(observed_copies) <= {"CUDA_MEMCPY_KIND_DTOD"}
         assert not any(re.search(r"(alloc|free|memcpy)", name, re.I) for name in calls)
         assert set(node_types) <= {"KERNEL", "MEMSET", "MEMCPY", "CONDITIONAL"}
         assert sum(copy_kinds.values()) == node_types.get("MEMCPY", 0)

@@ -211,6 +211,13 @@ oriented boundary and check local manifoldness; device union operations measure
 components, shell Euler characteristics, and cavity volumes. Quality and directed
 surface-error reductions are available to downstream device processes.
 
-Graded sizing, refinement, and stronger numerical recovery remain tracked
-in the [full VTM implementation plan](vtm.md). An energy decrease alone does not
+The independent [`SizingField` and `SizingQueryWorkspace`](sizing.md) evaluate
+sampled positive sizing constraints with controlled gradation. A device hierarchy
+prunes cones using minimum sample values and distance bounds; refit and queries
+compose in capture. The internal VTM core optionally uses centroid-evaluated
+inverse-cubed sizing for interior contributions and shares the field with its
+surface and crease quadrature. The uniform standalone ODT kernel is unchanged.
+
+Automatic sizing, initialization, refinement, and further performance work remain
+tracked in the [full VTM implementation plan](vtm.md). An energy decrease alone does not
 establish good worst-element quality or a CPU performance advantage.

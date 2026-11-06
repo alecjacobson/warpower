@@ -10,6 +10,8 @@ __all__ = [
     "DomainQueryWorkspace",
     "ExtractionWorkspace",
     "ODTWorkspace",
+    "SizingField",
+    "SizingQueryWorkspace",
     "SurfaceDomain",
     "delaunay_tetrahedra",
     "power_diagram",
@@ -19,6 +21,10 @@ __all__ = [
 
 
 def __getattr__(name):
+    if name in ("SizingField", "SizingQueryWorkspace"):
+        from . import _sizing
+
+        return getattr(_sizing, name)
     if name == "DelaunayWorkspace":
         from ._delaunay_recovery import DelaunayWorkspace
 

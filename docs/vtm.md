@@ -90,9 +90,13 @@ surface/crease membership and exact corner anchors. Its integration with interio
 ODT runs in a captured loop, with device backtracking and rollback. The internal
 core returns full-hull connectivity; the independent [extractor](extraction.md)
 selects a nonconvex domain mesh and measures topology, quality, and approximation
-error. Both compose in a captured producer/consumer loop. Graded sizing,
-initialization, refinement, stronger numerical recovery, and the final public
-mesher API remain necessary to complete the goal.
+error. Both compose in a captured producer/consumer loop. The optional
+[certified Delaunay constructor](delaunay-recovery.md) handles recovered
+candidates with exact original-input certification and explicit finite failure.
+The [sampled sizing layer](sizing.md) supplies device Lipschitz extension and
+graded interior/boundary updates. Automatic feature-size estimation,
+initialization, refinement, and the final public mesher API remain necessary to
+complete the goal.
 
 Additional findings are tracked in
 [#42](https://github.com/alecjacobson/warpower/issues/42) (old-connectivity line-search stalls),
@@ -109,4 +113,9 @@ stack allowance needed to memory-check a deeper captured optimizer trajectory;
 see the [diagnostic environment](cuda-validation.md).
 [#54](https://github.com/alecjacobson/warpower/issues/54) adds the isolated
 [exact predicate foundation](exact-predicates.md) for certified numerical
-recovery; it does not by itself close construction robustness in #32.
+recovery, integrated with candidate construction and whole-mesh certification in
+[#32](https://github.com/alecjacobson/warpower/issues/32).
+[#56](https://github.com/alecjacobson/warpower/issues/56) removes repeated failed
+construction work by reusing successful strategies with fresh current-input
+certification; [#58](https://github.com/alecjacobson/warpower/issues/58) tracks
+the remaining large-cloud certification cost.

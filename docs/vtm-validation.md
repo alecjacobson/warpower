@@ -281,3 +281,79 @@ nsys export --type sqlite --output results/local/boundary-loop.sqlite results/lo
 python -m benchmarks.graph_capture --vtm-core --dot results/local/boundary-loop.dot \
   --analyze results/local/boundary-loop.sqlite --output results/local/boundary-audit.json
 ```
+
+## Domain extraction and topology diagnostics
+
+[`ExtractionWorkspace`](extraction.md) applies the paper's strict outside-distance
+to circumradius threshold of 0.4, then compacts selected tetrahedra and exposes
+their oriented boundary. The complete suite passes **164 tests**
+([output](../results/validation/vtm/extraction-tests.txt)). Fifteen new tests cover
+independent circumcenter solves, all-triangle signed winding and closest-distance
+oracles, strict threshold behavior, volume and quality formulas, surface-error
+quadrature, invalid inputs, changing device counts, and captured consumers.
+
+The extracted cube has exact volume and surface area. An enclosed cavity has
+one volume component, two boundary shells, and the correct negative inner-shell
+volume. Disconnected cubes retain two components without a convex-hull bridge.
+The fitted torus has one closed boundary with Euler characteristic zero. Tests
+also detect duplicate tetrahedra, nonmanifold edge contacts, and disconnected
+vertex links. These checks do not guarantee topology at insufficient resolution.
+
+All **31 boundary/core/extraction tests** pass CUDA memcheck with 32-byte padding,
+zero errors, and no exclusions
+([output](../results/validation/vtm/extraction-memcheck.txt)). Instrumenting the
+300-site, 16-step nested optimizer requires a 32 KiB CUDA stack allowance in the
+test process; the default setting fails before extraction. Individual captured
+steps pass without that setting. The [validation environment](cuda-validation.md)
+records these observations and the diagnostic-only launcher. No runtime geometry
+or default context setting was changed.
+
+A second 31-test run also passes with explicit allocation-order checking and
+synchronous diagnostic allocations
+([output](../results/validation/vtm/extraction-lifetime.txt)). With asynchronous
+allocation, that checker reports use-before-allocation even in the committed
+minimal nested-counter example with no Warpower imports and an explicit setup
+synchronization. The diagnostic documentation includes that reproducer and
+distinguishes its settings from the normal pooled runtime.
+
+On NVIDIA L40, the 1,000-site torus extraction, topology/quality diagnostics,
+changing-input producer, and volume consumer take **23.22 ms** median over ten
+samples. Including 20 boundary/interior optimization steps takes **336.23 ms**
+median over five samples. Both measurements have no CPU quota throttling
+([extraction](../results/validation/vtm/extraction-torus.json),
+[combined loop](../results/validation/vtm/extraction-combined.json)). Selection
+and topology match independent CPU calculations. These are resident-device
+intermediate pipeline timings, not CPU speedup comparisons.
+
+The combined case retains **4,186 tetrahedra** and **1,144 boundary faces**, with
+median radius ratio **0.873** and worst ratio **0.025**. Its volume is **4.84% below**
+the triangulated input domain; directed sampled boundary RMS distance is
+**0.01861** in model units. Three cycling input translations produce slightly
+different optimization trajectories and final quality minima; each JSON records
+the final state for its particular replay count. Worst-element improvement,
+gradation, and better approximation remain required.
+
+The [combined native audit](../results/validation/vtm/extraction-device-audit.json)
+records 322 kernel, 116 memset, 26 conditional, and 22 device-to-device copy nodes.
+Three complete profiled replays execute 9,027 kernel activities. There are no
+host transfers, host callbacks, or allocation/free nodes; CPU activity is three
+graph submissions, profiler/capture bookkeeping, and one final synchronization
+outside geometry. All prior implementation modules remain byte-identical to
+`1cbea48` ([source audit](../results/validation/vtm/extraction-standalone-isolation.json)).
+An installed wheel also passes a captured extraction/changing-count smoke test
+outside the checkout, with exact source matching
+([package record](../results/validation/vtm/extraction-wheel.json)).
+
+```bash
+python -m benchmarks.extraction --reference --output results/local/extraction.json
+python -m benchmarks.extraction --combined --reference --repeats 5 \
+  --output results/local/extraction-combined.json
+nsys profile --trace=cuda --cuda-graph-trace=node --cuda-event-trace=false \
+  --sample=none --cpuctxsw=none --capture-range=cudaProfilerApi \
+  --capture-range-end=stop --output=results/local/extraction-loop \
+  python -m benchmarks.extraction --combined --iterations 20 --repeats 1 --profile \
+  --dot results/local/extraction-loop.dot
+nsys export --type sqlite --output results/local/extraction-loop.sqlite results/local/extraction-loop.nsys-rep
+python -m benchmarks.graph_capture --extraction --dot results/local/extraction-loop.dot \
+  --analyze results/local/extraction-loop.sqlite --output results/local/extraction-audit.json
+```

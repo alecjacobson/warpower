@@ -88,8 +88,11 @@ boundaries, cavities, and disconnected components independently of tetrahedral
 meshing. The independent [boundary fitter](boundary.md) now provides evolving
 surface/crease membership and exact corner anchors. Its integration with interior
 ODT runs in a captured loop, with device backtracking and rollback. The internal
-core still returns full-hull connectivity; the remaining stages are necessary
-before it can be used as a complete domain mesher.
+core returns full-hull connectivity; the independent [extractor](extraction.md)
+selects a nonconvex domain mesh and measures topology, quality, and approximation
+error. Both compose in a captured producer/consumer loop. Graded sizing,
+initialization, refinement, stronger numerical recovery, and the final public
+mesher API remain necessary to complete the goal.
 
 Additional findings are tracked in
 [#42](https://github.com/alecjacobson/warpower/issues/42) (old-connectivity line-search stalls),
@@ -101,3 +104,6 @@ and [#48](https://github.com/alecjacobson/warpower/issues/48) (surface query per
 Boundary work also exposed [#50](https://github.com/alecjacobson/warpower/issues/50)
 (native radix-sort capture allocations), resolved by rebuilding in an input-validity
 conditional graph whose scratch storage belongs to capture setup.
+[#52](https://github.com/alecjacobson/warpower/issues/52) records the explicit
+stack allowance needed to memory-check a deeper captured optimizer trajectory;
+see the [diagnostic environment](cuda-validation.md).

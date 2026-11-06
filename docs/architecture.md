@@ -199,6 +199,12 @@ membership evolves with the positions. An internal VTM core combines these
 targets with interior ODT, reconstruction, and complete rollback. Boundary-first
 acceptance is a heuristic because fitting changes the optimization domain.
 
-Graded sizing, refinement, nonconvex extraction, and stronger numerical recovery remain tracked
+[`ExtractionWorkspace`](extraction.md) independently selects tetrahedra using the
+paper's circumcenter thickening rule. Fixed-buffer face/edge tables expose the
+oriented boundary and check local manifoldness; device union operations measure
+components, shell Euler characteristics, and cavity volumes. Quality and directed
+surface-error reductions are available to downstream device processes.
+
+Graded sizing, refinement, and stronger numerical recovery remain tracked
 in the [full VTM implementation plan](vtm.md). An energy decrease alone does not
 establish good worst-element quality or a CPU performance advantage.

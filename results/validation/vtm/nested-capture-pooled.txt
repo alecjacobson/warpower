@@ -1,0 +1,48 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 32768, "diagnostic_mempool_enabled": true}
+========= Invalid __global__ write of size 4 bytes
+=========     at void memtile_value_kernel<int>(T1 *, T1, unsigned long)+0xc0
+=========     by thread (0,0,0) in block (0,0,0)
+=========     Access at 0x1ab4000c00 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4000c00 of size 4 bytes
+========= 
+========= Program hit cudaErrorLaunchFailure (error 719) due to "unspecified launch failure" on CUDA API call to cudaMemcpyAsync.
+========= 
+Warp CUDA error 719: unspecified launch failure (in function wp_memcpy_d2h, /builds/omniverse/warp/warp/native/warp.cu:1076)
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/horde/projects/power-diagram/benchmarks/nested_capture.py", line 55, in <module>
+    main()
+  File "/home/horde/projects/power-diagram/benchmarks/nested_capture.py", line 49, in main
+    result = int(value.numpy()[0])
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/types.py", line 4734, in numpy
+    a = self.to("cpu", requires_grad=False)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/types.py", line 4833, in to
+    return warp.clone(self, device=device, requires_grad=requires_grad)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 10503, in clone
+    warp.copy(arr, src)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 15360, in copy
+    raise RuntimeError(f"Warp copy error: {runtime.get_error_string()}")
+RuntimeError: Warp copy error: Warp CUDA error 719: unspecified launch failure (in function wp_memcpy_d2h, /builds/omniverse/warp/warp/native/warp.cu:1076)
+Module __main__ ba246c0 load on device 'cuda:0' took 392.02 ms  (compiled)
+Warp CUDA error 719: unspecified launch failure (in function release_now, /builds/omniverse/warp/warp/native/warp.cu:542)
+Warp CUDA error 719: unspecified launch failure (in function release_now, /builds/omniverse/warp/warp/native/warp.cu:542)
+Warp CUDA error 719: unspecified launch failure (in function release_now, /builds/omniverse/warp/warp/native/warp.cu:542)
+Warp CUDA error 719: unspecified launch failure (in function release_now, /builds/omniverse/warp/warp/native/warp.cu:542)
+Warp CUDA error 719: unspecified launch failure (in function release_now, /builds/omniverse/warp/warp/native/warp.cu:542)
+Warp CUDA error 719: unspecified launch failure (in function release_now, /builds/omniverse/warp/warp/native/warp.cu:542)
+Warp CUDA error 719: unspecified launch failure (in function release_now, /builds/omniverse/warp/warp/native/warp.cu:542)
+========= Target application returned an error
+========= ERROR SUMMARY: 9 errors
+========= ERROR SUMMARY: 7 errors were not printed. Use --print-limit option to adjust the number of printed errors

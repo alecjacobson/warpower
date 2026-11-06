@@ -1,7 +1,8 @@
 """Combinatorial Voronoi clipping with original-coordinate symbolic predicates.
 
-Only incident plane IDs are stored. Cartesian intersection construction and
-approximate geometric pruning are absent from this optional recovery path.
+Topology stores only incident plane IDs. Optional conservative bounds on the
+unweighted vertex limits reject strictly redundant geometric tests; uncertain
+cases retain the original-coordinate symbolic predicates.
 """
 
 import warp as wp
@@ -20,6 +21,9 @@ class SymbolicCell:
     nv: int
     np: int
     status: int
+    lo: wp.vec3d
+    hi: wp.vec3d
+    changed: int
 
 
 @wp.func(inline=True)
@@ -86,6 +90,7 @@ def clip_symbolic(
     points: wp.array[wp.vec3],
     bounds: wp.array[wp.vec3],
 ):
+    cell.changed = 0
     if cell.status != 0 or i == j:
         return cell
     removed = int(0)
@@ -115,6 +120,7 @@ def clip_symbolic(
             k += 1
     if removed == 0:
         return cell
+    cell.changed = 1
     if cell.nv == 0:
         cell.status = 3
         return cell

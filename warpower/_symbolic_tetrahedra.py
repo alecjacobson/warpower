@@ -3,6 +3,7 @@
 import warp as wp
 
 from . import _bvh
+from . import _symbolic_bounds as sb
 from ._cell import Scratch64, plane_at
 from ._symbolic_cell import clip_symbolic, init_symbolic
 from ._tetrahedra import sorted4
@@ -43,24 +44,32 @@ def build_cells(
         status[i] = 3
         return
     cell = init_symbolic(scratch, slot)
+    cell.lo = wp.vec3d(bounds[0])
+    cell.hi = wp.vec3d(bounds[1])
     nodes = wp.zeros(shape=128, dtype=int)
     nodes[0] = 1
     size = int(1)
     while size > 0 and cell.status == 0:
         size -= 1
         node = nodes[size]
+        if sb.outside(cell.lo, cell.hi, points[i], tree.lower[node], tree.upper[node]):
+            continue
         if tree.count[node] > 0:
             for k in range(tree.start[node], tree.start[node] + tree.count[node]):
                 j = tree.ids[k]
-                if tree.owners[j] == j:
+                if tree.owners[j] == j and not sb.outside(
+                    cell.lo, cell.hi, points[i], points[j], points[j]
+                ):
                     cell = clip_symbolic(scratch, cell, i, j, points, bounds)
                     if cell.status != 0:
                         break
+                    if cell.changed != 0:
+                        cell = sb.update(scratch, cell, points, bounds, i)
         else:
             left, right = tree.left[node], tree.right[node]
-            left_near = distance_order(points[i], tree.lower[left], tree.upper[left]) <= distance_order(
-                points[i], tree.lower[right], tree.upper[right]
-            )
+            left_near = distance_order(
+                points[i], tree.lower[left], tree.upper[left]
+            ) <= distance_order(points[i], tree.lower[right], tree.upper[right])
             for side in range(2):
                 child = tree.left[node]
                 if (side == 0 and left_near) or (side == 1 and not left_near):

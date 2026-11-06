@@ -206,6 +206,8 @@ The lazy [`ODTWorkspace`](odt.md) layer consumes the independently callable
 full-hull mesh. It accumulates uniform interpolation energy and stable
 volume-weighted circumcenter displacements in float64, holds the initial hull
 fixed, and tests parallel updates after rebuilding Delaunay connectivity.
+Uniform and graded accumulation use a [filtered exact volume fallback](stable-volumes.md)
+for nearly cancelling determinants of the original float32 sites.
 Per-site displacement limits account for the hull and float32 storage; captured
 conditional loops handle energy rejection, convergence, and complete rollback.
 The optimizer is a separate layer; standalone geometry calls retain their default execution path.

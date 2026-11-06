@@ -1,0 +1,18 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 32768, "diagnostic_mempool_enabled": false}
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 1.04 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.88 ms  (cached)
+Module warpower._sizing 3f064d7 load on device 'cuda:0' took 0.69 ms  (cached)
+Module benchmarks.stable_volumes f905ed8 load on device 'cuda:0' took 410.55 ms  (compiled)
+Module warpower._odt 6e95820 load on device 'cuda:0' took 0.95 ms  (cached)
+Module warpower._graded_odt 514c8a8 load on device 'cuda:0' took 0.83 ms  (cached)
+{'scope': 'Four resident producer/uniform and graded accumulation/consumer phases: original tiny positive cells, true inversion, nonfinite input, restored cells scaled by two. Device phase advance, one final synchronization. Native profiling first warms a complete cycle outside the trace. Not full meshing or a performance comparison.', 'warmup_replays': 0, 'columns': ['uniform_invalid', 'uniform_volume', 'uniform_energy', 'graded_invalid', 'graded_volume', 'graded_energy'], 'records': [[0.0, 1.0230303034634442e-19, 1.8506644744200573e-21, 0.0, 1.0230303034634442e-19, 1.480531579536046e-20], [256.0, 4.588052002620337e-27, 6.123018046783106e-29, 256.0, 4.588052002620337e-27, 4.898414437426485e-28], [256.0, 4.588052002620337e-27, 6.123018046783106e-29, 256.0, 4.588052002620337e-27, 4.898414437426485e-28], [0.0, 8.184242427707553e-19, 5.922126318144183e-20, 0.0, 8.184242427707553e-19, 4.737701054515347e-19]]}
+========= ERROR SUMMARY: 0 errors

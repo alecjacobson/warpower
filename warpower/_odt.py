@@ -11,6 +11,7 @@ import operator
 import warp as wp
 
 from ._graph import DiagramWorkspace
+from ._stable_volume import determinant
 
 wp.set_module_options({"enable_backward": False, "fast_math": False})
 
@@ -85,6 +86,7 @@ def accumulate_tets(
     a, b, c = wp.vec3d(points[i1]) - p, wp.vec3d(points[i2]) - p, wp.vec3d(points[i3]) - p
     cross_bc, cross_ca, cross_ab = wp.cross(b, c), wp.cross(c, a), wp.cross(a, b)
     det = wp.dot(a, cross_bc)
+    det = determinant(points[i0], points[i1], points[i2], points[i3], a, b, c, det)
     v = det / wp.float64(6.0)
     if v <= wp.float64(0.0) or not wp.isfinite(v):
         wp.atomic_or(invalid, 0, 256)

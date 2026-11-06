@@ -36,6 +36,12 @@ and `V * (circumcenter - site)` to form interior relocation directions. The latt
 uses cofactors without first dividing by a nearly zero determinant. Sites remain
 float32, matching the standalone geometry input contract.
 
+Uniform and graded accumulation retain the usual binary64 determinant when its
+sign is certified by a conservative error bound. Nearly cancelling cases use
+an exact integer orientation of the original sites and its physical determinant
+estimate. True inverted/zero cells still fail. See [robust volumes](stable-volumes.md)
+for the arithmetic argument, real failing cells, and validation.
+
 The initial hull vertices are detected from the validated face incidence index.
 The optimizer caps each proposed displacement by a fraction of the site's shortest
 incident edge, damps it, and independently limits it against the initial hull

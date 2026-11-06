@@ -1,0 +1,25 @@
+.F                                                                       [100%]
+=================================== FAILURES ===================================
+___________ test_well_conditioned_cells_preserve_existing_gpu_values ___________
+
+    def test_well_conditioned_cells_preserve_existing_gpu_values():
+        points = np.random.default_rng(110).normal(size=(512, 4, 3)).astype(np.float32)
+        raw, stable = evaluate_cases(points)
+>       np.testing.assert_array_equal(stable, raw)
+E       AssertionError: 
+E       Arrays are not equal
+E       
+E       Mismatched elements: 14 / 512 (2.73%)
+E       Max absolute difference among violations: 1.77635684e-15
+E       Max relative difference among violations: 6.13430463e-16
+E        ACTUAL: array([-6.704379e-01, -4.499697e+00, -8.182518e-01, -1.929833e+00,
+E               3.235625e+00,  7.344947e-01,  8.809089e-01,  1.447648e+00,
+E               1.410538e+01,  4.915816e-01,  6.466219e+00,  1.533011e+00,...
+E        DESIRED: array([-6.704379e-01, -4.499697e+00, -8.182518e-01, -1.929833e+00,
+E               3.235625e+00,  7.344947e-01,  8.809089e-01,  1.447648e+00,
+E               1.410538e+01,  4.915816e-01,  6.466219e+00,  1.533011e+00,...
+
+tests/test_stable_volume.py:82: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_stable_volume.py::test_well_conditioned_cells_preserve_existing_gpu_values
+1 failed, 1 passed, 3 deselected in 5.59s

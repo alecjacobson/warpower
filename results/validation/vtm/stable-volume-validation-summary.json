@@ -1,0 +1,102 @@
+{
+  "scope": "Robust ODT volume evaluation only; no claim of full hand success or CPU outperformance. Exact original float32 sites, independent diagram/Delaunay sources unchanged.",
+  "baseline_commit": "b5a1a24a9ba49900f8f6b13749e8b77a0f99c830",
+  "validated_source_commit": "2ecaa01730548c256543a9311e4e654697685ff0",
+  "unchanged_runtime_files": [
+    "warpower/__init__.py",
+    "warpower/_active_sites.py",
+    "warpower/_adjacency.py",
+    "warpower/_api.py",
+    "warpower/_automatic_sizing.py",
+    "warpower/_boundary.py",
+    "warpower/_bvh.py",
+    "warpower/_canonical.py",
+    "warpower/_cell.py",
+    "warpower/_construct.py",
+    "warpower/_delaunay_certificate.py",
+    "warpower/_delaunay_recovery.py",
+    "warpower/_domain.py",
+    "warpower/_domain_topology.py",
+    "warpower/_extraction.py",
+    "warpower/_facet_completion.py",
+    "warpower/_facet_seeds.py",
+    "warpower/_fast_candidates.py",
+    "warpower/_filtered_predicates.py",
+    "warpower/_graph.py",
+    "warpower/_graph_construct.py",
+    "warpower/_graph_tetrahedra.py",
+    "warpower/_halfspace_predicates.py",
+    "warpower/_integer.py",
+    "warpower/_jitter.py",
+    "warpower/_mesh_api.py",
+    "warpower/_mesh_topology.py",
+    "warpower/_mesher.py",
+    "warpower/_poles.py",
+    "warpower/_predicates.py",
+    "warpower/_quality_moves.py",
+    "warpower/_refinement.py",
+    "warpower/_sampling.py",
+    "warpower/_selective.py",
+    "warpower/_site_bvh.py",
+    "warpower/_sizing.py",
+    "warpower/_sphere_bounds.py",
+    "warpower/_surface_bvh.py",
+    "warpower/_symbolic_bounds.py",
+    "warpower/_symbolic_cell.py",
+    "warpower/_symbolic_delaunay.py",
+    "warpower/_symbolic_tetrahedra.py",
+    "warpower/_teleport.py",
+    "warpower/_tetrahedra.py",
+    "warpower/_triangle_contact.py",
+    "warpower/_validation.py",
+    "warpower/_voronoi_volume.py",
+    "warpower/_vtm.py",
+    "warpower/_vtm_controls.py"
+  ],
+  "changed_existing_runtime_files": [
+    "warpower/_graded_odt.py",
+    "warpower/_odt.py"
+  ],
+  "README_unchanged": true,
+  "odt1000_output_bitwise_equal": {
+    "points": true,
+    "tetrahedra": true
+  },
+  "torus1000_output_bitwise_equal": {
+    "points": true,
+    "tetrahedra": true,
+    "full_tetrahedra": true,
+    "boundary": true,
+    "roles": true,
+    "input_points": true,
+    "input_faces": true
+  },
+  "performance": {
+    "before": {
+      "odt1000_median_wall_ms": 197.53918051719666,
+      "odt1000_all_samples_wall_ms": [
+        197.5674107670784,
+        197.53918051719666,
+        197.46090471744537
+      ],
+      "odt1000_cpu_throttled": false,
+      "torus1000_median_gpu_ms": 3205.0166015625,
+      "torus1000_cpu_throttled": false,
+      "delaunay1000_median_gpu_ms": 9.167488098144531,
+      "delaunay100000_median_gpu_ms": 181.78016662597656
+    },
+    "after": {
+      "odt1000_median_wall_ms": 197.78567180037498,
+      "odt1000_all_samples_wall_ms": [
+        197.72754237055779,
+        197.80730083584785,
+        197.78567180037498
+      ],
+      "odt1000_cpu_throttled": false,
+      "torus1000_median_gpu_ms": 3207.372802734375,
+      "torus1000_cpu_throttled": false,
+      "delaunay1000_median_gpu_ms": 9.179488182067871,
+      "delaunay100000_median_gpu_ms": 183.5557403564453
+    }
+  }
+}

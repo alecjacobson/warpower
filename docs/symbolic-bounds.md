@@ -90,6 +90,67 @@ configurations, the directional box maximum, touching/one-ULP cases, and cached
 plane signs. Exact repeated-site and cospherical ties must defer to the original
 predicate. Independent symbolic-construction tests also cover complete geometry,
 changing-input capture, capacity failures, clipping-box growth, invalid input
-and recovery. Performance and full-suite validation of this developing
-optimization must accompany its eventual integration; local interval tests alone
-are not sufficient.
+and recovery. The [369-test suite](../results/validation/vtm/symbolic-bounds-full-tests.txt)
+passes. Two [additional integration tests](../results/validation/vtm/symbolic-bounds-extra-tests.txt)
+then pass on the same numerical source: 1,000 forced-symbolic random sites match
+SciPy, and small scratch chunks correctly reset cached geometry across duplicate
+sites and changing-input replays.
+
+Seven [padded pooled-memory cases](../results/validation/vtm/symbolic-bounds-memcheck.txt)
+and one [synchronous-allocation lifetime case](../results/validation/vtm/symbolic-bounds-lifetime.txt)
+pass with zero Compute Sanitizer errors. Both use a diagnostic 32 KiB stack;
+production allocation and stack settings are unchanged. The
+[native changing-input trace](../results/validation/vtm/symbolic-bounds-device-audit.json)
+records 669 GPU kernel activities across three producer/domain/automatic-sizing/
+sampling/consumer replays. Its graph has 504 kernel, 99 memset, 59 conditional
+and 28 device-copy nodes, with no host, allocation or free nodes. All observed
+copies and graph copy nodes are device-to-device; one final synchronization is
+outside geometry. [Isolation hashes](../results/validation/vtm/symbolic-bounds-isolation.json)
+record unchanged ordinary builders and final certificate.
+
+## Measured scope
+
+CUDA-event medians on an NVIDIA L40, Warp 1.19.0, with setup/JIT/upload excluded
+and no observed CPU-quota throttling:
+
+| Workload | Before | Cached intervals | Speedup |
+|---|---:|---:|---:|
+| Forced symbolic, 1,000 random sites | 1,529.74 ms | 124.90 ms | 12.25× |
+| Symbolic fallback, 128 structured torus sites | 2,415.97 ms | 1,221.20 ms | 1.98× |
+| Automatic sizing, 224 controls, static refit | 771.23 ms | 440.08 ms | 1.75× |
+| Automatic sizing, 224 controls, changing domain | 798.03 ms | 497.51 ms | 1.60× |
+| Automatic sizing, 896 controls, static refit | 3,364.40 ms | 538.67 ms | 6.25× |
+| Automatic sizing, 896 controls, changing domain | 3,423.13 ms | 648.65 ms | 5.28× |
+| Complete default 1,000-site torus mesher, including domain refit | 5,768.70 ms | 5,726.57 ms | 1.01× |
+
+The [random baseline](../results/validation/vtm/symbolic-before-random1000.json),
+[optimized random case](../results/validation/vtm/symbolic-cached-random1000.json),
+[torus baseline](../results/validation/vtm/sphere-box-performance.json), and
+[optimized torus case](../results/validation/vtm/symbolic-cached-torus128.json)
+record stage timing and strategy. First replay can be slower while the clipping
+box grows; subsequent replays reuse its size, rebuilding and certifying current
+geometry. Forced-symbolic timings do not describe ordinary-constructor throughput.
+The [10,000-site symbolic case](../results/validation/vtm/symbolic-cached-random10000.json)
+still takes 2,159.67 ms; there is no before/after claim at that size.
+
+The enriched control clouds add three quadrature sites per input triangle to
+8×4 and 16×8 torus vertices. Records for
+[224 before](../results/validation/vtm/symbolic-controls-before-224.json),
+[224 after](../results/validation/vtm/symbolic-controls-after-224.json),
+[896 before](../results/validation/vtm/symbolic-controls-before-896.json), and
+[896 after](../results/validation/vtm/symbolic-controls-after-896.json)
+include independent hull checks. The 224-site case additionally verifies the
+39 cells differing from SciPy using rational predicates.
+[Equivalence checks](../results/validation/vtm/symbolic-bounds-equivalence.json)
+confirm bit-identical control positions, canonical tetrahedra and local feature
+sizes at both sizes. The 896-site case does not claim an all-cell rational audit.
+
+The complete mesher's [before](../results/validation/vtm/symbolic-before-full-torus1000.json)
+and [after](../results/validation/vtm/symbolic-cached-full-torus1000.json) results
+have identical positions, canonical material cells, counts and quality. Its
+ordinary reconstruction path receives no meaningful overall acceleration here.
+The goal of outperforming native CPU meshing at comparable quality remains open.
+
+Reproduce the enriched comparison with `python -m benchmarks.symbolic_controls
+--major 16 --minor 8 --subdivisions 1 --repeats 3 --output result.json` on each
+revision. See `--help` for the smaller case and optional rational reference check.

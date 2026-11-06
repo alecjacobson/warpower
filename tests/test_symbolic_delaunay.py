@@ -211,3 +211,25 @@ def test_failed_preferred_symbolic_strategy_falls_back_to_current_base():
     assert tet_set(valid(w, changed)) == reference(changed)
     assert w.recovery_first.numpy()[0] == 0
     assert w.symbolic_attempted.numpy()[0] == 0
+
+
+def test_large_forced_symbolic_cloud_matches_independent_scipy():
+    points = np.random.default_rng(2026).uniform(-1, 1, (1000, 3)).astype(np.float32)
+    w = DelaunayWorkspace(points)
+    w._preferred.fill_(2)
+    w.run()
+    assert w.symbolic_recovered.numpy()[0] == 1
+    assert tet_set(valid(w, points)) == reference(points)
+
+
+def test_cached_vertex_intervals_are_reinitialized_across_small_chunks_and_replays():
+    unique = np.random.default_rng(6285).uniform(-1, 1, (80, 3)).astype(np.float32)
+    points = np.concatenate([unique, unique[:16]])
+    w = DelaunayWorkspace(points, chunk_size=7)
+    w._preferred.fill_(2)
+    for scale in [1.0, 1.01]:
+        current = (points * np.float32(scale)).astype(np.float32)
+        w.points.assign(current)
+        w.run()
+        assert w.symbolic_recovered.numpy()[0] == 1
+        assert tet_set(valid(w, current)) == reference(current[:80])

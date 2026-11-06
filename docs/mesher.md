@@ -36,6 +36,12 @@ parallel reductions can differ by roundoff. The input surface connectivity is
 fixed for the lifetime of `SurfaceDomain`; refit updates positions and derived
 features. Refit an explicit sizing field before the mesher if its samples changed.
 
+Each fresh sample generation resets the core's reconstruction preference. Strategy
+reuse continues within that optimization trajectory; a difficult final state from
+the preceding solve does not force its expensive strategy onto new initial sites.
+This policy belongs to the full mesher. Independently used `DelaunayWorkspace`
+keeps its existing strategy caching.
+
 Keep the workspace, domain, sizing providers, and caller-owned input arrays alive
 as long as any captured graph uses them. A workspace owns mutable scratch and
 must not execute concurrently with itself. Serialize its runs on one stream or
@@ -253,3 +259,32 @@ phases. [#81](https://github.com/alecjacobson/warpower/issues/81) investigates w
 the cached reconstruction preference should be refreshed when optimizer geometry
 changes. Current results remain certified on the current input; this is a cost
 question, not permission to weaken the predicate or topology checks.
+
+## Reconstruction policy measurements
+
+The five-phase changing-input experiment measures three valid small solves and
+two rejected inputs per cycle. Three measured cycles on L40 give:
+
+| Policy | Median full cycle |
+|---|---:|
+| [Retain preference across generations](../results/validation/vtm/recovery-policy-cached.json) | 17.312 s |
+| [Reset once per generation](../results/validation/vtm/recovery-policy-reset.json), the new full-mesher policy | **11.689 s** |
+| [Disable caching throughout](../results/validation/vtm/recovery-policy-uncached.json) | 30.027 s |
+| [Probe ordinary construction before every preferred symbolic build](../results/validation/vtm/recovery-policy-probe.json) | 30.867 s |
+
+The reset is **1.48x faster** on this loop. All runs are unthrottled and have
+[identical final points and canonical connectivity](../results/validation/vtm/recovery-policy-equivalence.json),
+matching phase counts/errors, and independent geometry validation. A separate
+[paired 1,000-site torus comparison](../results/validation/vtm/mesher-reset-paired-torus1000.json)
+alternates warmed historical and reset graphs: medians are 6.030 and 6.048 seconds
+(+0.29%, within the observed timing variation), with identical points and cells.
+These measurements do not establish the complete-mesher CPU speedup target.
+
+```bash
+python -m benchmarks.recovery_policy --policy reset --repeats 3 --reference \
+  --output results/local/recovery-policy-reset.json
+# Other policies: cached, uncached, probe. The harness explicitly reproduces
+# the historical generation entry so the baseline is independent of the default.
+python -m benchmarks.mesher_policy --repeats 5 \
+  --output results/local/mesher-policy-torus.json
+```

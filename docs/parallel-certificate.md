@@ -1,9 +1,10 @@
 # Parallel global certificate experiment
 
 The existing local certificate and original-site hierarchy are unchanged. When
-local coverage cannot be proved, global checks on buffers of 128–1,024 sites
+local coverage cannot be proved, global checks on buffers of 128–512 sites
 currently distribute each tetrahedron's site queries over 32 workers. The
-threshold is provisional pending the recorded full-operation measurements.
+upper limit follows the fixed-buffer grid benchmark: direct point scans improve
+the 512-site case but regress the 1,000-site case, which retains the tree.
 Larger and smaller buffers retain hierarchical traversal. No new arrays or
 per-replay allocations are required.
 
@@ -24,7 +25,7 @@ filter, so these branch-specific diagnostic counters should not be interpreted
 as identical units of work. Output connectivity and error semantics are the
 same; these counters are diagnostics rather than correctness evidence.
 
-The runtime change passes all 410 existing tests. Another 22 differential tests
+The runtime change passes all 410 existing tests. Another 28 differential tests
 compare the old and new global checks on identical inputs, including very small
 and very large float32 scales, subnormal tetrahedron heights, duplicate queries,
 interior/exterior witnesses, and sizes around the dispatch threshold and warp

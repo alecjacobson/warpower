@@ -22,6 +22,7 @@ def main():
         default="random",
     )
     parser.add_argument("--n", type=int, default=1000)
+    parser.add_argument("--grid-side", type=int, default=4, help="Sites per axis for --case grid")
     parser.add_argument("--repeats", type=int, default=10)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--dot", type=Path)
@@ -36,9 +37,11 @@ def main():
         help="Start with the symbolic strategy for isolated measurements",
     )
     args = parser.parse_args()
+    if args.grid_side < 2:
+        parser.error("grid-side must be at least two")
     rng = np.random.default_rng(2026)
     if args.case in ("cube", "grid"):
-        values = [-1, 1] if args.case == "cube" else range(4)
+        values = [-1, 1] if args.case == "cube" else range(args.grid_side)
         points = np.array(list(product(values, repeat=3)), np.float32)
     elif args.case == "torus-boundary":
         from tests.test_domain import torus

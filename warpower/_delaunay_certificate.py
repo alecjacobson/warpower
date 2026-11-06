@@ -618,7 +618,7 @@ class DelaunayCertificate:
         # Small degenerate cells can make one BVH lane serialize many exact
         # ties. Partition their original-site queries across a warp; keep the
         # hierarchy for large clouds and local certification unchanged.
-        parallel = 128 <= len(self.points) <= 1024
+        parallel = 128 <= len(self.points) <= 512
         self._launch(
             check_spheres_points if parallel else check_spheres,
             len(self.tetrahedra) * (32 if parallel else 1),

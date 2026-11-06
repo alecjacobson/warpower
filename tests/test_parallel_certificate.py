@@ -60,7 +60,7 @@ def test_distributed_queries_match_global_tree_across_float32_scales(exponent, i
     compare(points, inside)
 
 
-@pytest.mark.parametrize("n", [127, 128, 257, 1024, 1025])
+@pytest.mark.parametrize("n", [127, 128, 257, 511, 512, 513, 1024, 1025])
 @pytest.mark.parametrize("inside", [False, True])
 def test_tiny_height_and_non_multiple_of_warp_size(n, inside):
     tiny = np.nextafter(np.float32(0), np.float32(1))

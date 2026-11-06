@@ -66,3 +66,35 @@ least the exact radius squared. This avoids an approximate square-root oracle.
 Coplanar, coincident, negative-orientation and nonfinite inputs exercise the
 fallback. These tests support the arithmetic derivation; randomized testing
 alone is not a proof of conservativeness.
+
+## Measured effect on certified reconstruction
+
+The [before/after samples](../results/validation/vtm/sphere-box-performance.json)
+use L40, Warp 1.19.0 and identical inputs. Full/base/certificate timing windows
+have no CPU quota throttling. The 100,000-site case has five samples per stage;
+the smaller cases have ten. Medians in milliseconds:
+
+| Input | Complete before | Complete after | Certificate before | Certificate after |
+|---|---:|---:|---:|---:|
+| random100k (100000 sites) | 1116.913 | 765.726 | 646.830 | 290.187 |
+| random1000 (1000 sites) | 14.661 | 12.514 | 5.760 | 3.589 |
+| cube (8 sites) | 0.525 | 0.529 | 0.152 | 0.154 |
+| grid (64 sites) | 2.701 | 2.343 | 1.056 | 0.716 |
+| corner-cloud (200 sites) | 9.085 | 8.450 | 3.625 | 3.018 |
+| torus-boundary (128 sites) | 2426.028 | 2415.974 | 112.574 | 102.359 |
+
+For 100,000 random sites, certification is **2.23x faster** and complete certified
+construction is **1.46x faster**. Ordinary construction remains 473.02 ms.
+Certificate node visits fall from 383,864,890 to 46,061,402; leaf point tests fall
+from 29,300,464 to 8,793,024. All 671,908 tetrahedra match both the saved independent
+[native CGAL reference](../results/validation/vtm/sphere-box-100k-cgal.json) and the
+preceding exact-certified result. Tiny meshes are dominated by fixed overhead;
+no universal per-case speedup is claimed. Structured symbolic construction remains
+expensive, tracked separately in issue #62. This is a certified-Delaunay comparison,
+not the complete variational mesher's CPU speedup target.
+
+```bash
+python -m benchmarks.delaunay_recovery --case random --n 100000 --repeats 5 \
+  --output results/local/sphere-box-100k.json
+python -m pytest -q tests/test_sphere_bounds.py
+```

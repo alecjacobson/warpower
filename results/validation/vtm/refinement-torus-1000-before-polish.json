@@ -1,0 +1,90 @@
+{
+  "scope": "Resident initial point copy, active-count reset, initial optimization, fixed refinement/optimization stages, domain extraction; sampling, sizing, and remaining mesher stages excluded",
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "case": "torus",
+  "seed": 2026,
+  "initial": 256,
+  "target": 1000,
+  "iterations_per_stage": 5,
+  "stage_columns": [
+    "active",
+    "inserted",
+    "eligible",
+    "refinement_error",
+    "core_error"
+  ],
+  "stages": [
+    [
+      384,
+      128,
+      811,
+      0,
+      0
+    ],
+    [
+      576,
+      192,
+      1416,
+      0,
+      0
+    ],
+    [
+      864,
+      288,
+      2415,
+      0,
+      0
+    ],
+    [
+      1000,
+      136,
+      3808,
+      0,
+      0
+    ]
+  ],
+  "full_hull_tetrahedra": 5803,
+  "tetrahedra": 4475,
+  "diagnostics": 0,
+  "components": 1,
+  "shell_euler": [
+    0
+  ],
+  "volume": 17.66630517902439,
+  "domain_volume": 19.069637941124117,
+  "surface_rms_distance": 0.031483503398362304,
+  "surface_max_sample_distance": 0.1637719835728721,
+  "surface_metric": "Directed three-point quadrature per extracted face to input triangles",
+  "radius_ratio_percentiles": {
+    "0": 0.0006533708455187132,
+    "1": 0.029742876522642757,
+    "5": 0.20214957353058072,
+    "50": 0.8082646936781119,
+    "95": 0.9545226533859191,
+    "100": 0.9972657076133093
+  },
+  "gpu_milliseconds": [
+    692.4900512695312,
+    691.557861328125,
+    691.9937744140625,
+    694.2000122070312,
+    693.5933227539062
+  ],
+  "median_gpu_milliseconds": 692.4900512695312,
+  "cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "cpu_throttled": false,
+  "independent_delaunay_and_topology_match": true,
+  "polish_rounds": 0
+}

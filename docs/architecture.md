@@ -230,6 +230,12 @@ uses a conservative grid proposal and bounded rejection to generate exactly the
 requested number of unique interior sites at uniform or inverse-cubed sizing
 density. Both are separate lazy APIs with fixed storage and captured refits/runs.
 
-Refinement, the full mesher API, and further performance work remain tracked in
+The internal [refinement workspace](refinement.md) ranks material-interior
+Voronoi centers by circumradius over sizing, removes coincident float32 positions,
+and appends a bounded batch to the device active prefix. Reconstruction and
+statistics either commit together or restore the prior state entirely on device.
+It uses separate fixed buffers and adds no work to existing geometry calls.
+
+Worst-element improvement, the full mesher API, and further performance work remain tracked in
 the [full VTM implementation plan](vtm.md). An energy decrease alone does not
 establish good worst-element quality or a CPU performance advantage.

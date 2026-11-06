@@ -403,3 +403,96 @@ def test_full_device_producer_mesher_consumer_with_changing_input_and_recovery(
     path = tmp_path / "mesher.dot"
     wp.capture_debug_dot_print(cap.graph, str(path), verbose=True)
     assert all(node not in path.read_text() for node in ("MEM_ALLOC", "MEM_FREE", "HOST"))
+
+
+@wp.kernel
+def outer_target(phase: wp.array[int], target: wp.array[int]):
+    target[0] = wp.where(phase[0] == 1, 63, 96)
+
+
+@wp.kernel
+def outer_record(
+    phase: wp.array[int],
+    running: wp.array[int],
+    count: wp.array[int],
+    error: wp.array[int],
+    volume: wp.array[wp.float64],
+    counts: wp.array[int],
+    errors: wp.array[int],
+    volumes: wp.array[wp.float64],
+):
+    i = phase[0]
+    counts[i] = count[0]
+    errors[i] = error[0]
+    volumes[i] = volume[0]
+    phase[0] = i + 1
+    running[0] = int(i < 2)
+
+
+def test_mesher_composes_inside_an_outer_device_controlled_loop(monkeypatch):
+    d = warpower.SurfaceDomain(*cube(), surface_subdivisions=4)
+    target = wp.full(1, 96, dtype=int, device=d.device)
+    mesh = warpower.VariationalMeshingWorkspace(
+        d, 128, target_count=target, initial_count=64, quality_rounds=0
+    )
+    phase = wp.zeros(1, dtype=int, device=d.device)
+    running = wp.ones(1, dtype=int, device=d.device)
+    count_log = wp.zeros(3, dtype=int, device=d.device)
+    error_log = wp.zeros(3, dtype=int, device=d.device)
+    volume_log = wp.zeros(3, dtype=wp.float64, device=d.device)
+    volume = wp.zeros(1, dtype=wp.float64, device=d.device)
+    wp.load_module(module=__name__, device=d.device)
+    wp.load_module(module="tests.test_vtm_core", device=d.device)
+
+    def iteration():
+        wp.launch(outer_target, 1, inputs=[phase, target])
+        mesh.run()
+        volume.zero_()
+        wp.launch(
+            consume,
+            len(mesh.tetrahedra),
+            inputs=[mesh.points, mesh.tetrahedra, mesh.tetrahedra_count, mesh.error, volume],
+        )
+        wp.launch(
+            outer_record,
+            1,
+            inputs=[
+                phase,
+                running,
+                mesh.point_count,
+                mesh.error,
+                volume,
+                count_log,
+                error_log,
+                volume_log,
+            ],
+        )
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Host allocation, readback, or synchronization")
+
+    with monkeypatch.context() as patch:
+        for name in (
+            "empty",
+            "zeros",
+            "ones",
+            "full",
+            "empty_like",
+            "clone",
+            "synchronize",
+            "synchronize_device",
+            "synchronize_stream",
+        ):
+            patch.setattr(wp, name, forbidden)
+        patch.setattr(wp.array, "numpy", forbidden)
+        with wp.ScopedCapture() as cap:
+            phase.zero_()
+            running.fill_(1)
+            wp.capture_while(running, iteration)
+        wp.capture_launch(cap.graph)
+    np.testing.assert_array_equal(count_log.numpy(), [96, 0, 96])
+    np.testing.assert_array_equal(error_log.numpy(), [0, 1, 0])
+    volumes = volume_log.numpy()
+    assert volumes[1] == 0 and volumes[0] > 0 and volumes[2] > 0
+    np.testing.assert_allclose(volumes[0], volumes[2], rtol=1e-12)
+    validate(mesh)

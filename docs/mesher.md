@@ -201,10 +201,55 @@ The [independent measurements](../results/validation/vtm/mesher-torus1000-indepe
 give minimum/median radius ratio 0.0929/0.8744, minimum dihedral angle 3.06 degrees,
 and volume error -5.09%. The two-sided sampled RMS is 0.256% of the input bounding
 box diagonal. These expose remaining quality/fit work; they are not a universal
-quality guarantee. The first complete resident timing is about 6.06 seconds on
-L40, but its combined initial/warm measurement window has CPU quota throttling
-and is retained as diagnostic evidence. It is not a clean performance comparison.
+quality guarantee. A subsequent [uncontended replay measurement](../results/validation/vtm/mesher-torus1000-clean.json)
+on L40 takes a median **6.031 seconds** over five samples, including domain refit
+and the complete meshing pipeline. Both first-run and warmed CPU quota windows
+are unthrottled. It reproduces the same counts and quality. The earlier 6.06-second
+run had throttling in its combined initial/warm window and is retained only as
+diagnostic evidence. Neither run establishes a CPU speedup.
 
 The complete-mesher CPU speedup target remains open in
 [#40](https://github.com/alecjacobson/warpower/issues/40); the existing Paragram
 diagram speedup is a different measured operation.
+
+## Validation scope
+
+The [362-test suite](../results/validation/vtm/mesher-full-tests.txt) passes,
+including cavities, disconnected components, exact corners, explicit/automatic
+sizing, growth retries, coarse graded extraction recovery, forced stage failures
+and later valid replays. An additional [outer-loop test](../results/validation/vtm/mesher-outer-loop-test.txt)
+executes producer/mesher/consumer iterations inside a device-controlled
+`capture_while`, including invalid input and recovery, with Warp array allocation,
+host readback and synchronization forbidden during capture and submission.
+
+The [native five-phase audit](../results/validation/vtm/mesher-device-audit.json)
+records 36,129 kernel activities. Its graph has 6,352 kernel, 1,894 memset,
+770 conditional and 420 copy nodes; every graph copy is device-to-device.
+There are no host/callback or allocation/free nodes or observed host transfers.
+Nsight omits some graph copy activity records, so all DOT copy directions are
+checked too. The [installed-wheel smoke test](../results/validation/vtm/mesher-wheel.json)
+verifies source equality, captured count changes, invalid-target gating and
+recovery from outside the source checkout.
+
+Two [full-memory/lifetime cases](../results/validation/vtm/mesher-lifetime.txt)
+and two [pooled-memory cases](../results/validation/vtm/mesher-pooled-memcheck.txt)
+pass with zero sanitizer errors. They exercise rejected optional stages, failed
+restoration and later recovery, bounded topology-recovery exhaustion, and a
+failed insertion batch followed by successful single-site fallback. They use
+32-byte padding and the [diagnostic stack/allocator settings](cuda-validation.md);
+production context settings are unchanged.
+
+The [memory-check scope record](../results/validation/vtm/mesher-memory-scope.json)
+also preserves two interrupted broader attempts. The changing-input lifetime
+matrix was stopped after more than 17 minutes with one completed case; the
+graded pooled matrix was stopped after more than 12 minutes with two completed
+cases. Both reported zero errors before termination, but neither is counted as
+a completed matrix. The original graded recovery and all changing-input phases
+pass the normal tests; the focused memory checks cover their scheduler branches.
+
+The [kernel profile](../results/validation/vtm/mesher-loop-profile.json) identifies
+202 symbolic cell reconstructions taking 16.30 seconds across the profiled
+phases. [#81](https://github.com/alecjacobson/warpower/issues/81) investigates whether
+the cached reconstruction preference should be refreshed when optimizer geometry
+changes. Current results remain certified on the current input; this is a cost
+question, not permission to weaken the predicate or topology checks.

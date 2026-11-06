@@ -6,6 +6,8 @@ This implements the selective-update stage discussed in
 [Alliez et al., section 3.6](https://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Alliez05.pdf).
 Activation is explicit; use it after ordinary global fitting has made the mesh
 reasonably stable. The complete public mesher scheduler remains under development.
+Optional [device iteration and mode controls](vtm-controls.md) let one core
+switch between global and selective phases without reallocating its mesh state.
 
 ```python
 from warpower._vtm import VTMWorkspace

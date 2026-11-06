@@ -220,6 +220,8 @@ class VTMWorkspace:
         active_count=None,
         selective_threshold=None,
         selective_tolerance=0.4,
+        iteration_limit=None,
+        selective_enabled=None,
     ):
         self.max_iterations = operator.index(max_iterations)
         self.max_backtracks = operator.index(max_backtracks)
@@ -233,6 +235,9 @@ class VTMWorkspace:
             raise ValueError("tolerance must be nonnegative and finite")
         self.damping, self.step_limit, self.tolerance = damping, step_limit, tolerance
         self.selection = None
+        self.controls = None
+        if selective_enabled is not None and selective_threshold is None:
+            raise ValueError("selective_enabled requires selective_threshold")
         self._directions, self._direction_args = directions, []
         self.domain = domain
         self.active_count = active_count
@@ -328,8 +333,14 @@ class VTMWorkspace:
             if selective_threshold is not None:
                 from ._selective import SelectiveUpdate, masked_directions
 
-                self.selection = SelectiveUpdate(self, selective_threshold, selective_tolerance)
+                self.selection = SelectiveUpdate(
+                    self, selective_threshold, selective_tolerance, enabled=selective_enabled
+                )
                 self._directions, self._direction_args = masked_directions, [self.selection.mask]
+            if iteration_limit is not None or selective_enabled is not None:
+                from ._vtm_controls import DeviceControls
+
+                self.controls = DeviceControls(self, iteration_limit, selective_enabled)
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as capture:
                 self._record()
@@ -431,6 +442,8 @@ class VTMWorkspace:
                 self.max_iterations,
             ],
         )
+        if self.controls is not None:
+            self.controls.gate()
         wp.capture_while(self._running, self._step)
         self._launch(final_count, 1, [self.error, self.full_tetrahedra_count])
 
@@ -440,6 +453,8 @@ class VTMWorkspace:
             wp.capture_if(self.selection.ready, self._step_valid)
         else:
             self._step_valid()
+        if self.controls is not None:
+            self.controls.gate()
 
     def _step_valid(self):
         wp.copy(self._original, self.points)

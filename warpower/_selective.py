@@ -214,12 +214,17 @@ def guard_quality(
 
 
 class SelectiveUpdate:
-    def __init__(self, core, threshold, tolerance=0.4):
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
         if not math.isfinite(threshold) or not 0 < threshold <= 1:
             raise ValueError("selective_threshold must be in (0,1]")
         if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
             raise ValueError("selective_tolerance must be finite and in [0,1)")
         self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+
+            scalar(enabled, self.device, "selective_enabled")
         self.threshold, self.tolerance = threshold, tolerance
         self._m = len(core.full_tetrahedra)
         with wp.ScopedDevice(self.device):
@@ -290,6 +295,20 @@ class SelectiveUpdate:
         )
 
     def select(self):
+        if self.enabled is None:
+            self._select()
+        else:
+            wp.capture_if(self.enabled, self._select, self._select_all)
+
+    def _select_all(self):
+        self.error.zero_()
+        self.ready.fill_(1)
+        self.mask.fill_(1)
+        self.retained_count.zero_()
+        self.minimum.fill_(1)
+        self.previous_minimum.fill_(1)
+
+    def _select(self):
         self.evaluate()
         wp.copy(self.previous_minimum, self.minimum)
         self.bad_vertices.zero_()
@@ -342,6 +361,12 @@ class SelectiveUpdate:
         )
 
     def check(self):
+        if self.enabled is None:
+            self._check()
+        else:
+            wp.capture_if(self.enabled, self._check)
+
+    def _check(self):
         self.evaluate()
         self._launch(
             guard_quality,

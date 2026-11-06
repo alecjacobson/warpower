@@ -545,9 +545,10 @@ def coverage(
 class DelaunayCertificate:
     """Internal fixed-buffer check; caller supplies a current original-site BVH."""
 
-    def __init__(self, points, input_tets, input_count, tree):
+    def __init__(self, points, input_tets, input_count, tree, *, point_parallel=False):
         self.points, self.input_tets, self.input_count = points, input_tets, input_count
         self.tree, self.device = tree, points.device
+        self.point_parallel = bool(point_parallel)
         m, n = len(input_tets), len(points)
         with wp.ScopedDevice(self.device):
             self.tetrahedra = wp.empty_like(input_tets)
@@ -618,7 +619,7 @@ class DelaunayCertificate:
         # Small degenerate cells can make one BVH lane serialize many exact
         # ties. Partition their original-site queries across a warp; keep the
         # hierarchy for large clouds and local certification unchanged.
-        parallel = 128 <= len(self.points) <= 512
+        parallel = self.point_parallel or 128 <= len(self.points) <= 512
         self._launch(
             check_spheres_points if parallel else check_spheres,
             len(self.tetrahedra) * (32 if parallel else 1),

@@ -175,6 +175,14 @@ This optimization owns separate scratch and leaves the basic construction
 kernels intact. The original diagram and tetrahedralization paths
 above are unchanged; certification and recovery costs apply only to this API.
 
+For difficult small/medium buffers, [certified fragment completion](facet-completion.md)
+can filter valid original-coordinate tetrahedra from failed auxiliary candidates
+and extend their exposed faces. Exact symbolic sphere ordering selects each new
+opposite vertex, and a full global certificate gates the final result. It avoids
+repeated large-box clipping on the refined-hand fixture while retaining finite
+budgets and the existing fallback. Published cells and their matching face index
+remain available to downstream automatic sizing and meshing on device.
+
 ## Captured device execution
 
 The optional [`DiagramWorkspace`](graphs.md) API owns persistent arrays and

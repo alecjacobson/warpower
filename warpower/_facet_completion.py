@@ -1,7 +1,7 @@
-"""Experimental device facet extension of a globally certified Delaunay subset.
+"""Device facet extension of a globally certified Delaunay subset.
 
-Not yet wired into public construction. The caller supplies a rebuilt hierarchy
-and canonical owners for finite original sites. Every iteration uses the full
+The caller supplies a rebuilt hierarchy and canonical owners for finite
+original sites. Every iteration uses the full
 original-coordinate certificate, including the final result.
 """
 
@@ -223,7 +223,9 @@ class FacetCompletion:
         with wp.ScopedDevice(self.device):
             self._work = wp.empty((self.capacity, 4), dtype=int)
             self._count = wp.zeros(1, dtype=int)
-            self._certificate = DelaunayCertificate(points, self._work, self._count, tree)
+            self._certificate = DelaunayCertificate(
+                points, self._work, self._count, tree, point_parallel=len(points) <= 2048
+            )
             self._certificate._anchors = None
             self.tetrahedra = self._certificate.tetrahedra
             self.tetrahedra_count = self._certificate.tetrahedra_count

@@ -56,6 +56,11 @@ class ReplayState:
     preferred: wp.array[int]
     recovery_first: wp.array[int]
     auxiliary_level: wp.array[int]
+    facet_attempted: wp.array[int]
+    facet_recovered: wp.array[int]
+    facet_error: wp.array[int]
+    facet_rounds: wp.array[int]
+    facet_seeds: wp.array[int]
 
 
 @wp.kernel
@@ -76,6 +81,11 @@ def reset(state: ReplayState, cache: bool):
     state.running[0] = 0
     state.recovery_first[0] = int(cache and state.preferred[0] != 0)
     state.auxiliary_level[0] = 0
+    state.facet_attempted[0] = 0
+    state.facet_recovered[0] = 0
+    state.facet_error[0] = 0
+    state.facet_rounds[0] = 0
+    state.facet_seeds[0] = 0
 
 
 @wp.kernel
@@ -105,6 +115,56 @@ def finish_symbolic(
         used[0] = 2
     else:
         error[0] = 2
+
+
+@wp.kernel
+def preferred_auxiliary_ready(valid: wp.array[int], preferred: wp.array[int], ready: wp.array[int]):
+    ready[0] = int(valid[0] != 0 and (preferred[0] == 1 or preferred[0] == 3))
+
+
+@wp.kernel
+def facet_ready(
+    error: wp.array[int],
+    attempts: wp.array[int],
+    maximum: int,
+    preferred: wp.array[int],
+    cache: bool,
+    ready: wp.array[int],
+):
+    # Preserve ordinary successful recovery: new geometry runs only after its
+    # budget is exhausted, or when this exact-certified strategy succeeded last.
+    ready[0] = int(error[0] == 2 and (attempts[0] >= maximum or (cache and preferred[0] == 3)))
+
+
+@wp.kernel
+def publish_facets(
+    source: wp.array2d[int],
+    count: wp.array[int],
+    seed_count: wp.array[int],
+    seed_error: wp.array[int],
+    error: wp.array[int],
+    rounds: wp.array[int],
+    output: wp.array2d[int],
+    state: ReplayState,
+):
+    i = wp.tid()
+    good = seed_error[0] == 0 and error[0] == 0 and count[0] > 0 and count[0] <= output.shape[0]
+    if good and i < count[0]:
+        for k in range(4):
+            output[i, k] = source[i, k]
+    if i == 0:
+        state.facet_attempted[0] += 1
+        state.facet_error[0] = error[0] | (seed_error[0] << 8)
+        state.facet_rounds[0] = rounds[0]
+        state.facet_seeds[0] = seed_count[0]
+        if good:
+            state.count[0] = count[0]
+            state.error[0] = 0
+            state.certificate_error[0] = 0
+            state.running[0] = 0
+            state.recovered[0] = 1
+            state.facet_recovered[0] = 1
+            state.used[0] = 3
 
 
 @wp.kernel
@@ -211,7 +271,7 @@ def finalize(
     if cache and error[0] == 0:
         preferred[0] = used[0]
     preferred_level[0] = 0
-    if cache and error[0] == 0 and used[0] == 1:
+    if cache and error[0] == 0 and (used[0] == 1 or used[0] == 3):
         preferred_level[0] = auxiliary_level[0]
     if error[0] != 0:
         count[0] = 0
@@ -257,7 +317,7 @@ def fast_invalid_reset(error: wp.array[int], available: wp.array[int]):
 class DelaunayWorkspace:
     """Exact-certified ordinary Delaunay output, with bounded recovery attempts.
 
-    Setup allocates two construction workspaces and all certificate storage.
+    Setup allocates construction/certificate storage and optional facet scratch.
     Replay leaves input positions untouched and performs no host decisions.
     Exhaustion is explicit: error != 0 and tetrahedra_count == 0. This is not
     a universal exact constructor; finite candidate generation can still fail.
@@ -275,7 +335,17 @@ class DelaunayWorkspace:
         fast_candidates=True,
         symbolic_recovery=True,
         symbolic_max_expansions=16,
+        facet_recovery=None,
+        facet_max_rounds=64,
     ):
+        self.facet_recovery = (
+            bool(symbolic_recovery) and 128 <= len(points) <= 2048
+            if facet_recovery is None
+            else bool(facet_recovery)
+        )
+        self.facet_max_rounds = operator.index(facet_max_rounds)
+        if not 0 <= self.facet_max_rounds <= 64:
+            raise ValueError("facet_max_rounds must be in [0, 64]")
         self.max_attempts = operator.index(max_attempts)
         self.cache_strategy = bool(cache_strategy)
         self.symbolic_recovery = bool(symbolic_recovery)
@@ -340,6 +410,33 @@ class DelaunayWorkspace:
             else:
                 self.symbolic_error = wp.zeros(1, dtype=int)
                 self.symbolic_expansions = wp.zeros(1, dtype=int)
+            self._facet = None
+            for name in (
+                "facet_attempted",
+                "facet_recovered",
+                "facet_error",
+                "facet_rounds",
+                "facet_seeds",
+            ):
+                setattr(self, name, wp.zeros(1, dtype=int))
+            if self.facet_recovery:
+                from ._facet_completion import FacetCompletion
+                from ._facet_seeds import CertifiedSeeds
+
+                self._seed_filter = CertifiedSeeds(
+                    self.points,
+                    self._auxiliary._candidates,
+                    self._auxiliary._candidate_count,
+                    self._base._hierarchy,
+                )
+                self._facet = FacetCompletion(
+                    self.points,
+                    self._seed_filter.tetrahedra,
+                    self._seed_filter.tetrahedra_count,
+                    self._base._hierarchy,
+                    max_rounds=self.facet_max_rounds,
+                )
+                self._facet_ready = wp.zeros(1, dtype=int)
             self.fast_attempted = wp.zeros(1, dtype=int)
             self.fast_accepted = wp.zeros(1, dtype=int)
             self.fast_error = wp.zeros(1, dtype=int)
@@ -368,6 +465,11 @@ class DelaunayWorkspace:
                 "certificate_error",
                 "recovery_first",
                 "auxiliary_level",
+                "facet_attempted",
+                "facet_recovered",
+                "facet_error",
+                "facet_rounds",
+                "facet_seeds",
             ):
                 setattr(self._state, name, getattr(self, name))
             self._state.count = self.tetrahedra_count
@@ -488,7 +590,12 @@ class DelaunayWorkspace:
         )
         self._launch(input_ready, 1, [self._base._validation, self.error, self._valid])
         wp.capture_if(self._valid, self._refresh_original)
-        self._launch(preferred_ready, 1, [self._valid, self._preferred, 1, self._running])
+        if self._facet is not None:
+            self._launch(
+                preferred_auxiliary_ready, 1, [self._valid, self._preferred, self._running]
+            )
+        else:
+            self._launch(preferred_ready, 1, [self._valid, self._preferred, 1, self._running])
         wp.capture_while(
             self._running, lambda: self._retry(self._original.tree, self._original._bounds)
         )
@@ -566,6 +673,62 @@ class DelaunayWorkspace:
                 self.max_attempts,
             ],
         )
+        if self._facet is not None:
+            self._launch(
+                facet_ready,
+                1,
+                [
+                    self.error,
+                    self.attempts,
+                    self.max_attempts,
+                    self._preferred,
+                    self.cache_strategy,
+                    self._facet_ready,
+                ],
+            )
+            wp.capture_if(self._facet_ready, lambda: self._facet_trial(tree))
+
+    def _facet_trial(self, tree):
+        self._seed_filter.run()
+        self._facet.run(tree)
+        self._launch(
+            publish_facets,
+            len(self.tetrahedra),
+            [
+                self._facet.tetrahedra,
+                self._facet.tetrahedra_count,
+                self._seed_filter.tetrahedra_count,
+                self._seed_filter.error,
+                self._facet.error,
+                self._facet.rounds,
+                self.tetrahedra,
+                self._state,
+            ],
+        )
+        wp.capture_if(self.facet_recovered, self._publish_facet_certificate)
+
+    def _publish_facet_certificate(self):
+        # Pole extraction consumes this certificate's face index. Publish the
+        # matching index with the accepted cells, not an older rejected trial.
+        # Keep its input prefix current too, so independent recertification sees
+        # the same original-coordinate result. These are fixed device copies.
+        wp.copy(self._candidate, self.tetrahedra)
+        wp.copy(self._candidate_count, self.tetrahedra_count)
+        for name in (
+            "statistics",
+            "_used",
+            "_table",
+            "_occurrences",
+            "_balance",
+            "_parents",
+            "_boundary",
+            "_boundary_count",
+        ):
+            wp.copy(getattr(self._certificate, name), getattr(self._facet._certificate, name))
+        if self._certificate._anchors is not None:
+            self._certificate._anchors.zero_()
+            self._certificate._local.zero_()
+            self._certificate._global.fill_(1)
 
     def run(self, stream=None):
         stream = wp.get_stream(self.device) if stream is None else stream

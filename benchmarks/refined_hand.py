@@ -19,6 +19,8 @@ def main():
     parser.add_argument("--max-expansions", type=int, default=16)
     parser.add_argument("--initial-factor", type=float, default=1.0)
     parser.add_argument("--symbolic-first", action="store_true")
+    parser.add_argument("--facet-recovery", action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument("--no-symbolic", action="store_true")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--save-mesh", type=Path)
     args = parser.parse_args()
@@ -28,10 +30,18 @@ def main():
     points = np.load(data)["points"]
     expected = json.loads(data.with_suffix(".json").read_text())
     setup = time.perf_counter()
-    workspace = warpower.DelaunayWorkspace(points, symbolic_max_expansions=args.max_expansions)
+    workspace = warpower.DelaunayWorkspace(
+        points,
+        symbolic_max_expansions=args.max_expansions,
+        symbolic_recovery=not args.no_symbolic,
+        **({"facet_recovery": args.facet_recovery} if args.facet_recovery is not None else {}),
+    )
     if args.symbolic_first:
         workspace._preferred.fill_(2)
-    workspace._symbolic._factor.fill_(args.initial_factor)
+    if workspace._symbolic is not None:
+        workspace._symbolic._factor.fill_(args.initial_factor)
+    elif args.symbolic_first or args.initial_factor != 1:
+        parser.error("Symbolic strategy overrides require symbolic recovery")
     wp.synchronize()
     setup = time.perf_counter() - setup
     begin, end = wp.Event(enable_timing=True), wp.Event(enable_timing=True)
@@ -58,7 +68,20 @@ def main():
             "symbolic_expansions",
         ]:
             record[name] = int(getattr(workspace, name).numpy()[0])
-        record["final_box_factor"] = float(workspace._symbolic._factor.numpy()[0])
+        for name in [
+            "facet_attempted",
+            "facet_recovered",
+            "facet_error",
+            "facet_rounds",
+            "facet_seeds",
+        ]:
+            if hasattr(workspace, name):
+                record[name] = int(getattr(workspace, name).numpy()[0])
+        record["final_box_factor"] = (
+            float(workspace._symbolic._factor.numpy()[0])
+            if workspace._symbolic is not None
+            else None
+        )
         records.append(record)
         if record["error"]:
             break
@@ -74,6 +97,7 @@ def main():
     result = dict(
         scope="Complete resident-device Delaunay recovery of 384 fixed original float32 sites, including all attempted strategies and box expansions. First replay and subsequent cached-strategy replays are separate. Setup, readback and connectivity validation are excluded from timing. This is not a full VTM solve or CPU comparison.",
         parameters={k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()},
+        facet_recovery_effective=getattr(workspace, "facet_recovery", False),
         device=workspace.device.name,
         warp=wp.__version__,
         input_sha256=hashlib.sha256(points.tobytes()).hexdigest(),

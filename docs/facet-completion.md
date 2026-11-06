@@ -1,8 +1,8 @@
-# Certified fragment completion experiment
+# Certified Delaunay fragment completion
 
-`_facet_completion.FacetCompletion` is an internal experiment, currently isolated
-from public construction. It extends a nonempty subset of exact symbolic
-Delaunay tetrahedra to a complete hull. Input points remain the original
+`DelaunayWorkspace` can recover an incomplete candidate by filtering exact
+Delaunay seed cells and extending their exposed faces to a complete convex hull.
+The internal `_facet_completion.FacetCompletion` implements that extension. Input points remain the original
 float32 values. A caller must supply a current hierarchy with canonical owners
 for finite sites. Seed indices, counts, orientation, incidence and strict lower
 facets are validated; a malformed or non-Delaunay seed is rejected.
@@ -56,23 +56,65 @@ This adapts the ordered circle search and consistent tie-breaking discussed in
 [Shewchuk's Delaunay notes, sections 3.7–3.8](https://people.eecs.berkeley.edu/~jrs/meshpapers/delnotes.pdf).
 The planar explanation there is not itself a proof of this 3D implementation.
 
-## Current scope
+## Integration and bounded failure
+
+`facet_recovery=None` (default) enables this path for buffers of 128–2,048 sites
+when symbolic recovery is enabled. Explicit `True` or `False` overrides this
+setup choice. Original/normalized builders retain their order; completion runs
+only after all ordinary auxiliary attempts fail. A previously successful facet
+strategy tries its last auxiliary amplitude and completion first on the next
+replay. Every replay rebuilds current owners, filters fresh candidates, and
+recertifies the resulting mesh. No connectivity is reused as a success result.
+If the preferred strategy fails, the original builder still gets its chance.
+The existing symbolic clipping path remains available after failed completion.
+Successful publication also copies the matching certified face index and
+candidate prefix. Automatic sizing can then extract the current hull and poles,
+and subsequent independent certificate runs see the same accepted cells.
+
+`facet_max_rounds` accepts 0–64 (default 64). An empty/invalid seed batch,
+capacity/predicate failure, missing progress, or exhausted rounds cannot publish
+partial output. The usual final public error and zero-count contract applies if
+all remaining strategies fail. Five device diagnostics reset every replay:
+`facet_attempted`, `facet_recovered`, `facet_error`, `facet_rounds`, `facet_seeds`.
+The error combines the completion mask below with the seed-filter mask shifted
+left eight bits. A failed strategy's diagnostics can remain nonzero when a later
+strategy succeeds; inspect the public `error` for the final result.
+
+| Completion bit | Meaning |
+|---|---|
+| 1 | Seed certificate rejected a property other than missing hull/site coverage |
+| 2 | A face predicate could not certify a sign |
+| 4 | Output capacity exceeded |
+| 8 | No new cell added to an incomplete mesh |
+| 16 | Round budget exhausted |
+| 32 | Final global certificate rejected completion |
+
+Seed-filter bit 4 means invalid count/capacity; bit 2 means an unresolved predicate.
+Malformed individual indices, zero-volume cells, and nonempty spheres are
+filtered out. The remaining seeds must independently pass the completion
+certificate. All scratch is allocated at setup. Completion forces global
+certification, using 32 point workers per cell for buffers up to 2,048 sites;
+ordinary global certificates retain their existing 128–512-site dispatch.
+
+## Validation and performance
 
 Initial tests cover one-cell and scattered seeds, missing hull/interior cells,
 complete input, exact cube/octahedron ties, very thin cells, duplicate sites,
 malformed indices/counts, inverted/duplicate/non-Delaunay seeds, and exhausted
 round/capacity budgets. The saved 1,981-cell hand fragment reaches the same
-2,164-cell complete mesh in three rounds. This measures completion of an already
-available fragment; it excludes the cost of constructing that fragment and is
-not a full VTM or CPU-speed comparison. The 16 completion tests pass padded memory checking. A four-phase resident loop
-(one seed, invalid seed, translated current points, complete seed) also passes
-full allocation/lifetime checking and a native replay audit. The corrected
-trace records 707 GPU kernels, four launches, one final synchronization, and
-only device-to-device copies, with no host or allocation/free graph nodes.
+2,164-cell complete mesh in three rounds. That early experiment excludes seed
+construction and must not be compared with a full constructor.
+
+The initial 16 completion tests pass padded memory checking. A four-phase
+resident loop (one seed, invalid seed, translated current points, complete seed)
+also passes full allocation/lifetime checking and a native replay audit. The
+corrected trace records 707 GPU kernels, four launches, one final synchronization,
+and only device-to-device copies, with no host or allocation/free graph nodes.
 The initial benchmark violated SiteHierarchy's child-graph capture contract;
 its top-level native sort added allocation/free nodes. Capturing the rebuild in
 the required child graph fixes that audit. Public construction already follows
-that contract. No complete-constructor integration is claimed yet.
+that contract. These records validate the initial isolated implementation;
+integrated recovery has separate validation records.
 
 `_facet_seeds.CertifiedSeeds` additionally filters uncertified candidate cells
 into exact strict lower facets. It skips malformed individual cells, maps
@@ -83,12 +125,26 @@ and current owners; downstream completion still validates the resulting subset.
 Eight tests pass, including exhaustive cube/octahedron vertex combinations,
 positive/negative/zero orientations, duplicate owners and cells, three scales,
 malformed indices, nonempty spheres, invalid counts and safe replay recovery.
-Seed filtering is not yet connected to public Delaunay construction.
+Integration additionally tests the difficult hand fixture, a structured torus,
+failed budgets, a failed cached strategy followed by original construction, and
+a captured producer/consumer loop that changes input, rejects NaNs, and recovers.
 
 [Completion memory checks](../results/validation/vtm/facet-memcheck.txt),
 [corrected lifetime check](../results/validation/vtm/facet-lifetime-v2.txt),
 [native audit](../results/validation/vtm/facet-device-audit-v2.json), and
 [seed tests](../results/validation/vtm/facet-seeds-focused.txt) retain the scope.
-Full integration and performance validation remain required before adoption.
+The complete 384-site hand constructor (including seed construction and all
+attempted strategies) returns the same 2,164 canonical tetrahedra as main.
+The first replay takes 3,945 ms versus 37,731 ms; subsequent cached replays take
+182 ms versus 6,473 ms on the L40. These are device event timings, excluding
+setup and output validation. The complete 1,000-site torus mesher remains about
+3,204 ms. These are GPU version comparisons, not CPU speedup claims.
+
+The full thin-hand mesher still fails its growth budget: after the first batch
+reaches 384 sites, seven one-site retries reach only 391 of the requested 1,000.
+Public output is invalid and no partial material mesh is exported.
+[Issue #108](https://github.com/alecjacobson/warpower/issues/108) tracks that separate
+scheduler failure. Full VTM CPU performance and comparable-quality validation
+remain open.
 
 Progress is tracked in [issue #104](https://github.com/alecjacobson/warpower/issues/104).

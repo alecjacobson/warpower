@@ -103,8 +103,9 @@ The complete guarded hand reaches 1,000 sites with no rejected growth batches
 and no sites outside the input bounding box. Its 5,851-cell full Delaunay mesh
 is certified. The diagnostic material candidate contains 3,615 cells and 1,608
 boundary faces, with 13 independently counted nonmanifold edges. Public output
-therefore remains invalid with zero published counts. The saved candidate and
-edge-incidence diagnostic are linked from the final report.
+therefore remains invalid with zero published counts. See the
+[saved candidate](../results/validation/vtm/interior-domain-final-hand-final-candidate.npz)
+and [edge-incidence diagnostic](../results/validation/vtm/interior-domain-final-hand-extraction-diagnostic.json).
 
 The complete hand still requires the extraction work in
 [#112](https://github.com/alecjacobson/warpower/issues/112). Its failure gate

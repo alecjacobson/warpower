@@ -218,6 +218,8 @@ class VTMWorkspace:
         certified_delaunay=True,
         sizing=None,
         active_count=None,
+        selective_threshold=None,
+        selective_tolerance=0.4,
     ):
         self.max_iterations = operator.index(max_iterations)
         self.max_backtracks = operator.index(max_backtracks)
@@ -230,6 +232,8 @@ class VTMWorkspace:
         if not math.isfinite(tolerance) or tolerance < 0:
             raise ValueError("tolerance must be nonnegative and finite")
         self.damping, self.step_limit, self.tolerance = damping, step_limit, tolerance
+        self.selection = None
+        self._directions, self._direction_args = directions, []
         self.domain = domain
         self.active_count = active_count
         self._propose, self._propose_args = propose, []
@@ -321,6 +325,11 @@ class VTMWorkspace:
             self._old_count = wp.empty_like(self.full_tetrahedra_count)
             self._old_energy = wp.empty_like(self.energy)
             self._old_boundary = wp.empty_like(self.boundary.energy)
+            if selective_threshold is not None:
+                from ._selective import SelectiveUpdate, masked_directions
+
+                self.selection = SelectiveUpdate(self, selective_threshold, selective_tolerance)
+                self._directions, self._direction_args = masked_directions, [self.selection.mask]
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as capture:
                 self._record()
@@ -360,6 +369,8 @@ class VTMWorkspace:
         )
 
     def _record(self):
+        if self.selection is not None:
+            self.selection.reset()
         self.iterations.zero_()
         self.termination.zero_()
         self.rejected_steps.zero_()
@@ -424,13 +435,20 @@ class VTMWorkspace:
         self._launch(final_count, 1, [self.error, self.full_tetrahedra_count])
 
     def _step(self):
+        if self.selection is not None:
+            self.selection.select()
+            wp.capture_if(self.selection.ready, self._step_valid)
+        else:
+            self._step_valid()
+
+    def _step_valid(self):
         wp.copy(self._original, self.points)
         wp.copy(self._old_tets, self.full_tetrahedra)
         wp.copy(self._old_count, self.full_tetrahedra_count)
         wp.copy(self._old_energy, self.energy)
         wp.copy(self._old_boundary, self.boundary.energy)
         self._launch(
-            directions,
+            self._directions,
             self.n,
             [
                 self.points,
@@ -441,7 +459,8 @@ class VTMWorkspace:
                 self._edge,
                 self.step_limit,
                 self._direction,
-            ],
+            ]
+            + self._direction_args,
         )
         self._launch(
             start_attempt,
@@ -476,6 +495,8 @@ class VTMWorkspace:
                 self._accepted,
             ],
         )
+        if self.selection is not None:
+            wp.capture_if(self._accepted, self.selection.check)
         self._launch(
             finish_attempt,
             1,

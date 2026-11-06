@@ -98,8 +98,10 @@ subject to the [surface-domain contract](domains.md).
 The internal `warpower._vtm.VTMWorkspace` combines these evolving boundary roles
 with uniform or graded interior ODT displacements, reconstruction, device backtracking,
 and complete point/connectivity rollback. It is not yet exported as the public
-full-mesher API: refinement and the complete public interface remain under
-development. Independent [sizing and initial sampling](sizing.md) are available. The independent
+full-mesher API: additional quality stages and the complete public interface remain under
+development. Independent [sizing and initial sampling](sizing.md), internal
+[progressive refinement](refinement.md), and optional [selective updates](selective.md)
+are available. The independent
 [domain extractor](extraction.md) can now consume its full-hull output in the
 same captured loop.
 

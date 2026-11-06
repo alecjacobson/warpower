@@ -1,0 +1,75 @@
+{
+  "scope": "Resident fitted-point reset, further optimization, extraction and quality diagnostics; initial global fitting, sampling, sizing, and other mesher stages excluded",
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "mode": "selective",
+  "retention_classifier": "retention-only",
+  "n": 1000,
+  "seed": 2026,
+  "initial_global_iterations": 30,
+  "requested_further_iterations": 10,
+  "iterations": 4,
+  "termination": 1,
+  "rejected_steps": 14,
+  "before": {
+    "tetrahedra": 4162,
+    "diagnostics": 0,
+    "components": 1,
+    "shell_euler": [
+      0
+    ],
+    "volume": 18.162142139055987,
+    "surface_rms_distance": 0.018076389225980215,
+    "radius_ratio_percentiles": {
+      "0": 0.03429050864993224,
+      "1": 0.2949886805795006,
+      "5": 0.6334550313228049,
+      "50": 0.8823046040434626,
+      "95": 0.9679518048657249,
+      "100": 0.9977406860481959
+    }
+  },
+  "after": {
+    "tetrahedra": 4150,
+    "diagnostics": 0,
+    "components": 1,
+    "shell_euler": [
+      0
+    ],
+    "volume": 18.163567515207344,
+    "surface_rms_distance": 0.018054947513596726,
+    "radius_ratio_percentiles": {
+      "0": 0.11876495299151046,
+      "1": 0.3297055698058859,
+      "5": 0.6494651167037614,
+      "50": 0.8831306848972575,
+      "95": 0.9681477246581498,
+      "100": 0.9975321450726429
+    }
+  },
+  "gpu_milliseconds": [
+    606.3427734375,
+    605.3698120117188,
+    606.8341674804688,
+    606.4312744140625,
+    606.361328125
+  ],
+  "median_gpu_milliseconds": 606.361328125,
+  "cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "cpu_throttled": false,
+  "threshold": 0.3,
+  "last_selected_vertices": 522,
+  "quality_rejections": 14,
+  "independent_delaunay_and_topology_match": true
+}

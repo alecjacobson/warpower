@@ -236,6 +236,11 @@ and appends a bounded batch to the device active prefix. Reconstruction and
 statistics either commit together or restore the prior state entirely on device.
 It uses separate fixed buffers and adds no work to existing geometry calls.
 
-Worst-element improvement, the full mesher API, and further performance work remain tracked in
+The core's optional [selective mode](selective.md) classifies retained tetrahedra,
+marks poor-element vertices, and expands one neighbor ring in separate device
+passes. Masked updates and an additional retained-quality guard share the existing
+reconstruction/backtracking mechanism; default kernels and graph work are unchanged.
+
+Further worst-element improvement, the full mesher API, and performance work remain tracked in
 the [full VTM implementation plan](vtm.md). An energy decrease alone does not
 establish good worst-element quality or a CPU performance advantage.

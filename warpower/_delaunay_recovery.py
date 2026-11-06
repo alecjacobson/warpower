@@ -55,6 +55,7 @@ class ReplayState:
     running: wp.array[int]
     preferred: wp.array[int]
     recovery_first: wp.array[int]
+    auxiliary_level: wp.array[int]
 
 
 @wp.kernel
@@ -74,6 +75,7 @@ def reset(state: ReplayState, cache: bool):
     state.certificate_error[0] = 0
     state.running[0] = 0
     state.recovery_first[0] = int(cache and state.preferred[0] != 0)
+    state.auxiliary_level[0] = 0
 
 
 @wp.kernel
@@ -125,6 +127,46 @@ def normalize(
     weights[i] = amplitude * direction(owners[i])
 
 
+@wp.func
+def amplitude_level(attempt: int, preferred: int, maximum: int, cache: bool):
+    first = int(0)
+    if cache and preferred >= 0 and preferred < maximum:
+        first = preferred
+    level = attempt
+    if attempt == 0:
+        level = first
+    elif attempt <= first:
+        level = attempt - 1
+    return level
+
+
+@wp.kernel
+def normalize_ordered(
+    points: wp.array[wp.vec3],
+    bounds: wp.array[wp.vec3],
+    owners: wp.array[int],
+    attempts: wp.array[int],
+    preferred_level: wp.array[int],
+    maximum: int,
+    cache: bool,
+    normalized: wp.array[wp.vec3],
+    weights: wp.array[float],
+    auxiliary_level: wp.array[int],
+):
+    i = wp.tid()
+    level = amplitude_level(attempts[0], preferred_level[0], maximum, cache)
+    if i == 0:
+        auxiliary_level[0] = level
+    lo, hi = wp.vec3d(bounds[0]), wp.vec3d(bounds[1])
+    extent = wp.max(hi[0] - lo[0], wp.max(hi[1] - lo[1], hi[2] - lo[2]))
+    scale = wp.max(extent, wp.float64(1.0e-300))
+    normalized[i] = wp.vec3((wp.vec3d(points[i]) - (lo + hi) * wp.float64(0.5)) / scale)
+    amplitude = float(1.0e-5)
+    for _ in range(level):
+        amplitude *= 0.1
+    weights[i] = amplitude * direction(owners[i])
+
+
 @wp.kernel
 def candidate_ready(
     candidate_error: wp.array[int], certificate_error: wp.array[int], ready: wp.array[int]
@@ -161,11 +203,16 @@ def finalize(
     count: wp.array[int],
     used: wp.array[int],
     preferred: wp.array[int],
+    auxiliary_level: wp.array[int],
+    preferred_level: wp.array[int],
     cache: bool,
 ):
     preferred[0] = 0
     if cache and error[0] == 0:
         preferred[0] = used[0]
+    preferred_level[0] = 0
+    if cache and error[0] == 0 and used[0] == 1:
+        preferred_level[0] = auxiliary_level[0]
     if error[0] != 0:
         count[0] = 0
 
@@ -300,6 +347,8 @@ class DelaunayWorkspace:
             self._fast_available = wp.ones(1, dtype=int) if self.fast_candidates else None
             self._fast_fallback = wp.empty(1, dtype=int) if self.fast_candidates else None
             self._preferred = wp.zeros(1, dtype=int)
+            self._preferred_level = wp.zeros(1, dtype=int)
+            self.auxiliary_level = wp.zeros(1, dtype=int)
             self._used = wp.zeros(1, dtype=int)
             self._valid = wp.empty(1, dtype=int)
             self._ready = wp.empty(1, dtype=int)
@@ -318,6 +367,7 @@ class DelaunayWorkspace:
                 "candidate_error",
                 "certificate_error",
                 "recovery_first",
+                "auxiliary_level",
             ):
                 setattr(self._state, name, getattr(self, name))
             self._state.count = self.tetrahedra_count
@@ -352,6 +402,8 @@ class DelaunayWorkspace:
                 self.tetrahedra_count,
                 self._used,
                 self._preferred,
+                self.auxiliary_level,
+                self._preferred_level,
                 self.cache_strategy,
             ],
         )
@@ -478,15 +530,19 @@ class DelaunayWorkspace:
 
     def _retry(self, tree, bounds):
         self._launch(
-            normalize,
+            normalize_ordered,
             self.n,
             [
                 self.points,
                 bounds,
                 tree.owners,
                 self.attempts,
+                self._preferred_level,
+                self.max_attempts,
+                self.cache_strategy,
                 self._normalized,
                 self._weights,
+                self.auxiliary_level,
             ],
         )
         self._auxiliary.run()

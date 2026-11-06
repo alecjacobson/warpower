@@ -1,0 +1,168 @@
+{
+  "baseline": "b6e03c3f68161fdd5c0eddf6cd31eab6ac33d34a",
+  "runtime_tested": "344b0e1ec6728f571361e60e862247be7f6ca9dd",
+  "timing_scope": "Warmed full resident-device operations, all strategies included. Five samples per standalone matrix case, three full VTM replays, two cached refined-hand replays. ABBA100k adds two batches of15 per version. Setup/JIT/readback excluded. GPU NVIDIA L40, Warp1.19.0; no other GPU jobs. All full-operation timing windows unthrottled. One ABBA batch has throttling in separate auxiliary/certificate stage measurements; retain these records and exclude them from clean per-stage comparisons. Not a CPU speedup comparison.",
+  "matrix": [
+    {
+      "case": "1000",
+      "before_ms": 9.156991958618164,
+      "after_ms": 9.18620777130127,
+      "speedup": 0.9968196002735341,
+      "change_percent": 0.3190546941084671
+    },
+    {
+      "case": "10000",
+      "before_ms": 40.6960334777832,
+      "after_ms": 40.67619323730469,
+      "speedup": 1.000487760503122,
+      "change_percent": -0.04875227088002587
+    },
+    {
+      "case": "100000",
+      "before_ms": 181.1894989013672,
+      "after_ms": 184.01312255859375,
+      "speedup": 0.9846553136104331,
+      "change_percent": 1.558381514573104
+    },
+    {
+      "case": "cube",
+      "before_ms": 0.5248000025749207,
+      "after_ms": 0.5260800123214722,
+      "speedup": 0.9975668915059078,
+      "change_percent": 0.24390429502119115
+    },
+    {
+      "case": "grid",
+      "before_ms": 2.1929919719696045,
+      "after_ms": 2.1967039108276367,
+      "speedup": 0.9983102234034655,
+      "change_percent": 0.16926367745424553
+    },
+    {
+      "case": "corner-cloud",
+      "before_ms": 8.066240310668945,
+      "after_ms": 6.820288181304932,
+      "speedup": 1.182683208721193,
+      "change_percent": -15.446503964381453
+    },
+    {
+      "case": "torus-boundary",
+      "before_ms": 1143.8392333984375,
+      "after_ms": 228.21449279785156,
+      "speedup": 5.012123548225443,
+      "change_percent": -80.04837689298276
+    },
+    {
+      "case": "fitted-hand",
+      "before_ms": 15.892800331115723,
+      "after_ms": 13.447039604187012,
+      "speedup": 1.1818809789306468,
+      "change_percent": -15.389111270342193
+    },
+    {
+      "case": "torus1000",
+      "before_ms": 3199.470947265625,
+      "after_ms": 3207.572265625,
+      "speedup": 0.9974743146253646,
+      "change_percent": 0.2532080613608434
+    },
+    {
+      "case": "refined-hand",
+      "before_ms": 35624.15625,
+      "after_ms": 6494.05615234375,
+      "speedup": 5.485655715672091,
+      "change_percent": -81.77063870153066
+    }
+  ],
+  "quota_exceptions": [
+    {
+      "file": "integer-abba-after1.json",
+      "path": "/auxiliary/cpu/4/throttled_periods",
+      "value": 2
+    },
+    {
+      "file": "integer-abba-after1.json",
+      "path": "/auxiliary/cpu/4/throttled_usec",
+      "value": 10687627
+    },
+    {
+      "file": "integer-abba-after1.json",
+      "path": "/auxiliary/cpu/3/throttled_periods",
+      "value": 2
+    },
+    {
+      "file": "integer-abba-after1.json",
+      "path": "/auxiliary/cpu/3/throttled_usec",
+      "value": 10696627
+    },
+    {
+      "file": "integer-abba-after1.json",
+      "path": "/certificate/cpu/4/throttled_periods",
+      "value": 1
+    },
+    {
+      "file": "integer-abba-after1.json",
+      "path": "/certificate/cpu/4/throttled_usec",
+      "value": 79991
+    },
+    {
+      "file": "integer-abba-after1.json",
+      "path": "/certificate/cpu/3/throttled_periods",
+      "value": 1
+    },
+    {
+      "file": "integer-abba-after1.json",
+      "path": "/certificate/cpu/3/throttled_usec",
+      "value": 79997
+    }
+  ],
+  "random100k_abba": {
+    "before": {
+      "full_median_ms": 182.93924713134766,
+      "full_mean_ms": 182.79265950520832,
+      "certificate_median_ms": 9.166128158569336,
+      "samples": 30
+    },
+    "after": {
+      "full_median_ms": 182.04068756103516,
+      "full_mean_ms": 182.42670440673828,
+      "certificate_median_ms": 9.325376033782959,
+      "samples": 30
+    }
+  },
+  "source_files_sha256": {
+    "integer-before-1000.json": "58e05ac644948b46ae15956daa455412c0de8828948fb6bc5454ba2f98caf3e8",
+    "integer-before-10000.json": "2d0306f05a975d0a0e6640c40da2c93e0c0631530e16e21036265de1366fcd47",
+    "integer-before-100000.json": "08608b40d30892babfca898963c47549067ebf5a89386dc4500accaaaffb9362",
+    "integer-before-cube.json": "d274953d8201881dbd69d32a2b630a310bf82884ae44e9364e02bfe98a854513",
+    "integer-before-grid.json": "b20d3017eca03c99b45962b9e45bd094fb2688d65527294fbf5b44e646ed571e",
+    "integer-before-corner-cloud.json": "36e676a9c2553992556b6a05fe1803f7bf30b656c830386605b99ab11f51b07f",
+    "integer-before-torus-boundary.json": "8fc2ecc5efa8ab6eaa600ad4211a4c45e5949e7591139e597566839509be8105",
+    "integer-before-fitted-hand.json": "13c85c5177d5f3ff49d871213cae2d0cd93e9f23d6efe4a724a3ae9fb3f75d7e",
+    "integer-before-torus1000.json": "c5c96fd342f492d155f7c76677b1e637335bf5f35f1ce65fd3b0449d618a8b91",
+    "integer-before-refined-hand.json": "3a42c7f66ccc768e91bb14860103c5e776c86cde8ee2546e18236b515fadf8d7",
+    "integer-after-1000.json": "391fe3a2f1f7996898101b528745d849a62ce8d83fab7705c9c26f686a2e08ce",
+    "integer-after-10000.json": "c49d02e20ce4b7e68e64abb22af1b57428b0bdc3ed296f9978ba3849ddeb720e",
+    "integer-after-100000.json": "6a2f272ae0ed7b19c0d87363956e41d099f7b19069e3543d75bcdbfd5914e653",
+    "integer-after-cube.json": "de46bfb8b289ad9682031d4f773d804cb666768434b1f9082d45f5c808dc2e75",
+    "integer-after-grid.json": "3d23c30a6e6f13fda0b32c2ba9a623a3d8ceb5ca6aa2f0d6175088702ae546b7",
+    "integer-after-corner-cloud.json": "33cf7e4bc54e372851ce68d30c093aa898c4cb142051fc732c9a6586bfe73bf3",
+    "integer-after-torus-boundary.json": "7abce8673777a8919e131d8fab55f80c9e0cd0427ccce6fb408def6f3136681f",
+    "integer-after-fitted-hand.json": "aadf9a2984d81ad89534c9bab321796a7e2acce792dada83e975b3381a04466c",
+    "integer-after-torus1000.json": "a736d56431c3b763e9849e8b6e47a7e51bab119658011eb1521efa4426d26720",
+    "integer-after-refined-hand.json": "b2b275eeabd2b8e899613a153e1b12dd9f972b0d13431e0d64234e7886e07c0d",
+    "integer-abba-before1.json": "e21f7ee5564aa70406619600b20e217c54eb8ba104f2b837f39892d48d9c2f44",
+    "integer-abba-after1.json": "40a5a090ac214924fd9cc375d7ea222faa111c621e63393d014101e190ffaeec",
+    "integer-abba-after2.json": "75a225bb0be07744507cd99ec50b1545558d0c0395afa8916c7b6f7c2689fd04",
+    "integer-abba-before2.json": "42af2f96b2ef09f946027eff2ed106658fb6c1afef1c90ed4e0b04913a00f5af",
+    "integer-cgal.json": "6e606bd557a448a1d55c29957b6cac4b883d4e5583fd8a5f237e084c1b697fd7",
+    "integer-device-audit.json": "358a0b2988fb557d52744547b91f30bd764c383ccfa5ca32d61a68bee11a11d3",
+    "integer-native-run.json": "b352057079e6c2f4c4c7e70a86533fe1210280eaf12be8b660296bd6343d29d1",
+    "integer-memcheck.txt": "48ea9919e3828447dcb746ff1909e94cfa08ca2cd2cf8b061661531b6d29995e",
+    "integer-lifetime.txt": "5dc5bd3b0a1a07b217548eeb4d26fa6dc4050cd7bbc49cb3135dafc9bd2cb5f8",
+    "integer-integrated-all-tests.txt": "a3bb7f007f9fb1669d769afb79a98facaf19e2afefc8fb3f4b651f02fd03d78e",
+    "integer-integrated-focused.txt": "343f37e48d8709d07e893285f4a9de9aba7aa46a0bc6a52c33920c4a5462511e",
+    "integer-output-equivalence.json": "fd72705cd69f20a0a4c9393acea71ae2cbe71397e2d23960b13a840e48965f97",
+    "hand-integer-independent-validation.json": "16d126d913f75f8dd398bc64b3e53213892d046d7ac4c887313359038343310e"
+  }
+}

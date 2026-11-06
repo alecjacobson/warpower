@@ -1,4 +1,4 @@
-"""Roundoff-bounded float64 filters with exact expansion fallbacks.
+"""Roundoff-bounded float64 filters with exact dyadic-integer fallbacks.
 
 Calling kernels must set fast_math=False and fuse_fp=False. Bounds assume finite
 float32 input coordinates/weights, so all nonzero degree-five products and their

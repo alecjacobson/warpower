@@ -3,7 +3,7 @@
 import warp as wp
 
 from . import _filtered_predicates as fp
-from . import _predicates as exact
+from . import _integer as integer
 from ._delaunay_certificate import direction
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
@@ -92,6 +92,52 @@ def filtered_det(a: Plane, b: Plane, c: Plane, d: Plane):
     )
 
 
+@wp.func
+def halfspace_row(
+    points: wp.array[wp.vec3],
+    bounds: wp.array[wp.vec3],
+    owner: int,
+    index: int,
+    mode: int,
+    selected: int,
+    base: int,
+):
+    r = integer.Row()
+    r.x = integer.empty()
+    r.y = integer.empty()
+    r.z = integer.empty()
+    r.w = integer.empty()
+    if index >= 0:
+        p, q = points[owner], points[index]
+        r = integer.relative(p, q, base)
+        r.x = integer.plus(r.x, r.x)
+        r.y = integer.plus(r.y, r.y)
+        r.z = integer.plus(r.z, r.z)
+        rp = integer.relative(p, wp.vec3(0.0), base)
+        rq = integer.relative(q, wp.vec3(0.0), base)
+        r.w = integer.plus(
+            integer.minus(integer.norm(rq), integer.norm(rp)),
+            integer.minus(
+                integer.from_float(weight(owner, mode, selected), 2 * base),
+                integer.from_float(weight(index, mode, selected), 2 * base),
+            ),
+        )
+    elif index == -7:
+        r.w = integer.from_float(1.0, 2 * base)
+    else:
+        plane = -index - 1
+        axis, side = plane // 2, plane % 2
+        s = 1.0 - 2.0 * float(side)
+        if axis == 0:
+            r.x = integer.from_float(s, base)
+        elif axis == 1:
+            r.y = integer.from_float(s, base)
+        else:
+            r.z = integer.from_float(s, base)
+        r.w = integer.from_float(-s * bounds[side][axis], 2 * base)
+    return r
+
+
 @wp.func(inline=False)
 def exact_det(
     points: wp.array[wp.vec3],
@@ -101,60 +147,29 @@ def exact_det(
     mode: int,
     selected: int,
 ):
-    # Each site row is (-2*x, |x|^2-weight, 1). Box rows have last
-    # coordinate zero. Subtracting the owner row gives the original halfspace
-    # equations; expansion along the final column yields their 4x4 determinant.
-    rows = Ids5(ids[0], ids[1], ids[2], ids[3], owner)
-    positions = exact.Positions5()
-    constant = exact.Weights5()
-    sites = Ids5(0)
-    total = exact.empty_expansion()
-    for r in range(5):
-        index = rows[r]
+    base = wp.min(
+        integer.vector_base(points[owner]), integer.base_for(weight(owner, mode, selected), 2)
+    )
+    for k in range(4):
+        index = ids[k]
         if index >= 0:
-            p = points[index]
-            sites[r] = 1
-            for k in range(3):
-                positions[r, k] = wp.float64(-2.0) * wp.float64(p[k])
-                if not wp.isfinite(positions[r, k]):
-                    total.valid = 0
-            constant[r] = -wp.float64(weight(index, mode, selected))
-        elif index == -7:
-            constant[r] = wp.float64(1.0)
-        else:
+            base = wp.min(
+                base,
+                wp.min(
+                    integer.vector_base(points[index]),
+                    integer.base_for(weight(index, mode, selected), 2),
+                ),
+            )
+        elif index != -7:
             plane = -index - 1
-            axis, side = plane // 2, plane % 2
-            sign = wp.float64(1 - 2 * side)
-            positions[r, axis] = sign
-            constant[r] = -sign * wp.float64(bounds[side][axis])
-            if not wp.isfinite(constant[r]):
-                total.valid = 0
-    for k in range(120):
-        code = exact.POWER_TERMS[k]
-        a, b, c, d = code & 7, (code >> 3) & 7, (code >> 6) & 7, (code >> 9) & 7
-        last = 10 - a - b - c - d
-        if (
-            sites[last] == 0
-            or positions[a, 0] == wp.float64(0.0)
-            or positions[b, 1] == wp.float64(0.0)
-            or positions[c, 2] == wp.float64(0.0)
-        ):
-            continue
-        term = exact.grow(exact.empty_expansion(), constant[d])
-        if sites[d] != 0:
-            for j in range(3):
-                # Power-of-two scaling and each original float32 square are
-                # exact in float64, even though their sum need not be.
-                value = positions[d, j] * wp.float64(-0.5)
-                term = exact.grow(term, value * value)
-        term = exact.scale(term, positions[a, 0])
-        term = exact.scale(term, positions[b, 1])
-        term = exact.scale(term, positions[c, 2])
-        total = exact.add(total, term, wp.float64(1 - 2 * ((code >> 12) & 1)))
-    result = exact.negative_determinant(total)
-    result.sign = -result.sign
-    result.estimate = -result.estimate
-    return result
+            base = wp.min(base, integer.base_for(bounds[plane % 2][plane // 2], 2))
+    value = integer.det4(
+        halfspace_row(points, bounds, owner, ids[0], mode, selected, base),
+        halfspace_row(points, bounds, owner, ids[1], mode, selected, base),
+        halfspace_row(points, bounds, owner, ids[2], mode, selected, base),
+        halfspace_row(points, bounds, owner, ids[3], mode, selected, base),
+    )
+    return integer.predicate(value, 5 * base)
 
 
 @wp.func

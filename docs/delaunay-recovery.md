@@ -89,7 +89,7 @@ sphere against all original sites. A [conservative circumsphere box](sphere-boun
 first skips strictly disjoint BVH nodes using float32 comparisons. Surviving nodes
 retain the original float64 interval test, which can prove a strictly negative
 determinant even for large, nearly flat hull spheres. Uncertain/nonfinite boxes
-disable the box pretest. Surviving leaf points also use the cached polynomial
+disable the box pretest. For buffers with at least 32 sites, surviving leaf points also use the cached polynomial
 interval with equal box endpoints; only a strictly negative result skips the
 original predicate. Uncertain leaves use exact expansion arithmetic. Exact zero-volume candidates are discarded; negative
 original orientations reject the candidate.

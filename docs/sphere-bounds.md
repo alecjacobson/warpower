@@ -138,3 +138,50 @@ records 321 kernel activities across three replays; all 21 graph copies are
 device-to-device, with no host/callback or allocation/free nodes. The
 [isolation record](../results/validation/vtm/sphere-box-isolation.json) checks all
 other runtime modules against the preceding main revision.
+
+## Cached point-filter measurements
+
+The [paired final matrix](../results/validation/vtm/certpoint-performance.json)
+uses the preceding main revision and the guarded leaf filter. On L40 / Warp 1.19.0,
+medians in milliseconds are:
+
+| Input | Complete before | Complete after | Certificate before | Certificate after |
+|---|---:|---:|---:|---:|
+| Random1000 | 10.288 | 9.740 | 1.366 | 0.849 |
+| Random10000 | 49.350 | 45.628 | 9.594 | 6.085 |
+| Random100000 | 263.447 | 228.383 | 90.066 | 54.742 |
+| Cube8 | 0.525 | 0.525 | 0.150 | 0.152 |
+| Grid64 | 2.217 | 2.191 | 0.597 | 0.562 |
+| Torus boundary128 | 1220.889 | 1220.672 | 90.985 | 90.705 |
+
+The 100k certificate improves 1.65× and complete certified reconstruction 1.15×.
+The full torus1000 mesher improves 3942.56 → 3632.24 ms (1.085×), including domain
+refit, fresh sampling, refinement, fitting, four quality rounds and extraction.
+[Points, roles, full/material tetrahedra and boundary connectivity are unchanged](../results/validation/vtm/certpoint-torus-equivalence.json).
+Independent Delaunay and topology checks pass. Scalar reductions can differ at
+roundoff level because tetrahedron row order is unspecified.
+
+Random timings use five samples, structured cases three, and the full mesher
+three additional replays. All recorded timing windows have zero CPU quota
+throttling. First replays are reported separately in the raw records; allocation,
+compilation and serialization are outside these resident-device timings. These
+are internal improvements, not the outstanding native CPU performance target.
+
+A split filter/exact work-queue experiment was approximately flat and was not
+adopted. An initial unguarded leaf filter added about 0.011 ms to the tiny
+cospherical cube, so buffers smaller than 32 sites retain the original leaf
+predicate. The [other runtime modules and flagship README remain byte-identical](../results/validation/vtm/certpoint-isolation.json).
+
+All 671,908 tetrahedra in the 100k case match both the saved native CGAL 6.2.1
+reference and the preceding certified constructor on identical original
+float32 sites ([independent comparison](../results/validation/vtm/certpoint-cgal.json)).
+The final [391-test suite](../results/validation/vtm/certpoint-full-tests.txt) passes.
+
+Six [padded memory cases](../results/validation/vtm/certpoint-memcheck.txt) and one
+[captured changing-input lifetime case](../results/validation/vtm/certpoint-lifetime.txt)
+pass with zero sanitizer errors, using the documented diagnostic stack and
+synchronous allocations for lifetime tracking. The [native graph audit](../results/validation/vtm/certpoint-device-audit.json)
+records 552 kernel activities across four producer/reconstruction/consumer replays.
+All 21 graph copy nodes are device-to-device; there are no host callbacks,
+allocation/free nodes or host transfers. The [functional replay record](../results/validation/vtm/certpoint-native-run.json)
+covers 32,768 sites, a moved point, a sparse 128-site prefix and invalid input.

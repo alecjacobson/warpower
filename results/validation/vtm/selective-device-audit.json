@@ -1,0 +1,28 @@
+{
+  "scope": "Three warmed resident fitted-point reset, selective optimization (four accepted steps and fourteen quality rejections), and extraction replays with retained-only queries; one final synchronization outside captured work",
+  "gpu_kernel_activities": 9852,
+  "gpu_memset_activities": 159,
+  "gpu_memcpy_activities": 3,
+  "gpu_memcpy_kinds": {
+    "CUDA_MEMCPY_KIND_DTOD": 3
+  },
+  "cuda_api_calls": {
+    "cuCtxSynchronize": 1,
+    "cuProfilerStart": 1,
+    "cudaGraphLaunch_v10000": 3,
+    "cudaStreamIsCapturing_v10000": 1
+  },
+  "dot_node_types": {
+    "MEMCPY": 60,
+    "MEMSET": 269,
+    "KERNEL": 990,
+    "CONDITIONAL": 118
+  },
+  "dot_copy_kinds": {
+    "DtoD (DEVICE to DEVICE)": 60
+  },
+  "copy_trace_limit": "Nsight may omit graph copy activity records; both observed copy kinds and all DOT copy nodes are checked for device-to-device direction.",
+  "dot_sha256": "9823e91b476c77fbd594b505677f7ff5f92bae01634dc982106ed69b973c0db0",
+  "sqlite_sha256": "3d91b23e01ae69e3ee2864baccdfb1eb25e4a71d60b84fb70974924e0a53421b",
+  "record_command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 nsys profile --trace=cuda --cuda-graph-trace=node --cuda-event-trace=false --sample=none --cpuctxsw=none --capture-range=cudaProfilerApi --capture-range-end=stop --force-overwrite=true -o .work/vtm/selective-fast-loop .venv/bin/python -m benchmarks.selective --n 1000 --warmstart-iterations 30 --iterations 10 --repeats 1 --profile --dot .work/vtm/selective-fast-loop.dot"
+}

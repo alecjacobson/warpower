@@ -1,0 +1,71 @@
+{
+  "scope": "Initial full-query selective implementation: three profiled optimization/extraction replays; initial global fitting excluded",
+  "columns": [
+    "kernel",
+    "calls",
+    "total_gpu_ms"
+  ],
+  "top_kernels": [
+    [
+      "classify_dc6c3438_cuda_kernel_forward",
+      69,
+      1027.986725
+    ],
+    [
+      "make_cells__locals__build_cells_ea3c8b43_cuda_kernel_forward",
+      57,
+      735.03015
+    ],
+    [
+      "check_spheres_da6289f9_cuda_kernel_forward",
+      57,
+      486.932623
+    ],
+    [
+      "check_faces_5ba92ff6_cuda_kernel_forward",
+      57,
+      77.164364
+    ],
+    [
+      "accumulate_samples_da8eb4ee_cuda_kernel_forward",
+      120,
+      47.227736
+    ],
+    [
+      "validate_power_spheres_79a90018_cuda_kernel_forward",
+      57,
+      35.268856
+    ],
+    [
+      "surface_error_89dba5c1_cuda_kernel_forward",
+      3,
+      24.567236
+    ],
+    [
+      "validate_faces_0fd13b70_cuda_kernel_forward",
+      57,
+      11.247259
+    ],
+    [
+      "memset32",
+      2001,
+      2.44072
+    ],
+    [
+      "accumulate_tets_ea67b994_cuda_kernel_forward",
+      69,
+      2.156785
+    ],
+    [
+      "merge_level_4d0d6c23_cuda_kernel_forward",
+      1170,
+      2.11413
+    ],
+    [
+      "void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortSingleTileKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, SortPayload<(int)4>, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(const T3 *, T3 *, const T4 *, T4 *, T5, int, int, T6)",
+      117,
+      2.036791
+    ]
+  ],
+  "reproduce_with_current_code": "python -m benchmarks.selective --full-query-reference --n 1000 --warmstart-iterations 30 --iterations 10 --repeats 1 --profile"
+}

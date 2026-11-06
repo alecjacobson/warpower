@@ -98,7 +98,9 @@ graded interior/boundary updates, pole-based automatic feature-size estimates,
 and fixed-budget device initial sampling. The internal
 [refinement stage](refinement.md) grows a device active prefix with ranked,
 deduplicated Voronoi-center insertions and certified transactional reconstruction.
-Selective optimization, boundary jitter, worst-element relocation, the final
+Optional [selective optimization](selective.md) limits updates to poor retained
+tetrahedra and one neighbor ring, with an additional minimum-quality guard.
+Boundary jitter, worst-element relocation, the final
 public mesher API, and measured CPU outperformance remain necessary to complete
 the goal.
 

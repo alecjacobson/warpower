@@ -75,6 +75,16 @@ The current workspace conservatively requires `512*N < 2**31` (at most
 4,194,303 sites) and checks output capacities against int32 indexing limits.
 There is no automatic allocation inside a replay. If a reserve is exhausted,
 construct a larger workspace outside capture and recapture the enclosing graph.
+`tetrahedra_cell_capacity=1024` adds a larger float64 clipping recovery stage
+for high-valence or difficult intermediate cells. The default remains 512, with
+unchanged default GPU work and scratch allocation. This option requires
+`return_tetrahedra=True`; only 512 and 1024 are supported because packed plane
+indices have 10 bits. At the default 4096-cell retry chunk, 1024 doubles the
+float64 scratch from about 200 MiB to 400 MiB. Smaller `chunk_size` values reduce
+that reserve. This is a per-cell limit, distinct from `tetrahedra_capacity`, which
+reserves the output/candidate list. The larger recovery currently applies to the
+workspace path; the eager convenience builders retain their existing limit.
+
 `adjacency=False, return_tetrahedra=True` skips the bounded adjacency computation.
 The `status` field is then unused, initialized to -1.
 

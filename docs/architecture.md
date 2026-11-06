@@ -184,7 +184,7 @@ volume-weighted circumcenter displacements in float64, holds the initial hull
 fixed, and tests parallel updates after rebuilding Delaunay connectivity.
 Per-site displacement limits account for the hull and float32 storage; captured
 conditional loops handle energy rejection, convergence, and complete rollback.
-The standalone construction modules and their default execution remain unchanged.
+The optimizer is a separate layer; standalone geometry calls retain their default execution path.
 
 This is the fixed-boundary optimizer foundation. Boundary fitting, graded sizing,
 refinement, nonconvex extraction, and stronger numerical recovery remain tracked

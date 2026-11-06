@@ -609,6 +609,8 @@ class VariationalMeshingWorkspace:
         # but do not inherit the preceding solve's most expensive strategy.
         self.core.mesh._preferred.zero_()
         self.core.mesh._preferred_level.zero_()
+        if self.core.reuses_delaunay_cells:
+            self.core.mesh.clear_reuse()
         if self.core.mesh.fast_candidates:
             self.core.mesh._fast_available.fill_(1)
         wp.copy(self.points, self.sampler.points, count=self.initial_count)

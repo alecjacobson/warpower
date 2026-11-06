@@ -271,6 +271,13 @@ class VTMWorkspace:
             )
             self._propose, self._propose_args = self._active.propose_active, [active_count]
         mesh_type = DelaunayWorkspace if certified_delaunay else DiagramWorkspace
+        # Bound the exhaustive seed filter to the small-cloud completion range.
+        # Keep standalone constructors and large-cloud reconstruction unchanged.
+        self.reuses_delaunay_cells = certified_delaunay and 256 <= len(mesh_points) <= 2048
+        if self.reuses_delaunay_cells:
+            from ._reuse_delaunay import ReuseDelaunayWorkspace
+
+            mesh_type = ReuseDelaunayWorkspace
         mesh_options = {} if certified_delaunay else dict(adjacency=False, return_tetrahedra=True)
         self.mesh = mesh_type(
             mesh_points,

@@ -46,3 +46,22 @@ Compare tetrahedron sets after sorting each quadruple and sorting rows; ordering
 and orientations can differ between implementations. Degenerate inputs can have
 multiple valid Delaunay triangulations, so exact set equality alone is not a
 suitable correctness criterion for those cases.
+
+`surface_intersections.cpp` and `triangle_contact.cpp` are additional independent
+CGAL 6.2.1 references for [surface-contact validation](../../docs/domains.md).
+Both use `Exact_predicates_exact_constructions_kernel`. Compile with the same
+include path, C++17 and GMP/MPFR libraries as above. They are host-only validation
+programs and are never called by the device pipeline.
+
+The surface program takes a triangular OFF path and prints vertex, face and
+self-intersection counts, followed by at most 256 face-pair witnesses. Convert
+input positions to float32 and print them with 17 significant digits first;
+the reader explicitly constructs exact points from doubles so the reference
+uses the same binary coordinates as the GPU. The pair program reads a count,
+then six vertex IDs and six XYZ triples per pair from stdin. Each output row
+reports the row, shared-index count, whether an exact intersection exists,
+whether it exceeds legal indexed contact, and the CGAL variant index (`-1` for
+empty). The [pinned input URLs and hashes](../../results/validation/vtm/domain-contact-inputs.json)
+and [whole-surface exact results](../../results/validation/vtm/domain-contact-CGAL.json)
+record the imported-model check. The regression suite additionally proves
+separation independently with Python arbitrary-precision integers.

@@ -49,12 +49,25 @@ links are rejected on device. Geometry validation checks triangle intersections,
 including excess contact between triangles sharing an edge or vertex, and tests
 which side of each face contains material.
 
-This is floating-point validation, not an exact-predicate certificate. The
+The complete domain validator is not an exact-predicate certificate. The
 hierarchy, closest-point regions, and oriented ray counts use pure Warp kernels
 with float64 geometric arithmetic. Shared-edge/vertex ray hits trigger two
 alternative directions on device; unresolved classification is reported rather
-than guessed. Intersections between triangles without shared vertex indices use
-Warp's built-in triangle predicate after bounding-box filtering.
+than guessed. After bounding-box filtering, intersections between triangles
+without shared vertex indices use filtered float64 orientation signs with exact
+expansion fallback. Plane separation and segment/triangle tests handle crossing,
+coplanar overlap, and unindexed touching without a geometric tolerance. Shared
+indexed contact retains the separate float64 edge/cone tests.
+
+The exact-sign path fixes eight false intersection reports in the CGAL-distributed
+fandisk and bunny surfaces ([#92](https://github.com/alecjacobson/warpower/issues/92)).
+Warp 1.19's native triangle test uses a fixed plane threshold, including its
+float64 overload, so casting coordinates alone does not fix the issue. Independent
+CGAL exact checks found all eight pairs disjoint and both complete surfaces free
+of self-intersections using the same float32 coordinates. Both surfaces now pass
+the normal device validator; no geometry checks are disabled. The reduced
+fixtures are also checked against an independent arbitrary-precision integer
+separating-axis oracle across all windings, pair orders, and power-of-two scales.
 
 Faces with twice-area at most `1e-12` times the sum of squared edge lengths are
 rejected before division. Material-side orientation is checked at each face
@@ -141,3 +154,28 @@ Samples and compact feature ordering are reproducible for identical inputs.
 Refitting updates positions, weights, features, corners, and all device counts.
 The sizing weights required by Alliez et al. (`dA/mu^4` and `dL/mu^3`) are applied
 by the fitting layer; these base quadrature weights contain area/length only.
+
+## Exact-contact validation record
+
+On the NVIDIA L40 with Warp 1.19.0, the contact change passes
+[388 repository tests](../results/validation/vtm/domain-contact-tests.txt),
+[three padded memory cases](../results/validation/vtm/domain-contact-memcheck.txt)
+and [a captured refit with full allocation/lifetime tracking](../results/validation/vtm/domain-contact-lifetime.txt)
+using the documented diagnostic allocator/stack settings. A
+[native producer/refit/query/consumer trace](../results/validation/vtm/domain-contact-device-audit.json)
+contains 33 kernel, two memset and two device-to-device copy graph nodes, with
+no host callback, allocation/free or host-transfer nodes.
+
+The complete 1,000-site torus solve takes 3,940.59 ms (median of three additional
+replays), versus 3,936.47 ms in the preceding gallery run. Both timing windows
+were unthrottled; the difference is approximately 0.1%.
+[Points, roles and all canonical connectivity are identical](../results/validation/vtm/domain-contact-torus-equivalence.json),
+and independent Delaunay/topology checks pass. This is an internal regression
+control, not a CPU comparison.
+
+The stricter intersection check has a measurable cost: a deforming
+9,216-triangle domain plus 1,000 queries takes 28.007 → 30.160 ms (ten-replay
+medians). Queries alone remain 17.481 → 17.482 ms. These
+[before](../results/validation/vtm/domain-contact-domain-before.json)/[after](../results/validation/vtm/domain-contact-domain-after.json)
+measurements include no CPU throttling. The
+[other runtime modules and flagship README remain unchanged](../results/validation/vtm/domain-contact-scope.json).

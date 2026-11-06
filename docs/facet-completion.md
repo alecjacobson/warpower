@@ -64,7 +64,31 @@ malformed indices/counts, inverted/duplicate/non-Delaunay seeds, and exhausted
 round/capacity budgets. The saved 1,981-cell hand fragment reaches the same
 2,164-cell complete mesh in three rounds. This measures completion of an already
 available fragment; it excludes the cost of constructing that fragment and is
-not a full VTM or CPU-speed comparison. Broader integration, native replay and
-memory checks remain required before adopting this path.
+not a full VTM or CPU-speed comparison. The 16 completion tests pass padded memory checking. A four-phase resident loop
+(one seed, invalid seed, translated current points, complete seed) also passes
+full allocation/lifetime checking and a native replay audit. The corrected
+trace records 707 GPU kernels, four launches, one final synchronization, and
+only device-to-device copies, with no host or allocation/free graph nodes.
+The initial benchmark violated SiteHierarchy's child-graph capture contract;
+its top-level native sort added allocation/free nodes. Capturing the rebuild in
+the required child graph fixes that audit. Public construction already follows
+that contract. No complete-constructor integration is claimed yet.
+
+`_facet_seeds.CertifiedSeeds` additionally filters uncertified candidate cells
+into exact strict lower facets. It skips malformed individual cells, maps
+canonical owners, rejects zero-volume cells, positively orients and deduplicates
+the rest, and discards any cell with a nonempty symbolic sphere. Invalid input
+counts and predicate failure reject the batch. The caller supplies finite sites
+and current owners; downstream completion still validates the resulting subset.
+Eight tests pass, including exhaustive cube/octahedron vertex combinations,
+positive/negative/zero orientations, duplicate owners and cells, three scales,
+malformed indices, nonempty spheres, invalid counts and safe replay recovery.
+Seed filtering is not yet connected to public Delaunay construction.
+
+[Completion memory checks](../results/validation/vtm/facet-memcheck.txt),
+[corrected lifetime check](../results/validation/vtm/facet-lifetime-v2.txt),
+[native audit](../results/validation/vtm/facet-device-audit-v2.json), and
+[seed tests](../results/validation/vtm/facet-seeds-focused.txt) retain the scope.
+Full integration and performance validation remain required before adoption.
 
 Progress is tracked in [issue #104](https://github.com/alecjacobson/warpower/issues/104).

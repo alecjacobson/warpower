@@ -69,13 +69,17 @@ def audit(profile=False, dot=None):
     hierarchy = SiteHierarchy(points)
     wp.launch(identity, len(points), inputs=[hierarchy.tree.owners])
     completion = FacetCompletion(points, seeds, count, hierarchy.tree, capacity=512)
+    ready = wp.ones(1, dtype=int, device=points.device)
     phase = wp.zeros(1, dtype=int, device=points.device)
     records = wp.zeros((4, 4), dtype=wp.int64, device=points.device)
     wp.load_module(module=__name__, device=points.device)
     with wp.ScopedCapture() as capture:
         wp.launch(produce_points, len(points), inputs=[source, points, phase])
         wp.launch(produce_seed, len(seeds), inputs=[seed_source, seeds, count, phase])
-        hierarchy.rebuild()
+        # SiteHierarchy requires a child graph so CUB sort scratch is owned at
+        # capture setup instead of becoming allocation/free nodes on replay.
+        # This diagnostic producer always supplies finite, unique input sites.
+        wp.capture_if(ready, hierarchy.rebuild)
         completion.run()
         wp.launch(
             consume,

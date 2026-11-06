@@ -1,8 +1,10 @@
-# Experimental local Delaunay certificate
+# Local Delaunay certificate with a global fallback
 
-This branch investigates issue #97. The following argument and implementation
-need adversarial tests, independent equivalence checks and performance validation
-before adoption. The existing global sphere certificate remains the fallback.
+The optional `DelaunayWorkspace` can replace all-site sphere queries with
+shared-face tests when it first establishes coverage through a strict hull
+anchor. This file gives the sufficient geometric conditions and their argument.
+An uncertain anchor search uses the existing global certificate. The original
+power-diagram and `DiagramWorkspace` APIs are unchanged.
 
 ## Sufficient geometric conditions
 
@@ -116,3 +118,75 @@ simplicial maps ([paper](https://arxiv.org/abs/1310.0955)). Its stated setting i
 manifold mesh with boundary. We do not assume that unverified candidates already
 form such a mesh, or cite that theorem as a substitute for the chain-coverage
 argument here.
+
+
+## Validation and measurements
+
+At runtime commit `fed60a8`, all 407 tests pass. Adversarial cases include holes,
+repeated and inverted cells, both diagonals of a convex bipyramid, a missing
+interior site, symbolic cospherical octahedra, and overlapping cube covers whose
+boundary diagonals differ on every facet. That last case passes ordinary indexed
+face incidence and hull-support checks despite covering the cube twice; it has
+no strict anchor and the global fallback rejects it.
+
+All 671,908 tetrahedra for 100,000 uniform random sites match saved native
+CGAL 6.2.1 connectivity and the preceding constructor. Running the global
+certificate again on that result also succeeds. The complete 1,000-site torus
+retains identical positions, roles, input geometry and canonical full/material/
+boundary connectivity. Its independently checked quality and topology are
+unchanged.
+
+The following L40 / Warp 1.19 measurements include complete certified Delaunay
+reconstruction, except the last row, which includes complete VTM. Random cases
+use five additional replays, other initial cases three. CPU quota throttling was
+zero in every reported timing window.
+
+| Case | Before complete solve | After complete solve | Certificate before → after |
+| --- | ---: | ---: | ---: |
+| Random 1,000 | 9.797 ms | 9.172 ms | 0.854 → 0.283 ms |
+| Random 10,000 | 45.696 ms | 40.705 ms | 5.923 → 0.931 ms |
+| Random 100,000 | 228.499 ms | 182.577 ms | 54.808 → 9.128 ms |
+| Cube, 8 sites | 0.528 ms | 0.525 ms | 0.151 → 0.150 ms |
+| Grid, 64 sites | 2.200 ms | 2.196 ms | 0.552 → 0.555 ms |
+| Torus boundary, 128 sites | 1,220.684 ms | 1,144.326 ms | 90.717 → 13.162 ms |
+| Fitted hand, 256 sites | 25.807 ms | 16.048 ms | 10.839 → 3.471 ms |
+| Complete torus VTM, 1,000 sites | 3,632.697 ms | 3,203.738 ms | — |
+
+Flat hulls pay a small fallback overhead. The 200-site corner-cloud case has
+substantial timing variation from candidate ordering. Its initial three-sample
+medians were 7.233 → 8.165 ms; both versions produced samples near 7.2 and 8.3 ms.
+Two subsequent alternating-version batches of 31 samples each gave complete
+medians 8.133 → 8.164 ms (+0.37%), and means 8.081 → 8.174 ms (+1.15%). On the
+same fixed candidate buffer, alternating old/global-only and new/fallback graphs
+for 30 samples at each of three shuffled orders isolates about 28 microseconds
+of added certificate work (about 1.1% of that stage). This is below the documented
+2% regression investigation threshold; it is not a claim of universal zero
+overhead. All initial and follow-up samples are retained.
+
+Eight focused tests pass padded Compute Sanitizer memcheck with zero errors.
+A captured producer/constructor/consumer loop switches through random 200 sites
+(local), a padded cube (global), invalid input, and restored random input. It
+passes full stream-ordered allocation/lifetime checking with diagnostic
+synchronous allocations. Both sanitizer runs explicitly set a 32-KiB diagnostic
+CUDA stack allowance. A warmed native trace observes 514 GPU kernel activities,
+four graph launches and one final synchronization; all 21 graph copy nodes are
+device-to-device, with no host callback, allocation or free nodes. The existing
+[larger conditional-graph instrumentation limits](cuda-validation.md) still apply.
+
+Raw measurements, tests, native trace counters, connectivity hashes and source
+isolation are recorded under
+[`results/validation/vtm/local-*`](../results/validation/vtm/local-performance.json).
+Only `_delaunay_certificate.py` changes among runtime modules; the other 47
+runtime modules and the main README are byte-identical to the baseline.
+The CPU mesher speed goal remains open.
+
+Reproduce the targeted comparisons and captured branch audit with:
+
+```bash
+python -m benchmarks.delaunay_recovery --case random --n 100000 --repeats 5 --output results/local/delaunay100k.json
+python -m benchmarks.certificate_fallback --output results/local/certificate-fallback.json
+python -m benchmarks.local_certificate --output results/local/local-graph.json --dot results/local/local-graph.dot
+```
+
+The native trace requires `--profile` on the last command inside Nsight Systems;
+setup, warmup and final host readback are excluded from that profiling range.

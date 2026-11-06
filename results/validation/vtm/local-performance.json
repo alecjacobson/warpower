@@ -1,0 +1,91 @@
+{
+  "baseline_runtime_commit": "c0b3258",
+  "candidate_runtime_commit": "fed60a825ccf085e489b56f10fdcc1abf2c89fdf",
+  "baseline_note": "The 62-sample corner-cloud repeat used main 4bb9459, whose runtime modules equal c0b3258. Initial samples retained; repeated sampling was motivated by the observed multimodal distribution.",
+  "scope": "NVIDIA L40 / Warp 1.19, complete certified Delaunay reconstruction and certificate alone; torus1000 measures complete VTM. Three samples (five for random cases), except corner-cloud follow-up 62 samples. All final timing windows reported zero CPU quota throttling.",
+  "initial_matrix": [
+    {
+      "case": "1000",
+      "before_complete_ms": 9.796704292297363,
+      "after_complete_ms": 9.171648025512695,
+      "speedup": 1.0681509217368519,
+      "before_certificate_ms": 0.853600025177002,
+      "after_certificate_ms": 0.2825919985771179
+    },
+    {
+      "case": "10000",
+      "before_complete_ms": 45.69619369506836,
+      "after_complete_ms": 40.70502471923828,
+      "speedup": 1.1226180062598297,
+      "before_certificate_ms": 5.923327922821045,
+      "after_certificate_ms": 0.9314560294151306
+    },
+    {
+      "case": "100000",
+      "before_complete_ms": 228.49853515625,
+      "after_complete_ms": 182.57711791992188,
+      "speedup": 1.2515179216295287,
+      "before_certificate_ms": 54.808223724365234,
+      "after_certificate_ms": 9.127615928649902
+    },
+    {
+      "case": "cube",
+      "before_complete_ms": 0.5277119874954224,
+      "after_complete_ms": 0.5251839756965637,
+      "speedup": 1.0048135737490955,
+      "before_certificate_ms": 0.1509760022163391,
+      "after_certificate_ms": 0.15011200308799744
+    },
+    {
+      "case": "grid",
+      "before_complete_ms": 2.2000319957733154,
+      "after_complete_ms": 2.196160078048706,
+      "speedup": 1.0017630398454604,
+      "before_certificate_ms": 0.5522239804267883,
+      "after_certificate_ms": 0.5551360249519348
+    },
+    {
+      "case": "corner-cloud",
+      "before_complete_ms": 7.2330241203308105,
+      "after_complete_ms": 8.165087699890137,
+      "speedup": 0.8858476952339572,
+      "before_certificate_ms": 1.8397120237350464,
+      "after_certificate_ms": 2.8745920658111572
+    },
+    {
+      "case": "torus-boundary",
+      "before_complete_ms": 1220.68408203125,
+      "after_complete_ms": 1144.3258056640625,
+      "speedup": 1.0667277413383822,
+      "before_certificate_ms": 90.71654510498047,
+      "after_certificate_ms": 13.162431716918945
+    },
+    {
+      "case": "fitted-hand",
+      "before_complete_ms": 25.806720733642578,
+      "after_complete_ms": 16.048351287841797,
+      "speedup": 1.6080605584197116,
+      "before_certificate_ms": 10.838656425476074,
+      "after_certificate_ms": 3.4705278873443604
+    },
+    {
+      "case": "torus1000",
+      "before_complete_ms": 3632.697265625,
+      "after_complete_ms": 3203.73779296875,
+      "speedup": 1.1338934395934923
+    }
+  ],
+  "corner_cloud_followup": {
+    "samples_per_version": 62,
+    "before_median_ms": 8.133455753326416,
+    "after_median_ms": 8.163504123687744,
+    "before_mean_ms": 8.080687984343498,
+    "after_mean_ms": 8.173527740663097,
+    "identical_buffer_overhead_ms": [
+      0.02790391445159912,
+      0.028608083724975586,
+      0.027920007705688477
+    ],
+    "interpretation": "About 28 microseconds of additional fallback-certificate work on identical buffers (~1.1% of certificate time). Complete fallback case median increases 0.37%, below the documented 2% investigation threshold. Do not report universal zero overhead or a speedup for flat hulls."
+  }
+}

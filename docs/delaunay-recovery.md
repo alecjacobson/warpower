@@ -426,3 +426,13 @@ nodes are device-to-device, with no host/callback or allocation/free nodes.
 python -m benchmarks.delaunay_recovery --case fitted-hand --repeats 10 --output hand.json
 python -m benchmarks.amplitude_order --output hand-loop.json --dot hand-loop.dot
 ```
+
+
+For buffers of at least 128 sites, a verified strict hull anchor can enable
+[local Delaunay certification](local-certificate.md). Supporting hull faces,
+paired face incidence, positive orientation and complete site usage establish
+coverage; exact symbolic opposite-site tests then establish the global lower
+hull. If conservative anchor discovery is uncertain, the existing all-site
+sphere certificate runs instead. Candidate coordinates, output semantics and
+symbolic tie choices are unchanged. The linked proof, adversarial cases and
+measurements include the small overhead of flat-hull fallback.

@@ -109,6 +109,9 @@ def main():
     parser.add_argument("--dot", type=Path)
     parser.add_argument("--profile", action="store_true")
     args = parser.parse_args()
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    if args.dot:
+        args.dot.parent.mkdir(parents=True, exist_ok=True)
     result = audit(args.profile, args.dot)
     args.output.write_text(json.dumps(result, indent=2) + "\n")
     print(json.dumps(result), flush=True)

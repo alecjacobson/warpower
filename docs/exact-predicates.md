@@ -93,3 +93,27 @@ The [optional constructor](delaunay-recovery.md) adds finite candidate recovery,
 original-coordinate certification, and consistent symbolic lifting for ordinary
 Delaunay meshes. Weighted regular recovery remains outside its scope. These
 components do not by themselves establish the overall VTM goal.
+
+## Original-coordinate cell clipping
+
+The optional symbolic constructor also needs to classify vertices incident to
+clipping-box planes. `_halfspace_predicates` represents a site bisector for owner
+`p` and neighbor `q` as `(-2(q-p), |q|²-|p|²+w_p-w_q)`, with the interior on the
+nonnegative side. A box plane has an axis-aligned normal and its original
+float32 bound as its constant. For three defining rows `A` and a query row `Q`,
+`det4(A,Q) = det3(A.xyz) * Q(vertex)`. Opposite determinant signs identify an
+outside vertex without rounding the intersection coordinates.
+
+Float64 balls filter those signs. The exact fallback uses five homogeneous rows:
+site rows `(-2x, |x|²-w, 1)`, box rows `(normal, constant, 0)`, and the owner last.
+Subtracting the owner from the other site rows and expanding the last column
+recovers the four-row halfspace determinant. Expansion arithmetic therefore
+uses the original coordinates and individual exact float32 squares, not rounded
+translated plane coefficients. Products still have degree at most five.
+
+Zero query determinants use the certificate's infinitesimal hash weights and
+then successively smaller positive unit weights in site-index order. This rule
+also applies at box vertices. Singular defining normals return an explicit
+invalid predicate; they never become accepted finite vertices. Rational-oracle
+tests cover mixed box/site rows, extreme finite float32 bit patterns, row
+permutations, and symbolic ties.

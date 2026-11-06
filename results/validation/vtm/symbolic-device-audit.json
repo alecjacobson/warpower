@@ -1,0 +1,26 @@
+{
+  "scope": "Three warmed installed-wheel changing-input producer/original-coordinate symbolic Delaunay/consumer/device-phase-advance replays; 128 torus sites; one final synchronization outside geometry",
+  "gpu_kernel_activities": 285,
+  "gpu_memset_activities": 3,
+  "gpu_memcpy_activities": 0,
+  "gpu_memcpy_kinds": {},
+  "cuda_api_calls": {
+    "cuCtxSynchronize": 1,
+    "cuProfilerStart": 1,
+    "cudaGraphLaunch_v10000": 3,
+    "cudaStreamIsCapturing_v10000": 1
+  },
+  "dot_node_types": {
+    "KERNEL": 385,
+    "CONDITIONAL": 52,
+    "MEMSET": 87,
+    "MEMCPY": 21
+  },
+  "dot_copy_kinds": {
+    "DtoD (DEVICE to DEVICE)": 21
+  },
+  "copy_trace_limit": "Nsight may omit graph copy activity records; both observed copy kinds and all DOT copy nodes are checked for device-to-device direction.",
+  "dot_sha256": "946bac5acca8f9a9686a05eb6314f67167045400629d1020031311ad67b38ff4",
+  "sqlite_sha256": "340f3ee0206669a9a51c19c863dfe1864986a4abe2dbd0a58f197269f1febaf7",
+  "record_command": "PYTHONPATH=.work/vtm/symbolic-wheel-install nsys profile --trace=cuda --cuda-graph-trace=node --cuda-event-trace=false --capture-range=cudaProfilerApi --capture-range-end=stop --force-overwrite=true -o .work/vtm/symbolic-loop .venv/bin/python .work/vtm/symbolic-wheel-run/smoke.py --profile"
+}

@@ -15,6 +15,7 @@ from ._boundary import BoundaryWorkspace
 from ._delaunay_recovery import DelaunayWorkspace
 from ._graph import DiagramWorkspace
 from ._odt import accumulate_tets
+from ._vtm_domain import constrain
 
 wp.set_module_options({"enable_backward": False, "fast_math": False})
 
@@ -86,9 +87,13 @@ def start_attempt(
     attempt: wp.array[int],
     accepted: wp.array[int],
     backtracks: wp.array[int],
+    error: wp.array[int],
+    running: wp.array[int],
 ):
     alpha[0] = damping
-    attempt[0] = 1
+    attempt[0] = int(error[0] == 0)
+    if error[0] != 0:
+        running[0] = 0
     accepted[0] = 0
     backtracks[0] = 0
 
@@ -341,6 +346,7 @@ class VTMWorkspace:
                 from ._vtm_controls import DeviceControls
 
                 self.controls = DeviceControls(self, iteration_limit, selective_enabled)
+            wp.load_module(module="warpower._vtm_domain", device=self.device)
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as capture:
                 self._record()
@@ -478,9 +484,31 @@ class VTMWorkspace:
             + self._direction_args,
         )
         self._launch(
+            constrain,
+            self.n,
+            [
+                self.domain.tree,
+                self.points,
+                self.boundary.roles,
+                self._direction,
+                self._edge,
+                self.step_limit,
+                self.damping,
+                self.error,
+            ],
+        )
+        self._launch(
             start_attempt,
             1,
-            [self._alpha, self.damping, self._attempt, self._accepted, self._backtracks],
+            [
+                self._alpha,
+                self.damping,
+                self._attempt,
+                self._accepted,
+                self._backtracks,
+                self.error,
+                self._running,
+            ],
         )
         wp.capture_while(self._attempt, self._try_step)
         wp.capture_if(self._accepted, self._accept, self._restore)

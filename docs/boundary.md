@@ -98,8 +98,10 @@ subject to the [surface-domain contract](domains.md).
 The internal `warpower._vtm.VTMWorkspace` combines these evolving boundary roles
 with uniform interior ODT displacements, reconstruction, device backtracking,
 and complete point/connectivity rollback. It is not yet exported as the public
-full-mesher API: initial sampling, graded interior energy, domain extraction,
-refinement, and remaining numerical recovery are still under development.
+full-mesher API: initial sampling, graded interior energy, refinement, and
+remaining numerical recovery are still under development. The independent
+[domain extractor](extraction.md) can now consume its full-hull output in the
+same captured loop.
 
 Combined proposals use a shortest-edge displacement limit and damping. Accepted
 reconstructions prioritize decreasing crease error, then surface error, then ODT
@@ -111,7 +113,7 @@ single global objective. Fixed-hull `ODTWorkspace` retains its separate behavior
 The internal core currently returns `full_tetrahedra` and a device
 `full_tetrahedra_count`, covering the convex hull. This includes the torus hole
 and exterior of other nonconvex domains. Do not use those outputs as a finished
-domain mesh before extraction. `termination=2` means exhausted backtracking and
+domain mesh before applying `ExtractionWorkspace`. `termination=2` means exhausted backtracking and
 restoration of the last valid state; it is not convergence.
 
 Sharp domains require boundary-aware initialization. Snapping only cube corners

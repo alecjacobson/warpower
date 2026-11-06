@@ -7,6 +7,7 @@ __all__ = [
     "Diagram",
     "DiagramWorkspace",
     "DomainQueryWorkspace",
+    "ExtractionWorkspace",
     "ODTWorkspace",
     "SurfaceDomain",
     "delaunay_tetrahedra",
@@ -17,6 +18,10 @@ __all__ = [
 
 
 def __getattr__(name):
+    if name == "ExtractionWorkspace":
+        from ._extraction import ExtractionWorkspace
+
+        return ExtractionWorkspace
     if name == "BoundaryWorkspace":
         from ._boundary import BoundaryWorkspace
 

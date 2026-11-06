@@ -1,0 +1,35 @@
+{
+  "purpose": "Independent connectivity validation; construction times are single-run diagnostics, not full VTM CPU benchmarks",
+  "compiler": "g++ -O3 -DNDEBUG -std=c++17; CGAL6.2.1; sequential insertion",
+  "records": [
+    {
+      "CGAL": "6.2.1",
+      "vertices": 1000,
+      "tetrahedra": 5934,
+      "build_seconds": 0.00380336,
+      "n": 1000,
+      "complete_tet_set_matches_warpower": true
+    },
+    {
+      "CGAL": "6.2.1",
+      "vertices": 10000,
+      "tetrahedra": 61244,
+      "build_seconds": 0.0417747,
+      "n": 10000,
+      "complete_tet_set_matches_warpower": true
+    },
+    {
+      "CGAL": "6.2.1",
+      "vertices": 100000,
+      "tetrahedra": 626008,
+      "build_seconds": 0.442906,
+      "n": 100000,
+      "gpu_failed_indices": [
+        34817
+      ],
+      "gpu_failure_status": [
+        2
+      ]
+    }
+  ]
+}

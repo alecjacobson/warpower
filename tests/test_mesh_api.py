@@ -34,7 +34,7 @@ def test_default_import_remains_lazy():
             "-c",
             "import sys, warpower; "
             "assert not any(n in sys.modules for n in "
-            "('warpower._mesh_api', 'warpower._tetrahedra', 'warpower._graph'))",
+            "('warpower._mesh_api', 'warpower._tetrahedra', 'warpower._graph', 'warpower._odt'))",
         ],
         check=True,
     )

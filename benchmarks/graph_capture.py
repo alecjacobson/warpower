@@ -14,6 +14,9 @@ def main():
     parser.add_argument("--dot", type=Path, required=True)
     parser.add_argument("--analyze", type=Path, help="Nsight exported SQLite database")
     parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--optimizer", action="store_true", help="Audit three ODT iterations per replay"
+    )
     args = parser.parse_args()
     if args.analyze:
         database = sqlite3.connect(args.analyze)
@@ -38,7 +41,12 @@ def main():
         node_types = dict(collections.Counter(re.findall(r'label="\{\s*([A-Z0-9_]+)\s*\n', dot)))
         copy_kinds = dict(collections.Counter(re.findall(r"\{kind \| ([^}]+)\}", dot)))
         report = {
-            "scope": "Three warmed replays of a changing 1000-site weighted producer/diagram/tetrahedra/consumer graph; one final synchronization outside construction",
+            "scope": (
+                "Three warmed replays of a changing 1000-site producer/ODT/consumer graph, "
+                "three optimizer iterations each; one final synchronization outside construction"
+                if args.optimizer
+                else "Three warmed replays of a changing 1000-site weighted producer/diagram/tetrahedra/consumer graph; one final synchronization outside construction"
+            ),
             "gpu_kernel_activities": count("CUPTI_ACTIVITY_KIND_KERNEL"),
             "gpu_memset_activities": count("CUPTI_ACTIVITY_KIND_MEMSET"),
             "gpu_memcpy_activities": count("CUPTI_ACTIVITY_KIND_MEMCPY"),
@@ -73,7 +81,11 @@ def main():
     weights = wp.zeros(len(p), dtype=float, device="cuda:0")
     phase = wp.zeros(1, dtype=int, device="cuda:0")
     volume = wp.zeros(1, dtype=wp.float64, device="cuda:0")
-    workspace = warpower.DiagramWorkspace(points, weights, return_tetrahedra=True)
+    workspace = (
+        warpower.ODTWorkspace(points, max_iterations=3)
+        if args.optimizer
+        else warpower.DiagramWorkspace(points, weights, return_tetrahedra=True)
+    )
     with wp.ScopedCapture() as capture:
         wp.launch(produce, len(p), inputs=[base, points, weights, phase])
         workspace.run()
@@ -94,6 +106,8 @@ def main():
         wp.capture_launch(capture.graph)
     wp.synchronize()
     assert workspace.error.numpy()[0] == 0
+    if args.optimizer:
+        assert workspace.iterations.numpy()[0] == 3
     args.dot.parent.mkdir(parents=True, exist_ok=True)
     wp.capture_debug_dot_print(capture.graph, str(args.dot), verbose=True)
     torch.cuda.cudart().cudaProfilerStart()
@@ -102,6 +116,8 @@ def main():
     wp.synchronize()
     torch.cuda.cudart().cudaProfilerStop()
     assert workspace.error.numpy()[0] == 0
+    if args.optimizer:
+        assert workspace.iterations.numpy()[0] == 3
     print("Valid final tetrahedra:", int(workspace.tetrahedra_count.numpy()[0]))
 
 

@@ -175,3 +175,18 @@ tile scan replaces the native allocating scan in conditional branches. Optional
 tetrahedralization retains its last successful domain scale as a starting point
 and validates the current mesh on every replay. The original eager construction
 kernels are unchanged.
+
+## Optional variational optimization
+
+The lazy [`ODTWorkspace`](odt.md) layer consumes the independently callable
+full-hull mesh. It accumulates uniform interpolation energy and stable
+volume-weighted circumcenter displacements in float64, holds the initial hull
+fixed, and tests parallel updates after rebuilding Delaunay connectivity.
+Per-site displacement limits account for the hull and float32 storage; captured
+conditional loops handle energy rejection, convergence, and complete rollback.
+The standalone construction modules and their default execution remain unchanged.
+
+This is the fixed-boundary optimizer foundation. Boundary fitting, graded sizing,
+refinement, nonconvex extraction, and stronger numerical recovery remain tracked
+in the [full VTM implementation plan](vtm.md). An energy decrease alone does not
+establish good worst-element quality or a CPU performance advantage.

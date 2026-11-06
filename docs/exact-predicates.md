@@ -53,6 +53,20 @@ input and degree-five arithmetic restriction keeps intermediate values in
 float64 range. Tests independently check that the rational determinant lies in
 the reported ball, including extreme bit patterns and cancellation.
 
+For uncertain filters, a second fast path handles exact bounded integer
+differences. Error-free `TwoDiff` must establish that each original translated
+coordinate difference is an integer with absolute value at most 512. Merely
+rounding to an integer is insufficient: a lost tiny operand disqualifies this
+path. Power weights must also be exact integers with absolute value at most
+262144. Every intermediate translated determinant product and sum then fits
+exactly in float64: the power determinant is bounded by
+`24*M^3*(3*M^2 + 2*W) = 120*512^5 < 2^52`; orientation is bounded by
+`6*512^3 < 2^30`. The existing float64 determinant value is therefore exact,
+including zero, despite a conservative ball that may overlap zero. This avoids
+expansions for common lattice ties without introducing a tolerance. Large common
+translations, fractional offsets, near-integer differences, and lost low bits
+are checked against the independent rational oracle.
+
 ## Validation
 
 Tests compare both sign and determinant estimate against an independent Python

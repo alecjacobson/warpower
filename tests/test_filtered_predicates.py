@@ -93,3 +93,52 @@ def test_exact_ties_one_ulp_and_extreme_scales_use_fallback():
         x[4, 1] = np.nextafter(x[4, 1], np.float32(np.inf))
         cases.append(x.copy())
     check(cases)
+
+
+def test_small_integer_ties_with_large_fractional_translation_are_exact():
+    rng = np.random.default_rng(9967)
+    p = rng.integers(-64, 65, size=(128, 5, 3)).astype(np.float32)
+    w = np.sum(p * p, axis=2)
+    # These weighted lifts are affine, hence the exact determinant is zero.
+    check(p, w)
+    check(p + np.float32(2**20 + 0.125), w)
+    p = rng.integers(0, 513, size=(128, 5, 3)).astype(np.float32)
+    p[:, 4] = 0
+    w = rng.integers(-262144, 262145, size=(128, 5)).astype(np.float32)
+    check(p, w)
+    p[:, 0, 0] = np.nextafter(np.float32(512), np.float32(np.inf))
+    check(p, w)
+
+
+@wp.kernel
+def difference_gate(a: wp.array[float], b: wp.array[float], accepted: wp.array[int]):
+    i = wp.tid()
+    accepted[i] = int(fp.integer_difference(a[i], b[i]))
+
+
+def test_integer_shortcut_rejects_lost_low_bits_and_noninteger_differences():
+    from fractions import Fraction
+
+    tiny = np.nextafter(np.float32(0), np.float32(1))
+    pairs = np.array(
+        [
+            (512, tiny),
+            (0, tiny),
+            (512, 0),
+            (512, 1),
+            (2**20 + 0.125, 2**20 + 1.125),
+            (1, 1e-20),
+            (1, np.nextafter(np.float32(1), np.float32(2))),
+            (np.nextafter(np.float32(512), np.float32(np.inf)), 0),
+        ],
+        np.float32,
+    )
+    with wp.ScopedDevice("cuda:0"):
+        a, b = wp.array(pairs[:, 0]), wp.array(pairs[:, 1])
+        accepted = wp.empty(len(pairs), dtype=int)
+        wp.launch(difference_gate, len(pairs), inputs=[a, b, accepted])
+    expected = []
+    for x, y in pairs:
+        exact = Fraction(float(x)) - Fraction(float(y))
+        expected.append(int(abs(exact) <= 512 and exact.denominator == 1))
+    np.testing.assert_array_equal(accepted.numpy(), expected)

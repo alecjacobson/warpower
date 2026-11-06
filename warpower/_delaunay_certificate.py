@@ -349,7 +349,8 @@ class DelaunayCertificate:
     def _launch(self, kernel, dim, args):
         wp.launch(kernel, dim, inputs=args, device=self.device, block_dim=32)
 
-    def run(self):
+    def run(self, tree=None):
+        tree = self.tree if tree is None else tree
         self.error.zero_()
         self.statistics.zero_()
         self._used.zero_()
@@ -360,7 +361,7 @@ class DelaunayCertificate:
                 self.points,
                 self.input_tets,
                 self.input_count,
-                self.tree.owners,
+                tree.owners,
                 self._selected,
                 self.error,
             ],
@@ -373,21 +374,21 @@ class DelaunayCertificate:
                 self.input_tets,
                 self._selected,
                 self._prefix,
-                self.tree.owners,
+                tree.owners,
                 self.tetrahedra,
                 self.tetrahedra_count,
                 self._used,
             ],
         )
         self._launch(ready, 1, [self.error, self._ready])
-        wp.capture_if(self._ready, self._check)
+        wp.capture_if(self._ready, lambda: self._check(tree))
         self._launch(
             coverage,
             len(self.points),
-            [self.tree.owners, self._used, self.tetrahedra_count, self.error],
+            [tree.owners, self._used, self.tetrahedra_count, self.error],
         )
 
-    def _check(self):
+    def _check(self, tree):
         self._launch(
             check_spheres,
             len(self.tetrahedra),
@@ -395,7 +396,7 @@ class DelaunayCertificate:
                 self.points,
                 self.tetrahedra,
                 self.tetrahedra_count,
-                self.tree,
+                tree,
                 self.error,
                 self.statistics,
             ],
@@ -425,7 +426,7 @@ class DelaunayCertificate:
                 self._table,
                 self._occurrences,
                 self._balance,
-                self.tree,
+                tree,
                 self.error,
             ],
         )

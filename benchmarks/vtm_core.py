@@ -1,4 +1,4 @@
-"""Boundary/interior integration benchmark; full domain extraction is still pending."""
+"""Boundary/interior core benchmark; independent domain extraction is excluded."""
 
 import argparse
 import json
@@ -33,6 +33,9 @@ def main():
     parser.add_argument("--reference", action="store_true")
     parser.add_argument("--dot", type=Path)
     parser.add_argument("--profile", action="store_true")
+    parser.add_argument(
+        "--corner-only", action="store_true", help="Skip the cube's full boundary prefit"
+    )
     args = parser.parse_args()
     if args.n < 8 or args.iterations < 0 or args.repeats < 1:
         parser.error("n>=8, iterations>=0 and repeats>=1 required")
@@ -46,7 +49,11 @@ def main():
     base = wp.array(source, dtype=wp.vec3, device="cuda:0")
     points = wp.clone(base)
     core = VTMWorkspace(domain, points, max_iterations=args.iterations)
-    boundary_init = warpower.BoundaryWorkspace(domain, points) if args.case == "cube" else None
+    boundary_init = (
+        warpower.BoundaryWorkspace(domain, points)
+        if args.case == "cube" and not args.corner_only
+        else None
+    )
     phase = wp.zeros(1, dtype=int, device="cuda:0")
     volume = wp.zeros(1, dtype=wp.float64, device="cuda:0")
     wp.load_module(module=__name__, device="cuda:0")
@@ -110,6 +117,7 @@ def main():
         surface_samples=len(domain.surface_points),
         feature_edges=int(domain.feature_count.numpy()[0]),
         corners=int(domain.corner_count.numpy()[0]),
+        full_boundary_prefit=boundary_init is not None,
         roles=core.boundary.role_counts.numpy().tolist(),
         full_hull_tetrahedra=n_tets,
         full_hull_volume=float(core.volume.numpy()[0]),

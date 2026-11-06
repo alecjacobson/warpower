@@ -140,10 +140,73 @@ def predicate(value: Ball):
     return result
 
 
+@wp.func
+def integer_difference(a: float, b: float):
+    """Whether the original difference is an exact integer in [-512, 512]."""
+    x, y = wp.float64(a), wp.float64(b)
+    value = x - y
+    if not wp.isfinite(value) or wp.abs(value) > wp.float64(512.0):
+        return False
+    # Error-free TwoDiff. A rounded integer alone is insufficient: a tiny
+    # operand may have disappeared during subtraction from a larger integer.
+    b_virtual = x - value
+    a_virtual = value + b_virtual
+    residual = (x - a_virtual) + (b_virtual - y)
+    return residual == wp.float64(0.0) and value == wp.float64(int(value))
+
+
+@wp.func
+def integer_vector(a: wp.vec3, b: wp.vec3):
+    return (
+        integer_difference(a[0], b[0])
+        and integer_difference(a[1], b[1])
+        and integer_difference(a[2], b[2])
+    )
+
+
+@wp.func
+def integer_weight(value: float):
+    if not wp.isfinite(value) or wp.abs(value) > 262144.0:
+        return False
+    return wp.float64(value) == wp.float64(int(value))
+
+
+@wp.func
+def integer_sphere(
+    a: wp.vec3,
+    b: wp.vec3,
+    c: wp.vec3,
+    d: wp.vec3,
+    q: wp.vec3,
+    wa: float,
+    wb: float,
+    wc: float,
+    wd: float,
+    wq: float,
+):
+    # With M=512 and W=M^2, all partial integer determinant sums/products are
+    # bounded by 24*M^3*(3*M^2+2W) = 120*512^5 < 2^52. Thus sphere_ball.value
+    # evaluates exactly in binary64, even if its conservative ball spans zero.
+    return (
+        integer_vector(a, q)
+        and integer_vector(b, q)
+        and integer_vector(c, q)
+        and integer_vector(d, q)
+        and integer_weight(wa)
+        and integer_weight(wb)
+        and integer_weight(wc)
+        and integer_weight(wd)
+        and integer_weight(wq)
+    )
+
+
 @wp.func(inline=True)
 def orient3d(a: wp.vec3, b: wp.vec3, c: wp.vec3, d: wp.vec3):
     result = orientation_ball(a, b, c, d)
     if certain(result):
+        return predicate(result)
+    # Every partial triple product/sum is at most 6*512^3 < 2^30.
+    if integer_vector(b, a) and integer_vector(c, a) and integer_vector(d, a):
         return predicate(result)
     return exact.orient3d(a, b, c, d)
 
@@ -163,6 +226,8 @@ def power_sphere(
 ):
     result = sphere_ball(a, b, c, d, q, wa, wb, wc, wd, wq)
     if certain(result):
+        return predicate(result)
+    if integer_sphere(a, b, c, d, q, wa, wb, wc, wd, wq):
         return predicate(result)
     return exact.power_sphere(a, b, c, d, q, wa, wb, wc, wd, wq)
 

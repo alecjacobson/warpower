@@ -36,7 +36,7 @@ APIs remain available with their existing numerical contract.
 
 ## Construction and certification
 
-The first attempt uses the existing unweighted full-hull constructor. Both its
+The first replay starts with the existing unweighted full-hull constructor. Both its
 successful outputs and every recovery candidate undergo the new certificate.
 Recovery runs the regular builder on a normalized copy with small auxiliary
 weights. The default starts at `1e-5 * h(i)`, for a fixed float32 hash direction
@@ -44,6 +44,16 @@ weights. The default starts at `1e-5 * h(i)`, for a fixed float32 hash direction
 attempts by default (`max_attempts` accepts 1 through 12). Neither normalization
 roundoff nor finite auxiliary weights are assumed to preserve the desired mesh.
 Only the original-coordinate certificate can accept a candidate.
+
+After an auxiliary candidate succeeds, later replays try that construction
+strategy first. Each replay rebuilds the original-site hierarchy and coincident
+ownership from current input, normalizes current positions, constructs new
+connectivity, and certifies it again. The cache retains a strategy choice only;
+it does not reuse connectivity as success. If auxiliary attempts are exhausted,
+the original constructor gets another chance on the current input. Invalid
+input clears the preference, and every failure still publishes a zero count.
+`cache_strategy=False` disables this preference for comparisons. All choices and
+retry limits are device values or fixed setup parameters.
 
 The certificate uses [exact predicates](exact-predicates.md) with conservative
 float64 filters. Every positive-volume candidate tetrahedron must have an empty
@@ -83,7 +93,9 @@ resolve construction, capacity, or expansion problems. Entirely coplanar input
 has no volumetric result and reports an error.
 
 `attempts` counts normalized recovery attempts; `recovered` is one when such an
-attempt supplied the output. `base_error` and `candidate_error` expose the
+attempt supplied the output. `recovery_first` indicates that this replay tried
+the cached strategy first. `base_attempted` indicates whether the original
+constructor ran; its error is zero when skipped. `base_error` and `candidate_error` expose the
 underlying builders' codes. A zero candidate code with zero attempts means no
 candidate construction was needed. `certificate_error` describes the last
 certificate, using the following bit mask:
@@ -102,7 +114,8 @@ certificate, using the following bit mask:
 The default tetrahedron capacity is `8*N`; the worst-case Delaunay size can be
 quadratic, so applications may need `tetrahedra_capacity`. Cell capacity is 1024
 by default here, while the older `DiagramWorkspace` default remains 512. Two
-construction workspaces plus certificate buffers are reserved at setup. This
+construction workspaces, an additional original-site hierarchy for cached
+recovery, and certificate buffers are reserved at setup. This
 robustness path has measurable extra cost. Recovery and certification optimization
 is tracked in [#56](https://github.com/alecjacobson/warpower/issues/56); it is not
 a claim of performance parity with the original constructor.
@@ -155,7 +168,8 @@ allocation/free nodes. The CPU submits three graphs and performs one final
 synchronization outside geometry. Record with Nsight `--cuda-graph-trace=node`;
 the audit now rejects traces that omit kernel activity.
 
-Stage timings below use CUDA events, five warmed repetitions, an NVIDIA L40,
+The original recovery baseline below is commit `3537da1`, before strategy reuse
+and the bounded-integer predicate shortcut. Stage timings use CUDA events, five warmed repetitions, an NVIDIA L40,
 and no observed CPU quota throttling. Setup is excluded. Stages are measured
 separately, so their medians need not sum to the combined median; the auxiliary
 stage is not part of a successful base-only replay.
@@ -171,3 +185,71 @@ Repeated failed base construction dominates the small structured cases. These
 measurements motivate [#56](https://github.com/alecjacobson/warpower/issues/56),
 including reuse of a previously successful construction strategy with fresh
 certification. They are not a CPU mesher comparison or a VTM speedup claim.
+
+## Reusing successful strategies
+
+Strategy reuse and the bounded-integer predicate shortcut reduce repeated
+structured-input work. The current CUDA-event measurements use ten warmed
+repetitions on the same L40, with no observed CPU quota throttling. The baseline
+is the original certified implementation at `3537da1`.
+
+| Input | Original certified replay | Current warmed replay | Observed change |
+|---|---:|---:|---:|
+| [8 cube corners](../results/validation/vtm/recovery-fast-cube.json) | 190.26 ms | 0.53 ms | 359× faster |
+| [64-site lattice](../results/validation/vtm/recovery-fast-grid.json) | 1872.37 ms | 2.71 ms | 691× faster |
+| [200-site corner cloud](../results/validation/vtm/recovery-fast-corner-cloud.json) | 19.13 ms | 9.13 ms | 2.09× faster |
+| [1,000 random sites](../results/validation/vtm/recovery-fast-random.json) | 14.62 ms | 14.70 ms | Within 1% |
+
+These are improvements over the earlier optional certified implementation, not
+Paragram or CPU speedups. The first replay still tries the original constructor:
+it took 204 ms for the cube and 1846 ms for the lattice in this run. Setup is
+excluded, and each record includes its first-replay timing. Every warmed replay
+still rebuilds and certifies current input; the captured tests change positions,
+scale, translation, duplicate ownership, and connectivity, and exercise fallback
+to the original builder when the cached candidate strategy is exhausted.
+
+The same change improves the complete *current uniform VTM core* for the
+corner-only cube initialization. Five repetitions include the changing-input
+producer, boundary/interior optimization, and volume consumer. Domain extraction,
+graded sizing, and refinement are outside these timings. All runs complete the
+requested iterations without rejected steps or CPU quota throttling.
+
+| Example | Before | After | Iterations | Final full-hull tetrahedra |
+|---|---:|---:|---:|---:|
+| [Torus, 1,000 sites](../results/validation/vtm/recovery-core-after-torus.json) | [519.44 ms](../results/validation/vtm/recovery-core-before-torus.json) | 521.19 ms | 20 | 5902 |
+| [Cube with full prefit, 200 sites](../results/validation/vtm/recovery-core-after-cube.json) | [76.16 ms](../results/validation/vtm/recovery-core-before-cube.json) | 76.92 ms | 12 | 876 |
+| [Cube with corners only, 200 sites](../results/validation/vtm/recovery-core-after-corners-only.json) | [348.23 ms](../results/validation/vtm/recovery-core-before-corners-only.json) | 129.15 ms | 12 | 1156 |
+
+The corner-only optimizer improves **2.70×**; the other two cases stay within 1%.
+Final counts match, and the recorded energy histories differ by at most
+`6.4e-15` relative to `max(1, abs(energy))`.
+
+A [100,000-site random case](../results/validation/vtm/recovery-fast-random-100k.json)
+produces 671,908 tetrahedra, all matching an independent
+[native CGAL reference](../results/validation/vtm/recovery-fast-100k-cgal.json).
+Certified replay is 1117 ms: roughly 473 ms construction and 645 ms certification.
+The latter visits 383.9 million BVH nodes and remains a substantial bottleneck,
+tracked in [#58](https://github.com/alecjacobson/warpower/issues/58). The overall
+VTM CPU speed target is still open in [#40](https://github.com/alecjacobson/warpower/issues/40).
+
+The [current full suite](../results/validation/vtm/recovery-fast-tests.txt) passes
+**194 tests**. The [source audit](../results/validation/vtm/recovery-fast-isolation.json)
+confirms only the three optional recovery modules change runtime code relative
+to `3537da1`; all other runtime modules remain identical. The
+[installed wheel](../results/validation/vtm/recovery-fast-wheel.json) composes
+captured producers and consumers, including the preferred-strategy replay.
+The [native trace](../results/validation/vtm/recovery-fast-device-audit.json)
+records 390 kernel activities over three preferred-strategy replays. Its graph
+has only kernel, memset, device-copy, and conditional nodes; it contains no host
+or allocation/free nodes. All 23 graph copy nodes are device-to-device, although
+this Nsight trace omits their execution activity records.
+
+The [current memory-check batch](../results/validation/vtm/recovery-fast-memcheck.txt)
+passes all **29 recovery, predicate-filter, and VTM tests**, with padding enabled
+and zero CUDA errors. It uses the normal pooled allocator and the documented
+32 KiB diagnostic stack allowance. The
+[targeted lifetime batch](../results/validation/vtm/recovery-fast-lifetime.txt)
+passes three captured producer/consumer and cached-strategy fallback cases with
+stream-ordered race tracking, synchronous allocation, and zero errors. These
+instrumentation settings follow [CUDA validation](cuda-validation.md); production
+allocator and stack settings are unchanged.

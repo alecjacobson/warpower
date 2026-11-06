@@ -52,7 +52,9 @@ python showcase/finish_video.py --finish
 ```
 
 Outputs are written to the ignored, persistent `results/local/showcase/`
-directory. `build_scene.py` saves the editable `.blend` scene and a preview;
+directory. The release's source ZIP can be extracted into a clone of this
+repository to restore the scene and its inputs. `build_scene.py` saves the
+editable `.blend` scene and a preview;
 `render.py` explicitly selects the OptiX GPU in each Blender process.
 `finish_video.py` adds typography, generates the original score, and exports an
 H.264/AAC MP4 with a web-friendly metadata layout. Add `-- --preview` to the

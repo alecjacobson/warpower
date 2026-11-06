@@ -96,10 +96,10 @@ subject to the [surface-domain contract](domains.md).
 ## Boundary/interior integration under development
 
 The internal `warpower._vtm.VTMWorkspace` combines these evolving boundary roles
-with uniform interior ODT displacements, reconstruction, device backtracking,
+with uniform or graded interior ODT displacements, reconstruction, device backtracking,
 and complete point/connectivity rollback. It is not yet exported as the public
-full-mesher API: initial sampling, graded interior energy, refinement, and
-the full public API are still under development. The independent
+full-mesher API: refinement and the complete public interface remain under
+development. Independent [sizing and initial sampling](sizing.md) are available. The independent
 [domain extractor](extraction.md) can now consume its full-hull output in the
 same captured loop.
 
@@ -124,3 +124,42 @@ sites as well as corners. Finite construction recovery can still exhaust its
 budget; failures publish a zero tetrahedron count. The explicit
 `certified_delaunay=False` option selects the earlier floating-point constructor
 for comparisons. Existing boundary benchmark records predate this change.
+
+
+### Active prefixes for staged meshing
+
+The internal core accepts `active_count=device_int32_scalar`. Its point array
+is a fixed capacity; the device scalar chooses the active prefix on each run.
+Valid counts are in `[4, capacity]`, and the active sites must also satisfy the
+boundary corner budget. A producer may change the count before replay. Newly
+active positions must already contain valid coordinates.
+
+Only active sites participate in boundary fitting, reconstruction, and updates.
+Inactive input positions remain unchanged and can contain arbitrary values,
+including NaNs, or valid positions reserved for a later growth stage. An optional
+private reconstruction array copies the live prefix and fills its tail with the
+first live point. Canonical duplicate ownership then removes those private tail
+slots; output tetrahedra reference only active input indices. Rollback restores
+both the input prefix and the private mesh coordinates.
+
+A count outside `[4, capacity]` sets core `error=8`, clears the full-hull output
+count and current energy/volume, and executes no optimization. Histories are
+invalidated and the iteration count is zero. For example, a failed sampler's
+zero output count propagates directly to this guard. Corrected counts recover on
+the next replay. Child diagnostics can retain earlier results when the guard
+skips the body; consume the parent error/count before inspecting them.
+
+```python
+from warpower._vtm import VTMWorkspace  # Developing core, not the final public API.
+
+core = VTMWorkspace(domain, points, active_count=active_count, max_iterations=20)
+with wp.ScopedCapture() as capture:
+    # A producer writes points and active_count on device.
+    core.run()
+    # A consumer checks core.error and core.full_tetrahedra_count.
+```
+
+With `active_count=None`, the original fixed-budget path runs directly, without
+the extra guard, private point array, or copy kernels. The active-prefix option
+is a foundation for refinement; it does not itself insert or relocate sites
+between optimization runs.

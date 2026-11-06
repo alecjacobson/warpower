@@ -52,7 +52,7 @@ roundoff nor finite auxiliary weights are assumed to preserve the desired mesh.
 Only the original-coordinate certificate can accept a candidate.
 
 If those attempts fail, `facet_recovery=None` automatically enables
-[certified fragment completion](facet-completion.md) for 128–2,048-site buffers
+[certified fragment completion](facet-completion.md) for 256–2,048-site buffers
 when symbolic recovery is enabled. It filters exact lower facets from raw
 auxiliary candidates, extends missing neighbors, and requires a complete global
 certificate before publication. Explicit `facet_recovery=True/False` overrides

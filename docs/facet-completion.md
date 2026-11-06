@@ -58,7 +58,7 @@ The planar explanation there is not itself a proof of this 3D implementation.
 
 ## Integration and bounded failure
 
-`facet_recovery=None` (default) enables this path for buffers of 128–2,048 sites
+`facet_recovery=None` (default) enables this path for buffers of 256–2,048 sites
 when symbolic recovery is enabled. Explicit `True` or `False` overrides this
 setup choice. Original/normalized builders retain their order; completion runs
 only after all ordinary auxiliary attempts fail. A previously successful facet
@@ -67,6 +67,10 @@ replay. Every replay rebuilds current owners, filters fresh candidates, and
 recertifies the resulting mesh. No connectivity is reused as a success result.
 If the preferred strategy fails, the original builder still gets its chance.
 The existing symbolic clipping path remains available after failed completion.
+The initial 128-site automatic threshold regressed the structured torus boundary
+case from 228 to 432 ms because its normalized seed construction was expensive.
+The final 256-site threshold retains the existing small-cloud strategy; explicit
+`True` still permits completion there. The rejected threshold's data are retained.
 Successful publication also copies the matching certified face index and
 candidate prefix. Automatic sizing can then extract the current hull and poles,
 and subsequent independent certificate runs see the same accepted cells.
@@ -82,7 +86,7 @@ strategy succeeds; inspect the public `error` for the final result.
 
 | Completion bit | Meaning |
 |---|---|
-| 1 | Seed certificate rejected a property other than missing hull/site coverage |
+| 1 | Invalid/empty seed prefix, or seed certificate rejected a property other than missing hull/site coverage |
 | 2 | A face predicate could not certify a sign |
 | 4 | Output capacity exceeded |
 | 8 | No new cell added to an incomplete mesh |
@@ -135,16 +139,72 @@ a captured producer/consumer loop that changes input, rejects NaNs, and recovers
 [seed tests](../results/validation/vtm/facet-seeds-focused.txt) retain the scope.
 The complete 384-site hand constructor (including seed construction and all
 attempted strategies) returns the same 2,164 canonical tetrahedra as main.
-The first replay takes 3,945 ms versus 37,731 ms; subsequent cached replays take
-182 ms versus 6,473 ms on the L40. These are device event timings, excluding
+The first replay takes 3,955 ms versus 37,731 ms (9.54×); subsequent cached replays
+take 179 ms versus 6,473 ms (36.1×) on the L40. These are device event timings, excluding
 setup and output validation. The complete 1,000-site torus mesher remains about
-3,204 ms. These are GPU version comparisons, not CPU speedup claims.
+3,202 ms versus 3,204 ms. These are GPU version comparisons, not CPU speedup claims.
 
 The full thin-hand mesher still fails its growth budget: after the first batch
 reaches 384 sites, seven one-site retries reach only 391 of the requested 1,000.
 Public output is invalid and no partial material mesh is exported.
 [Issue #108](https://github.com/alecjacobson/warpower/issues/108) tracks that separate
-scheduler failure. Full VTM CPU performance and comparable-quality validation
-remain open.
+failure. The rejected-batch trace shows successful Delaunay certification and
+boundary checks, followed by ODT volume evaluation error 256. A diagnostic GPU
+kernel reproduces negative rounded determinants for two exactly positive cells.
+[Issue #110](https://github.com/alecjacobson/warpower/issues/110) tracks robust
+volume evaluation; [#109](https://github.com/alecjacobson/warpower/issues/109)
+tracks roundoff-split insertion centers. Full VTM CPU performance and
+comparable-quality validation remain open.
+
+The final full suite passes **469 tests**. An earlier integration run had two
+pole-extraction failures; publishing the matching certified face index fixes
+them, and the failure/follow-up records are retained. Padded memory coverage
+comprises 24 completed completion/seed tests from a partial run, then a completed
+seven-case integrated run (823.84 s, zero errors). The partial run was manually
+stopped during an expensive default-reserve hand test and does not certify that
+unfinished test. The focused integrated tests use the supported 512-plane
+clipping reserve; complete constructor timings use the default 1,024 reserve.
+A separate captured-loop check passes full allocation/lifetime instrumentation
+(390.93 s, zero errors). It executes four initial input phases; the padded run
+also included a duplicated warm-up cycle.
+
+The integrated native audit records **859 GPU kernels**, four graph launches,
+and one final synchronization. Its graph has 398 kernel, 52 conditional,
+106 memset and 41 device-to-device copy nodes, with no host/allocation/free nodes.
+Nsight omitted individual copy activity records; all graph copy directions were
+checked separately. Profiling uses four warm-up phases followed by four measured
+phases. The final automatic-size threshold does not change these explicitly
+facet-enabled audit paths.
+
+| Complete operation | Main (ms) | Final (ms) |
+|---|---:|---:|
+| Random 1,000 sites | 9.191 | 9.184 |
+| Random 10,000 sites | 40.648 | 40.659 |
+| Random 100,000 sites | 181.519 | 181.999 |
+| Cube, 8 sites | 0.526 | 0.526 |
+| Lattice, 64 sites | 2.184 | 2.204 |
+| Corner cloud, 200 sites | 6.067 | 6.082 |
+| Torus boundary, 128 sites | 227.764 | 227.940 |
+| Fitted hand, 256 sites | 13.394 | 13.423 |
+| Refined hand, 384 sites, cached | 6,473.251 | 179.302 |
+| Complete torus mesher, 1,000 sites | 3,204.364 | 3,202.189 |
+
+Standalone cases use five serial CUDA-event samples per version. The refined-hand
+main reference has two cached samples and the final version has five; torus
+meshing uses three complete solves per version. No timing window was CPU-quota
+throttled. Positions and oriented connectivity match on the saved refined-hand
+and full-torus outputs. The 47 other existing runtime modules and README are
+byte-identical to main; existing certificate kernels are unchanged. The changed
+existing code is confined to certified recovery and its optional certificate
+dispatch flag.
+
+[Performance/provenance](../results/validation/vtm/facet-performance.json),
+[output equivalence](../results/validation/vtm/facet-output-equivalence.json),
+[final suite](../results/validation/vtm/facet-256-suite.txt),
+[integrated memory](../results/validation/vtm/facet-integrated-memcheck.txt),
+[partial memory scope](../results/validation/vtm/facet-integrated-memcheck-partial-default.txt),
+[lifetime check](../results/validation/vtm/facet-integrated-lifetime.txt), and
+[native audit](../results/validation/vtm/facet-integrated-device-audit.json)
+retain the underlying records.
 
 Progress is tracked in [issue #104](https://github.com/alecjacobson/warpower/issues/104).

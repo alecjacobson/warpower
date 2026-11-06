@@ -338,8 +338,10 @@ class DelaunayWorkspace:
         facet_recovery=None,
         facet_max_rounds=64,
     ):
+        # Below 256 sites, difficult normalized seeds can cost more than the
+        # existing symbolic strategy (the 128-site torus is a measured example).
         self.facet_recovery = (
-            bool(symbolic_recovery) and 128 <= len(points) <= 2048
+            bool(symbolic_recovery) and 256 <= len(points) <= 2048
             if facet_recovery is None
             else bool(facet_recovery)
         )

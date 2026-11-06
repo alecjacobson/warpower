@@ -88,9 +88,12 @@ def audit(profile=False, dot=None):
         )
     if dot:
         wp.capture_debug_dot_print(capture.graph, str(dot), verbose=True)
-    for _ in range(4):
-        wp.capture_launch(capture.graph)
-    wp.synchronize()
+    # Native timing traces need warmed replay. Memory/lifetime checks should
+    # exercise the first four input phases without duplicating that full cycle.
+    if profile:
+        for _ in range(4):
+            wp.capture_launch(capture.graph)
+        wp.synchronize()
     if profile:
         import torch
 
@@ -109,7 +112,8 @@ def audit(profile=False, dot=None):
     assert phase.numpy()[0] == 0
     assert w.symbolic_attempted.numpy()[0] == 0
     return dict(
-        scope="Four warmed integrated producer/Delaunay/consumer replays with explicit facet recovery, one auxiliary attempt and symbolic cells disabled: structured torus, random sites, nonfinite input, restored torus. Device phase advance; final synchronization/readback only. Setup/warmup excluded from native replay trace. Not a throughput or full VTM comparison.",
+        scope="Four integrated producer/Delaunay/consumer replays with explicit facet recovery, one auxiliary attempt and symbolic cells disabled: structured torus, random sites, nonfinite input, restored torus. Device phase advance; final synchronization/readback only. Native profiling additionally warms four replays outside the trace. Not a throughput or full VTM comparison.",
+        warmup_replays=4 if profile else 0,
         columns=[
             "tetrahedra",
             "error",

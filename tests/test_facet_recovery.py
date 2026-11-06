@@ -60,7 +60,7 @@ def test_refined_hand_completes_without_symbolic_cells_and_reuses_certified_stra
 
 def test_structured_torus_uses_filtered_facets_and_matches_complete_symbolic_mesh():
     points, _ = torus(16, 8)
-    reference = DelaunayWorkspace(points).run()
+    reference = DelaunayWorkspace(points, facet_recovery=False).run()
     expected = valid(reference, points)
     w = DelaunayWorkspace(
         points, facet_recovery=True, symbolic_recovery=False, max_attempts=1

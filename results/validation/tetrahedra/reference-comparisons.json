@@ -1,0 +1,73 @@
+{
+  "seed": 2026,
+  "positions": "uniform[-1,1]^3 float32; reset RNG each case",
+  "weights": "uniform[-0.002,0.002] for N<100000, uniform[-0.0002,0.0002] otherwise, float32; generated after positions",
+  "timing": "single call including adjacency and any initial JIT/module load; not steady-state performance",
+  "source_sha256": {
+    "warpower/__init__.py": "87bfb91e188ed511490e3f84e86295b0f4aaa49d936196e5db0aa2a62fc9bd37",
+    "warpower/_adjacency.py": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+    "warpower/_api.py": "f84bec46306a84d7f1b72c6dc1d9dc560cb2905ad74bda63f4bffb97e4e5ad97",
+    "warpower/_bvh.py": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+    "warpower/_canonical.py": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+    "warpower/_cell.py": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+    "warpower/_construct.py": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+    "warpower/_tetrahedra.py": "5db1eb6583f84bf99a81c9aca8aabb1d8fdc8772d6db7fe9bb87d812ad09f2ec",
+    "warpower/_validation.py": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75"
+  },
+  "records": [
+    {
+      "n": 1000,
+      "weighted": false,
+      "tetrahedra": 6318,
+      "seconds_including_first_JIT": 0.2838783264160156,
+      "expansions": 6,
+      "missing": 0,
+      "extra": 0
+    },
+    {
+      "n": 1000,
+      "weighted": true,
+      "tetrahedra": 6320,
+      "seconds_including_first_JIT": 0.1428500860929489,
+      "expansions": 6,
+      "missing": 0,
+      "extra": 0
+    },
+    {
+      "n": 10000,
+      "weighted": false,
+      "tetrahedra": 66504,
+      "seconds_including_first_JIT": 0.25182459875941277,
+      "expansions": 5,
+      "missing": 0,
+      "extra": 0
+    },
+    {
+      "n": 10000,
+      "weighted": true,
+      "tetrahedra": 64316,
+      "seconds_including_first_JIT": 0.2571449838578701,
+      "expansions": 5,
+      "missing": 0,
+      "extra": 0
+    },
+    {
+      "n": 100000,
+      "weighted": false,
+      "tetrahedra": 671908,
+      "seconds_including_first_JIT": 2.643482033163309,
+      "expansions": 7,
+      "missing": 0,
+      "extra": 0
+    },
+    {
+      "n": 100000,
+      "weighted": true,
+      "tetrahedra": 667413,
+      "seconds_including_first_JIT": 2.505487009882927,
+      "expansions": 7,
+      "missing": 0,
+      "extra": 0
+    }
+  ]
+}

@@ -12,7 +12,8 @@ diagram = warpower.power_diagram(points, weights)
 `cuda:0`. Weights must be float32, have shape `(N,)` or `(N, 1)`, and be on the
 points device. Inputs must be finite. Noncontiguous inputs are copied as needed.
 
-The immutable result contains `adjacency`, `offsets`, `status`, and `diagnostics`.
+The immutable result contains `adjacency`, `offsets`, `status`, `diagnostics`,
+and an optional `tetrahedra` field (default `None`).
 The first three are int32 CUDA Warp arrays, or PyTorch tensors when the points
 input is a tensor. PyTorch calls honor the current PyTorch CUDA stream. Adjacency
 uses symmetric CSR, with `N+1` offsets; order within a row is unspecified. Empty
@@ -57,3 +58,45 @@ Alternatively set `WARPOWER_NUM_CHUNKS` or `WARPOWER_MEM_FRAC` (default `0.5`). 
 corresponding `PARAGRAM_*` environment variables are recognized for compatibility.
 Chunking limits temporary clipping storage; inputs, output, and the hierarchy
 remain resident. Topology is discrete and no differentiation is provided.
+
+## Optional full tetrahedral mesh
+
+```python
+diagram = warpower.voronoi_diagram(points, return_tetrahedra=True)
+tets = diagram.tetrahedra  # int32 CUDA array/tensor, shape (T, 4)
+
+# Weights select the dual regular (weighted Delaunay) tetrahedralization.
+weighted = warpower.power_diagram(points, weights, return_tetrahedra=True)
+```
+
+Each row indexes the original input points and has positive signed volume under
+`dot(p1-p0, cross(p2-p0, p3-p0))`. Row order is unspecified. Coincident sites use
+the same deterministic ownership rule as the diagram. Weighted sites whose
+unbounded power cells are empty are absent from the mesh.
+
+On success, the tetrahedra cover the **complete convex hull of the sites**.
+Finite dual vertices can lie far outside the ordinary diagram's clipping box,
+so this option performs a separate float64 Warp construction with adaptive domain
+expansion. Artificial box vertices are excluded. Before return, GPU checks verify
+positive orientation, empty power spheres, paired interior faces with opposite
+orientations, and supporting convex-hull boundary faces. Diagnostics include
+`tetrahedra_count`, `tetrahedra_expansions`, `tetrahedra_padding`, and a description
+of the validation performed. Inputs with fewer than four sites, or all sites at
+one position, produce an empty `(0, 4)` array.
+
+The existing `adjacency`, `offsets`, and `status` still describe the original
+**bounded diagram**, unchanged by this option. In particular, a site whose cell
+is empty inside that box can still occur in the complete weighted mesh, and the
+mesh can contain boundary edges absent from the bounded diagram's adjacency.
+
+The optional path uses floating-point predicates, not exact arithmetic or
+symbolic perturbation. It raises `ValueError` if construction or validation
+cannot establish a complete mesh, including ambiguous cospherical/copower
+configurations, near-coplanar tetrahedra, unsupported lower-dimensional inputs,
+and exhausted capacity/domain-expansion limits. It never returns a partial mesh
+as a complete tetrahedralization. A cube's eight cospherical corners, for example,
+require a degeneracy tie-breaking policy and are currently rejected.
+
+`return_tetrahedra=False` is the default. The optional module is imported only
+when requested, and no tetrahedron kernels, buffers, or validation passes run on
+the default path. The existing adjacency construction kernels are unchanged.

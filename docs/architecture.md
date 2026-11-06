@@ -125,3 +125,36 @@ The [full benchmark report](../results/summary/report.md) covers the paper's
 synthetic sizes and nine real scenes on the L40. The [API guide](api.md) documents
 inputs, outputs, statuses, and memory controls. Floating-point predicates are
 not exact; callers should inspect `status` and consistency diagnostics.
+
+## Optional tetrahedral dual
+
+`return_tetrahedra=True` adds a complete Delaunay mesh for unweighted sites or a
+regular tetrahedral mesh for weighted sites. This is a later addition to the
+implementation versions compared above. It is isolated in
+[`_tetrahedra.py`](../warpower/_tetrahedra.py); the default adjacency kernels and
+their launch path are unchanged, and the module is imported lazily.
+
+Cell adjacency alone records dual edges, not which four cells meet at a diagram
+vertex. The clipper's vertex records already contain triples of incident planes.
+Together with the seed index, three real site planes identify a tetrahedron.
+Vertices incident to artificial box planes are excluded; minimum-site ownership
+and GPU hashing remove duplicate tetrahedra, and a float64 orientation test gives
+positive-volume connectivity.
+
+Simply extracting the vertices inside the default finite box would miss valid
+tetrahedra near the convex hull. The optional path therefore rebuilds cells in
+float64 using a separate Warp BVH traversal, enlarging the box by a factor of
+eight until the candidate mesh passes validation. All-site empty-power-sphere
+queries and convex-hull support tests use the BVH; a face hash checks incidence
+and opposing orientations. A boundary face that does not support the input hull
+signals missing tetrahedra and triggers another domain expansion.
+
+This validation accepts full-dimensional, numerically resolved simplicial duals.
+Cospherical/copower ambiguity and other unresolved numerical or topology failures
+raise an error rather than expose a partial mesh. It does not implement symbolic
+perturbation. The [API guide](api.md#optional-full-tetrahedral-mesh) describes the
+output, limitations, and distinction between the original bounded adjacency and
+the complete tetrahedral dual.
+
+The [validation report](tetrahedra-validation.md) records independent mesh
+comparisons and paired default-performance checks.

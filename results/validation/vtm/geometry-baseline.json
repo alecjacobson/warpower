@@ -1,0 +1,761 @@
+{
+  "baseline_revision": "3091289464af368d2a61f843d169d7f4863d1cfd",
+  "warmups": 3,
+  "quick_smoke_only": false,
+  "comparison": "Alternating paired warmed calls, synchronized wall time, resident CUDA inputs",
+  "gate": "Fail if any paired 95% interval lies entirely above +2%; inspect all changes",
+  "source_sha256": {
+    "__init__.py": {
+      "current": "7eeb4dc945151cc4d8c42fdc838356397e195c33e1bd6c3b37352793f07e0cce",
+      "baseline": "f5bdb23e8f15c13fbb854885455cf777af5835d23179e684f20b1066c522bc87"
+    },
+    "_adjacency.py": {
+      "current": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+      "baseline": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8"
+    },
+    "_api.py": {
+      "current": "f84bec46306a84d7f1b72c6dc1d9dc560cb2905ad74bda63f4bffb97e4e5ad97",
+      "baseline": "f84bec46306a84d7f1b72c6dc1d9dc560cb2905ad74bda63f4bffb97e4e5ad97"
+    },
+    "_bvh.py": {
+      "current": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+      "baseline": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693"
+    },
+    "_canonical.py": {
+      "current": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+      "baseline": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42"
+    },
+    "_cell.py": {
+      "current": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+      "baseline": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf"
+    },
+    "_construct.py": {
+      "current": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+      "baseline": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f"
+    },
+    "_graph.py": {
+      "current": "dc9bab6de819416ed6c0a60c5bf0f4e2000e3fdb14fa656070dec4b6b8e88130",
+      "baseline": "dc9bab6de819416ed6c0a60c5bf0f4e2000e3fdb14fa656070dec4b6b8e88130"
+    },
+    "_graph_construct.py": {
+      "current": "9f305d39185abc6602b85431b887c3bd2b5152864ec18ef35e6a71e3a6690e42",
+      "baseline": "9f305d39185abc6602b85431b887c3bd2b5152864ec18ef35e6a71e3a6690e42"
+    },
+    "_graph_tetrahedra.py": {
+      "current": "ddbb067ef02cfd20032cc29d870bb19b9d30b4cd2a649516be5c547ce5b94540",
+      "baseline": "ddbb067ef02cfd20032cc29d870bb19b9d30b4cd2a649516be5c547ce5b94540"
+    },
+    "_mesh_api.py": {
+      "current": "37cf23ecf09d34a7bc0a77ebe73d8e2102c37064b1ab4923acccca993ea0678f",
+      "baseline": null
+    },
+    "_tetrahedra.py": {
+      "current": "5db1eb6583f84bf99a81c9aca8aabb1d8fdc8772d6db7fe9bb87d812ad09f2ec",
+      "baseline": "5db1eb6583f84bf99a81c9aca8aabb1d8fdc8772d6db7fe9bb87d812ad09f2ec"
+    },
+    "_validation.py": {
+      "current": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75",
+      "baseline": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75"
+    }
+  },
+  "records": [
+    {
+      "mode": "eager",
+      "n": 100000,
+      "distribution": "uniform",
+      "weighted": false,
+      "adjacency": true,
+      "tetrahedra": false,
+      "baseline_ms": [
+        12.746505439281464,
+        12.637045234441757,
+        12.869589030742645,
+        12.669362127780914,
+        12.594334781169891,
+        12.818701565265656,
+        12.555297464132309,
+        12.63497769832611,
+        12.574523687362671,
+        12.805074453353882,
+        12.877743691205978,
+        12.884076684713364,
+        12.527931481599808,
+        12.572523206472397,
+        12.580625712871552,
+        12.82292976975441,
+        12.677725404500961,
+        12.56202906370163,
+        13.071581721305847,
+        12.529738247394562
+      ],
+      "current_ms": [
+        12.769833207130432,
+        12.60937750339508,
+        12.653905898332596,
+        12.652523815631866,
+        12.700449675321579,
+        12.860983610153198,
+        12.687169015407562,
+        12.857161462306976,
+        12.841209769248962,
+        12.540154159069061,
+        12.663282454013824,
+        12.74198666214943,
+        12.864489108324051,
+        12.84141093492508,
+        12.620802968740463,
+        12.663416564464569,
+        12.63401284813881,
+        12.525591999292374,
+        12.913316488265991,
+        12.788821011781693
+      ],
+      "baseline_mean_ms": 12.70061582326889,
+      "current_mean_ms": 12.72149495780468,
+      "paired_relative_change_mean": 0.001771457537887189,
+      "paired_relative_change_95ci": [
+        -0.004972124543799635,
+        0.008515039619574012
+      ],
+      "regression_above_two_percent": false,
+      "identical_eager_launch_allocation_trace": true,
+      "persistent_workspace_bytes": [],
+      "outputs_equal": true,
+      "cpu_throttled": false,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "mode": "eager",
+      "n": 100000,
+      "distribution": "cluster5",
+      "weighted": false,
+      "adjacency": true,
+      "tetrahedra": false,
+      "baseline_ms": [
+        30.082587152719498,
+        31.441185623407364,
+        30.050557106733322,
+        29.37822788953781,
+        30.034169554710388,
+        29.513735324144363,
+        30.192501842975616,
+        29.089543968439102,
+        29.18165549635887,
+        29.458940029144287,
+        30.320338904857635,
+        30.45637160539627,
+        29.887322336435318,
+        28.522513806819916,
+        29.418468475341797,
+        29.33168038725853,
+        29.483068734407425,
+        30.273277312517166,
+        29.853250831365585,
+        30.227169394493103
+      ],
+      "current_ms": [
+        29.827531427145004,
+        29.323305934667587,
+        29.821719974279404,
+        29.623176902532578,
+        30.04373237490654,
+        30.46949952840805,
+        29.853716492652893,
+        29.40993756055832,
+        28.4944586455822,
+        30.191045254468918,
+        30.25389090180397,
+        29.269874095916748,
+        29.840480536222458,
+        29.723435640335083,
+        29.530130326747894,
+        29.663458466529846,
+        30.06453439593315,
+        29.057573527097702,
+        29.684752225875854,
+        30.16502410173416
+      ],
+      "baseline_mean_ms": 29.80982828885317,
+      "current_mean_ms": 29.715563915669918,
+      "paired_relative_change_mean": -0.0027479214647518403,
+      "paired_relative_change_95ci": [
+        -0.01476743315349866,
+        0.00927159022399498
+      ],
+      "regression_above_two_percent": false,
+      "identical_eager_launch_allocation_trace": true,
+      "persistent_workspace_bytes": [],
+      "outputs_equal": true,
+      "cpu_throttled": false,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "mode": "eager",
+      "n": 1000000,
+      "distribution": "uniform",
+      "weighted": false,
+      "adjacency": true,
+      "tetrahedra": false,
+      "baseline_ms": [
+        102.50791907310486,
+        101.59144178032875,
+        101.38989984989166,
+        101.35557129979134,
+        101.82543843984604,
+        101.04036331176758,
+        100.9964570403099,
+        101.86716169118881,
+        101.89489647746086,
+        101.84023901820183,
+        101.71100124716759,
+        100.96387937664986,
+        101.38940811157227,
+        101.45847871899605,
+        101.35574266314507,
+        101.29378736019135,
+        101.3866774737835,
+        100.84056854248047,
+        101.13247483968735,
+        101.42951086163521
+      ],
+      "current_ms": [
+        101.5317514538765,
+        101.81846469640732,
+        101.70718654990196,
+        101.57278925180435,
+        101.17515921592712,
+        101.5971228480339,
+        101.03033483028412,
+        101.33233293890953,
+        102.16888412833214,
+        101.27266123890877,
+        101.32336989045143,
+        100.70041939616203,
+        101.32280364632607,
+        101.4525443315506,
+        102.50816121697426,
+        102.07367688417435,
+        101.35394334793091,
+        101.13238543272018,
+        100.97061842679977,
+        101.32741555571556
+      ],
+      "baseline_mean_ms": 101.46354585886002,
+      "current_mean_ms": 101.46860126405954,
+      "paired_relative_change_mean": 6.032938960785494e-05,
+      "paired_relative_change_95ci": [
+        -0.0022661200765823003,
+        0.0023867788557980106
+      ],
+      "regression_above_two_percent": false,
+      "identical_eager_launch_allocation_trace": true,
+      "persistent_workspace_bytes": [],
+      "outputs_equal": true,
+      "cpu_throttled": false,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "mode": "eager",
+      "n": 1000000,
+      "distribution": "uniform",
+      "weighted": true,
+      "adjacency": true,
+      "tetrahedra": false,
+      "baseline_ms": [
+        114.95674774050713,
+        114.73748087882996,
+        114.55529183149338,
+        114.55445736646652,
+        114.4368015229702,
+        114.1413152217865,
+        114.55405876040459,
+        114.41729217767715,
+        114.51169103384018,
+        114.36548829078674,
+        115.42301625013351,
+        114.49145153164864,
+        114.73819613456726,
+        114.67325314879417,
+        114.89764228463173,
+        114.92761224508286,
+        115.08247628808022,
+        115.17254635691643,
+        114.90054801106453,
+        114.60314691066742
+      ],
+      "current_ms": [
+        114.57858979701996,
+        114.66389894485474,
+        114.50598016381264,
+        114.69873785972595,
+        114.83648791909218,
+        114.70197886228561,
+        114.78376388549805,
+        114.55070972442627,
+        114.8790717124939,
+        114.5012155175209,
+        115.15087261795998,
+        114.62090164422989,
+        114.89016935229301,
+        114.27655816078186,
+        114.55342918634415,
+        114.40055817365646,
+        114.79195952415466,
+        115.18818140029907,
+        114.71665650606155,
+        114.87395316362381
+      ],
+      "baseline_mean_ms": 114.70702569931746,
+      "current_mean_ms": 114.70818370580673,
+      "paired_relative_change_mean": 1.4961317890899162e-05,
+      "paired_relative_change_95ci": [
+        -0.0012163292092720406,
+        0.0012462518450538388
+      ],
+      "regression_above_two_percent": false,
+      "identical_eager_launch_allocation_trace": true,
+      "persistent_workspace_bytes": [],
+      "outputs_equal": true,
+      "cpu_throttled": false,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "mode": "graph",
+      "n": 100000,
+      "distribution": "uniform",
+      "weighted": false,
+      "adjacency": true,
+      "tetrahedra": false,
+      "baseline_ms": [
+        10.98787784576416,
+        11.061739176511765,
+        11.097665876150131,
+        11.002425104379654,
+        11.147890239953995,
+        10.997362434864044,
+        11.206381022930145,
+        11.105552315711975,
+        11.091351509094238,
+        11.09788566827774,
+        11.084537953138351,
+        11.174656450748444,
+        11.018894612789154,
+        11.11813634634018,
+        10.87229698896408,
+        11.155318468809128,
+        11.045821011066437,
+        11.098824441432953,
+        11.101644486188889,
+        11.122163385152817
+      ],
+      "current_ms": [
+        11.025473475456238,
+        11.250950396060944,
+        11.061839759349823,
+        11.105988174676895,
+        10.995358228683472,
+        11.113185435533524,
+        11.071935296058655,
+        11.047109961509705,
+        10.99734753370285,
+        11.021051555871964,
+        10.961227118968964,
+        10.966341942548752,
+        11.334527283906937,
+        11.203169822692871,
+        11.07047125697136,
+        11.126354336738586,
+        11.272735893726349,
+        11.132720857858658,
+        11.257372796535492,
+        11.139977723360062
+      ],
+      "baseline_mean_ms": 11.079421266913414,
+      "current_mean_ms": 11.107756942510605,
+      "paired_relative_change_mean": 0.002614291182147621,
+      "paired_relative_change_95ci": [
+        -0.0034367312280733026,
+        0.008665313592368544
+      ],
+      "regression_above_two_percent": false,
+      "identical_eager_launch_allocation_trace": null,
+      "persistent_workspace_bytes": [
+        792615739,
+        792615739
+      ],
+      "outputs_equal": true,
+      "cpu_throttled": false,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "mode": "graph",
+      "n": 100000,
+      "distribution": "uniform",
+      "weighted": true,
+      "adjacency": true,
+      "tetrahedra": false,
+      "baseline_ms": [
+        12.574959546327591,
+        12.545932084321976,
+        12.460097670555115,
+        12.556076049804688,
+        12.687977403402328,
+        12.342333793640137,
+        12.586016207933426,
+        12.287799268960953,
+        12.569941580295563,
+        12.838426977396011,
+        12.496951967477798,
+        12.509666383266449,
+        12.5284343957901,
+        12.405149638652802,
+        12.30127364397049,
+        12.672509998083115,
+        12.364882975816727,
+        12.225113809108734,
+        12.30134442448616,
+        12.45824247598648
+      ],
+      "current_ms": [
+        12.274552136659622,
+        12.31343299150467,
+        12.439627200365067,
+        12.422148138284683,
+        12.335598468780518,
+        12.260597199201584,
+        12.257445603609085,
+        12.396153062582016,
+        12.35603541135788,
+        12.273821979761124,
+        12.08546757698059,
+        12.431539595127106,
+        12.387748807668686,
+        12.212757021188736,
+        12.228325009346008,
+        12.136105448007584,
+        12.293193489313126,
+        12.23021000623703,
+        12.290749698877335,
+        12.35651969909668
+      ],
+      "baseline_mean_ms": 12.485656514763832,
+      "current_mean_ms": 12.299101427197456,
+      "paired_relative_change_mean": -0.014799238296446072,
+      "paired_relative_change_95ci": [
+        -0.021475354056929602,
+        -0.008123122535962543
+      ],
+      "regression_above_two_percent": false,
+      "identical_eager_launch_allocation_trace": null,
+      "persistent_workspace_bytes": [
+        792143037,
+        792215739
+      ],
+      "outputs_equal": true,
+      "cpu_throttled": false,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "mode": "graph",
+      "n": 100000,
+      "distribution": "uniform",
+      "weighted": false,
+      "adjacency": false,
+      "tetrahedra": true,
+      "baseline_ms": [
+        472.9607291519642,
+        472.9316495358944,
+        473.09090942144394,
+        473.0197973549366,
+        472.9282110929489,
+        472.8970192372799,
+        473.0857312679291,
+        472.96251356601715,
+        472.780529409647,
+        472.98846021294594
+      ],
+      "current_ms": [
+        472.9604423046112,
+        472.9653373360634,
+        472.9654751718044,
+        472.93123975396156,
+        473.0188734829426,
+        472.8446751832962,
+        472.99516573548317,
+        472.8189557790756,
+        472.9357697069645,
+        472.8808254003525
+      ],
+      "baseline_mean_ms": 472.9645550251007,
+      "current_mean_ms": 472.9316759854555,
+      "paired_relative_change_mean": -6.948856360431411e-05,
+      "paired_relative_change_95ci": [
+        -0.00022020827954041263,
+        8.123115233178442e-05
+      ],
+      "regression_above_two_percent": false,
+      "identical_eager_launch_allocation_trace": null,
+      "persistent_workspace_bytes": [
+        422523177,
+        422595879
+      ],
+      "outputs_equal": true,
+      "cpu_throttled": false,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "mode": "graph",
+      "n": 100000,
+      "distribution": "uniform",
+      "weighted": true,
+      "adjacency": false,
+      "tetrahedra": true,
+      "baseline_ms": [
+        477.36912965774536,
+        477.48738154768944,
+        477.38950327038765,
+        477.427639067173,
+        477.3671440780163,
+        477.5589257478714,
+        477.5536209344864,
+        477.392990142107,
+        477.43066400289536,
+        477.4167090654373
+      ],
+      "current_ms": [
+        477.6034951210022,
+        477.57186368107796,
+        477.349616587162,
+        477.5133728981018,
+        477.3087874054909,
+        477.49125212430954,
+        477.49267145991325,
+        477.40308940410614,
+        477.4071276187897,
+        477.23738476634026
+      ],
+      "baseline_mean_ms": 477.4393707513809,
+      "current_mean_ms": 477.4378661066294,
+      "paired_relative_change_mean": -3.1433903344035842e-06,
+      "paired_relative_change_95ci": [
+        -0.00017288819428344844,
+        0.0001666014136146413
+      ],
+      "regression_above_two_percent": false,
+      "identical_eager_launch_allocation_trace": null,
+      "persistent_workspace_bytes": [
+        422123177,
+        422195879
+      ],
+      "outputs_equal": true,
+      "cpu_throttled": false,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "mode": "graph",
+      "n": 100000,
+      "distribution": "uniform",
+      "weighted": false,
+      "adjacency": true,
+      "tetrahedra": true,
+      "baseline_ms": [
+        486.88313737511635,
+        486.93742230534554,
+        486.8972674012184,
+        486.8663400411606,
+        486.86401918530464,
+        487.06555366516113,
+        486.84701696038246,
+        487.46519163250923,
+        486.7963157594204,
+        486.89525574445724
+      ],
+      "current_ms": [
+        486.79330199956894,
+        487.2750751674175,
+        487.1158078312874,
+        486.9092106819153,
+        486.8466705083847,
+        487.10161074995995,
+        487.02075332403183,
+        487.13694140315056,
+        486.8405759334564,
+        487.0967008173466
+      ],
+      "baseline_mean_ms": 486.9517520070076,
+      "current_mean_ms": 487.0136648416519,
+      "paired_relative_change_mean": 0.0001272336877113478,
+      "paired_relative_change_95ci": [
+        -0.0001476793871968733,
+        0.00040214676261956893
+      ],
+      "regression_above_two_percent": false,
+      "identical_eager_launch_allocation_trace": null,
+      "persistent_workspace_bytes": [
+        978795009,
+        978867711
+      ],
+      "outputs_equal": true,
+      "cpu_throttled": false,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "mode": "graph",
+      "n": 100000,
+      "distribution": "uniform",
+      "weighted": true,
+      "adjacency": true,
+      "tetrahedra": true,
+      "baseline_ms": [
+        492.2151528298855,
+        491.95171147584915,
+        491.869755089283,
+        491.98688566684723,
+        492.81736463308334,
+        492.31304228305817,
+        492.4093820154667,
+        491.7757362127304,
+        491.9567182660103,
+        491.7057193815708
+      ],
+      "current_ms": [
+        491.9937923550606,
+        492.45573952794075,
+        492.1753369271755,
+        492.0978806912899,
+        492.49453842639923,
+        491.9486530125141,
+        492.5764352083206,
+        492.3524633049965,
+        492.26370081305504,
+        492.5534129142761
+      ],
+      "baseline_mean_ms": 492.10014678537846,
+      "current_mean_ms": 492.29119531810284,
+      "paired_relative_change_mean": 0.0003886465494312485,
+      "paired_relative_change_95ci": [
+        -0.0001957915687538929,
+        0.0009730846676163899
+      ],
+      "regression_above_two_percent": false,
+      "identical_eager_launch_allocation_trace": null,
+      "persistent_workspace_bytes": [
+        978395009,
+        978467711
+      ],
+      "outputs_equal": true,
+      "cpu_throttled": false,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    }
+  ]
+}

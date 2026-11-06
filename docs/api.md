@@ -103,3 +103,14 @@ require a degeneracy tie-breaking policy and are currently rejected.
 `return_tetrahedra=False` is the default. The optional module is imported only
 when requested, and no tetrahedron kernels, buffers, or validation passes run on
 the default path. The existing adjacency construction kernels are unchanged.
+## Standalone tetrahedralization
+
+`warpower.delaunay_tetrahedra(points, *, chunk_size=None, leaf_size=4)` returns
+positively oriented int32 CUDA tetrahedra of shape `(T, 4)` covering the full
+convex hull. `warpower.regular_tetrahedra(points, weights, ...)` is its weighted
+counterpart. Both accept the same input types as the diagram functions, return
+Warp arrays (or PyTorch tensors for PyTorch input), and skip bounded adjacency.
+They share the optional mesh's numerical limitations and raise on unresolved
+ambiguity. These exact-size convenience calls allocate and synchronize; for
+captured device loops use
+`DiagramWorkspace(points, weights, adjacency=False, return_tetrahedra=True)`.

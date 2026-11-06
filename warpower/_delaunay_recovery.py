@@ -37,17 +37,72 @@ def begin_retry(
     running[0] = int(error[0] == 2)
 
 
+@wp.struct
+class ReplayState:
+    count: wp.array[int]
+    error: wp.array[int]
+    attempts: wp.array[int]
+    recovered: wp.array[int]
+    base_attempted: wp.array[int]
+    symbolic_attempted: wp.array[int]
+    symbolic_recovered: wp.array[int]
+    symbolic_error: wp.array[int]
+    symbolic_expansions: wp.array[int]
+    used: wp.array[int]
+    base_error: wp.array[int]
+    candidate_error: wp.array[int]
+    certificate_error: wp.array[int]
+    running: wp.array[int]
+    preferred: wp.array[int]
+    recovery_first: wp.array[int]
+
+
 @wp.kernel
-def choose_strategy(
-    preferred: wp.array[int], cache: bool, normal: wp.array[int], recovery_first: wp.array[int]
+def reset(state: ReplayState, cache: bool):
+    state.count[0] = 0
+    state.error[0] = 2
+    state.attempts[0] = 0
+    state.recovered[0] = 0
+    state.base_attempted[0] = 0
+    state.symbolic_attempted[0] = 0
+    state.symbolic_recovered[0] = 0
+    state.symbolic_error[0] = 0
+    state.symbolic_expansions[0] = 0
+    state.used[0] = 0
+    state.base_error[0] = 0
+    state.candidate_error[0] = 0
+    state.certificate_error[0] = 0
+    state.running[0] = 0
+    state.recovery_first[0] = int(cache and state.preferred[0] != 0)
+
+
+@wp.kernel
+def fallback_ready(error: wp.array[int], attempted: wp.array[int], ready: wp.array[int]):
+    ready[0] = int(error[0] == 2 and attempted[0] == 0)
+
+
+@wp.kernel
+def preferred_ready(
+    valid: wp.array[int], preferred: wp.array[int], strategy: int, ready: wp.array[int]
 ):
-    normal[0] = int(not (cache and preferred[0] != 0))
-    recovery_first[0] = 1 - normal[0]
+    ready[0] = int(valid[0] != 0 and preferred[0] == strategy)
 
 
 @wp.kernel
-def fallback_ready(error: wp.array[int], ready: wp.array[int]):
-    ready[0] = int(error[0] == 2)
+def finish_symbolic(
+    symbolic_error: wp.array[int],
+    recovered: wp.array[int],
+    symbolic_recovered: wp.array[int],
+    used: wp.array[int],
+    error: wp.array[int],
+):
+    if symbolic_error[0] == 0:
+        error[0] = 0
+        recovered[0] = 1
+        symbolic_recovered[0] = 1
+        used[0] = 2
+    else:
+        error[0] = 2
 
 
 @wp.kernel
@@ -84,6 +139,7 @@ def finish_retry(
     certificate_error: wp.array[int],
     attempts: wp.array[int],
     recovered: wp.array[int],
+    used: wp.array[int],
     running: wp.array[int],
     error: wp.array[int],
     maximum: int,
@@ -91,6 +147,7 @@ def finish_retry(
     attempts[0] += 1
     if candidate_error[0] == 0 and certificate_error[0] == 0:
         recovered[0] = 1
+        used[0] = 1
         running[0] = 0
         error[0] = 0
     elif attempts[0] >= maximum:
@@ -102,11 +159,13 @@ def finish_retry(
 def finalize(
     error: wp.array[int],
     count: wp.array[int],
-    recovered: wp.array[int],
+    used: wp.array[int],
     preferred: wp.array[int],
     cache: bool,
 ):
-    preferred[0] = int(cache and error[0] == 0 and recovered[0] != 0)
+    preferred[0] = 0
+    if cache and error[0] == 0:
+        preferred[0] = used[0]
     if error[0] != 0:
         count[0] = 0
 
@@ -129,11 +188,17 @@ class DelaunayWorkspace:
         chunk_size=None,
         max_attempts=6,
         cache_strategy=True,
+        symbolic_recovery=True,
+        symbolic_max_expansions=16,
     ):
         self.max_attempts = operator.index(max_attempts)
         self.cache_strategy = bool(cache_strategy)
+        self.symbolic_recovery = bool(symbolic_recovery)
+        self.symbolic_max_expansions = operator.index(symbolic_max_expansions)
         if not 1 <= self.max_attempts <= 12:
             raise ValueError("max_attempts must be in [1, 12]")
+        if not 1 <= self.symbolic_max_expansions <= 32:
+            raise ValueError("symbolic_max_expansions must be in [1, 32]")
         settings = dict(
             adjacency=False,
             return_tetrahedra=True,
@@ -166,10 +231,49 @@ class DelaunayWorkspace:
             self.recovered = wp.zeros(1, dtype=int)
             self.base_attempted = wp.zeros(1, dtype=int)
             self.recovery_first = wp.zeros(1, dtype=int)
+            self.symbolic_attempted = wp.zeros(1, dtype=int)
+            self.symbolic_recovered = wp.zeros(1, dtype=int)
+            self._symbolic = None
+            if self.symbolic_recovery:
+                from ._symbolic_delaunay import SymbolicConstructor
+
+                self._symbolic = SymbolicConstructor(
+                    self._base,
+                    self._certificate,
+                    self._candidate,
+                    self._candidate_count,
+                    max_expansions=self.symbolic_max_expansions,
+                )
+                self.symbolic_error = self._symbolic.error
+                self.symbolic_expansions = self._symbolic.expansions
+            else:
+                self.symbolic_error = wp.zeros(1, dtype=int)
+                self.symbolic_expansions = wp.zeros(1, dtype=int)
             self._preferred = wp.zeros(1, dtype=int)
-            self._normal = wp.empty(1, dtype=int)
+            self._used = wp.zeros(1, dtype=int)
+            self._valid = wp.empty(1, dtype=int)
             self._ready = wp.empty(1, dtype=int)
             self._running = wp.empty(1, dtype=int)
+            self._state = ReplayState()
+            for name in (
+                "error",
+                "attempts",
+                "recovered",
+                "base_attempted",
+                "symbolic_attempted",
+                "symbolic_recovered",
+                "symbolic_error",
+                "symbolic_expansions",
+                "base_error",
+                "candidate_error",
+                "certificate_error",
+                "recovery_first",
+            ):
+                setattr(self._state, name, getattr(self, name))
+            self._state.count = self.tetrahedra_count
+            self._state.used = self._used
+            self._state.running = self._running
+            self._state.preferred = self._preferred
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as capture:
                 self._record()
@@ -180,33 +284,34 @@ class DelaunayWorkspace:
         wp.launch(kernel, dim, inputs=args, device=self.device)
 
     def _record(self):
-        self.tetrahedra_count.zero_()
-        self.error.zero_()
-        self.attempts.zero_()
-        self.recovered.zero_()
-        self.base_attempted.zero_()
-        self.base_error.zero_()
-        self.candidate_error.zero_()
-        self.certificate_error.zero_()
-        self._running.zero_()
-        self._launch(
-            choose_strategy,
-            1,
-            [self._preferred, self.cache_strategy, self._normal, self.recovery_first],
-        )
-        wp.capture_if(self._normal, self._normal_path)
+        self._launch(reset, 1, [self._state, self.cache_strategy])
         wp.capture_if(self.recovery_first, self._preferred_path)
+        self._launch(fallback_ready, 1, [self.error, self.base_attempted, self._ready])
+        wp.capture_if(self._ready, self._fallback_path)
         self._launch(
             finalize,
             1,
             [
                 self.error,
                 self.tetrahedra_count,
-                self.recovered,
+                self._used,
                 self._preferred,
                 self.cache_strategy,
             ],
         )
+
+    def _fallback_path(self):
+        self._base_path()
+        self._launch(fallback_ready, 1, [self.error, self.attempts, self._running])
+        wp.capture_while(
+            self._running, lambda: self._retry(self._base._hierarchy, self._base._bounds)
+        )
+        if self._symbolic is not None:
+            self._launch(fallback_ready, 1, [self.error, self.symbolic_attempted, self._ready])
+            wp.capture_if(
+                self._ready,
+                lambda: self._symbolic_path(self._base._hierarchy, self._base._bounds),
+            )
 
     def _base_path(self):
         self.base_attempted.fill_(1)
@@ -227,12 +332,6 @@ class DelaunayWorkspace:
             begin_retry, 1, [self.base_error, self.certificate_error, self.error, self._running]
         )
 
-    def _normal_path(self):
-        self._base_path()
-        wp.capture_while(
-            self._running, lambda: self._retry(self._base._hierarchy, self._base._bounds)
-        )
-
     def _preferred_path(self):
         self._base._validation.zero_()
         self._launch(
@@ -247,16 +346,27 @@ class DelaunayWorkspace:
                 self._base._validation,
             ],
         )
-        self._launch(input_ready, 1, [self._base._validation, self.error, self._ready])
-        wp.copy(self._running, self._ready)
-        wp.capture_if(self._ready, self._refresh_original)
+        self._launch(input_ready, 1, [self._base._validation, self.error, self._valid])
+        wp.capture_if(self._valid, self._refresh_original)
+        self._launch(preferred_ready, 1, [self._valid, self._preferred, 1, self._running])
         wp.capture_while(
             self._running, lambda: self._retry(self._original.tree, self._original._bounds)
         )
-        # A changed input may favor the original builder. Retry it once after
-        # auxiliary exhaustion; never turn stale connectivity into a success.
-        self._launch(fallback_ready, 1, [self.error, self._ready])
-        wp.capture_if(self._ready, self._base_path)
+        if self._symbolic is not None:
+            self._launch(preferred_ready, 1, [self._valid, self._preferred, 2, self._ready])
+            wp.capture_if(
+                self._ready,
+                lambda: self._symbolic_path(self._original.tree, self._original._bounds),
+            )
+
+    def _symbolic_path(self, tree, bounds):
+        self.symbolic_attempted.fill_(1)
+        self._symbolic.run(tree, bounds)
+        self._launch(
+            finish_symbolic,
+            1,
+            [self.symbolic_error, self.recovered, self.symbolic_recovered, self._used, self.error],
+        )
 
     def _refresh_original(self):
         self._original.rebuild()
@@ -306,6 +416,7 @@ class DelaunayWorkspace:
                 self.certificate_error,
                 self.attempts,
                 self.recovered,
+                self._used,
                 self._running,
                 self.error,
                 self.max_attempts,

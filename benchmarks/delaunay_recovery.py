@@ -17,7 +17,9 @@ from warpower._vtm import anchor_corners
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--case", choices=["cube", "grid", "corner-cloud", "random"], default="random"
+        "--case",
+        choices=["cube", "grid", "corner-cloud", "random", "torus-boundary"],
+        default="random",
     )
     parser.add_argument("--n", type=int, default=1000)
     parser.add_argument("--repeats", type=int, default=10)
@@ -30,6 +32,10 @@ def main():
     if args.case in ("cube", "grid"):
         values = [-1, 1] if args.case == "cube" else range(4)
         points = np.array(list(product(values, repeat=3)), np.float32)
+    elif args.case == "torus-boundary":
+        from tests.test_domain import torus
+
+        points, _ = torus(16, 8)
     elif args.case == "corner-cloud":
         from tests.test_domain import cube
 
@@ -125,6 +131,10 @@ def main():
         cache_strategy=workspace.cache_strategy,
         recovery_first=int(workspace.recovery_first.numpy()[0]),
         base_attempted=int(workspace.base_attempted.numpy()[0]),
+        symbolic_attempted=int(workspace.symbolic_attempted.numpy()[0]),
+        symbolic_recovered=int(workspace.symbolic_recovered.numpy()[0]),
+        symbolic_error=int(workspace.symbolic_error.numpy()[0]),
+        symbolic_expansions=int(workspace.symbolic_expansions.numpy()[0]),
         certificate_point_tests=int(workspace._certificate.statistics.numpy()[0]),
         certificate_node_visits=int(workspace._certificate.statistics.numpy()[1]),
     )

@@ -30,7 +30,9 @@ point to the corresponding source files.
 | Python interface | Float32 CUDA PyTorch inputs; immutable result with int32 `adjacency`, `offsets`, and `status` tensors. [API][p-api] | Also accepts native CUDA Warp arrays and NumPy inputs. Preserves the three result fields for PyTorch callers, adds diagnostics and `chunk_size`, and honors the current PyTorch CUDA stream. [API](../warpower/_api.py), [compatibility details](api.md) |
 | Chunking and allocator policy | Chunks temporary clipping storage using `PARAGRAM_NUM_CHUNKS` or `PARAGRAM_MEM_FRAC` (default 0.5); tensor allocations use PyTorch's cache. [Chunking][p-chunking] | Adds `chunk_size` and `WARPOWER_*` equivalents, with fallback to the Paragram environment variables. The published benchmarks configure 32 GiB of Warp allocator retention; the library leaves that global policy to the application. Inputs, hierarchy, and output stay resident. [API](../warpower/_api.py), [benchmark policy](benchmarks.md) |
 
-Both implementations use floating-point predicates; neither this comparison nor
+The diagram construction paths compared here use floating-point predicates;
+the optional certified Delaunay constructor is described separately below.
+Neither this comparison nor
 successful statuses establish exact geometric equivalence. The
 [numerical audit](numerical-audit.md) records observed adjacency differences and
 the scope of independent checks. The [full benchmark report](../results/summary/report.md)
@@ -161,7 +163,10 @@ comparisons and paired default-performance checks.
 
 The newer optional [`DelaunayWorkspace`](delaunay-recovery.md) adds exact
 original-coordinate certification, consistent symbolic lifting for ties, and
-finite normalized/weighted candidate recovery. It is an independent API used
+finite normalized/weighted candidate recovery, and an original-coordinate
+symbolic cell fallback. That fallback stores only incident plane IDs and uses
+exact site/box predicates with the certificate's tie rule; its current traversal
+has no approximate geometric pruning. It is an independent API used
 by the developing VTM core. The original diagram and tetrahedralization paths
 above are unchanged; certification and recovery costs apply only to this API.
 

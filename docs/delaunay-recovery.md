@@ -45,13 +45,33 @@ attempts by default (`max_attempts` accepts 1 through 12). Neither normalization
 roundoff nor finite auxiliary weights are assumed to preserve the desired mesh.
 Only the original-coordinate certificate can accept a candidate.
 
-After an auxiliary candidate succeeds, later replays try that construction
+If those attempts fail, the default `symbolic_recovery=True` enables an
+original-coordinate symbolic cell constructor. It stores incident plane IDs and
+classifies vertices with filtered/exact predicates; it does not construct rounded
+Cartesian intersections. Site bisectors and clipping-box planes use the same
+symbolic lifting rule as the certificate. This resolves the structured torus
+boundary case tracked in [#61](https://github.com/alecjacobson/warpower/issues/61).
+The resulting candidate still must pass the complete original-input certificate.
+
+The symbolic constructor starts with a box padded by the largest input extent.
+If certification finds only missing coverage or unsupported boundary faces, the
+padding grows by eight on device. `symbolic_max_expansions` bounds the number of
+box attempts (default 16, allowed 1 through 32). A successful box factor is reused
+with current bounds on later replays. Capacity, predicate, and other certification
+errors fail explicitly. Exact affine-rank checks reject lower-dimensional input
+before symbolic cell construction. `symbolic_recovery=False` omits this path for
+comparisons.
+
+After an auxiliary or symbolic candidate succeeds, later replays try that construction
 strategy first. Each replay rebuilds the original-site hierarchy and coincident
-ownership from current input, normalizes current positions, constructs new
-connectivity, and certifies it again. The cache retains a strategy choice only;
+ownership from current input, constructs new connectivity, and certifies it
+again. The auxiliary strategy normalizes a fresh copy of current positions. The cache retains a strategy choice only;
 it does not reuse connectivity as success. If auxiliary attempts are exhausted,
 the original constructor gets another chance on the current input. Invalid
 input clears the preference, and every failure still publishes a zero count.
+Each construction strategy runs at most once per replay, with its own finite
+attempt budget. A failed preferred symbolic strategy falls back to the original
+and auxiliary builders on current input.
 `cache_strategy=False` disables this preference for comparisons. All choices and
 retry limits are device values or fixed setup parameters.
 
@@ -92,8 +112,8 @@ are not a universal exact constructor**: small perturbations can still fail to
 resolve construction, capacity, or expansion problems. Entirely coplanar input
 has no volumetric result and reports an error.
 
-`attempts` counts normalized recovery attempts; `recovered` is one when such an
-attempt supplied the output. `recovery_first` indicates that this replay tried
+`attempts` counts normalized recovery attempts; `recovered` is one when auxiliary
+or symbolic recovery supplied the output. `recovery_first` indicates that this replay tried
 the cached strategy first. `base_attempted` indicates whether the original
 constructor ran; its error is zero when skipped. `base_error` and `candidate_error` expose the
 underlying builders' codes. A zero candidate code with zero attempts means no
@@ -111,6 +131,21 @@ certificate, using the following bit mask:
 | 64 | Exposed face does not support the convex hull |
 | 128 | Empty mesh or missing distinct site |
 
+`symbolic_attempted` and `symbolic_recovered` indicate whether the original-coordinate
+fallback ran and supplied the accepted output. `symbolic_expansions` counts box
+enlargements in this replay. All are device scalars and reset each replay.
+`symbolic_error` is zero when skipped or successful, with these failure bits:
+
+| Bit | Meaning |
+|---|---|
+| 1 | Original sites have affine dimension below three |
+| 2 | Cell capacity, traversal, or clipping topology failure |
+| 4 | Uncertified or rank-deficient vertex predicate |
+| 8 | Candidate tetrahedron capacity exceeded |
+| 16 | Certificate rejected a property that box expansion cannot repair |
+| 32 | Box-attempt budget exhausted |
+| 64 | Expanded box cannot be represented by finite float32 bounds |
+
 The default tetrahedron capacity is `8*N`; the worst-case Delaunay size can be
 quadratic, so applications may need `tetrahedra_capacity`. Cell capacity is 1024
 by default here, while the older `DiagramWorkspace` default remains 512. Two
@@ -119,6 +154,12 @@ recovery, and certificate buffers are reserved at setup. This
 robustness path has measurable extra cost. Recovery and certification optimization
 is tracked in [#56](https://github.com/alecjacobson/warpower/issues/56); it is not
 a claim of performance parity with the original constructor.
+
+The symbolic path shares existing integer cell scratch and candidate buffers;
+it adds only fixed scalar state and two box corners. It currently examines all
+sites for each cell, so its worst-case cost is high. Conservative pruning and
+selective recovery are tracked in [#62](https://github.com/alecjacobson/warpower/issues/62).
+Setup includes compiling this optional kernel; cold compilation can be substantial.
 
 The developing internal `VTMWorkspace` uses this certified constructor by default.
 Its `certified_delaunay=False` option selects the earlier floating-point builder
@@ -253,3 +294,75 @@ passes three captured producer/consumer and cached-strategy fallback cases with
 stream-ordered race tracking, synchronous allocation, and zero errors. These
 instrumentation settings follow [CUDA validation](cuda-validation.md); production
 allocator and stack settings are unchanged.
+
+## Structured boundary recovery
+
+The original-coordinate symbolic fallback recovers the 128 boundary vertices of
+`tests.test_domain.torus(16, 8)`, for which both earlier builders exhaust their
+attempts. It returns 519 positive tetrahedra with an exact certificate of zero,
+without moving the sites. The independent
+[CGAL comparison](../results/validation/vtm/symbolic-cgal.json) has 520 tetrahedra:
+467 are common, and all 52 GPU-only tetrahedra are independently empty and have
+additional exactly cospherical sites. These are valid alternative triangulations.
+The regression suite checks every output tetrahedron with rational predicates.
+
+The [full suite](../results/validation/vtm/symbolic-tests.txt) passes **228 tests**,
+including changed-input symbolic replay, exact hash collisions requiring the
+final site-order tie rule, duplicate ownership, affine-rank failures, finite
+capacity/box budgets, and fallback from an exhausted cached strategy. The
+[source audit](../results/validation/vtm/symbolic-isolation.json) verifies that
+26 existing runtime modules are byte-identical to `ac7b847`; only the optional
+certified recovery dispatcher changes existing runtime code.
+
+The [installed wheel](../results/validation/vtm/symbolic-wheel.json) composes a
+changing producer, symbolic mesher, consumer, and device phase advance; the first
+two outputs contain 519 and 523 tetrahedra. The
+[native trace](../results/validation/vtm/symbolic-device-audit.json) records 285
+kernel activities over three warmed changed-input replays. There are no host,
+allocation, or free graph nodes, and all 21 graph copy nodes are device-to-device.
+The CPU submits three graphs and performs one final synchronization.
+
+The [initial memory batch](../results/validation/vtm/symbolic-memcheck-torus.txt)
+completed two predicate tests and the full torus recovery test, including two
+replays, with zero CUDA errors. The remaining batch was deliberately interrupted
+after these three completed tests; its log retains the interruption and nonzero
+application exit. The
+[final 14-case batch](../results/validation/vtm/symbolic-memcheck-followup.txt)
+passes the new predicates, smaller symbolic geometries, failure paths, and
+captured cube producer/consumer with zero errors. The
+[two lifetime cases](../results/validation/vtm/symbolic-lifetime.txt) also pass with
+zero errors and stream-ordered tracking. Normal memory checks retain pooled
+allocation and use 32-byte padding; lifetime checks use synchronous allocation.
+Both use the documented 32 KiB diagnostic stack, without changing production
+settings. The full torus geometry kernels are unchanged by the subsequent scalar
+reset/dispatch optimization covered by the final batches.
+
+The [paired timings](../results/validation/vtm/symbolic-paired.json) use ten warmed
+CUDA-event repetitions on the L40 with matching tetrahedron counts and no observed
+CPU quota throttling. The baseline's certified recovery source is identical to
+`ac7b847`. Setup is excluded. Consolidating scalar resets and skipping remaining
+fallback checks after a cached success avoids dispatch overhead on existing cases.
+
+| Input | Before | After |
+|---|---:|---:|
+| 8 cube corners | 0.530 ms | 0.525 ms |
+| 64-site lattice | 2.712 ms | 2.702 ms |
+| 200-site corner cloud | 9.104 ms | 9.135 ms |
+| 1,000 random sites | 14.669 ms | 14.636 ms |
+
+These preserve the existing certified path within 0.4%, with a roughly 1.1%
+improvement for the smallest cube. The original diagram and standalone
+Delaunay/regular-mesh implementations remain unchanged. The new symbolic torus
+fallback is much slower and is tracked separately in
+[#62](https://github.com/alecjacobson/warpower/issues/62); these results do not
+establish the complete VTM CPU speed target.
+
+The [structured torus timing](../results/validation/vtm/symbolic-torus.json) is
+4.286 seconds for the first certified replay and 2.423 seconds warmed, excluding
+setup. It still needs substantial acceleration. The existing
+[1,000-site uniform VTM core](../results/validation/vtm/symbolic-core-after-torus.json)
+remains stable: [519.50 ms before](../results/validation/vtm/symbolic-core-before-torus.json)
+and 519.95 ms after for 20 iterations, five warmed repetitions, no rejected
+steps, and 5,902 full-hull tetrahedra. Energy histories agree within `6.2e-15`
+relative to `max(1, abs(energy))`. This core timing includes its producer and
+consumer, but excludes domain extraction, initialization, and refinement.

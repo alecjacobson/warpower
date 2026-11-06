@@ -112,3 +112,9 @@ def test_two_cube_covers_with_disjoint_hull_diagonals_require_global_fallback():
     error, local = compare(points, tets)
     assert local == 0
     assert error == 8  # Sphere violation only, not incidence/support/usage.
+
+
+def test_resident_graph_switches_local_global_invalid_and_restored_input():
+    from benchmarks.local_certificate import audit
+
+    audit()

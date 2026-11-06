@@ -17,14 +17,15 @@ finite collection of tetrahedra with vertices in P. Require:
    on its interior side. Its supporting plane contains exactly its three sites.
 5. Every canonical site is used.
 
-The implementation already establishes 1–3 and 5. For condition 4 it examines
-up to sixteen boundary faces during the existing hull-support traversal. Strict
-negative interval bounds may prune subtrees. An exact zero at any other canonical
-site disqualifies that face. After a lane finds such a witness, that lane can
-use the original nonpositive bound for its remaining traversal. The existing
-32 lanes OR-write a shared disqualification flag; they do not need to repeatedly
-read one another's flags while traversing. Failure to find an anchor is not an
-input error: the global sphere check is used instead.
+The implementation already establishes 1–3 and 5. For condition 4 a separate
+bounded search examines up to sixteen boundary faces. It uses conservative
+interval orientation bounds for both BVH nodes and individual sites. Only a
+strictly negative finite bound can exclude a distinct non-face site from the
+supporting plane. An uncertain sign, including an exact coplanarity, disqualifies
+that candidate immediately; there is no expensive exact tie evaluation in this
+optional search. The ordinary hull-support check remains unchanged and mandatory.
+A traversal overflow also disqualifies the candidate. Failure to find an anchor
+is not an input error: the global sphere check is used instead.
 
 ## Coverage argument
 
@@ -79,9 +80,9 @@ above the tetrahedron's lifted plane. This also rules out a hidden hanging site
 at a lower-dimensional intersection. The symbolic perturbation resolves the
 same exact cospherical choices as the existing global certificate.
 
-No coordinate is moved by this argument or implementation. All orientation,
-hull-support and local power comparisons use original float32 sites and the
-existing filtered/exact arithmetic. A failed predicate remains failure.
+No coordinate is moved by this argument or implementation. All comparisons use original float32 sites. Orientation, hull support and local
+power tests retain the existing filtered/exact arithmetic; optional anchor
+discovery uses conservative strict interval bounds and falls back on uncertainty. A failed predicate remains failure.
 
 ## Implementation boundaries
 

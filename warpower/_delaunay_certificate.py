@@ -379,85 +379,67 @@ def check_faces(
 
 
 @wp.func
-def anchor_halfspace(plane: Halfspace, lo: wp.vec3, hi: wp.vec3, strict: bool):
+def strictly_inside_halfspace(plane: Halfspace, lo: wp.vec3, hi: wp.vec3):
     x = fp.minus(interval(lo[0], hi[0]), fp.scalar(wp.float64(plane.origin[0])))
     y = fp.minus(interval(lo[1], hi[1]), fp.scalar(wp.float64(plane.origin[1])))
     z = fp.minus(interval(lo[2], hi[2]), fp.scalar(wp.float64(plane.origin[2])))
     value = fp.plus(fp.plus(fp.times(plane.nx, x), fp.times(plane.ny, y)), fp.times(plane.nz, z))
-    finite = wp.isfinite(value.value) and wp.isfinite(value.error)
-    if strict:
-        return finite and value.value < -value.error
-    return finite and value.value <= -value.error
+    return wp.isfinite(value.value) and wp.isfinite(value.error) and value.value < -value.error
 
 
 @wp.kernel
-def check_faces_with_anchors(
+def find_anchors(
     points: wp.array[wp.vec3],
     tets: wp.array2d[int],
     boundary: wp.array[int],
     count: wp.array[int],
     tree: Tree,
-    error: wp.array[int],
     depth: int,
-    workers: int,
     anchors: wp.array[int],
 ):
     tid = wp.tid()
     pieces = 1 << depth
-    worker, lane = tid // pieces, tid % pieces
-    # Partition the radix tree by path bits. An early leaf belongs only to
-    # the lane whose unused bits are zero, so every subtree is covered once.
+    slot, lane = tid // pieces, tid % pieces
+    if slot >= count[0]:
+        return
     root = int(1)
-    live = bool(True)
     for level in range(depth):
         if tree.count[root] > 0:
-            live = (lane >> level) == 0
+            if (lane >> level) != 0:
+                return
             break
         if ((lane >> level) & 1) == 0:
             root = tree.left[root]
         else:
             root = tree.right[root]
-    if not live:
-        return
-    # Fixed launch size, device count, and a strided tail cover even malformed
-    # candidates exposing all four faces per tetrahedron.
-    for slot in range(worker, count[0], workers):
-        ids = face_vertices(tets, boundary[slot])
-        a, b, c = points[ids[0]], points[ids[1]], points[ids[2]]
-        plane = halfspace(a, b, c)
-        # Each lane may independently abandon strict pruning after finding a
-        # coplanar witness. The shared flag is only OR-written, avoiding a
-        # contended atomic read at every visited node.
-        strict = bool(slot < anchors.shape[0])
-        stack = wp.zeros(shape=128, dtype=int)
-        stack[0] = root
-        size = int(1)
-        while size > 0:
-            size -= 1
-            node = stack[size]
-            if anchor_halfspace(plane, tree.lower[node], tree.upper[node], strict):
-                continue
-            if tree.count[node] > 0:
-                for k in range(tree.start[node], tree.start[node] + tree.count[node]):
-                    q = tree.ids[k]
-                    # Coincident sites have exactly the same plane sign.
-                    if tree.owners[q] != q or q == ids[0] or q == ids[1] or q == ids[2]:
-                        continue
-                    result = fp.orient3d(a, b, c, points[q])
-                    if result.valid == 0:
-                        wp.atomic_or(error, 0, 2)
-                    elif result.sign > 0:
-                        wp.atomic_or(error, 0, 64)
-                    elif result.sign == 0 and strict:
-                        wp.atomic_or(anchors, slot, 1)
-                        strict = False
-            else:
-                if size > 125:
-                    wp.atomic_or(error, 0, 16)
+    ids = face_vertices(tets, boundary[slot])
+    a, b, c = points[ids[0]], points[ids[1]], points[ids[2]]
+    plane = halfspace(a, b, c)
+    stack = wp.zeros(shape=128, dtype=int)
+    stack[0] = root
+    size = int(1)
+    while size > 0:
+        size -= 1
+        node = stack[size]
+        if strictly_inside_halfspace(plane, tree.lower[node], tree.upper[node]):
+            continue
+        if tree.count[node] > 0:
+            for k in range(tree.start[node], tree.start[node] + tree.count[node]):
+                q = tree.ids[k]
+                if tree.owners[q] != q or q == ids[0] or q == ids[1] or q == ids[2]:
+                    continue
+                # An uncertain anchor only loses the local optimization.
+                # Use conservative strict bounds; no exact tie work is needed.
+                if not strictly_inside_halfspace(plane, points[q], points[q]):
+                    wp.atomic_or(anchors, slot, 1)
                     return
-                stack[size] = tree.left[node]
-                stack[size + 1] = tree.right[node]
-                size += 2
+        else:
+            if size > 125:
+                wp.atomic_or(anchors, slot, 1)
+                return
+            stack[size] = tree.left[node]
+            stack[size + 1] = tree.right[node]
+            size += 2
 
 
 @wp.kernel
@@ -649,7 +631,7 @@ class DelaunayCertificate:
             ],
         )
         self._launch(
-            check_faces if self._anchors is None else check_faces_with_anchors,
+            check_faces,
             self._face_workers * (1 << self._face_depth),
             [
                 self.points,
@@ -660,10 +642,22 @@ class DelaunayCertificate:
                 self.error,
                 self._face_depth,
                 self._face_workers,
-            ]
-            + ([] if self._anchors is None else [self._anchors]),
+            ],
         )
         if self._anchors is not None:
+            self._launch(
+                find_anchors,
+                len(self._anchors) * (1 << self._face_depth),
+                [
+                    self.points,
+                    self.tetrahedra,
+                    self._boundary,
+                    self._boundary_count,
+                    tree,
+                    self._face_depth,
+                    self._anchors,
+                ],
+            )
             self._launch(
                 select_certificate,
                 1,

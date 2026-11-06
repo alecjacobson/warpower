@@ -1,5 +1,8 @@
 # API
 
+For loops captured in CUDA graphs, use the preallocated
+[`DiagramWorkspace` API](graphs.md), which keeps counts and control flow on the GPU.
+
 ```python
 import warpower
 

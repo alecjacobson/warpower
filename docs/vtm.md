@@ -107,3 +107,6 @@ conditional graph whose scratch storage belongs to capture setup.
 [#52](https://github.com/alecjacobson/warpower/issues/52) records the explicit
 stack allowance needed to memory-check a deeper captured optimizer trajectory;
 see the [diagnostic environment](cuda-validation.md).
+[#54](https://github.com/alecjacobson/warpower/issues/54) adds the isolated
+[exact predicate foundation](exact-predicates.md) for certified numerical
+recovery; it does not by itself close construction robustness in #32.

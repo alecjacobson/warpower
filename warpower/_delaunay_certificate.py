@@ -404,8 +404,8 @@ class DelaunayCertificate:
             self._parents = wp.empty(m, dtype=int)
             self._boundary = wp.empty(4 * m, dtype=int)
             self._boundary_count = wp.zeros(1, dtype=int)
-            self._face_depth = 5 if n >= 128 else 0
-            self._face_workers = min(n, 4096)
+            self._face_depth = 5
+            self._face_workers = min(max(n, 128), 4096)
             self._ready = wp.empty(1, dtype=int)
             wp.load_module(module=__name__, device=self.device)
 

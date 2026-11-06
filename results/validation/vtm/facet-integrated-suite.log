@@ -1,0 +1,90 @@
+.................................F.F.................................... [ 15%]
+........................................................................ [ 30%]
+........................................................................ [ 46%]
+........................................................................ [ 61%]
+........................................................................ [ 76%]
+........................................................................ [ 92%]
+.....................................                                    [100%]
+=================================== FAILURES ===================================
+_____________ test_torus_has_both_finite_and_unbounded_first_poles _____________
+
+    def test_torus_has_both_finite_and_unbounded_first_poles():
+        domain = warpower.SurfaceDomain(*torus(16, 8))
+        auto = AutomaticSizingWorkspace(domain, control_subdivisions=0)
+        assert auto.error.numpy()[0] == 0, auto.mesh.error.numpy()
+        first = auto.pole_valid.numpy()[::2]
+>       assert np.any(first == 0) and np.any(first == 1)
+E       assert (np.False_)
+E        +  where np.False_ = <function any at 0x7f1f849ce070>(array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,\n       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,\n       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], dtype=int32) == 0)
+E        +    where <function any at 0x7f1f849ce070> = np.any
+
+tests/test_automatic_sizing.py:50: AssertionError
+____ test_pole_choices_do_not_depend_on_tetrahedron_output_row_order[torus] ____
+
+shape = 'torus'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus"])
+    def test_pole_choices_do_not_depend_on_tetrahedron_output_row_order(shape):
+        import warp as wp
+    
+        from warpower._mesh_topology import identity, index_faces
+    
+        surface = cube() if shape == "cube" else torus(16, 8)
+        auto = AutomaticSizingWorkspace(warpower.SurfaceDomain(*surface), control_subdivisions=0)
+        assert auto.error.numpy()[0] == 0
+        mesh, cert = auto.mesh, auto.mesh._certificate
+        original = mesh.tetrahedra.numpy()
+        count = int(mesh.tetrahedra_count.numpy()[0])
+        expected = [
+            a.numpy() for a in (auto._normals, auto.poles, auto.pole_valid, auto.local_feature_size)
+        ]
+        with wp.ScopedCapture() as capture:
+            cert._table.fill_(-1)
+            cert._occurrences.zero_()
+            cert._balance.zero_()
+            wp.launch(identity, len(cert._parents), inputs=[cert._parents])
+            wp.launch(
+                index_faces,
+                4 * len(mesh.tetrahedra),
+                inputs=[
+                    mesh.tetrahedra,
+                    mesh.tetrahedra_count,
+                    cert._table,
+                    cert._occurrences,
+                    cert._balance,
+                    cert._parents,
+                ],
+            )
+            auto.error.zero_()
+            auto.pole_count.zero_()
+            auto.pole_valid.zero_()
+            auto._extract()
+            auto._distances()
+        for order in [np.arange(count)[::-1], np.random.default_rng(501).permutation(count)]:
+            shuffled = original.copy()
+            shuffled[:count] = original[order]
+            mesh.tetrahedra.assign(shuffled)
+            wp.capture_launch(capture.graph)
+            assert auto.error.numpy()[0] == 0
+            for wanted, actual in zip(
+                expected, (auto._normals, auto.poles, auto.pole_valid, auto.local_feature_size)
+            ):
+>               np.testing.assert_array_equal(actual.numpy(), wanted)
+E               AssertionError: 
+E               Arrays are not equal
+E               
+E               Mismatched elements: 229 / 384 (59.6%)
+E               Max absolute difference among violations: 7.96930681
+E               Max relative difference among violations: 46.26826676
+E                ACTUAL: array([[ 7.269307e+00,  0.000000e+00,  0.000000e+00],
+E                      [ 3.343645e+00,  0.000000e+00,  4.437619e+00],
+E                      [ 7.631589e-01,  0.000000e+00,  2.842429e+00],...
+E                DESIRED: array([[-7.000000e-01,  3.978247e-01, -1.110223e-16],
+E                      [ 8.407246e-01, -6.635120e-01,  2.729689e+00],
+E                      [-1.999999e+00,  0.000000e+00,  4.128425e+00],...
+
+tests/test_automatic_sizing.py:102: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_automatic_sizing.py::test_torus_has_both_finite_and_unbounded_first_poles
+FAILED tests/test_automatic_sizing.py::test_pole_choices_do_not_depend_on_tetrahedron_output_row_order[torus]
+2 failed, 467 passed in 282.56s (0:04:42)

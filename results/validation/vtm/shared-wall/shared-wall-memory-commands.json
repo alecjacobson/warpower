@@ -1,0 +1,23 @@
+[
+  {
+    "name": "wall",
+    "mode": "padded",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_wall_reuse.py"
+    ],
+    "exit_code": -2,
+    "wall_seconds": 96.49195671081543,
+    "timeout_seconds": 600,
+    "disable_pool": false,
+    "zero_memcheck_errors": false
+  }
+]

@@ -1,9 +1,10 @@
 # Native CPU comparison near 4,096 vertices
 
-The subsequent [grouped-query GPU optimization](grouped-seed-queries.md) reduces
-the same 4,096-site solve to 2.401 seconds with bitwise-identical positions and
-matching connectivity. The table below retains the original 2.640-second GPU
-record and native measurements; the CPU outperformance target remains unmet.
+The latest [shared wall reconstruction](shared-wall-reconstruction.md) measures
+the same 4,096-site GPU solve at 1.834 seconds, with the mesh and quality preserved
+through the intervening optimization comparisons. The table below retains the
+original 2.640-second GPU record and native measurements; the CPU outperformance
+target remains unmet.
 
 The complete GPU mesher still does not outperform CGAL Mesh_3/ODT. Near a
 4,096-vertex budget, the GPU solve measured here takes **2.640 seconds**. The native

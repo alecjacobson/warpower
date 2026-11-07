@@ -412,3 +412,9 @@ comparisons and CPU performance work remain tracked in the
 [full VTM implementation plan](vtm.md).
 An energy decrease alone does not establish good worst-element quality or a
 CPU performance advantage.
+
+An unadopted [representable-boundary experiment](representable-boundary-probe.md)
+removes exact midpoint rounding stalls through ordinary accepted proposals.
+Fresh hand solves expose a quality/fit tradeoff: the selective minimum guard
+then reduces the shared step 1,024-fold. The recorded cell/step investigation
+motivates localized backtracking; production behavior remains unchanged.

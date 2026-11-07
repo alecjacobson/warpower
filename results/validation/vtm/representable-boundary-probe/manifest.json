@@ -1,0 +1,784 @@
+{
+  "runtime": "6f7efc9f1515a18077053d23f3a306c4a6cdc47a",
+  "scope": "Unadopted exact-midpoint proposal, full-solve quality tradeoff and read-only selective-backtracking attribution. No runtime changes or production performance claim.",
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "files": [
+    {
+      "original": ".work/vtm/check-representable-full-v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/check-representable-full-v1.py",
+      "bytes": 1861,
+      "sha256": "fb5768286f1df245a24bd3714b2aa9c4b147a2db148fd7e7bc269176439a408e"
+    },
+    {
+      "original": ".work/vtm/check-representable-stages-v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/check-representable-stages-v1.py",
+      "bytes": 2435,
+      "sha256": "9fabda67a2ef6a51b5a72088378d66099733a66a5e7777ad44b40fbe44e24642"
+    },
+    {
+      "original": ".work/vtm/check-representable-transactions-v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/check-representable-transactions-v1.py",
+      "bytes": 2846,
+      "sha256": "33e29bfc5a4787bca576eaddd8d764ce7e7160924131ad944bef16493c94df11"
+    },
+    {
+      "original": ".work/vtm/representable-boundary-tests-v1.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-boundary-tests-v1.log",
+      "bytes": 99,
+      "sha256": "d7c440b6a717b26653f8637bae206258e5467869de462c1b88ecd3d0391308e1"
+    },
+    {
+      "original": ".work/vtm/representable-existing-tests-v1.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-existing-tests-v1.log",
+      "bytes": 100,
+      "sha256": "570460d80b5da4c9aa40a3510251172fb42f11ab5eb880295dc13d575dc6efa7"
+    },
+    {
+      "original": ".work/vtm/representable-existing-tests-v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-existing-tests-v1.py",
+      "bytes": 385,
+      "sha256": "84f2159dc63436f6a7965435c503e4b2b726de03e8aadf3fbd78a71d7804fa29"
+    },
+    {
+      "original": ".work/vtm/representable-full-independent-v1.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-independent-v1.json",
+      "bytes": 199160,
+      "sha256": "10b240058b514d1af2b832765fd7b0754d754955b08cc3b4be69f5c8ad250c60"
+    },
+    {
+      "original": ".work/vtm/representable-full-independent-v1.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-independent-v1.log",
+      "bytes": 461,
+      "sha256": "907f0fa6ba2c2d11a3511ba455710beb4c2524128b8a624b00fb5e86b08fed5e"
+    },
+    {
+      "original": ".work/vtm/representable-full-run-v1.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-run-v1.log",
+      "bytes": 2783,
+      "sha256": "2115ab7af9eab1f80df1a2bf7e2ec30d37d2b608318ab6896dbc5a320298f7dd"
+    },
+    {
+      "original": ".work/vtm/representable-stages-analysis-v1.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-analysis-v1.json",
+      "bytes": 35522,
+      "sha256": "b5954e1ff1260e0f7c07030c7336cabcb93c020490f4563a33b7e775a412aa4e"
+    },
+    {
+      "original": ".work/vtm/representable-stages-analysis-v1.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-analysis-v1.log",
+      "bytes": 1909,
+      "sha256": "727e9c98f6b62292ac038697df3c9afd08c5feac32022372887605dcbfb04517"
+    },
+    {
+      "original": ".work/vtm/representable-stages-baseline-v1.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-baseline-v1.json",
+      "bytes": 7260,
+      "sha256": "762a69a3d3e45db05854e7282de037d46d79e9d8c1f138a419b949dbd13b4448"
+    },
+    {
+      "original": ".work/vtm/representable-stages-baseline-v1.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-baseline-v1.log",
+      "bytes": 6482,
+      "sha256": "c4bfa14fcc5566a5557d5112a9d55b383a9346f2f1e2c2ee078f2928fc496f30"
+    },
+    {
+      "original": ".work/vtm/representable-stages-baseline-v1.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-baseline-v1.npz",
+      "bytes": 59783,
+      "sha256": "ffaf3a195d21dbb77986453739c7e9dc42ba7022ea52618a99a11bdddb21ce90"
+    },
+    {
+      "original": ".work/vtm/representable-stages-baseline-v2.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-baseline-v2.json",
+      "bytes": 7651,
+      "sha256": "ee64347cc9c8b4f18a31d8a4b007b216b3df291f58394f7e14d7f485068f4b15"
+    },
+    {
+      "original": ".work/vtm/representable-stages-baseline-v2.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-baseline-v2.log",
+      "bytes": 6903,
+      "sha256": "1c843b5a0d984321d3ba2114d1290b355a0b104eb05b786654be168338c65db7"
+    },
+    {
+      "original": ".work/vtm/representable-stages-baseline-v2.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-baseline-v2.npz",
+      "bytes": 62613,
+      "sha256": "bffd814aa4b7e7eee5fa5db7c7f5a9629bf213780c9207f39b09eb06373a1953"
+    },
+    {
+      "original": ".work/vtm/representable-stages-candidate-v1.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-candidate-v1.json",
+      "bytes": 7250,
+      "sha256": "81a3566bca0593fe61bf3574c6b7b43fa9647a5f32fbafc606131b62345b9f34"
+    },
+    {
+      "original": ".work/vtm/representable-stages-candidate-v1.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-candidate-v1.log",
+      "bytes": 6567,
+      "sha256": "a96f40dfc1f38d82879111ef8851fc6d26bbc4b814a60c50b232269ae0180874"
+    },
+    {
+      "original": ".work/vtm/representable-stages-candidate-v1.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-candidate-v1.npz",
+      "bytes": 59719,
+      "sha256": "2bbce0fa75ab37c5d7fa7f8010bc0248704daa2895598744c2a0a61d0726d16f"
+    },
+    {
+      "original": ".work/vtm/representable-stages-candidate-v2.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-candidate-v2.json",
+      "bytes": 7622,
+      "sha256": "5504da861c4ed706c6a926ffa7f9d5c1e744291807ff4e9a7c7e409fcad32eee"
+    },
+    {
+      "original": ".work/vtm/representable-stages-candidate-v2.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-candidate-v2.log",
+      "bytes": 6988,
+      "sha256": "fa28a975a945dcb623514cd96564fb88404782aa4c8ff3414c3319aae669d297"
+    },
+    {
+      "original": ".work/vtm/representable-stages-candidate-v2.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-stages-candidate-v2.npz",
+      "bytes": 66473,
+      "sha256": "bd20e73d12c90f61302fa84a03e6cf02a41ad17566a5b551b121e85e306325fb"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-current-hand-baseline-v2.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-current-hand-baseline-v2.json",
+      "bytes": 5482,
+      "sha256": "f23a3642d26b1d1762cd77093b91fc46c5597a2f18f3cbace02464cb8e17d8e2"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-current-hand-baseline-v2.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-current-hand-baseline-v2.log",
+      "bytes": 5512,
+      "sha256": "db06f863b220b7522d7495b4cdc47fd771ebe66459ad3b1a014e20d60822ccb3"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-current-hand-baseline-v2.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-current-hand-baseline-v2.npz",
+      "bytes": 98466,
+      "sha256": "b53eb0dc3b8212d9ceac8298aeadbf1f48c986b6fd2ae44cd3d8d4477badd514"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-current-hand-candidate-v2.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-current-hand-candidate-v2.json",
+      "bytes": 5547,
+      "sha256": "dfef57e00b66b39d1950aa65163869eb493360f9f9ce87839e29751f81da8b99"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-current-hand-candidate-v2.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-current-hand-candidate-v2.log",
+      "bytes": 5611,
+      "sha256": "0546ce80e6ab185d951d1d41b457d3d9154fb3b154484ec691eacb7b71b27f46"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-current-hand-candidate-v2.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-current-hand-candidate-v2.npz",
+      "bytes": 95712,
+      "sha256": "ba1eb013c6710a606e527c14e5761c7872269b989845a2e333611f5b8b00dd2f"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-old-hand-baseline-v1.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-old-hand-baseline-v1.log",
+      "bytes": 4467,
+      "sha256": "15dc811f70aced020294183262da666c398accae1ba9205da765b85f752245db"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-old-hand-baseline-v2.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-old-hand-baseline-v2.json",
+      "bytes": 5417,
+      "sha256": "06876bc2b1e8e3fefdf6fbff5954231d653a3431483ae2bce6434829edfe2eba"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-old-hand-baseline-v2.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-old-hand-baseline-v2.log",
+      "bytes": 5498,
+      "sha256": "770ed0cd2b8f1dd6ba5126dc73a46c7d09d38c9e3f3b503bb167810a2b03f434"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-old-hand-baseline-v2.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-old-hand-baseline-v2.npz",
+      "bytes": 96869,
+      "sha256": "c8a9548587d10ddae8b7e0c93f425524b2c6e349ca3e47307655ccc217c35d31"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-old-hand-candidate-v2.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-old-hand-candidate-v2.json",
+      "bytes": 5488,
+      "sha256": "2bf27cbe005a97d82af995ca55805a885cce7e75b292da8c4c72a91c179199ac"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-old-hand-candidate-v2.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-old-hand-candidate-v2.log",
+      "bytes": 5600,
+      "sha256": "4208a88fdf119a465d2a9469de012afebec092c102d267f03acd1a3261541875"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-old-hand-candidate-v2.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-old-hand-candidate-v2.npz",
+      "bytes": 103477,
+      "sha256": "30f5e8a2e8bbe8e8182d62d7e853f483b9988cb887fff62e362c32e3ee1793a4"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-tests-v1.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-tests-v1.log",
+      "bytes": 8328,
+      "sha256": "9a1420622ef323fab520e9a5ea55a00b30def2fb50d3f46cc1be7298ce78712d"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-tests-v2.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-tests-v2.log",
+      "bytes": 98,
+      "sha256": "8486e21daecd20fa521fdd005a43396d801931a4389c3f41a553e8259e3d2be9"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-torus-baseline-v2.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-torus-baseline-v2.json",
+      "bytes": 4881,
+      "sha256": "0b4908a1888668d241b922beab1f77381cc0c402315e37f4ccd759a0f3b5800e"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-torus-baseline-v2.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-torus-baseline-v2.log",
+      "bytes": 5491,
+      "sha256": "b8bdbb519e58221ab95ce6a3d7538f28f98c6baba59e6a351f18f82327f558bd"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-torus-baseline-v2.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-torus-baseline-v2.npz",
+      "bytes": 130713,
+      "sha256": "d7ddcd83bf0d82d0c6e468d6ff3f75208261746dafd0d9510f69fa235116963d"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-torus-candidate-v2.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-torus-candidate-v2.json",
+      "bytes": 4892,
+      "sha256": "c20e8308a5906f8122a02c79eb081745980d59e0523976830b1ead076e839372"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-torus-candidate-v2.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-torus-candidate-v2.log",
+      "bytes": 5580,
+      "sha256": "0957234d86d5316e4a29a7d2c194c5f42d9d22665e1be1868ce71a3f53077396"
+    },
+    {
+      "original": ".work/vtm/representable-transaction-torus-candidate-v2.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transaction-torus-candidate-v2.npz",
+      "bytes": 141952,
+      "sha256": "098491e7b6bd32cfd7abb53ef440baeb0fa1ca4816981669e0a6090165ff803d"
+    },
+    {
+      "original": ".work/vtm/representable-transactions-independent-v1.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transactions-independent-v1.json",
+      "bytes": 5529,
+      "sha256": "c692514c15366341f8160cdca9d63ca5984aeec0b28ba543b6dac471523a9700"
+    },
+    {
+      "original": ".work/vtm/representable-transactions-independent-v1.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transactions-independent-v1.log",
+      "bytes": 250,
+      "sha256": "c6689e05b6c283790b703869ac97c4efa2901c6121d7f16a92fc908f22ca3f61"
+    },
+    {
+      "original": ".work/vtm/representable-transactions-v2-commands.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transactions-v2-commands.json",
+      "bytes": 3281,
+      "sha256": "b5654cac30c63fec5c0bcaa2e5d619e8ec40b13908e3ea8c6fe844c8022fb03a"
+    },
+    {
+      "original": ".work/vtm/representable-transactions-v2.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-transactions-v2.log",
+      "bytes": 2696,
+      "sha256": "bb26eb421037aed0f050bab598c32d9abcb49564c63404b6b73a5f529ab9615c"
+    },
+    {
+      "original": ".work/vtm/representable_boundary_transaction_v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/representable_boundary_transaction_v1.py",
+      "bytes": 6030,
+      "sha256": "efc345c437fb925208a56a559f5ea2e4aa25c692b919f283f88b2bdc1c160d91"
+    },
+    {
+      "original": ".work/vtm/representable_boundary_transaction_v2.py",
+      "path": "results/validation/vtm/representable-boundary-probe/representable_boundary_transaction_v2.py",
+      "bytes": 6036,
+      "sha256": "6319be84830615d685c487d8bb50a221d56b78e23916962d576a6f5966388a08"
+    },
+    {
+      "original": ".work/vtm/representable_boundary_v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/representable_boundary_v1.py",
+      "bytes": 5034,
+      "sha256": "daf11106647fc8d78e92a7af41681d88a3dee96b8adf2212504bd7deaddcb177"
+    },
+    {
+      "original": ".work/vtm/representable_full_pilot_v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/representable_full_pilot_v1.py",
+      "bytes": 2653,
+      "sha256": "bd645e91fea0470ec4d544619af1f19d52fe9f7346d88ae65e67417a2152f55e"
+    },
+    {
+      "original": ".work/vtm/representable_stage_probe_v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/representable_stage_probe_v1.py",
+      "bytes": 4989,
+      "sha256": "493c4b7166704b160923a6940fb31d8766aebc8d275b4a30d15d34e3de1565b4"
+    },
+    {
+      "original": ".work/vtm/representable_stage_probe_v2.py",
+      "path": "results/validation/vtm/representable-boundary-probe/representable_stage_probe_v2.py",
+      "bytes": 6025,
+      "sha256": "fcb993f10df5242cad6d4372580cd683a2c923d5f204ef5e6085e6ae17cb48d5"
+    },
+    {
+      "original": ".work/vtm/representable_step_observer_v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/representable_step_observer_v1.py",
+      "bytes": 1171,
+      "sha256": "3d10e26e6dadb0eddd640419635e40ee3e1307c23743ad433ddc1146540eb1e6"
+    },
+    {
+      "original": ".work/vtm/run-representable-full-v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/run-representable-full-v1.py",
+      "bytes": 2490,
+      "sha256": "10d78db5f327b02840bb9d6c05b3639795e744639ff0f5666779c9048584af01"
+    },
+    {
+      "original": ".work/vtm/run-representable-transactions-v2.py",
+      "path": "results/validation/vtm/representable-boundary-probe/run-representable-transactions-v2.py",
+      "bytes": 1360,
+      "sha256": "93785c8392a6b28ecb01d5d9ad1984e812acb0f5e26aa8d0c46626030c34d8e4"
+    },
+    {
+      "original": ".work/vtm/test_representable_boundary_v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/test_representable_boundary_v1.py",
+      "bytes": 3922,
+      "sha256": "2ed37713cf005a3363b32fcd3d2246aa64b2fe61782d4f5589070eca932d12e5"
+    },
+    {
+      "original": ".work/vtm/test_representable_transactions_v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/test_representable_transactions_v1.py",
+      "bytes": 5076,
+      "sha256": "4d60355725eabfc753579b348709210cdceb2fd54fab8abb24dbee3c5d51f55b"
+    },
+    {
+      "original": ".work/vtm/test_representable_transactions_v2.py",
+      "path": "results/validation/vtm/representable-boundary-probe/test_representable_transactions_v2.py",
+      "bytes": 5843,
+      "sha256": "3d44fe5b90364b671f1cfc2fbe1b0f5f17ed2963eb2ce72415707468f9ad4d24"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/coarse-hand-baseline/failed-state.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/coarse-hand-baseline/failed-state.npz",
+      "bytes": 46654,
+      "sha256": "52fd74467b397703f6a5dc55dbf1e5d53bc52bef6e5c17c6bc78b1386e015db4"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/coarse-hand-baseline/input.off",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/coarse-hand-baseline/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/coarse-hand-baseline/pilot.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/coarse-hand-baseline/pilot.json",
+      "bytes": 1200,
+      "sha256": "d7948e68c6e712fd95076ff7d2c79a598ded3f945541b6dcf317ef54500b115a"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/coarse-hand-baseline/result.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/coarse-hand-baseline/result.json",
+      "bytes": 3213,
+      "sha256": "1cdce9c551f946c5c64621841a7fea757a38695f355ddff5135121cc6048a797"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/coarse-hand-baseline.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/coarse-hand-baseline.log",
+      "bytes": 7952,
+      "sha256": "966dc5aa7c4707d7d09bd250f3004778dd10ba524a126e8f7c1380070e9e9852"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/coarse-hand-candidate/failed-state.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/coarse-hand-candidate/failed-state.npz",
+      "bytes": 39134,
+      "sha256": "95c8fecb3681fa77be05f243fd7573a0609233a68adfea3b28fd9dab1053f489"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/coarse-hand-candidate/input.off",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/coarse-hand-candidate/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/coarse-hand-candidate/pilot.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/coarse-hand-candidate/pilot.json",
+      "bytes": 1305,
+      "sha256": "d0a7dadca951b911d9f120ac8c8857b2390d8dd70e9360ad3f3418dc635d748b"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/coarse-hand-candidate/result.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/coarse-hand-candidate/result.json",
+      "bytes": 3211,
+      "sha256": "ade6ee3eb2c2211b3504a29a13022e91d9ac41d7b1c8d6acfb7dba503d2deaea"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/coarse-hand-candidate.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/coarse-hand-candidate.log",
+      "bytes": 8038,
+      "sha256": "e9d1d22db2ab16d007ecb43b010f965ed23144b0bad9a1e23d094112b0b9754e"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/commands.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/commands.json",
+      "bytes": 10187,
+      "sha256": "c0892965369494a8da56d567ffc24967be7656d303094241655e0570d6511c92"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-baseline/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-baseline/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-baseline/boundary.off.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-baseline/boundary.off.gz",
+      "bytes": 28746,
+      "sha256": "cc2b22ed5b345ab6ab85884dd9a31788b8ecf662c53b7f98150ec944fb3b99a7"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-baseline/input.off",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-baseline/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-baseline/mesh.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-baseline/mesh.npz",
+      "bytes": 98659,
+      "sha256": "954e558f94fbe4cd9212a07c51a215b1c31e961ebc10ff9b0b8ba2bc26b47dab"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-baseline/mesh.vtu.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-baseline/mesh.vtu.gz",
+      "bytes": 70667,
+      "sha256": "9849e58e697a5fe9cb28dece121172474e9905678817b2a5bb32991079c3ac83"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-baseline/pilot.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-baseline/pilot.json",
+      "bytes": 1200,
+      "sha256": "639614d45f5046200bf49d4aa1e05995e97825b5764d14944ae0a4747ac786bf"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-baseline/result.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-baseline/result.json",
+      "bytes": 3608,
+      "sha256": "5b93a083413aa2d05d26de2fb0ddf16abfbeef5868c463701e1410c39298b9fc"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-baseline.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-baseline.log",
+      "bytes": 8224,
+      "sha256": "76f5833609e1f5883a27baaccaa717ea08259495105cbb87c195610195726846"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "29a12814592006c991a3242e86b976dbec257d904acac2867aebcfd7b3b7a1e7"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-candidate/boundary.off.gz",
+      "bytes": 28687,
+      "sha256": "fda6cefed4b08cd582dce5a4107995225d4c87d8b20dcd5a472f38347a3155fd"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-candidate/input.off",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-candidate/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-candidate/mesh.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-candidate/mesh.npz",
+      "bytes": 89018,
+      "sha256": "e16743cf01f85c28deac866e3ab64475b09827e6ee1ceeba0ba944d0452c92b4"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-candidate/mesh.vtu.gz",
+      "bytes": 70634,
+      "sha256": "1817ffa31379e8a3eb4e8873c0cb802b8ee7830ca71702cd9837abecad8ee8cf"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-candidate/pilot.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-candidate/pilot.json",
+      "bytes": 1305,
+      "sha256": "ec1850fca0672c79b04dc372b84e72c15f93bcc473f46d1c7f3846c6e6d0e938"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-candidate/result.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-candidate/result.json",
+      "bytes": 3610,
+      "sha256": "0feae930cf6b15d04ba9664fa8ac8d24de691c35a3227ea7feac9865d56b6f5c"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-candidate.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-candidate.log",
+      "bytes": 8314,
+      "sha256": "2bc69b47fb4c862cbf2cc5f6cba16438031b4812a9f12562907ea46921a41b95"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/lossless-archives.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/lossless-archives.json",
+      "bytes": 4879,
+      "sha256": "4329a7c3287ee75e12b8ffe0c71f771c11f679754bb9246b36e00f69c9e8caa6"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-baseline/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-baseline/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-baseline/boundary.off.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-baseline/boundary.off.gz",
+      "bytes": 32368,
+      "sha256": "37aacae3724d6a1d9dcdf96c49eaea94b3db15be16ea3391e171ab6d13292585"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-baseline/input.off",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-baseline/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-baseline/mesh.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-baseline/mesh.npz",
+      "bytes": 109318,
+      "sha256": "c9c0eda95f87166b8fdd6849e3b75ed05b37e58834f0d14557d48787c929905e"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-baseline/mesh.vtu.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-baseline/mesh.vtu.gz",
+      "bytes": 86050,
+      "sha256": "fd7b5f330d07a0ad3fbd99e1d281f58c8ec5a99cb61ecabfbb07bb237fbbcdd8"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-baseline/pilot.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-baseline/pilot.json",
+      "bytes": 1133,
+      "sha256": "7db55279217f3478ee41c0cafc4fe287a9c3dd96c9a4b2ada85ab4177fb4def4"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-baseline/result.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-baseline/result.json",
+      "bytes": 3616,
+      "sha256": "c7cceba19066c1c13a3fcadf16f673d6380857e40e729b30caa7fd52a2e8e67d"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-baseline.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-baseline.log",
+      "bytes": 8232,
+      "sha256": "149dacffd20e6c59af2605dd5e610e71c00f17ffeaa89a2d338c48acade98283"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-candidate/boundary.off.gz",
+      "bytes": 32367,
+      "sha256": "fdcb6759b74e3b4a291756f7cbb9fb174cd282eff51182585ec1aefc2ecee0c7"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-candidate/input.off",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-candidate/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-candidate/mesh.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-candidate/mesh.npz",
+      "bytes": 106764,
+      "sha256": "784decdbf55fa6b751afd56d89221ce93ae247b6b60a7260e2e482b1e6f4a2a6"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-candidate/mesh.vtu.gz",
+      "bytes": 86074,
+      "sha256": "34fd56b20b04933281e48df99bb7c0b9f8c24c1596af7ee17425623b77e07dc5"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-candidate/pilot.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-candidate/pilot.json",
+      "bytes": 1234,
+      "sha256": "5e807104ca1d455096b370528e208014b0a6eee619222f108dd6647d5a58c477"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-candidate/result.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-candidate/result.json",
+      "bytes": 3612,
+      "sha256": "7f04ee13b825cd78964a72024fdc9a6e2415fea350c01ba032214980ee77f010"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/plate-candidate.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/plate-candidate.log",
+      "bytes": 8316,
+      "sha256": "08f15e010faa82d52f15b4f6a652a6eab9b8e2c4a86f1e532643a7947b1fe62d"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-baseline/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-baseline/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a61ebe6d45dbde62aab088d4406ace29d998b7e525f77785b2e7d79c3a89bfbc"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-baseline/boundary.off.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-baseline/boundary.off.gz",
+      "bytes": 35307,
+      "sha256": "cd1e0f52c8f6114d224893e45ea43bdc6eb58b2411ac33956d71225aa75e51b6"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-baseline/input.off",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-baseline/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-baseline/mesh.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-baseline/mesh.npz",
+      "bytes": 123033,
+      "sha256": "2265b9d1cbacddd1c6b7dd6cd39f25f164dc6d3c50a4e7dc05299cb20d763bdd"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-baseline/mesh.vtu.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-baseline/mesh.vtu.gz",
+      "bytes": 92864,
+      "sha256": "b70afb73f72bf2ae068ef6ba22482c8cab9be52074c122d1cf23f89f63a0405b"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-baseline/pilot.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-baseline/pilot.json",
+      "bytes": 1120,
+      "sha256": "10b427193ca988a305f3c872371adeebceb98078df233746781ca29d221354b4"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-baseline/result.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-baseline/result.json",
+      "bytes": 3593,
+      "sha256": "9af2af5d86b7451ff9225b8b20a57557956e5b3f097b51439d1b3621670ee45f"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-baseline.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-baseline.log",
+      "bytes": 8209,
+      "sha256": "ecffbbda0548e4eae54555b0c2d231c728b9af287ba041a02fb70c122865bcea"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a61ebe6d45dbde62aab088d4406ace29d998b7e525f77785b2e7d79c3a89bfbc"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-candidate/boundary.off.gz",
+      "bytes": 35292,
+      "sha256": "fea745da22d650cb7152bbb11ab6ca23fe95f17698e4f2524b62c6dd283d3b77"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-candidate/input.off",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-candidate/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-candidate/mesh.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-candidate/mesh.npz",
+      "bytes": 123014,
+      "sha256": "8e092acb8fb52d207d0b10495dba1bf966ea5c787fc45083901dcbe81ea13c19"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-candidate/mesh.vtu.gz",
+      "bytes": 92810,
+      "sha256": "70ee6648cbdfd6865ed78b3dfccc23fa8215d2614deebd2fe36197b11fc6c6f5"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-candidate/pilot.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-candidate/pilot.json",
+      "bytes": 1213,
+      "sha256": "69c1807230fbbbf192cfcbce0581cf96dea57291c017412375a8f30e17c704b9"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-candidate/result.json",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-candidate/result.json",
+      "bytes": 3598,
+      "sha256": "89cd98fa3e25bb8d784e9d5324cba6de969151a444f3ec69c0040aab3d91bf42"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/torus-candidate.log",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/torus-candidate.log",
+      "bytes": 8302,
+      "sha256": "d2d365d27a2bb0e9cfe43eb78860cbf942746d37510880d9d2e2380a7b82481f"
+    },
+    {
+      "original": ".work/vtm/stable-center-final-hand-final-candidate.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/stable-center-final-hand-final-candidate.npz",
+      "bytes": 43852,
+      "sha256": "0904d219fe7c81b2b64b00f772bad2087b7390e99899e150d74c98110010c1ff"
+    },
+    {
+      "original": ".work/vtm/publish-representable-boundary-v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/publish-representable-boundary-v1.py",
+      "bytes": 3766,
+      "sha256": "eec037c893e3daea89960eba63073742e8415f386a4b04d47e2941b068f4b436"
+    }
+  ],
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-after/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-after/mesh.npz",
+      "sha256": "2750906e4f8c199e52281c72364b20607b6cb9f923798479d58426f7e0516f59"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus1000-after.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus1000-after.npz",
+      "sha256": "c4ec5704d3a1513516e2522a8b65a17e31cf3745ccb418e20cf37c4960e9ff5a"
+    }
+  ],
+  "shared_helpers": [
+    {
+      "original": ".work/vtm/check-surface-bound-reuse-final-v2.py",
+      "path": "results/validation/vtm/surface-bound-reuse/check-surface-bound-reuse-final-v2.py",
+      "sha256": "043e6a45bc7f2723bce7411d587cafc15f0f3aa3789b81868f0fe5f4a81dd83a"
+    },
+    {
+      "original": ".work/vtm/check-large-reuse-proof-pairs.py",
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    }
+  ],
+  "source_sha256": {
+    "warpower/_vtm.py": "4fe87ba5ed154187af10a00753dba973a1fabefed244c963409726fe0f7c6d2f",
+    "warpower/_selective.py": "8d1afafaf8db2b598b2a9f0c2cde01f4161195c844f8b6e7091d6e7493279c15",
+    "warpower/_mesher.py": "8cfbbff36fc79725700368ccedd5e5323382248bddb22514b0593d41c7ea587b",
+    "examples/vtm_gallery.py": "8e39899ba4ec7b98dee840f73ccc330c57ac2a398faff3efc103dabb57af4acf",
+    "examples/vtm_inputs.py": "83284ecd146010c2d610b221bdfeaa16ce0b98fd59cda561c1602bdfa87bc9a0",
+    "benchmarks/feature_quality.py": "06f9c355f193ad5c6ff8b63a98d33bbbaaf497b965cf3e84459efd3fa638d4c8"
+  },
+  "reproduction": "Restore each original path from its path entry in a separate checkout of runtime. Shared helpers and inputs retain their listed original paths. Commands in records use the original workspace path; substitute the checkout root. Native independent validators are built from benchmarks/cpu; this bundle does not include executables.",
+  "limitations": [
+    "No new standalone/full-suite/native-profiler/sanitizer adoption gate.",
+    "Coarse hand explicitly invalid in both full pilots.",
+    "Instrumented full-solve correction counters count core-accepted moves which outer quality stages may later roll back.",
+    "Selective observer coordinates differ below 1e-8 from corresponding unobserved pilots; work and roles agree."
+  ],
+  "reference_binaries_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  }
+}

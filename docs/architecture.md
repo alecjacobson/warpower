@@ -336,6 +336,11 @@ A private [fresh complete-mesh certificate experiment](previous-complete-certifi
 tries to avoid fragment filtering when the entire previous topology survives.
 Its ordinary schedule is slower; earlier rejection is effectively neutral at 4k
 and slower at 1k. Both variants remain unadopted.
+A separate [Local DeWall candidate experiment](local-dewall-candidates.md)
+uses bounded compact wall traversal, exact seed filtering and complete hull
+certification. It improves tested reconstruction cases but gives smaller complete
+VTM gains with more storage; it remains unadopted pending broader validation and
+removal of duplicate certification. Independent production APIs are unchanged.
 The immediately preceding [hull-support result](hull-support-reuse.md) also
 lets proven hull faces skip candidate search. Each new boundary ordering receives
 a fresh global support check before that mask can be consumed. The private

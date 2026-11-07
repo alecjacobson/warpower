@@ -1,0 +1,93 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 1.00 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.65 ms  (cached)
+Module local_dewall_v1 bf8a51f load on device 'cpu' took 36.15 ms  (error)
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/probe-local-dewall-v1.py", line 22, in <module>
+    candidate = Candidate(p, h.tree)
+  File "/home/horde/projects/power-diagram/.work/vtm/local_dewall_v1.py", line 244, in __init__
+    wp.load_module(module=__name__)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 13074, in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 12906, in force_load
+    m.load(d, block_dim=dim)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 5227, in load
+    raise e
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 5224, in load
+    compiled = self._compile(device, module_dir, output_name, output_arch, options=options)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 4972, in _compile
+    source_str, source_code_ext, meta, ltoir_values, fatbin_values = self._run_codegen(options, is_cpu)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 1907, in locked_call
+    return func(*args, **kwargs)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 4833, in _run_codegen
+    builder = ModuleBuilder(
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 3501, in __init__
+    self.build_kernel(kernel)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 3620, in build_kernel
+    kernel.adj.build(self)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 1907, in locked_call
+    return func(*args, **kwargs)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 2415, in build
+    raise type(original_exc)(*new_args).with_traceback(original_exc.__traceback__) from None
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 2395, in build
+    adj.eval(adj.tree.body[0])
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 3632, in emit_FunctionDef
+    adj.eval(f)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 4391, in emit_For
+    adj.eval(s)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 5646, in emit_Assign
+    rhs = adj.eval(node.value)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 4832, in emit_Call
+    out = adj.add_call(
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 3034, in add_call
+    adj.builder.build_function(func)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 3632, in build_function
+    func.build(self)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 820, in build
+    self.adj.build(builder, default_builder_options)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 1907, in locked_call
+    return func(*args, **kwargs)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 2415, in build
+    raise type(original_exc)(*new_args).with_traceback(original_exc.__traceback__) from None
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 2395, in build
+    adj.eval(adj.tree.body[0])
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 3632, in emit_FunctionDef
+    adj.eval(f)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 4173, in emit_While
+    adj.eval(s)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 3703, in emit_If
+    adj.eval(stmt)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 3680, in emit_If
+    adj.eval(stmt)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 5705, in emit_Assign
+    raise WarpCodegenTypeError(
+warp._src.codegen.WarpCodegenTypeError: Error while parsing function "initialize" at /home/horde/projects/power-diagram/.work/vtm/local_dewall_v1.py:141:
+        result = search(points, tree, site, tri)
+;Error while parsing function "search" at /home/horde/projects/power-diagram/.work/vtm/local_dewall_v1.py:117:
+                left, right = right, left
+;Error, assigning to existing symbol left (wp.ref[int32]) with different type (wp.ref[int32])

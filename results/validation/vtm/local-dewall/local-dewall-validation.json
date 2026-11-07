@@ -1,0 +1,40 @@
+{
+  "runtime_commit": "6eb1882d8af126e65ee88fe0cbdd5f3520f8cc87",
+  "baseline_commit": "0ea739e1fbb6b1c84fdafd69cff977af4f328868",
+  "production_runtime_tests_readme_unchanged": true,
+  "checks": [
+    {
+      "log": "local-dewall-v2-focused.log",
+      "passed": 8,
+      "seconds": 3.67,
+      "sha256": "00c50bb4f631e3f087f0ff2e9e32d5814339d6c3266235b99456dc995cd77a6e"
+    },
+    {
+      "log": "local-dewall-v2-memcheck.log",
+      "passed": 8,
+      "seconds": 34.99,
+      "sha256": "4621dce9682ad65d48ee4e3c49f6d4ff2df7efcabcad8396900890bf2b29f683"
+    },
+    {
+      "log": "local-dewall-v2-lifetime.log",
+      "passed": 8,
+      "seconds": 38.56,
+      "sha256": "1aa7ffd30fead4774e8d92bfcf723e07c281fe06239f4aece9c885069249a575"
+    }
+  ],
+  "memcheck_scope": {
+    "padding_bytes": 32,
+    "stack_bytes": 131072,
+    "pooled_memory": true,
+    "lifetime_pool_disabled": true,
+    "lifetime_tracking": "use-after-free",
+    "full_allocation_order_tracking": false
+  },
+  "native_full_trace_run": false,
+  "production_adopted": false,
+  "issues": [
+    186,
+    188
+  ],
+  "cpu_goal_met": false
+}

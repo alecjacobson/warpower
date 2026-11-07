@@ -339,11 +339,15 @@ check now [stops a face traversal after an exact exterior witness](hull-witness-
 sharing that negative result across partitions while retaining every later
 strided face slot and exhaustive checking for positive support.
 
-The VTM strided face scan uses [analytic float64 determinant bounds](analytic-predicate-bounds.md)
-to certify ordinary orientation and sphere signs before the interval and exact
-fallbacks. Uncertain comparisons and physical ties retain the original symbolic
-policy. This changes two sign queries in the reuse-owned search; standalone
-predicates, allocation, topology checks and proof lifetimes remain unchanged.
+The VTM strided face scan and retained-cell queries first try
+[certified bounded float32 filters](bounded-predicate-filters.md) on finite
+original coordinates with magnitude at most 16. Their error bounds cover
+roundoff, underflow and the rounded acceptance threshold. Unsupported or
+uncertain face queries retain the [analytic float64 bounds](analytic-predicate-bounds.md)
+and original interval/exact fallback; retained-cell queries keep their prepared
+Ball64 and symbolic fallback. Physical ties retain the original symbolic policy.
+This adds no persistent arrays or launches. Standalone predicates, topology
+checks and proof lifetimes remain unchanged.
 
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).

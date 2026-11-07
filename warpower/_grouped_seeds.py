@@ -1,13 +1,16 @@
 """Current-input Morton groups for private VTM seed certification.
 
 Every invocation refreshes exact float32 point-group boxes. A strict sphere-box
-separation can skip a complete group; surviving points retain the original
-strict Ball64 test and complete symbolic fallback. No temporal proof is stored.
+separation can skip a complete group. Surviving points use a bounded binary32
+first stage before the original strict Ball64 test and complete symbolic
+fallback. No temporal proof is stored.
 """
 
 import warp as wp
 
+from . import _bounded_predicates as low
 from . import _sphere_bounds as sb
+from ._analytic_predicates import strict
 from ._bvh import Tree
 from ._delaunay_certificate import Sphere, symbolic_sphere
 from ._prepared_seeds import PreparedSeedQueries, point_value, prepare
@@ -51,6 +54,7 @@ def check_groups(
     if error[0] != 0 or i >= count[0]:
         return
     ids = wp.vec4i(tets[i, 0], tets[i, 1], tets[i, 2], tets[i, 3])
+    a, b, c, d = points[ids[0]], points[ids[1]], points[ids[2]], points[ids[3]]
     shape = shapes[i]
     box = boxes[i]
     for group in range(lower.shape[0]):
@@ -66,6 +70,11 @@ def check_groups(
             continue
         p = points[q]
         if sb.outside(box, p, p):
+            continue
+        fast = low.sphere_filter(a, b, c, d, p)
+        if strict(fast):
+            if fast.value > wp.float64(0.0):
+                wp.atomic_and(live, i, 0)
             continue
         value = point_value(shape, p)
         if (

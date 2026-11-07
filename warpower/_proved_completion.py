@@ -9,7 +9,7 @@ No proof survives a call to run(), and no caller-supplied trust mask is accepted
 
 import warp as wp
 
-from . import _analytic_predicates as af
+from . import _bounded_predicates as af
 from . import _filtered_predicates as fp
 from . import _sphere_bounds as sb
 from ._bvh import Tree

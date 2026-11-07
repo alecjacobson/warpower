@@ -271,6 +271,10 @@ Extraction, retained-cell classification and boundary-distance queries use
 [32-thread launch blocks](query-launches.md) to distribute small active workloads
 across the GPU. This changes scheduling without changing geometric calculations,
 buffers or the standalone diagram and Delaunay paths.
+VTM-owned facet completion and seed filtering, boundary projection and refinement
+also use measured [32-thread launches](reconstruction-launches.md). Shared
+reconstruction classes retain the standalone constructor's 256-thread defaults;
+the private VTM class selects its policy before graph capture.
 
 The optional [boundary-jitter workspace](jitter.md) searches a tangent disk at a
 surface vertex of a poor tetrahedron. Fixed buffers hold the original state and

@@ -1,0 +1,87 @@
+........................................................................ [ 13%]
+........................................................................ [ 27%]
+........................................................................ [ 40%]
+........................................................................ [ 54%]
+........................................................................ [ 68%]
+........................................................................ [ 81%]
+........................................................................ [ 95%]
+...............F
+=================================== FAILURES ===================================
+___________ test_guard_failure_restores_core_and_invalidates_output ____________
+
+    def test_guard_failure_restores_core_and_invalidates_output():
+        data = np.load(Path(__file__).parent / "data/unassigned-hand-sites.npz")
+        domain = SurfaceDomain(data["input_points"], data["input_faces"], surface_subdivisions=4)
+        core = VTMWorkspace(domain, data["points"], max_iterations=2)
+        original = core._launch
+    
+        def launch(kernel, dim, inputs):
+            original(kernel, dim, inputs)
+            if kernel == constrain:
+                wp.launch(fail_guard, 1, inputs=[core.error])
+    
+        core._launch = launch
+        wp.load_module(module=__name__, device=core.device)
+        with wp.ScopedCapture() as capture:
+>           core.run()
+
+tests/test_vtm_domain.py:256: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_vtm.py:612: in run
+    self._record()
+warpower/_vtm.py:419: in _record
+    self._record_valid()
+warpower/_vtm.py:474: in _record_valid
+    wp.capture_while(self._running, self._step)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:14278: in capture_while
+    while_body(**kwargs)
+warpower/_vtm.py:482: in _step
+    self._step_valid()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._vtm.VTMWorkspace object at 0x7f6d701a0ee0>
+
+    def _step_valid(self):
+        wp.copy(self._original, self.points)
+        wp.copy(self._old_tets, self.full_tetrahedra)
+        wp.copy(self._old_count, self.full_tetrahedra_count)
+        wp.copy(self._old_energy, self.energy)
+        wp.copy(self._old_boundary, self.boundary.energy)
+        self._launch(
+            self._directions,
+            self.n,
+            [
+                self.points,
+                self.boundary.targets,
+                self.boundary.roles,
+                self._mass,
+                self._moment,
+                self._edge,
+                self.step_limit,
+                self._direction,
+            ]
+            + self._direction_args,
+        )
+>       self._launch(
+            constrain,
+            self.n,
+            [
+                self.domain.tree,
+                self.points,
+                self.boundary.roles,
+                self._direction,
+                self._edge,
+                self.step_limit,
+                self.damping,
+                self.error,
+                self._interior_known,
+            ],
+            block_dim=32,
+        )
+E       TypeError: test_guard_failure_restores_core_and_invalidates_output.<locals>.launch() got an unexpected keyword argument 'block_dim'
+
+warpower/_vtm.py:507: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_vtm_domain.py::test_guard_failure_restores_core_and_invalidates_output
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 519 passed in 251.74s (0:04:11)

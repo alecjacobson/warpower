@@ -1,0 +1,184 @@
+{
+  "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+  "parameters": {
+    "case": "cavity",
+    "input": null,
+    "n": 1000,
+    "initial": 256,
+    "seed": 2026,
+    "subdivisions": 4,
+    "crease_subdivisions": 4,
+    "quality_rounds": 4,
+    "automatic_sizing": false,
+    "repeats": 3,
+    "independent_quality": true,
+    "output": "/home/horde/projects/power-diagram/.work/vtm/recon-launch-coarse-cavity"
+  },
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "input_points": 16,
+  "input_faces": 24,
+  "surface_quadrature_capacity": 1152,
+  "crease_quadrature_capacity": 576,
+  "input_off_sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+  "setup_seconds": 1.262749269604683,
+  "first_replay_wall_seconds": 3.0488110333681107,
+  "first_replay_gpu_ms": 3048.669921875,
+  "additional_replay_gpu_ms": [
+    2858.979736328125,
+    2858.230712890625,
+    2857.50830078125
+  ],
+  "median_additional_replay_ms": 2858.230712890625,
+  "cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "setup_cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "first_replay_cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "additional_replays_cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "valid": 1,
+  "error": 0,
+  "status": 1,
+  "counts": [
+    1000,
+    5220,
+    4545,
+    1040
+  ],
+  "topology": [
+    1,
+    2,
+    1,
+    4
+  ],
+  "rounds": [
+    4,
+    0,
+    4
+  ],
+  "steps": [
+    40,
+    6
+  ],
+  "moves": [
+    4,
+    1
+  ],
+  "last_errors": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "refinement_rejections": 0,
+  "quality_rejections": 0,
+  "last_bad_extraction": 0,
+  "final_extraction_error": 0,
+  "final_extraction_diagnostics": 0,
+  "last_quality_stage_errors": {
+    "selection": 0,
+    "jitter": 0,
+    "interior": 0,
+    "bounded_dual": 0
+  },
+  "quality_stage_diagnostic_scope": "Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
+  "material_recovery": {
+    "activated": 1,
+    "last_added_cells": 2,
+    "last_passes": 1
+  },
+  "quality": {
+    "radius_ratio_percentiles": {
+      "0": 0.09907586292748344,
+      "1": 0.3612519425653043,
+      "5": 0.5417694548117126,
+      "50": 0.8578331653093881,
+      "95": 0.966195008606563,
+      "100": 0.9963117872464776
+    },
+    "volume": 7.306857378844679,
+    "relative_volume_error": -0.02419105219295206,
+    "directed_surface_rms": 0.019772854645822072
+  },
+  "independent_quality": {
+    "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+    "sites": 1000,
+    "referenced_vertices": 1000,
+    "tetrahedra": 4545,
+    "boundary_triangles": 1040,
+    "components": 1,
+    "boundary_euler": 4,
+    "volume": 7.306857378844699,
+    "input_volume": 7.487999977111816,
+    "relative_volume_error": -0.02419105219294959,
+    "mean_radius_ratio": 0.8193200739641395,
+    "radius_ratio_percentiles": {
+      "0": 0.09907586292748345,
+      "1": 0.3612519425653044,
+      "5": 0.5417694548117126,
+      "50": 0.8578331653093881,
+      "95": 0.9661950086065633,
+      "100": 0.9963117872464774
+    },
+    "dihedral_degrees_min": 4.404096448446864,
+    "dihedral_degrees_max": 171.31654123933714,
+    "output_to_input": {
+      "area": 28.723678267017696,
+      "squared_integral": 0.011229975302399674,
+      "rms": 0.019772854645822135,
+      "max_sample": 0.09501477082570409
+    },
+    "input_to_output": {
+      "area": 27.84000011444091,
+      "squared_integral": 0.004050384738938938,
+      "rms": 0.012061838872194298,
+      "max_sample": 0.050287935858186084
+    },
+    "two_sided_area_weighted_rms": 0.016436069596819074,
+    "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.47446846030714585
+  }
+}

@@ -224,8 +224,9 @@ run had throttling in its combined initial/warm window and is retained only as
 diagnostic evidence. Neither run establishes a CPU speedup.
 
 These are historical implementation measurements. The
-[surface-query launch comparison](query-launches.md) records later complete
-solve timings, independent mesh comparisons and the current capture audit.
+[surface-query launch comparison](query-launches.md) and subsequent
+[reconstruction/projection tuning](reconstruction-launches.md) record later
+complete-solve timings, independent mesh comparisons and native capture audits.
 
 The complete-mesher CPU speedup target remains open in
 [#40](https://github.com/alecjacobson/warpower/issues/40); the existing Paragram

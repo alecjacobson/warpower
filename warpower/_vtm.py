@@ -225,6 +225,7 @@ class VTMWorkspace:
         active_count=None,
         selective_threshold=None,
         selective_tolerance=0.4,
+        local_quality_retries=0,
         iteration_limit=None,
         selective_enabled=None,
         material_recovery=None,
@@ -244,7 +245,13 @@ class VTMWorkspace:
             raise ValueError("tolerance must be nonnegative and finite")
         self.damping, self.step_limit, self.tolerance = damping, step_limit, tolerance
         self.selection = None
+        self.local_backtracking = None
         self.controls = None
+        local_quality_retries = operator.index(local_quality_retries)
+        if not 0 <= local_quality_retries < 2**31:
+            raise ValueError("local_quality_retries must be in [0,2**31)")
+        if local_quality_retries and selective_threshold is None:
+            raise ValueError("local_quality_retries requires selective_threshold")
         if selective_enabled is not None and selective_threshold is None:
             raise ValueError("selective_enabled requires selective_threshold")
         self._directions, self._direction_args = directions, []
@@ -368,6 +375,10 @@ class VTMWorkspace:
                     self, selective_threshold, selective_tolerance, enabled=selective_enabled
                 )
                 self._directions, self._direction_args = masked_directions, [self.selection.mask]
+                if local_quality_retries:
+                    from ._selective_backtracking import LocalQualityBacktracking
+
+                    self.local_backtracking = LocalQualityBacktracking(self, local_quality_retries)
             if iteration_limit is not None or selective_enabled is not None:
                 from ._vtm_controls import DeviceControls
 
@@ -413,6 +424,8 @@ class VTMWorkspace:
 
     def _record(self):
         self._interior_known.zero_()
+        if self.local_backtracking is not None:
+            self.local_backtracking.reset()
         if self.selection is not None:
             self.selection.reset()
         self.iterations.zero_()
@@ -490,6 +503,8 @@ class VTMWorkspace:
             self.controls.gate()
 
     def _step_valid(self):
+        if self.local_backtracking is not None:
+            self.local_backtracking.start_step()
         wp.copy(self._original, self.points)
         wp.copy(self._old_tets, self.full_tetrahedra)
         wp.copy(self._old_count, self.full_tetrahedra_count)
@@ -545,6 +560,8 @@ class VTMWorkspace:
     def _try_step(self):
         if self.selection is not None:
             self.selection._invalidate_current()
+        if self.local_backtracking is not None:
+            self.local_backtracking.begin_attempt()
         self._max_move.zero_()
         self._launch(
             self._propose,
@@ -571,6 +588,12 @@ class VTMWorkspace:
         )
         if self.selection is not None:
             wp.capture_if(self._accepted, self.selection.check)
+        if self.local_backtracking is None:
+            self._finish_attempt()
+        else:
+            self.local_backtracking.finish(self._finish_attempt)
+
+    def _finish_attempt(self):
         self._launch(
             finish_attempt,
             1,

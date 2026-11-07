@@ -57,6 +57,11 @@ guard is an implementation choice, not a convergence theorem from the paper.
 It can reject all directions or accept a tiny rounded step; it does not guarantee
 that the threshold is reached or that selective updates are faster.
 
+Optional [local quality backtracking](local-quality-backtracking.md), configured
+with `local_quality_retries`, blocks moved vertices of rejecting cells before
+retrying the complete transaction. Its bounded additional trials retain ordinary
+global backtracking as fallback. The default zero adds no helper state or kernels.
+
 Selection uses fixed buffers and GPU reductions. It repeats on every iteration
 as positions, connectivity, and boundary membership change. Capture replay does
 not read masks/counts on the host, allocate storage, synchronize, or use a CPU

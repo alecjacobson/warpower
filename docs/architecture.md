@@ -255,12 +255,12 @@ a bounded batch to the device active prefix. Reconstruction and
 statistics either commit together or restore the prior state entirely on device.
 It uses separate fixed buffers and adds no work to existing geometry calls.
 
-Material extraction separately uses a
+Material extraction, retained-cell selection and bounded dual volumes use a
 [wide geometry fallback](extraction-geometry.md) when a tetrahedron's float64
 determinant is numerically uncertain. Integer original-coordinate determinants
 and circumcenter numerators preserve very flat positive cells through metric
-evaluation. Centers remain float64; the existing material-selection and topology
-checks decide which cells belong in the output.
+evaluation. Centers and local offsets remain float64; the existing
+material-selection and topology checks decide which cells belong in the output.
 
 The core's optional [selective mode](selective.md) classifies retained tetrahedra,
 marks poor-element vertices, and expands one neighbor ring in separate device

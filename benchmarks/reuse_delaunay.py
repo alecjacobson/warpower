@@ -28,6 +28,8 @@ def consume(
     accepted: wp.array[int],
     rounds: wp.array[int],
     base_attempted: wp.array[int],
+    seed_count: wp.array[int],
+    proofs: wp.array[int],
     records: wp.array2d[wp.int64],
 ):
     row = phase[0]
@@ -42,6 +44,11 @@ def consume(
         for k in range(4):
             checksum += wp.int64(tets[i, k])
     records[row, 6] = checksum
+    records[row, 7] = wp.int64(0)
+    records[row, 8] = wp.int64(0)
+    if seed_count[0] > 0:
+        records[row, 7] = wp.int64(proofs[0])
+        records[row, 8] = wp.int64(proofs[1])
     phase[0] = (row + 1) % records.shape[0]
 
 
@@ -59,7 +66,7 @@ def audit(profile=False, dot=None):
     mesh = ReuseDelaunayWorkspace(initial)
     source = wp.array(frames, dtype=wp.vec3, device=mesh.device)
     phase = wp.zeros(1, dtype=int, device=mesh.device)
-    records = wp.zeros((len(frames), 7), dtype=wp.int64, device=mesh.device)
+    records = wp.zeros((len(frames), 9), dtype=wp.int64, device=mesh.device)
     wp.load_module(module=__name__, device=mesh.device)
     with wp.ScopedCapture() as cap:
         wp.launch(produce, mesh.n, inputs=[source, phase, mesh.points])
@@ -76,6 +83,8 @@ def audit(profile=False, dot=None):
                 mesh.reuse_accepted,
                 mesh.reuse_rounds,
                 mesh.base_attempted,
+                mesh.reuse_seeds,
+                mesh._reuse_completion._certificate.proof_statistics,
                 records,
             ],
         )
@@ -99,6 +108,9 @@ def audit(profile=False, dot=None):
     np.testing.assert_array_equal(values[:, 1], [0, 0, 0, 0, 1, 0])
     assert values[1, 3] == 1 and values[1, 5] == 0
     assert values[2, 3] == 1 and values[2, 4] > 0
+    assert values[1, 7] == values[1, 0] and values[1, 8] == 0
+    assert values[2, 7] > 0 and values[2, 8] > 0
+    np.testing.assert_array_equal(values[[0, 4, 5], 7:], 0)
     assert values[4, 0] == values[4, 6] == 0
     assert values[5, 2] == 0 and values[5, 5] == 1
     np.testing.assert_array_equal(values[0, [0, 6]], values[5, [0, 6]])
@@ -113,6 +125,8 @@ def audit(profile=False, dot=None):
             "completion_rounds",
             "base_attempted",
             "checksum",
+            "cell_proofs_reused_within_completion",
+            "cells_globally_checked_within_completion",
         ],
         records=values.tolist(),
     )

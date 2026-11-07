@@ -213,6 +213,8 @@ def finish(error: wp.array[int], certificate: wp.array[int], count: wp.array[int
 class FacetCompletion:
     """Internal bounded completion; never expose a partial result as successful."""
 
+    _certificate_type = DelaunayCertificate
+
     def __init__(
         self, points, seeds, seed_count, tree, *, capacity=None, max_rounds=64, query_block_dim=256
     ):
@@ -226,7 +228,7 @@ class FacetCompletion:
         with wp.ScopedDevice(self.device):
             self._work = wp.empty((self.capacity, 4), dtype=int)
             self._count = wp.zeros(1, dtype=int)
-            self._certificate = DelaunayCertificate(
+            self._certificate = self._certificate_type(
                 points, self._work, self._count, tree, point_parallel=len(points) <= 2048
             )
             self._certificate._anchors = None
@@ -317,6 +319,15 @@ class FacetCompletion:
             ],
             block_dim=self._query_block_dim,
         )
+        self._deduplicate()
+        self._launch(
+            progress,
+            1,
+            [self.tetrahedra_count, self._count, self.rounds, self.error, self._running],
+        )
+        wp.capture_if(self._running, lambda: self._certify(tree))
+
+    def _deduplicate(self):
         self._table.fill_(-1)
         self._count.zero_()
         self._launch(
@@ -324,9 +335,3 @@ class FacetCompletion:
             5 * self.capacity,
             [self.points, self._keys, self._live, self._table, self._work, self._count, self.error],
         )
-        self._launch(
-            progress,
-            1,
-            [self.tetrahedra_count, self._count, self.rounds, self.error, self._running],
-        )
-        wp.capture_if(self._running, lambda: self._certify(tree))

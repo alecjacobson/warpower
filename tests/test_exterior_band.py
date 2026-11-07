@@ -24,19 +24,27 @@ def patch():
     return points, tets, distances, data["removed"]
 
 
-def transaction(points, tets, distances, keep=None, roles=None):
+def transaction(points, tets, distances, keep=None, roles=None, *, padding=0):
     # This exercises the post-classification transaction, using recorded signed
     # distances. It is deliberately independent of the surface-query algorithm.
     d = warpower.SurfaceDomain(*cube(5))
     roles = np.zeros(len(points), np.int32) if roles is None else roles
-    e = warpower.ExtractionWorkspace(d, points, tets, exterior_recovery=True, feature_roles=roles)
+    source = np.vstack([tets, np.full((padding, 4), -1, np.int32)])
+    count = wp.full(1, len(tets), dtype=int, device=d.device)
+    e = warpower.ExtractionWorkspace(
+        d, points, source, count, exterior_recovery=True, feature_roles=roles
+    )
     keep = np.ones(len(tets), np.int32) if keep is None else keep
-    wp.copy(e.selected, wp.array(keep, device=e.device))
-    wp.copy(e.signed_distance, wp.array(distances, device=e.device))
     p = points[tets].astype(np.float64)
     volumes = np.linalg.det(p[:, 1:] - p[:, :1]) / 6
     assert np.all(volumes > 0)
-    wp.copy(e._input_volume, wp.array(volumes, device=e.device))
+    e._fixture_sources = [
+        wp.array(np.r_[keep, np.zeros(padding, np.int32)], device=e.device),
+        wp.array(np.r_[distances, np.full(padding, np.nan)], device=e.device),
+        wp.array(np.r_[volumes, np.full(padding, np.nan)], device=e.device),
+    ]
+    for target, source in zip([e.selected, e.signed_distance, e._input_volume], e._fixture_sources):
+        wp.copy(target, source)
     e._input_quality.fill_(1)
     with wp.ScopedCapture() as cap:
         e._recompact()
@@ -121,6 +129,7 @@ def test_residual_bad_edge_rolls_back_all_earlier_changes():
 def test_independent_extractor_has_no_recovery_allocations_by_default():
     p, t, _, _ = patch()
     e = warpower.ExtractionWorkspace(warpower.SurfaceDomain(*cube(5)), p, t).run()
+    wp.synchronize_device(e.device)
     assert e._exterior is None and not hasattr(e, "removed_count")
     np.testing.assert_array_equal(e.selected.numpy(), 1)
 
@@ -169,15 +178,14 @@ def consumer(
 def test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames(
     monkeypatch, tmp_path
 ):
+    wp.load_module(module=__name__, device="cuda:0")
     p, t, distances, removed = patch()
-    e, _ = transaction(p, t, distances)
+    # Captured connectivity keeps its original storage throughout replay.
+    e, _ = transaction(p, t, distances, padding=1)
+    wp.synchronize_device(e.device)
     n = len(t)
-    # Add inaccessible invalid padding to exercise active-prefix reads.
-    padded = wp.array(np.vstack([t, [-1, -1, -1, -1]]).astype(np.int32), device=e.device)
-    e.input_tetrahedra = padded
     phase = wp.zeros(1, dtype=int, device=e.device)
     output = wp.empty((5, 5), dtype=int, device=e.device)
-    wp.load_module(module=__name__, device=e.device)
 
     def forbidden(*args, **kwargs):
         raise AssertionError("Host allocation, sync or readback during captured recovery")

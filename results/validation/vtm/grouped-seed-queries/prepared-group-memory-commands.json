@@ -1,0 +1,140 @@
+[
+  {
+    "name": "bounds",
+    "mode": "padded",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_grouped_query_bounds.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 1.4662766456604004,
+    "timeout_seconds": 600,
+    "disable_pool": false,
+    "zero_memcheck_errors": true
+  },
+  {
+    "name": "bounds",
+    "mode": "lifetime",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_grouped_query_bounds.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 1.5165503025054932,
+    "timeout_seconds": 600,
+    "disable_pool": true,
+    "zero_memcheck_errors": true
+  },
+  {
+    "name": "masks",
+    "mode": "padded",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_grouped_query_masks.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 32.46003317832947,
+    "timeout_seconds": 600,
+    "disable_pool": false,
+    "zero_memcheck_errors": true
+  },
+  {
+    "name": "masks",
+    "mode": "lifetime",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_grouped_query_masks.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 36.51594543457031,
+    "timeout_seconds": 600,
+    "disable_pool": true,
+    "zero_memcheck_errors": true
+  },
+  {
+    "name": "route",
+    "mode": "padded",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py::test_large_route_changes_inputs_and_prefixes_without_host_decisions[2050]"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 16.988123416900635,
+    "timeout_seconds": 600,
+    "disable_pool": false,
+    "zero_memcheck_errors": true
+  },
+  {
+    "name": "route",
+    "mode": "lifetime",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "use-after-free",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py::test_large_route_changes_inputs_and_prefixes_without_host_decisions[2050]"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 28.40462589263916,
+    "timeout_seconds": 600,
+    "disable_pool": true,
+    "zero_memcheck_errors": true
+  }
+]

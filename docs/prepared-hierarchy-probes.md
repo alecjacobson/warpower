@@ -1,8 +1,8 @@
 # Prepared seed-query hierarchy experiments
 
 Four private traversal variants preserve the tested meshes but make complete VTM
-solves slower. None is adopted. Production retains the
-[prepared point checker](prepared-point-queries.md) and its strided 32-worker scan.
+solves slower. None is adopted. The subsequent [flat Morton-group design](grouped-seed-queries.md)
+uses a different layout and retains the [prepared point expression](prepared-point-queries.md).
 
 The current 4k trace attributes 554.292 ms across 208 launches to prepared seed
 queries, about 19.5% of its 2,839.922 ms kernel activity. That motivates testing

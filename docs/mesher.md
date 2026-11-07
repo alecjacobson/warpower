@@ -248,6 +248,10 @@ The [prepared point-query filter](prepared-point-queries.md) further reduces
 the 4k torus to 2.640 s and the 1k torus to 717 ms, with unchanged storage and
 launch scheduling. Final standalone comparisons stay within 0.4% of controls;
 full hull, material, boundary and iteration-work checks remain unchanged.
+The subsequent [grouped seed queries](grouped-seed-queries.md) reduce the 4k
+torus to 2.401 s and the 1k torus to 704 ms, with fixed extra group storage.
+Final meshes retain the same connectivity and work; standalone comparison
+differences remain below 1% after retaining and pooling the fitted-hand repeats.
 
 The complete-mesher CPU speedup target remains open in
 [#40](https://github.com/alecjacobson/warpower/issues/40); the existing Paragram

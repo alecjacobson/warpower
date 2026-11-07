@@ -5,9 +5,9 @@ comparison establishes a reproducible baseline and a substantial remaining
 performance gap. Both implementations receive the identical float32 torus
 surface, but their point counts, stopping rules, boundary constraints and quality
 differ. These are not quality-matched time-to-target results. Subsequent GPU
-optimizations reduce the complete 1,000-site solve to **0.717 s** at runtime
-`6a82244`, preserving the original coordinates and tetrahedron sets. See the
-[latest paired GPU measurement](prepared-point-queries.md) and
+optimizations reduce the complete 1,000-site solve to **0.704 s** at runtime
+`b5d369c`, preserving the original coordinates and tetrahedron sets. See the
+[latest paired GPU measurement](grouped-seed-queries.md) and
 [original-mesh comparison](../results/validation/vtm/prepared-point-queries/prepared-query-original-torus-comparison.json).
 The [new comparison near 4,096 vertices](cpu-size-frontier.md) records the
 remaining gap at a larger budget, including all quality and quota limitations.

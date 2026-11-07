@@ -1,0 +1,59 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 2.13 ms  (cached)
+Module warpower._prepared_seeds 3fdfc80 load on device 'cuda:0' took 1.68 ms  (cached)
+{
+  "properties": {
+    "check_seeds": {
+      "symbol": "check_seeds_6826fe7f_cuda_kernel_forward",
+      "register_count": 255,
+      "local_memory_size": 15936
+    },
+    "prepare": {
+      "symbol": "prepare_54678b29_cuda_kernel_forward",
+      "register_count": 92,
+      "local_memory_size": 0
+    },
+    "check": {
+      "symbol": "check_f3173017_cuda_kernel_forward",
+      "register_count": 255,
+      "local_memory_size": 15936
+    }
+  },
+  "baseline": [
+    {
+      "kernel": "check_seeds_6826fe7f_cuda_kernel_forward",
+      "registersPerThread": 255,
+      "blockX": 32,
+      "calls": 420,
+      "milliseconds": 272.547309
+    }
+  ],
+  "prepared": {
+    "check_seeds": [],
+    "prepare": [
+      {
+        "kernel": "prepare_54678b29_cuda_kernel_forward",
+        "registersPerThread": 92,
+        "blockX": 32,
+        "calls": 420,
+        "milliseconds": 6.022649
+      }
+    ],
+    "check": [
+      {
+        "kernel": "check_f3173017_cuda_kernel_forward",
+        "registersPerThread": 255,
+        "blockX": 32,
+        "calls": 420,
+        "milliseconds": 186.34048
+      }
+    ]
+  }
+}

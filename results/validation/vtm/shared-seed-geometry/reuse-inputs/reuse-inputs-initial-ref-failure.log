@@ -1,0 +1,91 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+Module warpower._domain 34c6db2 load on device 'cuda:0' took 0.91 ms  (cached)
+Module warpower._surface_bvh 7ad7add load on device 'cuda:0' took 0.63 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._triangle_contact 9e6db6b load on device 'cuda:0' took 1.19 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.60 ms  (cached)
+Module warpower._domain_topology 52a6f22 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._sampling 473e0ae load on device 'cuda:0' took 0.62 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.51 ms  (cached)
+Module warpower._active_sites e183170 load on device 'cuda:0' took 0.52 ms  (cached)
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.52 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 1.27 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.49 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.57 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.55 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.53 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.53 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.53 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 4.84 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 0.91 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 3.02 ms  (cached)
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 1.47 ms  (cached)
+Module warpower._facet_completion bb6aebe load on device 'cuda:0' took 2.16 ms  (cached)
+Module warpower._facet_completion 62c1043 load on device 'cuda:0' took 3.02 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.57 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._facet_seeds fa4cd6c load on device 'cuda:0' took 1.99 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._proved_completion 9f7b57c load on device 'cuda:0' took 3.41 ms  (cached)
+Module warpower._proved_completion 1af4ac5 load on device 'cuda:0' took 3.51 ms  (cached)
+Module warpower._reuse_delaunay 58b0d1a load on device 'cuda:0' took 0.58 ms  (cached)
+Module __main__ 05ec0de load on device 'cuda:0' took 7.01 ms  (error)
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/profile-reuse-inputs.py", line 109, in <module>
+    main()
+  File "/home/horde/projects/power-diagram/benchmarks/mesher.py", line 59, in main
+    mesh = warpower.VariationalMeshingWorkspace(
+  File "/home/horde/projects/power-diagram/warpower/_mesher.py", line 471, in __init__
+    self.core = VTMWorkspace(
+  File "/home/horde/projects/power-diagram/warpower/_vtm.py", line 292, in __init__
+    self.mesh = mesh_type(
+  File "/home/horde/projects/power-diagram/.work/vtm/profile-reuse-inputs.py", line 74, in initialize
+    wp.load_module(module=__name__,device=self.device)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 13074, in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 12906, in force_load
+    m.load(d, block_dim=dim)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 5227, in load
+    raise e
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 5224, in load
+    compiled = self._compile(device, module_dir, output_name, output_arch, options=options)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 4972, in _compile
+    source_str, source_code_ext, meta, ltoir_values, fatbin_values = self._run_codegen(options, is_cpu)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 1907, in locked_call
+    return func(*args, **kwargs)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 4833, in _run_codegen
+    builder = ModuleBuilder(
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 3501, in __init__
+    self.build_kernel(kernel)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 3620, in build_kernel
+    kernel.adj.build(self)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 1907, in locked_call
+    return func(*args, **kwargs)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 2415, in build
+    raise type(original_exc)(*new_args).with_traceback(original_exc.__traceback__) from None
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 2395, in build
+    adj.eval(adj.tree.body[0])
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 3632, in emit_FunctionDef
+    adj.eval(f)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 4365, in emit_For
+    adj.eval(statement)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 5705, in emit_Assign
+    raise WarpCodegenTypeError(
+warp._src.codegen.WarpCodegenTypeError: Error while parsing function "unchanged_corners" at /home/horde/projects/power-diagram/.work/vtm/profile-reuse-inputs.py:46:
+        p,q=points[j],previous[j]
+;Error, assigning to existing symbol p (wp.ref[vec3f]) with different type (wp.ref[vec3f])

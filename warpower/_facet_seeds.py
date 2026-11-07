@@ -109,7 +109,7 @@ def compact(
 class CertifiedSeeds:
     """Preallocated exact seed filter; input is a device-count prefix of cells."""
 
-    def __init__(self, points, source, count, tree, *, block_dim=256):
+    def __init__(self, points, source, count, tree, *, block_dim=256, prepare_geometry=False):
         self.points, self.source, self.count, self.tree = points, source, count, tree
         self.device = points.device
         self._block_dim = block_dim
@@ -129,6 +129,19 @@ class CertifiedSeeds:
             if self._block_dim != 256:
                 wp.load_module(module=__name__, device=points.device, block_dim=self._block_dim)
             wp.load_module(module="warpower._facet_completion", device=points.device)
+            self._prepared = None
+            if prepare_geometry:
+                from ._prepared_seeds import PreparedSeedQueries
+
+                self._prepared = PreparedSeedQueries(
+                    self.points,
+                    self.unique,
+                    self.unique_count,
+                    self.tree,
+                    self.live,
+                    self.error,
+                    block_dim=self._block_dim,
+                )
 
     def run(self):
         n = len(self.source)
@@ -165,13 +178,23 @@ class CertifiedSeeds:
             ],
         )
         wp.launch(reset_live, n, inputs=[self.unique_count, self.live], device=self.device)
-        wp.launch(
-            check_seeds,
-            32 * n,
-            device=self.device,
-            inputs=[self.points, self.unique, self.unique_count, self.tree, self.live, self.error],
-            block_dim=self._block_dim,
-        )
+        if self._prepared is None:
+            wp.launch(
+                check_seeds,
+                32 * n,
+                device=self.device,
+                inputs=[
+                    self.points,
+                    self.unique,
+                    self.unique_count,
+                    self.tree,
+                    self.live,
+                    self.error,
+                ],
+                block_dim=self._block_dim,
+            )
+        else:
+            self._prepared.run()
         wp.launch(
             compact,
             n,

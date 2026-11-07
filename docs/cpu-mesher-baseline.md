@@ -5,10 +5,10 @@ comparison establishes a reproducible baseline and a substantial remaining
 performance gap. Both implementations receive the identical float32 torus
 surface, but their point counts, stopping rules, boundary constraints and quality
 differ. These are not quality-matched time-to-target results. Subsequent GPU
-optimizations reduce the complete 1,000-site solve to **0.851 s** at runtime
-`3e33911`, preserving the original coordinates and tetrahedron sets. See the
-[latest paired GPU measurement](boundary-launch.md) and
-[original-mesh comparison](../results/validation/vtm/boundary-launch/boundary-original-torus-comparison.json).
+optimizations reduce the complete 1,000-site solve to **0.820 s** at runtime
+`68e2386`, preserving the original coordinates and tetrahedron sets. See the
+[latest paired GPU measurement](shared-seed-geometry.md) and
+[original-mesh comparison](../results/validation/vtm/shared-seed-geometry/prepared-original-torus-comparison.json).
 The table below retains the original CPU/GPU experiment; its CPU measurements
 have not been replaced by a new quality-matched comparison.
 
@@ -69,6 +69,6 @@ records every sample, input/binary hashes, parameters, quotas and independent
 quality. It explicitly reports unthrottled sample counts and medians.
 
 The remaining work is tracked in #37 (time to comparable quality), #40 (wide
-native CPU outperformance), #43 (complete trajectories), #97 (local certification)
-and #98 (cooperative reconstruction). The main README retains the independently
+native CPU outperformance), #43 (complete trajectories) and #98 (cooperative
+reconstruction). The main README retains the independently
 earned Paragram adjacency result; this baseline adds no VTM performance claim.

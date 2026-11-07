@@ -20,9 +20,9 @@ python -m examples.vtm_gallery --case disconnected --n 1000 --output results/loc
 
 The uniform and prescribed-graded torus, thin hand, cavity and separated
 components have completed full solves with independent quality and topology
-checks. A [uniform scanned Armadillo](scanned-armadillo.md) now adds a dense
-imported surface with pinned provenance and independent validation; its graded
-case exposes a separately tracked extraction failure. The broader gallery remains
+checks. The [uniform and graded scanned Armadillo](scanned-armadillo.md) examples add a
+dense imported surface with pinned provenance and independent validation. The
+graded case uses bounded exterior-band recovery for its material boundary. The broader gallery remains
 tracked in [issue #39](https://github.com/alecjacobson/warpower/issues/39).
 
 The thin hand is a new extruded palm with five narrow fingers and sharp corners,

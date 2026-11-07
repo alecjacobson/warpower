@@ -1,0 +1,204 @@
+[
+  {
+    "name": "memcheck-small-stack128k-repeat",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.memcheck",
+      "--stack-bytes",
+      "131072",
+      "--",
+      "-q",
+      "tests/test_exterior_band.py"
+    ],
+    "exit_code": 0,
+    "seconds": 2.325502395629883
+  },
+  {
+    "name": "memcheck-scanned",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.memcheck",
+      "--stack-bytes",
+      "131072",
+      "--",
+      "-q",
+      "tests/test_exterior_scanned.py"
+    ],
+    "exit_code": 0,
+    "seconds": 12.00166654586792
+  },
+  {
+    "name": "lifetime",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-lifetime.py",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-lifetime.json"
+    ],
+    "exit_code": 0,
+    "seconds": 17.05282735824585
+  },
+  {
+    "name": "extraction-native",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--capture-range=cudaProfilerApi",
+      "--capture-range-end=stop",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-extraction-native",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.exterior_loop",
+      "--profile",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-extraction-native.dot",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-extraction-native.json"
+    ],
+    "exit_code": 0,
+    "seconds": 8.550986766815186
+  },
+  {
+    "name": "extraction-native-export",
+    "command": [
+      "nsys",
+      "export",
+      "--type",
+      "sqlite",
+      "--force-overwrite=true",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-extraction-native.sqlite",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-extraction-native.nsys-rep"
+    ],
+    "exit_code": 0,
+    "seconds": 0.022452116012573242
+  },
+  {
+    "name": "extraction-native-audit",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.graph_capture",
+      "--analyze",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-extraction-native.sqlite",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-extraction-native.dot",
+      "--scope",
+      "Seven resident device producer/exterior-recovery/consumer phases: repaired, feature-protected rejection, empty, upstream error, restored, disabled and reenabled. One final synchronization; setup, warmup and readback excluded.",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-extraction-native-audit.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.03591036796569824
+  },
+  {
+    "name": "full-native",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--capture-range=cudaProfilerApi",
+      "--capture-range-end=stop",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-full-native",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--repeats",
+      "3",
+      "--profile",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-full-native.dot",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-full-native.json"
+    ],
+    "exit_code": 0,
+    "seconds": 19.77709412574768
+  },
+  {
+    "name": "full-native-export",
+    "command": [
+      "nsys",
+      "export",
+      "--type",
+      "sqlite",
+      "--force-overwrite=true",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-full-native.sqlite",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-full-native.nsys-rep"
+    ],
+    "exit_code": 0,
+    "seconds": 0.46611762046813965
+  },
+  {
+    "name": "full-native-audit",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.graph_capture",
+      "--analyze",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-full-native.sqlite",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-full-native.dot",
+      "--scope",
+      "Three complete fresh resident torus1000 solves, including domain refit, sampling, growth, fitting, four quality rounds and final extraction. One final synchronization; setup, warmup and readback excluded.",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-full-native-audit.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.07913732528686523
+  },
+  {
+    "name": "mesher-loop",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher_loop",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-mesher-loop.dot",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/exterior-mesher-loop.json"
+    ],
+    "exit_code": 0,
+    "seconds": 13.846081018447876
+  }
+]

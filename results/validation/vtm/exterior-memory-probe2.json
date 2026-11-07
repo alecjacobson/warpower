@@ -1,0 +1,82 @@
+[
+  {
+    "mode": "stack",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      ".work/vtm/exterior-memory-probe2.py",
+      "stack"
+    ],
+    "exit_code": 0
+  },
+  {
+    "mode": "freegraph",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      ".work/vtm/exterior-memory-probe2.py",
+      "freegraph"
+    ],
+    "exit_code": 0
+  },
+  {
+    "mode": "full",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      ".work/vtm/exterior-memory-probe2.py",
+      "full"
+    ],
+    "exit_code": 0
+  },
+  {
+    "mode": "plain",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      ".work/vtm/exterior-memory-probe2.py",
+      "plain"
+    ],
+    "exit_code": 0
+  },
+  {
+    "mode": "no-padding",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      ".work/vtm/exterior-memory-probe2.py",
+      "no-padding"
+    ],
+    "exit_code": 99
+  }
+]

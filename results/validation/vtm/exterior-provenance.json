@@ -1,0 +1,417 @@
+{
+  "scope": "Final late-fallback exterior-band recovery: complete fresh solve timings, independent geometry, real-input capture/lifetime audits and graded scanned example. Earlier eager-pruning policy excluded from final measurements.",
+  "baseline": "7c251ee4395b97323f0ff843129a60b89ba48996",
+  "runtime": "058fa60b193617cad23adf8596900d4757a354fe",
+  "fixture_tests": "7cc131accd3c7d6fdc40dda048cc957511762b0c",
+  "source_sha256": {
+    "warpower/_exterior_band.py": "d875e2b215020ee4b29ed7be89b191fd5cf866339970619673fd7b0244cc995d",
+    "warpower/_extraction.py": "42e5d045b6a5b15414b2a18f01f62b35c76d7da02ff3c49c2b27e7833fed438e",
+    "warpower/_mesher.py": "8cfbbff36fc79725700368ccedd5e5323382248bddb22514b0593d41c7ea587b",
+    "warpower/_quality_moves.py": "d515e12a38b75642c2a8beba29a4925fc14bc4d96dffbfacab692301a54ea9cc",
+    "warpower/_selective.py": "6b1786baac41f4654efbbc6405226168a77286f8ff40d9061b4959c06e0a511f",
+    "warpower/_vtm.py": "f2c25d85322e9a320ef9aed457ae9f6b4105fc836510216b7ec91883f2096abe",
+    "tests/test_exterior_band.py": "b975f96965b6f92924f728fdf98d35a234d5431bacb5b8fc0501d269a24b9df9",
+    "tests/test_exterior_scanned.py": "ca4647d79b32bca8c6880c81921b3cee6cb31db80ebef53e0e99ded2c6b685ff",
+    "benchmarks/exterior_loop.py": "f15db0dc5d0bf4d8f7896caf8dd808e8011f5e19a59266c49eda2d3a78cf7374",
+    "examples/vtm_gallery.py": "58b689a0159d62827259057072ebf71760c0c32dae3193c8cdbbc93464d57c99",
+    "examples/vtm_render.py": "ef908f1733b376be8b77fb1295cb09040984a1578d6058f09dede4d75522a3cd",
+    "benchmarks/memcheck.py": "707d7d29ef6469d9cc52f56d6f21b0dc5464a6aedf858eca09ebb91bcda6df50"
+  },
+  "artifacts": {
+    "results/examples/vtm/armadillo-graded/NOTICE.md": {
+      "bytes": 890,
+      "sha256": "3644377bc9d838aac8a11d13d3bc25f8a5c48ff4f1dc28547e43e333b96427b2"
+    },
+    "results/examples/vtm/armadillo-graded/boundary-self-intersections.txt": {
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    "results/examples/vtm/armadillo-graded/boundary.off": {
+      "bytes": 311406,
+      "sha256": "80b2625558c2b6953798ccce3b79341369915c7f272b459c6adef1200cf97029"
+    },
+    "results/examples/vtm/armadillo-graded/cutaway.png": {
+      "bytes": 374096,
+      "sha256": "d93eb6e1d832c9ed6bdcfec864556807f0bdb5232472705b854a075c83699080"
+    },
+    "results/examples/vtm/armadillo-graded/grading-comparison.json": {
+      "bytes": 1131,
+      "sha256": "105137caad948560858e12177dbf25203ba0a0a911fd43900322599f834310d4"
+    },
+    "results/examples/vtm/armadillo-graded/independent-checks.json": {
+      "bytes": 3614,
+      "sha256": "a4a158402305c880ec66f793850786ccdf187b7110536fa156dd8979e4581eb6"
+    },
+    "results/examples/vtm/armadillo-graded/independent-quality.json": {
+      "bytes": 1683,
+      "sha256": "c69a02fafa0094b4b7abe4e6df3f3c1aa485f228e4be8de93f0dd813723df043"
+    },
+    "results/examples/vtm/armadillo-graded/input-provenance.json": {
+      "bytes": 1640,
+      "sha256": "30e8f081e5efd96275c3af983ec84ee1f6eaf8557a40a3fc8c94687a3e549948"
+    },
+    "results/examples/vtm/armadillo-graded/input.off": {
+      "bytes": 4325935,
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    "results/examples/vtm/armadillo-graded/mesh.npz": {
+      "bytes": 1612892,
+      "sha256": "bc5770e38986d938bde119fc83719d147891e028b514a5753104138a6a456a06"
+    },
+    "results/examples/vtm/armadillo-graded/mesh.vtu": {
+      "bytes": 1051678,
+      "sha256": "36bf9ed5ea5c331076c0b11b3d69617bd96ca868ac8c1a4a99255a3a987fe4c2"
+    },
+    "results/examples/vtm/armadillo-graded/result.json": {
+      "bytes": 3725,
+      "sha256": "bb11c50c69d6aef52580896efd013272c13c4c4d5fbc9deb855eb0d1d0f1f1d4"
+    },
+    "results/examples/vtm/armadillo-graded/surface.png": {
+      "bytes": 406690,
+      "sha256": "974c167eb66de928fae5fa43906fb2c66ab6be69c84076bd9e76e74933b59fc5"
+    },
+    "results/validation/vtm/exterior-after-armadillo-graded.json": {
+      "bytes": 3725,
+      "sha256": "bb11c50c69d6aef52580896efd013272c13c4c4d5fbc9deb855eb0d1d0f1f1d4"
+    },
+    "results/validation/vtm/exterior-after-armadillo-uniform.json": {
+      "bytes": 3711,
+      "sha256": "30c0f73955fd21428c8e0e8deea80914e8a92ac01f5a50e5914bf8849e7b7520"
+    },
+    "results/validation/vtm/exterior-after-cavity.json": {
+      "bytes": 3630,
+      "sha256": "6fd0dcee161ed307a27e40bd723b031e849019a91855cc4192c8eb11f7944dcc"
+    },
+    "results/validation/vtm/exterior-after-cavity.npz": {
+      "bytes": 108510,
+      "sha256": "700b534663df9cb7d23c783b8e9ddbac062bf2e19baf6c8b7bb62777bc3e69ff"
+    },
+    "results/validation/vtm/exterior-after-coarse-cavity.json": {
+      "bytes": 3548,
+      "sha256": "985c4362784da0290703b3d7cf4b71b2d798ba0f16ab7e8de95896bddd034d63"
+    },
+    "results/validation/vtm/exterior-after-coarse-cavity.npz": {
+      "bytes": 111415,
+      "sha256": "645a5eb4be1f720b947c625960898c0cfded2d72c1ee9d23c24a85156a76947c"
+    },
+    "results/validation/vtm/exterior-after-coarse-disconnected.json": {
+      "bytes": 3556,
+      "sha256": "91c20cbf5965a8a1b93c07fd21566175c5b8699a083db235c456d456e3bc87fc"
+    },
+    "results/validation/vtm/exterior-after-coarse-disconnected.npz": {
+      "bytes": 112594,
+      "sha256": "6db9e26d468f7fb47a1b4b485acdc6816c744c48bed52e0002cac14a8bc3c6c4"
+    },
+    "results/validation/vtm/exterior-after-coarse-thin-hand.json": {
+      "bytes": 3159,
+      "sha256": "0394f59fd46dd1cf927265b61d1c1830a1e865f3d56ae02c1f02c29f5d3fdf05"
+    },
+    "results/validation/vtm/exterior-after-delaunay-fitted-hand.json": {
+      "bytes": 2834,
+      "sha256": "8c5a9c5c3c862b29b5783e3f7856c0e4e10b40d80f6ee1ab6cff73234091a422"
+    },
+    "results/validation/vtm/exterior-after-delaunay-grid.json": {
+      "bytes": 2829,
+      "sha256": "f5f88e290627e8e58a2d9ca90fc04af648311667b15159d0bb5c844583bafe14"
+    },
+    "results/validation/vtm/exterior-after-delaunay1000.json": {
+      "bytes": 2826,
+      "sha256": "b724b9b9a0b7f6eb17cc808cb65f9b7ccb9862d71d45cc415efb40ecc3e703b2"
+    },
+    "results/validation/vtm/exterior-after-delaunay100000.json": {
+      "bytes": 2830,
+      "sha256": "5991a1b81a11c95de87f400810d7e4e527cdc5e3c8c80fe9e4eec13a6cea9768"
+    },
+    "results/validation/vtm/exterior-after-diagram100000.json": {
+      "bytes": 2183,
+      "sha256": "7c9a729a9a69160af2e5b12f5ab1816dda5daddff44daedcd47bdf4bb8ae0701"
+    },
+    "results/validation/vtm/exterior-after-disconnected.json": {
+      "bytes": 3643,
+      "sha256": "a32a4086aa532c39f780028f8fe4771870a5f794ade011c0c5666d69514f088c"
+    },
+    "results/validation/vtm/exterior-after-disconnected.npz": {
+      "bytes": 110256,
+      "sha256": "632c44c68b3972f036233ea48052c7a0e879e4ad4d143a34c625906ec848f76c"
+    },
+    "results/validation/vtm/exterior-after-graded-torus.json": {
+      "bytes": 3643,
+      "sha256": "508df32a1eeff6c2c5fdc24dff8c5b3046d810a4faadfff60fc391ce671c1a7f"
+    },
+    "results/validation/vtm/exterior-after-graded-torus.npz": {
+      "bytes": 123889,
+      "sha256": "7a75f5ef36e35a268ee2c398eb4691eb01c469ddac2754232d03e7d979acbeae"
+    },
+    "results/validation/vtm/exterior-after-thin-hand.json": {
+      "bytes": 3634,
+      "sha256": "fb653d2141ba8dfcc058ffbcdfd99b7511c9afb39290ebb0863e619d801158f4"
+    },
+    "results/validation/vtm/exterior-after-thin-hand.npz": {
+      "bytes": 98648,
+      "sha256": "cb7e4a98d6e885aff4db33c0a9a97db27a90f97bcd33444d616f8e515f4a2f36"
+    },
+    "results/validation/vtm/exterior-after-torus1000.json": {
+      "bytes": 2909,
+      "sha256": "80feacb0acefe1303a080464d3c186246150876c9c6f1299e64684bc84794c01"
+    },
+    "results/validation/vtm/exterior-after-torus1000.npz": {
+      "bytes": 91447,
+      "sha256": "d661f4841ba6a7c1cd1aa31c76b9f3e40b24cebabd615c298f8a18f41462647b"
+    },
+    "results/validation/vtm/exterior-after-torus4096.json": {
+      "bytes": 3089,
+      "sha256": "f0ed4cdf1396bf35135e27c65d1e782bdba78931bf70e0369baafabcbd506df9"
+    },
+    "results/validation/vtm/exterior-after-torus4096.npz": {
+      "bytes": 420042,
+      "sha256": "92b9a3daaf2c85758a0b788530146c5be853d63faeda02c91819c016429a6e08"
+    },
+    "results/validation/vtm/exterior-audit-stack128k-commands.json": {
+      "bytes": 5939,
+      "sha256": "78766deb65c1991d25552a1dc9b18bf9e60378bd8bbba4decd2a0400959423bf"
+    },
+    "results/validation/vtm/exterior-before-cavity.json": {
+      "bytes": 3445,
+      "sha256": "b465ec68d15293065199ccaf90ed6fd2f5f77a32f41e95b12adf18a9d7ff14ac"
+    },
+    "results/validation/vtm/exterior-before-delaunay-fitted-hand.json": {
+      "bytes": 2828,
+      "sha256": "9d18473f50cf45f52ef166b62ee350df052007b2dbaa15b319e8caca23f01117"
+    },
+    "results/validation/vtm/exterior-before-delaunay-grid.json": {
+      "bytes": 2833,
+      "sha256": "545a1ed96417a74d1e9a2dead4fdb6c1ade18d890dfdd4e96df59bdbea9608a2"
+    },
+    "results/validation/vtm/exterior-before-delaunay1000.json": {
+      "bytes": 2829,
+      "sha256": "fb8db51492fd26007f04234f4e8b3fad1b6b9618a07ffe145d0357fbe3685818"
+    },
+    "results/validation/vtm/exterior-before-delaunay100000.json": {
+      "bytes": 2828,
+      "sha256": "beb0180e1856dff25589db594f407e38a89529a3c50e95aa04f0ab321a881266"
+    },
+    "results/validation/vtm/exterior-before-diagram100000.json": {
+      "bytes": 2184,
+      "sha256": "e5a5fa015526e700b9e99af0b1480315c261388a3850e90aa02e9b082ab408ff"
+    },
+    "results/validation/vtm/exterior-before-disconnected.json": {
+      "bytes": 3461,
+      "sha256": "e94ce7905e6ce2e8dde96ab2e78b371d452f3cf975e7b9069aa9dc8bda8c20b2"
+    },
+    "results/validation/vtm/exterior-before-graded-torus.json": {
+      "bytes": 3461,
+      "sha256": "da77569e876c2ade9832044646ebe6186c958a3aae18bf7dedba996392643978"
+    },
+    "results/validation/vtm/exterior-before-thin-hand.json": {
+      "bytes": 3458,
+      "sha256": "d6bad9d10d68da9a39118f0613479dbdcf00417cc60c97dfef36b759e6504147"
+    },
+    "results/validation/vtm/exterior-before-torus1000.json": {
+      "bytes": 2911,
+      "sha256": "bd7353778a7a26f657477f4057706a48f5ae46cb81a95a66d079e1139d1ae513"
+    },
+    "results/validation/vtm/exterior-before-torus4096.json": {
+      "bytes": 3084,
+      "sha256": "8f23f5f8bbf27770f318a75aaa4806d5e7704c2bbc15a6d1003104b054fd715d"
+    },
+    "results/validation/vtm/exterior-diagram-recheck-commands.json": {
+      "bytes": 2104,
+      "sha256": "63aebbe09ae7741c319846d7cef81ec5c20a8a64ce2d46131bc08a2b188fa3f8"
+    },
+    "results/validation/vtm/exterior-diagram-recheck-summary.json": {
+      "bytes": 388,
+      "sha256": "976b3ebb8930cf8f6816ee7defc95d5c477deab73147f7bac6d44e0244355026"
+    },
+    "results/validation/vtm/exterior-diagram-recheck1-after.json": {
+      "bytes": 2565,
+      "sha256": "731784220e7f164b7b4b71bad1c52970c5abdb1e3598201bdc27f0c7b486deec"
+    },
+    "results/validation/vtm/exterior-diagram-recheck1-before.json": {
+      "bytes": 2561,
+      "sha256": "ebbed111e8314213449f92fc02893aec8d4bc88da4090b3ad45cb96e63bc5983"
+    },
+    "results/validation/vtm/exterior-diagram-recheck2-after.json": {
+      "bytes": 2570,
+      "sha256": "eb7187974df509252cb80a4b7434da09c3752698af46fbe6620be94c1204f2ac"
+    },
+    "results/validation/vtm/exterior-diagram-recheck2-before.json": {
+      "bytes": 2568,
+      "sha256": "e5c7c8a5014fb8629e2267739df5e40a3ff5e7d6220ac0606a6140b1875df631"
+    },
+    "results/validation/vtm/exterior-extraction-native-audit.json": {
+      "bytes": 1009,
+      "sha256": "d779091c8e14d5fa5d1ac96169e810bde7db67748746689c051d06bc591d0833"
+    },
+    "results/validation/vtm/exterior-extraction-native.dot": {
+      "bytes": 73546,
+      "sha256": "3bd1870287e3a9d37b1a8a9f5729ea4ffffb9f59732d41b0b010c0b692f27e6b"
+    },
+    "results/validation/vtm/exterior-extraction-native.json": {
+      "bytes": 919,
+      "sha256": "69f8f89fb1fa466fcf3cb2a97c2b96894d54d7d796f9d53df5b720475c30f750"
+    },
+    "results/validation/vtm/exterior-full-native-audit.json": {
+      "bytes": 1034,
+      "sha256": "1c0bd4074e48098dcdb403291bb4188b36f8d03d2260d66c661ebbc8b5c3f9c5"
+    },
+    "results/validation/vtm/exterior-full-native.dot": {
+      "bytes": 7560344,
+      "sha256": "f2da6b25342b521b38602639137e873ec5db43e036208618aa61c9f663618ea2"
+    },
+    "results/validation/vtm/exterior-full-native.json": {
+      "bytes": 2857,
+      "sha256": "b3b951fd14b66971326b3168373d2dc1b0dfbedd1c7486e43f7ae2fd339bcbc7"
+    },
+    "results/validation/vtm/exterior-full-tests.log": {
+      "bytes": 672,
+      "sha256": "03d88bcdd57981273e2bda549fe381b10f091099958e31cbdc5a8799e1b40e76"
+    },
+    "results/validation/vtm/exterior-independent.json": {
+      "bytes": 50609,
+      "sha256": "48388eb31cf0f002f3d54d74422af85094cccd5b61a947d4d9f825070dfee1d2"
+    },
+    "results/validation/vtm/exterior-lifetime.json": {
+      "bytes": 918,
+      "sha256": "390bc6aefde88dc41b971be9694f3db1262338cc172fbba221d363ed0de91363"
+    },
+    "results/validation/vtm/exterior-lifetime.log": {
+      "bytes": 1931,
+      "sha256": "05e0bbcab4ec30da0bb8276e132d2c5575fd379426381587835db9623f454a9d"
+    },
+    "results/validation/vtm/exterior-lifetime.py": {
+      "bytes": 143,
+      "sha256": "5eeef050c25c9721d2454ad97972737c25d3d6ce458ac1efd361fdf93671563c"
+    },
+    "results/validation/vtm/exterior-memcheck-all-no-pool.log": {
+      "bytes": 6163,
+      "sha256": "117897c147dab70515cdb3012969fd83b9623ce90bd81d700772681c9609ce76"
+    },
+    "results/validation/vtm/exterior-memcheck-pair-default.log": {
+      "bytes": 6154,
+      "sha256": "fb7fd5468de689b2d0e60283283986ea77ff179dfdc6f201ce3f844015bdba1f"
+    },
+    "results/validation/vtm/exterior-memcheck-pair-first.log": {
+      "bytes": 1386,
+      "sha256": "bb14489d239a4d3eb7fdf4c088ca4c0fefd0aed5ac224c46e274bc978f456b73"
+    },
+    "results/validation/vtm/exterior-memcheck-pair-residual.log": {
+      "bytes": 1386,
+      "sha256": "52906f34b706d3b4104b39238fbe21661f869777bcca6e4ee63b3b5a18af804e"
+    },
+    "results/validation/vtm/exterior-memcheck-scanned.log": {
+      "bytes": 634,
+      "sha256": "c273855df5d08e234dbe878e8efb91996308edbdedeb5fa4e8f2e56003485751"
+    },
+    "results/validation/vtm/exterior-memcheck-single-replay.log": {
+      "bytes": 1385,
+      "sha256": "9a90b4ab2370a191903556223f9dba9546a126e6a66527faa6b8090a4c94184d"
+    },
+    "results/validation/vtm/exterior-memcheck-small-buffer-replacement-failure.log": {
+      "bytes": 12745,
+      "sha256": "f8b89e2a21621ace3dbb1acb6de8f4af21e454025c5bfa5419adffa45b0b719d"
+    },
+    "results/validation/vtm/exterior-memcheck-small-completed-setup.log": {
+      "bytes": 6162,
+      "sha256": "7cb29e308ab1fe54f09b2d056415a1daeab150cd6b9d91bd959a4f5d8d3b6a37"
+    },
+    "results/validation/vtm/exterior-memcheck-small-late-module-failure.log": {
+      "bytes": 12628,
+      "sha256": "30ac25cc4efb007520e0ed6a579d7232b53c822e1fb140ce816448e67617a6e1"
+    },
+    "results/validation/vtm/exterior-memcheck-small-preloaded.log": {
+      "bytes": 41301,
+      "sha256": "e3ae15cc53e4f651d15e549c84e95fbb414cbea67fdc0651a3bec55bc024b42a"
+    },
+    "results/validation/vtm/exterior-memcheck-small-retained-inputs.log": {
+      "bytes": 6162,
+      "sha256": "4b18cd8ba07d9e7d1fbf5b04aeacae0b2588154980b554691f62e9007ad8bf85"
+    },
+    "results/validation/vtm/exterior-memcheck-small-stack128k-repeat.log": {
+      "bytes": 634,
+      "sha256": "4c751243b96d4fcfff9ef7c9e0041a259abdf4fe53279b466622e6117a37eeb2"
+    },
+    "results/validation/vtm/exterior-memcheck-small-stack128k.log": {
+      "bytes": 1396,
+      "sha256": "df5e3d9171948279d916f34348c2e3af20949c2291578c8916ec587dc8cec972"
+    },
+    "results/validation/vtm/exterior-memcheck-small-synchronized.log": {
+      "bytes": 6162,
+      "sha256": "8e9adf661c0ed046f9df864da1504ac7d41d89557b3b6799b139823b935b306c"
+    },
+    "results/validation/vtm/exterior-memory-isolation.json": {
+      "bytes": 2068,
+      "sha256": "5b72c979ed7e5245480a41a208b1337668801919f3e600e40a1a57c4a3ef7ef7"
+    },
+    "results/validation/vtm/exterior-memory-probe-free.log": {
+      "bytes": 1349,
+      "sha256": "0d444e4be63558c38f5e8d3a95876fe521a43d15a515a13cf3497906ba63a394"
+    },
+    "results/validation/vtm/exterior-memory-probe-no-run.log": {
+      "bytes": 1322,
+      "sha256": "23f1f88b96138c7944057ab613909e2850cca478534937bef97f13181825a0bb"
+    },
+    "results/validation/vtm/exterior-memory-probe-retain.log": {
+      "bytes": 2593,
+      "sha256": "ab4d3f569b75a9606bb5f8878f91d6604ec12bac2b2d1b5133b7017f66811c15"
+    },
+    "results/validation/vtm/exterior-memory-probe.json": {
+      "bytes": 942,
+      "sha256": "81210e73eba8cd8c4ac9370f7dff903f950dda24077de88ba5da2a2b377f8751"
+    },
+    "results/validation/vtm/exterior-memory-probe.py": {
+      "bytes": 601,
+      "sha256": "576e85d15c9395538fba3749f37ad775a8013c996f45d14dfa037c0031531bb5"
+    },
+    "results/validation/vtm/exterior-memory-probe2-freegraph.log": {
+      "bytes": 1337,
+      "sha256": "11089d423a63ec1542ac90083d14760b849cc4890fcdb3ba4aa6572fd23543c3"
+    },
+    "results/validation/vtm/exterior-memory-probe2-full.log": {
+      "bytes": 1335,
+      "sha256": "c0ff62e1a11422bd247f63efc4f420ab0f09124c388f1e2ffd46de23b7259b54"
+    },
+    "results/validation/vtm/exterior-memory-probe2-no-padding.log": {
+      "bytes": 2596,
+      "sha256": "0317f7277ef60231bf44fa022795f5d4f3801e8becb001a56085b025d6e4b557"
+    },
+    "results/validation/vtm/exterior-memory-probe2-plain.log": {
+      "bytes": 1249,
+      "sha256": "b6124fee14214763d0c9b45af52f9f98d72bef35aa03c91c56d34f683eaef851"
+    },
+    "results/validation/vtm/exterior-memory-probe2-stack.log": {
+      "bytes": 1338,
+      "sha256": "77837afc0b55fd4a6d277e7ad55ddc0507e6ef155c6572b2b50320529a65c5c0"
+    },
+    "results/validation/vtm/exterior-memory-probe2.json": {
+      "bytes": 1585,
+      "sha256": "74983c04bc1f0b62962c219b63b32dbb331475721ecb45eee245bf54bc267f82"
+    },
+    "results/validation/vtm/exterior-memory-probe2.py": {
+      "bytes": 862,
+      "sha256": "a56ae9b45a792be4cd73375f19393ded54bdb5521a669f356483a20a84252c3f"
+    },
+    "results/validation/vtm/exterior-mesher-loop.json": {
+      "bytes": 597,
+      "sha256": "63ea358c266cabd4d1a94e8b53be0503fdad275bfe21ff59f981bf60fa76cfff"
+    },
+    "results/validation/vtm/exterior-source-isolation.json": {
+      "bytes": 9314,
+      "sha256": "40775db3d4d7784149b49033267dc7786309d247e4569d605a03f2f91cd26dec"
+    },
+    "results/validation/vtm/exterior-summary.json": {
+      "bytes": 52041,
+      "sha256": "1492c326c7c6e351e354ae116147334611914501c2f0ff52ceb520ca030d5ebc"
+    },
+    "results/validation/vtm/exterior-timing-commands.json": {
+      "bytes": 15272,
+      "sha256": "3f7aedfb5651e421fb0bb0f2017e731fdd3546d6b88254fdfe633c891c04e37a"
+    }
+  },
+  "native_reports": {
+    "exterior-extraction-native.nsys-rep": "a90953f04f776553813a225c71d7e1bb4cbe734d97457db6329dfffda4649f7f",
+    "exterior-full-native.nsys-rep": "47d61a901360cbc2bd63fd9ab4fd6e05f726d1e20a827197000e381e91e848e4",
+    "exterior-extraction-native.sqlite": "6266098c741cc830dc257e36e33ba9f8ab38506c40d9800806b1a8ea60d5d557",
+    "exterior-full-native.sqlite": "5deaff07dc5fdb15c2b8d7583eece284dbefc20e06fe9b22bc598e82248a6042"
+  },
+  "cpu_outperformance_established": false
+}

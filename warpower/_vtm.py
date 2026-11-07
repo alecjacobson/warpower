@@ -482,7 +482,7 @@ class VTMWorkspace:
 
     def _step(self):
         if self.selection is not None:
-            self.selection.select()
+            self.selection._select_current()
             wp.capture_if(self.selection.ready, self._step_valid)
         else:
             self._step_valid()
@@ -543,6 +543,8 @@ class VTMWorkspace:
         wp.capture_if(self._accepted, self._accept, self._restore)
 
     def _try_step(self):
+        if self.selection is not None:
+            self.selection._invalidate_current()
         self._max_move.zero_()
         self._launch(
             self._propose,
@@ -599,6 +601,8 @@ class VTMWorkspace:
         self._evaluate(True)
 
     def _restore(self):
+        if self.selection is not None:
+            self.selection._invalidate_current()
         wp.copy(self.points, self._original)
         self._prepare_mesh()
         wp.copy(self.full_tetrahedra, self._old_tets)

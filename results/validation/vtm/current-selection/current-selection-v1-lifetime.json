@@ -1,0 +1,22 @@
+{
+  "scope": "Private #190 current_selection_cache_v1.py, four bytes per selective workspace. No production source changed.",
+  "producer": "Only a freshly computed _check followed by guard_quality with selection.error==0 and core._accepted!=0 marks the current evaluation reusable.",
+  "consumer": "Only VTMWorkspace._step calls select_current. Its Python context applies to select() graph recording only; conditional decisions use the device needed flag. Direct select/evaluate calls recompute.",
+  "lifetime": "After _check accepts, _accept only recomputes ODT energy/mass/moments/edge statistics; controls.gate reads device controls and may stop the loop. Neither changes selection inputs, keep/quality/minimum/count, current domain data, roles, active prefix, recovery/exterior flags or extraction metadata before the next selection.",
+  "invalidation": [
+    "Selection.reset before every fresh run, initial anchoring and initial reconstruction",
+    "Before every _try_step changes points and reconstructs",
+    "Before _restore copies old points/connectivity",
+    "Every select-all transition before overwriting summary outputs",
+    "Every direct/fresh evaluate before recomputation",
+    "Failed/error quality checks retain needed=1"
+  ],
+  "limits": "This is an optimizer-owned intra-run lifetime. It does not authorize using select_current as a general cache after arbitrary external writes. Fresh public core.run resets the state, so producers can change inputs/counts/domain/controls between graph calls. Concurrent unordered input writes were never a supported operation.",
+  "evidence": [
+    "39 existing selection/controls/active/containment tests pass",
+    "4 new forced-fresh oracle tests pass (v2 test fixture; v1 used unsupported float(string) in a Warp kernel and its failure is retained)",
+    "Two complete torus pairs pass independent exact CGAL global/hull, NumPy quality/AABB and boundary-link checks; points and work match bitwise/exactly.",
+    "Initial private validator assumed reconstruction_routing existed at1k; corrected v2 checks that field only where present. Original failing source/log retained."
+  ],
+  "previous_goal_turn": "progress: merged191/closed188, measured six-case observer and unchanged standalone performance. Current turn implements private cache and obtains new tests/timings; CPU wide-speedup objective remains unmet."
+}

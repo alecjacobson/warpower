@@ -365,6 +365,14 @@ Ball64 and symbolic fallback. Physical ties retain the original symbolic policy.
 This adds no persistent arrays or launches. Standalone predicates, topology
 checks and proof lifetimes remain unchanged.
 
+The selective optimizer [reuses an accepted material evaluation](current-material-selection.md)
+at the immediately following step. The current keep mask, quality, minimum and
+count already describe that unchanged mesh, including material recovery when
+enabled. One device flag permits this private intra-run reuse. Fresh solves,
+trial proposals, rollback, select-all and direct evaluation invalidate it;
+every candidate quality check remains fresh. Standalone power-diagram and
+Delaunay routines allocate no cache state and retain their existing paths.
+
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).
 Preallocated 1,024- and 2,048-site constructors handle the smallest fitting prefix;

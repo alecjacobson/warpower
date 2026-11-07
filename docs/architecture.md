@@ -372,6 +372,11 @@ enabled. One device flag permits this private intra-run reuse. Fresh solves,
 trial proposals, rollback, select-all and direct evaluation invalidate it;
 every candidate quality check remains fresh. Standalone power-diagram and
 Delaunay routines allocate no cache state and retain their existing paths.
+For recovered material selection, a private extractor now
+[checks surface-query validity with a finite-distance witness](selection-surface-status.md)
+instead of computing unused boundary-distance summaries. An unavailable witness
+uses the original full query. Geometry, recovery, topology and all error checks
+remain; public extraction and final mesher diagnostics keep full distances.
 
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).

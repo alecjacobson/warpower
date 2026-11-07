@@ -7,7 +7,7 @@ import warp as wp
 
 from ._domain import _contiguous_points, _Scan
 from ._mesh_topology import MeshTopology
-from ._surface_bvh import SurfaceTree, closest_point, material_side
+from ._surface_bvh import SurfaceTree, closest_point, closest_triangle, material_side
 from ._wide_center import exact_geometry, uncertain
 
 wp.set_module_options({"enable_backward": False, "fast_math": False})
@@ -164,6 +164,50 @@ def surface_error(
         else:
             wp.atomic_add(integral, 0, weight * hit.distance2)
             wp.atomic_max(maximum, 0, wp.sqrt(hit.distance2))
+
+
+@wp.kernel
+def selection_surface_status(
+    tree: SurfaceTree,
+    points: wp.array[wp.vec3],
+    faces: wp.array2d[int],
+    count: wp.array[int],
+    error: wp.array[int],
+):
+    """Preserve surface-query errors when internal selection needs no distances."""
+    i = wp.tid()
+    if i >= count[0] or error[0] != 0:
+        return
+    a = wp.vec3d(points[faces[i, 0]])
+    b = wp.vec3d(points[faces[i, 1]])
+    c = wp.vec3d(points[faces[i, 2]])
+    for k in range(3):
+        dominant = a
+        if k == 1:
+            dominant = b
+        elif k == 2:
+            dominant = c
+        sample = (a + b + c) / wp.float64(6.0) + dominant / wp.float64(2.0)
+        proved = False
+        if tree.n > 0:
+            f = tree.ids[0]
+            x = wp.vec3d(tree.points[tree.indices[3 * f]])
+            y = wp.vec3d(tree.points[tree.indices[3 * f + 1]])
+            z = wp.vec3d(tree.points[tree.indices[3 * f + 2]])
+            q = closest_triangle(sample, x, y, z)
+            distance = wp.length_sq(sample - q)
+            limit = wp.float64(1.0e150)
+            # Current finite float32 boxes and these boundary samples have
+            # squared box distances < 1.5e78. Before any finite hit, the full
+            # traversal cannot prune this leaf against its ~1e300 limit.
+            # This identical leaf computation therefore witnesses a finite
+            # hit, even if another triangle is visited first. No nearest
+            # distance or geometric accuracy is inferred from the witness.
+            proved = wp.isfinite(distance) and distance < limit * limit
+        if not proved:
+            hit = closest_point(tree, sample, wp.float64(1.0e150))
+            if hit.face < 0 or not wp.isfinite(hit.distance2):
+                wp.atomic_or(error, 0, 16)
 
 
 @wp.kernel
@@ -394,20 +438,7 @@ class ExtractionWorkspace:
             wp.capture_while(self._repair_ready, self._repair)
         if self._exterior is not None:
             self._exterior.run()
-        self._launch(
-            surface_error,
-            len(self.boundary_faces),
-            [
-                self.domain.tree,
-                self.points,
-                self.boundary_faces,
-                self.boundary_count,
-                self._surface_integral,
-                self.surface_max_sample_distance,
-                self.error,
-            ],
-            block_dim=32,
-        )
+        self._surface_metrics()
         self._launch(
             domain_volume, self.domain.tree.n, [self.domain.tree, self.domain_volume, self.error]
         )
@@ -427,6 +458,22 @@ class ExtractionWorkspace:
                 self._surface_integral,
                 self.surface_rms_distance,
             ],
+        )
+
+    def _surface_metrics(self):
+        self._launch(
+            surface_error,
+            len(self.boundary_faces),
+            [
+                self.domain.tree,
+                self.points,
+                self.boundary_faces,
+                self.boundary_count,
+                self._surface_integral,
+                self.surface_max_sample_distance,
+                self.error,
+            ],
+            block_dim=32,
         )
 
     def _compact_topology(self):
@@ -502,3 +549,26 @@ class ExtractionWorkspace:
             else:
                 wp.capture_launch(self.graph, stream=stream)
         return self
+
+
+class _SelectionExtractionWorkspace(ExtractionWorkspace):
+    """Private selection/recovery and validity, without surface-distance outputs.
+
+    Geometry, topology, recovery and error checks have the full extractor's
+    semantics. Its unused RMS/max/integral distance fields stay zero. Callers
+    needing those diagnostics must use the public ExtractionWorkspace.
+    """
+
+    def _surface_metrics(self):
+        self._launch(
+            selection_surface_status,
+            len(self.boundary_faces),
+            [
+                self.domain.tree,
+                self.points,
+                self.boundary_faces,
+                self.boundary_count,
+                self.error,
+            ],
+            block_dim=32,
+        )

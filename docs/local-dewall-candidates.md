@@ -1,10 +1,12 @@
 # Certified Local DeWall candidate experiment
 
-The private prototype in [#186](https://github.com/alecjacobson/warpower/issues/186)
-improves isolated Delaunay reconstruction on several tested distributions. Its
-complete VTM gains are smaller and it uses more memory. **It is not adopted:**
-all production modules, public defaults and the main README retain their contents.
-The quality-matched wide CPU speedup goal remains unmet.
+This report preserves the original private prototype and its measurements from
+[#186](https://github.com/alecjacobson/warpower/issues/186). That wrapper was not
+adopted. The subsequent [shared integration](shared-wall-reconstruction.md)
+removes duplicate certification and most extra storage, and adopts the bounded
+candidate in private VTM routes after broader validation. Independent diagram
+and Delaunay defaults remain unchanged. The quality-matched wide CPU speedup
+goal remains unmet.
 
 The reference is Gao and Chen's 2026
 [Local DeWall](https://doi.org/10.1016/j.cad.2026.104107), evaluated here through
@@ -118,9 +120,10 @@ memory and pool-disabled use-after-free tracking, using a 128 KiB diagnostic
 stack. Full allocation-order tracking and a complete native VTM trace have not
 been run for this prototype.
 
-Production adoption still requires broader feature/nonconvex/graded cases, cold
-failure costs, memory reduction, native graph auditing and an evidence-based
-dispatch policy. The [artifact manifest](../results/validation/vtm/local-dewall/manifest.json)
+At this initial checkpoint, adoption still required broader
+feature/nonconvex/graded cases, cold failure costs, memory reduction, native graph
+auditing and an evidence-based dispatch policy; see the subsequent
+[shared integration report](shared-wall-reconstruction.md) for those checks. The [artifact manifest](../results/validation/vtm/local-dewall/manifest.json)
 identifies the retained snapshots. On a fresh checkout, copy its Python scripts
 and `references/` directory into `.work/vtm` and run `test_local_dewall_v2.py`
 with pytest and `PYTHONPATH=.:.work/vtm`. The serial drivers create new result

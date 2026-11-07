@@ -336,11 +336,14 @@ A private [fresh complete-mesh certificate experiment](previous-complete-certifi
 tries to avoid fragment filtering when the entire previous topology survives.
 Its ordinary schedule is slower; earlier rejection is effectively neutral at 4k
 and slower at 1k. Both variants remain unadopted.
-A separate [Local DeWall candidate experiment](local-dewall-candidates.md)
-uses bounded compact wall traversal, exact seed filtering and complete hull
-certification. It improves tested reconstruction cases but gives smaller complete
-VTM gains with more storage; it remains unadopted pending broader validation and
-removal of duplicate certification. Independent production APIs are unchanged.
+After an absent or unsuccessful fragment, these private routes now try
+[shared wall reconstruction](shared-wall-reconstruction.md). The bounded
+[Local DeWall candidates](local-dewall-candidates.md) borrow the consumed fragment
+buffer and share its exact seed filter and completion workspace. Acceptance
+publishes the current certificate and matching face/hull metadata together,
+avoiding a second certificate; any failure uses ordinary construction. The
+new per-site wall state adds about 0.6 MB to the 4k torus workspace. Independently
+callable diagram and Delaunay APIs retain their source and defaults.
 The immediately preceding [hull-support result](hull-support-reuse.md) also
 lets proven hull faces skip candidate search. Each new boundary ordering receives
 a fresh global support check before that mask can be consumed. The private

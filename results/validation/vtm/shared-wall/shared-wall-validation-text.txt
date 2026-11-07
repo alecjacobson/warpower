@@ -1,0 +1,37 @@
+All 844 ordinary tests pass, including 75 focused reconstruction tests. The new
+13 cases cover changing producers/consumers, canonical-owner promotion, invalid
+input and recovery, extreme finite scales, malformed/overwritten counts, empty
+and overflowing proposals, filter/completion failure, insufficient final output
+capacity, stable addresses and publication of the current face/hull index.
+A poisoned outer certificate establishes that an accepted wall proof takes the
+intended direct-publication branch; an independent face-index comparison checks
+that its metadata matches the output cells.
+
+Six fresh-process Compute Sanitizer jobs cover all 13 new cases plus the routed
+2,050-site changing-input test, once with padded pooled allocations and once
+with pool-disabled API/use-after-free tracking. Every job reports zero errors
+with a 128 KiB diagnostic stack. The first combined padded run was interrupted
+after 97 seconds with nine pytest passes while spending substantial time in
+setup synchronization. It is retained as **incomplete**, without a final sanitizer
+summary. Smaller fresh groups then completed the entire selected coverage. The
+unresolved setup-delay investigation remains in #155; these observations do not
+establish its cause.
+
+The [full-solve native audit](../results/validation/vtm/shared-wall/shared-wall-full-native-audit.json)
+and [changing-input audit](../results/validation/vtm/shared-wall/shared-wall-loop-native-audit.json)
+each show one graph launch and one final audit synchronization. Neither graph
+contains host transfer, host callback, allocation or free nodes; no explicit CUDA
+allocation/free API is observed. All 3,652 full-graph and 288 loop-graph copy nodes
+are device-to-device. This first execution also includes native graph
+instantiation/upload. Nsight can omit graph-copy activity records, so the audit
+checks both the observed activity and every DOT copy node.
+
+The complete solve executes eight wall initializations/walks and returns the
+expected valid 4,096-site mesh. The second trace contains eight phases in one
+device-controlled loop: full input, a small move, a 512-site prefix, unrelated
+input, invalid active count, recovery, NaN input, and recovery again. All six
+valid outputs match independent SciPy connectivity and mesh checks; both invalid
+phases publish zero tetrahedra. Fresh full inputs accept the wall path, the small
+move accepts temporal reuse, and recovery accepts freshly certified walls.
+The trace records 62,280 and 1,285 kernel activities respectively. Profiling is
+structural/cost evidence, separate from the warmed timing comparison above.

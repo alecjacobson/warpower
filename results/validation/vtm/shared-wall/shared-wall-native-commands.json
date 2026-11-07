@@ -1,0 +1,63 @@
+[
+  {
+    "name": "full-native",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--capture-range=cudaProfilerApi",
+      "--capture-range-end=stop",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/shared-wall-full-native",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/shared-wall-full-native.py",
+      "--dot",
+      "/opt/warpower-generated-cache/graph-derived/shared-wall-full-native.dot",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/shared-wall-full-native.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 17.586037397384644,
+    "timeout_seconds": 300
+  },
+  {
+    "name": "loop-native",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--capture-range=cudaProfilerApi",
+      "--capture-range-end=stop",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/shared-wall-loop-native",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/shared-wall-loop-native.py",
+      "--dot",
+      "/opt/warpower-generated-cache/graph-derived/shared-wall-loop-native.dot",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/shared-wall-loop-native.json",
+      "--profile"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 13.631112337112427,
+    "timeout_seconds": 300
+  },
+  {
+    "name": "native-analysis",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/analyze-shared-wall-audit.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 5.820779323577881,
+    "timeout_seconds": 180
+  }
+]

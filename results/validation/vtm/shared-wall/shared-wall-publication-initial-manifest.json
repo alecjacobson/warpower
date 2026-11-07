@@ -1,0 +1,1844 @@
+{
+  "baseline": "6eb1882d8af126e65ee88fe0cbdd5f3520f8cc87",
+  "runtime": "cc0a020f5f7c586370191d0246eb116c92cd0ac8",
+  "scope": "Private VTM wall fallback shares exact filtering/completion and publishes current proof plus topology metadata once; standalone public defaults unchanged. No quality-matched CPU speedup claim.",
+  "source_sha256": {
+    "warpower/_wall_candidates.py": "f9a532d2418a9ced7ccd9fcccecf91db74c0548b746e1bcd012cfd08d5d764cb",
+    "warpower/_wall_reuse.py": "8eb33d823e468da70ad1e1540876c5d8eb56c861ddfa2aa493a7bd8177f5e56e",
+    "warpower/_active_delaunay.py": "cab5fecb5959856729df080b36bb72c80980eb38a823949044140be7854654ae",
+    "warpower/_vtm.py": "bdabbf0bd5ff6a67f089e5485b1d3b8d19d32f0a764f20fec521e1f1ed742614",
+    "tests/test_wall_reuse.py": "d83876423fe3a2329cba4cde0ad11d197d1418241167d2a17b973f660d0758ed",
+    "NOTICE": "20d07e6ffb042080c3d4c949a6a030b601e5fbc1b6cc90da345af213a2e26cfe",
+    "LICENSE-Local-DeWall": "d31c82872b87420f0160530319a9dfde1a74b985c6fbd410ac567f3e7bdafd46",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "examples/vtm_gallery.py": "8e39899ba4ec7b98dee840f73ccc330c57ac2a398faff3efc103dabb57af4acf",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f"
+  },
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-candidate/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-control/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-candidate/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-control/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    }
+  ],
+  "shared_helpers": [
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    },
+    {
+      "path": "results/validation/vtm/analytic-filters/boundary-timing-commands.json",
+      "sha256": "c75b0a3c89cf49e7e1dec7a109ec6a7497370ddcc801f2c22ad78cc4c6174c49"
+    },
+    {
+      "path": "results/validation/vtm/local-dewall/local_dewall_v4.py",
+      "sha256": "bee1840aa3ca98854b50bffcdf5788c31ecb37083bd3268b05071b490a8ee9d6"
+    },
+    {
+      "path": "results/validation/vtm/local-dewall/local_dewall_integration_v2.py",
+      "sha256": "5e664d13c48fd101a3d71f20bc594110f6ce18b5bc163b054e8c4fb6fcf37d38"
+    },
+    {
+      "path": "results/validation/vtm/local-dewall/test_local_dewall_v2.py",
+      "sha256": "0acb02f2cef8510d279983d04a84c10f373c55436e130307f30273a5470b959e"
+    }
+  ],
+  "reference_binaries_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "files": [
+    {
+      "original": ".work/vtm/analyze-shared-wall-audit.py",
+      "path": "results/validation/vtm/shared-wall/analyze-shared-wall-audit.py",
+      "bytes": 3776,
+      "sha256": "3b61411a4302602244dcab1c53707fe91e46174a6d362f33d3cf166a5b7a465d"
+    },
+    {
+      "original": ".work/vtm/check-shared-wall-final.py",
+      "path": "results/validation/vtm/shared-wall/check-shared-wall-final.py",
+      "bytes": 5691,
+      "sha256": "b6f3d81588e92df34ab8e97b71f943e1fd0938798d7d72d92b14ed05e1769669"
+    },
+    {
+      "original": ".work/vtm/check-shared-wall-private-v2.py",
+      "path": "results/validation/vtm/shared-wall/check-shared-wall-private-v2.py",
+      "bytes": 3652,
+      "sha256": "fae3c8b8f8a173dee063839978e6279cb441d64a268b01286b7477ad93475a3d"
+    },
+    {
+      "original": ".work/vtm/check-shared-wall-private-v3.py",
+      "path": "results/validation/vtm/shared-wall/check-shared-wall-private-v3.py",
+      "bytes": 3576,
+      "sha256": "ae76e03167ce061d4c4b7d97f52b312aaed212019933f923cacfa1304e1e4870"
+    },
+    {
+      "original": ".work/vtm/check-shared-wall-private.py",
+      "path": "results/validation/vtm/shared-wall/check-shared-wall-private.py",
+      "bytes": 2978,
+      "sha256": "8bbb3995effb821f0d162df15383ec52882619af2461d568326466c99350ba1f"
+    },
+    {
+      "original": ".work/vtm/local-dewall-shared-v1-focused-first.log",
+      "path": "results/validation/vtm/shared-wall/local-dewall-shared-v1-focused-first.log",
+      "bytes": 98,
+      "sha256": "98f1e926ddd1109bf40eeb166f64d95c87195921b45154286e8b54da1c05ef42"
+    },
+    {
+      "original": ".work/vtm/local-dewall-v3-1000.json",
+      "path": "results/validation/vtm/shared-wall/local-dewall-v3-1000.json",
+      "bytes": 755,
+      "sha256": "60c9345c71ec1d2f5b0bf5e11f0c78256991be00305904d901c9644bc92fd5cf"
+    },
+    {
+      "original": ".work/vtm/local-dewall-v3-1000.log",
+      "path": "results/validation/vtm/shared-wall/local-dewall-v3-1000.log",
+      "bytes": 1778,
+      "sha256": "caef36b74acffd6e6292872f689fe72a3bf22a951fded0e40c07fdb36025278b"
+    },
+    {
+      "original": ".work/vtm/local-dewall-v3-1000.npz",
+      "path": "results/validation/vtm/shared-wall/local-dewall-v3-1000.npz",
+      "bytes": 97782,
+      "sha256": "8bba6e900b5803ee08d6fdd6ca7974f9721dc6badf8a9598d80585132af26f39"
+    },
+    {
+      "original": ".work/vtm/local-dewall-v3-focused-first.log",
+      "path": "results/validation/vtm/shared-wall/local-dewall-v3-focused-first.log",
+      "bytes": 98,
+      "sha256": "8adad1718bf4381d6078e5f62b39b2c1c3f9bf76a8b4eeb8b3d11376a9ab2c89"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/commands.json",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/commands.json",
+      "bytes": 16467,
+      "sha256": "f4f787389421554087b485134b9eff3a83ef72bc9b65037b7fc826ccdb698311"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-1000-candidate.json",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-1000-candidate.json",
+      "bytes": 2932,
+      "sha256": "271ab6f64d0861fdcf1720f110e008563915f781a32ee41c857c143866f20146"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-1000-candidate.log",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-1000-candidate.log",
+      "bytes": 7613,
+      "sha256": "0de924e28852c1e5a79f5be05b96a2c66c6bb03454531a1a551de513a5393066"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-1000-candidate.npz",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-1000-candidate.npz",
+      "bytes": 91323,
+      "sha256": "8812c7be04e844ace14532ba99e0f6518629056a822a6be0fc658a2dc950dec2"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-1000-control.json",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-1000-control.json",
+      "bytes": 2935,
+      "sha256": "a7e86ba4afd79e2b407a22931d7911ba3d3c8d29a9515d79efd02a93da4098f1"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-1000-control.log",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-1000-control.log",
+      "bytes": 7370,
+      "sha256": "816aaecc0871a40009595f27fe9e1a47e8b82d836f9dbca5115cd365767087c8"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-1000-control.npz",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-1000-control.npz",
+      "bytes": 91333,
+      "sha256": "e1c492048b0c9fac4f019e5be042776623a4128678c1d529c79592b52557f7ca"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-4096-candidate.json",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-4096-candidate.json",
+      "bytes": 3082,
+      "sha256": "b67ed4a8e186fd531fd7b0c1b04c8fdcab2140f78b29baf00246b9c6f7f57b6f"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-4096-candidate.log",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-4096-candidate.log",
+      "bytes": 7793,
+      "sha256": "92758ecc4d8de0ba037cfe6b3907b2da8a929cb367b2194bdeb21f40a2a22872"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-4096-candidate.npz",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-4096-candidate.npz",
+      "bytes": 419922,
+      "sha256": "ff3038ee2e450bef273f47a300aed5cdab5111fcd8739c517178f2c22fd0b07c"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-4096-control.json",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-4096-control.json",
+      "bytes": 3073,
+      "sha256": "2965fa3d4ec99a0c768dbd8b7d10e536f16ff906ff2e2312fb070e4e5be8db09"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-4096-control.log",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-4096-control.log",
+      "bytes": 7538,
+      "sha256": "c0f9ecefda90873a32082fdb9e1f615049b9f28acefc699e1d0d020e67eb643d"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3/torus-4096-control.npz",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3/torus-4096-control.npz",
+      "bytes": 419167,
+      "sha256": "b0bb378b8554b54541f987d93b579f98070457a7923387a076969d200479510b"
+    },
+    {
+      "original": ".work/vtm/local-dewall-vtm-v3-driver.log",
+      "path": "results/validation/vtm/shared-wall/local-dewall-vtm-v3-driver.log",
+      "bytes": 1814,
+      "sha256": "db63683ea84107a9caddc7e1b68a33803ae0313ab1aea772cb1a5ea3fbbb1ebb"
+    },
+    {
+      "original": ".work/vtm/local_dewall_integration_v3.py",
+      "path": "results/validation/vtm/shared-wall/local_dewall_integration_v3.py",
+      "bytes": 7009,
+      "sha256": "6627404a9921a40ca0cce8224264741c3c704c8d1c4adf5e9f230726378885e2"
+    },
+    {
+      "original": ".work/vtm/local_dewall_shared_v1.py",
+      "path": "results/validation/vtm/shared-wall/local_dewall_shared_v1.py",
+      "bytes": 6689,
+      "sha256": "cee08a271370e86a7207ebd9e38cb9c130a29ed3c5a2cfc289278a796600879f"
+    },
+    {
+      "original": ".work/vtm/publish-shared-wall.py",
+      "path": "results/validation/vtm/shared-wall/publish-shared-wall.py",
+      "bytes": 5292,
+      "sha256": "67b3f37b48ac0707f69731f182610e9f1d534c6d89fef8d67dbf07753195c706"
+    },
+    {
+      "original": ".work/vtm/run-local-dewall-mesher-v3.py",
+      "path": "results/validation/vtm/shared-wall/run-local-dewall-mesher-v3.py",
+      "bytes": 100,
+      "sha256": "77c7dc29581cf9a2065c4fe05456739be923e18949dfce57b8ad2593e0d75040"
+    },
+    {
+      "original": ".work/vtm/run-local-dewall-vtm-pilots-v3.py",
+      "path": "results/validation/vtm/shared-wall/run-local-dewall-vtm-pilots-v3.py",
+      "bytes": 1781,
+      "sha256": "bae758909db2b8ef3f72c3c240c1e01afe610da2937b057e966ff5e99bccc225"
+    },
+    {
+      "original": ".work/vtm/run-shared-wall-broad-v1.py",
+      "path": "results/validation/vtm/shared-wall/run-shared-wall-broad-v1.py",
+      "bytes": 2400,
+      "sha256": "4bf83f02c75986f5b5f5622636bf436efd71d0f6644a917df4e69a16518d467c"
+    },
+    {
+      "original": ".work/vtm/run-shared-wall-final.py",
+      "path": "results/validation/vtm/shared-wall/run-shared-wall-final.py",
+      "bytes": 4793,
+      "sha256": "5d404f6d496ad211cd437709b98cc40077dc5272cb70b18f2eb13e193b3cfe45"
+    },
+    {
+      "original": ".work/vtm/run-shared-wall-gallery-v1.py",
+      "path": "results/validation/vtm/shared-wall/run-shared-wall-gallery-v1.py",
+      "bytes": 98,
+      "sha256": "0d87dd8dcb53b6bca6f0cc115ca0833ccb729c8c7985c9a8c7dca0bfe05aa292"
+    },
+    {
+      "original": ".work/vtm/run-shared-wall-memory-v2.py",
+      "path": "results/validation/vtm/shared-wall/run-shared-wall-memory-v2.py",
+      "bytes": 2265,
+      "sha256": "8096abef339b1d2c7c59b262ad4c7a6eb41a791cb5ea69b2eb87f13ecfa56ba8"
+    },
+    {
+      "original": ".work/vtm/run-shared-wall-memory.py",
+      "path": "results/validation/vtm/shared-wall/run-shared-wall-memory.py",
+      "bytes": 2073,
+      "sha256": "b2de62604ba478f078aaba8a01b49e86258d0122b833a0893d3c6423b82d9868"
+    },
+    {
+      "original": ".work/vtm/run-shared-wall-mesher-v1.py",
+      "path": "results/validation/vtm/shared-wall/run-shared-wall-mesher-v1.py",
+      "bytes": 95,
+      "sha256": "ee5bfecad4f5e56460192f930eccf2c46121d9179c3cc4635de131c4e0778439"
+    },
+    {
+      "original": ".work/vtm/run-shared-wall-native.py",
+      "path": "results/validation/vtm/shared-wall/run-shared-wall-native.py",
+      "bytes": 2743,
+      "sha256": "41fca66164da8015bb733f7530ddbac6d651de3eaad79b79a92610ff66cf7913"
+    },
+    {
+      "original": ".work/vtm/run-shared-wall-vtm-pilots-v1.py",
+      "path": "results/validation/vtm/shared-wall/run-shared-wall-vtm-pilots-v1.py",
+      "bytes": 1779,
+      "sha256": "93c44cf8cebefa748f56830aa263f1019bf24c33ff67a6a30068676d2cc71ee7"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-graded-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-graded-candidate/boundary.off.gz",
+      "bytes": 139477,
+      "sha256": "af8c5de4541320f05ccc1165259c8a89592eac8105c0e34c1d6718024236a266"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-candidate/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-graded-candidate/mesh.npz",
+      "bytes": 1612077,
+      "sha256": "8e1866c553116755d03ec97aae99a2fa016490fd7c2c860153e4c41c3ba7f55a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-graded-candidate/mesh.vtu.gz",
+      "bytes": 427760,
+      "sha256": "e852d2084bce1ebcf1d0d14bc5a3fa457667dcd3cc6ba4b8b091849ca203aa11"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-candidate/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-graded-candidate/result.json",
+      "bytes": 3740,
+      "sha256": "51dd67e53cc471c4c24646c464012a64be91da709da2e0e0f7fb4dd77210414e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-candidate.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-graded-candidate.log",
+      "bytes": 8504,
+      "sha256": "000e6cb95a4dc188504312fc6ba70fc424e7ededbd29474c10832381bb6dec97"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-control/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-graded-control/boundary.off.gz",
+      "bytes": 139484,
+      "sha256": "40cd3094770a74b213a9544649092c89fa3e5f02dd9e0f2846d2f48bf9f707e8"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-control/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-graded-control/mesh.npz",
+      "bytes": 1612390,
+      "sha256": "a07447c007766062b4d43434a5cc83dc528af76b80d8397867b9c188b17ada14"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-control/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-graded-control/mesh.vtu.gz",
+      "bytes": 428003,
+      "sha256": "3ab763d291aec3d869c2139b0d2dc0a510c55fa53209bd2397a02980d8fd5783"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-control/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-graded-control/result.json",
+      "bytes": 3738,
+      "sha256": "96ef4b01c3c8f4308cbd3b1a5e08a0ec10ea2bbe0cf84277412b6267240aa0cb"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-graded-control.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-graded-control.log",
+      "bytes": 8261,
+      "sha256": "98fbc3033506b23f3e70b8236539dc71327826c12ad0e057e716b587202db3e5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-uniform-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-uniform-candidate/boundary.off.gz",
+      "bytes": 140734,
+      "sha256": "d734e820e92378f0420a258c0279e12a7059e09c162e48b8d69d1d4fb03f52fc"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-candidate/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-uniform-candidate/mesh.npz",
+      "bytes": 1610497,
+      "sha256": "6f21e5e413639a1a5b03efc88a8b5c619613917e8004f6bf3b4f23bbc45decd7"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-uniform-candidate/mesh.vtu.gz",
+      "bytes": 423382,
+      "sha256": "54a07fb6b4d23b1984f444d96c880c1740d8c5b554972a5c3e983ab23f4e60c1"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-candidate/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-uniform-candidate/result.json",
+      "bytes": 3739,
+      "sha256": "99534638c0abcf980f9003fd82c8c055aaa0b071dfd9d02adc89f6447be93434"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-candidate.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-uniform-candidate.log",
+      "bytes": 8417,
+      "sha256": "93e5ac07ab844fb73558a4b307eba56a2f228e59f35b3666dba77eb35b4baebd"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-control/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-uniform-control/boundary.off.gz",
+      "bytes": 140756,
+      "sha256": "0e3565a966accefa8e635ab0547aab6006ab76ebf4d2300f1d4d122a63c48e4e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-control/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-uniform-control/mesh.npz",
+      "bytes": 1610176,
+      "sha256": "dfb6b4c2722b23b294ae715f14181cdda1b3ef1cb119f4033d5e1650bbbaa8ef"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-control/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-uniform-control/mesh.vtu.gz",
+      "bytes": 423444,
+      "sha256": "5d2140eab4ce0380d6e157a3115e97e17a936dc81f833bdf8ab9bd7913a34c36"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-control/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-uniform-control/result.json",
+      "bytes": 3737,
+      "sha256": "e357e8c4f862f7dae03c663b0d12ecb50d0ca741878ba6ea94acaed08aa3da94"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/armadillo-uniform-control.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/armadillo-uniform-control.log",
+      "bytes": 8174,
+      "sha256": "2528c0b4b4016d8e3d88a759d8021e4e0c641c964996d0d3c1007f67597197c2"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-candidate/boundary.off.gz",
+      "bytes": 30643,
+      "sha256": "ddee439a69644e71e0186897c6f3f3c5c25bcaa49d68f0f8553007dc68524b92"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-candidate/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-candidate/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-candidate/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-candidate/mesh.npz",
+      "bytes": 108613,
+      "sha256": "fc9401f6fd6a00364064b462d945bade64ae6285e6ae1101bb1fa5a7cf375fc6"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-candidate/mesh.vtu.gz",
+      "bytes": 92524,
+      "sha256": "bf8a2e01307200b5ba48d386459ab131b2dcca2e6599fd20cce3e71e0f19be21"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-candidate/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-candidate/result.json",
+      "bytes": 3644,
+      "sha256": "f1dfde679ce4928939ef5b9100b685481beca0f981c408ad552de76e0840137e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-candidate.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-candidate.log",
+      "bytes": 8234,
+      "sha256": "25fc7170923f6e1bd3c2a73145a889e33afd4cb6a25227de9651282ab4d0baa9"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-control/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-control/boundary.off.gz",
+      "bytes": 30613,
+      "sha256": "7ad9ee3295d65019b51ccfbe666340de6d9de469ead60a4cd510ca2865b7c651"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-control/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-control/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-control/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-control/mesh.npz",
+      "bytes": 108677,
+      "sha256": "1520be75da26787c744418843fcc26bfa1acb64280a37cb8bfd1eb1acb633ed1"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-control/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-control/mesh.vtu.gz",
+      "bytes": 92527,
+      "sha256": "0f441d0ee7d3b9c05d322657118955340d86562d5a8b6117b8dee445b8426deb"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-control/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-control/result.json",
+      "bytes": 3635,
+      "sha256": "ab6464e7825d502bc5b81c6242260960f2b373a043641f15e2d4aeeb0e3db9d5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/cavity-control.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/cavity-control.log",
+      "bytes": 7984,
+      "sha256": "68e8bcc3d43a4aede9038a388218d5ff878eb9becf70a55d5690d142fb3a9d0a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/commands.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/commands.json",
+      "bytes": 9303,
+      "sha256": "d659acd27b34129fa1753e5c4db5a0c5ebcc77d75f2284f7105a51f183c1d395"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-candidate/boundary.off.gz",
+      "bytes": 30547,
+      "sha256": "e33a9c4b142e5d6eef3378239f57b173e31cfeb1d65d8ac0082bd737d2b68664"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-candidate/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-candidate/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-candidate/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-candidate/mesh.npz",
+      "bytes": 110192,
+      "sha256": "f85cd9818a857e0f185e0c3a9ea6887dc9d1172715e06a061e9cecb010d2e508"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-candidate/mesh.vtu.gz",
+      "bytes": 88076,
+      "sha256": "114cc0981de90161afcb35cbd79e0f7707e88fa5ea8f7e0bd383551976b5af30"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-candidate/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-candidate/result.json",
+      "bytes": 3657,
+      "sha256": "24844a809752fc0841298ff1d4cf71584b82ea63061d52b3f1bf34bfa98fb14d"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-candidate.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-candidate.log",
+      "bytes": 8247,
+      "sha256": "33b1807020d95bc9035ad0b51bec090d13af26422344a4ad3fb681e5cc291928"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-control/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-control/boundary.off.gz",
+      "bytes": 30558,
+      "sha256": "a7c40acb9efbcbb4eba328a4104abe55178125f584b8a797b1d8d96183231f4b"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-control/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-control/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-control/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-control/mesh.npz",
+      "bytes": 110231,
+      "sha256": "ceebccd2d46f183ffa339c8cb61cfb11f29a8890a26fb64b5d882b962620d773"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-control/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-control/mesh.vtu.gz",
+      "bytes": 88227,
+      "sha256": "2be9f8b75d4379e654786be0150951f69f56058b088a936c2104b1c1731bdfdb"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-control/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-control/result.json",
+      "bytes": 3652,
+      "sha256": "6ff4367cff1e99f103d699e06e2145d58cc965bd63de8b69bfb4a663bb67f110"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/disconnected-control.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/disconnected-control.log",
+      "bytes": 8001,
+      "sha256": "f0f4aec2f59537275c9acc0ee9b97c0f7e4d0e3b97157758befb194c4d714925"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-candidate/boundary.off.gz",
+      "bytes": 133237,
+      "sha256": "b6077a778751ec78535fdc807f9d492f818c53e75ac53aa7ce7e330d760e6d99"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-candidate/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-candidate/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-candidate/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-candidate/mesh.npz",
+      "bytes": 572323,
+      "sha256": "c62cf5a148fa9bd38235be8849f7b933b403f3449db92eb62275c339edafe9a5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-candidate/mesh.vtu.gz",
+      "bytes": 453063,
+      "sha256": "ef1e519b2018a5e7d7699eac554a3e7082a927993eefcb89ff4cd0ceae732058"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-candidate/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-candidate/result.json",
+      "bytes": 3652,
+      "sha256": "6317306308547d6e4c7ddf9fdcda342470c9bee84c9fb420f57d7dc922a6e3c6"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-candidate.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-candidate.log",
+      "bytes": 8416,
+      "sha256": "6eb144473a6448abbb503119ae357a6e7188b1e169da0321657b3618b368f480"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-control/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-control/boundary.off.gz",
+      "bytes": 133250,
+      "sha256": "408ebc0252fddf3e63ff2da81a3d3d2c73a825f1299b0e629b912cacbf35bf10"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-control/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-control/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-control/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-control/mesh.npz",
+      "bytes": 572044,
+      "sha256": "c1e15b545759285040dbfd4ecd6d268830d09f797af14a489609a776aa24f665"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-control/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-control/mesh.vtu.gz",
+      "bytes": 452955,
+      "sha256": "d748f803daa217fb8b64ff93006e69fc729dda3c7841275a2dda22a142c0571a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-control/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-control/result.json",
+      "bytes": 3657,
+      "sha256": "e768ed1e39e66778dcdf28b5443b5fe97c19f4038776bb0f800c9e3fd5e46afe"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/graded-torus-control.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/graded-torus-control.log",
+      "bytes": 8180,
+      "sha256": "eeac8da5ac470f9913c3da535ae7e9d05b51710c981a058111ad55699c553ab1"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-candidate/boundary.off.gz",
+      "bytes": 28764,
+      "sha256": "1794e0273109dd594a0ee889c3f812c07dd84271a5fe5f15f7af743d1f8c4c98"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-candidate/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-candidate/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-candidate/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-candidate/mesh.npz",
+      "bytes": 98531,
+      "sha256": "66a54f8d980305a0a36ae3f95018e6815e96f86ccbb7352af188955733dd18c8"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-candidate/mesh.vtu.gz",
+      "bytes": 70685,
+      "sha256": "c85045d39bef7af85b2f200c293525cf97ab9cd26905a83fc030427eb73a12f5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-candidate/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-candidate/result.json",
+      "bytes": 3661,
+      "sha256": "99b07ddae00c2a9151e6b5e2e3fa654676a4dfa51db7c90ca3cc4e5159626c64"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-candidate.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-candidate.log",
+      "bytes": 8251,
+      "sha256": "60691d2d25c8e6a24f1ae3b2bd0d50fc29945895f5cec47a8d949347257ce963"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-control/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-control/boundary.off.gz",
+      "bytes": 28730,
+      "sha256": "ed198096d431e8f500986a38da4ca020144b83c643d70c6a2b4c87ac819b804a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-control/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-control/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-control/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-control/mesh.npz",
+      "bytes": 98668,
+      "sha256": "84aa3a53a35562464eaaa03bcd55f77f26a02d8574bbf3c22c23bf154d779ea5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-control/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-control/mesh.vtu.gz",
+      "bytes": 70654,
+      "sha256": "8684cdd4786e2dfe9b8d53df2243f39dab964945d24dcde4a1051ad8cf921d1e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-control/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-control/result.json",
+      "bytes": 3654,
+      "sha256": "d52eb42d62bdb0bbee1ede6bee536c40d0a240251147170dab3f5a08225046bf"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1/thin-hand-control.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1/thin-hand-control.log",
+      "bytes": 8003,
+      "sha256": "62417b919f5de2e6b3ecb8316a31e752f771a02294927972bacfdfa45912a064"
+    },
+    {
+      "original": ".work/vtm/shared-wall-broad-v1-driver.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-broad-v1-driver.log",
+      "bytes": 7428,
+      "sha256": "618daf5c0678ac093f91ade6fb8250ab9bd5003d663dafaf623033c40c934be6"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-after/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-graded-after/boundary.off.gz",
+      "bytes": 139480,
+      "sha256": "5e065e76f7c3a90abd6f2f42a263e4faf325a4260289f24db449da4867b45ddc"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-after/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-graded-after/mesh.npz",
+      "bytes": 1612374,
+      "sha256": "27ce56a434a31cf575cd2832df1510736e480b56e8e32255f2f24c36f52a594d"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-graded-after/mesh.vtu.gz",
+      "bytes": 427915,
+      "sha256": "db126e1ab775b22c94b396875b11c638be71cb13713e7542d29e381b7cde4ce7"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-after/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-graded-after/result.json",
+      "bytes": 3741,
+      "sha256": "7240fb88a5a9434b9030105a13dc00084b8ee62309cd313e74ff4010f692ac34"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-graded-after.log",
+      "bytes": 8523,
+      "sha256": "2eb067828b29b63929447acdd8093aae16970d36b60bff006ff2b135aaca12f9"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-before/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-graded-before/boundary.off.gz",
+      "bytes": 139463,
+      "sha256": "2fbb4bb0e224777ae5138b92d71b9d092f22648d9ad0709ddbf8964b9ffdc630"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-before/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-graded-before/mesh.npz",
+      "bytes": 1612486,
+      "sha256": "52f3b9f8f1583ca4e8a13cb85c73870cf167f870dfe750771fb0bbfaab4ed036"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-graded-before/mesh.vtu.gz",
+      "bytes": 428085,
+      "sha256": "b4723b2281016532c33a1096c978d40860a826edf02a90c8c26e59334d40705d"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-before/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-graded-before/result.json",
+      "bytes": 3741,
+      "sha256": "e8a88f6dbdbc13bd5251912992fdbe8fa0208f5c4a3339510a5d02621ed09683"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-graded-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-graded-before.log",
+      "bytes": 8264,
+      "sha256": "04ca873dc4d33c3eaeb207d0550b1e40ee9702dec59e54338a413ff0243c8118"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-after/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-uniform-after/boundary.off.gz",
+      "bytes": 140800,
+      "sha256": "1325efea9e7644f0b0084e7bd07294ccb051d03bc599a184c2f6584798183218"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-after/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-uniform-after/mesh.npz",
+      "bytes": 1610567,
+      "sha256": "d8db004a5629a91dc56f5b615d2ae8e424cfb1ddb69e4e4dfdb974fdbe363713"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-uniform-after/mesh.vtu.gz",
+      "bytes": 423343,
+      "sha256": "8053faa9b7adbb090ed019286728daa6f39ef396c19ffbc6ac4b13f6559a7ed1"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-after/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-uniform-after/result.json",
+      "bytes": 3732,
+      "sha256": "f681c6b272cff3af6506fb1ebcea17b2b6b2a45a80527fab76b55e0145c7adf5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-uniform-after.log",
+      "bytes": 8428,
+      "sha256": "b238556eb800a59987d336dd963b71c1f6ce964f88dcef12d2f758e4922b306a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-before/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-uniform-before/boundary.off.gz",
+      "bytes": 140779,
+      "sha256": "8ee8ba5b278b13561e59b808ab89cd859ea70d7e390f04a03b297e1b0cbe0f51"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-before/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-uniform-before/mesh.npz",
+      "bytes": 1610547,
+      "sha256": "79787db15547f114a4221d91c56fa3f6b5643fd4b6b48fa0343f4fbeda06198e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-uniform-before/mesh.vtu.gz",
+      "bytes": 423376,
+      "sha256": "0c0beecf24b68e620e1c7c67fa47e732f55a9f57af20dd34cbfa1e5b4444dad0"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-before/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-uniform-before/result.json",
+      "bytes": 3728,
+      "sha256": "e1167a23032e69158eb8c809e16358badd833ed88ae85728aba6d3f659e02e2c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/armadillo-uniform-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/armadillo-uniform-before.log",
+      "bytes": 8165,
+      "sha256": "e35a7bfa8351720b99c738819155d7576a555b0ea18b2402aa9a91da1de061cc"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-after/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-after/boundary.off.gz",
+      "bytes": 30638,
+      "sha256": "db185da7d6d4baedd07bdd26d2b3f86e04340f16e23179ac7104a8116811db3a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-after/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-after/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-after/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-after/mesh.npz",
+      "bytes": 108556,
+      "sha256": "f8cdc30375622a53e70918876e0597d7054e737165011ef1117f2fb68405f5a5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-after/mesh.vtu.gz",
+      "bytes": 92525,
+      "sha256": "3075a93e57e0f37459208e0679157b7b2454132c1544f94da07bef9b75f54af9"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-after/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-after/result.json",
+      "bytes": 3637,
+      "sha256": "3621bc0f1488490db6548a21036479c7b749f92c4fed167d5a4b197951bba24e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-after.log",
+      "bytes": 8245,
+      "sha256": "25a19c24b5fa321f948edfead006324f34a5f35f98d4b969111028bb94b36824"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-before/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-before/boundary.off.gz",
+      "bytes": 30649,
+      "sha256": "14c0c4c24a3666f803189dc289fb92584dacf1dffc30b33c8eb67225f9495dfa"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-before/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-before/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-before/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-before/mesh.npz",
+      "bytes": 108561,
+      "sha256": "e636f0d40bea92ccf7358ebc718faaff3bef8dd7c47b709b575adef791927049"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-before/mesh.vtu.gz",
+      "bytes": 92649,
+      "sha256": "392a999e09841a0f171e408dfc52e3c0d9fa23b373f4b388f3c6e217a2627330"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-before/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-before/result.json",
+      "bytes": 3638,
+      "sha256": "b7f5b2550f88da5a592be2e365328eaec85e68b61cd4d3e1d3d756e555e9de7c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/cavity-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/cavity-before.log",
+      "bytes": 7987,
+      "sha256": "e196d6f102fc1242dd228f744f33cd2b81172552442a400abd730b2f5adc986b"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/commands.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/commands.json",
+      "bytes": 22878,
+      "sha256": "8b627a4e141ed5780d816233baceab1103d072f98dbe3df0a90905a55855cfdb"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay-fitted-hand-after.json",
+      "bytes": 2841,
+      "sha256": "f34471ab8ab4781addd5540342a4ba13ab6cef2b8cbbadb59c0f24ca724cb5cc"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay-fitted-hand-after.log",
+      "bytes": 5137,
+      "sha256": "4d4e99ec27f8936ff783f9fda755517aff3a6c077c19277f4fab4e2c6b74ecba"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay-fitted-hand-before.json",
+      "bytes": 2844,
+      "sha256": "a35c12e71f802fac25ea4931948c68373bbbabbd887ccd8d61e9bb2307425320"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay-fitted-hand-before.log",
+      "bytes": 5140,
+      "sha256": "5312b442290de29137820c7c65ee512763b2e225a8aa80402833d368ae44d963"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay-grid-after.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay-grid-after.json",
+      "bytes": 2836,
+      "sha256": "f697af932da5e6483b7f5855566d9484acb45db85b241cf3a2733b622c7d1819"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay-grid-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay-grid-after.log",
+      "bytes": 4875,
+      "sha256": "622deff9a0e1752195f03fcfbfd0072283bf878b80882c7b01aaf923465bb78b"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay-grid-before.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay-grid-before.json",
+      "bytes": 2831,
+      "sha256": "0bc49839faa76d49b0fd0d6a0e22bedce4ec9f96f64115b2cd6de711cc799d33"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay-grid-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay-grid-before.log",
+      "bytes": 4870,
+      "sha256": "6d1f3ee15aa7a1eb9e83ca72a06e1b9f9bed3c2e3eea010b89684b4cfe85b6d2"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay1000-after.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay1000-after.json",
+      "bytes": 2821,
+      "sha256": "b04d17a9cd8685d02283546cd657acef794d3fb21f89a85f7f47f031793b63d0"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay1000-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay1000-after.log",
+      "bytes": 5117,
+      "sha256": "82ba19d134ff98acda0ade6adf8d4625e980d9d80ad813eb6491cd19b1e97a0b"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay1000-before.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay1000-before.json",
+      "bytes": 2829,
+      "sha256": "d7c7ddbc43d36463b0f8cc55f0a0b377e7f9702a411016503f5c0d2f33cf64b9"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay1000-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay1000-before.log",
+      "bytes": 5125,
+      "sha256": "31147099ebab29fd26cde18a2f87c0e72619e826653be72e72792a0b81826381"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay100000-after.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay100000-after.json",
+      "bytes": 2832,
+      "sha256": "0db2696d0206e78d3251e30b69fccb73faf07a1f75995e3d8e55002ac24702b8"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay100000-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay100000-after.log",
+      "bytes": 5062,
+      "sha256": "532e411e21db8e5848a0b8130c37338e289fff8f8efe03a3a71c52e16dbcfb10"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay100000-before.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay100000-before.json",
+      "bytes": 2839,
+      "sha256": "cea818e82b6c95ba192a86f7e7145978844b61a063058dae50c1a4da1c49cef3"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/delaunay100000-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/delaunay100000-before.log",
+      "bytes": 5069,
+      "sha256": "ccd94e58b3b0f05dbcbec14875b72261b51b3d8e42e22307ea291acb54c49d9a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/diagram100000-after.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/diagram100000-after.json",
+      "bytes": 2565,
+      "sha256": "f09fef288e929af182376b40fae4d43a0b487439715f2ba34b23c50594e34798"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/diagram100000-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/diagram100000-after.log",
+      "bytes": 3436,
+      "sha256": "5cf18e6b844a59fc6c3285003d84481b37c2e6eb321f134db715b7277d165444"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/diagram100000-before.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/diagram100000-before.json",
+      "bytes": 2565,
+      "sha256": "7c493c826814ead92693894d58649c4385e3813b6420b9288abce679d5d4be74"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/diagram100000-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/diagram100000-before.log",
+      "bytes": 3436,
+      "sha256": "9aa54872a0fd58796cb68b66bdc13bfe74dba961864ffa8e84598b6d9ce67317"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-after/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-after/boundary.off.gz",
+      "bytes": 30572,
+      "sha256": "26e5908d0d0958474134e75ffbbdc436eb9ff77347eae202cf7fad99a92005b0"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-after/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-after/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-after/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-after/mesh.npz",
+      "bytes": 110312,
+      "sha256": "55889ada1ef6c17e36fbe5ba9db022dba255f16659941d4e4be373438dfd4b5d"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-after/mesh.vtu.gz",
+      "bytes": 88175,
+      "sha256": "0c63f021a406a4883dbbd392d092c34b9f7afb2af9296f374ce14da6ee715122"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-after/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-after/result.json",
+      "bytes": 3651,
+      "sha256": "9a53c06c2ed7ad87d61a3a427eeca102e0d1c0dcd141a014a37d33f073bd3f6b"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-after.log",
+      "bytes": 8259,
+      "sha256": "0ce6a71c4e8da94e8bc5d774dc35420329d74d14d366a262f3efc624868ee53e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-before/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-before/boundary.off.gz",
+      "bytes": 30547,
+      "sha256": "b1a425cf7a7ccd58d4c48da9b3cd2204549eeb7ac8ceee454f68a1bdfb6a96a8"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-before/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-before/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-before/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-before/mesh.npz",
+      "bytes": 110204,
+      "sha256": "b8d2daa39e8a981d789199fd29518e4edfafe5a8507c2753d7e421d3144d16d5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-before/mesh.vtu.gz",
+      "bytes": 88085,
+      "sha256": "698afefd0b35e283f41512467c91293418a9d9507e794672ab12b124d365a7f6"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-before/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-before/result.json",
+      "bytes": 3644,
+      "sha256": "cf34b56687495836bb752ffb66c139cfd400424e0a309f754415d126de72974c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/disconnected-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/disconnected-before.log",
+      "bytes": 7993,
+      "sha256": "cb15020d1930f3ca0b96b00ddd8754fc8e4ec4f75e4f70fa3f0b6b58811f557d"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-after/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-after/boundary.off.gz",
+      "bytes": 133266,
+      "sha256": "33a435be538c9a12455cd801a8e25f8c290296b1c731e2521f5ae6d4fe17da16"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-after/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-after/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-after/mesh.npz",
+      "bytes": 572308,
+      "sha256": "436a6b9e23d61f7e098a4edfc0f2c04dea08791514558b860cb3b5c670ff0c06"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-after/mesh.vtu.gz",
+      "bytes": 453022,
+      "sha256": "ea2c4b118993445d1c86300e0a9b5090c135d599d7d50014aa7c178299773093"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-after/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-after/result.json",
+      "bytes": 3654,
+      "sha256": "174b786fd4d1e3ef092ebdac00fa7c3380db4535f32660dbb3aca68110d79445"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-after.log",
+      "bytes": 8436,
+      "sha256": "dd32d20558351ceb8216a0e3aa878e4b26cc0eb92e8343c0f771f664e5cf5a6f"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-before/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-before/boundary.off.gz",
+      "bytes": 133229,
+      "sha256": "03a8c0f37bade280e810ab9cf394c6ad17878f55db12c52baebc2e5b065f2adb"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-before/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-before/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-before/mesh.npz",
+      "bytes": 572021,
+      "sha256": "1a2754a52d0193ab5de290f2d899760e2060767a73aac4c57d3b5f581a5ed696"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-before/mesh.vtu.gz",
+      "bytes": 453088,
+      "sha256": "cceeba6ed933c50ee8d827f35b470163df8ff32e11ead0b8ad49dbfac32852f1"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-before/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-before/result.json",
+      "bytes": 3650,
+      "sha256": "53676ce38d410a39187c72f18680f46ab88fde1b4071d73fe222ccaff6b685b8"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/graded-torus-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/graded-torus-before.log",
+      "bytes": 8173,
+      "sha256": "8cfae61746eff0c5f7ac184fa935bc80b1c66bdfa58ef682caa2fdba8e38f9b8"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-after/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-after/boundary.off.gz",
+      "bytes": 28740,
+      "sha256": "9a6a6d7aa66d32bf027a188219d35f42fd3b250f0780e2f426ff8edda8a3f860"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-after/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-after/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-after/mesh.npz",
+      "bytes": 98588,
+      "sha256": "47687ba812d04be07eef2cdd7e66c887b870093f2d4a687ac821824a72ab0be6"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-after/mesh.vtu.gz",
+      "bytes": 70646,
+      "sha256": "67d6e4723a80d5d7d1e2f01ed671d36b3d6710ed93e33cc07c8c6d6aa0d058a4"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-after/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-after/result.json",
+      "bytes": 3642,
+      "sha256": "263b5d3be36d8caddc6a4cd62687b4f111f8e0a75ed51c5f204054ba517c9c16"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-after.log",
+      "bytes": 8250,
+      "sha256": "611465adf9f4a7a8477b796cb8e96465fbc5c815cd0105e2aa640d8a65e1d3f3"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-before/boundary.off.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-before/boundary.off.gz",
+      "bytes": 28740,
+      "sha256": "215c941707dd3a5b40d8c994f35792d4f2907e46fccd19cc09005cb06beb6926"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-before/input.off",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-before/mesh.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-before/mesh.npz",
+      "bytes": 98693,
+      "sha256": "171e271e0320edd8ea1790543e9d8920aaf334d02bf5a56b3938fef6b7c136ca"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-before/mesh.vtu.gz",
+      "bytes": 70619,
+      "sha256": "6346617ff6c93f6162fff2e191475bb00744b5fd45c9826cd35efb8e22becbb7"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-before/result.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-before/result.json",
+      "bytes": 3647,
+      "sha256": "18d747d8cf14b75f0cfd49937545d0a8141cf6e11b1714a5e2eccd02df35ded6"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/thin-hand-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/thin-hand-before.log",
+      "bytes": 7996,
+      "sha256": "c9a9bb7e771235644fded324369394ee410181de2c049ad4242b38b9b15fdfcc"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus1000-after.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus1000-after.json",
+      "bytes": 2923,
+      "sha256": "cc9e857eca5999102d76eabaf334a01c112189844558076eb9c891bdf1cfd48f"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus1000-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus1000-after.log",
+      "bytes": 7617,
+      "sha256": "6fafa5491e05f2f15142a9fbd810d90c9672e445f9341f9be434db8004c87bd0"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus1000-after.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus1000-after.npz",
+      "bytes": 91489,
+      "sha256": "85926eff5b60209b371fa007e4d5452478284ba16608067b1fd90c45bdc1ec6e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus1000-before.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus1000-before.json",
+      "bytes": 2927,
+      "sha256": "4925536d321c4e6195e722fe5d8facddf45b23b8a8ee4d93be1c5a2c4fca24d1"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus1000-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus1000-before.log",
+      "bytes": 7362,
+      "sha256": "0c6dc330d36f42125f4d8fe94efeb3ac68280f439e1f3b055b3ed336705b9183"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus1000-before.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus1000-before.npz",
+      "bytes": 91276,
+      "sha256": "8bb1f121c7387c8b92f6f32f78bf7fb8c54307fb7fd118fe924e48246b23c9df"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus4096-after.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus4096-after.json",
+      "bytes": 3066,
+      "sha256": "ae46b28bc16a9588a0e946e65da379844ded4f6077506fd19678de8ee70189a3"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus4096-after.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus4096-after.log",
+      "bytes": 7790,
+      "sha256": "c7d532943710726e06158053faaa33591d05ac628a8628e6fd1a01a44d9eb99b"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus4096-after.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus4096-after.npz",
+      "bytes": 419223,
+      "sha256": "55f31de7aa6ccebec1ab5a21808fd6d15511841a91ce00823464515f4658479d"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus4096-before.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus4096-before.json",
+      "bytes": 3069,
+      "sha256": "5de750ab52e8af91c70c5d27e5b983f921a60aee25294712a29c8680f61f7857"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus4096-before.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus4096-before.log",
+      "bytes": 7534,
+      "sha256": "7ddedbd7f6baf59d5316732b94947d8eeda907e675dc3468adc4cf7f5e2ea8e4"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final/torus4096-before.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final/torus4096-before.npz",
+      "bytes": 419457,
+      "sha256": "f9c6e490b84e3f7cc3ff153720883eb5d04cccabcf7390b8f5303eab1e670e48"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final-independent.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final-independent.json",
+      "bytes": 38018,
+      "sha256": "198689c9c3f0587714457a191ae1ed1d778b225283524f6007d315c305e33080"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final-independent.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final-independent.log",
+      "bytes": 6029,
+      "sha256": "7ccf8f8225704e93a7a20f7f1b16200d0b62c5bc4655da608306bdcc102b574e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final-lossless-archives.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final-lossless-archives.json",
+      "bytes": 8535,
+      "sha256": "bd4dea21cee4cc3d3bcaebdade7e8bea7c2801a5635b6f672d67bdc775e6da9e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-final.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-final.log",
+      "bytes": 19037,
+      "sha256": "f4d005062548d7204fc9d74f05f1f70695e2eb3534570074f8e2cc909ca6f766"
+    },
+    {
+      "original": ".work/vtm/shared-wall-full-native-audit.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-full-native-audit.json",
+      "bytes": 1120,
+      "sha256": "117e86b9eb04b9129815b5c3e4d441b75478ddcebf6991def6b0cc0b481e1e59"
+    },
+    {
+      "original": ".work/vtm/shared-wall-full-native-audit.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-full-native-audit.log",
+      "bytes": 1120,
+      "sha256": "117e86b9eb04b9129815b5c3e4d441b75478ddcebf6991def6b0cc0b481e1e59"
+    },
+    {
+      "original": ".work/vtm/shared-wall-full-native-export.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-full-native-export.log",
+      "bytes": 8101,
+      "sha256": "6f5f30263e80e1a3dc5a4d3791f8cb9d626a0df4a0baea4ba020895fd803a0c6"
+    },
+    {
+      "original": ".work/vtm/shared-wall-full-native.dot.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-full-native.dot.gz",
+      "bytes": 1628647,
+      "sha256": "14ffefc697c01a39d7d09064229a95df5d411bc54fea50fdbcf4bd753d1882f0"
+    },
+    {
+      "original": ".work/vtm/shared-wall-full-native.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-full-native.json",
+      "bytes": 609,
+      "sha256": "1b6e9f78c63c72ece49cc48dbc1e04f345a28c62ff3449683f3ba57253a862a6"
+    },
+    {
+      "original": ".work/vtm/shared-wall-full-native.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-full-native.log",
+      "bytes": 9294,
+      "sha256": "6939977222074dc0983b17c22c2ae39cb7435811ecff2716bc3319fca9011b10"
+    },
+    {
+      "original": ".work/vtm/shared-wall-full-native.nsys-rep.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-full-native.nsys-rep.gz",
+      "bytes": 3202673,
+      "sha256": "dfe44d69128a8638e503b9d87e7a82f07a669e27efa59f8d11c232cf7fadab57"
+    },
+    {
+      "original": ".work/vtm/shared-wall-full-native.py",
+      "path": "results/validation/vtm/shared-wall/shared-wall-full-native.py",
+      "bytes": 1738,
+      "sha256": "f1b06c595d2e0c98e682ca8d92aaff93fb1b03b47b302ee3535e1fe4ccc58c8b"
+    },
+    {
+      "original": ".work/vtm/shared-wall-full-native.sqlite.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-full-native.sqlite.gz",
+      "bytes": 4351905,
+      "sha256": "8953f8c708b8f3e5e1d5c58ed8a90ed221ce2d6ece4232775d7bb4aa986fec04"
+    },
+    {
+      "original": ".work/vtm/shared-wall-full-suite.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-full-suite.log",
+      "bytes": 992,
+      "sha256": "caf17cf35c0107f8fd248f49877745300574acd2f9e08a21d29602ca84bf7713"
+    },
+    {
+      "original": ".work/vtm/shared-wall-full-trace-archive.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-full-trace-archive.json",
+      "bytes": 216,
+      "sha256": "d563f606fd50200c0ea343a0001b9f8a6626fffc41b6feadb8f8c7c084595cb9"
+    },
+    {
+      "original": ".work/vtm/shared-wall-integrated-focused.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-integrated-focused.log",
+      "bytes": 180,
+      "sha256": "80f92a7adad3f3bccee597ac7c80c43818d1c4770edfb6fce825b5838f0a4794"
+    },
+    {
+      "original": ".work/vtm/shared-wall-kernel-ast.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-kernel-ast.json",
+      "bytes": 320,
+      "sha256": "8f476346f70c1456005b2e5ef89436f53a34733aa6f7400ccd46f11405092f34"
+    },
+    {
+      "original": ".work/vtm/shared-wall-loop-native-audit.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-loop-native-audit.json",
+      "bytes": 1144,
+      "sha256": "78decfca48450161f0883d79d9f7b329900ebb7e09a74bfcfb637f85036bce7c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-loop-native-audit.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-loop-native-audit.log",
+      "bytes": 1144,
+      "sha256": "78decfca48450161f0883d79d9f7b329900ebb7e09a74bfcfb637f85036bce7c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-loop-native-export.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-loop-native-export.log",
+      "bytes": 8101,
+      "sha256": "2319c66c20226ba28e8a1ba2ac8b19daf06b40591bd834baee6706764b20a912"
+    },
+    {
+      "original": ".work/vtm/shared-wall-loop-native.dot.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-loop-native.dot.gz",
+      "bytes": 117241,
+      "sha256": "239d6e98df0171b78b89013b766d0adc7886123baca958cbed10071805209de5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-loop-native.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-loop-native.json",
+      "bytes": 2879,
+      "sha256": "7efe3ac58c0b12f14fedcb4e0f1bb0f7be22e3c7a19fb0517904a8d50a340060"
+    },
+    {
+      "original": ".work/vtm/shared-wall-loop-native.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-loop-native.log",
+      "bytes": 6412,
+      "sha256": "014a74401f90eb913c20b65ba1b4bd0f617335f62aa53ef454f156723e8b8194"
+    },
+    {
+      "original": ".work/vtm/shared-wall-loop-native.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-loop-native.npz",
+      "bytes": 1395195,
+      "sha256": "38f45be1486c2e7a1a9cdcf503ff5dae8cd9d7301c201d7c5bc7c07a831ee1a2"
+    },
+    {
+      "original": ".work/vtm/shared-wall-loop-native.nsys-rep.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-loop-native.nsys-rep.gz",
+      "bytes": 254649,
+      "sha256": "1eecc7a22b92e152e275f2eed2e2efc6f06f1635043ac0936ba3fc6c706a5691"
+    },
+    {
+      "original": ".work/vtm/shared-wall-loop-native.py",
+      "path": "results/validation/vtm/shared-wall/shared-wall-loop-native.py",
+      "bytes": 5446,
+      "sha256": "c27927c39161b2a6a2699f01bfabd4ce05a18052116f6eb9bc5f44f388aad99e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-loop-native.sqlite.gz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-loop-native.sqlite.gz",
+      "bytes": 376595,
+      "sha256": "8fee710ef34ea8d938232d4856e642d2a4f10c94dc39601514afcbb0beb6d540"
+    },
+    {
+      "original": ".work/vtm/shared-wall-loop-trace-archive.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-loop-trace-archive.json",
+      "bytes": 214,
+      "sha256": "78e3010227a8abf62b87674be307fa7c5aa313e6ee80da5b6f653498f1133237"
+    },
+    {
+      "original": ".work/vtm/shared-wall-memory-commands.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-memory-commands.json",
+      "bytes": 559,
+      "sha256": "5da57265aa3d7df4588192669a66f67b62df3d18f92cffe06716f99110bf3ccd"
+    },
+    {
+      "original": ".work/vtm/shared-wall-memory-interruption.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-memory-interruption.json",
+      "bytes": 706,
+      "sha256": "202677b7029ced8ab71d4b800fe267d9d618bd2dc91dca0e1c0fa0b33197ef4a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-memory-v2-commands.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-memory-v2-commands.json",
+      "bytes": 4151,
+      "sha256": "4cb74b8132bed2a1c5ac0e6019320daf9752d9928f4437d7ee08eb058aa0ecc4"
+    },
+    {
+      "original": ".work/vtm/shared-wall-memory-v2.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-memory-v2.log",
+      "bytes": 3398,
+      "sha256": "00c1c38cbf33803ecdc0a163ba389de7b2841beafe0ff7d9badff54edee60278"
+    },
+    {
+      "original": ".work/vtm/shared-wall-memory.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-memory.log",
+      "bytes": 1110,
+      "sha256": "f306fec44c4ee903df55a475d4a0b95bc4eb2ea580a4592fe2eff396f7730ffe"
+    },
+    {
+      "original": ".work/vtm/shared-wall-native-analysis.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-native-analysis.log",
+      "bytes": 58,
+      "sha256": "0943b6d52fc9fbaaf4b6756bf5943ac7b5f830b5aa49da0556ea71d664e95f96"
+    },
+    {
+      "original": ".work/vtm/shared-wall-native-audit-summary.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-native-audit-summary.json",
+      "bytes": 54791,
+      "sha256": "9107e2185b225e1aba63e379a333b42ab5b078b215750dcec99d2ed3ffc0448d"
+    },
+    {
+      "original": ".work/vtm/shared-wall-native-commands.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-native-commands.json",
+      "bytes": 1947,
+      "sha256": "d37040c9ef87a118ac2922a6539dfdf6e22b35375e7c7c152a551818c9ede419"
+    },
+    {
+      "original": ".work/vtm/shared-wall-native.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-native.log",
+      "bytes": 1623,
+      "sha256": "cdd1e631d7068ca41d5ce4d524966c37ff00f249bcd9d4238b5e801df480dc52"
+    },
+    {
+      "original": ".work/vtm/shared-wall-private-independent-v2.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-private-independent-v2.log",
+      "bytes": 403,
+      "sha256": "753f625097b5055fbb7e9fbc4252cdc883befe256447d110ef071e9e7304596c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-private-independent-v3.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-private-independent-v3.json",
+      "bytes": 33378,
+      "sha256": "826663be594473925317a992cfe770c7da0aaad38ce36d1d58899d92a1fd2c3c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-private-independent-v3.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-private-independent-v3.log",
+      "bytes": 2336,
+      "sha256": "02d45f9d523981d0a85f2652512741d20cfb69ab44cccd43a9fa4877535d28a5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-private-independent.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-private-independent.json",
+      "bytes": 26742,
+      "sha256": "ecd77cb80285153bd53af47cbaa2400a9d2b1ea16ddd3f85937a15658c14f3c5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-private-independent.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-private-independent.log",
+      "bytes": 3515,
+      "sha256": "6da4cab792c427f1fd864266e0eb4ec567f587650f8377fd92b72095a1ae13fb"
+    },
+    {
+      "original": ".work/vtm/shared-wall-private-lossless-archives.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-private-lossless-archives.json",
+      "bytes": 8799,
+      "sha256": "c46fc67c68f83e67208007634ae1037688dd955f2c160793242c254c69841cd5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-publication.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-publication.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/shared-wall-v2-route-lifetime.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-v2-route-lifetime.log",
+      "bytes": 3642,
+      "sha256": "964840f980abdc8ea38e1754171fe3b7b628a2cb9deca9d77f29110d6ffd39b1"
+    },
+    {
+      "original": ".work/vtm/shared-wall-v2-route-padded.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-v2-route-padded.log",
+      "bytes": 3641,
+      "sha256": "a52a34894aa436c2ef381154e6628aab8fc04d4ebaae24a0b5e5a6166edb6000"
+    },
+    {
+      "original": ".work/vtm/shared-wall-v2-wall-core-lifetime.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-v2-wall-core-lifetime.log",
+      "bytes": 7515,
+      "sha256": "d17f6f2275c9881ddec4235fc059a7e7e735b97112762a5f97c150a061f48ab9"
+    },
+    {
+      "original": ".work/vtm/shared-wall-v2-wall-core-padded.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-v2-wall-core-padded.log",
+      "bytes": 3399,
+      "sha256": "d3ca5215f22499d2b0584261847635dc83015c837430c60a2f1e73695393970e"
+    },
+    {
+      "original": ".work/vtm/shared-wall-v2-wall-metadata-lifetime.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-v2-wall-metadata-lifetime.log",
+      "bytes": 3313,
+      "sha256": "d6ab21556f3fa01fdf9ef98dff50243d75f2ff6062be18d42900c94aad13447d"
+    },
+    {
+      "original": ".work/vtm/shared-wall-v2-wall-metadata-padded.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-v2-wall-metadata-padded.log",
+      "bytes": 3312,
+      "sha256": "7166c6ab4ea3e51b265dca14c18ed08832b7e437b8d493d301583262203d1341"
+    },
+    {
+      "original": ".work/vtm/shared-wall-validation-text.txt",
+      "path": "results/validation/vtm/shared-wall/shared-wall-validation-text.txt",
+      "bytes": 2617,
+      "sha256": "d2bbc022ef5748ae1df18001b3f794bf52c41d62e4c71a49af036a6bcd5d29c2"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/commands.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/commands.json",
+      "bytes": 16459,
+      "sha256": "91125710fe0fd14b0b18a639968894fdeafe0359797629edd4b1acb990db464c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-1000-candidate.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-1000-candidate.json",
+      "bytes": 2937,
+      "sha256": "7ca292fa60b497b0164b3fd58bc34449efd698102d2776a6e6328c880ecf7d52"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-1000-candidate.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-1000-candidate.log",
+      "bytes": 7613,
+      "sha256": "ff1d4d92f3bbe2d4657997142aa22c2086fce49b864e76b9a072865338fc44d1"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-1000-candidate.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-1000-candidate.npz",
+      "bytes": 91432,
+      "sha256": "2051cc1474ed44aa3ac91bf2dc3a5080d8cefb39b57f761ddfda18144a51a422"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-1000-control.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-1000-control.json",
+      "bytes": 2933,
+      "sha256": "ae5b3b7d6fe8fbabc723d10b9d864a1f8291f938129be4164c5a29e63c430aaf"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-1000-control.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-1000-control.log",
+      "bytes": 7368,
+      "sha256": "b453b715cabe357a09751cf794caf5fd60b6c8fe9f580a82e72862541fd3aaa2"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-1000-control.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-1000-control.npz",
+      "bytes": 91599,
+      "sha256": "7d737bfe8bcad8e56452170e5cab469aa9a5be8a58b32707f56c387b9f49fa06"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-4096-candidate.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-4096-candidate.json",
+      "bytes": 3077,
+      "sha256": "2c16291f942bebfd2a832f31de5d56cfa183203085d1588a87af1d7df3469393"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-4096-candidate.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-4096-candidate.log",
+      "bytes": 7783,
+      "sha256": "dca18060397102ac01baf33d2674aa81a8fde630b36ea26bfd1a9e6d0eabe00c"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-4096-candidate.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-4096-candidate.npz",
+      "bytes": 419163,
+      "sha256": "faa2272ca7d9853269777e36daff69a233810872e0e00124b8914876ad55dddb"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-4096-control.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-4096-control.json",
+      "bytes": 3075,
+      "sha256": "63b0a2ebddcdebdff80eea71072d7f37e21e82388d512ac490502e2288965206"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-4096-control.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-4096-control.log",
+      "bytes": 7540,
+      "sha256": "aa89d30af22540e6257e8e9169e81159d3b3df5ee8a7f5b03e5e9cf7835355d5"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1/torus-4096-control.npz",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1/torus-4096-control.npz",
+      "bytes": 418907,
+      "sha256": "b399fd5fa504ce1d2e868d05fef179c178ab3caf64be78c8e4b539a304d5a3e2"
+    },
+    {
+      "original": ".work/vtm/shared-wall-vtm-v1-driver.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-vtm-v1-driver.log",
+      "bytes": 1806,
+      "sha256": "0de54fd3d320aef37f379040b8f92be13d6ed0724d2444f13efcf3844f0cd04a"
+    },
+    {
+      "original": ".work/vtm/shared-wall-wall-padded.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-wall-padded.log",
+      "bytes": 7935,
+      "sha256": "9efb60b1103b803e9638e5989455a26aae02aaaf69913302b24c7f0a58a35902"
+    },
+    {
+      "original": ".work/vtm/shared-wall-wheel-build-v2.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-wheel-build-v2.log",
+      "bytes": 881,
+      "sha256": "27ab549e3958b28334336cb4a076f2ca38cbc2624c76afa4bf8e4df2185cf30b"
+    },
+    {
+      "original": ".work/vtm/shared-wall-wheel-build.log",
+      "path": "results/validation/vtm/shared-wall/shared-wall-wheel-build.log",
+      "bytes": 1647,
+      "sha256": "0d9a5a972ccd77d941da6e8d301b61fc9a81bddb23b01d463c7f512c734db16b"
+    },
+    {
+      "original": ".work/vtm/shared-wall-wheel-check.json",
+      "path": "results/validation/vtm/shared-wall/shared-wall-wheel-check.json",
+      "bytes": 600,
+      "sha256": "347cded6d658c3e9aa052471b5321a01b5d94c397aec6a6699b6f55502bacae3"
+    },
+    {
+      "original": ".work/vtm/test_local_dewall_shared_v1.py",
+      "path": "results/validation/vtm/shared-wall/test_local_dewall_shared_v1.py",
+      "bytes": 4925,
+      "sha256": "6c4e567358c79f8105f2884a5c7ed8d25841f34515e478041a104c8b2801555b"
+    },
+    {
+      "original": ".work/vtm/test_local_dewall_v3.py",
+      "path": "results/validation/vtm/shared-wall/test_local_dewall_v3.py",
+      "bytes": 5267,
+      "sha256": "781722e32eb17d75a8db7308e54e302d694f7035e53493456ef1c7ca9f29f29d"
+    },
+    {
+      "original": ".work/vtm/write-shared-wall-doc.py",
+      "path": "results/validation/vtm/shared-wall/write-shared-wall-doc.py",
+      "bytes": 9574,
+      "sha256": "d225fda35877c96cb42b0ce8d58bbcd77b5783a5cde3ec0eb3b15a535290a482"
+    }
+  ]
+}

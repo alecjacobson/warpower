@@ -1,0 +1,106 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.87 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.59 ms  (cached)
+Module make_construct_kernel__locals__construct_ff93eeef 0ad3be0 load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 10.43 ms  (cached)
+Module warpower._adjacency 2ca3a3f load on device 'cuda:0' took 0.64 ms  (cached)
+{
+  "backend": "warpower",
+  "points_sha256": "46b737e55673a8f387681866c9d839c610fab9cdbe2ea1804db0d8f0a66ff7ee",
+  "weights_sha256": null,
+  "distribution": "uniform",
+  "n": 100000,
+  "seed": 42,
+  "weighted": false,
+  "memory": {
+    "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+    "interval_seconds": 0.001,
+    "before_construction_bytes": 1137836032,
+    "peak_bytes": 1750204416,
+    "samples": 667,
+    "error": null
+  },
+  "cpu_quota_during_measurement": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "cpu_throttled": false,
+  "mempool_retain_mb": 0,
+  "warmup": 5,
+  "repeats": 30,
+  "seconds": [
+    0.018000252544879913,
+    0.018126338720321655,
+    0.018057122826576233,
+    0.01812191680073738,
+    0.018091939389705658,
+    0.01805122196674347,
+    0.01793874055147171,
+    0.018157701939344406,
+    0.018147088587284088,
+    0.018111035227775574,
+    0.01828901469707489,
+    0.02418314665555954,
+    0.03292565792798996,
+    0.018035046756267548,
+    0.018300358206033707,
+    0.01821405068039894,
+    0.01811528205871582,
+    0.01808653399348259,
+    0.018117059022188187,
+    0.018073707818984985,
+    0.01801804080605507,
+    0.018114406615495682,
+    0.018143191933631897,
+    0.018267493695020676,
+    0.017961770296096802,
+    0.01799982786178589,
+    0.01837388426065445,
+    0.018444489687681198,
+    0.019679252058267593,
+    0.018850073218345642
+  ],
+  "mean_seconds": 0.018899854893485706,
+  "median_seconds": 0.018119487911462784,
+  "nnz": 1526592,
+  "status_counts": {
+    "0": 100000
+  },
+  "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+  "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+  "python": "3.10.12",
+  "versions": {
+    "warp": "1.19.0",
+    "warpower_source_sha256": "9719937f0b9b88cb0a6e19285eb5d19601d4bebf0030b1635031bdb3cb9ff7b1",
+    "warpower_dirty": false,
+    "warpower_commit": "c5b75f44cccb696ae1ad01ea8257039e803fb2ad",
+    "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+  },
+  "diagnostics": {
+    "retried_cells": 0,
+    "double_precision_cells": 0,
+    "consistency_retried_cells": 0,
+    "asymmetric_cells_remaining": 0,
+    "chunk_size": 100000,
+    "leaf_size": 4,
+    "knn_requested": 8,
+    "knn_effective": 0,
+    "warm_start": "nearest leaf"
+  }
+}

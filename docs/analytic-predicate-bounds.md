@@ -1,7 +1,9 @@
 # Certified analytic filters for VTM face search
 
 The VTM reuse constructor's strided exposed-face search uses analytic float64
-determinant bounds before the existing interval and exact predicates. A filter
+determinant bounds before the existing interval and exact predicates. A
+[bounded float32 first stage](bounded-predicate-filters.md) now precedes them;
+unsupported ranges and uncertain signs retain the binary64 path described here. A filter
 returns only a certified strict nonzero sign. An uncertain or nonfinite result
 falls through to the original Ball64, dyadic-integer and symbolic policy.
 Uncertainty is never interpreted as a tie. Standalone diagram and Delaunay

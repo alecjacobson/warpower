@@ -1,0 +1,63 @@
+[
+  {
+    "name": "full-native",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--capture-range=cudaProfilerApi",
+      "--capture-range-end=stop",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/float32-full-native",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/float32-full-native.py",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/float32-full-native.dot",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/float32-full-native.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 16.53463363647461,
+    "timeout_seconds": 300
+  },
+  {
+    "name": "loop-native",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--capture-range=cudaProfilerApi",
+      "--capture-range-end=stop",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/float32-loop-native",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/float32-loop.py",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/float32-loop-native.dot",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/float32-loop-native.json",
+      "--profile"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 13.030109643936157,
+    "timeout_seconds": 300
+  },
+  {
+    "name": "native-analysis",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/analyze-float32-audit.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 5.570695877075195,
+    "timeout_seconds": 180
+  }
+]

@@ -162,6 +162,10 @@ def record_face_support(
     # Fixed launch size, device count, and a strided tail cover even malformed
     # candidates exposing all four faces per tetrahedron.
     for slot in range(worker, count[0], workers):
+        # A different partition may already have disproved this same face.
+        # Atomic reads match the monotone atomic clears below.
+        if wp.atomic_add(supported, slot, 0) == 0:
+            continue
         ids = face_vertices(tets, boundary[slot])
         a, b, c = points[ids[0]], points[ids[1]], points[ids[2]]
         plane = halfspace(a, b, c)
@@ -169,6 +173,8 @@ def record_face_support(
         stack[0] = root
         size = int(1)
         while size > 0:
+            if wp.atomic_add(supported, slot, 0) == 0:
+                break
             size -= 1
             node = stack[size]
             if inside_halfspace(plane, tree.lower[node], tree.upper[node]):

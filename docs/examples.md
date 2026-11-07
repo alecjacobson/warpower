@@ -18,12 +18,10 @@ python -m examples.vtm_gallery --case cavity --n 1000 --output results/local/cav
 python -m examples.vtm_gallery --case disconnected --n 1000 --output results/local/disconnected
 ```
 
-The uniform and prescribed-graded torus and the thin hand have completed full
-solves with independent quality and topology checks. The broader gallery is
-still tracked in [issue #39](https://github.com/alecjacobson/warpower/issues/39).
-The cavity and separated components have validated input surfaces, but their
-full gallery solves have not yet been validated. These commands expose those
-outstanding cases too.
+The uniform and prescribed-graded torus, thin hand, cavity and separated
+components have completed full solves with independent quality and topology
+checks. The broader gallery, including imported scanned geometry, remains
+tracked in [issue #39](https://github.com/alecjacobson/warpower/issues/39).
 
 The thin hand is a new extruded palm with five narrow fingers and sharp corners,
 not the scanned hand from Alliez et al. The torus tests nonconvex topology;
@@ -179,8 +177,9 @@ Download the [material mesh](../results/examples/vtm/thin-hand/mesh.vtu),
 Input/output surfaces and hashes are also included in the gallery and its
 [provenance manifest](../results/examples/vtm/provenance.json).
 
-The thin-hand runner defaults to surface and crease subdivisions **20/20**;
-other examples retain **4/4**, and explicit arguments override either default.
+The thin-hand, cavity and disconnected runners default to surface and crease
+subdivisions **20/20**; other examples retain **4/4**, and explicit arguments
+override either default.
 This increases quadrature density without subdividing the input geometry.
 It reserves 105,600 surface samples and 10,560 crease-sample slots. On the same
 runtime and 1,000-site target, both 4/4 and 20/4 fail material-boundary validation
@@ -196,4 +195,62 @@ Reproduce the measured configuration and preview with:
 ```bash
 python -m examples.vtm_gallery --case thin-hand --n 1000 --subdivisions 20 --crease-subdivisions 20 --repeats 3 --independent-quality --output results/local/thin-hand
 python -m examples.vtm_render results/local/thin-hand/mesh.npz --axis z --fraction 0.5 --title 'Thin hand · variational tetrahedral mesh' --output results/local/thin-hand/cutaway.png
+```
+
+## Published cavity and disconnected results
+
+These two inputs each have 16 vertices and 24 triangles. The cavity is an outer
+cube with a reversed inner shell; the disconnected case has two separated
+cubes. Both use 1,000 sites, 256 initial sites, seed 2026 and quadrature 20/20.
+Four growth rounds and four quality rounds complete without extraction recovery.
+The cavity produces one material component, two closed shells and one cavity;
+the separated cubes produce two material components and two closed shells.
+Each boundary shell has Euler characteristic two.
+
+| Measurement | Cavity | Disconnected |
+| --- | ---: | ---: |
+| Full-hull / material tetrahedra | 5,064 / 4,344 | 5,768 / 4,115 |
+| Boundary triangles | 1,124 | 1,166 |
+| Minimum / mean radius ratio, 3r/R | 0.23681 / 0.84004 | 0.08111 / 0.83711 |
+| First percentile / median radius ratio | 0.40641 / 0.87128 | 0.34898 / 0.86943 |
+| Minimum / maximum dihedral angle | 10.18° / 161.18° | 3.86° / 173.36° |
+| Two-sided sampled boundary RMS / box diagonal | 0.16778% | 0.01984% |
+| Relative volume error | +0.25498% | −0.06253% |
+| Complete resident solve, median of 3 additional replays | 1.417 s | 1.240 s |
+| First complete replay | 1.580 s | 1.480 s |
+| Setup, including graph construction | 1.124 s | 1.121 s |
+
+These measurements use an NVIDIA L40, Warp 1.19.0, runtime `1804b64` and runner
+`e01e9d2`. Setup and replay windows have zero observed CPU quota throttling.
+Independent CGAL exact predicates check every full-hull cell against every
+site, with face pairing and hull support. Independent NumPy checks measure
+material quality, topology and two-sided fit. VTU round trips reproduce the
+saved mesh exactly. These offline checks are excluded from GPU timings and
+are not runtime dependencies. The results do not establish CPU outperformance,
+convergence, a prescribed minimum quality or a maximum-distance bound.
+
+| Cavity | Disconnected components |
+| --- | --- |
+| ![Cavity centroid cutaway](../results/examples/vtm/cavity/cutaway.png) | ![Disconnected centroid cutaway](../results/examples/vtm/disconnected/cutaway.png) |
+
+Download the [cavity mesh](../results/examples/vtm/cavity/mesh.vtu) or
+[disconnected mesh](../results/examples/vtm/disconnected/mesh.vtu). Their
+directories contain source surfaces, NPZ arrays, raw timings and independent
+checks; the [manifest](../results/examples/vtm/provenance.json) records hashes.
+
+Sampling matters. The coarse 4/4 cavity still fails the material-boundary gate
+with one nonmanifold edge and zero public output counts; recovery remains
+tracked in [#125](https://github.com/alecjacobson/warpower/issues/125).
+The coarse 4/4 disconnected case now succeeds after
+[stable geometry evaluation](extraction-geometry.md), but takes 11.743 s and
+has minimum radius ratio 0.06904 and sampled RMS error 0.33674% of the box
+diagonal. The dense example improves those measurements. Coarse records are
+included as `coarse-comparison.json`; the failed cavity is not a successful
+mesh or a comparable timing sample.
+
+Reproduce the measured configurations with:
+
+```bash
+python -m examples.vtm_gallery --case cavity --n 1000 --subdivisions 20 --crease-subdivisions 20 --repeats 3 --independent-quality --output results/local/cavity
+python -m examples.vtm_gallery --case disconnected --n 1000 --subdivisions 20 --crease-subdivisions 20 --repeats 3 --independent-quality --output results/local/disconnected
 ```

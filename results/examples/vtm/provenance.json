@@ -100,6 +100,58 @@
         "_vtm_controls.py": "a2c08f2f50c4bc189e2bc82a38f50b4137229081ff13344d4b319e11cbff9880",
         "_vtm_domain.py": "7e7d79477224b3ddbcd5c11a47bee237ed96474660987268d43dac554aadf76a"
       }
+    },
+    "cavity": {
+      "runtime_commit": "1804b64",
+      "runner_commit": "e01e9d2",
+      "command": "python -m examples.vtm_gallery --case cavity --n 1000 --subdivisions 20 --crease-subdivisions 20 --repeats 3 --output results/local/cavity",
+      "resolved_sampling": {
+        "surface_subdivisions": 20,
+        "crease_subdivisions": 20
+      },
+      "independent_validation": "CGAL6.2.1 exact full-hull predicates, NumPy material quality/topology, exact VTU round trip; all outside replay timing.",
+      "sha256": {
+        "boundary.off": "8286e672b5c309abac8b80dd2286b81cc874ebdb1170829a7b0d104905183b13",
+        "coarse-comparison.json": "2bd116527989f53e614057e3553f8e531fdba75fc821d7309d5b2d04656d0cf9",
+        "cutaway.png": "54b78daf1f458170db9b5ffb171a0a7064dd5ffe5e26d3cdfaf389651a9b7131",
+        "export-and-native-check.json": "a5b4c9bef26dea3c0ba10457efb14e3bdc680d033c19c0d2b4b7eeee754c0041",
+        "input.off": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+        "mesh.npz": "7278a818e0d7c8b78bcae094cc819610290e181d7c0fb9a1b9bfe702595b96d8",
+        "mesh.vtu": "9d8ebaf571ef663910100a896fccdb74e799c334d95ea1cde1e14ab4c17a8b9b",
+        "result.json": "83041a63f44a20709ede989048ad71e3feb81571f7a672b65147e1c896f0cc69",
+        "timing.json": "66b22cfbfb17db9d2de6cc630d0a5f9d7f5aa149eaa24ef42563c1c7727b6f17"
+      },
+      "render": {
+        "axis": "z",
+        "fraction": 0.5,
+        "title": "Cavity \u00b7 variational tetrahedral mesh"
+      }
+    },
+    "disconnected": {
+      "runtime_commit": "1804b64",
+      "runner_commit": "e01e9d2",
+      "command": "python -m examples.vtm_gallery --case disconnected --n 1000 --subdivisions 20 --crease-subdivisions 20 --repeats 3 --output results/local/disconnected",
+      "resolved_sampling": {
+        "surface_subdivisions": 20,
+        "crease_subdivisions": 20
+      },
+      "independent_validation": "CGAL6.2.1 exact full-hull predicates, NumPy material quality/topology, exact VTU round trip; all outside replay timing.",
+      "sha256": {
+        "boundary.off": "22a60cd95f68d4155ac91b8a2630d9a46d815a66fc9a2acc7c37b1f04e34889d",
+        "coarse-comparison.json": "4b8f540e36d8cfa0310d2379f2f6114fb217be1f5633ffbab187d89496b9b61d",
+        "cutaway.png": "5eee029a537a2b9cdf9518296815496785906403223a747287cf215277812120",
+        "export-and-native-check.json": "447ec165279740b7f46e40cdb2dd8a535db0d8c2dcb37a33fa95225797c7ffce",
+        "input.off": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+        "mesh.npz": "08ca0fe1eb768263a9f378eb6f3d6c65dee8963835d0234119348f8daa49307a",
+        "mesh.vtu": "7834cec1103eee0fbad60ee7a1e23b17a78cb3a4a7351adf1254e4beb7e76f00",
+        "result.json": "1b494a4d2ab9e123a64aee46aae5434d7a6197b0ef481a1215ef65585fe77557",
+        "timing.json": "e980a09c253c75a4fc1645573264e485d715973cf61e17396f5d571b5e4d8940"
+      },
+      "render": {
+        "axis": "z",
+        "fraction": 0.5,
+        "title": "Disconnected components \u00b7 VTM"
+      }
     }
   },
   "runtime_module_sha256": {

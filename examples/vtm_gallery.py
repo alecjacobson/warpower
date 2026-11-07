@@ -60,12 +60,12 @@ def main():
     parser.add_argument(
         "--subdivisions",
         type=int,
-        help="Surface quadrature subdivisions (20 for thin-hand, otherwise 4)",
+        help="Surface quadrature subdivisions (20 for thin-hand/cavity/disconnected, otherwise 4)",
     )
     parser.add_argument(
         "--crease-subdivisions",
         type=int,
-        help="Crease quadrature subdivisions (20 for thin-hand, otherwise 4)",
+        help="Crease quadrature subdivisions (20 for thin-hand/cavity/disconnected, otherwise 4)",
     )
     parser.add_argument("--quality-rounds", type=int, default=4)
     parser.add_argument("--automatic-sizing", action="store_true")
@@ -79,7 +79,7 @@ def main():
     )
     parser.add_argument("--output", type=Path, required=True, help="Output directory")
     args = parser.parse_args()
-    default_subdivisions = 20 if args.case == "thin-hand" else 4
+    default_subdivisions = 20 if args.case in ("thin-hand", "cavity", "disconnected") else 4
     if args.subdivisions is None:
         args.subdivisions = default_subdivisions
     if args.crease_subdivisions is None:

@@ -1,0 +1,107 @@
+{
+  "scope": "Within-Warp schedule study; no CPU parity claim, no runtime changes.",
+  "pairs": [
+    {
+      "progressive": "torus-2026-progressive",
+      "fixed": "torus-2026-fixed-32",
+      "time_ratio": 1.31029332473654,
+      "time_reduction_percent": 23.681210831088574,
+      "nondegrading_metrics": {
+        "radius_ratio_p0": true,
+        "radius_ratio_p1": true,
+        "radius_ratio_p5": true,
+        "radius_ratio_p50": true,
+        "radius_ratio_p95": true,
+        "boundary_rms": true,
+        "absolute_volume_error": true,
+        "minimum_dihedral": true,
+        "maximum_dihedral": true
+      },
+      "all_checked_metrics_nondegrading": true
+    },
+    {
+      "progressive": "torus-2027-progressive",
+      "fixed": "torus-2027-fixed-32",
+      "time_ratio": 1.2873456109588657,
+      "time_reduction_percent": 22.320782275774363,
+      "nondegrading_metrics": {
+        "radius_ratio_p0": false,
+        "radius_ratio_p1": true,
+        "radius_ratio_p5": true,
+        "radius_ratio_p50": true,
+        "radius_ratio_p95": true,
+        "boundary_rms": true,
+        "absolute_volume_error": true,
+        "minimum_dihedral": false,
+        "maximum_dihedral": false
+      },
+      "all_checked_metrics_nondegrading": false
+    },
+    {
+      "progressive": "cavity-2026-progressive",
+      "fixed": "cavity-2026-fixed-32",
+      "time_ratio": 2.33904674149537,
+      "time_reduction_percent": 57.24754096360244,
+      "nondegrading_metrics": {
+        "radius_ratio_p0": false,
+        "radius_ratio_p1": false,
+        "radius_ratio_p5": false,
+        "radius_ratio_p50": false,
+        "radius_ratio_p95": true,
+        "boundary_rms": true,
+        "absolute_volume_error": true,
+        "minimum_dihedral": false,
+        "maximum_dihedral": false
+      },
+      "all_checked_metrics_nondegrading": false
+    },
+    {
+      "progressive": "disconnected-2026-progressive",
+      "fixed": "disconnected-2026-fixed-32",
+      "time_ratio": 1.4140287711391992,
+      "time_reduction_percent": 29.28008111218563,
+      "nondegrading_metrics": {
+        "radius_ratio_p0": true,
+        "radius_ratio_p1": true,
+        "radius_ratio_p5": true,
+        "radius_ratio_p50": true,
+        "radius_ratio_p95": false,
+        "boundary_rms": true,
+        "absolute_volume_error": true,
+        "minimum_dihedral": true,
+        "maximum_dihedral": true
+      },
+      "all_checked_metrics_nondegrading": false
+    }
+  ],
+  "repeat_output_checks": [
+    {
+      "name": "torus-2026-progressive",
+      "exact_arrays": {
+        "points": true,
+        "roles": true,
+        "input_points": true,
+        "input_faces": true
+      },
+      "canonical_cells": {
+        "tetrahedra": true,
+        "full_tetrahedra": true
+      },
+      "oriented_boundary_equal": true
+    },
+    {
+      "name": "torus-2026-fixed-32",
+      "exact_arrays": {
+        "points": true,
+        "roles": true,
+        "input_points": true,
+        "input_faces": true
+      },
+      "canonical_cells": {
+        "tetrahedra": true,
+        "full_tetrahedra": true
+      },
+      "oriented_boundary_equal": true
+    }
+  ]
+}

@@ -158,3 +158,7 @@ nsys profile --trace=cuda --cuda-graph-trace=node --cuda-event-trace=false \
   --iterations 1 --polish-rounds 0 --repeats 1 --profile \
   --dot results/local/refinement-loop.dot
 ```
+
+The complete-pipeline [schedule comparison](quality-frontier.md) measures
+progressive insertion against fixed-site optimization at the same site budget,
+including quality and fit tradeoffs across seeds and domains.

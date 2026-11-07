@@ -1,0 +1,546 @@
+[
+  {
+    "name": "fixed-24",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--initial",
+      "1000",
+      "--growth-iterations",
+      "0",
+      "--polish-iterations",
+      "24",
+      "--selective-iterations",
+      "10",
+      "--quality-rounds",
+      "4",
+      "--repeats",
+      "3",
+      "--save-mesh",
+      "/home/horde/projects/power-diagram/.work/vtm/quality-frontier-polish/fixed-24.npz",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/quality-frontier-polish/fixed-24.json"
+    ],
+    "source": "9228a3e7b3804b0cf1b191976477e35c25dc47ef",
+    "exit_code": 0,
+    "timeout_seconds": 180,
+    "timed_out": false,
+    "wall_seconds": 6.422724485397339,
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      5707,
+      4030,
+      1226
+    ],
+    "median_ms": 709.9708862304688,
+    "reported_quality": {
+      "tetrahedra": 4030,
+      "diagnostics": 0,
+      "components": 1,
+      "shell_euler": [
+        0
+      ],
+      "volume": 18.24682564584121,
+      "surface_rms_distance": 0.01632665254741222,
+      "radius_ratio_percentiles": {
+        "0": 0.12868127904940171,
+        "1": 0.29197071352466986,
+        "5": 0.6257374676007071,
+        "50": 0.8776190902168517,
+        "95": 0.9669241515761846,
+        "100": 0.9961791936838437
+      },
+      "relative_volume_error": -0.0431477670327714,
+      "worst_tetrahedron": [
+        638,
+        330,
+        739,
+        998
+      ],
+      "worst_vertex_roles": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "quota_clean": true,
+    "independent": {
+      "input_sha256": "2f6921ea2d2ea8ee52c9ee0d0bb4125043b1166b2672e643ad0d87571e78daaf",
+      "mesh_sha256": "6bbccaaf3835a5c193fdda4e773e95ba4e6707731313f318b5febdce56abde93",
+      "full_hull": {
+        "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+        "CGAL": "6.2.1",
+        "sites": 1000,
+        "tetrahedra": 5707,
+        "sphere_tests": 5684172,
+        "cospherical_ties": 0,
+        "hull_faces": 766,
+        "hull_support_tests": 766000,
+        "valid": true
+      },
+      "quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 1000,
+        "referenced_vertices": 1000,
+        "tetrahedra": 4030,
+        "boundary_triangles": 1226,
+        "components": 1,
+        "boundary_euler": 0,
+        "volume": 18.246825645841177,
+        "input_volume": 19.0696379411241,
+        "relative_volume_error": -0.043147767032771456,
+        "mean_radius_ratio": 0.8491474431966248,
+        "radius_ratio_percentiles": {
+          "0": 0.12868127904940163,
+          "1": 0.29197071352466986,
+          "5": 0.6257374676007074,
+          "50": 0.8776190902168517,
+          "95": 0.9669241515761846,
+          "100": 0.996179193683844
+        },
+        "dihedral_degrees_min": 5.995773257101863,
+        "dihedral_degrees_max": 169.84056666514783,
+        "output_to_input": {
+          "area": 53.99208143844763,
+          "squared_integral": 0.014392106735343352,
+          "rms": 0.016326652547412293,
+          "max_sample": 0.0387550615688456
+        },
+        "input_to_output": {
+          "area": 55.01379994263034,
+          "squared_integral": 0.01543426631773174,
+          "rms": 0.016749705401761288,
+          "max_sample": 0.04638466397109303
+        },
+        "two_sided_area_weighted_rms": 0.016541514019339405,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.21305347804343475
+      },
+      "distance_oracle": {
+        "implementation": "CGAL AABB triangle distances with float64 constructions",
+        "version": "CGAL 6.2.1",
+        "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+        "source": "benchmarks/cpu/surface_distance.cpp",
+        "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+      },
+      "role_counts": {
+        "0": 387,
+        "1": 613
+      },
+      "single_cycle_boundary_links": true
+    }
+  },
+  {
+    "name": "fixed-28",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--initial",
+      "1000",
+      "--growth-iterations",
+      "0",
+      "--polish-iterations",
+      "28",
+      "--selective-iterations",
+      "10",
+      "--quality-rounds",
+      "4",
+      "--repeats",
+      "3",
+      "--save-mesh",
+      "/home/horde/projects/power-diagram/.work/vtm/quality-frontier-polish/fixed-28.npz",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/quality-frontier-polish/fixed-28.json"
+    ],
+    "source": "9228a3e7b3804b0cf1b191976477e35c25dc47ef",
+    "exit_code": 0,
+    "timeout_seconds": 180,
+    "timed_out": false,
+    "wall_seconds": 6.424641132354736,
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      5698,
+      4001,
+      1226
+    ],
+    "median_ms": 636.3465576171875,
+    "reported_quality": {
+      "tetrahedra": 4001,
+      "diagnostics": 0,
+      "components": 1,
+      "shell_euler": [
+        0
+      ],
+      "volume": 18.24927737621056,
+      "surface_rms_distance": 0.016236917588218627,
+      "radius_ratio_percentiles": {
+        "0": 0.15562105202947069,
+        "1": 0.3716041879282434,
+        "5": 0.6584661714422709,
+        "50": 0.8833913799750978,
+        "95": 0.9685946926713044,
+        "100": 0.9970023094353044
+      },
+      "relative_volume_error": -0.04301919981104906,
+      "worst_tetrahedron": [
+        303,
+        77,
+        394,
+        409
+      ],
+      "worst_vertex_roles": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "quota_clean": true,
+    "independent": {
+      "input_sha256": "2f6921ea2d2ea8ee52c9ee0d0bb4125043b1166b2672e643ad0d87571e78daaf",
+      "mesh_sha256": "805acd4c2d59364e15380037c57538e5e21fd6e001794d45dce4313bad025106",
+      "full_hull": {
+        "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+        "CGAL": "6.2.1",
+        "sites": 1000,
+        "tetrahedra": 5698,
+        "sphere_tests": 5675208,
+        "cospherical_ties": 0,
+        "hull_faces": 764,
+        "hull_support_tests": 764000,
+        "valid": true
+      },
+      "quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 1000,
+        "referenced_vertices": 1000,
+        "tetrahedra": 4001,
+        "boundary_triangles": 1226,
+        "components": 1,
+        "boundary_euler": 0,
+        "volume": 18.24927737621053,
+        "input_volume": 19.0696379411241,
+        "relative_volume_error": -0.043019199811048625,
+        "mean_radius_ratio": 0.8579913140953278,
+        "radius_ratio_percentiles": {
+          "0": 0.15562105202947069,
+          "1": 0.37160418792824373,
+          "5": 0.6584661714422708,
+          "50": 0.8833913799750976,
+          "95": 0.9685946926713046,
+          "100": 0.9970023094353042
+        },
+        "dihedral_degrees_min": 7.02132499971641,
+        "dihedral_degrees_max": 167.6826022015353,
+        "output_to_input": {
+          "area": 53.99593683956118,
+          "squared_integral": 0.014235353407965914,
+          "rms": 0.0162369175882187,
+          "max_sample": 0.03711916932710379
+        },
+        "input_to_output": {
+          "area": 55.01379994263034,
+          "squared_integral": 0.015215534276658758,
+          "rms": 0.016630594771142933,
+          "max_sample": 0.044003689493831676
+        },
+        "two_sided_area_weighted_rms": 0.01643677269226559,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.2117044174917905
+      },
+      "distance_oracle": {
+        "implementation": "CGAL AABB triangle distances with float64 constructions",
+        "version": "CGAL 6.2.1",
+        "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+        "source": "benchmarks/cpu/surface_distance.cpp",
+        "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+      },
+      "role_counts": {
+        "0": 387,
+        "1": 613
+      },
+      "single_cycle_boundary_links": true
+    }
+  },
+  {
+    "name": "fixed-32",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--initial",
+      "1000",
+      "--growth-iterations",
+      "0",
+      "--polish-iterations",
+      "32",
+      "--selective-iterations",
+      "10",
+      "--quality-rounds",
+      "4",
+      "--repeats",
+      "3",
+      "--save-mesh",
+      "/home/horde/projects/power-diagram/.work/vtm/quality-frontier-polish/fixed-32.npz",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/quality-frontier-polish/fixed-32.json"
+    ],
+    "source": "9228a3e7b3804b0cf1b191976477e35c25dc47ef",
+    "exit_code": 0,
+    "timeout_seconds": 180,
+    "timed_out": false,
+    "wall_seconds": 6.576903343200684,
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      5694,
+      4006,
+      1226
+    ],
+    "median_ms": 627.9544677734375,
+    "reported_quality": {
+      "tetrahedra": 4006,
+      "diagnostics": 0,
+      "components": 1,
+      "shell_euler": [
+        0
+      ],
+      "volume": 18.2505968943483,
+      "surface_rms_distance": 0.016226141897087272,
+      "radius_ratio_percentiles": {
+        "0": 0.1462354597476599,
+        "1": 0.32926123362004445,
+        "5": 0.6608037820912747,
+        "50": 0.8826084232693807,
+        "95": 0.9681508777276551,
+        "100": 0.9972362204400996
+      },
+      "relative_volume_error": -0.04295000509734791,
+      "worst_tetrahedron": [
+        612,
+        206,
+        780,
+        782
+      ],
+      "worst_vertex_roles": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "quota_clean": true,
+    "independent": {
+      "input_sha256": "2f6921ea2d2ea8ee52c9ee0d0bb4125043b1166b2672e643ad0d87571e78daaf",
+      "mesh_sha256": "cec253abafb998ed54e67672e551855870ac58ae354107cc65b8733a222f59e9",
+      "full_hull": {
+        "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+        "CGAL": "6.2.1",
+        "sites": 1000,
+        "tetrahedra": 5694,
+        "sphere_tests": 5671224,
+        "cospherical_ties": 0,
+        "hull_faces": 764,
+        "hull_support_tests": 764000,
+        "valid": true
+      },
+      "quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 1000,
+        "referenced_vertices": 1000,
+        "tetrahedra": 4006,
+        "boundary_triangles": 1226,
+        "components": 1,
+        "boundary_euler": 0,
+        "volume": 18.25059689434829,
+        "input_volume": 19.0696379411241,
+        "relative_volume_error": -0.042950005097345256,
+        "mean_radius_ratio": 0.8570113124724441,
+        "radius_ratio_percentiles": {
+          "0": 0.1462354597476599,
+          "1": 0.3292612336200445,
+          "5": 0.6608037820912748,
+          "50": 0.8826084232693806,
+          "95": 0.9681508777276553,
+          "100": 0.9972362204400996
+        },
+        "dihedral_degrees_min": 6.834630444717289,
+        "dihedral_degrees_max": 168.25409847073888,
+        "output_to_input": {
+          "area": 53.996034433351966,
+          "squared_integral": 0.014216490681832259,
+          "rms": 0.016226141897087355,
+          "max_sample": 0.03618526423885996
+        },
+        "input_to_output": {
+          "area": 55.01379994263034,
+          "squared_integral": 0.015179720600587131,
+          "rms": 0.016611011047944844,
+          "max_sample": 0.041229161362183055
+        },
+        "two_sided_area_weighted_rms": 0.016421500587579296,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.21150771391213907
+      },
+      "distance_oracle": {
+        "implementation": "CGAL AABB triangle distances with float64 constructions",
+        "version": "CGAL 6.2.1",
+        "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+        "source": "benchmarks/cpu/surface_distance.cpp",
+        "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+      },
+      "role_counts": {
+        "0": 387,
+        "1": 613
+      },
+      "single_cycle_boundary_links": true
+    }
+  },
+  {
+    "name": "fixed-40",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--initial",
+      "1000",
+      "--growth-iterations",
+      "0",
+      "--polish-iterations",
+      "40",
+      "--selective-iterations",
+      "10",
+      "--quality-rounds",
+      "4",
+      "--repeats",
+      "3",
+      "--save-mesh",
+      "/home/horde/projects/power-diagram/.work/vtm/quality-frontier-polish/fixed-40.npz",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/quality-frontier-polish/fixed-40.json"
+    ],
+    "source": "9228a3e7b3804b0cf1b191976477e35c25dc47ef",
+    "exit_code": 0,
+    "timeout_seconds": 180,
+    "timed_out": false,
+    "wall_seconds": 6.873899698257446,
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      5696,
+      4004,
+      1226
+    ],
+    "median_ms": 807.2869262695312,
+    "reported_quality": {
+      "tetrahedra": 4004,
+      "diagnostics": 0,
+      "components": 1,
+      "shell_euler": [
+        0
+      ],
+      "volume": 18.26043856255948,
+      "surface_rms_distance": 0.015995706661183526,
+      "radius_ratio_percentiles": {
+        "0": 0.0657903571827874,
+        "1": 0.3201284123865451,
+        "5": 0.659670814891655,
+        "50": 0.8855639504884811,
+        "95": 0.9685436862127479,
+        "100": 0.997993903644319
+      },
+      "relative_volume_error": -0.042433914113261965,
+      "worst_tetrahedron": [
+        170,
+        712,
+        839,
+        914
+      ],
+      "worst_vertex_roles": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "quota_clean": true,
+    "independent": {
+      "input_sha256": "2f6921ea2d2ea8ee52c9ee0d0bb4125043b1166b2672e643ad0d87571e78daaf",
+      "mesh_sha256": "feae94d1358009badde6414d852280e2a92d14a33bf6ea3b7f4773b8e6169e9e",
+      "full_hull": {
+        "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+        "CGAL": "6.2.1",
+        "sites": 1000,
+        "tetrahedra": 5696,
+        "sphere_tests": 5673216,
+        "cospherical_ties": 0,
+        "hull_faces": 768,
+        "hull_support_tests": 768000,
+        "valid": true
+      },
+      "quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 1000,
+        "referenced_vertices": 1000,
+        "tetrahedra": 4004,
+        "boundary_triangles": 1226,
+        "components": 1,
+        "boundary_euler": 0,
+        "volume": 18.26043856255948,
+        "input_volume": 19.0696379411241,
+        "relative_volume_error": -0.04243391411325981,
+        "mean_radius_ratio": 0.8594705188035364,
+        "radius_ratio_percentiles": {
+          "0": 0.0657903571827873,
+          "1": 0.32012841238654505,
+          "5": 0.6596708148916549,
+          "50": 0.8855639504884809,
+          "95": 0.9685436862127479,
+          "100": 0.9979939036443191
+        },
+        "dihedral_degrees_min": 3.6607042736490514,
+        "dihedral_degrees_max": 174.5314903118219,
+        "output_to_input": {
+          "area": 54.00080689324005,
+          "squared_integral": 0.013816788559722008,
+          "rms": 0.015995706661183596,
+          "max_sample": 0.03469002111443899
+        },
+        "input_to_output": {
+          "area": 55.01379994263034,
+          "squared_integral": 0.014746863864030407,
+          "rms": 0.01637246284875389,
+          "max_sample": 0.038067955829995975
+        },
+        "two_sided_area_weighted_rms": 0.016186931297980846,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.2084864787983098
+      },
+      "distance_oracle": {
+        "implementation": "CGAL AABB triangle distances with float64 constructions",
+        "version": "CGAL 6.2.1",
+        "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+        "source": "benchmarks/cpu/surface_distance.cpp",
+        "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+      },
+      "role_counts": {
+        "0": 387,
+        "1": 613
+      },
+      "single_cycle_boundary_links": true
+    }
+  }
+]

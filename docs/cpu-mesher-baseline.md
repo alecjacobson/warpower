@@ -68,7 +68,11 @@ Build and reproduction instructions are in
 records every sample, input/binary hashes, parameters, quotas and independent
 quality. It explicitly reports unthrottled sample counts and medians.
 
-The remaining work is tracked in #37 (time to comparable quality), #40 (wide
+The [progressive/fixed-site schedule study](quality-frontier.md) completes #37's
+within-Warp comparison: an optional fixed-site schedule takes 0.628 s on the
+original torus with better measured quality and fit than the progressive default,
+but does not improve every metric on the other tested inputs. This remains
+separate from native CPU quality parity. Remaining work is tracked in #40 (wide
 native CPU outperformance), #43 (complete trajectories) and #98 (cooperative
 reconstruction). The main README retains the independently
 earned Paragram adjacency result; this baseline adds no VTM performance claim.

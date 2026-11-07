@@ -1,4 +1,4 @@
-"""Audit uncertain extraction geometry with resident valid/invalid/restored inputs."""
+"""Audit uncertain pipeline geometry with resident valid/invalid/restored inputs."""
 
 import argparse
 import json
@@ -8,8 +8,10 @@ import numpy as np
 import warp as wp
 
 from examples.vtm_inputs import surface
-from tests.test_wide_center import bridge
+from tests.test_wide_center import bounded_bridge, bounded_core, bridge
 from warpower import ExtractionWorkspace, SurfaceDomain
+from warpower._selective import classify_retained
+from warpower._voronoi_volume import BoundedVoronoiVolumes
 
 
 @wp.kernel
@@ -26,6 +28,11 @@ def consume(
     error: wp.array[int],
     valid: wp.array[int],
     boundary_count: wp.array[int],
+    selection_error: wp.array[int],
+    dual_error: wp.array[int],
+    dual_count: wp.array[int],
+    volume: wp.array[wp.float64],
+    volume_sums: wp.array[wp.float64],
     records: wp.array2d[int],
 ):
     row = phase[0]
@@ -38,6 +45,13 @@ def consume(
         for k in range(4):
             checksum += tets[i, k]
     records[row, 4] = checksum
+    records[row, 5] = selection_error[0]
+    records[row, 6] = dual_error[0]
+    records[row, 7] = dual_count[0]
+    total = wp.float64(0.0)
+    for i in range(volume.shape[0]):
+        total += volume[i]
+    volume_sums[row] = total
     phase[0] = (row + 1) % records.shape[0]
 
 
@@ -53,12 +67,45 @@ def audit(profile=False, dot=None):
     points = wp.array(original, dtype=wp.vec3, device=domain.device)
     extraction = ExtractionWorkspace(domain, points, np.arange(8, dtype=np.int32).reshape(2, 4))
     source = wp.array(frames, dtype=wp.vec3, device=domain.device)
+    dual_original = bounded_bridge()
+    dual_flat, dual_invalid = dual_original.copy(), dual_original.copy()
+    dual_flat[3] = dual_flat[0]
+    dual_invalid[0, 0] = np.nan
+    dual_source = wp.array(
+        np.stack([dual_original, dual_flat, dual_invalid, dual_original]),
+        dtype=wp.vec3,
+        device=domain.device,
+    )
+    core = bounded_core(dual_original)
+    dual = BoundedVoronoiVolumes(core)
+    selection_error = wp.zeros(1, dtype=int, device=domain.device)
+    selected = wp.empty(2, dtype=int, device=domain.device)
+    quality = wp.empty(2, dtype=wp.float64, device=domain.device)
     phase = wp.zeros(1, dtype=int, device=domain.device)
-    records = wp.zeros((4, 5), dtype=int, device=domain.device)
+    records = wp.zeros((4, 8), dtype=int, device=domain.device)
+    volume_sums = wp.zeros(4, dtype=wp.float64, device=domain.device)
     wp.load_module(module=__name__, device=domain.device)
+    wp.load_module(module="warpower._selective", device=domain.device)
     with wp.ScopedCapture() as cap:
         wp.launch(produce, len(points), inputs=[source, phase, points])
         extraction.run()
+        selection_error.zero_()
+        wp.launch(
+            classify_retained,
+            2,
+            inputs=[
+                domain.tree,
+                points,
+                extraction.input_tetrahedra,
+                extraction.input_count,
+                0.4,
+                selection_error,
+                selected,
+                quality,
+            ],
+        )
+        wp.launch(produce, len(core.points), inputs=[dual_source, phase, core.points])
+        dual.run()
         wp.launch(
             consume,
             1,
@@ -69,6 +116,11 @@ def audit(profile=False, dot=None):
                 extraction.error,
                 extraction.valid,
                 extraction.boundary_count,
+                selection_error,
+                dual.error,
+                dual.count,
+                dual.volume,
+                volume_sums,
                 records,
             ],
         )
@@ -88,14 +140,37 @@ def audit(profile=False, dot=None):
         torch.cuda.cudart().cudaProfilerStop()
     values = records.numpy()
     np.testing.assert_array_equal(
-        values, [[0, 1, 1, 4, 22], [8, 0, 0, 0, 0], [4, 0, 0, 0, 0], [0, 1, 1, 4, 22]]
+        values,
+        [
+            [0, 1, 1, 4, 22, 0, 0, 4],
+            [8, 0, 0, 0, 0, 8, 2, 0],
+            [4, 0, 0, 0, 0, 4, 2, 0],
+            [0, 1, 1, 4, 22, 0, 0, 4],
+        ],
+    )
+    from tests.test_voronoi_volume import oracle
+
+    expected, _ = oracle(dual_original)
+    np.testing.assert_allclose(
+        volume_sums.numpy(), [expected.sum(), 0, 0, expected.sum()], rtol=1e-7
     )
     np.testing.assert_array_equal(points.numpy(), original)
+    np.testing.assert_array_equal(core.points.numpy(), dual_original)
     assert phase.numpy()[0] == 0
     return dict(
-        scope="Four warmed resident producer/extraction/consumer phases: an exact-positive bridge whose ordinary determinant is zero plus healthy material; a physically flat input; a nonfinite input; original input restored. Device phase advance and one final synchronization. Setup, warmup and validation excluded from native trace; not a throughput measurement.",
-        columns=["error", "valid", "tetrahedra", "boundary_faces", "index_sum"],
+        scope="Four warmed resident producer/extraction/quality-selection/bounded-dual-volume/consumer phases: exact-positive bridge whose ordinary determinant is zero; physically flat input; nonfinite input; original input restored. Fixed certified dual connectivity was built at setup. Device phase advance and one final synchronization. Setup, warmup and validation excluded from native trace; not a throughput measurement.",
+        columns=[
+            "error",
+            "valid",
+            "tetrahedra",
+            "boundary_faces",
+            "index_sum",
+            "selection_error",
+            "dual_error",
+            "bounded_cells",
+        ],
         records=values.tolist(),
+        volume_sums=volume_sums.numpy().tolist(),
     )
 
 

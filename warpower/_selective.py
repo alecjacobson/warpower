@@ -7,6 +7,7 @@ import warp as wp
 
 from . import _extraction
 from ._surface_bvh import SurfaceTree, closest_point, material_side
+from ._wide_center import exact_geometry, uncertain
 
 wp.set_module_options({"enable_backward": False, "fast_math": False})
 
@@ -41,13 +42,23 @@ def classify_retained(
     c = wp.vec3d(points[ids[3]]) - p0
     bc, ca, ab = wp.cross(b, c), wp.cross(c, a), wp.cross(a, b)
     determinant = wp.dot(a, bc)
-    if determinant <= wp.float64(0.0) or not wp.isfinite(determinant):
-        wp.atomic_or(error, 0, 8)
-        return
-    offset = (wp.dot(a, a) * bc + wp.dot(b, b) * ca + wp.dot(c, c) * ab) / (
-        wp.float64(2.0) * determinant
-    )
-    center, radius = p0 + offset, wp.length(offset)
+    center, radius = wp.vec3d(), wp.float64(0.0)
+    if uncertain(a, b, c, determinant):
+        geometry = exact_geometry(points[ids[0]], points[ids[1]], points[ids[2]], points[ids[3]])
+        if geometry.valid == 0:
+            wp.atomic_or(error, 0, 8)
+            return
+        determinant = wp.float64(geometry.determinant)
+        center = wp.vec3d(geometry.center)
+        radius = wp.float64(geometry.radius)
+    else:
+        if determinant <= wp.float64(0.0):
+            wp.atomic_or(error, 0, 8)
+            return
+        offset = (wp.dot(a, a) * bc + wp.dot(b, b) * ca + wp.dot(c, c) * ab) / (
+            wp.float64(2.0) * determinant
+        )
+        center, radius = p0 + offset, wp.length(offset)
     if not wp.isfinite(radius) or radius <= wp.float64(0.0):
         wp.atomic_or(error, 0, 8)
         return

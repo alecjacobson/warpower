@@ -19,6 +19,7 @@ wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": 
 class Geometry:
     determinant: wp.float64
     center: wp.vec3d
+    offset: wp.vec3d
     radius: wp.float64
     valid: int
 
@@ -76,6 +77,7 @@ def exact_geometry(p0: wp.vec3, p1: wp.vec3, p2: wp.vec3, p3: wp.vec3):
         result.center[axis] = global_value.estimate / d.estimate
         offset[axis] = local_value.estimate / d.estimate
     # Subtracting a rounded global center loses radius accuracy far from zero.
+    result.offset = offset
     result.radius = wp.length(offset)
     result.valid = int(
         wp.isfinite(result.center[0])

@@ -4,6 +4,8 @@ import warp as wp
 
 from ._mesh_topology import face_vertices, sorted_face
 from ._sizing import SizingData, sizing_value
+from ._stable_volume import determinant as physical_determinant
+from ._wide_center import exact_geometry, uncertain
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
 
@@ -57,6 +59,9 @@ def validate(
     c = wp.vec3d(points[ids[2]]) - a
     d = wp.vec3d(points[ids[3]]) - a
     determinant = wp.dot(b, wp.cross(c, d))
+    determinant = physical_determinant(
+        points[ids[0]], points[ids[1]], points[ids[2]], points[ids[3]], b, c, d, determinant
+    )
     if determinant <= wp.float64(0.0) or not wp.isfinite(determinant):
         wp.atomic_or(error, 0, 2)
         return
@@ -128,16 +133,28 @@ def accumulate(
     if t >= count[0]:
         return
     ids = wp.vec4i(tets[t, 0], tets[t, 1], tets[t, 2], tets[t, 3])
+    # This cell contributes no bounded dual volume. Orientation was already
+    # checked, so no circumcenter metric is needed for these four hull sites.
+    if hull[ids[0]] != 0 and hull[ids[1]] != 0 and hull[ids[2]] != 0 and hull[ids[3]] != 0:
+        return
     origin = wp.vec3d(points[ids[0]])
     a = wp.vec3d(points[ids[1]]) - origin
     b = wp.vec3d(points[ids[2]]) - origin
     c = wp.vec3d(points[ids[3]]) - origin
     determinant = wp.dot(a, wp.cross(b, c))
-    offset = (
-        wp.dot(a, a) * wp.cross(b, c)
-        + wp.dot(b, b) * wp.cross(c, a)
-        + wp.dot(c, c) * wp.cross(a, b)
-    ) / (wp.float64(2.0) * determinant)
+    offset = wp.vec3d()
+    if uncertain(a, b, c, determinant):
+        geometry = exact_geometry(points[ids[0]], points[ids[1]], points[ids[2]], points[ids[3]])
+        if geometry.valid == 0:
+            wp.atomic_or(error, 0, 8)
+            return
+        offset = wp.vec3d(geometry.offset)
+    else:
+        offset = (
+            wp.dot(a, a) * wp.cross(b, c)
+            + wp.dot(b, b) * wp.cross(c, a)
+            + wp.dot(c, c) * wp.cross(a, b)
+        ) / (wp.float64(2.0) * determinant)
     for i in range(4):
         if hull[ids[i]] != 0:
             continue

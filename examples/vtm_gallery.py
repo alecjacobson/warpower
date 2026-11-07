@@ -67,6 +67,12 @@ def main():
         type=int,
         help="Crease quadrature subdivisions (20 for thin-hand/cavity/disconnected, otherwise 4)",
     )
+    parser.add_argument(
+        "--feature-angle", type=float, default=45.0, help="Crease detection angle in degrees"
+    )
+    parser.add_argument(
+        "--corner-angle", type=float, default=45.0, help="Corner detection angle in degrees"
+    )
     parser.add_argument("--quality-rounds", type=int, default=4)
     parser.add_argument("--automatic-sizing", action="store_true")
     parser.add_argument(
@@ -88,6 +94,8 @@ def main():
         parser.error("Require n>=4, initial>=4, repeats>=0")
     if min(args.subdivisions, args.crease_subdivisions) < 1:
         parser.error("Quadrature subdivisions must be positive")
+    if not (0 < args.feature_angle < 180 and 0 < args.corner_angle < 180):
+        parser.error("Feature and corner angles must lie between 0 and 180 degrees")
     if args.automatic_sizing and args.case.startswith("graded-"):
         parser.error("Use either the prescribed graded case or --automatic-sizing")
     points, faces = surface(args.case, args.input)
@@ -101,6 +109,8 @@ def main():
         faces,
         surface_subdivisions=args.subdivisions,
         crease_subdivisions=args.crease_subdivisions,
+        feature_angle=args.feature_angle,
+        corner_angle=args.corner_angle,
     )
     sizing = None
     if args.case.startswith("graded-"):
@@ -160,6 +170,9 @@ def main():
         warp=wp.__version__,
         input_points=len(points),
         input_faces=len(faces),
+        domain_error=int(domain.error.numpy()[0]),
+        detected_feature_edges=int(domain.feature_count.numpy()[0]),
+        detected_corners=int(domain.corner_count.numpy()[0]),
         surface_quadrature_capacity=len(domain.surface_points),
         crease_quadrature_capacity=len(domain.crease_points),
         input_off_sha256=hashlib.sha256((args.output / "input.off").read_bytes()).hexdigest(),

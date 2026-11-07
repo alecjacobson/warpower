@@ -12,14 +12,14 @@ from tests.test_domain import brute_distances
 from tests.test_extraction import independent_topology
 
 
-def boundary_error(points, faces, target, triangles):
+def boundary_error(points, faces, target, triangles, distance_query=brute_distances):
     tri = points[faces]
     area = np.linalg.norm(np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0]), axis=1) / 2
     bary = np.full((3, 3), 1 / 6)
     np.fill_diagonal(bary, 2 / 3)
     samples = np.einsum("ij,fjk->fik", bary, tri).reshape(-1, 3)
     weights = np.repeat(area / 3, 3)
-    distances = brute_distances(target, triangles, samples)
+    distances = distance_query(target, triangles, samples)
     integral = float(weights @ (distances * distances))
     return dict(
         area=float(weights.sum()),
@@ -29,7 +29,9 @@ def boundary_error(points, faces, target, triangles):
     )
 
 
-def measure(points, tetrahedra, input_points, input_faces):
+def measure(points, tetrahedra, input_points, input_faces, *, distance_query=None):
+    if distance_query is None:
+        distance_query = brute_distances
     p, t = np.asarray(points, np.float64), np.asarray(tetrahedra)
     p0, f0 = np.asarray(input_points, np.float64), np.asarray(input_faces)
     if not len(t):
@@ -58,8 +60,8 @@ def measure(points, tetrahedra, input_points, input_faces):
     )
     quality = 9 * volumes / (areas * radii)
     boundary, components, chi = independent_topology(p, t)
-    a = boundary_error(p, boundary, p0, f0)
-    b = boundary_error(p0, f0, p, boundary)
+    a = boundary_error(p, boundary, p0, f0, distance_query)
+    b = boundary_error(p0, f0, p, boundary, distance_query)
     symmetric = float(
         np.sqrt((a["squared_integral"] + b["squared_integral"]) / (a["area"] + b["area"]))
     )
@@ -69,7 +71,11 @@ def measure(points, tetrahedra, input_points, input_faces):
     )
     percentiles = [0, 1, 5, 50, 95, 100]
     return dict(
-        scope="Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        scope=(
+            "Independent NumPy solves, face/edge incidence and "
+            + getattr(distance_query, "description", "brute-force triangle distances")
+            + "; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate."
+        ),
         sites=len(p),
         referenced_vertices=len(np.unique(t)),
         tetrahedra=len(t),
@@ -100,11 +106,29 @@ def main():
         "mesh", type=Path, help="NPZ containing points, tetrahedra, input_points, input_faces"
     )
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--distance-binary",
+        type=Path,
+        help="Optional native CGAL AABB distance oracle for dense surfaces",
+    )
     args = parser.parse_args()
+    distances = None
+    if args.distance_binary is not None:
+        from benchmarks.surface_distance import NativeSurfaceDistance
+
+        distances = NativeSurfaceDistance(
+            args.distance_binary, args.output.parent / "distance-scratch"
+        )
     with np.load(args.mesh) as data:
         result = measure(
-            data["points"], data["tetrahedra"], data["input_points"], data["input_faces"]
+            data["points"],
+            data["tetrahedra"],
+            data["input_points"],
+            data["input_faces"],
+            distance_query=distances,
         )
+    if distances is not None:
+        result["distance_oracle"] = distances.metadata
     result["input_sha256"] = hashlib.sha256(args.mesh.read_bytes()).hexdigest()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + "\n")

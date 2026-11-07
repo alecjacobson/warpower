@@ -366,15 +366,15 @@ class VTMWorkspace:
                 from ._vtm_controls import DeviceControls
 
                 self.controls = DeviceControls(self, iteration_limit, selective_enabled)
-            wp.load_module(module="warpower._vtm_domain", device=self.device)
+            wp.load_module(module="warpower._vtm_domain", device=self.device, block_dim=32)
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as capture:
                 self._record()
             self.graph = capture.graph
         wp.synchronize_device(self.device)
 
-    def _launch(self, kernel, dim, args):
-        wp.launch(kernel, dim, inputs=args, device=self.device)
+    def _launch(self, kernel, dim, args, *, block_dim=256):
+        wp.launch(kernel, dim, inputs=args, device=self.device, block_dim=block_dim)
 
     def _evaluate(self, compute_directions):
         self._invalid.zero_()
@@ -518,6 +518,7 @@ class VTMWorkspace:
                 self.error,
                 self._interior_known,
             ],
+            block_dim=32,
         )
         self._launch(
             start_attempt,

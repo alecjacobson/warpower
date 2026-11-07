@@ -213,9 +213,12 @@ def finish(error: wp.array[int], certificate: wp.array[int], count: wp.array[int
 class FacetCompletion:
     """Internal bounded completion; never expose a partial result as successful."""
 
-    def __init__(self, points, seeds, seed_count, tree, *, capacity=None, max_rounds=64):
+    def __init__(
+        self, points, seeds, seed_count, tree, *, capacity=None, max_rounds=64, query_block_dim=256
+    ):
         self.points, self.seeds, self.seed_count = points, seeds, seed_count
         self.tree, self.device = tree, points.device
+        self._query_block_dim = query_block_dim
         self.capacity = len(seeds) if capacity is None else operator.index(capacity)
         self.max_rounds = operator.index(max_rounds)
         if self.capacity < len(seeds) or self.capacity < 1 or self.max_rounds < 0:
@@ -239,9 +242,13 @@ class FacetCompletion:
             self._live = wp.empty(5 * self.capacity, dtype=int)
             self._table = wp.empty(1 << (10 * self.capacity - 1).bit_length(), dtype=int)
             wp.load_module(module=__name__, device=self.device)
+            if self._query_block_dim != 256:
+                wp.load_module(
+                    module=__name__, device=self.device, block_dim=self._query_block_dim
+                )
 
-    def _launch(self, kernel, dim, args):
-        wp.launch(kernel, dim, inputs=args, device=self.device)
+    def _launch(self, kernel, dim, args, *, block_dim=256):
+        wp.launch(kernel, dim, inputs=args, device=self.device, block_dim=block_dim)
 
     def run(self, tree=None):
         tree = self.tree if tree is None else tree
@@ -291,6 +298,7 @@ class FacetCompletion:
                 self._workers,
                 self.error,
             ],
+            block_dim=self._query_block_dim,
         )
         self._launch(
             extend_faces,
@@ -307,6 +315,7 @@ class FacetCompletion:
                 self.capacity,
                 self.error,
             ],
+            block_dim=self._query_block_dim,
         )
         self._table.fill_(-1)
         self._count.zero_()

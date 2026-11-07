@@ -67,6 +67,8 @@ class ReuseDelaunayWorkspace(DelaunayWorkspace):
     contract. The standalone DelaunayWorkspace defaults remain unchanged.
     """
 
+    _facet_query_block_dim = 32
+
     def __init__(self, *args, reuse_max_rounds=4, **kwargs):
         super().__init__(*args, **kwargs)
         with wp.ScopedDevice(self.device):
@@ -77,7 +79,11 @@ class ReuseDelaunayWorkspace(DelaunayWorkspace):
             self.reuse_accepted = wp.zeros(1, dtype=int)
             self.reuse_error = wp.zeros(1, dtype=int)
             self._reuse_filter = CertifiedSeeds(
-                self.points, self._previous, self._previous_count, self._original.tree
+                self.points,
+                self._previous,
+                self._previous_count,
+                self._original.tree,
+                block_dim=self._facet_query_block_dim,
             )
             self._reuse_completion = FacetCompletion(
                 self.points,
@@ -85,6 +91,7 @@ class ReuseDelaunayWorkspace(DelaunayWorkspace):
                 self._reuse_filter.tetrahedra_count,
                 self._original.tree,
                 max_rounds=reuse_max_rounds,
+                query_block_dim=self._facet_query_block_dim,
             )
             self.reuse_seeds = self._reuse_filter.tetrahedra_count
             self.reuse_rounds = self._reuse_completion.rounds

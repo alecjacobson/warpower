@@ -181,6 +181,11 @@ def main():
         steps=mesh.steps.numpy().tolist(),
         moves=mesh.moves.numpy().tolist(),
         last_errors=mesh.last_errors.numpy().tolist(),
+        refinement_rejections=int(mesh.refinement_rejections.numpy()[0]),
+        quality_rejections=int(mesh.quality_rejections.numpy()[0]),
+        last_bad_extraction=int(mesh.last_bad_extraction.numpy()[0]),
+        final_extraction_error=int(mesh.extraction.error.numpy()[0]),
+        final_extraction_diagnostics=int(mesh.extraction.diagnostics.numpy()[0]),
     )
     if result["valid"]:
         n, full_count, m, boundary_count = result["counts"]

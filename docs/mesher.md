@@ -223,6 +223,10 @@ are unthrottled. It reproduces the same counts and quality. The earlier 6.06-sec
 run had throttling in its combined initial/warm window and is retained only as
 diagnostic evidence. Neither run establishes a CPU speedup.
 
+These are historical implementation measurements. The
+[surface-query launch comparison](query-launches.md) records later complete
+solve timings, independent mesh comparisons and the current capture audit.
+
 The complete-mesher CPU speedup target remains open in
 [#40](https://github.com/alecjacobson/warpower/issues/40); the existing Paragram
 diagram speedup is a different measured operation.

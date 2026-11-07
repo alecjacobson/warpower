@@ -332,6 +332,10 @@ Within one unchanged-input completion, [exact cell proofs](completion-proofs.md)
 now follow retained cells through deduplication and compaction. New cells keep
 their full sphere checks; all topology, coverage and hull-support checks remain.
 Proofs are re-established against current input on the next invocation.
+A private [fresh complete-mesh certificate experiment](previous-complete-certificate.md)
+tries to avoid fragment filtering when the entire previous topology survives.
+Its ordinary schedule is slower; earlier rejection is effectively neutral at 4k
+and slower at 1k. Both variants remain unadopted.
 The immediately preceding [hull-support result](hull-support-reuse.md) also
 lets proven hull faces skip candidate search. Each new boundary ordering receives
 a fresh global support check before that mask can be consumed. The private

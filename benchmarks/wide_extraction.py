@@ -8,7 +8,8 @@ import numpy as np
 import warp as wp
 
 from examples.vtm_inputs import surface
-from tests.test_wide_center import bounded_bridge, bounded_core, bridge
+from tests.test_sphere_bounds import exact_sphere
+from tests.test_wide_center import bounded_bridge, bounded_core, bridge, exact_area2
 from warpower import ExtractionWorkspace, SurfaceDomain
 from warpower._selective import classify_retained
 from warpower._voronoi_volume import BoundedVoronoiVolumes
@@ -29,6 +30,9 @@ def consume(
     valid: wp.array[int],
     boundary_count: wp.array[int],
     selection_error: wp.array[int],
+    selected: wp.array[int],
+    quality: wp.array[wp.float64],
+    quality_sums: wp.array[wp.float64],
     dual_error: wp.array[int],
     dual_count: wp.array[int],
     volume: wp.array[wp.float64],
@@ -48,6 +52,15 @@ def consume(
     records[row, 5] = selection_error[0]
     records[row, 6] = dual_error[0]
     records[row, 7] = dual_count[0]
+    selected_count = int(0)
+    selected_quality = wp.float64(0.0)
+    if selection_error[0] == 0:
+        for i in range(selected.shape[0]):
+            if selected[i] != 0:
+                selected_count += 1
+                selected_quality += quality[i]
+    records[row, 8] = selected_count
+    quality_sums[row] = selected_quality
     total = wp.float64(0.0)
     for i in range(volume.shape[0]):
         total += volume[i]
@@ -82,8 +95,9 @@ def audit(profile=False, dot=None):
     selected = wp.empty(2, dtype=int, device=domain.device)
     quality = wp.empty(2, dtype=wp.float64, device=domain.device)
     phase = wp.zeros(1, dtype=int, device=domain.device)
-    records = wp.zeros((4, 8), dtype=int, device=domain.device)
+    records = wp.zeros((4, 9), dtype=int, device=domain.device)
     volume_sums = wp.zeros(4, dtype=wp.float64, device=domain.device)
+    quality_sums = wp.zeros(4, dtype=wp.float64, device=domain.device)
     wp.load_module(module=__name__, device=domain.device)
     wp.load_module(module="warpower._selective", device=domain.device)
     with wp.ScopedCapture() as cap:
@@ -117,6 +131,9 @@ def audit(profile=False, dot=None):
                 extraction.valid,
                 extraction.boundary_count,
                 selection_error,
+                selected,
+                quality,
+                quality_sums,
                 dual.error,
                 dual.count,
                 dual.volume,
@@ -142,10 +159,10 @@ def audit(profile=False, dot=None):
     np.testing.assert_array_equal(
         values,
         [
-            [0, 1, 1, 4, 22, 0, 0, 4],
-            [8, 0, 0, 0, 0, 8, 2, 0],
-            [4, 0, 0, 0, 0, 4, 2, 0],
-            [0, 1, 1, 4, 22, 0, 0, 4],
+            [0, 1, 1, 4, 22, 0, 0, 4, 1],
+            [8, 0, 0, 0, 0, 8, 2, 0, 0],
+            [4, 0, 0, 0, 0, 4, 2, 0, 0],
+            [0, 1, 1, 4, 22, 0, 0, 4, 1],
         ],
     )
     from tests.test_voronoi_volume import oracle
@@ -153,6 +170,11 @@ def audit(profile=False, dot=None):
     expected, _ = oracle(dual_original)
     np.testing.assert_allclose(
         volume_sums.numpy(), [expected.sum(), 0, 0, expected.sum()], rtol=1e-7
+    )
+    det, _, radius2 = exact_sphere(healthy)
+    expected_quality = 3 * float(det) / (exact_area2(healthy) * np.sqrt(float(radius2)))
+    np.testing.assert_allclose(
+        quality_sums.numpy(), [expected_quality, 0, 0, expected_quality], rtol=1e-14
     )
     np.testing.assert_array_equal(points.numpy(), original)
     np.testing.assert_array_equal(core.points.numpy(), dual_original)
@@ -168,9 +190,11 @@ def audit(profile=False, dot=None):
             "selection_error",
             "dual_error",
             "bounded_cells",
+            "selected_cells",
         ],
         records=values.tolist(),
         volume_sums=volume_sums.numpy().tolist(),
+        quality_sums=quality_sums.numpy().tolist(),
     )
 
 

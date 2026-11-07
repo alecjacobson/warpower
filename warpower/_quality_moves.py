@@ -408,8 +408,8 @@ class QualityMove:
             self.graph = capture.graph
         wp.synchronize_device(self.device)
 
-    def _launch(self, kernel, dim, args):
-        wp.launch(kernel, dim, inputs=args, device=self.device)
+    def _launch(self, kernel, dim, args, *, block_dim=256):
+        wp.launch(kernel, dim, inputs=args, device=self.device, block_dim=block_dim)
 
     def _record(self):
         c = self.core
@@ -527,6 +527,7 @@ class QualityMove:
                 self._query_keep,
                 self._query_quality,
             ],
+            block_dim=32,
         )
         self._launch(
             _selective.summarize,

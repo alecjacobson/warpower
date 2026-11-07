@@ -267,6 +267,11 @@ marks poor-element vertices, and expands one neighbor ring in separate device
 passes. Masked updates and an additional retained-quality guard share the existing
 reconstruction/backtracking mechanism; default kernels and graph work are unchanged.
 
+Extraction, retained-cell classification and boundary-distance queries use
+[32-thread launch blocks](query-launches.md) to distribute small active workloads
+across the GPU. This changes scheduling without changing geometric calculations,
+buffers or the standalone diagram and Delaunay paths.
+
 The optional [boundary-jitter workspace](jitter.md) searches a tangent disk at a
 surface vertex of a poor tetrahedron. Fixed buffers hold the original state and
 device-seeded proposals. Each trial is reconstructed and certified; retained

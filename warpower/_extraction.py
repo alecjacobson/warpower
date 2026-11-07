@@ -316,8 +316,8 @@ class ExtractionWorkspace:
             self.graph = capture.graph
         wp.synchronize_device(self.device)
 
-    def _launch(self, kernel, dim, args):
-        wp.launch(kernel, dim, inputs=args, device=self.device)
+    def _launch(self, kernel, dim, args, *, block_dim=256):
+        wp.launch(kernel, dim, inputs=args, device=self.device, block_dim=block_dim)
 
     def _record(self):
         for a in (
@@ -334,6 +334,7 @@ class ExtractionWorkspace:
             1,
             [self.domain.error, self.source_error, self.input_count, self.capacity, self.error],
         )
+        # Register-heavy surface queries need enough blocks for small cell sets.
         self._launch(
             classify,
             self.capacity,
@@ -351,6 +352,7 @@ class ExtractionWorkspace:
                 self._input_volume,
                 self._input_quality,
             ],
+            block_dim=32,
         )
         self._compact_topology()
         if self.containment_recovery:
@@ -380,6 +382,7 @@ class ExtractionWorkspace:
                 self.surface_max_sample_distance,
                 self.error,
             ],
+            block_dim=32,
         )
         self._launch(
             domain_volume, self.domain.tree.n, [self.domain.tree, self.domain_volume, self.error]

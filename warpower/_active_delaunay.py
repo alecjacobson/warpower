@@ -5,7 +5,7 @@ import operator
 import warp as wp
 
 from ._delaunay_recovery import DelaunayWorkspace
-from ._reuse_delaunay import ReuseDelaunayWorkspace
+from ._wall_reuse import WallReuseDelaunayWorkspace as ReuseDelaunayWorkspace
 
 wp.set_module_options({"enable_backward": False, "fast_math": False})
 

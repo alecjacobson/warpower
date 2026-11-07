@@ -279,7 +279,7 @@ class VTMWorkspace:
         # Keep standalone constructors and large-cloud reconstruction unchanged.
         self.reuses_delaunay_cells = certified_delaunay and 256 <= len(mesh_points) <= 2048
         if self.reuses_delaunay_cells:
-            from ._reuse_delaunay import ReuseDelaunayWorkspace
+            from ._wall_reuse import WallReuseDelaunayWorkspace as ReuseDelaunayWorkspace
 
             mesh_type = ReuseDelaunayWorkspace
         mesh_options = {} if certified_delaunay else dict(adjacency=False, return_tetrahedra=True)

@@ -342,6 +342,10 @@ a fresh global support check before that mask can be consumed. The private
 check now [stops a face traversal after an exact exterior witness](hull-witness-stop.md),
 sharing that negative result across partitions while retaining every later
 strided face slot and exhaustive checking for positive support.
+Its leaf point queries now use the existing
+[bounded and analytic orientation filters](bounded-hull-support.md) before the
+original interval/exact fallback. Tree pruning, support lifetimes, storage and
+launches retain their existing behavior.
 
 The VTM strided face scan and retained-cell queries first try
 [certified bounded float32 filters](bounded-predicate-filters.md) on finite

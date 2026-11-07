@@ -332,6 +332,12 @@ check now [stops a face traversal after an exact exterior witness](hull-witness-
 sharing that negative result across partitions while retaining every later
 strided face slot and exhaustive checking for positive support.
 
+The VTM strided face scan uses [analytic float64 determinant bounds](analytic-predicate-bounds.md)
+to certify ordinary orientation and sphere signs before the interval and exact
+fallbacks. Uncertain comparisons and physical ties retain the original symbolic
+policy. This changes two sign queries in the reuse-owned search; standalone
+predicates, allocation, topology checks and proof lifetimes remain unchanged.
+
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).
 Preallocated 1,024- and 2,048-site constructors handle the smallest fitting prefix;

@@ -240,6 +240,10 @@ timings, independent mesh comparisons and native capture audits.
 The [extension of certified fragment reuse through 4,096 sites](large-fragment-reuse.md)
 reduces complete 4k torus and Armadillo solves by 1.82–2.96× versus the preceding
 GPU implementation; small default and standalone API timings remain stable.
+The subsequent [analytic predicate filters](analytic-facet-search.md) reduce the
+complete 4k torus from 3.785 to 2.825 s and the 1k torus from 824 to 737 ms,
+with matching connectivity and iteration work. Standalone timings stay within
+0.8% of controls; the uncertain and symbolic predicate policies are unchanged.
 
 The complete-mesher CPU speedup target remains open in
 [#40](https://github.com/alecjacobson/warpower/issues/40); the existing Paragram

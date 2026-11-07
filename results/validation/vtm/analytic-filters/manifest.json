@@ -1,0 +1,2173 @@
+{
+  "runtime": "0590626a96ad3e4bf8df18d7fb5a0184e5ce21b1",
+  "baseline": "fb795ac1b83f4bbf0c5759fb6f800ff41e1c403e",
+  "scope": "Certified analytic FP64 filters only in VTM exposed-face search. Complete GPU gains; no CPU speedup claim. Full routed allocation-order limitation retained, not relabeled a pass.",
+  "source_sha256": {
+    "warpower/_analytic_predicates.py": "b6d8ab23dfb23e107f8dde1d9e473085f9a45004115279531bfe219194bfad15",
+    "warpower/_proved_completion.py": "458258ff9ce3e6a926ba33ddeac2c931907fa9d7379d6b20b0dc8e0a1fe5a414",
+    "tests/test_analytic_predicates.py": "125a0dbe23ae98593874a894859412e864fcf1da4a740b80047756322470ca28",
+    "tests/test_analytic_face_search.py": "42244e86aac930bd92d391413c90a78402e74df89fa04ac06f08da2841546a20",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "examples/vtm_gallery.py": "8e39899ba4ec7b98dee840f73ccc330c57ac2a398faff3efc103dabb57af4acf",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f"
+  },
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-graded-control/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-analytic/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-control/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck/armadillo-graded-control/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-analytic/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-control/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-graded-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-uniform-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    }
+  ],
+  "shared_helpers": [
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    }
+  ],
+  "reference_binaries_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "reference_predicates_url": "https://www.cs.cmu.edu/afs/cs/project/quake/public/code/predicates.c",
+  "reference_predicates_sha256": "f8662c3f407d1c1c5dcd4dd49ea8b8ddd801a71827d65734206ddc3741792029",
+  "files": [
+    {
+      "original": ".work/vtm/analytic-audit-commands.json",
+      "original_sha256": "919e08d877ca26010bf67fcac14420ed3226b4c9eaff3e1afd5814ae9ff7c3aa",
+      "path": "results/validation/vtm/analytic-filters/analytic-audit-commands.json",
+      "bytes": 12712,
+      "sha256": "919e08d877ca26010bf67fcac14420ed3226b4c9eaff3e1afd5814ae9ff7c3aa"
+    },
+    {
+      "original": ".work/vtm/analytic-audits.log",
+      "original_sha256": "d366e060bf1c1ca356ca9acf1dc3cbe3054663346b05664ec9b37c3f91547908",
+      "path": "results/validation/vtm/analytic-filters/analytic-audits.log",
+      "bytes": 10550,
+      "sha256": "d366e060bf1c1ca356ca9acf1dc3cbe3054663346b05664ec9b37c3f91547908"
+    },
+    {
+      "original": ".work/vtm/analytic-broad-coordinate-differences.json",
+      "original_sha256": "85f1968a896fac1b409c5510f2405802decc0a8f85b535cd30121b7cb7ed49f6",
+      "path": "results/validation/vtm/analytic-filters/analytic-broad-coordinate-differences.json",
+      "bytes": 1271,
+      "sha256": "85f1968a896fac1b409c5510f2405802decc0a8f85b535cd30121b7cb7ed49f6"
+    },
+    {
+      "original": ".work/vtm/analytic-cavity-control-repeat.log",
+      "original_sha256": "32aea5d6064aacf9a3a57a792291b1ff9e4e4e1954cfc32585f63039a073203a",
+      "path": "results/validation/vtm/analytic-filters/analytic-cavity-control-repeat.log",
+      "bytes": 7900,
+      "sha256": "32aea5d6064aacf9a3a57a792291b1ff9e4e4e1954cfc32585f63039a073203a"
+    },
+    {
+      "original": ".work/vtm/analytic-compiler-cache-public-summary.json",
+      "original_sha256": "6f44db10de3d4a8dda5ebe5aacee36d671ae960cf3505a51ee75e913230c149a",
+      "path": "results/validation/vtm/analytic-filters/analytic-compiler-cache-public-summary.json",
+      "bytes": 946,
+      "sha256": "6f44db10de3d4a8dda5ebe5aacee36d671ae960cf3505a51ee75e913230c149a"
+    },
+    {
+      "original": ".work/vtm/analytic-compiler-cache-relocation.log",
+      "original_sha256": "254d1e8c2e4e7c34cd3498e7def77f1e05dfd082f7bd6d65cc20de712547adc4",
+      "path": "results/validation/vtm/analytic-filters/analytic-compiler-cache-relocation.log",
+      "bytes": 62,
+      "sha256": "254d1e8c2e4e7c34cd3498e7def77f1e05dfd082f7bd6d65cc20de712547adc4"
+    },
+    {
+      "original": ".work/vtm/analytic-coordinate-repeat-analysis.json",
+      "original_sha256": "ead178ca3ad3d53aedf9d52dcd1d598e7b045120cb0ee091271516d3ec4ead34",
+      "path": "results/validation/vtm/analytic-filters/analytic-coordinate-repeat-analysis.json",
+      "bytes": 7266,
+      "sha256": "ead178ca3ad3d53aedf9d52dcd1d598e7b045120cb0ee091271516d3ec4ead34"
+    },
+    {
+      "original": ".work/vtm/analytic-coordinate-repeat-commands.json",
+      "original_sha256": "913ac3af7f19a335749fb9082bb6b99bd8f7af34016a98ca9b540b6cb5625642",
+      "path": "results/validation/vtm/analytic-filters/analytic-coordinate-repeat-commands.json",
+      "bytes": 994,
+      "sha256": "913ac3af7f19a335749fb9082bb6b99bd8f7af34016a98ca9b540b6cb5625642"
+    },
+    {
+      "original": ".work/vtm/analytic-coordinate-repeat.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "results/validation/vtm/analytic-filters/analytic-coordinate-repeat.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/analytic-disconnected-control-repeat.log",
+      "original_sha256": "73be31805234d9c4e1d00db5ed797c54f4ad7d07265d7b9ef9014e166a081390",
+      "path": "results/validation/vtm/analytic-filters/analytic-disconnected-control-repeat.log",
+      "bytes": 7912,
+      "sha256": "73be31805234d9c4e1d00db5ed797c54f4ad7d07265d7b9ef9014e166a081390"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-independent-initial.log",
+      "original_sha256": "06d1bf332eb26f39090dee065fdf376ece0ce61eefead6bb0bfbb2f4415bde62",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-independent-initial.log",
+      "bytes": 746,
+      "sha256": "06d1bf332eb26f39090dee065fdf376ece0ce61eefead6bb0bfbb2f4415bde62"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-independent-second.log",
+      "original_sha256": "9977d9d30c146febda9d8431bd762cf8eedc2803e4bb5045372c2f62a8cf0ba5",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-independent-second.log",
+      "bytes": 907,
+      "sha256": "9977d9d30c146febda9d8431bd762cf8eedc2803e4bb5045372c2f62a8cf0ba5"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-independent.json",
+      "original_sha256": "e9c65f71a7c3813ed4eb874fd1f72f62cee08209ac70be0eb9373c9ff811be60",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-independent.json",
+      "bytes": 19390,
+      "sha256": "e9c65f71a7c3813ed4eb874fd1f72f62cee08209ac70be0eb9373c9ff811be60"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-independent.log",
+      "original_sha256": "61d99a696c4c9accbea33e6c4048779533835f67d0ce99fd351b61e792e6e7ac",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-independent.log",
+      "bytes": 1398,
+      "sha256": "61d99a696c4c9accbea33e6c4048779533835f67d0ce99fd351b61e792e6e7ac"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck.log",
+      "original_sha256": "46edc4fc76a90552c023810738fee73aacbc8e4c803414fd12b7a48d6fd1e89c",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck.log",
+      "bytes": 1599,
+      "sha256": "46edc4fc76a90552c023810738fee73aacbc8e4c803414fd12b7a48d6fd1e89c"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2.log",
+      "original_sha256": "4d5922bb1087412d42d791d75187038f4f72111c6a4bd3bc3aaca95c2bfa03dd",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2.log",
+      "bytes": 1541,
+      "sha256": "4d5922bb1087412d42d791d75187038f4f72111c6a4bd3bc3aaca95c2bfa03dd"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad.log",
+      "original_sha256": "e3037c3e554f0c69f762588ed428ebe3f1fbfae6d14089173d14b3f6fc0f143e",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad.log",
+      "bytes": 7881,
+      "sha256": "e3037c3e554f0c69f762588ed428ebe3f1fbfae6d14089173d14b3f6fc0f143e"
+    },
+    {
+      "original": ".work/vtm/analytic-face-existing-tests.log",
+      "original_sha256": "c6a37355235f18de9a98d2c801cf320435aac3cfa4daef4ed8466ea139dacddb",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-existing-tests.log",
+      "bytes": 613,
+      "sha256": "c6a37355235f18de9a98d2c801cf320435aac3cfa4daef4ed8466ea139dacddb"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot-independent.json",
+      "original_sha256": "e5feddea90930e0dc8d04fa9750b1b461b63850b28e054c79b75b64f711d108c",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot-independent.json",
+      "bytes": 6547,
+      "sha256": "e5feddea90930e0dc8d04fa9750b1b461b63850b28e054c79b75b64f711d108c"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot-independent.log",
+      "original_sha256": "9e9c794b7defe79d11c5554f5d999fa7ba55aed3b2dfdfc10492c7ee0cf649c6",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot-independent.log",
+      "bytes": 434,
+      "sha256": "9e9c794b7defe79d11c5554f5d999fa7ba55aed3b2dfdfc10492c7ee0cf649c6"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot.log",
+      "original_sha256": "048f0b80d2551f9d8740943f08ebc9ada8dd6795fcf6cebb74e9da7778cba2e0",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot.log",
+      "bytes": 2353,
+      "sha256": "048f0b80d2551f9d8740943f08ebc9ada8dd6795fcf6cebb74e9da7778cba2e0"
+    },
+    {
+      "original": ".work/vtm/analytic-face-properties.json",
+      "original_sha256": "de8f4e189f508097463016600b738b5e44c82170cf5fb51c37a81d32c2855ad0",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-properties.json",
+      "bytes": 161,
+      "sha256": "de8f4e189f508097463016600b738b5e44c82170cf5fb51c37a81d32c2855ad0"
+    },
+    {
+      "original": ".work/vtm/analytic-face-properties.log",
+      "original_sha256": "f2a802140c0b50070f2ce44296ea02972a9c9250feddc8fd15ecaf81aac4ecfd",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-properties.log",
+      "bytes": 651,
+      "sha256": "f2a802140c0b50070f2ce44296ea02972a9c9250feddc8fd15ecaf81aac4ecfd"
+    },
+    {
+      "original": ".work/vtm/analytic-face-properties.py",
+      "original_sha256": "728c8835b2033119d8a3d3317a58b4bb097da8640bf81a46e5f73f1a8cb2fb6d",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-properties.py",
+      "bytes": 487,
+      "sha256": "728c8835b2033119d8a3d3317a58b4bb097da8640bf81a46e5f73f1a8cb2fb6d"
+    },
+    {
+      "original": ".work/vtm/analytic-face-query-tests.log",
+      "original_sha256": "f9e99cebc86f4d3df1e9255dd4dc3bb168d139799ccf479e4a2a0310e450dce0",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-query-tests.log",
+      "bytes": 110,
+      "sha256": "f9e99cebc86f4d3df1e9255dd4dc3bb168d139799ccf479e4a2a0310e450dce0"
+    },
+    {
+      "original": ".work/vtm/analytic-filter-range.md",
+      "original_sha256": "4342432bac19ab9bb2babd9981797f1c1f43fd54b77f47eda9696553049a1dd5",
+      "path": "results/validation/vtm/analytic-filters/analytic-filter-range.md",
+      "bytes": 3127,
+      "sha256": "4342432bac19ab9bb2babd9981797f1c1f43fd54b77f47eda9696553049a1dd5"
+    },
+    {
+      "original": ".work/vtm/analytic-final-independent.json",
+      "original_sha256": "407370d5fe6d5924c6bbb6d277ec06ea59330b72375b55fb2c28221ba24c544a",
+      "path": "results/validation/vtm/analytic-filters/analytic-final-independent.json",
+      "bytes": 38384,
+      "sha256": "407370d5fe6d5924c6bbb6d277ec06ea59330b72375b55fb2c28221ba24c544a"
+    },
+    {
+      "original": ".work/vtm/analytic-final-independent.log",
+      "original_sha256": "8339a54ba85fb9dcfb196a446a70cfade525092d85066305810158a291da442d",
+      "path": "results/validation/vtm/analytic-filters/analytic-final-independent.log",
+      "bytes": 6055,
+      "sha256": "8339a54ba85fb9dcfb196a446a70cfade525092d85066305810158a291da442d"
+    },
+    {
+      "original": ".work/vtm/analytic-final-timings.log",
+      "original_sha256": "bdb45117032353a8123d96cbd73ce1d02dd3781a4a89bc59bb75a73526a644eb",
+      "path": "results/validation/vtm/analytic-filters/analytic-final-timings.log",
+      "bytes": 12653,
+      "sha256": "bdb45117032353a8123d96cbd73ce1d02dd3781a4a89bc59bb75a73526a644eb"
+    },
+    {
+      "original": ".work/vtm/analytic-focused-tests.log",
+      "original_sha256": "2eda9fa84357716c60e006abbee39ffe0e5b57d2ce4f007941daa6e96e3ee5df",
+      "path": "results/validation/vtm/analytic-filters/analytic-focused-tests.log",
+      "bytes": 191,
+      "sha256": "2eda9fa84357716c60e006abbee39ffe0e5b57d2ce4f007941daa6e96e3ee5df"
+    },
+    {
+      "original": ".work/vtm/analytic-full-native-audit.json",
+      "original_sha256": "05fef0a7a274c5ed428846d36cb3a281fd579882ac85a8a53174a852cfdfe732",
+      "path": "results/validation/vtm/analytic-filters/analytic-full-native-audit.json",
+      "bytes": 1120,
+      "sha256": "05fef0a7a274c5ed428846d36cb3a281fd579882ac85a8a53174a852cfdfe732"
+    },
+    {
+      "original": ".work/vtm/analytic-full-native-audit.log",
+      "original_sha256": "05fef0a7a274c5ed428846d36cb3a281fd579882ac85a8a53174a852cfdfe732",
+      "path": "results/validation/vtm/analytic-filters/analytic-full-native-audit.log",
+      "bytes": 1120,
+      "sha256": "05fef0a7a274c5ed428846d36cb3a281fd579882ac85a8a53174a852cfdfe732"
+    },
+    {
+      "original": ".work/vtm/analytic-full-native-export.log",
+      "original_sha256": "98c846488f2244adbad4ee87e2b745a994d5a3d9bbf8300b05bf1bf17e9b9568",
+      "path": "results/validation/vtm/analytic-filters/analytic-full-native-export.log",
+      "bytes": 8101,
+      "sha256": "98c846488f2244adbad4ee87e2b745a994d5a3d9bbf8300b05bf1bf17e9b9568"
+    },
+    {
+      "original": ".work/vtm/analytic-full-native.dot.gz",
+      "original_sha256": "477e657a34d21f1036fa060e66ecf8c7851527f678d96e25cdeeab2b19e93419",
+      "path": "results/validation/vtm/analytic-filters/analytic-full-native.dot.gz",
+      "bytes": 1434254,
+      "sha256": "477e657a34d21f1036fa060e66ecf8c7851527f678d96e25cdeeab2b19e93419"
+    },
+    {
+      "original": ".work/vtm/analytic-full-native.json",
+      "original_sha256": "ce763569095f84b07d46061a5b1ec2ef2531bd42466c25eaa80073c270000867",
+      "path": "results/validation/vtm/analytic-filters/analytic-full-native.json",
+      "bytes": 539,
+      "sha256": "ce763569095f84b07d46061a5b1ec2ef2531bd42466c25eaa80073c270000867"
+    },
+    {
+      "original": ".work/vtm/analytic-full-native.log",
+      "original_sha256": "76b5e49fc8d8a78ee3e1547536e969633c91ec9725b46b01dfcdaf3a40dae4d8",
+      "path": "results/validation/vtm/analytic-filters/analytic-full-native.log",
+      "bytes": 8561,
+      "sha256": "76b5e49fc8d8a78ee3e1547536e969633c91ec9725b46b01dfcdaf3a40dae4d8"
+    },
+    {
+      "original": ".work/vtm/analytic-full-native.nsys-rep",
+      "original_sha256": "b160c6117b24a620c4a47d390911d02be66a415282bc5be700f5a137c3719885",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-full-native.nsys-rep.gz",
+      "bytes": 2904251,
+      "sha256": "757d7218607dd992c63cb81fa1f714be6cae44d7c32b401c164016fb8695cbd8"
+    },
+    {
+      "original": ".work/vtm/analytic-full-native.py",
+      "original_sha256": "6fcaacb36cd825f759ae4dfe21320096a046c7cdb6b0ea0a4ee5cbd3dc254955",
+      "path": "results/validation/vtm/analytic-filters/analytic-full-native.py",
+      "bytes": 1595,
+      "sha256": "6fcaacb36cd825f759ae4dfe21320096a046c7cdb6b0ea0a4ee5cbd3dc254955"
+    },
+    {
+      "original": ".work/vtm/analytic-full-native.sqlite.gz",
+      "original_sha256": "0aee869958efd7509c7c76ef372993492a4003706349485a314a66895259bc1c",
+      "path": "results/validation/vtm/analytic-filters/analytic-full-native.sqlite.gz",
+      "bytes": 3881250,
+      "sha256": "0aee869958efd7509c7c76ef372993492a4003706349485a314a66895259bc1c"
+    },
+    {
+      "original": ".work/vtm/analytic-full-suite.log",
+      "original_sha256": "92eb1273ab5fdf2935bc6a86e61976a65cabde0e15c125b05fd44e2a33f3a9f6",
+      "path": "results/validation/vtm/analytic-filters/analytic-full-suite.log",
+      "bytes": 832,
+      "sha256": "92eb1273ab5fdf2935bc6a86e61976a65cabde0e15c125b05fd44e2a33f3a9f6"
+    },
+    {
+      "original": ".work/vtm/analytic-hand-control-repeat.log",
+      "original_sha256": "3132f5f855a84db1bc98460e9b37a1070d67ecaba48f948a1e902f1e9128cd1d",
+      "path": "results/validation/vtm/analytic-filters/analytic-hand-control-repeat.log",
+      "bytes": 7864,
+      "sha256": "3132f5f855a84db1bc98460e9b37a1070d67ecaba48f948a1e902f1e9128cd1d"
+    },
+    {
+      "original": ".work/vtm/analytic-hand-coordinate-analysis.json",
+      "original_sha256": "359bfa98c33f3b59b83fae70325a9b526dc4bc26d440689a74e9f38b20da1940",
+      "path": "results/validation/vtm/analytic-filters/analytic-hand-coordinate-analysis.json",
+      "bytes": 1519,
+      "sha256": "359bfa98c33f3b59b83fae70325a9b526dc4bc26d440689a74e9f38b20da1940"
+    },
+    {
+      "original": ".work/vtm/analytic-input-deduplication.json",
+      "original_sha256": "46b1f1bcb08cc9a9c1116cd3eced569c4ad526929e8221a49f4c1432ebc42d37",
+      "path": "results/validation/vtm/analytic-filters/analytic-input-deduplication.json",
+      "bytes": 2404,
+      "sha256": "46b1f1bcb08cc9a9c1116cd3eced569c4ad526929e8221a49f4c1432ebc42d37"
+    },
+    {
+      "original": ".work/vtm/analytic-input-deduplication.log",
+      "original_sha256": "bb524d9417462994abf3a60aed4301416df6cdd9f299410163dd72e50b4ecc02",
+      "path": "results/validation/vtm/analytic-filters/analytic-input-deduplication.log",
+      "bytes": 37,
+      "sha256": "bb524d9417462994abf3a60aed4301416df6cdd9f299410163dd72e50b4ecc02"
+    },
+    {
+      "original": ".work/vtm/analytic-loop-native-audit.json",
+      "original_sha256": "226ae3ef7e6eaf6d6f3a8df4f034bf59916e9888c6a23f99836be61bdcc8816d",
+      "path": "results/validation/vtm/analytic-filters/analytic-loop-native-audit.json",
+      "bytes": 1144,
+      "sha256": "226ae3ef7e6eaf6d6f3a8df4f034bf59916e9888c6a23f99836be61bdcc8816d"
+    },
+    {
+      "original": ".work/vtm/analytic-loop-native-audit.log",
+      "original_sha256": "226ae3ef7e6eaf6d6f3a8df4f034bf59916e9888c6a23f99836be61bdcc8816d",
+      "path": "results/validation/vtm/analytic-filters/analytic-loop-native-audit.log",
+      "bytes": 1144,
+      "sha256": "226ae3ef7e6eaf6d6f3a8df4f034bf59916e9888c6a23f99836be61bdcc8816d"
+    },
+    {
+      "original": ".work/vtm/analytic-loop-native-export.log",
+      "original_sha256": "bec7cdd02511edd30eba328ed58c2977578f479afb3492906d3ee179296f2648",
+      "path": "results/validation/vtm/analytic-filters/analytic-loop-native-export.log",
+      "bytes": 8101,
+      "sha256": "bec7cdd02511edd30eba328ed58c2977578f479afb3492906d3ee179296f2648"
+    },
+    {
+      "original": ".work/vtm/analytic-loop-native.dot.gz",
+      "original_sha256": "8dcdd63deb1580c393d54ceddba42aa696e5199a908638c62b225b464af4405f",
+      "path": "results/validation/vtm/analytic-filters/analytic-loop-native.dot.gz",
+      "bytes": 101280,
+      "sha256": "8dcdd63deb1580c393d54ceddba42aa696e5199a908638c62b225b464af4405f"
+    },
+    {
+      "original": ".work/vtm/analytic-loop-native.json",
+      "original_sha256": "da768d194ae51158c165be02e042f2fa3924c22f3d3e67423a86d505575812a5",
+      "path": "results/validation/vtm/analytic-filters/analytic-loop-native.json",
+      "bytes": 2285,
+      "sha256": "da768d194ae51158c165be02e042f2fa3924c22f3d3e67423a86d505575812a5"
+    },
+    {
+      "original": ".work/vtm/analytic-loop-native.log",
+      "original_sha256": "631d72c6ce270385457501e4aaae973fe150cecc646ab6ce5e1d14368b10e59c",
+      "path": "results/validation/vtm/analytic-filters/analytic-loop-native.log",
+      "bytes": 5810,
+      "sha256": "631d72c6ce270385457501e4aaae973fe150cecc646ab6ce5e1d14368b10e59c"
+    },
+    {
+      "original": ".work/vtm/analytic-loop-native.npz",
+      "original_sha256": "5cef1be7764050e7b97963b9a2ee76360d17b4e249077c047fd196f3597c525d",
+      "path": "results/validation/vtm/analytic-filters/analytic-loop-native.npz",
+      "bytes": 1400428,
+      "sha256": "5cef1be7764050e7b97963b9a2ee76360d17b4e249077c047fd196f3597c525d"
+    },
+    {
+      "original": ".work/vtm/analytic-loop-native.nsys-rep",
+      "original_sha256": "58937e365eab16e2eb8ead68a453e4d238c40ca406c7ff315314f5a6cc442652",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-loop-native.nsys-rep.gz",
+      "bytes": 215375,
+      "sha256": "ffed2f96f5ccd6dda5c4f9b7eb52d0c5008022c7d5adec95cdf935c048e7abc9"
+    },
+    {
+      "original": ".work/vtm/analytic-loop-native.sqlite.gz",
+      "original_sha256": "efbe89d66a2141b8468a4acbdda6758a7fe5df686dcdae9d601c4f1559d2ad6c",
+      "path": "results/validation/vtm/analytic-filters/analytic-loop-native.sqlite.gz",
+      "bytes": 310048,
+      "sha256": "efbe89d66a2141b8468a4acbdda6758a7fe5df686dcdae9d601c4f1559d2ad6c"
+    },
+    {
+      "original": ".work/vtm/analytic-loop.py",
+      "original_sha256": "ff594b0e3813fd252a7d00a43250cdfc5a557063460a3bc0add4cf04cde5d70f",
+      "path": "results/validation/vtm/analytic-filters/analytic-loop.py",
+      "bytes": 4447,
+      "sha256": "ff594b0e3813fd252a7d00a43250cdfc5a557063460a3bc0add4cf04cde5d70f"
+    },
+    {
+      "original": ".work/vtm/analytic-memory-analysis.log",
+      "original_sha256": "41a4246cc42304bece5e7241743bd11b169301dc5a8ba1a0eb8c631258414cc6",
+      "path": "results/validation/vtm/analytic-filters/analytic-memory-analysis.log",
+      "bytes": 1462,
+      "sha256": "41a4246cc42304bece5e7241743bd11b169301dc5a8ba1a0eb8c631258414cc6"
+    },
+    {
+      "original": ".work/vtm/analytic-memory-coverage.json",
+      "original_sha256": "41a4246cc42304bece5e7241743bd11b169301dc5a8ba1a0eb8c631258414cc6",
+      "path": "results/validation/vtm/analytic-filters/analytic-memory-coverage.json",
+      "bytes": 1462,
+      "sha256": "41a4246cc42304bece5e7241743bd11b169301dc5a8ba1a0eb8c631258414cc6"
+    },
+    {
+      "original": ".work/vtm/analytic-native-analysis.log",
+      "original_sha256": "03982bbfec77578c2d28654bc46fb3c2f86837dd09f469ae3cdcf4d93e918cc4",
+      "path": "results/validation/vtm/analytic-filters/analytic-native-analysis.log",
+      "bytes": 59,
+      "sha256": "03982bbfec77578c2d28654bc46fb3c2f86837dd09f469ae3cdcf4d93e918cc4"
+    },
+    {
+      "original": ".work/vtm/analytic-native-audit-summary.json",
+      "original_sha256": "6b87a84480253474ca2a634a18706b107ddb0a8db954aedcc2d250b112e18532",
+      "path": "results/validation/vtm/analytic-filters/analytic-native-audit-summary.json",
+      "bytes": 58655,
+      "sha256": "6b87a84480253474ca2a634a18706b107ddb0a8db954aedcc2d250b112e18532"
+    },
+    {
+      "original": ".work/vtm/analytic-native-commands.json",
+      "original_sha256": "ec859ceedf318abb075ad512fac5b42528462ef34a01e2251970e997f786d6b3",
+      "path": "results/validation/vtm/analytic-filters/analytic-native-commands.json",
+      "bytes": 1914,
+      "sha256": "ec859ceedf318abb075ad512fac5b42528462ef34a01e2251970e997f786d6b3"
+    },
+    {
+      "original": ".work/vtm/analytic-native.log",
+      "original_sha256": "70dd4d6dd3597031dac3ee8af8199038b8c5cd1057f7454a0838e16a22e364f3",
+      "path": "results/validation/vtm/analytic-filters/analytic-native.log",
+      "bytes": 1590,
+      "sha256": "70dd4d6dd3597031dac3ee8af8199038b8c5cd1057f7454a0838e16a22e364f3"
+    },
+    {
+      "original": ".work/vtm/analytic-predicates-lifetime-all.log",
+      "original_sha256": "455f359455600b340b32dc8d80450c3531dd1aaaf09a8e52e1c0b3c0f93b9399",
+      "path": "results/validation/vtm/analytic-filters/analytic-predicates-lifetime-all.log",
+      "bytes": 755,
+      "sha256": "455f359455600b340b32dc8d80450c3531dd1aaaf09a8e52e1c0b3c0f93b9399"
+    },
+    {
+      "original": ".work/vtm/analytic-predicates-memcheck.log",
+      "original_sha256": "4bdb71df934a63f55ac355bbf0d1eec13c961f8ecbfbb505697267568231fd7b",
+      "path": "results/validation/vtm/analytic-filters/analytic-predicates-memcheck.log",
+      "bytes": 754,
+      "sha256": "4bdb71df934a63f55ac355bbf0d1eec13c961f8ecbfbb505697267568231fd7b"
+    },
+    {
+      "original": ".work/vtm/analytic-production-properties.json",
+      "original_sha256": "4ef5b9865af0a4c9ff841d7a40aceb6b7598e8c97d19e893de41c697a1f4b694",
+      "path": "results/validation/vtm/analytic-filters/analytic-production-properties.json",
+      "bytes": 58,
+      "sha256": "4ef5b9865af0a4c9ff841d7a40aceb6b7598e8c97d19e893de41c697a1f4b694"
+    },
+    {
+      "original": ".work/vtm/analytic-production-properties.log",
+      "original_sha256": "fe91bea0408663b998ab2427ef149e1fab63bec1f6a23dd3e97f64751ccc9607",
+      "path": "results/validation/vtm/analytic-filters/analytic-production-properties.log",
+      "bytes": 495,
+      "sha256": "fe91bea0408663b998ab2427ef149e1fab63bec1f6a23dd3e97f64751ccc9607"
+    },
+    {
+      "original": ".work/vtm/analytic-production-properties.py",
+      "original_sha256": "ed13cfa33649636f21ad48e3181a9870a27094fa4a6d219023d03ff94dfe465b",
+      "path": "results/validation/vtm/analytic-filters/analytic-production-properties.py",
+      "bytes": 367,
+      "sha256": "ed13cfa33649636f21ad48e3181a9870a27094fa4a6d219023d03ff94dfe465b"
+    },
+    {
+      "original": ".work/vtm/analytic-queries-lifetime-all.log",
+      "original_sha256": "9b78056be3509f725db96a0f539f640b13002f60bd54334a485cfa4608b209eb",
+      "path": "results/validation/vtm/analytic-filters/analytic-queries-lifetime-all.log",
+      "bytes": 1381,
+      "sha256": "9b78056be3509f725db96a0f539f640b13002f60bd54334a485cfa4608b209eb"
+    },
+    {
+      "original": ".work/vtm/analytic-queries-memcheck.log",
+      "original_sha256": "16bd7eac3b8c49259584b6adc406f6c31b69f01840ed439963fabb5dea539169",
+      "path": "results/validation/vtm/analytic-filters/analytic-queries-memcheck.log",
+      "bytes": 1380,
+      "sha256": "16bd7eac3b8c49259584b6adc406f6c31b69f01840ed439963fabb5dea539169"
+    },
+    {
+      "original": ".work/vtm/analytic-route-0-lifetime-after-free.log",
+      "original_sha256": "5cc4b6fe2b3e5961fc976646eeb899f83a5fb8a4086dab9a3c3d47e0a457ad4e",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-0-lifetime-after-free.log",
+      "bytes": 3297,
+      "sha256": "5cc4b6fe2b3e5961fc976646eeb899f83a5fb8a4086dab9a3c3d47e0a457ad4e"
+    },
+    {
+      "original": ".work/vtm/analytic-route-0-memcheck.log",
+      "original_sha256": "5d68dae354ae5ce7e023556c518e75e262b16e714b51b4096ce088e8a9fcda3f",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-0-memcheck.log",
+      "bytes": 3296,
+      "sha256": "5d68dae354ae5ce7e023556c518e75e262b16e714b51b4096ce088e8a9fcda3f"
+    },
+    {
+      "original": ".work/vtm/analytic-route-1-lifetime-after-free.log",
+      "original_sha256": "21f6ed9bd813a430360d1cf311309e66a9f042fc6e92ef24aa4e84678065c713",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-1-lifetime-after-free.log",
+      "bytes": 3297,
+      "sha256": "21f6ed9bd813a430360d1cf311309e66a9f042fc6e92ef24aa4e84678065c713"
+    },
+    {
+      "original": ".work/vtm/analytic-route-1-memcheck.log",
+      "original_sha256": "137ca6fd15cfe83f6e6efa7b861456e79c837322a237ab8d035fa66e56ba3010",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-1-memcheck.log",
+      "bytes": 3296,
+      "sha256": "137ca6fd15cfe83f6e6efa7b861456e79c837322a237ab8d035fa66e56ba3010"
+    },
+    {
+      "original": ".work/vtm/analytic-route-2-lifetime-after-free.log",
+      "original_sha256": "09d7935669d89a290ba810da62c025fff09aabc8ede6e5af64ae588fc0bb6b58",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-2-lifetime-after-free.log",
+      "bytes": 3125,
+      "sha256": "09d7935669d89a290ba810da62c025fff09aabc8ede6e5af64ae588fc0bb6b58"
+    },
+    {
+      "original": ".work/vtm/analytic-route-2-memcheck.log",
+      "original_sha256": "3d1a752cbeb5b9019a00ee8c10d658fd3a4f1ca96e2016f6e8040fcfc7a7ce3d",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-2-memcheck.log",
+      "bytes": 3124,
+      "sha256": "3d1a752cbeb5b9019a00ee8c10d658fd3a4f1ca96e2016f6e8040fcfc7a7ce3d"
+    },
+    {
+      "original": ".work/vtm/analytic-route-3-lifetime-after-free.log",
+      "original_sha256": "12922ae46d8898a58b38875c1a93fdf9b81f7166aaf3228bb053a2bc6b6dcc14",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-3-lifetime-after-free.log",
+      "bytes": 3038,
+      "sha256": "12922ae46d8898a58b38875c1a93fdf9b81f7166aaf3228bb053a2bc6b6dcc14"
+    },
+    {
+      "original": ".work/vtm/analytic-route-3-memcheck.log",
+      "original_sha256": "28ace4f3834dc15add2bc12db87933dfcc62a444820526c705016bcb75043cb7",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-3-memcheck.log",
+      "bytes": 3037,
+      "sha256": "28ace4f3834dc15add2bc12db87933dfcc62a444820526c705016bcb75043cb7"
+    },
+    {
+      "original": ".work/vtm/analytic-route-4-lifetime-after-free.log",
+      "original_sha256": "699dd023433099600e6b86307c2c32213f42546cdfda96852aa04f319b183676",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-4-lifetime-after-free.log",
+      "bytes": 3038,
+      "sha256": "699dd023433099600e6b86307c2c32213f42546cdfda96852aa04f319b183676"
+    },
+    {
+      "original": ".work/vtm/analytic-route-4-memcheck.log",
+      "original_sha256": "7e59348510f66766084da292eea65ae019ece669707adfee5d0937f12116a84c",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-4-memcheck.log",
+      "bytes": 3037,
+      "sha256": "7e59348510f66766084da292eea65ae019ece669707adfee5d0937f12116a84c"
+    },
+    {
+      "original": ".work/vtm/analytic-route-5-lifetime-after-free.log",
+      "original_sha256": "577c1df10aaf8ac47226b31125ebff1a5350dc4c7e65c668a5cb8b745f1dcd1a",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-5-lifetime-after-free.log",
+      "bytes": 3038,
+      "sha256": "577c1df10aaf8ac47226b31125ebff1a5350dc4c7e65c668a5cb8b745f1dcd1a"
+    },
+    {
+      "original": ".work/vtm/analytic-route-5-lifetime-all.log",
+      "original_sha256": "027f267c47c1c0602a336890230bd0486d64a9170f187792b9c9da7a33da9189",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-5-lifetime-all.log",
+      "bytes": 21117,
+      "sha256": "027f267c47c1c0602a336890230bd0486d64a9170f187792b9c9da7a33da9189"
+    },
+    {
+      "original": ".work/vtm/analytic-route-5-memcheck.log",
+      "original_sha256": "2bc862364bfa299d34bf374b8437fe3cff3f1c6e7f7ae72bf70ede145d02b10b",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-5-memcheck.log",
+      "bytes": 3037,
+      "sha256": "2bc862364bfa299d34bf374b8437fe3cff3f1c6e7f7ae72bf70ede145d02b10b"
+    },
+    {
+      "original": ".work/vtm/analytic-route-6-lifetime-after-free.log",
+      "original_sha256": "aba7f310dedcc2bfa9d7c8329a75419421df7efc00dc0a807908c33aead21029",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-6-lifetime-after-free.log",
+      "bytes": 3038,
+      "sha256": "aba7f310dedcc2bfa9d7c8329a75419421df7efc00dc0a807908c33aead21029"
+    },
+    {
+      "original": ".work/vtm/analytic-route-6-memcheck.log",
+      "original_sha256": "d7f02a62a0ef661f5ab3920117fee4cfad25dd2eb5ed46b8df45638bf1375192",
+      "path": "results/validation/vtm/analytic-filters/analytic-route-6-memcheck.log",
+      "bytes": 3037,
+      "sha256": "d7f02a62a0ef661f5ab3920117fee4cfad25dd2eb5ed46b8df45638bf1375192"
+    },
+    {
+      "original": ".work/vtm/analytic-source-isolation.json",
+      "original_sha256": "fae273e7e54544540221cf06594bc39bc63e635ce36ae23e48f99b710d570488",
+      "path": "results/validation/vtm/analytic-filters/analytic-source-isolation.json",
+      "bytes": 748,
+      "sha256": "fae273e7e54544540221cf06594bc39bc63e635ce36ae23e48f99b710d570488"
+    },
+    {
+      "original": ".work/vtm/analytic-source-isolation.log",
+      "original_sha256": "fae273e7e54544540221cf06594bc39bc63e635ce36ae23e48f99b710d570488",
+      "path": "results/validation/vtm/analytic-filters/analytic-source-isolation.log",
+      "bytes": 748,
+      "sha256": "fae273e7e54544540221cf06594bc39bc63e635ce36ae23e48f99b710d570488"
+    },
+    {
+      "original": ".work/vtm/analytic_face_search.py",
+      "original_sha256": "e3216d83bcc1d9d560c4d5b4bce613ace6bb26c19a398bc5173ff612729e7528",
+      "path": "results/validation/vtm/analytic-filters/analytic_face_search.py",
+      "bytes": 5443,
+      "sha256": "e3216d83bcc1d9d560c4d5b4bce613ace6bb26c19a398bc5173ff612729e7528"
+    },
+    {
+      "original": ".work/vtm/install_analytic_face.py",
+      "original_sha256": "2db93444dde9ab0ad69c1d29fefc8f4cabb528d583f914f7f488f6392279520a",
+      "path": "results/validation/vtm/analytic-filters/install_analytic_face.py",
+      "bytes": 723,
+      "sha256": "2db93444dde9ab0ad69c1d29fefc8f4cabb528d583f914f7f488f6392279520a"
+    },
+    {
+      "original": ".work/vtm/test-analytic-existing.py",
+      "original_sha256": "5f0e77533fe89e05df94fcd28c52d7c0b5339e82d720d24fcab618b03a6d522d",
+      "path": "results/validation/vtm/analytic-filters/test-analytic-existing.py",
+      "bytes": 227,
+      "sha256": "5f0e77533fe89e05df94fcd28c52d7c0b5339e82d720d24fcab618b03a6d522d"
+    },
+    {
+      "original": ".work/vtm/test_analytic_filters.py",
+      "original_sha256": "ac6d3dfd897e5c091dc0a9dc20aec90b0b0503fc91328bd81134e7da55cf708a",
+      "path": "results/validation/vtm/analytic-filters/test_analytic_filters.py",
+      "bytes": 4797,
+      "sha256": "ac6d3dfd897e5c091dc0a9dc20aec90b0b0503fc91328bd81134e7da55cf708a"
+    },
+    {
+      "original": ".work/vtm/test_analytic_queries.py",
+      "original_sha256": "5f81d4c019abfdd54e2083b0dc6ff8ceb004788fb14b92228e2f8f32d44694df",
+      "path": "results/validation/vtm/analytic-filters/test_analytic_queries.py",
+      "bytes": 5917,
+      "sha256": "5f81d4c019abfdd54e2083b0dc6ff8ceb004788fb14b92228e2f8f32d44694df"
+    },
+    {
+      "original": ".work/vtm/integrate-analytic-filters.py",
+      "original_sha256": "a876b46e5f96a54da479f0b3aba920a417280dbe140e080dce1772e330c41e39",
+      "path": "results/validation/vtm/analytic-filters/integrate-analytic-filters.py",
+      "bytes": 3015,
+      "sha256": "a876b46e5f96a54da479f0b3aba920a417280dbe140e080dce1772e330c41e39"
+    },
+    {
+      "original": ".work/vtm/relocate-analytic-compiler-cache.py",
+      "original_sha256": "32982cccee27fe0aecbf66edb3f3aea8d09ad2967b6c879f0a2db387e100b708",
+      "path": "results/validation/vtm/analytic-filters/relocate-analytic-compiler-cache.py",
+      "bytes": 1926,
+      "sha256": "32982cccee27fe0aecbf66edb3f3aea8d09ad2967b6c879f0a2db387e100b708"
+    },
+    {
+      "original": ".work/vtm/repeat-analytic-controls.py",
+      "original_sha256": "ae1708886b57c5133791288143fe4f28335ca8f67812dad42b2575807f2b8163",
+      "path": "results/validation/vtm/analytic-filters/repeat-analytic-controls.py",
+      "bytes": 978,
+      "sha256": "ae1708886b57c5133791288143fe4f28335ca8f67812dad42b2575807f2b8163"
+    },
+    {
+      "original": ".work/vtm/deduplicate-analytic-inputs.py",
+      "original_sha256": "4b8f3891a59aaef581e327e25c4a85f9023a44cdf3bfec5f93bb286688032466",
+      "path": "results/validation/vtm/analytic-filters/deduplicate-analytic-inputs.py",
+      "bytes": 942,
+      "sha256": "4b8f3891a59aaef581e327e25c4a85f9023a44cdf3bfec5f93bb286688032466"
+    },
+    {
+      "original": ".work/vtm/boundary-timing-commands.json",
+      "original_sha256": "c75b0a3c89cf49e7e1dec7a109ec6a7497370ddcc801f2c22ad78cc4c6174c49",
+      "path": "results/validation/vtm/analytic-filters/boundary-timing-commands.json",
+      "bytes": 18447,
+      "sha256": "c75b0a3c89cf49e7e1dec7a109ec6a7497370ddcc801f2c22ad78cc4c6174c49"
+    },
+    {
+      "original": ".work/vtm/shewchuk-predicates.c",
+      "original_sha256": "f8662c3f407d1c1c5dcd4dd49ea8b8ddd801a71827d65734206ddc3741792029",
+      "path": "results/validation/vtm/analytic-filters/shewchuk-predicates.c",
+      "bytes": 171536,
+      "sha256": "f8662c3f407d1c1c5dcd4dd49ea8b8ddd801a71827d65734206ddc3741792029"
+    },
+    {
+      "original": ".work/vtm/publish-analytic-validation.py",
+      "original_sha256": "0b59e0cd66fa807ca7dbcc1c721f3b73faa517aa32fd7d17cd0ead6ede671680",
+      "path": "results/validation/vtm/analytic-filters/publish-analytic-validation.py",
+      "bytes": 5994,
+      "sha256": "0b59e0cd66fa807ca7dbcc1c721f3b73faa517aa32fd7d17cd0ead6ede671680"
+    },
+    {
+      "original": ".work/vtm/analyze-analytic-audit.py",
+      "original_sha256": "4571e50f21d98dcf1768290aed649dfd11d16b3429a138ac8527ed4de501d17c",
+      "path": "results/validation/vtm/analytic-filters/analyze-analytic-audit.py",
+      "bytes": 3314,
+      "sha256": "4571e50f21d98dcf1768290aed649dfd11d16b3429a138ac8527ed4de501d17c"
+    },
+    {
+      "original": ".work/vtm/analyze-analytic-memory.py",
+      "original_sha256": "a2d76990b7a0836026f3f6c560086c9b55e02d1bf69b501e7c4558d03a4a3808",
+      "path": "results/validation/vtm/analytic-filters/analyze-analytic-memory.py",
+      "bytes": 1925,
+      "sha256": "a2d76990b7a0836026f3f6c560086c9b55e02d1bf69b501e7c4558d03a4a3808"
+    },
+    {
+      "original": ".work/vtm/check-analytic-broad-initial.py",
+      "original_sha256": "cafb34e292f9acfe7b61a015b0e82f7aa94b7bf8fea15deebd9915daaa12b0f9",
+      "path": "results/validation/vtm/analytic-filters/check-analytic-broad-initial.py",
+      "bytes": 2269,
+      "sha256": "cafb34e292f9acfe7b61a015b0e82f7aa94b7bf8fea15deebd9915daaa12b0f9"
+    },
+    {
+      "original": ".work/vtm/check-analytic-broad-second.py",
+      "original_sha256": "2c613004a9d98df208d3d56dec0c3e0f8d8d45f62a64f227cb8c1e337949a106",
+      "path": "results/validation/vtm/analytic-filters/check-analytic-broad-second.py",
+      "bytes": 2331,
+      "sha256": "2c613004a9d98df208d3d56dec0c3e0f8d8d45f62a64f227cb8c1e337949a106"
+    },
+    {
+      "original": ".work/vtm/check-analytic-broad.py",
+      "original_sha256": "3908b7700f53a949deca4a17a16658dc9cbe3b5d632c63d91579a6eebf1f7bf2",
+      "path": "results/validation/vtm/analytic-filters/check-analytic-broad.py",
+      "bytes": 2246,
+      "sha256": "3908b7700f53a949deca4a17a16658dc9cbe3b5d632c63d91579a6eebf1f7bf2"
+    },
+    {
+      "original": ".work/vtm/check-analytic-face-pilot.py",
+      "original_sha256": "98d521fa12ccfb579e5271bbe825c1f8c063ee05a071fb4d8ee5dcc746909f26",
+      "path": "results/validation/vtm/analytic-filters/check-analytic-face-pilot.py",
+      "bytes": 1951,
+      "sha256": "98d521fa12ccfb579e5271bbe825c1f8c063ee05a071fb4d8ee5dcc746909f26"
+    },
+    {
+      "original": ".work/vtm/check-analytic-final.py",
+      "original_sha256": "de7fc956df6f7bec7c737c043def1f86ff0e9c1eedc67d681db8fb41b3f93014",
+      "path": "results/validation/vtm/analytic-filters/check-analytic-final.py",
+      "bytes": 4858,
+      "sha256": "de7fc956df6f7bec7c737c043def1f86ff0e9c1eedc67d681db8fb41b3f93014"
+    },
+    {
+      "original": ".work/vtm/check-analytic-isolation.py",
+      "original_sha256": "89f8523668bced3bfb2c5b4b2b8a23bb954eca6f4a7206c21bf27638bac86cc3",
+      "path": "results/validation/vtm/analytic-filters/check-analytic-isolation.py",
+      "bytes": 2481,
+      "sha256": "89f8523668bced3bfb2c5b4b2b8a23bb954eca6f4a7206c21bf27638bac86cc3"
+    },
+    {
+      "original": ".work/vtm/run-analytic-audits.py",
+      "original_sha256": "9ac1c0aec0c0fba8422a3532dab9eac7859e879c50d632fed22eacb6de507f8e",
+      "path": "results/validation/vtm/analytic-filters/run-analytic-audits.py",
+      "bytes": 3215,
+      "sha256": "9ac1c0aec0c0fba8422a3532dab9eac7859e879c50d632fed22eacb6de507f8e"
+    },
+    {
+      "original": ".work/vtm/run-analytic-broad-recheck.py",
+      "original_sha256": "13702a564546e02aea0f1c236115a0da7e9f749364a1c6e682e23a242f86a4d0",
+      "path": "results/validation/vtm/analytic-filters/run-analytic-broad-recheck.py",
+      "bytes": 2507,
+      "sha256": "13702a564546e02aea0f1c236115a0da7e9f749364a1c6e682e23a242f86a4d0"
+    },
+    {
+      "original": ".work/vtm/run-analytic-broad-recheck2.py",
+      "original_sha256": "aaddedf699c0b28eb15c31bae8e31eee64161bcebb322c089df1ba4eba6cb268",
+      "path": "results/validation/vtm/analytic-filters/run-analytic-broad-recheck2.py",
+      "bytes": 2508,
+      "sha256": "aaddedf699c0b28eb15c31bae8e31eee64161bcebb322c089df1ba4eba6cb268"
+    },
+    {
+      "original": ".work/vtm/run-analytic-broad.py",
+      "original_sha256": "56dfb57e74549f058811e729143ff07ceadf6f86b1e1dd4a448a2a50322acb39",
+      "path": "results/validation/vtm/analytic-filters/run-analytic-broad.py",
+      "bytes": 2570,
+      "sha256": "56dfb57e74549f058811e729143ff07ceadf6f86b1e1dd4a448a2a50322acb39"
+    },
+    {
+      "original": ".work/vtm/run-analytic-face-pilot.py",
+      "original_sha256": "a6b6cb4dc841982bdef047bd96c61cb47199075ff306c89ef7485a56315cc705",
+      "path": "results/validation/vtm/analytic-filters/run-analytic-face-pilot.py",
+      "bytes": 2093,
+      "sha256": "a6b6cb4dc841982bdef047bd96c61cb47199075ff306c89ef7485a56315cc705"
+    },
+    {
+      "original": ".work/vtm/run-analytic-face.py",
+      "original_sha256": "8ec7b5660305fc23bd2ae0daa15750f44033c33d4a67927ad8bb4bc1ca15cd03",
+      "path": "results/validation/vtm/analytic-filters/run-analytic-face.py",
+      "bytes": 165,
+      "sha256": "8ec7b5660305fc23bd2ae0daa15750f44033c33d4a67927ad8bb4bc1ca15cd03"
+    },
+    {
+      "original": ".work/vtm/run-analytic-final.py",
+      "original_sha256": "9276ac8609cd75eefd1c5068bff14351261625393df06629fdd1b9ac9ac62281",
+      "path": "results/validation/vtm/analytic-filters/run-analytic-final.py",
+      "bytes": 3691,
+      "sha256": "9276ac8609cd75eefd1c5068bff14351261625393df06629fdd1b9ac9ac62281"
+    },
+    {
+      "original": ".work/vtm/run-analytic-gallery.py",
+      "original_sha256": "59aa249979cd319eadacabb890f6278bd3d21437389998abe00fc81cc3468a36",
+      "path": "results/validation/vtm/analytic-filters/run-analytic-gallery.py",
+      "bytes": 172,
+      "sha256": "59aa249979cd319eadacabb890f6278bd3d21437389998abe00fc81cc3468a36"
+    },
+    {
+      "original": ".work/vtm/run-analytic-native.py",
+      "original_sha256": "c5abbe413f40a1c3061f3d424187811a020c24ebd6906def336eeed15a9c2761",
+      "path": "results/validation/vtm/analytic-filters/run-analytic-native.py",
+      "bytes": 1870,
+      "sha256": "c5abbe413f40a1c3061f3d424187811a020c24ebd6906def336eeed15a9c2761"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/1000-analytic.json",
+      "original_sha256": "d1d44110a4278a290ae35acf70b99e9ab18b79d853947b46d530743cb2070916",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/1000-analytic.json",
+      "bytes": 2919,
+      "sha256": "d1d44110a4278a290ae35acf70b99e9ab18b79d853947b46d530743cb2070916"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/1000-analytic.log",
+      "original_sha256": "36bc37ec3996735cdfaca41cedc31ec38c22d01000c9515aa5adf62625c86242",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/1000-analytic.log",
+      "bytes": 7428,
+      "sha256": "36bc37ec3996735cdfaca41cedc31ec38c22d01000c9515aa5adf62625c86242"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/1000-analytic.npz",
+      "original_sha256": "0e78ded699600bcf6397bf82a344b4876f66eef2b7e7757947c4c73587a343cd",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/1000-analytic.npz",
+      "bytes": 91369,
+      "sha256": "0e78ded699600bcf6397bf82a344b4876f66eef2b7e7757947c4c73587a343cd"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/1000-control.json",
+      "original_sha256": "1f258636d46c9cdc25f19fbf745a65c1dde879edac13a89eedc9457826d74384",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/1000-control.json",
+      "bytes": 2925,
+      "sha256": "1f258636d46c9cdc25f19fbf745a65c1dde879edac13a89eedc9457826d74384"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/1000-control.log",
+      "original_sha256": "375c7e7933a36eb652295f33b22d3ed8a49ba155444f2f06d971f4d035caae8a",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/1000-control.log",
+      "bytes": 7268,
+      "sha256": "375c7e7933a36eb652295f33b22d3ed8a49ba155444f2f06d971f4d035caae8a"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/1000-control.npz",
+      "original_sha256": "c1bd3abafb39d0577de9826e8124a70aeacfcb4f2ba992f50bc3cbb3ec3566c6",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/1000-control.npz",
+      "bytes": 91392,
+      "sha256": "c1bd3abafb39d0577de9826e8124a70aeacfcb4f2ba992f50bc3cbb3ec3566c6"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/4096-analytic.json",
+      "original_sha256": "a977c3eb9c9057901c9f2289238fdc9796fc235cb8ea0f384d752c41ba6570d8",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/4096-analytic.json",
+      "bytes": 3065,
+      "sha256": "a977c3eb9c9057901c9f2289238fdc9796fc235cb8ea0f384d752c41ba6570d8"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/4096-analytic.log",
+      "original_sha256": "24ecb511589c93f7193844b4f7063a834b58224583d326850e270e01f70acefa",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/4096-analytic.log",
+      "bytes": 7604,
+      "sha256": "24ecb511589c93f7193844b4f7063a834b58224583d326850e270e01f70acefa"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/4096-analytic.npz",
+      "original_sha256": "b330b9d426b712b783cc892d5bbd4ebb8a5a6406a13c7830cc451fabf96a161f",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/4096-analytic.npz",
+      "bytes": 419137,
+      "sha256": "b330b9d426b712b783cc892d5bbd4ebb8a5a6406a13c7830cc451fabf96a161f"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/4096-control.json",
+      "original_sha256": "68d5ae7ef12b22248779bb7f5d5271d70b7a506062c37aa0cc4ccee3644048ed",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/4096-control.json",
+      "bytes": 3056,
+      "sha256": "68d5ae7ef12b22248779bb7f5d5271d70b7a506062c37aa0cc4ccee3644048ed"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/4096-control.log",
+      "original_sha256": "bbf4851996add4ddfe8ea83dc5a3812af11f9b78704f86bc49f0f4a2552dbc80",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/4096-control.log",
+      "bytes": 7429,
+      "sha256": "bbf4851996add4ddfe8ea83dc5a3812af11f9b78704f86bc49f0f4a2552dbc80"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/4096-control.npz",
+      "original_sha256": "6373433a40ff2f6c8bf1f96af944c4028371246aee6c73b70ca2ae05eae0ed4c",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/4096-control.npz",
+      "bytes": 419394,
+      "sha256": "6373433a40ff2f6c8bf1f96af944c4028371246aee6c73b70ca2ae05eae0ed4c"
+    },
+    {
+      "original": ".work/vtm/analytic-face-pilot/commands.json",
+      "original_sha256": "eb4345a9e2e2b565710cd9400d765cbdea66c636973ec5667c14603e6bf01924",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-pilot/commands.json",
+      "bytes": 2836,
+      "sha256": "eb4345a9e2e2b565710cd9400d765cbdea66c636973ec5667c14603e6bf01924"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-graded-control/boundary.off",
+      "original_sha256": "af34c831ab584d6c717ed692951c3bb0d45f840a225049081c03e1927d93f51c",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-graded-control/boundary.off.gz",
+      "bytes": 139506,
+      "sha256": "aeec072fbdc45ce1de38e32e314de08f1b3feda8a253fa0a07ff307904eab264"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-graded-control/mesh.npz",
+      "original_sha256": "312547d2074da0261dcda7858f0245ee13e73cb8d2de6ea6ef94185a809e16ba",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-graded-control/mesh.npz",
+      "bytes": 1612404,
+      "sha256": "312547d2074da0261dcda7858f0245ee13e73cb8d2de6ea6ef94185a809e16ba"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-graded-control/mesh.vtu",
+      "original_sha256": "222c412d9a36798aa9941de885701dcda7a76f3f40cdd58bef5c4ca708e3771b",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-graded-control/mesh.vtu.gz",
+      "bytes": 427931,
+      "sha256": "e1e9cee388588f25018b1b5668c41c4a0db14c22124c00c7606919129c26e417"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-graded-control/result.json",
+      "original_sha256": "162cd496f3b8b1687f2c85c0a98a776f0df4ddcbdb6557638a151cd35f2c2a7f",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-graded-control/result.json",
+      "bytes": 3755,
+      "sha256": "162cd496f3b8b1687f2c85c0a98a776f0df4ddcbdb6557638a151cd35f2c2a7f"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-graded-control.log",
+      "original_sha256": "7e203ed1e0e51452c8aaeef51fc20c3a9b955bdc9485092171143074c817e351",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-graded-control.log",
+      "bytes": 8186,
+      "sha256": "7e203ed1e0e51452c8aaeef51fc20c3a9b955bdc9485092171143074c817e351"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-analytic/boundary-self-intersections.txt",
+      "original_sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-uniform-analytic/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-analytic/boundary.off",
+      "original_sha256": "e2450242efd55c3959e593663a04360efcf58197128b04cc28070e9c1e068559",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-uniform-analytic/boundary.off.gz",
+      "bytes": 140757,
+      "sha256": "760b314db1e769f7e5839444eb046a08584bb13ae007b5ba8c420c208dff1c2c"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-analytic/mesh.npz",
+      "original_sha256": "c719c33ff10b9bd6c7f22d81c240e2fe87fa99c3848fef5593d0b535e0dc1f5a",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-uniform-analytic/mesh.npz",
+      "bytes": 1610523,
+      "sha256": "c719c33ff10b9bd6c7f22d81c240e2fe87fa99c3848fef5593d0b535e0dc1f5a"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-analytic/mesh.vtu",
+      "original_sha256": "5f010e54232fb5a6171bb99e9112591621bca8d737161a90cd46fb6ad94a092b",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-uniform-analytic/mesh.vtu.gz",
+      "bytes": 423208,
+      "sha256": "0afe0977d76a941be0bb1ec281a2b180bf38b9702610ca6a980c4faac41d6f49"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-analytic/result.json",
+      "original_sha256": "6c0834754aa71716d62940cefc26e91079500234f8af420f5f9674b15dfef237",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-uniform-analytic/result.json",
+      "bytes": 3743,
+      "sha256": "6c0834754aa71716d62940cefc26e91079500234f8af420f5f9674b15dfef237"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-analytic.log",
+      "original_sha256": "1b940dd1013800d39909df7702a02abb62659dfa0e20ebfa9ae9dee1ca91c206",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-uniform-analytic.log",
+      "bytes": 8254,
+      "sha256": "1b940dd1013800d39909df7702a02abb62659dfa0e20ebfa9ae9dee1ca91c206"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-control/boundary.off",
+      "original_sha256": "27ca64253155ece1380b946e9c6141857727972a4673f9f64698e0f767171464",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-uniform-control/boundary.off.gz",
+      "bytes": 140788,
+      "sha256": "959c9cccab855c6ca19e67a2a0d8edba54d140fb887fcebd055656c6bcfeb25e"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-control/mesh.npz",
+      "original_sha256": "10d2d7ac26975901dce84102a25df06662e1bbe52f63fb6ec111e0dc8a91a70d",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-uniform-control/mesh.npz",
+      "bytes": 1610994,
+      "sha256": "10d2d7ac26975901dce84102a25df06662e1bbe52f63fb6ec111e0dc8a91a70d"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-control/mesh.vtu",
+      "original_sha256": "5342c88fbf4a0fb584321d90282bea00140d830689e1466f8c80c99d0dc22af6",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-uniform-control/mesh.vtu.gz",
+      "bytes": 423558,
+      "sha256": "9838060fc4b1d789018e6960925f7deade4abcdc0a38d9fc515918983e989f8c"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-control/result.json",
+      "original_sha256": "f9085a93076c6d16adec535a1db09c1e86ed6587b40007b4bc2460a33f8627be",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-uniform-control/result.json",
+      "bytes": 3737,
+      "sha256": "f9085a93076c6d16adec535a1db09c1e86ed6587b40007b4bc2460a33f8627be"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/armadillo-uniform-control.log",
+      "original_sha256": "1978677abfc061220d7463f6f4dcb159fa806480539ca0b07b2cb499cbf8d91d",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/armadillo-uniform-control.log",
+      "bytes": 8082,
+      "sha256": "1978677abfc061220d7463f6f4dcb159fa806480539ca0b07b2cb499cbf8d91d"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-analytic/boundary-self-intersections.txt",
+      "original_sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-analytic/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-analytic/boundary.off",
+      "original_sha256": "4b3c48a65a6982cc48c7d2099a639ccab21398fbb355bec977843156861d303c",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-analytic/boundary.off.gz",
+      "bytes": 30632,
+      "sha256": "83183251632bd0bba411282118bffed3e8575b8fdfc415029fa46814a3cab876"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-analytic/input.off",
+      "original_sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-analytic/input.off.gz",
+      "bytes": 175,
+      "sha256": "371075bd607d390971e428e56b2d5ec1c223fa7cb4e0d06fef2512165f2f3b4c"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-analytic/mesh.npz",
+      "original_sha256": "44e53f41dc1cbb6fe169747f82bc19934d55a82097088dac114e97cd2394ee1d",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-analytic/mesh.npz",
+      "bytes": 108564,
+      "sha256": "44e53f41dc1cbb6fe169747f82bc19934d55a82097088dac114e97cd2394ee1d"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-analytic/mesh.vtu",
+      "original_sha256": "086a2c96e3d69d09aa5c14b5279349e050ab5218dc256da0ad532d630d7edb3e",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-analytic/mesh.vtu.gz",
+      "bytes": 92522,
+      "sha256": "8360556fc0f2f926bc62007c9abd5ea86661d7452bcc5f3a27db2c1381b2d02c"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-analytic/result.json",
+      "original_sha256": "7ed4f141e79c0237c7db2ac5eaa995774e449cc8f084f04f2bdc090af4a8c763",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-analytic/result.json",
+      "bytes": 3641,
+      "sha256": "7ed4f141e79c0237c7db2ac5eaa995774e449cc8f084f04f2bdc090af4a8c763"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-analytic.log",
+      "original_sha256": "d54a72d4caea3f47105571998254f5d2640b21f59848f4233d08eb9b695cd283",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-analytic.log",
+      "bytes": 8064,
+      "sha256": "d54a72d4caea3f47105571998254f5d2640b21f59848f4233d08eb9b695cd283"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-control/boundary.off",
+      "original_sha256": "dc557f3c89bc912cbcfeb8e3a5e5a2cf5eede2bea12d856784bcbde0c2850ad6",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-control/boundary.off.gz",
+      "bytes": 30630,
+      "sha256": "def9f2edf35a14c1eafd984d8389f67331a20cfb389820a8ed999c6b600f3eca"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-control/input.off",
+      "original_sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-control/input.off.gz",
+      "bytes": 175,
+      "sha256": "371075bd607d390971e428e56b2d5ec1c223fa7cb4e0d06fef2512165f2f3b4c"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-control/mesh.npz",
+      "original_sha256": "f20ceb5ab088e188914e9905debeafebf98ac44833de5964bcab5ac3fa6ea407",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-control/mesh.npz",
+      "bytes": 108622,
+      "sha256": "f20ceb5ab088e188914e9905debeafebf98ac44833de5964bcab5ac3fa6ea407"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-control/mesh.vtu",
+      "original_sha256": "325d4021705ac3de75edf12ec54a076384776cd1b98e9764137ef8fd974590ac",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-control/mesh.vtu.gz",
+      "bytes": 92544,
+      "sha256": "67200ab8060cfec3d5131c99a2697aaa261f75225035f6ab574150e9548a2fb2"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-control/result.json",
+      "original_sha256": "a8ed176c96b11b72aa70659296f233784250f4ad9d8ad22512fd60bc153c304c",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-control/result.json",
+      "bytes": 3633,
+      "sha256": "a8ed176c96b11b72aa70659296f233784250f4ad9d8ad22512fd60bc153c304c"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/cavity-control.log",
+      "original_sha256": "7453ee1a094c409568c77381d805a534e38e5299aa1bc1ac1dc2d8e15747e140",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/cavity-control.log",
+      "bytes": 7890,
+      "sha256": "7453ee1a094c409568c77381d805a534e38e5299aa1bc1ac1dc2d8e15747e140"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/commands.json",
+      "original_sha256": "ddf4850dc41a18af9b92bd4071e256977567bbc9d0dcd2b67991dfa73b63053f",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/commands.json",
+      "bytes": 8627,
+      "sha256": "ddf4850dc41a18af9b92bd4071e256977567bbc9d0dcd2b67991dfa73b63053f"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-analytic/boundary-self-intersections.txt",
+      "original_sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-analytic/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-analytic/boundary.off",
+      "original_sha256": "cfd5d6a4d6caff867bb79bab3a1ff5b69bdc8917c8b05d9439fc61af6830933c",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-analytic/boundary.off.gz",
+      "bytes": 30547,
+      "sha256": "8e22cbba6f90961ed07e0729cf36e977be9a0921ede85f9af7d5567e3566379d"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-analytic/input.off",
+      "original_sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-analytic/input.off.gz",
+      "bytes": 203,
+      "sha256": "435e1b608ae8730ed2278dfa712b37c0ff3777b941521de8f3a018c85ae4069f"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-analytic/mesh.npz",
+      "original_sha256": "975607760693e3cd91bbb024e3f2460b8b6c6f8baa8471770c075999dc3b7c6c",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-analytic/mesh.npz",
+      "bytes": 110141,
+      "sha256": "975607760693e3cd91bbb024e3f2460b8b6c6f8baa8471770c075999dc3b7c6c"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-analytic/mesh.vtu",
+      "original_sha256": "0e8782c7613041af14139ed5170bdcd233ea1ef8912191e9d22d722f0f9f7802",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-analytic/mesh.vtu.gz",
+      "bytes": 88182,
+      "sha256": "51f0288c4788e4046412b545f26ee7d0752cc59c2b9993330ded028482f53723"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-analytic/result.json",
+      "original_sha256": "af2afd2b24ceb365c8d192af67fecb2781e450ffc6b30013716294afb46fcab4",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-analytic/result.json",
+      "bytes": 3653,
+      "sha256": "af2afd2b24ceb365c8d192af67fecb2781e450ffc6b30013716294afb46fcab4"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-analytic.log",
+      "original_sha256": "37e74676e59c3cbcaf804f6236a5980c48a24ab8caa37846895118b301ae3f87",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-analytic.log",
+      "bytes": 8076,
+      "sha256": "37e74676e59c3cbcaf804f6236a5980c48a24ab8caa37846895118b301ae3f87"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-control/boundary.off",
+      "original_sha256": "bf56639ac28e798765a1f59ef1fb398319d88c1b0ac67c22c1b49f1143c6c204",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-control/boundary.off.gz",
+      "bytes": 30548,
+      "sha256": "1cf2904307b0191d48041930ce058b7530f2bff899f0436681f393606d349e05"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-control/input.off",
+      "original_sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-control/input.off.gz",
+      "bytes": 203,
+      "sha256": "435e1b608ae8730ed2278dfa712b37c0ff3777b941521de8f3a018c85ae4069f"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-control/mesh.npz",
+      "original_sha256": "52db2699975d084682693e2fc8ad0ff082468010ef4c920dbc8208a691a8d79e",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-control/mesh.npz",
+      "bytes": 110274,
+      "sha256": "52db2699975d084682693e2fc8ad0ff082468010ef4c920dbc8208a691a8d79e"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-control/mesh.vtu",
+      "original_sha256": "f1d17048bae2ac78e91db74f0f97cebbf03ab96aa7b359e8da15d405e455905a",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-control/mesh.vtu.gz",
+      "bytes": 88082,
+      "sha256": "d8a134c38baf6f6ada50d9803bba50cc5532d530b33a4d6647f2a6e90c2425cb"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-control/result.json",
+      "original_sha256": "abf89eee72f92be93f607f52bd4016580be92201f33a27456ffa6f84b24b4a19",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-control/result.json",
+      "bytes": 3653,
+      "sha256": "abf89eee72f92be93f607f52bd4016580be92201f33a27456ffa6f84b24b4a19"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/disconnected-control.log",
+      "original_sha256": "1ed628ccad20985217f02b547d6f9e6cc2b234a65570918e6b5bcc8dcb577636",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/disconnected-control.log",
+      "bytes": 7910,
+      "sha256": "1ed628ccad20985217f02b547d6f9e6cc2b234a65570918e6b5bcc8dcb577636"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-analytic/boundary-self-intersections.txt",
+      "original_sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-analytic/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-analytic/boundary.off",
+      "original_sha256": "cb28569ce19f6d8bad347060a00ed25233c475d48479f2c90202b3565e75d38f",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-analytic/boundary.off.gz",
+      "bytes": 133272,
+      "sha256": "e9787a735a64e7c431243e13abd74a96b27c80b059d4e26a1188465b76aec6fb"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-analytic/input.off",
+      "original_sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-analytic/input.off.gz",
+      "bytes": 16802,
+      "sha256": "e4b2abc769534575a9af284ccec20414fa6fa1c4f0c32b8fe105676172db0aa3"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-analytic/mesh.npz",
+      "original_sha256": "a3d9cd8ddc52e7011f47ba7c7c02f5bda41855cf7c8b49eb66f72c03b3f0f70b",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-analytic/mesh.npz",
+      "bytes": 572790,
+      "sha256": "a3d9cd8ddc52e7011f47ba7c7c02f5bda41855cf7c8b49eb66f72c03b3f0f70b"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-analytic/mesh.vtu",
+      "original_sha256": "732e4555a9554b8dd817398730105ef17e67d568277b651ad0ccd1116a8a0fa4",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-analytic/mesh.vtu.gz",
+      "bytes": 453235,
+      "sha256": "f6a8c276153d62b988222cdd7daa795fdfe02102785dcd539a18073758bcba12"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-analytic/result.json",
+      "original_sha256": "4d1f1a3b411f2381faa096dfb1fb4b2a24492e60da00f8a7c93aa1a432298ab7",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-analytic/result.json",
+      "bytes": 3650,
+      "sha256": "4d1f1a3b411f2381faa096dfb1fb4b2a24492e60da00f8a7c93aa1a432298ab7"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-analytic.log",
+      "original_sha256": "db2bfac913cda49840f9c41304a07f795046e90f8a17e9075be64bfa31e9e3a0",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-analytic.log",
+      "bytes": 8247,
+      "sha256": "db2bfac913cda49840f9c41304a07f795046e90f8a17e9075be64bfa31e9e3a0"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-control/boundary.off",
+      "original_sha256": "b2f3c53121af5b4ea16950a5e56fbcefb9ae12f4e9ad58b2d29e3f9fbccdaa3d",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-control/boundary.off.gz",
+      "bytes": 133266,
+      "sha256": "835465a6cb413b23f62e87b44cefe3f8ec806fd718a660e137c26e23367ede9c"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-control/input.off",
+      "original_sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-control/input.off.gz",
+      "bytes": 16802,
+      "sha256": "e4b2abc769534575a9af284ccec20414fa6fa1c4f0c32b8fe105676172db0aa3"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-control/mesh.npz",
+      "original_sha256": "ee4b4fbb02de2b6d8524ceb11d580fed74e71ec21dcfe6cd7e1c16d3bb1a13aa",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-control/mesh.npz",
+      "bytes": 572157,
+      "sha256": "ee4b4fbb02de2b6d8524ceb11d580fed74e71ec21dcfe6cd7e1c16d3bb1a13aa"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-control/mesh.vtu",
+      "original_sha256": "4cff0190f1359396fdecafe2e65b33c4fd005677073811b5fd3e8f7fb55e3310",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-control/mesh.vtu.gz",
+      "bytes": 453107,
+      "sha256": "409be1653b4a80d30d1fdd136c9767c38adaac1dee515d94a2a65a86bbc9f7fb"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-control/result.json",
+      "original_sha256": "4662ef861ebc932dc20f5719cc21f9e1158396e46e09809492d1ed90f070ed21",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-control/result.json",
+      "bytes": 3642,
+      "sha256": "4662ef861ebc932dc20f5719cc21f9e1158396e46e09809492d1ed90f070ed21"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/graded-torus-control.log",
+      "original_sha256": "702cbd48665616de8e8772b1c72ebbc83fef31bf6972e209ce0d9a67670e93ae",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/graded-torus-control.log",
+      "bytes": 8073,
+      "sha256": "702cbd48665616de8e8772b1c72ebbc83fef31bf6972e209ce0d9a67670e93ae"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-analytic/boundary-self-intersections.txt",
+      "original_sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-analytic/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-analytic/boundary.off",
+      "original_sha256": "4525e4058939c90a5447296efe59ce2e8a21aeff60a68653eba92d83bb02db92",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-analytic/boundary.off.gz",
+      "bytes": 28748,
+      "sha256": "d30700633666980f98cef648f38c602a81f114d201dbba57e02e73e99e613582"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-analytic/input.off",
+      "original_sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-analytic/input.off.gz",
+      "bytes": 597,
+      "sha256": "8644de8fac9e842eb82416d32d938622658f3f541ae3a04705fb759ba3c2596e"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-analytic/mesh.npz",
+      "original_sha256": "d57f7adf72fdccd6abe6d1cdd54c09d5db98b0b8e21348982744d183dcc81029",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-analytic/mesh.npz",
+      "bytes": 98751,
+      "sha256": "d57f7adf72fdccd6abe6d1cdd54c09d5db98b0b8e21348982744d183dcc81029"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-analytic/mesh.vtu",
+      "original_sha256": "f0a58d80b40af41897b4f162b4597aa9797a1d18c312c98b524eaf49afc1e6d3",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-analytic/mesh.vtu.gz",
+      "bytes": 70638,
+      "sha256": "731e2b53b35f2d1d75598e2b7d5c8f2adf904d0509e91ef16054c33675620548"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-analytic/result.json",
+      "original_sha256": "d68fedb5fae4b12a9a117da16b4adb0b3b21023474f5ca1a250caef910264fff",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-analytic/result.json",
+      "bytes": 3644,
+      "sha256": "d68fedb5fae4b12a9a117da16b4adb0b3b21023474f5ca1a250caef910264fff"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-analytic.log",
+      "original_sha256": "bf9d036da7d7c0882678692e26a2afa12c72bf35f9ac4d1d8d9eabbb12686d90",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-analytic.log",
+      "bytes": 8067,
+      "sha256": "bf9d036da7d7c0882678692e26a2afa12c72bf35f9ac4d1d8d9eabbb12686d90"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-control/boundary.off",
+      "original_sha256": "04b24e9912cdade832f995f8162ef4044e2da67c0011f3741acdf82a52a8da47",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-control/boundary.off.gz",
+      "bytes": 28762,
+      "sha256": "f87092d9d7413bed57d907f68f08b55be43c1ff7b01422a2182a2e3b2fc1824e"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-control/input.off",
+      "original_sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-control/input.off.gz",
+      "bytes": 597,
+      "sha256": "8644de8fac9e842eb82416d32d938622658f3f541ae3a04705fb759ba3c2596e"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-control/mesh.npz",
+      "original_sha256": "136b807ac8924ac1358090f4aae08ded7051b42990940bfffee09dc3c6f481b7",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-control/mesh.npz",
+      "bytes": 98646,
+      "sha256": "136b807ac8924ac1358090f4aae08ded7051b42990940bfffee09dc3c6f481b7"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-control/mesh.vtu",
+      "original_sha256": "16463540a0e2792b65e9c9c324a6b9f1f8f6da0c2cc91251374556314256a8e5",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-control/mesh.vtu.gz",
+      "bytes": 70572,
+      "sha256": "49109f1babeacfae51e547f5829159cf761f6d111c0988e4f8e13378c180f0a1"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-control/result.json",
+      "original_sha256": "6696dd7562afc4271f137f0b8cefe0311dd114ab14c4db5d53f2362435231bb9",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-control/result.json",
+      "bytes": 3646,
+      "sha256": "6696dd7562afc4271f137f0b8cefe0311dd114ab14c4db5d53f2362435231bb9"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad/thin-hand-control.log",
+      "original_sha256": "6feb19fdb65474523682ec43c3dc5ce337a998b2551c3a1d474a8d948cc7b2ab",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad/thin-hand-control.log",
+      "bytes": 7903,
+      "sha256": "6feb19fdb65474523682ec43c3dc5ce337a998b2551c3a1d474a8d948cc7b2ab"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck/armadillo-graded-control.log",
+      "original_sha256": "631ca69df5544469e9fa704d47469c069de1665505399ca04662134ce08a2ddc",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck/armadillo-graded-control.log",
+      "bytes": 1361,
+      "sha256": "631ca69df5544469e9fa704d47469c069de1665505399ca04662134ce08a2ddc"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck/commands.json",
+      "original_sha256": "2b7e96edf4ea89caf4ddc101e1c5003b878c36c4294e1ae5d0eb9b4bfeee9c0a",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck/commands.json",
+      "bytes": 854,
+      "sha256": "2b7e96edf4ea89caf4ddc101e1c5003b878c36c4294e1ae5d0eb9b4bfeee9c0a"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-analytic/boundary-self-intersections.txt",
+      "original_sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/armadillo-graded-analytic/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-analytic/boundary.off",
+      "original_sha256": "3f2ad4d2ea825bce8ea7dfa4cd07201ab460174db48b88ba4bfadc13b46e5085",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/armadillo-graded-analytic/boundary.off.gz",
+      "bytes": 139461,
+      "sha256": "ffb7d003ac4d4cc08322eca05d7f0f2f1691f071552a83e2ec8725d23d0a3501"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-analytic/mesh.npz",
+      "original_sha256": "c05354b108bfad4f7f5d009a6f860cf4a00e96404be2854610123badba6bcae2",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/armadillo-graded-analytic/mesh.npz",
+      "bytes": 1611725,
+      "sha256": "c05354b108bfad4f7f5d009a6f860cf4a00e96404be2854610123badba6bcae2"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-analytic/mesh.vtu",
+      "original_sha256": "b6daeb742366ca900b2a7e67d2f6278caa922153c3cf5852d3bef99b46b2c3ef",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/armadillo-graded-analytic/mesh.vtu.gz",
+      "bytes": 427641,
+      "sha256": "55ff8bc0f4aef2bac2f813e0d4175d99bed229154138d31a3a66205c03804116"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-analytic/result.json",
+      "original_sha256": "b085849158badbb1d746356ee5026f7c6cd2b85489ed4d5432954447c61b6507",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/armadillo-graded-analytic/result.json",
+      "bytes": 3752,
+      "sha256": "b085849158badbb1d746356ee5026f7c6cd2b85489ed4d5432954447c61b6507"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-analytic.log",
+      "original_sha256": "c185819b9161b81d39188c17e52a19a7ade851c48b4c514307acedc416024079",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/armadillo-graded-analytic.log",
+      "bytes": 8355,
+      "sha256": "c185819b9161b81d39188c17e52a19a7ade851c48b4c514307acedc416024079"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-control/boundary.off",
+      "original_sha256": "de6ffb68afcd451ee2b76177b9edad629ef51d3fc185a1c5fbd48728869da17e",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/armadillo-graded-control/boundary.off.gz",
+      "bytes": 139473,
+      "sha256": "9de7f15f46ed970ea7b7704804fbe335dcaa671d115bfad52eef3d5ad885a84a"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-control/mesh.npz",
+      "original_sha256": "1a89202db577cf1fd65a74c152ba8ff9be95c2bfc19f6291530508e0fbd82b7d",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/armadillo-graded-control/mesh.npz",
+      "bytes": 1613026,
+      "sha256": "1a89202db577cf1fd65a74c152ba8ff9be95c2bfc19f6291530508e0fbd82b7d"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-control/mesh.vtu",
+      "original_sha256": "7bb7d99cdcd82a808d90baa845250d04b131a34dbf8ea32a1f9fa3b1ae3c0ad3",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/armadillo-graded-control/mesh.vtu.gz",
+      "bytes": 428030,
+      "sha256": "356c9f1ce079614d4a43a33ca633b7a299e62d090dd801057158695c74f4879a"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-control/result.json",
+      "original_sha256": "0c4de732b1f988d313ade0291df417640935b2fa6d6aef9c4e10ae18f77e7ecd",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/armadillo-graded-control/result.json",
+      "bytes": 3748,
+      "sha256": "0c4de732b1f988d313ade0291df417640935b2fa6d6aef9c4e10ae18f77e7ecd"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/armadillo-graded-control.log",
+      "original_sha256": "e07f0520d72c5d0e4208734e391128b5dc33c5ca2c8b359f640548f901444e7f",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/armadillo-graded-control.log",
+      "bytes": 8185,
+      "sha256": "e07f0520d72c5d0e4208734e391128b5dc33c5ca2c8b359f640548f901444e7f"
+    },
+    {
+      "original": ".work/vtm/analytic-face-broad-recheck2/commands.json",
+      "original_sha256": "4bbec99bd20e4b858321d40e393481ed637c420a91ef0e6bee742db6cae55a26",
+      "path": "results/validation/vtm/analytic-filters/analytic-face-broad-recheck2/commands.json",
+      "bytes": 1928,
+      "sha256": "4bbec99bd20e4b858321d40e393481ed637c420a91ef0e6bee742db6cae55a26"
+    },
+    {
+      "original": ".work/vtm/analytic-hand-control-repeat/boundary.off",
+      "original_sha256": "ca718ef13a9be329ff80059a54b6de8bf6dae36b8d696f67e394824585487b02",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-hand-control-repeat/boundary.off.gz",
+      "bytes": 28734,
+      "sha256": "5afb1d3137f3707e945901215a6810372420d321313a2c96b6b1b4ab7457444c"
+    },
+    {
+      "original": ".work/vtm/analytic-hand-control-repeat/input.off",
+      "original_sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-hand-control-repeat/input.off.gz",
+      "bytes": 597,
+      "sha256": "8644de8fac9e842eb82416d32d938622658f3f541ae3a04705fb759ba3c2596e"
+    },
+    {
+      "original": ".work/vtm/analytic-hand-control-repeat/mesh.npz",
+      "original_sha256": "1bf7cc2f443fb076d15b484227169df93b0aaaf1020ad2804b1220eba8ff0906",
+      "path": "results/validation/vtm/analytic-filters/analytic-hand-control-repeat/mesh.npz",
+      "bytes": 98630,
+      "sha256": "1bf7cc2f443fb076d15b484227169df93b0aaaf1020ad2804b1220eba8ff0906"
+    },
+    {
+      "original": ".work/vtm/analytic-hand-control-repeat/mesh.vtu",
+      "original_sha256": "63022829fc030e1b5c5da00b5137b9545a165f8a7ad1da43ffb8a45d23fa62bb",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-hand-control-repeat/mesh.vtu.gz",
+      "bytes": 70672,
+      "sha256": "0b53f348b6fd63ec14f105f0d803d490c71712979ccb13793e7e4e1e7fd4523f"
+    },
+    {
+      "original": ".work/vtm/analytic-hand-control-repeat/result.json",
+      "original_sha256": "abf8bdb3f919b219d2d39004217761f6ba11bfa71bc302e4184b7f79f03500ac",
+      "path": "results/validation/vtm/analytic-filters/analytic-hand-control-repeat/result.json",
+      "bytes": 3601,
+      "sha256": "abf8bdb3f919b219d2d39004217761f6ba11bfa71bc302e4184b7f79f03500ac"
+    },
+    {
+      "original": ".work/vtm/analytic-cavity-control-repeat/boundary.off",
+      "original_sha256": "292cab53cf22f0a1f0773dcb22e951fb050709d46adc9644b1f3f9ab21f142b4",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-cavity-control-repeat/boundary.off.gz",
+      "bytes": 30637,
+      "sha256": "69b0d8279673a4c9f111b79c45f57350a326a6810918453156cbffd1300b2739"
+    },
+    {
+      "original": ".work/vtm/analytic-cavity-control-repeat/input.off",
+      "original_sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-cavity-control-repeat/input.off.gz",
+      "bytes": 175,
+      "sha256": "371075bd607d390971e428e56b2d5ec1c223fa7cb4e0d06fef2512165f2f3b4c"
+    },
+    {
+      "original": ".work/vtm/analytic-cavity-control-repeat/mesh.npz",
+      "original_sha256": "e2c8f41eb648641ac36d6f5fe66d5be9607dd7930bdb25d75a35b5139a0a10ec",
+      "path": "results/validation/vtm/analytic-filters/analytic-cavity-control-repeat/mesh.npz",
+      "bytes": 108540,
+      "sha256": "e2c8f41eb648641ac36d6f5fe66d5be9607dd7930bdb25d75a35b5139a0a10ec"
+    },
+    {
+      "original": ".work/vtm/analytic-cavity-control-repeat/mesh.vtu",
+      "original_sha256": "3302dff5347080393d6609e4acf157a6ec36d92df2a561fc045b77d365be8206",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-cavity-control-repeat/mesh.vtu.gz",
+      "bytes": 92522,
+      "sha256": "3a9ea2b4b35211217ee35825739098accfce0ae534f7419286473071d2bf3708"
+    },
+    {
+      "original": ".work/vtm/analytic-cavity-control-repeat/result.json",
+      "original_sha256": "f8c5a071c7b7a84dcf6adbf2af52cbd7bc5a2a21fd00395d022f56508a1c4475",
+      "path": "results/validation/vtm/analytic-filters/analytic-cavity-control-repeat/result.json",
+      "bytes": 3637,
+      "sha256": "f8c5a071c7b7a84dcf6adbf2af52cbd7bc5a2a21fd00395d022f56508a1c4475"
+    },
+    {
+      "original": ".work/vtm/analytic-disconnected-control-repeat/boundary.off",
+      "original_sha256": "64e048cda29d274a00fa457a5d58478244e98ee106bea1b0f2eba1a3dcd667ca",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-disconnected-control-repeat/boundary.off.gz",
+      "bytes": 30545,
+      "sha256": "728d09d8cd642547ccf288f7e053638cd1b5f77eca3cbcaa59765734b9549ed7"
+    },
+    {
+      "original": ".work/vtm/analytic-disconnected-control-repeat/input.off",
+      "original_sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-disconnected-control-repeat/input.off.gz",
+      "bytes": 203,
+      "sha256": "435e1b608ae8730ed2278dfa712b37c0ff3777b941521de8f3a018c85ae4069f"
+    },
+    {
+      "original": ".work/vtm/analytic-disconnected-control-repeat/mesh.npz",
+      "original_sha256": "3cb8420f8710e8e71b8458c46119a4e27416bd52423df8e7e84bd9c185eb7870",
+      "path": "results/validation/vtm/analytic-filters/analytic-disconnected-control-repeat/mesh.npz",
+      "bytes": 110194,
+      "sha256": "3cb8420f8710e8e71b8458c46119a4e27416bd52423df8e7e84bd9c185eb7870"
+    },
+    {
+      "original": ".work/vtm/analytic-disconnected-control-repeat/mesh.vtu",
+      "original_sha256": "bbbf5f106d4f59078bdda165f70977d127bf91a6564acfee1db97d13086eac5b",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-disconnected-control-repeat/mesh.vtu.gz",
+      "bytes": 88122,
+      "sha256": "568457160f811db73bd4df2ba3e31c0f3c72d0ba3ca800ab2933f6692b8bf5e4"
+    },
+    {
+      "original": ".work/vtm/analytic-disconnected-control-repeat/result.json",
+      "original_sha256": "4279f3592225387d579ff571ce2238f5ce2c609e6aae6f975dc0839226295cdd",
+      "path": "results/validation/vtm/analytic-filters/analytic-disconnected-control-repeat/result.json",
+      "bytes": 3649,
+      "sha256": "4279f3592225387d579ff571ce2238f5ce2c609e6aae6f975dc0839226295cdd"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "original_sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-graded-after/boundary.off",
+      "original_sha256": "704171fd9b8efc7ef9a719be0c498c2e8adebfac7e059af8327d5707f5c7ce48",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-graded-after/boundary.off.gz",
+      "bytes": 139455,
+      "sha256": "611bd4582c126eb4af8685bf78b8b046b2af2b9e5e9dc231d7a698fc3c9f752e"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-graded-after/mesh.npz",
+      "original_sha256": "3a6cbe051e929cf20bbd323cc86b274107a53e8a96eb3124dcd73d499e860574",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-graded-after/mesh.npz",
+      "bytes": 1612482,
+      "sha256": "3a6cbe051e929cf20bbd323cc86b274107a53e8a96eb3124dcd73d499e860574"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-graded-after/mesh.vtu",
+      "original_sha256": "69545b78517d7145e50b6d301586deb9ea92b884b105c439d14465384b614cc5",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-graded-after/mesh.vtu.gz",
+      "bytes": 428027,
+      "sha256": "14083c17a7169cdb600712bdbb7d8256ce75386d1319d2d997b759cf8a4fdc6a"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-graded-after/result.json",
+      "original_sha256": "9db0f81a934657084e53165d372943ea286c944f62989e13b524578332ec17a2",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-graded-after/result.json",
+      "bytes": 3723,
+      "sha256": "9db0f81a934657084e53165d372943ea286c944f62989e13b524578332ec17a2"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-graded-after.log",
+      "original_sha256": "8afb19180d4d7ed93fcb28719bdba167270c7b60a937ad3bfdd013b5f656cb47",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-graded-after.log",
+      "bytes": 8160,
+      "sha256": "8afb19180d4d7ed93fcb28719bdba167270c7b60a937ad3bfdd013b5f656cb47"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "original_sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-uniform-after/boundary.off",
+      "original_sha256": "0460e9b11ad118fa5445bc6a86fb534004f0911692b3ee36b3075fbe4268312f",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-uniform-after/boundary.off.gz",
+      "bytes": 140763,
+      "sha256": "d44deaac9d8fffd5d8ff6ba3101dfc36194e716a5fa59fabca2e1131b010d3d7"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-uniform-after/mesh.npz",
+      "original_sha256": "1668e352da5dde1d40fc394da1b6b1bba239d9e11c5027bdfcd2726d3e25f3fe",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-uniform-after/mesh.npz",
+      "bytes": 1610298,
+      "sha256": "1668e352da5dde1d40fc394da1b6b1bba239d9e11c5027bdfcd2726d3e25f3fe"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-uniform-after/mesh.vtu",
+      "original_sha256": "2e4507e8474f22bc662ca1ece2de3bbffc0b31d16aa348dce97607a57d4eb841",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-uniform-after/mesh.vtu.gz",
+      "bytes": 423498,
+      "sha256": "8b904750308ff09bfccdf788e56c8d255a52cecd1fc7dab63c29e78958f55245"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-uniform-after/result.json",
+      "original_sha256": "77fd89f104899d53d5505d3331079ef550c1ec1365f2718205e3a6e05156cf53",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-uniform-after/result.json",
+      "bytes": 3722,
+      "sha256": "77fd89f104899d53d5505d3331079ef550c1ec1365f2718205e3a6e05156cf53"
+    },
+    {
+      "original": ".work/vtm/analytic-final/armadillo-uniform-after.log",
+      "original_sha256": "40c4e28b5a5c3a6584329aafba0adb84831e3d26ad81aabf669b5d202a9263d2",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/armadillo-uniform-after.log",
+      "bytes": 8073,
+      "sha256": "40c4e28b5a5c3a6584329aafba0adb84831e3d26ad81aabf669b5d202a9263d2"
+    },
+    {
+      "original": ".work/vtm/analytic-final/cavity-after/boundary-self-intersections.txt",
+      "original_sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/cavity-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/analytic-final/cavity-after/boundary.off",
+      "original_sha256": "8905a557ddfa99e5805c568a5691f1cf48ac3d6ec623c5cc21d056b6bcc71ed3",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/cavity-after/boundary.off.gz",
+      "bytes": 30609,
+      "sha256": "ea99df19861b560de9593dcfbb5ccd3f1697185b60368b9120b1a0976b49bd3f"
+    },
+    {
+      "original": ".work/vtm/analytic-final/cavity-after/input.off",
+      "original_sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/cavity-after/input.off.gz",
+      "bytes": 175,
+      "sha256": "371075bd607d390971e428e56b2d5ec1c223fa7cb4e0d06fef2512165f2f3b4c"
+    },
+    {
+      "original": ".work/vtm/analytic-final/cavity-after/mesh.npz",
+      "original_sha256": "b909085e71fc5f50baec2d918ba771331e8243deb6aae0dedf3cf38c37cf3041",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/cavity-after/mesh.npz",
+      "bytes": 108657,
+      "sha256": "b909085e71fc5f50baec2d918ba771331e8243deb6aae0dedf3cf38c37cf3041"
+    },
+    {
+      "original": ".work/vtm/analytic-final/cavity-after/mesh.vtu",
+      "original_sha256": "0966726a203dc8ffbd2d50b44905d84e807831250812285cae88eabc24ac4332",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/cavity-after/mesh.vtu.gz",
+      "bytes": 92555,
+      "sha256": "30afa3f7fb0ef3c214be13b641b37098da461a9601ce4834f57675540f16bd8b"
+    },
+    {
+      "original": ".work/vtm/analytic-final/cavity-after/result.json",
+      "original_sha256": "196967f6894f1a41d8f2d508384007dfc1c00bf0923b05aee48165e47df37631",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/cavity-after/result.json",
+      "bytes": 3634,
+      "sha256": "196967f6894f1a41d8f2d508384007dfc1c00bf0923b05aee48165e47df37631"
+    },
+    {
+      "original": ".work/vtm/analytic-final/cavity-after.log",
+      "original_sha256": "50e2fcda726c8be238b041bfa020974ecdbfe2ee9c8afd161e0f69564fc18ae1",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/cavity-after.log",
+      "bytes": 7897,
+      "sha256": "50e2fcda726c8be238b041bfa020974ecdbfe2ee9c8afd161e0f69564fc18ae1"
+    },
+    {
+      "original": ".work/vtm/analytic-final/commands.json",
+      "original_sha256": "8680ba885b55ad34bc17c9dd8c06e4af4423ac709b768c1a3669b9d9eb37b674",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/commands.json",
+      "bytes": 15206,
+      "sha256": "8680ba885b55ad34bc17c9dd8c06e4af4423ac709b768c1a3669b9d9eb37b674"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay-fitted-hand-after.json",
+      "original_sha256": "d7dc2c2c55112c48bf4b2237cf3e75cd79b099737ae15811fad135a0b998f908",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay-fitted-hand-after.json",
+      "bytes": 2843,
+      "sha256": "d7dc2c2c55112c48bf4b2237cf3e75cd79b099737ae15811fad135a0b998f908"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay-fitted-hand-after.log",
+      "original_sha256": "1e36fa7e1a2ed23aeaf431ecc0611dc7726b7b3e0500cde9e900851ce01470a1",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay-fitted-hand-after.log",
+      "bytes": 5139,
+      "sha256": "1e36fa7e1a2ed23aeaf431ecc0611dc7726b7b3e0500cde9e900851ce01470a1"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay-fitted-hand-before.json",
+      "original_sha256": "da0931040aab27bc87627b628412a2e6a4f580609e5f05f86979c2976847514d",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay-fitted-hand-before.json",
+      "bytes": 2842,
+      "sha256": "da0931040aab27bc87627b628412a2e6a4f580609e5f05f86979c2976847514d"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay-fitted-hand-before.log",
+      "original_sha256": "0a1637001374aba1760e113bcf112221651470339574faea7ea5ed303c4aab57",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay-fitted-hand-before.log",
+      "bytes": 5138,
+      "sha256": "0a1637001374aba1760e113bcf112221651470339574faea7ea5ed303c4aab57"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay-grid-after.json",
+      "original_sha256": "c46ee319ef5b4156134b2953760263f742bb2c76cd95aa698b74b51c1310efe1",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay-grid-after.json",
+      "bytes": 2828,
+      "sha256": "c46ee319ef5b4156134b2953760263f742bb2c76cd95aa698b74b51c1310efe1"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay-grid-after.log",
+      "original_sha256": "8d4c746eccb6ad97c60ad6e556ee694ba299cdb8611e1adeace45491c9a0b3f8",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay-grid-after.log",
+      "bytes": 4867,
+      "sha256": "8d4c746eccb6ad97c60ad6e556ee694ba299cdb8611e1adeace45491c9a0b3f8"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay-grid-before.json",
+      "original_sha256": "87d3cbfe66b2d9292feb19efdd717bcf61871d7d0e688ae787a299945e8b94ea",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay-grid-before.json",
+      "bytes": 2838,
+      "sha256": "87d3cbfe66b2d9292feb19efdd717bcf61871d7d0e688ae787a299945e8b94ea"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay-grid-before.log",
+      "original_sha256": "487420f64d77fbb267b2c948560257a344a7338c3bcb9d50b7a197b4c735e582",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay-grid-before.log",
+      "bytes": 4877,
+      "sha256": "487420f64d77fbb267b2c948560257a344a7338c3bcb9d50b7a197b4c735e582"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay1000-after.json",
+      "original_sha256": "3d5ca9be8538d5c12357303d083b69b90255ca24ea0b09ad36c25f8351c1492b",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay1000-after.json",
+      "bytes": 2817,
+      "sha256": "3d5ca9be8538d5c12357303d083b69b90255ca24ea0b09ad36c25f8351c1492b"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay1000-after.log",
+      "original_sha256": "a7be37d1eb58ce0f37f3cf25440681e2b82ce1b183c7d1e63b2489a136d6021b",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay1000-after.log",
+      "bytes": 5113,
+      "sha256": "a7be37d1eb58ce0f37f3cf25440681e2b82ce1b183c7d1e63b2489a136d6021b"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay1000-before.json",
+      "original_sha256": "25558a1c9e04f6530b9e0213455501b919c6900441769c681098c1e4cdf7a7c6",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay1000-before.json",
+      "bytes": 2826,
+      "sha256": "25558a1c9e04f6530b9e0213455501b919c6900441769c681098c1e4cdf7a7c6"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay1000-before.log",
+      "original_sha256": "f358561b63c097a06f6ca5743f9a80ba9a19f49d076d9023ec6f28b08ab012f8",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay1000-before.log",
+      "bytes": 5122,
+      "sha256": "f358561b63c097a06f6ca5743f9a80ba9a19f49d076d9023ec6f28b08ab012f8"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay100000-after.json",
+      "original_sha256": "3950aff9334a98c90890d27379b938f41b195a2353137dbfed8cc2521585de64",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay100000-after.json",
+      "bytes": 2821,
+      "sha256": "3950aff9334a98c90890d27379b938f41b195a2353137dbfed8cc2521585de64"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay100000-after.log",
+      "original_sha256": "a3bd4cccd5ad0713ed6a04bf30d56b2de28657d556a07da93c0e1b55fb1669f4",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay100000-after.log",
+      "bytes": 5051,
+      "sha256": "a3bd4cccd5ad0713ed6a04bf30d56b2de28657d556a07da93c0e1b55fb1669f4"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay100000-before.json",
+      "original_sha256": "a47bf54985e2970343645a34c7fec08c47156ee21af2f66a6f28b2e0f969e8bc",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay100000-before.json",
+      "bytes": 2826,
+      "sha256": "a47bf54985e2970343645a34c7fec08c47156ee21af2f66a6f28b2e0f969e8bc"
+    },
+    {
+      "original": ".work/vtm/analytic-final/delaunay100000-before.log",
+      "original_sha256": "efeec6565096e0f40fdb40b04b12b05f10ab742bf52a9fcd5090bb8d207a2f0a",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/delaunay100000-before.log",
+      "bytes": 5056,
+      "sha256": "efeec6565096e0f40fdb40b04b12b05f10ab742bf52a9fcd5090bb8d207a2f0a"
+    },
+    {
+      "original": ".work/vtm/analytic-final/diagram100000-after.json",
+      "original_sha256": "58fa81d78069fc1e97105c4997af889e44db2b04c569d8270314c177072ad7e5",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/diagram100000-after.json",
+      "bytes": 2559,
+      "sha256": "58fa81d78069fc1e97105c4997af889e44db2b04c569d8270314c177072ad7e5"
+    },
+    {
+      "original": ".work/vtm/analytic-final/diagram100000-after.log",
+      "original_sha256": "ed228cf60cad58478eb55e99ab1cae2934a8c63f669cab7ca013fa33883df4b8",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/diagram100000-after.log",
+      "bytes": 3430,
+      "sha256": "ed228cf60cad58478eb55e99ab1cae2934a8c63f669cab7ca013fa33883df4b8"
+    },
+    {
+      "original": ".work/vtm/analytic-final/diagram100000-before.json",
+      "original_sha256": "d7e3b7c6a147e56d19f09b89a6a5159d8817db65433f4a3ea0faed2e886c6e0d",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/diagram100000-before.json",
+      "bytes": 2572,
+      "sha256": "d7e3b7c6a147e56d19f09b89a6a5159d8817db65433f4a3ea0faed2e886c6e0d"
+    },
+    {
+      "original": ".work/vtm/analytic-final/diagram100000-before.log",
+      "original_sha256": "d8e92e6aa6c22bf4d8201a7dcf1643ef05eaf24bbb030240fce59e49c20309a6",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/diagram100000-before.log",
+      "bytes": 3443,
+      "sha256": "d8e92e6aa6c22bf4d8201a7dcf1643ef05eaf24bbb030240fce59e49c20309a6"
+    },
+    {
+      "original": ".work/vtm/analytic-final/disconnected-after/boundary-self-intersections.txt",
+      "original_sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/disconnected-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/analytic-final/disconnected-after/boundary.off",
+      "original_sha256": "c96674d570a451aea1412a7d002b985532cde7d664f57aeb7947cbd81c7271da",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/disconnected-after/boundary.off.gz",
+      "bytes": 30536,
+      "sha256": "5a58cb168e5769c694c362be9173a9d344b4ce79f502fc9318729b780a487082"
+    },
+    {
+      "original": ".work/vtm/analytic-final/disconnected-after/input.off",
+      "original_sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/disconnected-after/input.off.gz",
+      "bytes": 203,
+      "sha256": "435e1b608ae8730ed2278dfa712b37c0ff3777b941521de8f3a018c85ae4069f"
+    },
+    {
+      "original": ".work/vtm/analytic-final/disconnected-after/mesh.npz",
+      "original_sha256": "e1cdd29dd114c8e2e57fc28a04168217966f16da5ba746dce06427e42f7b30d0",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/disconnected-after/mesh.npz",
+      "bytes": 110253,
+      "sha256": "e1cdd29dd114c8e2e57fc28a04168217966f16da5ba746dce06427e42f7b30d0"
+    },
+    {
+      "original": ".work/vtm/analytic-final/disconnected-after/mesh.vtu",
+      "original_sha256": "f034bd62fb3cd2ff44d379b378c8358661d3e5b6b79bfe8d593ac7b0cdd39d94",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/disconnected-after/mesh.vtu.gz",
+      "bytes": 88094,
+      "sha256": "c53d201a9bb59cc9c17dd0a4fbe0229df391fe2fdb4745e67ecea76c8e86e025"
+    },
+    {
+      "original": ".work/vtm/analytic-final/disconnected-after/result.json",
+      "original_sha256": "0f1323baf97ca0baf80c7deaf206a0739fcdce013edb0d82ba12da5df71c0227",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/disconnected-after/result.json",
+      "bytes": 3648,
+      "sha256": "0f1323baf97ca0baf80c7deaf206a0739fcdce013edb0d82ba12da5df71c0227"
+    },
+    {
+      "original": ".work/vtm/analytic-final/disconnected-after.log",
+      "original_sha256": "207d63c01a955fd7997c0e539cafdab3545fa1a82ef12e51783adb877e77c538",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/disconnected-after.log",
+      "bytes": 7911,
+      "sha256": "207d63c01a955fd7997c0e539cafdab3545fa1a82ef12e51783adb877e77c538"
+    },
+    {
+      "original": ".work/vtm/analytic-final/graded-torus-after/boundary-self-intersections.txt",
+      "original_sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/graded-torus-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/analytic-final/graded-torus-after/boundary.off",
+      "original_sha256": "1d8ca37748321ea3ef875c61b1cc4c4b91cfdae7cb22776c6556843612500407",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/graded-torus-after/boundary.off.gz",
+      "bytes": 133257,
+      "sha256": "93607e26d2f8466aa128caba9881f1c9c67618b23e246c810c05e584a9f40dea"
+    },
+    {
+      "original": ".work/vtm/analytic-final/graded-torus-after/input.off",
+      "original_sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/graded-torus-after/input.off.gz",
+      "bytes": 16802,
+      "sha256": "e4b2abc769534575a9af284ccec20414fa6fa1c4f0c32b8fe105676172db0aa3"
+    },
+    {
+      "original": ".work/vtm/analytic-final/graded-torus-after/mesh.npz",
+      "original_sha256": "b6495fcaf0a33b009eeeb702562c2bcebb6b6fa50a7451bb6a904ccaa9c604cb",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/graded-torus-after/mesh.npz",
+      "bytes": 572286,
+      "sha256": "b6495fcaf0a33b009eeeb702562c2bcebb6b6fa50a7451bb6a904ccaa9c604cb"
+    },
+    {
+      "original": ".work/vtm/analytic-final/graded-torus-after/mesh.vtu",
+      "original_sha256": "61f7e6255a5b49d153e94da3ee002ff035b39939d981a295d30ee6bf91c589fd",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/graded-torus-after/mesh.vtu.gz",
+      "bytes": 453279,
+      "sha256": "893ce61d4de8895f41f0e21e14d04c7dc302f43e00cfb3e260c5cead62031bb9"
+    },
+    {
+      "original": ".work/vtm/analytic-final/graded-torus-after/result.json",
+      "original_sha256": "d1eadc9d488f8f67f78da8514ec416f928f7fdd77a9fd417a6f8d0daf280c630",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/graded-torus-after/result.json",
+      "bytes": 3644,
+      "sha256": "d1eadc9d488f8f67f78da8514ec416f928f7fdd77a9fd417a6f8d0daf280c630"
+    },
+    {
+      "original": ".work/vtm/analytic-final/graded-torus-after.log",
+      "original_sha256": "871a78b3e481530a227384c7210585a1619e1828b3fda5c567367d0428a5c491",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/graded-torus-after.log",
+      "bytes": 8081,
+      "sha256": "871a78b3e481530a227384c7210585a1619e1828b3fda5c567367d0428a5c491"
+    },
+    {
+      "original": ".work/vtm/analytic-final/thin-hand-after/boundary-self-intersections.txt",
+      "original_sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/thin-hand-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/analytic-final/thin-hand-after/boundary.off",
+      "original_sha256": "8d6195fb512e396d25f0363051c264ea83316c16b3f8824728cae709f26edf5d",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/thin-hand-after/boundary.off.gz",
+      "bytes": 28763,
+      "sha256": "115f35b22942c12e07d1cc2433d21108e2647b2cedc4fcbfee557cc66eb97b39"
+    },
+    {
+      "original": ".work/vtm/analytic-final/thin-hand-after/input.off",
+      "original_sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/thin-hand-after/input.off.gz",
+      "bytes": 597,
+      "sha256": "8644de8fac9e842eb82416d32d938622658f3f541ae3a04705fb759ba3c2596e"
+    },
+    {
+      "original": ".work/vtm/analytic-final/thin-hand-after/mesh.npz",
+      "original_sha256": "dfe3f5f622525af8fb1773a7854236b9d8202affa621542e76ca25ccf05ba783",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/thin-hand-after/mesh.npz",
+      "bytes": 98645,
+      "sha256": "dfe3f5f622525af8fb1773a7854236b9d8202affa621542e76ca25ccf05ba783"
+    },
+    {
+      "original": ".work/vtm/analytic-final/thin-hand-after/mesh.vtu",
+      "original_sha256": "53fa5005134b4a0886a482c1ca0c85884607de5c5de8bc624e9904a13782a63d",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/thin-hand-after/mesh.vtu.gz",
+      "bytes": 70637,
+      "sha256": "333953b70d9b8b3d5c373734fc842e5f239fdc678b2d2b139edab797319b4679"
+    },
+    {
+      "original": ".work/vtm/analytic-final/thin-hand-after/result.json",
+      "original_sha256": "b43260cbc739a3c6c618bc460a0f6b5ff1f06db2580643a5d323745fa12b0f23",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/thin-hand-after/result.json",
+      "bytes": 3645,
+      "sha256": "b43260cbc739a3c6c618bc460a0f6b5ff1f06db2580643a5d323745fa12b0f23"
+    },
+    {
+      "original": ".work/vtm/analytic-final/thin-hand-after.log",
+      "original_sha256": "806a9809f77465ce66b4254360eb565c3880a173aad67a8dc0cea83a53e1c719",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/thin-hand-after.log",
+      "bytes": 7908,
+      "sha256": "806a9809f77465ce66b4254360eb565c3880a173aad67a8dc0cea83a53e1c719"
+    },
+    {
+      "original": ".work/vtm/analytic-final/torus1000-after.json",
+      "original_sha256": "a9a3d92d8e06bd674cd7f267056b0268c0cd5b21f1fb7d66c938c6f27c7aa82e",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/torus1000-after.json",
+      "bytes": 2919,
+      "sha256": "a9a3d92d8e06bd674cd7f267056b0268c0cd5b21f1fb7d66c938c6f27c7aa82e"
+    },
+    {
+      "original": ".work/vtm/analytic-final/torus1000-after.log",
+      "original_sha256": "67492b4c76fc6a8fa23849ab728253d15eaecd45260e8cf699a8b5fce7d15bbf",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/torus1000-after.log",
+      "bytes": 7268,
+      "sha256": "67492b4c76fc6a8fa23849ab728253d15eaecd45260e8cf699a8b5fce7d15bbf"
+    },
+    {
+      "original": ".work/vtm/analytic-final/torus1000-after.npz",
+      "original_sha256": "0f772516479cdb574920bc203aa2b114fe48277e13ce392b651698da57d1d90b",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/torus1000-after.npz",
+      "bytes": 91491,
+      "sha256": "0f772516479cdb574920bc203aa2b114fe48277e13ce392b651698da57d1d90b"
+    },
+    {
+      "original": ".work/vtm/analytic-final/torus4096-after.json",
+      "original_sha256": "75441c5fe3c9be038610b48953078c9c36d320eaecda712b4db47c7fe0b7f7eb",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/torus4096-after.json",
+      "bytes": 3056,
+      "sha256": "75441c5fe3c9be038610b48953078c9c36d320eaecda712b4db47c7fe0b7f7eb"
+    },
+    {
+      "original": ".work/vtm/analytic-final/torus4096-after.log",
+      "original_sha256": "fcda53a55fc82e6e00e43397e3a1865bcef26efcbb0a84bde73c63448b590a2f",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/torus4096-after.log",
+      "bytes": 7435,
+      "sha256": "fcda53a55fc82e6e00e43397e3a1865bcef26efcbb0a84bde73c63448b590a2f"
+    },
+    {
+      "original": ".work/vtm/analytic-final/torus4096-after.npz",
+      "original_sha256": "6dc653004a015c2477d8d5c752abba8a03fa2e18ed2d8de61cb465ab3c53166f",
+      "path": "results/validation/vtm/analytic-filters/analytic-final/torus4096-after.npz",
+      "bytes": 419622,
+      "sha256": "6dc653004a015c2477d8d5c752abba8a03fa2e18ed2d8de61cb465ab3c53166f"
+    }
+  ]
+}

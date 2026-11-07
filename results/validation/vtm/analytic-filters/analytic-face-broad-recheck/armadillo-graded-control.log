@@ -1,0 +1,21 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/horde/projects/power-diagram/examples/vtm_gallery.py", line 272, in <module>
+    main()
+  File "/home/horde/projects/power-diagram/examples/vtm_gallery.py", line 107, in main
+    wp.init()
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 17030, in init
+    runtime = Runtime()
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 8782, in __init__
+    warp._src.build.init_kernel_cache(warp.config.kernel_cache_dir)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/build.py", line 259, in init_kernel_cache
+    os.makedirs(warp.config.kernel_cache_dir, exist_ok=True)
+  File "/usr/lib/python3.10/os.py", line 215, in makedirs
+    makedirs(head, exist_ok=exist_ok)
+  File "/usr/lib/python3.10/os.py", line 225, in makedirs
+    mkdir(name, mode)
+PermissionError: [Errno 13] Permission denied: '/opt/warpower-generated-cache'

@@ -212,6 +212,14 @@ def quality_seed(state: State, seed: wp.array[int], output: wp.array[int]):
 
 
 @wp.kernel
+def remember_material_recovery(
+    valid: wp.array[int], additions: wp.array[int], active: wp.array[int]
+):
+    if valid[0] != 0 and additions[0] > 0:
+        active[0] = 1
+
+
+@wp.kernel
 def quality_result(
     state: State,
     stage: int,
@@ -222,6 +230,9 @@ def quality_result(
     boundary_error: wp.array[int],
     invalid: wp.array[int],
     termination: wp.array[int],
+    material_recovery: wp.array[int],
+    previous_minimum: wp.array[wp.float64],
+    current_minimum: wp.array[wp.float64],
 ):
     slot = 2
     if stage > 0:
@@ -235,6 +246,10 @@ def quality_result(
         or invalid[0] != 0
         or state.extraction_reason[0] != 0
     )
+    if stage == 0 and material_recovery[0] != 0:
+        failed = failed or current_minimum[0] < previous_minimum[0] * (
+            wp.float64(1.0) - wp.float64(1.0e-10)
+        )
     state.rollback[0] = int(failed)
     if failed:
         state.quality_rejections[0] += 1
@@ -338,6 +353,7 @@ class VariationalMeshingWorkspace:
         quality_threshold=0.3,
         jitter_attempts=8,
         extraction_tolerance=0.4,
+        containment_recovery=True,
         sampling_resolution=32,
         sampling_max_attempts=4096,
         tetrahedra_capacity=None,
@@ -345,6 +361,7 @@ class VariationalMeshingWorkspace:
         chunk_size=None,
     ):
         self.domain, self.device = domain, domain.device
+        self.containment_recovery = bool(containment_recovery)
         self.capacity = operator.index(capacity)
         if not 4 <= self.capacity < 2**29:
             raise ValueError("capacity must be in [4,2**29)")
@@ -431,6 +448,7 @@ class VariationalMeshingWorkspace:
             self.points = wp.zeros(self.capacity, dtype=wp.vec3)
             self._budget = wp.zeros(1, dtype=int)
             self._mode = wp.zeros(1, dtype=int)
+            self._material_recovery = wp.zeros(1, dtype=int)
             self._jitter_seed = wp.zeros(1, dtype=int)
             self._refinement_target = wp.full(1, self.capacity, dtype=int)
             self.input_topology = DomainTopology(domain)
@@ -457,6 +475,7 @@ class VariationalMeshingWorkspace:
                 selective_threshold=quality_threshold if self.quality_rounds else None,
                 selective_tolerance=extraction_tolerance,
                 selective_enabled=self._mode if self.quality_rounds else None,
+                material_recovery=self._material_recovery if self.containment_recovery else None,
                 tetrahedra_capacity=tetrahedra_capacity,
                 tetrahedra_cell_capacity=tetrahedra_cell_capacity,
                 chunk_size=chunk_size,
@@ -488,6 +507,7 @@ class VariationalMeshingWorkspace:
                 self.core.full_tetrahedra_count,
                 source_error=self.core.error,
                 tolerance=extraction_tolerance,
+                containment_recovery=self.containment_recovery,
             )
             self.full_tetrahedra = self.core.full_tetrahedra
             self.tetrahedra = self.extraction.tetrahedra
@@ -553,6 +573,7 @@ class VariationalMeshingWorkspace:
                 self._old_tets = wp.empty_like(self.full_tetrahedra)
                 self._old_count = wp.empty(1, dtype=int)
                 self._old_active = wp.empty(1, dtype=int)
+                self._old_minimum = wp.empty(1, dtype=wp.float64)
             self._field_error = wp.zeros(1, dtype=int) if sizing is None else sizing.error
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as cap:
@@ -566,6 +587,7 @@ class VariationalMeshingWorkspace:
     def _record(self):
         self.topology.zero_()
         self.metrics.zero_()
+        self._material_recovery.zero_()
         self._launch(begin, 1, [self._state, self.domain.error, self.domain.corner_count])
         wp.capture_if(self.ready, self._initialize)
         e = self.extraction
@@ -655,6 +677,10 @@ class VariationalMeshingWorkspace:
     def _extract(self):
         e = self.extraction
         e.run()
+        if self.containment_recovery:
+            self._launch(
+                remember_material_recovery, 1, [e.valid, e.repaired_count, self._material_recovery]
+            )
         self.topology.zero_()
         self._launch(sum_euler, len(e.shell_euler), [e.shell_euler, self.topology])
         self._launch(
@@ -695,6 +721,7 @@ class VariationalMeshingWorkspace:
         wp.copy(self._old_tets, self.full_tetrahedra)
         wp.copy(self._old_count, self.core.full_tetrahedra_count)
         wp.copy(self._old_active, self.active_count)
+        wp.copy(self._old_minimum, self.extraction.minimum_radius_ratio)
 
     def _assess(self, stage, error, accepted):
         c = self.core
@@ -712,6 +739,9 @@ class VariationalMeshingWorkspace:
                 c.boundary.error,
                 c._invalid,
                 c.termination,
+                self._material_recovery,
+                self._old_minimum,
+                self.extraction.minimum_radius_ratio,
             ],
         )
         wp.capture_if(self.rollback, self._restore)

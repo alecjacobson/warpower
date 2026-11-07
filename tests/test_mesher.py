@@ -118,7 +118,8 @@ def test_inadequate_topology_is_not_published_and_recovery_is_bounded():
 
 
 @pytest.mark.parametrize("recovery", [0, 3])
-def test_coarse_graded_nonmanifold_boundary_recovers_with_additional_fitting(recovery):
+@pytest.mark.parametrize("containment", [False, True])
+def test_coarse_graded_nonmanifold_boundary_recovery_strategies(recovery, containment):
     d = warpower.SurfaceDomain(*cube(), surface_subdivisions=6)
     field = warpower.SizingField(
         np.array([[-0.8, 0, 0], [0.8, 0, 0]], np.float32),
@@ -139,6 +140,7 @@ def test_coarse_graded_nonmanifold_boundary_recovers_with_additional_fitting(rec
         polish_iterations=5,
         quality_rounds=0,
         max_recovery_rounds=recovery,
+        containment_recovery=containment,
     )
 
     def reproduce_sampling(stream=None):
@@ -151,7 +153,12 @@ def test_coarse_graded_nonmanifold_boundary_recovers_with_additional_fitting(rec
     with wp.ScopedCapture() as cap:
         mesh.run()
     wp.capture_launch(cap.graph)
-    if recovery == 0:
+    if containment:
+        validate(mesh)
+        assert mesh.extraction.repaired_count.numpy()[0] > 0
+        assert mesh.rounds.numpy()[1] == 0
+        assert mesh.steps.numpy()[0] == 5
+    elif recovery == 0:
         assert mesh.core.error.numpy()[0] == mesh.extraction.error.numpy()[0] == 0
         assert mesh.extraction.diagnostics.numpy()[0] == 2
         assert mesh.error.numpy()[0] == 64

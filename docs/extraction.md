@@ -42,6 +42,12 @@ surface, and an outside circumcenter can be retained intentionally. The rule
 does not guarantee topology or preserve input triangles exactly. Sampling,
 boundary fitting, and adequate site resolution remain necessary.
 
+Optional [containment recovery](containment-recovery.md) can add proven wholly
+material cells around a bad boundary edge. Enable it with
+`containment_recovery=True`; the independent extractor defaults to `False`.
+The final selection includes these additions, so it need not equal the
+circumcenter predicate alone. Remaining topology failures are still explicit.
+
 Inputs must be a nonoverlapping, positively oriented tetrahedral complex. For
 the paper's interpretation, use the complete Delaunay triangulation. Extraction
 checks index validity, finite referenced positions, positive determinants, and

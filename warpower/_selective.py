@@ -225,6 +225,13 @@ def guard_quality(
         last_error[0] = failure
 
 
+@wp.kernel
+def recovered_status(source_error: wp.array[int], valid: wp.array[int], error: wp.array[int]):
+    error[0] = source_error[0]
+    if valid[0] == 0:
+        error[0] |= 16
+
+
 class SelectiveUpdate:
     def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
         if not math.isfinite(threshold) or not 0 < threshold <= 1:
@@ -252,6 +259,17 @@ class SelectiveUpdate:
             self.quality = wp.empty(self._m, dtype=wp.float64)
             self.bad_vertices = wp.zeros(core.n, dtype=int)
             self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction.ExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=True,
+                )
             wp.load_module(module=__name__, device=self.device)
             wp.load_module(module="warpower._extraction", device=self.device)
 
@@ -266,6 +284,28 @@ class SelectiveUpdate:
         self.bad_vertices.zero_()
 
     def evaluate(self):
+        if self.recovery_extraction is None:
+            self._evaluate_ordinary()
+        else:
+            wp.capture_if(
+                self.core.material_recovery, self._evaluate_recovered, self._evaluate_ordinary
+            )
+
+    def _evaluate_recovered(self):
+        e = self.recovery_extraction
+        e.run()
+        wp.copy(self.keep, e.selected)
+        wp.copy(self.quality, e._input_quality)
+        self._launch(recovered_status, 1, [e.error, e.valid, self.error])
+        self.retained_count.zero_()
+        self.minimum.fill_(1)
+        self._launch(
+            summarize,
+            self._m,
+            [self.keep, self.quality, self.error, self.retained_count, self.minimum],
+        )
+
+    def _evaluate_ordinary(self):
         core = self.core
         self.retained_count.zero_()
         self.minimum.fill_(1)

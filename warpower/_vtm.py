@@ -227,6 +227,7 @@ class VTMWorkspace:
         selective_tolerance=0.4,
         iteration_limit=None,
         selective_enabled=None,
+        material_recovery=None,
     ):
         self.max_iterations = operator.index(max_iterations)
         self.max_backtracks = operator.index(max_backtracks)
@@ -294,6 +295,11 @@ class VTMWorkspace:
         )
         self.points = self.mesh.points if active_count is None else self._input_points
         self.device, self.n = self.mesh.device, self.mesh.n
+        self.material_recovery = material_recovery
+        if material_recovery is not None:
+            from ._vtm_controls import scalar
+
+            scalar(material_recovery, self.device, "material_recovery")
         if self.n < 4:
             raise ValueError("Tetrahedral meshing needs at least four sites")
         self.sizing = sizing

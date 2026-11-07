@@ -57,6 +57,8 @@ def use_full_query_reference(core):
                 volumes,
                 selected.quality,
             ],
+            # Isolate the query algorithm with the same launch configuration.
+            block_dim=32,
         )
         selected._launch(
             _selective.summarize,

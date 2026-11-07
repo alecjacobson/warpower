@@ -1,0 +1,19 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 131072, "diagnostic_mempool_enabled": false}
+Module warpower._domain 34c6db2 load on device 'cuda:0' took 1.17 ms  (cached)
+Module warpower._surface_bvh 7ad7add load on device 'cuda:0' took 0.78 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.88 ms  (cached)
+Module warpower._triangle_contact 9e6db6b load on device 'cuda:0' took 1.60 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.79 ms  (cached)
+Module benchmarks.domain 12277da load on device 'cuda:0' took 506.75 ms  (compiled)
+Module tests.test_domain 1bba98d load on device 'cuda:0' took 3.33 ms  (cached)
+{"device": "NVIDIA L40", "warp": "1.19.0", "vertices": 4608, "triangles": 9216, "queries": 4096, "surface_samples": 110592, "setup_seconds": 0.6742755696177483, "persistent_workspace_pool_bytes": 11807, "timings_ms": {"hierarchy_refit": {"samples": [2.1803200244903564, 2.079296112060547, 2.0249600410461426], "median": 2.079296112060547, "cpu_quota_delta": {"4": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}, "3": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}}, "cpu_throttled": false}, "queries": {"samples": [80.8799057006836, 82.79481506347656, 83.0514907836914], "median": 82.79481506347656, "cpu_quota_delta": {"4": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}, "3": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}}, "cpu_throttled": false}, "refit_queries_consumer": {"samples": [125.07945251464844, 123.7791976928711, 125.22937774658203], "median": 125.07945251464844, "cpu_quota_delta": {"4": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}, "3": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}}, "cpu_throttled": false}}, "domain_error": 0, "query_error": 0, "all_queries_valid": true}
+========= ERROR SUMMARY: 0 errors

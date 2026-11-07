@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import time
 from pathlib import Path
 
 import numpy as np
@@ -33,6 +34,10 @@ def main():
     args = parser.parse_args()
     if args.queries < 1 or args.repeats < 1:
         parser.error("queries and repeats must be positive")
+    wp.init()
+    wp.synchronize()
+    memory_before = wp.get_mempool_used_mem_current("cuda:0")
+    setup_start = time.perf_counter()
     p, f = torus(96, 48)
     source = wp.array(p, dtype=wp.vec3, device="cuda:0")
     points = wp.clone(source)
@@ -45,6 +50,9 @@ def main():
     wp.load_module(module="tests.test_domain", device="cuda:0")
     graphs = {}
     with wp.ScopedCapture() as capture:
+        domain._hierarchy.refit()
+    graphs["hierarchy_refit"] = capture.graph
+    with wp.ScopedCapture() as capture:
         query.run()
     graphs["queries"] = capture.graph
     with wp.ScopedCapture() as capture:
@@ -54,6 +62,7 @@ def main():
         wp.launch(consumer, args.queries, inputs=[query.signed_distance, query.inside, result])
         wp.launch(advance, 1, inputs=[phase])
     graphs["refit_queries_consumer"] = capture.graph
+    wp.synchronize()
     report = {
         "device": wp.get_device("cuda:0").name,
         "warp": wp.__version__,
@@ -61,6 +70,10 @@ def main():
         "triangles": len(f),
         "queries": args.queries,
         "surface_samples": len(domain.surface_points),
+        "setup_seconds": time.perf_counter() - setup_start,
+        "persistent_workspace_pool_bytes": (
+            wp.get_mempool_used_mem_current("cuda:0") - memory_before
+        ),
         "timings_ms": {},
     }
     for name, graph in graphs.items():
@@ -83,8 +96,9 @@ def main():
             v["throttled_periods"] for v in cpu.values()
         )
         assert domain.error.numpy()[0] == 0
-        assert query.error.numpy()[0] == 0
-        assert np.all(query.valid.numpy())
+        if name != "hierarchy_refit":
+            assert query.error.numpy()[0] == 0
+            assert np.all(query.valid.numpy())
     if args.dot:
         args.dot.parent.mkdir(parents=True, exist_ok=True)
         wp.capture_debug_dot_print(graphs["refit_queries_consumer"], str(args.dot), verbose=True)

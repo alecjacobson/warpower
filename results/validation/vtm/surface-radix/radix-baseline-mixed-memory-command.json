@@ -1,0 +1,31 @@
+{
+  "source": "18b18f566ca1bd0c9a4cf5e96caf623ab009f07c",
+  "command": [
+    "/usr/local/cuda-12.9/bin/compute-sanitizer",
+    "--tool",
+    "memcheck",
+    "--padding",
+    "32",
+    "--error-exitcode",
+    "99",
+    "/home/horde/projects/power-diagram/.venv/bin/python",
+    "-m",
+    "benchmarks.memcheck",
+    "--stack-bytes",
+    "131072",
+    "--",
+    "-q",
+    "-s",
+    "-o",
+    "faulthandler_timeout=120",
+    "-o",
+    "faulthandler_exit_on_timeout=true",
+    "tests/test_mesher.py::test_complete_pipeline_samples_grows_fits_and_preserves_domain_topology[cube]",
+    "tests/test_mesher.py::test_complete_pipeline_samples_grows_fits_and_preserves_domain_topology[torus]",
+    "tests/test_mesher.py::test_complete_pipeline_samples_grows_fits_and_preserves_domain_topology[cavity]"
+  ],
+  "cwd": "/home/horde/projects/power-diagram/.work/vtm/extraction-geometry",
+  "exit_code": 1,
+  "wall_seconds": 178.18381023406982,
+  "scope": "Original first three combined tests; per-test 120-second diagnostic timeout with stack dump. Nonzero exit is preserved, never counted as a pass."
+}

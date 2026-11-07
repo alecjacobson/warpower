@@ -1,0 +1,83 @@
+F
+=================================== FAILURES ===================================
+____ test_radix_queries_match_heap_and_independent_geometry[False-cube--60] ____
+
+case = 'cube', exponent = -60, fuse_fp = False
+
+    @pytest.mark.parametrize("exponent", [-60, 0, 60])
+    @pytest.mark.parametrize("case", ["cube", "torus", "plate", "thin-hand", "cavity", "disconnected"])
+    @pytest.mark.parametrize("fuse_fp", [False, True])
+    def test_radix_queries_match_heap_and_independent_geometry(case, exponent, fuse_fp):
+        wp.set_module_options({"fuse_fp": fuse_fp}, module=__name__)
+        p, f = (
+            cube()
+            if case == "cube"
+            else torus(16, 8)
+            if case == "torus"
+            else counterbored_plate(16)
+            if case == "plate"
+            else surface(case)
+        )
+        p = (p * np.float32(2.0**exponent)).astype(np.float32)
+        domain = SurfaceDomain(p, f, surface_subdivisions=1, crease_subdivisions=1)
+        assert domain.error.numpy()[0] == 0
+        rng = np.random.default_rng(918)
+        lo, hi = p.min(axis=0).astype(float), p.max(axis=0).astype(float)
+        ordinary = rng.uniform(lo - 0.1 * (hi - lo), hi + 0.1 * (hi - lo), (100, 3))
+        triangles = p[f].astype(float)
+        centers = triangles.mean(axis=1)
+        probes = np.concatenate([ordinary, p, triangles[:, :2].mean(axis=1), centers, centers])
+        excluded = np.r_[np.full(len(probes) - len(f), -1, np.int32), np.arange(len(f), dtype=np.int32)]
+        points = wp.array(probes, dtype=wp.vec3d)
+        faces = wp.array(excluded, dtype=int)
+        differences = wp.empty(len(probes), dtype=int)
+        membership = wp.empty_like(differences)
+        distances = wp.empty(len(probes), dtype=wp.float64)
+        point_difference = wp.empty_like(distances)
+        wp.launch(
+            compare,
+            len(probes),
+            inputs=[
+                domain.tree,
+                domain._hierarchy._segment,
+                points,
+                faces,
+                differences,
+                membership,
+                distances,
+                point_difference,
+            ],
+        )
+>       np.testing.assert_array_equal(differences.numpy(), 0)
+E       AssertionError: 
+E       Arrays are not equal
+E       
+E       Mismatched elements: 44 / 144 (30.6%)
+E       Max absolute difference among violations: 4
+E       Max relative difference among violations: inf
+E        ACTUAL: array([0, 0, 0, 0, 0, 4, 0, 0, 0, 4, 4, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0,
+E              4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0,
+E              0, 4, 0, 4, 0, 0, 0, 4, 0, 4, 4, 4, 0, 0, 4, 0, 0, 4, 0, 0, 4, 4,...
+E        DESIRED: array(0)
+
+tests/test_surface_radix.py:99: AssertionError
+----------------------------- Captured stdout call -----------------------------
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+Module warpower._domain 34c6db2 load on device 'cuda:0' took 1.57 ms  (cached)
+Module warpower._surface_bvh 17aed04 load on device 'cuda:0' took 0.62 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._triangle_contact 9e6db6b load on device 'cuda:0' took 1.19 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.60 ms  (cached)
+Module tests.test_surface_radix a12ec5d load on device 'cuda:0' took 1908.35 ms  (compiled)
+----------------------------- Captured stderr call -----------------------------
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+=========================== short test summary info ============================
+FAILED tests/test_surface_radix.py::test_radix_queries_match_heap_and_independent_geometry[False-cube--60]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed in 2.93s

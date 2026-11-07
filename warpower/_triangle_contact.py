@@ -203,12 +203,8 @@ def check_intersections(tree: SurfaceTree, error: wp.array[int]):
     a, b, c = tree.indices[3 * f], tree.indices[3 * f + 1], tree.indices[3 * f + 2]
     p, q, r = tree.points[a], tree.points[b], tree.points[c]
     lo, hi = wp.min(p, wp.min(q, r)), wp.max(p, wp.max(q, r))
-    stack = wp.zeros(shape=64, dtype=int)
-    stack[0] = 1
-    size = int(1)
-    while size > 0:
-        size -= 1
-        node = stack[size]
+    node = int(1)
+    while node > 0:
         lower, upper = tree.lower[node], tree.upper[node]
         if (
             lower[0] > hi[0]
@@ -218,6 +214,7 @@ def check_intersections(tree: SurfaceTree, error: wp.array[int]):
             or upper[1] < lo[1]
             or upper[2] < lo[2]
         ):
+            node = tree.escape[node]
             continue
         if node >= tree.leaf_base:
             first = 4 * (node - tree.leaf_base)
@@ -242,7 +239,6 @@ def check_intersections(tree: SurfaceTree, error: wp.array[int]):
                         continue
                     if excess_contact(tree.points, wp.vec3i(a, b, c), right):
                         wp.atomic_or(error, 0, 16)
+            node = tree.escape[node]
         else:
-            stack[size] = 2 * node
-            stack[size + 1] = 2 * node + 1
-            size += 2
+            node = tree.right[node]

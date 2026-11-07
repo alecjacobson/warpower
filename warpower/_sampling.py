@@ -25,17 +25,14 @@ def random64(state: wp.uint64):
 
 @wp.func(inline=True)
 def boundary_box(tree: SurfaceTree, lower: wp.vec3d, upper: wp.vec3d):
-    stack = wp.zeros(shape=64, dtype=int)
-    stack[0] = 1
-    size = int(1)
-    while size > 0:
-        size -= 1
-        node = stack[size]
+    node = int(1)
+    while node > 0:
         lo, hi = wp.vec3d(tree.lower[node]), wp.vec3d(tree.upper[node])
         overlap = True
         for k in range(3):
             overlap = overlap and lo[k] <= upper[k] and hi[k] >= lower[k]
         if not overlap:
+            node = tree.escape[node]
             continue
         if node >= tree.leaf_base:
             for j in range(
@@ -51,13 +48,9 @@ def boundary_box(tree: SurfaceTree, lower: wp.vec3d, upper: wp.vec3d):
                     overlap = overlap and lo[k] <= upper[k] and hi[k] >= lower[k]
                 if overlap:
                     return True
+            node = tree.escape[node]
         else:
-            if size + 2 > 64:
-                # Retention is conservative; a stack limit cannot omit geometry.
-                return True
-            stack[size] = 2 * node
-            stack[size + 1] = 2 * node + 1
-            size += 2
+            node = tree.right[node]
     return False
 
 

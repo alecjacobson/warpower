@@ -5,10 +5,10 @@ comparison establishes a reproducible baseline and a substantial remaining
 performance gap. Both implementations receive the identical float32 torus
 surface, but their point counts, stopping rules, boundary constraints and quality
 differ. These are not quality-matched time-to-target results. Subsequent GPU
-optimizations reduce the complete 1,000-site solve to **1.087 s** at runtime
-`32ee3c6`, preserving the original coordinates and tetrahedron sets. See the
-[latest paired GPU measurement](hull-witness-stop.md) and
-[original-mesh comparison](../results/validation/vtm/hull-stop-original-torus-comparison.json).
+optimizations reduce the complete 1,000-site solve to **0.892 s** at runtime
+`2c95331`, preserving the original coordinates and tetrahedron sets. See the
+[latest paired GPU measurement](surface-radix.md) and
+[original-mesh comparison](../results/validation/vtm/surface-radix/radix-original-torus-comparison.json).
 The table below retains the original CPU/GPU experiment; its CPU measurements
 have not been replaced by a new quality-matched comparison.
 

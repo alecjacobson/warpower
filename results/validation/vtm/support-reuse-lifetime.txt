@@ -1,0 +1,39 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 32768, "diagnostic_mempool_enabled": false}
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.74 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 1.05 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.78 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.63 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.60 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.66 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.68 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.70 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.72 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.70 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 10.66 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 0.96 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 6.85 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.76 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.86 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.93 ms  (cached)
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 1.74 ms  (cached)
+Module warpower._facet_completion bb6aebe load on device 'cuda:0' took 6.35 ms  (cached)
+Module warpower._proved_completion 9cf4208 load on device 'cuda:0' took 7.59 ms  (cached)
+Module warpower._proved_completion 4aac95f load on device 'cuda:0' took 6.48 ms  (cached)
+Module warpower._facet_completion 62c1043 load on device 'cuda:0' took 5.79 ms  (cached)
+Module warpower._reuse_delaunay 58b0d1a load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._facet_seeds fa4cd6c load on device 'cuda:0' took 4.85 ms  (cached)
+Module benchmarks.reuse_delaunay 0b04548 load on device 'cuda:0' took 518.61 ms  (compiled)
+{'scope': 'Six warmed resident producer/reconstruction/consumer phases: fresh random64, nearby unchanged topology, moved sites requiring facet completion, duplicate sites, nonfinite input and restored random64. Device phase advance and one final synchronization; setup, warmup and readback excluded from native trace. Internal VTM strategy audit, not a throughput measurement.', 'columns': ['tetrahedra', 'error', 'reuse_attempted', 'reuse_accepted', 'completion_rounds', 'base_attempted', 'checksum', 'cell_proofs_reused_within_completion', 'cells_globally_checked_within_completion', 'supported_faces_skipping_candidate_search', 'unsupported_faces_requiring_candidate_search'], 'records': [[305, 0, 0, 0, 0, 1, 38213, 0, 0, 0, 0], [305, 0, 1, 1, 0, 0, 38213, 305, 0, 0, 0], [319, 0, 1, 1, 3, 0, 39284, 1015, 123, 89, 223], [134, 0, 1, 0, 4, 1, 8302, 360, 100, 30, 154], [0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0], [305, 0, 0, 0, 0, 1, 38213, 0, 0, 0, 0]]}
+========= ERROR SUMMARY: 0 errors

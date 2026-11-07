@@ -18,12 +18,13 @@ wp.set_module_options({"enable_backward": False, "fast_math": False})
 def begin(
     error: wp.array[int],
     diagnostics: wp.array[int],
+    enabled: wp.array[int],
     ready: wp.array[int],
     rounds: wp.array[int],
     removed: wp.array[int],
     rejected: wp.array[int],
 ):
-    ready[0] = int(error[0] == 0 and diagnostics[0] == 2)
+    ready[0] = int(enabled[0] != 0 and error[0] == 0 and diagnostics[0] == 2)
     rounds[0] = 0
     removed[0] = 0
     rejected[0] = 0
@@ -121,10 +122,11 @@ def accept(
 
 
 class ExteriorBandRecovery:
-    def __init__(self, extraction, roles):
+    def __init__(self, extraction, roles, enabled):
         self.extraction = weakref.proxy(extraction)
         self.device = extraction.device
         self.roles = roles if roles is not None else wp.zeros(len(extraction.points), dtype=int)
+        self.enabled = enabled if enabled is not None else wp.ones(1, dtype=int)
         self.before = wp.empty_like(extraction.selected)
         self.before_volume = wp.empty_like(extraction.volume)
         self.references = wp.empty(len(extraction.points), dtype=int)
@@ -141,7 +143,17 @@ class ExteriorBandRecovery:
     def run(self):
         e = self.extraction
         self._launch(
-            begin, 1, [e.error, e.diagnostics, self.ready, self.rounds, self.removed, self.rejected]
+            begin,
+            1,
+            [
+                e.error,
+                e.diagnostics,
+                self.enabled,
+                self.ready,
+                self.rounds,
+                self.removed,
+                self.rejected,
+            ],
         )
         wp.capture_if(self.ready, self._attempt)
 

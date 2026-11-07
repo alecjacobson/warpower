@@ -17,6 +17,7 @@ def produce(
     roles: wp.array[int],
     count: wp.array[int],
     source_error: wp.array[int],
+    enabled: wp.array[int],
     n: int,
 ):
     i = wp.tid()
@@ -24,6 +25,7 @@ def produce(
     if i == 0:
         count[0] = wp.where(phase[0] == 2, 0, n)
         source_error[0] = int(phase[0] == 3)
+        enabled[0] = int(phase[0] != 5)
 
 
 @wp.kernel
@@ -67,7 +69,7 @@ def record(
     output[k, 4] = removed[0]
     output[k, 5] = rounds[0]
     output[k, 6] = rejected[0]
-    phase[0] = (k + 1) % 5
+    phase[0] = (k + 1) % 7
 
 
 def main():
@@ -94,6 +96,7 @@ def main():
     n = len(data["full_tetrahedra"])
     count = wp.full(1, n, dtype=int, device=d.device)
     source_error = wp.zeros(1, dtype=int, device=d.device)
+    enabled = wp.ones(1, dtype=int, device=d.device)
     tets = np.vstack([data["full_tetrahedra"], [-1, -1, -1, -1]]).astype(np.int32)
     e = warpower.ExtractionWorkspace(
         d,
@@ -104,13 +107,18 @@ def main():
         containment_recovery=True,
         exterior_recovery=True,
         feature_roles=roles,
+        exterior_enabled=enabled,
     )
     phase = wp.zeros(1, dtype=int, device=d.device)
-    output = wp.empty((5, 7), dtype=int, device=d.device)
-    volumes = wp.zeros(5, dtype=wp.float64, device=d.device)
+    output = wp.empty((7, 7), dtype=int, device=d.device)
+    volumes = wp.zeros(7, dtype=wp.float64, device=d.device)
     wp.load_module(module=__name__, device=d.device)
     with wp.ScopedCapture() as cap:
-        wp.launch(produce, len(roles), inputs=[phase, source_roles, roles, count, source_error, n])
+        wp.launch(
+            produce,
+            len(roles),
+            inputs=[phase, source_roles, roles, count, source_error, enabled, n],
+        )
         e.run()
         wp.launch(
             consume,
@@ -132,7 +140,7 @@ def main():
                 output,
             ],
         )
-    for _ in range(5):
+    for _ in range(7):
         wp.capture_launch(cap.graph)
     wp.synchronize()
     volumes.zero_()
@@ -140,7 +148,7 @@ def main():
         import torch
 
         torch.cuda.cudart().cudaProfilerStart()
-    for _ in range(5):
+    for _ in range(7):
         wp.capture_launch(cap.graph)
     wp.synchronize()
     if args.profile:
@@ -151,17 +159,29 @@ def main():
         [0, 0, 1, 0, 0, 0, 0],
         [2, 0, 0, 0, 0, 0, 0],
         [0, 0, 1, 18767, 2, 1, 0],
+        [0, 2, 0, 0, 0, 0, 0],
+        [0, 0, 1, 18767, 2, 1, 0],
     ]
     np.testing.assert_array_equal(output.numpy(), expected)
     np.testing.assert_allclose(
-        volumes.numpy(), [0.5286930860623611, 0, 0, 0, 0.5286930860623611], rtol=1e-11
+        volumes.numpy(),
+        [0.5286930860623611, 0, 0, 0, 0.5286930860623611, 0, 0.5286930860623611],
+        rtol=1e-11,
     )
     if args.dot:
         args.dot.parent.mkdir(parents=True, exist_ok=True)
         wp.capture_debug_dot_print(cap.graph, str(args.dot), verbose=True)
         assert all(x not in args.dot.read_text() for x in ["MEM_ALLOC", "MEM_FREE", "HOST"])
     result = dict(
-        phases=["repaired", "feature_protected_rejected", "empty", "upstream_error", "restored"],
+        phases=[
+            "repaired",
+            "feature_protected_rejected",
+            "empty",
+            "upstream_error",
+            "restored",
+            "disabled",
+            "reenabled",
+        ],
         error_diagnostics_valid_count_removed_rounds_rejected=expected,
         consumed_volumes=volumes.numpy().tolist(),
         device=d.device.name,

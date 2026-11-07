@@ -303,7 +303,7 @@ wholly material tetrahedra around nonmanifold boundary edges. Exact containment
 witnesses gate additions, and every bounded pass reruns topology checks. The full
 mesher enables this extension and carries its selection into quality guards;
 the independently callable extractor retains its original default rule.
-If bad edges remain, [exterior-band recovery](exterior-band-recovery.md) can
+If bad edges remain after the additional-fitting budget, [exterior-band recovery](exterior-band-recovery.md) can
 transactionally remove exterior-center tolerance cells. Referenced vertices,
 feature-incident cells, a one-percent volume limit and final topology checks
 guard this approximation; unsuccessful attempts restore the original selection.

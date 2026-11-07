@@ -239,6 +239,7 @@ class ExtractionWorkspace:
         containment_recovery=False,
         exterior_recovery=False,
         feature_roles=None,
+        exterior_enabled=None,
     ):
         self.domain = domain
         self.points = _contiguous_points(points)
@@ -261,6 +262,9 @@ class ExtractionWorkspace:
             None
             if feature_roles is None
             else _int_array(feature_roles, self.device, (len(self.points),))
+        )
+        self.exterior_enabled = (
+            None if exterior_enabled is None else _int_array(exterior_enabled, self.device, (1,))
         )
         with wp.ScopedDevice(self.device):
             self.input_count = (
@@ -322,7 +326,9 @@ class ExtractionWorkspace:
             if self.exterior_recovery:
                 from ._exterior_band import ExteriorBandRecovery
 
-                self._exterior = ExteriorBandRecovery(self, self.feature_roles)
+                self._exterior = ExteriorBandRecovery(
+                    self, self.feature_roles, self.exterior_enabled
+                )
                 self.removed_count = self._exterior.removed
                 self.exterior_rounds = self._exterior.rounds
                 self.exterior_rejected = self._exterior.rejected

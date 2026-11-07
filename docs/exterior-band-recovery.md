@@ -8,8 +8,9 @@ interior-center cell around the edge. Containment additions cannot resolve it.
 
 `ExtractionWorkspace(..., exterior_recovery=True)` enables a bounded device
 transaction for this case. The independent extractor defaults to `False`.
-`VariationalMeshingWorkspace` enables it by default, after containment recovery
-and before additional global fitting. Pass both `containment_recovery=False`
+`VariationalMeshingWorkspace` enables it by default as a fallback after its
+existing containment and additional-global-fitting recovery budget. Previously
+successful fitting trajectories retain their selection and quality. Pass both `containment_recovery=False`
 and `exterior_recovery=False` to use only the original circumcenter extraction
 and additional-fitting policy. Diagram and Delaunay functions remain independent.
 
@@ -47,6 +48,13 @@ topology checks. It leaves the sites and complete input tetrahedralization
 unchanged. `selected` and `source_indices` describe the final material selection.
 If containment recovery also runs, that selection can include both additions
 and removals relative to the original circumcenter rule.
+
+Optional `exterior_enabled` is a device int32 scalar. Zero disables attempts on
+that replay without changing ordinary extraction; any nonzero value enables
+them. Omitting it enables attempts whenever the topology prerequisite holds.
+The full mesher owns a shared scalar, resets it for each fresh solve, and enables
+it only if the existing initial-extraction recovery budget is exhausted. The
+same scalar controls extraction inside all subsequent quality guards.
 
 Device `removed_count`, `exterior_rounds` and `exterior_rejected` reset every
 replay. `removed_count` is zero on rejection; rounds count attempted passes;

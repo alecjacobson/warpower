@@ -273,6 +273,7 @@ class SelectiveUpdate:
                     feature_roles=(
                         core.boundary.roles if getattr(core, "exterior_recovery", False) else None
                     ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
                 )
             wp.load_module(module=__name__, device=self.device)
             wp.load_module(module="warpower._extraction", device=self.device)

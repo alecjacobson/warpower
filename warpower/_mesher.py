@@ -199,6 +199,11 @@ def require_extraction(state: State):
 
 
 @wp.kernel
+def enable_exterior_recovery(state: State, enabled: wp.array[int]):
+    enabled[0] = int(state.error[0] == 0 and state.extraction_reason[0] != 0)
+
+
+@wp.kernel
 def start_quality(state: State):
     state.quality[0] = int(state.error[0] == 0 and state.quality_limit > 0)
 
@@ -450,6 +455,7 @@ class VariationalMeshingWorkspace:
             self._budget = wp.zeros(1, dtype=int)
             self._mode = wp.zeros(1, dtype=int)
             self._material_recovery = wp.zeros(1, dtype=int)
+            self._exterior_enabled = wp.zeros(1, dtype=int)
             self._jitter_seed = wp.zeros(1, dtype=int)
             self._refinement_target = wp.full(1, self.capacity, dtype=int)
             self.input_topology = DomainTopology(domain)
@@ -479,6 +485,7 @@ class VariationalMeshingWorkspace:
                 material_recovery=self._material_recovery if self._uses_recovery else None,
                 containment_recovery=self.containment_recovery,
                 exterior_recovery=self.exterior_recovery,
+                exterior_enabled=self._exterior_enabled,
                 tetrahedra_capacity=tetrahedra_capacity,
                 tetrahedra_cell_capacity=tetrahedra_cell_capacity,
                 chunk_size=chunk_size,
@@ -513,6 +520,7 @@ class VariationalMeshingWorkspace:
                 containment_recovery=self.containment_recovery,
                 exterior_recovery=self.exterior_recovery,
                 feature_roles=self.core.boundary.roles,
+                exterior_enabled=self._exterior_enabled,
             )
             self.full_tetrahedra = self.core.full_tetrahedra
             self.tetrahedra = self.extraction.tetrahedra
@@ -593,6 +601,7 @@ class VariationalMeshingWorkspace:
         self.topology.zero_()
         self.metrics.zero_()
         self._material_recovery.zero_()
+        self._exterior_enabled.zero_()
         self._launch(begin, 1, [self._state, self.domain.error, self.domain.corner_count])
         wp.capture_if(self.ready, self._initialize)
         e = self.extraction
@@ -712,6 +721,10 @@ class VariationalMeshingWorkspace:
         self._extract()
         self._launch(start_recovery, 1, [self._state])
         wp.capture_while(self.recover, self._recovery)
+        if self.exterior_recovery:
+            # Preserve fitting and quality on previously successful trajectories.
+            self._launch(enable_exterior_recovery, 1, [self._state, self._exterior_enabled])
+            wp.capture_if(self._exterior_enabled, self._extract)
         self._launch(require_extraction, 1, [self._state])
         wp.capture_if(self.ready, self._improve)
 

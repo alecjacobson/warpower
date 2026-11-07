@@ -219,6 +219,7 @@ def main():
     if mesh.exterior_recovery:
         result["exterior_band_recovery"] = dict(
             material_quality_guard_active=int(mesh._material_recovery.numpy()[0]),
+            enabled_after_fitting=int(mesh._exterior_enabled.numpy()[0]),
             last_removed_cells=int(mesh.extraction.removed_count.numpy()[0]),
             last_passes=int(mesh.extraction.exterior_rounds.numpy()[0]),
             last_rejected=int(mesh.extraction.exterior_rejected.numpy()[0]),

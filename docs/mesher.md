@@ -115,7 +115,7 @@ full-hull cells around nonmanifold boundary edges and adds only cells proved
 wholly in material. Every pass reruns the topology gate. Once repair is used,
 quality guards evaluate the repaired subcomplex consistently; a fresh solve
 resets this mode. The independent extractor keeps its original rule by default.
-If bad edges remain, [exterior-band recovery](exterior-band-recovery.md) can
+If bad edges remain after the additional-fitting budget, [exterior-band recovery](exterior-band-recovery.md) can
 remove exterior-center tolerance cells while preserving referenced vertices and
 feature-incident cells. It limits volume change and restores the selection on
 failure. This policy is an approximation; it does not prove whole-cell exterior

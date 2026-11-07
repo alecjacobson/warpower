@@ -31,6 +31,7 @@ def test_scanned_failure_recovers_and_quality_guard_measures_the_same_subcomplex
     count = wp.full(1, len(full), dtype=int, device=d.device)
     error = wp.zeros(1, dtype=int, device=d.device)
     roles = wp.array(data["roles"], device=d.device)
+    enabled = wp.zeros(1, dtype=int, device=d.device)
     e = warpower.ExtractionWorkspace(
         d,
         points,
@@ -40,9 +41,14 @@ def test_scanned_failure_recovers_and_quality_guard_measures_the_same_subcomplex
         containment_recovery=True,
         exterior_recovery=True,
         feature_roles=roles,
+        exterior_enabled=enabled,
     )
     with wp.ScopedCapture() as cap:
         e.run()
+    wp.capture_launch(cap.graph)
+    assert e.valid.numpy()[0] == 0 and e.diagnostics.numpy()[0] == 2
+    assert e.removed_count.numpy()[0] == e.exterior_rounds.numpy()[0] == 0
+    enabled.fill_(1)
     wp.capture_launch(cap.graph)
     p, actual, _ = extracted(e)
     expected = data["selected"].copy()
@@ -64,6 +70,7 @@ def test_scanned_failure_recovers_and_quality_guard_measures_the_same_subcomplex
         boundary=SimpleNamespace(roles=roles),
         containment_recovery=True,
         exterior_recovery=True,
+        exterior_enabled=enabled,
         material_recovery=wp.ones(1, dtype=int, device=d.device),
     )
 
@@ -109,3 +116,7 @@ def test_scanned_failure_recovers_and_quality_guard_measures_the_same_subcomplex
     wp.capture_launch(cap.graph)
     assert e.valid.numpy()[0] == 1 and e.removed_count.numpy()[0] == 2
     np.testing.assert_array_equal(e.selected.numpy(), np.r_[expected, 0])
+    enabled.zero_()
+    wp.capture_launch(cap.graph)
+    assert e.valid.numpy()[0] == 0 and e.diagnostics.numpy()[0] == 2
+    assert e.removed_count.numpy()[0] == e.exterior_rounds.numpy()[0] == 0

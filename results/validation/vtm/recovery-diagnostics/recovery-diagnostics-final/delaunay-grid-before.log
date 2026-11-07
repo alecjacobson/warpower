@@ -1,0 +1,160 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.75 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.76 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.53 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.51 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.57 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.60 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.57 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 4.91 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 1.16 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 3.35 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.60 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.75 ms  (cached)
+{
+  "case": "grid",
+  "n": 64,
+  "seed": 2026,
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "first_replay_ms": 1851.41650390625,
+  "full": {
+    "median_ms": 2.2082560062408447,
+    "samples_ms": [
+      2.21232008934021,
+      2.1855039596557617,
+      2.2128639221191406,
+      2.2010560035705566,
+      2.2129600048065186,
+      2.184096097946167,
+      2.2082560062408447,
+      2.229408025741577,
+      2.1760640144348145
+    ],
+    "cpu": {
+      "4": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      },
+      "3": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      }
+    }
+  },
+  "base": {
+    "median_ms": 1822.326904296875,
+    "samples_ms": [
+      1822.30419921875,
+      1822.3333740234375,
+      1822.3277587890625,
+      1822.3299560546875,
+      1822.3272705078125,
+      1822.326904296875,
+      1822.29296875,
+      1822.3250732421875,
+      1822.295654296875
+    ],
+    "cpu": {
+      "4": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 2,
+        "throttled_usec": 172020
+      },
+      "3": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 2,
+        "throttled_usec": 172088
+      }
+    }
+  },
+  "auxiliary": {
+    "median_ms": 1.5450880527496338,
+    "samples_ms": [
+      1.5546560287475586,
+      1.5450880527496338,
+      1.5439039468765259,
+      1.5454399585723877,
+      1.5454399585723877,
+      1.5437120199203491,
+      1.542688012123108,
+      1.5458240509033203,
+      1.5400639772415161
+    ],
+    "cpu": {
+      "4": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      },
+      "3": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      }
+    }
+  },
+  "certificate": {
+    "median_ms": 0.547327995300293,
+    "samples_ms": [
+      0.5519359707832336,
+      0.5488960146903992,
+      0.547104001045227,
+      0.5472319722175598,
+      0.5463039875030518,
+      0.5476160049438477,
+      0.547327995300293,
+      0.548192024230957,
+      0.5467519760131836
+    ],
+    "cpu": {
+      "4": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      },
+      "3": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      }
+    }
+  },
+  "tetrahedra": 158,
+  "error": 0,
+  "base_error": 0,
+  "candidate_error": 0,
+  "certificate_error": 0,
+  "attempts": 1,
+  "cache_strategy": true,
+  "fast_candidates": false,
+  "fast_attempted": 0,
+  "fast_accepted": 0,
+  "fast_error": 0,
+  "fast_repaired_cells": 0,
+  "symbolic_first": false,
+  "recovery_first": 1,
+  "base_attempted": 0,
+  "symbolic_attempted": 0,
+  "symbolic_recovered": 0,
+  "symbolic_error": 0,
+  "symbolic_expansions": 0,
+  "certificate_point_tests": 1632,
+  "certificate_node_visits": 2216
+}

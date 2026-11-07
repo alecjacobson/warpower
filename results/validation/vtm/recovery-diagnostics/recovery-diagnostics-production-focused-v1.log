@@ -1,0 +1,359 @@
+........................FFFFFF.......................................... [ 94%]
+....                                                                     [100%]
+=================================== FAILURES ===================================
+_______ test_status_matches_full_surface_queries[all_missing-1e-30-cube] _______
+
+shape = 'cube', scale = 1e-30, mode = 'all_missing'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize(
+        "mode", ["ordinary", "nan_sample", "initial_error", "missing_witness", "all_missing"]
+    )
+    def test_status_matches_full_surface_queries(shape, scale, mode):
+        p, t = cube() if shape == "cube" else torus(12, 6)
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, t)
+        assert domain.error.numpy()[0] == 0
+        if mode in ["missing_witness", "all_missing"]:
+            # Deliberately poison leaf arithmetic after building finite valid boxes:
+            # one bad witness must fall back; all missing hits must preserve error16.
+            first = int(domain.tree.ids.numpy()[0])
+            changed = p.copy()
+            changed[t[first]] = np.nan
+            if mode == "all_missing":
+                changed[:] = np.nan
+            wp.copy(domain.points, wp.array(changed, dtype=wp.vec3, device=domain.device))
+        query = (np.random.default_rng(192).uniform(-4, 4, (96, 3)) * scale).astype(np.float32)
+        if mode == "nan_sample":
+            query[0] = np.nan
+        points = wp.array(query, dtype=wp.vec3, device=domain.device)
+        indices = np.full((40, 3), -7, np.int32)
+        indices[:32] = np.arange(96, dtype=np.int32).reshape(-1, 3)
+        faces = wp.array(indices, device=domain.device)
+        count = wp.full(1, 32, dtype=int, device=domain.device)
+        errors = [
+            wp.full(1, 4 if mode == "initial_error" else 0, dtype=int, device=domain.device)
+            for _ in range(2)
+        ]
+        integral = wp.zeros(1, dtype=wp.float64, device=domain.device)
+        maximum = wp.zeros_like(integral)
+        common = [domain.tree, points, faces, count]
+        wp.launch(
+            _extraction.surface_error,
+            len(faces),
+            inputs=common + [integral, maximum, errors[0]],
+            device=domain.device,
+        )
+        wp.launch(
+            _extraction.selection_surface_status,
+            len(faces),
+            inputs=common + [errors[1]],
+            device=domain.device,
+        )
+        np.testing.assert_array_equal(errors[0].numpy(), errors[1].numpy())
+        if mode == "ordinary":
+            assert errors[0].numpy()[0] == 0
+        if mode in ["nan_sample", "all_missing"]:
+>           assert errors[0].numpy()[0] == 16
+E           assert np.int32(0) == 16
+
+tests/test_selection_extraction.py:63: AssertionError
+______ test_status_matches_full_surface_queries[all_missing-1e-30-torus] _______
+
+shape = 'torus', scale = 1e-30, mode = 'all_missing'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize(
+        "mode", ["ordinary", "nan_sample", "initial_error", "missing_witness", "all_missing"]
+    )
+    def test_status_matches_full_surface_queries(shape, scale, mode):
+        p, t = cube() if shape == "cube" else torus(12, 6)
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, t)
+        assert domain.error.numpy()[0] == 0
+        if mode in ["missing_witness", "all_missing"]:
+            # Deliberately poison leaf arithmetic after building finite valid boxes:
+            # one bad witness must fall back; all missing hits must preserve error16.
+            first = int(domain.tree.ids.numpy()[0])
+            changed = p.copy()
+            changed[t[first]] = np.nan
+            if mode == "all_missing":
+                changed[:] = np.nan
+            wp.copy(domain.points, wp.array(changed, dtype=wp.vec3, device=domain.device))
+        query = (np.random.default_rng(192).uniform(-4, 4, (96, 3)) * scale).astype(np.float32)
+        if mode == "nan_sample":
+            query[0] = np.nan
+        points = wp.array(query, dtype=wp.vec3, device=domain.device)
+        indices = np.full((40, 3), -7, np.int32)
+        indices[:32] = np.arange(96, dtype=np.int32).reshape(-1, 3)
+        faces = wp.array(indices, device=domain.device)
+        count = wp.full(1, 32, dtype=int, device=domain.device)
+        errors = [
+            wp.full(1, 4 if mode == "initial_error" else 0, dtype=int, device=domain.device)
+            for _ in range(2)
+        ]
+        integral = wp.zeros(1, dtype=wp.float64, device=domain.device)
+        maximum = wp.zeros_like(integral)
+        common = [domain.tree, points, faces, count]
+        wp.launch(
+            _extraction.surface_error,
+            len(faces),
+            inputs=common + [integral, maximum, errors[0]],
+            device=domain.device,
+        )
+        wp.launch(
+            _extraction.selection_surface_status,
+            len(faces),
+            inputs=common + [errors[1]],
+            device=domain.device,
+        )
+        np.testing.assert_array_equal(errors[0].numpy(), errors[1].numpy())
+        if mode == "ordinary":
+            assert errors[0].numpy()[0] == 0
+        if mode in ["nan_sample", "all_missing"]:
+>           assert errors[0].numpy()[0] == 16
+E           assert np.int32(0) == 16
+
+tests/test_selection_extraction.py:63: AssertionError
+________ test_status_matches_full_surface_queries[all_missing-1.0-cube] ________
+
+shape = 'cube', scale = 1.0, mode = 'all_missing'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize(
+        "mode", ["ordinary", "nan_sample", "initial_error", "missing_witness", "all_missing"]
+    )
+    def test_status_matches_full_surface_queries(shape, scale, mode):
+        p, t = cube() if shape == "cube" else torus(12, 6)
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, t)
+        assert domain.error.numpy()[0] == 0
+        if mode in ["missing_witness", "all_missing"]:
+            # Deliberately poison leaf arithmetic after building finite valid boxes:
+            # one bad witness must fall back; all missing hits must preserve error16.
+            first = int(domain.tree.ids.numpy()[0])
+            changed = p.copy()
+            changed[t[first]] = np.nan
+            if mode == "all_missing":
+                changed[:] = np.nan
+            wp.copy(domain.points, wp.array(changed, dtype=wp.vec3, device=domain.device))
+        query = (np.random.default_rng(192).uniform(-4, 4, (96, 3)) * scale).astype(np.float32)
+        if mode == "nan_sample":
+            query[0] = np.nan
+        points = wp.array(query, dtype=wp.vec3, device=domain.device)
+        indices = np.full((40, 3), -7, np.int32)
+        indices[:32] = np.arange(96, dtype=np.int32).reshape(-1, 3)
+        faces = wp.array(indices, device=domain.device)
+        count = wp.full(1, 32, dtype=int, device=domain.device)
+        errors = [
+            wp.full(1, 4 if mode == "initial_error" else 0, dtype=int, device=domain.device)
+            for _ in range(2)
+        ]
+        integral = wp.zeros(1, dtype=wp.float64, device=domain.device)
+        maximum = wp.zeros_like(integral)
+        common = [domain.tree, points, faces, count]
+        wp.launch(
+            _extraction.surface_error,
+            len(faces),
+            inputs=common + [integral, maximum, errors[0]],
+            device=domain.device,
+        )
+        wp.launch(
+            _extraction.selection_surface_status,
+            len(faces),
+            inputs=common + [errors[1]],
+            device=domain.device,
+        )
+        np.testing.assert_array_equal(errors[0].numpy(), errors[1].numpy())
+        if mode == "ordinary":
+            assert errors[0].numpy()[0] == 0
+        if mode in ["nan_sample", "all_missing"]:
+>           assert errors[0].numpy()[0] == 16
+E           assert np.int32(0) == 16
+
+tests/test_selection_extraction.py:63: AssertionError
+_______ test_status_matches_full_surface_queries[all_missing-1.0-torus] ________
+
+shape = 'torus', scale = 1.0, mode = 'all_missing'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize(
+        "mode", ["ordinary", "nan_sample", "initial_error", "missing_witness", "all_missing"]
+    )
+    def test_status_matches_full_surface_queries(shape, scale, mode):
+        p, t = cube() if shape == "cube" else torus(12, 6)
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, t)
+        assert domain.error.numpy()[0] == 0
+        if mode in ["missing_witness", "all_missing"]:
+            # Deliberately poison leaf arithmetic after building finite valid boxes:
+            # one bad witness must fall back; all missing hits must preserve error16.
+            first = int(domain.tree.ids.numpy()[0])
+            changed = p.copy()
+            changed[t[first]] = np.nan
+            if mode == "all_missing":
+                changed[:] = np.nan
+            wp.copy(domain.points, wp.array(changed, dtype=wp.vec3, device=domain.device))
+        query = (np.random.default_rng(192).uniform(-4, 4, (96, 3)) * scale).astype(np.float32)
+        if mode == "nan_sample":
+            query[0] = np.nan
+        points = wp.array(query, dtype=wp.vec3, device=domain.device)
+        indices = np.full((40, 3), -7, np.int32)
+        indices[:32] = np.arange(96, dtype=np.int32).reshape(-1, 3)
+        faces = wp.array(indices, device=domain.device)
+        count = wp.full(1, 32, dtype=int, device=domain.device)
+        errors = [
+            wp.full(1, 4 if mode == "initial_error" else 0, dtype=int, device=domain.device)
+            for _ in range(2)
+        ]
+        integral = wp.zeros(1, dtype=wp.float64, device=domain.device)
+        maximum = wp.zeros_like(integral)
+        common = [domain.tree, points, faces, count]
+        wp.launch(
+            _extraction.surface_error,
+            len(faces),
+            inputs=common + [integral, maximum, errors[0]],
+            device=domain.device,
+        )
+        wp.launch(
+            _extraction.selection_surface_status,
+            len(faces),
+            inputs=common + [errors[1]],
+            device=domain.device,
+        )
+        np.testing.assert_array_equal(errors[0].numpy(), errors[1].numpy())
+        if mode == "ordinary":
+            assert errors[0].numpy()[0] == 0
+        if mode in ["nan_sample", "all_missing"]:
+>           assert errors[0].numpy()[0] == 16
+E           assert np.int32(0) == 16
+
+tests/test_selection_extraction.py:63: AssertionError
+_______ test_status_matches_full_surface_queries[all_missing-1e+30-cube] _______
+
+shape = 'cube', scale = 1e+30, mode = 'all_missing'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize(
+        "mode", ["ordinary", "nan_sample", "initial_error", "missing_witness", "all_missing"]
+    )
+    def test_status_matches_full_surface_queries(shape, scale, mode):
+        p, t = cube() if shape == "cube" else torus(12, 6)
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, t)
+        assert domain.error.numpy()[0] == 0
+        if mode in ["missing_witness", "all_missing"]:
+            # Deliberately poison leaf arithmetic after building finite valid boxes:
+            # one bad witness must fall back; all missing hits must preserve error16.
+            first = int(domain.tree.ids.numpy()[0])
+            changed = p.copy()
+            changed[t[first]] = np.nan
+            if mode == "all_missing":
+                changed[:] = np.nan
+            wp.copy(domain.points, wp.array(changed, dtype=wp.vec3, device=domain.device))
+        query = (np.random.default_rng(192).uniform(-4, 4, (96, 3)) * scale).astype(np.float32)
+        if mode == "nan_sample":
+            query[0] = np.nan
+        points = wp.array(query, dtype=wp.vec3, device=domain.device)
+        indices = np.full((40, 3), -7, np.int32)
+        indices[:32] = np.arange(96, dtype=np.int32).reshape(-1, 3)
+        faces = wp.array(indices, device=domain.device)
+        count = wp.full(1, 32, dtype=int, device=domain.device)
+        errors = [
+            wp.full(1, 4 if mode == "initial_error" else 0, dtype=int, device=domain.device)
+            for _ in range(2)
+        ]
+        integral = wp.zeros(1, dtype=wp.float64, device=domain.device)
+        maximum = wp.zeros_like(integral)
+        common = [domain.tree, points, faces, count]
+        wp.launch(
+            _extraction.surface_error,
+            len(faces),
+            inputs=common + [integral, maximum, errors[0]],
+            device=domain.device,
+        )
+        wp.launch(
+            _extraction.selection_surface_status,
+            len(faces),
+            inputs=common + [errors[1]],
+            device=domain.device,
+        )
+        np.testing.assert_array_equal(errors[0].numpy(), errors[1].numpy())
+        if mode == "ordinary":
+            assert errors[0].numpy()[0] == 0
+        if mode in ["nan_sample", "all_missing"]:
+>           assert errors[0].numpy()[0] == 16
+E           assert np.int32(0) == 16
+
+tests/test_selection_extraction.py:63: AssertionError
+______ test_status_matches_full_surface_queries[all_missing-1e+30-torus] _______
+
+shape = 'torus', scale = 1e+30, mode = 'all_missing'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize(
+        "mode", ["ordinary", "nan_sample", "initial_error", "missing_witness", "all_missing"]
+    )
+    def test_status_matches_full_surface_queries(shape, scale, mode):
+        p, t = cube() if shape == "cube" else torus(12, 6)
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, t)
+        assert domain.error.numpy()[0] == 0
+        if mode in ["missing_witness", "all_missing"]:
+            # Deliberately poison leaf arithmetic after building finite valid boxes:
+            # one bad witness must fall back; all missing hits must preserve error16.
+            first = int(domain.tree.ids.numpy()[0])
+            changed = p.copy()
+            changed[t[first]] = np.nan
+            if mode == "all_missing":
+                changed[:] = np.nan
+            wp.copy(domain.points, wp.array(changed, dtype=wp.vec3, device=domain.device))
+        query = (np.random.default_rng(192).uniform(-4, 4, (96, 3)) * scale).astype(np.float32)
+        if mode == "nan_sample":
+            query[0] = np.nan
+        points = wp.array(query, dtype=wp.vec3, device=domain.device)
+        indices = np.full((40, 3), -7, np.int32)
+        indices[:32] = np.arange(96, dtype=np.int32).reshape(-1, 3)
+        faces = wp.array(indices, device=domain.device)
+        count = wp.full(1, 32, dtype=int, device=domain.device)
+        errors = [
+            wp.full(1, 4 if mode == "initial_error" else 0, dtype=int, device=domain.device)
+            for _ in range(2)
+        ]
+        integral = wp.zeros(1, dtype=wp.float64, device=domain.device)
+        maximum = wp.zeros_like(integral)
+        common = [domain.tree, points, faces, count]
+        wp.launch(
+            _extraction.surface_error,
+            len(faces),
+            inputs=common + [integral, maximum, errors[0]],
+            device=domain.device,
+        )
+        wp.launch(
+            _extraction.selection_surface_status,
+            len(faces),
+            inputs=common + [errors[1]],
+            device=domain.device,
+        )
+        np.testing.assert_array_equal(errors[0].numpy(), errors[1].numpy())
+        if mode == "ordinary":
+            assert errors[0].numpy()[0] == 0
+        if mode in ["nan_sample", "all_missing"]:
+>           assert errors[0].numpy()[0] == 16
+E           assert np.int32(0) == 16
+
+tests/test_selection_extraction.py:63: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_selection_extraction.py::test_status_matches_full_surface_queries[all_missing-1e-30-cube]
+FAILED tests/test_selection_extraction.py::test_status_matches_full_surface_queries[all_missing-1e-30-torus]
+FAILED tests/test_selection_extraction.py::test_status_matches_full_surface_queries[all_missing-1.0-cube]
+FAILED tests/test_selection_extraction.py::test_status_matches_full_surface_queries[all_missing-1.0-torus]
+FAILED tests/test_selection_extraction.py::test_status_matches_full_surface_queries[all_missing-1e+30-cube]
+FAILED tests/test_selection_extraction.py::test_status_matches_full_surface_queries[all_missing-1e+30-torus]
+6 failed, 70 passed in 64.22s (0:01:04)

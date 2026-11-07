@@ -1,0 +1,1307 @@
+{
+  "baseline": "6f1601e2f960fb75dde63e9421bf518c9dca20f9",
+  "runtime": "987568a054a04db4fdfefcea3978c1598665ba89",
+  "scope": "Private selection surface-query status preserves full-query errors while omitting unused distance reductions; public full diagnostics stay available. Full production meshes published; earlier instrumented/pilot meshes retained privately with hashes. No quality-matched CPU speedup claim.",
+  "source_sha256": {
+    "warpower/_selective.py": "8d1afafaf8db2b598b2a9f0c2cde01f4161195c844f8b6e7091d6e7493279c15",
+    "warpower/_extraction.py": "61a77fcb580879dec01a61f748921bb4efd7d750bcf84f1a555f53c23c83cb44",
+    "tests/test_selection_extraction.py": "501d22b5a1d84d1b9972861814ac1c257dc852ae5a8839ee1e80e2e7e9c16161",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "examples/vtm_gallery.py": "8e39899ba4ec7b98dee840f73ccc330c57ac2a398faff3efc103dabb57af4acf",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f"
+  },
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    }
+  ],
+  "shared_helpers": [
+    {
+      "path": "results/validation/vtm/current-selection/check-current-selection-final.py",
+      "sha256": "7bb687215eaab9dd14282e86fbb68776860c481705dc413f5e554a21bfadd243"
+    },
+    {
+      "path": "results/validation/vtm/shared-wall/check-shared-wall-final.py",
+      "sha256": "b6f3d81588e92df34ab8e97b71f943e1fd0938798d7d72d92b14ed05e1769669"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    },
+    {
+      "path": "results/validation/vtm/analytic-filters/boundary-timing-commands.json",
+      "sha256": "c75b0a3c89cf49e7e1dec7a109ec6a7497370ddcc801f2c22ad78cc4c6174c49"
+    },
+    {
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-profile-summary.json",
+      "sha256": "c5046fbc36efe40eb421b4d13297af9c50a5a35145593e94ccf6e0f97862f922"
+    }
+  ],
+  "reference_binaries_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "private_pilot_meshes": [
+    {
+      "path": ".work/vtm/recovery-diagnostics-observers-v1/disconnected-replay1.npz",
+      "sha256": "d748295add0bcd58719ad9051a695a81c71bdf1d14d37233bf777e402e893149",
+      "bytes": 79383
+    },
+    {
+      "path": ".work/vtm/recovery-diagnostics-observers-v1/thin-hand-replay0.npz",
+      "sha256": "fe636af2ab02599840c852c753568d7fd8f0acc14ac81b033b34d0590694a6be",
+      "bytes": 74172
+    },
+    {
+      "path": ".work/vtm/recovery-diagnostics-observers-v1/thin-hand-replay1.npz",
+      "sha256": "f5b5bd1958176016842c380d7b4b229740f85860ac235b4b6e2e25219ac8d735",
+      "bytes": 74230
+    },
+    {
+      "path": ".work/vtm/recovery-diagnostics-pilot-v1/candidate/boundary.off.gz",
+      "sha256": "256e577add42be6672c2e0810586ca6aee4485b8af83a2aa9149c74a39fcc221",
+      "bytes": 139488
+    },
+    {
+      "path": ".work/vtm/recovery-diagnostics-pilot-v1/candidate/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "path": ".work/vtm/recovery-diagnostics-pilot-v1/candidate/mesh.npz",
+      "sha256": "2c24eac0a42a460eee341291a170a48ff7087dfc7a3079fb23e12ce6ad84b513",
+      "bytes": 1612560
+    },
+    {
+      "path": ".work/vtm/recovery-diagnostics-pilot-v1/candidate/mesh.vtu.gz",
+      "sha256": "4e3ad79acc713b9a4656592dad7aeae339da28f5d132d56a3e51f398b7b2683f",
+      "bytes": 427984
+    },
+    {
+      "path": ".work/vtm/recovery-diagnostics-pilot-v1/control/boundary.off.gz",
+      "sha256": "8ebec5b5244cfbed0cf87a3bfbe3492de51be531e4cdf0b9284b02519c1bdcfa",
+      "bytes": 139539
+    },
+    {
+      "path": ".work/vtm/recovery-diagnostics-pilot-v1/control/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "path": ".work/vtm/recovery-diagnostics-pilot-v1/control/mesh.npz",
+      "sha256": "e4dfc5d079a6a17910622e53fac4e6d8f5d44dd6a5ad7e52437407ddfc6be19c",
+      "bytes": 1611839
+    },
+    {
+      "path": ".work/vtm/recovery-diagnostics-pilot-v1/control/mesh.vtu.gz",
+      "sha256": "e02959d8c84a1e3d9d1188b1722c12fa58106e85e5c1da4211d2fe6b6fa0471a",
+      "bytes": 427785
+    }
+  ],
+  "files": [
+    {
+      "original": ".work/vtm/analyze-recovery-diagnostics-audit.py",
+      "path": "results/validation/vtm/recovery-diagnostics/analyze-recovery-diagnostics-audit.py",
+      "bytes": 3645,
+      "sha256": "c0d0c21f72f87153d1a94a61423e0526a9e6db66c000ca50fb49187466104e7f"
+    },
+    {
+      "original": ".work/vtm/check-recovery-diagnostics-final.py",
+      "path": "results/validation/vtm/recovery-diagnostics/check-recovery-diagnostics-final.py",
+      "bytes": 5721,
+      "sha256": "a5f8e841860e9240130d7489cb812af99d00e55b51271b75956b02d9e0d5ba33"
+    },
+    {
+      "original": ".work/vtm/check-recovery-diagnostics-observers-v1.py",
+      "path": "results/validation/vtm/recovery-diagnostics/check-recovery-diagnostics-observers-v1.py",
+      "bytes": 695,
+      "sha256": "a138a71891ed9f89e2cf53b1b4ee525ad22f44d2e41fb63535760d139cf82fd8"
+    },
+    {
+      "original": ".work/vtm/check-recovery-diagnostics-pilot-v1.py",
+      "path": "results/validation/vtm/recovery-diagnostics/check-recovery-diagnostics-pilot-v1.py",
+      "bytes": 1597,
+      "sha256": "741919d102ce5442d850f93b48665e58e236b5752f542b06a646b40a10e828d4"
+    },
+    {
+      "original": ".work/vtm/check-recovery-diagnostics-public-quality.py",
+      "path": "results/validation/vtm/recovery-diagnostics/check-recovery-diagnostics-public-quality.py",
+      "bytes": 2327,
+      "sha256": "18212ca89d996ee1c17a96d9136ff41174abfe4daf58d5aa00687993daa80352"
+    },
+    {
+      "original": ".work/vtm/publish-recovery-diagnostics.py",
+      "path": "results/validation/vtm/recovery-diagnostics/publish-recovery-diagnostics.py",
+      "bytes": 6406,
+      "sha256": "768be65d41cf565cfd3fc6622dbbaa132ed291d1523fdbc4966dd22e92f98da9"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-graded-after/boundary.off.gz",
+      "bytes": 139437,
+      "sha256": "35ed1bf7dcc1553979822466753fbde9b5e0b975c8a3e1f3c57db41d742181cf"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-graded-after/mesh.npz",
+      "bytes": 1612219,
+      "sha256": "f795a4fb59e0b55ca267f130b370079ec86fbee1d77347cb46b97fccec3bb8ee"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-graded-after/mesh.vtu.gz",
+      "bytes": 427785,
+      "sha256": "721d8e2ee5a46439f038fea3668b8bb020c079c8cc041a6a991eefb050463a9f"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-after/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-graded-after/result.json",
+      "bytes": 3741,
+      "sha256": "8f9eaeedb38b64befd7aa660d48c17a5af0032bd45efd9a414d3619188198f45"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-graded-after.log",
+      "bytes": 8523,
+      "sha256": "238277790154a16096b3b63b4a9eea837c92d9d2e0f050fd1611acfa6b7329f2"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-graded-before/boundary.off.gz",
+      "bytes": 139489,
+      "sha256": "74875b7d38660420a9d09cce225856e2ec38510cb3f40c9b6f81436c59b423ff"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-graded-before/mesh.npz",
+      "bytes": 1612109,
+      "sha256": "31f3b8555ee31338e34c47c59a3b7c030fbc12139a57925d8938d741ac0145b9"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-graded-before/mesh.vtu.gz",
+      "bytes": 427517,
+      "sha256": "e0c7380a8b9f1fda7c750cadb901fe30979bb8406fb8fefe8e7671777ab07a90"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-before/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-graded-before/result.json",
+      "bytes": 3750,
+      "sha256": "a11841a191c91604561287c751ba87c601ef4817616c945dbbe4ffd10c1305c0"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-graded-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-graded-before.log",
+      "bytes": 8532,
+      "sha256": "d702c4e63ebee4d2b9c9efcd3eb25fa85376bc17395da37204aecbfc023fdc1c"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-uniform-after/boundary.off.gz",
+      "bytes": 140760,
+      "sha256": "d9caaf48f14238d10ec1186d404a81d244d760a8e4d79d96284dcd7fa86ea434"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-uniform-after/mesh.npz",
+      "bytes": 1610659,
+      "sha256": "b121b349311b96079ff1272d0b3b27d62d085d445ed90c4ea04e263ff6d5263d"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-uniform-after/mesh.vtu.gz",
+      "bytes": 423502,
+      "sha256": "a938805ceebc5736c221b0b723fd85023c3c35895518be7e1e6743ff1627ee8b"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-after/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-uniform-after/result.json",
+      "bytes": 3744,
+      "sha256": "bac6f04c1ddde798be2b1c729f1a091b13998ceca6af2be25850ff028ed2ee3f"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-uniform-after.log",
+      "bytes": 8440,
+      "sha256": "b73196d8054adfc9c3ae746d6d5fa346d7fb3f39f1ae54f8a93672c7e9253ba6"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-uniform-before/boundary.off.gz",
+      "bytes": 140766,
+      "sha256": "9f53685a66eeb04350f79456e31d76a51a6790e277b694c3fc9ac3d80f1e9226"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-uniform-before/mesh.npz",
+      "bytes": 1610403,
+      "sha256": "b50ca38d301d8053248dc6949690df141b5dd246a28514ba0d29c76936aa2c64"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-uniform-before/mesh.vtu.gz",
+      "bytes": 423367,
+      "sha256": "a288d2aea452276bf10b70e29e8b491dff0c42f18e95ec776080c81ff66703ff"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-before/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-uniform-before/result.json",
+      "bytes": 3745,
+      "sha256": "b25707f1bafc927dd5b52f99e9e765189a532a2b324b2396e09a88e326992f26"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/armadillo-uniform-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/armadillo-uniform-before.log",
+      "bytes": 8441,
+      "sha256": "51486931e01bb4816b009dd4328f9fb7867f832d5a47a43bbac1b108e42926b6"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-after/boundary.off.gz",
+      "bytes": 30628,
+      "sha256": "07748ecdc277688060195c6481969cd3153777813d4c73e53df9f5cebdc5cbeb"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-after/input.off",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-after/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-after/mesh.npz",
+      "bytes": 108639,
+      "sha256": "5850124be2ac910be628a14641e72bce9ae74d2354d68216aab35f8c78d191a2"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-after/mesh.vtu.gz",
+      "bytes": 92576,
+      "sha256": "2b9d61ab743e5d115e8d03fd86a2ec655f13a2dbde5922963a75d6707480ddd9"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-after/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-after/result.json",
+      "bytes": 3647,
+      "sha256": "5c2b7566043168f4a4ef5992136cb5fadde897c00dbe1cda4d6fc56bf79aa66e"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-after.log",
+      "bytes": 8255,
+      "sha256": "2007a056671ad5655ad247d539bfbc86e6d6d469ce69b4731880d74c8d334ed4"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-before/boundary.off.gz",
+      "bytes": 30621,
+      "sha256": "48b91b094791b2998f63e591f296488da9d495563cf888342e61768d4cbbd883"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-before/input.off",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-before/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-before/mesh.npz",
+      "bytes": 108561,
+      "sha256": "ec044512d2027ee9a0e20b04eb6859b89e401dc5df94f63d12e656cf128369cc"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-before/mesh.vtu.gz",
+      "bytes": 92634,
+      "sha256": "26c5bfab9762da96cdf1cb73bcac088b74dc7ece6a78967d496a67808bf41e44"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-before/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-before/result.json",
+      "bytes": 3639,
+      "sha256": "81955ffe2c1ea0100c2d68b80301edecd48f39c27b5dee6e2fa8bfed15ac2d5f"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/cavity-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/cavity-before.log",
+      "bytes": 8247,
+      "sha256": "ee485d29b5758893de1fc9d8e284d23d067c2f6cb9985bfc220455d373fffb1b"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/commands.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/commands.json",
+      "bytes": 23399,
+      "sha256": "fed60c7303378320c34198292cb98203fd6f39dd817cdb0ca5f7e061795309db"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay-fitted-hand-after.json",
+      "bytes": 2839,
+      "sha256": "25eedb738b56a6773d2a6e1d8ce359cc89cb32d37fbe3d64d727d8f9fa7acbb2"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay-fitted-hand-after.log",
+      "bytes": 5135,
+      "sha256": "ef8111cbcf8a110a7f05ec7647e45b06198e2d0cfd5f67f322b57889aaac4d11"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay-fitted-hand-before.json",
+      "bytes": 2837,
+      "sha256": "f69fb8db41b4750f07262de877da65843a2f80e6cd6b50b1aa25645701937e2c"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay-fitted-hand-before.log",
+      "bytes": 5133,
+      "sha256": "8a4e3ff8051a0ba6a69762ba6756759f013520ee0dcc714fedbc9db33c48aeef"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay-grid-after.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay-grid-after.json",
+      "bytes": 2834,
+      "sha256": "a4c24ff03c62e0fabbfb98140f65fb7f30dd554e12082b91afe84b44ed2abc8a"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay-grid-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay-grid-after.log",
+      "bytes": 4873,
+      "sha256": "af3ed46c7d815cb0b4efadb9bf2a1c1e432e61681a6926461c748cfd6874c8be"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay-grid-before.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay-grid-before.json",
+      "bytes": 2843,
+      "sha256": "3cc70b5bcfa6a87d4e1c057c45ab69ad346791cfb60f839d9b3370290323b1c2"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay-grid-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay-grid-before.log",
+      "bytes": 4882,
+      "sha256": "fd9550fbc5ef2184100735dc93eb6059abaa02a771b4ff3f6382065ab18b71b8"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay1000-after.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay1000-after.json",
+      "bytes": 2817,
+      "sha256": "05e4b8ba494415aaf31190caa522d98d84aa62261a2889d6c54404f2695fc4c6"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay1000-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay1000-after.log",
+      "bytes": 5113,
+      "sha256": "fd0867ed1478956d9b0e628a9015a32bc812303d522f3e68148dd1cd015f4e7a"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay1000-before.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay1000-before.json",
+      "bytes": 2826,
+      "sha256": "d6b183b44f23e679872fb135c568cb1feb054e390072294c58ddf5a2794d05b4"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay1000-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay1000-before.log",
+      "bytes": 5122,
+      "sha256": "3660c229272fdc685d5dfbd20c3856a3e292e479a41932bca08e21469b914ef0"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay100000-after.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay100000-after.json",
+      "bytes": 2847,
+      "sha256": "e71c453b31108d4da2067c51d000f76ea4b8dfde6e6eac57c3178ce205374551"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay100000-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay100000-after.log",
+      "bytes": 5077,
+      "sha256": "cbd618966b1a2be1a264e2547aba851edf04bcccc7e8a70e21a815b5b953f608"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay100000-before.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay100000-before.json",
+      "bytes": 2833,
+      "sha256": "14df3d83302aec3dbd6da794063ecc223fae8724ce523a001c009e36c99faeb6"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/delaunay100000-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/delaunay100000-before.log",
+      "bytes": 5063,
+      "sha256": "24330f78d01b62dead4831881c8a28883951a2b867260ed2caa41cd3d043fcfe"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/diagram100000-after.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/diagram100000-after.json",
+      "bytes": 2572,
+      "sha256": "4f2ee5f9c262e1f75f78414cbcd542aa7b14574f445296f2db0e165327c765c3"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/diagram100000-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/diagram100000-after.log",
+      "bytes": 3443,
+      "sha256": "ed67affd8147818c248e99b9d665d80719e4f36bf3911f28ec3a3812c398bbbd"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/diagram100000-before.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/diagram100000-before.json",
+      "bytes": 2564,
+      "sha256": "694c01c7c80ac4b5a59e643be6d65c18eb9ef4a3d9fb473f87ab2dc80f634fb4"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/diagram100000-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/diagram100000-before.log",
+      "bytes": 3435,
+      "sha256": "5f21db72fbbb5ab9f9b25a22d882ffea541b45a3439ba8532f5edc8a38e6ed41"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-after/boundary.off.gz",
+      "bytes": 30539,
+      "sha256": "7b2561c982f39d866afa5054ad7ff6567ff32e10e0f831005180adfa183d2b76"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-after/input.off",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-after/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-after/mesh.npz",
+      "bytes": 110253,
+      "sha256": "82e9ee6987cf03a16da0e485a10922bffbbd95c0ac6913f21e8069f5e8a5fd34"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-after/mesh.vtu.gz",
+      "bytes": 88075,
+      "sha256": "54626a9ba7a60486c0b71989b4cf6eb86942f4d3c76ee5dc9fde540a6735c2f7"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-after/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-after/result.json",
+      "bytes": 3661,
+      "sha256": "20aa4f474aff84c5a49a279de053b38fa6de6d5a8f210ce2fdc08da5d8ebcc3b"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-after.log",
+      "bytes": 8269,
+      "sha256": "8c19007b99d1a060051e65a10dc7ecc89df6b414ed62d26acc1c19c6001ff340"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-before/boundary.off.gz",
+      "bytes": 30541,
+      "sha256": "be3af891e32be19854d7a0e51512b5aea14a3d525fc8e450b61c99b6b2798fea"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-before/input.off",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-before/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-before/mesh.npz",
+      "bytes": 110234,
+      "sha256": "384999ac73eb82fae5447d4ec981b149ccd0cb42e8e7e09173dd6a82b573b360"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-before/mesh.vtu.gz",
+      "bytes": 88115,
+      "sha256": "2580772b38bfb1c2322f2fbc0c8925048877a49879ee862994364bb645ca9b9c"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-before/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-before/result.json",
+      "bytes": 3655,
+      "sha256": "b407397f86ba63d3ddafbaf75dc2cf3e78f2f415ca508f3071b610af2d11895a"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/disconnected-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/disconnected-before.log",
+      "bytes": 8263,
+      "sha256": "4a6a77d29246f8e437972dcca72cd59980ae6856f05bd1b4fc94c7d089d92baf"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-after/boundary.off.gz",
+      "bytes": 133295,
+      "sha256": "1e13b68b928002086cd977151b8e78a1179fd49ff22a43c14322576dc61240b4"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-after/input.off",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-after/mesh.npz",
+      "bytes": 571467,
+      "sha256": "894b7e2587d092dd279aeb1af2335d1bceef53da770f85f4a19b945cb32b0ba0"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-after/mesh.vtu.gz",
+      "bytes": 453151,
+      "sha256": "0b7d72dd998b446d8efa6187ab11fb80ff72dac87a89fe7fba091f6195cfbb8f"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-after/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-after/result.json",
+      "bytes": 3660,
+      "sha256": "8bf9c1819620fddb524f9de8709ca09263e30f28e2923000ccf28009d35e494c"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-after.log",
+      "bytes": 8442,
+      "sha256": "2aaf8f4a07b3702c773775a2613f3d58eb04fd32b74a75eaa82ef7d4af36f8ba"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-before/boundary.off.gz",
+      "bytes": 133274,
+      "sha256": "dec0cd1bdb763233082ccf2feb70e543e1627541d829cf8df1a447a26cfadad6"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-before/input.off",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-before/mesh.npz",
+      "bytes": 572405,
+      "sha256": "5227e9f4ff0a7471e6648a7e24c649037a87fe9de1392c060af030a900d9aa91"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-before/mesh.vtu.gz",
+      "bytes": 453297,
+      "sha256": "d85805dbe8a5f10c1cf4fe0eeaf103919d9e644122d1700241b322a56ebad79c"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-before/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-before/result.json",
+      "bytes": 3661,
+      "sha256": "6662eab5d6d0094ea80a568a66e1144f3fe42c299738be3538b5de0085e344b6"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/graded-torus-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/graded-torus-before.log",
+      "bytes": 8443,
+      "sha256": "a3b559edbd8d6189a0a9a0e11e52b1772630fa13640b6066b647a6eabb164ecb"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-after/boundary.off.gz",
+      "bytes": 28750,
+      "sha256": "5da03d7f4f9dc1d06c39372765eb0ad097e4f603efdfe2ef3a3349861814e663"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-after/input.off",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-after/mesh.npz",
+      "bytes": 98708,
+      "sha256": "c6cc51855f523c5b0d939eb8a0da9be63d80047ed9bc2456274688943b0b213c"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-after/mesh.vtu.gz",
+      "bytes": 70615,
+      "sha256": "d32f4ca26309d356a1e86f4e55df2b0734c3f1ee540d43d49ebbfb6843f186fb"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-after/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-after/result.json",
+      "bytes": 3661,
+      "sha256": "192169d3ccae602ae574551c022c0aa861d6b008681c2602a63753ffd78696f3"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-after.log",
+      "bytes": 8269,
+      "sha256": "94227ae31d94ec1d793918212571ad391a5f46921dbcf220bd46167835a6f9c4"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-before/boundary.off.gz",
+      "bytes": 28729,
+      "sha256": "ff7301848db721129c971c54850d681db57fe5e5d2fe174f8c4e7b9abd111f1d"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-before/input.off",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-before/mesh.npz",
+      "bytes": 98690,
+      "sha256": "e6bbd4dbf3d8d9400dcd283be9675af64b1f05e9490afba991bbd1598f6d5a1a"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-before/mesh.vtu.gz",
+      "bytes": 70720,
+      "sha256": "96ecafc46be41d7b4a514ff32b5c7be64eb0d0517c900cc05d49efbbd1186e66"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-before/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-before/result.json",
+      "bytes": 3662,
+      "sha256": "6d0a35265561405b72c37ac6e8ffcd2ff98299cdb6c5ff8025a918ad34bf1b67"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/thin-hand-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/thin-hand-before.log",
+      "bytes": 8270,
+      "sha256": "09d09ce0930b9d19fe46038c58e9ee81ae27800967cee7dbe2be104a98cd2125"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus1000-after.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus1000-after.json",
+      "bytes": 2940,
+      "sha256": "a1d11411512f9a0ed818af85a0fc30ff3e4a1e50f39ee5547f8036f643620e13"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus1000-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus1000-after.log",
+      "bytes": 7634,
+      "sha256": "4b4fe1bce04f5d2afe8b3bdb0dee90ca4c85d00040462728d090d6ad0ec2a0b7"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus1000-after.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus1000-after.npz",
+      "bytes": 91525,
+      "sha256": "ee94a057c6fe5c93ad61e9729601158684f5a6c399038b10cfc4068d41ef5d13"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus1000-before.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus1000-before.json",
+      "bytes": 2944,
+      "sha256": "354ed2f7ffed8f9258e4815093807b98a1bc38d20e9782c6e857c5a2ce7098bc"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus1000-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus1000-before.log",
+      "bytes": 7638,
+      "sha256": "ff0ff0675ff8e54e490b9f78b0b8889e458227357085598e7b131f44aae71584"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus1000-before.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus1000-before.npz",
+      "bytes": 91350,
+      "sha256": "16e5d531ebf226e6d026428f86a08f0f85d0468d417fb1e2b6e297de18dae42f"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus4096-after.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus4096-after.json",
+      "bytes": 3081,
+      "sha256": "cc2e911ef318500811b2c7969008f035667226f450a4251195d3e4d225e4b0aa"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus4096-after.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus4096-after.log",
+      "bytes": 7805,
+      "sha256": "b70e1deda53d7712b82603b13050e8abe799ffe85aaace9376db7cd3c51bb854"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus4096-after.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus4096-after.npz",
+      "bytes": 419337,
+      "sha256": "92773045c752ecd260c96cf2bbf4c3a35912158d2c60d31c855e8d8755b24bf6"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus4096-before.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus4096-before.json",
+      "bytes": 3080,
+      "sha256": "62e7e890a06dd197df83d64402b35e714428572747884acd2ee320e98a7462a1"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus4096-before.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus4096-before.log",
+      "bytes": 7804,
+      "sha256": "7e5031735cc2364aada8689776f7b8392dc6aa90978edf095927cb392353d353"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final/torus4096-before.npz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final/torus4096-before.npz",
+      "bytes": 419595,
+      "sha256": "c6f52411cbd76cbc746acce435641c3daede9e8b2ee276b40ac0fe48b90eb99f"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final-independent.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final-independent.json",
+      "bytes": 38666,
+      "sha256": "a705ab6df84c78ff548f6da4fac8178a0b4d0cbf47671567df39648d4028be6b"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final-independent.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final-independent.log",
+      "bytes": 6078,
+      "sha256": "d955e10527a9e01462068a6ce91e5bcf5e96ef647daf15df00a62e1c068bc77f"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final-lossless-archives.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final-lossless-archives.json",
+      "bytes": 8967,
+      "sha256": "15952f3032bd6e709e4cd0a083c3983d3da22e9ebcc0976a2b0f1e1a21739bad"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-final.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-final.log",
+      "bytes": 19558,
+      "sha256": "a026b2801c501ba15740feefd906cb20b7219952392f9b39e639f4b0f7d2bb2a"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-full-native-audit.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-full-native-audit.json",
+      "bytes": 1182,
+      "sha256": "1350f3e88eb4cee6284628866750007fd018f786a54242e0020e6ba2371094e2"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-full-native-audit.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-full-native-audit.log",
+      "bytes": 1182,
+      "sha256": "1350f3e88eb4cee6284628866750007fd018f786a54242e0020e6ba2371094e2"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-full-native-export.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-full-native-export.log",
+      "bytes": 8101,
+      "sha256": "9a6b9afb9cc18c87a2cb449798ab4ec3edca53c1040ea124d7fc26bac1f74f0d"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-full-native.dot.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-full-native.dot.gz",
+      "bytes": 1629565,
+      "sha256": "b61acfadb2158a2c74a7d91c629f3ecc2c76334736faebadce863c13a5b258ad"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-full-native.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-full-native.json",
+      "bytes": 441,
+      "sha256": "979c0d0cac8a027d053f1905bb3d489861619cc7f1d142aaaf89f0a54ac05308"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-full-native.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-full-native.log",
+      "bytes": 9651,
+      "sha256": "72a2b2418bdbd72537c7f4cd6448d3c2470e9f4d8530aaed0ecd6985e8c09665"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-full-native.nsys-rep.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-full-native.nsys-rep.gz",
+      "bytes": 3433078,
+      "sha256": "fcc604e87d2ac992cf9d1ff1501875005555ba2211813cac0ad5107bd10e84b5"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-full-native.py",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-full-native.py",
+      "bytes": 1927,
+      "sha256": "ee6d8528160bd09a87848ffa2c409fadf0f2bc9043f2181b276b4da4333c1c30"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-full-oracle-v1.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-full-oracle-v1.log",
+      "bytes": 545,
+      "sha256": "eb5337a9569753b9b1ed76368958b7a935bc54bd83eddb744562281f05bb4dbb"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-full-suite.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-full-suite.log",
+      "bytes": 1072,
+      "sha256": "776a72bd2d3f3393acbf5161d6a02ba13411a94a469394de4bcf2f27ba73df46"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-full-trace-archive.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-full-trace-archive.json",
+      "bytes": 216,
+      "sha256": "c96b872e572f70a1221c01c78bbf0d9755f87ab62091519f5169559cadec6931"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-loop-native-audit.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-loop-native-audit.json",
+      "bytes": 1200,
+      "sha256": "c77fcdd4d30b43835f5dafa1ed866a408a3be1a65746e3bd987c418d1da70887"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-loop-native-audit.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-loop-native-audit.log",
+      "bytes": 1200,
+      "sha256": "c77fcdd4d30b43835f5dafa1ed866a408a3be1a65746e3bd987c418d1da70887"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-loop-native-export.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-loop-native-export.log",
+      "bytes": 8101,
+      "sha256": "ae8640946db6930536b0943d66324b155749de2ea9c2a5f4fda270bf5913ee64"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-loop-native.dot.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-loop-native.dot.gz",
+      "bytes": 7292,
+      "sha256": "c748c5ca687efde2cbac14500837d2eaf6983a7b2f5ddd3988d2d8b6fa1338fd"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-loop-native.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-loop-native.json",
+      "bytes": 2349,
+      "sha256": "5057df693c35e5b3e1d520e3e5dae58d620d69e27a2f096457905f5b644690f0"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-loop-native.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-loop-native.log",
+      "bytes": 4024,
+      "sha256": "d100a7f95f18a03530dd5b8d7b47a8127d0bb3801c30d5a05c6d7f65be5f660d"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-loop-native.nsys-rep.gz",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-loop-native.nsys-rep.gz",
+      "bytes": 54743,
+      "sha256": "6c103cdf1d84524aa8d66c6095727acf5403419b93804adc055da66f04f751bb"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-loop-native.py",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-loop-native.py",
+      "bytes": 5799,
+      "sha256": "75558916cec54ca7f244c0a7ed120097a9e837a25a65ae45e95aa6360411bceb"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-loop-trace-archive.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-loop-trace-archive.json",
+      "bytes": 213,
+      "sha256": "ba8a0a7072966ba65d6dc2d7746d2af47a9535c3f7fdaf33cede858af559dd80"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-memory-v2-commands.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-memory-v2-commands.json",
+      "bytes": 2733,
+      "sha256": "a1d81f9efe08fc8e56a837a9e49a0ad711c0a7fe270feef5018dbab4cb645930"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-memory-v2.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-memory-v2.log",
+      "bytes": 2214,
+      "sha256": "186b6fd39262cd40c6ff2a52c53249f0d2472eec3ca6b91de2a637f0381fadd7"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-native-analysis.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-native-analysis.log",
+      "bytes": 58,
+      "sha256": "f9643e1c941bbf2ad04171aada436be110c21d731931204edd1618b89ab8b8ae"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-native-audit-summary.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-native-audit-summary.json",
+      "bytes": 51301,
+      "sha256": "2a30000ec36ccd1143b87f9e350c4caa1a3c641ed2bd49fd6a336dd999629a2f"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-native-commands.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-native-commands.json",
+      "bytes": 2028,
+      "sha256": "d37fa01e4463bf685aa72af8bb76b320dd3e49e2382d00082d1e27b6467d55cb"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-native.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-native.log",
+      "bytes": 1704,
+      "sha256": "9d303cdb28be193caa6131124eb8b27b50b758a024a2194d9b5cdc3d78933d6a"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/armadillo-graded.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/armadillo-graded.json",
+      "bytes": 3541,
+      "sha256": "eaa829ec24bad197a41524efe0c6c58b28e9fb2ed3cbea9dadf0941dadf55eb2"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/armadillo-graded.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/armadillo-graded.log",
+      "bytes": 7670,
+      "sha256": "2eb2988edca1667e7a7ab24d1a1f1e567e32451f47c47417d2f43c0ccc209cda"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/armadillo-uniform.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/armadillo-uniform.json",
+      "bytes": 3479,
+      "sha256": "d0e736354acf8c7a3dd5fbc74dc23ff5c9bbeb9f1a0c67bfcf11113161f1f8f2"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/armadillo-uniform.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/armadillo-uniform.log",
+      "bytes": 7522,
+      "sha256": "8fffac2a4f9453899abd6950248f63395dd2391ad22999d7e7411d5e5e2ceb57"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/cavity.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/cavity.json",
+      "bytes": 3437,
+      "sha256": "799edd56f6bf4e5247bd5b318e7223042772ecc8a2d49a96e3e0a1f091d8cb7a"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/cavity.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/cavity.log",
+      "bytes": 7392,
+      "sha256": "c933b8cde2a94de6aa7174a45f0c2e06b352f6511ea6a38014489db6037b5aa5"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/commands.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/commands.json",
+      "bytes": 5108,
+      "sha256": "8dedc40a7209993dcf0253f07bea907814577ea73fc20b4c7fc6a9e8f2f44ae3"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/disconnected.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/disconnected.json",
+      "bytes": 3706,
+      "sha256": "1cdab9786a0952910b6f54fcfff2e2a11e847ceee9223e61bc9007fd3f072e3d"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/disconnected.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/disconnected.log",
+      "bytes": 7581,
+      "sha256": "4b70bdbf9f0ed4978fe571a3d0932589f634a37071d4eadcad38a17a7f2a4b2e"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/graded-torus.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/graded-torus.json",
+      "bytes": 3469,
+      "sha256": "edb39c0d130734e966c3eb3c87bc7427d479d6172883eb5e7ce7f98814b85493"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/graded-torus.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/graded-torus.log",
+      "bytes": 7598,
+      "sha256": "5b797794b75517cea31735dde3df6149659b3308def2d8677449edae13422170"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/thin-hand.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/thin-hand.json",
+      "bytes": 4189,
+      "sha256": "e1a93101382c9f4e3fa2ebed5fb20e942d53d085c9911f237a8877705d09b8a5"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/thin-hand.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/thin-hand.log",
+      "bytes": 7844,
+      "sha256": "209a70811789188f20328f8e5f25b4369cb078738841d6c23386bf39183e8030"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/torus1000.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/torus1000.json",
+      "bytes": 3413,
+      "sha256": "562cb65acbde95ce7169292b571bd5c22d8163bdb1575c3a957122d7340cfd1b"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/torus1000.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/torus1000.log",
+      "bytes": 7372,
+      "sha256": "40f941f21b4e7ad5641fff6c26577d7a1aff298a7ba38a6e50f3dbacc73b3b1e"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/torus4096.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/torus4096.json",
+      "bytes": 3449,
+      "sha256": "50239d45f4997d54f44bc191fcc71ab2b23983d41d59801789573ea4c092679a"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1/torus4096.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1/torus4096.log",
+      "bytes": 7492,
+      "sha256": "d681fcb356af00a2dd3afafcd6e8134a7fa63eb7ee21bcfc5250b7070bc61767"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1-independent.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1-independent.json",
+      "bytes": 7452,
+      "sha256": "9208460b400fde80220e5428d4b86b34b1baf54d26d3dc38003331b631bb6fb1"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1-independent.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1-independent.log",
+      "bytes": 84,
+      "sha256": "f9f846f0ede60bd0765c0bbca9b9ededa4fd25a59213c0cf87ca6aa17663d7c9"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-observers-v1.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-observers-v1.log",
+      "bytes": 4489,
+      "sha256": "d10544254f1b8495da72ec0fe5f82b702503509b9b0c5a3187bad2e55bf2ab41"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-pilot-v1/candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-pilot-v1/candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-pilot-v1/candidate/lossless-exports.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-pilot-v1/candidate/lossless-exports.json",
+      "bytes": 583,
+      "sha256": "141bc4b70c6541f0dadd180fd09f4b5b2b65e9589b5473cfd3bc506415076cca"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-pilot-v1/candidate/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-pilot-v1/candidate/result.json",
+      "bytes": 3737,
+      "sha256": "b9737b7bd84f3211cbeb6b2294b33623e7b77a449c4257384a3e425fc5a6aeb3"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-pilot-v1/candidate.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-pilot-v1/candidate.log",
+      "bytes": 8707,
+      "sha256": "c6f7232ae1668998238bc37d7fbdd9859df5186af1f36edec6d0e777ef0173ac"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-pilot-v1/commands.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-pilot-v1/commands.json",
+      "bytes": 2038,
+      "sha256": "3f50cd9c605aa984e08d9764287241debadde789adb6dd4a483a5feec9bf954b"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-pilot-v1/control/lossless-exports.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-pilot-v1/control/lossless-exports.json",
+      "bytes": 579,
+      "sha256": "1aadff9804cdad58fdbb5dd4339e10a87c26eedbc89655c6c8ef4c8e82fe9df9"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-pilot-v1/control/result.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-pilot-v1/control/result.json",
+      "bytes": 3732,
+      "sha256": "20504d061d184dde5940bf5a0dc4fcdca1a8067c62aefe5e0fa0a1038319cec1"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-pilot-v1/control.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-pilot-v1/control.log",
+      "bytes": 8514,
+      "sha256": "3b8bd763763961de2770e49e63934cf3437e11693a17c62a915545e899405c19"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-pilot-v1-independent.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-pilot-v1-independent.json",
+      "bytes": 3081,
+      "sha256": "09cc84b5515d083367069c0f8c8ae84b517f4c19fbede878ac19e06482564835"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-pilot-v1-independent.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-pilot-v1-independent.log",
+      "bytes": 211,
+      "sha256": "a9237a210be43de993881dbaa5b79b22a9bafe0fb051a3e90ef4d4d0732533ba"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-pilot-v1.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-pilot-v1.log",
+      "bytes": 1659,
+      "sha256": "0bb4727f9779054705986d6708fd708191f75b1944c289ed7adfd3390be90da5"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-production-focused-v1.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-production-focused-v1.log",
+      "bytes": 16866,
+      "sha256": "d373a041b302137b20a3cfd18e67865e0a1e7f5b294063f07225034258c46bfe"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-production-focused-v2.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-production-focused-v2.log",
+      "bytes": 180,
+      "sha256": "a44b39f1e16bf25537739f37078392919e3c65dd03d57c80bddee59295fcdd1c"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-public-quality.json",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-public-quality.json",
+      "bytes": 7823,
+      "sha256": "b485922a35ebfe83901380f20c6809a5cb051e04b3099d618f08eb850c948ad9"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-public-quality.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-public-quality.log",
+      "bytes": 133,
+      "sha256": "e08ceb5bf8d98cfcb8cf178239498374a85ce88be0cd50eb093e6273537e6f63"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-v2-selection-lifetime-lifetime.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-v2-selection-lifetime-lifetime.log",
+      "bytes": 1581,
+      "sha256": "76577e53012051dd1c13d39161c660c8d69fd98549d234e84869e015d52706c3"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-v2-selection-lifetime-padded.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-v2-selection-lifetime-padded.log",
+      "bytes": 1580,
+      "sha256": "38b359a576fc5abbee8da7dd7c41ca27bd105f645ee093ec0269456e0326d2b8"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-v2-status-kernel-lifetime.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-v2-status-kernel-lifetime.log",
+      "bytes": 1101,
+      "sha256": "3a58975e55455827a90810aa1ed4f7ea44a1dfa6914a0fdb06786d23ecdb3987"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-v2-status-kernel-padded.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-v2-status-kernel-padded.log",
+      "bytes": 1100,
+      "sha256": "c83688c2a2d68ae9ddc030d155ee175a9610ed9a45c4119dd09d8fb8df3514ec"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-witness-v1-proof.md",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-witness-v1-proof.md",
+      "bytes": 2501,
+      "sha256": "9c7163bd1127f4af9d5f5385a3b4c1283e5fa3e78021bb58bf9835f690439e34"
+    },
+    {
+      "original": ".work/vtm/recovery-diagnostics-witness-v1-tests.log",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-witness-v1-tests.log",
+      "bytes": 551,
+      "sha256": "854b26814687173ba2c5db89b87cce8020bdd06a5819f3f845da0937f58ed61b"
+    },
+    {
+      "original": ".work/vtm/recovery_diagnostics_observer_v1.py",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery_diagnostics_observer_v1.py",
+      "bytes": 6712,
+      "sha256": "ba8797f73e8ca0cd013ba0d0738c1e4822c7210785a5e02c236214dc74dfcb27"
+    },
+    {
+      "original": ".work/vtm/recovery_diagnostics_witness_v1.py",
+      "path": "results/validation/vtm/recovery-diagnostics/recovery_diagnostics_witness_v1.py",
+      "bytes": 2179,
+      "sha256": "f4b54c4f2888b2524cbbe54bdd3d565d62196c2554dc5285e4ad3b3bcad7fbf0"
+    },
+    {
+      "original": ".work/vtm/run-recovery-diagnostics-final.py",
+      "path": "results/validation/vtm/recovery-diagnostics/run-recovery-diagnostics-final.py",
+      "bytes": 4878,
+      "sha256": "1db1770acdf25c00886ebaa02aa17cd2fb869baf9d76a1e718e3cba3f76ba812"
+    },
+    {
+      "original": ".work/vtm/run-recovery-diagnostics-full-oracle-v1.py",
+      "path": "results/validation/vtm/recovery-diagnostics/run-recovery-diagnostics-full-oracle-v1.py",
+      "bytes": 170,
+      "sha256": "2b6f2b33c09c93c4b61bbca053d96beb4d69127f951de4fb5be92353aed32faa"
+    },
+    {
+      "original": ".work/vtm/run-recovery-diagnostics-gallery-v1.py",
+      "path": "results/validation/vtm/recovery-diagnostics/run-recovery-diagnostics-gallery-v1.py",
+      "bytes": 107,
+      "sha256": "f8e13bca101021f9b27cdda3cd03508c781094377728644a6b6d7e4dfd17fda8"
+    },
+    {
+      "original": ".work/vtm/run-recovery-diagnostics-memory-v2.py",
+      "path": "results/validation/vtm/recovery-diagnostics/run-recovery-diagnostics-memory-v2.py",
+      "bytes": 2163,
+      "sha256": "20485068b95b7146835490619cb646200622ed7bd0d17b50368483c672eb1359"
+    },
+    {
+      "original": ".work/vtm/run-recovery-diagnostics-native.py",
+      "path": "results/validation/vtm/recovery-diagnostics/run-recovery-diagnostics-native.py",
+      "bytes": 2815,
+      "sha256": "3c99839409812d8ee2b75746756e9ee962000a56dea368a2ea6fe02741c52257"
+    },
+    {
+      "original": ".work/vtm/run-recovery-diagnostics-observers-v1.py",
+      "path": "results/validation/vtm/recovery-diagnostics/run-recovery-diagnostics-observers-v1.py",
+      "bytes": 1360,
+      "sha256": "ecb4e0b78912d53903616c96d99ddb62ef0c878324c4b7f6cc2a9d1638272536"
+    },
+    {
+      "original": ".work/vtm/run-recovery-diagnostics-pilot-v1.py",
+      "path": "results/validation/vtm/recovery-diagnostics/run-recovery-diagnostics-pilot-v1.py",
+      "bytes": 2739,
+      "sha256": "93b2ed952c2090a77ca1f3f6225a319fe58c93aa087911155d1bc4fabe82803c"
+    },
+    {
+      "original": ".work/vtm/run-recovery-diagnostics-witness-tests-v1.py",
+      "path": "results/validation/vtm/recovery-diagnostics/run-recovery-diagnostics-witness-tests-v1.py",
+      "bytes": 300,
+      "sha256": "3d3ccb1e3e9c59a5603f84deac9268c8e03d68e205be35df0f8deefc8961eddb"
+    },
+    {
+      "original": ".work/vtm/test_recovery_diagnostics_full_oracle_v1.py",
+      "path": "results/validation/vtm/recovery-diagnostics/test_recovery_diagnostics_full_oracle_v1.py",
+      "bytes": 1996,
+      "sha256": "a0019203a08ff23532d80a3775c7c44770bea985b359cce01b445cd1bcea8787"
+    },
+    {
+      "original": ".work/vtm/test_recovery_diagnostics_witness_v1.py",
+      "path": "results/validation/vtm/recovery-diagnostics/test_recovery_diagnostics_witness_v1.py",
+      "bytes": 1880,
+      "sha256": "d35eca30f33056e2de857f87b4054544063ecd65ab360514ea56b494a7ddbfa1"
+    },
+    {
+      "original": ".work/vtm/test_selection_extraction_initial.py",
+      "path": "results/validation/vtm/recovery-diagnostics/test_selection_extraction_initial.py",
+      "bytes": 6591,
+      "sha256": "76e61fc19b040c78c22191da58b14e3498bd84ec814ba027f2fc7be8b8327562"
+    }
+  ]
+}

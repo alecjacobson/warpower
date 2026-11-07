@@ -135,9 +135,9 @@ the corresponding full trace reduces `classify_retained` calls from 152 to 141.
 The new acceptance-flag kernel costs 0.171 ms across 129 calls in that trace;
 flag fills/conditional scheduling also add overhead, included in complete timing.
 
-The remaining unconsumed recovery diagnostics are tracked in
-[#192](https://github.com/alecjacobson/warpower/issues/192);
-this change keeps every fresh extraction and error check intact. CPU
+Unconsumed recovery diagnostics are addressed separately by the
+[private surface-status path](selection-surface-status.md) (#192). The cache
+optimization described here does not itself skip fresh extraction/error checks. CPU
 outperformance at comparable quality remains unachieved (#40): the 4k torus
 still takes about 1.815 s, and the earlier native CPU baselines also have better
 lower-percentile/surface quality. This milestone compares Warp revisions.

@@ -1,0 +1,156 @@
+FFF..                                                                    [100%]
+=================================== FAILURES ===================================
+___________ test_accepted_midpoint_reaches_existing_boundary_target ____________
+
+    def test_accepted_midpoint_reaches_existing_boundary_target():
+        domain,source,target=fixture()
+        baseline=_vtm.VTMWorkspace(domain,source.copy(),max_iterations=1).run()
+        candidate=install(_vtm.VTMWorkspace(domain,source.copy(),max_iterations=1)).run()
+>       valid_core(baseline);points,_=valid_core(candidate)
+
+.work/vtm/test_representable_transactions_v1.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+workspace = <warpower._vtm.VTMWorkspace object at 0x7fb2665548e0>
+
+    def valid_core(workspace):
+        assert workspace.error.numpy()[0] == 0
+        assert workspace.mesh.error.numpy()[0] == 0
+        assert workspace.boundary.error.numpy()[0] == 0
+        p = workspace.points.numpy()
+        t = workspace.full_tetrahedra.numpy()[: workspace.full_tetrahedra_count.numpy()[0]]
+        check_mesh(p, t)
+>       assert tet_set(t) == reference(p)
+E       assert {(0, 1, 11, 1... 13, 14), ...} == {(0, 1, 11, 1... 13, 14), ...}
+E         
+E         Extra items in the left set:
+E         (4, 5, 6, 8)
+E         (5, 6, 7, 8)
+E         Extra items in the right set:
+E         (4, 6, 7, 8)
+E         (4, 5, 7, 8)
+E         Use -v to get more diff
+
+tests/test_vtm_core.py:31: AssertionError
+----------------------------- Captured stdout call -----------------------------
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._domain 6c84e07 load on device 'cuda:0' took 1.12 ms  (cached)
+Module warpower._surface_bvh 7ad7add load on device 'cuda:0' took 0.72 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.71 ms  (cached)
+Module warpower._triangle_contact 9e6db6b load on device 'cuda:0' took 1.23 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.71 ms  (cached)
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.57 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.55 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.72 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.71 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.57 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.59 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.59 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 4.86 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 1.22 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 3.17 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.61 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.69 ms  (cached)
+Module warpower._boundary 6f19e8b load on device 'cuda:0' took 0.76 ms  (cached)
+Module warpower._boundary b9921e4 load on device 'cuda:0' took 0.78 ms  (cached)
+Module warpower._vtm_domain 90cb295 load on device 'cuda:0' took 0.63 ms  (cached)
+Module warpower._vtm a9d88de load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._odt 6e95820 load on device 'cuda:0' took 1.05 ms  (cached)
+Module representable_boundary_v1 83eba88 load on device 'cuda:0' took 0.90 ms  (cached)
+----------------------------- Captured stderr call -----------------------------
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+_________________ test_short_edge_cap_does_not_force_endpoint __________________
+
+    def test_short_edge_cap_does_not_force_endpoint():
+        domain,source,_=fixture()
+        c=install(_vtm.VTMWorkspace(domain,source.copy(),max_iterations=1,step_limit=1e-9)).run()
+>       points,_=valid_core(c)
+
+.work/vtm/test_representable_transactions_v1.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+workspace = <warpower._vtm.VTMWorkspace object at 0x7fb2135d5ff0>
+
+    def valid_core(workspace):
+        assert workspace.error.numpy()[0] == 0
+        assert workspace.mesh.error.numpy()[0] == 0
+        assert workspace.boundary.error.numpy()[0] == 0
+        p = workspace.points.numpy()
+        t = workspace.full_tetrahedra.numpy()[: workspace.full_tetrahedra_count.numpy()[0]]
+        check_mesh(p, t)
+>       assert tet_set(t) == reference(p)
+E       assert {(0, 1, 11, 1... 13, 14), ...} == {(0, 1, 11, 1... 13, 14), ...}
+E         
+E         Extra items in the left set:
+E         (4, 5, 6, 8)
+E         (5, 6, 7, 8)
+E         Extra items in the right set:
+E         (4, 6, 7, 8)
+E         (4, 5, 7, 8)
+E         Use -v to get more diff
+
+tests/test_vtm_core.py:31: AssertionError
+________________ test_rejected_endpoint_backtracks_and_restores ________________
+
+    def test_rejected_endpoint_backtracks_and_restores():
+        domain,source,_=fixture()
+        c=install(_vtm.VTMWorkspace(domain,source.copy(),max_iterations=2,max_backtracks=2))
+        calls=wp.zeros(1,dtype=int);flags=wp.zeros((3,c.n),dtype=int)
+        run=c.mesh.run;launch=c._launch
+        def failing_run(stream=None):
+            run(stream)
+            wp.launch(fail_after_initial,1,inputs=[c.mesh.error,c.full_tetrahedra_count,calls])
+        def measured(kernel,dim,args,*,block_dim=256):
+            if kernel is _vtm.finish_attempt:
+                launch(record_flags,c.n,[c._backtracks,c._tie_flags,flags])
+            launch(kernel,dim,args,block_dim=block_dim)
+        c.mesh.run=failing_run;c._launch=measured
+        wp.load_module(module=__name__,device=c.device)
+        with wp.ScopedCapture() as cap:
+            calls.zero_();flags.zero_();c._tie_stats.zero_();c.run()
+        wp.capture_launch(cap.graph)
+>       points,_=valid_core(c)
+
+.work/vtm/test_representable_transactions_v1.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+workspace = <warpower._vtm.VTMWorkspace object at 0x7fb2135d59c0>
+
+    def valid_core(workspace):
+        assert workspace.error.numpy()[0] == 0
+        assert workspace.mesh.error.numpy()[0] == 0
+        assert workspace.boundary.error.numpy()[0] == 0
+        p = workspace.points.numpy()
+        t = workspace.full_tetrahedra.numpy()[: workspace.full_tetrahedra_count.numpy()[0]]
+        check_mesh(p, t)
+>       assert tet_set(t) == reference(p)
+E       assert {(0, 1, 11, 1... 10, 12), ...} == {(0, 1, 11, 1... 10, 12), ...}
+E         
+E         Extra items in the left set:
+E         (4, 5, 6, 8)
+E         (5, 6, 7, 8)
+E         Extra items in the right set:
+E         (4, 6, 7, 8)
+E         (4, 5, 7, 8)
+E         Use -v to get more diff
+
+tests/test_vtm_core.py:31: AssertionError
+----------------------------- Captured stdout call -----------------------------
+Module test_representable_transactions_v1 6953998 load on device 'cuda:0' took 386.12 ms  (compiled)
+Module tests.test_vtm_core 3da53b4 load on device 'cuda:0' took 0.60 ms  (cached)
+=========================== short test summary info ============================
+FAILED .work/vtm/test_representable_transactions_v1.py::test_accepted_midpoint_reaches_existing_boundary_target
+FAILED .work/vtm/test_representable_transactions_v1.py::test_short_edge_cap_does_not_force_endpoint
+FAILED .work/vtm/test_representable_transactions_v1.py::test_rejected_endpoint_backtracks_and_restores
+3 failed, 2 passed in 4.31s

@@ -1,0 +1,1873 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 131072, "diagnostic_mempool_enabled": false}
+......========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (96,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007780 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (100,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007790 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (101,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007794 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (102,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007798 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (104,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077a0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (105,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077a4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (106,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077a8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (109,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077b4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (110,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077b8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (111,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077bc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (112,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077c0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (114,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077c8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (115,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077cc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (116,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077d0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (120,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077e0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (121,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077e4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (122,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077e8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (124,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077f0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (125,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077f4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (126,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077f8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (127,0,0) in block (0,0,0)
+=========     Access at 0x1ab40077fc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (27,0,0) in block (0,0,0)
+=========     Access at 0x1ab400766c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (30,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007678 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (31,0,0) in block (0,0,0)
+=========     Access at 0x1ab400767c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (35,0,0) in block (0,0,0)
+=========     Access at 0x1ab400768c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (37,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007694 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (54,0,0) in block (0,0,0)
+=========     Access at 0x1ab40076d8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (62,0,0) in block (0,0,0)
+=========     Access at 0x1ab40076f8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (67,0,0) in block (0,0,0)
+=========     Access at 0x1ab400770c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (70,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007718 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (76,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007730 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (79,0,0) in block (0,0,0)
+=========     Access at 0x1ab400773c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (81,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007744 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (85,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007754 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (86,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007758 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (87,0,0) in block (0,0,0)
+=========     Access at 0x1ab400775c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (90,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007768 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (93,0,0) in block (0,0,0)
+=========     Access at 0x1ab4007774 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (95,0,0) in block (0,0,0)
+=========     Access at 0x1ab400777c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (127,0,0) in block (1,0,0)
+=========     Access at 0x1ab40079fc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (127,0,0) in block (2,0,0)
+=========     Access at 0x1ab40079fc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (127,0,0) in block (3,0,0)
+=========     Access at 0x1ab40079fc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4007600 of size 11775 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:64
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Program hit CUDA_ERROR_LAUNCH_FAILED (error 719) due to "unspecified launch failure" on CUDA API call to cuCtxSynchronize.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame: wp_cuda_context_synchronize [0xb69c79] in warp.so
+=========         Host Frame: synchronize in context.py:12691
+=========         Host Frame: test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners in test_vtm_examples.py:65
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+F....                                                              [100%]
+=================================== FAILURES ===================================
+__ test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners __
+
+    def test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners():
+        domain = SurfaceDomain(*counterbored_plate(), surface_subdivisions=16, crease_subdivisions=16)
+        mesh = VariationalMeshingWorkspace(domain, 1000, initial_count=256, seed=2026)
+        with wp.ScopedCapture() as capture:
+            domain.refit()
+            mesh.run()
+        wp.capture_launch(capture.graph)
+>       wp.synchronize()
+
+tests/test_vtm_examples.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def synchronize():
+        """Manually synchronize the calling CPU thread with any outstanding CUDA work on all devices
+    
+        This method allows the host application code to ensure that any kernel launches
+        or memory copies have completed.
+    
+        Raises:
+            RuntimeError: If graph capture is active on a device, or if CUDA reports an
+                error from outstanding work. Warp synchronizes the remaining devices
+                before raising the first error.
+        """
+    
+        if is_cuda_driver_initialized():
+            # save the original context to avoid side effects
+            saved_context = runtime.core.wp_cuda_context_get_current()
+    
+            error = None
+            try:
+                # TODO: only synchronize devices that have outstanding work
+                for device in runtime.cuda_devices:
+                    # avoid creating primary context if the device has not been used yet
+                    if device.has_context:
+                        if device.is_capturing:
+                            raise RuntimeError(f"Cannot synchronize device {device} while graph capture is active")
+    
+                        # read the error string before synchronizing the next device replaces it
+                        if not runtime.core.wp_cuda_context_synchronize(device.context) and error is None:
+                            error = f"Failed to synchronize device {device}: {runtime.get_error_string()}"
+            finally:
+                # restore the original context to avoid side effects
+                runtime.core.wp_cuda_context_set_current(saved_context)
+    
+            if error is not None:
+>               raise RuntimeError(error)
+E               RuntimeError: Failed to synchronize device cuda:0: Warp CUDA error 719: unspecified launch failure (in function wp_cuda_context_synchronize, /builds/omniverse/warp/warp/native/warp.cu:2869)
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12698: RuntimeError
+----------------------------- Captured stdout call -----------------------------
+Module warpower._sampling 1053924 load on device 'cuda:0' took 1.48 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._active_sites e183170 load on device 'cuda:0' took 0.62 ms  (cached)
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.66 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 1.41 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.59 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.64 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.86 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.78 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.69 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.76 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.79 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 10.24 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 1.53 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 7.17 ms  (cached)
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 3.83 ms  (cached)
+Module warpower._facet_completion bb6aebe load on device 'cuda:0' took 6.92 ms  (cached)
+Module warpower._facet_completion 62c1043 load on device 'cuda:0' took 6.14 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.81 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.84 ms  (cached)
+Module warpower._facet_seeds fa4cd6c load on device 'cuda:0' took 3.32 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 1.15 ms  (cached)
+Module warpower._proved_completion 9f7b57c load on device 'cuda:0' took 3.51 ms  (cached)
+Module warpower._proved_completion 1af4ac5 load on device 'cuda:0' took 2.73 ms  (cached)
+Module warpower._reuse_delaunay 58b0d1a load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._boundary 6f19e8b load on device 'cuda:0' took 0.94 ms  (cached)
+Module warpower._containment 848ec8a load on device 'cuda:0' took 2.50 ms  (cached)
+Module warpower._exterior_band 98ccdcc load on device 'cuda:0' took 0.71 ms  (cached)
+Module warpower._extraction 527730c load on device 'cuda:0' took 2.79 ms  (cached)
+Module warpower._extraction 3113c00 load on device 'cuda:0' took 2.69 ms  (cached)
+Module warpower._mesh_topology 20805dd load on device 'cuda:0' took 1.08 ms  (cached)
+Module warpower._selective 20b472f load on device 'cuda:0' took 1.83 ms  (cached)
+Module warpower._vtm_controls 759cf0a load on device 'cuda:0' took 0.69 ms  (cached)
+Module warpower._vtm_domain 69a8587 load on device 'cuda:0' took 0.70 ms  (cached)
+Module warpower._vtm a9d88de load on device 'cuda:0' took 0.76 ms  (cached)
+Module warpower._odt 6e95820 load on device 'cuda:0' took 0.97 ms  (cached)
+Module warpower._selective 6a40372 load on device 'cuda:0' took 1.61 ms  (cached)
+Module warpower._refinement ef4e2ec load on device 'cuda:0' took 2.15 ms  (cached)
+Module warpower._refinement bdfadda load on device 'cuda:0' took 1.62 ms  (cached)
+Module warpower._jitter 87fcc9d load on device 'cuda:0' took 0.95 ms  (cached)
+Module warpower._quality_moves 4916b8c load on device 'cuda:0' took 0.85 ms  (cached)
+Module warpower._voronoi_volume 65f456a load on device 'cuda:0' took 2.05 ms  (cached)
+Module warpower._teleport a3fa81a load on device 'cuda:0' took 0.89 ms  (cached)
+Module warpower._mesher 267e3a2 load on device 'cuda:0' took 1.15 ms  (cached)
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 719: unspecified launch failure (in function wp_cuda_context_synchronize, /builds/omniverse/warp/warp/native/warp.cu:2869)
+=========================== short test summary info ============================
+FAILED tests/test_vtm_examples.py::test_counterbored_plate_captured_mesher_retains_hole_and_all_eight_corners
+1 failed, 10 passed in 26.55s
+========= Target application returned an error
+========= ERROR SUMMARY: 43 errors

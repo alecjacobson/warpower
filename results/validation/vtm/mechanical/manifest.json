@@ -1,0 +1,341 @@
+{
+  "scope": "Procedural mechanical example and offline validation. Pure-Warp geometry runtime unchanged from 32ee3c6. No CPU speedup claim. Full allocation-order tracking failed and is retained, with ordinary/after-free passes and standalone controls.",
+  "example_and_audit_revision": "04c4e85",
+  "baseline_main": "c61e122b2ccca55e9676e7927e19e45ef7cf2abc",
+  "runtime_revision": "32ee3c6",
+  "environment": {
+    "gpu": "NVIDIA L40",
+    "warp": "1.19.0",
+    "python": "3.10",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "4",
+    "PYTHONPATH": "."
+  },
+  "final_command": [
+    "python",
+    "-m",
+    "examples.vtm_gallery",
+    "--case",
+    "counterbored-plate",
+    "--n",
+    "1000",
+    "--initial",
+    "256",
+    "--seed",
+    "2026",
+    "--feature-angle",
+    "45",
+    "--corner-angle",
+    "45",
+    "--quality-rounds",
+    "4",
+    "--repeats",
+    "5",
+    "--output",
+    ".work/vtm/mechanical-plate-final"
+  ],
+  "initial_full_allocation_tracking_command": [
+    "compute-sanitizer",
+    "--tool",
+    "memcheck",
+    "--padding",
+    "32",
+    "--check-api-memory-access",
+    "yes",
+    "--track-stream-ordered-races",
+    "all",
+    "--error-exitcode",
+    "99",
+    "python",
+    "-m",
+    "benchmarks.memcheck",
+    "--stack-bytes",
+    "131072",
+    "--disable-mempool",
+    "--",
+    "-q",
+    "tests/test_vtm_examples.py",
+    "tests/test_feature_quality.py"
+  ],
+  "initial_full_allocation_tracking_exit_code": 99,
+  "files": {
+    "results/validation/vtm/mechanical/check-mechanical.py": {
+      "bytes": 4953,
+      "sha256": "ff6c3cf88dca5ad50215678a10a1f4c3caf42795068b2634d7bcf4344186d094"
+    },
+    "results/validation/vtm/mechanical/final.log": {
+      "bytes": 7737,
+      "sha256": "1ef474dab66a26328a171ef3f0e25c5f0b8b0c2234bdfd4f48c7b8639ed5c226"
+    },
+    "results/validation/vtm/mechanical/input/expected-features.json": {
+      "bytes": 314,
+      "sha256": "86561614a7aab75776259de4fb2a5ab902a7be6d88d645f16c57a422c0f401bf"
+    },
+    "results/validation/vtm/mechanical/input/input-preview.png": {
+      "bytes": 278167,
+      "sha256": "0878fdbbee1f9cde757fc88d42f2aef908d7180e8f607d4d3feb637566365ee5"
+    },
+    "results/validation/vtm/mechanical/input/provenance.json": {
+      "bytes": 857,
+      "sha256": "9bc1e679eaeed73a1e09c79a68c7b8b1c5bfeb74b98b0a9314f167622972b162"
+    },
+    "results/validation/vtm/mechanical/input/self-intersections.txt": {
+      "bytes": 10,
+      "sha256": "2f17032660f556ae2c1d730178386b61a27c32ce9b4cd9ec419d26302ade6066"
+    },
+    "results/validation/vtm/mechanical/mechanical-audit-commands.json": {
+      "bytes": 4119,
+      "sha256": "8ade4cbeda8292da017c3185339a426330d2e95297c40a991bce592ecb5cc3b2"
+    },
+    "results/validation/vtm/mechanical/mechanical-final-targeted-tests.log": {
+      "bytes": 99,
+      "sha256": "a8dd98baf40e9bf16ae40490c66da55b0b5fe0e0fd78b6e5fb6c03da17c08856"
+    },
+    "results/validation/vtm/mechanical/mechanical-final-vs-pilot.json": {
+      "bytes": 207,
+      "sha256": "37626cce185aa13458543668941c0ce5309cee7b3f223eeefb1e1a23a036be82"
+    },
+    "results/validation/vtm/mechanical/mechanical-independent-final.log": {
+      "bytes": 8559,
+      "sha256": "4ad78421aff29b8feb9b32a6bba7d268e6c7e5967b9be460ef9f6e65f6690b3e"
+    },
+    "results/validation/vtm/mechanical/mechanical-independent-summary.json": {
+      "bytes": 10618,
+      "sha256": "7799e9627d6001a153cafb91002d4fd74bff4e8db8275a149d6c481b18e3ec36"
+    },
+    "results/validation/vtm/mechanical/mechanical-input-pilot.py": {
+      "bytes": 3609,
+      "sha256": "35ad5411c35657d1ad037a3d02da77de6cbbfe94592017db5f974a509f188a3f"
+    },
+    "results/validation/vtm/mechanical/mechanical-memcheck-afterfree.log": {
+      "bytes": 646,
+      "sha256": "95116fc91ada9d699a0198ec57d9158b716054ca40a09af5659eeb2eda5daaa1"
+    },
+    "results/validation/vtm/mechanical/mechanical-memcheck-ordinary.log": {
+      "bytes": 645,
+      "sha256": "7049959f8d0278e09a4fca1530adef387cca80722728cdd4f2cabbb13e0d5faa"
+    },
+    "results/validation/vtm/mechanical/mechanical-memcheck.log": {
+      "bytes": 133717,
+      "sha256": "670c9365adcc9bf11dcf26ed5f1234193996466a86fa9bce679886f820373576"
+    },
+    "results/validation/vtm/mechanical/mechanical-native-audit.json": {
+      "bytes": 1003,
+      "sha256": "2cadbb8c1cf86ba9419be35d5c4e6aaaab8f05fe0475cad30ffab2a73f5aac32"
+    },
+    "results/validation/vtm/mechanical/mechanical-native-audit.log": {
+      "bytes": 1003,
+      "sha256": "2cadbb8c1cf86ba9419be35d5c4e6aaaab8f05fe0475cad30ffab2a73f5aac32"
+    },
+    "results/validation/vtm/mechanical/mechanical-native-export.log": {
+      "bytes": 8101,
+      "sha256": "c49aece6ee49cab2d5394e4b059a68a08ef3d1f9aff3949bc022cb83f3f2dba3"
+    },
+    "results/validation/vtm/mechanical/mechanical-native-result.json": {
+      "bytes": 137,
+      "sha256": "80bba5503ad22f8189d36be2cbe8ba8706fdf977f32f4bfc98e08199409db5a9"
+    },
+    "results/validation/vtm/mechanical/mechanical-native.dot.gz": {
+      "bytes": 521892,
+      "sha256": "e4bb7e57ac7023a5245cf80d307570fc553c2c72665186af90a415392c6299c9"
+    },
+    "results/validation/vtm/mechanical/mechanical-native.log": {
+      "bytes": 7505,
+      "sha256": "d8bf6358a7482882bda1f6d555d706e72c6a8c8a3c55c31c745c9d2094cdd00a"
+    },
+    "results/validation/vtm/mechanical/mechanical-native.py": {
+      "bytes": 1055,
+      "sha256": "7483d0de7441409b033a15f881d83a0e98cddec7ae1a2f6b238cb603a48fd934"
+    },
+    "results/validation/vtm/mechanical/mechanical-native.sqlite.gz": {
+      "bytes": 3309220,
+      "sha256": "44ab7422f24c90b4e642437d7fa6093ad529d854d9239b1e185cce756a9fe789"
+    },
+    "results/validation/vtm/mechanical/mechanical-pilot-commands.json": {
+      "bytes": 947,
+      "sha256": "8c2ff9ebe92ac50ff54d93dfb52bace20b537231947c39252ff302681e423cc7"
+    },
+    "results/validation/vtm/mechanical/mechanical-radix-afterfree.log": {
+      "bytes": 683,
+      "sha256": "97e4f7f89e7ba50e162ac2d912ab53df00322af0f7620c1acca0121a61aece10"
+    },
+    "results/validation/vtm/mechanical/mechanical-radix-conditional.log": {
+      "bytes": 115322,
+      "sha256": "f422473f206706586db478cd0e5a2343dbbb23ee0cfc2a77c64c8fa48f7a3373"
+    },
+    "results/validation/vtm/mechanical/mechanical-radix-top.log": {
+      "bytes": 683,
+      "sha256": "f7186b5b4cb76b95367bc06a06e6280288b3ef58a59fd7e64eacf34ebaa99249"
+    },
+    "results/validation/vtm/mechanical/pilot16/boundary-self-intersections.txt": {
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    "results/validation/vtm/mechanical/pilot16/boundary.off": {
+      "bytes": 78252,
+      "sha256": "937cf86d956f259730965a7a58e3052fcec8e3bfad483c98e537909cf7133662"
+    },
+    "results/validation/vtm/mechanical/pilot16/feature-quality.json": {
+      "bytes": 16785,
+      "sha256": "3f35cce2e9d97664a4cc01d8f569dbf5a324331aa7b85acd5a3b81341a77bfd2"
+    },
+    "results/validation/vtm/mechanical/pilot16/independent-validation.json": {
+      "bytes": 2412,
+      "sha256": "147ee0a0f13581059f35cbac45e369f39d5d9f91d5b3cb2cd04ef6090ccc861a"
+    },
+    "results/validation/vtm/mechanical/pilot16/input.off": {
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    "results/validation/vtm/mechanical/pilot16/mesh.npz": {
+      "bytes": 109270,
+      "sha256": "e6ca8ab9fc693aa85cb918ca6d5b3db771fab9371a81903e5124d561b72413bc"
+    },
+    "results/validation/vtm/mechanical/pilot16/mesh.vtu": {
+      "bytes": 210809,
+      "sha256": "3c6e88e2705b05fcdffe2086e215bea3a59f2ae0ca60bb154ac1721f731294c7"
+    },
+    "results/validation/vtm/mechanical/pilot16/result.json": {
+      "bytes": 3526,
+      "sha256": "6a342199cf82338cc3229b08cf89066391da334dbe73eb5a5ff37f67c53411b6"
+    },
+    "results/validation/vtm/mechanical/pilot16.log": {
+      "bytes": 7631,
+      "sha256": "38ee00eb5f4914edb3c6e3416bafda8cecbdd7894189ed7a154077661b449614"
+    },
+    "results/validation/vtm/mechanical/pilot4/boundary-self-intersections.txt": {
+      "bytes": 12,
+      "sha256": "ec4e53389b60d12b310e53984b245294f34b179e8bc76b16ee5520f66cdaac80"
+    },
+    "results/validation/vtm/mechanical/pilot4/boundary.off": {
+      "bytes": 77488,
+      "sha256": "7cabacd56db7e3f12e74c753b90c5eac8d0a0ceacb000fbfccf13bbd7cbe6d08"
+    },
+    "results/validation/vtm/mechanical/pilot4/feature-quality.json": {
+      "bytes": 17202,
+      "sha256": "4dd611c7588cdbdf038313f7ed221010e6c90197a775cb4f996726031e6bed3a"
+    },
+    "results/validation/vtm/mechanical/pilot4/independent-validation.json": {
+      "bytes": 2411,
+      "sha256": "e1d31e087e3e30b07a5aba67b3fc2c49f1c8f265e2ce7fb50bf7eb83dc3432d0"
+    },
+    "results/validation/vtm/mechanical/pilot4/input.off": {
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    "results/validation/vtm/mechanical/pilot4/mesh.npz": {
+      "bytes": 109540,
+      "sha256": "f587ac43c73bcf99990757334d8f61e2f4640c4681592bad4ccf333a1d944637"
+    },
+    "results/validation/vtm/mechanical/pilot4/mesh.vtu": {
+      "bytes": 214706,
+      "sha256": "e53b8210de1e8aeea5ce2765a5755388e81249eb2bc2be66a6a137b536251c7e"
+    },
+    "results/validation/vtm/mechanical/pilot4/result.json": {
+      "bytes": 3523,
+      "sha256": "ff98510c326fbe6dac80bada13e7f68f991023eb8a5669a7cc4497d470e05b0f"
+    },
+    "results/validation/vtm/mechanical/pilot4.log": {
+      "bytes": 7628,
+      "sha256": "4d75812b4fe25eb95c07850ae477266a912a59684bc253ca898d76fa96d4b05c"
+    },
+    "results/validation/vtm/mechanical/pilot8/boundary-self-intersections.txt": {
+      "bytes": 12,
+      "sha256": "a059f1dd528df3700093b656d9233c1ef87397c5e4280a03a6e3bfd49c4fe3dd"
+    },
+    "results/validation/vtm/mechanical/pilot8/boundary.off": {
+      "bytes": 77716,
+      "sha256": "a2473847896e482c7eaf8c23e69b5b234805c85dac57eff646d8d1d6aabe9a00"
+    },
+    "results/validation/vtm/mechanical/pilot8/feature-quality.json": {
+      "bytes": 16826,
+      "sha256": "cfac20ae44d4eda1edd83f764b463aae4f3199074c1669f62bd2f78324731857"
+    },
+    "results/validation/vtm/mechanical/pilot8/independent-validation.json": {
+      "bytes": 2409,
+      "sha256": "6a330738f52d1b6d8993c78625fc6c394ff0b16c15aede301d088dfcd75daf6b"
+    },
+    "results/validation/vtm/mechanical/pilot8/input.off": {
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    "results/validation/vtm/mechanical/pilot8/mesh.npz": {
+      "bytes": 108871,
+      "sha256": "fa038ea40b4d2e7e9bf958351315e8bb93f433f89083933ee7af15009083fe63"
+    },
+    "results/validation/vtm/mechanical/pilot8/mesh.vtu": {
+      "bytes": 212426,
+      "sha256": "55888ad5aa70b1e7b3ed4c415482ebd2f6dc93098faebc8a4da73bd07d63a805"
+    },
+    "results/validation/vtm/mechanical/pilot8/result.json": {
+      "bytes": 3526,
+      "sha256": "7caa40c380d4045310d7cbf26b8e691400cdf584c25e0fa2dff34819a4f7eb56"
+    },
+    "results/validation/vtm/mechanical/pilot8.log": {
+      "bytes": 7631,
+      "sha256": "aa3b4402732edba6380afb05088b863f558f0e3b0709ce97ef00cd33dc2674a8"
+    },
+    "results/validation/vtm/mechanical/run-mechanical-audits.py": {
+      "bytes": 2293,
+      "sha256": "d80af5eac147ca897ef60a2834198ea598a508caa7485fe6c551afe8ddfdf28d"
+    },
+    "results/examples/vtm/counterbored-plate/boundary-self-intersections.txt": {
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    "results/examples/vtm/counterbored-plate/boundary.off": {
+      "bytes": 78252,
+      "sha256": "01db6e131a71d66fc6005fb8a754b657a9e06f12005268fbabc3a37a17ef5421"
+    },
+    "results/examples/vtm/counterbored-plate/cutaway.png": {
+      "bytes": 372950,
+      "sha256": "8b0684c20029523632c88e783c73628c9ad928261598324e8ab578943e426896"
+    },
+    "results/examples/vtm/counterbored-plate/feature-quality.json": {
+      "bytes": 16785,
+      "sha256": "93a6750b32f7d38ff0339231eae38031e6eea522bdecf65ea8ea9003795c03bc"
+    },
+    "results/examples/vtm/counterbored-plate/independent-validation.json": {
+      "bytes": 2412,
+      "sha256": "eff8dfab8918c7c15cc5e6b13b56305e9cacf1712431323334dec0e392405408"
+    },
+    "results/examples/vtm/counterbored-plate/input.off": {
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    "results/examples/vtm/counterbored-plate/mesh.npz": {
+      "bytes": 109174,
+      "sha256": "bb18d3f5bb6fb45f1ac120ed8ae485c908a2ce366c6b75a2662a784159576c17"
+    },
+    "results/examples/vtm/counterbored-plate/mesh.vtu": {
+      "bytes": 210809,
+      "sha256": "a30927a2c56d3532d09ecc63b3438421b72e7de66481acf224976767c4e1f4f0"
+    },
+    "results/examples/vtm/counterbored-plate/result.json": {
+      "bytes": 3656,
+      "sha256": "400feff00310abb2219c32d086478e1f20623216403c7cbfe89625b39a205745"
+    },
+    "results/examples/vtm/counterbored-plate/surface.png": {
+      "bytes": 495297,
+      "sha256": "dc9630154cc355435945efc9c4719b89d2227c5fc09ad4e6e213b5482b173a60"
+    }
+  },
+  "native_checker_binaries": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe"
+  },
+  "source_files": {
+    "examples/vtm_inputs.py": "83284ecd146010c2d610b221bdfeaa16ce0b98fd59cda561c1602bdfa87bc9a0",
+    "examples/vtm_gallery.py": "8e39899ba4ec7b98dee840f73ccc330c57ac2a398faff3efc103dabb57af4acf",
+    "examples/vtm_render.py": "ef908f1733b376be8b77fb1295cb09040984a1578d6058f09dede4d75522a3cd",
+    "benchmarks/feature_quality.py": "06f9c355f193ad5c6ff8b63a98d33bbbaaf497b965cf3e84459efd3fa638d4c8",
+    "benchmarks/mesh_quality.py": "0a5765c4d82da5e24ccda94bf2c149875c83932bc314c9211b276a99a893e0dd",
+    "benchmarks/surface_distance.py": "977463196b35b253c1fee0193f87522dd8d43af87ad636c73737d64b678d6f2f",
+    "tests/test_vtm_examples.py": "31117436fbf59e7a1bbebc42655753e9195e826eeb225ad803d34eae2c5f569c",
+    "tests/test_feature_quality.py": "e7ee05158baf0c85a8826dcb5622e9eeb03b640b18aa3f16998d51f88cab07e4",
+    "benchmarks/cpu/surface_distance.cpp": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d",
+    "benchmarks/cpu/check_delaunay.cpp": "1a2b1ec4537bbad7a2ac5edd237d853c88bc2167e864eac2686fd9e98ccc3fcd",
+    "benchmarks/cpu/surface_intersections.cpp": "227f37892bdc6a783ed12bc110a7c53571862951f264a5b72d07b7d21f341775"
+  }
+}

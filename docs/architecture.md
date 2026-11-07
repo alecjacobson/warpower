@@ -334,7 +334,10 @@ distinct site and retains original IDs. Each branch still certifies the complete
 active convex hull. Stable output buffers let downstream kernels consume either
 branch without allocation, host decisions or graph recapture.
 
-Broader example validation, integrated time-to-quality comparisons and CPU
-performance work remain tracked in the [full VTM implementation plan](vtm.md).
+The [example gallery](examples.md) includes uniform/graded torus and scanned
+Armadillo meshes, thin geometry, cavities, disconnected domains and a
+[sharp-feature mechanical plate](mechanical-plate.md). Integrated time-to-quality
+comparisons and CPU performance work remain tracked in the
+[full VTM implementation plan](vtm.md).
 An energy decrease alone does not establish good worst-element quality or a
 CPU performance advantage.

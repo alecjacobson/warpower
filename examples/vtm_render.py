@@ -12,7 +12,17 @@ from matplotlib import colors
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 
-def render(mesh, output, axis=0, fraction=0.5, title="Variational tetrahedral mesh"):
+def render(
+    mesh,
+    output,
+    axis=0,
+    fraction=0.5,
+    title="Variational tetrahedral mesh",
+    up_axis="z",
+    credit=None,
+    elevation=27,
+    azimuth=-55,
+):
     data = np.load(mesh)
     p, t = data["points"].astype(np.float64), data["tetrahedra"]
     q = data["radius_ratio"]
@@ -51,7 +61,7 @@ def render(mesh, output, axis=0, fraction=0.5, title="Variational tetrahedral me
     ax.set_ylim(lo[1], hi[1])
     ax.set_zlim(lo[2], hi[2])
     ax.set_box_aspect(hi - lo, zoom=1.1)
-    ax.view_init(elev=27, azim=-55)
+    ax.view_init(elev=elevation, azim=azimuth, vertical_axis=up_axis)
     ax.set_axis_off()
     fig.text(0.055, 0.93, title, color="#142c44", fontsize=22, weight="bold")
     fig.text(
@@ -69,10 +79,16 @@ def render(mesh, output, axis=0, fraction=0.5, title="Variational tetrahedral me
     fig.text(
         0.055,
         0.055,
-        "Cutaway removes whole tetrahedra by centroid; exposed faces show the interior mesh.",
+        (
+            "Cutaway removes whole tetrahedra by centroid; exposed faces show the interior mesh."
+            if fraction < 1
+            else "Boundary faces colored by the quality of their incident tetrahedron."
+        ),
         color="#52677a",
         fontsize=9,
     )
+    if credit:
+        fig.text(0.055, 0.025, credit, color="#52677a", fontsize=8)
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output, dpi=180, facecolor=fig.get_facecolor())
@@ -86,10 +102,24 @@ def main():
     p.add_argument("--axis", choices=["x", "y", "z"], default="x")
     p.add_argument("--fraction", type=float, default=0.5)
     p.add_argument("--title", default="Variational tetrahedral mesh")
+    p.add_argument("--up-axis", choices=["x", "y", "z"], default="z")
+    p.add_argument("--credit", help="Optional dataset attribution in the figure")
+    p.add_argument("--elevation", type=float, default=27)
+    p.add_argument("--azimuth", type=float, default=-55)
     args = p.parse_args()
     if not 0 < args.fraction <= 1:
         p.error("fraction must lie in (0, 1]")
-    render(args.mesh, args.output, "xyz".index(args.axis), args.fraction, args.title)
+    render(
+        args.mesh,
+        args.output,
+        "xyz".index(args.axis),
+        args.fraction,
+        args.title,
+        args.up_axis,
+        args.credit,
+        args.elevation,
+        args.azimuth,
+    )
 
 
 if __name__ == "__main__":

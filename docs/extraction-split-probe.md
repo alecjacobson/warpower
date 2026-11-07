@@ -2,8 +2,10 @@
 
 Separating physical tetrahedron geometry from surface queries did not give a
 meaningful complete-solve improvement in the tested full extractor. The private
-prototype is **not adopted**. The selective classifier is unchanged and has not
-been tested as a split implementation; that part of issue #159 remains open.
+prototype is **not adopted**. The selective classifier remains unchanged. A
+subsequent [cooperative query probe](cooperative-surface-probe.md) measures a
+staged retained classifier on final snapshots; its complete-solve and failure
+validation remain outstanding under issue #159.
 
 The original `classify` kernel computes physical centers, radii, volume and
 quality, including exact integer fallback for uncertain geometry, then queries

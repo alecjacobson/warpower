@@ -382,6 +382,10 @@ Its distance buffer provides only a nonpositive/positive sign for exterior-band
 decisions. Outside, ambiguous and unsupported centers keep the complete query;
 physical geometry/quality and all public distances remain unchanged.
 
+A separate [cooperative surface-query experiment](cooperative-surface-probe.md)
+measures shared ray traversal and fused/staged retained-cell classifiers. These
+are private prototypes; their kernels and scratch are not used by production.
+
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).
 Preallocated 1,024- and 2,048-site constructors handle the smallest fitting prefix;

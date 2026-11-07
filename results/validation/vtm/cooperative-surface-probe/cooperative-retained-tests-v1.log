@@ -1,0 +1,3203 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module cooperative_retained_v1 0aa6eed load on device 'cuda:0' took 5.22 ms  (cached)
+FFFFFFFFFFFFFFFFFFFFFFFFFFF                                              [100%]
+=================================== FAILURES ===================================
+________ test_selective_mask_matches_exactly_one_retained_neighbor_ring ________
+
+    def test_selective_mask_matches_exactly_one_retained_neighbor_ring():
+>       source = initial()
+
+tests/test_selective.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_selective.py:14: in initial
+    domain = warpower.SurfaceDomain(*torus(24, 12), surface_subdivisions=2)
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (1728,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37f4fcf540>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_ test_unselected_positions_stay_fixed_and_retained_minimum_does_not_decrease __
+
+    def test_unselected_positions_stay_fixed_and_retained_minimum_does_not_decrease():
+>       source = initial()
+
+tests/test_selective.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_selective.py:14: in initial
+    domain = warpower.SurfaceDomain(*torus(24, 12), surface_subdivisions=2)
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (1728,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce274bc0>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_________ test_selective_updates_improve_a_fitted_torus_worst_element __________
+
+    def test_selective_updates_improve_a_fitted_torus_worst_element():
+>       source = initial(256, 20)
+
+tests/test_selective.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_selective.py:14: in initial
+    domain = warpower.SurfaceDomain(*torus(24, 12), surface_subdivisions=2)
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (1728,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce0b8380>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+________________ test_no_poor_elements_stops_without_an_update _________________
+
+    def test_no_poor_elements_stops_without_an_update():
+>       source = initial()
+
+tests/test_selective.py:96: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_selective.py:14: in initial
+    domain = warpower.SurfaceDomain(*torus(24, 12), surface_subdivisions=2)
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (1728,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce2c8c80>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+____ test_rejected_quality_updates_restore_original_geometry_and_statistics ____
+
+    def test_rejected_quality_updates_restore_original_geometry_and_statistics():
+>       source = initial(64, 5)
+
+tests/test_selective.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_selective.py:14: in initial
+    domain = warpower.SurfaceDomain(*torus(24, 12), surface_subdivisions=2)
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (1728,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce6b2380>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+____ test_empty_retained_domain_fails_and_recovers_in_device_producer_loop _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f37ce80eda0>
+tmp_path = PosixPath('/run/openclaw/horde/pytest-of-horde/pytest-293/test_empty_retained_domain_fai0')
+
+    def test_empty_retained_domain_fails_and_recovers_in_device_producer_loop(monkeypatch, tmp_path):
+        points = wp.array(
+            [[2, 0, 0], [2.1, 0, 0], [2, 0.1, 0], [2, 0, 0.1]], dtype=wp.vec3, device="cuda:0"
+        )
+        core = VTMWorkspace(
+>           warpower.SurfaceDomain(*torus(24, 12)),
+            points,
+            max_iterations=2,
+            selective_threshold=0.3,
+            selective_tolerance=0,
+        )
+
+tests/test_selective.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (1728,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce049bc0>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+____ test_graded_selective_active_prefix_preserves_tail_and_corner_anchors _____
+
+    def test_graded_selective_active_prefix_preserves_tail_and_corner_anchors():
+>       domain = warpower.SurfaceDomain(*cube(), surface_subdivisions=6)
+
+tests/test_selective.py:238: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (36,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce783200>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_ test_captured_selective_updates_and_quality_guard_execute_without_host_work __
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f37ce7220b0>
+
+    def test_captured_selective_updates_and_quality_guard_execute_without_host_work(monkeypatch):
+>       fitted = initial(256, 20)
+
+tests/test_selective.py:268: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_selective.py:14: in initial
+    domain = warpower.SurfaceDomain(*torus(24, 12), surface_subdivisions=2)
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (1728,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce76f940>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+__________________ test_selection_configuration_is_validated ___________________
+
+    def test_selection_configuration_is_validated():
+>       source = initial(16, 0)
+
+tests/test_selective.py:322: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_selective.py:14: in initial
+    domain = warpower.SurfaceDomain(*torus(24, 12), surface_subdivisions=2)
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (1728,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce04cc80>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+____ test_retention_only_query_matches_full_distance_classifier[0.0-torus] _____
+
+case = 'torus', tolerance = 0.0
+
+    @pytest.mark.parametrize("case", ["torus", "cavity-and-components"])
+    @pytest.mark.parametrize("tolerance", [0.0, 1e-100, 0.4, 0.99])
+    def test_retention_only_query_matches_full_distance_classifier(case, tolerance):
+        from scipy.spatial import Delaunay
+    
+        if case == "torus":
+            boundary = torus(16, 8)
+        else:
+            inner = cube(0.4)
+            boundary = combine(cube(), (inner[0], inner[1][:, ::-1].copy()), cube(0.5, (4, 0, 0)))
+>       domain = warpower.SurfaceDomain(*boundary)
+
+tests/test_selective.py:377: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (768,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce65d480>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_ test_retention_only_query_matches_full_distance_classifier[0.0-cavity-and-components] _
+
+case = 'cavity-and-components', tolerance = 0.0
+
+    @pytest.mark.parametrize("case", ["torus", "cavity-and-components"])
+    @pytest.mark.parametrize("tolerance", [0.0, 1e-100, 0.4, 0.99])
+    def test_retention_only_query_matches_full_distance_classifier(case, tolerance):
+        from scipy.spatial import Delaunay
+    
+        if case == "torus":
+            boundary = torus(16, 8)
+        else:
+            inner = cube(0.4)
+            boundary = combine(cube(), (inner[0], inner[1][:, ::-1].copy()), cube(0.5, (4, 0, 0)))
+>       domain = warpower.SurfaceDomain(*boundary)
+
+tests/test_selective.py:377: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (108,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce7cd380>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+___ test_retention_only_query_matches_full_distance_classifier[1e-100-torus] ___
+
+case = 'torus', tolerance = 1e-100
+
+    @pytest.mark.parametrize("case", ["torus", "cavity-and-components"])
+    @pytest.mark.parametrize("tolerance", [0.0, 1e-100, 0.4, 0.99])
+    def test_retention_only_query_matches_full_distance_classifier(case, tolerance):
+        from scipy.spatial import Delaunay
+    
+        if case == "torus":
+            boundary = torus(16, 8)
+        else:
+            inner = cube(0.4)
+            boundary = combine(cube(), (inner[0], inner[1][:, ::-1].copy()), cube(0.5, (4, 0, 0)))
+>       domain = warpower.SurfaceDomain(*boundary)
+
+tests/test_selective.py:377: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (768,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce213a00>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_ test_retention_only_query_matches_full_distance_classifier[1e-100-cavity-and-components] _
+
+case = 'cavity-and-components', tolerance = 1e-100
+
+    @pytest.mark.parametrize("case", ["torus", "cavity-and-components"])
+    @pytest.mark.parametrize("tolerance", [0.0, 1e-100, 0.4, 0.99])
+    def test_retention_only_query_matches_full_distance_classifier(case, tolerance):
+        from scipy.spatial import Delaunay
+    
+        if case == "torus":
+            boundary = torus(16, 8)
+        else:
+            inner = cube(0.4)
+            boundary = combine(cube(), (inner[0], inner[1][:, ::-1].copy()), cube(0.5, (4, 0, 0)))
+>       domain = warpower.SurfaceDomain(*boundary)
+
+tests/test_selective.py:377: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (108,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce0ba880>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+____ test_retention_only_query_matches_full_distance_classifier[0.4-torus] _____
+
+case = 'torus', tolerance = 0.4
+
+    @pytest.mark.parametrize("case", ["torus", "cavity-and-components"])
+    @pytest.mark.parametrize("tolerance", [0.0, 1e-100, 0.4, 0.99])
+    def test_retention_only_query_matches_full_distance_classifier(case, tolerance):
+        from scipy.spatial import Delaunay
+    
+        if case == "torus":
+            boundary = torus(16, 8)
+        else:
+            inner = cube(0.4)
+            boundary = combine(cube(), (inner[0], inner[1][:, ::-1].copy()), cube(0.5, (4, 0, 0)))
+>       domain = warpower.SurfaceDomain(*boundary)
+
+tests/test_selective.py:377: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (768,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce7a6e00>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_ test_retention_only_query_matches_full_distance_classifier[0.4-cavity-and-components] _
+
+case = 'cavity-and-components', tolerance = 0.4
+
+    @pytest.mark.parametrize("case", ["torus", "cavity-and-components"])
+    @pytest.mark.parametrize("tolerance", [0.0, 1e-100, 0.4, 0.99])
+    def test_retention_only_query_matches_full_distance_classifier(case, tolerance):
+        from scipy.spatial import Delaunay
+    
+        if case == "torus":
+            boundary = torus(16, 8)
+        else:
+            inner = cube(0.4)
+            boundary = combine(cube(), (inner[0], inner[1][:, ::-1].copy()), cube(0.5, (4, 0, 0)))
+>       domain = warpower.SurfaceDomain(*boundary)
+
+tests/test_selective.py:377: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (108,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce0988c0>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+____ test_retention_only_query_matches_full_distance_classifier[0.99-torus] ____
+
+case = 'torus', tolerance = 0.99
+
+    @pytest.mark.parametrize("case", ["torus", "cavity-and-components"])
+    @pytest.mark.parametrize("tolerance", [0.0, 1e-100, 0.4, 0.99])
+    def test_retention_only_query_matches_full_distance_classifier(case, tolerance):
+        from scipy.spatial import Delaunay
+    
+        if case == "torus":
+            boundary = torus(16, 8)
+        else:
+            inner = cube(0.4)
+            boundary = combine(cube(), (inner[0], inner[1][:, ::-1].copy()), cube(0.5, (4, 0, 0)))
+>       domain = warpower.SurfaceDomain(*boundary)
+
+tests/test_selective.py:377: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (768,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce2cb7c0>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_ test_retention_only_query_matches_full_distance_classifier[0.99-cavity-and-components] _
+
+case = 'cavity-and-components', tolerance = 0.99
+
+    @pytest.mark.parametrize("case", ["torus", "cavity-and-components"])
+    @pytest.mark.parametrize("tolerance", [0.0, 1e-100, 0.4, 0.99])
+    def test_retention_only_query_matches_full_distance_classifier(case, tolerance):
+        from scipy.spatial import Delaunay
+    
+        if case == "torus":
+            boundary = torus(16, 8)
+        else:
+            inner = cube(0.4)
+            boundary = combine(cube(), (inner[0], inner[1][:, ::-1].copy()), cube(0.5, (4, 0, 0)))
+>       domain = warpower.SurfaceDomain(*boundary)
+
+tests/test_selective.py:377: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (108,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce69db40>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_ test_retention_only_query_keeps_exact_boundary_face_edge_and_corner_centers[0.0] _
+
+tolerance = 0.0
+
+    @pytest.mark.parametrize("tolerance", [0.0, 0.4])
+    def test_retention_only_query_keeps_exact_boundary_face_edge_and_corner_centers(tolerance):
+        offsets = np.array([[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]], np.float32) / 8
+        centers = np.array([[1, 0, 0], [1, 1, 0], [1, 1, 1]], np.float32)
+        points = (centers[:, None, :] + offsets[None, :, :]).reshape(-1, 3)
+        tets = orient(points, np.arange(12).reshape(-1, 4))
+>       full = compare_retention(warpower.SurfaceDomain(*cube()), points, tets, tolerance)
+
+tests/test_selective.py:389: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (36,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce69cf40>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_ test_retention_only_query_keeps_exact_boundary_face_edge_and_corner_centers[0.4] _
+
+tolerance = 0.4
+
+    @pytest.mark.parametrize("tolerance", [0.0, 0.4])
+    def test_retention_only_query_keeps_exact_boundary_face_edge_and_corner_centers(tolerance):
+        offsets = np.array([[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]], np.float32) / 8
+        centers = np.array([[1, 0, 0], [1, 1, 0], [1, 1, 1]], np.float32)
+        points = (centers[:, None, :] + offsets[None, :, :]).reshape(-1, 3)
+        tets = orient(points, np.arange(12).reshape(-1, 4))
+>       full = compare_retention(warpower.SurfaceDomain(*cube()), points, tets, tolerance)
+
+tests/test_selective.py:389: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (36,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce645800>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+___ test_retention_search_expansion_preserves_strict_threshold_and_neighbors ___
+
+    def test_retention_search_expansion_preserves_strict_threshold_and_neighbors():
+        offsets = np.array([[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]], np.float64)
+        points = (offsets * (0.4 / np.sqrt(3)) + [1.1, 0, 0]).astype(np.float32)
+        tets = orient(points, [[0, 1, 2, 3]])
+>       domain = warpower.SurfaceDomain(*cube())
+
+tests/test_selective.py:397: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (36,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce0260c0>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+________ test_every_optimizer_selection_matches_forced_fresh_evaluation ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f37f51a83d0>
+
+    def test_every_optimizer_selection_matches_forced_fresh_evaluation(monkeypatch):
+>       fitted = initial(256, 20)
+
+tests/test_current_selection.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_selective.py:14: in initial
+    domain = warpower.SurfaceDomain(*torus(24, 12), surface_subdivisions=2)
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (1728,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce100e80>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+___ test_recovered_current_results_match_fresh_with_device_failure_recovery ____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f37ce9eb940>
+
+    def test_recovered_current_results_match_fresh_with_device_failure_recovery(monkeypatch):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:157: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:139: in recovered_selection
+    c.domain = warpower.SurfaceDomain(*cavity())
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (72,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce2da8c0>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_____ test_direct_calls_remain_fresh_even_after_an_accepted_check[select] ______
+
+operation = 'select'
+
+    @pytest.mark.parametrize("operation", ["select", "evaluate"])
+    def test_direct_calls_remain_fresh_even_after_an_accepted_check(operation):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:211: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:139: in recovered_selection
+    c.domain = warpower.SurfaceDomain(*cavity())
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (72,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce098900>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+____ test_direct_calls_remain_fresh_even_after_an_accepted_check[evaluate] _____
+
+operation = 'evaluate'
+
+    @pytest.mark.parametrize("operation", ["select", "evaluate"])
+    def test_direct_calls_remain_fresh_even_after_an_accepted_check(operation):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:211: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:139: in recovered_selection
+    c.domain = warpower.SurfaceDomain(*cavity())
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (72,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37f5027400>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+___ test_interrupted_accepted_evaluation_recomputes_before_selection[reset] ____
+
+invalidate = 'reset'
+
+    @pytest.mark.parametrize("invalidate", ["reset", "_select_all", "rejected_check"])
+    def test_interrupted_accepted_evaluation_recomputes_before_selection(invalidate):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:229: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:139: in recovered_selection
+    c.domain = warpower.SurfaceDomain(*cavity())
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (72,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce103a00>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_ test_interrupted_accepted_evaluation_recomputes_before_selection[_select_all] _
+
+invalidate = '_select_all'
+
+    @pytest.mark.parametrize("invalidate", ["reset", "_select_all", "rejected_check"])
+    def test_interrupted_accepted_evaluation_recomputes_before_selection(invalidate):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:229: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:139: in recovered_selection
+    c.domain = warpower.SurfaceDomain(*cavity())
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (72,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce65d3c0>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+_ test_interrupted_accepted_evaluation_recomputes_before_selection[rejected_check] _
+
+invalidate = 'rejected_check'
+
+    @pytest.mark.parametrize("invalidate", ["reset", "_select_all", "rejected_check"])
+    def test_interrupted_accepted_evaluation_recomputes_before_selection(invalidate):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:229: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:139: in recovered_selection
+    c.domain = warpower.SurfaceDomain(*cavity())
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.work/vtm/run_cooperative_retained_v1.py:17: in launch
+    return original(kernel, dim=dim, inputs=inputs, outputs=outputs, **kwargs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f382251e3b0>, dim = (72,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f37ce65fc80>
+outputs = None, adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = None, adjoint = False, record_tape = True, record_cmd = False
+max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+>           fwd_args.extend(outputs)
+E           TypeError: 'NoneType' object is not iterable
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12023: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_selective.py::test_selective_mask_matches_exactly_one_retained_neighbor_ring
+FAILED tests/test_selective.py::test_unselected_positions_stay_fixed_and_retained_minimum_does_not_decrease
+FAILED tests/test_selective.py::test_selective_updates_improve_a_fitted_torus_worst_element
+FAILED tests/test_selective.py::test_no_poor_elements_stops_without_an_update
+FAILED tests/test_selective.py::test_rejected_quality_updates_restore_original_geometry_and_statistics
+FAILED tests/test_selective.py::test_empty_retained_domain_fails_and_recovers_in_device_producer_loop
+FAILED tests/test_selective.py::test_graded_selective_active_prefix_preserves_tail_and_corner_anchors
+FAILED tests/test_selective.py::test_captured_selective_updates_and_quality_guard_execute_without_host_work
+FAILED tests/test_selective.py::test_selection_configuration_is_validated - T...
+FAILED tests/test_selective.py::test_retention_only_query_matches_full_distance_classifier[0.0-torus]
+FAILED tests/test_selective.py::test_retention_only_query_matches_full_distance_classifier[0.0-cavity-and-components]
+FAILED tests/test_selective.py::test_retention_only_query_matches_full_distance_classifier[1e-100-torus]
+FAILED tests/test_selective.py::test_retention_only_query_matches_full_distance_classifier[1e-100-cavity-and-components]
+FAILED tests/test_selective.py::test_retention_only_query_matches_full_distance_classifier[0.4-torus]
+FAILED tests/test_selective.py::test_retention_only_query_matches_full_distance_classifier[0.4-cavity-and-components]
+FAILED tests/test_selective.py::test_retention_only_query_matches_full_distance_classifier[0.99-torus]
+FAILED tests/test_selective.py::test_retention_only_query_matches_full_distance_classifier[0.99-cavity-and-components]
+FAILED tests/test_selective.py::test_retention_only_query_keeps_exact_boundary_face_edge_and_corner_centers[0.0]
+FAILED tests/test_selective.py::test_retention_only_query_keeps_exact_boundary_face_edge_and_corner_centers[0.4]
+FAILED tests/test_selective.py::test_retention_search_expansion_preserves_strict_threshold_and_neighbors
+FAILED tests/test_current_selection.py::test_every_optimizer_selection_matches_forced_fresh_evaluation
+FAILED tests/test_current_selection.py::test_recovered_current_results_match_fresh_with_device_failure_recovery
+FAILED tests/test_current_selection.py::test_direct_calls_remain_fresh_even_after_an_accepted_check[select]
+FAILED tests/test_current_selection.py::test_direct_calls_remain_fresh_even_after_an_accepted_check[evaluate]
+FAILED tests/test_current_selection.py::test_interrupted_accepted_evaluation_recomputes_before_selection[reset]
+FAILED tests/test_current_selection.py::test_interrupted_accepted_evaluation_recomputes_before_selection[_select_all]
+FAILED tests/test_current_selection.py::test_interrupted_accepted_evaluation_recomputes_before_selection[rejected_check]
+27 failed in 7.74s

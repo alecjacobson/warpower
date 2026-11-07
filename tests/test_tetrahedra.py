@@ -1,3 +1,5 @@
+from fractions import Fraction
+
 import numpy as np
 import pytest
 import warp as wp
@@ -26,6 +28,27 @@ def check_mesh(points, tets):
     signed_six_volumes = np.einsum(
         "ij,ij->i", p[:, 1] - p[:, 0], np.cross(p[:, 2] - p[:, 0], p[:, 3] - p[:, 0])
     )
+    # The independent checker must not repeat extraction's cancellation bug.
+    # Use exact rational differences/products in ambiguous cases, never clamp
+    # or ignore a zero/negative floating-point estimate.
+    a, b, c = p[:, 1] - p[:, 0], p[:, 2] - p[:, 0], p[:, 3] - p[:, 0]
+    magnitude = sum(
+        np.abs(a[:, j])
+        * (
+            np.abs(b[:, (j + 1) % 3] * c[:, (j + 2) % 3])
+            + np.abs(b[:, (j + 2) % 3] * c[:, (j + 1) % 3])
+        )
+        for j in range(3)
+    )
+    for i in np.flatnonzero(np.abs(signed_six_volumes) <= 1e-12 * magnitude):
+        row = [[Fraction(float(x)) for x in vertex] for vertex in p[i]]
+        a0, b0, c0 = [[x - y for x, y in zip(vertex, row[0])] for vertex in row[1:]]
+        signed_six_volumes[i] = float(
+            sum(
+                a0[j] * (b0[(j + 1) % 3] * c0[(j + 2) % 3] - b0[(j + 2) % 3] * c0[(j + 1) % 3])
+                for j in range(3)
+            )
+        )
     assert np.all(signed_six_volumes > 0)
     assert np.isclose(signed_six_volumes.sum() / 6, ConvexHull(points).volume, rtol=1e-9)
     faces = {}

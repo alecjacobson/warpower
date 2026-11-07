@@ -45,9 +45,12 @@ boundary fitting, and adequate site resolution remain necessary.
 Inputs must be a nonoverlapping, positively oriented tetrahedral complex. For
 the paper's interpretation, use the complete Delaunay triangulation. Extraction
 checks index validity, finite referenced positions, positive determinants, and
-finite circumcenter calculations. It does **not** independently certify empty
-spheres or test arbitrary tetrahedron intersections. `DiagramWorkspace` provides
-the separate full-hull Delaunay validation. Weighted regular tetrahedra can be
+finite circumcenter calculations. Cancellation-prone cells use a
+[wide integer-geometry fallback](extraction-geometry.md) for physical determinant
+and circumcenter estimates; extraction centers remain float64. It does **not**
+independently certify empty spheres or test arbitrary tetrahedron intersections.
+`DelaunayWorkspace` provides separate original-coordinate full-hull certification.
+Weighted regular tetrahedra can be
 passed as connectivity, but this extractor always uses **ordinary geometric
 circumcenters**, not power centers.
 

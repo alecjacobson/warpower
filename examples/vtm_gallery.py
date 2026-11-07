@@ -181,6 +181,21 @@ def main():
         steps=mesh.steps.numpy().tolist(),
         moves=mesh.moves.numpy().tolist(),
         last_errors=mesh.last_errors.numpy().tolist(),
+        refinement_rejections=int(mesh.refinement_rejections.numpy()[0]),
+        quality_rejections=int(mesh.quality_rejections.numpy()[0]),
+        last_bad_extraction=int(mesh.last_bad_extraction.numpy()[0]),
+        final_extraction_error=int(mesh.extraction.error.numpy()[0]),
+        final_extraction_diagnostics=int(mesh.extraction.diagnostics.numpy()[0]),
+        last_quality_stage_errors={
+            name: None if stage is None else int(stage.error.numpy()[0])
+            for name, stage in (
+                ("selection", mesh.core.selection),
+                ("jitter", mesh.jitter),
+                ("interior", mesh.interior),
+                ("bounded_dual", None if mesh.interior is None else mesh.interior.cells),
+            )
+        },
+        quality_stage_diagnostic_scope="Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
     )
     if result["valid"]:
         n, full_count, m, boundary_count = result["counts"]

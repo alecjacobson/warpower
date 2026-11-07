@@ -14,6 +14,7 @@ pip install -e '.[dev,bench]'
 python -m examples.vtm_gallery --case torus --n 1000 --output results/local/torus
 python -m examples.vtm_gallery --case graded-torus --n 1000 --output results/local/graded-torus
 python -m examples.vtm_gallery --case thin-hand --n 1000 --output results/local/thin-hand
+python -m examples.vtm_gallery --case counterbored-plate --n 1000 --output results/local/plate
 python -m examples.vtm_gallery --case cavity --n 1000 --output results/local/cavity
 python -m examples.vtm_gallery --case disconnected --n 1000 --output results/local/disconnected
 ```
@@ -22,8 +23,12 @@ The uniform and prescribed-graded torus, thin hand, cavity and separated
 components have completed full solves with independent quality and topology
 checks. The [uniform and graded scanned Armadillo](scanned-armadillo.md) examples add a
 dense imported surface with pinned provenance and independent validation. The
-graded case uses bounded exterior-band recovery for its material boundary. The broader gallery remains
-tracked in [issue #39](https://github.com/alecjacobson/warpower/issues/39).
+graded case uses bounded exterior-band recovery for its material boundary. The
+[counterbored plate](mechanical-plate.md) adds a mechanical part with eight exact
+corners, four bore rims, independently measured crease fit and exported meshes.
+It runs in 1.629 s at 1,000 sites; approximate crease fitting still has measurable
+limitations tracked in [issue #149](https://github.com/alecjacobson/warpower/issues/149).
+The gallery milestone is [issue #39](https://github.com/alecjacobson/warpower/issues/39).
 
 The thin hand is a new extruded palm with five narrow fingers and sharp corners,
 not the scanned hand from Alliez et al. The torus tests nonconvex topology;

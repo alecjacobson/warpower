@@ -251,3 +251,56 @@ def test_support_kernel_reports_incomplete_traversal_like_original(failure, bit)
         wp.launch(kernel, 1, inputs=args, block_dim=32, device=seed.points.device)
         codes.append(int(error.numpy()[0]))
     assert codes[0] == codes[1] and codes[1] & bit
+
+
+@pytest.mark.parametrize("depth", [0, 5])
+def test_support_replay_rechecks_changed_witnesses_and_all_strided_slots(depth):
+    points = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [0.1, 0.1, 0.1]], np.float32)
+    tets = np.array([[0, 1, 2, 3]], np.int32)
+    seed, _, retained = seed_fixture(points, tets)
+    hierarchy = retained[0]
+    faces = np.tile(np.array([1, 3, 0, 2], np.int32), 5)
+    boundary = wp.array(faces, dtype=int, device=seed.points.device)
+    count = wp.full(1, len(faces), dtype=int, device=seed.points.device)
+    supported = wp.zeros(len(faces), dtype=int, device=seed.points.device)
+    errors = wp.zeros(2, dtype=int, device=seed.points.device)
+    workers = 2  # Ten strided slots each, including faces after a witness.
+    with wp.ScopedCapture() as capture:
+        errors.zero_()
+        supported.fill_(1)
+        for i, kernel in enumerate([check_faces, record_face_support]):
+            args = [
+                seed.points,
+                seed.source,
+                boundary,
+                count,
+                seed.tree,
+                errors[i : i + 1],
+                depth,
+                workers,
+            ]
+            if i:
+                args += [supported]
+            wp.launch(
+                kernel, workers * (1 << depth), inputs=args, block_dim=32, device=seed.points.device
+            )
+    # Refit inputs before replay, as required by the internal kernel contract.
+    # The captured support graph itself is reused for every frame.
+    frames = [
+        ([0.1, 0.1, 0.1], len(faces)),
+        ([-0.5, 0.1, 0.1], len(faces)),
+        ([0.1, -0.5, 0.1], len(faces)),
+        ([0.1, -0.5, 0.1], 0),
+        ([0.1, 0.1, 0.1], len(faces)),
+    ]
+    for query, active in frames:
+        points[4] = query
+        seed.points.assign(points)
+        hierarchy.rebuild()
+        count.fill_(active)
+        supported.zero_()  # Stale bits must not survive the next graph launch.
+        wp.capture_launch(capture.graph)
+        expected = np.ones(len(faces), np.int32)
+        expected[:active] = support_oracle(points, tets, faces[:active])
+        np.testing.assert_array_equal(supported.numpy(), expected)
+        np.testing.assert_array_equal(errors.numpy(), [64 if np.any(expected == 0) else 0] * 2)

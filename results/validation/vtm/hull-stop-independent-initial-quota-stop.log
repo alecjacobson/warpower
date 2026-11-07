@@ -1,0 +1,12 @@
+checked torus1000
+checked torus4096
+checked graded-torus
+checked thin-hand
+checked cavity
+checked disconnected
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/check-hull-stop-results.py", line 66, in <module>
+    rp,mp,vtu=files('after',case);d=json.loads(rp.read_text());quota(d)
+  File "/home/horde/projects/power-diagram/.work/vtm/check-hull-stop-results.py", line 17, in quota
+    if k in d:assert all(v['throttled_periods']==0 for v in d[k].values()),(k,d[k])
+AssertionError: ('cpu_quota_delta', {'4': {'cpu_cores': 4.0, 'throttled_periods': 4, 'throttled_usec': 265820}, '3': {'cpu_cores': 4.0, 'throttled_periods': 4, 'throttled_usec': 265963}})

@@ -1,0 +1,199 @@
+[
+  {
+    "name": "full-suite",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 277.20509696006775
+  },
+  {
+    "name": "memcheck-support",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.memcheck",
+      "--stack-bytes",
+      "131072",
+      "--",
+      "-q",
+      "tests/test_support_reuse.py"
+    ],
+    "exit_code": 0,
+    "seconds": 4.421653509140015
+  },
+  {
+    "name": "memcheck-proofs",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.memcheck",
+      "--stack-bytes",
+      "131072",
+      "--",
+      "-q",
+      "tests/test_proved_completion.py"
+    ],
+    "exit_code": 0,
+    "seconds": 148.26797890663147
+  },
+  {
+    "name": "memcheck-reuse",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.memcheck",
+      "--stack-bytes",
+      "131072",
+      "--",
+      "-q",
+      "tests/test_reuse_delaunay.py"
+    ],
+    "exit_code": 0,
+    "seconds": 14.485648393630981
+  },
+  {
+    "name": "memcheck-refinement",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.memcheck",
+      "--stack-bytes",
+      "131072",
+      "--",
+      "-q",
+      "tests/test_refinement.py::test_ranked_insertion_matches_independent_uniform_and_graded_oracles",
+      "tests/test_refinement.py::test_captured_producer_refinement_consumer_recovers_and_has_no_host_work"
+    ],
+    "exit_code": 0,
+    "seconds": 15.41118335723877
+  },
+  {
+    "name": "lifetime",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/hull-stop-lifetime.py",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/hull-stop-lifetime.json"
+    ],
+    "exit_code": 0,
+    "seconds": 19.65301823616028
+  },
+  {
+    "name": "native",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--capture-range=cudaProfilerApi",
+      "--capture-range-end=stop",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/hull-stop-native",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--repeats",
+      "3",
+      "--profile",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/hull-stop-native.dot",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/hull-stop-native.json"
+    ],
+    "exit_code": 0,
+    "seconds": 18.786508798599243
+  },
+  {
+    "name": "native-export",
+    "command": [
+      "nsys",
+      "export",
+      "--type",
+      "sqlite",
+      "--force-overwrite=true",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/hull-stop-native.sqlite",
+      "/home/horde/projects/power-diagram/.work/vtm/hull-stop-native.nsys-rep"
+    ],
+    "exit_code": 0,
+    "seconds": 0.46471667289733887
+  },
+  {
+    "name": "native-audit",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.graph_capture",
+      "--analyze",
+      "/home/horde/projects/power-diagram/.work/vtm/hull-stop-native.sqlite",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/hull-stop-native.dot",
+      "--scope",
+      "Three complete fresh resident torus1000 solves with shared exact exterior witnesses. Setup, warmup and readback excluded; one final synchronization.",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/hull-stop-native-audit.json"
+    ],
+    "exit_code": 0,
+    "seconds": 0.07963776588439941
+  },
+  {
+    "name": "mesher-loop",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher_loop",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/hull-stop-mesher-loop.json"
+    ],
+    "exit_code": 0,
+    "seconds": 13.741610527038574
+  }
+]

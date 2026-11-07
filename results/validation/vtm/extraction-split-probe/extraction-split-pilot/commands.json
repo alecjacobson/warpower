@@ -1,0 +1,39 @@
+[
+  {
+    "name": "control",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--repeats",
+      "5",
+      "--save-mesh",
+      "/home/horde/projects/power-diagram/.work/vtm/extraction-split-pilot/control.npz",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/extraction-split-pilot/control.json"
+    ],
+    "source": "9228a3e7b3804b0cf1b191976477e35c25dc47ef",
+    "exit_code": 0,
+    "wall_seconds": 9.025975942611694
+  },
+  {
+    "name": "split",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/run-extraction-split.py",
+      "--n",
+      "1000",
+      "--repeats",
+      "5",
+      "--save-mesh",
+      "/home/horde/projects/power-diagram/.work/vtm/extraction-split-pilot/split.npz",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/extraction-split-pilot/split.json"
+    ],
+    "source": "9228a3e7b3804b0cf1b191976477e35c25dc47ef",
+    "exit_code": 0,
+    "wall_seconds": 8.97701382637024
+  }
+]

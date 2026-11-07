@@ -1,0 +1,1391 @@
+{
+  "scope": "Static final-mesh classification kernels only. All inputs are fixed current validated meshes. Includes error reset in each graph; geometry preparation is included only in full/prepare/split paths. Query-only rows intentionally reuse immutable prepared geometry. Not whole-mesher timings, no setup comparison, and no adoption claim. Invalid-input/failure semantics of any future split remain unvalidated.",
+  "runtime": "305758fac0575cfb4c7ded604df02a52560905ce",
+  "cases": {
+    "torus1000": {
+      "input": "results/validation/vtm/recovery-classification/recovery-classification-final/torus1000-after.npz",
+      "input_sha256": "ac3112f62733aa12e0871396f3a3e07ced483346f626b1b4e45e55d1281381bb",
+      "sites": 1000,
+      "tetrahedra": 5826,
+      "geometry_categories": {
+        "ordinary": 5826,
+        "uncertain_exact_fallback": 0
+      },
+      "rows": {
+        "full": {
+          "gpu_ms": [
+            4.034848213195801,
+            4.058847904205322,
+            4.027584075927734,
+            4.057919979095459,
+            4.026688098907471,
+            4.055424213409424,
+            4.029088020324707,
+            4.055840015411377,
+            4.028160095214844,
+            4.056575775146484,
+            4.026976108551025,
+            4.055967807769775,
+            4.028768062591553,
+            4.057407855987549,
+            4.029632091522217,
+            4.055520057678223,
+            4.025568008422852,
+            4.05676794052124,
+            4.0261759757995605,
+            4.055071830749512
+          ],
+          "median_ms": 4.044960021972656,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "110308fa0f3c4c40f60fb89d6677b18803cc004c01413cf8254ae2506411105c",
+            "circumradii": "40c79d02287ffe405b82f911088c3f621ca45d82fa1c9ca68210703ef86b5c17",
+            "signed_distance": "f1eedd457bc6443ef3810a3b1033361ef23b79fc2f9a6c2d7f6eb1ae0341106a",
+            "selected": "f804e5d65894e9772b9927935631861d8a356c54af152ad99e361f0b9d3de24a",
+            "_input_volume": "aa3d2480a617f2b2fb13e66b76a782e84c3fe5caf6bbe87164e32f4ff6f3700f",
+            "_input_quality": "b7c46000a59c7aeaf406565521cebc1a731854e6225c5a3d01f4dbc94d5769f5"
+          }
+        },
+        "prepare_only": {
+          "gpu_ms": [
+            0.015456000342965126,
+            0.011615999974310398,
+            0.011103999800980091,
+            0.011392000131309032,
+            0.011103999800980091,
+            0.01152000017464161,
+            0.011136000044643879,
+            0.011487999930977821,
+            0.01142400037497282,
+            0.011168000288307667,
+            0.011552000418305397,
+            0.011008000001311302,
+            0.011008000001311302,
+            0.01104000024497509,
+            0.010816000401973724,
+            0.01104000024497509,
+            0.010975999757647514,
+            0.011008000001311302,
+            0.01152000017464161,
+            0.011231999844312668
+          ],
+          "median_ms": 0.011152000166475773,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "110308fa0f3c4c40f60fb89d6677b18803cc004c01413cf8254ae2506411105c",
+            "circumradii": "40c79d02287ffe405b82f911088c3f621ca45d82fa1c9ca68210703ef86b5c17",
+            "signed_distance": "f1eedd457bc6443ef3810a3b1033361ef23b79fc2f9a6c2d7f6eb1ae0341106a",
+            "selected": "359400e182fba690b9394441cfa2941bd78931c03e12d40d713a2fa4e940babc",
+            "_input_volume": "aa3d2480a617f2b2fb13e66b76a782e84c3fe5caf6bbe87164e32f4ff6f3700f",
+            "_input_quality": "b7c46000a59c7aeaf406565521cebc1a731854e6225c5a3d01f4dbc94d5769f5"
+          }
+        },
+        "full_query_only": {
+          "gpu_ms": [
+            3.941312074661255,
+            3.9257280826568604,
+            3.93503999710083,
+            3.9259839057922363,
+            3.9338879585266113,
+            3.924704074859619,
+            3.936192035675049,
+            3.9257280826568604,
+            3.9372799396514893,
+            3.928800106048584,
+            3.934688091278076,
+            3.9250879287719727,
+            3.9345920085906982,
+            3.926815986633301,
+            3.931488037109375,
+            3.921344041824341,
+            3.935551881790161,
+            3.925920009613037,
+            3.9343678951263428,
+            3.9256958961486816
+          ],
+          "median_ms": 3.9301440715789795,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "110308fa0f3c4c40f60fb89d6677b18803cc004c01413cf8254ae2506411105c",
+            "circumradii": "40c79d02287ffe405b82f911088c3f621ca45d82fa1c9ca68210703ef86b5c17",
+            "signed_distance": "f1eedd457bc6443ef3810a3b1033361ef23b79fc2f9a6c2d7f6eb1ae0341106a",
+            "selected": "f804e5d65894e9772b9927935631861d8a356c54af152ad99e361f0b9d3de24a",
+            "_input_volume": "aa3d2480a617f2b2fb13e66b76a782e84c3fe5caf6bbe87164e32f4ff6f3700f",
+            "_input_quality": "b7c46000a59c7aeaf406565521cebc1a731854e6225c5a3d01f4dbc94d5769f5"
+          }
+        },
+        "full_split": {
+          "gpu_ms": [
+            3.9384000301361084,
+            3.9335360527038574,
+            3.9326400756835938,
+            3.9374399185180664,
+            3.9311039447784424,
+            3.9376959800720215,
+            3.932352066040039,
+            3.935231924057007,
+            3.9321279525756836,
+            3.9329280853271484,
+            3.9315199851989746,
+            3.9311680793762207,
+            3.9328958988189697,
+            3.9337921142578125,
+            3.9312000274658203,
+            3.9319679737091064,
+            3.93174409866333,
+            3.9329280853271484,
+            3.9318718910217285,
+            3.935839891433716
+          ],
+          "median_ms": 3.9327679872512817,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "110308fa0f3c4c40f60fb89d6677b18803cc004c01413cf8254ae2506411105c",
+            "circumradii": "40c79d02287ffe405b82f911088c3f621ca45d82fa1c9ca68210703ef86b5c17",
+            "signed_distance": "f1eedd457bc6443ef3810a3b1033361ef23b79fc2f9a6c2d7f6eb1ae0341106a",
+            "selected": "f804e5d65894e9772b9927935631861d8a356c54af152ad99e361f0b9d3de24a",
+            "_input_volume": "aa3d2480a617f2b2fb13e66b76a782e84c3fe5caf6bbe87164e32f4ff6f3700f",
+            "_input_quality": "b7c46000a59c7aeaf406565521cebc1a731854e6225c5a3d01f4dbc94d5769f5"
+          }
+        },
+        "private": {
+          "gpu_ms": [
+            3.8800320625305176,
+            3.876192092895508,
+            3.870784044265747,
+            3.873055934906006,
+            3.874272108078003,
+            3.872960090637207,
+            3.8708159923553467,
+            3.8718719482421875,
+            3.8728959560394287,
+            3.8724799156188965,
+            3.8704640865325928,
+            3.871903896331787,
+            3.8707520961761475,
+            3.8737599849700928,
+            3.871040105819702,
+            3.876960039138794,
+            3.8714559078216553,
+            3.87225604057312,
+            3.87007999420166,
+            3.872544050216675
+          ],
+          "median_ms": 3.8723679780960083,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "110308fa0f3c4c40f60fb89d6677b18803cc004c01413cf8254ae2506411105c",
+            "circumradii": "40c79d02287ffe405b82f911088c3f621ca45d82fa1c9ca68210703ef86b5c17",
+            "signed_distance": "f00ad586cf9bed6c28837d0ac02d0145bc6b05e4d9976b6924036587959cebce",
+            "selected": "f804e5d65894e9772b9927935631861d8a356c54af152ad99e361f0b9d3de24a",
+            "_input_volume": "aa3d2480a617f2b2fb13e66b76a782e84c3fe5caf6bbe87164e32f4ff6f3700f",
+            "_input_quality": "b7c46000a59c7aeaf406565521cebc1a731854e6225c5a3d01f4dbc94d5769f5"
+          }
+        },
+        "private_query_only": {
+          "gpu_ms": [
+            3.7908480167388916,
+            3.7944960594177246,
+            3.78438401222229,
+            3.793503999710083,
+            3.782975912094116,
+            3.7964799404144287,
+            3.7875521183013916,
+            3.7923200130462646,
+            3.7830400466918945,
+            3.788896083831787,
+            3.7833919525146484,
+            3.797312021255493,
+            3.7836480140686035,
+            3.7933759689331055,
+            3.7822721004486084,
+            3.793600082397461,
+            3.7832961082458496,
+            3.795423984527588,
+            3.7818241119384766,
+            3.7923200130462646
+          ],
+          "median_ms": 3.7898720502853394,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "110308fa0f3c4c40f60fb89d6677b18803cc004c01413cf8254ae2506411105c",
+            "circumradii": "40c79d02287ffe405b82f911088c3f621ca45d82fa1c9ca68210703ef86b5c17",
+            "signed_distance": "f00ad586cf9bed6c28837d0ac02d0145bc6b05e4d9976b6924036587959cebce",
+            "selected": "f804e5d65894e9772b9927935631861d8a356c54af152ad99e361f0b9d3de24a",
+            "_input_volume": "aa3d2480a617f2b2fb13e66b76a782e84c3fe5caf6bbe87164e32f4ff6f3700f",
+            "_input_quality": "b7c46000a59c7aeaf406565521cebc1a731854e6225c5a3d01f4dbc94d5769f5"
+          }
+        },
+        "private_split": {
+          "gpu_ms": [
+            3.804095983505249,
+            3.7983040809631348,
+            3.7974720001220703,
+            3.7995519638061523,
+            3.7971839904785156,
+            3.8006720542907715,
+            3.800031900405884,
+            3.799168109893799,
+            3.799839973449707,
+            3.7981760501861572,
+            3.7981760501861572,
+            3.7999680042266846,
+            3.7982399463653564,
+            3.7985920906066895,
+            3.798207998275757,
+            3.7971839904785156,
+            3.7994558811187744,
+            3.7990400791168213,
+            3.799839973449707,
+            3.798271894454956
+          ],
+          "median_ms": 3.7988160848617554,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "110308fa0f3c4c40f60fb89d6677b18803cc004c01413cf8254ae2506411105c",
+            "circumradii": "40c79d02287ffe405b82f911088c3f621ca45d82fa1c9ca68210703ef86b5c17",
+            "signed_distance": "f00ad586cf9bed6c28837d0ac02d0145bc6b05e4d9976b6924036587959cebce",
+            "selected": "f804e5d65894e9772b9927935631861d8a356c54af152ad99e361f0b9d3de24a",
+            "_input_volume": "aa3d2480a617f2b2fb13e66b76a782e84c3fe5caf6bbe87164e32f4ff6f3700f",
+            "_input_quality": "b7c46000a59c7aeaf406565521cebc1a731854e6225c5a3d01f4dbc94d5769f5"
+          }
+        }
+      }
+    },
+    "torus4096": {
+      "input": "results/validation/vtm/recovery-classification/recovery-classification-final/torus4096-after.npz",
+      "input_sha256": "eda4afbd3d7c4fdfe0cd502cd9605f0570c75942680fea297b8fd95b965451c8",
+      "sites": 4096,
+      "tetrahedra": 24519,
+      "geometry_categories": {
+        "ordinary": 24519,
+        "uncertain_exact_fallback": 0
+      },
+      "rows": {
+        "full": {
+          "gpu_ms": [
+            8.942303657531738,
+            8.946271896362305,
+            8.939007759094238,
+            8.943103790283203,
+            8.939104080200195,
+            8.943840026855469,
+            8.938464164733887,
+            8.940832138061523,
+            8.939167976379395,
+            8.943136215209961,
+            8.93830394744873,
+            8.943743705749512,
+            8.93887996673584,
+            8.943136215209961,
+            8.938912391662598,
+            8.944928169250488,
+            8.941311836242676,
+            8.944448471069336,
+            8.939104080200195,
+            8.943648338317871
+          ],
+          "median_ms": 8.941807746887207,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "8036365d8c5d9d7de830644b71b083546326071fd6b057027f475fe7ae05b061",
+            "circumradii": "41efe7aaa5ad902667216637bf86ad966b55a54599a811af305d8082009c334e",
+            "signed_distance": "a30221211e817177d49e1bb5e48a9da9c4ab5eb78654fc83b282b0ce37f7067f",
+            "selected": "7e15e09f4aaeb655ece5c7db0767cee756ae1a06968a49abe60e3140db9cd560",
+            "_input_volume": "3dd06eb8fc50b05658fefe3b78077813a9a2d0d8526dfc74ef069e78e12e6247",
+            "_input_quality": "cd67a3fc9fa54870bddc5d5a64252dfd98e7e94ffe1ba4cf6ea10ab9419e9ec5"
+          }
+        },
+        "prepare_only": {
+          "gpu_ms": [
+            0.022655999287962914,
+            0.018015999346971512,
+            0.017343999817967415,
+            0.017920000478625298,
+            0.01756799966096878,
+            0.017311999574303627,
+            0.01744000054895878,
+            0.017823999747633934,
+            0.016992000862956047,
+            0.017152000218629837,
+            0.01727999933063984,
+            0.017311999574303627,
+            0.017216000705957413,
+            0.017184000462293625,
+            0.017503999173641205,
+            0.017376000061631203,
+            0.017216000705957413,
+            0.017696000635623932,
+            0.017472000792622566,
+            0.01724799908697605
+          ],
+          "median_ms": 0.01735999993979931,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "8036365d8c5d9d7de830644b71b083546326071fd6b057027f475fe7ae05b061",
+            "circumradii": "41efe7aaa5ad902667216637bf86ad966b55a54599a811af305d8082009c334e",
+            "signed_distance": "a30221211e817177d49e1bb5e48a9da9c4ab5eb78654fc83b282b0ce37f7067f",
+            "selected": "227c8fb08bb00c4904d8178c42ebc6a15868a7b058123cf41fe149b265efc528",
+            "_input_volume": "3dd06eb8fc50b05658fefe3b78077813a9a2d0d8526dfc74ef069e78e12e6247",
+            "_input_quality": "cd67a3fc9fa54870bddc5d5a64252dfd98e7e94ffe1ba4cf6ea10ab9419e9ec5"
+          }
+        },
+        "full_query_only": {
+          "gpu_ms": [
+            8.901951789855957,
+            8.900768280029297,
+            8.898271560668945,
+            8.895039558410645,
+            8.899168014526367,
+            8.89846420288086,
+            8.903840065002441,
+            8.898303985595703,
+            8.897695541381836,
+            8.896608352661133,
+            8.897248268127441,
+            8.89737606048584,
+            8.899744033813477,
+            8.899040222167969,
+            8.897472381591797,
+            8.89964771270752,
+            8.899519920349121,
+            8.90015983581543,
+            8.896415710449219,
+            8.916831970214844
+          ],
+          "median_ms": 8.898752212524414,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "8036365d8c5d9d7de830644b71b083546326071fd6b057027f475fe7ae05b061",
+            "circumradii": "41efe7aaa5ad902667216637bf86ad966b55a54599a811af305d8082009c334e",
+            "signed_distance": "a30221211e817177d49e1bb5e48a9da9c4ab5eb78654fc83b282b0ce37f7067f",
+            "selected": "7e15e09f4aaeb655ece5c7db0767cee756ae1a06968a49abe60e3140db9cd560",
+            "_input_volume": "3dd06eb8fc50b05658fefe3b78077813a9a2d0d8526dfc74ef069e78e12e6247",
+            "_input_quality": "cd67a3fc9fa54870bddc5d5a64252dfd98e7e94ffe1ba4cf6ea10ab9419e9ec5"
+          }
+        },
+        "full_split": {
+          "gpu_ms": [
+            8.917311668395996,
+            8.913248062133789,
+            8.912832260131836,
+            8.91164779663086,
+            8.912063598632812,
+            8.911552429199219,
+            8.912256240844727,
+            8.911680221557617,
+            8.912991523742676,
+            8.91097640991211,
+            8.914624214172363,
+            8.911328315734863,
+            8.911935806274414,
+            8.910655975341797,
+            8.908063888549805,
+            8.913599967956543,
+            8.90998363494873,
+            8.910528182983398,
+            8.911968231201172,
+            8.910271644592285
+          ],
+          "median_ms": 8.911808013916016,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "8036365d8c5d9d7de830644b71b083546326071fd6b057027f475fe7ae05b061",
+            "circumradii": "41efe7aaa5ad902667216637bf86ad966b55a54599a811af305d8082009c334e",
+            "signed_distance": "a30221211e817177d49e1bb5e48a9da9c4ab5eb78654fc83b282b0ce37f7067f",
+            "selected": "7e15e09f4aaeb655ece5c7db0767cee756ae1a06968a49abe60e3140db9cd560",
+            "_input_volume": "3dd06eb8fc50b05658fefe3b78077813a9a2d0d8526dfc74ef069e78e12e6247",
+            "_input_quality": "cd67a3fc9fa54870bddc5d5a64252dfd98e7e94ffe1ba4cf6ea10ab9419e9ec5"
+          }
+        },
+        "private": {
+          "gpu_ms": [
+            8.379008293151855,
+            8.373120307922363,
+            8.370240211486816,
+            8.369791984558105,
+            8.36950397491455,
+            8.369440078735352,
+            8.37116813659668,
+            8.368288040161133,
+            8.371423721313477,
+            8.372384071350098,
+            8.368800163269043,
+            8.370400428771973,
+            8.371808052062988,
+            8.370207786560059,
+            8.371071815490723,
+            8.369855880737305,
+            8.371328353881836,
+            8.370559692382812,
+            8.370304107666016,
+            8.368096351623535
+          ],
+          "median_ms": 8.370352268218994,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "8036365d8c5d9d7de830644b71b083546326071fd6b057027f475fe7ae05b061",
+            "circumradii": "41efe7aaa5ad902667216637bf86ad966b55a54599a811af305d8082009c334e",
+            "signed_distance": "613ee0e515126487edd845b018e2a3757c3d88fbe4d382f0d20e2915d3f2c16e",
+            "selected": "7e15e09f4aaeb655ece5c7db0767cee756ae1a06968a49abe60e3140db9cd560",
+            "_input_volume": "3dd06eb8fc50b05658fefe3b78077813a9a2d0d8526dfc74ef069e78e12e6247",
+            "_input_quality": "cd67a3fc9fa54870bddc5d5a64252dfd98e7e94ffe1ba4cf6ea10ab9419e9ec5"
+          }
+        },
+        "private_query_only": {
+          "gpu_ms": [
+            8.372672080993652,
+            8.367168426513672,
+            8.364992141723633,
+            8.364895820617676,
+            8.366463661193848,
+            8.36736011505127,
+            8.367712020874023,
+            8.363871574401855,
+            8.36633586883545,
+            8.367103576660156,
+            8.36355209350586,
+            8.364128112792969,
+            8.365440368652344,
+            8.366623878479004,
+            8.366720199584961,
+            8.365823745727539,
+            8.36796760559082,
+            8.365663528442383,
+            8.363231658935547,
+            8.366144180297852
+          ],
+          "median_ms": 8.36624002456665,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "8036365d8c5d9d7de830644b71b083546326071fd6b057027f475fe7ae05b061",
+            "circumradii": "41efe7aaa5ad902667216637bf86ad966b55a54599a811af305d8082009c334e",
+            "signed_distance": "613ee0e515126487edd845b018e2a3757c3d88fbe4d382f0d20e2915d3f2c16e",
+            "selected": "7e15e09f4aaeb655ece5c7db0767cee756ae1a06968a49abe60e3140db9cd560",
+            "_input_volume": "3dd06eb8fc50b05658fefe3b78077813a9a2d0d8526dfc74ef069e78e12e6247",
+            "_input_quality": "cd67a3fc9fa54870bddc5d5a64252dfd98e7e94ffe1ba4cf6ea10ab9419e9ec5"
+          }
+        },
+        "private_split": {
+          "gpu_ms": [
+            8.386848449707031,
+            8.3821439743042,
+            8.385087966918945,
+            8.37980842590332,
+            8.376928329467773,
+            8.377216339111328,
+            8.377056121826172,
+            8.377568244934082,
+            8.379008293151855,
+            8.378975868225098,
+            8.38054370880127,
+            8.379903793334961,
+            8.379232406616211,
+            8.378751754760742,
+            8.379679679870605,
+            8.378656387329102,
+            8.378687858581543,
+            8.378975868225098,
+            8.379743576049805,
+            8.38047981262207
+          ],
+          "median_ms": 8.379120349884033,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "8036365d8c5d9d7de830644b71b083546326071fd6b057027f475fe7ae05b061",
+            "circumradii": "41efe7aaa5ad902667216637bf86ad966b55a54599a811af305d8082009c334e",
+            "signed_distance": "613ee0e515126487edd845b018e2a3757c3d88fbe4d382f0d20e2915d3f2c16e",
+            "selected": "7e15e09f4aaeb655ece5c7db0767cee756ae1a06968a49abe60e3140db9cd560",
+            "_input_volume": "3dd06eb8fc50b05658fefe3b78077813a9a2d0d8526dfc74ef069e78e12e6247",
+            "_input_quality": "cd67a3fc9fa54870bddc5d5a64252dfd98e7e94ffe1ba4cf6ea10ab9419e9ec5"
+          }
+        }
+      }
+    },
+    "armadillo-uniform": {
+      "input": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-after/mesh.npz",
+      "input_sha256": "aab19435d988119cbb659cd43b21eb73eee8a0093d96cade463e1a10c401479c",
+      "sites": 4096,
+      "tetrahedra": 24721,
+      "geometry_categories": {
+        "ordinary": 24721,
+        "uncertain_exact_fallback": 0
+      },
+      "rows": {
+        "full": {
+          "gpu_ms": [
+            20.894784927368164,
+            20.887807846069336,
+            20.889984130859375,
+            20.882783889770508,
+            20.879199981689453,
+            20.880704879760742,
+            20.874847412109375,
+            20.869184494018555,
+            20.875743865966797,
+            20.87830352783203,
+            20.876447677612305,
+            20.871583938598633,
+            20.87603187561035,
+            20.876447677612305,
+            20.88287925720215,
+            20.87331199645996,
+            20.87276840209961,
+            20.87571144104004,
+            20.875167846679688,
+            20.874048233032227
+          ],
+          "median_ms": 20.876239776611328,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "85dc4722d3224c7b11301fb919278b6a8a23af679e87e4180d74325b65282fde",
+            "circumradii": "bf64105e5edc194741d33ce1f7a401c2df9408e2411caa302254ab7a6e47014f",
+            "signed_distance": "eaf305ffc754d368d7a51571952c66295cd2be9c91451d6416c24fc0d36bb4b6",
+            "selected": "58a9dee10b316b81d1ea91a231aaee18f0843b48212abe2eb349b790fa1d2ee5",
+            "_input_volume": "32e862ad7714f18d918a59028debcc69fd73c578c413a4e9d3a7bf4acd18be27",
+            "_input_quality": "11ed37b07f71876c1f2022859a761d11924aa47cd7def57393400c0d933dc658"
+          }
+        },
+        "prepare_only": {
+          "gpu_ms": [
+            0.023711999878287315,
+            0.0180479995906353,
+            0.01759999990463257,
+            0.017184000462293625,
+            0.017503999173641205,
+            0.017152000218629837,
+            0.017376000061631203,
+            0.01692800037562847,
+            0.017311999574303627,
+            0.016896000131964684,
+            0.0180479995906353,
+            0.017823999747633934,
+            0.01759999990463257,
+            0.017216000705957413,
+            0.01744000054895878,
+            0.017472000792622566,
+            0.01711999997496605,
+            0.017696000635623932,
+            0.017855999991297722,
+            0.017152000218629837
+          ],
+          "median_ms": 0.017456000670790672,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "85dc4722d3224c7b11301fb919278b6a8a23af679e87e4180d74325b65282fde",
+            "circumradii": "bf64105e5edc194741d33ce1f7a401c2df9408e2411caa302254ab7a6e47014f",
+            "signed_distance": "eaf305ffc754d368d7a51571952c66295cd2be9c91451d6416c24fc0d36bb4b6",
+            "selected": "0e50fa3594a67cfbb62e8517047633d5be13ecb5abc5ca96c41b929a7c757135",
+            "_input_volume": "32e862ad7714f18d918a59028debcc69fd73c578c413a4e9d3a7bf4acd18be27",
+            "_input_quality": "11ed37b07f71876c1f2022859a761d11924aa47cd7def57393400c0d933dc658"
+          }
+        },
+        "full_query_only": {
+          "gpu_ms": [
+            20.665056228637695,
+            20.632383346557617,
+            20.627103805541992,
+            20.631135940551758,
+            20.62553596496582,
+            20.637344360351562,
+            20.628511428833008,
+            20.631711959838867,
+            20.635007858276367,
+            20.63327980041504,
+            20.63222312927246,
+            20.62816047668457,
+            20.622432708740234,
+            20.634143829345703,
+            20.62563133239746,
+            20.62495994567871,
+            20.635967254638672,
+            20.627199172973633,
+            20.626976013183594,
+            20.632352828979492
+          ],
+          "median_ms": 20.631423950195312,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "85dc4722d3224c7b11301fb919278b6a8a23af679e87e4180d74325b65282fde",
+            "circumradii": "bf64105e5edc194741d33ce1f7a401c2df9408e2411caa302254ab7a6e47014f",
+            "signed_distance": "eaf305ffc754d368d7a51571952c66295cd2be9c91451d6416c24fc0d36bb4b6",
+            "selected": "58a9dee10b316b81d1ea91a231aaee18f0843b48212abe2eb349b790fa1d2ee5",
+            "_input_volume": "32e862ad7714f18d918a59028debcc69fd73c578c413a4e9d3a7bf4acd18be27",
+            "_input_quality": "11ed37b07f71876c1f2022859a761d11924aa47cd7def57393400c0d933dc658"
+          }
+        },
+        "full_split": {
+          "gpu_ms": [
+            20.646080017089844,
+            20.656063079833984,
+            20.647104263305664,
+            20.652896881103516,
+            20.645824432373047,
+            20.648191452026367,
+            20.671232223510742,
+            20.652223587036133,
+            20.65056037902832,
+            20.637056350708008,
+            20.64771270751953,
+            20.64841651916504,
+            20.644960403442383,
+            20.64486312866211,
+            20.650720596313477,
+            20.64748764038086,
+            20.641727447509766,
+            20.653343200683594,
+            20.648544311523438,
+            20.646272659301758
+          ],
+          "median_ms": 20.64795207977295,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "85dc4722d3224c7b11301fb919278b6a8a23af679e87e4180d74325b65282fde",
+            "circumradii": "bf64105e5edc194741d33ce1f7a401c2df9408e2411caa302254ab7a6e47014f",
+            "signed_distance": "eaf305ffc754d368d7a51571952c66295cd2be9c91451d6416c24fc0d36bb4b6",
+            "selected": "58a9dee10b316b81d1ea91a231aaee18f0843b48212abe2eb349b790fa1d2ee5",
+            "_input_volume": "32e862ad7714f18d918a59028debcc69fd73c578c413a4e9d3a7bf4acd18be27",
+            "_input_quality": "11ed37b07f71876c1f2022859a761d11924aa47cd7def57393400c0d933dc658"
+          }
+        },
+        "private": {
+          "gpu_ms": [
+            12.5448637008667,
+            12.538656234741211,
+            12.538080215454102,
+            12.537247657775879,
+            12.532959938049316,
+            12.532320022583008,
+            12.535743713378906,
+            12.536383628845215,
+            12.535327911376953,
+            12.533760070800781,
+            12.537343978881836,
+            12.536064147949219,
+            12.530976295471191,
+            12.530336380004883,
+            12.536352157592773,
+            12.539104461669922,
+            12.535327911376953,
+            12.53104019165039,
+            12.535039901733398,
+            12.540127754211426
+          ],
+          "median_ms": 12.535903930664062,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "85dc4722d3224c7b11301fb919278b6a8a23af679e87e4180d74325b65282fde",
+            "circumradii": "bf64105e5edc194741d33ce1f7a401c2df9408e2411caa302254ab7a6e47014f",
+            "signed_distance": "f46bd74074187a228f143170e34dc3fa68d1e9ce9a15aae7f80ae1432be473aa",
+            "selected": "58a9dee10b316b81d1ea91a231aaee18f0843b48212abe2eb349b790fa1d2ee5",
+            "_input_volume": "32e862ad7714f18d918a59028debcc69fd73c578c413a4e9d3a7bf4acd18be27",
+            "_input_quality": "11ed37b07f71876c1f2022859a761d11924aa47cd7def57393400c0d933dc658"
+          }
+        },
+        "private_query_only": {
+          "gpu_ms": [
+            12.486656188964844,
+            12.487199783325195,
+            12.49238395690918,
+            12.483263969421387,
+            12.481087684631348,
+            12.481823921203613,
+            12.484095573425293,
+            12.47868824005127,
+            12.483360290527344,
+            12.477408409118652,
+            12.481151580810547,
+            12.482751846313477,
+            12.483327865600586,
+            12.476448059082031,
+            12.48198413848877,
+            12.484288215637207,
+            12.478912353515625,
+            12.489279747009277,
+            12.478879928588867,
+            12.484319686889648
+          ],
+          "median_ms": 12.483007907867432,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "85dc4722d3224c7b11301fb919278b6a8a23af679e87e4180d74325b65282fde",
+            "circumradii": "bf64105e5edc194741d33ce1f7a401c2df9408e2411caa302254ab7a6e47014f",
+            "signed_distance": "f46bd74074187a228f143170e34dc3fa68d1e9ce9a15aae7f80ae1432be473aa",
+            "selected": "58a9dee10b316b81d1ea91a231aaee18f0843b48212abe2eb349b790fa1d2ee5",
+            "_input_volume": "32e862ad7714f18d918a59028debcc69fd73c578c413a4e9d3a7bf4acd18be27",
+            "_input_quality": "11ed37b07f71876c1f2022859a761d11924aa47cd7def57393400c0d933dc658"
+          }
+        },
+        "private_split": {
+          "gpu_ms": [
+            12.496607780456543,
+            12.493887901306152,
+            12.492671966552734,
+            12.492256164550781,
+            12.494848251342773,
+            12.49516773223877,
+            12.493215560913086,
+            12.494112014770508,
+            12.494367599487305,
+            12.493056297302246,
+            12.495552062988281,
+            12.487327575683594,
+            12.491104125976562,
+            12.489855766296387,
+            12.49401569366455,
+            12.494112014770508,
+            12.498496055603027,
+            12.49392032623291,
+            12.495776176452637,
+            12.492799758911133
+          ],
+          "median_ms": 12.49396800994873,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "85dc4722d3224c7b11301fb919278b6a8a23af679e87e4180d74325b65282fde",
+            "circumradii": "bf64105e5edc194741d33ce1f7a401c2df9408e2411caa302254ab7a6e47014f",
+            "signed_distance": "f46bd74074187a228f143170e34dc3fa68d1e9ce9a15aae7f80ae1432be473aa",
+            "selected": "58a9dee10b316b81d1ea91a231aaee18f0843b48212abe2eb349b790fa1d2ee5",
+            "_input_volume": "32e862ad7714f18d918a59028debcc69fd73c578c413a4e9d3a7bf4acd18be27",
+            "_input_quality": "11ed37b07f71876c1f2022859a761d11924aa47cd7def57393400c0d933dc658"
+          }
+        }
+      }
+    },
+    "armadillo-graded": {
+      "input": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-after/mesh.npz",
+      "input_sha256": "4814397c2a91df65e270162ea80bf3e94946fd9775c9a124a094f86218b175e8",
+      "sites": 4096,
+      "tetrahedra": 24667,
+      "geometry_categories": {
+        "ordinary": 24667,
+        "uncertain_exact_fallback": 0
+      },
+      "rows": {
+        "full": {
+          "gpu_ms": [
+            22.80816078186035,
+            22.803199768066406,
+            22.799072265625,
+            22.79587173461914,
+            22.79532814025879,
+            22.79078483581543,
+            22.79203224182129,
+            22.7926082611084,
+            22.79769515991211,
+            22.796415328979492,
+            22.812063217163086,
+            22.80076789855957,
+            22.80406379699707,
+            22.796703338623047,
+            22.80575942993164,
+            22.796287536621094,
+            22.799135208129883,
+            22.793855667114258,
+            22.802879333496094,
+            22.78771209716797
+          ],
+          "median_ms": 22.797199249267578,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "844b0990cd4d79e65c3c5152c3707a8828ee2088d0a88bf6720a22ec209c07c5",
+            "circumradii": "68edd2fb74f8f415214779bd40fc066f42c2c8c98154174b174ecc128a59db6b",
+            "signed_distance": "a52407ab07d50a5ef3c2c2574ac799cc8f3ab4703d267b328e62b6be267b1331",
+            "selected": "69a519107f45be0909ebf01e79862b18e7452657a88a1292cacf1cff3b5f9053",
+            "_input_volume": "c9e397ae76bd5117e76c34246a48d6153b4b90629b2f2c155c7bc00abb15167a",
+            "_input_quality": "3c880859d430eab4a46c10ce7ff52198767205eca9adab3784d8e8957b1fafaf"
+          }
+        },
+        "prepare_only": {
+          "gpu_ms": [
+            0.02300800010561943,
+            0.017823999747633934,
+            0.01708799973130226,
+            0.01696000061929226,
+            0.01692800037562847,
+            0.01708799973130226,
+            0.016831999644637108,
+            0.016992000862956047,
+            0.01696000061929226,
+            0.01897599920630455,
+            0.01692800037562847,
+            0.017152000218629837,
+            0.016992000862956047,
+            0.01692800037562847,
+            0.017055999487638474,
+            0.01696000061929226,
+            0.016992000862956047,
+            0.016863999888300896,
+            0.01696000061929226,
+            0.01696000061929226
+          ],
+          "median_ms": 0.016976000741124153,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "844b0990cd4d79e65c3c5152c3707a8828ee2088d0a88bf6720a22ec209c07c5",
+            "circumradii": "68edd2fb74f8f415214779bd40fc066f42c2c8c98154174b174ecc128a59db6b",
+            "signed_distance": "a52407ab07d50a5ef3c2c2574ac799cc8f3ab4703d267b328e62b6be267b1331",
+            "selected": "1f3667312b8d05016ac66d68728faf6db1697dafa7638f11ad4e791b2284e284",
+            "_input_volume": "c9e397ae76bd5117e76c34246a48d6153b4b90629b2f2c155c7bc00abb15167a",
+            "_input_quality": "3c880859d430eab4a46c10ce7ff52198767205eca9adab3784d8e8957b1fafaf"
+          }
+        },
+        "full_query_only": {
+          "gpu_ms": [
+            22.54800033569336,
+            22.546079635620117,
+            22.544736862182617,
+            22.53740882873535,
+            22.53990364074707,
+            22.53388786315918,
+            22.539264678955078,
+            22.538719177246094,
+            22.54911994934082,
+            22.541536331176758,
+            22.546911239624023,
+            22.53990364074707,
+            22.53811264038086,
+            22.54560089111328,
+            22.537023544311523,
+            22.54431915283203,
+            22.542400360107422,
+            22.535295486450195,
+            22.549760818481445,
+            22.541759490966797
+          ],
+          "median_ms": 22.541647911071777,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "844b0990cd4d79e65c3c5152c3707a8828ee2088d0a88bf6720a22ec209c07c5",
+            "circumradii": "68edd2fb74f8f415214779bd40fc066f42c2c8c98154174b174ecc128a59db6b",
+            "signed_distance": "a52407ab07d50a5ef3c2c2574ac799cc8f3ab4703d267b328e62b6be267b1331",
+            "selected": "69a519107f45be0909ebf01e79862b18e7452657a88a1292cacf1cff3b5f9053",
+            "_input_volume": "c9e397ae76bd5117e76c34246a48d6153b4b90629b2f2c155c7bc00abb15167a",
+            "_input_quality": "3c880859d430eab4a46c10ce7ff52198767205eca9adab3784d8e8957b1fafaf"
+          }
+        },
+        "full_split": {
+          "gpu_ms": [
+            22.558624267578125,
+            22.566816329956055,
+            22.555871963500977,
+            22.550559997558594,
+            22.558719635009766,
+            22.54800033569336,
+            22.56025505065918,
+            22.54787254333496,
+            22.55299186706543,
+            22.559104919433594,
+            22.56447982788086,
+            22.54876708984375,
+            22.543968200683594,
+            22.55753517150879,
+            22.55516815185547,
+            22.551904678344727,
+            22.549631118774414,
+            22.552576065063477,
+            22.556415557861328,
+            22.552000045776367
+          ],
+          "median_ms": 22.55408000946045,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "844b0990cd4d79e65c3c5152c3707a8828ee2088d0a88bf6720a22ec209c07c5",
+            "circumradii": "68edd2fb74f8f415214779bd40fc066f42c2c8c98154174b174ecc128a59db6b",
+            "signed_distance": "a52407ab07d50a5ef3c2c2574ac799cc8f3ab4703d267b328e62b6be267b1331",
+            "selected": "69a519107f45be0909ebf01e79862b18e7452657a88a1292cacf1cff3b5f9053",
+            "_input_volume": "c9e397ae76bd5117e76c34246a48d6153b4b90629b2f2c155c7bc00abb15167a",
+            "_input_quality": "3c880859d430eab4a46c10ce7ff52198767205eca9adab3784d8e8957b1fafaf"
+          }
+        },
+        "private": {
+          "gpu_ms": [
+            12.611455917358398,
+            12.602720260620117,
+            12.606816291809082,
+            12.608991622924805,
+            12.613984107971191,
+            12.604031562805176,
+            12.60812759399414,
+            12.608415603637695,
+            12.6080322265625,
+            12.612319946289062,
+            12.6113920211792,
+            12.602879524230957,
+            12.603967666625977,
+            12.604351997375488,
+            12.60972785949707,
+            12.607904434204102,
+            12.61081600189209,
+            12.60534381866455,
+            12.605728149414062,
+            12.602911949157715
+          ],
+          "median_ms": 12.6079683303833,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "output_sha256": {
+            "circumcenters": "844b0990cd4d79e65c3c5152c3707a8828ee2088d0a88bf6720a22ec209c07c5",
+            "circumradii": "68edd2fb74f8f415214779bd40fc066f42c2c8c98154174b174ecc128a59db6b",
+            "signed_distance": "77431b467393bde3605436da4da6764152d92b78c129c1ad6bde87b8132dda1f",
+            "selected": "69a519107f45be0909ebf01e79862b18e7452657a88a1292cacf1cff3b5f9053",
+            "_input_volume": "c9e397ae76bd5117e76c34246a48d6153b4b90629b2f2c155c7bc00abb15167a",
+            "_input_quality": "3c880859d430eab4a46c10ce7ff52198767205eca9adab3784d8e8957b1fafaf"
+          }
+        },
+        "private_query_only": {
+          "gpu_ms": [
+            12.561311721801758,
+            12.564512252807617,
+            12.55679988861084,
+            12.561792373657227,
+            12.55081558227539,
+            12.564384460449219,
+            12.560864448547363,
+            12.554880142211914,
+            12.55884838104248,
+            12.558688163757324,
+            12.555744171142578,
+            12.555392265319824,
+            12.566880226135254,
+            12.558560371398926,
+            12.560352325439453,
+            12.559103965759277,
+            12.555423736572266,
+            12.560768127441406,
+            12.558560371398926,
+            12.560992240905762
+          ],
+          "median_ms": 12.558976173400879,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "844b0990cd4d79e65c3c5152c3707a8828ee2088d0a88bf6720a22ec209c07c5",
+            "circumradii": "68edd2fb74f8f415214779bd40fc066f42c2c8c98154174b174ecc128a59db6b",
+            "signed_distance": "77431b467393bde3605436da4da6764152d92b78c129c1ad6bde87b8132dda1f",
+            "selected": "69a519107f45be0909ebf01e79862b18e7452657a88a1292cacf1cff3b5f9053",
+            "_input_volume": "c9e397ae76bd5117e76c34246a48d6153b4b90629b2f2c155c7bc00abb15167a",
+            "_input_quality": "3c880859d430eab4a46c10ce7ff52198767205eca9adab3784d8e8957b1fafaf"
+          }
+        },
+        "private_split": {
+          "gpu_ms": [
+            12.581503868103027,
+            12.575103759765625,
+            12.573951721191406,
+            12.587039947509766,
+            12.574432373046875,
+            12.577856063842773,
+            12.577631950378418,
+            12.572287559509277,
+            12.57430362701416,
+            12.578495979309082,
+            12.57795238494873,
+            12.56982421875,
+            12.581376075744629,
+            12.575712203979492,
+            12.570143699645996,
+            12.571711540222168,
+            12.576831817626953,
+            12.567008018493652,
+            12.575648307800293,
+            12.577247619628906
+          ],
+          "median_ms": 12.575680255889893,
+          "cpu_quota_delta": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "quota_clean": true,
+          "error": 0,
+          "all_fields_bitwise_equal_to_fused": true,
+          "output_sha256": {
+            "circumcenters": "844b0990cd4d79e65c3c5152c3707a8828ee2088d0a88bf6720a22ec209c07c5",
+            "circumradii": "68edd2fb74f8f415214779bd40fc066f42c2c8c98154174b174ecc128a59db6b",
+            "signed_distance": "77431b467393bde3605436da4da6764152d92b78c129c1ad6bde87b8132dda1f",
+            "selected": "69a519107f45be0909ebf01e79862b18e7452657a88a1292cacf1cff3b5f9053",
+            "_input_volume": "c9e397ae76bd5117e76c34246a48d6153b4b90629b2f2c155c7bc00abb15167a",
+            "_input_quality": "3c880859d430eab4a46c10ce7ff52198767205eca9adab3784d8e8957b1fafaf"
+          }
+        }
+      }
+    }
+  },
+  "source_sha256": {
+    ".work/vtm/geometry_query_profile_v1.py": "4c7d47dfce49ad33ca31bae8b6af916087136595e6060b62c7f0cdf405810c5b",
+    ".work/vtm/extraction_split.py": "a3c6c66a83dff5a4b38d305dc77d1bccad9a6fe3a5e881c70627ec6d66944e69",
+    "warpower/_extraction.py": "f69cf3a721103fe751c2ffeaebd9a22d85d31213e2df5ca7a03959a31654f889"
+  }
+}

@@ -232,6 +232,11 @@ def recovered_status(source_error: wp.array[int], valid: wp.array[int], error: w
         error[0] |= 16
 
 
+@wp.kernel
+def accepted_evaluation(error: wp.array[int], accepted: wp.array[int], needed: wp.array[int]):
+    needed[0] = int(error[0] != 0 or accepted[0] == 0)
+
+
 class SelectiveUpdate:
     def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
         if not math.isfinite(threshold) or not 0 < threshold <= 1:
@@ -253,6 +258,7 @@ class SelectiveUpdate:
             self.selected_count = wp.zeros(1, dtype=int)
             self.rejections = wp.zeros(1, dtype=int)
             self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
             self.minimum = wp.ones(1, dtype=wp.float64)
             self.previous_minimum = wp.ones(1, dtype=wp.float64)
             self.keep = wp.empty(self._m, dtype=int)
@@ -282,6 +288,7 @@ class SelectiveUpdate:
         wp.launch(kernel, dim, inputs=args, device=self.device, block_dim=block_dim)
 
     def reset(self):
+        self._invalidate_current()
         self.rejections.zero_()
         self.last_error.zero_()
         self.selected_count.zero_()
@@ -289,6 +296,14 @@ class SelectiveUpdate:
         self.bad_vertices.zero_()
 
     def evaluate(self):
+        # Explicit evaluations and every trial quality check always recompute.
+        self._invalidate_current()
+        self._evaluate()
+
+    def _invalidate_current(self):
+        self._current_needed.fill_(1)
+
+    def _evaluate(self):
         if self.recovery_extraction is None:
             self._evaluate_ordinary()
         else:
@@ -358,7 +373,18 @@ class SelectiveUpdate:
         else:
             wp.capture_if(self.enabled, self._select, self._select_all)
 
+    def _select_current(self):
+        # Only the uninterrupted VTM step schedule may reuse the preceding
+        # accepted check. _accept updates ODT statistics, not classification
+        # inputs or outputs. Reset, proposal and rollback invalidate before
+        # changing geometry; direct select/evaluate calls remain fresh.
+        if self.enabled is None:
+            self._select(current=True)
+        else:
+            wp.capture_if(self.enabled, lambda: self._select(current=True), self._select_all)
+
     def _select_all(self):
+        self._invalidate_current()
         self.error.zero_()
         self.ready.fill_(1)
         self.mask.fill_(1)
@@ -366,8 +392,11 @@ class SelectiveUpdate:
         self.minimum.fill_(1)
         self.previous_minimum.fill_(1)
 
-    def _select(self):
-        self.evaluate()
+    def _select(self, *, current=False):
+        if current:
+            wp.capture_if(self._current_needed, self._evaluate)
+        else:
+            self.evaluate()
         wp.copy(self.previous_minimum, self.minimum)
         self.bad_vertices.zero_()
         self.mask.zero_()
@@ -438,4 +467,7 @@ class SelectiveUpdate:
                 self.rejections,
                 self.last_error,
             ],
+        )
+        self._launch(
+            accepted_evaluation, 1, [self.error, self.core._accepted, self._current_needed]
         )

@@ -14,6 +14,10 @@ hierarchy on device. The seed filter removes malformed, duplicate, flat or
 non-Delaunay previous cells using current original-coordinate exact predicates.
 Survivors must be strict facets under the same symbolic tie policy used by
 [facet completion](facet-completion.md). Previous validity alone never suffices.
+[Same-input proof propagation](completion-proofs.md) now avoids repeating those
+cell predicates inside the subsequent completion. It preserves the complete
+certificate requirements and does not reuse proofs across input changes. That
+report also contains newer timings and capture audits.
 
 The fragment is extended for at most four rounds. A successful result must pass
 the existing full certificate: physical orientation, site coverage, paired faces,

@@ -310,6 +310,10 @@ It checks them against current original-coordinate sites, completes surviving
 facets with a four-round budget, and requires the full final certificate. The
 ordinary constructor handles any failed attempt. Fresh meshing initialization
 clears the fragment; standalone diagram and Delaunay APIs keep their existing paths.
+Within one unchanged-input completion, [exact cell proofs](completion-proofs.md)
+now follow retained cells through deduplication and compaction. New cells keep
+their full sphere checks; all topology, coverage and hull-support checks remain.
+Proofs are re-established against current input on the next invocation.
 
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).

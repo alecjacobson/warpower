@@ -1,0 +1,34 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 32768, "diagnostic_mempool_enabled": true}
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.2.0, pluggy-1.7.0 -- /home/horde/projects/power-diagram/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/horde/projects/power-diagram
+configfile: pyproject.toml
+plugins: platformdirs-4.12.4
+collecting ... collected 3 items
+
+tests/test_refinement.py::test_captured_producer_refinement_consumer_recovers_and_has_no_host_work PASSED [ 33%]
+tests/test_refinement.py::test_ranked_insertion_matches_independent_uniform_and_graded_oracles[False] PASSED [ 66%]
+tests/test_refinement.py::test_ranked_insertion_matches_independent_uniform_and_graded_oracles[True] PASSED [100%]
+
+============================= slowest 10 durations =============================
+14.84s call     tests/test_refinement.py::test_ranked_insertion_matches_independent_uniform_and_graded_oracles[True]
+4.33s call     tests/test_refinement.py::test_ranked_insertion_matches_independent_uniform_and_graded_oracles[False]
+4.02s call     tests/test_refinement.py::test_captured_producer_refinement_consumer_recovers_and_has_no_host_work
+0.00s setup    tests/test_refinement.py::test_captured_producer_refinement_consumer_recovers_and_has_no_host_work
+0.00s setup    tests/test_refinement.py::test_ranked_insertion_matches_independent_uniform_and_graded_oracles[False]
+0.00s setup    tests/test_refinement.py::test_ranked_insertion_matches_independent_uniform_and_graded_oracles[True]
+0.00s teardown tests/test_refinement.py::test_captured_producer_refinement_consumer_recovers_and_has_no_host_work
+0.00s teardown tests/test_refinement.py::test_ranked_insertion_matches_independent_uniform_and_graded_oracles[True]
+0.00s teardown tests/test_refinement.py::test_ranked_insertion_matches_independent_uniform_and_graded_oracles[False]
+============================== 3 passed in 23.58s ==============================
+========= ERROR SUMMARY: 0 errors

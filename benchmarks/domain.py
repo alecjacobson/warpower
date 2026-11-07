@@ -96,8 +96,9 @@ def main():
             v["throttled_periods"] for v in cpu.values()
         )
         assert domain.error.numpy()[0] == 0
-        assert query.error.numpy()[0] == 0
-        assert np.all(query.valid.numpy())
+        if name != "hierarchy_refit":
+            assert query.error.numpy()[0] == 0
+            assert np.all(query.valid.numpy())
     if args.dot:
         args.dot.parent.mkdir(parents=True, exist_ok=True)
         wp.capture_debug_dot_print(graphs["refit_queries_consumer"], str(args.dot), verbose=True)

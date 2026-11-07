@@ -10,8 +10,9 @@ from tests.test_facet_completion import canonical, execute
 from tests.test_facet_seeds import fixture as seed_fixture
 from tests.test_local_certificate import positive
 from tests.test_predicates import exact_reference
+from warpower import DelaunayWorkspace
 from warpower._delaunay_certificate import DelaunayCertificate
-from warpower._proved_completion import SeededFacetCompletion, unique_proved_pool
+from warpower._proved_completion import ProvedCertificate, SeededFacetCompletion, unique_proved_pool
 from warpower._reuse_delaunay import ReuseDelaunayWorkspace
 
 
@@ -82,20 +83,60 @@ def test_proved_fragments_match_scipy_and_ordinary_global_certificate(subset):
 
 @pytest.mark.parametrize("scale", [2.0**-60, 1.0, 2.0**60])
 @pytest.mark.parametrize("shape", ["cube", "octahedron"])
-def test_exhaustive_candidates_with_duplicates_match_rational_symbolic_oracle(shape, scale):
+@pytest.mark.parametrize("subset", ["one", "all"])
+def test_candidates_with_duplicates_match_rational_symbolic_oracle(shape, scale, subset):
     points = np.array(list(product([-1, 1], repeat=3)), np.float32)
     if shape == "octahedron":
         points = np.vstack([np.eye(3), -np.eye(3)]).astype(np.float32)
     points = np.vstack([points, points[:2]]) * np.float32(scale)
     seeds = np.array(list(combinations(range(len(points)), 4)), np.int32)
     seeds = np.vstack([seeds, seeds[:, [1, 0, 2, 3]]])
+    if subset == "one":
+        reference = DelaunayWorkspace(points).run()
+        assert reference.error.numpy()[0] == 0
+        seeds = reference.tetrahedra.numpy()[:1]
     w, retained = completion(points, seeds)
     error, actual = execute(w)
     assert error == 0
-    assert w.rounds.numpy()[0] == 0
-    assert w._certificate.proof_statistics.numpy().tolist() == [len(actual), 0]
+    if subset == "all":
+        assert w.rounds.numpy()[0] == 0
+        assert w._certificate.proof_statistics.numpy().tolist() == [len(actual), 0]
+    else:
+        assert w.rounds.numpy()[0] > 0
+        assert np.all(w._certificate.proof_statistics.numpy() > 0)
     global_certificate(w)
     exact_symbolic_cells(points, actual)
+
+
+def test_filtered_flat_cell_does_not_shift_a_proof_onto_a_bad_cell():
+    points = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1], [0.25, 0.25, 0.25]], np.float32)
+    # A flat but distinct-ID first cell is removed by positive-cell compaction.
+    # The real proof belongs only to the middle cell; the last sphere is nonempty.
+    points = np.vstack([points, [[0.25, 0.25, 0]]]).astype(np.float32)
+    reference = DelaunayWorkspace(points).run()
+    assert reference.error.numpy()[0] == 0
+    full = reference.tetrahedra.numpy()[: reference.tetrahedra_count.numpy()[0]]
+    source = np.array([[0, 1, 2, 5], full[0], [0, 1, 2, 3]], np.int32)
+    seed_filter, _, retained = seed_fixture(points, source)
+    errors = []
+    for cls in [DelaunayCertificate, ProvedCertificate]:
+        c = cls(
+            seed_filter.points,
+            seed_filter.source,
+            seed_filter.count,
+            seed_filter.tree,
+            point_parallel=True,
+        )
+        c._anchors = None
+        if cls is ProvedCertificate:
+            c._input_proved.assign(np.array([0, 1, 0], np.int32))
+        with wp.ScopedCapture() as capture:
+            c.run()
+        wp.capture_launch(capture.graph)
+        errors.append(int(c.error.numpy()[0]))
+        assert c.tetrahedra_count.numpy()[0] == 2
+    assert errors[0] == errors[1] and errors[1] & 8
+    assert c.proof_statistics.numpy().tolist() == [1, 1]
 
 
 @pytest.mark.parametrize("first", ["old", "new"])

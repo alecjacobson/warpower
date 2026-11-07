@@ -1,0 +1,35 @@
+{
+  "padded_memory_cases": 51,
+  "new_predicate_and_query_full_api_lifetime_cases": 44,
+  "routed_api_after_free_cases": 7,
+  "all_those_scopes_zero_error": true,
+  "strict_route_control": {
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py::test_large_full_route_preserves_cospherical_first_duplicate_owners[1.0]"
+    ],
+    "exit_code": 99,
+    "zero_errors": false,
+    "error_summaries": [
+      5
+    ],
+    "printed_invalid_diagnostics": 5,
+    "all_printed_invalid_diagnostics_match_prior_cub_histogram_allocation_order": true,
+    "source_log": ".work/vtm/analytic-route-5-lifetime-all.log",
+    "source_log_sha256": "027f267c47c1c0602a336890230bd0486d64a9170f187792b9c9da7a33da9189"
+  },
+  "prior_control": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-analysis.json",
+  "scope": "Full allocation-order tracking of every routed case is not claimed. The one strict routed control remains a failure if it reports errors. Pattern matching classifies only printed diagnostics, without suppressions or assertions about unprinted errors."
+}

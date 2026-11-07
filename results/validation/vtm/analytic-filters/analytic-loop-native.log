@@ -1,0 +1,52 @@
+WARNING: Device-side CUDA Event completion trace is currently enabled.
+         This may increase runtime overhead and the likelihood of false
+         dependencies across CUDA Streams. If you wish to avoid this, please
+         disable the feature with --cuda-event-trace=false.
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Capture range started in the application.
+Capture range ended in the application.
+Generating '/run/openclaw/horde/nsys-report-9010.qdstrm'
+[1/1] [0%                          ] analytic-loop-native.nsys-repProcessing events...
+[1/1] [0%                          ] analytic-loop-native.nsys-rep[1/1] [7%                          ] analytic-loop-native.nsys-rep[1/1] [=15%                        ] analytic-loop-native.nsys-rep[1/1] [============57%             ] analytic-loop-native.nsys-rep[1/1] [========================99% ] analytic-loop-native.nsys-rep[1/1] [==================77%       ] analytic-loop-native.nsys-rep[1/1] [=======================96%  ] analytic-loop-native.nsys-rep[1/1] [========================100%] analytic-loop-native.nsys-rep[1/1] [========================100%] analytic-loop-native.nsys-rep
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 1.34 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.54 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.51 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.59 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.58 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 6.42 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 1.12 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 4.22 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.62 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.72 ms  (cached)
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 2.60 ms  (cached)
+Module warpower._facet_completion bb6aebe load on device 'cuda:0' took 4.10 ms  (cached)
+Module warpower._prepared_seeds 3fdfc80 load on device 'cuda:0' took 1.39 ms  (cached)
+Module warpower._proved_completion 4a7514f load on device 'cuda:0' took 4.63 ms  (cached)
+Module warpower._proved_completion 16f18aa load on device 'cuda:0' took 3.85 ms  (cached)
+Module warpower._facet_completion 62c1043 load on device 'cuda:0' took 3.28 ms  (cached)
+Module warpower._reuse_delaunay 58b0d1a load on device 'cuda:0' took 0.53 ms  (cached)
+Module warpower._facet_seeds fa4cd6c load on device 'cuda:0' took 2.12 ms  (cached)
+Module warpower._active_delaunay 6b514e5 load on device 'cuda:0' took 0.63 ms  (cached)
+Module __main__ 6e4d9d4 load on device 'cuda:0' took 0.61 ms  (cached)
+Module tests.test_active_delaunay bd742ce load on device 'cuda:0' took 0.62 ms  (cached)
+Module tests.test_large_reuse d794e43 load on device 'cuda:0' took 0.54 ms  (cached)
+Module warpower._active_sites e183170 load on device 'cuda:0' took 0.58 ms  (cached)
+{"scope": "One graph launch with eight device-controlled producer/routed-Delaunay/consumer phases; includes full 4096-site reuse, smaller prefix, unrelated inputs, invalid count, nonfinite input and recovery. Setup, upload, final readback and independent checks are outside profiling.", "warp": "1.19.0", "device": "NVIDIA L40", "counts": [4096, 4096, 512, 4096, 4097, 4096, 4096, 4096], "meta": [[27170, 0, 4096], [27170, 0, 4096], [3175, 0, 1024], [27179, 0, 4096], [0, 8, 0], [27170, 0, 4096], [0, 1, 4096], [27170, 0, 4096]], "reuse": [[0, 0, 0, 0], [1, 1, 27170, 0], [1, 1, 27170, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0], [0, 0, 0, 0]], "route_calls": [1, 0, 6], "phase": 8, "validation": [{"phase": 0, "independent_scipy_match": true, "mesh_checks_passed": true, "tetrahedra": 27170}, {"phase": 1, "independent_scipy_match": true, "mesh_checks_passed": true, "tetrahedra": 27170}, {"phase": 2, "independent_scipy_match": true, "mesh_checks_passed": true, "tetrahedra": 3175}, {"phase": 3, "independent_scipy_match": true, "mesh_checks_passed": true, "tetrahedra": 27179}, {"phase": 4, "invalid_empty": true}, {"phase": 5, "independent_scipy_match": true, "mesh_checks_passed": true, "tetrahedra": 27170}, {"phase": 6, "invalid_empty": true}, {"phase": 7, "independent_scipy_match": true, "mesh_checks_passed": true, "tetrahedra": 27170}], "mesh_archive_sha256": "5cef1be7764050e7b97963b9a2ee76360d17b4e249077c047fd196f3597c525d"}
+Generated:
+	/home/horde/projects/power-diagram/.work/vtm/analytic-loop-native.nsys-rep

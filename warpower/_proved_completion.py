@@ -9,6 +9,7 @@ No proof survives a call to run(), and no caller-supplied trust mask is accepted
 
 import warp as wp
 
+from . import _analytic_predicates as af
 from . import _filtered_predicates as fp
 from . import _sphere_bounds as sb
 from ._bvh import Tree
@@ -233,7 +234,7 @@ def search_unproved_faces(
     for q in range(lane, points.shape[0], workers):
         if owners[q] != q or q == face[0] or q == face[1] or q == face[2]:
             continue
-        orientation = fp.orient3d(a, b, c, points[q])
+        orientation = af.orient3d(a, b, c, points[q])
         if orientation.valid == 0:
             wp.atomic_or(error, 0, 2)
             return
@@ -242,7 +243,7 @@ def search_unproved_faces(
         if best < 0:
             best = q
         else:
-            result = symbolic_sphere(points, wp.vec4i(face[0], face[1], face[2], best), q)
+            result = af.symbolic_sphere(points, wp.vec4i(face[0], face[1], face[2], best), q)
             if result.valid == 0 or result.sign == 0:
                 wp.atomic_or(error, 0, 2)
                 return

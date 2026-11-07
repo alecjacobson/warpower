@@ -80,3 +80,7 @@ and require the existing offline reference tools.
 Tracked in [#164](https://github.com/alecjacobson/warpower/issues/164). These results
 do not advance the [native CPU speed target](cpu-mesher-baseline.md); they prevent
 a slower path from becoming the default.
+
+A subsequent [analytic-predicate experiment](analytic-facet-search.md) keeps the
+original strided scan and reduces the cost of certified strict sign queries.
+It uses neither rejected pruning variant.

@@ -1,0 +1,393 @@
+{
+  "baseline": "336d25d2c575f980419fe6f5479852f8219976d6",
+  "gpu_runtime": "6a82244d67bf261a5295c2225e6208a84a90abea",
+  "scope": "Four size/reference batches; all twelve samples retained. Counts and quality differ. This is not CPU outperformance or an equal-quality speedup comparison. No runtime change.",
+  "native_source_sha256": "2be80a2312f8093dc9fea912b5e5aaa8b6b160dc084dee5a1926cfa9223e0f29",
+  "native_enum": {
+    "path": "/home/horde/references/CGAL-6.2.1/include/CGAL/Mesh_optimization_return_code.h",
+    "sha256": "48e541703424af1e18fad9523c4a0165df376bf6c7e1bae4b63e58078beef228",
+    "return_code_3": "CONVERGENCE_REACHED"
+  },
+  "shared_references": [
+    {
+      "path": "results/validation/vtm/cpu-mesh3-build.json",
+      "sha256": "c58e7303d3e02ab3130d8625033db536f7ae0971ee828abdeecb3376c9061bc0"
+    },
+    {
+      "path": "results/validation/vtm/cpu-mesh3-torus-input.off",
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "path": "results/validation/vtm/prepared-point-queries/prepared-query-final/torus4096-after.json",
+      "sha256": "521a0b79421708894e4a4a0554f35e25366773257929b61ba2b833f629c73e52"
+    },
+    {
+      "path": "results/validation/vtm/prepared-point-queries/prepared-query-final/torus4096-after.npz",
+      "sha256": "0627be10b9a8ed3c757c867e8c8a175a68977399ea73d1a6c60336054b01514b"
+    },
+    {
+      "path": "results/validation/vtm/prepared-point-queries/prepared-query-final-independent.json",
+      "sha256": "62f8e1574f1828168bb21227687e4ed9c23a23a79a4a1a1af070f56f94d62c20"
+    }
+  ],
+  "summaries": {
+    "cpu-frontier-torus-019-default-parallel-verified": {
+      "parameters": {
+        "binary": ".work/vtm/cpu-mesh3-target-parallel",
+        "surface": "results/validation/vtm/cpu-mesh3-torus-input.off",
+        "size": 0.19,
+        "facet_distance": 0.025,
+        "odt_iterations": 50,
+        "convergence": 0.02,
+        "freeze_bound": 0.01,
+        "threads": 4,
+        "repeats": 3,
+        "output": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified"
+      },
+      "median_complete_seconds": 0.498450042,
+      "unthrottled_samples": 2,
+      "median_unthrottled_complete_seconds": 0.493465595
+    },
+    "cpu-frontier-torus-016-default-parallel": {
+      "parameters": {
+        "binary": ".work/vtm/cpu-mesh3-target-parallel",
+        "surface": "results/validation/vtm/cpu-mesh3-torus-input.off",
+        "size": 0.16,
+        "facet_distance": 0.025,
+        "odt_iterations": 50,
+        "convergence": 0.02,
+        "freeze_bound": 0.01,
+        "threads": 4,
+        "repeats": 3,
+        "output": ".work/vtm/cpu-frontier-torus-016-default-parallel"
+      },
+      "median_complete_seconds": 0.694253245,
+      "unthrottled_samples": 1,
+      "median_unthrottled_complete_seconds": 0.694253245
+    },
+    "cpu-frontier-torus-0163-default-sequential": {
+      "parameters": {
+        "binary": ".work/vtm/cpu-mesh3-target-sequential",
+        "surface": "results/validation/vtm/cpu-mesh3-torus-input.off",
+        "size": 0.163,
+        "facet_distance": 0.025,
+        "odt_iterations": 50,
+        "convergence": 0.02,
+        "freeze_bound": 0.01,
+        "threads": 1,
+        "repeats": 3,
+        "output": ".work/vtm/cpu-frontier-torus-0163-default-sequential"
+      },
+      "median_complete_seconds": 1.279777742,
+      "unthrottled_samples": 2,
+      "median_unthrottled_complete_seconds": 1.273488948
+    },
+    "cpu-frontier-torus-0163-default-parallel": {
+      "parameters": {
+        "binary": ".work/vtm/cpu-mesh3-target-parallel",
+        "surface": "results/validation/vtm/cpu-mesh3-torus-input.off",
+        "size": 0.163,
+        "facet_distance": 0.025,
+        "odt_iterations": 50,
+        "convergence": 0.02,
+        "freeze_bound": 0.01,
+        "threads": 4,
+        "repeats": 3,
+        "output": ".work/vtm/cpu-frontier-torus-0163-default-parallel"
+      },
+      "median_complete_seconds": 0.736499888,
+      "unthrottled_samples": 1,
+      "median_unthrottled_complete_seconds": 0.681057476
+    }
+  },
+  "files": [
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified.log",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel-verified.log",
+      "bytes": 10146,
+      "sha256": "d77b32254ba7582fb58d0e7cb22e7b6080c8b0d64fa26e420bf43a226ecc9970"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified/mesh-0.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel-verified/mesh-0.txt.gz",
+      "bytes": 169362,
+      "sha256": "78ea4bd9a4f3365715a4eaa614a58167a2a28876ec53b94014f02a1addedca39"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified/mesh-1.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel-verified/mesh-1.txt.gz",
+      "bytes": 169206,
+      "sha256": "820c6ccd938bbdf50509687f5ff861d934178cf6ec09d07f7ffed60c0ce1ba1e"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified/mesh-2.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel-verified/mesh-2.txt.gz",
+      "bytes": 169174,
+      "sha256": "b69eff04240ff7ca1ee10d2a51c6be06c9f377073377dc973f8a5d42ec8d2813"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified/result.json",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel-verified/result.json",
+      "bytes": 13056,
+      "sha256": "027c73d380606c4046bf2f5b5b40e6308fe49bc6548c0c233550d94bef1a834f"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified/run-0.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel-verified/run-0.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified/run-0.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel-verified/run-0.stdout",
+      "bytes": 607,
+      "sha256": "8ac0d79c0ea2f03c6e39e7b26d13aeb168b3c4a1d9c8c72e38b0a0ad2af7145f"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified/run-1.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel-verified/run-1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified/run-1.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel-verified/run-1.stdout",
+      "bytes": 598,
+      "sha256": "998c50248d55ee89f4ab569d5c4d16615f734a66cbd365d53134f7fe3cca38ef"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified/run-2.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel-verified/run-2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel-verified/run-2.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel-verified/run-2.stdout",
+      "bytes": 588,
+      "sha256": "56c73eefb429fc7db1ad55ec8fdf61d5c88b2b7d71b9be74cf72698d9837322d"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-016-default-parallel.log",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-016-default-parallel.log",
+      "bytes": 10125,
+      "sha256": "48c607259aa5c9b0af41f2bf5bb73cf8349e8c806f8adccd715002ed80e7bb89"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-016-default-parallel/mesh-0.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-016-default-parallel/mesh-0.txt.gz",
+      "bytes": 289813,
+      "sha256": "9ac96d2488778569c55d7c8f70053309c9ff05ec47823b932c8ed4e6d82de568"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-016-default-parallel/mesh-1.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-016-default-parallel/mesh-1.txt.gz",
+      "bytes": 288751,
+      "sha256": "0f32aa0658a1b126cb135725adac4ee0acff24c06b3cc77207cff4fb672f5831"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-016-default-parallel/mesh-2.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-016-default-parallel/mesh-2.txt.gz",
+      "bytes": 286663,
+      "sha256": "dc64816a59245212aa91c3a5654bf5a266896ce4a9cd46d0f869781b8bebaa21"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-016-default-parallel/result.json",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-016-default-parallel/result.json",
+      "bytes": 13035,
+      "sha256": "dee2ee1a575e6dd85bc7619c441d42ef86d5853c644a419df99d36f01f464191"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-016-default-parallel/run-0.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-016-default-parallel/run-0.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-016-default-parallel/run-0.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-016-default-parallel/run-0.stdout",
+      "bytes": 589,
+      "sha256": "dbbb393fef1f9269bba2b44409f421dc3fd2a2a3a9cc46f99c04c040e27a24b4"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-016-default-parallel/run-1.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-016-default-parallel/run-1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-016-default-parallel/run-1.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-016-default-parallel/run-1.stdout",
+      "bytes": 607,
+      "sha256": "28abec3dc2635c73dcae7121ec514fc19985c03419820da1d807bffa7dd5373c"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-016-default-parallel/run-2.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-016-default-parallel/run-2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-016-default-parallel/run-2.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-016-default-parallel/run-2.stdout",
+      "bytes": 580,
+      "sha256": "75825035d573d7e738a949b55010ce68b48a91bd1a06bde1bae7c5c1028ce5c7"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-sequential.log",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-sequential.log",
+      "bytes": 10164,
+      "sha256": "8703b0cca551bfbf579be6cc13f70a5cb3fee1733983d8dc3c99542aba7df158"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-sequential/mesh-0.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-sequential/mesh-0.txt.gz",
+      "bytes": 262162,
+      "sha256": "11bc4ab238dd22689c11fbe9490787f7b9a697f1a57274520cfe19310ac72e30"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-sequential/mesh-1.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-sequential/mesh-1.txt.gz",
+      "bytes": 262162,
+      "sha256": "11bc4ab238dd22689c11fbe9490787f7b9a697f1a57274520cfe19310ac72e30"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-sequential/mesh-2.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-sequential/mesh-2.txt.gz",
+      "bytes": 262162,
+      "sha256": "11bc4ab238dd22689c11fbe9490787f7b9a697f1a57274520cfe19310ac72e30"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-sequential/result.json",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-sequential/result.json",
+      "bytes": 13074,
+      "sha256": "ef3e435dcd72357360af6485dcc6b678f317da744ddc500f20bc24ec27629c2a"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-sequential/run-0.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-sequential/run-0.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-sequential/run-0.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-sequential/run-0.stdout",
+      "bytes": 596,
+      "sha256": "a01ab20a09449033b6ecf53bb75af2476b033b87cfead37f1c9832c064f5f9b5"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-sequential/run-1.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-sequential/run-1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-sequential/run-1.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-sequential/run-1.stdout",
+      "bytes": 604,
+      "sha256": "1327c78e23c5fef57f4da3ac4b66f95e9bf8fd7c072f6a4c938d1a966d0bc718"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-sequential/run-2.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-sequential/run-2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-sequential/run-2.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-sequential/run-2.stdout",
+      "bytes": 614,
+      "sha256": "ce656e3f12712fd7a48d378cf35b7e16e3e6c56e569e982a3f6e6833bb902a86"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-parallel.log",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-parallel.log",
+      "bytes": 10131,
+      "sha256": "f0cca6f493987b464cacf4ebdcbf602726de08f6e0a19eb6bf7696c1127fa3cf"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-parallel/mesh-0.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-parallel/mesh-0.txt.gz",
+      "bytes": 274542,
+      "sha256": "f24cfc87645dc503ae8c494048668083e0dcd2e47a56b7e34a0710e94c38dd3f"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-parallel/mesh-1.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-parallel/mesh-1.txt.gz",
+      "bytes": 271132,
+      "sha256": "1eb3bef4122bb8bd707754d04ebf89f690f7aef27cfe9b4c8bffdebf0de69cb2"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-parallel/mesh-2.txt.gz",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-parallel/mesh-2.txt.gz",
+      "bytes": 273782,
+      "sha256": "61c7d2e788a49cfb1621a53bd552c4ebc0b9ca2b490f081c54a51f50f43533a0"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-parallel/result.json",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-parallel/result.json",
+      "bytes": 13041,
+      "sha256": "b9330bd81af6e88caaec03e44043eaac0903d36a3b1777b1d990a1304e694555"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-parallel/run-0.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-parallel/run-0.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-parallel/run-0.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-parallel/run-0.stdout",
+      "bytes": 622,
+      "sha256": "f5dc9c5e67e881b7fcf0edf41ba68e9b4f94b7b5b3f54f977c26a125da25cd39"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-parallel/run-1.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-parallel/run-1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-parallel/run-1.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-parallel/run-1.stdout",
+      "bytes": 622,
+      "sha256": "27d264fa7648c98130ff1c1b164c7280596186ae1e48d0fc442269f677a919c3"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-parallel/run-2.stderr",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-parallel/run-2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-0163-default-parallel/run-2.stdout",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-0163-default-parallel/run-2.stdout",
+      "bytes": 612,
+      "sha256": "57bb2000f0ab91cc8910fb91640fe0039c782bd5fcee59c6c925ce1cdb5397ea"
+    },
+    {
+      "original": ".work/vtm/run-cpu-frontier.py",
+      "path": "results/validation/vtm/cpu-size-frontier/run-cpu-frontier.py",
+      "bytes": 1285,
+      "sha256": "6185e431bed0ef94fbb3c542c79891329f9cb56a44bcde5e86db5b1eaf8d920b"
+    },
+    {
+      "original": ".work/vtm/publish-cpu-size-frontier.py",
+      "path": "results/validation/vtm/cpu-size-frontier/publish-cpu-size-frontier.py",
+      "bytes": 4056,
+      "sha256": "bbcc623f1806cec26f4e90fbc348c03b4304bc2695be1f37ffc4890a96182067"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-lossless-mesh-archives.json",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-lossless-mesh-archives.json",
+      "bytes": 3861,
+      "sha256": "71f1907e0ca655792af191523a265fe826110a5006f2036e2c34665a12b6b2a6"
+    },
+    {
+      "original": ".work/vtm/cpu-frontier-torus-019-default-parallel.log",
+      "path": "results/validation/vtm/cpu-size-frontier/cpu-frontier-torus-019-default-parallel.log",
+      "bytes": 999,
+      "sha256": "dfe215d24a7511804a0bd62fcd012e562672dfad43f0371aa64953e13d2147f1"
+    }
+  ]
+}

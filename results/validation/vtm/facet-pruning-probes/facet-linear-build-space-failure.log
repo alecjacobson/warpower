@@ -1,0 +1,30 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp error: Failed to write to output file '/home/horde/.cache/warp/1.19.0/wp_facet_linear_box_search_3c6754b_p1030505_t140079669539264/wp_facet_linear_box_search_3c6754b.sm89.cubin'
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+Module facet_linear_box_search 3c6754b load on device 'cuda:0' took 18274.20 ms  (error)
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/test-facet-linear-existing.py", line 3, in <module>
+    install()
+  File "/home/horde/projects/power-diagram/.work/vtm/install_facet_linear.py", line 8, in install
+    wp.load_module(module='facet_linear_box_search',device='cuda:0',block_dim=block)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 13074, in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 12906, in force_load
+    m.load(d, block_dim=dim)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 5227, in load
+    raise e
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 5224, in load
+    compiled = self._compile(device, module_dir, output_name, output_arch, options=options)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 5083, in _compile
+    raise (e)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 5049, in _compile
+    warp._src.build.build_cuda(
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/build.py", line 143, in build_cuda
+    raise Exception(f"CUDA kernel build failed with error code {err}")
+Exception: CUDA kernel build failed with error code 4294967295

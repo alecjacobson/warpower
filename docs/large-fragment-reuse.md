@@ -166,6 +166,8 @@ accounts for 1,273.260 ms. These diagnostic durations identify remaining work;
 the clean complete-solve timing is the 3,787.116 ms median above. The final full
 reconstruction consumes 73,496 current-input cell proofs and checks 27 newly
 introduced cells across its completion rounds.
+Subsequent [conservative facet-search probes](facet-search-probes.md) were slower
+and are retained as rejected experiments; they do not change this implementation.
 
 The [full native audit](../results/validation/vtm/large-fragment-reuse/large-reuse-full-native-audit.json),
 [device-loop audit](../results/validation/vtm/large-fragment-reuse/large-reuse-loop-native-audit.json)

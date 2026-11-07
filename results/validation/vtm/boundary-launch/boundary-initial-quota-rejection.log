@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/check-boundary-results.py", line 54, in <module>
+    rp,_,_=files(phase,case);quota(json.loads(rp.read_text()))
+  File "/home/horde/projects/power-diagram/.work/vtm/check-boundary-results.py", line 17, in quota
+    if k in d:assert all(v['throttled_periods']==0 for v in d[k].values()),(k,d[k])
+AssertionError: ('cpu_quota_delta', {'4': {'cpu_cores': 4.0, 'throttled_periods': 2, 'throttled_usec': 93809}, '3': {'cpu_cores': 4.0, 'throttled_periods': 2, 'throttled_usec': 93776}})

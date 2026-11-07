@@ -46,6 +46,7 @@ def main():
             "torus",
             "graded-torus",
             "thin-hand",
+            "counterbored-plate",
             "cavity",
             "disconnected",
             "surface",
@@ -60,12 +61,12 @@ def main():
     parser.add_argument(
         "--subdivisions",
         type=int,
-        help="Surface quadrature subdivisions (20 for thin-hand/cavity/disconnected, otherwise 4)",
+        help="Surface quadrature subdivisions (20 for thin-hand/cavity/disconnected, 16 for counterbored-plate, otherwise 4)",
     )
     parser.add_argument(
         "--crease-subdivisions",
         type=int,
-        help="Crease quadrature subdivisions (20 for thin-hand/cavity/disconnected, otherwise 4)",
+        help="Crease quadrature subdivisions (20 for thin-hand/cavity/disconnected, 16 for counterbored-plate, otherwise 4)",
     )
     parser.add_argument(
         "--feature-angle", type=float, default=45.0, help="Crease detection angle in degrees"
@@ -86,6 +87,8 @@ def main():
     parser.add_argument("--output", type=Path, required=True, help="Output directory")
     args = parser.parse_args()
     default_subdivisions = 20 if args.case in ("thin-hand", "cavity", "disconnected") else 4
+    if args.case == "counterbored-plate":
+        default_subdivisions = 16
     if args.subdivisions is None:
         args.subdivisions = default_subdivisions
     if args.crease_subdivisions is None:

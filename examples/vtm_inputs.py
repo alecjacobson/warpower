@@ -1,5 +1,6 @@
 """Fixed example inputs; host preparation happens before device meshing."""
 
+import operator
 from pathlib import Path
 
 import numpy as np
@@ -124,6 +125,70 @@ def thin_hand():
     return np.vstack((bottom, top)).astype(np.float32), np.array(faces, np.int32)
 
 
+def counterbored_plate(segments=32):
+    """Rectangular mounting plate with a polygonal stepped through-hole.
+
+    An analytic mechanical example, not an asset from the Alliez paper. Extra
+    rays preserve the rectangular corners; matched rings avoid Boolean repair.
+    """
+    segments = operator.index(segments)
+    if segments < 16 or segments % 4:
+        raise ValueError("segments must be a multiple of four and at least 16")
+    half_width, half_height = 1.25, 0.85
+    angles = [(2 * np.pi * i / segments, None) for i in range(segments)]
+    for x, y in [
+        (half_width, half_height),
+        (-half_width, half_height),
+        (-half_width, -half_height),
+        (half_width, -half_height),
+    ]:
+        angles.append((np.arctan2(y, x) % (2 * np.pi), (x, y)))
+    angles.sort(key=lambda entry: entry[0])
+    theta = np.array([entry[0] for entry in angles])
+    outer = []
+    for angle, corner in angles:
+        c, s = np.cos(angle), np.sin(angle)
+        if corner is not None:
+            outer.append(corner)
+        elif abs(c) / half_width >= abs(s) / half_height:
+            outer.append((np.copysign(half_width, c), half_width * s / abs(c)))
+        else:
+            outer.append((half_height * c / abs(s), np.copysign(half_height, s)))
+    outer = np.array(outer)
+    circle = np.column_stack((np.cos(theta), np.sin(theta)))
+    n = len(theta)
+
+    def ring(xy, z):
+        return np.column_stack((xy, np.full(n, z)))
+
+    points = np.vstack(
+        [
+            ring(outer, -0.35),
+            ring(outer, 0.35),
+            ring(0.35 * circle, -0.35),
+            ring(0.35 * circle, 0.05),
+            ring(0.65 * circle, 0.05),
+            ring(0.65 * circle, 0.35),
+        ]
+    ).astype(np.float32)
+    faces = []
+
+    def quad(a, b, c, d):
+        faces.extend(((a, b, c), (a, c, d)))
+
+    for i in range(n):
+        j = (i + 1) % n
+        ob, ot, ib, lower, upper, it = [k * n + i for k in range(6)]
+        obn, otn, ibn, lowern, uppern, itn = [k * n + j for k in range(6)]
+        quad(ob, obn, otn, ot)  # Outward outer wall.
+        quad(ob, ib, ibn, obn)  # Downward bottom cap.
+        quad(ot, otn, itn, it)  # Upward top cap.
+        quad(ib, lower, lowern, ibn)  # Inward lower bore.
+        quad(upper, uppern, lowern, lower)  # Upward counterbore shoulder.
+        quad(upper, it, itn, uppern)  # Inward upper bore.
+    return points, np.array(faces, np.int32)
+
+
 def cube(scale=1.0, center=(0.0, 0.0, 0.0)):
     points = np.array(
         [
@@ -172,6 +237,8 @@ def surface(name, off=None):
         return torus()
     if name == "thin-hand":
         return thin_hand()
+    if name == "counterbored-plate":
+        return counterbored_plate()
     if name == "cavity":
         p, f = cube(0.4)
         return combine(cube(), (p, f[:, ::-1].copy()))

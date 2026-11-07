@@ -667,20 +667,7 @@ class DelaunayCertificate:
                 self.error,
             ],
         )
-        self._launch(
-            check_faces,
-            self._face_workers * (1 << self._face_depth),
-            [
-                self.points,
-                self.tetrahedra,
-                self._boundary,
-                self._boundary_count,
-                tree,
-                self.error,
-                self._face_depth,
-                self._face_workers,
-            ],
-        )
+        self._hull_support(tree)
         if self._anchors is not None:
             self._launch(
                 find_anchors,
@@ -716,3 +703,19 @@ class DelaunayCertificate:
                 ),
             )
             wp.capture_if(self._global, lambda: self._global_spheres(tree))
+
+    def _hull_support(self, tree):
+        self._launch(
+            check_faces,
+            self._face_workers * (1 << self._face_depth),
+            [
+                self.points,
+                self.tetrahedra,
+                self._boundary,
+                self._boundary_count,
+                tree,
+                self.error,
+                self._face_depth,
+                self._face_workers,
+            ],
+        )

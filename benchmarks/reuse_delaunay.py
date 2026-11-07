@@ -30,6 +30,7 @@ def consume(
     base_attempted: wp.array[int],
     seed_count: wp.array[int],
     proofs: wp.array[int],
+    face_proofs: wp.array[int],
     records: wp.array2d[wp.int64],
 ):
     row = phase[0]
@@ -46,9 +47,13 @@ def consume(
     records[row, 6] = checksum
     records[row, 7] = wp.int64(0)
     records[row, 8] = wp.int64(0)
+    records[row, 9] = wp.int64(0)
+    records[row, 10] = wp.int64(0)
     if seed_count[0] > 0:
         records[row, 7] = wp.int64(proofs[0])
         records[row, 8] = wp.int64(proofs[1])
+        records[row, 9] = wp.int64(face_proofs[0])
+        records[row, 10] = wp.int64(face_proofs[1])
     phase[0] = (row + 1) % records.shape[0]
 
 
@@ -66,7 +71,7 @@ def audit(profile=False, dot=None):
     mesh = ReuseDelaunayWorkspace(initial)
     source = wp.array(frames, dtype=wp.vec3, device=mesh.device)
     phase = wp.zeros(1, dtype=int, device=mesh.device)
-    records = wp.zeros((len(frames), 9), dtype=wp.int64, device=mesh.device)
+    records = wp.zeros((len(frames), 11), dtype=wp.int64, device=mesh.device)
     wp.load_module(module=__name__, device=mesh.device)
     with wp.ScopedCapture() as cap:
         wp.launch(produce, mesh.n, inputs=[source, phase, mesh.points])
@@ -85,6 +90,7 @@ def audit(profile=False, dot=None):
                 mesh.base_attempted,
                 mesh.reuse_seeds,
                 mesh._reuse_completion._certificate.proof_statistics,
+                mesh._reuse_completion._certificate.face_statistics,
                 records,
             ],
         )
@@ -110,6 +116,8 @@ def audit(profile=False, dot=None):
     assert values[2, 3] == 1 and values[2, 4] > 0
     assert values[1, 7] == values[1, 0] and values[1, 8] == 0
     assert values[2, 7] > 0 and values[2, 8] > 0
+    assert values[2, 9] > 0 and values[2, 10] > 0
+    np.testing.assert_array_equal(values[1, 9:], 0)
     np.testing.assert_array_equal(values[[0, 4, 5], 7:], 0)
     assert values[4, 0] == values[4, 6] == 0
     assert values[5, 2] == 0 and values[5, 5] == 1
@@ -127,6 +135,8 @@ def audit(profile=False, dot=None):
             "checksum",
             "cell_proofs_reused_within_completion",
             "cells_globally_checked_within_completion",
+            "supported_faces_skipping_candidate_search",
+            "unsupported_faces_requiring_candidate_search",
         ],
         records=values.tolist(),
     )

@@ -174,6 +174,10 @@ The integrated checker preserves exhaustive querying and the original diagnostic
 policy. The private variants, raw samples and independent checks remain in the
 evidence; they are not additional default implementations.
 
+A subsequent [hierarchy-traversal study](prepared-hierarchy-probes.md) compares
+one-, eight- and 32-worker pruning layouts. All four tested variants regress
+complete solves, so the strided point checker remains the production path.
+
 This work is tracked in [#170](https://github.com/alecjacobson/warpower/issues/170)
 and [PR #171](https://github.com/alecjacobson/warpower/pull/171). The
 [native CPU performance goal](cpu-mesher-baseline.md) remains unmet, and the

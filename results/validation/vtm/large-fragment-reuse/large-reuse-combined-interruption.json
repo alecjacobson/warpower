@@ -1,0 +1,11 @@
+{
+  "time_utc": "2026-11-07 12:09:47 UTC",
+  "scope": "Incomplete combined padded memcheck, deliberately interrupted; not a pass.",
+  "reason": "Three cases completed; no further progress for more than eight minutes, instrumented Python consumes one CPU core while GPU utilization is0%. SIGINT to Python did not return within30s. Preserve log and rerun every case separately with stack diagnostics; root cause unestablished, related issue155.",
+  "planned_timeout_seconds": 1800,
+  "processes": "    PID    PGID    PPID     ELAPSED %CPU STAT COMMAND\n1027577 1027577  541268       11:52  0.0 Ss   /bin/bash -c OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 PYTHONPATH=. .venv/bin/python .work/vtm/run-large-reuse-audits.py > .work/vtm/large-reuse-audit-driver.log 2>&1\n1027578 1027577 1027577       11:52  0.0 S    .venv/bin/python .work/vtm/run-large-reuse-audits.py\n1027579 1027577 1027578       11:52  0.0 Sl   /usr/local/cuda-12.9/bin/../compute-sanitizer/compute-sanitizer --tool memcheck --padding 32 --error-exitcode 99 /home/horde/projects/power-diagram/.venv/bin/python -m benchmarks.memcheck --stack-bytes 131072 -- -q tests/test_large_reuse.py\n1027582 1027577 1027579       11:52  0.0 S    /usr/local/cuda-12.9/compute-sanitizer/TreeLauncherSubreaper -m benchmarks.memcheck --stack-bytes 131072 -- -q tests/test_large_reuse.py /home/horde/projects/power-diagram/.venv/bin/python\n1027588 1027577 1027582       11:52  100 Rl   /home/horde/projects/power-diagram/.venv/bin/python -m benchmarks.memcheck --stack-bytes 131072 -- -q tests/test_large_reuse.py\n",
+  "interruption_signal": "SIGTERM to dedicated execution process group1027577",
+  "reported_test_progress": 3,
+  "zero_error_exit_obtained": false,
+  "debugger_attach": "Unavailable: ptrace denied; diagnostic log retained."
+}

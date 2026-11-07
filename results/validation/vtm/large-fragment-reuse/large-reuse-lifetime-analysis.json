@@ -1,0 +1,193 @@
+{
+  "tests": {
+    "0": {
+      "padded_memory_pass": true,
+      "api_memory_and_afterfree_pass": true,
+      "full_tracking_pass": true,
+      "checked_log": "large-reuse-lifetime-isolated-0.log",
+      "checked_sha256": "9e0ecef09bce0c96915a26e9038736dd1ab40c765853e2822fb58e20cb66672c"
+    },
+    "1": {
+      "padded_memory_pass": true,
+      "api_memory_and_afterfree_pass": true,
+      "full_tracking_pass": false,
+      "checked_log": "large-reuse-afterfree-isolated-1.log",
+      "checked_sha256": "10dbee518871ae8f15bf24eb12b878b8d7845e653c26e0517a4c3c9ab04fe161"
+    },
+    "2": {
+      "padded_memory_pass": true,
+      "api_memory_and_afterfree_pass": true,
+      "full_tracking_pass": true,
+      "checked_log": "large-reuse-lifetime-isolated-2.log",
+      "checked_sha256": "0cb558d5b0266628b9ed82e6865aec3a86279cd0871ff6cf45c3ccf5cd55e4e4"
+    },
+    "3": {
+      "padded_memory_pass": true,
+      "api_memory_and_afterfree_pass": true,
+      "full_tracking_pass": true,
+      "checked_log": "large-reuse-lifetime-isolated-3.log",
+      "checked_sha256": "3881db679ff64e13910d0f00552ab20af28106d1e675946119c93419217cca84"
+    },
+    "4": {
+      "padded_memory_pass": true,
+      "api_memory_and_afterfree_pass": true,
+      "full_tracking_pass": false,
+      "checked_log": "large-reuse-afterfree-isolated-4.log",
+      "checked_sha256": "134ace8de9de7a364d4d0d709b20cf9b22b7ab11a977c2de5dae778dfc17b91f"
+    },
+    "5": {
+      "padded_memory_pass": true,
+      "api_memory_and_afterfree_pass": true,
+      "full_tracking_pass": false,
+      "checked_log": "large-reuse-afterfree-isolated-5.log",
+      "checked_sha256": "71d4564adf1f46541c42fc5625a20224e5f538bb28bdac1e4bed614218491959"
+    },
+    "6": {
+      "padded_memory_pass": true,
+      "api_memory_and_afterfree_pass": true,
+      "full_tracking_pass": false,
+      "checked_log": "large-reuse-afterfree-isolated-6.log",
+      "checked_sha256": "19760f6071c3fcb867bf6aa7fd2158e0f2ca18088ee3b23a955cbd1d471f6a5b"
+    }
+  },
+  "controls": {
+    "radix4096-top-all": {
+      "exit_code": 0,
+      "exact_keys_and_payloads_match": true,
+      "zero_errors": true
+    },
+    "radix4096-conditional-normal": {
+      "exit_code": 0,
+      "exact_keys_and_payloads_match": true,
+      "zero_errors": true
+    },
+    "radix4096-conditional-afterfree": {
+      "exit_code": 0,
+      "exact_keys_and_payloads_match": true,
+      "zero_errors": true
+    }
+  },
+  "strict_failures": {
+    "lifetime-isolated-1": {
+      "log": "large-reuse-lifetime-isolated-1.log",
+      "log_sha256": "0f221488a5e1337906c313a2e5e59df86d14cd5c0095f46f728464a7ed36593d",
+      "total_reported_errors": 224,
+      "printed_kernel": "void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40",
+      "printed_kinds": [
+        "Invalid __global__ atomic of size 4 bytes"
+      ],
+      "printed_native_scratch_sizes": [
+        10751
+      ],
+      "printed_reports": 100,
+      "application_fatal_python_error": true,
+      "scope": "Only printed diagnostics are classified; the raw log records any print-limit truncation."
+    },
+    "lifetime-isolated-4": {
+      "log": "large-reuse-lifetime-isolated-4.log",
+      "log_sha256": "0de15801b7d90672331fbdf9e9f2e8fd20b9d23ed3d9d4cef13995db0462b72e",
+      "total_reported_errors": 5,
+      "printed_kernel": "void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40",
+      "printed_kinds": [
+        "Invalid __global__ atomic of size 4 bytes"
+      ],
+      "printed_native_scratch_sizes": [
+        10751
+      ],
+      "printed_reports": 5,
+      "application_fatal_python_error": true,
+      "scope": "Only printed diagnostics are classified; the raw log records any print-limit truncation."
+    },
+    "lifetime-isolated-5": {
+      "log": "large-reuse-lifetime-isolated-5.log",
+      "log_sha256": "607fd2b7627fb5dfd8e9191c3ddb538f12a1aefa5200277b5f8c3ff7c11d1145",
+      "total_reported_errors": 5,
+      "printed_kernel": "void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40",
+      "printed_kinds": [
+        "Invalid __global__ atomic of size 4 bytes"
+      ],
+      "printed_native_scratch_sizes": [
+        10751
+      ],
+      "printed_reports": 5,
+      "application_fatal_python_error": true,
+      "scope": "Only printed diagnostics are classified; the raw log records any print-limit truncation."
+    },
+    "lifetime-isolated-6": {
+      "log": "large-reuse-lifetime-isolated-6.log",
+      "log_sha256": "110d7e46877f6489554d7023c0de19cfbac74d6393adcef0838a5f559a33a60e",
+      "total_reported_errors": 5,
+      "printed_kernel": "void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40",
+      "printed_kinds": [
+        "Invalid __global__ atomic of size 4 bytes"
+      ],
+      "printed_native_scratch_sizes": [
+        10751
+      ],
+      "printed_reports": 5,
+      "application_fatal_python_error": true,
+      "scope": "Only printed diagnostics are classified; the raw log records any print-limit truncation."
+    },
+    "radix4096-conditional-all": {
+      "log": "large-reuse-radix4096-conditional-all.log",
+      "log_sha256": "ddd7616c77e0ee4bbbd9b777eea036ac0b1abce7ed4875c4d40e73be16f3ea28",
+      "total_reported_errors": 257,
+      "printed_kernel": "void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40",
+      "printed_kinds": [
+        "Invalid __global__ atomic of size 4 bytes"
+      ],
+      "printed_native_scratch_sizes": [
+        10751
+      ],
+      "printed_reports": 100,
+      "application_fatal_python_error": false,
+      "scope": "Only printed diagnostics are classified; the raw log records any print-limit truncation."
+    },
+    "route-before-all": {
+      "log": "large-reuse-route-before-all.log",
+      "log_sha256": "9a35a48e11cf5e03a44208b14b70dd73cd7421784732e18e5997c0f6f9bcfdc1",
+      "total_reported_errors": 256,
+      "printed_kernel": "void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40",
+      "printed_kinds": [
+        "Invalid __global__ atomic of size 4 bytes"
+      ],
+      "printed_native_scratch_sizes": [
+        10751
+      ],
+      "printed_reports": 100,
+      "application_fatal_python_error": true,
+      "scope": "Only printed diagnostics are classified; the raw log records any print-limit truncation."
+    },
+    "route-after-all": {
+      "log": "large-reuse-route-after-all.log",
+      "log_sha256": "203ceaceaf093137d2e16c417090dedb5415d1a23468d634f082d33b5da6a8a7",
+      "total_reported_errors": 256,
+      "printed_kernel": "void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40",
+      "printed_kinds": [
+        "Invalid __global__ atomic of size 4 bytes"
+      ],
+      "printed_native_scratch_sizes": [
+        10751
+      ],
+      "printed_reports": 100,
+      "application_fatal_python_error": true,
+      "scope": "Only printed diagnostics are classified; the raw log records any print-limit truncation."
+    }
+  },
+  "scope": "No error suppression. Full allocation-order failures remain failed. Zero-error use-after-free/API coverage does not establish full allocation-order validity.",
+  "coverage": {
+    "full_tracking_failed_indices": [
+      1,
+      4,
+      5,
+      6
+    ],
+    "all_seven_have_zero_error_api_and_afterfree_coverage": true,
+    "full_tracking_passed_indices": [
+      0,
+      2,
+      3
+    ],
+    "scope": "Strict full allocation-order failures remain failures; affected cases separately tested with use-after-free tracking. No production allocation changes or error filtering."
+  }
+}

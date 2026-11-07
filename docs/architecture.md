@@ -335,7 +335,11 @@ strided face slot and exhaustive checking for positive support.
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).
 Preallocated 1,024- and 2,048-site constructors handle the smallest fitting prefix;
-the ordinary full constructor handles larger inputs and prefix failures. Inactive
+the full constructor handles larger inputs and prefix failures. At reserved
+capacities of 2,049–4,096 sites, that full route now
+[uses certified fragment reuse](large-fragment-reuse.md), retaining current-input
+cell proofs throughout completion. Larger capacities retain ordinary full
+construction. Each fresh solve clears all fragments. Inactive
 scratch sites are exact duplicates of site zero, so the prefix contains every
 distinct site and retains original IDs. Each branch still certifies the complete
 active convex hull. Stable output buffers let downstream kernels consume either

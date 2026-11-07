@@ -1,0 +1,16 @@
+memcheck-isolated-3 0 23.042979955673218
+memcheck-isolated-0 0 17.23677659034729
+memcheck-isolated-1 0 20.041602611541748
+memcheck-isolated-2 0 4.920052528381348
+memcheck-isolated-4 0 25.04496121406555
+memcheck-isolated-5 0 27.999818563461304
+memcheck-isolated-6 0 28.75136089324951
+lifetime-isolated-3 0 25.29517912864685
+lifetime-isolated-0 0 29.85203528404236
+lifetime-isolated-1 99 5.520833730697632
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/run-large-reuse-isolated-audits.py", line 36, in <module>
+    path=run(f'{kind}-isolated-{i}',args+[python,w/'large-reuse-isolated-test.py',nodes[i]],env)
+  File "/home/horde/projects/power-diagram/.work/vtm/run-large-reuse-isolated-audits.py", line 25, in run
+    print(name,code,row['wall_seconds'],flush=True);assert code==0,row
+AssertionError: {'name': 'lifetime-isolated-1', 'command': ['/usr/local/cuda-12.9/bin/compute-sanitizer', '--tool', 'memcheck', '--padding', '32', '--error-exitcode', '99', '--check-api-memory-access', 'yes', '--track-stream-ordered-races', 'all', '/home/horde/projects/power-diagram/.venv/bin/python', '/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py', 'tests/test_large_reuse.py::test_large_route_changes_inputs_and_prefixes_without_host_decisions[4096]'], 'exit_code': 99, 'timed_out': False, 'timeout_seconds': 600, 'wall_seconds': 5.520833730697632, 'disable_pool': True}

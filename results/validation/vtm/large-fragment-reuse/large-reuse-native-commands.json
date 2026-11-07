@@ -1,0 +1,47 @@
+[
+  {
+    "name": "control",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--capture-range=cudaProfilerApi",
+      "--capture-range-end=stop",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-native-control",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/profile-large-reuse-native.py",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-native-control.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 20.039317846298218
+  },
+  {
+    "name": "reuse",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--capture-range=cudaProfilerApi",
+      "--capture-range-end=stop",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-native-reuse",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/profile-large-reuse-native.py",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-native-reuse.json",
+      "--reuse"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 24.543988943099976
+  }
+]

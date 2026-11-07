@@ -6,10 +6,13 @@ duplicates. This also disabled small-cloud reconstruction strategies whenever th
 reservation exceeded their size limits, even if few sites were active.
 
 The internal VTM core now preallocates constructors for 1,024 and 2,048 sites
-alongside the ordinary full constructor when a device active count is present
+alongside the full constructor when a device active count is present
 and reserved capacity exceeds 2,048. A device kernel selects the smallest fitting
 prefix. Each small constructor can recertify and complete previous fragments;
-larger inputs use ordinary reconstruction. A failed small attempt also falls
+the full route now also [uses fragment reuse at reserved capacities of
+2,049–4,096 sites](large-fragment-reuse.md), with current-input proofs retained
+through completion. Larger reserved capacities use ordinary reconstruction.
+A failed small attempt also falls
 back to the full constructor, preserving its larger output and strategy budgets.
 If that fails, publication remains an explicit error with zero tetrahedra.
 
@@ -31,7 +34,7 @@ existing certificate/index contract and implementation.
 
 All constructors, conditions, prefix views and output storage exist before
 capture. Growth, shrinkage, invalid-count handling, construction and fallback use
-device conditional nodes. Fresh full-mesher sampling clears prefix fragments and
+device conditional nodes. Fresh full-mesher sampling clears every retained fragment and
 strategy hints. Rejected trials may leave fragments in scratch, but every later
 use must recertify them against current sites. No validity is inherited merely
 because a branch succeeded on an earlier input.
@@ -41,6 +44,11 @@ unchanged. VTM capacities at or below 2,048 and fixed-budget cores without a
 device active count keep their preceding paths.
 
 ## Complete resident-solve measurements
+
+The following records describe the original routing change. The
+[later full-route extension](large-fragment-reuse.md) provides current larger-case
+timings, its additional scratch cost and new validation; it preserves the routing
+capacities and the ordinary standalone APIs.
 
 Fresh measurements on NVIDIA L40 / Warp 1.19.0 compare main `3b3ca21` against
 runtime `f81bbaf`. Each median contains three additional complete replays after

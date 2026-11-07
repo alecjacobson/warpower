@@ -237,6 +237,9 @@ These are historical implementation measurements. The
 [same-input cell-proof reuse](completion-proofs.md), together with
 [current hull-support reuse](hull-support-reuse.md), record later complete-solve
 timings, independent mesh comparisons and native capture audits.
+The [extension of certified fragment reuse through 4,096 sites](large-fragment-reuse.md)
+reduces complete 4k torus and Armadillo solves by 1.82–2.96× versus the preceding
+GPU implementation; small default and standalone API timings remain stable.
 
 The complete-mesher CPU speedup target remains open in
 [#40](https://github.com/alecjacobson/warpower/issues/40); the existing Paragram

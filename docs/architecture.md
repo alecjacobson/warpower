@@ -289,6 +289,15 @@ facets with a four-round budget, and requires the full final certificate. The
 ordinary constructor handles any failed attempt. Fresh meshing initialization
 clears the fragment; standalone diagram and Delaunay APIs keep their existing paths.
 
+For an active prefix in a larger reserved workspace, the core now
+[selects a reconstruction capacity on device](active-reconstruction.md).
+Preallocated 1,024- and 2,048-site constructors handle the smallest fitting prefix;
+the ordinary full constructor handles larger inputs and prefix failures. Inactive
+scratch sites are exact duplicates of site zero, so the prefix contains every
+distinct site and retains original IDs. Each branch still certifies the complete
+active convex hull. Stable output buffers let downstream kernels consume either
+branch without allocation, host decisions or graph recapture.
+
 Broader example validation, integrated time-to-quality comparisons and CPU
 performance work remain tracked in the [full VTM implementation plan](vtm.md).
 An energy decrease alone does not establish good worst-element quality or a

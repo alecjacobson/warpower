@@ -97,6 +97,10 @@ candidates with exact original-input certification and explicit finite failure.
 For capacities of 256–2,048 sites, the VTM core additionally
 [recertifies and completes previous Delaunay fragments](delaunay-reuse.md) before
 falling back to full reconstruction. Standalone geometry defaults are unchanged.
+Larger reserved workspaces with a device active count
+[route reconstruction through smaller preallocated prefixes](active-reconstruction.md)
+until the sites outgrow them. Full original-coordinate certification and the
+ordinary full-capacity fallback remain mandatory.
 The [sampled sizing layer](sizing.md) supplies device Lipschitz extension and
 graded interior/boundary updates, pole-based automatic feature-size estimates,
 and fixed-budget device initial sampling. The internal

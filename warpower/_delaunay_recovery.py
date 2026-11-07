@@ -323,6 +323,9 @@ class DelaunayWorkspace:
     a universal exact constructor; finite candidate generation can still fail.
     """
 
+    # Private VTM subclasses choose their launch policy before graph capture.
+    _facet_query_block_dim = 256
+
     def __init__(
         self,
         points,
@@ -430,6 +433,7 @@ class DelaunayWorkspace:
                     self._auxiliary._candidates,
                     self._auxiliary._candidate_count,
                     self._base._hierarchy,
+                    block_dim=self._facet_query_block_dim,
                 )
                 self._facet = FacetCompletion(
                     self.points,
@@ -437,6 +441,7 @@ class DelaunayWorkspace:
                     self._seed_filter.tetrahedra_count,
                     self._base._hierarchy,
                     max_rounds=self.facet_max_rounds,
+                    query_block_dim=self._facet_query_block_dim,
                 )
                 self._facet_ready = wp.zeros(1, dtype=int)
             self.fast_attempted = wp.zeros(1, dtype=int)

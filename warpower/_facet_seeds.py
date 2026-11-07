@@ -109,9 +109,10 @@ def compact(
 class CertifiedSeeds:
     """Preallocated exact seed filter; input is a device-count prefix of cells."""
 
-    def __init__(self, points, source, count, tree):
+    def __init__(self, points, source, count, tree, *, block_dim=256):
         self.points, self.source, self.count, self.tree = points, source, count, tree
         self.device = points.device
+        self._block_dim = block_dim
         n = len(source)
         if n < 1:
             raise ValueError("Candidate capacity must be positive")
@@ -125,6 +126,8 @@ class CertifiedSeeds:
             self.tetrahedra_count = wp.zeros(1, dtype=int)
             self.error = wp.zeros(1, dtype=int)
             wp.load_module(module=__name__, device=points.device)
+            if self._block_dim != 256:
+                wp.load_module(module=__name__, device=points.device, block_dim=self._block_dim)
             wp.load_module(module="warpower._facet_completion", device=points.device)
 
     def run(self):
@@ -167,6 +170,7 @@ class CertifiedSeeds:
             32 * n,
             device=self.device,
             inputs=[self.points, self.unique, self.unique_count, self.tree, self.live, self.error],
+            block_dim=self._block_dim,
         )
         wp.launch(
             compact,

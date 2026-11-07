@@ -351,13 +351,14 @@ class RefinementWorkspace:
             self._old_count = wp.empty(1, dtype=int)
             self._old_active = wp.empty(1, dtype=int)
             wp.load_module(module=__name__, device=self.device)
+            wp.load_module(module=__name__, device=self.device, block_dim=32)
             with wp.ScopedCapture() as capture:
                 self._record()
             self.graph = capture.graph
         wp.synchronize_device(self.device)
 
-    def _launch(self, kernel, n, args):
-        wp.launch(kernel, n, inputs=args, device=self.device)
+    def _launch(self, kernel, n, args, *, block_dim=256):
+        wp.launch(kernel, n, inputs=args, device=self.device, block_dim=block_dim)
 
     def _record(self):
         self.selected_tetrahedra.fill_(-1)
@@ -397,6 +398,7 @@ class RefinementWorkspace:
                 self._keys,
                 self._ids,
             ],
+            block_dim=32,
         )
         self._launch(ready_candidates, 1, [self._state])
         wp.capture_if(self.ready, self._sort_select)

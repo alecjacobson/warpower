@@ -323,7 +323,11 @@ and shares it across its query lanes. Every call refreshes these fixed setup
 buffers before querying; ordinary construction retains its original default path.
 The shared query now uses [point-specific Ball64 bounds](prepared-point-queries.md)
 for both strict physical signs. Uncertain and tied queries keep the original
-symbolic fallback, with unchanged preparation, allocation and launch scheduling.
+symbolic fallback. The private VTM checker now [groups current Morton-sorted
+points](grouped-seed-queries.md) in batches of 32, with freshly computed exact
+group boxes. Strict sphere-box separation can skip an entire group; unresolved
+groups retain the same individual point tests. This adds fixed group storage and
+one preparation launch while keeping standalone construction paths unchanged.
 Within one unchanged-input completion, [exact cell proofs](completion-proofs.md)
 now follow retained cells through deduplication and compaction. New cells keep
 their full sphere checks; all topology, coverage and hull-support checks remain.

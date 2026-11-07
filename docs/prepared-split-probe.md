@@ -2,8 +2,8 @@
 
 A private split of the prepared seed checker reduces register and local-memory
 requirements in its common kernel but makes complete solves about 1.3% slower
-at both tested sizes. **The split is not adopted.** Production retains the
-[combined point checker](prepared-point-queries.md).
+at both tested sizes. **The split is not adopted.** The subsequent
+[flat grouping](grouped-seed-queries.md) retains the combined strict/exact point policy.
 
 The strict kernel uses the existing sphere box and point-specific Ball64
 expression. It records a bit in a per-cell uint32 mask for each of the 32 query

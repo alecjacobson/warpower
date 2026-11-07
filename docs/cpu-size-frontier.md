@@ -1,7 +1,12 @@
 # Native CPU comparison near 4,096 vertices
 
+The subsequent [grouped-query GPU optimization](grouped-seed-queries.md) reduces
+the same 4,096-site solve to 2.401 seconds with bitwise-identical positions and
+matching connectivity. The table below retains the original 2.640-second GPU
+record and native measurements; the CPU outperformance target remains unmet.
+
 The complete GPU mesher still does not outperform CGAL Mesh_3/ODT. Near a
-4,096-vertex budget, the current GPU solve takes **2.640 seconds**. The native
+4,096-vertex budget, the GPU solve measured here takes **2.640 seconds**. The native
 sequential CPU median is **1.280 seconds** and the four-thread median is
 **0.736 seconds**. These medians retain all three samples, including samples
 with CPU quota throttling. The CPU also has better measured lower-percentile

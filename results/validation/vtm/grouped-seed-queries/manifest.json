@@ -1,0 +1,2048 @@
+{
+  "baseline": "ce510966c37143d0df27a53b930918651abdd8d1",
+  "runtime": "b5d369c3ee3064c6c1dbbb7b67cc358040d3d88a",
+  "scope": "Current-input Morton groups in private VTM seed queries. Exact group min/max boxes, existing conservative sphere-box and point/symbolic tests. Adds 24 bytes per group and one preparation launch per invocation; no temporal proof or CPU outperformance claim. The existing routed full allocation-order instrumentation limitation remains.",
+  "source_sha256": {
+    "warpower/_grouped_seeds.py": "2240d85cb6624f5a4e648cb7cae11c3ed310189eae4c69128b9aa0e09e830381",
+    "warpower/_facet_seeds.py": "30d44e71d8ccf2b1fa4f16a6d9793dce7f736dcd56a04205d1bc52a8c0dfc5b9",
+    "warpower/_prepared_seeds.py": "86246833eec66426191c3e5465f6eadcd8437724893f4ccecf6f4f8564d89d56",
+    "tests/test_grouped_query_bounds.py": "73d737689ea965a7846ac03979ed79a4b85aff93cb309c4d5ecd8eb6f2f09242",
+    "tests/test_grouped_query_masks.py": "a3e766292eaf218e9299b98a4a3b8ff58e89caac032a4d460f4960c3485254c9",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "examples/vtm_gallery.py": "8e39899ba4ec7b98dee840f73ccc330c57ac2a398faff3efc103dabb57af4acf",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f"
+  },
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-candidate/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-control/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-candidate/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-control/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-graded-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-uniform-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    }
+  ],
+  "shared_helpers": [
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    },
+    {
+      "path": "results/validation/vtm/analytic-filters/boundary-timing-commands.json",
+      "sha256": "c75b0a3c89cf49e7e1dec7a109ec6a7497370ddcc801f2c22ad78cc4c6174c49"
+    },
+    {
+      "path": "results/validation/vtm/prepared-point-queries/prepared-query-final/commands.json",
+      "sha256": "9d5cf9c1124f6573ccb3190e7fc7579c1ee527a7b89386d182cc0ee6f8048185"
+    }
+  ],
+  "reference_binaries_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "verified_raw_duplicates_removed": [
+    {
+      "raw": ".work/vtm/prepared-group-full-native.nsys-rep",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-full-native.nsys-rep.gz",
+      "sha256": "de4dff7505e74e2a2c3b26c5ec4db7f2cd6d1d070d5c02248a0ced756df3d990"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-loop-native.nsys-rep",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-loop-native.nsys-rep.gz",
+      "sha256": "020212cb553d4be462b17226b04333c258707e5a9bd83af604a1abf6c897295c"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/armadillo-graded-candidate/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-candidate/boundary.off.gz",
+      "sha256": "d5b92ed8ae8ab8e321dc4ddb4aac987d1ef1cf6997959c39775b97752f614537"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/armadillo-graded-candidate/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-candidate/mesh.vtu.gz",
+      "sha256": "bfad77cbe34660ff9cc79c11a459f745c281517d2d3be4080f6ab3b88f169009"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/armadillo-graded-control/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-control/boundary.off.gz",
+      "sha256": "5eff97a12483582141ff44ad42ea4e60a36c12488bdd5a7262b37ba331c32df6"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/armadillo-graded-control/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-control/mesh.vtu.gz",
+      "sha256": "99fadb48a9e3f10c67c472649bcf38603d847e8b725d2962a4dfffea7498c90a"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/armadillo-uniform-candidate/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-candidate/boundary.off.gz",
+      "sha256": "10bf4beb9b891b19e0193d4d841363ea596951f07f92eff8d2c6f2ce185ad933"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/armadillo-uniform-candidate/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-candidate/mesh.vtu.gz",
+      "sha256": "74116dade5e1b08a26958d6d83bfc83258e282778df3c18c5200bfd5c310d706"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/armadillo-uniform-control/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-control/boundary.off.gz",
+      "sha256": "25ceb5517c169634bc16c8287d804e739cccb5907077da197d3e9fae419ce679"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/armadillo-uniform-control/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-control/mesh.vtu.gz",
+      "sha256": "43bf04ea833818f038d79234d7493a2be46f16e297b10927b930dda895fb50d6"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/cavity-candidate/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-candidate/boundary.off.gz",
+      "sha256": "476a777c77fc403b5fe87660e9c0fbd532a2df8618cb8a3ea3fde28d96069437"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/cavity-candidate/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-candidate/input.off.gz",
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/cavity-candidate/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-candidate/mesh.vtu.gz",
+      "sha256": "756dee0a9a1b4d446e2193f9b9a0768f203e750c51c2a26b4c6094e847088bba"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/cavity-control/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-control/boundary.off.gz",
+      "sha256": "2688fc3ceea6355fccf08cc898e046ef638fba1bc649352ba92bad1978d78380"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/cavity-control/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-control/input.off.gz",
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/cavity-control/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-control/mesh.vtu.gz",
+      "sha256": "8d748d3d333f4264091a5e258fc7472b9ed3e8cb7094360da3dd138326d16615"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/disconnected-candidate/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-candidate/boundary.off.gz",
+      "sha256": "55a0324d83dd93e611da8555415a3c32a60a3002814e3bf6d1e86ce0db2a64f6"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/disconnected-candidate/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-candidate/input.off.gz",
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/disconnected-candidate/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-candidate/mesh.vtu.gz",
+      "sha256": "cd641c9baf8491fcb4ba4c3d32a8799b9177ab9c9e4be94a6ad58ce65e070698"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/disconnected-control/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-control/boundary.off.gz",
+      "sha256": "1159c3beef528a55857ead84a166631844abd323936b85dec63a6864a3acb10d"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/disconnected-control/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-control/input.off.gz",
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/disconnected-control/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-control/mesh.vtu.gz",
+      "sha256": "cf04c6ab5f55581bb97d39b2e08a9376573b4abba64f90749000a61c6816c508"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/graded-torus-candidate/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-candidate/boundary.off.gz",
+      "sha256": "122f2141862fd185bd8b49faa642d5b41b5dd89824e02088e42ca0f68b95f389"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/graded-torus-candidate/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-candidate/input.off.gz",
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/graded-torus-candidate/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-candidate/mesh.vtu.gz",
+      "sha256": "e8444e04849035ebfba34eb1902b5b18b935cc28c9b5dc0f702420acaba7d922"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/graded-torus-control/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-control/boundary.off.gz",
+      "sha256": "08954679c5a311da21525f9c9bbe87ff27d046dcbe34b4d5e374b370e4b9f044"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/graded-torus-control/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-control/input.off.gz",
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/graded-torus-control/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-control/mesh.vtu.gz",
+      "sha256": "65656c493acd8aca66885434832ac11818cd60cb332c5ba1368f2893c703ef09"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/thin-hand-candidate/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-candidate/boundary.off.gz",
+      "sha256": "10538cb10d7ddc9b69c947b4e743e4de0bd514423a6ac85b475e8981e79a8a2e"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/thin-hand-candidate/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-candidate/input.off.gz",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/thin-hand-candidate/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-candidate/mesh.vtu.gz",
+      "sha256": "fcd15816e3e6be8194879852eae4a7b078f152ea848d27a270b05d84a7920de0"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/thin-hand-control/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-control/boundary.off.gz",
+      "sha256": "d6d4c75e294e338e3cb8c94e62b0030fab8cd978260a6e7de06d3bc4689a26fd"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/thin-hand-control/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-control/input.off.gz",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-broad/thin-hand-control/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-control/mesh.vtu.gz",
+      "sha256": "1949b353f28a9e0b566ac20ae85945f3ef59c0e26446cf4fb03cb00ee763910d"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/armadillo-graded-after/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-graded-after/boundary.off.gz",
+      "sha256": "f015296f89f5c28f982241f0cee6ea57c947c7467d7169ff7aac4bbde7fc8930"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/armadillo-graded-after/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-graded-after/mesh.vtu.gz",
+      "sha256": "751c15121134e429535e37dd64d9f40dc4999f7772f8bb91f5c1d25fd6d950be"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/armadillo-uniform-after/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-uniform-after/boundary.off.gz",
+      "sha256": "765bbd7f6bfb70db94dcc4432ce13dd6eefff228565f123888a34516728b17af"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/armadillo-uniform-after/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-uniform-after/mesh.vtu.gz",
+      "sha256": "b42a7c23e70877bb67b48335ec288d8d7926395333b301bfb4702d60ea1d1248"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/cavity-after/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/cavity-after/boundary.off.gz",
+      "sha256": "4091fa86978ae9f168b1e50f9f46f39d8e649ef2f363fd37d4d5d08eb6bd438f"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/cavity-after/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/cavity-after/input.off.gz",
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/cavity-after/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/cavity-after/mesh.vtu.gz",
+      "sha256": "fe5a9036ded85fe5e6666ef88df1ffa2de50eb352472e78b2198b7ed90456eb0"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/disconnected-after/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/disconnected-after/boundary.off.gz",
+      "sha256": "81d055e6034c20582ddd95072def6432e557b9be340a8bd7007d2c2670e6bbe0"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/disconnected-after/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/disconnected-after/input.off.gz",
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/disconnected-after/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/disconnected-after/mesh.vtu.gz",
+      "sha256": "f9508a208290dddd25247027b56382d4c4de973f0ccf1cca512bf9e3fdd0eb37"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/graded-torus-after/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/graded-torus-after/boundary.off.gz",
+      "sha256": "4a31257306a0b11c6b6c644db65966eac2e96729c80ce61538800978b5e8f1ca"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/graded-torus-after/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/graded-torus-after/input.off.gz",
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/graded-torus-after/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/graded-torus-after/mesh.vtu.gz",
+      "sha256": "86a20ad32bf06165c1c303b4be17e27fd940c481d20bb02ce05d340cec4e81ca"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/thin-hand-after/boundary.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/thin-hand-after/boundary.off.gz",
+      "sha256": "ca2993f7d518bfc20ea6eb6278d09f8e49026e81f588a6e68cbe9d35b3440b23"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/thin-hand-after/input.off",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/thin-hand-after/input.off.gz",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "raw": ".work/vtm/prepared-group-final/thin-hand-after/mesh.vtu",
+      "archive": "results/validation/vtm/grouped-seed-queries/prepared-group-final/thin-hand-after/mesh.vtu.gz",
+      "sha256": "75aafd8edf3bf70c9fb576546120d9f3cc7c944c8c29de536de8a7a9bb0c2f9d"
+    }
+  ],
+  "files": [
+    {
+      "original": ".work/vtm/prepared-group-bound-tests.log",
+      "original_sha256": "746bf6b56e589420af6fedf731b4d57fd2b9c543de8486d867bbca85131dc32d",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-bound-tests.log",
+      "bytes": 99,
+      "sha256": "746bf6b56e589420af6fedf731b4d57fd2b9c543de8486d867bbca85131dc32d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-bounds-lifetime.log",
+      "original_sha256": "9b661a487f0df13fa2de356c4ba26cde10e98f7ec4c84cd4c8119c4eefbebc10",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-bounds-lifetime.log",
+      "bytes": 936,
+      "sha256": "9b661a487f0df13fa2de356c4ba26cde10e98f7ec4c84cd4c8119c4eefbebc10"
+    },
+    {
+      "original": ".work/vtm/prepared-group-bounds-padded.log",
+      "original_sha256": "1ff86f588f873d82c35e39b4117a2b0e655bd8f19899e569c17e643debb844f1",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-bounds-padded.log",
+      "bytes": 935,
+      "sha256": "1ff86f588f873d82c35e39b4117a2b0e655bd8f19899e569c17e643debb844f1"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad-independent.json",
+      "original_sha256": "bd286b1b83b397ef216701c3c5bc944c95c061c6ab5d63ae826a5fe8f95fc51b",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad-independent.json",
+      "bytes": 25481,
+      "sha256": "bd286b1b83b397ef216701c3c5bc944c95c061c6ab5d63ae826a5fe8f95fc51b"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad-independent.log",
+      "original_sha256": "64051d5917586257dc4227cce8e6720d2920e87667d2919bb7e6dce22df5e59d",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad-independent.log",
+      "bytes": 1385,
+      "sha256": "64051d5917586257dc4227cce8e6720d2920e87667d2919bb7e6dce22df5e59d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad.log",
+      "original_sha256": "da56a4c5349d52193ae6d19ba9985ad678eb04b62a1c629e5ab51f1918090d62",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad.log",
+      "bytes": 9446,
+      "sha256": "da56a4c5349d52193ae6d19ba9985ad678eb04b62a1c629e5ab51f1918090d62"
+    },
+    {
+      "original": ".work/vtm/prepared-group-counter-4096.json",
+      "original_sha256": "b1a1da0cc793e0d934f5289e2eb42e047d9ff18b9850b4f2870e1ee433d2823c",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-counter-4096.json",
+      "bytes": 1245,
+      "sha256": "b1a1da0cc793e0d934f5289e2eb42e047d9ff18b9850b4f2870e1ee433d2823c"
+    },
+    {
+      "original": ".work/vtm/prepared-group-counter-4096.log",
+      "original_sha256": "4c1fd416874eb4c923d85c97834fc7c9b560bce5f2c1cface84271266b7cc1ac",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-counter-4096.log",
+      "bytes": 7490,
+      "sha256": "4c1fd416874eb4c923d85c97834fc7c9b560bce5f2c1cface84271266b7cc1ac"
+    },
+    {
+      "original": ".work/vtm/prepared-group-counter-4096.npz",
+      "original_sha256": "f8a7480a734b96c0775d55e6e316a714a0d634662d73d0c3076d740397cffc60",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-counter-4096.npz",
+      "bytes": 419601,
+      "sha256": "f8a7480a734b96c0775d55e6e316a714a0d634662d73d0c3076d740397cffc60"
+    },
+    {
+      "original": ".work/vtm/prepared-group-counter-equivalence.json",
+      "original_sha256": "ff5d6cd77d96cb27d81c640d99b2af0ebd7ce04a749527cdeef1633db508d667",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-counter-equivalence.json",
+      "bytes": 720,
+      "sha256": "ff5d6cd77d96cb27d81c640d99b2af0ebd7ce04a749527cdeef1633db508d667"
+    },
+    {
+      "original": ".work/vtm/prepared-group-counter-run-4096.json",
+      "original_sha256": "d2e6247784f9e96c8963c7df2f90efe040a9a315aa09c927e09d245e92c3ad79",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-counter-run-4096.json",
+      "bytes": 2940,
+      "sha256": "d2e6247784f9e96c8963c7df2f90efe040a9a315aa09c927e09d245e92c3ad79"
+    },
+    {
+      "original": ".work/vtm/prepared-group-existing.log",
+      "original_sha256": "eb5589a649938505a9ab1d3f7c71eae26a4630821d94400ed5a009c83355655a",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-existing.log",
+      "bytes": 100,
+      "sha256": "eb5589a649938505a9ab1d3f7c71eae26a4630821d94400ed5a009c83355655a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final-independent-initial.json",
+      "original_sha256": "23cf8b78bac0544e4981ddde48af7b5fb9f94815dc38f3aac82c7ef7bface0c6",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final-independent-initial.json",
+      "bytes": 38307,
+      "sha256": "23cf8b78bac0544e4981ddde48af7b5fb9f94815dc38f3aac82c7ef7bface0c6"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final-independent.json",
+      "original_sha256": "5fc0039a711bbac32241245517120113acfbb53e2b5dd590d50f3f7a004c4b00",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final-independent.json",
+      "bytes": 44155,
+      "sha256": "5fc0039a711bbac32241245517120113acfbb53e2b5dd590d50f3f7a004c4b00"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final-independent.log",
+      "original_sha256": "bd2bc30871f29786c23b919f5e961e37cd1152208351718354a678886fe4f003",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final-independent.log",
+      "bytes": 6042,
+      "sha256": "bd2bc30871f29786c23b919f5e961e37cd1152208351718354a678886fe4f003"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final.log",
+      "original_sha256": "01319010c2e05062a4f494e30bcf10b96a7f1e3acaf60338edf4e2bc37b860c1",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final.log",
+      "bytes": 12875,
+      "sha256": "01319010c2e05062a4f494e30bcf10b96a7f1e3acaf60338edf4e2bc37b860c1"
+    },
+    {
+      "original": ".work/vtm/prepared-group-focused-tests.log",
+      "original_sha256": "36194a64231442db233b88f5a8288d25b16b91d425719cb5140390df8c8c98a3",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-focused-tests.log",
+      "bytes": 191,
+      "sha256": "36194a64231442db233b88f5a8288d25b16b91d425719cb5140390df8c8c98a3"
+    },
+    {
+      "original": ".work/vtm/prepared-group-full-native-audit.json",
+      "original_sha256": "fbbb7b02fa92811736003755450d8831dc73c342f33a688b7d1fe0435bc78215",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-full-native-audit.json",
+      "bytes": 1120,
+      "sha256": "fbbb7b02fa92811736003755450d8831dc73c342f33a688b7d1fe0435bc78215"
+    },
+    {
+      "original": ".work/vtm/prepared-group-full-native-audit.log",
+      "original_sha256": "fbbb7b02fa92811736003755450d8831dc73c342f33a688b7d1fe0435bc78215",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-full-native-audit.log",
+      "bytes": 1120,
+      "sha256": "fbbb7b02fa92811736003755450d8831dc73c342f33a688b7d1fe0435bc78215"
+    },
+    {
+      "original": ".work/vtm/prepared-group-full-native-export.log",
+      "original_sha256": "af4fc2992810db8d8f04f1cdd8d06eb77db58656156bc3f96c99bdcac6a9ae81",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-full-native-export.log",
+      "bytes": 8101,
+      "sha256": "af4fc2992810db8d8f04f1cdd8d06eb77db58656156bc3f96c99bdcac6a9ae81"
+    },
+    {
+      "original": ".work/vtm/prepared-group-full-native.dot.gz",
+      "original_sha256": "01ad3726db1dc7f9cec6329e6cdfbaa84a2a7e271ef1ff0058d24af1f4ecd92d",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-full-native.dot.gz",
+      "bytes": 1434901,
+      "sha256": "01ad3726db1dc7f9cec6329e6cdfbaa84a2a7e271ef1ff0058d24af1f4ecd92d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-full-native.json",
+      "original_sha256": "ce763569095f84b07d46061a5b1ec2ef2531bd42466c25eaa80073c270000867",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-full-native.json",
+      "bytes": 539,
+      "sha256": "ce763569095f84b07d46061a5b1ec2ef2531bd42466c25eaa80073c270000867"
+    },
+    {
+      "original": ".work/vtm/prepared-group-full-native.log",
+      "original_sha256": "df73ec1da3dfd9f84091afd3fb665a4e5fd1e9234f3f2d72766b2a31098ee5a2",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-full-native.log",
+      "bytes": 8887,
+      "sha256": "df73ec1da3dfd9f84091afd3fb665a4e5fd1e9234f3f2d72766b2a31098ee5a2"
+    },
+    {
+      "original": ".work/vtm/prepared-group-full-native.nsys-rep",
+      "original_sha256": "de4dff7505e74e2a2c3b26c5ec4db7f2cd6d1d070d5c02248a0ced756df3d990",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-full-native.nsys-rep.gz",
+      "bytes": 2912835,
+      "sha256": "546d4423824eedc2a82f55d98789a122b0110ebec2d1f36e332662e121e8d328"
+    },
+    {
+      "original": ".work/vtm/prepared-group-full-native.py",
+      "original_sha256": "6fcaacb36cd825f759ae4dfe21320096a046c7cdb6b0ea0a4ee5cbd3dc254955",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-full-native.py",
+      "bytes": 1595,
+      "sha256": "6fcaacb36cd825f759ae4dfe21320096a046c7cdb6b0ea0a4ee5cbd3dc254955"
+    },
+    {
+      "original": ".work/vtm/prepared-group-full-native.sqlite.gz",
+      "original_sha256": "54f59ff74ad6756ec4f07ea53ff34ef3144107a144e26167513943064d90a6d9",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-full-native.sqlite.gz",
+      "bytes": 3886064,
+      "sha256": "54f59ff74ad6756ec4f07ea53ff34ef3144107a144e26167513943064d90a6d9"
+    },
+    {
+      "original": ".work/vtm/prepared-group-full-suite.log",
+      "original_sha256": "b1c6377e09ca8dc097c78147a8366750441bb83cd6f8c2281a79c0663dc132c4",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-full-suite.log",
+      "bytes": 912,
+      "sha256": "b1c6377e09ca8dc097c78147a8366750441bb83cd6f8c2281a79c0663dc132c4"
+    },
+    {
+      "original": ".work/vtm/prepared-group-hand-repeat-comparison.json",
+      "original_sha256": "73d9061e400851d13c3f452e79195b5a7d4794ce00e7135d5c3cb86fb05c4f4a",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-hand-repeat-comparison.json",
+      "bytes": 1992,
+      "sha256": "73d9061e400851d13c3f452e79195b5a7d4794ce00e7135d5c3cb86fb05c4f4a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-hand-repeat-comparison.log",
+      "original_sha256": "73d9061e400851d13c3f452e79195b5a7d4794ce00e7135d5c3cb86fb05c4f4a",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-hand-repeat-comparison.log",
+      "bytes": 1992,
+      "sha256": "73d9061e400851d13c3f452e79195b5a7d4794ce00e7135d5c3cb86fb05c4f4a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-hand-repeat.log",
+      "original_sha256": "e1b920ebfa29bb44d86c272165967e5363827753250a90dfbd8ee42f9ce5918b",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-hand-repeat.log",
+      "bytes": 931,
+      "sha256": "e1b920ebfa29bb44d86c272165967e5363827753250a90dfbd8ee42f9ce5918b"
+    },
+    {
+      "original": ".work/vtm/prepared-group-loop-native-audit.json",
+      "original_sha256": "300733966bb3495fa1991f0c9e4595249e4ed719fc9077a6f61116f18dd206ae",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-loop-native-audit.json",
+      "bytes": 1144,
+      "sha256": "300733966bb3495fa1991f0c9e4595249e4ed719fc9077a6f61116f18dd206ae"
+    },
+    {
+      "original": ".work/vtm/prepared-group-loop-native-audit.log",
+      "original_sha256": "300733966bb3495fa1991f0c9e4595249e4ed719fc9077a6f61116f18dd206ae",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-loop-native-audit.log",
+      "bytes": 1144,
+      "sha256": "300733966bb3495fa1991f0c9e4595249e4ed719fc9077a6f61116f18dd206ae"
+    },
+    {
+      "original": ".work/vtm/prepared-group-loop-native-export.log",
+      "original_sha256": "52bdec43d3872463e3551f57a4e7b7c2f7373316e2928d21de472b5ae7854ba6",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-loop-native-export.log",
+      "bytes": 8101,
+      "sha256": "52bdec43d3872463e3551f57a4e7b7c2f7373316e2928d21de472b5ae7854ba6"
+    },
+    {
+      "original": ".work/vtm/prepared-group-loop-native.dot.gz",
+      "original_sha256": "1d8fab25e7fe93ebefc6ed542d61b519a490a80cdb81a2e75e6255e572e28670",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-loop-native.dot.gz",
+      "bytes": 101267,
+      "sha256": "1d8fab25e7fe93ebefc6ed542d61b519a490a80cdb81a2e75e6255e572e28670"
+    },
+    {
+      "original": ".work/vtm/prepared-group-loop-native.json",
+      "original_sha256": "0645f53df0c32f6b09ee581d904f916aec53a1af6d502345fd686aafcc609d63",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-loop-native.json",
+      "bytes": 2285,
+      "sha256": "0645f53df0c32f6b09ee581d904f916aec53a1af6d502345fd686aafcc609d63"
+    },
+    {
+      "original": ".work/vtm/prepared-group-loop-native.log",
+      "original_sha256": "7fae9b29d04d5af30d12b7d5db0c1489eef04d2ca227b6392fb884515cfc32e7",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-loop-native.log",
+      "bytes": 5962,
+      "sha256": "7fae9b29d04d5af30d12b7d5db0c1489eef04d2ca227b6392fb884515cfc32e7"
+    },
+    {
+      "original": ".work/vtm/prepared-group-loop-native.npz",
+      "original_sha256": "6c7d356992128a0d89013dc39578cfb10ada2efaece64163799fa36653d4a9a8",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-loop-native.npz",
+      "bytes": 1400477,
+      "sha256": "6c7d356992128a0d89013dc39578cfb10ada2efaece64163799fa36653d4a9a8"
+    },
+    {
+      "original": ".work/vtm/prepared-group-loop-native.nsys-rep",
+      "original_sha256": "020212cb553d4be462b17226b04333c258707e5a9bd83af604a1abf6c897295c",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-loop-native.nsys-rep.gz",
+      "bytes": 214173,
+      "sha256": "666679cd500da8ad4bd32c695d27cbb63862596dcbfa20b14a1ff6c965fc5bd4"
+    },
+    {
+      "original": ".work/vtm/prepared-group-loop-native.sqlite.gz",
+      "original_sha256": "736351b905471ae0c63251e04ccb3bd55a9f2c201fa5ae5b996c6bd60936f2ce",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-loop-native.sqlite.gz",
+      "bytes": 310798,
+      "sha256": "736351b905471ae0c63251e04ccb3bd55a9f2c201fa5ae5b996c6bd60936f2ce"
+    },
+    {
+      "original": ".work/vtm/prepared-group-loop.py",
+      "original_sha256": "ff594b0e3813fd252a7d00a43250cdfc5a557063460a3bc0add4cf04cde5d70f",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-loop.py",
+      "bytes": 4447,
+      "sha256": "ff594b0e3813fd252a7d00a43250cdfc5a557063460a3bc0add4cf04cde5d70f"
+    },
+    {
+      "original": ".work/vtm/prepared-group-mask-tests.log",
+      "original_sha256": "acebb5d4869da4f986e3eeb621c75a0965401ab2176605708cd7d75630b4e5b4",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-mask-tests.log",
+      "bytes": 100,
+      "sha256": "acebb5d4869da4f986e3eeb621c75a0965401ab2176605708cd7d75630b4e5b4"
+    },
+    {
+      "original": ".work/vtm/prepared-group-masks-lifetime.log",
+      "original_sha256": "eb03c1ba019367c968aa0c9083249f6b00676483bad3aa2d3f6a399346084b7e",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-masks-lifetime.log",
+      "bytes": 1535,
+      "sha256": "eb03c1ba019367c968aa0c9083249f6b00676483bad3aa2d3f6a399346084b7e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-masks-padded.log",
+      "original_sha256": "d7751c6a13f61e75ed7fe93607dc35e858b33ba48d51c28504ef33d67b32136f",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-masks-padded.log",
+      "bytes": 1534,
+      "sha256": "d7751c6a13f61e75ed7fe93607dc35e858b33ba48d51c28504ef33d67b32136f"
+    },
+    {
+      "original": ".work/vtm/prepared-group-memory-commands.json",
+      "original_sha256": "c2e604f3efce27a439103e16ea349fdd118f223203a5bf8eb4fc895f4529597f",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-memory-commands.json",
+      "bytes": 3839,
+      "sha256": "c2e604f3efce27a439103e16ea349fdd118f223203a5bf8eb4fc895f4529597f"
+    },
+    {
+      "original": ".work/vtm/prepared-group-memory.log",
+      "original_sha256": "19508d554e6152ab630708d43471748ef7db22d49aff02aa93067ef914e8337d",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-memory.log",
+      "bytes": 3134,
+      "sha256": "19508d554e6152ab630708d43471748ef7db22d49aff02aa93067ef914e8337d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-native-analysis.log",
+      "original_sha256": "852f6acf0c2a0fd8eb05ab90dd3b8ccce3e49b5ac9aff73b8b7abfe340991b03",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-native-analysis.log",
+      "bytes": 59,
+      "sha256": "852f6acf0c2a0fd8eb05ab90dd3b8ccce3e49b5ac9aff73b8b7abfe340991b03"
+    },
+    {
+      "original": ".work/vtm/prepared-group-native-audit-summary.json",
+      "original_sha256": "bb383c57adf620acd6aa6ed81a2830f28a1d3493c53ba7486cbe5f57d00dd44e",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-native-audit-summary.json",
+      "bytes": 59052,
+      "sha256": "bb383c57adf620acd6aa6ed81a2830f28a1d3493c53ba7486cbe5f57d00dd44e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-native-commands.json",
+      "original_sha256": "f0d30fc5bcc3e7cedfccd2e8ee75536bdea6345dce50926efaa5f25daacc323d",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-native-commands.json",
+      "bytes": 1969,
+      "sha256": "f0d30fc5bcc3e7cedfccd2e8ee75536bdea6345dce50926efaa5f25daacc323d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-native.log",
+      "original_sha256": "d4f151efc4bb1d8a63bd99bfabb284db03585cbe2de025f97b844f361efca0a3",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-native.log",
+      "bytes": 1645,
+      "sha256": "d4f151efc4bb1d8a63bd99bfabb284db03585cbe2de025f97b844f361efca0a3"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot-independent.json",
+      "original_sha256": "c341c0f8a0a5fc1618f6c7d824d8f8188adabfc4e54a3dd7926aeeda740342c6",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot-independent.json",
+      "bytes": 6491,
+      "sha256": "c341c0f8a0a5fc1618f6c7d824d8f8188adabfc4e54a3dd7926aeeda740342c6"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot-independent.log",
+      "original_sha256": "07c412311a0958065f1fdb76bf8e5a029a1691cc01e7d310c8aeacaca8809a76",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot-independent.log",
+      "bytes": 445,
+      "sha256": "07c412311a0958065f1fdb76bf8e5a029a1691cc01e7d310c8aeacaca8809a76"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilots.log",
+      "original_sha256": "0c8a9d13b7e4f158e23174ca0f599ea028b227b6dcc82bb6fe217215b37acd87",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilots.log",
+      "bytes": 2477,
+      "sha256": "0c8a9d13b7e4f158e23174ca0f599ea028b227b6dcc82bb6fe217215b37acd87"
+    },
+    {
+      "original": ".work/vtm/prepared-group-progress.md",
+      "original_sha256": "cb9767153126a9a413c309524b9d9c18a13637c6c3ca4d7985951e9b1016f8f0",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-progress.md",
+      "bytes": 1017,
+      "sha256": "cb9767153126a9a413c309524b9d9c18a13637c6c3ca4d7985951e9b1016f8f0"
+    },
+    {
+      "original": ".work/vtm/prepared-group-publication.log",
+      "original_sha256": "72c41658f3b5ad70838678b25282b479540a263715217cc048d9caf8ee49b4ac",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-publication.log",
+      "bytes": 39,
+      "sha256": "72c41658f3b5ad70838678b25282b479540a263715217cc048d9caf8ee49b4ac"
+    },
+    {
+      "original": ".work/vtm/prepared-group-route-lifetime.log",
+      "original_sha256": "89cea0465d59852b3d3bae81757076d6ff2282f35f3bf318a38f9a258132d178",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-route-lifetime.log",
+      "bytes": 3383,
+      "sha256": "89cea0465d59852b3d3bae81757076d6ff2282f35f3bf318a38f9a258132d178"
+    },
+    {
+      "original": ".work/vtm/prepared-group-route-padded.log",
+      "original_sha256": "94ff074ebe68dfdda4628dc594c7d2711f57419adf6607351f728f8aa07ad090",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-route-padded.log",
+      "bytes": 3382,
+      "sha256": "94ff074ebe68dfdda4628dc594c7d2711f57419adf6607351f728f8aa07ad090"
+    },
+    {
+      "original": ".work/vtm/prepared-group-runtime.json",
+      "original_sha256": "eda09519081957c54825aacdf677af72e93d7dc12b67e3e8dd3bd43099bb7148",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-runtime.json",
+      "bytes": 118,
+      "sha256": "eda09519081957c54825aacdf677af72e93d7dc12b67e3e8dd3bd43099bb7148"
+    },
+    {
+      "original": ".work/vtm/prepared-group-source-isolation.json",
+      "original_sha256": "da40ea919e33fa5330c5cda348932d7e528eeec00e297fd674440b2facaaa64a",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-source-isolation.json",
+      "bytes": 557,
+      "sha256": "da40ea919e33fa5330c5cda348932d7e528eeec00e297fd674440b2facaaa64a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-source-isolation.log",
+      "original_sha256": "da40ea919e33fa5330c5cda348932d7e528eeec00e297fd674440b2facaaa64a",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-source-isolation.log",
+      "bytes": 557,
+      "sha256": "da40ea919e33fa5330c5cda348932d7e528eeec00e297fd674440b2facaaa64a"
+    },
+    {
+      "original": ".work/vtm/repeat-prepared-group-hand.py",
+      "original_sha256": "c672aa9751f23bdf7293716140f69f431ccdece05017483778cb2cea18faa070",
+      "path": "results/validation/vtm/grouped-seed-queries/repeat-prepared-group-hand.py",
+      "bytes": 1531,
+      "sha256": "c672aa9751f23bdf7293716140f69f431ccdece05017483778cb2cea18faa070"
+    },
+    {
+      "original": ".work/vtm/prepared_group_counters.py",
+      "original_sha256": "d0099e76ec5c9ce957d1a52bce0f01aa0ce5b2f95e3a6d144bff8f46b9529c80",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared_group_counters.py",
+      "bytes": 5113,
+      "sha256": "d0099e76ec5c9ce957d1a52bce0f01aa0ce5b2f95e3a6d144bff8f46b9529c80"
+    },
+    {
+      "original": ".work/vtm/prepared_group_queries.py",
+      "original_sha256": "44ca356bead95fb669fc69bd1538ce81df6b4734e59366a6236e1fabd12fe142",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared_group_queries.py",
+      "bytes": 3124,
+      "sha256": "44ca356bead95fb669fc69bd1538ce81df6b4734e59366a6236e1fabd12fe142"
+    },
+    {
+      "original": ".work/vtm/test_prepared_group_masks.py",
+      "original_sha256": "353a1ebb2085260c31eda809e3233d1016ed62eda66d8dabc4f6cdab065dae65",
+      "path": "results/validation/vtm/grouped-seed-queries/test_prepared_group_masks.py",
+      "bytes": 10040,
+      "sha256": "353a1ebb2085260c31eda809e3233d1016ed62eda66d8dabc4f6cdab065dae65"
+    },
+    {
+      "original": ".work/vtm/test_prepared_group_bounds.py",
+      "original_sha256": "a0aad1c57a5ea375475d05c7f8ba78663db508701bf22d3a134960fca893f52f",
+      "path": "results/validation/vtm/grouped-seed-queries/test_prepared_group_bounds.py",
+      "bytes": 2256,
+      "sha256": "a0aad1c57a5ea375475d05c7f8ba78663db508701bf22d3a134960fca893f52f"
+    },
+    {
+      "original": ".work/vtm/publish-prepared-group-validation.py",
+      "original_sha256": "5e39526bf2ca8e026cc89f77e1ec0c17130c9e4b3a704574a114a527f0c93697",
+      "path": "results/validation/vtm/grouped-seed-queries/publish-prepared-group-validation.py",
+      "bytes": 6803,
+      "sha256": "5e39526bf2ca8e026cc89f77e1ec0c17130c9e4b3a704574a114a527f0c93697"
+    },
+    {
+      "original": ".work/vtm/analyze-prepared-group-audit.py",
+      "original_sha256": "65c1425eb41dfa41afdd03e9a7325548a900dd5300247d5e0ffafe57f9b89c93",
+      "path": "results/validation/vtm/grouped-seed-queries/analyze-prepared-group-audit.py",
+      "bytes": 3356,
+      "sha256": "65c1425eb41dfa41afdd03e9a7325548a900dd5300247d5e0ffafe57f9b89c93"
+    },
+    {
+      "original": ".work/vtm/check-prepared-group-broad.py",
+      "original_sha256": "b2888a2582f8eaed654c192a16c1a7bda1d7637a399ab9bb3bcb6e4b4fa22df5",
+      "path": "results/validation/vtm/grouped-seed-queries/check-prepared-group-broad.py",
+      "bytes": 3415,
+      "sha256": "b2888a2582f8eaed654c192a16c1a7bda1d7637a399ab9bb3bcb6e4b4fa22df5"
+    },
+    {
+      "original": ".work/vtm/check-prepared-group-final.py",
+      "original_sha256": "fc8d98ea8faed3d8235093813030e09b565af3c42176095dc251ed48f3d454fd",
+      "path": "results/validation/vtm/grouped-seed-queries/check-prepared-group-final.py",
+      "bytes": 4836,
+      "sha256": "fc8d98ea8faed3d8235093813030e09b565af3c42176095dc251ed48f3d454fd"
+    },
+    {
+      "original": ".work/vtm/check-prepared-group-hand-repeat.py",
+      "original_sha256": "0cecca093e5625a7c9b20eb9f9f86f6185dbad495ee6073659abe0d8cc21d7e6",
+      "path": "results/validation/vtm/grouped-seed-queries/check-prepared-group-hand-repeat.py",
+      "bytes": 1745,
+      "sha256": "0cecca093e5625a7c9b20eb9f9f86f6185dbad495ee6073659abe0d8cc21d7e6"
+    },
+    {
+      "original": ".work/vtm/check-prepared-group-isolation.py",
+      "original_sha256": "6cadc390311af41f60b95f15494f8e3bdc3dfadc3469dfd072a3bd6df980a305",
+      "path": "results/validation/vtm/grouped-seed-queries/check-prepared-group-isolation.py",
+      "bytes": 1871,
+      "sha256": "6cadc390311af41f60b95f15494f8e3bdc3dfadc3469dfd072a3bd6df980a305"
+    },
+    {
+      "original": ".work/vtm/check-prepared-group-pilots.py",
+      "original_sha256": "77c751c8e978f426f59e6e1d0802aaeb4869b259287288421e8689aee5f337f0",
+      "path": "results/validation/vtm/grouped-seed-queries/check-prepared-group-pilots.py",
+      "bytes": 2093,
+      "sha256": "77c751c8e978f426f59e6e1d0802aaeb4869b259287288421e8689aee5f337f0"
+    },
+    {
+      "original": ".work/vtm/run-prepared-group-broad-entry.py",
+      "original_sha256": "d6bdafd2fe37f0488dee3fe7ea8878dd42f7dfedfed82e6c21ed74023b671443",
+      "path": "results/validation/vtm/grouped-seed-queries/run-prepared-group-broad-entry.py",
+      "bytes": 138,
+      "sha256": "d6bdafd2fe37f0488dee3fe7ea8878dd42f7dfedfed82e6c21ed74023b671443"
+    },
+    {
+      "original": ".work/vtm/run-prepared-group-broad.py",
+      "original_sha256": "b0a0bf9cd9b9ad25b5b4ae4b9cc4af355fe2d4c440aad010639288dfa35dfa0c",
+      "path": "results/validation/vtm/grouped-seed-queries/run-prepared-group-broad.py",
+      "bytes": 3497,
+      "sha256": "b0a0bf9cd9b9ad25b5b4ae4b9cc4af355fe2d4c440aad010639288dfa35dfa0c"
+    },
+    {
+      "original": ".work/vtm/run-prepared-group-final.py",
+      "original_sha256": "06615133cc20a46992375eefeae15229c0e3bec3f2829cdd0f60ee245f6ebf61",
+      "path": "results/validation/vtm/grouped-seed-queries/run-prepared-group-final.py",
+      "bytes": 4021,
+      "sha256": "06615133cc20a46992375eefeae15229c0e3bec3f2829cdd0f60ee245f6ebf61"
+    },
+    {
+      "original": ".work/vtm/run-prepared-group-memory.py",
+      "original_sha256": "3921e3afd698a902b5d5196a896bdfc66317047da49662bd37ecc23b058228b5",
+      "path": "results/validation/vtm/grouped-seed-queries/run-prepared-group-memory.py",
+      "bytes": 2171,
+      "sha256": "3921e3afd698a902b5d5196a896bdfc66317047da49662bd37ecc23b058228b5"
+    },
+    {
+      "original": ".work/vtm/run-prepared-group-native.py",
+      "original_sha256": "b00a513c678e9134ff31572731c5c74ca01e272497f1765fa61cec33d814466c",
+      "path": "results/validation/vtm/grouped-seed-queries/run-prepared-group-native.py",
+      "bytes": 1927,
+      "sha256": "b00a513c678e9134ff31572731c5c74ca01e272497f1765fa61cec33d814466c"
+    },
+    {
+      "original": ".work/vtm/run-prepared-group-pilots.py",
+      "original_sha256": "00c93ce4ad64ac9353612c5518e6ef7686551c21b424534a4b7029f3a3f0b56d",
+      "path": "results/validation/vtm/grouped-seed-queries/run-prepared-group-pilots.py",
+      "bytes": 2486,
+      "sha256": "00c93ce4ad64ac9353612c5518e6ef7686551c21b424534a4b7029f3a3f0b56d"
+    },
+    {
+      "original": ".work/vtm/run-prepared-group.py",
+      "original_sha256": "19430a3ea8d094e022d52b8b31f9170304443eba06a7f80cda7b71b0fe3e6f4c",
+      "path": "results/validation/vtm/grouped-seed-queries/run-prepared-group.py",
+      "bytes": 95,
+      "sha256": "19430a3ea8d094e022d52b8b31f9170304443eba06a7f80cda7b71b0fe3e6f4c"
+    },
+    {
+      "original": ".work/vtm/test-prepared-group-existing.py",
+      "original_sha256": "686e633061d7e2b783c058bb22fa73557bb9ad8739dbd2e40b53914cd38344a4",
+      "path": "results/validation/vtm/grouped-seed-queries/test-prepared-group-existing.py",
+      "bytes": 256,
+      "sha256": "686e633061d7e2b783c058bb22fa73557bb9ad8739dbd2e40b53914cd38344a4"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/commands.json",
+      "original_sha256": "51c20133d52d2f7d652ba65e36f395b8c05ef2de7ba95e3ba7fc2dc9bd250790",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/commands.json",
+      "bytes": 2976,
+      "sha256": "51c20133d52d2f7d652ba65e36f395b8c05ef2de7ba95e3ba7fc2dc9bd250790"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-1000-candidate.json",
+      "original_sha256": "8e8bab8c84f06b08fb23f524313ac69fdbde9300018e78059cf1538842ef0b2c",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-1000-candidate.json",
+      "bytes": 2941,
+      "sha256": "8e8bab8c84f06b08fb23f524313ac69fdbde9300018e78059cf1538842ef0b2c"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-1000-candidate.log",
+      "original_sha256": "9caab07e6f5243b89d223c5f809e0e22b4285db0fe80a52647d2e834ac43a684",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-1000-candidate.log",
+      "bytes": 7375,
+      "sha256": "9caab07e6f5243b89d223c5f809e0e22b4285db0fe80a52647d2e834ac43a684"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-1000-candidate.npz",
+      "original_sha256": "455b11daa5a7a16e09d30a9f4a97f0022cb024e9c57ea4ae07b0084764ca5c32",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-1000-candidate.npz",
+      "bytes": 91309,
+      "sha256": "455b11daa5a7a16e09d30a9f4a97f0022cb024e9c57ea4ae07b0084764ca5c32"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-1000-control.json",
+      "original_sha256": "dbc4dc56bd057a1263bf2ef8f73d2f47738fe9e3a1140d7bcce7cea6c036f703",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-1000-control.json",
+      "bytes": 2932,
+      "sha256": "dbc4dc56bd057a1263bf2ef8f73d2f47738fe9e3a1140d7bcce7cea6c036f703"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-1000-control.log",
+      "original_sha256": "f8624f44276b2cee7dc12d0e0869e574cf9c07802ad678997ee187752c7551bd",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-1000-control.log",
+      "bytes": 7281,
+      "sha256": "f8624f44276b2cee7dc12d0e0869e574cf9c07802ad678997ee187752c7551bd"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-1000-control.npz",
+      "original_sha256": "2d3fbcf06b37aab8e09420c530a1b152bd7f110e42ed3b373477ea4a6f56c5c0",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-1000-control.npz",
+      "bytes": 91478,
+      "sha256": "2d3fbcf06b37aab8e09420c530a1b152bd7f110e42ed3b373477ea4a6f56c5c0"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-4096-candidate.json",
+      "original_sha256": "ff689e233ef4c23a34b121eb3fc337b2218d27b6d8ff08a00d10959f15e7540d",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-4096-candidate.json",
+      "bytes": 3071,
+      "sha256": "ff689e233ef4c23a34b121eb3fc337b2218d27b6d8ff08a00d10959f15e7540d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-4096-candidate.log",
+      "original_sha256": "efc836e8a95e1cccd3305c3922d9edf1ac1c1859868aa2231742186514b7e9d0",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-4096-candidate.log",
+      "bytes": 7535,
+      "sha256": "efc836e8a95e1cccd3305c3922d9edf1ac1c1859868aa2231742186514b7e9d0"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-4096-candidate.npz",
+      "original_sha256": "f9d323459a4625b3be98108b1c75384fa3c71da8d9f7ceb0b2c37a50bb2c64c9",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-4096-candidate.npz",
+      "bytes": 419271,
+      "sha256": "f9d323459a4625b3be98108b1c75384fa3c71da8d9f7ceb0b2c37a50bb2c64c9"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-4096-control.json",
+      "original_sha256": "e844883987b770646620c5d54dd96b3d4c5def4d3179c70d9e01536e5c757bc6",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-4096-control.json",
+      "bytes": 3073,
+      "sha256": "e844883987b770646620c5d54dd96b3d4c5def4d3179c70d9e01536e5c757bc6"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-4096-control.log",
+      "original_sha256": "f78245aa8909df8ae5a923dc93189aca9d64f8c9304732f09cc24796d99ee23a",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-4096-control.log",
+      "bytes": 7452,
+      "sha256": "f78245aa8909df8ae5a923dc93189aca9d64f8c9304732f09cc24796d99ee23a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-pilot/group-4096-control.npz",
+      "original_sha256": "6d1980f65c4674bebfc6c84c357c114d90915c291f3726148ae625cf8727acc9",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-pilot/group-4096-control.npz",
+      "bytes": 419435,
+      "sha256": "6d1980f65c4674bebfc6c84c357c114d90915c291f3726148ae625cf8727acc9"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-candidate/boundary-self-intersections.txt",
+      "original_sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-candidate/boundary.off",
+      "original_sha256": "d5b92ed8ae8ab8e321dc4ddb4aac987d1ef1cf6997959c39775b97752f614537",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-candidate/boundary.off.gz",
+      "bytes": 139471,
+      "sha256": "7c7fa474a534e249b252f9f6b11a9dd576233256f35f38118627dd432d0b6a0b"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-candidate/mesh.npz",
+      "original_sha256": "4063442a1eb0e415c16ce9b8d54c7f82554e37708afd0e4f77d18d30c3a730ea",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-candidate/mesh.npz",
+      "bytes": 1612294,
+      "sha256": "4063442a1eb0e415c16ce9b8d54c7f82554e37708afd0e4f77d18d30c3a730ea"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-candidate/mesh.vtu",
+      "original_sha256": "bfad77cbe34660ff9cc79c11a459f745c281517d2d3be4080f6ab3b88f169009",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-candidate/mesh.vtu.gz",
+      "bytes": 427954,
+      "sha256": "84b6c7ddae09f30e67543f5d0ad1b16f623305693f36339ec6b012344c58ee99"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-candidate/result.json",
+      "original_sha256": "ade34ee2af6d4809b40f4e656456bd06fa8d83d0579bad9a88443a379467efcb",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-candidate/result.json",
+      "bytes": 3742,
+      "sha256": "ade34ee2af6d4809b40f4e656456bd06fa8d83d0579bad9a88443a379467efcb"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-candidate.log",
+      "original_sha256": "2243284e4d6e025b9f560d09bcc736fdb47fc5d5ffcf791f4b144dee975dfbf5",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-candidate.log",
+      "bytes": 8264,
+      "sha256": "2243284e4d6e025b9f560d09bcc736fdb47fc5d5ffcf791f4b144dee975dfbf5"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-control/boundary.off",
+      "original_sha256": "5eff97a12483582141ff44ad42ea4e60a36c12488bdd5a7262b37ba331c32df6",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-control/boundary.off.gz",
+      "bytes": 139466,
+      "sha256": "e843bf15e8c759682ac7cac4b17bb4b652ae932bbd7699b134dbaea144bc99d6"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-control/mesh.npz",
+      "original_sha256": "4403fe8981335036e32b08c7f0a3d493aa272078b715e73b472f1109518608c4",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-control/mesh.npz",
+      "bytes": 1612193,
+      "sha256": "4403fe8981335036e32b08c7f0a3d493aa272078b715e73b472f1109518608c4"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-control/mesh.vtu",
+      "original_sha256": "99fadb48a9e3f10c67c472649bcf38603d847e8b725d2962a4dfffea7498c90a",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-control/mesh.vtu.gz",
+      "bytes": 427700,
+      "sha256": "a98f31388b7e09d548b36a894464b8c1bf6095e2e712604a2ccad26b2fd2d0b0"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-control/result.json",
+      "original_sha256": "3fbaf801f1fd88fd2f8fb79e60754f03007708beb19d0f75849ede3059326c2c",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-control/result.json",
+      "bytes": 3743,
+      "sha256": "3fbaf801f1fd88fd2f8fb79e60754f03007708beb19d0f75849ede3059326c2c"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-graded-control.log",
+      "original_sha256": "d08fe41f2f1d5bcc3592f3ee56e61f2f6dbade6d41e3c12d3e94b4009e1074ec",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-graded-control.log",
+      "bytes": 8180,
+      "sha256": "d08fe41f2f1d5bcc3592f3ee56e61f2f6dbade6d41e3c12d3e94b4009e1074ec"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-candidate/boundary-self-intersections.txt",
+      "original_sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-candidate/boundary.off",
+      "original_sha256": "10bf4beb9b891b19e0193d4d841363ea596951f07f92eff8d2c6f2ce185ad933",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-candidate/boundary.off.gz",
+      "bytes": 140813,
+      "sha256": "25ca41c8d5ff239948739b9676cd8463476334c30be88361927037109ef47e8b"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-candidate/mesh.npz",
+      "original_sha256": "42b8f4e0f6839cec33a6489e88d21e2bcfa2e7160dfee7843769e93066710269",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-candidate/mesh.npz",
+      "bytes": 1610527,
+      "sha256": "42b8f4e0f6839cec33a6489e88d21e2bcfa2e7160dfee7843769e93066710269"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-candidate/mesh.vtu",
+      "original_sha256": "74116dade5e1b08a26958d6d83bfc83258e282778df3c18c5200bfd5c310d706",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-candidate/mesh.vtu.gz",
+      "bytes": 423337,
+      "sha256": "a30ffd0a99683944f3798a1cf719a76ff726b05268d6d0d839d1684fdf94441d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-candidate/result.json",
+      "original_sha256": "208f1f09a516cffaa741c1240434568ac8a2e33a86567321a9e7be559da8b01f",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-candidate/result.json",
+      "bytes": 3729,
+      "sha256": "208f1f09a516cffaa741c1240434568ac8a2e33a86567321a9e7be559da8b01f"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-candidate.log",
+      "original_sha256": "53dcf49d0824880548bcd3b76f011e1a6c360a171393ec5fcf3bb4ebc9731291",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-candidate.log",
+      "bytes": 8165,
+      "sha256": "53dcf49d0824880548bcd3b76f011e1a6c360a171393ec5fcf3bb4ebc9731291"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-control/boundary.off",
+      "original_sha256": "25ceb5517c169634bc16c8287d804e739cccb5907077da197d3e9fae419ce679",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-control/boundary.off.gz",
+      "bytes": 140814,
+      "sha256": "486ca8198ef29354224813347abe6ffbdc9de2aba60ac237db65dbfdf0aa7bc7"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-control/mesh.npz",
+      "original_sha256": "4ccedfe6488a2d84a3b43a33187bb37e598e9ea75ec962af47506c69d9b4e6df",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-control/mesh.npz",
+      "bytes": 1610325,
+      "sha256": "4ccedfe6488a2d84a3b43a33187bb37e598e9ea75ec962af47506c69d9b4e6df"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-control/mesh.vtu",
+      "original_sha256": "43bf04ea833818f038d79234d7493a2be46f16e297b10927b930dda895fb50d6",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-control/mesh.vtu.gz",
+      "bytes": 423436,
+      "sha256": "b50c7256e783195c3eeecd0d91fa09c47dba7bc714551f779b4a0c34880626b2"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-control/result.json",
+      "original_sha256": "d3bfc8c126d765fe411ad192b0fda4ce6da8b0c19d32b6a9240424a6990887af",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-control/result.json",
+      "bytes": 3739,
+      "sha256": "d3bfc8c126d765fe411ad192b0fda4ce6da8b0c19d32b6a9240424a6990887af"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/armadillo-uniform-control.log",
+      "original_sha256": "06c073430fac3de88d9cfe76524322e0a36f314e0c9f7272025c75cfda7c098d",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/armadillo-uniform-control.log",
+      "bytes": 8090,
+      "sha256": "06c073430fac3de88d9cfe76524322e0a36f314e0c9f7272025c75cfda7c098d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-candidate/boundary-self-intersections.txt",
+      "original_sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-candidate/boundary.off",
+      "original_sha256": "476a777c77fc403b5fe87660e9c0fbd532a2df8618cb8a3ea3fde28d96069437",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-candidate/boundary.off.gz",
+      "bytes": 30604,
+      "sha256": "5cdf68c3b05538842eed67003c4d93df768b63fd808fa7b27a860df0aa8ede22"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-candidate/input.off",
+      "original_sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-candidate/input.off.gz",
+      "bytes": 175,
+      "sha256": "371075bd607d390971e428e56b2d5ec1c223fa7cb4e0d06fef2512165f2f3b4c"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-candidate/mesh.npz",
+      "original_sha256": "55533049ef299122b7673d8fe02af8904daf310f01f1c8c95036494f8b632bea",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-candidate/mesh.npz",
+      "bytes": 108693,
+      "sha256": "55533049ef299122b7673d8fe02af8904daf310f01f1c8c95036494f8b632bea"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-candidate/mesh.vtu",
+      "original_sha256": "756dee0a9a1b4d446e2193f9b9a0768f203e750c51c2a26b4c6094e847088bba",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-candidate/mesh.vtu.gz",
+      "bytes": 92630,
+      "sha256": "70d181333e5efe2fcd3f3b4ae698fe7c73b03f26d61ace9d2a2a433d26e49613"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-candidate/result.json",
+      "original_sha256": "1bd439f898f3afe6e4ad6800e49319ee50b2431b7bfa4f58f5dd0cdc3f355e8f",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-candidate/result.json",
+      "bytes": 3643,
+      "sha256": "1bd439f898f3afe6e4ad6800e49319ee50b2431b7bfa4f58f5dd0cdc3f355e8f"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-candidate.log",
+      "original_sha256": "2c86aacfae0965be72687e00b6af944dc5d056a5b587281b81bf255340f3c03a",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-candidate.log",
+      "bytes": 7991,
+      "sha256": "2c86aacfae0965be72687e00b6af944dc5d056a5b587281b81bf255340f3c03a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-control/boundary.off",
+      "original_sha256": "2688fc3ceea6355fccf08cc898e046ef638fba1bc649352ba92bad1978d78380",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-control/boundary.off.gz",
+      "bytes": 30624,
+      "sha256": "121f0bf68dbf243ab3c86d65ba12c04560789dec8fefd2ae4ba1cb583202f83e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-control/input.off",
+      "original_sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-control/input.off.gz",
+      "bytes": 175,
+      "sha256": "371075bd607d390971e428e56b2d5ec1c223fa7cb4e0d06fef2512165f2f3b4c"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-control/mesh.npz",
+      "original_sha256": "12364f48120438593e2c7970285d7c1264d900c43054934e22c24016ec53179a",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-control/mesh.npz",
+      "bytes": 108639,
+      "sha256": "12364f48120438593e2c7970285d7c1264d900c43054934e22c24016ec53179a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-control/mesh.vtu",
+      "original_sha256": "8d748d3d333f4264091a5e258fc7472b9ed3e8cb7094360da3dd138326d16615",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-control/mesh.vtu.gz",
+      "bytes": 92565,
+      "sha256": "cb3f6cf70e62be374e40ec36e66cd2f611f7d28a0cd106857966c0c9179e476b"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-control/result.json",
+      "original_sha256": "def1e8eb2b5a53d19f6be805e4d436f51be4432e6e14845b4685558d57b6150b",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-control/result.json",
+      "bytes": 3639,
+      "sha256": "def1e8eb2b5a53d19f6be805e4d436f51be4432e6e14845b4685558d57b6150b"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/cavity-control.log",
+      "original_sha256": "0416789b5b784b18202ff770b3bc3a7e627fbd750411a7e058b017058e851f09",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/cavity-control.log",
+      "bytes": 7902,
+      "sha256": "0416789b5b784b18202ff770b3bc3a7e627fbd750411a7e058b017058e851f09"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/commands.json",
+      "original_sha256": "ec55ad9a05512816f8e50623a999fb633c955894119dfe205b816856c44cdb84",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/commands.json",
+      "bytes": 12333,
+      "sha256": "ec55ad9a05512816f8e50623a999fb633c955894119dfe205b816856c44cdb84"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-candidate/boundary-self-intersections.txt",
+      "original_sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-candidate/boundary.off",
+      "original_sha256": "55a0324d83dd93e611da8555415a3c32a60a3002814e3bf6d1e86ce0db2a64f6",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-candidate/boundary.off.gz",
+      "bytes": 30555,
+      "sha256": "0d48542776268b644b8a91fda25ac2b1c283a8638e215b1af34cb9dd99294f6e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-candidate/input.off",
+      "original_sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-candidate/input.off.gz",
+      "bytes": 203,
+      "sha256": "435e1b608ae8730ed2278dfa712b37c0ff3777b941521de8f3a018c85ae4069f"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-candidate/mesh.npz",
+      "original_sha256": "a0583adc51ae4633c2d19105a8b4133eb868187de4ed5ebfea2c00609f668ed0",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-candidate/mesh.npz",
+      "bytes": 110078,
+      "sha256": "a0583adc51ae4633c2d19105a8b4133eb868187de4ed5ebfea2c00609f668ed0"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-candidate/mesh.vtu",
+      "original_sha256": "cd641c9baf8491fcb4ba4c3d32a8799b9177ab9c9e4be94a6ad58ce65e070698",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-candidate/mesh.vtu.gz",
+      "bytes": 88072,
+      "sha256": "68e7ba27a900f75dcf8f28ae2d155e85e3902a308971795f0497a182ae994e43"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-candidate/result.json",
+      "original_sha256": "2b8e5047825019e7b3502ef9162aeb31f870f15224debf1494c8ee85d0016dde",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-candidate/result.json",
+      "bytes": 3653,
+      "sha256": "2b8e5047825019e7b3502ef9162aeb31f870f15224debf1494c8ee85d0016dde"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-candidate.log",
+      "original_sha256": "0a706257420a9ceb5f23bd6f29bc88d4dfb7cc9510daa31617d94eea44ad3e42",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-candidate.log",
+      "bytes": 8001,
+      "sha256": "0a706257420a9ceb5f23bd6f29bc88d4dfb7cc9510daa31617d94eea44ad3e42"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-control/boundary.off",
+      "original_sha256": "1159c3beef528a55857ead84a166631844abd323936b85dec63a6864a3acb10d",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-control/boundary.off.gz",
+      "bytes": 30561,
+      "sha256": "c1a07a7d6f969b4ad7376fa7d14cda346ff9b857d9df49164a55f522778e808e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-control/input.off",
+      "original_sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-control/input.off.gz",
+      "bytes": 203,
+      "sha256": "435e1b608ae8730ed2278dfa712b37c0ff3777b941521de8f3a018c85ae4069f"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-control/mesh.npz",
+      "original_sha256": "d4c3cfd997bbdfee2bdeab2ea751a3d516ff54f443cff287226a418a937d12b8",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-control/mesh.npz",
+      "bytes": 110241,
+      "sha256": "d4c3cfd997bbdfee2bdeab2ea751a3d516ff54f443cff287226a418a937d12b8"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-control/mesh.vtu",
+      "original_sha256": "cf04c6ab5f55581bb97d39b2e08a9376573b4abba64f90749000a61c6816c508",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-control/mesh.vtu.gz",
+      "bytes": 88228,
+      "sha256": "73fac21ff68c2a3a5075e4726718879df97351250bfbfbe1c04e520150453fc1"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-control/result.json",
+      "original_sha256": "f2a024f1e2d2c12a15efb9fc308cec009a743a1e11d324a1a34152bc0a2c7c00",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-control/result.json",
+      "bytes": 3657,
+      "sha256": "f2a024f1e2d2c12a15efb9fc308cec009a743a1e11d324a1a34152bc0a2c7c00"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/disconnected-control.log",
+      "original_sha256": "18381a84ae27b7068b4b14716350de9f8ff0ca198f9993c12ebe8b36746fb59f",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/disconnected-control.log",
+      "bytes": 7920,
+      "sha256": "18381a84ae27b7068b4b14716350de9f8ff0ca198f9993c12ebe8b36746fb59f"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-candidate/boundary-self-intersections.txt",
+      "original_sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-candidate/boundary.off",
+      "original_sha256": "122f2141862fd185bd8b49faa642d5b41b5dd89824e02088e42ca0f68b95f389",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-candidate/boundary.off.gz",
+      "bytes": 133251,
+      "sha256": "048cdee4726e6bbb1c7232d66b878617271dbac678bb4b06a701c9f08fc31708"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-candidate/input.off",
+      "original_sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-candidate/input.off.gz",
+      "bytes": 16802,
+      "sha256": "e4b2abc769534575a9af284ccec20414fa6fa1c4f0c32b8fe105676172db0aa3"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-candidate/mesh.npz",
+      "original_sha256": "f77a23d9dc896d4cb40c18f14fd7695148fd988963f03962c2726debc6ea701e",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-candidate/mesh.npz",
+      "bytes": 572135,
+      "sha256": "f77a23d9dc896d4cb40c18f14fd7695148fd988963f03962c2726debc6ea701e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-candidate/mesh.vtu",
+      "original_sha256": "e8444e04849035ebfba34eb1902b5b18b935cc28c9b5dc0f702420acaba7d922",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-candidate/mesh.vtu.gz",
+      "bytes": 453151,
+      "sha256": "5b168931bbedfb3a0642626c35c22acd09014ea44ef1ecd5e37eaab371340241"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-candidate/result.json",
+      "original_sha256": "8f1b7925fc245bbd40c8bad237aa81194f08b035e7644e7edf1beb0c2d525d3d",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-candidate/result.json",
+      "bytes": 3655,
+      "sha256": "8f1b7925fc245bbd40c8bad237aa81194f08b035e7644e7edf1beb0c2d525d3d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-candidate.log",
+      "original_sha256": "4b6616151c40bc94b7cfa0f11aac2d2b30ea4ce265c7f8c7e400505aa81c4b68",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-candidate.log",
+      "bytes": 8177,
+      "sha256": "4b6616151c40bc94b7cfa0f11aac2d2b30ea4ce265c7f8c7e400505aa81c4b68"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-control/boundary.off",
+      "original_sha256": "08954679c5a311da21525f9c9bbe87ff27d046dcbe34b4d5e374b370e4b9f044",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-control/boundary.off.gz",
+      "bytes": 133257,
+      "sha256": "a00401ac481b1eddba0172d1baef000f45df89bfcd9a4874c67caeea55a69926"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-control/input.off",
+      "original_sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-control/input.off.gz",
+      "bytes": 16802,
+      "sha256": "e4b2abc769534575a9af284ccec20414fa6fa1c4f0c32b8fe105676172db0aa3"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-control/mesh.npz",
+      "original_sha256": "7d00dd71fa73923e3c1a5e46bd890566e290859dc288193badbe1441af383532",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-control/mesh.npz",
+      "bytes": 571998,
+      "sha256": "7d00dd71fa73923e3c1a5e46bd890566e290859dc288193badbe1441af383532"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-control/mesh.vtu",
+      "original_sha256": "65656c493acd8aca66885434832ac11818cd60cb332c5ba1368f2893c703ef09",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-control/mesh.vtu.gz",
+      "bytes": 453050,
+      "sha256": "215023dd3f4f8876bf8cd8b4926190ff89ec179ead83bb49d9554de6f08703cb"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-control/result.json",
+      "original_sha256": "7d22f616563b2ce2071ae6d9f0e74a215a78ae285c874f9a339af0833362412b",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-control/result.json",
+      "bytes": 3659,
+      "sha256": "7d22f616563b2ce2071ae6d9f0e74a215a78ae285c874f9a339af0833362412b"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/graded-torus-control.log",
+      "original_sha256": "a27d028bebea40dbfec8ee138f21d68d5c295d012ef3ddec41de527d48ed1cc8",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/graded-torus-control.log",
+      "bytes": 8096,
+      "sha256": "a27d028bebea40dbfec8ee138f21d68d5c295d012ef3ddec41de527d48ed1cc8"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-candidate/boundary-self-intersections.txt",
+      "original_sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-candidate/boundary.off",
+      "original_sha256": "10538cb10d7ddc9b69c947b4e743e4de0bd514423a6ac85b475e8981e79a8a2e",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-candidate/boundary.off.gz",
+      "bytes": 28751,
+      "sha256": "200163bcb02484dc1c6c0cb0cb5d830597054ced47ba44ceb7c276389c4dcb71"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-candidate/input.off",
+      "original_sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-candidate/input.off.gz",
+      "bytes": 597,
+      "sha256": "8644de8fac9e842eb82416d32d938622658f3f541ae3a04705fb759ba3c2596e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-candidate/mesh.npz",
+      "original_sha256": "f5fb779b18f73029f22ded7c580434b3aacd3519a76a0b8beee0bea72e98488f",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-candidate/mesh.npz",
+      "bytes": 98614,
+      "sha256": "f5fb779b18f73029f22ded7c580434b3aacd3519a76a0b8beee0bea72e98488f"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-candidate/mesh.vtu",
+      "original_sha256": "fcd15816e3e6be8194879852eae4a7b078f152ea848d27a270b05d84a7920de0",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-candidate/mesh.vtu.gz",
+      "bytes": 70631,
+      "sha256": "a5d80d3b7ef4204f910df624e7ca86558aadc08fb8c21bec5f531c074409b673"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-candidate/result.json",
+      "original_sha256": "6a82d7d73657a2ccffeaa828ce750595c103e7bbc4d2c13c6f7c4333584571fd",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-candidate/result.json",
+      "bytes": 3646,
+      "sha256": "6a82d7d73657a2ccffeaa828ce750595c103e7bbc4d2c13c6f7c4333584571fd"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-candidate.log",
+      "original_sha256": "d8c832d5aac8c66a6f75f0c4f974e57987d391a750d97a49485be9b4dd8582ae",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-candidate.log",
+      "bytes": 7994,
+      "sha256": "d8c832d5aac8c66a6f75f0c4f974e57987d391a750d97a49485be9b4dd8582ae"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-control/boundary.off",
+      "original_sha256": "d6d4c75e294e338e3cb8c94e62b0030fab8cd978260a6e7de06d3bc4689a26fd",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-control/boundary.off.gz",
+      "bytes": 28750,
+      "sha256": "a9ce94430cb8478b594010eddf8dfa3cbb46d9b2ed522ab8c786871da4b0d47a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-control/input.off",
+      "original_sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-control/input.off.gz",
+      "bytes": 597,
+      "sha256": "8644de8fac9e842eb82416d32d938622658f3f541ae3a04705fb759ba3c2596e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-control/mesh.npz",
+      "original_sha256": "f193138c30a3caf0ca46e3ef5f4e1e4e80a1dfd91e94e9d5490dfaecac93bf7d",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-control/mesh.npz",
+      "bytes": 98469,
+      "sha256": "f193138c30a3caf0ca46e3ef5f4e1e4e80a1dfd91e94e9d5490dfaecac93bf7d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-control/mesh.vtu",
+      "original_sha256": "1949b353f28a9e0b566ac20ae85945f3ef59c0e26446cf4fb03cb00ee763910d",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-control/mesh.vtu.gz",
+      "bytes": 70687,
+      "sha256": "6fbd02569cb4a44aa7ea9c494d452356bc5c83975dd8bd6eaf8c2150a2992e0e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-control/result.json",
+      "original_sha256": "7c549ae98fbf7204aca3be798e1d29e1f66c195049cb07d1d4bb3f0ea5012470",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-control/result.json",
+      "bytes": 3654,
+      "sha256": "7c549ae98fbf7204aca3be798e1d29e1f66c195049cb07d1d4bb3f0ea5012470"
+    },
+    {
+      "original": ".work/vtm/prepared-group-broad/thin-hand-control.log",
+      "original_sha256": "e949a505e88efe2f0754695485a08a5ebddf452192d1e82c451b945e314984d7",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-broad/thin-hand-control.log",
+      "bytes": 7917,
+      "sha256": "e949a505e88efe2f0754695485a08a5ebddf452192d1e82c451b945e314984d7"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "original_sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-graded-after/boundary.off",
+      "original_sha256": "f015296f89f5c28f982241f0cee6ea57c947c7467d7169ff7aac4bbde7fc8930",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-graded-after/boundary.off.gz",
+      "bytes": 139500,
+      "sha256": "ec720eeb5ef2390d722f30d093680890dd8ecd3d5994da623b20a0bef11e7138"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-graded-after/mesh.npz",
+      "original_sha256": "f36b4b9c6976fc52a122b2b1e91ce5228a5d66d8d8f98ebfe3d41d8366895071",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-graded-after/mesh.npz",
+      "bytes": 1611960,
+      "sha256": "f36b4b9c6976fc52a122b2b1e91ce5228a5d66d8d8f98ebfe3d41d8366895071"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-graded-after/mesh.vtu",
+      "original_sha256": "751c15121134e429535e37dd64d9f40dc4999f7772f8bb91f5c1d25fd6d950be",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-graded-after/mesh.vtu.gz",
+      "bytes": 427767,
+      "sha256": "7b6f659e9019b51a2da3185d39d6874367483fc9ef876212c2014ba9046605e4"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-graded-after/result.json",
+      "original_sha256": "ca91c2a5d03bd38fcab2faaa9e4c1a009a8dfcdd56de978aa4695998fd2e674e",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-graded-after/result.json",
+      "bytes": 3742,
+      "sha256": "ca91c2a5d03bd38fcab2faaa9e4c1a009a8dfcdd56de978aa4695998fd2e674e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-graded-after.log",
+      "original_sha256": "b605854c15fc46d6bf79c94c6fd5d743f5745cf9aa44c2512c7b21de43a93ab4",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-graded-after.log",
+      "bytes": 8265,
+      "sha256": "b605854c15fc46d6bf79c94c6fd5d743f5745cf9aa44c2512c7b21de43a93ab4"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "original_sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-uniform-after/boundary.off",
+      "original_sha256": "765bbd7f6bfb70db94dcc4432ce13dd6eefff228565f123888a34516728b17af",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-uniform-after/boundary.off.gz",
+      "bytes": 140805,
+      "sha256": "6c47997fe1e08571bbb49961ee487953937021aa3b0e0d09e20883d297220b09"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-uniform-after/mesh.npz",
+      "original_sha256": "90a299eb1ec6a1b8701206faeee212aa2e490421bf6b65cdbf60310c7ea0fb62",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-uniform-after/mesh.npz",
+      "bytes": 1610767,
+      "sha256": "90a299eb1ec6a1b8701206faeee212aa2e490421bf6b65cdbf60310c7ea0fb62"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-uniform-after/mesh.vtu",
+      "original_sha256": "b42a7c23e70877bb67b48335ec288d8d7926395333b301bfb4702d60ea1d1248",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-uniform-after/mesh.vtu.gz",
+      "bytes": 423580,
+      "sha256": "63bee110e1201f71989dcd3f5d2f5af0563fd619ebf85ebe16723bc813068c65"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-uniform-after/result.json",
+      "original_sha256": "acb99158b48c3b476357faa2ae7f19fc457dd605d7bde9cb619fe55b894c1e07",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-uniform-after/result.json",
+      "bytes": 3724,
+      "sha256": "acb99158b48c3b476357faa2ae7f19fc457dd605d7bde9cb619fe55b894c1e07"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/armadillo-uniform-after.log",
+      "original_sha256": "2b9f1623e2a0311e1e69bfb8b2d1aa384efc47321b65d29e5fff17fe7c0eb6bd",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/armadillo-uniform-after.log",
+      "bytes": 8161,
+      "sha256": "2b9f1623e2a0311e1e69bfb8b2d1aa384efc47321b65d29e5fff17fe7c0eb6bd"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/cavity-after/boundary-self-intersections.txt",
+      "original_sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/cavity-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/cavity-after/boundary.off",
+      "original_sha256": "4091fa86978ae9f168b1e50f9f46f39d8e649ef2f363fd37d4d5d08eb6bd438f",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/cavity-after/boundary.off.gz",
+      "bytes": 30632,
+      "sha256": "c88ab29e6894413f8c3fc7fe5987660407962e73b20e2642f7b258a784117254"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/cavity-after/input.off",
+      "original_sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/cavity-after/input.off.gz",
+      "bytes": 175,
+      "sha256": "371075bd607d390971e428e56b2d5ec1c223fa7cb4e0d06fef2512165f2f3b4c"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/cavity-after/mesh.npz",
+      "original_sha256": "4e8d04acd335891f43ba0f250752b51b87965a45353da7422827e66467ebadee",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/cavity-after/mesh.npz",
+      "bytes": 108621,
+      "sha256": "4e8d04acd335891f43ba0f250752b51b87965a45353da7422827e66467ebadee"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/cavity-after/mesh.vtu",
+      "original_sha256": "fe5a9036ded85fe5e6666ef88df1ffa2de50eb352472e78b2198b7ed90456eb0",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/cavity-after/mesh.vtu.gz",
+      "bytes": 92536,
+      "sha256": "177f9830d42be8cb43138ec39805fea62ff9d72b72539c063342c7c34cc221a1"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/cavity-after/result.json",
+      "original_sha256": "4149805a2ed1887829cf0a6167aee89e9d21a2a5df13b7d31dd4f4fefbc8de4b",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/cavity-after/result.json",
+      "bytes": 3632,
+      "sha256": "4149805a2ed1887829cf0a6167aee89e9d21a2a5df13b7d31dd4f4fefbc8de4b"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/cavity-after.log",
+      "original_sha256": "3a9536e04ba1a70df3e860bbad476e705b80119b3ed93e93b154e93d5de270c8",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/cavity-after.log",
+      "bytes": 7981,
+      "sha256": "3a9536e04ba1a70df3e860bbad476e705b80119b3ed93e93b154e93d5de270c8"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/commands.json",
+      "original_sha256": "bbab89ecb25e0465c280a925c8b49f229941e992e4c0cd00aa5b00d5bf69f240",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/commands.json",
+      "bytes": 15428,
+      "sha256": "bbab89ecb25e0465c280a925c8b49f229941e992e4c0cd00aa5b00d5bf69f240"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay-fitted-hand-after.json",
+      "original_sha256": "59609876144ce3eed8cfcd26e38b72d602e64f68ef41824c6fa649dcd96e6bea",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay-fitted-hand-after.json",
+      "bytes": 2844,
+      "sha256": "59609876144ce3eed8cfcd26e38b72d602e64f68ef41824c6fa649dcd96e6bea"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay-fitted-hand-after.log",
+      "original_sha256": "20d55a6b10f119132c36f92a0a907bbd7563b43b59ddab0a9801a34b3916bedb",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay-fitted-hand-after.log",
+      "bytes": 5140,
+      "sha256": "20d55a6b10f119132c36f92a0a907bbd7563b43b59ddab0a9801a34b3916bedb"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay-fitted-hand-before.json",
+      "original_sha256": "3a4380b75361db7c13773e412f1a7c5d445e0656fbabbbfca668f6fac5d09907",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay-fitted-hand-before.json",
+      "bytes": 2841,
+      "sha256": "3a4380b75361db7c13773e412f1a7c5d445e0656fbabbbfca668f6fac5d09907"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay-fitted-hand-before.log",
+      "original_sha256": "39626af8136ce9c06d91c8025b1c5f6d088ea35db0937f2330526dfcbf17033b",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay-fitted-hand-before.log",
+      "bytes": 5137,
+      "sha256": "39626af8136ce9c06d91c8025b1c5f6d088ea35db0937f2330526dfcbf17033b"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay-grid-after.json",
+      "original_sha256": "7bbbee7d2d81931f60140e6d93735aa64a1e0155c1b7efb8ba1e51d837c33579",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay-grid-after.json",
+      "bytes": 2838,
+      "sha256": "7bbbee7d2d81931f60140e6d93735aa64a1e0155c1b7efb8ba1e51d837c33579"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay-grid-after.log",
+      "original_sha256": "9e7ea079e20ae38def5751c4f8d45a9b760b88455a11f157deb30cee398f9872",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay-grid-after.log",
+      "bytes": 4877,
+      "sha256": "9e7ea079e20ae38def5751c4f8d45a9b760b88455a11f157deb30cee398f9872"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay-grid-before.json",
+      "original_sha256": "3d080ef26bb7a15411c0fc0dcc02be9a7f7aac0f5b598f6b6530d453d13fd3f9",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay-grid-before.json",
+      "bytes": 2837,
+      "sha256": "3d080ef26bb7a15411c0fc0dcc02be9a7f7aac0f5b598f6b6530d453d13fd3f9"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay-grid-before.log",
+      "original_sha256": "e27ca5fe31a383353db87411456a4b8dbf4494a9070769c7d9403d648f8b1dc6",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay-grid-before.log",
+      "bytes": 4876,
+      "sha256": "e27ca5fe31a383353db87411456a4b8dbf4494a9070769c7d9403d648f8b1dc6"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay1000-after.json",
+      "original_sha256": "d737ad5e9652af1755782c0faea661349fb5af7058c282add08c3bd4fd80bdc2",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay1000-after.json",
+      "bytes": 2827,
+      "sha256": "d737ad5e9652af1755782c0faea661349fb5af7058c282add08c3bd4fd80bdc2"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay1000-after.log",
+      "original_sha256": "a2474af26d3537170828648b9aee6c63d807ac4a481e2c0efaf85f2491ffb0a1",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay1000-after.log",
+      "bytes": 5123,
+      "sha256": "a2474af26d3537170828648b9aee6c63d807ac4a481e2c0efaf85f2491ffb0a1"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay1000-before.json",
+      "original_sha256": "bf71496623cb270c1c32520245739ecc5e0a8390acb437bbe14eef0dba7d1364",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay1000-before.json",
+      "bytes": 2820,
+      "sha256": "bf71496623cb270c1c32520245739ecc5e0a8390acb437bbe14eef0dba7d1364"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay1000-before.log",
+      "original_sha256": "7615e88fb8ff5b8c29e96451a1ba89f25678e70d016fa7f75b19b96f73614c66",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay1000-before.log",
+      "bytes": 5116,
+      "sha256": "7615e88fb8ff5b8c29e96451a1ba89f25678e70d016fa7f75b19b96f73614c66"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay100000-after.json",
+      "original_sha256": "15a933390173898c1791045916fc1aaea128bda045066ce41a8de9c5e42ab028",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay100000-after.json",
+      "bytes": 2828,
+      "sha256": "15a933390173898c1791045916fc1aaea128bda045066ce41a8de9c5e42ab028"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay100000-after.log",
+      "original_sha256": "3eb77c6c79c127640e99c40c0e55c08fa724afee198a8343ab13ce9744b486f4",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay100000-after.log",
+      "bytes": 5058,
+      "sha256": "3eb77c6c79c127640e99c40c0e55c08fa724afee198a8343ab13ce9744b486f4"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay100000-before.json",
+      "original_sha256": "99ed9c8dc9513bdc1dd0ff11737b110a1336072f0c987f94e387d5cde0a09ff9",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay100000-before.json",
+      "bytes": 2829,
+      "sha256": "99ed9c8dc9513bdc1dd0ff11737b110a1336072f0c987f94e387d5cde0a09ff9"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/delaunay100000-before.log",
+      "original_sha256": "3084a9caa0d9e71caf632f7ab90b9784dc71df973b8c6b71f0c6e296d84ccac8",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/delaunay100000-before.log",
+      "bytes": 5059,
+      "sha256": "3084a9caa0d9e71caf632f7ab90b9784dc71df973b8c6b71f0c6e296d84ccac8"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/diagram100000-after.json",
+      "original_sha256": "6606068beeeb63d6afc9db87d3071dfc0c7b4fd2debfde6e1d227e89413f7b13",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/diagram100000-after.json",
+      "bytes": 2570,
+      "sha256": "6606068beeeb63d6afc9db87d3071dfc0c7b4fd2debfde6e1d227e89413f7b13"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/diagram100000-after.log",
+      "original_sha256": "20f17621b4cb22c56f7916ad3a7aa0ef436efc403339c630b01e9da8999a509d",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/diagram100000-after.log",
+      "bytes": 3441,
+      "sha256": "20f17621b4cb22c56f7916ad3a7aa0ef436efc403339c630b01e9da8999a509d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/diagram100000-before.json",
+      "original_sha256": "b157ec69c71a48ff44156904bd6ca0f12866e65dd1c0aacda24435b5ab8e65ce",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/diagram100000-before.json",
+      "bytes": 2572,
+      "sha256": "b157ec69c71a48ff44156904bd6ca0f12866e65dd1c0aacda24435b5ab8e65ce"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/diagram100000-before.log",
+      "original_sha256": "fe1122923298bd74521ea8abd2914b1083f76ecd4f58243f46e66552d656a395",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/diagram100000-before.log",
+      "bytes": 3443,
+      "sha256": "fe1122923298bd74521ea8abd2914b1083f76ecd4f58243f46e66552d656a395"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/disconnected-after/boundary-self-intersections.txt",
+      "original_sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/disconnected-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/disconnected-after/boundary.off",
+      "original_sha256": "81d055e6034c20582ddd95072def6432e557b9be340a8bd7007d2c2670e6bbe0",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/disconnected-after/boundary.off.gz",
+      "bytes": 30523,
+      "sha256": "5819ef1b93075a48d6e2d510dc4959d74dc4dbd696e86d0af656fa2d2e4eef5a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/disconnected-after/input.off",
+      "original_sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/disconnected-after/input.off.gz",
+      "bytes": 203,
+      "sha256": "435e1b608ae8730ed2278dfa712b37c0ff3777b941521de8f3a018c85ae4069f"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/disconnected-after/mesh.npz",
+      "original_sha256": "c524c06474b824b59252f866b50cd92a27c1e34cffd2654c4e2fd35415ba5abd",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/disconnected-after/mesh.npz",
+      "bytes": 110243,
+      "sha256": "c524c06474b824b59252f866b50cd92a27c1e34cffd2654c4e2fd35415ba5abd"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/disconnected-after/mesh.vtu",
+      "original_sha256": "f9508a208290dddd25247027b56382d4c4de973f0ccf1cca512bf9e3fdd0eb37",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/disconnected-after/mesh.vtu.gz",
+      "bytes": 88159,
+      "sha256": "9945858f0ec19c07ff65bdcc11e90cc7515a2b0f21ee6061ca4c1288023a2a5a"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/disconnected-after/result.json",
+      "original_sha256": "9292fdf9b014dff5f8c6405bb0741306ff06380a7c7606d3b020ee6428f239b2",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/disconnected-after/result.json",
+      "bytes": 3651,
+      "sha256": "9292fdf9b014dff5f8c6405bb0741306ff06380a7c7606d3b020ee6428f239b2"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/disconnected-after.log",
+      "original_sha256": "c11eb2bf79396e5189d71b9cc957818a2b3abf50192c8bfb6aa524a42d460d1f",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/disconnected-after.log",
+      "bytes": 8000,
+      "sha256": "c11eb2bf79396e5189d71b9cc957818a2b3abf50192c8bfb6aa524a42d460d1f"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/graded-torus-after/boundary-self-intersections.txt",
+      "original_sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/graded-torus-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/graded-torus-after/boundary.off",
+      "original_sha256": "4a31257306a0b11c6b6c644db65966eac2e96729c80ce61538800978b5e8f1ca",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/graded-torus-after/boundary.off.gz",
+      "bytes": 133271,
+      "sha256": "ed1e5c5d33956efca2cc26e9725f422da4f622e75dc59b8dc0013a4875527d09"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/graded-torus-after/input.off",
+      "original_sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/graded-torus-after/input.off.gz",
+      "bytes": 16802,
+      "sha256": "e4b2abc769534575a9af284ccec20414fa6fa1c4f0c32b8fe105676172db0aa3"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/graded-torus-after/mesh.npz",
+      "original_sha256": "46d4435f8aa156faec6424cb0e5b8e892977cee2642c05e38bbbf97c77b6b745",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/graded-torus-after/mesh.npz",
+      "bytes": 571882,
+      "sha256": "46d4435f8aa156faec6424cb0e5b8e892977cee2642c05e38bbbf97c77b6b745"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/graded-torus-after/mesh.vtu",
+      "original_sha256": "86a20ad32bf06165c1c303b4be17e27fd940c481d20bb02ce05d340cec4e81ca",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/graded-torus-after/mesh.vtu.gz",
+      "bytes": 453213,
+      "sha256": "f6fbae564a44e8ebd9bcb17a31e66f692cf7090b28d16f6091d60341e0bbf31d"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/graded-torus-after/result.json",
+      "original_sha256": "01d0b4d8057d72fe4f3db4d3d3c00864d89fe9cee7de14210e69c9d5e5b7c7e4",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/graded-torus-after/result.json",
+      "bytes": 3653,
+      "sha256": "01d0b4d8057d72fe4f3db4d3d3c00864d89fe9cee7de14210e69c9d5e5b7c7e4"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/graded-torus-after.log",
+      "original_sha256": "e26d37ece60f7a650c1d338c5976e96f88640babd3df9bcad384a84f55980e1c",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/graded-torus-after.log",
+      "bytes": 8176,
+      "sha256": "e26d37ece60f7a650c1d338c5976e96f88640babd3df9bcad384a84f55980e1c"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/thin-hand-after/boundary-self-intersections.txt",
+      "original_sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/thin-hand-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/thin-hand-after/boundary.off",
+      "original_sha256": "ca2993f7d518bfc20ea6eb6278d09f8e49026e81f588a6e68cbe9d35b3440b23",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/thin-hand-after/boundary.off.gz",
+      "bytes": 28757,
+      "sha256": "d5bcb2ba8d98aaa978afcf3b25ec92578700ccf8dbdee0eb25572dc0a2359ba3"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/thin-hand-after/input.off",
+      "original_sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/thin-hand-after/input.off.gz",
+      "bytes": 597,
+      "sha256": "8644de8fac9e842eb82416d32d938622658f3f541ae3a04705fb759ba3c2596e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/thin-hand-after/mesh.npz",
+      "original_sha256": "610a78ed8e0cd08e2169ca8df0763daa5557610326fcba8d8aadc573f2311d31",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/thin-hand-after/mesh.npz",
+      "bytes": 98595,
+      "sha256": "610a78ed8e0cd08e2169ca8df0763daa5557610326fcba8d8aadc573f2311d31"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/thin-hand-after/mesh.vtu",
+      "original_sha256": "75aafd8edf3bf70c9fb576546120d9f3cc7c944c8c29de536de8a7a9bb0c2f9d",
+      "encoding": "gzip; decompress to recover exact original bytes",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/thin-hand-after/mesh.vtu.gz",
+      "bytes": 70643,
+      "sha256": "4670c1205ece4be3079b185502f81ea8501bef2a645526b8de31fefef05b0786"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/thin-hand-after/result.json",
+      "original_sha256": "b2e8e45a8dd3d187963d98a5601ef04be35bb9fb9d9cb46b4f117479f0ef1d05",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/thin-hand-after/result.json",
+      "bytes": 3647,
+      "sha256": "b2e8e45a8dd3d187963d98a5601ef04be35bb9fb9d9cb46b4f117479f0ef1d05"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/thin-hand-after.log",
+      "original_sha256": "3fe8cf687ae9fc3be77b06f91bbd614c33cad78cb2d9515b391574994b16fd84",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/thin-hand-after.log",
+      "bytes": 7996,
+      "sha256": "3fe8cf687ae9fc3be77b06f91bbd614c33cad78cb2d9515b391574994b16fd84"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/torus1000-after.json",
+      "original_sha256": "807ab92a98ff3fc5ff1eae71b3519bc93d60f5db74ea92c68135ef654d8893c8",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/torus1000-after.json",
+      "bytes": 2926,
+      "sha256": "807ab92a98ff3fc5ff1eae71b3519bc93d60f5db74ea92c68135ef654d8893c8"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/torus1000-after.log",
+      "original_sha256": "e8766c31a818111ec931c1ad796b4eefc55cdec5b00f3c09104ff9e97ebb0e99",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/torus1000-after.log",
+      "bytes": 7361,
+      "sha256": "e8766c31a818111ec931c1ad796b4eefc55cdec5b00f3c09104ff9e97ebb0e99"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/torus1000-after.npz",
+      "original_sha256": "d78dc091393e4acdc38098b50d8d52dd1d7ab900cd8da598e76298df297d2ffa",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/torus1000-after.npz",
+      "bytes": 91287,
+      "sha256": "d78dc091393e4acdc38098b50d8d52dd1d7ab900cd8da598e76298df297d2ffa"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/torus4096-after.json",
+      "original_sha256": "d6e888f37e1f2b14001f53ef0104d6d7674d5072cc941baf7e838b3128e26c88",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/torus4096-after.json",
+      "bytes": 3067,
+      "sha256": "d6e888f37e1f2b14001f53ef0104d6d7674d5072cc941baf7e838b3128e26c88"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/torus4096-after.log",
+      "original_sha256": "ada750602353128bc2d456252362ab1db62c3336815fbcaf726ed717a276aae7",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/torus4096-after.log",
+      "bytes": 7532,
+      "sha256": "ada750602353128bc2d456252362ab1db62c3336815fbcaf726ed717a276aae7"
+    },
+    {
+      "original": ".work/vtm/prepared-group-final/torus4096-after.npz",
+      "original_sha256": "c4d2e0ac2c7ce3c272efe6b8851937b969457fd4ba037df9138a3f2af85db41e",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-final/torus4096-after.npz",
+      "bytes": 419142,
+      "sha256": "c4d2e0ac2c7ce3c272efe6b8851937b969457fd4ba037df9138a3f2af85db41e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-hand-repeat/after.json",
+      "original_sha256": "64b106821c624b1fab5bb47e3e075bb22326786fd4776421dc7b22ee7fd0729b",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-hand-repeat/after.json",
+      "bytes": 2840,
+      "sha256": "64b106821c624b1fab5bb47e3e075bb22326786fd4776421dc7b22ee7fd0729b"
+    },
+    {
+      "original": ".work/vtm/prepared-group-hand-repeat/after.log",
+      "original_sha256": "4f265b0172c66ff885bdec73ee1bc5adcab7c6032c876fdfa8a0b4c51ade870e",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-hand-repeat/after.log",
+      "bytes": 5136,
+      "sha256": "4f265b0172c66ff885bdec73ee1bc5adcab7c6032c876fdfa8a0b4c51ade870e"
+    },
+    {
+      "original": ".work/vtm/prepared-group-hand-repeat/before.json",
+      "original_sha256": "1494284a5ca73230b72d141742ca32eedd5cb16f50f3bd75b1fd3a58a702a5a7",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-hand-repeat/before.json",
+      "bytes": 2843,
+      "sha256": "1494284a5ca73230b72d141742ca32eedd5cb16f50f3bd75b1fd3a58a702a5a7"
+    },
+    {
+      "original": ".work/vtm/prepared-group-hand-repeat/before.log",
+      "original_sha256": "afdea6ee0e604043371877e133d94299919a7305381f5c996cb96a299368e429",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-hand-repeat/before.log",
+      "bytes": 5139,
+      "sha256": "afdea6ee0e604043371877e133d94299919a7305381f5c996cb96a299368e429"
+    },
+    {
+      "original": ".work/vtm/prepared-group-hand-repeat/commands.json",
+      "original_sha256": "4577f3ddb066f0ccfaef7dc664da87a2398e4c4dc9fea441a7dbc0df5dea55f9",
+      "path": "results/validation/vtm/grouped-seed-queries/prepared-group-hand-repeat/commands.json",
+      "bytes": 1124,
+      "sha256": "4577f3ddb066f0ccfaef7dc664da87a2398e4c4dc9fea441a7dbc0df5dea55f9"
+    }
+  ],
+  "publication_finalization": "The publisher included its own redirected log before writing its completion line. After the process exited, that single log record was updated to its final byte count and SHA256; all artifact and source hashes were rechecked. No validation evidence changed."
+}

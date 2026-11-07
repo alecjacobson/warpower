@@ -176,7 +176,8 @@ evidence; they are not additional default implementations.
 
 A subsequent [hierarchy-traversal study](prepared-hierarchy-probes.md) compares
 one-, eight- and 32-worker pruning layouts. All four tested variants regress
-complete solves, so the strided point checker remains the production path.
+complete solves and remain unadopted. The later [flat Morton grouping](grouped-seed-queries.md)
+retains this point expression and symbolic fallback while skipping excluded groups.
 
 A separate [strict/exact kernel split](prepared-split-probe.md) lowers the common
 kernel's register footprint but regresses complete solves by about 1.3%.

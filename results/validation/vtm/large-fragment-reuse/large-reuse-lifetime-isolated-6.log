@@ -1,0 +1,256 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 131072, "diagnostic_mempool_enabled": false}
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (109,0,0) in block (0,0,0)
+=========     Access at 0x1ab4011db4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4011c00 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_large_full_route_preserves_cospherical_first_duplicate_owners in test_large_reuse.py:224
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (0,0,0) in block (0,0,0)
+=========     Access at 0x1ab4011c00 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4011c00 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_large_full_route_preserves_cospherical_first_duplicate_owners in test_large_reuse.py:224
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (36,0,0) in block (0,0,0)
+=========     Access at 0x1ab4011c90 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4011c00 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_large_full_route_preserves_cospherical_first_duplicate_owners in test_large_reuse.py:224
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (73,0,0) in block (0,0,0)
+=========     Access at 0x1ab4011d24 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4011c00 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_large_full_route_preserves_cospherical_first_duplicate_owners in test_large_reuse.py:224
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (0,0,0) in block (1,0,0)
+=========     Access at 0x1ab4011c00 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab4011c00 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: test_large_full_route_preserves_cospherical_first_duplicate_owners in test_large_reuse.py:224
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+Fatal Python error: Segmentation fault
+
+Current thread 0x00007f0a8dd999c0 (most recent call first):
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 14410 in capture_launch
+  File "/home/horde/projects/power-diagram/tests/test_large_reuse.py", line 224 in test_large_full_route_preserves_cospherical_first_duplicate_owners
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/python.py", line 187 in pytest_pyfunc_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/python.py", line 1798 in runtest
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 184 in pytest_runtest_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 250 in <lambda>
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 361 in from_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 249 in call_and_report
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 139 in runtestprotocol
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 118 in pytest_runtest_protocol
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 411 in pytest_runtestloop
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 387 in _main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 333 in wrap_session
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 380 in pytest_cmdline_main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/config/__init__.py", line 262 in _main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/config/__init__.py", line 231 in main
+  File "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py", line 9 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, scipy._lib._ccallback_c, charset_normalizer.md, charset_normalizer.cd, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._mt19937, numpy.random.mtrand, numpy.random._philox, numpy.random._pcg64, numpy.random._sfc64, numpy.random._generator, scipy.sparse._sparsetools, _csparsetools, scipy.sparse._csparsetools, scipy.linalg._fblas, scipy.linalg._flapack, scipy.linalg.cython_lapack, scipy.linalg._cythonized_array_utils, scipy.linalg._solve_toeplitz, scipy.linalg._decomp_lu_cython, scipy.linalg._matfuncs_sqrtm_triu, scipy.linalg._matfuncs_expm, scipy.linalg._linalg_pythran, scipy.linalg.cython_blas, scipy.linalg._decomp_update, scipy.sparse.linalg._dsolve._superlu, scipy.sparse.linalg._eigen.arpack._arpack, scipy.sparse.linalg._propack._spropack, scipy.sparse.linalg._propack._dpropack, scipy.sparse.linalg._propack._cpropack, scipy.sparse.linalg._propack._zpropack, scipy.sparse.csgraph._tools, scipy.sparse.csgraph._shortest_path, scipy.sparse.csgraph._traversal, scipy.sparse.csgraph._min_spanning_tree, scipy.sparse.csgraph._flow, scipy.sparse.csgraph._matching, scipy.sparse.csgraph._reordering, scipy.spatial._ckdtree, scipy._lib.messagestream, scipy.spatial._qhull, scipy.spatial._voronoi, scipy.spatial._distance_wrap, scipy.spatial._hausdorff, scipy.special._ufuncs_cxx, scipy.special._ufuncs, scipy.special._specfun, scipy.special._comb, scipy.special._ellip_harm_2, scipy.spatial.transform._rotation (total: 53)
+========= Error: process didn't terminate successfully
+=========     The application may have hit an error when dereferencing Unified Memory from the host. Please rerun the application under cuda-gdb or a host debugger to catch host side errors.
+========= Target application returned an error
+========= ERROR SUMMARY: 5 errors

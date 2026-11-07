@@ -1,0 +1,63 @@
+[
+  {
+    "name": "full-native",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--capture-range=cudaProfilerApi",
+      "--capture-range-end=stop",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-full-native",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-full-native.py",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-full-native.dot",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-full-native.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 17.586701154708862,
+    "timeout_seconds": 300
+  },
+  {
+    "name": "loop-native",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--capture-range=cudaProfilerApi",
+      "--capture-range-end=stop",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-loop-native",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-loop.py",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-loop-native.dot",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-loop-native.json",
+      "--profile"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 12.330769300460815,
+    "timeout_seconds": 300
+  },
+  {
+    "name": "native-adoption-analysis",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/analyze-large-reuse-audit.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 5.470831871032715,
+    "timeout_seconds": 180
+  }
+]

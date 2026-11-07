@@ -1,0 +1,1253 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 131072, "diagnostic_mempool_enabled": false}
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.93 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.84 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.78 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.62 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.68 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.60 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.65 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.68 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.70 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.68 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 10.67 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 1.00 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 6.93 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.76 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.75 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.96 ms  (cached)
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 3.29 ms  (cached)
+Module warpower._facet_completion bb6aebe load on device 'cuda:0' took 6.76 ms  (cached)
+Module warpower._facet_completion 62c1043 load on device 'cuda:0' took 5.80 ms  (cached)
+Module warpower._facet_seeds fa4cd6c load on device 'cuda:0' took 3.64 ms  (cached)
+Module warpower._prepared_seeds 3fdfc80 load on device 'cuda:0' took 1.92 ms  (cached)
+Module warpower._proved_completion 9f7b57c load on device 'cuda:0' took 6.62 ms  (cached)
+Module warpower._proved_completion 1af4ac5 load on device 'cuda:0' took 6.53 ms  (cached)
+Module warpower._reuse_delaunay 58b0d1a load on device 'cuda:0' took 0.71 ms  (cached)
+Module warpower._active_delaunay 6b514e5 load on device 'cuda:0' took 1.07 ms  (cached)
+Module tests.test_active_delaunay bd742ce load on device 'cuda:0' took 0.86 ms  (cached)
+Module warpower._active_sites e183170 load on device 'cuda:0' took 0.74 ms  (cached)
+launch 0
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (32,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f080 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (33,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f084 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (34,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f088 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (35,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f08c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (36,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f090 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (37,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f094 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (38,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f098 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (39,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f09c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (40,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0a0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (41,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0a4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (42,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0a8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (43,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0ac is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (44,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0b0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (45,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0b4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (46,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0b8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (47,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0bc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (48,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0c0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (49,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0c4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (50,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0c8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (51,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0cc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (52,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0d0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (53,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0d4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (54,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0d8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (55,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0dc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (56,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0e0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (57,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0e4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (58,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0e8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (59,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0ec is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (60,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0f0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (61,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0f4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (62,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0f8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (63,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f0fc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (64,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f100 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (65,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f104 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (66,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f108 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (67,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f10c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (68,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f110 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (69,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f114 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (70,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f118 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (71,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f11c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (72,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f120 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (73,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f124 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (74,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f128 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (75,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f12c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (76,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f130 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (77,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f134 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (78,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f138 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (79,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f13c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (80,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f140 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (81,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f144 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (82,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f148 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (83,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f14c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (84,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f150 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (85,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f154 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (86,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f158 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (87,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f15c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (88,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f160 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (89,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f164 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (90,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f168 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (91,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f16c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (92,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f170 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (93,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f174 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (94,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f178 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (95,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f17c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (96,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f180 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (97,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f184 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (98,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f188 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (99,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f18c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (100,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f190 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (101,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f194 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (102,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f198 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (103,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f19c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (104,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1a0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (105,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1a4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (106,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1a8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (107,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1ac is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (108,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1b0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (109,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1b4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (110,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1b8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (111,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1bc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (112,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1c0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (113,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1c4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (114,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1c8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (115,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1cc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (116,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1d0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (117,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1d4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (118,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1d8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (119,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1dc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (120,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1e0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (121,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1e4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (122,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1e8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (123,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1ec is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (124,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1f0 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (125,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1f4 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (126,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1f8 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (127,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f1fc is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (0,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f000 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (1,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f004 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (2,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f008 is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+========= Invalid __global__ atomic of size 4 bytes
+=========     at void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortHistogramKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, unsigned int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T4 *, const T3 *, T4, int, int, T5)+0x1a40
+=========     by thread (3,0,0) in block (0,0,0)
+=========     Access at 0x1ab400f00c is potentially accessed before it is allocated
+=========     and is inside the nearest allocation at 0x1ab400f000 of size 10751 bytes
+=========     Saved host backtrace up to driver entry point at kernel launch time
+=========         Host Frame:  [0xb8f5aa] in warp.so
+=========         Host Frame:  [0xbee2d1] in warp.so
+=========         Host Frame: wp_cuda_graph_launch [0xb5b1d4] in warp.so
+=========         Host Frame: capture_launch in context.py:14410
+=========         Host Frame: <module> in large-reuse-route-control.py:32
+========= 
+Fatal Python error: Segmentation fault
+
+Current thread 0x00007f90bb8fe9c0 (most recent call first):
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 14410 in capture_launch
+  File "/home/horde/projects/power-diagram/.work/vtm/large-reuse-route-control.py", line 32 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, scipy._lib._ccallback_c, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._mt19937, numpy.random.mtrand, numpy.random._philox, numpy.random._pcg64, numpy.random._sfc64, numpy.random._generator, charset_normalizer.md, charset_normalizer.cd, scipy.sparse._sparsetools, _csparsetools, scipy.sparse._csparsetools, scipy.linalg._fblas, scipy.linalg._flapack, scipy.linalg.cython_lapack, scipy.linalg._cythonized_array_utils, scipy.linalg._solve_toeplitz, scipy.linalg._decomp_lu_cython, scipy.linalg._matfuncs_sqrtm_triu, scipy.linalg._matfuncs_expm, scipy.linalg._linalg_pythran, scipy.linalg.cython_blas, scipy.linalg._decomp_update, scipy.sparse.linalg._dsolve._superlu, scipy.sparse.linalg._eigen.arpack._arpack, scipy.sparse.linalg._propack._spropack, scipy.sparse.linalg._propack._dpropack, scipy.sparse.linalg._propack._cpropack, scipy.sparse.linalg._propack._zpropack, scipy.sparse.csgraph._tools, scipy.sparse.csgraph._shortest_path, scipy.sparse.csgraph._traversal, scipy.sparse.csgraph._min_spanning_tree, scipy.sparse.csgraph._flow, scipy.sparse.csgraph._matching, scipy.sparse.csgraph._reordering, scipy.spatial._ckdtree, scipy._lib.messagestream, scipy.spatial._qhull, scipy.spatial._voronoi, scipy.spatial._distance_wrap, scipy.spatial._hausdorff, scipy.special._ufuncs_cxx, scipy.special._ufuncs, scipy.special._specfun, scipy.special._comb, scipy.special._ellip_harm_2, scipy.spatial.transform._rotation (total: 53)
+========= Error: process didn't terminate successfully
+=========     The application may have hit an error when dereferencing Unified Memory from the host. Please rerun the application under cuda-gdb or a host debugger to catch host side errors.
+========= Target application returned an error
+========= ERROR SUMMARY: 256 errors
+========= ERROR SUMMARY: 156 errors were not printed. Use --print-limit option to adjust the number of printed errors

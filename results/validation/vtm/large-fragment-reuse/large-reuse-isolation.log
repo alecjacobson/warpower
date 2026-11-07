@@ -1,0 +1,20 @@
+{
+  "baseline": "cca7a1de4f5ddf3c190f321cfda53c66f0525948",
+  "runtime": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+  "production_changed": [
+    "warpower/_active_delaunay.py",
+    "warpower/_reuse_delaunay.py"
+  ],
+  "changed_module_device_ast": {
+    "warpower/_active_delaunay.py": {
+      "count": 2,
+      "all_equal": true
+    },
+    "warpower/_reuse_delaunay.py": {
+      "count": 5,
+      "all_equal": true
+    }
+  },
+  "benchmarks_examples_readme_unchanged": true,
+  "scope": "Only host construction/routing changes. Active full route uses Reuse for 2048<n<=4096 and clears its fragment at fresh solve. Reuse enables existing same-current-input proof consumption; every run recertifies retained cells against current original input. Ordinary standalone APIs and all Warp kernels/functions unchanged."
+}

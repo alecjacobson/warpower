@@ -4,10 +4,15 @@ Nearby optimization steps often preserve most Delaunay tetrahedra. The internal
 VTM core uses previous connectivity as a candidate fragment at capacities from
 256 through 2,048 sites. The independently callable `DelaunayWorkspace`, power
 diagram functions and fixed-boundary `ODTWorkspace` keep their existing paths.
-Larger reconstructions retain the ordinary constructor: the exhaustive seed
-filter costs O(sites × retained cells). For a small active prefix inside a larger
+For a small active prefix inside a larger
 reserved VTM workspace, [device capacity routing](active-reconstruction.md) now
 selects a smaller constructor that can use this strategy.
+The active mesher's full route also [uses reuse at reserved capacities of
+2,049–4,096 sites](large-fragment-reuse.md), with current-input proof consumption
+enabled throughout completion. Larger full routes retain ordinary construction;
+the exhaustive seed filter costs O(sites × retained cells). The later report
+records complete uniform/graded torus and Armadillo gains, storage costs and
+validation of the extension. The measurements below describe the earlier change.
 
 Every reconstruction rebuilds canonical duplicate owners and the current spatial
 hierarchy on device. The seed filter removes malformed, duplicate, flat or

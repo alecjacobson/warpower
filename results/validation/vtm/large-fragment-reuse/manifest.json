@@ -1,0 +1,1717 @@
+{
+  "runtime": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+  "baseline": "cca7a1de4f5ddf3c190f321cfda53c66f0525948",
+  "baseline_runtime": "9228a3e7b3804b0cf1b191976477e35c25dc47ef",
+  "production_scope": [
+    "warpower/_active_delaunay.py",
+    "warpower/_reuse_delaunay.py"
+  ],
+  "source_sha256": {
+    "warpower/_active_delaunay.py": "d5c8213455d4372ce2827ada10cfb79f137f1430ed0cce52ef549d068c6e918a",
+    "warpower/_reuse_delaunay.py": "a15d8beb82263abfa7001046cba419fd8f1608959ffffdb35c2f4ec30d5b4ce8",
+    "warpower/_proved_completion.py": "0070c9539a83989c2299a0ff9864565d236f58a031b83109ebf791d1c4b69541",
+    "warpower/_facet_seeds.py": "947e16f5441a598d39e1b865477380ebc7263bf4f35ce9481f788d05dbd492f9",
+    "warpower/_prepared_seeds.py": "1ba76af31aa19378af2c9c9239c264846b10ed1eeb38a26e7bc47e6aa1feb804",
+    "warpower/_facet_completion.py": "fe32e851c37ff5564393f4f6d3d4cfab6a43cf9927db3fd1bb0bf8d0b4cdb6c8",
+    "tests/test_large_reuse.py": "cbae7a639153bfb907a854d0d8c1682fbd864dc83a1a64424352d07fd22d2173",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "examples/vtm_gallery.py": "8e39899ba4ec7b98dee840f73ccc330c57ac2a398faff3efc103dabb57af4acf",
+    "benchmarks/mesh_quality.py": "0a5765c4d82da5e24ccda94bf2c149875c83932bc314c9211b276a99a893e0dd",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f",
+    "benchmarks/cpu/check_delaunay.cpp": "1a2b1ec4537bbad7a2ac5edd237d853c88bc2167e864eac2686fd9e98ccc3fcd",
+    "benchmarks/cpu/surface_intersections.cpp": "227f37892bdc6a783ed12bc110a7c53571862951f264a5b72d07b7d21f341775",
+    "benchmarks/cpu/surface_distance.cpp": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+  },
+  "native_reference_binary_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe"
+  },
+  "shared_uniform4096_control": "results/validation/vtm/extraction-split-probe/extraction-split-4096",
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/large-reuse-proof-pairs/armadillo-graded-control/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/large-reuse-proof-pairs/armadillo-graded-proofs/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/large-reuse-proof-pairs/armadillo-uniform-control/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/large-reuse-proof-pairs/armadillo-uniform-proofs/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/large-reuse-proof-pairs/graded-torus4096-control/input.off",
+      "canonical": "results/examples/vtm/graded-torus/input.off",
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/large-reuse-proof-pairs/graded-torus4096-proofs/input.off",
+      "canonical": "results/examples/vtm/graded-torus/input.off",
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/large-reuse-final/armadillo-graded-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/large-reuse-final/armadillo-uniform-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/large-reuse-final/graded-torus4096-after/input.off",
+      "canonical": "results/examples/vtm/graded-torus/input.off",
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    }
+  ],
+  "lifetime_validation_scope": {
+    "full_tracking_failed_indices": [
+      1,
+      4,
+      5,
+      6
+    ],
+    "all_seven_have_zero_error_api_and_afterfree_coverage": true,
+    "full_tracking_passed_indices": [
+      0,
+      2,
+      3
+    ],
+    "scope": "Strict full allocation-order failures remain failures; affected cases separately tested with use-after-free tracking. No production allocation changes or error filtering."
+  },
+  "scope": "Bounded active full-route reuse through 4096 sites. Existing same-current-input proofs consumed beyond former query threshold. All numerical device kernels unchanged. No cross-input proof cache. CPU outperformance goal remains unmet.",
+  "files": [
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/analyze-large-reuse-audit.py",
+      "bytes": 3335,
+      "sha256": "6cca2a48aa7b0de4a57f8ec06043d7d835ae54d01af51a009f0b7e4e451b5472",
+      "uncompressed_sha256": "6cca2a48aa7b0de4a57f8ec06043d7d835ae54d01af51a009f0b7e4e451b5472"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/analyze-large-reuse-lifetime.py",
+      "bytes": 3279,
+      "sha256": "5c28c9413ed6055fea54895c1c8df6e374fe5ff99b2eb736d0909ea142b39945",
+      "uncompressed_sha256": "5c28c9413ed6055fea54895c1c8df6e374fe5ff99b2eb736d0909ea142b39945"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/analyze-large-reuse-native-export-failed.py",
+      "bytes": 2563,
+      "sha256": "ad9299e7e78f9e502e3d8f9abc179646dbb3a5bd95dd2078dfc1e44a3ba1486a",
+      "uncompressed_sha256": "ad9299e7e78f9e502e3d8f9abc179646dbb3a5bd95dd2078dfc1e44a3ba1486a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/analyze-large-reuse-native-initial.py",
+      "bytes": 2563,
+      "sha256": "ddc7622193227759afc4a4c7126024e3a6c72824f4abbb02fabb91fabead436e",
+      "uncompressed_sha256": "ddc7622193227759afc4a4c7126024e3a6c72824f4abbb02fabb91fabead436e"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/analyze-large-reuse-native.py",
+      "bytes": 2753,
+      "sha256": "12494d3f86a71a56b2b17355ab76fa3195d44f356a3b6f4669aa43d125de8be7",
+      "uncompressed_sha256": "12494d3f86a71a56b2b17355ab76fa3195d44f356a3b6f4669aa43d125de8be7"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-final-initial.py",
+      "bytes": 4364,
+      "sha256": "523b95662b0a7345ca64e6cca15587e38340f47c684f5f10251e794fbd669684",
+      "uncompressed_sha256": "523b95662b0a7345ca64e6cca15587e38340f47c684f5f10251e794fbd669684"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-final.py",
+      "bytes": 4861,
+      "sha256": "302a755353070d1d0c0049c81f0b72e8476febadea8ad6b18f06a941f00e97b0",
+      "uncompressed_sha256": "302a755353070d1d0c0049c81f0b72e8476febadea8ad6b18f06a941f00e97b0"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-isolation.py",
+      "bytes": 2012,
+      "sha256": "c8f1856f2a97639a4d7f33155dbb4ebc713241883d8bd59901cec0c4593f806b",
+      "uncompressed_sha256": "c8f1856f2a97639a4d7f33155dbb4ebc713241883d8bd59901cec0c4593f806b"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "bytes": 5027,
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5",
+      "uncompressed_sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proofs.py",
+      "bytes": 2483,
+      "sha256": "fe601bb9459a6bce4e8d0530d687df1d34e65e92ab776882218938b61aede570",
+      "uncompressed_sha256": "fe601bb9459a6bce4e8d0530d687df1d34e65e92ab776882218938b61aede570"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-tree.py",
+      "bytes": 2477,
+      "sha256": "76e0fbc7cbe08221d2ea9bdf19fa6f1aa252e7a38470caff9f99c0fc47440362",
+      "uncompressed_sha256": "76e0fbc7cbe08221d2ea9bdf19fa6f1aa252e7a38470caff9f99c0fc47440362"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse.py",
+      "bytes": 2462,
+      "sha256": "6097f9ba624ec114b9f3a6fac3ed33cf30eb6c4c7a117de5ef82c7ea91b274df",
+      "uncompressed_sha256": "6097f9ba624ec114b9f3a6fac3ed33cf30eb6c4c7a117de5ef82c7ea91b274df"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-155-comment.md",
+      "bytes": 1265,
+      "sha256": "833c42691a2d256694763240ab568b3d93d4aee486e3ebdd64fbd379f32e9b17",
+      "uncompressed_sha256": "833c42691a2d256694763240ab568b3d93d4aee486e3ebdd64fbd379f32e9b17"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-161-integrated-comment.md",
+      "bytes": 1597,
+      "sha256": "c8e8f803945ccb8769c904f4387f657930d15eb267c1c64cb0daaa3b9fb47fdc",
+      "uncompressed_sha256": "c8e8f803945ccb8769c904f4387f657930d15eb267c1c64cb0daaa3b9fb47fdc"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-afterfree-isolated-1.log",
+      "bytes": 3291,
+      "sha256": "10dbee518871ae8f15bf24eb12b878b8d7845e653c26e0517a4c3c9ab04fe161",
+      "uncompressed_sha256": "10dbee518871ae8f15bf24eb12b878b8d7845e653c26e0517a4c3c9ab04fe161"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-afterfree-isolated-4.log",
+      "bytes": 3032,
+      "sha256": "134ace8de9de7a364d4d0d709b20cf9b22b7ab11a977c2de5dae778dfc17b91f",
+      "uncompressed_sha256": "134ace8de9de7a364d4d0d709b20cf9b22b7ab11a977c2de5dae778dfc17b91f"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-afterfree-isolated-5.log",
+      "bytes": 3032,
+      "sha256": "71d4564adf1f46541c42fc5625a20224e5f538bb28bdac1e4bed614218491959",
+      "uncompressed_sha256": "71d4564adf1f46541c42fc5625a20224e5f538bb28bdac1e4bed614218491959"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-afterfree-isolated-6.log",
+      "bytes": 3032,
+      "sha256": "19760f6071c3fcb867bf6aa7fd2158e0f2ca18088ee3b23a955cbd1d471f6a5b",
+      "uncompressed_sha256": "19760f6071c3fcb867bf6aa7fd2158e0f2ca18088ee3b23a955cbd1d471f6a5b"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-collected-tests.log",
+      "bytes": 750,
+      "sha256": "7436c1b134facc968e4a5b55ae07fe08c56d8de63d44a2791f7efafa26f72b94",
+      "uncompressed_sha256": "7436c1b134facc968e4a5b55ae07fe08c56d8de63d44a2791f7efafa26f72b94"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-combined-driver-interrupted.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-combined-interruption.json",
+      "bytes": 1792,
+      "sha256": "619459509887245990c1d095d6c089429f10c137fe5451f9eb2eb72409ca3394",
+      "uncompressed_sha256": "619459509887245990c1d095d6c089429f10c137fe5451f9eb2eb72409ca3394"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-combined-memcheck-interrupted.log",
+      "bytes": 504,
+      "sha256": "1383e890e7eacf80035fd7374fe54d916e1c7680d8d1111d7171ec6e76451c40",
+      "uncompressed_sha256": "1383e890e7eacf80035fd7374fe54d916e1c7680d8d1111d7171ec6e76451c40"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final-driver.log",
+      "bytes": 1294,
+      "sha256": "7766b83a938effada6359faaa09311ad2ddb67400d1ecf0451f187b18d1c8cc0",
+      "uncompressed_sha256": "7766b83a938effada6359faaa09311ad2ddb67400d1ecf0451f187b18d1c8cc0"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final-independent-initial.log",
+      "bytes": 663,
+      "sha256": "3d2aa707dae76f6f73184d4c40a4d65b5d4189bfd19020cdf91f13e963d3c21f",
+      "uncompressed_sha256": "3d2aa707dae76f6f73184d4c40a4d65b5d4189bfd19020cdf91f13e963d3c21f"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final-independent.json",
+      "bytes": 46035,
+      "sha256": "f5a193b99b8d19e4d52ffe69e358a1731ce1e0552d513906e08842cbfa565bba",
+      "uncompressed_sha256": "f5a193b99b8d19e4d52ffe69e358a1731ce1e0552d513906e08842cbfa565bba"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final-independent.log",
+      "bytes": 4796,
+      "sha256": "1dc679a90ef8c874309e82a8f661409b5ff86d53581c044a00429bbea64d13d8",
+      "uncompressed_sha256": "1dc679a90ef8c874309e82a8f661409b5ff86d53581c044a00429bbea64d13d8"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-full-native-audit.json",
+      "bytes": 1120,
+      "sha256": "1a0f1f0eaafb1614076bbff7473e26d23be5f3ff7337b7be963ab8bb908171cc",
+      "uncompressed_sha256": "1a0f1f0eaafb1614076bbff7473e26d23be5f3ff7337b7be963ab8bb908171cc"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-full-native-audit.log",
+      "bytes": 1120,
+      "sha256": "1a0f1f0eaafb1614076bbff7473e26d23be5f3ff7337b7be963ab8bb908171cc",
+      "uncompressed_sha256": "1a0f1f0eaafb1614076bbff7473e26d23be5f3ff7337b7be963ab8bb908171cc"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-full-native-export.log",
+      "bytes": 8101,
+      "sha256": "98c846488f2244adbad4ee87e2b745a994d5a3d9bbf8300b05bf1bf17e9b9568",
+      "uncompressed_sha256": "98c846488f2244adbad4ee87e2b745a994d5a3d9bbf8300b05bf1bf17e9b9568"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-full-native.dot.gz",
+      "bytes": 1434714,
+      "sha256": "0943502f3223d03159fb4475b42df24a502945dd94ecd18af505f4abdf655a60",
+      "uncompressed_sha256": "0943502f3223d03159fb4475b42df24a502945dd94ecd18af505f4abdf655a60"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-full-native.json",
+      "bytes": 539,
+      "sha256": "ce763569095f84b07d46061a5b1ec2ef2531bd42466c25eaa80073c270000867",
+      "uncompressed_sha256": "ce763569095f84b07d46061a5b1ec2ef2531bd42466c25eaa80073c270000867"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-full-native.log",
+      "bytes": 8675,
+      "sha256": "aec7e2a80efbc553a7769d818f4b2d26565903bf008558a18c61ee929d09814a",
+      "uncompressed_sha256": "aec7e2a80efbc553a7769d818f4b2d26565903bf008558a18c61ee929d09814a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-full-native.nsys-rep.gz",
+      "bytes": 2906449,
+      "sha256": "64a6c603733144f968cce998c3fdb9ac0c343c5ff019050e7f2f7f1dc4af9007",
+      "uncompressed_sha256": "83a47af6072703fc068d851b501c4da301537e8996bfdf8dfd1a918e563f4cca"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-full-native.py",
+      "bytes": 1595,
+      "sha256": "6fcaacb36cd825f759ae4dfe21320096a046c7cdb6b0ea0a4ee5cbd3dc254955",
+      "uncompressed_sha256": "6fcaacb36cd825f759ae4dfe21320096a046c7cdb6b0ea0a4ee5cbd3dc254955"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-full-native.sqlite.gz",
+      "bytes": 3882889,
+      "sha256": "8e39181073e4653f5dacbf19a204e5f02ca766f51fd41ca7ae64e217ab48a949",
+      "uncompressed_sha256": "8e39181073e4653f5dacbf19a204e5f02ca766f51fd41ca7ae64e217ab48a949"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-full-suite.log",
+      "bytes": 832,
+      "sha256": "2893266ee9076c76341a2c18923909767f8de0d36dc4b069c5b53512f8cf3814",
+      "uncompressed_sha256": "2893266ee9076c76341a2c18923909767f8de0d36dc4b069c5b53512f8cf3814"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-audit-commands.json",
+      "bytes": 6442,
+      "sha256": "730351e07f6c4118668e0c73b71190808a0d919bc3ea3710a05878bbe7173471",
+      "uncompressed_sha256": "730351e07f6c4118668e0c73b71190808a0d919bc3ea3710a05878bbe7173471"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-audit-driver.log",
+      "bytes": 1427,
+      "sha256": "c246c5bdde42fd9c11c0824e860b926e7f83ed1558f0f6cbb48160d201f39c04",
+      "uncompressed_sha256": "c246c5bdde42fd9c11c0824e860b926e7f83ed1558f0f6cbb48160d201f39c04"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "bytes": 452,
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78",
+      "uncompressed_sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolation.json",
+      "bytes": 6750,
+      "sha256": "f500ec48cd542aba5807dc2347829c5fb5f856dbd6c4c054ecfb742d56f415f1",
+      "uncompressed_sha256": "f500ec48cd542aba5807dc2347829c5fb5f856dbd6c4c054ecfb742d56f415f1"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolation.log",
+      "bytes": 814,
+      "sha256": "1d8887ddddb685d80c8cc4b8a7048ae48d442d13d73d2a2f57179c78f30e8daa",
+      "uncompressed_sha256": "1d8887ddddb685d80c8cc4b8a7048ae48d442d13d73d2a2f57179c78f30e8daa"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-issue.md",
+      "bytes": 2139,
+      "sha256": "6b075af4f8e424f9ccd98ff7458d9021d5e9f3653f9ed21f8d48eb8ea004dec5",
+      "uncompressed_sha256": "6b075af4f8e424f9ccd98ff7458d9021d5e9f3653f9ed21f8d48eb8ea004dec5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-issue155-context.json",
+      "bytes": 2805,
+      "sha256": "1052031bd8b2a2a6921b92afa60d53cde6fe8add701dd46a4aff2c7732f6fedf",
+      "uncompressed_sha256": "1052031bd8b2a2a6921b92afa60d53cde6fe8add701dd46a4aff2c7732f6fedf"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-issue91-context.json",
+      "bytes": 4263,
+      "sha256": "2bad7355445cfe24bb18e9b94ccebbbaf90a1d403c9eb02b4772beb98163d276",
+      "uncompressed_sha256": "2bad7355445cfe24bb18e9b94ccebbbaf90a1d403c9eb02b4772beb98163d276"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-analysis.json",
+      "bytes": 10178,
+      "sha256": "16ee4e479de9125cd12db7a670c1c494cb4c1ce48c43e752d8e827ef2af99631",
+      "uncompressed_sha256": "16ee4e479de9125cd12db7a670c1c494cb4c1ce48c43e752d8e827ef2af99631"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-analysis.log",
+      "bytes": 71,
+      "sha256": "81bd5becdac4487580a0fabd2ab08fe7db9aa901d8d48c02651219be89b7b171",
+      "uncompressed_sha256": "81bd5becdac4487580a0fabd2ab08fe7db9aa901d8d48c02651219be89b7b171"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-control-driver.log",
+      "bytes": 592,
+      "sha256": "a04610dffa2fe004d59a33907c19c221a60ee1c957a2e30a67f56280a7eb3e88",
+      "uncompressed_sha256": "a04610dffa2fe004d59a33907c19c221a60ee1c957a2e30a67f56280a7eb3e88"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-controls.json",
+      "bytes": 11804,
+      "sha256": "93065efd4335005959393bde4aad65b0eb909e6b01e11bdc134eae147270c2e1",
+      "uncompressed_sha256": "93065efd4335005959393bde4aad65b0eb909e6b01e11bdc134eae147270c2e1"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-coverage.json",
+      "bytes": 381,
+      "sha256": "7edd3142faed277ab9b86750522c1a26cc7bd5c85ccb1c07e3793858394ec67a",
+      "uncompressed_sha256": "7edd3142faed277ab9b86750522c1a26cc7bd5c85ccb1c07e3793858394ec67a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-isolated-0.log",
+      "bytes": 3291,
+      "sha256": "9e0ecef09bce0c96915a26e9038736dd1ab40c765853e2822fb58e20cb66672c",
+      "uncompressed_sha256": "9e0ecef09bce0c96915a26e9038736dd1ab40c765853e2822fb58e20cb66672c"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-isolated-1.log",
+      "bytes": 300338,
+      "sha256": "0f221488a5e1337906c313a2e5e59df86d14cd5c0095f46f728464a7ed36593d",
+      "uncompressed_sha256": "0f221488a5e1337906c313a2e5e59df86d14cd5c0095f46f728464a7ed36593d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-isolated-2.log",
+      "bytes": 3119,
+      "sha256": "0cb558d5b0266628b9ed82e6865aec3a86279cd0871ff6cf45c3ccf5cd55e4e4",
+      "uncompressed_sha256": "0cb558d5b0266628b9ed82e6865aec3a86279cd0871ff6cf45c3ccf5cd55e4e4"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-isolated-3.log",
+      "bytes": 3032,
+      "sha256": "3881db679ff64e13910d0f00552ab20af28106d1e675946119c93419217cca84",
+      "uncompressed_sha256": "3881db679ff64e13910d0f00552ab20af28106d1e675946119c93419217cca84"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-isolated-4.log",
+      "bytes": 21111,
+      "sha256": "0de15801b7d90672331fbdf9e9f2e8fd20b9d23ed3d9d4cef13995db0462b72e",
+      "uncompressed_sha256": "0de15801b7d90672331fbdf9e9f2e8fd20b9d23ed3d9d4cef13995db0462b72e"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-isolated-5.log",
+      "bytes": 21111,
+      "sha256": "607fd2b7627fb5dfd8e9191c3ddb538f12a1aefa5200277b5f8c3ff7c11d1145",
+      "uncompressed_sha256": "607fd2b7627fb5dfd8e9191c3ddb538f12a1aefa5200277b5f8c3ff7c11d1145"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-lifetime-isolated-6.log",
+      "bytes": 21111,
+      "sha256": "110d7e46877f6489554d7023c0de19cfbac74d6393adcef0838a5f559a33a60e",
+      "uncompressed_sha256": "110d7e46877f6489554d7023c0de19cfbac74d6393adcef0838a5f559a33a60e"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-loop-native-audit.json",
+      "bytes": 1144,
+      "sha256": "190496ab653eb7f907cc3a4aee53e9c4127460b80fc70c42cd0d82ec866e3602",
+      "uncompressed_sha256": "190496ab653eb7f907cc3a4aee53e9c4127460b80fc70c42cd0d82ec866e3602"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-loop-native-audit.log",
+      "bytes": 1144,
+      "sha256": "190496ab653eb7f907cc3a4aee53e9c4127460b80fc70c42cd0d82ec866e3602",
+      "uncompressed_sha256": "190496ab653eb7f907cc3a4aee53e9c4127460b80fc70c42cd0d82ec866e3602"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-loop-native-export.log",
+      "bytes": 8101,
+      "sha256": "525aac4777dfcad296ef8bf23bb8cb45accb056f174cf0b2f7594b00754b71cb",
+      "uncompressed_sha256": "525aac4777dfcad296ef8bf23bb8cb45accb056f174cf0b2f7594b00754b71cb"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-loop-native.dot.gz",
+      "bytes": 101125,
+      "sha256": "0179994836b3e396257a52ff7e514a4f3c14a52bb80900d72407c7724d905e25",
+      "uncompressed_sha256": "0179994836b3e396257a52ff7e514a4f3c14a52bb80900d72407c7724d905e25"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-loop-native.json",
+      "bytes": 2285,
+      "sha256": "6e542085b1dbdc8462643bdb95e9da33bb7e661f234d5dc5f5ee3a07b836cb6d",
+      "uncompressed_sha256": "6e542085b1dbdc8462643bdb95e9da33bb7e661f234d5dc5f5ee3a07b836cb6d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-loop-native.log",
+      "bytes": 5841,
+      "sha256": "9d4d7cb1fed1884159c0cc0b36733f4cc09d3af9100da00454f44b6c94a02d24",
+      "uncompressed_sha256": "9d4d7cb1fed1884159c0cc0b36733f4cc09d3af9100da00454f44b6c94a02d24"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-loop-native.npz",
+      "bytes": 1400598,
+      "sha256": "b513886c837c1f5f4da577ddbb7c70080b54d3320548af95ee5c1932669e12a6",
+      "uncompressed_sha256": "b513886c837c1f5f4da577ddbb7c70080b54d3320548af95ee5c1932669e12a6"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-loop-native.nsys-rep.gz",
+      "bytes": 216272,
+      "sha256": "9baabcd9555141d4d47260046fbfe8e9f81c50a0467a231ccd2e7a1f5b5eedc5",
+      "uncompressed_sha256": "767e89944f32972df6559ec1d84282ae1bc36fedc5389e37979b6e7493a3ad9d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-loop-native.sqlite.gz",
+      "bytes": 313432,
+      "sha256": "57ed707387f0b95545b1a30a95ce57d1f38b580ff56acad0724f535de14bfe80",
+      "uncompressed_sha256": "57ed707387f0b95545b1a30a95ce57d1f38b580ff56acad0724f535de14bfe80"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-loop.py",
+      "bytes": 4447,
+      "sha256": "ff594b0e3813fd252a7d00a43250cdfc5a557063460a3bc0add4cf04cde5d70f",
+      "uncompressed_sha256": "ff594b0e3813fd252a7d00a43250cdfc5a557063460a3bc0add4cf04cde5d70f"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-memcheck-diagnostic-stack.log",
+      "bytes": 291,
+      "sha256": "af38f5a281bad7ecfc6a408a262f3b3df2d4aa63b395bb9440722f7afe086844",
+      "uncompressed_sha256": "af38f5a281bad7ecfc6a408a262f3b3df2d4aa63b395bb9440722f7afe086844"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-memcheck-isolated-0.log",
+      "bytes": 3290,
+      "sha256": "a01cdef4fe7fbf44df3178802e4312cf3a4e3411f6434cf6917b047c3d76f1b9",
+      "uncompressed_sha256": "a01cdef4fe7fbf44df3178802e4312cf3a4e3411f6434cf6917b047c3d76f1b9"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-memcheck-isolated-1.log",
+      "bytes": 3290,
+      "sha256": "94b653bb15f3fe94067eff51c9e1494a81e40a052b81e3e88c630f8a26f094dc",
+      "uncompressed_sha256": "94b653bb15f3fe94067eff51c9e1494a81e40a052b81e3e88c630f8a26f094dc"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-memcheck-isolated-2.log",
+      "bytes": 3118,
+      "sha256": "356c0be4ffe003eaca3191a35126bfe19db99218d82cba8edc75daa409d81946",
+      "uncompressed_sha256": "356c0be4ffe003eaca3191a35126bfe19db99218d82cba8edc75daa409d81946"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-memcheck-isolated-3.log",
+      "bytes": 3034,
+      "sha256": "380743398c74749eb3ec82cfc9a7966a0c2f8f894f683597246b3ec4ac528347",
+      "uncompressed_sha256": "380743398c74749eb3ec82cfc9a7966a0c2f8f894f683597246b3ec4ac528347"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-memcheck-isolated-4.log",
+      "bytes": 3031,
+      "sha256": "1b5909c1c74582a59df387aac53fa8dd979cda4f1e6382472008a33ce0ed4fea",
+      "uncompressed_sha256": "1b5909c1c74582a59df387aac53fa8dd979cda4f1e6382472008a33ce0ed4fea"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-memcheck-isolated-5.log",
+      "bytes": 3031,
+      "sha256": "84a8608049c831a369ea218364137a4505cbbb2c516f090a8c4b10bdea930830",
+      "uncompressed_sha256": "84a8608049c831a369ea218364137a4505cbbb2c516f090a8c4b10bdea930830"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-memcheck-isolated-6.log",
+      "bytes": 3031,
+      "sha256": "3558b5c740144467558d20c7430710d688153598895cd7f1a49e5743e5a80fed",
+      "uncompressed_sha256": "3558b5c740144467558d20c7430710d688153598895cd7f1a49e5743e5a80fed"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-memcheck.log",
+      "bytes": 22227,
+      "sha256": "6d94afeabe1a596a4d2698d9e08dc257489155a2cac20f3d1170d13ed34cf587",
+      "uncompressed_sha256": "6d94afeabe1a596a4d2698d9e08dc257489155a2cac20f3d1170d13ed34cf587"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-adoption-analysis.log",
+      "bytes": 58,
+      "sha256": "134fa10bb06ef2a08d11582a95966454c6b202b9cd49806f6814b0ca4d3911f6",
+      "uncompressed_sha256": "134fa10bb06ef2a08d11582a95966454c6b202b9cd49806f6814b0ca4d3911f6"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-adoption-commands.json",
+      "bytes": 1951,
+      "sha256": "278ec458c49effbad1d5d3fc4ae09a58ace94517cbfb9944b5a719bd38740eb8",
+      "uncompressed_sha256": "278ec458c49effbad1d5d3fc4ae09a58ace94517cbfb9944b5a719bd38740eb8"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-adoption-driver.log",
+      "bytes": 111,
+      "sha256": "930e22e409262047daa33d182d5a79d53f65a6d270b42bda5a421847950aec0d",
+      "uncompressed_sha256": "930e22e409262047daa33d182d5a79d53f65a6d270b42bda5a421847950aec0d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-analysis-export-failed.log",
+      "bytes": 676,
+      "sha256": "e4671175bf728789fc8569cdc9363f05cbcfecd68ea45aa2a60d5c482b51f9ac",
+      "uncompressed_sha256": "e4671175bf728789fc8569cdc9363f05cbcfecd68ea45aa2a60d5c482b51f9ac"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-analysis-initial.log",
+      "bytes": 520,
+      "sha256": "30d202e16169f881be2d03fd505201346b987a0d6a541fca417a4a615ed23679",
+      "uncompressed_sha256": "30d202e16169f881be2d03fd505201346b987a0d6a541fca417a4a615ed23679"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-analysis-vartmp-failed.log",
+      "bytes": 680,
+      "sha256": "fe8e37e124b6dee7eea3f91ffdbe9edf0f9ba0f1a5230cd315a5b27755cbda84",
+      "uncompressed_sha256": "fe8e37e124b6dee7eea3f91ffdbe9edf0f9ba0f1a5230cd315a5b27755cbda84"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-analysis.log",
+      "bytes": 3529,
+      "sha256": "aeeb18e0cb1f08a7756c372c4253662f5c741999f0b9f83e9cbc47e2e172892a",
+      "uncompressed_sha256": "aeeb18e0cb1f08a7756c372c4253662f5c741999f0b9f83e9cbc47e2e172892a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-audit-summary.json",
+      "bytes": 58662,
+      "sha256": "8b9693e6339618761d5035098390811a06a2c2378ac004d81c43e0cbe8bacba1",
+      "uncompressed_sha256": "8b9693e6339618761d5035098390811a06a2c2378ac004d81c43e0cbe8bacba1"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-commands.json",
+      "bytes": 1408,
+      "sha256": "881a45db4f5be122588a75fa38dfe2101a5056f3ccf5f6475163444785b427e8",
+      "uncompressed_sha256": "881a45db4f5be122588a75fa38dfe2101a5056f3ccf5f6475163444785b427e8"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-control-export.log",
+      "bytes": 8101,
+      "sha256": "69a1d12bd703d6378628486de90e09da8ef2ec72e020a5e3d1c7904edddcb13c",
+      "uncompressed_sha256": "69a1d12bd703d6378628486de90e09da8ef2ec72e020a5e3d1c7904edddcb13c"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-control.json",
+      "bytes": 298,
+      "sha256": "538dc338129e3e1627d2a49727499f629649da764cd98b00241f7d89e9beaaf9",
+      "uncompressed_sha256": "538dc338129e3e1627d2a49727499f629649da764cd98b00241f7d89e9beaaf9"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-control.log",
+      "bytes": 8515,
+      "sha256": "ce06f5a9eef22a08238ef4667580bf6e30d6f6f6ea63a0f21b840164711bf289",
+      "uncompressed_sha256": "ce06f5a9eef22a08238ef4667580bf6e30d6f6f6ea63a0f21b840164711bf289"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-control.nsys-rep.gz",
+      "bytes": 2657956,
+      "sha256": "3ba35482e9cdb5a7572c39e5e726f0bdccb07fb937979dfdb2f7318602686d1b",
+      "uncompressed_sha256": "779bf4230e445a5c595992f1e8f6cdcb53c03c50c64b3f6abb4bd243b8b130ba"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-control.sqlite.gz",
+      "bytes": 3580008,
+      "sha256": "cce5dc4860a130afb090b9965d07e307d1b04d13d7e52933d3422a6569c25808",
+      "uncompressed_sha256": "cce5dc4860a130afb090b9965d07e307d1b04d13d7e52933d3422a6569c25808"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-driver.log",
+      "bytes": 18,
+      "sha256": "90f86e559598b03d564be379085a2919dc41bd82449ef54e87a394ea1a97e805",
+      "uncompressed_sha256": "90f86e559598b03d564be379085a2919dc41bd82449ef54e87a394ea1a97e805"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-reuse-export-failed.log",
+      "bytes": 8192,
+      "sha256": "6e3f74aced8516c22e916c5d336ffb50c6d061976c3d2730a85cd15ff18483ae",
+      "uncompressed_sha256": "6e3f74aced8516c22e916c5d336ffb50c6d061976c3d2730a85cd15ff18483ae"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-reuse-export-vartmp-failed.log",
+      "bytes": 8192,
+      "sha256": "75bbdf68e02e3cff6d4e2706da8cba21a828a4279ce535dd3bb3937f17b3aea6",
+      "uncompressed_sha256": "75bbdf68e02e3cff6d4e2706da8cba21a828a4279ce535dd3bb3937f17b3aea6"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-reuse-export.log",
+      "bytes": 8101,
+      "sha256": "f03da17c96c7eb892132e6989e3252106013572402c98667b96ceb933fb59909",
+      "uncompressed_sha256": "f03da17c96c7eb892132e6989e3252106013572402c98667b96ceb933fb59909"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-reuse.json",
+      "bytes": 297,
+      "sha256": "b1c068f982b52daa33f9f3d46cae073bce0ea8067d14f936c71dd2281e515897",
+      "uncompressed_sha256": "b1c068f982b52daa33f9f3d46cae073bce0ea8067d14f936c71dd2281e515897"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-reuse.log",
+      "bytes": 8578,
+      "sha256": "711e1206a11c19fcec1c5c17a56432da8157c885e2a542f1dddcc211a17353b9",
+      "uncompressed_sha256": "711e1206a11c19fcec1c5c17a56432da8157c885e2a542f1dddcc211a17353b9"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-reuse.nsys-rep.gz",
+      "bytes": 2909296,
+      "sha256": "0bc11af761dbf0c8f8b90db5460ab169b9b7f3573b2d5e1425205ab15a8c0947",
+      "uncompressed_sha256": "5516c5d4211341d70aabb11413add4fb729046a03520b205cc5a5853b2bc7bde"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-reuse.sqlite.gz",
+      "bytes": 3877154,
+      "sha256": "6f5989f87b58a91cb2d07d963f92a345a840f7ce8742c4a20c9a4577af5b1d99",
+      "uncompressed_sha256": "6f5989f87b58a91cb2d07d963f92a345a840f7ce8742c4a20c9a4577af5b1d99"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-native-summary.json",
+      "bytes": 91749,
+      "sha256": "b0959b72c24dd4fc7dabdbb416c9563bba7fb5691bbdea41ef28a2ba810c61a4",
+      "uncompressed_sha256": "b0959b72c24dd4fc7dabdbb416c9563bba7fb5691bbdea41ef28a2ba810c61a4"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-new-tests.log",
+      "bytes": 99,
+      "sha256": "5388385167309f8b389209ad2759a9b74c6deba6daef45339935b22cc9a01310",
+      "uncompressed_sha256": "5388385167309f8b389209ad2759a9b74c6deba6daef45339935b22cc9a01310"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-outcomes.json",
+      "bytes": 15398,
+      "sha256": "cd850cf47be7ffaf8785e2f05321f3e98c1a49cec48c3d815e1d64826a37d268",
+      "uncompressed_sha256": "cd850cf47be7ffaf8785e2f05321f3e98c1a49cec48c3d815e1d64826a37d268"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-outcomes.log",
+      "bytes": 5223,
+      "sha256": "3290ae73b9f575cf9d1d1fe2bc130cb84bafb969c96b74781270d49fc1384e17",
+      "uncompressed_sha256": "3290ae73b9f575cf9d1d1fe2bc130cb84bafb969c96b74781270d49fc1384e17"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs-driver.log",
+      "bytes": 4495,
+      "sha256": "a0bfeea377976ac8b7a8e5b1f055cc4f809bbdbc28d433695f7a2b576e93a664",
+      "uncompressed_sha256": "a0bfeea377976ac8b7a8e5b1f055cc4f809bbdbc28d433695f7a2b576e93a664"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs-independent.json",
+      "bytes": 9657,
+      "sha256": "32545f16e22d8c2b06357d6410fce568b124df8e165f7e54bd6b9cd3178aa584",
+      "uncompressed_sha256": "32545f16e22d8c2b06357d6410fce568b124df8e165f7e54bd6b9cd3178aa584"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs-independent.log",
+      "bytes": 703,
+      "sha256": "3e546b385d37059a0682bda290b70ba2c8a42262c24834d51cbad4654c89b4c7",
+      "uncompressed_sha256": "3e546b385d37059a0682bda290b70ba2c8a42262c24834d51cbad4654c89b4c7"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proofs4096-command.json",
+      "bytes": 562,
+      "sha256": "f9a62bbc8ebce054784ef8320a6a0436100c5086989a1f1e643a53d0abd8c8d0",
+      "uncompressed_sha256": "f9a62bbc8ebce054784ef8320a6a0436100c5086989a1f1e643a53d0abd8c8d0"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proofs4096-comparison.json",
+      "bytes": 2911,
+      "sha256": "82709b199a66f6750429cbe2ccef872b7f2d889d9c3e445069b39dfdc582df3f",
+      "uncompressed_sha256": "82709b199a66f6750429cbe2ccef872b7f2d889d9c3e445069b39dfdc582df3f"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proofs4096-comparison.log",
+      "bytes": 966,
+      "sha256": "d1618a3a3d2f7e19ca90f68b8cce4ec926228f5d045369adb6fe31626f5fb41a",
+      "uncompressed_sha256": "d1618a3a3d2f7e19ca90f68b8cce4ec926228f5d045369adb6fe31626f5fb41a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proofs4096-driver.log",
+      "bytes": 183,
+      "sha256": "b458b85955d8835700dd1c2e30ad0021ffc7c498c170b705cc39cc0a7f2bf07d",
+      "uncompressed_sha256": "b458b85955d8835700dd1c2e30ad0021ffc7c498c170b705cc39cc0a7f2bf07d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proofs4096.json",
+      "bytes": 3040,
+      "sha256": "2db182ca893df694bd86bfbb362a895f552992d1d644fd599b55b4a9d54bf064",
+      "uncompressed_sha256": "2db182ca893df694bd86bfbb362a895f552992d1d644fd599b55b4a9d54bf064"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proofs4096.log",
+      "bytes": 7413,
+      "sha256": "ad1955e1e9a8742a2e496712052c61775512cef8173fcb48305cb4e8bf848581",
+      "uncompressed_sha256": "ad1955e1e9a8742a2e496712052c61775512cef8173fcb48305cb4e8bf848581"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proofs4096.npz",
+      "bytes": 419221,
+      "sha256": "2a138cba84002f806a42591e2d5d81cc1bd2f4179c4b8955172f3fe1f0737feb",
+      "uncompressed_sha256": "2a138cba84002f806a42591e2d5d81cc1bd2f4179c4b8955172f3fe1f0737feb"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-publication.log",
+      "bytes": 53,
+      "sha256": "430eaf638a3d7d0e0af841a81986510d75195908b8ff78f1ea978b5b4990ec38",
+      "uncompressed_sha256": "430eaf638a3d7d0e0af841a81986510d75195908b8ff78f1ea978b5b4990ec38"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-radix4096-conditional-afterfree.dot.gz",
+      "bytes": 1284,
+      "sha256": "f05e432032fbd5ad6e3ea1acd06f2c541ca7d2f254b513f9da7f33a446e69b39",
+      "uncompressed_sha256": "a1924ee19a832fbace33c89dbe89cf4ce0a8afe5452d4fe4d88efe518515ab96"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-radix4096-conditional-afterfree.log",
+      "bytes": 684,
+      "sha256": "8a62c07663e6aa781b35bb197b5b31511e20a17fffeee21193a4b4459c5e2af0",
+      "uncompressed_sha256": "8a62c07663e6aa781b35bb197b5b31511e20a17fffeee21193a4b4459c5e2af0"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-radix4096-conditional-all.dot.gz",
+      "bytes": 1281,
+      "sha256": "d838470540ab47241f3d719fd7c642d23b1c61067f73cf9f1b7b66f917ec8de8",
+      "uncompressed_sha256": "8d19bcf85ce89ebe268b5bcdaad9991b102162a419bc0f76d680e50d1ce7ae49"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-radix4096-conditional-all.log",
+      "bytes": 115323,
+      "sha256": "ddd7616c77e0ee4bbbd9b777eea036ac0b1abce7ed4875c4d40e73be16f3ea28",
+      "uncompressed_sha256": "ddd7616c77e0ee4bbbd9b777eea036ac0b1abce7ed4875c4d40e73be16f3ea28"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-radix4096-conditional-normal.dot.gz",
+      "bytes": 1287,
+      "sha256": "688ad57426c857291ea6f55bef30606170f21cea59f5c96cdd6e51013292a8f2",
+      "uncompressed_sha256": "42939f6051999634d5f184fe784fb8292531fb8e7a33580ea56306d5e815c7a0"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-radix4096-conditional-normal.log",
+      "bytes": 684,
+      "sha256": "8a62c07663e6aa781b35bb197b5b31511e20a17fffeee21193a4b4459c5e2af0",
+      "uncompressed_sha256": "8a62c07663e6aa781b35bb197b5b31511e20a17fffeee21193a4b4459c5e2af0"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-radix4096-top-all.dot.gz",
+      "bytes": 1298,
+      "sha256": "4db52881330c7eeeec3ea434506cc88221d3f06cdc06ac7ead20b0ddb9a37927",
+      "uncompressed_sha256": "974234b1529cdf41d4094fe4119a6554e502ff2aad91d3c9416d6499009ff037"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-radix4096-top-all.log",
+      "bytes": 684,
+      "sha256": "7afb42653b18de0e53ff90ba492e2a2dca1afbcb4f6396217a5a94fa4ed3dfe6",
+      "uncompressed_sha256": "7afb42653b18de0e53ff90ba492e2a2dca1afbcb4f6396217a5a94fa4ed3dfe6"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-route-after-all.log",
+      "bytes": 120584,
+      "sha256": "203ceaceaf093137d2e16c417090dedb5415d1a23468d634f082d33b5da6a8a7",
+      "uncompressed_sha256": "203ceaceaf093137d2e16c417090dedb5415d1a23468d634f082d33b5da6a8a7"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-route-before-all.log",
+      "bytes": 120618,
+      "sha256": "9a35a48e11cf5e03a44208b14b70dd73cd7421784732e18e5997c0f6f9bcfdc1",
+      "uncompressed_sha256": "9a35a48e11cf5e03a44208b14b70dd73cd7421784732e18e5997c0f6f9bcfdc1"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-route-control.py",
+      "bytes": 2984,
+      "sha256": "393d58f58386b7a3a1bc71b8ed3d42edd4a5a8b7ac6fc3c95e84eb6eee56824b",
+      "uncompressed_sha256": "393d58f58386b7a3a1bc71b8ed3d42edd4a5a8b7ac6fc3c95e84eb6eee56824b"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-tree4096-command.json",
+      "bytes": 555,
+      "sha256": "cd15f433be5a15b698e884011c80fbacef065dd5e751a1b9048fd6a678290783",
+      "uncompressed_sha256": "cd15f433be5a15b698e884011c80fbacef065dd5e751a1b9048fd6a678290783"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-tree4096-comparison.json",
+      "bytes": 2910,
+      "sha256": "bd8a64e502cb4a9b4329f1b10af6e9d1d22bae87d6a15ae3c63c9d598231d035",
+      "uncompressed_sha256": "bd8a64e502cb4a9b4329f1b10af6e9d1d22bae87d6a15ae3c63c9d598231d035"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-tree4096-comparison.log",
+      "bytes": 964,
+      "sha256": "56f17984aa79fa7d6ffde4f77c8fd6a9a59c1912718b1b0326d9c4d98e176fab",
+      "uncompressed_sha256": "56f17984aa79fa7d6ffde4f77c8fd6a9a59c1912718b1b0326d9c4d98e176fab"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-tree4096-driver.log",
+      "bytes": 181,
+      "sha256": "405bb87bfbd5189d7c54dc2b4ecaf1325f28e9afd1c693fd3f6532ebb1812574",
+      "uncompressed_sha256": "405bb87bfbd5189d7c54dc2b4ecaf1325f28e9afd1c693fd3f6532ebb1812574"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-tree4096.json",
+      "bytes": 3031,
+      "sha256": "8caa7d55df1301a9a64f742fcd26e3cf5a5684b69e0ee69b5c7bb56dfcc4c1f5",
+      "uncompressed_sha256": "8caa7d55df1301a9a64f742fcd26e3cf5a5684b69e0ee69b5c7bb56dfcc4c1f5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-tree4096.log",
+      "bytes": 7484,
+      "sha256": "4840bebe0a718b6f1eaa372232975943a12d0940b275c935f5c30d9bb9228885",
+      "uncompressed_sha256": "4840bebe0a718b6f1eaa372232975943a12d0940b275c935f5c30d9bb9228885"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-tree4096.npz",
+      "bytes": 419317,
+      "sha256": "a40949a7be6b00e2a7add574f9db0572312f30b55776456b90100ee1dac1a4fe",
+      "uncompressed_sha256": "a40949a7be6b00e2a7add574f9db0572312f30b55776456b90100ee1dac1a4fe"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse4096-comparison.json",
+      "bytes": 2910,
+      "sha256": "4c5028102d0336d4b3b5bf9718f6d60d1af742461a78a2ac263aa83594af3174",
+      "uncompressed_sha256": "4c5028102d0336d4b3b5bf9718f6d60d1af742461a78a2ac263aa83594af3174"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse4096-comparison.log",
+      "bytes": 964,
+      "sha256": "31cb92647207c8b02a9ae79ef91d870ebc5e79538d540a397476a42511e5ebaf",
+      "uncompressed_sha256": "31cb92647207c8b02a9ae79ef91d870ebc5e79538d540a397476a42511e5ebaf"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse4096.json",
+      "bytes": 2951,
+      "sha256": "acf7f73f41b2d1628646989bca81aa35d884cfeb18ab6a78f6a7036658421f5a",
+      "uncompressed_sha256": "acf7f73f41b2d1628646989bca81aa35d884cfeb18ab6a78f6a7036658421f5a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse4096.log",
+      "bytes": 7324,
+      "sha256": "b02f112ecf0f393996974055368420b0157584092e58b19002166651ad76de70",
+      "uncompressed_sha256": "b02f112ecf0f393996974055368420b0157584092e58b19002166651ad76de70"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse4096.npz",
+      "bytes": 419684,
+      "sha256": "04f761d5395390f222fcb7494a6e5da9dd604230287780e0c1318c895e8fee03",
+      "uncompressed_sha256": "04f761d5395390f222fcb7494a6e5da9dd604230287780e0c1318c895e8fee03"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/profile-large-reuse-native.py",
+      "bytes": 1540,
+      "sha256": "2cefbd4a9a28d469a4c4d4175e3f5cc1ca445f6f970ce51896c4fbb234aea13b",
+      "uncompressed_sha256": "2cefbd4a9a28d469a4c4d4175e3f5cc1ca445f6f970ce51896c4fbb234aea13b"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/profile-large-reuse.py",
+      "bytes": 3319,
+      "sha256": "d741873ac89df929492ef56f1ec6f44eb0df69f583c70b619edd6802529b5603",
+      "uncompressed_sha256": "d741873ac89df929492ef56f1ec6f44eb0df69f583c70b619edd6802529b5603"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/publish-large-reuse.py",
+      "bytes": 5352,
+      "sha256": "2cb0ef2ffe5803159c407b6205ae26b74579187bc90f8308bd43a1672a716b1e",
+      "uncompressed_sha256": "2cb0ef2ffe5803159c407b6205ae26b74579187bc90f8308bd43a1672a716b1e"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/run-large-reuse-audits.py",
+      "bytes": 2165,
+      "sha256": "065848c2667e8adfad1638469e35af1f70f7cb64ea1ab8478c6bd1d6e0767767",
+      "uncompressed_sha256": "065848c2667e8adfad1638469e35af1f70f7cb64ea1ab8478c6bd1d6e0767767"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/run-large-reuse-final-timings.py",
+      "bytes": 4043,
+      "sha256": "5caac5b02cf8088eb816136dfe26031c25d8fa5486d545717f65915410cbaeac",
+      "uncompressed_sha256": "5caac5b02cf8088eb816136dfe26031c25d8fa5486d545717f65915410cbaeac"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/run-large-reuse-isolated-audits.py",
+      "bytes": 3133,
+      "sha256": "256f229152153b758ee336d966909aa525949befc3882c866990f4074c4e7208",
+      "uncompressed_sha256": "256f229152153b758ee336d966909aa525949befc3882c866990f4074c4e7208"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/run-large-reuse-lifetime-controls.py",
+      "bytes": 3396,
+      "sha256": "43e1c80f46b6b4a75dd4d38b64a6402f17cf7afa5e98f0cef9851ff390c62fd2",
+      "uncompressed_sha256": "43e1c80f46b6b4a75dd4d38b64a6402f17cf7afa5e98f0cef9851ff390c62fd2"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/run-large-reuse-native-adoption.py",
+      "bytes": 1719,
+      "sha256": "1cb406f40b3487012324b82fab2ae2fb4f73c60322bbb91739335cc2b33002a9",
+      "uncompressed_sha256": "1cb406f40b3487012324b82fab2ae2fb4f73c60322bbb91739335cc2b33002a9"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/run-large-reuse-native.py",
+      "bytes": 1017,
+      "sha256": "71db9f1f311bcb3a13382bf3aa2b7c5d7a0ccc461f2dad9835c4378549d17bd4",
+      "uncompressed_sha256": "71db9f1f311bcb3a13382bf3aa2b7c5d7a0ccc461f2dad9835c4378549d17bd4"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/run-large-reuse-proof-pairs.py",
+      "bytes": 1978,
+      "sha256": "f386db8740904fe8bf75b3338311dff032e90c8e05f833acef4694618f2a5722",
+      "uncompressed_sha256": "f386db8740904fe8bf75b3338311dff032e90c8e05f833acef4694618f2a5722"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/run-large-reuse-proofs-initial.py",
+      "bytes": 987,
+      "sha256": "afab428917e7f84b25cc335f37bb6c9101a3f10a79a2f1f0d24f79033c0681d9",
+      "uncompressed_sha256": "afab428917e7f84b25cc335f37bb6c9101a3f10a79a2f1f0d24f79033c0681d9"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/run-large-reuse-proofs.py",
+      "bytes": 1100,
+      "sha256": "b485d735f07cb21b1fecc8bb2763ac9b4d686577f667d34478678c217086ac2f",
+      "uncompressed_sha256": "b485d735f07cb21b1fecc8bb2763ac9b4d686577f667d34478678c217086ac2f"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/run-large-reuse-tree.py",
+      "bytes": 948,
+      "sha256": "cb5b99d22c6e278ba304816e18d8cc2aeb017c9641b9a8a6eddadef520a12dd9",
+      "uncompressed_sha256": "cb5b99d22c6e278ba304816e18d8cc2aeb017c9641b9a8a6eddadef520a12dd9"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/run-large-reuse.py",
+      "bytes": 614,
+      "sha256": "5cb29ea8dba6425078b9373f9a81693e4bf074abb7927426f9d559dc3dd83b21",
+      "uncompressed_sha256": "5cb29ea8dba6425078b9373f9a81693e4bf074abb7927426f9d559dc3dd83b21"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/time-large-reuse-proofs.py",
+      "bytes": 1083,
+      "sha256": "d75eaa27b8495dc7f7aef6643d4b7d433920c2f80f4b99a7db1a23bfb644aa14",
+      "uncompressed_sha256": "d75eaa27b8495dc7f7aef6643d4b7d433920c2f80f4b99a7db1a23bfb644aa14"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/time-large-reuse-tree.py",
+      "bytes": 1071,
+      "sha256": "25ede2857c4e22cbe346fd7c2c3a2d3885b53873cba10df06567ebce489fe33f",
+      "uncompressed_sha256": "25ede2857c4e22cbe346fd7c2c3a2d3885b53873cba10df06567ebce489fe33f"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/seed_tree_queries.py",
+      "bytes": 2382,
+      "sha256": "1f5fd34e295fb5a426cea97a704e19ea68f3b0a6f27841fdd2c943c1b0d9a575",
+      "uncompressed_sha256": "1f5fd34e295fb5a426cea97a704e19ea68f3b0a6f27841fdd2c943c1b0d9a575"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/test-seed-tree-existing.py",
+      "bytes": 465,
+      "sha256": "a6df984e68d4cf569cabe3ab9d463e8061de027420af35b00d17edd73c9a2708",
+      "uncompressed_sha256": "a6df984e68d4cf569cabe3ab9d463e8061de027420af35b00d17edd73c9a2708"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/test_seed_tree_large.py",
+      "bytes": 2972,
+      "sha256": "86884c68ca64c33a8313a92cf20d7604b76e1281f00c877dd84aa4632e86d06e",
+      "uncompressed_sha256": "86884c68ca64c33a8313a92cf20d7604b76e1281f00c877dd84aa4632e86d06e"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/seed-tree-existing-tests.log",
+      "bytes": 618,
+      "sha256": "1620c660ed473cc836a30eca1813212799402733b39cf2bc76a17f835ac60d9d",
+      "uncompressed_sha256": "1620c660ed473cc836a30eca1813212799402733b39cf2bc76a17f835ac60d9d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/seed-tree-large-tests.log",
+      "bytes": 99,
+      "sha256": "c7da7ae3cf09cc8ea7d7ddbc56c84c2b154cead39a2e114d3c7a2f3e394b4645",
+      "uncompressed_sha256": "c7da7ae3cf09cc8ea7d7ddbc56c84c2b154cead39a2e114d3c7a2f3e394b4645"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-graded-control/boundary.off.gz",
+      "bytes": 139604,
+      "sha256": "f26fa120ec8b8648d37a1ed4a0587cacfdc4b75d2906ed80cdb1cfd2035c0a5a",
+      "uncompressed_sha256": "1c39cd2f0da10348f2235cb180d5835f21d55be0b16ec5243d074979e0081762"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-graded-control/mesh.npz",
+      "bytes": 1613031,
+      "sha256": "cabec427d99ff9020dd3c223842289dce55af104a084d03794a625e9d97f1521",
+      "uncompressed_sha256": "cabec427d99ff9020dd3c223842289dce55af104a084d03794a625e9d97f1521"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-graded-control/mesh.vtu.gz",
+      "bytes": 428022,
+      "sha256": "c5fbf8c2abb16b05c01cba39a6e52a7b0984d7307ad521117aaaa17fd1fd0a62",
+      "uncompressed_sha256": "eb8233a3fe30b3d632e1040793aa194e8b52be48fc4b1f0b10de0048d2e2212d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-graded-control/result.json",
+      "bytes": 3749,
+      "sha256": "d2ba6cca268c4c297d2d6ec547c5f98e893d28a497512159d2b7bfb529cb2a9a",
+      "uncompressed_sha256": "d2ba6cca268c4c297d2d6ec547c5f98e893d28a497512159d2b7bfb529cb2a9a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-graded-control.log",
+      "bytes": 8180,
+      "sha256": "004181b51270ceef69f73b30cf8b816023621354e0fabd59191f90851d238d5f",
+      "uncompressed_sha256": "004181b51270ceef69f73b30cf8b816023621354e0fabd59191f90851d238d5f"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-graded-proofs/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59",
+      "uncompressed_sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-graded-proofs/boundary.off.gz",
+      "bytes": 139522,
+      "sha256": "06a6206a77f652e67c066ab02b6a515a63df8d26be420e25e2d971a37ccd9add",
+      "uncompressed_sha256": "bb52c4a02971daaa945496d3aade6822678432cfc8bc789b2b7d46769b34b186"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-graded-proofs/mesh.npz",
+      "bytes": 1612256,
+      "sha256": "cae9b2e798a162989d666c952a6c5045127227ff81180fc703c99f0fde9c5c67",
+      "uncompressed_sha256": "cae9b2e798a162989d666c952a6c5045127227ff81180fc703c99f0fde9c5c67"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-graded-proofs/mesh.vtu.gz",
+      "bytes": 427851,
+      "sha256": "f2f34976c6abc5661cfc5a6e0ee0f34289db9e9584bd8a82bed29371447491f8",
+      "uncompressed_sha256": "afc080cdd08475be1278bc915ec2a845221b268b929fa47901889db1728b1cad"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-graded-proofs/result.json",
+      "bytes": 3743,
+      "sha256": "0c9316cb8e07c0d1d9c9f6edd4b64ee8b8d3de9466a2648dd6f5746cf5de76bc",
+      "uncompressed_sha256": "0c9316cb8e07c0d1d9c9f6edd4b64ee8b8d3de9466a2648dd6f5746cf5de76bc"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-graded-proofs.log",
+      "bytes": 8174,
+      "sha256": "22d5eebff63f09630250d00b13c62637b19ef49b3b7eb1af95c09ef1240459e2",
+      "uncompressed_sha256": "22d5eebff63f09630250d00b13c62637b19ef49b3b7eb1af95c09ef1240459e2"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-uniform-control/boundary.off.gz",
+      "bytes": 140951,
+      "sha256": "1c9444d99a66fe0c24e94e268faca3285408d1ed189ff0c8ad91c54d54970818",
+      "uncompressed_sha256": "c87c6ce51ab8f4d768a0462f13b4c6805b267bcfafa6f7b199984ef063a9d45a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-uniform-control/mesh.npz",
+      "bytes": 1611366,
+      "sha256": "d6ae459b5ddf728b6b6ffe5c642a0bc6f3c479821009a123ec7b201d84917b4d",
+      "uncompressed_sha256": "d6ae459b5ddf728b6b6ffe5c642a0bc6f3c479821009a123ec7b201d84917b4d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-uniform-control/mesh.vtu.gz",
+      "bytes": 423614,
+      "sha256": "5f5eb0f33cc97fd29a1337eac4ccd6ba5b2b3aba426e0538447055c31ff9af0f",
+      "uncompressed_sha256": "e0046d07374cfa106a7791367b6a178c4baaa9dd4ea11ab171ad178c7fbdd655"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-uniform-control/result.json",
+      "bytes": 3733,
+      "sha256": "47bacae18562c2c7e14ac9cf0b65d99646b7f474fd87ef4f81a1f6672d1d255e",
+      "uncompressed_sha256": "47bacae18562c2c7e14ac9cf0b65d99646b7f474fd87ef4f81a1f6672d1d255e"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-uniform-control.log",
+      "bytes": 8078,
+      "sha256": "54b5d6ca2d425db513831ff7ea9ce8fb5ba55425e079a3f2b43ab6a79b55e0be",
+      "uncompressed_sha256": "54b5d6ca2d425db513831ff7ea9ce8fb5ba55425e079a3f2b43ab6a79b55e0be"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-uniform-proofs/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265",
+      "uncompressed_sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-uniform-proofs/boundary.off.gz",
+      "bytes": 140778,
+      "sha256": "dba5f9fdedbfb577287ad97546aa418fdb661c0798d5c6b2a04f7ab7a0cfa7b3",
+      "uncompressed_sha256": "01c843834774ad8ea3526e06e4e9af65b767556ac71204216ae420539c8537a5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-uniform-proofs/mesh.npz",
+      "bytes": 1609846,
+      "sha256": "b074411efcf6fbd1a4c289ace422291ab5ea8e066ab6b49082cd85011d16ef98",
+      "uncompressed_sha256": "b074411efcf6fbd1a4c289ace422291ab5ea8e066ab6b49082cd85011d16ef98"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-uniform-proofs/mesh.vtu.gz",
+      "bytes": 423050,
+      "sha256": "385e64a3e5826a91c28328a56bdf5d4ce3636ace6b4fb48851e7f86d1b6c9134",
+      "uncompressed_sha256": "e633b8e81e9617932e6c5a34023b40473f46c3ab748cbe06eff7957e556d5c96"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-uniform-proofs/result.json",
+      "bytes": 3729,
+      "sha256": "4193ca1ce70f15d05408ce1945607274ca43667d1566ef4089a8fa56e347202a",
+      "uncompressed_sha256": "4193ca1ce70f15d05408ce1945607274ca43667d1566ef4089a8fa56e347202a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/armadillo-uniform-proofs.log",
+      "bytes": 8074,
+      "sha256": "45ee345f9d11fe6a390f6def1bf464aa8b89bbe78295bda2e64143b725fc3539",
+      "uncompressed_sha256": "45ee345f9d11fe6a390f6def1bf464aa8b89bbe78295bda2e64143b725fc3539"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/commands.json",
+      "bytes": 5429,
+      "sha256": "79120bd62c3de4ba45c39c38222e4cf8554f3a1b94f8b272aee61600ef7113b6",
+      "uncompressed_sha256": "79120bd62c3de4ba45c39c38222e4cf8554f3a1b94f8b272aee61600ef7113b6"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/graded-torus4096-control/boundary.off.gz",
+      "bytes": 133362,
+      "sha256": "471ccf963212dea0ded189d2b2d6bb0807e18b9072fcad15dd7bfb7a28adab4e",
+      "uncompressed_sha256": "eb1c52e887b81c0a816a0083436244b35ab839824ff13e3c5673db9ac5666184"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/graded-torus4096-control/mesh.npz",
+      "bytes": 572912,
+      "sha256": "041646eebbe0ababc5b751ce54ed4d2a4cfb385929ac0cf788facabfe2bacb29",
+      "uncompressed_sha256": "041646eebbe0ababc5b751ce54ed4d2a4cfb385929ac0cf788facabfe2bacb29"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/graded-torus4096-control/mesh.vtu.gz",
+      "bytes": 453114,
+      "sha256": "88cc28eadae140c6ffd8f3d7831513edd40746d2d8dd41914c6fed54e956c0e1",
+      "uncompressed_sha256": "e10adb187c02ebda8aaaf09f2eb2378fe2deddb28c974245f64fb07f6f1a9607"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/graded-torus4096-control/result.json",
+      "bytes": 3660,
+      "sha256": "9657cf183513b10347143234f1c3086dbd990fd6b7051240cae4009e71ed42d9",
+      "uncompressed_sha256": "9657cf183513b10347143234f1c3086dbd990fd6b7051240cae4009e71ed42d9"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/graded-torus4096-control.log",
+      "bytes": 8091,
+      "sha256": "2855ccd11a01c7df2bc16476839987cb2f22f616e09bcab3946bcbde3ac36f54",
+      "uncompressed_sha256": "2855ccd11a01c7df2bc16476839987cb2f22f616e09bcab3946bcbde3ac36f54"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/graded-torus4096-proofs/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0",
+      "uncompressed_sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/graded-torus4096-proofs/boundary.off.gz",
+      "bytes": 133284,
+      "sha256": "3e4257629e57121c24b083e2eaac202d3e94acdf36b72e775c789f8e8213576c",
+      "uncompressed_sha256": "abbb20f61881523c3dfcab63cf91061cff5d39c442eafd745d89092cd6cf988b"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/graded-torus4096-proofs/mesh.npz",
+      "bytes": 572449,
+      "sha256": "86724d040825b5c5fe1d636d1ddb54824d30007102ada9e62aabea0644b23114",
+      "uncompressed_sha256": "86724d040825b5c5fe1d636d1ddb54824d30007102ada9e62aabea0644b23114"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/graded-torus4096-proofs/mesh.vtu.gz",
+      "bytes": 453361,
+      "sha256": "07133908d823dc5b08307d2e69b274b3563ec7bd4c98f4bdd551355ac465b161",
+      "uncompressed_sha256": "a89a5787e4fced033b98a88f3c9eaa610f042e2223d32d50847beb9a5f9fe7dc"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/graded-torus4096-proofs/result.json",
+      "bytes": 3652,
+      "sha256": "5fd8f7cba1f8054f1f35b03219e24d56c1b267adbc936e0b7601cb3d85d559c8",
+      "uncompressed_sha256": "5fd8f7cba1f8054f1f35b03219e24d56c1b267adbc936e0b7601cb3d85d559c8"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-proof-pairs/graded-torus4096-proofs.log",
+      "bytes": 8083,
+      "sha256": "9f201cfd3c265a072c5843bb8e7496cfd14eddc53c952ef7dca1118d9421dff6",
+      "uncompressed_sha256": "9f201cfd3c265a072c5843bb8e7496cfd14eddc53c952ef7dca1118d9421dff6"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59",
+      "uncompressed_sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-graded-after/boundary.off.gz",
+      "bytes": 139462,
+      "sha256": "83208e5d443a9e40c39dac32a79a3f9b612141230de1b0c51dbabc36c4ac4257",
+      "uncompressed_sha256": "d3bede4f82de8a0cc0e8ddba0d5c0e9c92d6e77d3c3100e4cacafe9b3e3c8fee"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-graded-after/mesh.npz",
+      "bytes": 1612539,
+      "sha256": "1207d2858cd3f3c2e27efe54536264cc41c72ef6a183198b9c22e01cec65aa7c",
+      "uncompressed_sha256": "1207d2858cd3f3c2e27efe54536264cc41c72ef6a183198b9c22e01cec65aa7c"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-graded-after/mesh.vtu.gz",
+      "bytes": 428063,
+      "sha256": "6d55c4aa8f265a7a308ebac5a80ad284ba770110726e6f20c105e028e88ded11",
+      "uncompressed_sha256": "69d2feba26c71465f06a6b38ad7be05d43ab4cae74f5ecdd6be367113f686f3c"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-graded-after/result.json",
+      "bytes": 3738,
+      "sha256": "13769bf8e4a75098f2b47b518b1f9da82e5a87dd19fbaa0329ce2dab25f99c04",
+      "uncompressed_sha256": "13769bf8e4a75098f2b47b518b1f9da82e5a87dd19fbaa0329ce2dab25f99c04"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-graded-after.log",
+      "bytes": 8169,
+      "sha256": "52603b37e78d4eb1e7c348bcb61453c7e3a8563e936d709133da3cde6fcbfb0a",
+      "uncompressed_sha256": "52603b37e78d4eb1e7c348bcb61453c7e3a8563e936d709133da3cde6fcbfb0a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265",
+      "uncompressed_sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-uniform-after/boundary.off.gz",
+      "bytes": 140755,
+      "sha256": "067b1d8a3c696c1be155cea6fa9d9a42be87d6a49a8a16ad40e1c5219971a413",
+      "uncompressed_sha256": "be62b7dc8991bc2f4ef22ff3c621ec96841b3baa9a3fb488abe2c3325489e6d1"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-uniform-after/mesh.npz",
+      "bytes": 1610441,
+      "sha256": "c542669a68af4f2f703bf52ac074a7befc77aa0c94f60cf1f7572b3271b6f7de",
+      "uncompressed_sha256": "c542669a68af4f2f703bf52ac074a7befc77aa0c94f60cf1f7572b3271b6f7de"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-uniform-after/mesh.vtu.gz",
+      "bytes": 423320,
+      "sha256": "b51405617cf2aa6ba95ca18c3c634368fce6f3700221e8e8fd2cf73e98f92d56",
+      "uncompressed_sha256": "111bb710b7cc06be1df2891ebcc7bddd9f7ed8b9bc1e99c01383ccc6ac706bc9"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-uniform-after/result.json",
+      "bytes": 3722,
+      "sha256": "574e5e2015b4e9d1a14d0a416ef479117c3e9c4bcc7b492aefee84efd08fc677",
+      "uncompressed_sha256": "574e5e2015b4e9d1a14d0a416ef479117c3e9c4bcc7b492aefee84efd08fc677"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/armadillo-uniform-after.log",
+      "bytes": 8067,
+      "sha256": "a2c3e326ca787dca52693202f8e1a8b22332e1a1c65699661cacf7e759532377",
+      "uncompressed_sha256": "a2c3e326ca787dca52693202f8e1a8b22332e1a1c65699661cacf7e759532377"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/commands.json",
+      "bytes": 23635,
+      "sha256": "dc809a9e2658c8bf604bc5dc4ccda1bafe249d80c82e27c06f777cda49f97c77",
+      "uncompressed_sha256": "dc809a9e2658c8bf604bc5dc4ccda1bafe249d80c82e27c06f777cda49f97c77"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay-fitted-hand-after.json",
+      "bytes": 2834,
+      "sha256": "331e3df0ea9c9c7dc1c10705d0a4c2afbe6c1e0758733f45a0f5f59cfe3d2fcb",
+      "uncompressed_sha256": "331e3df0ea9c9c7dc1c10705d0a4c2afbe6c1e0758733f45a0f5f59cfe3d2fcb"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay-fitted-hand-after.log",
+      "bytes": 5124,
+      "sha256": "6bdc8d86d8ee98a47d39580dcbc25403490c88f53bab0a75ee7a6ae2585f71bc",
+      "uncompressed_sha256": "6bdc8d86d8ee98a47d39580dcbc25403490c88f53bab0a75ee7a6ae2585f71bc"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay-fitted-hand-before.json",
+      "bytes": 2840,
+      "sha256": "2f93f3338e7567304e01d5713e7f3fc7bfa41767c44b8bc9ad2a3b411c37913f",
+      "uncompressed_sha256": "2f93f3338e7567304e01d5713e7f3fc7bfa41767c44b8bc9ad2a3b411c37913f"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay-fitted-hand-before.log",
+      "bytes": 5130,
+      "sha256": "848e1edb1c72dc7dda6175fc9292ebe60adbfb9cf8a308f499634b13ab2ae315",
+      "uncompressed_sha256": "848e1edb1c72dc7dda6175fc9292ebe60adbfb9cf8a308f499634b13ab2ae315"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay-grid-after.json",
+      "bytes": 2837,
+      "sha256": "86691389cacbd30a9d8e4ba74af04130fb87295e314eab804a661e6f2e6622bc",
+      "uncompressed_sha256": "86691389cacbd30a9d8e4ba74af04130fb87295e314eab804a661e6f2e6622bc"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay-grid-after.log",
+      "bytes": 4870,
+      "sha256": "6efb7b59042cf5d3b5c1c54bbeb57936f8083a2e771eb6196c734ff0168142be",
+      "uncompressed_sha256": "6efb7b59042cf5d3b5c1c54bbeb57936f8083a2e771eb6196c734ff0168142be"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay-grid-before.json",
+      "bytes": 2834,
+      "sha256": "e6d9c146153ab39faa7c1be87f543bd3ba0cf3ec2d903d6d2b263a6ac4a15f10",
+      "uncompressed_sha256": "e6d9c146153ab39faa7c1be87f543bd3ba0cf3ec2d903d6d2b263a6ac4a15f10"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay-grid-before.log",
+      "bytes": 4867,
+      "sha256": "2675e8b16cc1bd7a36373086777df10628d33fd53862d7909a48f51480fe8388",
+      "uncompressed_sha256": "2675e8b16cc1bd7a36373086777df10628d33fd53862d7909a48f51480fe8388"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay1000-after.json",
+      "bytes": 2810,
+      "sha256": "fb0059d7ac6e37407c2e1d0e87df635402729deb639e8688209f8ef4f8590e56",
+      "uncompressed_sha256": "fb0059d7ac6e37407c2e1d0e87df635402729deb639e8688209f8ef4f8590e56"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay1000-after.log",
+      "bytes": 5100,
+      "sha256": "4b9dc615b0672ec94f91bd1a9df322cdfd28b0849ea4dc38c57492013aee276d",
+      "uncompressed_sha256": "4b9dc615b0672ec94f91bd1a9df322cdfd28b0849ea4dc38c57492013aee276d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay1000-before.json",
+      "bytes": 2826,
+      "sha256": "a3b6310e8b1bb80e19a6014a6243032ac6b280f7e84bd2542a3aaa2320b72b4a",
+      "uncompressed_sha256": "a3b6310e8b1bb80e19a6014a6243032ac6b280f7e84bd2542a3aaa2320b72b4a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay1000-before.log",
+      "bytes": 5116,
+      "sha256": "f010bb7686f1ab74fbda5499886918a682142d2595ebc38d61b9c2af756663e4",
+      "uncompressed_sha256": "f010bb7686f1ab74fbda5499886918a682142d2595ebc38d61b9c2af756663e4"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay100000-after.json",
+      "bytes": 2822,
+      "sha256": "0a7e99e7380e5d366d8e2097d25ee84e912897a87990ffcff4f372341e3cab5d",
+      "uncompressed_sha256": "0a7e99e7380e5d366d8e2097d25ee84e912897a87990ffcff4f372341e3cab5d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay100000-after.log",
+      "bytes": 5046,
+      "sha256": "6349b4aa74cb24a3054c27a1e469784ebddb135d70f1ac7191082aa7960bc81a",
+      "uncompressed_sha256": "6349b4aa74cb24a3054c27a1e469784ebddb135d70f1ac7191082aa7960bc81a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay100000-before.json",
+      "bytes": 2834,
+      "sha256": "3cd4342dcbbd06b18ba503bba3d02cb51b22ff644281557500a9699fbd3ba4cf",
+      "uncompressed_sha256": "3cd4342dcbbd06b18ba503bba3d02cb51b22ff644281557500a9699fbd3ba4cf"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/delaunay100000-before.log",
+      "bytes": 5058,
+      "sha256": "e9d676b68187a8b1564a1a964273b0bb5957492388a4c357afe23da247a6f659",
+      "uncompressed_sha256": "e9d676b68187a8b1564a1a964273b0bb5957492388a4c357afe23da247a6f659"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/diagram100000-after.json",
+      "bytes": 2566,
+      "sha256": "cfdd854ff53afa204487d844b9a976122309f6be88ed8493803a2b841cdd4289",
+      "uncompressed_sha256": "cfdd854ff53afa204487d844b9a976122309f6be88ed8493803a2b841cdd4289"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/diagram100000-after.log",
+      "bytes": 3431,
+      "sha256": "f81cbaed72faae74bf6ecc747d3fa30f1b13c2dd1f22605134e5eb5932434bf5",
+      "uncompressed_sha256": "f81cbaed72faae74bf6ecc747d3fa30f1b13c2dd1f22605134e5eb5932434bf5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/diagram100000-before.json",
+      "bytes": 2571,
+      "sha256": "af00def552d945da98c9421bd361614c7688f3dbf885e4c92bd80a1bda648fa1",
+      "uncompressed_sha256": "af00def552d945da98c9421bd361614c7688f3dbf885e4c92bd80a1bda648fa1"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/diagram100000-before.log",
+      "bytes": 3436,
+      "sha256": "1fccce5aab55508fbc80af2be9b29c75b3eb1d41d4c7ddb69c0a2b43c664be5f",
+      "uncompressed_sha256": "1fccce5aab55508fbc80af2be9b29c75b3eb1d41d4c7ddb69c0a2b43c664be5f"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/graded-torus4096-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0",
+      "uncompressed_sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/graded-torus4096-after/boundary.off.gz",
+      "bytes": 133266,
+      "sha256": "8cd99c26b8de4af5382a809213d34631c42c068ad92a4a53f1814a9ede5e1c95",
+      "uncompressed_sha256": "0424a05d3af67a5a19cb1ab9f28ee7392680fb5d2c3b6fd0d90f85580619fb56"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/graded-torus4096-after/mesh.npz",
+      "bytes": 571711,
+      "sha256": "e8e6f69533c2f5f994ed61b75506c26d472331df3285fc55aa159ea6b8c578a6",
+      "uncompressed_sha256": "e8e6f69533c2f5f994ed61b75506c26d472331df3285fc55aa159ea6b8c578a6"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/graded-torus4096-after/mesh.vtu.gz",
+      "bytes": 453184,
+      "sha256": "4c54fbfb3051c77e477b7f59f25d99a81764a57b5e138cf58db477f452bec508",
+      "uncompressed_sha256": "68af514c94af07033e24589e2c5b5df5af3572e4501a5fbdacb66c155460078d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/graded-torus4096-after/result.json",
+      "bytes": 3650,
+      "sha256": "585ed5ead3ead3302176fd1621317dfeb8c2fcf6153b50dd46d77471247128db",
+      "uncompressed_sha256": "585ed5ead3ead3302176fd1621317dfeb8c2fcf6153b50dd46d77471247128db"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/graded-torus4096-after.log",
+      "bytes": 8081,
+      "sha256": "4c591b8df4e05089bf92585a6d010b628c1369b1dedcb7bb3cf1daa5689cb4c6",
+      "uncompressed_sha256": "4c591b8df4e05089bf92585a6d010b628c1369b1dedcb7bb3cf1daa5689cb4c6"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target1000-after.json",
+      "bytes": 3059,
+      "sha256": "02a50fee12f574c92b43abdd0260464417f03b86becf36a231ac08598e5b8d8c",
+      "uncompressed_sha256": "02a50fee12f574c92b43abdd0260464417f03b86becf36a231ac08598e5b8d8c"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target1000-after.log",
+      "bytes": 7432,
+      "sha256": "b67214db7c1ce35956f4f9dfaa1cf24111dcc4857390223b4c3454458a62b20a",
+      "uncompressed_sha256": "b67214db7c1ce35956f4f9dfaa1cf24111dcc4857390223b4c3454458a62b20a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target1000-after.npz",
+      "bytes": 91506,
+      "sha256": "41795b7edea8f73f71db68f31c0627ba80dad8fa2aa9a02cbbb1b6b80a68a4e6",
+      "uncompressed_sha256": "41795b7edea8f73f71db68f31c0627ba80dad8fa2aa9a02cbbb1b6b80a68a4e6"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target1000-before.json",
+      "bytes": 3084,
+      "sha256": "9fcaf5f625948a6fc6c770dfdd72b588d1ad92185396e0fb7ae7c9b48066678b",
+      "uncompressed_sha256": "9fcaf5f625948a6fc6c770dfdd72b588d1ad92185396e0fb7ae7c9b48066678b"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target1000-before.log",
+      "bytes": 7457,
+      "sha256": "02598bc63313a4ab62ea8eb39fe4ae9f2743985245d347d3185b3c3a163f9c4e",
+      "uncompressed_sha256": "02598bc63313a4ab62ea8eb39fe4ae9f2743985245d347d3185b3c3a163f9c4e"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target1000-before.npz",
+      "bytes": 91600,
+      "sha256": "930b9ba986ac3f67fddce58d3ccab6b14e76a3c36e4b7eecf66ad08bb11d60de",
+      "uncompressed_sha256": "930b9ba986ac3f67fddce58d3ccab6b14e76a3c36e4b7eecf66ad08bb11d60de"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target2048-after.json",
+      "bytes": 3083,
+      "sha256": "09b5bf541188a16c149b66b2e39a84e29972ad2fe48827c3646d5d9c9a22f649",
+      "uncompressed_sha256": "09b5bf541188a16c149b66b2e39a84e29972ad2fe48827c3646d5d9c9a22f649"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target2048-after.log",
+      "bytes": 7456,
+      "sha256": "46f4ffac90a3caf55d2bbe6f1009dcbaa420a213029f5ba40a3ba49e957c94ee",
+      "uncompressed_sha256": "46f4ffac90a3caf55d2bbe6f1009dcbaa420a213029f5ba40a3ba49e957c94ee"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target2048-after.npz",
+      "bytes": 193419,
+      "sha256": "c9fb63023c3b3635967e1b41b70ea21fe06d99348e471b6dbe02d6bb012abd5b",
+      "uncompressed_sha256": "c9fb63023c3b3635967e1b41b70ea21fe06d99348e471b6dbe02d6bb012abd5b"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target2048-before.json",
+      "bytes": 3087,
+      "sha256": "045fb49512d6217e568cb4baf2ee861814bdf03541a326e8f590e7b9e397ab6d",
+      "uncompressed_sha256": "045fb49512d6217e568cb4baf2ee861814bdf03541a326e8f590e7b9e397ab6d"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target2048-before.log",
+      "bytes": 7460,
+      "sha256": "5afecad636be2de2b7debb966f5ec10cfccd4458f28822d6855a5ddfd844a3ea",
+      "uncompressed_sha256": "5afecad636be2de2b7debb966f5ec10cfccd4458f28822d6855a5ddfd844a3ea"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved4096-target2048-before.npz",
+      "bytes": 193678,
+      "sha256": "7c85a563ef41117b9b6f1dc0ad6d046c76ad509c36b71d312b40d923acde8dbe",
+      "uncompressed_sha256": "7c85a563ef41117b9b6f1dc0ad6d046c76ad509c36b71d312b40d923acde8dbe"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved8192-target4096-after.json",
+      "bytes": 3087,
+      "sha256": "034f0540810c008df37c0ec76bb661679d4343f9aa0eb0fc7cad7500731112bf",
+      "uncompressed_sha256": "034f0540810c008df37c0ec76bb661679d4343f9aa0eb0fc7cad7500731112bf"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved8192-target4096-after.log",
+      "bytes": 7460,
+      "sha256": "1d8e6b659aa4eaa45a02e4965402bafefda02bee99727ff5cf5d43b2a4f27558",
+      "uncompressed_sha256": "1d8e6b659aa4eaa45a02e4965402bafefda02bee99727ff5cf5d43b2a4f27558"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved8192-target4096-after.npz",
+      "bytes": 419059,
+      "sha256": "911f94ea9833d8b247273f1d17721d59c152722e9e9d213b4e20d1678e89ddf7",
+      "uncompressed_sha256": "911f94ea9833d8b247273f1d17721d59c152722e9e9d213b4e20d1678e89ddf7"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved8192-target4096-before.json",
+      "bytes": 3088,
+      "sha256": "4d20b46ef7fbe40087d54eda35d193ac566b0d2fb7ba33253db4fc0d09402791",
+      "uncompressed_sha256": "4d20b46ef7fbe40087d54eda35d193ac566b0d2fb7ba33253db4fc0d09402791"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved8192-target4096-before.log",
+      "bytes": 7461,
+      "sha256": "f06d88d5ddc777c445f975ac523d9c1e4738fb19f464ce75b54486f0fe3c4f9b",
+      "uncompressed_sha256": "f06d88d5ddc777c445f975ac523d9c1e4738fb19f464ce75b54486f0fe3c4f9b"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/reserved8192-target4096-before.npz",
+      "bytes": 419803,
+      "sha256": "3a4c8ee83f05423585f2fd00759e9fbc2a59947fd2c3e0dca9df695709485086",
+      "uncompressed_sha256": "3a4c8ee83f05423585f2fd00759e9fbc2a59947fd2c3e0dca9df695709485086"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus1000-after.json",
+      "bytes": 2919,
+      "sha256": "6231e4a809465c44b84846c61a8e75cc45d029ae3d76f9f2d5d8424720c9a5a4",
+      "uncompressed_sha256": "6231e4a809465c44b84846c61a8e75cc45d029ae3d76f9f2d5d8424720c9a5a4"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus1000-after.log",
+      "bytes": 7262,
+      "sha256": "052a8cbd44607a9c4d10ad943c3bb7055031091a6ddba1db34300d458a6486c8",
+      "uncompressed_sha256": "052a8cbd44607a9c4d10ad943c3bb7055031091a6ddba1db34300d458a6486c8"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus1000-after.npz",
+      "bytes": 91373,
+      "sha256": "d2145db51cc699206448a38e754fbf2c73b9bf8bbacca0cc8b642fdbbcd99ffb",
+      "uncompressed_sha256": "d2145db51cc699206448a38e754fbf2c73b9bf8bbacca0cc8b642fdbbcd99ffb"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus1000-before.json",
+      "bytes": 2926,
+      "sha256": "a1daca31fff3d5559d2ce8c9ca38f6ddcc56dbd59487ed1bf8c7900d07c097ea",
+      "uncompressed_sha256": "a1daca31fff3d5559d2ce8c9ca38f6ddcc56dbd59487ed1bf8c7900d07c097ea"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus1000-before.log",
+      "bytes": 7269,
+      "sha256": "aae243e59023b58c4e1cc9a5100618d2bc1d152702b9ff256a840922cb7ff4d4",
+      "uncompressed_sha256": "aae243e59023b58c4e1cc9a5100618d2bc1d152702b9ff256a840922cb7ff4d4"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus1000-before.npz",
+      "bytes": 91374,
+      "sha256": "a6a921ae7f821fac31edc6d4895dbe8cd709cb093b86e608eae38cbaead2da1f",
+      "uncompressed_sha256": "a6a921ae7f821fac31edc6d4895dbe8cd709cb093b86e608eae38cbaead2da1f"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus2050-after.json",
+      "bytes": 3054,
+      "sha256": "b15e5feffaf5b8b86721de0048cf11444b23f7eb3dc8f900fd3e17989c34c356",
+      "uncompressed_sha256": "b15e5feffaf5b8b86721de0048cf11444b23f7eb3dc8f900fd3e17989c34c356"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus2050-after.log",
+      "bytes": 7427,
+      "sha256": "a2e1c0c2f92887def91a32f3538f832f1c79e8dac7669a6aaf46659da89a9ea7",
+      "uncompressed_sha256": "a2e1c0c2f92887def91a32f3538f832f1c79e8dac7669a6aaf46659da89a9ea7"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus2050-after.npz",
+      "bytes": 193865,
+      "sha256": "1d68114c00f74faee7f67ab2d35999213da3ada5c7ae266b674b3d53d8a6c117",
+      "uncompressed_sha256": "1d68114c00f74faee7f67ab2d35999213da3ada5c7ae266b674b3d53d8a6c117"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus2050-before.json",
+      "bytes": 3045,
+      "sha256": "5cf681134b2b3f09a59554be5b58c9405ecdb3349d06d61ec641c35ef6aa61f3",
+      "uncompressed_sha256": "5cf681134b2b3f09a59554be5b58c9405ecdb3349d06d61ec641c35ef6aa61f3"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus2050-before.log",
+      "bytes": 7418,
+      "sha256": "aaf4f52d59834ee0e87616547dcbbfcb7c3df377522194deac6371a1624058e1",
+      "uncompressed_sha256": "aaf4f52d59834ee0e87616547dcbbfcb7c3df377522194deac6371a1624058e1"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus2050-before.npz",
+      "bytes": 194345,
+      "sha256": "c06d14d53be1da7ce981e8f1d325993a53d3b4fe23a7dbd09cf173b096c1e8f8",
+      "uncompressed_sha256": "c06d14d53be1da7ce981e8f1d325993a53d3b4fe23a7dbd09cf173b096c1e8f8"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus3072-after.json",
+      "bytes": 3059,
+      "sha256": "07ef00f888725bbe0dbb8659e059781b99ada902744070b4ab0850204b85dd23",
+      "uncompressed_sha256": "07ef00f888725bbe0dbb8659e059781b99ada902744070b4ab0850204b85dd23"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus3072-after.log",
+      "bytes": 7432,
+      "sha256": "8600b05f930dec8057d6d3b442c813fd2690d04a8606ded5dd65426c328a565c",
+      "uncompressed_sha256": "8600b05f930dec8057d6d3b442c813fd2690d04a8606ded5dd65426c328a565c"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus3072-after.npz",
+      "bytes": 302621,
+      "sha256": "07eb6cd701692204015e091f204130ff469097ecf642d543273969c2f80f0ec2",
+      "uncompressed_sha256": "07eb6cd701692204015e091f204130ff469097ecf642d543273969c2f80f0ec2"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus3072-before.json",
+      "bytes": 3057,
+      "sha256": "5e0cfa3ef593d868abf86be2f73ce5a226611c992e1654b937865ce0238e3ca6",
+      "uncompressed_sha256": "5e0cfa3ef593d868abf86be2f73ce5a226611c992e1654b937865ce0238e3ca6"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus3072-before.log",
+      "bytes": 7430,
+      "sha256": "d2bd65eeeeb2f28499a3d687044abac4378e82df7a9ae70049ffa1b7dc729142",
+      "uncompressed_sha256": "d2bd65eeeeb2f28499a3d687044abac4378e82df7a9ae70049ffa1b7dc729142"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus3072-before.npz",
+      "bytes": 302844,
+      "sha256": "2c08bc202c6600f1324a2ed6b2c1295eace0b845c951717427a7a45711e4cee0",
+      "uncompressed_sha256": "2c08bc202c6600f1324a2ed6b2c1295eace0b845c951717427a7a45711e4cee0"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus4096-after.json",
+      "bytes": 3060,
+      "sha256": "68002061a6185e791d70e2730148641231e43cce133bde4c4e2c76a0f7ac51c8",
+      "uncompressed_sha256": "68002061a6185e791d70e2730148641231e43cce133bde4c4e2c76a0f7ac51c8"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus4096-after.log",
+      "bytes": 7433,
+      "sha256": "ff2982dfbea1d13e3028f04b45654577cfa8e9e56cc4fda18f6e6d89537073a5",
+      "uncompressed_sha256": "ff2982dfbea1d13e3028f04b45654577cfa8e9e56cc4fda18f6e6d89537073a5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-final/torus4096-after.npz",
+      "bytes": 419566,
+      "sha256": "21ee6c01bb04fe1424a923dd4c3763dfd21e297ca2cd8c1f5a235c5875a112e6",
+      "uncompressed_sha256": "21ee6c01bb04fe1424a923dd4c3763dfd21e297ca2cd8c1f5a235c5875a112e6"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/publish-large-reuse-initial.py",
+      "bytes": 5322,
+      "sha256": "241d0f1a81aaf338d5946f753fbc72617168bcb69e762768f33c051ac5a3d9d1",
+      "uncompressed_sha256": "241d0f1a81aaf338d5946f753fbc72617168bcb69e762768f33c051ac5a3d9d1"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-verified-duplicate-cleanup.json",
+      "bytes": 10035,
+      "sha256": "3e94d72501ab1ffcec9fdcf03dafc972982c55c746ce30886fe3124bb5d6b0c7",
+      "uncompressed_sha256": "3e94d72501ab1ffcec9fdcf03dafc972982c55c746ce30886fe3124bb5d6b0c7"
+    }
+  ],
+  "publication_validation": "Manifest rechecked after redirected stdout closed; live stdout excluded by the corrected publisher. Original executing publisher retained. Raw trace/text and input duplicates removed only after exact persistent-copy verification; no source/history/unique data removed."
+}

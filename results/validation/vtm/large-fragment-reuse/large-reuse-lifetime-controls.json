@@ -1,0 +1,423 @@
+[
+  {
+    "name": "radix4096-conditional-all",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.radix_capture",
+      "--disable-mempool",
+      "--stack-bytes",
+      "131072",
+      "--n",
+      "4096",
+      "--depth",
+      "1",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-radix4096-conditional-all.dot"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 99,
+    "wall_seconds": 1.467587947845459,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0,
+      99
+    ]
+  },
+  {
+    "name": "radix4096-top-all",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.radix_capture",
+      "--disable-mempool",
+      "--stack-bytes",
+      "131072",
+      "--n",
+      "4096",
+      "--depth",
+      "0",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-radix4096-top-all.dot"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 0,
+    "wall_seconds": 1.016951560974121,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0
+    ]
+  },
+  {
+    "name": "radix4096-conditional-normal",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.radix_capture",
+      "--disable-mempool",
+      "--stack-bytes",
+      "131072",
+      "--n",
+      "4096",
+      "--depth",
+      "1",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-radix4096-conditional-normal.dot"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 0,
+    "wall_seconds": 1.017082929611206,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0
+    ]
+  },
+  {
+    "name": "radix4096-conditional-afterfree",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "use-after-free",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.radix_capture",
+      "--disable-mempool",
+      "--stack-bytes",
+      "131072",
+      "--n",
+      "4096",
+      "--depth",
+      "1",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-radix4096-conditional-afterfree.dot"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 0,
+    "wall_seconds": 1.0671608448028564,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0
+    ]
+  },
+  {
+    "name": "route-before-all",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-route-control.py",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-route-before-all.json"
+    ],
+    "cwd": "/home/horde/projects/power-diagram/.work/vtm/extraction-geometry",
+    "source": "cca7a1de4f5ddf3c190f321cfda53c66f0525948",
+    "exit_code": 99,
+    "wall_seconds": 4.7224133014678955,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0,
+      99
+    ]
+  },
+  {
+    "name": "route-after-all",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-route-control.py",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-route-after-all.json"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 99,
+    "wall_seconds": 5.022231101989746,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0,
+      99
+    ]
+  },
+  {
+    "name": "lifetime-isolated-2",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py::test_large_unproved_cell_corruption_requires_ordinary_fallback"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 0,
+    "wall_seconds": 5.474329471588135,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0,
+      99
+    ]
+  },
+  {
+    "name": "lifetime-isolated-4",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py::test_large_full_route_preserves_cospherical_first_duplicate_owners[8.673617379884035e-19]"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 99,
+    "wall_seconds": 5.1224610805511475,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0,
+      99
+    ]
+  },
+  {
+    "name": "lifetime-isolated-5",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py::test_large_full_route_preserves_cospherical_first_duplicate_owners[1.0]"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 99,
+    "wall_seconds": 5.172403335571289,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0,
+      99
+    ]
+  },
+  {
+    "name": "lifetime-isolated-6",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "all",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py::test_large_full_route_preserves_cospherical_first_duplicate_owners[1.152921504606847e+18]"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 99,
+    "wall_seconds": 5.27271842956543,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0,
+      99
+    ]
+  },
+  {
+    "name": "afterfree-isolated-1",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "use-after-free",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py::test_large_route_changes_inputs_and_prefixes_without_host_decisions[4096]"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 0,
+    "wall_seconds": 30.755526781082153,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0
+    ]
+  },
+  {
+    "name": "afterfree-isolated-4",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "use-after-free",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py::test_large_full_route_preserves_cospherical_first_duplicate_owners[8.673617379884035e-19]"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 0,
+    "wall_seconds": 28.80170512199402,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0
+    ]
+  },
+  {
+    "name": "afterfree-isolated-5",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "use-after-free",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py::test_large_full_route_preserves_cospherical_first_duplicate_owners[1.0]"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 0,
+    "wall_seconds": 28.40118098258972,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0
+    ]
+  },
+  {
+    "name": "afterfree-isolated-6",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "use-after-free",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py::test_large_full_route_preserves_cospherical_first_duplicate_owners[1.152921504606847e+18]"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "f8b5cfaf2625f264dd95448a272849b88c0c353b",
+    "exit_code": 0,
+    "wall_seconds": 29.452108144760132,
+    "timeout_seconds": 600,
+    "allowed_codes": [
+      0
+    ]
+  }
+]

@@ -385,6 +385,12 @@ physical geometry/quality and all public distances remain unchanged.
 A separate [cooperative surface-query experiment](cooperative-surface-probe.md)
 measures shared ray traversal and fused/staged retained-cell classifiers. These
 are private prototypes; their kernels and scratch are not used by production.
+The nearest-surface traversal now [reuses child box distances](surface-bound-reuse.md)
+within each query, preserving its original ordering, comparisons and triangle
+arithmetic. A local stack holds the already computed float64 values; nothing is
+retained across queries or refits. The
+[operation counts and bounded-arithmetic probes](surface-bound-investigation.md)
+explain this choice and record the separate experimental float32 filter.
 
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).

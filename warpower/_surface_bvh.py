@@ -204,12 +204,17 @@ def closest_point(tree: SurfaceTree, p: wp.vec3d, limit: wp.float64):
     result.distance2 = limit * limit
     # 63 Morton bits plus at most 31 index bits bound the radix depth below 96.
     stack = wp.zeros(shape=128, dtype=int)
+    # Child distances are already computed for ordering. The point and tree
+    # stay fixed during this query, so retain those rounded scalar values and
+    # compare against the current best distance when each node is popped.
+    bounds = wp.zeros(shape=128, dtype=wp.float64)
     stack[0] = 1
+    bounds[0] = box_distance(tree, 1, p)
     size = int(1)
     while size > 0:
         size -= 1
         node = stack[size]
-        if box_distance(tree, node, p) >= result.distance2:
+        if bounds[size] >= result.distance2:
             continue
         if node >= tree.leaf_base:
             first = 4 * (node - tree.leaf_base)
@@ -226,10 +231,15 @@ def closest_point(tree: SurfaceTree, p: wp.vec3d, limit: wp.float64):
                     result.distance2 = distance
         else:
             left, right = int(tree.left[node]), int(tree.right[node])
-            if box_distance(tree, left, p) < box_distance(tree, right, p):
+            left_distance = box_distance(tree, left, p)
+            right_distance = box_distance(tree, right, p)
+            if left_distance < right_distance:
                 left, right = right, left
+                left_distance, right_distance = right_distance, left_distance
             stack[size] = left
             stack[size + 1] = right
+            bounds[size] = left_distance
+            bounds[size + 1] = right_distance
             size += 2
     return result
 

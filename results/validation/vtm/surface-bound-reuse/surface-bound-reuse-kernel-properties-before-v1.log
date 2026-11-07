@@ -1,0 +1,42 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._extraction 090a8f2 load on device 'cuda:0' took 3.77 ms  (cached)
+Module warpower._selective 24f74cc load on device 'cuda:0' took 1.95 ms  (cached)
+[
+  {
+    "kernel": "classify",
+    "block_dim": 32,
+    "register_count": 255,
+    "local_memory_size": 33800
+  },
+  {
+    "kernel": "classify_selection",
+    "block_dim": 32,
+    "register_count": 255,
+    "local_memory_size": 33848
+  },
+  {
+    "kernel": "surface_error",
+    "block_dim": 32,
+    "register_count": 102,
+    "local_memory_size": 1136
+  },
+  {
+    "kernel": "selection_surface_status",
+    "block_dim": 32,
+    "register_count": 104,
+    "local_memory_size": 1136
+  },
+  {
+    "kernel": "classify_retained",
+    "block_dim": 32,
+    "register_count": 255,
+    "local_memory_size": 33808
+  }
+]

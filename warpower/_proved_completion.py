@@ -185,6 +185,11 @@ def record_face_support(
                     elif result.sign > 0:
                         wp.atomic_or(error, 0, 64)
                         wp.atomic_and(supported, slot, 0)
+                        # One exact exterior witness disproves this face's
+                        # support. End only this subtree/face, not the thread:
+                        # the strided outer loop must still check later slots.
+                        size = 0
+                        break
             else:
                 if size > 125:
                     wp.atomic_or(error, 0, 16)

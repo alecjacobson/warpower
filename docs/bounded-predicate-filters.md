@@ -6,6 +6,9 @@ admits only finite original float32 coordinates with absolute value at most 16.
 An unsupported range or uncertain sign uses the unchanged fallback. It neither
 normalizes inputs nor changes geometric ties, symbolic ordering or final
 certification. Public diagram and ordinary Delaunay defaults retain their kernels.
+The later [hull-support application](bounded-hull-support.md) uses the same
+orientation stages in private leaf queries; its separate measurements are recorded
+there.
 
 The [error proof](bounded-predicate-proof.md) covers the determinant, its permanent,
 operand/result subnormal flushing and the rounded threshold itself. It uses

@@ -1,0 +1,1401 @@
+{
+  "baseline": "94056844cf9d55a44b4454744b0e07dcd20fd9a7",
+  "runtime": "6eb1882d8af126e65ee88fe0cbdd5f3520f8cc87",
+  "scope": "Existing bounded binary32 and analytic binary64 orientation stages in private VTM hull-support leaf queries, followed by original Ball64/exact fallback. One runtime call change; unchanged storage/launch shape and standalone defaults. No CPU-outperformance claim; routed full allocation-order checker limitation remains documented.",
+  "source_sha256": {
+    "warpower/_proved_completion.py": "aa593becd183bf90685e2b0ab8fefc94ad708b687f547eb87d34ebd5fe3838cc",
+    "warpower/_bounded_predicates.py": "2a9afb83f8c64eea5f0597ffff0ccc9d5007f71f1d37a41f14da7b3e06df22e3",
+    "warpower/_analytic_predicates.py": "b6d8ab23dfb23e107f8dde1d9e473085f9a45004115279531bfe219194bfad15",
+    "benchmarks/bounded_predicate_proof.py": "90ce13274a06dc7a2f9dcf9c684fadc1967317d1e6f714956b08b0dae49a6002",
+    "tests/test_bounded_hull_support.py": "151b018db30cd8603af564987b315386e168d46066ba6c848187546aaf2e69e2",
+    "tests/test_support_reuse.py": "383d324f64dab001f0d9ce3ef223ecfc8e91206e35c4db83cbb6223985370a54",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "examples/vtm_gallery.py": "8e39899ba4ec7b98dee840f73ccc330c57ac2a398faff3efc103dabb57af4acf",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f"
+  },
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    }
+  ],
+  "shared_helpers": [
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    },
+    {
+      "path": "results/validation/vtm/analytic-filters/boundary-timing-commands.json",
+      "sha256": "c75b0a3c89cf49e7e1dec7a109ec6a7497370ddcc801f2c22ad78cc4c6174c49"
+    },
+    {
+      "path": "results/validation/vtm/bounded-predicate-filters/float32-native-audit-summary.json",
+      "sha256": "662805c3fba1d757eaf6ddb598dcbeed27117e7ba10f9b7f6afa18be03dde551"
+    }
+  ],
+  "reference_binaries_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "lossless_archives": [
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-after/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/armadillo-graded-after/boundary.off.gz",
+      "raw_bytes": 311406,
+      "bytes": 139438,
+      "raw_sha256": "b5ca93101ba553fa92f65d5b1933c49f6cb76966a01577e5a187fad16f771afe",
+      "sha256": "73e10f4cfae16b12a3bd0ff13a1a658515086f2402aea0a6c40a891a64709082"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-after/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/armadillo-graded-after/mesh.vtu.gz",
+      "raw_bytes": 1051678,
+      "bytes": 427872,
+      "raw_sha256": "bff766b68360220e8eafe66bfd6b0e412a2d646625d3f0628ad07b9718d88c0d",
+      "sha256": "687b7bf8751cd11ecc87284d36a8bda17a53c8c5c57f02b96fe5b8ee2a051c0d"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-before/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/armadillo-graded-before/boundary.off.gz",
+      "raw_bytes": 311406,
+      "bytes": 139462,
+      "raw_sha256": "0cde5f901fed61f7ae4421586c00bc28d434587a79a3d74a2759ab610bcb6bab",
+      "sha256": "c7c5de2af727eedd7771475004bcf3e25d1a389e87220ae419848b62548b1641"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-before/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/armadillo-graded-before/mesh.vtu.gz",
+      "raw_bytes": 1051678,
+      "bytes": 427809,
+      "raw_sha256": "7bfe9ed8df38d091e91c7f6ab078ba00471647fdfdc078079bdfcfc0879c2b86",
+      "sha256": "8f37ea9b5e1b5a200eefe936d24d5f575c3d09bc8236ed7d9890b243b2568670"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-after/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/armadillo-uniform-after/boundary.off.gz",
+      "raw_bytes": 313604,
+      "bytes": 140840,
+      "raw_sha256": "7224698763897d7bf2d6ff8d2418832d298a6ebabd2d5785ee74e0c7a87d522b",
+      "sha256": "96de8ed70ba5e48b2f4337138009135511b149bf2e66c6ae624290b9c50c6b99"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-after/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/armadillo-uniform-after/mesh.vtu.gz",
+      "raw_bytes": 1039866,
+      "bytes": 423378,
+      "raw_sha256": "d3c643b86e30a9213ce7b19ebf2af21562bf00356c563573e69f596578beec40",
+      "sha256": "11228c705a8c02ef56f96e19dc28906f9269f78dbf166ab9b1ad4896a2b3ba79"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-before/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/armadillo-uniform-before/boundary.off.gz",
+      "raw_bytes": 313604,
+      "bytes": 140796,
+      "raw_sha256": "524ef385b5eb78c465688b9d229f37b0b6332a057f7fa914216737af8a6c4519",
+      "sha256": "388f43d559a36b24acb18ef2cb95e5dbce7b9d3ab06f406567d5f4e71151f728"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-before/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/armadillo-uniform-before/mesh.vtu.gz",
+      "raw_bytes": 1039866,
+      "bytes": 423380,
+      "raw_sha256": "668946206a6aced0e9e12053fc2ff33dee9da4ca499f50b064c5decb0137a647",
+      "sha256": "14e7c6c339962156297358b1bb8eab891ad5d52febb488e2416c0b3d3feef4b0"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-after/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/cavity-after/boundary.off.gz",
+      "raw_bytes": 69401,
+      "bytes": 30628,
+      "raw_sha256": "b961f9ca52cb01c9c51a6570b834f3299d086b251556c285518b5ac3360a5590",
+      "sha256": "5f7ea4583052be89c1f31997b3049554d67150c21bb3d5d868533c877118015b"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-after/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/cavity-after/mesh.vtu.gz",
+      "raw_bytes": 224943,
+      "bytes": 92611,
+      "raw_sha256": "8f822c2026c6cb8e0bd180446b389ba79c1f45f0167946df24612232ff6babc3",
+      "sha256": "5dfa44fea1d61578f5a741e66ed0ed201893b58355be676a34fa8f985231eb24"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-before/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/cavity-before/boundary.off.gz",
+      "raw_bytes": 69401,
+      "bytes": 30623,
+      "raw_sha256": "0c647b57a4fa5fef5cbf0aeb2006b78e36a29a44256519309ad9596383c76ac6",
+      "sha256": "5f35af63778801cf5e8ac93ecdd67d2a0177e9df88c0e20cf2ab594474338af2"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-before/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/cavity-before/mesh.vtu.gz",
+      "raw_bytes": 224943,
+      "bytes": 92569,
+      "raw_sha256": "838d81d8b47b198d74e5635a160894996229120377aaf54ba6713c7079f4a127",
+      "sha256": "9a0d34f57a070838aa42e4e7b886b23972f7f2a8f6e704996c790fcd97d3d54a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-after/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/disconnected-after/boundary.off.gz",
+      "raw_bytes": 76359,
+      "bytes": 30543,
+      "raw_sha256": "d3a0aa9b933b6ac00e329f0eeb2e768523d091ad3453c2f1c7cf2195d58c73a9",
+      "sha256": "cfe6db535ac85de50b2d34d587603c307dc4adc94f6353af92b5baef29134a2f"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-after/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/disconnected-after/mesh.vtu.gz",
+      "raw_bytes": 217677,
+      "bytes": 88061,
+      "raw_sha256": "c9317064b80c9ed0858689752a7ad56f1dd0b7958a1d43ab289c000827560d14",
+      "sha256": "947d50fae91f7c81a6cd9050538bf50b664d8e82146ce84ea5693bcbec5821cf"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-before/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/disconnected-before/boundary.off.gz",
+      "raw_bytes": 76359,
+      "bytes": 30556,
+      "raw_sha256": "473c9fc7b79cfe0184d53a88c5a61c6fbc7778a3b3918800ce39ad715509760a",
+      "sha256": "007ad15ff0c0fc98bc7b450e25a0cdfe5d5ad0674f0dfffce55f3087e588d2c2"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-before/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/disconnected-before/mesh.vtu.gz",
+      "raw_bytes": 217677,
+      "bytes": 88093,
+      "raw_sha256": "4925f22b87c6ed3cfc2840757524b02f3cfa9bb2fb58d78f7e12cd41b6b84893",
+      "sha256": "8b46c07685f3096380c7fb4ff59f93cd0412bd3f3245ab30e94f4de03c3d200c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-after/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/graded-torus-after/boundary.off.gz",
+      "raw_bytes": 294714,
+      "bytes": 133277,
+      "raw_sha256": "a5608feaf1223b51abf8f61e7f72da942c66d71d947b64afce269c041a09083e",
+      "sha256": "65178c50def8a8e726bba5cbf5f4e00258ece059b73f6520e98ee8b9289a09a7"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-after/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/graded-torus-after/mesh.vtu.gz",
+      "raw_bytes": 1112967,
+      "bytes": 453191,
+      "raw_sha256": "a2b97aae513a43fa8ce71c2aa9163348bf6c936e61ff22dbf2154beeeb6df8c1",
+      "sha256": "8c2bfa188e28a3e6779ca743c4e41811208dd78b492f051f79978be81a295c8c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-before/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/graded-torus-before/boundary.off.gz",
+      "raw_bytes": 294714,
+      "bytes": 133249,
+      "raw_sha256": "d784e5a4ba14edd9e479e45b5ddcd961df81afe95786f952b21d2e92c45d465c",
+      "sha256": "1d089a0ba73d589ab6962b5313c4d6dc529e1005f1e84c1508859823f3962a7c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-before/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/graded-torus-before/mesh.vtu.gz",
+      "raw_bytes": 1112967,
+      "bytes": 453257,
+      "raw_sha256": "87db24da30dc6281f6be5a6841380b2d9bf6d1d4fc10088042a464a93460bcc9",
+      "sha256": "3005640e50849a5672a5b5387bf0652fe4c500d0f76ef368a0e0e914f62f6e12"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-after/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/thin-hand-after/boundary.off.gz",
+      "raw_bytes": 80412,
+      "bytes": 28766,
+      "raw_sha256": "c155da02e9b6e618108998f67b094d509a019363eea26a57add0803c4f2cdbd0",
+      "sha256": "c5a1c1b6e2d7ebb06b0fd5aaf503e1ad541d924e2f02d6b5a14037de869b50e9"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-after/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/thin-hand-after/mesh.vtu.gz",
+      "raw_bytes": 177778,
+      "bytes": 70674,
+      "raw_sha256": "123c87c26a2e5aef52941e263e9a73b944b62fb5b65f41687617c3efb5c8f3bd",
+      "sha256": "b8d0dadf6f24ff594a4370f673beac38684c0e1a31c07cdbe0612e12b0d6e947"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-before/boundary.off",
+      "path": ".work/vtm/bounded-hull-support-final/thin-hand-before/boundary.off.gz",
+      "raw_bytes": 80412,
+      "bytes": 28721,
+      "raw_sha256": "cfa436761bc9242029aebc07d7da74b1763410d396a9dff75890ce059dfa0242",
+      "sha256": "8914b4a5d0f8d36e85750a1e9174d52db448349c3da2688480f230984c97462a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-before/mesh.vtu",
+      "path": ".work/vtm/bounded-hull-support-final/thin-hand-before/mesh.vtu.gz",
+      "raw_bytes": 177778,
+      "bytes": 70647,
+      "raw_sha256": "192eb8ba6d3db556354180145a2443b87d732e41f91fe57c8d676884fb2152b7",
+      "sha256": "16e7096e3c03f8eb55378507c8a1f84e152dd0d25bc28b7951d5fa2fd7e78010"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-full-native.nsys-rep",
+      "path": ".work/vtm/bounded-hull-support-full-native.nsys-rep.gz",
+      "raw_bytes": 6512495,
+      "bytes": 2908010,
+      "raw_sha256": "5072563ef8abf212c5ec62bd84a805e228124012c64d074ccea171557c7607ee",
+      "sha256": "4f39b101e393b18dbfeaa1f0bda5b57e83908413a378b5d416fb6e2a4afabf33"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-native.nsys-rep",
+      "path": ".work/vtm/bounded-hull-support-loop-native.nsys-rep.gz",
+      "raw_bytes": 514935,
+      "bytes": 215034,
+      "raw_sha256": "242c906e76c7365b610460c4cfbd83a542247a7f4a5772fa6edf3133247f564c",
+      "sha256": "1f58ca0d2f2f50110954f7bba582f3368c779296d89e451baa5d8d3a9b2f1ee7"
+    }
+  ],
+  "files": [
+    {
+      "original": ".work/vtm/analyze-bounded-hull-support-audit.py",
+      "path": "results/validation/vtm/bounded-hull-support/analyze-bounded-hull-support-audit.py",
+      "bytes": 3398,
+      "sha256": "3894c47f3a8ef0eff98a2040d209cdfbd9c89502b28e0f25d64f2b8e7f495ad1"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-audit-harness-correction.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-audit-harness-correction.json",
+      "bytes": 444,
+      "sha256": "9b942141fc0674bf9df3674b46a3f97bce93b2bcf6e5b107e344c7724adec66f"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-existing.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-existing.log",
+      "bytes": 100,
+      "sha256": "a6b5299e4d8f536e141fb64bcf42cb7a9babff0d3ae634282801d9f23c73256d"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-after/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-graded-after/boundary.off.gz",
+      "bytes": 139438,
+      "sha256": "73e10f4cfae16b12a3bd0ff13a1a658515086f2402aea0a6c40a891a64709082"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-after/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-graded-after/mesh.npz",
+      "bytes": 1612272,
+      "sha256": "fc91689c580cd2b03afa2f1ad7fb870b94d75da2f709c5f7859ca23c5d44648d"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-graded-after/mesh.vtu.gz",
+      "bytes": 427872,
+      "sha256": "687b7bf8751cd11ecc87284d36a8bda17a53c8c5c57f02b96fe5b8ee2a051c0d"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-after/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-graded-after/result.json",
+      "bytes": 3747,
+      "sha256": "629fbe3be7d08d52c9ab63e55c230e2488a2c8f2271de98768a4b54e072796b7"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-graded-after.log",
+      "bytes": 8270,
+      "sha256": "f3f916bb77fb4dc3325d0ba4b3130a1b374bec15b8c2c6d92447b283a3794cb8"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-before/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-graded-before/boundary.off.gz",
+      "bytes": 139462,
+      "sha256": "c7c5de2af727eedd7771475004bcf3e25d1a389e87220ae419848b62548b1641"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-before/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-graded-before/mesh.npz",
+      "bytes": 1612274,
+      "sha256": "4232225995ea952cf9c14d899d0e6ef95d7a005e8ea1ed86df70db8ef7bd4071"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-graded-before/mesh.vtu.gz",
+      "bytes": 427809,
+      "sha256": "8f37ea9b5e1b5a200eefe936d24d5f575c3d09bc8236ed7d9890b243b2568670"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-before/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-graded-before/result.json",
+      "bytes": 3750,
+      "sha256": "4c9b415d1515d86d8288f40cb3a9aec6830d7ec6bfe08a5d098b4b2efc343304"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-graded-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-graded-before.log",
+      "bytes": 8273,
+      "sha256": "5bd296d94a8c7b0b3d3dc3edad4d3182a737703956e765fef2d38e87dc271dc2"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-after/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-uniform-after/boundary.off.gz",
+      "bytes": 140840,
+      "sha256": "96de8ed70ba5e48b2f4337138009135511b149bf2e66c6ae624290b9c50c6b99"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-after/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-uniform-after/mesh.npz",
+      "bytes": 1610571,
+      "sha256": "f93880f52c0d0b121b94ecb7ae79c6f031ab90ec36e2329f903fa96527f898bd"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-uniform-after/mesh.vtu.gz",
+      "bytes": 423378,
+      "sha256": "11228c705a8c02ef56f96e19dc28906f9269f78dbf166ab9b1ad4896a2b3ba79"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-after/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-uniform-after/result.json",
+      "bytes": 3740,
+      "sha256": "377688bf51e49f26d7326bd227341f94ccd39c5a6f2e35eec571795ac13f99d7"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-uniform-after.log",
+      "bytes": 8177,
+      "sha256": "9ebdf789f6fb6a1782bb6cf3e8fe1bf634ac47a3f575a5afcea42265ae1e7b72"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-before/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-uniform-before/boundary.off.gz",
+      "bytes": 140796,
+      "sha256": "388f43d559a36b24acb18ef2cb95e5dbce7b9d3ab06f406567d5f4e71151f728"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-before/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-uniform-before/mesh.npz",
+      "bytes": 1610654,
+      "sha256": "a5d189b83a879df71d8dc9c8dbd327c2b1061b1d21b784dac1c1ace4a8c15ab0"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-uniform-before/mesh.vtu.gz",
+      "bytes": 423380,
+      "sha256": "14e7c6c339962156297358b1bb8eab891ad5d52febb488e2416c0b3d3feef4b0"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-before/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-uniform-before/result.json",
+      "bytes": 3749,
+      "sha256": "db67c9c587b12b9509c481431cd9b0fdc772542c8cd94bea72b7f5fb301b1b81"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/armadillo-uniform-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/armadillo-uniform-before.log",
+      "bytes": 8186,
+      "sha256": "65001cf213514393ede52337f5d1524697f2409c82864835ad102c35ce4a770a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-after/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-after/boundary.off.gz",
+      "bytes": 30628,
+      "sha256": "5f7ea4583052be89c1f31997b3049554d67150c21bb3d5d868533c877118015b"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-after/input.off",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-after/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-after/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-after/mesh.npz",
+      "bytes": 108799,
+      "sha256": "43be6d7863f39ae6ee2fb76fe2d036872aba36280f3bbb17febeafbb80d16c67"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-after/mesh.vtu.gz",
+      "bytes": 92611,
+      "sha256": "5dfa44fea1d61578f5a741e66ed0ed201893b58355be676a34fa8f985231eb24"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-after/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-after/result.json",
+      "bytes": 3646,
+      "sha256": "32c964601a5101f18407df4a6237767bede69157024e86f04c44424604bd0030"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-after.log",
+      "bytes": 7995,
+      "sha256": "fa7a7f0f425a4343b4dfc789db7390cfb61fed9605372bf48fdfaa2efd03556a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-before/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-before/boundary.off.gz",
+      "bytes": 30623,
+      "sha256": "5f35af63778801cf5e8ac93ecdd67d2a0177e9df88c0e20cf2ab594474338af2"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-before/input.off",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-before/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-before/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-before/mesh.npz",
+      "bytes": 108652,
+      "sha256": "9f24e04d0b2d8ebdf5f8ec28749f26477e787a6d7ed0ec1d5fd034cef332a14f"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-before/mesh.vtu.gz",
+      "bytes": 92569,
+      "sha256": "9a0d34f57a070838aa42e4e7b886b23972f7f2a8f6e704996c790fcd97d3d54a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-before/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-before/result.json",
+      "bytes": 3646,
+      "sha256": "5aa34e99ea6646879f5660f4f53fe8446edd1214b3e78614312c2e42fc3a451e"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/cavity-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/cavity-before.log",
+      "bytes": 7995,
+      "sha256": "1a6d88f4707d1b0377671e7268fb634f3a47632253700fb4e8dfc565b9acd9d7"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/commands.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/commands.json",
+      "bytes": 23388,
+      "sha256": "17b0f2ee0467a2dbf4b4ae7db439af67c3cd40d5e3c4503c3a7b846d17ac752c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay-fitted-hand-after.json",
+      "bytes": 2838,
+      "sha256": "7fad42799fd9d22b84450912203d80001b53c275fd8259adc5cee98281608081"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay-fitted-hand-after.log",
+      "bytes": 5134,
+      "sha256": "598f16a73218a254713dc498eaa257e774600751b1fc8adbb86a50ea6fea4a46"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay-fitted-hand-before.json",
+      "bytes": 2841,
+      "sha256": "6a33a8b1871a9f42db1c64cb2a95495dff6c93a9d9bc835b0db7ac76acc38bca"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay-fitted-hand-before.log",
+      "bytes": 5137,
+      "sha256": "5f8b98e539fc8f50127d32000aac088530d37b1253e0fc6154b9858c6c41438f"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay-grid-after.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay-grid-after.json",
+      "bytes": 2837,
+      "sha256": "27270e276a3047a6a6030cdcb4edd6482ccae4ec05eb581b9179ff69ee20eb67"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay-grid-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay-grid-after.log",
+      "bytes": 4876,
+      "sha256": "b3b7fd096a0ba5469a4456310ac1f83a6827071b873c97d183e6d1698b6de239"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay-grid-before.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay-grid-before.json",
+      "bytes": 2822,
+      "sha256": "7ddef8c9d5a7a2ce7a8e903bb1026bdb7b35d1fc66fcd206d2eddcf4e34d64b7"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay-grid-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay-grid-before.log",
+      "bytes": 4861,
+      "sha256": "3746d9d52bc5bbd557da39c88a0fcbec1a6b52f08eedaf7d3c062f670003a711"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay1000-after.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay1000-after.json",
+      "bytes": 2826,
+      "sha256": "659019ec7a345b9e44f6157b59a0617453883a4d121560141a359f5c9e8fe5c0"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay1000-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay1000-after.log",
+      "bytes": 5122,
+      "sha256": "4cad26a344b3624468e717898eeabf5909c72125a570334863aaa348eb010d4f"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay1000-before.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay1000-before.json",
+      "bytes": 2822,
+      "sha256": "7174643f3a41e5586a83b1b50923881e81ed1db4f11bff3170c0d1c7b328cf7e"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay1000-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay1000-before.log",
+      "bytes": 5118,
+      "sha256": "cd58c63205c64074651110ff7e79854b00fb8b9fd004e4cde93844e2ec0a03f3"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay100000-after.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay100000-after.json",
+      "bytes": 2832,
+      "sha256": "9f84eb597f1ac4d6640995ff23c0ba646a99b5c5fd5d2c41b8684ed12a4eb82d"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay100000-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay100000-after.log",
+      "bytes": 5062,
+      "sha256": "03cc845d1ed06eb3c237b1a8e7d866cd76b9b2b332b960e44a5c38959fcac20d"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay100000-before.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay100000-before.json",
+      "bytes": 2822,
+      "sha256": "2da5ce6cd7cc1b5d7cf4472c62272d559bbbabfc3103c7538544777c9f340538"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/delaunay100000-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/delaunay100000-before.log",
+      "bytes": 5052,
+      "sha256": "e3e4c61f2fd23eb6510b72c58821b0e688ce4a96b846e81aba5d34f71bf11bd0"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/diagram100000-after.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/diagram100000-after.json",
+      "bytes": 2564,
+      "sha256": "02978f8a2bf5623d1a780c6c819d7eb5ca0aa0dfc5a9a313b2e6b4093843ab69"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/diagram100000-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/diagram100000-after.log",
+      "bytes": 3435,
+      "sha256": "e1b78181a920bd71e61788199988c8617470d1430bb13da1937bc2199b20d01f"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/diagram100000-before.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/diagram100000-before.json",
+      "bytes": 2570,
+      "sha256": "6546c9040dac8491a0ea9f998f04477d08c5085b24542eb6f6f6444328cc95ed"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/diagram100000-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/diagram100000-before.log",
+      "bytes": 3441,
+      "sha256": "a4efb662e5c7d2ed7acb8f6814d182646e92826b21bb668869d93cfeececdee5"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-after/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-after/boundary.off.gz",
+      "bytes": 30543,
+      "sha256": "cfe6db535ac85de50b2d34d587603c307dc4adc94f6353af92b5baef29134a2f"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-after/input.off",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-after/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-after/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-after/mesh.npz",
+      "bytes": 110234,
+      "sha256": "72fb273123fd4fcad1269042e3090873803debce28e4f81cf9c149109bff28b9"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-after/mesh.vtu.gz",
+      "bytes": 88061,
+      "sha256": "947d50fae91f7c81a6cd9050538bf50b664d8e82146ce84ea5693bcbec5821cf"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-after/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-after/result.json",
+      "bytes": 3659,
+      "sha256": "40517f6fda01dbee241d410eee4686188e9b2862425b38dabf1c1cc98fb07e7e"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-after.log",
+      "bytes": 8008,
+      "sha256": "983da033dbd6f58b474153ff20ed708d31c6745be8e66f2428150587267bd139"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-before/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-before/boundary.off.gz",
+      "bytes": 30556,
+      "sha256": "007ad15ff0c0fc98bc7b450e25a0cdfe5d5ad0674f0dfffce55f3087e588d2c2"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-before/input.off",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-before/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-before/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-before/mesh.npz",
+      "bytes": 110343,
+      "sha256": "daf21af89eb4928b47d3b6fa6be72f509cf9daa896bb639bbf1a8ea12bfebf0f"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-before/mesh.vtu.gz",
+      "bytes": 88093,
+      "sha256": "8b46c07685f3096380c7fb4ff59f93cd0412bd3f3245ab30e94f4de03c3d200c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-before/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-before/result.json",
+      "bytes": 3662,
+      "sha256": "62e522ba9c08aab790547b27eab948c6896492de437e24c35a01dcf2b505c43d"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/disconnected-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/disconnected-before.log",
+      "bytes": 8011,
+      "sha256": "81aced7c09920464af3dd43ac0ec9182eae64c94b464fc62059b2452500cd252"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-after/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-after/boundary.off.gz",
+      "bytes": 133277,
+      "sha256": "65178c50def8a8e726bba5cbf5f4e00258ece059b73f6520e98ee8b9289a09a7"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-after/input.off",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-after/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-after/mesh.npz",
+      "bytes": 572004,
+      "sha256": "b60e4a31f82cff39d0c8da18d76a69546ec7c41177e1122d18dcc0763b1860ef"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-after/mesh.vtu.gz",
+      "bytes": 453191,
+      "sha256": "8c2bfa188e28a3e6779ca743c4e41811208dd78b492f051f79978be81a295c8c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-after/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-after/result.json",
+      "bytes": 3657,
+      "sha256": "05df1a7f90af72d9842f8c4e96e3b44097427b0212bdbd77aadd9a0c4523552c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-after.log",
+      "bytes": 8180,
+      "sha256": "024e54f9e9ee27e8a675620ceb84f3ffc5130d4dd9654e126caf8355e5e9030a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-before/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-before/boundary.off.gz",
+      "bytes": 133249,
+      "sha256": "1d089a0ba73d589ab6962b5313c4d6dc529e1005f1e84c1508859823f3962a7c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-before/input.off",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-before/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-before/mesh.npz",
+      "bytes": 572374,
+      "sha256": "6ca33fb2ccb619d54da20f1d9f3da23d885261684609ae7e320e359866749d96"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-before/mesh.vtu.gz",
+      "bytes": 453257,
+      "sha256": "3005640e50849a5672a5b5387bf0652fe4c500d0f76ef368a0e0e914f62f6e12"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-before/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-before/result.json",
+      "bytes": 3657,
+      "sha256": "7ff7aab610b8872c92485cb3360a95f179fd772a8a1575c41bc1ed71de58b987"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/graded-torus-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/graded-torus-before.log",
+      "bytes": 8180,
+      "sha256": "364aa81255615a0a66a7f79cc24100be7d6c6adc61ba6d8161eccef29a2bdfc9"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-after/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-after/boundary.off.gz",
+      "bytes": 28766,
+      "sha256": "c5a1c1b6e2d7ebb06b0fd5aaf503e1ad541d924e2f02d6b5a14037de869b50e9"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-after/input.off",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-after/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-after/mesh.npz",
+      "bytes": 98722,
+      "sha256": "0c9b8b1ff2cce219c24c139082d2bb15bd365687730c03e06130618190e88a94"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-after/mesh.vtu.gz",
+      "bytes": 70674,
+      "sha256": "b8d0dadf6f24ff594a4370f673beac38684c0e1a31c07cdbe0612e12b0d6e947"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-after/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-after/result.json",
+      "bytes": 3644,
+      "sha256": "0d1317655c5f01a7309c5f7f0198193e2714730ca786f5801d46c2bb6fc9a98a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-after.log",
+      "bytes": 7993,
+      "sha256": "c188c7c7895d920ce9d397e9c63d81c6cf155c6e2c12cfd5ed06b7b8ecc89767"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-before/boundary.off.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-before/boundary.off.gz",
+      "bytes": 28721,
+      "sha256": "8914b4a5d0f8d36e85750a1e9174d52db448349c3da2688480f230984c97462a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-before/input.off",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-before/mesh.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-before/mesh.npz",
+      "bytes": 98598,
+      "sha256": "efdf16afc8222e7eade0e69efb050b18baa0f917cda3a47839aaa573f9838ad4"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-before/mesh.vtu.gz",
+      "bytes": 70647,
+      "sha256": "16e7096e3c03f8eb55378507c8a1f84e152dd0d25bc28b7951d5fa2fd7e78010"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-before/result.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-before/result.json",
+      "bytes": 3654,
+      "sha256": "7424f9a381da1e3d169a3a82540cc01b3ac1f9733ca55360d856285854f4c854"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/thin-hand-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/thin-hand-before.log",
+      "bytes": 8003,
+      "sha256": "29ad18208521a6cddbf8f8813066fcbb32889399854a134964b3f9a5e068e088"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus1000-after.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus1000-after.json",
+      "bytes": 2939,
+      "sha256": "3a21ae6461fbcdb33a7f9f98476d97a6abbfd09d462c4b4bdc62940db16573df"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus1000-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus1000-after.log",
+      "bytes": 7374,
+      "sha256": "1595877fd9675b5c67e59ec5c1a2f4d8c8d8b3ffdecf6ec0649ce2398f17fd27"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus1000-after.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus1000-after.npz",
+      "bytes": 91326,
+      "sha256": "f86f472508a034fae70ee7bfda42fd382de6b75332ac9f72f176e1f0690e3086"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus1000-before.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus1000-before.json",
+      "bytes": 2945,
+      "sha256": "7ed0cfb08c46c1c1693d2302391aaebc68fce1bc568d69b576f0e6c58f1943be"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus1000-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus1000-before.log",
+      "bytes": 7380,
+      "sha256": "14d28e56d473f82b5d8fb3aac0923ce43a75bd794a8124dc781cf4045084fa92"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus1000-before.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus1000-before.npz",
+      "bytes": 91404,
+      "sha256": "d22255833f8c284b105b6d1d6c6e7773e6319717d909d7ea56ec11bfdbe30556"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus4096-after.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus4096-after.json",
+      "bytes": 3087,
+      "sha256": "a7c945eca7d056dc5d645b364ebc74cd7f0b64813c7ad5187594b8e38f1eb5e7"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus4096-after.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus4096-after.log",
+      "bytes": 7552,
+      "sha256": "7f025be7ad3a87f6584ee2cbcc742c797fb9ef67fa1dc05eaf8c32739cddbf69"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus4096-after.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus4096-after.npz",
+      "bytes": 419078,
+      "sha256": "86a6e407227d317c5d95770fc6d7e9bd532029e6dd1224129395ef95e19153c8"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus4096-before.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus4096-before.json",
+      "bytes": 3083,
+      "sha256": "e1d47536aaa1e747c2ccbc6bd513dabdce616c77f078b4498b3ac60940d8515d"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus4096-before.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus4096-before.log",
+      "bytes": 7548,
+      "sha256": "2b353e05d2ccb44064df2708fcc96177e7a3e40a39c8728f1988f7fc5f26bc93"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final/torus4096-before.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final/torus4096-before.npz",
+      "bytes": 419521,
+      "sha256": "8686ee923fa2d70cf9d756c8bd5484c5ce22e77c0cad1b69d1a551523bb4e9ff"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final-independent.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final-independent.json",
+      "bytes": 38264,
+      "sha256": "32eb0b52fa8424965c65d01ba7a61743c28e6628e23fe9a80b1281261411d529"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final-independent.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final-independent.log",
+      "bytes": 6029,
+      "sha256": "083b48ccc867123b6bde813554229f1b477dcde11d5e44ebdedbe98335fd1b38"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-final.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-final.log",
+      "bytes": 19547,
+      "sha256": "be82fe040f9625c494284751be3335a916b33ac0a44d23374dcb208c721309b0"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-full-native-audit.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-full-native-audit.json",
+      "bytes": 1120,
+      "sha256": "e028d36970b1869deb9081268495c78dadc892a35dcdc45cd5ecbf4229c02cdd"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-full-native-audit.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-full-native-audit.log",
+      "bytes": 1120,
+      "sha256": "e028d36970b1869deb9081268495c78dadc892a35dcdc45cd5ecbf4229c02cdd"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-full-native-export.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-full-native-export.log",
+      "bytes": 8101,
+      "sha256": "d4e4c22d7d5fb9ad7353616ff7ee4dff6b9801298865d0dd2f21227acfc03ce2"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-full-native.dot.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-full-native.dot.gz",
+      "bytes": 1434646,
+      "sha256": "73cbf4855a522dbf7e6bfcf7c294b4298092aea9d82261de3719ec0fc38e2333"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-full-native.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-full-native.json",
+      "bytes": 539,
+      "sha256": "ce763569095f84b07d46061a5b1ec2ef2531bd42466c25eaa80073c270000867"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-full-native.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-full-native.log",
+      "bytes": 9127,
+      "sha256": "d66c08df2ac272269cde6acbb9c10af521fe3d9f39bddb9b7a196f49d654fe0b"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-full-native.nsys-rep.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-full-native.nsys-rep.gz",
+      "bytes": 2908010,
+      "sha256": "4f39b101e393b18dbfeaa1f0bda5b57e83908413a378b5d416fb6e2a4afabf33"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-full-native.py",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-full-native.py",
+      "bytes": 1595,
+      "sha256": "6fcaacb36cd825f759ae4dfe21320096a046c7cdb6b0ea0a4ee5cbd3dc254955"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-full-native.sqlite.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-full-native.sqlite.gz",
+      "bytes": 3886890,
+      "sha256": "adaf0daaabd77ada790da98fed435dadc386629d5b1b6beaf969d59a1ac8d353"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-full-suite.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-full-suite.log",
+      "bytes": 992,
+      "sha256": "de4c9901a9fcbf08b91cf527f53b6d69c0b1875e7129e612a1c4a56ce134e219"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-integrated-focused.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-integrated-focused.log",
+      "bytes": 191,
+      "sha256": "7ae8d96665b8a5b59d63e8ee43ec87c1d6ed7caa0c15a2c52a23279f2013f20b"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-integration.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-integration.json",
+      "bytes": 483,
+      "sha256": "c19c2969c93b653e3f3d872e656e09fee9c85308170f1ca96fe9b3d02a5bfb8a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-native-audit.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop-native-audit.json",
+      "bytes": 1144,
+      "sha256": "fc2c8aff32c71b2739c50bc90cb3695f97f8c3b5ba30f806778c9d3801d1d9c4"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-native-audit.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop-native-audit.log",
+      "bytes": 1144,
+      "sha256": "fc2c8aff32c71b2739c50bc90cb3695f97f8c3b5ba30f806778c9d3801d1d9c4"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-native-export.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop-native-export.log",
+      "bytes": 8101,
+      "sha256": "09eab5ee96cf0a7e289fa091d7cc4189f80e653a6f701bb1db9490880d89d2ef"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-native-v2.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop-native-v2.log",
+      "bytes": 6028,
+      "sha256": "930019b9749c03c6f9152397cf76297c2f05f667ff4555a54b5d8e0eab5829f3"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-native.dot.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop-native.dot.gz",
+      "bytes": 101245,
+      "sha256": "1f195f55e77d787c4a753eb15b34b80e7e5ae293ba7b9f0715a4fe2f0df81309"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-native.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop-native.json",
+      "bytes": 2285,
+      "sha256": "2f30317b8adcbc67da876c4695ce7b0706443faa81d6522950c742f2698b7312"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-native.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop-native.log",
+      "bytes": 1168,
+      "sha256": "78055c2b541e09d66e21ae8a64cc0516d494ec81c0913b9cb060f13572597a77"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-native.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop-native.npz",
+      "bytes": 1400249,
+      "sha256": "1dfbaff9c0aae28736a06bf201fd8a1c02a5b2fb6215d7f654fa0f68c7edcaed"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-native.nsys-rep.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop-native.nsys-rep.gz",
+      "bytes": 215034,
+      "sha256": "1f58ca0d2f2f50110954f7bba582f3368c779296d89e451baa5d8d3a9b2f1ee7"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-native.sqlite.gz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop-native.sqlite.gz",
+      "bytes": 313316,
+      "sha256": "ee818365e5c80c3c0ae0070a0306e260ef9d938b04841f48c2fe4362fa81dc1e"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop-v2.py",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop-v2.py",
+      "bytes": 4447,
+      "sha256": "ff594b0e3813fd252a7d00a43250cdfc5a557063460a3bc0add4cf04cde5d70f"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-loop.py",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-loop.py",
+      "bytes": 4486,
+      "sha256": "32cc7f46f1794db801b60648af72b00df18bbb3a98bd56ed5f6e27e0dec91290"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-lossless-archives.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-lossless-archives.json",
+      "bytes": 10175,
+      "sha256": "d9bb18721d5ea4681a62505d5bb6e1f2afe3878b66d1bc6c6bc0ac1e48a7ab99"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-masks-lifetime.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-masks-lifetime.log",
+      "bytes": 1540,
+      "sha256": "3f4aad92c3659b05e8b7491ac7b24c91614fe3013c143dd604f6098199f03a31"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-masks-padded.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-masks-padded.log",
+      "bytes": 1539,
+      "sha256": "3418c4c8eb866cd049e269ce38a95db66f564b2cc34a4307fbae51c492dcd554"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-masks.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-masks.log",
+      "bytes": 100,
+      "sha256": "95fef7347f047c0bf257a56176cdae987c3486ea2406f0edc2bee87b2b98b1f8"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-memory-commands.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-memory-commands.json",
+      "bytes": 3826,
+      "sha256": "611402ddf11bb2850f97777f3e6a406536a9ffe17aa2a522c7f5e0ceefd18399"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-memory.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-memory.log",
+      "bytes": 3121,
+      "sha256": "fc167846e4ff2d7d4de53e1f8d1db06257c0a052765a1ebc5d834c414f0341fd"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-native-analysis.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-native-analysis.log",
+      "bytes": 59,
+      "sha256": "56dfd351ce54d6945a5df45d1d542a208d60594d6d2cb046f55e649235c0b130"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-native-audit-summary.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-native-audit-summary.json",
+      "bytes": 59048,
+      "sha256": "5583b40a9d023ebbd882e42d64337e859de3844098e0dcd8b79aa145b034f3aa"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-native-commands.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-native-commands.json",
+      "bytes": 1721,
+      "sha256": "525d96e7a3517447d8f6c9a3fb7727b676346729439f9df07104034aa0f4767a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-native-resume-commands.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-native-resume-commands.json",
+      "bytes": 1176,
+      "sha256": "59fa26699e25f74bbcca5e1b7bcdda239ff71e3dbd4cadb03e711f5514510288"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-native-resume.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-native-resume.log",
+      "bytes": 987,
+      "sha256": "15014ee20edd77878b431d25f5117169271b07692aed1b520954fb4650c52f9c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-native.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-native.log",
+      "bytes": 2608,
+      "sha256": "2e1ea3ba7c1faeb11d38f34d4294cff2772e761a84537545b6752aa596afe900"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-parent-before.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-parent-before.json",
+      "bytes": 8288,
+      "sha256": "6d3123a7e95e050cd1a8aedbca38c5c7bf4bc070fa6d8f215b25e35d87fbbdef"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-1000-candidate.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-1000-candidate.json",
+      "bytes": 2953,
+      "sha256": "171360b7bd345470046ecc83ae5e8d55f950d2f1afc71c0e257f009a35329e29"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-1000-candidate.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-1000-candidate.log",
+      "bytes": 7554,
+      "sha256": "0d978dd22e7e4ccecbd2f203f0dcfcc085907189439f77b72571226cd4ec904a"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-1000-candidate.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-1000-candidate.npz",
+      "bytes": 91423,
+      "sha256": "7b64f2c793dc38e57679c15b770cb317dadc4192b3bfcd79280af1fca9eb3edd"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-1000-control.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-1000-control.json",
+      "bytes": 2953,
+      "sha256": "e87c2651ca6a72ee6953bf75a3c9bc0be6cf50f9c0af5530e18e4769f2a3ecd2"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-1000-control.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-1000-control.log",
+      "bytes": 7388,
+      "sha256": "85923f0c5025ad6f0af2a72e0e069954dff761a9b8e3b556858b2215eb9627cf"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-1000-control.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-1000-control.npz",
+      "bytes": 91376,
+      "sha256": "d054601f99ec1530048f26105a50ba035d3cb53e87419fda4a4b4b6ded0fefa0"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-4096-candidate.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-4096-candidate.json",
+      "bytes": 3096,
+      "sha256": "0b0661eea147ee279f56c2fc0aeb1c9ba889a99866749417b27fb3ad0a643137"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-4096-candidate.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-4096-candidate.log",
+      "bytes": 7727,
+      "sha256": "5019ac1612d78d5eaf3dc8e2f02cdf724dbb6aa498ea600962cbe0dc409e0489"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-4096-candidate.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-4096-candidate.npz",
+      "bytes": 419382,
+      "sha256": "f6a462178dcb8f2036beeb4e35869fc8ae332d30105f211355ca2c2c5c72690c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-4096-control.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-4096-control.json",
+      "bytes": 3092,
+      "sha256": "1dc5fe3164583cee9c0594a61b20284f148cf9763a2ddd2926f8d1fdb00e96d7"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-4096-control.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-4096-control.log",
+      "bytes": 7557,
+      "sha256": "043c8505541c6464a4a8873e8656e8375920c2d402643ddf118e1f0181b1480d"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/bounded-4096-control.npz",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/bounded-4096-control.npz",
+      "bytes": 419409,
+      "sha256": "ca06ca9c5c2ba86f3d07602dab13b0d861ef10f19ff8557b2ed5cf371422e824"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot/commands.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot/commands.json",
+      "bytes": 3062,
+      "sha256": "67a14179b11da99bbb65d667ebdefa36ef3712a11edf8cdbd55e97cdd636f7a5"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot-independent.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot-independent.json",
+      "bytes": 6498,
+      "sha256": "cda88bb36f9f23c8563c95291d6fb9901287fccb6a45da8e2e246f09be41a1e8"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilot-independent.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilot-independent.log",
+      "bytes": 453,
+      "sha256": "2b8f2c04ebec5722f357febc91aa2edae2a90cb53ccc8f6f18dea18a6c7ab00c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-pilots.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-pilots.log",
+      "bytes": 2563,
+      "sha256": "39eabb7bad13d27fbba28226699aac3e871805e7d69816f6c204a7836b65484d"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-route-lifetime.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-route-lifetime.log",
+      "bytes": 3383,
+      "sha256": "18521b0a3ce819f7f91056f710db9b9ff9c75039254161fd4a53655f335e917e"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-route-padded.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-route-padded.log",
+      "bytes": 3382,
+      "sha256": "df06ea5c8107465030400c76889fd7febc8d4536201286c5fefa07835614b9c5"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-source-isolation.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-source-isolation.json",
+      "bytes": 16353,
+      "sha256": "476515f76f95924ccce32530f6230921a17e991247841b17f4157f958913f60c"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-support-lifetime.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-support-lifetime.log",
+      "bytes": 1604,
+      "sha256": "5a364e0aabf576488510a2b1db11b9d429c64c749bf8cad1fbce9bbd07b5b275"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-support-padded.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-support-padded.log",
+      "bytes": 1603,
+      "sha256": "3f8f18ba9c7be1e80e1dcadd059999c0db7346f5696025416fe75ad2ebe2ec48"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-validation-workflow.json",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-validation-workflow.json",
+      "bytes": 1176,
+      "sha256": "a4c53072d16b4d0829fbb86d089e1a874d34073438fb7a713b6bc510e5a4985f"
+    },
+    {
+      "original": ".work/vtm/bounded-hull-support-validation-workflow.log",
+      "path": "results/validation/vtm/bounded-hull-support/bounded-hull-support-validation-workflow.log",
+      "bytes": 1618,
+      "sha256": "905bc543060f258646e7d8401e9fdd20cf03e752f957f3b514b2163a5e968e2d"
+    },
+    {
+      "original": ".work/vtm/bounded_hull_support.py",
+      "path": "results/validation/vtm/bounded-hull-support/bounded_hull_support.py",
+      "bytes": 3663,
+      "sha256": "b309a71c904986e5ba02328a793bacb82f255ddf5866763e61f7e74758542b12"
+    },
+    {
+      "original": ".work/vtm/build_bounded_hull_support.py",
+      "path": "results/validation/vtm/bounded-hull-support/build_bounded_hull_support.py",
+      "bytes": 1927,
+      "sha256": "c82c07e1289b0d4b348fda354ca4da4b0a4c2fa0770f05b4504681c2d6d210d5"
+    },
+    {
+      "original": ".work/vtm/check-bounded-hull-support-final.py",
+      "path": "results/validation/vtm/bounded-hull-support/check-bounded-hull-support-final.py",
+      "bytes": 4735,
+      "sha256": "dab2bf442d44301145347d60ba7c68e48afd645409cf5c740b73d281f285cfeb"
+    },
+    {
+      "original": ".work/vtm/check-bounded-hull-support-pilots.py",
+      "path": "results/validation/vtm/bounded-hull-support/check-bounded-hull-support-pilots.py",
+      "bytes": 2107,
+      "sha256": "e6af07e4dda8c75b4b669be6fbfbacc4a60ec88880f81097252a9ec794a83726"
+    },
+    {
+      "original": ".work/vtm/publish-bounded-hull-support.py",
+      "path": "results/validation/vtm/bounded-hull-support/publish-bounded-hull-support.py",
+      "bytes": 5947,
+      "sha256": "e90e7eaeff6318400791d89d68d608ee55fd8463835dc4c9776852d4d628a453"
+    },
+    {
+      "original": ".work/vtm/run-bounded-hull-support-final.py",
+      "path": "results/validation/vtm/bounded-hull-support/run-bounded-hull-support-final.py",
+      "bytes": 4112,
+      "sha256": "f4d1dfba3fc916da186cd3551d786a7a6918f991924c65509184b93be7d55f03"
+    },
+    {
+      "original": ".work/vtm/run-bounded-hull-support-memory.py",
+      "path": "results/validation/vtm/bounded-hull-support/run-bounded-hull-support-memory.py",
+      "bytes": 2190,
+      "sha256": "a5094347fc2cc9bab05775f7a69d360ab7e80ee60b6e8c1f878bcef4644b5928"
+    },
+    {
+      "original": ".work/vtm/run-bounded-hull-support-native-resume.py",
+      "path": "results/validation/vtm/bounded-hull-support/run-bounded-hull-support-native-resume.py",
+      "bytes": 1935,
+      "sha256": "3635c7e680429ad96980c01ebf7440b2ce815696fa0bbc884c781be11d48639d"
+    },
+    {
+      "original": ".work/vtm/run-bounded-hull-support-native.py",
+      "path": "results/validation/vtm/bounded-hull-support/run-bounded-hull-support-native.py",
+      "bytes": 1969,
+      "sha256": "38bcd28ac4efd0fa8896727a90850eeef4bc97b008b23f979ece33f6c5325b58"
+    },
+    {
+      "original": ".work/vtm/run-bounded-hull-support-pilots.py",
+      "path": "results/validation/vtm/bounded-hull-support/run-bounded-hull-support-pilots.py",
+      "bytes": 2436,
+      "sha256": "6ae33bcea3687ed20befeb8ef4fd5e7f4719d3b5eee0526c9aae315cea9f8b79"
+    },
+    {
+      "original": ".work/vtm/run-bounded-hull-support-validation.py",
+      "path": "results/validation/vtm/bounded-hull-support/run-bounded-hull-support-validation.py",
+      "bytes": 2825,
+      "sha256": "5c2ebc662e3dcfb48bbae3162dc7b10f0b86246d42ea65579d4b377cc8ab03a3"
+    },
+    {
+      "original": ".work/vtm/run-bounded-hull-support.py",
+      "path": "results/validation/vtm/bounded-hull-support/run-bounded-hull-support.py",
+      "bytes": 93,
+      "sha256": "3cecc90dfe3c685d8dfe1aedad6a520bbdad2dcee4319cbffa91ed60c2b18733"
+    },
+    {
+      "original": ".work/vtm/test-bounded-hull-support-existing.py",
+      "path": "results/validation/vtm/bounded-hull-support/test-bounded-hull-support-existing.py",
+      "bytes": 254,
+      "sha256": "63bc1445dd413b483591891a05ea92580cd9531ebb2e09e3037f93cf3b8f3049"
+    },
+    {
+      "original": ".work/vtm/test_bounded_hull_support.py",
+      "path": "results/validation/vtm/bounded-hull-support/test_bounded_hull_support.py",
+      "bytes": 4137,
+      "sha256": "5545bea6e360fe0861a2bb9d18ca6602ba135cefd730889c79494581b922d5cb"
+    },
+    {
+      "original": ".work/vtm/write-bounded-hull-support-docs.py",
+      "path": "results/validation/vtm/bounded-hull-support/write-bounded-hull-support-docs.py",
+      "bytes": 9390,
+      "sha256": "d3b5ded65d5659d5dbdf07a8aedb8fe89edcdcb2d4e88f5e404dd028243ed977"
+    }
+  ]
+}

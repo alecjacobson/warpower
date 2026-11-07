@@ -91,6 +91,11 @@ class ReuseDelaunayWorkspace(DelaunayWorkspace):
                 max_rounds=reuse_max_rounds,
                 query_block_dim=self._facet_query_block_dim,
             )
+            # The filter just certified these cells against the current input.
+            # Keep that proof through this completion even beyond the ordinary
+            # small-cloud query threshold; only newly introduced cells need
+            # another sphere check. No proof survives a call to run().
+            self._reuse_completion._certificate.point_parallel = True
             self.reuse_seeds = self._reuse_filter.tetrahedra_count
             self.reuse_rounds = self._reuse_completion.rounds
             wp.load_module(module=__name__, device=self.device)

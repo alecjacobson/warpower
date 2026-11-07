@@ -89,7 +89,9 @@ class ActiveDelaunayWorkspace:
         ):
             raise ValueError("active_count must be one contiguous device int32")
         self.active_count = active_count
-        self._full = DelaunayWorkspace(points, **options)
+        self._full_reuses_cells = 2048 < len(points) <= 4096
+        full_constructor = ReuseDelaunayWorkspace if self._full_reuses_cells else DelaunayWorkspace
+        self._full = full_constructor(points, **options)
         self.points, self.n, self.device = self._full.points, self._full.n, self._full.device
         # Reuse the full output allocation, but never expose its stale face index.
         self.tetrahedra = self._full.tetrahedra
@@ -126,6 +128,8 @@ class ActiveDelaunayWorkspace:
     def clear_reuse(self):
         """Start a fresh trajectory; all operations are device graph nodes."""
         self.route_calls.zero_()
+        if self._full_reuses_cells:
+            self._full.clear_reuse()
         for child in self._children:
             child.clear_reuse()
             child._preferred.zero_()

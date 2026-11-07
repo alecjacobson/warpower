@@ -273,8 +273,8 @@ class SelectiveUpdate:
             wp.load_module(module=__name__, device=self.device)
             wp.load_module(module="warpower._extraction", device=self.device)
 
-    def _launch(self, kernel, dim, args):
-        wp.launch(kernel, dim, inputs=args, device=self.device)
+    def _launch(self, kernel, dim, args, *, block_dim=256):
+        wp.launch(kernel, dim, inputs=args, device=self.device, block_dim=block_dim)
 
     def reset(self):
         self.rejections.zero_()
@@ -333,6 +333,7 @@ class SelectiveUpdate:
                 self.keep,
                 self.quality,
             ],
+            block_dim=32,
         )
         self._launch(
             summarize,

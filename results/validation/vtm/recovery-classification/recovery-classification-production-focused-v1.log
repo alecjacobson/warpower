@@ -1,0 +1,282 @@
+..F..F..F..F..F..F..F..F..F..F..F..F.................................... [ 45%]
+........................................................................ [ 91%]
+.............                                                            [100%]
+=================================== FAILURES ===================================
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[ordinary-1e-30-nested-positive] _
+
+shape = 'nested-positive', scale = 1e-30, mode = 'ordinary'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[ordinary-1.0-nested-positive] _
+
+shape = 'nested-positive', scale = 1.0, mode = 'ordinary'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[ordinary-1e+30-nested-positive] _
+
+shape = 'nested-positive', scale = 1e+30, mode = 'ordinary'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[missing-witness-1e-30-nested-positive] _
+
+shape = 'nested-positive', scale = 1e-30, mode = 'missing-witness'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[missing-witness-1.0-nested-positive] _
+
+shape = 'nested-positive', scale = 1.0, mode = 'missing-witness'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[missing-witness-1e+30-nested-positive] _
+
+shape = 'nested-positive', scale = 1e+30, mode = 'missing-witness'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[all-missing-1e-30-nested-positive] _
+
+shape = 'nested-positive', scale = 1e-30, mode = 'all-missing'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[all-missing-1.0-nested-positive] _
+
+shape = 'nested-positive', scale = 1.0, mode = 'all-missing'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[all-missing-1e+30-nested-positive] _
+
+shape = 'nested-positive', scale = 1e+30, mode = 'all-missing'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[empty-1e-30-nested-positive] _
+
+shape = 'nested-positive', scale = 1e-30, mode = 'empty'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[empty-1.0-nested-positive] _
+
+shape = 'nested-positive', scale = 1.0, mode = 'empty'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+_ test_synthetic_centers_preserve_search_limit_and_error_semantics[empty-1e+30-nested-positive] _
+
+shape = 'nested-positive', scale = 1e+30, mode = 'empty'
+
+    @pytest.mark.parametrize("shape", ["cube", "torus", "nested-positive"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    @pytest.mark.parametrize("mode", ["ordinary", "missing-witness", "all-missing", "empty"])
+    def test_synthetic_centers_preserve_search_limit_and_error_semantics(shape, scale, mode):
+        if shape == "cube":
+            p, f = cube()
+        elif shape == "torus":
+            p, f = torus(12, 6)
+        else:
+            # Both shells point outward: the origin has winding count two, which
+            # must retain the full classifier's error instead of becoming inside.
+            p, f = combine(cube(), cube(0.4))
+        p = (p * scale).astype(np.float32)
+        domain = warpower.SurfaceDomain(p, f)
+>       assert domain.error.numpy()[0] == 0
+E       assert np.int32(32) == 0
+
+tests/test_selection_classification.py:63: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[ordinary-1e-30-nested-positive]
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[ordinary-1.0-nested-positive]
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[ordinary-1e+30-nested-positive]
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[missing-witness-1e-30-nested-positive]
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[missing-witness-1.0-nested-positive]
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[missing-witness-1e+30-nested-positive]
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[all-missing-1e-30-nested-positive]
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[all-missing-1.0-nested-positive]
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[all-missing-1e+30-nested-positive]
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[empty-1e-30-nested-positive]
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[empty-1.0-nested-positive]
+FAILED tests/test_selection_classification.py::test_synthetic_centers_preserve_search_limit_and_error_semantics[empty-1e+30-nested-positive]
+12 failed, 145 passed in 71.90s (0:01:11)

@@ -10,9 +10,10 @@ containment/exterior recovery, volume and final validity schedule.
 Only the private surface-metric hook changes. Its three unused distance fields
 (`_surface_integral`, `surface_rms_distance`, and `surface_max_sample_distance`)
 are zero and explicitly unavailable. The public `ExtractionWorkspace`, quality
-moves and final mesher outputs still compute full diagnostics. Circumcenter
-classification distances and exterior-band behavior are unchanged. There are
-no additional device arrays, public options, or runtime Python substitutions.
+moves and final mesher outputs still compute full diagnostics. This surface-status
+change retains the original circumcenter classification and exterior-band
+behavior; a subsequent [private inside-classification optimization](selection-interior-status.md)
+uses a separate center bound. Neither change adds device arrays or public options.
 
 ## Error-preserving witness
 
@@ -164,9 +165,9 @@ The graded-scan native trace attributes the saved work directly:
 The baseline is the retained graded-scan profile from #193. These first-launch
 profiles explain the optimization and are separate from the clean warmed
 performance pairs. Full nearest-distance work remains at the 39 consumers that
-need it. Classification is now the largest remaining cost on this trajectory;
-[#194](https://github.com/alecjacobson/warpower/issues/194) tracks whether its
-private distance requirements can also be reduced with error equivalence.
+need it. Classification became the largest remaining cost on this trajectory;
+the subsequent [inside-classification optimization](selection-interior-status.md)
+(#194) addresses its private distance requirements separately.
 The bounded boundary-sample witness proof above does not automatically apply to
 potentially unbounded circumcenters.
 

@@ -1,0 +1,1184 @@
+{
+  "public_classify_source_sha256": "0275c34e9053e9780fe27c0ef17d424d5e44d3414e21b7850475caec4e241e87",
+  "baseline": "f338eb5c5d90c58806d7b794769c309729567392",
+  "runtime": "57c42cb5d196c8ffca6fee845259d89df4f11130",
+  "scope": "Private selection skips nearest distances only for proved inside centers; its distance buffer has only a sign contract. All outside/unsupported queries and public full distances/diagnostics retain original behavior. Full production meshes published; earlier instrumented/pilot meshes retained privately with hashes. No quality-matched CPU speedup claim.",
+  "source_sha256": {
+    "warpower/_selective.py": "8d1afafaf8db2b598b2a9f0c2cde01f4161195c844f8b6e7091d6e7493279c15",
+    "warpower/_extraction.py": "f69cf3a721103fe751c2ffeaebd9a22d85d31213e2df5ca7a03959a31654f889",
+    "tests/test_selection_extraction.py": "1d4da4cbff877ca67a9e8ead3191e9616aaa727426588aab519db4a564e0ea2a",
+    "tests/test_selection_classification.py": "4fd088676c03625b7d1e953e1cf103038495df3f35e52b2e6fe624443538f0af",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "examples/vtm_gallery.py": "8e39899ba4ec7b98dee840f73ccc330c57ac2a398faff3efc103dabb57af4acf",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f"
+  },
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    }
+  ],
+  "shared_helpers": [
+    {
+      "path": "results/validation/vtm/recovery-diagnostics/check-recovery-diagnostics-final.py",
+      "sha256": "a5f8e841860e9240130d7489cb812af99d00e55b51271b75956b02d9e0d5ba33"
+    },
+    {
+      "path": "results/validation/vtm/current-selection/check-current-selection-final.py",
+      "sha256": "7bb687215eaab9dd14282e86fbb68776860c481705dc413f5e554a21bfadd243"
+    },
+    {
+      "path": "results/validation/vtm/shared-wall/check-shared-wall-final.py",
+      "sha256": "b6f3d81588e92df34ab8e97b71f943e1fd0938798d7d72d92b14ed05e1769669"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    },
+    {
+      "path": "results/validation/vtm/analytic-filters/boundary-timing-commands.json",
+      "sha256": "c75b0a3c89cf49e7e1dec7a109ec6a7497370ddcc801f2c22ad78cc4c6174c49"
+    },
+    {
+      "path": "results/validation/vtm/recovery-diagnostics/recovery-diagnostics-native-audit-summary.json",
+      "sha256": "2a30000ec36ccd1143b87f9e350c4caa1a3c641ed2bd49fd6a336dd999629a2f"
+    }
+  ],
+  "reference_binaries_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "private_pilot_meshes": [
+    {
+      "path": ".work/vtm/recovery-classification-pilot-v1/candidate/boundary.off.gz",
+      "sha256": "8c52fec42d824cd0431b746992f801715063f7463d96849346e4eff4ae7e7ec0",
+      "bytes": 139471
+    },
+    {
+      "path": ".work/vtm/recovery-classification-pilot-v1/candidate/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "path": ".work/vtm/recovery-classification-pilot-v1/candidate/mesh.npz",
+      "sha256": "0ba2f35981cd8b8f83259de7c353c00a8b2fb91f4bfca43d99d5990368da0968",
+      "bytes": 1612354
+    },
+    {
+      "path": ".work/vtm/recovery-classification-pilot-v1/candidate/mesh.vtu.gz",
+      "sha256": "27a6556210a67669467eafa7eed9a8da182567cc5277a666b6cfdc3fffe5ac60",
+      "bytes": 428078
+    },
+    {
+      "path": ".work/vtm/recovery-classification-pilot-v1/control/boundary.off.gz",
+      "sha256": "021a9d10354a9aa810879f98927b5b146d9ef9497e9a4a45f7fdc6b186c2b389",
+      "bytes": 139465
+    },
+    {
+      "path": ".work/vtm/recovery-classification-pilot-v1/control/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "path": ".work/vtm/recovery-classification-pilot-v1/control/mesh.npz",
+      "sha256": "4e77ad1e069c6b88ad3f421583aa2a3ef022980cb4fcbe38d986c831cbe11716",
+      "bytes": 1612484
+    },
+    {
+      "path": ".work/vtm/recovery-classification-pilot-v1/control/mesh.vtu.gz",
+      "sha256": "3a3eb620279db47a199e43775e8169c0992a848f3b7a65e81a0b105e76f4c504",
+      "bytes": 427911
+    }
+  ],
+  "files": [
+    {
+      "original": ".work/vtm/analyze-recovery-classification-audit.py",
+      "path": "results/validation/vtm/recovery-classification/analyze-recovery-classification-audit.py",
+      "bytes": 3663,
+      "sha256": "b6fbac984ee6dee7fc7334f61d1e5bd6ea0f41cc9ddd0aa4c3f17420266e2ad5"
+    },
+    {
+      "original": ".work/vtm/check-recovery-classification-final.py",
+      "path": "results/validation/vtm/recovery-classification/check-recovery-classification-final.py",
+      "bytes": 5730,
+      "sha256": "9b90d9578433d21af0111b4fe71174d0c7ce809694a5930188e4242764a4071c"
+    },
+    {
+      "original": ".work/vtm/check-recovery-classification-pilot-v1.py",
+      "path": "results/validation/vtm/recovery-classification/check-recovery-classification-pilot-v1.py",
+      "bytes": 1603,
+      "sha256": "9503c8e2ac4f73dd62ba25d542b6bf14bbd035091659aabf9ca275d547cb1ca3"
+    },
+    {
+      "original": ".work/vtm/check-recovery-classification-public-quality.py",
+      "path": "results/validation/vtm/recovery-classification/check-recovery-classification-public-quality.py",
+      "bytes": 2333,
+      "sha256": "3d2d684438af32511841be444159f910e35db4aea7fc85b647c73a671911d8a3"
+    },
+    {
+      "original": ".work/vtm/publish-recovery-classification.py",
+      "path": "results/validation/vtm/recovery-classification/publish-recovery-classification.py",
+      "bytes": 7148,
+      "sha256": "72941959f1ff357787ce390896a4ef56d2678e0475d45df8c02a0101d9c89e84"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-experiments-v1.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-experiments-v1.json",
+      "bytes": 3401,
+      "sha256": "060c9deb6990bea146326174f79d50d7f2f825ce1625ba45ead1ff0ee157c8a7"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-after/boundary.off.gz",
+      "bytes": 139486,
+      "sha256": "6cd69fd93d6a11686294112a7c4f3e2c32df8361a3e40081916ff510dbd1d9fe"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-after/mesh.npz",
+      "bytes": 1612033,
+      "sha256": "4814397c2a91df65e270162ea80bf3e94946fd9775c9a124a094f86218b175e8"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-after/mesh.vtu.gz",
+      "bytes": 427652,
+      "sha256": "c9287ac1655e6077f9a92b09f991c50fd9bc3c264ae425d2e05b119c8ab9e8cf"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-after/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-after/result.json",
+      "bytes": 3746,
+      "sha256": "10ba2553519d63ca8fdd1f984af4f2c0c9c1087fb2e73519f2f45f0ae17774e4"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-after.log",
+      "bytes": 8528,
+      "sha256": "4cbc76a1e63c7147687e3d41a393523822a5bbbedfeb124de7a6b75e83af0dfa"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-before/boundary.off.gz",
+      "bytes": 139480,
+      "sha256": "61f852b9fbc6ed8208e8ca9c7832896913aa6c36f8f560055559bf0bdc8feda9"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-before/mesh.npz",
+      "bytes": 1612254,
+      "sha256": "8f90192dc4390e3fa8cff2a6575fb532986597f1924757f954a1954475ffe683"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-before/mesh.vtu.gz",
+      "bytes": 427968,
+      "sha256": "5b2ed2c411cba715731d912d66944904569523f374a3d36cc8e1119be3eba24a"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-before/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-before/result.json",
+      "bytes": 3743,
+      "sha256": "f2e5dbb7c949f3ac120409e3f119e3c41455adfe14215d929afa5384b1b202c3"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-graded-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-before.log",
+      "bytes": 8525,
+      "sha256": "b98257cb35cbe8cfb0499ac75f1301312f86470c789c8ad38c57a25977deca23"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-after/boundary.off.gz",
+      "bytes": 140819,
+      "sha256": "fee03dc89c78e3a29f23df80bd3dfeb371c7ade991b39122dfd6141464afd4f4"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-after/mesh.npz",
+      "bytes": 1610627,
+      "sha256": "aab19435d988119cbb659cd43b21eb73eee8a0093d96cade463e1a10c401479c"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-after/mesh.vtu.gz",
+      "bytes": 423156,
+      "sha256": "3d5092250f0d6c61a7c1ba1c716ca144d9c7d0d2d3d47449e435601be987f8e2"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-after/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-after/result.json",
+      "bytes": 3745,
+      "sha256": "3938bc4d2dd0c70e6c3cfb121e634ded97716461b109281400c94ff3fbe3d9d9"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-after.log",
+      "bytes": 8441,
+      "sha256": "b86c427b47c2cfadfd05805fad65b35f0a344654be9858870e7f2f4721d14b34"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-before/boundary.off.gz",
+      "bytes": 140779,
+      "sha256": "863f85a162c8d18d1b47cf2590bd8cad20ca9ea8b61e9d9df8d978b1c407c791"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-before/mesh.npz",
+      "bytes": 1610427,
+      "sha256": "8fb6ab98e2a8d3c39713c6cd971f18c43199b2ddc1c914ea79fbfb6c2aab38ee"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-before/mesh.vtu.gz",
+      "bytes": 423410,
+      "sha256": "c93b97e9504fd1163cdad1e0762b31e921bade756697d7233d745873555343ca"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-before/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-before/result.json",
+      "bytes": 3749,
+      "sha256": "c101f2ef56b802ca7c865161d5bb7b66b0e927d050e68fd8ad03b57e91f5161a"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/armadillo-uniform-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-before.log",
+      "bytes": 8445,
+      "sha256": "828704bffc439cdbec9ca92e73427eb150c91c4b7c31f041a08371753a6eb64b"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-after/boundary.off.gz",
+      "bytes": 30603,
+      "sha256": "919176996b3caaf3bd75d422a80108f40431c1a9c85835a3b9d3c01f33c62097"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-after/input.off",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-after/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-after/mesh.npz",
+      "bytes": 108768,
+      "sha256": "0f918959578ba60924456097e4178baf2fec3aea9d355cc4216d900cef21964e"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-after/mesh.vtu.gz",
+      "bytes": 92573,
+      "sha256": "23b096574f50b278f4e389f05fd2ff88a25d34a9ebdbb0f18f3855c94dc1e2d1"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-after/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-after/result.json",
+      "bytes": 3648,
+      "sha256": "85a3fa63d267a056fe7f03498a82183bec4ba8654a9f560a066440ed5bdb7262"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-after.log",
+      "bytes": 8256,
+      "sha256": "f1729e3510860fc8f2f53ea58c54d4f067324c2fc26964928d50828f682f2657"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-before/boundary.off.gz",
+      "bytes": 30616,
+      "sha256": "dd02c6c3bc93774c33df250cb6af306a472ee3b23edb81e0c7fbf2a15424c4b5"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-before/input.off",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-before/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-before/mesh.npz",
+      "bytes": 108474,
+      "sha256": "b50da1cf6a49ca8cb4eb6a07f4da9d6dee9f371c8ec406a99923b8ad670712f4"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-before/mesh.vtu.gz",
+      "bytes": 92469,
+      "sha256": "318b50382d9775ec72bee9e5a45c84d7d666752cca6c2aa58ddfc0ca0b2b4557"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-before/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-before/result.json",
+      "bytes": 3651,
+      "sha256": "47ea4df6febe9586b6dec959c7127a7d654cae2161bdc1dfd4434168f32869d3"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/cavity-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/cavity-before.log",
+      "bytes": 8259,
+      "sha256": "8cfaa4c28aa60a59f82d60c2f1d73742a20e40a6323dede2e287eed005421962"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/commands.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/commands.json",
+      "bytes": 23552,
+      "sha256": "4b1c049e2bec17507c873bb5f19d675cc1161e268e4602db327a40fd3eb903ec"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay-fitted-hand-after.json",
+      "bytes": 2846,
+      "sha256": "50b39fb8fbb06151871dd2e76052bd77974269936ee97279339485868638173b"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay-fitted-hand-after.log",
+      "bytes": 5142,
+      "sha256": "1abd8515ff1bcde8945ba8f32c9904610b18eec2501bc15ba8f4012b0d1c1ad9"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay-fitted-hand-before.json",
+      "bytes": 2841,
+      "sha256": "05a1af9a5b6c241c236d61f18888471887924915a4aab31cbec51225ebde3b54"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay-fitted-hand-before.log",
+      "bytes": 5137,
+      "sha256": "a9eadefbf4a16e4132cd1c4010e2cd911b7e658b96d50a7a2cf0a9998ea7b643"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay-grid-after.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay-grid-after.json",
+      "bytes": 2838,
+      "sha256": "b03c36a2397cf3ee36b04397f943e6f825d7a22df154c458de7a35ea55870171"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay-grid-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay-grid-after.log",
+      "bytes": 4877,
+      "sha256": "82db106c20a3cbb6db7a87f1ef2d99fd4e3073b40b3417e9f353a35e4e9679c4"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay-grid-before.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay-grid-before.json",
+      "bytes": 2834,
+      "sha256": "556c03ac897c410f12b4a3eb8650c6af9d992ab9ba26da88aa72df1221f5d4c6"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay-grid-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay-grid-before.log",
+      "bytes": 4873,
+      "sha256": "336460c9ea603a8e219453b630b04770a4a88d1dba23b418567cf98db06d6788"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay1000-after.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay1000-after.json",
+      "bytes": 2824,
+      "sha256": "8a058b8695794eee81f83b63a90c6c04d49ebc54c9738c2c64052ef896ef9799"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay1000-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay1000-after.log",
+      "bytes": 5120,
+      "sha256": "efe3d5ff802c6c12f24d0f7fd8253308bfe274c75f5961b3699b4a8e4952cb31"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay1000-before.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay1000-before.json",
+      "bytes": 2824,
+      "sha256": "4ebc0bfef2d0b8415a5229458fedc170addd3f23a1b20b1f65cebe0b4d93bf6e"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay1000-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay1000-before.log",
+      "bytes": 5120,
+      "sha256": "74853ae872a6372c1f58a08eea5a039c35f2acd08774284bbc6f310baedd6cb1"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay100000-after.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay100000-after.json",
+      "bytes": 2831,
+      "sha256": "672bd6f518ca739c18ac3cff03d4e8127181896c52ca3f0142f4cfef1516c0c4"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay100000-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay100000-after.log",
+      "bytes": 5061,
+      "sha256": "118df5e222a3941ecd834dedb7916bf8f1b41f34e7ccd41facfc44bddd6d099f"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay100000-before.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay100000-before.json",
+      "bytes": 2832,
+      "sha256": "34758c9fb3e95308599d67a359f2d217ea352628487f732e5ce8b55b451f1d75"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/delaunay100000-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/delaunay100000-before.log",
+      "bytes": 5062,
+      "sha256": "1c7648c8ff00c81a97afacf7953d751c1c259c5cc121e3fdc82ac419e910283a"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/diagram100000-after.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/diagram100000-after.json",
+      "bytes": 2568,
+      "sha256": "875f8d971d701a191d99c4298c62fffbfbb7d1ae87e4e35a7acff19c8c423d6f"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/diagram100000-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/diagram100000-after.log",
+      "bytes": 3439,
+      "sha256": "8d97b2da8b403a5385ea060b79dfed8f2b8da3c5609310034797161e59ae5db7"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/diagram100000-before.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/diagram100000-before.json",
+      "bytes": 2562,
+      "sha256": "a4d4d9be40964b26c7e932fd941c48458021fbe43488430b7cc5c80440cc464e"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/diagram100000-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/diagram100000-before.log",
+      "bytes": 3433,
+      "sha256": "4e57683bde96ad218feb61a96bd0c86dc7dd21ee4c3312dad97e9950484a9de2"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-after/boundary.off.gz",
+      "bytes": 30548,
+      "sha256": "741437d76d3151f12f3450ba764b313e549066ea5df2e96952af4012b1cde25b"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-after/input.off",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-after/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-after/mesh.npz",
+      "bytes": 110183,
+      "sha256": "0d8c04099758f60bd15a423b2e40bc8a321432016efa4d3a38a2cf7eb82b5ca0"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-after/mesh.vtu.gz",
+      "bytes": 88172,
+      "sha256": "a36dd5ffb76631a2a9255d18fd3f6ca4f8995f266687137d5998431659f2de9c"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-after/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-after/result.json",
+      "bytes": 3664,
+      "sha256": "003fd31edc06e0a835e434346ce287ad06d08567170e4217dbd69265ab7e84be"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-after.log",
+      "bytes": 8272,
+      "sha256": "277c55ab264a48b70c0debe945779e5f7fb99d705e883c400a925cd9c16b42fd"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-before/boundary.off.gz",
+      "bytes": 30545,
+      "sha256": "9e6ebc835aea17e91463e4d2a231b4fd2bc7c64d7232ff69a9c46947e360906a"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-before/input.off",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-before/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-before/mesh.npz",
+      "bytes": 110048,
+      "sha256": "a44dd1da2062529af2884b0c1f4512f0f70150f4b740c7babc2b7aec241e2f0b"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-before/mesh.vtu.gz",
+      "bytes": 88104,
+      "sha256": "f58b470ad77a148c22a57753e706e270532b9d465dabcc7431992f059b622051"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-before/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-before/result.json",
+      "bytes": 3664,
+      "sha256": "93e1d9009c8ff1a5673f0085167550599aa854b59ce70d8c12bf6b484b38e7cf"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/disconnected-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/disconnected-before.log",
+      "bytes": 8272,
+      "sha256": "3c10c8db4afec7f34bb07643443fb439a243b5c51a9083392b05785272edf487"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-after/boundary.off.gz",
+      "bytes": 133262,
+      "sha256": "acb27ef39f0338e1425c73de64b93b73fa28cd8db66baecd868b17a839959c07"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-after/input.off",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-after/mesh.npz",
+      "bytes": 571733,
+      "sha256": "db621e2c6f914a83a81fcec755c862f81decb3a32d46eafe465b367f23079236"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-after/mesh.vtu.gz",
+      "bytes": 452987,
+      "sha256": "2c434e363e4d5bdaca93cda59bfb4b455e7f176152a174a25a1fdfe6948a0d65"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-after/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-after/result.json",
+      "bytes": 3663,
+      "sha256": "63715676fe405edf9a26aca52cec720872e5de49d3b8ff4dfc68abdb24eac48d"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-after.log",
+      "bytes": 8445,
+      "sha256": "3868c633a6457452646e32bef1eee1b76a4f7c2d6ba7279d1b0f77869e8492c7"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-before/boundary.off.gz",
+      "bytes": 133254,
+      "sha256": "0947e7d4a6b6ae39b31b8896790dd174d8108d84d9a66ecac001dcaf4024e93d"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-before/input.off",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-before/mesh.npz",
+      "bytes": 572140,
+      "sha256": "d74846a298b1ebeacc34abf9174db9a05b2496a228cf48730a3fdcb09c5d897c"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-before/mesh.vtu.gz",
+      "bytes": 453133,
+      "sha256": "0e202194c551a589ae3abf8759bae066ac70bd5774baef3f323bbc045199fefd"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-before/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-before/result.json",
+      "bytes": 3662,
+      "sha256": "76a83667e5d6421ac562da2b0000eb43a3feefced901126effcbcd7f7573e7e1"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/graded-torus-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/graded-torus-before.log",
+      "bytes": 8444,
+      "sha256": "b6adc2995071e920dfe92f396f279cabf76a585b8d38253694ce2897aef7f69c"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-after/boundary.off.gz",
+      "bytes": 28759,
+      "sha256": "a2fd95660d1391811b402f6b771d266983a7db93889ad7f4336edc464c5fc5e1"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-after/input.off",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-after/mesh.npz",
+      "bytes": 98559,
+      "sha256": "8aa24f6894059cfcb0448bcb01049ef4d7e3927d3d8fd2cac2a2f52a1c804b1f"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-after/mesh.vtu.gz",
+      "bytes": 70676,
+      "sha256": "5d7f4f3a0526b5fae821863caea2244abed5945f173ceb77a2f042099ef50d68"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-after/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-after/result.json",
+      "bytes": 3662,
+      "sha256": "f8c5f2247dd27b1d766818157d32e1a45b392ac2e419170aa7bc222d93a0112c"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-after.log",
+      "bytes": 8270,
+      "sha256": "7e5de7dd8c282ea787ddbeb6e50c8fec0875550341514032db3166535689f48a"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-before/boundary.off.gz",
+      "bytes": 28739,
+      "sha256": "b48d176909043281a69cd05e03f51e3104a744ee2acd025923e7c483eeb456ab"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-before/input.off",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-before/mesh.npz",
+      "bytes": 98519,
+      "sha256": "ba33e724afb5c80be55f8782e77056c9fd85012ebe7d577a48073c6be560b8c3"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-before/mesh.vtu.gz",
+      "bytes": 70589,
+      "sha256": "a6f5635cd06cdec67b4bef8faa5d531094bc567bcf44f7daab3054d20a0a4f28"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-before/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-before/result.json",
+      "bytes": 3665,
+      "sha256": "7c740757838af726d6bea94b87a6c535ce116c8c4bbbac13aef315551814470e"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/thin-hand-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/thin-hand-before.log",
+      "bytes": 8273,
+      "sha256": "e80e85af487ad5a6719224c8e567a21d0f38ea8aeb0559f8aead1c1122096e39"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus1000-after.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus1000-after.json",
+      "bytes": 2952,
+      "sha256": "db4dd046faa99b634b1cf1e78915545d3e6e54d75c8075228177a0212e252e7e"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus1000-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus1000-after.log",
+      "bytes": 7646,
+      "sha256": "e37654c1795fec5259afaa9580d47edaff9629c675179e4001958d0fa884a21f"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus1000-after.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus1000-after.npz",
+      "bytes": 91583,
+      "sha256": "ac3112f62733aa12e0871396f3a3e07ced483346f626b1b4e45e55d1281381bb"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus1000-before.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus1000-before.json",
+      "bytes": 2951,
+      "sha256": "14e07d6608d78d0ae6f965edac5ec134454036de10b5a945a8889a6ec8613afa"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus1000-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus1000-before.log",
+      "bytes": 7645,
+      "sha256": "7f36689201e4aa970dc96b53a59170071c14f4637cd4c4ef08ea6fa3fcce97db"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus1000-before.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus1000-before.npz",
+      "bytes": 91477,
+      "sha256": "99f7d326978dfa7d385271f26e6f627d29356201f87f9945ff69409f82b6097b"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus4096-after.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus4096-after.json",
+      "bytes": 3092,
+      "sha256": "7f284c8962c2798934bed7d36ea8ddb9e35b7b476be5d5a12a6f78674ca359e9"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus4096-after.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus4096-after.log",
+      "bytes": 7816,
+      "sha256": "5b43c53777b492124219a601ab0bbc67e82732925f491dfc893dc307e59d31c7"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus4096-after.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus4096-after.npz",
+      "bytes": 419218,
+      "sha256": "eda4afbd3d7c4fdfe0cd502cd9605f0570c75942680fea297b8fd95b965451c8"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus4096-before.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus4096-before.json",
+      "bytes": 3092,
+      "sha256": "2a3540acd3a6a11492ba65768cf03a78c536e816aab03834af3b76643960b98f"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus4096-before.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus4096-before.log",
+      "bytes": 7816,
+      "sha256": "74c37405114b864bcc743947e59a391889de0b68f9ea40172e096818dd3da39f"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final/torus4096-before.npz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final/torus4096-before.npz",
+      "bytes": 419253,
+      "sha256": "faf1618e668f0922d7798edf773057e77e507d6fa3b5d26322c2cbb2c377aa10"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final-independent.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final-independent.json",
+      "bytes": 38352,
+      "sha256": "3a937dca337faea10ee4171d8e42b0f4319286c5c5028470ea5769979e00d809"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final-independent.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final-independent.log",
+      "bytes": 6052,
+      "sha256": "4ba02149f44a0b5ad4567d29f7f3a969b8f5ce7a053c8ba2998a3628f1ecea30"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final-lossless-archives.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final-lossless-archives.json",
+      "bytes": 9111,
+      "sha256": "09bd6cdaa3ee2ae78314c9e8be1c83bc1325a6e225f34b467f1c7fee6fc12b1c"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-final.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-final.log",
+      "bytes": 19711,
+      "sha256": "111279943b0dec456e543bc93718b2ffb48075e5a0116d3322935bdebd12e074"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-full-native-audit.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-full-native-audit.json",
+      "bytes": 1182,
+      "sha256": "1ef79c4e10990ddbcc6d2886ff6f84d40a21a7790cba4d605b011995966d577c"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-full-native-audit.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-full-native-audit.log",
+      "bytes": 1182,
+      "sha256": "1ef79c4e10990ddbcc6d2886ff6f84d40a21a7790cba4d605b011995966d577c"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-full-native-export.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-full-native-export.log",
+      "bytes": 8101,
+      "sha256": "56ec687d2c73ce52cada4fc9b4db8f72d4d01cc5415c58c8481d82de5167ea7b"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-full-native.dot.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-full-native.dot.gz",
+      "bytes": 1630129,
+      "sha256": "47291d22dfa6071d7b0d33443af98b74952d74bc2dc62dd8a73974dfad4b2620"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-full-native.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-full-native.json",
+      "bytes": 441,
+      "sha256": "979c0d0cac8a027d053f1905bb3d489861619cc7f1d142aaaf89f0a54ac05308"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-full-native.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-full-native.log",
+      "bytes": 9780,
+      "sha256": "096400e9efe89944bfe174f307b12fda4ba14378347a6bbbc4fc0a906528e504"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-full-native.nsys-rep.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-full-native.nsys-rep.gz",
+      "bytes": 3422615,
+      "sha256": "a4ba56c878f8c15cfe123a60964d82ff274c5bf9240b24806ffb01c056ffd22b"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-full-native.py",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-full-native.py",
+      "bytes": 1927,
+      "sha256": "ee6d8528160bd09a87848ffa2c409fadf0f2bc9043f2181b276b4da4333c1c30"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-full-suite.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-full-suite.log",
+      "bytes": 1152,
+      "sha256": "01710c823a8933ae2a6dfcacb36ed28af3c4785eb0514dfbd355d70729a3a3e8"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-full-trace-archive.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-full-trace-archive.json",
+      "bytes": 216,
+      "sha256": "c02886ada469211b1fde35ba7a48ce9964d1b2fe9aaec1d7d55f167c218a5934"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-inside-v1-proof.md",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-inside-v1-proof.md",
+      "bytes": 2461,
+      "sha256": "2395d9a50afd65e1cfc05e4c9e205eba513788931e36af3b7394f90d994acafe"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-loop-native-audit.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-loop-native-audit.json",
+      "bytes": 1293,
+      "sha256": "4f80d6f69e82ee5fff5c8ed7ff0ff50f287d31da2ac3463f89c06beb96b61fb0"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-loop-native-audit.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-loop-native-audit.log",
+      "bytes": 1293,
+      "sha256": "4f80d6f69e82ee5fff5c8ed7ff0ff50f287d31da2ac3463f89c06beb96b61fb0"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-loop-native-export.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-loop-native-export.log",
+      "bytes": 8101,
+      "sha256": "ae8640946db6930536b0943d66324b155749de2ea9c2a5f4fda270bf5913ee64"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-loop-native.dot.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-loop-native.dot.gz",
+      "bytes": 7339,
+      "sha256": "0d2f699c03dc52a10cb76a53961142824b4c40ba5e6144a58fd937f3fd33106b"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-loop-native.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-loop-native.json",
+      "bytes": 2442,
+      "sha256": "efe85f6964621d219a2c18f81007bf017f2d05bf8ad0a4db1801652dd84acd18"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-loop-native.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-loop-native.log",
+      "bytes": 4141,
+      "sha256": "80b871b1dfa1830adecaacd68f34f1ccc054bb4d04737f519c2f8b39da70c2c6"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-loop-native.nsys-rep.gz",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-loop-native.nsys-rep.gz",
+      "bytes": 54382,
+      "sha256": "981d9b1743eadf0a0031af2208d2ff9418da40f00171ecc389c379f95d1b036f"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-loop-native.py",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-loop-native.py",
+      "bytes": 6269,
+      "sha256": "9cf29e87fb0aade367c3af6f4c3b2259c0702477f7bed0b8060574b1452faf42"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-loop-trace-archive.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-loop-trace-archive.json",
+      "bytes": 213,
+      "sha256": "073e8a5875c2368fde7663570705ecc89b484d6dbe96118bbc275fbce5ea673d"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-memory-v1-commands.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-memory-v1-commands.json",
+      "bytes": 2661,
+      "sha256": "f446d4b4aea0ec0876fa30676b7c8a80df1003cb3a0f31887bc81710cea2f7cb"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-memory-v1.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-memory-v1.log",
+      "bytes": 2166,
+      "sha256": "b911c71e6b0de9b2331573b3d2fdbb2d0922f3e5437fbea58f1921154fd780f2"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-native-analysis.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-native-analysis.log",
+      "bytes": 52,
+      "sha256": "d57844623195595e160ca2368172c922c45e4f6ceccafe6885fb82ba47f55833"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-native-audit-summary.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-native-audit-summary.json",
+      "bytes": 51789,
+      "sha256": "57a1b71dde415b96ec61af7c4ff994d668f5bf168138b40ac9217dca63a510c6"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-native-commands.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-native-commands.json",
+      "bytes": 2054,
+      "sha256": "e868dd5dec79abc67f78dd4d2e3b981d3751d826ec4f4241a93ffca3dd028fd4"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-native.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-native.log",
+      "bytes": 1730,
+      "sha256": "96d48a78ea504ba02431cb4484a00ad5723de8ba6cb566e7109bbdd2de519206"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-observer-v1.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-observer-v1.json",
+      "bytes": 4374,
+      "sha256": "cce7fe99bdbacb666d4f263831000672d7be02a51cd90b101d4b529248605db8"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-observer-v1.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-observer-v1.log",
+      "bytes": 8414,
+      "sha256": "4107aacb7ee1c1eb09e27f5fcc8110fff2f1a0edcddc2fe27de609f4042e41dd"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-pilot-v1/candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-pilot-v1/candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-pilot-v1/candidate/lossless-exports.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-pilot-v1/candidate/lossless-exports.json",
+      "bytes": 589,
+      "sha256": "e20f1cdfe6593cef92929100bf9fbf71966fae3b57eb9c7ba529912fb7440457"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-pilot-v1/candidate/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-pilot-v1/candidate/result.json",
+      "bytes": 3746,
+      "sha256": "25bbd6ef5e43234acee33d667f5bd7c6871539fcffa4e419c662ba0e5542c02c"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-pilot-v1/candidate.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-pilot-v1/candidate.log",
+      "bytes": 8720,
+      "sha256": "6be1e1a0016e7dfd064e241ab9568d6c472a2ccc60a0809ce3508bea2b116fcc"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-pilot-v1/commands.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-pilot-v1/commands.json",
+      "bytes": 2042,
+      "sha256": "ce222885a6a6d93339d26d304ec395e02797e37501c2d37f222923a6f6c13040"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-pilot-v1/control/lossless-exports.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-pilot-v1/control/lossless-exports.json",
+      "bytes": 585,
+      "sha256": "84aa8fd01f4d23b6f12111422a56ce64c4e4fc0d3c6e7fba69509ea946539f78"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-pilot-v1/control/result.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-pilot-v1/control/result.json",
+      "bytes": 3727,
+      "sha256": "b6c448a0a137d5c9aaafbc4d6f6c404a2f58e404702e37e08a6e2e6edc7a2296"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-pilot-v1/control.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-pilot-v1/control.log",
+      "bytes": 8509,
+      "sha256": "6cb6b13b66638cddba3ba82ec04e2a2426b76e37899ad29298d2e31ae007954d"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-pilot-v1-independent.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-pilot-v1-independent.json",
+      "bytes": 3077,
+      "sha256": "58db757602de9a72032bc0b8fc20f8f09c82d963ba6dc390c9328377c7152af2"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-pilot-v1-independent.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-pilot-v1-independent.log",
+      "bytes": 206,
+      "sha256": "c424dc181a56044fdbfe8cad264fb2a97bf6f43d2af568be8434a1c66da5aa02"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-pilot-v1.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-pilot-v1.log",
+      "bytes": 1663,
+      "sha256": "aa423abc48836c4f702eeb865ac55902b4e199cd071f2b3f5d79ec9619a414a2"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-production-focused-v1.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-production-focused-v1.log",
+      "bytes": 14811,
+      "sha256": "ed732d3edf624b3c77a2e2439ed352a268b63c0b206eebdbdaec55c510d97620"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-production-focused-v2.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-production-focused-v2.log",
+      "bytes": 260,
+      "sha256": "bccb0603196f8c7e21c2723b4370f4fe162bdfef0c67f505b58c559c3b3aa1ab"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-production-test-v1.py",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-production-test-v1.py",
+      "bytes": 10718,
+      "sha256": "2e90a9ab67051684f05e44e0e8542992784a49d9a62ccab5c4e44a633c7907d2"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-public-quality.json",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-public-quality.json",
+      "bytes": 7822,
+      "sha256": "8b7c434ba4c0ec8e787329dfd18483df77682fe5c1e7f995fcf148ef1f22a630"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-public-quality.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-public-quality.log",
+      "bytes": 133,
+      "sha256": "2c1360f72c971cd1cfe23a453fe7391e6ebe47772e428d8146e8095010b4c1e8"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-tests-v1.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-tests-v1.log",
+      "bytes": 2462,
+      "sha256": "cb5092698f92e02f6f67b1ce755cc061f4eaeb9b43b50ea620c680d1aa0f7014"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-tests-v2.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-tests-v2.log",
+      "bytes": 628,
+      "sha256": "db879a96c4db22eb4044882dca2313d91353fa91126f643506eea1b8684afe00"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-v1-classification-kernel-lifetime.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-v1-classification-kernel-lifetime.log",
+      "bytes": 1406,
+      "sha256": "248130b83be9ac0e65e186ae6a761f3c7c89503daf37a9c1deebce5144d1e078"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-v1-classification-kernel-padded.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-v1-classification-kernel-padded.log",
+      "bytes": 1404,
+      "sha256": "5f6bbcdc2d23ac35502aa7ecb6db3a6b112e1034fdda435c9d79052b9961c50a"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-v1-selection-lifetime-lifetime.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-v1-selection-lifetime-lifetime.log",
+      "bytes": 1581,
+      "sha256": "b43a3d1680f98dce73d152a025740c8f72d2bd0c5189391a8d679bb2c9ebb147"
+    },
+    {
+      "original": ".work/vtm/recovery-classification-v1-selection-lifetime-padded.log",
+      "path": "results/validation/vtm/recovery-classification/recovery-classification-v1-selection-lifetime-padded.log",
+      "bytes": 1580,
+      "sha256": "aa619a70e7455aa1fc9acf973a543961d2eb607bdea48b7cc70c85b7a7326df6"
+    },
+    {
+      "original": ".work/vtm/recovery_classification_inside_v1.py",
+      "path": "results/validation/vtm/recovery-classification/recovery_classification_inside_v1.py",
+      "bytes": 4778,
+      "sha256": "9156e5583124868311f35e941d0c33ceffeadd0b1126875f3dc630d4ff334a73"
+    },
+    {
+      "original": ".work/vtm/recovery_classification_observer_v1.py",
+      "path": "results/validation/vtm/recovery-classification/recovery_classification_observer_v1.py",
+      "bytes": 11913,
+      "sha256": "3d3d0f0b31c0a7bc20c7940a006c862b4640e9c3639402d2d9e2ad5e4d58e405"
+    },
+    {
+      "original": ".work/vtm/run-recovery-classification-final.py",
+      "path": "results/validation/vtm/recovery-classification/run-recovery-classification-final.py",
+      "bytes": 4890,
+      "sha256": "7264f884f1b2dcf8857bca630ac8c258e75228d362a996535c249f5a9ab39b6f"
+    },
+    {
+      "original": ".work/vtm/run-recovery-classification-gallery-v1.py",
+      "path": "results/validation/vtm/recovery-classification/run-recovery-classification-gallery-v1.py",
+      "bytes": 109,
+      "sha256": "b9430dffa7b81d9edaea052e368abc2f53612f325ff86225f4b0c87c3d2584b2"
+    },
+    {
+      "original": ".work/vtm/run-recovery-classification-memory-v1.py",
+      "path": "results/validation/vtm/recovery-classification/run-recovery-classification-memory-v1.py",
+      "bytes": 2152,
+      "sha256": "1001745b05fe1e13158abfdf5252fe099bb309faad4ec5fca432ea8e030c5515"
+    },
+    {
+      "original": ".work/vtm/run-recovery-classification-native.py",
+      "path": "results/validation/vtm/recovery-classification/run-recovery-classification-native.py",
+      "bytes": 2839,
+      "sha256": "1e5f7417d95cd450e8e92b6cd29bebb6bddc687bc6737e4fb70044795afe54c4"
+    },
+    {
+      "original": ".work/vtm/run-recovery-classification-pilot-v1.py",
+      "path": "results/validation/vtm/recovery-classification/run-recovery-classification-pilot-v1.py",
+      "bytes": 2949,
+      "sha256": "a92cef8d6c196d26188b650cfd4801c7dc187356664466c8716626b915d430c3"
+    },
+    {
+      "original": ".work/vtm/run-recovery-classification-tests-v1.py",
+      "path": "results/validation/vtm/recovery-classification/run-recovery-classification-tests-v1.py",
+      "bytes": 231,
+      "sha256": "176d30757060116a98e60f1c89e04fd9b1eb91935e1963124ca328e1e7a465b1"
+    },
+    {
+      "original": ".work/vtm/run-recovery-classification-tests-v2.py",
+      "path": "results/validation/vtm/recovery-classification/run-recovery-classification-tests-v2.py",
+      "bytes": 231,
+      "sha256": "788b8e5d60c30c441e518b379d3ec26a7345b08f05b07083dfdebc3ff2de0831"
+    },
+    {
+      "original": ".work/vtm/test_recovery_classification_inside_v1.py",
+      "path": "results/validation/vtm/recovery-classification/test_recovery_classification_inside_v1.py",
+      "bytes": 5590,
+      "sha256": "5dfe68eadf67f53a32aa69927b8e7cb68dcab735caf115dd85351331a8418bea"
+    },
+    {
+      "original": ".work/vtm/test_recovery_classification_inside_v2.py",
+      "path": "results/validation/vtm/recovery-classification/test_recovery_classification_inside_v2.py",
+      "bytes": 5590,
+      "sha256": "5a40540da0ffde0cfc85b3c68c19828a0f55efc7f28b45c8da50dc66fa3f4859"
+    }
+  ]
+}

@@ -168,3 +168,9 @@ def test_public_extractor_retains_full_diagnostics_with_private_selection_alongs
         )
         assert public.surface_rms_distance.numpy()[0] > 0.8
         assert public.surface_max_sample_distance.numpy()[0] > 0.8
+        assert private.signed_distance.numpy()[0] == -1
+        np.testing.assert_allclose(
+            public.signed_distance.numpy()[0],
+            -(1 - float(np.float32(0.1)) / 2),
+            rtol=1e-15,
+        )

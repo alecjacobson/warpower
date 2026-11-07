@@ -1,0 +1,37 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module recovery_classification_inside_v1 5aa8e16 load on device 'cuda:0' took 20327.89 ms  (compiled)
+...........................................F............................ [ 76%]
+......................                                                   [100%]
+=================================== FAILURES ===================================
+__________________ test_exact_geometry_fallback[large-bridge] __________________
+
+geometry = 'large-bridge'
+
+    @pytest.mark.parametrize('geometry',['needle','bridge','large-bridge'])
+    def test_exact_geometry_fallback(geometry):
+        p=needle() if geometry=='needle' else bridge()
+        if geometry=='large-bridge':p=(p*2.**100).astype(np.float32)
+        a,b=compare(warpower.SurfaceDomain(*cube()),p,np.arange(4,dtype=np.int32).reshape(1,4),.4)
+        assert a['error'][0]==0
+>       if geometry=='large-bridge':assert np.max(np.abs(a['centers'][0]))>np.finfo(np.float32).max
+E       AssertionError: assert np.float64(5.210574453361155e+36) > np.float32(3.4028235e+38)
+E        +  where np.float64(5.210574453361155e+36) = <function max at 0x7f4d73616c70>(array([0.00000000e+00, 5.21057445e+36, 6.95589038e+12]))
+E        +    where <function max at 0x7f4d73616c70> = np.max
+E        +    and   array([0.00000000e+00, 5.21057445e+36, 6.95589038e+12]) = <ufunc 'absolute'>(array([0.00000000e+00, 5.21057445e+36, 6.95589038e+12]))
+E        +      where <ufunc 'absolute'> = np.abs
+E        +  and   np.float32(3.4028235e+38) = finfo(resolution=1e-06, min=-3.4028235e+38, max=3.4028235e+38, dtype=float32).max
+E        +    where finfo(resolution=1e-06, min=-3.4028235e+38, max=3.4028235e+38, dtype=float32) = <class 'numpy.finfo'>(<class 'numpy.float32'>)
+E        +      where <class 'numpy.finfo'> = np.finfo
+E        +      and   <class 'numpy.float32'> = np.float32
+
+.work/vtm/test_recovery_classification_inside_v1.py:84: AssertionError
+=========================== short test summary info ============================
+FAILED .work/vtm/test_recovery_classification_inside_v1.py::test_exact_geometry_fallback[large-bridge]
+1 failed, 93 passed in 22.38s

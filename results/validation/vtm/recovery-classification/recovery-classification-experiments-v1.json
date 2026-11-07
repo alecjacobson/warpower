@@ -1,0 +1,77 @@
+{
+  "scope": "Private #194 experiments; no production changes. Shell environment recorded separately; commands use repository cwd.",
+  "runtime": "f338eb5c5d90c58806d7b794769c309729567392",
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "WARP_CACHE_PATH": "/opt/warpower-generated-cache",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "4",
+    "PYTHONPATH": ".:.work/vtm"
+  },
+  "records": [
+    {
+      "name": "focused-v1",
+      "command": [
+        ".venv/bin/python",
+        ".work/vtm/run-recovery-classification-tests-v1.py"
+      ],
+      "exit_code": 1,
+      "passed": 93,
+      "failed": 1,
+      "log": ".work/vtm/recovery-classification-tests-v1.log",
+      "log_sha256": "cb5092698f92e02f6f67b1ce755cc061f4eaeb9b43b50ea620c680d1aa0f7014"
+    },
+    {
+      "name": "focused-v2",
+      "command": [
+        ".venv/bin/python",
+        ".work/vtm/run-recovery-classification-tests-v2.py"
+      ],
+      "exit_code": 0,
+      "passed": 94,
+      "failed": 0,
+      "log": ".work/vtm/recovery-classification-tests-v2.log",
+      "log_sha256": "db879a96c4db22eb4044882dca2313d91353fa91126f643506eea1b8684afe00"
+    },
+    {
+      "name": "independent-pilot",
+      "command": [
+        ".venv/bin/python",
+        ".work/vtm/check-recovery-classification-pilot-v1.py"
+      ],
+      "exit_code": 0,
+      "result": ".work/vtm/recovery-classification-pilot-v1-independent.json",
+      "result_sha256": "58db757602de9a72032bc0b8fc20f8f09c82d963ba6dc390c9328377c7152af2"
+    },
+    {
+      "name": "observer",
+      "command": [
+        "timeout",
+        "300",
+        ".venv/bin/python",
+        ".work/vtm/recovery_classification_observer_v1.py",
+        "--baseline",
+        ".work/vtm/recovery-diagnostics-final/armadillo-graded-after/result.json",
+        "--mesh",
+        ".work/vtm/recovery-diagnostics-final/armadillo-graded-after/mesh.npz",
+        "--output",
+        ".work/vtm/recovery-classification-observer-v1.json"
+      ],
+      "exit_code": 0,
+      "result": ".work/vtm/recovery-classification-observer-v1.json",
+      "result_sha256": "cce7fe99bdbacb666d4f263831000672d7be02a51cd90b101d4b529248605db8"
+    }
+  ],
+  "pilot_commands": ".work/vtm/recovery-classification-pilot-v1/commands.json",
+  "source_sha256": {
+    ".work/vtm/test_recovery_classification_inside_v1.py": "5dfe68eadf67f53a32aa69927b8e7cb68dcab735caf115dd85351331a8418bea",
+    ".work/vtm/run-recovery-classification-tests-v1.py": "176d30757060116a98e60f1c89e04fd9b1eb91935e1963124ca328e1e7a465b1",
+    ".work/vtm/run-recovery-classification-pilot-v1.py": "a92cef8d6c196d26188b650cfd4801c7dc187356664466c8716626b915d430c3",
+    ".work/vtm/recovery_classification_inside_v1.py": "9156e5583124868311f35e941d0c33ceffeadd0b1126875f3dc630d4ff334a73",
+    ".work/vtm/run-recovery-classification-gallery-v1.py": "b9430dffa7b81d9edaea052e368abc2f53612f325ff86225f4b0c87c3d2584b2",
+    ".work/vtm/test_recovery_classification_inside_v2.py": "5a40540da0ffde0cfc85b3c68c19828a0f55efc7f28b45c8da50dc66fa3f4859",
+    ".work/vtm/run-recovery-classification-tests-v2.py": "788b8e5d60c30c441e518b379d3ec26a7345b08f05b07083dfdebc3ff2de0831",
+    ".work/vtm/recovery_classification_observer_v1.py": "3d3d0f0b31c0a7bc20c7940a006c862b4640e9c3639402d2d9e2ad5e4d58e405",
+    ".work/vtm/check-recovery-classification-pilot-v1.py": "9503c8e2ac4f73dd62ba25d542b6bf14bbd035091659aabf9ca275d547cb1ca3"
+  }
+}

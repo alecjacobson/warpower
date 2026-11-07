@@ -377,6 +377,10 @@ For recovered material selection, a private extractor now
 instead of computing unused boundary-distance summaries. An unavailable witness
 uses the original full query. Geometry, recovery, topology and all error checks
 remain; public extraction and final mesher diagnostics keep full distances.
+Private recovery also [omits nearest traversal for proved inside circumcenters](selection-interior-status.md).
+Its distance buffer provides only a nonpositive/positive sign for exterior-band
+decisions. Outside, ambiguous and unsupported centers keep the complete query;
+physical geometry/quality and all public distances remain unchanged.
 
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).

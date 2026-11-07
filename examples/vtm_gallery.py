@@ -197,6 +197,12 @@ def main():
         },
         quality_stage_diagnostic_scope="Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
     )
+    if mesh.containment_recovery:
+        result["material_recovery"] = dict(
+            activated=int(mesh._material_recovery.numpy()[0]),
+            last_added_cells=int(mesh.extraction.repaired_count.numpy()[0]),
+            last_passes=int(mesh.extraction.repair_rounds.numpy()[0]),
+        )
     if result["valid"]:
         n, full_count, m, boundary_count = result["counts"]
         p = mesh.points.numpy()[:n]

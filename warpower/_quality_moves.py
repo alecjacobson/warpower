@@ -344,6 +344,7 @@ class QualityMove:
             core.full_tetrahedra_count,
             source_error=core.error,
             tolerance=extraction_tolerance,
+            containment_recovery=core.material_recovery is not None,
         )
         self.tetrahedra = self.extraction.tetrahedra
         self._tolerance = extraction_tolerance
@@ -493,6 +494,15 @@ class QualityMove:
         self._launch(apply_proposal, 1, [self._state, self.points])
 
     def _quality(self):
+        if self.core.material_recovery is None:
+            self._approximate_quality()
+        else:
+            # Once repair is needed, assess exactly the repaired subcomplex.
+            wp.capture_if(
+                self.core.material_recovery, self._complete_quality, self._approximate_quality
+            )
+
+    def _approximate_quality(self):
         c = self.core
         self._query_count.zero_()
         self._query_minimum.fill_(1)

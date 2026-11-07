@@ -228,7 +228,15 @@ class ExtractionWorkspace:
     """
 
     def __init__(
-        self, domain, points, tetrahedra, tetrahedra_count=None, *, source_error=None, tolerance=0.4
+        self,
+        domain,
+        points,
+        tetrahedra,
+        tetrahedra_count=None,
+        *,
+        source_error=None,
+        tolerance=0.4,
+        containment_recovery=False,
     ):
         self.domain = domain
         self.points = _contiguous_points(points)
@@ -245,6 +253,7 @@ class ExtractionWorkspace:
         if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
             raise ValueError("Extraction tolerance must be finite and in [0, 1)")
         self.tolerance = float(tolerance)
+        self.containment_recovery = bool(containment_recovery)
         with wp.ScopedDevice(self.device):
             self.input_count = (
                 wp.full(1, self.capacity, dtype=int)
@@ -293,6 +302,14 @@ class ExtractionWorkspace:
                 "boundary_area",
             ):
                 setattr(self, name, getattr(self._topology, name))
+            if self.containment_recovery:
+                from . import _containment
+
+                self.repaired_count = wp.zeros(1, dtype=int)
+                self.repair_rounds = wp.zeros(1, dtype=int)
+                self._repair_additions = wp.zeros(1, dtype=int)
+                self._repair_ready = wp.zeros(1, dtype=int)
+                wp.load_module(module=_containment, device=self.device)
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as capture:
                 self._record()
@@ -335,26 +352,22 @@ class ExtractionWorkspace:
                 self._input_quality,
             ],
         )
-        self._scan.run(self.selected, self._prefix)
-        self._launch(
-            compact,
-            self.capacity,
-            [
-                self.input_tetrahedra,
-                self.selected,
-                self._prefix,
-                self._input_volume,
-                self._input_quality,
-                self.error,
-                self.tetrahedra,
-                self.tetrahedra_count,
-                self.source_indices,
-                self.radius_ratio,
-                self.volume,
-                self.minimum_radius_ratio,
-            ],
-        )
-        self._topology.run()
+        self._compact_topology()
+        if self.containment_recovery:
+            from . import _containment
+
+            self._launch(
+                _containment.begin,
+                1,
+                [
+                    self.error,
+                    self.diagnostics,
+                    self.repair_rounds,
+                    self.repaired_count,
+                    self._repair_ready,
+                ],
+            )
+            wp.capture_while(self._repair_ready, self._repair)
         self._launch(
             surface_error,
             len(self.boundary_faces),
@@ -388,6 +401,69 @@ class ExtractionWorkspace:
                 self.surface_rms_distance,
             ],
         )
+
+    def _compact_topology(self):
+        self._scan.run(self.selected, self._prefix)
+        self._launch(
+            compact,
+            self.capacity,
+            [
+                self.input_tetrahedra,
+                self.selected,
+                self._prefix,
+                self._input_volume,
+                self._input_quality,
+                self.error,
+                self.tetrahedra,
+                self.tetrahedra_count,
+                self.source_indices,
+                self.radius_ratio,
+                self.volume,
+                self.minimum_radius_ratio,
+            ],
+        )
+        self._topology.run()
+
+    def _repair(self):
+        from . import _containment
+
+        t = self._topology
+        self._repair_additions.zero_()
+        self._launch(
+            _containment.add_contained,
+            self.capacity,
+            [
+                self.domain.tree,
+                self.points,
+                self.input_tetrahedra,
+                self.input_count,
+                self.selected,
+                t.boundary_indices,
+                t._edges,
+                t._edge_counts,
+                t._edge_balance,
+                self._repair_additions,
+                self.repaired_count,
+            ],
+        )
+        wp.capture_if(self._repair_additions, self._recompact)
+        self._launch(
+            _containment.next_round,
+            1,
+            [
+                self.error,
+                self.diagnostics,
+                self._repair_additions,
+                self.repair_rounds,
+                self._repair_ready,
+            ],
+        )
+
+    def _recompact(self):
+        self.tetrahedra_count.zero_()
+        self.volume.zero_()
+        self.minimum_radius_ratio.fill_(1.0)
+        self._compact_topology()
 
     def run(self, stream=None):
         stream = wp.get_stream(self.device) if stream is None else stream

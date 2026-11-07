@@ -92,8 +92,8 @@ about 0.0690; the extraction-only intermediate fix stopped at 0.00235 because
 the downstream geometry consumers still failed. This remains a bounded-budget
 result, not a convergence or minimum-quality guarantee. Quality/time comparisons
 remain tracked in [#37](https://github.com/alecjacobson/warpower/issues/37). The coarse
-cavity's nonmanifold edge is unchanged and tracked separately in
-[#125](https://github.com/alecjacobson/warpower/issues/125). Resolving arithmetic
+cavity's nonmanifold edge was unchanged at this revision and is handled by the
+later [containment recovery](containment-recovery.md). Resolving arithmetic
 failure does not establish topology recovery for every domain or a quality
 guarantee.
 
@@ -150,6 +150,8 @@ The full 1,000-site quality trajectory's memory audit is **incomplete**. An
 unfiltered run and a run instrumenting only the changed kernels were deliberately
 stopped after more than 15 and 10 minutes, respectively. Neither completed or
 counts as a pass. Both logs and their scope/stop records are preserved in the
-manifest; [#129](https://github.com/alecjacobson/warpower/issues/129) tracks the
-remaining audit. The ordinary full trajectory and the isolated memory checks
-above did complete.
+manifest. The ordinary full trajectory and the isolated memory checks above did
+complete. A later [containment-recovery trajectory](containment-recovery.md)
+passes the full unfiltered audit tracked in
+[#129](https://github.com/alecjacobson/warpower/issues/129); that result does not
+retroactively validate the canceled `1804b64` runs.

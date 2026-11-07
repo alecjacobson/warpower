@@ -289,6 +289,12 @@ restore the last valid mesh on failure. The output counts and diagnostics stay
 on device for downstream captured consumers. This lazy API adds no work to the
 independent geometry routines.
 
+Optional [containment recovery](containment-recovery.md) can restore omitted,
+wholly material tetrahedra around nonmanifold boundary edges. Exact containment
+witnesses gate additions, and every bounded pass reruns topology checks. The full
+mesher enables this extension and carries its selection into quality guards;
+the independently callable extractor retains its original default rule.
+
 At capacities of 256–2,048 sites, the VTM core first attempts to
 [reuse Delaunay fragments](delaunay-reuse.md) from the preceding reconstruction.
 It checks them against current original-coordinate sites, completes surviving

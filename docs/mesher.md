@@ -244,6 +244,10 @@ The subsequent [analytic predicate filters](analytic-facet-search.md) reduce the
 complete 4k torus from 3.785 to 2.825 s and the 1k torus from 824 to 737 ms,
 with matching connectivity and iteration work. Standalone timings stay within
 0.8% of controls; the uncertain and symbolic predicate policies are unchanged.
+The [prepared point-query filter](prepared-point-queries.md) further reduces
+the 4k torus to 2.640 s and the 1k torus to 717 ms, with unchanged storage and
+launch scheduling. Final standalone comparisons stay within 0.4% of controls;
+full hull, material, boundary and iteration-work checks remain unchanged.
 
 The complete-mesher CPU speedup target remains open in
 [#40](https://github.com/alecjacobson/warpower/issues/40); the existing Paragram

@@ -6,11 +6,29 @@ before querying it; these arrays never carry a proof across input changes.
 
 import warp as wp
 
+from . import _filtered_predicates as fp
 from . import _sphere_bounds as sb
 from ._bvh import Tree
-from ._delaunay_certificate import Sphere, outside, sphere, symbolic_sphere
+from ._delaunay_certificate import Sphere, sphere, symbolic_sphere
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
+
+
+@wp.func
+def point_value(shape: Sphere, p: wp.vec3):
+    """Original-coordinate sphere determinant enclosed by prepared Ball64 data.
+
+    A float32 point promotes exactly to float64. Unlike a general box query,
+    it needs no uncertain midpoint; the differences and subsequent arithmetic
+    still carry their full rounding bounds and prepared cofactor uncertainty.
+    """
+    x = fp.difference(p[0], shape.origin[0])
+    y = fp.difference(p[1], shape.origin[1])
+    z = fp.difference(p[2], shape.origin[2])
+    return fp.minus(
+        fp.plus(fp.plus(fp.times(x, shape.nx), fp.times(y, shape.ny)), fp.times(z, shape.nz)),
+        fp.times(shape.determinant, fp.lift(x, y, z, 0.0, 0.0)),
+    )
 
 
 @wp.kernel
@@ -55,8 +73,19 @@ def check(
         if tree.owners[q] != q or q == ids[0] or q == ids[1] or q == ids[2] or q == ids[3]:
             continue
         p = points[q]
-        if sb.outside(box, p, p) or outside(shape, p, p):
+        if sb.outside(box, p, p):
             continue
+        value = point_value(shape, p)
+        if (
+            wp.isfinite(value.value)
+            and wp.isfinite(value.error)
+            and wp.abs(value.value) > value.error
+        ):
+            if value.value > wp.float64(0.0):
+                wp.atomic_and(live, i, 0)
+            continue
+        # Only strict physical signs bypass the original symbolic policy.
+        # Continue querying rejected cells to preserve exhaustive diagnostics.
         result = symbolic_sphere(points, ids, q)
         if result.valid == 0:
             wp.atomic_or(error, 0, 2)

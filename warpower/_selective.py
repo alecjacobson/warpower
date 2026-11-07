@@ -267,7 +267,7 @@ class SelectiveUpdate:
             self.mask = wp.zeros(core.n, dtype=int)
             self.recovery_extraction = None
             if core.material_recovery is not None:
-                self.recovery_extraction = _extraction.ExtractionWorkspace(
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
                     core.domain,
                     core.points,
                     core.full_tetrahedra,

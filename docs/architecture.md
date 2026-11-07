@@ -314,6 +314,9 @@ Within one unchanged-input completion, [exact cell proofs](completion-proofs.md)
 now follow retained cells through deduplication and compaction. New cells keep
 their full sphere checks; all topology, coverage and hull-support checks remain.
 Proofs are re-established against current input on the next invocation.
+The immediately preceding [hull-support result](hull-support-reuse.md) also
+lets proven hull faces skip candidate search. Each new boundary ordering receives
+a fresh global support check before that mask can be consumed.
 
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).

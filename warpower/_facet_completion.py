@@ -287,21 +287,7 @@ class FacetCompletion:
             self.capacity,
             [self.tetrahedra, self.tetrahedra_count, self._keys, self._live],
         )
-        self._launch(
-            search_faces,
-            4 * self.capacity * self._workers,
-            [
-                self.points,
-                tree.owners,
-                self.tetrahedra,
-                c._boundary,
-                c._boundary_count,
-                self._candidates,
-                self._workers,
-                self.error,
-            ],
-            block_dim=self._query_block_dim,
-        )
+        self._search_faces(tree)
         self._launch(
             extend_faces,
             4 * self.capacity,
@@ -334,4 +320,22 @@ class FacetCompletion:
             unique_pool,
             5 * self.capacity,
             [self.points, self._keys, self._live, self._table, self._work, self._count, self.error],
+        )
+
+    def _search_faces(self, tree):
+        c = self._certificate
+        self._launch(
+            search_faces,
+            4 * self.capacity * self._workers,
+            [
+                self.points,
+                tree.owners,
+                self.tetrahedra,
+                c._boundary,
+                c._boundary_count,
+                self._candidates,
+                self._workers,
+                self.error,
+            ],
+            block_dim=self._query_block_dim,
         )

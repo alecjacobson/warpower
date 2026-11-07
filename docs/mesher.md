@@ -226,7 +226,8 @@ diagnostic evidence. Neither run establishes a CPU speedup.
 These are historical implementation measurements. The
 [surface-query launch comparison](query-launches.md),
 [reconstruction/projection tuning](reconstruction-launches.md) and
-[same-input cell-proof reuse](completion-proofs.md) record later complete-solve
+[same-input cell-proof reuse](completion-proofs.md), together with
+[current hull-support reuse](hull-support-reuse.md), record later complete-solve
 timings, independent mesh comparisons and native capture audits.
 
 The complete-mesher CPU speedup target remains open in

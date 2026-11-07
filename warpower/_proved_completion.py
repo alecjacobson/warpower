@@ -1,8 +1,9 @@
 """Private reuse of exact cell proofs within one unchanged-input completion.
 
 Seed filtering, every completion round and proof consumption are recorded as one
-ordered operation. Points and canonical owners cannot change between them. Only
-empty-sphere predicates are reused; all other certificate checks still execute.
+ordered operation. Points and canonical owners cannot change between them.
+Empty-sphere and immediately preceding hull-support results may be reused;
+every newly exposed face is globally checked before its result is consumed.
 No proof survives a call to run(), and no caller-supplied trust mask is accepted.
 """
 
@@ -11,8 +12,16 @@ import warp as wp
 from . import _filtered_predicates as fp
 from . import _sphere_bounds as sb
 from ._bvh import Tree
-from ._delaunay_certificate import DelaunayCertificate, outside, sphere, symbolic_sphere
+from ._delaunay_certificate import (
+    DelaunayCertificate,
+    halfspace,
+    inside_halfspace,
+    outside,
+    sphere,
+    symbolic_sphere,
+)
 from ._facet_completion import FacetCompletion
+from ._mesh_topology import face_vertices
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
 
@@ -121,6 +130,116 @@ def unique_proved_pool(
     wp.atomic_or(error, 0, 4)
 
 
+@wp.kernel
+def record_face_support(
+    points: wp.array[wp.vec3],
+    tets: wp.array2d[int],
+    boundary: wp.array[int],
+    count: wp.array[int],
+    tree: Tree,
+    error: wp.array[int],
+    depth: int,
+    workers: int,
+    supported: wp.array[int],
+):
+    tid = wp.tid()
+    pieces = 1 << depth
+    worker, lane = tid // pieces, tid % pieces
+    # Partition the radix tree by path bits. An early leaf belongs only to
+    # the lane whose unused bits are zero, so every subtree is covered once.
+    root = int(1)
+    live = bool(True)
+    for level in range(depth):
+        if tree.count[root] > 0:
+            live = (lane >> level) == 0
+            break
+        if ((lane >> level) & 1) == 0:
+            root = tree.left[root]
+        else:
+            root = tree.right[root]
+    if not live:
+        return
+    # Fixed launch size, device count, and a strided tail cover even malformed
+    # candidates exposing all four faces per tetrahedron.
+    for slot in range(worker, count[0], workers):
+        ids = face_vertices(tets, boundary[slot])
+        a, b, c = points[ids[0]], points[ids[1]], points[ids[2]]
+        plane = halfspace(a, b, c)
+        stack = wp.zeros(shape=128, dtype=int)
+        stack[0] = root
+        size = int(1)
+        while size > 0:
+            size -= 1
+            node = stack[size]
+            if inside_halfspace(plane, tree.lower[node], tree.upper[node]):
+                continue
+            if tree.count[node] > 0:
+                for k in range(tree.start[node], tree.start[node] + tree.count[node]):
+                    q = tree.ids[k]
+                    # Coincident sites have exactly the same plane sign.
+                    if tree.owners[q] != q or q == ids[0] or q == ids[1] or q == ids[2]:
+                        continue
+                    result = fp.orient3d(a, b, c, points[q])
+                    if result.valid == 0:
+                        wp.atomic_or(error, 0, 2)
+                    elif result.sign > 0:
+                        wp.atomic_or(error, 0, 64)
+                        wp.atomic_and(supported, slot, 0)
+            else:
+                if size > 125:
+                    wp.atomic_or(error, 0, 16)
+                    return
+                stack[size] = tree.left[node]
+                stack[size + 1] = tree.right[node]
+                size += 2
+
+
+@wp.kernel
+def search_unproved_faces(
+    points: wp.array[wp.vec3],
+    owners: wp.array[int],
+    tets: wp.array2d[int],
+    faces: wp.array[int],
+    count: wp.array[int],
+    candidates: wp.array[int],
+    workers: int,
+    error: wp.array[int],
+    supported: wp.array[int],
+    statistics: wp.array[int],
+):
+    tid = wp.tid()
+    i, lane = tid // workers, tid % workers
+    candidates[tid] = -1
+    if i >= count[0]:
+        return
+    if lane == 0:
+        wp.atomic_add(statistics, wp.where(supported[i] != 0, 0, 1), 1)
+    if supported[i] != 0:
+        return
+    face = face_vertices(tets, faces[i])
+    a, b, c = points[face[0]], points[face[1]], points[face[2]]
+    best = int(-1)
+    for q in range(lane, points.shape[0], workers):
+        if owners[q] != q or q == face[0] or q == face[1] or q == face[2]:
+            continue
+        orientation = fp.orient3d(a, b, c, points[q])
+        if orientation.valid == 0:
+            wp.atomic_or(error, 0, 2)
+            return
+        if orientation.sign <= 0:
+            continue
+        if best < 0:
+            best = q
+        else:
+            result = symbolic_sphere(points, wp.vec4i(face[0], face[1], face[2], best), q)
+            if result.valid == 0 or result.sign == 0:
+                wp.atomic_or(error, 0, 2)
+                return
+            if result.sign > 0:
+                best = q
+    candidates[tid] = best
+
+
 class ProvedCertificate(DelaunayCertificate):
     """Completion-only certificate, with private same-input proof provenance."""
 
@@ -131,6 +250,8 @@ class ProvedCertificate(DelaunayCertificate):
             self._proved = wp.empty_like(self._input_proved)
             # Cell checks skipped/performed, accumulated over one completion.
             self.proof_statistics = wp.zeros(2, dtype=int)
+            self._face_supported = wp.empty_like(self._boundary)
+            self.face_statistics = wp.zeros(2, dtype=int)
             wp.load_module(module=__name__, device=self.device)
             wp.load_module(module=__name__, device=self.device, block_dim=32)
 
@@ -162,6 +283,26 @@ class ProvedCertificate(DelaunayCertificate):
             ],
         )
 
+    def _hull_support(self, tree):
+        # This array belongs to the current boundary ordering only. A new
+        # certificate always resets and recomputes it before any search.
+        self._face_supported.fill_(1)
+        self._launch(
+            record_face_support,
+            self._face_workers * (1 << self._face_depth),
+            [
+                self.points,
+                self.tetrahedra,
+                self._boundary,
+                self._boundary_count,
+                tree,
+                self.error,
+                self._face_depth,
+                self._face_workers,
+                self._face_supported,
+            ],
+        )
+
 
 class SeededFacetCompletion(FacetCompletion):
     """Run the real seed filter and immediately consume its current cell proofs."""
@@ -182,6 +323,7 @@ class SeededFacetCompletion(FacetCompletion):
         self._seed_filter.run()
         self._certificate._input_proved.fill_(1)
         self._certificate.proof_statistics.zero_()
+        self._certificate.face_statistics.zero_()
         return super().run(self._seed_filter.tree)
 
     def _deduplicate(self):
@@ -203,4 +345,27 @@ class SeededFacetCompletion(FacetCompletion):
                 self.capacity,
                 self._certificate._input_proved,
             ],
+        )
+
+    def _search_faces(self, tree):
+        # decide() admits this round only if the entire preceding certificate
+        # has no geometric errors. Thus every live BVH piece finished checking
+        # these exact faces against these unchanged sites and canonical owners.
+        c = self._certificate
+        self._launch(
+            search_unproved_faces,
+            4 * self.capacity * self._workers,
+            [
+                self.points,
+                tree.owners,
+                self.tetrahedra,
+                c._boundary,
+                c._boundary_count,
+                self._candidates,
+                self._workers,
+                self.error,
+                c._face_supported,
+                c.face_statistics,
+            ],
+            block_dim=self._query_block_dim,
         )

@@ -96,3 +96,60 @@ cavity's nonmanifold edge is unchanged and tracked separately in
 [#125](https://github.com/alecjacobson/warpower/issues/125). Resolving arithmetic
 failure does not establish topology recovery for every domain or a quality
 guarantee.
+
+## Measured validation
+
+The [recorded comparison](../results/validation/vtm/wide-pipeline-summary.json)
+uses an NVIDIA L40, Warp 1.19 and three warm complete resident solves per case.
+Each solve refits the input domain and sizing and starts fresh sampling. Setup,
+uploads, downloads, export and independent checking are outside these timings.
+The baseline is `354b31e`; the final runtime is `1804b64`. Raw records, saved
+meshes and source hashes are listed in the
+[artifact manifest](../results/validation/vtm/wide-pipeline-provenance.json).
+
+| Case | Before (ms) | After (ms) |
+| --- | ---: | ---: |
+| Torus, 1,000 sites | 2,226.517 | 2,229.850 |
+| Torus, 4,096 sites | 8,610.172 | 8,619.411 |
+| Graded torus, 1,000 sites | 3,717.012 | 3,720.915 |
+| Thin hand, 1,000 sites, quadrature 20/20 | 3,364.462 | 3,365.609 |
+| Cavity, 1,000 sites, quadrature 20/20 | 1,419.838 | 1,417.110 |
+| Disconnected, 1,000 sites, quadrature 20/20 | 1,239.835 | 1,240.364 |
+
+All six median differences are below 0.2%; they do not establish a speedup.
+Cell sets, oriented boundary faces and site roles agree before and after.
+The hand has small coordinate differences; the other five cases have bitwise
+identical positions. Every saved final full-hull mesh passes independent CGAL
+6.2.1 exact orientation, global empty-sphere, hull-support and face-pairing
+checks. Independent NumPy calculations verify material quality and topology;
+gallery VTU exports match the saved connectivity and coordinates.
+
+The recovered coarse disconnected case (quadrature 4/4) takes 11,742.734 ms and
+produces 4,324 material tetrahedra, two components and two closed shells, each
+with Euler characteristic two. Its minimum radius ratio is 0.06904 and its
+two-sided sampled surface RMS error is 0.3367% of the input bounding-box diagonal.
+All extraction, selection, jitter, interior and bounded-dual error flags are zero.
+The preceding main revision fails this case, so it provides no valid timing
+comparison. This complete four-round quality solve also does more work than
+the earlier extraction-only fix.
+
+Standalone Delaunay medians change from 9.156 to 9.191 ms at 1,000 sites and
+183.757 to 182.798 ms at 100,000 sites. The 100,000-site diagram changes from
+18.141 to 18.138 ms. Those implementations and the README are unchanged.
+CPU outperformance remains unachieved; these are comparisons with the preceding
+Warpower revision.
+
+The final suite passes **517 tests**. Four isolated regressions pass unfiltered
+padded Compute Sanitizer checking with zero errors. The four-phase resident
+producer/consumer audit also passes unfiltered allocation/lifetime checking.
+Its native trace contains 152 kernel activities, 108 memsets, four graph
+launches and one final synchronization; the graph has no host copies, host
+callbacks, allocation or free nodes.
+
+The full 1,000-site quality trajectory's memory audit is **incomplete**. An
+unfiltered run and a run instrumenting only the changed kernels were deliberately
+stopped after more than 15 and 10 minutes, respectively. Neither completed or
+counts as a pass. Both logs and their scope/stop records are preserved in the
+manifest; [#129](https://github.com/alecjacobson/warpower/issues/129) tracks the
+remaining audit. The ordinary full trajectory and the isolated memory checks
+above did complete.

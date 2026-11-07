@@ -1,0 +1,29 @@
+{
+  "scope": "Full trajectory instrumentation filters; every modified runtime kernel symbol matches. Unchanged construction kernels are excluded. The four isolated geometry/recovery tests and resident lifetime audit use unfiltered instrumentation.",
+  "filter": "regex=(evaluate|classify|classify_retained|validate|accumulate)_[0-9a-f]+_cuda_kernel_forward",
+  "changed_kernels": [
+    {
+      "module": "wp_warpower._extraction_527730c",
+      "kernel": "classify_5bc2cb83_cuda_kernel_forward",
+      "generated_source_sha256": "587ca67a62a093da04a12682e985549f511d309bf30fbbebb2eabf84802137ce"
+    },
+    {
+      "module": "wp_warpower._selective_733ae9f",
+      "kernel": "classify_retained_f8e8b2da_cuda_kernel_forward",
+      "generated_source_sha256": "6b49ee7098a45b164994ab45f5ca3b7c6402a9ee8a915d7585fdf90f6df3ec52"
+    },
+    {
+      "module": "wp_warpower._voronoi_volume_65f456a",
+      "kernel": "validate_adc158c6_cuda_kernel_forward",
+      "generated_source_sha256": "5df97b6cce6a47b806748120670283c74032811ccfaf2489b3375e85eaf0e201"
+    },
+    {
+      "module": "wp_warpower._voronoi_volume_65f456a",
+      "kernel": "accumulate_1a40d7a3_cuda_kernel_forward",
+      "generated_source_sha256": "5df97b6cce6a47b806748120670283c74032811ccfaf2489b3375e85eaf0e201"
+    }
+  ],
+  "unfiltered_full_trajectory": "Canceled aftermorethan15minutes; incomplete, see129.",
+  "execution_complete": false,
+  "execution_note": "This filteredfulltrajectoryattempt wasstopped aftermorethantenminutes. Matching thefilter isnot a completedmemorycheck."
+}

@@ -186,7 +186,7 @@ def record_face_support(
                     # Coincident sites have exactly the same plane sign.
                     if tree.owners[q] != q or q == ids[0] or q == ids[1] or q == ids[2]:
                         continue
-                    result = fp.orient3d(a, b, c, points[q])
+                    result = af.orient3d(a, b, c, points[q])
                     if result.valid == 0:
                         wp.atomic_or(error, 0, 2)
                     elif result.sign > 0:

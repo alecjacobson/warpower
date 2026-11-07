@@ -1,0 +1,1997 @@
+{
+  "baseline": "80d6ded503ac799048c3a82d17003951aa0f8aa6",
+  "runtime": "0b67386c59b29f900bb1c186139deff4f499f27c",
+  "scope": "Accepted material evaluation reused only inside uninterrupted VTM step schedule. Full production meshes published; earlier instrumented/pilot meshes retained privately with hashes. No quality-matched CPU speedup claim.",
+  "source_sha256": {
+    "warpower/_selective.py": "2cbac517fef09ccd93a0b499eebee06bc792914c2b219efe2b682efb1f7ed389",
+    "warpower/_vtm.py": "4fe87ba5ed154187af10a00753dba973a1fabefed244c963409726fe0f7c6d2f",
+    "tests/test_current_selection.py": "b327bd9bda9851fd13e35db241d58db3d49f117533a0f70db2b2eb67e0486965",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "examples/vtm_gallery.py": "8e39899ba4ec7b98dee840f73ccc330c57ac2a398faff3efc103dabb57af4acf",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f"
+  },
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    }
+  ],
+  "shared_helpers": [
+    {
+      "path": "results/validation/vtm/shared-wall/check-shared-wall-final.py",
+      "sha256": "b6f3d81588e92df34ab8e97b71f943e1fd0938798d7d72d92b14ed05e1769669"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    },
+    {
+      "path": "results/validation/vtm/analytic-filters/boundary-timing-commands.json",
+      "sha256": "c75b0a3c89cf49e7e1dec7a109ec6a7497370ddcc801f2c22ad78cc4c6174c49"
+    }
+  ],
+  "reference_binaries_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "private_pilot_meshes": [
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-graded-candidate/boundary.off.gz",
+      "sha256": "f8642d660a0daa40442849a2c596e816c4cdf508453c2bcdcfdf000e5ae54e67",
+      "bytes": 139480
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-graded-candidate/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-graded-candidate/mesh.npz",
+      "sha256": "427af1924f6955ed802a60ea336487f1f788cbf51c8415cc8964db2c2fdb1137",
+      "bytes": 1612158
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-graded-candidate/mesh.vtu.gz",
+      "sha256": "bfc7aab4262433642f9e9f53ae38f41302d8ddca2a730dd2a00104c7cc5f04cb",
+      "bytes": 427731
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-graded-control/boundary.off.gz",
+      "sha256": "b194e2c04cf80799fe11faeb83ef036dcf6e2acd658041c2785c78cd0eb4d858",
+      "bytes": 139473
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-graded-control/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-graded-control/mesh.npz",
+      "sha256": "e7a777cf2c8f896743c39f81a00186b6842545820f44d960ed890e1dd1ca3284",
+      "bytes": 1612534
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-graded-control/mesh.vtu.gz",
+      "sha256": "78705d2048556694ebf5dd8bb2e412faad53579d097e81037e10dff09604d051",
+      "bytes": 428233
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-uniform-candidate/boundary.off.gz",
+      "sha256": "9a857a494996137f4905054412b5df2e969c4ced8e7afe4b3780d83bd93e93d9",
+      "bytes": 140773
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-uniform-candidate/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-uniform-candidate/mesh.npz",
+      "sha256": "ed25e37b9f5cc1e36968f450fab6a50eefff5baa246233c763d3cec69c134c2a",
+      "bytes": 1610323
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-uniform-candidate/mesh.vtu.gz",
+      "sha256": "379d2b9219d48883fe34edfa2a866dcd0a8766deeadf1bfb609c99d08d94fd87",
+      "bytes": 423243
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-uniform-control/boundary.off.gz",
+      "sha256": "33a1edf39957f2e7553bf875ed2566d643c1a65aae63631bec2e471d8c080831",
+      "bytes": 140799
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-uniform-control/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-uniform-control/mesh.npz",
+      "sha256": "a451894cfabe1dbb43d5f446e8e71a61eec85d729f4569d03a8eb9788f6a4392",
+      "bytes": 1610475
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/armadillo-uniform-control/mesh.vtu.gz",
+      "sha256": "ae2e50c8d63708c618591f74a067408dd6caf6b0b266e56dae981f5594490e6a",
+      "bytes": 423310
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/cavity-candidate/boundary.off.gz",
+      "sha256": "126ffd9ed8b171b008cb33c1e30f4bcab118c65630511d617ea700112729b2be",
+      "bytes": 30626
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/cavity-candidate/input.off",
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "bytes": 783
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/cavity-candidate/mesh.npz",
+      "sha256": "fb779a763b203f55ad1a5509a5aa2a6ef490a6aef880e0b8feb288af4bdb576f",
+      "bytes": 108535
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/cavity-candidate/mesh.vtu.gz",
+      "sha256": "e2c3b57e565f8cb0c5ac1576496015718651b8a6bb5f992fdd2f301210793820",
+      "bytes": 92515
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/cavity-control/boundary.off.gz",
+      "sha256": "e2553cfa0ce3347fa12fc109b9280296f65ae4317a71defb7541cb98fef9c0d1",
+      "bytes": 30627
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/cavity-control/input.off",
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "bytes": 783
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/cavity-control/mesh.npz",
+      "sha256": "6fc874786a1513a9abdef79d5ecf9eb81a0af01ba06e75dd0e1837d0a4c85915",
+      "bytes": 108658
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/cavity-control/mesh.vtu.gz",
+      "sha256": "54aeac5e7a6b862a5bfdc4c5b2c595ea64fcc26d6520cffd71535a6f7b37e4f0",
+      "bytes": 92454
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/disconnected-candidate/boundary.off.gz",
+      "sha256": "3c50115d76e37e68aba021269bb34c892463ef34e4091d0aabc9e234bed5357f",
+      "bytes": 30573
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/disconnected-candidate/input.off",
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "bytes": 1199
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/disconnected-candidate/mesh.npz",
+      "sha256": "b6cf5ab53932a5834bdb0ab35f1080eec4d8abd5ddea7bfae1ddc6da68f917cb",
+      "bytes": 110275
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/disconnected-candidate/mesh.vtu.gz",
+      "sha256": "f0a17d4fc4e59c27304b0bd3765af76e99c3b7cb300b4bb93568e43e2b22e64a",
+      "bytes": 88104
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/disconnected-control/boundary.off.gz",
+      "sha256": "ed892cbb43f205f058889ccd9c1fd9f30b2e2d991e37c56fe88e50eb45c4e666",
+      "bytes": 30545
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/disconnected-control/input.off",
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "bytes": 1199
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/disconnected-control/mesh.npz",
+      "sha256": "c18fe7c27ef60c101c254bcd9c917f8ceb11a1348a5a5ff45d6a05eb13e75080",
+      "bytes": 110315
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/disconnected-control/mesh.vtu.gz",
+      "sha256": "32ef8f4e543fc73c6cfb2aeb32f8e062a26b00d0f1d25c89c017558b16f1926f",
+      "bytes": 88175
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/graded-torus-candidate/boundary.off.gz",
+      "sha256": "ee6dc46435876565dd8162ab33999762066274819c1cb1af9465abad9437f824",
+      "bytes": 133271
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/graded-torus-candidate/input.off",
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+      "bytes": 100133
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/graded-torus-candidate/mesh.npz",
+      "sha256": "660b717e16f881fafd4f80872e73a2ecf79b6763092dec834e8df864f5075725",
+      "bytes": 572029
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/graded-torus-candidate/mesh.vtu.gz",
+      "sha256": "3db529805a028b8749594582e5be50ab2f3cd7e39abc1232a4c6497a16018682",
+      "bytes": 453161
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/graded-torus-control/boundary.off.gz",
+      "sha256": "3a997b8366f7340af098f8cf4a8190c9977425f77cb2ecd631edbe0d8a22439d",
+      "bytes": 133278
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/graded-torus-control/input.off",
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+      "bytes": 100133
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/graded-torus-control/mesh.npz",
+      "sha256": "1646e97f9bbf62314d222f78e1db064838cfc9bc75bd70010fa4caa1e53a4e1e",
+      "bytes": 572184
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/graded-torus-control/mesh.vtu.gz",
+      "sha256": "c41bf276533b39db920ffd774d216322b6f55a145cd05f89eac6e56869577f16",
+      "bytes": 453050
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/thin-hand-candidate/boundary.off.gz",
+      "sha256": "c1ed877b39ebd914c8549545faea47f7158ed0db4251d44738f75ae0492c9fc6",
+      "bytes": 28748
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/thin-hand-candidate/input.off",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "bytes": 3249
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/thin-hand-candidate/mesh.npz",
+      "sha256": "821b2e87ff99f0e508b9fdda3d00afc4c2ebadbf6730d6af3273ff42964aa8f5",
+      "bytes": 98617
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/thin-hand-candidate/mesh.vtu.gz",
+      "sha256": "7a3cef30526d8f5fa0bbf0f905a53659453c17e39114711b6e70e51f16ef60d9",
+      "bytes": 70607
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/thin-hand-control/boundary.off.gz",
+      "sha256": "24643ab9702ff13c166b053d6b1b3366a268448588bdcf9c7a0b0544295e44ec",
+      "bytes": 28758
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/thin-hand-control/input.off",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "bytes": 3249
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/thin-hand-control/mesh.npz",
+      "sha256": "0105762645e6598f19e8f698a34978a90e6d0a8d7beee368922008893a41b439",
+      "bytes": 98571
+    },
+    {
+      "path": ".work/vtm/current-selection-broad-v1/thin-hand-control/mesh.vtu.gz",
+      "sha256": "cd84d40dd9d0f1a92682b706637b22362859c4c2e60af2727be4d45e0ac5f107",
+      "bytes": 70637
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/cavity/boundary.off.gz",
+      "sha256": "86f81e917663604fbeef6760e8a60b020492616db2f6a9ae5906ba462ab91ffa",
+      "bytes": 30644
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/cavity/input.off",
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "bytes": 783
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/cavity/mesh.npz",
+      "sha256": "3d7f281daa989d0832eb66f9ecdf21ab9e5f0238908a8d5b45c5db8b8fab0bba",
+      "bytes": 108743
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/cavity/mesh.vtu.gz",
+      "sha256": "b5e963db656fa52dba242b5899aced1b190a45ca30fbb3d84d2b15ef7537790d",
+      "bytes": 92622
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/disconnected/boundary.off.gz",
+      "sha256": "fed240085cef189a7a58353e8a9806d6e3a4c23e8de7f9ee217be8356a7922ec",
+      "bytes": 30545
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/disconnected/input.off",
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "bytes": 1199
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/disconnected/mesh.npz",
+      "sha256": "2c3f95b21c8fe1ed7fe26b993b3507671b5e09da5553f37a81b697cf0522b056",
+      "bytes": 110173
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/disconnected/mesh.vtu.gz",
+      "sha256": "d9fd8c7a2fb1396369ed0f96a8af5696d685c3aecb2a2f67273ab96a7b99041c",
+      "bytes": 88180
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/graded-torus/boundary.off.gz",
+      "sha256": "44c17526b4b1ec7a4a001ef80a4635fba76b3840d3dff9545a52fae6a8d4156e",
+      "bytes": 133238
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/graded-torus/input.off",
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+      "bytes": 100133
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/graded-torus/mesh.npz",
+      "sha256": "0c45f2cd5f3a8df7db8b72652d57c017b534d75a4c38cbb46618429a4a70a3dd",
+      "bytes": 572202
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/graded-torus/mesh.vtu.gz",
+      "sha256": "4132d9f21f8aede8866f3be0c36a1e5fc708e614a80328c6e015546982d8d481",
+      "bytes": 453115
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/thin-hand/boundary.off.gz",
+      "sha256": "46b1bfad1c1d553c3e65d612081c22f2bb5547d1ce990b4e5e5f06a5af391dcd",
+      "bytes": 28753
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/thin-hand/input.off",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "bytes": 3249
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/thin-hand/mesh.npz",
+      "sha256": "2469967d1c2f707615a72d9f2100cc739f26a6f3c5bfad330309ebb088897ada",
+      "bytes": 98573
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/thin-hand/mesh.vtu.gz",
+      "sha256": "947659812ee4449d614a15813cabe3b299e28a1b2b4b948df18ccd78ffa28a8f",
+      "bytes": 70646
+    },
+    {
+      "path": ".work/vtm/current-selection-observers-v3/torus1000.npz",
+      "sha256": "f05a322c3540d3a9ddf09735e0b4e3d3abc653bad8ce5b960eb0c0dd827c6902",
+      "bytes": 91353
+    },
+    {
+      "path": ".work/vtm/current-selection-vtm-v1/torus-1000-candidate.npz",
+      "sha256": "fe0f060854b7a8cd17b5242d000382e3f2337d1ab7ef23564c1ef913912f7fd4",
+      "bytes": 91389
+    },
+    {
+      "path": ".work/vtm/current-selection-vtm-v1/torus-1000-control.npz",
+      "sha256": "692bb119320ec0b84039c3cd4df326b6a0b4224428350b420df1600a5e08216f",
+      "bytes": 91243
+    },
+    {
+      "path": ".work/vtm/current-selection-vtm-v1/torus-4096-candidate.npz",
+      "sha256": "61de8c75da121419e1bba46b96c1f3c0e0e9af0d0e49e2e711671fb578116fdb",
+      "bytes": 419192
+    },
+    {
+      "path": ".work/vtm/current-selection-vtm-v1/torus-4096-control.npz",
+      "sha256": "b2cf074371a2a96f3a585d9e4d6a5ccebce6ade7e49b94de4b2639e667648df9",
+      "bytes": 419145
+    }
+  ],
+  "files": [
+    {
+      "original": ".work/vtm/analyze-current-selection-audit.py",
+      "path": "results/validation/vtm/current-selection/analyze-current-selection-audit.py",
+      "bytes": 3627,
+      "sha256": "befe769e9d9343d8250588bd590938a53468edfc67cd2219ebf0bd63b3486260"
+    },
+    {
+      "original": ".work/vtm/check-current-selection-broad-v1.py",
+      "path": "results/validation/vtm/current-selection/check-current-selection-broad-v1.py",
+      "bytes": 2156,
+      "sha256": "20db929c06577c9616d1ea87634b7841c575a9c4e56e6af362477656233eb809"
+    },
+    {
+      "original": ".work/vtm/check-current-selection-final.py",
+      "path": "results/validation/vtm/current-selection/check-current-selection-final.py",
+      "bytes": 5705,
+      "sha256": "7bb687215eaab9dd14282e86fbb68776860c481705dc413f5e554a21bfadd243"
+    },
+    {
+      "original": ".work/vtm/check-current-selection-observer-v2.py",
+      "path": "results/validation/vtm/current-selection/check-current-selection-observer-v2.py",
+      "bytes": 2884,
+      "sha256": "9f0c4ecd44bb29edf3e90d166a002c68f9b5cbae8343a34f0741e7ff3f13c982"
+    },
+    {
+      "original": ".work/vtm/check-current-selection-observers-v3.py",
+      "path": "results/validation/vtm/current-selection/check-current-selection-observers-v3.py",
+      "bytes": 2938,
+      "sha256": "9bc43291e02b88ee0dc6a193f1f98329d89e7023b9786a1ecd9bb41419d1e8c3"
+    },
+    {
+      "original": ".work/vtm/check-current-selection-vtm-v1-v2.py",
+      "path": "results/validation/vtm/current-selection/check-current-selection-vtm-v1-v2.py",
+      "bytes": 2058,
+      "sha256": "4b6b91bd622233020516ad4aecde3aa81ab7055fabfd595e4b10c50d2fad878f"
+    },
+    {
+      "original": ".work/vtm/check-current-selection-vtm-v1.py",
+      "path": "results/validation/vtm/current-selection/check-current-selection-vtm-v1.py",
+      "bytes": 1964,
+      "sha256": "b216de36257555ea6ab6011bc8859b51a3931761195462b66ab9efb3fdb14f30"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-after-export.log",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-after-export.log",
+      "bytes": 8101,
+      "sha256": "56ec687d2c73ce52cada4fc9b4db8f72d4d01cc5415c58c8481d82de5167ea7b"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-after.dot.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-after.dot.gz",
+      "bytes": 1628689,
+      "sha256": "072a72f9c0b2d46967c3f241342c36747be7f39ca5a7095c63846e4c73c2df11"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-after.json",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-after.json",
+      "bytes": 441,
+      "sha256": "979c0d0cac8a027d053f1905bb3d489861619cc7f1d142aaaf89f0a54ac05308"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-after.log",
+      "bytes": 9945,
+      "sha256": "dde3449bd44d3aa5e7ffa1a30d6d0614c56f0edc93da9b88190bca5e504f1613"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-after.nsys-rep.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-after.nsys-rep.gz",
+      "bytes": 3430152,
+      "sha256": "8d08e0cb458fd1a0f5cd942746925c9b4a92b59e4d2cd379dc526490bf98e3d7"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-before-export.log",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-before-export.log",
+      "bytes": 8101,
+      "sha256": "2bd0551131f3f6be2886d8442eae9c2be753edc91e76bad81c164b22f5907525"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-before.dot.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-before.dot.gz",
+      "bytes": 1628936,
+      "sha256": "c7037f4280213a4d88612a555498080bcc54a439975775327fd024011ed14219"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-before.json",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-before.json",
+      "bytes": 441,
+      "sha256": "979c0d0cac8a027d053f1905bb3d489861619cc7f1d142aaaf89f0a54ac05308"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-before.log",
+      "bytes": 9748,
+      "sha256": "51b5456dc4cdd2fc02302d5033a8bafdafc143f6fc8f7de0ec39a515b3ff4cb5"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-before.nsys-rep.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-before.nsys-rep.gz",
+      "bytes": 3474706,
+      "sha256": "d248485abe339f7847e57d3288a9fef514a58c41aba0ebe454049862d9a2f116"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-native.py",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-native.py",
+      "bytes": 1877,
+      "sha256": "d9b76b6fad4010c73877a898acecd3c680bba273bbbe4588b287ce12123c7292"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-profile-summary.json",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-profile-summary.json",
+      "bytes": 60459,
+      "sha256": "c5046fbc36efe40eb421b4d13297af9c50a5a35145593e94ccf6e0f97862f922"
+    },
+    {
+      "original": ".work/vtm/current-selection-armadillo-profile.log",
+      "path": "results/validation/vtm/current-selection/current-selection-armadillo-profile.log",
+      "bytes": 2420,
+      "sha256": "abfdff128eecbed11740c6367a6f8771393d06095b2a35c7204e98f6ed458cae"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/armadillo-graded-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/armadillo-graded-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/armadillo-graded-candidate/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/armadillo-graded-candidate/result.json",
+      "bytes": 3749,
+      "sha256": "2d1b3c7af188b4e117d2e0d88ade8e5348f63b8e9fb46ce9f126dcb09a2e4063"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/armadillo-graded-candidate.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/armadillo-graded-candidate.log",
+      "bytes": 8620,
+      "sha256": "9f59d29fe0f10c3449eb40cfa80ee4bff83b3a22107f1ea8ab0f1bf2d93db8f0"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/armadillo-graded-control/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/armadillo-graded-control/result.json",
+      "bytes": 3749,
+      "sha256": "061513f6075603c615947c4a2a1602e75f044b1ade93d4d77c34e6a5e755acb7"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/armadillo-graded-control.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/armadillo-graded-control.log",
+      "bytes": 8531,
+      "sha256": "ccb1d9b3d11f4de5c03e1c4256b51a99c2b06ab3bb1fbee437ea6e26f148006b"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/armadillo-uniform-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/armadillo-uniform-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/armadillo-uniform-candidate/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/armadillo-uniform-candidate/result.json",
+      "bytes": 3741,
+      "sha256": "e1289abca9a430f1f62d41c5c5fdab85cb9823e5cea5afb92a34bcbeb0bb446b"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/armadillo-uniform-candidate.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/armadillo-uniform-candidate.log",
+      "bytes": 8526,
+      "sha256": "f5b8a1afae0db62dc89a83fb1dfd667ed00c07f5576f7db2e24fb3c4c6fc5bf6"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/armadillo-uniform-control/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/armadillo-uniform-control/result.json",
+      "bytes": 3749,
+      "sha256": "40d9af1a01f7ba7735354d06e2a4438453efb8508a6d02d7c126d654cb9c6310"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/armadillo-uniform-control.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/armadillo-uniform-control.log",
+      "bytes": 8445,
+      "sha256": "a05f2d9ce3ae51a7cc4805a31c3df1dd48fc355c7508ac740031f101259c3f33"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/cavity-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/cavity-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/cavity-candidate/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/cavity-candidate/result.json",
+      "bytes": 3650,
+      "sha256": "7f10e842bab560147be93b703102f961f73a5b2ef8f986bcecdaddf7bf4ae327"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/cavity-candidate.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/cavity-candidate.log",
+      "bytes": 8347,
+      "sha256": "f7d41ce4cc0fc273970372ab22a38c1211dfe8a182acf5c9ae8e5b84f2c3cea5"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/cavity-control/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/cavity-control/result.json",
+      "bytes": 3650,
+      "sha256": "96148f06109fa58e4cf9d5f298c169dcc10c0ab94ae8d1542d781bdc1ef31787"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/cavity-control.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/cavity-control.log",
+      "bytes": 8258,
+      "sha256": "372ee7f1528d80d905a449dfcb7199d7abb779b92d25ff3e2f84e102aaecb754"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/commands.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/commands.json",
+      "bytes": 9420,
+      "sha256": "176c750110859f387c98fc68a866a53b83d852140fffbe2ac5245d803d794732"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/disconnected-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/disconnected-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/disconnected-candidate/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/disconnected-candidate/result.json",
+      "bytes": 3664,
+      "sha256": "a9663aaa3149ab90a345b1ca5666f0583b933df75486c122376fa27000edcb7a"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/disconnected-candidate.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/disconnected-candidate.log",
+      "bytes": 8361,
+      "sha256": "7aafb02e10218af6640c3b30b5f80ac2bc555acf145666a4959cbf0d30cb8bc0"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/disconnected-control/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/disconnected-control/result.json",
+      "bytes": 3662,
+      "sha256": "10a110d3ce1d8c6fed960ec47b6cbc0826a8f80d65cfd2279d585afe97ba51fe"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/disconnected-control.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/disconnected-control.log",
+      "bytes": 8270,
+      "sha256": "f37a89e4f8a13a94ed47127217c0dbb9040d2e8160e8dd2d1f2c3f0d5f82dbc4"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/graded-torus-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/graded-torus-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/graded-torus-candidate/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/graded-torus-candidate/result.json",
+      "bytes": 3653,
+      "sha256": "8b74ea7c164a570a8eb4ab80b9e72aa475ce9f5285ce6d747ca03787f238e56f"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/graded-torus-candidate.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/graded-torus-candidate.log",
+      "bytes": 8524,
+      "sha256": "193c1f7c30513fd6558bdc775bf2566a1267440b131ad86a9b97e4dad91d744b"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/graded-torus-control/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/graded-torus-control/result.json",
+      "bytes": 3660,
+      "sha256": "a7db6a740de062dc5ec175d2f991d23b25b147c1311c2252fdea15b502448e52"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/graded-torus-control.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/graded-torus-control.log",
+      "bytes": 8442,
+      "sha256": "56384be091a9aa520ebbb926f3161245d77b43f4c2876ea2eae272c7c225768d"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/thin-hand-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/thin-hand-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/thin-hand-candidate/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/thin-hand-candidate/result.json",
+      "bytes": 3667,
+      "sha256": "00d16de2d1f9d3ccca2466ebd5cd7e69b37e5200e5dd7464ebdf61e0a182a33b"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/thin-hand-candidate.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/thin-hand-candidate.log",
+      "bytes": 8364,
+      "sha256": "f84389d11ae0d857b506b513a00238e3e618442231a3cc6753e65ab506bd54f3"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/thin-hand-control/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/thin-hand-control/result.json",
+      "bytes": 3665,
+      "sha256": "6c2707410731bf84055c9aa8d5582edeb5b8fa80bb18aacbd9d8c9dcea167b39"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1/thin-hand-control.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1/thin-hand-control.log",
+      "bytes": 8273,
+      "sha256": "b88514a5d57a8f3f7ada145068c8d975c485c623d9e4291e78e2dd52a75f03ce"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1-independent.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1-independent.json",
+      "bytes": 21150,
+      "sha256": "ac5a3441acfef81d2ef5e5711adf64fa4aa38df676d656d4705a03fb53884ff3"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1-independent.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1-independent.log",
+      "bytes": 1374,
+      "sha256": "fcf61a5a1584247471f0a6c6d7ce400943ad996d1ab1a9e4c303772bd172a925"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1-lossless-archives.json",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1-lossless-archives.json",
+      "bytes": 9567,
+      "sha256": "b117bb87861d3e20756932d74d1c3d532b533052766e15308ed0b947fdd721e2"
+    },
+    {
+      "original": ".work/vtm/current-selection-broad-v1.log",
+      "path": "results/validation/vtm/current-selection/current-selection-broad-v1.log",
+      "bytes": 7545,
+      "sha256": "0b8094f96699084e1d24b35da5d8ac4e2ed7dc388864e4c832d8fd75b97d000e"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-after/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-graded-after/boundary.off.gz",
+      "bytes": 139394,
+      "sha256": "e5b5420610956c4f3dd50f108509b265c2a69e07d5b742ed54a22775baf0b632"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-after/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-graded-after/mesh.npz",
+      "bytes": 1612199,
+      "sha256": "6edc62547ba32ee2e354c05198954017853fc5b21c17964e44fd3ecd5c713e8f"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-graded-after/mesh.vtu.gz",
+      "bytes": 427658,
+      "sha256": "93c55ca4fe8370f1a65e0af58d8f9d3b5563305662759d27a4129821bfd1516f"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-after/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-graded-after/result.json",
+      "bytes": 3745,
+      "sha256": "9dc17233dc58857dda8648bf9b24c640ef96d593f5a60bb82c289b7895375aae"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-graded-after.log",
+      "bytes": 8527,
+      "sha256": "6fedf35a4c8374e359fa177a994765e31eb19500fcccd2e9cbe3cf2f5032e3b6"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-before/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-graded-before/boundary.off.gz",
+      "bytes": 139489,
+      "sha256": "9249cf6da29e25d8c35495340c1171363b1e7a45f9303ea2ca676b0aaa77fa06"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-before/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-graded-before/mesh.npz",
+      "bytes": 1612160,
+      "sha256": "3fb72f0bcec431a6e030de57784ba0bf1d021207c716b490ab91e40ba78db81d"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-graded-before/mesh.vtu.gz",
+      "bytes": 427739,
+      "sha256": "329fdfcaa31e428db72f9bbf821bafbb705190d966df7bb885f1ced7760561b2"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-before/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-graded-before/result.json",
+      "bytes": 3741,
+      "sha256": "e94f6519bab3cda9852e5ab840bada82a3c324359ea62e613f9954dce566b457"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-graded-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-graded-before.log",
+      "bytes": 8523,
+      "sha256": "e2654cf7a8b4a06781ca6a955ae26dba4b172f7b59aed5b54c22015c5c0d238c"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-after/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-uniform-after/boundary.off.gz",
+      "bytes": 140773,
+      "sha256": "5364633cf4b8e7fadec02003503eb17efe0d01a4e801df85696e2b95e76bb8b0"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-after/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-uniform-after/mesh.npz",
+      "bytes": 1610671,
+      "sha256": "2514dbb8a9ddf52637029bee848445f1f85f1f827caa7d64f931c4d09462cc50"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-uniform-after/mesh.vtu.gz",
+      "bytes": 423449,
+      "sha256": "fb4af111f08743f7745c8213313a6edaa7e27980b698965b7e98dea7a7bb4aa1"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-after/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-uniform-after/result.json",
+      "bytes": 3742,
+      "sha256": "1c2b1d0ed605c7dac7ed78f8b240d0c7b86f46861d5488e832f920a4939fdba9"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-uniform-after.log",
+      "bytes": 8438,
+      "sha256": "9203c23836d489d5ca393650d98479b189a890e6e98e0d2417620fc6a2daea1c"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-before/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-uniform-before/boundary.off.gz",
+      "bytes": 140774,
+      "sha256": "14001533eeaf568c65ae4584762dfbdda8f42058510e6d082646df7e0be4eb38"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-before/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-uniform-before/mesh.npz",
+      "bytes": 1610576,
+      "sha256": "064adeb2baa16bc2ce13fae8997fe9d1334782600122683c00d44b4882eddce1"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-uniform-before/mesh.vtu.gz",
+      "bytes": 423519,
+      "sha256": "8508ca54dcb08fb69b94184b3c269f69f221db8cd828068839e834d9f3089613"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-before/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-uniform-before/result.json",
+      "bytes": 3741,
+      "sha256": "e5914e2efa4d7444e8cf45a9d717cb1d8355ab17f541f48f550a7a2eeae702ff"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/armadillo-uniform-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/armadillo-uniform-before.log",
+      "bytes": 8437,
+      "sha256": "6894c1fd6ca06988173a71de5bbc12d96e4a647d2a6ff621cdedc4b279b230a5"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-after/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-after/boundary.off.gz",
+      "bytes": 30638,
+      "sha256": "afdfed38d6e498a5b9052f203139d8768d21eba6248a0afdfe1cc272c1806647"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-after/input.off",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-after/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-after/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-after/mesh.npz",
+      "bytes": 108473,
+      "sha256": "49c01aeadb5fb4beedf0fb0b1b29608f3b4bc572b6721d4e88a65fbf7980eac4"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-after/mesh.vtu.gz",
+      "bytes": 92509,
+      "sha256": "9eb3e71af56e7bf4a99f30767a79f3f0113ac16d5835ff28aa22748566e0be74"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-after/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-after/result.json",
+      "bytes": 3646,
+      "sha256": "a9d236d72d0d003e76241216474ea482b4d1afdeb37881e17c76cdcc19f1d7cf"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-after.log",
+      "bytes": 8254,
+      "sha256": "671a68622f3a962c457245e1d5e464a0f9d9c8765851113cbe9a9e07bfbddb12"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-before/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-before/boundary.off.gz",
+      "bytes": 30636,
+      "sha256": "e7377b6a53c7c26f10414e371b19144f94aa86bcdec99dbcd90dbb7d6c630b40"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-before/input.off",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-before/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-before/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-before/mesh.npz",
+      "bytes": 108669,
+      "sha256": "4ee4fc10b48d4edcac7da94ec39803b15b734d1e9c9f19415865565a41dfc9a2"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-before/mesh.vtu.gz",
+      "bytes": 92570,
+      "sha256": "c1503e5b9a6151f705575ab9dd1b75140f31a99bca6125d37736041ec3eb974c"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-before/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-before/result.json",
+      "bytes": 3640,
+      "sha256": "8fa216cc9211527d49cec9ed420e05d368f68ab355547430a8b0e262f6e19705"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/cavity-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/cavity-before.log",
+      "bytes": 8248,
+      "sha256": "26e6904107ac6de9634c0fd4b5fbab8466191931ffb3082d641f30a61999812a"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/commands.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/commands.json",
+      "bytes": 23219,
+      "sha256": "82e5eb251c680a5d9a7adbf3f6aa25822a361d33ef410dc26480185d4846ab98"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay-fitted-hand-after.json",
+      "bytes": 2831,
+      "sha256": "e43224a6cb21dcd6c5a311f721f0066fd65ca5fca3d3be941dd6471c46a0620c"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay-fitted-hand-after.log",
+      "bytes": 5127,
+      "sha256": "e64023b38289e640cd57b0532b7837ca203894794e71e8c848de98ab4e1d45b7"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay-fitted-hand-before.json",
+      "bytes": 2842,
+      "sha256": "8a2eddd06a01f9de83b79bad7cf60ac7eb102e9a4e220a1375fee1bc1e27abc9"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay-fitted-hand-before.log",
+      "bytes": 5138,
+      "sha256": "203c7573c560381897238988f04e8f1c52415c0595f7dee7609529129f3c81df"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay-grid-after.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay-grid-after.json",
+      "bytes": 2835,
+      "sha256": "b25c824940b0ed25d8e9628be8ff51ed32335a8507effd8ff5ca1717adc594b4"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay-grid-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay-grid-after.log",
+      "bytes": 4874,
+      "sha256": "a33f03684caf446f8a8c62adb58926f8196f78acbec4b711ed02dd7fc7a8bcef"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay-grid-before.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay-grid-before.json",
+      "bytes": 2830,
+      "sha256": "0a975803acb113511e442a48ea7aac5ecb0b89b7340154368fdccb81d30c6d3c"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay-grid-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay-grid-before.log",
+      "bytes": 4869,
+      "sha256": "d008774d65df4a47d948118cb45b2ff65709ed54de58d64f5e000e786f715529"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay1000-after.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay1000-after.json",
+      "bytes": 2825,
+      "sha256": "83a028f47a9ceeb2e250740b3bc15f09e5babfe728ea4d2e76fad41a132aa958"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay1000-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay1000-after.log",
+      "bytes": 5121,
+      "sha256": "8e5df471760fbd87689a564c5c952e6f560f13b0042f7a76318cd07104ed481d"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay1000-before.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay1000-before.json",
+      "bytes": 2824,
+      "sha256": "58ea9bf21e26e18f6f8ca07843d4bdfbb182e6971404e8e71619c10ccd457a2d"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay1000-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay1000-before.log",
+      "bytes": 5120,
+      "sha256": "184d7fa9ca912e2b99fff32ea583b92eb60f6f474840ba82a96c5218a8f34ed8"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay100000-after.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay100000-after.json",
+      "bytes": 2827,
+      "sha256": "57f9cc01b7ab2d7e5005c8dfdfb7f7585e17334297ed7a16700c81d8ae7046cd"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay100000-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay100000-after.log",
+      "bytes": 5057,
+      "sha256": "4eba7bb9a26db33800e048dc0fb539c6ff52de2e12c5a1e17a8e65d3373ba3c7"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay100000-before.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay100000-before.json",
+      "bytes": 2829,
+      "sha256": "02d26c64220bfe13d055af663a66494b57cb411cf803a62096a2a3cc243874c2"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/delaunay100000-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/delaunay100000-before.log",
+      "bytes": 5059,
+      "sha256": "727f0f55940cb0951594b85b601ccd753036da66038a1fce80df3da9935ff015"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/diagram100000-after.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/diagram100000-after.json",
+      "bytes": 2567,
+      "sha256": "46b385af962fc0cc7da1500aad200b9719922e80b711a1632817b18a715783dd"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/diagram100000-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/diagram100000-after.log",
+      "bytes": 3438,
+      "sha256": "751dccc7f22c1c982170ea3e9efb529039c7bb9b211462739431afae5096a6d9"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/diagram100000-before.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/diagram100000-before.json",
+      "bytes": 2565,
+      "sha256": "f6a0a8b868d55bec4449c0a1b232b322b90a8f776920cc7d3ea818b84ac94ef6"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/diagram100000-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/diagram100000-before.log",
+      "bytes": 3436,
+      "sha256": "f1bd8c8cbd6be268748580cd96cda168c09e9b3f5ad27fa01dfc7d9b84903224"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-after/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-after/boundary.off.gz",
+      "bytes": 30536,
+      "sha256": "4a7d5192c61cafb3054b1a98b9bd27b971a269a0bbbb7643d1c659adea4d5d83"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-after/input.off",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-after/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-after/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-after/mesh.npz",
+      "bytes": 110289,
+      "sha256": "e5a679eb95bab4584b4655391100dbc141b79829a0ed43f97f99494e104da6a8"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-after/mesh.vtu.gz",
+      "bytes": 88172,
+      "sha256": "258ed93525c3e93202871b9a0fc4cc42eacb1483599fd635971839c2cc141569"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-after/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-after/result.json",
+      "bytes": 3657,
+      "sha256": "2ea4a9aae5f482d1a477299b5cf8dea2e0c73fb5c610163044251f370eca4c4e"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-after.log",
+      "bytes": 8265,
+      "sha256": "287af1c4f9303fb0281844a657c02cd47eabde63afe32696d7dc6e03de29a449"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-before/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-before/boundary.off.gz",
+      "bytes": 30545,
+      "sha256": "bf5d09bc40ef23adc0dc13feb0fb259970b43db498d113e842fcf87aa4ed3c38"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-before/input.off",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-before/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-before/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-before/mesh.npz",
+      "bytes": 110453,
+      "sha256": "901aa4acd42b54fe86ca13faf2ab2cc96185183d66fbad00412b7489dd056944"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-before/mesh.vtu.gz",
+      "bytes": 88137,
+      "sha256": "69b1f649f53579b4dd76f6bfff663916ac6aec9dfca22887be4075706bde28f0"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-before/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-before/result.json",
+      "bytes": 3657,
+      "sha256": "7bfe7c6b089472f4fbe2fdf0c151f1702955ddb13c4124b0f21ba5d83af4ffa9"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/disconnected-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/disconnected-before.log",
+      "bytes": 8265,
+      "sha256": "0676ecb998b2415cb1ee82da4b4067d4267129984a97a9b4738f7542bb4dee32"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-after/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-after/boundary.off.gz",
+      "bytes": 133240,
+      "sha256": "c0472294fc69758321d9920de5c6f0210e5cee980fc5afa1d3483ebdcc85b4e7"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-after/input.off",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-after/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-after/mesh.npz",
+      "bytes": 572481,
+      "sha256": "436e580263b66c9fb53292d5cd60e212abbf1018ecbd15814ee0b08242c6954e"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-after/mesh.vtu.gz",
+      "bytes": 453265,
+      "sha256": "4509d00d44979c98a269c64ec90d1f2277cac11b73748147c816a41ac1d3c4ab"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-after/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-after/result.json",
+      "bytes": 3646,
+      "sha256": "dc31eaa51dda49e89866bb4d3f45dd18a8417628ac3a272e0bf70a4e61b6898e"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-after.log",
+      "bytes": 8428,
+      "sha256": "24e92bbd79608bac1bb943c4a9048bb8d2098957e3d931be6180df126e1449a0"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-before/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-before/boundary.off.gz",
+      "bytes": 133266,
+      "sha256": "182f30ab8526d2cd577128c71bff577a599d7eb22cffa3e7e32af1c8240cf60e"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-before/input.off",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-before/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-before/mesh.npz",
+      "bytes": 571987,
+      "sha256": "cae249b8938df6b25fc13dde9014f40f6691d808bea0a3ce8287a08d88cfaf68"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-before/mesh.vtu.gz",
+      "bytes": 452988,
+      "sha256": "6c911997a243ca38ce1a25299d55b1083946a83ce7622d90af20ec362f24ecb8"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-before/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-before/result.json",
+      "bytes": 3658,
+      "sha256": "7b302dd92c52cf50538b8476a93d5ce83ef69308c88085c7bf56d5e1700bd185"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/graded-torus-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/graded-torus-before.log",
+      "bytes": 8440,
+      "sha256": "0522eaed3ca25456b67bdf9e1ceaf947d491e98c3793cf33deb9bcb41be79992"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-after/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-after/boundary.off.gz",
+      "bytes": 28750,
+      "sha256": "d80a08b4ab590293f50a42bc567f650951d0f553e4362ec626f498133d4a80cb"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-after/input.off",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-after/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-after/mesh.npz",
+      "bytes": 98619,
+      "sha256": "1e977751b135058c66b26de1c79c5236827873e147dd60ef7ac85969f2d2f134"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-after/mesh.vtu.gz",
+      "bytes": 70602,
+      "sha256": "62615a9fda14751623f142d8388f1793c11252c300cd7cdb497afb949bc435a0"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-after/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-after/result.json",
+      "bytes": 3652,
+      "sha256": "4b7fb0ef9954885ec1181d42a21a8b442e58aa298d904363f3f42d06bb2637ce"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-after.log",
+      "bytes": 8260,
+      "sha256": "15cdc0ea8fc360f4ccf8be2d89e2b80ed41f9ef1a4766e64275fdbd7b9e1bc7c"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-before/boundary.off.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-before/boundary.off.gz",
+      "bytes": 28737,
+      "sha256": "9c73f569da2b58714405e1f75459b72d64aef33e7e5414df0029360939e4b54f"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-before/input.off",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-before/mesh.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-before/mesh.npz",
+      "bytes": 98687,
+      "sha256": "52c99d95739a513dd9b5c57f8187370b3da1dda82c6a4fccfa8ad140d1c4c8b1"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-before/mesh.vtu.gz",
+      "bytes": 70649,
+      "sha256": "2c7b3a5d57c8f41c2914e6c91b5e9953bfbe2b03dd6cf796876a9b9ccc5a785d"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-before/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-before/result.json",
+      "bytes": 3660,
+      "sha256": "fbe5aa713bb46d83add7c7377b70d1af88424ccec34f63f254dc5c71dbdda443"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/thin-hand-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/thin-hand-before.log",
+      "bytes": 8268,
+      "sha256": "73f8c6caec45bb472f771eef22f293e5fa30e285bfba99ea1462994b70c1a6a7"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus1000-after.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus1000-after.json",
+      "bytes": 2928,
+      "sha256": "4f94642916b9ecb66f873c905c4c1fcc5a8fd30b0bd72365063eb186bd2340e3"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus1000-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus1000-after.log",
+      "bytes": 7622,
+      "sha256": "8985490557d9ac67c8fdc93f5b527596bd264fb146d09756ea9bd661c77aee58"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus1000-after.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus1000-after.npz",
+      "bytes": 91367,
+      "sha256": "618e1fa5b3a4e5697608eb6dcb674789d19d7af4c7c4fde88dfefe121e8418f8"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus1000-before.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus1000-before.json",
+      "bytes": 2939,
+      "sha256": "8f9b9b71a6f62e871ab73ec4c426f5e85679e3b8548940eaaa911f5344fc127a"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus1000-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus1000-before.log",
+      "bytes": 7633,
+      "sha256": "4a94c8d6bbe83294dd7699fcfca97938e7802d9be5399f9dc9251bc782230f06"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus1000-before.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus1000-before.npz",
+      "bytes": 91200,
+      "sha256": "58e3f373856f0c9f047766c2375cdffd1c63af0d0f6c83ecd0a4e0db2e9158cf"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus4096-after.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus4096-after.json",
+      "bytes": 3072,
+      "sha256": "15750b6b4e10e92a7ca7ee634ae5435b19d1a9971138f219a3e2d41bf1d05163"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus4096-after.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus4096-after.log",
+      "bytes": 7796,
+      "sha256": "3ee005d0e27b69901ff32afa38233cd947257b7d8ac932b8aedaf61c39a71598"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus4096-after.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus4096-after.npz",
+      "bytes": 419080,
+      "sha256": "17a6ded627f8a2b07887b611b10b2d01860e6f3af959d465a4a96fe6fe04cf9f"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus4096-before.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus4096-before.json",
+      "bytes": 3084,
+      "sha256": "65b344663a4f26526096d70f5a8a732cb8b06bb805ee87f2f32016b3ec70e11c"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus4096-before.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus4096-before.log",
+      "bytes": 7808,
+      "sha256": "92a25943835d196c2553940e7a91d4dffee56fd265ea9f68879fed7bc13aa679"
+    },
+    {
+      "original": ".work/vtm/current-selection-final/torus4096-before.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-final/torus4096-before.npz",
+      "bytes": 419609,
+      "sha256": "ce92661db2f2b75b89c7c91c91c264b6bbb516751cd38351bdf448aa415a12d3"
+    },
+    {
+      "original": ".work/vtm/current-selection-final-independent.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final-independent.json",
+      "bytes": 38107,
+      "sha256": "de2cedd0adafb6e8ea794ad4a09e4711642a33c79b8522ebd6cb635d4d34f33f"
+    },
+    {
+      "original": ".work/vtm/current-selection-final-independent.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final-independent.log",
+      "bytes": 6028,
+      "sha256": "c7e0f0553b4aae7e0d5789d07bd95c68fb1d06f8acd82f409b07525a19c12935"
+    },
+    {
+      "original": ".work/vtm/current-selection-final-lossless-archives.json",
+      "path": "results/validation/vtm/current-selection/current-selection-final-lossless-archives.json",
+      "bytes": 8823,
+      "sha256": "0a7f9870a36ecfc0d8484703e51ef0164cb1999dcf96a10cbbe94beb5ccbe39b"
+    },
+    {
+      "original": ".work/vtm/current-selection-final.log",
+      "path": "results/validation/vtm/current-selection/current-selection-final.log",
+      "bytes": 19378,
+      "sha256": "3df8e2b2f6c4cbc01b46f0fa14eda37a5ff62785e2563109ad987938170342ff"
+    },
+    {
+      "original": ".work/vtm/current-selection-full-native-audit.json",
+      "path": "results/validation/vtm/current-selection/current-selection-full-native-audit.json",
+      "bytes": 1120,
+      "sha256": "06a7cd8c36c6c8682eb49458432cb2ffffbb68c363eed2e51c5d0503e803cbff"
+    },
+    {
+      "original": ".work/vtm/current-selection-full-native-audit.log",
+      "path": "results/validation/vtm/current-selection/current-selection-full-native-audit.log",
+      "bytes": 1120,
+      "sha256": "06a7cd8c36c6c8682eb49458432cb2ffffbb68c363eed2e51c5d0503e803cbff"
+    },
+    {
+      "original": ".work/vtm/current-selection-full-native-export.log",
+      "path": "results/validation/vtm/current-selection/current-selection-full-native-export.log",
+      "bytes": 8101,
+      "sha256": "c21b2049cda1c0d4e783699f27adab926fd9110f392647c80d31bdcac477d94e"
+    },
+    {
+      "original": ".work/vtm/current-selection-full-native.dot.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-full-native.dot.gz",
+      "bytes": 1629117,
+      "sha256": "58a5c30ab6fe58490945c88dcad6aa9f890b760de92704dad612350ecbf71b91"
+    },
+    {
+      "original": ".work/vtm/current-selection-full-native.json",
+      "path": "results/validation/vtm/current-selection/current-selection-full-native.json",
+      "bytes": 609,
+      "sha256": "1b6e9f78c63c72ece49cc48dbc1e04f345a28c62ff3449683f3ba57253a862a6"
+    },
+    {
+      "original": ".work/vtm/current-selection-full-native.log",
+      "path": "results/validation/vtm/current-selection/current-selection-full-native.log",
+      "bytes": 9476,
+      "sha256": "675bf256711188f2c9ab43587597c73b20b6c00ea5f59f898430c0f3b700becd"
+    },
+    {
+      "original": ".work/vtm/current-selection-full-native.nsys-rep.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-full-native.nsys-rep.gz",
+      "bytes": 3209556,
+      "sha256": "2b126e8207769e5ce5f65e4aa14bf5b376f2fb9096fb3a4109eed36a21261080"
+    },
+    {
+      "original": ".work/vtm/current-selection-full-native.py",
+      "path": "results/validation/vtm/current-selection/current-selection-full-native.py",
+      "bytes": 1738,
+      "sha256": "f1b06c595d2e0c98e682ca8d92aaff93fb1b03b47b302ee3535e1fe4ccc58c8b"
+    },
+    {
+      "original": ".work/vtm/current-selection-full-suite.log",
+      "path": "results/validation/vtm/current-selection/current-selection-full-suite.log",
+      "bytes": 992,
+      "sha256": "ab74184ceb4b644d251d93c4f3d74427d8451264fd792881c74d535f0bde79dd"
+    },
+    {
+      "original": ".work/vtm/current-selection-full-trace-archive.json",
+      "path": "results/validation/vtm/current-selection/current-selection-full-trace-archive.json",
+      "bytes": 216,
+      "sha256": "5fc3b105e03cdecff472307eade62928c405b62a0d283d8d0230e33cc86dbe1d"
+    },
+    {
+      "original": ".work/vtm/current-selection-loop-native-audit.json",
+      "path": "results/validation/vtm/current-selection/current-selection-loop-native-audit.json",
+      "bytes": 1220,
+      "sha256": "19f2620732bd92394067f21f562317bb7f77a680b4bce4e133c5c6656beea80a"
+    },
+    {
+      "original": ".work/vtm/current-selection-loop-native-audit.log",
+      "path": "results/validation/vtm/current-selection/current-selection-loop-native-audit.log",
+      "bytes": 1220,
+      "sha256": "19f2620732bd92394067f21f562317bb7f77a680b4bce4e133c5c6656beea80a"
+    },
+    {
+      "original": ".work/vtm/current-selection-loop-native-export.log",
+      "path": "results/validation/vtm/current-selection/current-selection-loop-native-export.log",
+      "bytes": 8101,
+      "sha256": "dd852d7ee75df6a34cb626022719016d9d262a3ff51e41b1af60818ad1ab1eaf"
+    },
+    {
+      "original": ".work/vtm/current-selection-loop-native.dot.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-loop-native.dot.gz",
+      "bytes": 69698,
+      "sha256": "9c4542c006568c444df04d1eb38465ac471b830fd8812edd274c4f31c8efe794"
+    },
+    {
+      "original": ".work/vtm/current-selection-loop-native.json",
+      "path": "results/validation/vtm/current-selection/current-selection-loop-native.json",
+      "bytes": 1788,
+      "sha256": "1c664fc862ba5cb882efdd0c41418ba297a09c5afb34831c9a754c5939e6f6db"
+    },
+    {
+      "original": ".work/vtm/current-selection-loop-native.log",
+      "path": "results/validation/vtm/current-selection/current-selection-loop-native.log",
+      "bytes": 6743,
+      "sha256": "f406a9fe59dd5f81bb9ae4c017f6e2af3ba0f375043d900896232f09c792788b"
+    },
+    {
+      "original": ".work/vtm/current-selection-loop-native.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-loop-native.npz",
+      "bytes": 98653,
+      "sha256": "a1a49cd6ea9475edc3b8059b5b082c5770f02f710851cd7a4f0e071acd13f551"
+    },
+    {
+      "original": ".work/vtm/current-selection-loop-native.nsys-rep.gz",
+      "path": "results/validation/vtm/current-selection/current-selection-loop-native.nsys-rep.gz",
+      "bytes": 350930,
+      "sha256": "d59ac387137e8078ada0a3d7fa3863525d2f68117935dc00cb8164eb19c04efd"
+    },
+    {
+      "original": ".work/vtm/current-selection-loop-native.py",
+      "path": "results/validation/vtm/current-selection/current-selection-loop-native.py",
+      "bytes": 5367,
+      "sha256": "a9e9126c37047b5cec09bc0fdb61796a611dd67d5d74a3ba157681a96844a272"
+    },
+    {
+      "original": ".work/vtm/current-selection-loop-trace-archive.json",
+      "path": "results/validation/vtm/current-selection/current-selection-loop-trace-archive.json",
+      "bytes": 214,
+      "sha256": "97d4af14ac3679fa47adfc7b6f2a2a1db640e482dd8a4e9dced9aa6d80853345"
+    },
+    {
+      "original": ".work/vtm/current-selection-memory-v2-commands.json",
+      "path": "results/validation/vtm/current-selection/current-selection-memory-v2-commands.json",
+      "bytes": 2947,
+      "sha256": "4ccb47ab11f200ba5986376ec2aae5177dd3ec64f5cf5daa9d0750d38c53c3de"
+    },
+    {
+      "original": ".work/vtm/current-selection-memory-v2.log",
+      "path": "results/validation/vtm/current-selection/current-selection-memory-v2.log",
+      "bytes": 2452,
+      "sha256": "b09054ea259a1239421f8ee5a14df8a3846120f8894d4f3fdd0682bf76877cbb"
+    },
+    {
+      "original": ".work/vtm/current-selection-native-analysis.log",
+      "path": "results/validation/vtm/current-selection/current-selection-native-analysis.log",
+      "bytes": 60,
+      "sha256": "81fa304b8ba8d39080cffd08e31d8ed9b494e86849bb63be188c6bb3cff48b73"
+    },
+    {
+      "original": ".work/vtm/current-selection-native-audit-summary.json",
+      "path": "results/validation/vtm/current-selection/current-selection-native-audit-summary.json",
+      "bytes": 61821,
+      "sha256": "32cb03648c14d5676d3cbb9626f3768c646d43ac4e3ad5533f69d83ab0eab78d"
+    },
+    {
+      "original": ".work/vtm/current-selection-native-commands.json",
+      "path": "results/validation/vtm/current-selection/current-selection-native-commands.json",
+      "bytes": 2001,
+      "sha256": "b8ceb89a479c385eec9087f310de14757bfd05b666930371570a1397d98c9787"
+    },
+    {
+      "original": ".work/vtm/current-selection-native.log",
+      "path": "results/validation/vtm/current-selection/current-selection-native.log",
+      "bytes": 1677,
+      "sha256": "e448ef894f8362e21a47e11f90fd1299c35cae8c6c9d8a981a20b27e0f444561"
+    },
+    {
+      "original": ".work/vtm/current-selection-observer-4096-v1-result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observer-4096-v1-result.json",
+      "bytes": 2957,
+      "sha256": "31af0087d67d0c392861c0baffc203bb751f7fd971396cd69da98c02b1017044"
+    },
+    {
+      "original": ".work/vtm/current-selection-observer-4096-v1.log",
+      "path": "results/validation/vtm/current-selection/current-selection-observer-4096-v1.log",
+      "bytes": 8269,
+      "sha256": "072d48823555a413b70bbba9c15b0e95f3322b598a3d7a69d79cbfa4ab615c6b"
+    },
+    {
+      "original": ".work/vtm/current-selection-observer-4096-v1.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-observer-4096-v1.npz",
+      "bytes": 419465,
+      "sha256": "4a493d02609658269d56a52bbf3ee5a07d2c5ca0db2d20e7cce3dbe6645a540a"
+    },
+    {
+      "original": ".work/vtm/current-selection-observer-4096-v2-result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observer-4096-v2-result.json",
+      "bytes": 2959,
+      "sha256": "988fba6de214e8c7305388a83b5dc65d031e7b79913364aa685c505d6ac5d4a8"
+    },
+    {
+      "original": ".work/vtm/current-selection-observer-4096-v2.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observer-4096-v2.json",
+      "bytes": 44937,
+      "sha256": "88c135658915c5a1b84622f9042263e3702de16e60a7962e94324960a92b1d2f"
+    },
+    {
+      "original": ".work/vtm/current-selection-observer-4096-v2.log",
+      "path": "results/validation/vtm/current-selection/current-selection-observer-4096-v2.log",
+      "bytes": 7762,
+      "sha256": "46e84a7aa242e5acaef527059f569c4e2b041b16cd4f86bf55164c22b612eebc"
+    },
+    {
+      "original": ".work/vtm/current-selection-observer-4096-v2.npz",
+      "path": "results/validation/vtm/current-selection/current-selection-observer-4096-v2.npz",
+      "bytes": 419099,
+      "sha256": "45733660af06ebea494179e3338ba230173aadc4a568d50f590e7a37865a0026"
+    },
+    {
+      "original": ".work/vtm/current-selection-observer-independent-v2.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observer-independent-v2.json",
+      "bytes": 2142,
+      "sha256": "8d6fd1eecad53057eb9abedea5c717b1f7e2a8d04aa6a158e85a55bc2cf87a53"
+    },
+    {
+      "original": ".work/vtm/current-selection-observer-independent-v2.log",
+      "path": "results/validation/vtm/current-selection/current-selection-observer-independent-v2.log",
+      "bytes": 1818,
+      "sha256": "e50b68e76a12f1a924f0afc61751a9fee94428b8765b58a34e3a87df094d82f2"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-independent-v3.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-independent-v3.json",
+      "bytes": 10597,
+      "sha256": "93652cbaaeb0b53d8d5f0d202a2b9a01d9c19632df11f7f9d4bc1283c7d412a8"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-independent-v3.log",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-independent-v3.log",
+      "bytes": 1554,
+      "sha256": "21f755f23b7e348ead01483ad7b7b6217723dc1b7c3750fb6263ee3e79efb289"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/cavity/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/cavity/result.json",
+      "bytes": 3597,
+      "sha256": "40286cbf8fde5d46a5bb21a00f5f118f6e4737cc0feaa00233c7599946f77933"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/cavity-observer.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/cavity-observer.json",
+      "bytes": 19659,
+      "sha256": "40be09c6639708732ec8545f425c8c52e77daf45f6dba36a9a831e9d131fccf6"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/cavity.log",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/cavity.log",
+      "bytes": 8305,
+      "sha256": "ff5349b250a6f8633e6deb30a8fdc17f6da506265c05171044bbe1d9a8deea9e"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/commands.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/commands.json",
+      "bytes": 4732,
+      "sha256": "4250f219d7ed0197f9cab10e83bfbd4699b9625842d36af479c191292181be73"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/disconnected/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/disconnected/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/disconnected/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/disconnected/result.json",
+      "bytes": 3615,
+      "sha256": "136978b966a98220a93cc8aa967e7a9c85ec5d98a6d7ab32d22ec336b6792493"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/disconnected-observer.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/disconnected-observer.json",
+      "bytes": 12182,
+      "sha256": "fe842d41d57b4c9c2e957770ce13faa4e47aaa5c853253275f8b8a50c6386e47"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/disconnected.log",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/disconnected.log",
+      "bytes": 8323,
+      "sha256": "7d710bc204e7cfac41004717d4664a4f6a354b0ee6a94ed7a603a42932af67e6"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/graded-torus/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/graded-torus/result.json",
+      "bytes": 3615,
+      "sha256": "e08f3ec30955a9a82ec7a7f4e7befe1921c0416280841927fc6b7a002e41c1c5"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/graded-torus-observer.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/graded-torus-observer.json",
+      "bytes": 37185,
+      "sha256": "08d27ae818dc8e06bb43d1ea100a77e64fcdef1d3ce7542fd3517c43cdf34417"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/graded-torus.log",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/graded-torus.log",
+      "bytes": 8501,
+      "sha256": "3e89e3f074821bdf0aaa804c258a5a5b46d5e0d5bfc62ab241059a2f66e7197a"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/thin-hand/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/thin-hand/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/thin-hand/result.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/thin-hand/result.json",
+      "bytes": 3609,
+      "sha256": "b9fd97f7a37214ea331574659a952264bc1385be09f50ea52616b47d8bc3c84c"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/thin-hand-observer.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/thin-hand-observer.json",
+      "bytes": 27133,
+      "sha256": "70e9e4fa43679275a93f79bf99e02094888c69023b5362f91e957f05972a3cc6"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/thin-hand.log",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/thin-hand.log",
+      "bytes": 8317,
+      "sha256": "f21f86af123d16b5d0b2d7940208472d64e5dcef420dc8bef366f2171c928cb7"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/torus1000-observer.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/torus1000-observer.json",
+      "bytes": 26931,
+      "sha256": "4c261db20070a48e486bad8648f76075ef67464f1ddc857158e31d5732a7be67"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/torus1000.json",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/torus1000.json",
+      "bytes": 2848,
+      "sha256": "3308f29f7735c520ec3517f8983fb511a1f8b15d36d9396ed8d4ade3bd3df930"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3/torus1000.log",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3/torus1000.log",
+      "bytes": 7629,
+      "sha256": "36541818ed08f695c4455d5fcdc9d56600cb388b6855aff5ed3ed8773f85e8b5"
+    },
+    {
+      "original": ".work/vtm/current-selection-observers-v3.log",
+      "path": "results/validation/vtm/current-selection/current-selection-observers-v3.log",
+      "bytes": 3748,
+      "sha256": "51f598a849ea1638e907aad6edd97f1bb9ff1e390eb8b3629b6a9f5238560e20"
+    },
+    {
+      "original": ".work/vtm/current-selection-production-focused-v1.log",
+      "path": "results/validation/vtm/current-selection/current-selection-production-focused-v1.log",
+      "bytes": 5686,
+      "sha256": "d78ba6cbb9cc0af79423275066b6f715729dac65bbf5645e2a670aee22038a20"
+    },
+    {
+      "original": ".work/vtm/current-selection-production-focused-v2.log",
+      "path": "results/validation/vtm/current-selection/current-selection-production-focused-v2.log",
+      "bytes": 100,
+      "sha256": "de66193277e68063fb5cd51252a35205745f6523d048949926f18421b61a2447"
+    },
+    {
+      "original": ".work/vtm/current-selection-v1-focused.log",
+      "path": "results/validation/vtm/current-selection/current-selection-v1-focused.log",
+      "bytes": 100,
+      "sha256": "cf55f7871d2e1b23fa8f3f1949ca1762ce467ace44ef00bfb6f5443bc4280d12"
+    },
+    {
+      "original": ".work/vtm/current-selection-v1-lifetime.json",
+      "path": "results/validation/vtm/current-selection/current-selection-v1-lifetime.json",
+      "bytes": 2379,
+      "sha256": "c9dd9e2a0a864a82d39534621cef403194523399bfb8e32e2a6954d2528e2913"
+    },
+    {
+      "original": ".work/vtm/current-selection-v1-oracles.log",
+      "path": "results/validation/vtm/current-selection/current-selection-v1-oracles.log",
+      "bytes": 13996,
+      "sha256": "0f6a4b6d886352f27ba96bb7788558d7a2091ec0c127177d2032dbd7b3bbb205"
+    },
+    {
+      "original": ".work/vtm/current-selection-v2-controls-rollback-lifetime.log",
+      "path": "results/validation/vtm/current-selection/current-selection-v2-controls-rollback-lifetime.log",
+      "bytes": 3654,
+      "sha256": "df51c8bee79b9128b11bd5675597bd8c8f60c921813e81ef065e276fdef95876"
+    },
+    {
+      "original": ".work/vtm/current-selection-v2-controls-rollback-padded.log",
+      "path": "results/validation/vtm/current-selection/current-selection-v2-controls-rollback-padded.log",
+      "bytes": 3653,
+      "sha256": "64869789128b5a428d8fe45409a8f4423b078ac131ee8c9679dd2ceb2621f4a0"
+    },
+    {
+      "original": ".work/vtm/current-selection-v2-oracles.log",
+      "path": "results/validation/vtm/current-selection/current-selection-v2-oracles.log",
+      "bytes": 98,
+      "sha256": "6c725f82c0def4c51a82951094e373527ca910cb87df04a0cf1dfe252fe4a150"
+    },
+    {
+      "original": ".work/vtm/current-selection-v2-selection-oracle-lifetime.log",
+      "path": "results/validation/vtm/current-selection/current-selection-v2-selection-oracle-lifetime.log",
+      "bytes": 4541,
+      "sha256": "e85fb3144a28ffcab4d759fb8cefc708a3af11ab13b2c8149ec8e0e944496694"
+    },
+    {
+      "original": ".work/vtm/current-selection-v2-selection-oracle-padded.log",
+      "path": "results/validation/vtm/current-selection/current-selection-v2-selection-oracle-padded.log",
+      "bytes": 4540,
+      "sha256": "66356be78d5d4542919cd5cd88f08cd052be842d420355fb595989f9993820db"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1/commands.json",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1/commands.json",
+      "bytes": 16559,
+      "sha256": "d73e6be13b9fc73794fbda4e77a34d064f79d7cb6ef3874d9de9ecad758319ad"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1/torus-1000-candidate.json",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1/torus-1000-candidate.json",
+      "bytes": 2945,
+      "sha256": "8d688d2f534b53b39eec50633913f7ba1108534efd2ad0a4ccc47d0d86101c44"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1/torus-1000-candidate.log",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1/torus-1000-candidate.log",
+      "bytes": 7728,
+      "sha256": "a9702a389acdb9a83333fd636b3649fc8b72e2837dbadb98b9f93b15033f7bd7"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1/torus-1000-control.json",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1/torus-1000-control.json",
+      "bytes": 2942,
+      "sha256": "88cbfb029668ec299e9445aecc4ec7e3e2cda35a1943502af676baa7630fc0ed"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1/torus-1000-control.log",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1/torus-1000-control.log",
+      "bytes": 7636,
+      "sha256": "386c381ea0826822f702ba0da7c2a32a3564fb33a41da9e5c378986be036bbd5"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1/torus-4096-candidate.json",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1/torus-4096-candidate.json",
+      "bytes": 3092,
+      "sha256": "d90b7cd1352423931ace62cb2a84853faba9846af1260f71d17e73151b200196"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1/torus-4096-candidate.log",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1/torus-4096-candidate.log",
+      "bytes": 7905,
+      "sha256": "b9e45fe9ded3964210e760f8451d7c2ca0b9c7ceb594c8da8d30420420598c3a"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1/torus-4096-control.json",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1/torus-4096-control.json",
+      "bytes": 3081,
+      "sha256": "84c368628b12d9a6985e31d3e6b00f0a63e703868a27b0f39724abee1fcb0f6a"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1/torus-4096-control.log",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1/torus-4096-control.log",
+      "bytes": 7805,
+      "sha256": "0a136f189e1cb6967a6845eb04183439ef79884560b2156fea1ce5b37e2cb379"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1-independent-v2.json",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1-independent-v2.json",
+      "bytes": 6929,
+      "sha256": "f8f162e26040b9a95e84f4a799613b4eb06dac781898fc49d6abacf992f7d8e5"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1-independent-v2.log",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1-independent-v2.log",
+      "bytes": 438,
+      "sha256": "eac770ed70030b3c45cf6fb5deb9b1b15d7d1b08683ecdbcc37247966ae26857"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1-independent.log",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1-independent.log",
+      "bytes": 658,
+      "sha256": "f767a8f0f77b944d642d3355aa958a5a655150f5108c78fdbae79dd1f1df74e1"
+    },
+    {
+      "original": ".work/vtm/current-selection-vtm-v1.log",
+      "path": "results/validation/vtm/current-selection/current-selection-vtm-v1.log",
+      "bytes": 1868,
+      "sha256": "877537283c126ebfcd08414d3bbad94dec5b812d5955741c6bf83fb2f4ab60cc"
+    },
+    {
+      "original": ".work/vtm/current_selection_cache_v1.py",
+      "path": "results/validation/vtm/current-selection/current_selection_cache_v1.py",
+      "bytes": 2844,
+      "sha256": "9983485be01c347fac110cda167b387caf4eda64756c338326163420e5e73da7"
+    },
+    {
+      "original": ".work/vtm/current_selection_observer_v1.py",
+      "path": "results/validation/vtm/current-selection/current_selection_observer_v1.py",
+      "bytes": 5625,
+      "sha256": "a86f191d45984dd94e05e6b0a2932bfd2c3343c4b92bd5bf1ad6c8e59df171f2"
+    },
+    {
+      "original": ".work/vtm/current_selection_observer_v2.py",
+      "path": "results/validation/vtm/current-selection/current_selection_observer_v2.py",
+      "bytes": 5655,
+      "sha256": "8fdbf6e19e9c92c7afc70954fa8e036cbab2ef221a399f1d227dcbb36126a3f1"
+    },
+    {
+      "original": ".work/vtm/current_selection_observer_v3.py",
+      "path": "results/validation/vtm/current-selection/current_selection_observer_v3.py",
+      "bytes": 5691,
+      "sha256": "6e4ca33a063fe3348dfaa4e8bf3c35d7fc0a5abbb4dfbbc54715be677b2b1c23"
+    },
+    {
+      "original": ".work/vtm/publish-current-selection.py",
+      "path": "results/validation/vtm/current-selection/publish-current-selection.py",
+      "bytes": 5166,
+      "sha256": "14790e2ac46a03dc91adc0d5b2fd1d0c79da40a01f55722887d98e11f85482c3"
+    },
+    {
+      "original": ".work/vtm/run-current-selection-armadillo-profile.py",
+      "path": "results/validation/vtm/current-selection/run-current-selection-armadillo-profile.py",
+      "bytes": 3119,
+      "sha256": "9942f3305769e6daa6acf1274f056abda897d3adf69318c9f86d3432a61b8b35"
+    },
+    {
+      "original": ".work/vtm/run-current-selection-broad-v1.py",
+      "path": "results/validation/vtm/current-selection/run-current-selection-broad-v1.py",
+      "bytes": 2412,
+      "sha256": "7fb7ad1cd47258d531dd1e92f1d5d525069b388a4b44b94370b2a7b48c435792"
+    },
+    {
+      "original": ".work/vtm/run-current-selection-final.py",
+      "path": "results/validation/vtm/current-selection/run-current-selection-final.py",
+      "bytes": 4836,
+      "sha256": "230d8210141dbe69fb3ac8a3b7288ec41fc4856d706a52334d8c52ca5151041d"
+    },
+    {
+      "original": ".work/vtm/run-current-selection-gallery-v1.py",
+      "path": "results/validation/vtm/current-selection/run-current-selection-gallery-v1.py",
+      "bytes": 102,
+      "sha256": "bb91d74354ff230193f0b156a1671cf9d09c5761f824a9a4e784d30207ce05d3"
+    },
+    {
+      "original": ".work/vtm/run-current-selection-gallery-v3.py",
+      "path": "results/validation/vtm/current-selection/run-current-selection-gallery-v3.py",
+      "bytes": 172,
+      "sha256": "e4d7c07f01f48420495e85ed07711ed8dd96ead69a2cc539f5a9978b2ed49579"
+    },
+    {
+      "original": ".work/vtm/run-current-selection-memory-v2.py",
+      "path": "results/validation/vtm/current-selection/run-current-selection-memory-v2.py",
+      "bytes": 2272,
+      "sha256": "c7b67eb87b64146847279f481263d000011450580437062ed6189140397f83a1"
+    },
+    {
+      "original": ".work/vtm/run-current-selection-mesher-v1.py",
+      "path": "results/validation/vtm/current-selection/run-current-selection-mesher-v1.py",
+      "bytes": 99,
+      "sha256": "377a0028214c6e58a2a33688bae526eb70be270fa297836fb0a507da69ba7efa"
+    },
+    {
+      "original": ".work/vtm/run-current-selection-native.py",
+      "path": "results/validation/vtm/current-selection/run-current-selection-native.py",
+      "bytes": 2791,
+      "sha256": "e8c4bfca74754ebb9869dae42c554cbd394d9b110496b7a02d934ee3488b1a79"
+    },
+    {
+      "original": ".work/vtm/run-current-selection-observers-v3.py",
+      "path": "results/validation/vtm/current-selection/run-current-selection-observers-v3.py",
+      "bytes": 2296,
+      "sha256": "f61cbbaff74460ee5bc121fca2142ed64a2b516b7d7cfce1c7377026573ab96b"
+    },
+    {
+      "original": ".work/vtm/run-current-selection-tests-v1.py",
+      "path": "results/validation/vtm/current-selection/run-current-selection-tests-v1.py",
+      "bytes": 264,
+      "sha256": "b5dc970175e73e5d43495e5fdb89104e48d9e45547ffb03e7d792c3c3302c5d6"
+    },
+    {
+      "original": ".work/vtm/run-current-selection-vtm-pilots-v1.py",
+      "path": "results/validation/vtm/current-selection/run-current-selection-vtm-pilots-v1.py",
+      "bytes": 1791,
+      "sha256": "03500e7b259b3a2a318972c4d247315c8c95a1c8d149760c7df223fe523575bf"
+    },
+    {
+      "original": ".work/vtm/test_current_selection_cache_v1.py",
+      "path": "results/validation/vtm/current-selection/test_current_selection_cache_v1.py",
+      "bytes": 7724,
+      "sha256": "774862fac1fee2ae53b5466aabc3f93651902b34c93a04362f766d5a1b53cc8f"
+    },
+    {
+      "original": ".work/vtm/test_current_selection_cache_v2.py",
+      "path": "results/validation/vtm/current-selection/test_current_selection_cache_v2.py",
+      "bytes": 7718,
+      "sha256": "213e39ded6010057f7261d5c6cc32fb7c20670a64d0ff7583c089af522a492c5"
+    },
+    {
+      "original": ".work/vtm/test_current_selection_production_initial.py",
+      "path": "results/validation/vtm/current-selection/test_current_selection_production_initial.py",
+      "bytes": 8861,
+      "sha256": "a196a193626b2d6dcab4103d303276f1fa25a391950c7e9c6a364da54bb31b50"
+    },
+    {
+      "original": ".work/vtm/write-current-selection-doc.py",
+      "path": "results/validation/vtm/current-selection/write-current-selection-doc.py",
+      "bytes": 3693,
+      "sha256": "14e2252c655578033fc19ac2dd6f5b3fa1498c8ad3a3a970c0f42ed641dd0a69"
+    }
+  ]
+}

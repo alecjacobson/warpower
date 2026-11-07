@@ -1,0 +1,82 @@
+F.............................................                           [100%]
+=================================== FAILURES ===================================
+________ test_every_optimizer_selection_matches_forced_fresh_evaluation ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f8dffbd6cb0>
+
+    def test_every_optimizer_selection_matches_forced_fresh_evaluation(monkeypatch):
+        fitted = initial(256, 20)
+        core = VTMWorkspace(
+            fitted.domain, wp.clone(fitted.points), max_iterations=8, selective_threshold=0.3
+        )
+        audit = FreshOracle(core.selection)
+        original = core.selection._select_current
+    
+        def checked_select():
+            # Avoid recursive interception while building the audit's first call.
+            core.selection._select_current = original
+            try:
+                audit.select()
+            finally:
+                core.selection._select_current = checked_select
+    
+>       monkeypatch.setattr(core.selection, "select_current", checked_select)
+E       AttributeError: <warpower._selective.SelectiveUpdate object at 0x7f8dc57a2fe0> has no attribute 'select_current'
+
+tests/test_current_selection.py:96: AttributeError
+----------------------------- Captured stdout call -----------------------------
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._domain 34c6db2 load on device 'cuda:0' took 0.92 ms  (cached)
+Module warpower._surface_bvh 7ad7add load on device 'cuda:0' took 0.63 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.73 ms  (cached)
+Module warpower._triangle_contact 9e6db6b load on device 'cuda:0' took 1.22 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.62 ms  (cached)
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.62 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.62 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.57 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.56 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.56 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.57 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.54 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.54 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 4.75 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 0.92 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 3.04 ms  (cached)
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 1.46 ms  (cached)
+Module warpower._facet_completion bb6aebe load on device 'cuda:0' took 2.15 ms  (cached)
+Module warpower._facet_completion 62c1043 load on device 'cuda:0' took 2.44 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.61 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.60 ms  (cached)
+Module warpower._facet_seeds fa4cd6c load on device 'cuda:0' took 1.95 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.70 ms  (cached)
+Module warpower._prepared_seeds 4fb5246 load on device 'cuda:0' took 1.67 ms  (cached)
+Module warpower._grouped_seeds 9582e1f load on device 'cuda:0' took 1.35 ms  (cached)
+Module warpower._proved_completion f8ae5c8 load on device 'cuda:0' took 5.66 ms  (cached)
+Module warpower._proved_completion 8f85240 load on device 'cuda:0' took 2.43 ms  (cached)
+Module warpower._reuse_delaunay 58b0d1a load on device 'cuda:0' took 0.52 ms  (cached)
+Module warpower._wall_candidates 954a0c3 load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._wall_reuse a53e752 load on device 'cuda:0' took 0.54 ms  (cached)
+Module warpower._wall_candidates 7f00c7b load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._boundary 6f19e8b load on device 'cuda:0' took 0.69 ms  (cached)
+Module warpower._boundary b9921e4 load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._vtm_domain f457694 load on device 'cuda:0' took 0.59 ms  (cached)
+Module warpower._vtm a9d88de load on device 'cuda:0' took 0.60 ms  (cached)
+Module warpower._odt 6e95820 load on device 'cuda:0' took 0.94 ms  (cached)
+Module warpower._selective 677ebd4 load on device 'cuda:0' took 19993.72 ms  (compiled)
+Module warpower._extraction eef7483 load on device 'cuda:0' took 1.19 ms  (cached)
+Module warpower._selective 24f74cc load on device 'cuda:0' took 19324.90 ms  (compiled)
+Module tests.test_current_selection 170f502 load on device 'cuda:0' took 147.79 ms  (compiled)
+----------------------------- Captured stderr call -----------------------------
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+=========================== short test summary info ============================
+FAILED tests/test_current_selection.py::test_every_optimizer_selection_matches_forced_fresh_evaluation
+1 failed, 45 passed in 50.95s

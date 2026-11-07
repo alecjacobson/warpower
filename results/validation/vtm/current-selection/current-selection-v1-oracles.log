@@ -1,0 +1,228 @@
+FF..                                                                     [100%]
+=================================== FAILURES ===================================
+________ test_every_optimizer_selection_matches_forced_fresh_evaluation ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f69fb1226b0>
+
+    def test_every_optimizer_selection_matches_forced_fresh_evaluation(monkeypatch):
+        fitted = initial(256, 20)
+        core = VTMWorkspace(fitted.domain, wp.clone(fitted.points), max_iterations=8, selective_threshold=0.3)
+>       audit = FreshOracle(core.selection)
+
+.work/vtm/test_current_selection_cache_v1.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.work/vtm/test_current_selection_cache_v1.py:52: in __init__
+    wp.load_module(module=__name__, device=selection.device)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5227: in load
+    raise e
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5224: in load
+    compiled = self._compile(device, module_dir, output_name, output_arch, options=options)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4972: in _compile
+    source_str, source_code_ext, meta, ltoir_values, fatbin_values = self._run_codegen(options, is_cpu)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:1907: in locked_call
+    return func(*args, **kwargs)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4833: in _run_codegen
+    builder = ModuleBuilder(
+.venv/lib/python3.10/site-packages/warp/_src/context.py:3501: in __init__
+    self.build_kernel(kernel)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:3620: in build_kernel
+    kernel.adj.build(self)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:1907: in locked_call
+    return func(*args, **kwargs)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:2415: in build
+    raise type(original_exc)(*new_args).with_traceback(original_exc.__traceback__) from None
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:2395: in build
+    adj.eval(adj.tree.body[0])
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:3632: in emit_FunctionDef
+    adj.eval(f)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:3680: in emit_If
+    adj.eval(stmt)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:5646: in emit_Assign
+    rhs = adj.eval(node.value)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:4793: in emit_Call
+    args.append(adj.resolve_arg(x))
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:4438: in resolve_arg
+    raise error
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:4427: in resolve_arg
+    var = adj.eval(arg)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:4832: in emit_Call
+    out = adj.add_call(
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:2973: in add_call
+    func, bound_args, bound_arg_nodes = adj.resolve_call(
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:2906: in resolve_call
+    func = adj.resolve_func(func, arg_types, kwarg_types, min_outputs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def resolve_func(adj, func, arg_types, kwarg_types, min_outputs):
+        if not func.is_builtin():
+            # user-defined function
+            overload = func.get_overload(arg_types, kwarg_types)
+            if overload is not None:
+                return overload
+        else:
+            # if func is overloaded then perform overload resolution here
+            # we validate argument types before they go to generated native code
+            # Two passes: exact type matches first, then let concrete query-kind
+            # arguments bind to parameters typed as their erased parent, so a
+            # parent-typed overload can never steal a call from a specialized one.
+            for allow_erasure in (False, True):
+                for f in func.overloads:
+                    # skip type checking for variadic functions
+                    if not f.variadic:
+                        # check argument counts match are compatible (may be some default args)
+                        if len(f.input_types) < len(arg_types) + len(kwarg_types):
+                            continue
+    
+                        if not func_match_args(f, arg_types, kwarg_types, allow_erasure=allow_erasure):
+                            continue
+    
+                    # check output dimensions match expectations
+                    if min_outputs:
+                        value_type = f.value_func(None, None)
+                        if not isinstance(value_type, Sequence) or len(value_type) != min_outputs:
+                            continue
+    
+                    # found a match, use it
+                    return f
+    
+        # unresolved function, report error
+        arg_type_reprs = []
+    
+        for x in itertools.chain(arg_types, kwarg_types.values()):
+            if isinstance(x, warp._src.context.Function):
+                arg_type_reprs.append("function")
+            else:
+                # shorten Warp primitive type names
+                if isinstance(x, Sequence):
+                    if len(x) != 1:
+                        raise WarpCodegenError("Argument must not be the result from a multi-valued function")
+                    arg_type = x[0]
+                else:
+                    arg_type = x
+    
+                arg_type_reprs.append(type_repr(arg_type))
+    
+>       raise WarpCodegenError(
+            f"Couldn't find function overload for '{func.key}' that matched inputs with types: [{', '.join(arg_type_reprs)}]"
+        )
+E       warp._src.codegen.WarpCodegenError: Error while parsing function "produce_points" at /home/horde/projects/power-diagram/.work/vtm/test_current_selection_cache_v1.py:109:
+E               points[i] = wp.vec3(float('nan'))
+E       ;Couldn't find function overload for 'float' that matched inputs with types: [builtins.str]
+
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:2797: WarpCodegenError
+----------------------------- Captured stdout call -----------------------------
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._domain 34c6db2 load on device 'cuda:0' took 0.94 ms  (cached)
+Module warpower._surface_bvh 7ad7add load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.69 ms  (cached)
+Module warpower._triangle_contact 9e6db6b load on device 'cuda:0' took 1.19 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.59 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.58 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.53 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.59 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.59 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.57 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.54 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 4.85 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 0.88 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 3.06 ms  (cached)
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 1.53 ms  (cached)
+Module warpower._facet_completion bb6aebe load on device 'cuda:0' took 2.26 ms  (cached)
+Module warpower._facet_completion 62c1043 load on device 'cuda:0' took 2.30 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.60 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._facet_seeds fa4cd6c load on device 'cuda:0' took 2.02 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.72 ms  (cached)
+Module warpower._prepared_seeds 4fb5246 load on device 'cuda:0' took 1.70 ms  (cached)
+Module warpower._grouped_seeds 9582e1f load on device 'cuda:0' took 1.40 ms  (cached)
+Module warpower._proved_completion f8ae5c8 load on device 'cuda:0' took 3.55 ms  (cached)
+Module warpower._proved_completion 8f85240 load on device 'cuda:0' took 2.61 ms  (cached)
+Module warpower._reuse_delaunay 58b0d1a load on device 'cuda:0' took 0.54 ms  (cached)
+Module warpower._wall_candidates 954a0c3 load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._wall_reuse a53e752 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._wall_candidates 7f00c7b load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._boundary 6f19e8b load on device 'cuda:0' took 0.80 ms  (cached)
+Module warpower._boundary b9921e4 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._vtm_domain f457694 load on device 'cuda:0' took 0.61 ms  (cached)
+Module warpower._vtm a9d88de load on device 'cuda:0' took 0.62 ms  (cached)
+Module warpower._odt 6e95820 load on device 'cuda:0' took 0.99 ms  (cached)
+Module warpower._selective 450d293 load on device 'cuda:0' took 2.00 ms  (cached)
+Module warpower._extraction eef7483 load on device 'cuda:0' took 1.96 ms  (cached)
+Module current_selection_cache_v1 70c671a load on device 'cuda:0' took 0.52 ms  (cached)
+Module warpower._selective 1750cbe load on device 'cuda:0' took 1.94 ms  (cached)
+Module test_current_selection_cache_v1 f1295dc load on device 'cuda:0' took 3.80 ms  (error)
+----------------------------- Captured stderr call -----------------------------
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+___ test_recovered_current_results_match_fresh_with_device_failure_recovery ____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f692d3f2d70>
+
+    def test_recovered_current_results_match_fresh_with_device_failure_recovery(monkeypatch):
+        c, s = recovered_selection()
+>       audit = FreshOracle(s)
+
+.work/vtm/test_current_selection_cache_v1.py:144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.work/vtm/test_current_selection_cache_v1.py:52: in __init__
+    wp.load_module(module=__name__, device=selection.device)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       warp._src.codegen.WarpCodegenError: Error while parsing function "produce_points" at /home/horde/projects/power-diagram/.work/vtm/test_current_selection_cache_v1.py:109:
+E               points[i] = wp.vec3(float('nan'))
+E       ;Couldn't find function overload for 'float' that matched inputs with types: [builtins.str]
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: WarpCodegenError
+----------------------------- Captured stdout call -----------------------------
+Module warpower._containment 7822106 load on device 'cuda:0' took 1.36 ms  (cached)
+Module warpower._extraction 951e778 load on device 'cuda:0' took 1.02 ms  (cached)
+Module warpower._mesh_topology 20805dd load on device 'cuda:0' took 0.63 ms  (cached)
+=========================== short test summary info ============================
+FAILED .work/vtm/test_current_selection_cache_v1.py::test_every_optimizer_selection_matches_forced_fresh_evaluation
+FAILED .work/vtm/test_current_selection_cache_v1.py::test_recovered_current_results_match_fresh_with_device_failure_recovery
+2 failed, 2 passed in 3.42s

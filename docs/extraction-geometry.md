@@ -155,3 +155,7 @@ complete. A later [containment-recovery trajectory](containment-recovery.md)
 passes the full unfiltered audit tracked in
 [#129](https://github.com/alecjacobson/warpower/issues/129); that result does not
 retroactively validate the canceled `1804b64` runs.
+
+A later [full-classification split experiment](extraction-split-probe.md) reduced
+query-kernel registers but showed no meaningful complete-solve improvement at
+1,000 or 4,096 sites. It was not adopted.

@@ -1,0 +1,90 @@
+[
+  {
+    "case": "torus",
+    "phase": "before",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--repeats",
+      "5",
+      "--save-mesh",
+      "/home/horde/projects/power-diagram/.work/vtm/boundary-pilot-before-torus.npz",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/boundary-pilot-before-torus.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 9.388137817382812,
+    "source": "1624d62c89d56ad5f3e801c67fd724bbe450a7f4"
+  },
+  {
+    "case": "torus",
+    "phase": "scalar32",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/boundary-variant-run.py",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--repeats",
+      "5",
+      "--save-mesh",
+      "/home/horde/projects/power-diagram/.work/vtm/boundary-pilot-scalar32-torus.npz",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/boundary-pilot-scalar32-torus.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 9.054622650146484,
+    "source": "1624d62c89d56ad5f3e801c67fd724bbe450a7f4"
+  },
+  {
+    "case": "plate",
+    "phase": "before",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "examples.vtm_gallery",
+      "--case",
+      "counterbored-plate",
+      "--n",
+      "1000",
+      "--subdivisions",
+      "16",
+      "--crease-subdivisions",
+      "16",
+      "--repeats",
+      "5",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/boundary-pilot-before-plate"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 12.571998596191406,
+    "source": "1624d62c89d56ad5f3e801c67fd724bbe450a7f4"
+  },
+  {
+    "case": "plate",
+    "phase": "scalar32",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/boundary-variant-run.py",
+      "examples.vtm_gallery",
+      "--case",
+      "counterbored-plate",
+      "--n",
+      "1000",
+      "--subdivisions",
+      "16",
+      "--crease-subdivisions",
+      "16",
+      "--repeats",
+      "5",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/boundary-pilot-scalar32-plate"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 12.219417810440063,
+    "source": "1624d62c89d56ad5f3e801c67fd724bbe450a7f4"
+  }
+]

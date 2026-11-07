@@ -192,3 +192,6 @@ all preexisting VTM kernel/function ASTs are identical. For the default uniform
 difference within measurement variation. Both produce 5,902 full-hull tetrahedra,
 accept all 20 steps, and have matching energy histories within `2e-14` relative
 roundoff, with no observed CPU quota throttling. These remain core-only timings.
+
+Boundary quadrature uses 32-thread launch blocks without changing assignment or
+accumulation arithmetic. See the [launch-size measurements and validation](boundary-launch.md).

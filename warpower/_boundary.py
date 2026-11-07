@@ -447,6 +447,7 @@ class BoundaryWorkspace:
                     component,
                     self.error,
                 ],
+                block_dim=32,
                 device=self.device,
             )
         wp.launch(

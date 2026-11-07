@@ -160,5 +160,6 @@ Their retained results are separate from this flat-group design.
 
 Tracked in [#172](https://github.com/alecjacobson/warpower/issues/172).
 The separate [#177](https://github.com/alecjacobson/warpower/issues/177) follow-up
-investigates existing segment-tree bounds and stackless traversal; it is not
-implemented by this change.
+tested [existing segment-tree bounds and stackless traversal](stackless-seed-probe.md).
+Its complete 1k/4k solves are effectively neutral, so production retains these
+flat groups.

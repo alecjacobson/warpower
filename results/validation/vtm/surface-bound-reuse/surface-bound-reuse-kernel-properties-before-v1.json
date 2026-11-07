@@ -1,0 +1,39 @@
+{
+  "runtime": "18ecb03c10cb10e42a5089e8253ed92a24c3bae1",
+  "warp_version": "1.19.0",
+  "device": "NVIDIA L40",
+  "scope": "CUDA function attributes for the compiled block-size32 variant. Local-memory bytes per thread are not a measurement of occupied memory, traffic or occupancy. Query is outside graph execution.",
+  "source_sha256": "98b18d8d71143f419f16dceffa07c134e29375b89314206ee0002e005d31fba7",
+  "kernels": [
+    {
+      "kernel": "classify",
+      "block_dim": 32,
+      "register_count": 255,
+      "local_memory_size": 33800
+    },
+    {
+      "kernel": "classify_selection",
+      "block_dim": 32,
+      "register_count": 255,
+      "local_memory_size": 33848
+    },
+    {
+      "kernel": "surface_error",
+      "block_dim": 32,
+      "register_count": 102,
+      "local_memory_size": 1136
+    },
+    {
+      "kernel": "selection_surface_status",
+      "block_dim": 32,
+      "register_count": 104,
+      "local_memory_size": 1136
+    },
+    {
+      "kernel": "classify_retained",
+      "block_dim": 32,
+      "register_count": 255,
+      "local_memory_size": 33808
+    }
+  ]
+}

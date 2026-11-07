@@ -1,0 +1,1225 @@
+{
+  "runtime": "576ac5193125ae980da2314ed7502bd6938aeb79",
+  "baseline": "18ecb03c10cb10e42a5089e8253ed92a24c3bae1",
+  "scope": "Exact per-query reuse of rounded float64 child-box distances, preserving original traversal and triangle arithmetic. Earlier operation attribution and float32/tail prototypes use the recorded baseline and are not additional production changes. No comparable-quality CPU outperformance claim.",
+  "source_sha256": {
+    "warpower/_surface_bvh.py": "b8bb9d8bb798fb5b38fcf59aa55c858a1af56de1d57e98b630f0b37b593edcf4",
+    "tests/test_surface_bound_reuse.py": "bf3578e18783df3ece5658d06ce106ae6fee0e339f51b09d6c60df354c24c34c",
+    "tests/surface_nearest_reference.py": "233067ec3622da5cd2ea49d09cf7d8de978916422de636195f9ed9b460229401",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "examples/vtm_gallery.py": "8e39899ba4ec7b98dee840f73ccc330c57ac2a398faff3efc103dabb57af4acf",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f"
+  },
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-after/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-before/input.off",
+      "canonical": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    }
+  ],
+  "shared_helpers": [
+    {
+      "original": ".work/vtm/extraction_split.py",
+      "path": "results/validation/vtm/cooperative-surface-probe/extraction_split.py",
+      "sha256": "a3c6c66a83dff5a4b38d305dc77d1bccad9a6fe3a5e881c70627ec6d66944e69"
+    },
+    {
+      "original": ".work/vtm/check-large-reuse-proof-pairs.py",
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "original": ".work/vtm/large-reuse-isolated-test.py",
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    },
+    {
+      "original": ".work/vtm/boundary-timing-commands.json",
+      "path": "results/validation/vtm/analytic-filters/boundary-timing-commands.json",
+      "sha256": "c75b0a3c89cf49e7e1dec7a109ec6a7497370ddcc801f2c22ad78cc4c6174c49"
+    }
+  ],
+  "unexecuted_artifact_sources": [
+    "test_cached_surface_bounds_v1.py"
+  ],
+  "reference_binaries_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "files": [
+    {
+      "original": ".work/vtm/analyze-surface-bound-reuse-audit.py",
+      "path": "results/validation/vtm/surface-bound-reuse/analyze-surface-bound-reuse-audit.py",
+      "bytes": 4265,
+      "sha256": "0dea173a734db04305908aeffb22d13a4af79a13d3d7c52003a585f1030842a4"
+    },
+    {
+      "original": ".work/vtm/build_cached_surface_bounds_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/build_cached_surface_bounds_v1.py",
+      "bytes": 1951,
+      "sha256": "08da80671f4e754ea510021523f7e7379c4196042674c367f285391d750697e9"
+    },
+    {
+      "original": ".work/vtm/build_surface_work_probe_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/build_surface_work_probe_v1.py",
+      "bytes": 6243,
+      "sha256": "cfbba1d30316e6e9cf1c3c7d436b1a250696b83165ae75d31ab2e1e9513027a3"
+    },
+    {
+      "original": ".work/vtm/cached-surface-bounds-profile-v1.json",
+      "path": "results/validation/vtm/surface-bound-reuse/cached-surface-bounds-profile-v1.json",
+      "bytes": 11451,
+      "sha256": "7f37d849356bc85a112abe4473ae915c1c17ab351aef8541a83b9975488f0e40"
+    },
+    {
+      "original": ".work/vtm/cached-surface-bounds-profile-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/cached-surface-bounds-profile-v1.log",
+      "bytes": 1702,
+      "sha256": "1b3337c5ffd4edf0d09a6887156c2d0155f24ac9ddd711ec9349f3485335e3c6"
+    },
+    {
+      "original": ".work/vtm/cached-surface-bounds-profile-v2.json",
+      "path": "results/validation/vtm/surface-bound-reuse/cached-surface-bounds-profile-v2.json",
+      "bytes": 11444,
+      "sha256": "6c0243b4056c50c590658b0ce748d7c631e38c4a34ab9d6d64306de35de38b74"
+    },
+    {
+      "original": ".work/vtm/cached-surface-bounds-profile-v2.log",
+      "path": "results/validation/vtm/surface-bound-reuse/cached-surface-bounds-profile-v2.log",
+      "bytes": 1701,
+      "sha256": "f09de640f18d4aa5a29435b866311e845e07c9f6e1b60334999331b6360269bf"
+    },
+    {
+      "original": ".work/vtm/cached-surface-bounds-tests-v2.log",
+      "path": "results/validation/vtm/surface-bound-reuse/cached-surface-bounds-tests-v2.log",
+      "bytes": 99,
+      "sha256": "cb11e137dcfda4940d1ccf98e85fe6676d9f38215a8c8e3bb7b74cf18a12bc14"
+    },
+    {
+      "original": ".work/vtm/cached_surface_bounds_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/cached_surface_bounds_v1.py",
+      "bytes": 2425,
+      "sha256": "4916b4c27229bc29a5a2b6ff63ea5bbbed1ac8fad1b8b004f601e27f37f27264"
+    },
+    {
+      "original": ".work/vtm/cached_surface_bounds_v2.py",
+      "path": "results/validation/vtm/surface-bound-reuse/cached_surface_bounds_v2.py",
+      "bytes": 2441,
+      "sha256": "ed48915e235c990d02f460e5ec82bee06082c9daf322cd83709ab737b4d78891"
+    },
+    {
+      "original": ".work/vtm/check-surface-bound-reuse-final-v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/check-surface-bound-reuse-final-v1.py",
+      "bytes": 5653,
+      "sha256": "282fa5b6dee82e696d18bcfe17425d32440cd31ce6e3566d279e0b0ba22715f7"
+    },
+    {
+      "original": ".work/vtm/check-surface-bound-reuse-final-v2.py",
+      "path": "results/validation/vtm/surface-bound-reuse/check-surface-bound-reuse-final-v2.py",
+      "bytes": 5787,
+      "sha256": "043e6a45bc7f2723bce7411d587cafc15f0f3aa3789b81868f0fe5f4a81dd83a"
+    },
+    {
+      "original": ".work/vtm/check-surface-bound-reuse-public-quality-v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/check-surface-bound-reuse-public-quality-v1.py",
+      "bytes": 2339,
+      "sha256": "d8348bf3b9cb45774c0f3348adb82dd843235db52037d9e41ec7965fd10bffd3"
+    },
+    {
+      "original": ".work/vtm/filtered-nearest-profile-v1.json",
+      "path": "results/validation/vtm/surface-bound-reuse/filtered-nearest-profile-v1.json",
+      "bytes": 11558,
+      "sha256": "f35beb5b72cdaa25f5d388c992ea24ad8bb3e937f20d8b919984a4b93fd1ed16"
+    },
+    {
+      "original": ".work/vtm/filtered-nearest-profile-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/filtered-nearest-profile-v1.log",
+      "bytes": 1699,
+      "sha256": "299e9b245a6cf0a18ea4b7c584875a4b261af9c5dad7043c8d22289354e3fe40"
+    },
+    {
+      "original": ".work/vtm/filtered_nearest_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/filtered_nearest_v1.py",
+      "bytes": 2167,
+      "sha256": "b29e56b278a9d8190dbaeb578b8fd33555998f42b242e4737b20ebe7680f6e11"
+    },
+    {
+      "original": ".work/vtm/profile_cached_surface_bounds_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/profile_cached_surface_bounds_v1.py",
+      "bytes": 3647,
+      "sha256": "a7dc4fadf0670a14b97d0161ef6f9dd9798b2a6a5ee8e0768d04297af97dbe7a"
+    },
+    {
+      "original": ".work/vtm/profile_cached_surface_bounds_v2.py",
+      "path": "results/validation/vtm/surface-bound-reuse/profile_cached_surface_bounds_v2.py",
+      "bytes": 3647,
+      "sha256": "a968bb0b5c47f133319730f1757143d2fe6f43c1b5c0d710e38ef4cf8b82b36a"
+    },
+    {
+      "original": ".work/vtm/profile_filtered_nearest_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/profile_filtered_nearest_v1.py",
+      "bytes": 3674,
+      "sha256": "c7585d2ea88e1ddd30b3ece2f02e4cf9badec0e45e1c8ba8e88f64951dd1e26d"
+    },
+    {
+      "original": ".work/vtm/prove_surface_box_filter_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/prove_surface_box_filter_v1.py",
+      "bytes": 2493,
+      "sha256": "9b459ecf3ca805389ff55e727eede326aa97571bf87c3f573860f4e3c362fd7b"
+    },
+    {
+      "original": ".work/vtm/publish-surface-bound-reuse-v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/publish-surface-bound-reuse-v1.py",
+      "bytes": 6731,
+      "sha256": "43584e8eb209487833e8da8171b31092a239070a10a2289d19f268cebec6bf9f"
+    },
+    {
+      "original": ".work/vtm/run-surface-bound-reuse-final-v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/run-surface-bound-reuse-final-v1.py",
+      "bytes": 4833,
+      "sha256": "ec4afc04ddb9c6f84c265395a070cfe83d790ab29cbd2dff265f7d2cbb9a57c2"
+    },
+    {
+      "original": ".work/vtm/run-surface-bound-reuse-memory-v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/run-surface-bound-reuse-memory-v1.py",
+      "bytes": 2214,
+      "sha256": "f722721906c8bbe1f09f9c7768ea78f3a67037c1d6ac46d0b0321639a35c4f0a"
+    },
+    {
+      "original": ".work/vtm/run-surface-bound-reuse-native-v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/run-surface-bound-reuse-native-v1.py",
+      "bytes": 2807,
+      "sha256": "4ad8e2d51079ba9c4a9a02741711788179afcac9a8d87d2fd11009ce8bbdcd03"
+    },
+    {
+      "original": ".work/vtm/run_surface_work_probe_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/run_surface_work_probe_v1.py",
+      "bytes": 4236,
+      "sha256": "8202d16b575c382dff2e2e0093781f3da35de53fddb3bbcea266d33c039c1631"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-graded-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-graded-after/boundary.off.gz",
+      "bytes": 139492,
+      "sha256": "aba38007f38c9b2aaecc2c3e7804354fe7064adcb16eb347157b1d14c59861eb"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-after/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-graded-after/mesh.npz",
+      "bytes": 1611548,
+      "sha256": "3ff26ee8923466d4ac1c0d406a44be259522ddc39556f2e686656263956b9c36"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-graded-after/mesh.vtu.gz",
+      "bytes": 427663,
+      "sha256": "1859430d34916fc95faaadfbd73ba7a9c53e5ea445e4cd1ed79782e7a0a47439"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-after/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-graded-after/result.json",
+      "bytes": 3745,
+      "sha256": "d202e227fc8c29ac91c8292b0bfe57ce8b88c2804ddcbd7ef5707f60e22ec2f9"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-graded-after.log",
+      "bytes": 8527,
+      "sha256": "2d88947e70f77e9bdf4f32702fb7fafd7d691d2009651334dcc2218959e2b6cb"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-graded-before/boundary.off.gz",
+      "bytes": 139501,
+      "sha256": "599b45028b65a0a3242eaa211556ebf9b21804016eab9cdbad3e70b9169fd17d"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-before/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-graded-before/mesh.npz",
+      "bytes": 1612191,
+      "sha256": "66c3cac32b09f70f0d5e659e4e4a2f6abb3fb335cbc854a914efae97ff9ec1b9"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-graded-before/mesh.vtu.gz",
+      "bytes": 427813,
+      "sha256": "6ed0dfb354e778f45878dba4160ca8a809053917433a22835e9dc0703b1833a2"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-before/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-graded-before/result.json",
+      "bytes": 3748,
+      "sha256": "3572ea4b0a541367492257f9ea775d54108e1fcac131999702802db1f7a9bb9c"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-graded-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-graded-before.log",
+      "bytes": 8530,
+      "sha256": "5013a002c17e7ac27ab888b196c91bb8b4604e94a98e67f02ce0fe6f8d2c73a4"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-uniform-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-uniform-after/boundary.off.gz",
+      "bytes": 140737,
+      "sha256": "e5e11597a72ccc77e901bd906335f80606fd80e46c028b4eb0574c245b5c07f5"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-after/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-uniform-after/mesh.npz",
+      "bytes": 1610808,
+      "sha256": "b3511f30d879c7f6f0e024599017c07c8c9ae6d9c1c83f757a02d86240f64b98"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-uniform-after/mesh.vtu.gz",
+      "bytes": 423645,
+      "sha256": "dc612951054a1abb4d2aa3b63a3a96e9327ffb327d3745e2d6a30d32944de584"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-after/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-uniform-after/result.json",
+      "bytes": 3741,
+      "sha256": "413253f569124c6a3bd4be11c0ef8fd8bf15454bdae11e789a9bfea998b51349"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-uniform-after.log",
+      "bytes": 8437,
+      "sha256": "bbd006397f05a06e32f09ca296c3878347c2d118df1cc0eaa5a5fe2b11fc31b7"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-uniform-before/boundary.off.gz",
+      "bytes": 140781,
+      "sha256": "6a2601478bad37bf10a4ad63ec720ad7b45cdf42d4d00a8669fed1e8fc72231d"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-before/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-uniform-before/mesh.npz",
+      "bytes": 1610588,
+      "sha256": "c939982c85f8b5a16d549ec8f29dd1a9dd3d7645bf2cec3fabd4aa50e0175350"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-uniform-before/mesh.vtu.gz",
+      "bytes": 423291,
+      "sha256": "072aec1fe78ce21c466cb1a9f0e5f9d70abc78be8cd8b8982e6f623d408bb6ac"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-before/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-uniform-before/result.json",
+      "bytes": 3746,
+      "sha256": "210f6b64adf00b13b17a425dc5cb1be920829fe3f53d16b660af0a704ca9c004"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/armadillo-uniform-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/armadillo-uniform-before.log",
+      "bytes": 8442,
+      "sha256": "416b216efa36049c6778b49edd4f1ad7d97e5541044a5e6bf31a7927815b06e5"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-after/boundary.off.gz",
+      "bytes": 30632,
+      "sha256": "dc9d73693626b1a56b8c05cd714f1c3b8c5c8ed2925e681391a2808fe16c019b"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-after/input.off",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-after/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-after/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-after/mesh.npz",
+      "bytes": 108488,
+      "sha256": "a7e1b47cf1b477d5851f84d5260413f78a6aa7fafd47b0d21caaad4d5a4b4418"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-after/mesh.vtu.gz",
+      "bytes": 92459,
+      "sha256": "fb675a02204da59513f9ff447a252f5472939dad30b6bd257f1ba2f6a1740505"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-after/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-after/result.json",
+      "bytes": 3644,
+      "sha256": "26e1a564141f321e18c90b51b7f9b1a6b820b1ab590a91a16193388f51948562"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-after.log",
+      "bytes": 8252,
+      "sha256": "89566821c6bacd49e39189ed7aaf44e66514ea735bcfbbac8b59d4e3b2b6a179"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-before/boundary.off.gz",
+      "bytes": 30620,
+      "sha256": "4780b083fd8ac6faf829285fab7ce854b905653f300bfa9cedb57216672a7ead"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-before/input.off",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-before/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-before/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-before/mesh.npz",
+      "bytes": 108552,
+      "sha256": "d83d165c67ab074ff266c011fcd88f22c4a03f82467a204ecabe3c18c72c9e7d"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-before/mesh.vtu.gz",
+      "bytes": 92545,
+      "sha256": "9a1f874dfcae9dee2bfb74e31f22f4350a360d03f1f5d34da68f19c8a6f46c23"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-before/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-before/result.json",
+      "bytes": 3643,
+      "sha256": "43015caef496d1b96632cfc43abf3754db020ea59e2642b8f40e29eeafa7855b"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/cavity-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/cavity-before.log",
+      "bytes": 8251,
+      "sha256": "10064c62ca974023022c022ba4b1af7df5463cd9a541dc6bc16295fba307b947"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/commands.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/commands.json",
+      "bytes": 23334,
+      "sha256": "717cb1f95e9c03301451762af06c73892e3eecdc469468a6968e9d6df114b305"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay-fitted-hand-after.json",
+      "bytes": 2830,
+      "sha256": "31d6321725a44bb97a716e0d282b00a22d51bf3a80592daec665d3dbd31a4f1d"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay-fitted-hand-after.log",
+      "bytes": 5126,
+      "sha256": "4879c5421612ae093a800d1faa99e5837d9e797c6f568bcd269aca1856bab4e0"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay-fitted-hand-before.json",
+      "bytes": 2838,
+      "sha256": "b93ffb261bc5e090615eb5abdab9282d0f45d17dd8595b2a57868858c05a53d8"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay-fitted-hand-before.log",
+      "bytes": 5134,
+      "sha256": "32e7377424f6662a70a7e3639a380e0cf1ae20069ce7cb2553dff3f6050d2c0a"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay-grid-after.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay-grid-after.json",
+      "bytes": 2839,
+      "sha256": "207dc03ad1f9fc9fb34dca64ccb89354982cd6827c20e2a9e094112926627439"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay-grid-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay-grid-after.log",
+      "bytes": 4878,
+      "sha256": "2344fa4994456d8ae19671866778a51254d3a49715d71bb49809e9317f25371a"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay-grid-before.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay-grid-before.json",
+      "bytes": 2836,
+      "sha256": "dc5a17737ce0da7ed8db1bfeb4e1c68bbbeee7e70ecdd8ba30a5aaa140b8bf88"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay-grid-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay-grid-before.log",
+      "bytes": 4875,
+      "sha256": "edfd84d01152b38108e34717b1ff998823dfa609906640188efe7afe59d92713"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay1000-after.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay1000-after.json",
+      "bytes": 2827,
+      "sha256": "cd7827b061410b8caa02327e32aff1b91d223f9c684b4beaf612503fc5384971"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay1000-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay1000-after.log",
+      "bytes": 5123,
+      "sha256": "1082c06da3b035067d25f5b5bc4beda221655d51a9da26e6e8783a6cdcb1f61c"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay1000-before.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay1000-before.json",
+      "bytes": 2817,
+      "sha256": "b04e1ff8e7f752803d943d23e90a397ac4534ecc12b295c5c25a938fad9ba38e"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay1000-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay1000-before.log",
+      "bytes": 5113,
+      "sha256": "29a558923a15e9335a0e3ea23b6c837a260ac9ae7f20081b335d1aa0bc633e38"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay100000-after.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay100000-after.json",
+      "bytes": 2834,
+      "sha256": "ed9bf674311dcd3d42e6ccd40a70b2c198de101e15de1349278dbc0661f7555b"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay100000-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay100000-after.log",
+      "bytes": 5064,
+      "sha256": "83fcb459600e92b9dd0a5db86a3f23d746d73c15448158709f9803ee870e46cf"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay100000-before.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay100000-before.json",
+      "bytes": 2835,
+      "sha256": "fe6e88cb2bb4c7c8251f72a66782dcaa41ba3432ea1c2e21ef0464e86313e98d"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/delaunay100000-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/delaunay100000-before.log",
+      "bytes": 5065,
+      "sha256": "f209fc58c8261913da25e37607394e2e3bf66787d2ba7c9d3871d6236738bc7e"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/diagram100000-after.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/diagram100000-after.json",
+      "bytes": 2564,
+      "sha256": "2440232d8bfea978e18fdbae218cf1ea26c41657b15f99363a902b486be59339"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/diagram100000-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/diagram100000-after.log",
+      "bytes": 3435,
+      "sha256": "9c8fd12668faa9b7fcb5776bb6da6409e9cb010394a90b1e89ac7a31995a4efb"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/diagram100000-before.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/diagram100000-before.json",
+      "bytes": 2569,
+      "sha256": "805780ca23407efd24ca56c7d67b764213f58b7d8ef0361f1df35ef409c04304"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/diagram100000-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/diagram100000-before.log",
+      "bytes": 3440,
+      "sha256": "78020ae0f498f060cef6a32ae9ac7d9778d81c142d43d73d4c306504b0d785c8"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-after/boundary.off.gz",
+      "bytes": 30571,
+      "sha256": "e130ea456e3a6e134524f26ff7e53febe5dc6f624d3edc895d05c4d51a885f4d"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-after/input.off",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-after/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-after/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-after/mesh.npz",
+      "bytes": 110263,
+      "sha256": "858927634024233ff88a4a51e115d64b4c80b497774e070ffccf18097a39a91a"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-after/mesh.vtu.gz",
+      "bytes": 88160,
+      "sha256": "c197c551fee220c6511abea074afee976c76e75374567ac35e1cb78fc87c4603"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-after/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-after/result.json",
+      "bytes": 3661,
+      "sha256": "49b53de093a3c8a2c7a9e4f7f316136fbac3c635a745d6bcfeeded53dcc037ce"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-after.log",
+      "bytes": 8269,
+      "sha256": "2d316f0b3c46996d9b764fed682a6029c0cab75cce93c3309b6b4d1524a2e724"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-before/boundary.off.gz",
+      "bytes": 30537,
+      "sha256": "06536b129303dcc6a82a0069487e4d74e6b1ca380c6c47a69665aba100f30223"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-before/input.off",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-before/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-before/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-before/mesh.npz",
+      "bytes": 110154,
+      "sha256": "94280b6380b39b74fc9d8d689554495022041c37482941fa2d6152fdecbe479b"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-before/mesh.vtu.gz",
+      "bytes": 88102,
+      "sha256": "de61084067ca39eedc4feb4e17fa14e9a1762911e27d6e4254c620727ed49090"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-before/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-before/result.json",
+      "bytes": 3659,
+      "sha256": "3d521234b9cf79752eeed95e1d0345b159e7525ff272cfaf81370636deaca629"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/disconnected-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/disconnected-before.log",
+      "bytes": 8267,
+      "sha256": "3a70edc9bac9597568bca7b803899e472a5f778e1a7bf45484eb60da7b0c2417"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-after/boundary.off.gz",
+      "bytes": 133262,
+      "sha256": "c6c6de44482509a712aacf3c8eddaa1840ac138c92966e96389e201a26b03ac4"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-after/input.off",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-after/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-after/mesh.npz",
+      "bytes": 572496,
+      "sha256": "4df862a3d0ac47fae7a1901b34ef46e6d837a30f6bd8852b69442ec9c3ebdb2f"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-after/mesh.vtu.gz",
+      "bytes": 453184,
+      "sha256": "df74974bae540a62d781a65d79ca7fdb9242670675128c5c40befd192fd6b620"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-after/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-after/result.json",
+      "bytes": 3657,
+      "sha256": "6bfd4baf67ffdd56181ccb8e2fb009388836565833d516a7e39806f23a6ed50f"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-after.log",
+      "bytes": 8439,
+      "sha256": "a253a8d6b6dc79dc114ced5f87210dbb596e206b092de176f45b2da40c806632"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-before/boundary.off.gz",
+      "bytes": 133231,
+      "sha256": "1f7aefa729a7cab2f792b9ac9b0f61a54b584949ae6a552b314bee2833694655"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-before/input.off",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-before/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-before/mesh.npz",
+      "bytes": 571979,
+      "sha256": "cbc80ae6826da57842e2700442641d0f1791232f246bbf3fa827159d0376690b"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-before/mesh.vtu.gz",
+      "bytes": 453261,
+      "sha256": "6c45fe3cf18d04deffddc45fb1f4f9fe1d8a688757d0c56ef109b2e5df7e3a48"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-before/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-before/result.json",
+      "bytes": 3653,
+      "sha256": "b3883d209f8500da17f1815ff6a0ca424a4ecc298c9123dcc01d05315d6ee67d"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/graded-torus-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/graded-torus-before.log",
+      "bytes": 8435,
+      "sha256": "90a2869eb42ed1c9348389cad512676e7178c2fb2339e9c9a0163f9d6c48ab09"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-after/boundary.off.gz",
+      "bytes": 28763,
+      "sha256": "08e98554f300d183bb210462a6e15faf6f6c6fefd116a197b5079dcc8048ad20"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-after/input.off",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-after/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-after/mesh.npz",
+      "bytes": 98598,
+      "sha256": "2750906e4f8c199e52281c72364b20607b6cb9f923798479d58426f7e0516f59"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-after/mesh.vtu.gz",
+      "bytes": 70542,
+      "sha256": "8ab324f0f9d023315a408c5a4e7b9556e9e506b15f74a16df8aecda653b4c945"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-after/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-after/result.json",
+      "bytes": 3649,
+      "sha256": "00e00e909dd0b3dad75f352d03d23bce31a5ff4bb9f5244bae2f2c5bf9293b61"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-after.log",
+      "bytes": 8257,
+      "sha256": "d2e1ddae07c03f8b44f160a9f0c01d1f67d1b65ccee3ce94eab87e2a5c946f8c"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-before/boundary.off.gz",
+      "bytes": 28741,
+      "sha256": "1df5a95c2edc0b233053faba3849255fc370e49b9c43c7abfa624cf1001d3075"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-before/input.off",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-before/mesh.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-before/mesh.npz",
+      "bytes": 98635,
+      "sha256": "a9237a8ce8d6a34af98d0c373cc8a99e1152db9218476fc84e787bd4c2cd1c0d"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-before/mesh.vtu.gz",
+      "bytes": 70669,
+      "sha256": "8279cd79eb6a5c3e9a83ef6001f0dc67abc617f5f678cf8644ac1fcd2c2f1c57"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-before/result.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-before/result.json",
+      "bytes": 3657,
+      "sha256": "25d01ff2d9d463b164ce9175dba0a7eb96660093d306b46a08b9dd3ee7956108"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/thin-hand-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/thin-hand-before.log",
+      "bytes": 8265,
+      "sha256": "629ebc102d31e1626faa7a9f9ab1f3884c7a85c1ad36d203a4b52f6697e2f418"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus1000-after.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus1000-after.json",
+      "bytes": 2940,
+      "sha256": "35452f8e091ab51759c3bb2b2cf9fe9038bb0f187b716aa4346226abb2ad62ae"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus1000-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus1000-after.log",
+      "bytes": 7634,
+      "sha256": "da72146f62617c51bb04efdf72bbfd0330f60bd2b19c59cde1885d5dc8f347cf"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus1000-after.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus1000-after.npz",
+      "bytes": 91403,
+      "sha256": "c4ec5704d3a1513516e2522a8b65a17e31cf3745ccb418e20cf37c4960e9ff5a"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus1000-before.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus1000-before.json",
+      "bytes": 2940,
+      "sha256": "49470d0952a6641fc3523f33540c3a0118add95fbcc652e683914cdcf5c8c973"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus1000-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus1000-before.log",
+      "bytes": 7634,
+      "sha256": "4c9c1db45e854b51dac0b76a05a8f7059e53fdb03ab1aec8f201670c131035f5"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus1000-before.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus1000-before.npz",
+      "bytes": 91519,
+      "sha256": "764bfd7d157a9022c58f7de603592c8aea20b3d271012a96562bf2f04026d37c"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus4096-after.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus4096-after.json",
+      "bytes": 3083,
+      "sha256": "7b80f859b2478110c0c93d0ad4141b416de899a080eaf953d4ea9538ee9fe85e"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus4096-after.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus4096-after.log",
+      "bytes": 7807,
+      "sha256": "1a7cb1a4428d610b2b12a8b76f4997224afd2a66524367da699142efc181e629"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus4096-after.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus4096-after.npz",
+      "bytes": 419166,
+      "sha256": "f940524d15c2e24b80e2baf00a51f98cb2dd25cb21b981dd1ef014833ccc1928"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus4096-before.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus4096-before.json",
+      "bytes": 3086,
+      "sha256": "f5083c0a5b53f065eec924c4b378904fe772c779fdfea891a37dac1d8e378c34"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus4096-before.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus4096-before.log",
+      "bytes": 7810,
+      "sha256": "3440f5c2a7bac5fe12d7c06b4d252b5e2e2b32f1bf566d8bbdbfedc601b5b208"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final/torus4096-before.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final/torus4096-before.npz",
+      "bytes": 419512,
+      "sha256": "64ae5c0b0db790569e56ef6aae493cdc913137fe56e76481fc5fc35b7a746028"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final-independent-v1-partial.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final-independent-v1-partial.json",
+      "bytes": 12646,
+      "sha256": "5217820bb5efcb1495153841798c03664cc4f4cb0e6a26e4a2e47e104ec93516"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final-independent.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final-independent.json",
+      "bytes": 38252,
+      "sha256": "2c150d1a0bdebd57c803cc1e5e060967149ec8d0b028d1248421349624ca7098"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final-lossless-archives.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final-lossless-archives.json",
+      "bytes": 8919,
+      "sha256": "2d3ec22de754f45030fbd234a94696e69dd95dcb8396bdbbc489b8b7f54408b5"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-final-run-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-final-run-v1.log",
+      "bytes": 19493,
+      "sha256": "3097add289e0c356975a7f5e32be773169752abf6c8f75169e8891abda51d167"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-focused-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-focused-v1.log",
+      "bytes": 352,
+      "sha256": "afe6f5a80ea6a640e64f2ff77855601fd2882868140f37bd0a569d3ccf58b295"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-full-native-audit.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-full-native-audit.json",
+      "bytes": 1182,
+      "sha256": "c2b088f7868ccbfad9f28d633edb3f63532e7f5c9667108ea770692f2e4f5d6b"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-full-native-audit.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-full-native-audit.log",
+      "bytes": 1182,
+      "sha256": "c2b088f7868ccbfad9f28d633edb3f63532e7f5c9667108ea770692f2e4f5d6b"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-full-native-export.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-full-native-export.log",
+      "bytes": 8101,
+      "sha256": "74127cc46950b8dea285c8b40d0a15acc61bf6d9dce12ed9621964eb05c3e699"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-full-native.dot.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-full-native.dot.gz",
+      "bytes": 1628496,
+      "sha256": "b3e6831d59c8a57a312fa779924dd2c0fa7f787f0f0b21382a5ba7bbb7b0d854"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-full-native.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-full-native.json",
+      "bytes": 441,
+      "sha256": "979c0d0cac8a027d053f1905bb3d489861619cc7f1d142aaaf89f0a54ac05308"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-full-native.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-full-native.log",
+      "bytes": 9608,
+      "sha256": "e8f309c492ab90530212b8d4b00fdc64e9c3489a8cbea0d9f59594bc01f4e722"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-full-native.nsys-rep.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-full-native.nsys-rep.gz",
+      "bytes": 3418965,
+      "sha256": "a70dc144b2b800a03c8707b154f023541274a1b1c0c894beafc40c67dda437e2"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-full-native.py",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-full-native.py",
+      "bytes": 1927,
+      "sha256": "ee6d8528160bd09a87848ffa2c409fadf0f2bc9043f2181b276b4da4333c1c30"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-full-suite-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-full-suite-v1.log",
+      "bytes": 1233,
+      "sha256": "71325e77142c36f783d3a0c4b36fdd0450f0174ca3f81c830e157c104c9ea1cf"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-full-trace-archive.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-full-trace-archive.json",
+      "bytes": 216,
+      "sha256": "88dde455c90f4d1b7c7f9c50eb4a4a68f0f5944e9776757579f73a002e1c822f"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-independent-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-independent-v1.log",
+      "bytes": 1110,
+      "sha256": "cad380503691ed6dff08e097fdd7b8d51d48de3dd1cc1a451dc7f0879cc558a9"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-independent-v2.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-independent-v2.log",
+      "bytes": 6036,
+      "sha256": "3b2e65e3ed1f64d8d6a8c191f2766ce62f185d4d41155042a563d29e48a7dd85"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-kernel-properties-after-v1.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-kernel-properties-after-v1.json",
+      "bytes": 1092,
+      "sha256": "379278cae32f52ed822d735713ef70e03b58c03f8ffe8e91c41de7787322bf1c"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-kernel-properties-after-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-kernel-properties-after-v1.log",
+      "bytes": 1127,
+      "sha256": "42fab9bafb077e8677d61690550ae72f98020b088f3d4b1a914261e5fa5f882e"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-kernel-properties-before-v1.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-kernel-properties-before-v1.json",
+      "bytes": 1094,
+      "sha256": "627890660f209daacae0514f265ef53cbfdd182e80800973743a5f696ada038e"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-kernel-properties-before-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-kernel-properties-before-v1.log",
+      "bytes": 1129,
+      "sha256": "68e05a2b9e67201ce9c10d0bc35faeaf11535c065aba079a4a67bf5454eecce7"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-kernel-properties-v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-kernel-properties-v1.py",
+      "bytes": 1293,
+      "sha256": "98b18d8d71143f419f16dceffa07c134e29375b89314206ee0002e005d31fba7"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-loop-native-audit.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-loop-native-audit.json",
+      "bytes": 1293,
+      "sha256": "0b75dc5119abda6ca3be4e196e8627099ad7761af9cec9cac0f789ff45b774b8"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-loop-native-audit.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-loop-native-audit.log",
+      "bytes": 1293,
+      "sha256": "0b75dc5119abda6ca3be4e196e8627099ad7761af9cec9cac0f789ff45b774b8"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-loop-native-export.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-loop-native-export.log",
+      "bytes": 8101,
+      "sha256": "ae8640946db6930536b0943d66324b155749de2ea9c2a5f4fda270bf5913ee64"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-loop-native.dot.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-loop-native.dot.gz",
+      "bytes": 7339,
+      "sha256": "1bdc3ed336cb36884d43f75c3a2cf020a6aaf0e64d029d856609049835fb8646"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-loop-native.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-loop-native.json",
+      "bytes": 2442,
+      "sha256": "efe85f6964621d219a2c18f81007bf017f2d05bf8ad0a4db1801652dd84acd18"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-loop-native.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-loop-native.log",
+      "bytes": 4105,
+      "sha256": "6973d5afbbca09695233266c13df296999d63c8eb67c68e90ad4aa3938b70e4e"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-loop-native.nsys-rep.gz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-loop-native.nsys-rep.gz",
+      "bytes": 54406,
+      "sha256": "3b46007df747ed1bd62ac5a51f78c8d977c5d04979ddbfdd266abc66c749756b"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-loop-native.py",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-loop-native.py",
+      "bytes": 6269,
+      "sha256": "9cf29e87fb0aade367c3af6f4c3b2259c0702477f7bed0b8060574b1452faf42"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-loop-trace-archive.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-loop-trace-archive.json",
+      "bytes": 213,
+      "sha256": "7b661da50f03405f93cde260b4ba1ff8c22672a45757e764044224e88a45bbc0"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-memory-run-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-memory-run-v1.log",
+      "bytes": 2313,
+      "sha256": "edb8b896c6a7ef3783df94f3b965019f6b20676d065a4b44b639145fcfe54ba7"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-memory-v1-commands.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-memory-v1-commands.json",
+      "bytes": 2820,
+      "sha256": "3036a015eefde7646ec613d593399fcb3bb9ab3454793effe3859be5f5fd9bd6"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-native-analysis.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-native-analysis.log",
+      "bytes": 58,
+      "sha256": "6217a9ac9a981ec085b9e0a02e1b6ae945cb4f5e71f48857e2c2cff8d49ed122"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-native-audit-summary.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-native-audit-summary.json",
+      "bytes": 92060,
+      "sha256": "9694038d6fa7221450ffcbb3f8ac92438deb97e0246c0aefe07b6ab3f3b6bd6f"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-native-commands.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-native-commands.json",
+      "bytes": 2019,
+      "sha256": "684194fc1dc7287e847f8a40526d355b5a6d57fd467fc79b2b9ae27d9bdcbe79"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-native-run-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-native-run-v1.log",
+      "bytes": 1695,
+      "sha256": "299817401d27b9506ca447ff6633aecaf2b24e74dc8537898bf88db54eb13d16"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-public-quality-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-public-quality-v1.log",
+      "bytes": 134,
+      "sha256": "09ca2737e018c1179197b4a928a13e8d877d3365d56d4d628401c3d680f4eb89"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-public-quality.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-public-quality.json",
+      "bytes": 7649,
+      "sha256": "76542b2aac41e85104b66496374cec30fa37c827aea343f242c72a28e30ae54a"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-source-check-v1.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-source-check-v1.json",
+      "bytes": 578,
+      "sha256": "9c803c1a09e5a92feaea6eaf83edc5f2f0de9deaa4045634566d15f742ef9316"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-v1-surface-bounds-lifetime.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-v1-surface-bounds-lifetime.log",
+      "bytes": 5292,
+      "sha256": "d96fbf1e5a03818497cda813a1d627530e8c03d1838bac5fb1cdea235bf57ce5"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-v1-surface-bounds-padded.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-v1-surface-bounds-padded.log",
+      "bytes": 5291,
+      "sha256": "e6ff4b1e825b771a14cda475040252d876fde0bae9e0373fd6d37c4774fc2a7e"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-v1-surface-lifetime-lifetime.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-v1-surface-lifetime-lifetime.log",
+      "bytes": 1682,
+      "sha256": "287c8c6719f729e54298cfcb05e798dafa29d32195e2e0e0bbf8442e0bc6dfb0"
+    },
+    {
+      "original": ".work/vtm/surface-bound-reuse-v1-surface-lifetime-padded.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-bound-reuse-v1-surface-lifetime-padded.log",
+      "bytes": 1681,
+      "sha256": "f52eb85488ccc0d90afcb745eaeadf265233948a7e1d89b4360cebf21e761e2f"
+    },
+    {
+      "original": ".work/vtm/surface-box-filter-proof-v1.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-box-filter-proof-v1.json",
+      "bytes": 9209,
+      "sha256": "ad9db0d9d243c476d3336b19d22cabb5e019a1112025412017b668a27c10503b"
+    },
+    {
+      "original": ".work/vtm/surface-box-filter-tests-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-box-filter-tests-v1.log",
+      "bytes": 99,
+      "sha256": "84e7e5f81e624a136d5209d87bb1438f7dd09f44756627b42e57b0de0f5e09d8"
+    },
+    {
+      "original": ".work/vtm/surface-work-probe-v1/armadillo-graded.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-work-probe-v1/armadillo-graded.npz",
+      "bytes": 543194,
+      "sha256": "b0b5972443525a579f326f9df100a5bae58b1eb4d6a726bc75926a8ea9e4a0d2"
+    },
+    {
+      "original": ".work/vtm/surface-work-probe-v1/armadillo-uniform.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-work-probe-v1/armadillo-uniform.npz",
+      "bytes": 533424,
+      "sha256": "8412235c12aba527a49056106544798ed271432d642d4521fe6c6a09c62ed673"
+    },
+    {
+      "original": ".work/vtm/surface-work-probe-v1/results.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-work-probe-v1/results.json",
+      "bytes": 31754,
+      "sha256": "32e3ea0091dc3e594119b49a4d5cb2fe4f531dedf29089b2c9bacbd5a4f80f72"
+    },
+    {
+      "original": ".work/vtm/surface-work-probe-v1/torus1000.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-work-probe-v1/torus1000.npz",
+      "bytes": 87656,
+      "sha256": "329914233de35925befd31756f6789648b278ed1d8a2a734bec7015f96ffcde2"
+    },
+    {
+      "original": ".work/vtm/surface-work-probe-v1/torus4096.npz",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-work-probe-v1/torus4096.npz",
+      "bytes": 349097,
+      "sha256": "c5c481a60062484628ecabc8e758a924d71a626cccf780b487aaf028e5240ef5"
+    },
+    {
+      "original": ".work/vtm/surface-work-probe-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-work-probe-v1.log",
+      "bytes": 2717,
+      "sha256": "c9455461ec2b17694e47db5a542a103e492ccf8dafb0fe4e393025c297fd7bf9"
+    },
+    {
+      "original": ".work/vtm/surface-work-trajectory-graded-v1.json",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-work-trajectory-graded-v1.json",
+      "bytes": 2807,
+      "sha256": "b6767ae5116c3baaceb6ad95c23eeb5efe7c7891a047682a41e7056940971ba9"
+    },
+    {
+      "original": ".work/vtm/surface-work-trajectory-graded-v1.log",
+      "path": "results/validation/vtm/surface-bound-reuse/surface-work-trajectory-graded-v1.log",
+      "bytes": 7525,
+      "sha256": "445bb053ad4a6140922851976dc17b6c2280b3e50a7ffeddd6855486015df134"
+    },
+    {
+      "original": ".work/vtm/surface_box_filter_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/surface_box_filter_v1.py",
+      "bytes": 2465,
+      "sha256": "44d40f1a97ed7db4156ae16a54eeeb627b5081e6b31692482ea597342df6de49"
+    },
+    {
+      "original": ".work/vtm/surface_trajectory_work_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/surface_trajectory_work_v1.py",
+      "bytes": 6978,
+      "sha256": "5e67c57a28308c85057f9f920fae2b66732a35a04ad35520c29c27ff2f640054"
+    },
+    {
+      "original": ".work/vtm/surface_work_probe_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/surface_work_probe_v1.py",
+      "bytes": 7600,
+      "sha256": "36f504be52df32bc8f149470d195f410af243efb815ffd2f621cf429607cef7d"
+    },
+    {
+      "original": ".work/vtm/test_cached_surface_bounds_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/test_cached_surface_bounds_v1.py",
+      "bytes": 2926,
+      "sha256": "509d082b6020163b50e9ea9f1e36fe3363ada39432cbd6df43d3e58ba275c897"
+    },
+    {
+      "original": ".work/vtm/test_cached_surface_bounds_v2.py",
+      "path": "results/validation/vtm/surface-bound-reuse/test_cached_surface_bounds_v2.py",
+      "bytes": 3965,
+      "sha256": "2b9732e053a5a4ff4403a9cba7dd874444a8a2158eb2a9f0b249626166b60b17"
+    },
+    {
+      "original": ".work/vtm/test_surface_box_filter_v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/test_surface_box_filter_v1.py",
+      "bytes": 4697,
+      "sha256": "7a6b71edf0f9aa0a20a61eace9ebdb6e3c11244e83036874925c7e8599425504"
+    },
+    {
+      "original": ".work/vtm/write-surface-bound-reuse-doc-v1.py",
+      "path": "results/validation/vtm/surface-bound-reuse/write-surface-bound-reuse-doc-v1.py",
+      "bytes": 9076,
+      "sha256": "f10aef5c5ed8b1de3712b33a10150ea66671f27fba9a1e21722c846d7b18871c"
+    }
+  ]
+}

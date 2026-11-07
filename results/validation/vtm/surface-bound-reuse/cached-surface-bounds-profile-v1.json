@@ -1,0 +1,357 @@
+{
+  "runtime": "18ecb03c10cb10e42a5089e8253ed92a24c3bae1",
+  "scope": "Static full-nearest query kernels; no geometry preparation/setup or whole-solve speed claim.",
+  "sources": {
+    "/home/horde/projects/power-diagram/.work/vtm/profile_cached_surface_bounds_v1.py": "a7dc4fadf0670a14b97d0161ef6f9dd9798b2a6a5ee8e0768d04297af97dbe7a",
+    "/home/horde/projects/power-diagram/.work/vtm/cached_surface_bounds_v1.py": "4916b4c27229bc29a5a2b6ff63ea5bbbed1ac8fad1b8b004f601e27f37f27264",
+    ".work/vtm/extraction_split.py": "a3c6c66a83dff5a4b38d305dc77d1bccad9a6fe3a5e881c70627ec6d66944e69",
+    "warpower/_surface_bvh.py": "8f08d6c1f785e7dfc59554c3cdb44950830b48f6a86fb63f5c308887c8ffdb82"
+  },
+  "cases": [
+    {
+      "case": "torus1000",
+      "input": "results/validation/vtm/recovery-classification/recovery-classification-final/torus1000-after.npz",
+      "input_sha256": "ac3112f62733aa12e0871396f3a3e07ced483346f626b1b4e45e55d1281381bb",
+      "queries": 5826,
+      "samples_ms": {
+        "reference": [
+          3.5060479640960693,
+          3.504096031188965,
+          3.5006399154663086,
+          3.5017600059509277,
+          3.497407913208008,
+          3.5036160945892334,
+          3.497375965118408,
+          3.499039888381958,
+          3.498016119003296,
+          3.5031039714813232,
+          3.4959359169006348,
+          3.500704050064087,
+          3.502432107925415,
+          3.5018560886383057,
+          3.4975359439849854,
+          3.501728057861328,
+          3.495487928390503,
+          3.5023999214172363,
+          3.4984960556030273,
+          3.500607967376709
+        ],
+        "candidate": [
+          3.3571839332580566,
+          3.3563520908355713,
+          3.3475840091705322,
+          3.3559999465942383,
+          3.3517119884490967,
+          3.3526721000671387,
+          3.3516159057617188,
+          3.3506879806518555,
+          3.3510079383850098,
+          3.3497281074523926,
+          3.352544069290161,
+          3.3520960807800293,
+          3.3539199829101562,
+          3.3539841175079346,
+          3.350368022918701,
+          3.3548800945281982,
+          3.3549439907073975,
+          3.35315203666687,
+          3.35097599029541,
+          3.3517119884490967
+        ]
+      },
+      "median_ms": {
+        "reference": 3.5006719827651978,
+        "candidate": 3.352320075035095
+      },
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "differences": {
+        "point": 0,
+        "distance2": 0,
+        "face": 0
+      },
+      "output_sha256": {
+        "reference": {
+          "point": "65bd7b5e4edbc94dfc6e0efda38138cbba24e9e0f39cda205368982b183a2813",
+          "distance2": "aeea90616f2c6ad28a98a70a0eae615ddc1291293fd4aaf2082e0091981b4de9",
+          "face": "8d27e86c4031ea29ec4f40f637f9e6be80123576bcc48b0642c24f653807dcdd"
+        },
+        "candidate": {
+          "point": "65bd7b5e4edbc94dfc6e0efda38138cbba24e9e0f39cda205368982b183a2813",
+          "distance2": "aeea90616f2c6ad28a98a70a0eae615ddc1291293fd4aaf2082e0091981b4de9",
+          "face": "8d27e86c4031ea29ec4f40f637f9e6be80123576bcc48b0642c24f653807dcdd"
+        }
+      }
+    },
+    {
+      "case": "torus4096",
+      "input": "results/validation/vtm/recovery-classification/recovery-classification-final/torus4096-after.npz",
+      "input_sha256": "eda4afbd3d7c4fdfe0cd502cd9605f0570c75942680fea297b8fd95b965451c8",
+      "queries": 24519,
+      "samples_ms": {
+        "reference": [
+          7.748000144958496,
+          7.73795223236084,
+          7.738048076629639,
+          7.733920097351074,
+          7.737023830413818,
+          7.736576080322266,
+          7.737055778503418,
+          7.734752178192139,
+          7.734687805175781,
+          7.738368034362793,
+          7.735040187835693,
+          7.737247943878174,
+          7.737311840057373,
+          7.736832141876221,
+          7.736800193786621,
+          7.739232063293457,
+          7.73740816116333,
+          7.737760066986084,
+          7.739264011383057,
+          7.734208106994629
+        ],
+        "candidate": [
+          7.2626237869262695,
+          7.259232044219971,
+          7.261216163635254,
+          7.262976169586182,
+          7.261919975280762,
+          7.257728099822998,
+          7.265312194824219,
+          7.256288051605225,
+          7.2633280754089355,
+          7.259903907775879,
+          7.2636799812316895,
+          7.258495807647705,
+          7.263775825500488,
+          7.262080192565918,
+          7.264480113983154,
+          7.259552001953125,
+          7.264224052429199,
+          7.257311820983887,
+          7.263552188873291,
+          7.257728099822998
+        ]
+      },
+      "median_ms": {
+        "reference": 7.737151861190796,
+        "candidate": 7.26200008392334
+      },
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "differences": {
+        "point": 0,
+        "distance2": 0,
+        "face": 0
+      },
+      "output_sha256": {
+        "reference": {
+          "point": "7825c2684425356e2980e1cebacbff0934e3dd300f1be38d35012407117e4c28",
+          "distance2": "f2a683cea64d6809b6b619a3a0ee5794027312fdf05d98aa48ef5712fb1756de",
+          "face": "e1930a90f94d482233aa58bcf6409927b677ef8a86f46999b0a90342f8c46fa4"
+        },
+        "candidate": {
+          "point": "7825c2684425356e2980e1cebacbff0934e3dd300f1be38d35012407117e4c28",
+          "distance2": "f2a683cea64d6809b6b619a3a0ee5794027312fdf05d98aa48ef5712fb1756de",
+          "face": "e1930a90f94d482233aa58bcf6409927b677ef8a86f46999b0a90342f8c46fa4"
+        }
+      }
+    },
+    {
+      "case": "armadillo-uniform",
+      "input": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-uniform-after/mesh.npz",
+      "input_sha256": "aab19435d988119cbb659cd43b21eb73eee8a0093d96cade463e1a10c401479c",
+      "queries": 24721,
+      "samples_ms": {
+        "reference": [
+          17.12761688232422,
+          17.12544059753418,
+          17.118207931518555,
+          17.115808486938477,
+          17.1167049407959,
+          17.1167049407959,
+          17.117631912231445,
+          17.116512298583984,
+          17.11622428894043,
+          17.12335968017578,
+          17.154207229614258,
+          17.12166404724121,
+          17.12179183959961,
+          17.119808197021484,
+          17.128095626831055,
+          17.11846351623535,
+          17.12460708618164,
+          17.12112045288086,
+          17.12348747253418,
+          17.12403106689453
+        ],
+        "candidate": [
+          15.519647598266602,
+          15.489824295043945,
+          15.498047828674316,
+          15.491680145263672,
+          15.501440048217773,
+          15.489567756652832,
+          15.498784065246582,
+          15.495840072631836,
+          15.502431869506836,
+          15.49084758758545,
+          15.499584197998047,
+          15.491392135620117,
+          15.504511833190918,
+          15.496319770812988,
+          15.501855850219727,
+          15.49449634552002,
+          15.501855850219727,
+          15.500927925109863,
+          15.496735572814941,
+          15.491647720336914
+        ]
+      },
+      "median_ms": {
+        "reference": 17.121392250061035,
+        "candidate": 15.497391700744629
+      },
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "differences": {
+        "point": 0,
+        "distance2": 0,
+        "face": 0
+      },
+      "output_sha256": {
+        "reference": {
+          "point": "0df55637add40c0a9e7ce60e12d03438bd8dae5a36d65e4d1317323ce9d11e8e",
+          "distance2": "a160c63acef2e6ec443dc4aa1902a6ed8b3ff5dd23d17f4332d8e9c17d095858",
+          "face": "947ba78e909974965478369c227d48b7b071cb397708eba0110d662532a50d6b"
+        },
+        "candidate": {
+          "point": "0df55637add40c0a9e7ce60e12d03438bd8dae5a36d65e4d1317323ce9d11e8e",
+          "distance2": "a160c63acef2e6ec443dc4aa1902a6ed8b3ff5dd23d17f4332d8e9c17d095858",
+          "face": "947ba78e909974965478369c227d48b7b071cb397708eba0110d662532a50d6b"
+        }
+      }
+    },
+    {
+      "case": "armadillo-graded",
+      "input": "results/validation/vtm/recovery-classification/recovery-classification-final/armadillo-graded-after/mesh.npz",
+      "input_sha256": "4814397c2a91df65e270162ea80bf3e94946fd9775c9a124a094f86218b175e8",
+      "queries": 24667,
+      "samples_ms": {
+        "reference": [
+          18.491872787475586,
+          18.487327575683594,
+          18.47056007385254,
+          18.48467254638672,
+          18.486751556396484,
+          18.483488082885742,
+          18.5199031829834,
+          18.475744247436523,
+          18.477951049804688,
+          18.483104705810547,
+          18.477983474731445,
+          18.49078369140625,
+          18.476415634155273,
+          18.494112014770508,
+          18.486751556396484,
+          18.481664657592773,
+          18.47385597229004,
+          18.482816696166992,
+          18.489856719970703,
+          18.486207962036133
+        ],
+        "candidate": [
+          16.34771156311035,
+          16.339359283447266,
+          16.335968017578125,
+          16.338176727294922,
+          16.34614372253418,
+          16.346464157104492,
+          16.34547233581543,
+          16.340896606445312,
+          16.340576171875,
+          16.331296920776367,
+          16.34320068359375,
+          16.346784591674805,
+          16.33897590637207,
+          16.34499168395996,
+          16.34444808959961,
+          16.33580780029297,
+          16.343360900878906,
+          16.342304229736328,
+          16.339136123657227,
+          16.33910369873047
+        ]
+      },
+      "median_ms": {
+        "reference": 18.48408031463623,
+        "candidate": 16.34160041809082
+      },
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "differences": {
+        "point": 0,
+        "distance2": 0,
+        "face": 0
+      },
+      "output_sha256": {
+        "reference": {
+          "point": "09100679fb5c6da6b16ce8a4fc13103fc0e3465865cbd42fba323512ea3e7f96",
+          "distance2": "3ed3fd4d620f79475645c71a8ff3f01ed618df648218f17d7e2f41ef70310680",
+          "face": "94aecc044fb132b577c57d7dc585e1644118ecf758ee9e19c23e3bfe8638d5b9"
+        },
+        "candidate": {
+          "point": "09100679fb5c6da6b16ce8a4fc13103fc0e3465865cbd42fba323512ea3e7f96",
+          "distance2": "3ed3fd4d620f79475645c71a8ff3f01ed618df648218f17d7e2f41ef70310680",
+          "face": "94aecc044fb132b577c57d7dc585e1644118ecf758ee9e19c23e3bfe8638d5b9"
+        }
+      }
+    }
+  ],
+  "finished": true
+}

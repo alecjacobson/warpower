@@ -238,15 +238,15 @@ Download the [cavity mesh](../results/examples/vtm/cavity/mesh.vtu) or
 directories contain source surfaces, NPZ arrays, raw timings and independent
 checks; the [manifest](../results/examples/vtm/provenance.json) records hashes.
 
-Sampling matters. The coarse 4/4 cavity still fails the material-boundary gate
-with one nonmanifold edge and zero public output counts; recovery remains
-tracked in [#125](https://github.com/alecjacobson/warpower/issues/125).
-The coarse 4/4 disconnected case now succeeds after
-[stable geometry evaluation](extraction-geometry.md), but takes 11.743 s and
-has minimum radius ratio 0.06904 and sampled RMS error 0.33674% of the box
-diagonal. The dense example improves those measurements. Coarse records are
-included as `coarse-comparison.json`; the failed cavity is not a successful
-mesh or a comparable timing sample.
+Sampling matters. The historical coarse records at runtime `1804b64` are
+included as `coarse-comparison.json`: the cavity fails its material-boundary
+gate, and the disconnected solve takes 11.743 s with minimum radius ratio
+0.06904 and sampled RMS error 0.33674% of the box diagonal.
+Later [containment recovery](containment-recovery.md) resolves the coarse cavity
+and shortens the coarse disconnected trajectory, with an explicit quality/fit
+tradeoff. The dense gallery configurations above retain better quality and fit.
+Historical records keep their original status and provenance; the rejected
+cavity record is not a successful mesh or a comparable timing sample.
 
 Reproduce the measured configurations with:
 

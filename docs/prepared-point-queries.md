@@ -178,6 +178,10 @@ A subsequent [hierarchy-traversal study](prepared-hierarchy-probes.md) compares
 one-, eight- and 32-worker pruning layouts. All four tested variants regress
 complete solves, so the strided point checker remains the production path.
 
+A separate [strict/exact kernel split](prepared-split-probe.md) lowers the common
+kernel's register footprint but regresses complete solves by about 1.3%.
+That prototype also remains unadopted.
+
 This work is tracked in [#170](https://github.com/alecjacobson/warpower/issues/170)
 and [PR #171](https://github.com/alecjacobson/warpower/pull/171). The
 [native CPU performance goal](cpu-mesher-baseline.md) remains unmet, and the

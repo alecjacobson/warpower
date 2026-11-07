@@ -21,6 +21,7 @@ class Geometry:
     center: wp.vec3d
     offset: wp.vec3d
     radius: wp.float64
+    area2: wp.float64
     valid: int
 
 
@@ -61,13 +62,30 @@ def exact_geometry(p0: wp.vec3, p1: wp.vec3, p2: wp.vec3, p3: wp.vec3):
     norms.y = integer.norm(b)
     norms.z = integer.norm(c)
     offset = wp.vec3d()
+    normal0, normal1, normal2, normal3 = wp.vec3d(), wp.vec3d(), wp.vec3d(), wp.vec3d()
     for axis in range(3):
+        bc, ca, ab = cofactor(b, c, axis), cofactor(c, a, axis), cofactor(a, b, axis)
+        bc_value = integer.predicate(bc, 2 * base)
+        ca_value = integer.predicate(ca, 2 * base)
+        ab_value = integer.predicate(ab, 2 * base)
+        other_value = integer.predicate(integer.plus(integer.plus(bc, ca), ab), 2 * base)
+        if (
+            bc_value.valid == 0
+            or ca_value.valid == 0
+            or ab_value.valid == 0
+            or other_value.valid == 0
+        ):
+            return result
+        normal0[axis] = bc_value.estimate
+        normal1[axis] = ca_value.estimate
+        normal2[axis] = ab_value.estimate
+        normal3[axis] = other_value.estimate
         relative_n = integer.plus(
             integer.plus(
-                integer.times(norms.x, cofactor(b, c, axis)),
-                integer.times(norms.y, cofactor(c, a, axis)),
+                integer.times(norms.x, bc),
+                integer.times(norms.y, ca),
             ),
-            integer.times(norms.z, cofactor(a, b, axis)),
+            integer.times(norms.z, ab),
         )
         n = integer.plus(integer.times(denominator, integer.from_float(p0[axis], base)), relative_n)
         global_value = integer.predicate(n, 4 * base)
@@ -79,11 +97,14 @@ def exact_geometry(p0: wp.vec3, p1: wp.vec3, p2: wp.vec3, p3: wp.vec3):
     # Subtracting a rounded global center loses radius accuracy far from zero.
     result.offset = offset
     result.radius = wp.length(offset)
+    result.area2 = wp.length(normal0) + wp.length(normal1) + wp.length(normal2) + wp.length(normal3)
     result.valid = int(
         wp.isfinite(result.center[0])
         and wp.isfinite(result.center[1])
         and wp.isfinite(result.center[2])
         and wp.isfinite(result.radius)
         and result.radius > wp.float64(0.0)
+        and wp.isfinite(result.area2)
+        and result.area2 > wp.float64(0.0)
     )
     return result

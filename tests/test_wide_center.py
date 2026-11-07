@@ -1,5 +1,5 @@
 from fractions import Fraction
-from itertools import permutations, product
+from itertools import combinations, permutations, product
 from types import SimpleNamespace
 
 import numpy as np
@@ -36,6 +36,21 @@ def bounded_bridge():
             np.array(list(product([-5, 5], [-5, np.float32(0.7000001)], [-5, 5])), np.float32),
         ]
     )
+
+
+def needle():
+    e = 2.0**-100
+    return np.array([[1, 1, 1], [0, e, 0], [e, 0, 0], [0, 0, e]], np.float32)
+
+
+def exact_area2(points):
+    total = 0.0
+    for face in combinations(points, 3):
+        p = [[Fraction(float(x)) for x in row] for row in face]
+        a, b = [[p[i][j] - p[0][j] for j in range(3)] for i in (1, 2)]
+        normal = [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]
+        total += np.sqrt(float(sum(x * x for x in normal)))
+    return total
 
 
 def bounded_core(points):
@@ -76,6 +91,7 @@ def evaluate(
     metrics[i, 0] = result.determinant
     metrics[i, 1] = result.radius
     metrics[i, 2] = d
+    metrics[i, 3] = result.area2
     flags[i, 0] = result.valid
     flags[i, 1] = int(uncertain(a, b, c, d))
 
@@ -86,13 +102,14 @@ def test_exact_metric_fallback_across_order_scale_and_centers_beyond_float32():
             np.ldexp(bridge()[list(order)], exponent)
             for exponent in (-60, 0, 110)
             for order in permutations(range(4))
-        ],
+        ]
+        + [needle()[list(order)] for order in permutations(range(4))],
         np.float32,
     )
     points = wp.array(cases, dtype=wp.vec3, device="cuda:0")
     centers = wp.empty(len(cases), dtype=wp.vec3d, device=points.device)
     offsets = wp.empty_like(centers)
-    metrics = wp.empty((len(cases), 3), dtype=wp.float64, device=points.device)
+    metrics = wp.empty((len(cases), 4), dtype=wp.float64, device=points.device)
     flags = wp.empty((len(cases), 2), dtype=int, device=points.device)
     wp.launch(evaluate, len(cases), inputs=[points, centers, offsets, metrics, flags])
     values, status, positions = metrics.numpy(), flags.numpy(), centers.numpy()
@@ -106,10 +123,48 @@ def test_exact_metric_fallback_across_order_scale_and_centers_beyond_float32():
             np.testing.assert_allclose(positions[i], list(map(float, center)), rtol=3e-15, atol=0)
             expected_offset = [float(x - Fraction(float(y))) for x, y in zip(center, cloud[0])]
             np.testing.assert_allclose(local[i], expected_offset, rtol=3e-15, atol=0)
+            np.testing.assert_allclose(values[i, 3], exact_area2(cloud), rtol=3e-15, atol=0)
     # The original cancellation fixture and an exactly power-of-two-scaled copy.
     assert values[24, 2] == 0 and status[24].tolist() == [1, 1]
     assert status[48].tolist() == [1, 1]
     assert positions[48, 1] > np.finfo(np.float32).max
+
+
+def test_extreme_positive_needle_does_not_report_perfect_quality_from_zero_face_area():
+    from tests.test_domain import cube
+
+    points = needle()
+    domain = SurfaceDomain(*cube(), surface_subdivisions=1)
+    extraction = ExtractionWorkspace(domain, points, np.arange(4, dtype=np.int32).reshape(1, 4))
+    selected = wp.empty(1, dtype=int, device=domain.device)
+    quality = wp.empty(1, dtype=wp.float64, device=domain.device)
+    error = wp.zeros(1, dtype=int, device=domain.device)
+    wp.load_module(module="warpower._selective", device=domain.device)
+    with wp.ScopedCapture() as cap:
+        extraction.run()
+        error.zero_()
+        wp.launch(
+            classify_retained,
+            1,
+            inputs=[
+                domain.tree,
+                extraction.points,
+                extraction.input_tetrahedra,
+                extraction.input_count,
+                0.4,
+                error,
+                selected,
+                quality,
+            ],
+        )
+    wp.capture_launch(cap.graph)
+    assert extraction.error.numpy()[0] == error.numpy()[0] == 0
+    assert extraction.tetrahedra_count.numpy()[0] == selected.numpy()[0] == 1
+    det, _, radius2 = exact_sphere(points)
+    expected = 3 * float(det) / (exact_area2(points) * np.sqrt(float(radius2)))
+    assert 0 < expected < 1e-25
+    np.testing.assert_allclose(extraction.radius_ratio.numpy()[0], expected, rtol=3e-15)
+    np.testing.assert_allclose(quality.numpy()[0], expected, rtol=3e-15)
 
 
 def test_extraction_rejects_distant_bridge_without_aborting_healthy_material():

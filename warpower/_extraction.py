@@ -62,6 +62,7 @@ def classify(
     )
     bc, ca, ab = wp.cross(b, c), wp.cross(c, a), wp.cross(a, b)
     determinant = wp.dot(a, bc)
+    area2 = wp.length(bc) + wp.length(ca) + wp.length(ab) + wp.length(wp.cross(b - a, c - a))
     center, radius = wp.vec3d(), wp.float64(0.0)
     if uncertain(a, b, c, determinant):
         geometry = exact_geometry(points[ids[0]], points[ids[1]], points[ids[2]], points[ids[3]])
@@ -71,6 +72,7 @@ def classify(
         determinant = wp.float64(geometry.determinant)
         center = wp.vec3d(geometry.center)
         radius = wp.float64(geometry.radius)
+        area2 = wp.float64(geometry.area2)
     else:
         if determinant <= wp.float64(0.0):
             wp.atomic_or(error, 0, 8)
@@ -98,7 +100,6 @@ def classify(
     distances[i] = wp.where(side == 1, -distance, distance)
     keep[i] = int(side == 1 or distance / radius < tolerance)
     volumes[i] = determinant / wp.float64(6.0)
-    area2 = wp.length(bc) + wp.length(ca) + wp.length(ab) + wp.length(wp.cross(b - a, c - a))
     quality[i] = wp.min(wp.float64(1.0), wp.float64(3.0) * determinant / (area2 * radius))
 
 

@@ -163,3 +163,7 @@ The separate [#177](https://github.com/alecjacobson/warpower/issues/177) follow-
 tested [existing segment-tree bounds and stackless traversal](stackless-seed-probe.md).
 Its complete 1k/4k solves are effectively neutral, so production retains these
 flat groups.
+
+The subsequent [temporal sphere-proof probe](temporal-seed-probe.md) also remains
+unadopted: its tested complete-solve gains are below 1%, despite unchanged
+previously certified cells accounting for about a third of cell instances.

@@ -1,0 +1,880 @@
+.........................................FFFFFFFFFFFFFFF.............    [100%]
+=================================== FAILURES ===================================
+___ test_promoted_duplicate_and_restored_owner_receive_fresh_symbolic_proofs ___
+
+    def test_promoted_duplicate_and_restored_owner_receive_fresh_symbolic_proofs():
+        points = np.array(list(product([-1, 1], repeat=3)), np.float32)
+        points = np.vstack([points, points[:1]])
+        moved = points.copy()
+        moved[0, 0] = np.nextafter(moved[0, 0], np.float32(-np.inf))
+>       w = ReuseDelaunayWorkspace(points)
+
+tests/test_proved_completion.py:260: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5227: in load
+    raise e
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5224: in load
+    compiled = self._compile(device, module_dir, output_name, output_arch, options=options)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5083: in _compile
+    raise (e)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5049: in _compile
+    warp._src.build.build_cuda(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def build_cuda(
+        cu_path,
+        arch,
+        output_path,
+        *,
+        pch_dir,
+        config="release",
+        optimization_level=3,
+        verify_fp=False,
+        fast_math=False,
+        fuse_fp=True,
+        lineinfo=False,
+        compile_time_trace=False,
+        ltoirs=None,
+        fatbins=None,
+        arch_suffix="",
+        llvm_cuda=False,
+        use_precompiled_headers=True,
+        extra_include_dirs=(),
+    ) -> None:
+        with open(cu_path, "rb") as src_file:
+            src = src_file.read()
+        cu_path_bytes = cu_path.encode("utf-8")
+        program_name_bytes = os.path.basename(cu_path).encode("utf-8")
+        inc_path = os.path.join(warp_home, "native").encode("utf-8")
+        extra_cuda_include_dirs = _get_extra_include_dir_bytes(extra_include_dirs)
+        num_cuda_include_dirs = len(extra_cuda_include_dirs)
+        cuda_include_dirs = (
+            (ctypes.c_char_p * num_cuda_include_dirs)(*extra_cuda_include_dirs) if num_cuda_include_dirs else None
+        )
+        output_path = output_path.encode("utf-8")
+    
+        if llvm_cuda:
+            err = warp._src.context.runtime.llvm.wp_compile_cuda(
+                src, cu_path_bytes, inc_path, num_cuda_include_dirs, cuda_include_dirs, output_path, False
+            )
+        else:
+            if ltoirs is None:
+                ltoirs = []
+            if fatbins is None:
+                fatbins = []
+    
+            link_data = list(ltoirs) + list(fatbins)
+            num_link = len(link_data)
+            arr_link = (ctypes.c_char_p * num_link)(*link_data)
+            arr_link_sizes = (ctypes.c_size_t * num_link)(*[len(l) for l in link_data])
+            link_input_types = [nvJitLink_input_type["ltoir"]] * len(ltoirs) + [nvJitLink_input_type["fatbin"]] * len(
+                fatbins
+            )
+            arr_link_input_types = (ctypes.c_int * num_link)(*link_input_types)
+            # Per-thread directory shared across module compilations for PCH reuse,
+            # isolated between threads and processes to avoid .pch races.
+            pch_dir_bytes = pch_dir.encode("utf-8") if pch_dir else None
+            arch_suffix_bytes = arch_suffix.encode("utf-8")
+            err = warp._src.context.runtime.core.wp_cuda_compile_program(
+                src,
+                program_name_bytes,
+                arch,
+                arch_suffix_bytes,
+                inc_path,
+                num_cuda_include_dirs,
+                cuda_include_dirs,
+                config == "debug",
+                optimization_level,
+                warp.config.log_level <= LOG_DEBUG,
+                verify_fp,
+                fast_math,
+                fuse_fp,
+                lineinfo,
+                compile_time_trace,
+                use_precompiled_headers,
+                output_path,
+                pch_dir_bytes,
+                num_link,
+                arr_link,
+                arr_link_sizes,
+                arr_link_input_types,
+            )
+        if err != 0:
+>           raise Exception(f"CUDA kernel build failed with error code {err}")
+E           Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/build.py:143: Exception
+----------------------------- Captured stdout call -----------------------------
+Module temporal_seed_queries 113a500 load on device 'cuda:0' took 661.12 ms  (error)
+----------------------------- Captured stderr call -----------------------------
+Warp NVRTC compilation error 6: NVRTC_ERROR_COMPILATION (/builds/omniverse/warp/warp/native/warp.cu:4837)
+"wp_temporal_seed_queries_113a500.cu": creating precompiled header file "/run/openclaw/horde/wp_pch_mx0dsgon/wp_temporal_seed_queries_113a500.pch"
+wp_temporal_seed_queries_113a500.cu(4636): warning #68-D: integer conversion resulted in a change of sign
+      const wp::int32 var_4 = 2246822507;
+                              ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+wp_temporal_seed_queries_113a500.cu(4643): warning #68-D: integer conversion resulted in a change of sign
+      const wp::int32 var_11 = 3266489909;
+                               ^
+
+wp_temporal_seed_queries_113a500.cu(7150): error: no operator "!=" matches these operands
+            operand types are: wp::vec_t<3U, float> != wp::vec_t<3U, float>
+                  var_17 = (var_18 != var_19);
+                                   ^
+wp_temporal_seed_queries_113a500.cu(7150): note #3328-D: built-in operator!=(<promoted arithmetic>, <promoted arithmetic>) does not match because argument #1 does not match parameter
+                  var_17 = (var_18 != var_19);
+                                   ^
+wp_temporal_seed_queries_113a500.cu(7150): note #3328-D: built-in operator!=(<nullptr>, <nullptr>) does not match because argument #1 does not match parameter
+                  var_17 = (var_18 != var_19);
+                                   ^
+
+wp_temporal_seed_queries_113a500.cu(7221): warning #68-D: integer conversion resulted in a change of sign
+          const wp::int32 var_31 = 2654435761;
+                                   ^
+
+wp_temporal_seed_queries_113a500.cu(7829): error: no operator "!=" matches these operands
+            operand types are: wp::vec_t<3U, float> != wp::vec_t<3U, float>
+                  var_60 = (var_61 != var_62);
+                                   ^
+wp_temporal_seed_queries_113a500.cu(7829): note #3328-D: built-in operator!=(<promoted arithmetic>, <promoted arithmetic>) does not match because argument #1 does not match parameter
+                  var_60 = (var_61 != var_62);
+                                   ^
+wp_temporal_seed_queries_113a500.cu(7829): note #3328-D: built-in operator!=(<nullptr>, <nullptr>) does not match because argument #1 does not match parameter
+                  var_60 = (var_61 != var_62);
+                                   ^
+
+wp_temporal_seed_queries_113a500.cu(7887): error: no operator "!=" matches these operands
+            operand types are: wp::vec_t<3U, float> != wp::vec_t<3U, float>
+                  var_93 = (var_94 != var_95);
+                                   ^
+wp_temporal_seed_queries_113a500.cu(7887): note #3328-D: built-in operator!=(<promoted arithmetic>, <promoted arithmetic>) does not match because argument #1 does not match parameter
+                  var_93 = (var_94 != var_95);
+                                   ^
+wp_temporal_seed_queries_113a500.cu(7887): note #3328-D: built-in operator!=(<nullptr>, <nullptr>) does not match because argument #1 does not match parameter
+                  var_93 = (var_94 != var_95);
+                                   ^
+
+wp_temporal_seed_queries_113a500.cu(7953): error: no operator "!=" matches these operands
+            operand types are: wp::vec_t<3U, float> != wp::vec_t<3U, float>
+                  var_130 = (var_131 != var_132);
+                                     ^
+wp_temporal_seed_queries_113a500.cu(7953): note #3328-D: built-in operator!=(<promoted arithmetic>, <promoted arithmetic>) does not match because argument #1 does not match parameter
+                  var_130 = (var_131 != var_132);
+                                     ^
+wp_temporal_seed_queries_113a500.cu(7953): note #3328-D: built-in operator!=(<nullptr>, <nullptr>) does not match because argument #1 does not match parameter
+                  var_130 = (var_131 != var_132);
+                                     ^
+
+wp_temporal_seed_queries_113a500.cu(8027): error: no operator "!=" matches these operands
+            operand types are: wp::vec_t<3U, float> != wp::vec_t<3U, float>
+                  var_171 = (var_172 != var_173);
+                                     ^
+wp_temporal_seed_queries_113a500.cu(8027): note #3328-D: built-in operator!=(<promoted arithmetic>, <promoted arithmetic>) does not match because argument #1 does not match parameter
+                  var_171 = (var_172 != var_173);
+                                     ^
+wp_temporal_seed_queries_113a500.cu(8027): note #3328-D: built-in operator!=(<nullptr>, <nullptr>) does not match because argument #1 does not match parameter
+                  var_171 = (var_172 != var_173);
+                                     ^
+
+5 errors detected in the compilation of "wp_temporal_seed_queries_113a500.cu".
+___ test_changing_device_producer_invalid_phase_and_consumer_in_one_graph[0] ___
+
+rounds = 0
+
+    @pytest.mark.parametrize("rounds", [0, 4])
+    def test_changing_device_producer_invalid_phase_and_consumer_in_one_graph(rounds):
+        rng = np.random.default_rng(930)
+        initial = rng.normal(size=(32, 3)).astype(np.float32)
+        nearby = initial.copy()
+        nearby[5] += np.float32(1e-5)
+        unrelated = rng.normal(size=(32, 3)).astype(np.float32)
+        duplicate = unrelated.copy()
+        duplicate[16:] = duplicate[:16]
+        invalid = initial.copy()
+        invalid[4, 0] = np.nan
+        inputs = np.stack([initial, nearby, unrelated, duplicate, invalid, initial])
+>       w = ReuseDelaunayWorkspace(initial, reuse_max_rounds=rounds)
+
+tests/test_reuse_delaunay.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+___ test_changing_device_producer_invalid_phase_and_consumer_in_one_graph[4] ___
+
+rounds = 4
+
+    @pytest.mark.parametrize("rounds", [0, 4])
+    def test_changing_device_producer_invalid_phase_and_consumer_in_one_graph(rounds):
+        rng = np.random.default_rng(930)
+        initial = rng.normal(size=(32, 3)).astype(np.float32)
+        nearby = initial.copy()
+        nearby[5] += np.float32(1e-5)
+        unrelated = rng.normal(size=(32, 3)).astype(np.float32)
+        duplicate = unrelated.copy()
+        duplicate[16:] = duplicate[:16]
+        invalid = initial.copy()
+        invalid[4, 0] = np.nan
+        inputs = np.stack([initial, nearby, unrelated, duplicate, invalid, initial])
+>       w = ReuseDelaunayWorkspace(initial, reuse_max_rounds=rounds)
+
+tests/test_reuse_delaunay.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+______ test_bad_retained_fragment_cannot_bypass_fresh_construction[count] ______
+
+corruption = 'count'
+
+    @pytest.mark.parametrize("corruption", ["count", "indices", "empty"])
+    def test_bad_retained_fragment_cannot_bypass_fresh_construction(corruption):
+        points = np.random.default_rng(931).normal(size=(24, 3)).astype(np.float32)
+>       w = ReuseDelaunayWorkspace(points).run()
+
+tests/test_reuse_delaunay.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+_____ test_bad_retained_fragment_cannot_bypass_fresh_construction[indices] _____
+
+corruption = 'indices'
+
+    @pytest.mark.parametrize("corruption", ["count", "indices", "empty"])
+    def test_bad_retained_fragment_cannot_bypass_fresh_construction(corruption):
+        points = np.random.default_rng(931).normal(size=(24, 3)).astype(np.float32)
+>       w = ReuseDelaunayWorkspace(points).run()
+
+tests/test_reuse_delaunay.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+______ test_bad_retained_fragment_cannot_bypass_fresh_construction[empty] ______
+
+corruption = 'empty'
+
+    @pytest.mark.parametrize("corruption", ["count", "indices", "empty"])
+    def test_bad_retained_fragment_cannot_bypass_fresh_construction(corruption):
+        points = np.random.default_rng(931).normal(size=(24, 3)).astype(np.float32)
+>       w = ReuseDelaunayWorkspace(points).run()
+
+tests/test_reuse_delaunay.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+__________ test_exhausted_output_capacity_stays_empty_across_replays ___________
+
+    def test_exhausted_output_capacity_stays_empty_across_replays():
+        points = np.random.default_rng(932).normal(size=(24, 3)).astype(np.float32)
+>       w = ReuseDelaunayWorkspace(points, tetrahedra_capacity=1)
+
+tests/test_reuse_delaunay.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+_____________ test_exact_cospherical_duplicates_and_one_ulp_motion _____________
+
+    def test_exact_cospherical_duplicates_and_one_ulp_motion():
+        points = np.array(list(product([-1, 1], repeat=3)), np.float32)
+        points = np.vstack([points, points[:2]])
+>       w = ReuseDelaunayWorkspace(points).run()
+
+tests/test_reuse_delaunay.py:136: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+__ test_large_route_changes_inputs_and_prefixes_without_host_decisions[2050] ___
+
+capacity = 2050
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fc111200cd0>
+
+    @pytest.mark.parametrize("capacity", [2050, 4096])
+    def test_large_route_changes_inputs_and_prefixes_without_host_decisions(capacity, monkeypatch):
+        rng = np.random.default_rng(161)
+        initial = rng.normal(size=(capacity, 3)).astype(np.float32)
+        nearby = initial.copy()
+        nearby[5] += np.float32(1e-5)
+        unrelated = rng.normal(size=(capacity, 3)).astype(np.float32)
+        invalid = initial.copy()
+        invalid[4, 0] = np.nan
+        counts = [capacity, capacity, 512, capacity, capacity + 1, capacity, capacity, capacity]
+        frames = np.stack([initial, nearby, initial, unrelated, initial, initial, invalid, initial])
+        frames[2, 512:] = np.nan
+        device = "cuda:0"
+        source = wp.array(frames, dtype=wp.vec3, device=device)
+        sizes = wp.array(counts, dtype=int, device=device)
+        phase = wp.zeros(1, dtype=int, device=device)
+        points = wp.zeros(capacity, dtype=wp.vec3, device=device)
+        prepared = wp.zeros_like(points)
+        active = wp.zeros(1, dtype=int, device=device)
+>       w = ActiveDelaunayWorkspace(prepared, active_count=active)
+
+tests/test_large_reuse.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_active_delaunay.py:94: in __init__
+    self._full = full_constructor(points, **options)
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+__ test_large_route_changes_inputs_and_prefixes_without_host_decisions[4096] ___
+
+capacity = 4096
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fc111acdc60>
+
+    @pytest.mark.parametrize("capacity", [2050, 4096])
+    def test_large_route_changes_inputs_and_prefixes_without_host_decisions(capacity, monkeypatch):
+        rng = np.random.default_rng(161)
+        initial = rng.normal(size=(capacity, 3)).astype(np.float32)
+        nearby = initial.copy()
+        nearby[5] += np.float32(1e-5)
+        unrelated = rng.normal(size=(capacity, 3)).astype(np.float32)
+        invalid = initial.copy()
+        invalid[4, 0] = np.nan
+        counts = [capacity, capacity, 512, capacity, capacity + 1, capacity, capacity, capacity]
+        frames = np.stack([initial, nearby, initial, unrelated, initial, initial, invalid, initial])
+        frames[2, 512:] = np.nan
+        device = "cuda:0"
+        source = wp.array(frames, dtype=wp.vec3, device=device)
+        sizes = wp.array(counts, dtype=int, device=device)
+        phase = wp.zeros(1, dtype=int, device=device)
+        points = wp.zeros(capacity, dtype=wp.vec3, device=device)
+        prepared = wp.zeros_like(points)
+        active = wp.zeros(1, dtype=int, device=device)
+>       w = ActiveDelaunayWorkspace(prepared, active_count=active)
+
+tests/test_large_reuse.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_active_delaunay.py:94: in __init__
+    self._full = full_constructor(points, **options)
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+________ test_large_unproved_cell_corruption_requires_ordinary_fallback ________
+
+    def test_large_unproved_cell_corruption_requires_ordinary_fallback():
+        points = np.random.default_rng(162).normal(size=(2050, 3)).astype(np.float32)
+>       w = ReuseDelaunayWorkspace(points)
+
+tests/test_large_reuse.py:149: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+____ test_large_output_exhaustion_does_not_retain_or_publish_partial_cells _____
+
+    def test_large_output_exhaustion_does_not_retain_or_publish_partial_cells():
+        points = wp.array(
+            np.random.default_rng(163).normal(size=(2050, 3)).astype(np.float32),
+            dtype=wp.vec3,
+            device="cuda:0",
+        )
+        active = wp.full(1, len(points), dtype=int, device=points.device)
+>       w = ActiveDelaunayWorkspace(points, active_count=active, tetrahedra_capacity=1)
+
+tests/test_large_reuse.py:203: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_active_delaunay.py:94: in __init__
+    self._full = full_constructor(points, **options)
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+_ test_large_full_route_preserves_cospherical_first_duplicate_owners[8.673617379884035e-19] _
+
+scale = 8.673617379884035e-19
+
+    @pytest.mark.parametrize("scale", [2.0**-60, 1.0, 2.0**60])
+    def test_large_full_route_preserves_cospherical_first_duplicate_owners(scale):
+        cloud = np.array(list(product([-1, 1], repeat=3)), np.float32) * np.float32(scale)
+        source = np.tile(cloud[0], (4096, 1))
+        source[: len(cloud)] = cloud
+        points = wp.array(source, dtype=wp.vec3, device="cuda:0")
+        active = wp.full(1, len(points), dtype=int, device=points.device)
+>       w = ActiveDelaunayWorkspace(points, active_count=active)
+
+tests/test_large_reuse.py:220: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_active_delaunay.py:94: in __init__
+    self._full = full_constructor(points, **options)
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+___ test_large_full_route_preserves_cospherical_first_duplicate_owners[1.0] ____
+
+scale = 1.0
+
+    @pytest.mark.parametrize("scale", [2.0**-60, 1.0, 2.0**60])
+    def test_large_full_route_preserves_cospherical_first_duplicate_owners(scale):
+        cloud = np.array(list(product([-1, 1], repeat=3)), np.float32) * np.float32(scale)
+        source = np.tile(cloud[0], (4096, 1))
+        source[: len(cloud)] = cloud
+        points = wp.array(source, dtype=wp.vec3, device="cuda:0")
+        active = wp.full(1, len(points), dtype=int, device=points.device)
+>       w = ActiveDelaunayWorkspace(points, active_count=active)
+
+tests/test_large_reuse.py:220: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_active_delaunay.py:94: in __init__
+    self._full = full_constructor(points, **options)
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+_ test_large_full_route_preserves_cospherical_first_duplicate_owners[1.152921504606847e+18] _
+
+scale = 1.152921504606847e+18
+
+    @pytest.mark.parametrize("scale", [2.0**-60, 1.0, 2.0**60])
+    def test_large_full_route_preserves_cospherical_first_duplicate_owners(scale):
+        cloud = np.array(list(product([-1, 1], repeat=3)), np.float32) * np.float32(scale)
+        source = np.tile(cloud[0], (4096, 1))
+        source[: len(cloud)] = cloud
+        points = wp.array(source, dtype=wp.vec3, device="cuda:0")
+        active = wp.full(1, len(points), dtype=int, device=points.device)
+>       w = ActiveDelaunayWorkspace(points, active_count=active)
+
+tests/test_large_reuse.py:220: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_active_delaunay.py:94: in __init__
+    self._full = full_constructor(points, **options)
+warpower/_reuse_delaunay.py:81: in __init__
+    self._reuse_filter = CertifiedSeeds(
+.work/vtm/temporal_seed_queries.py:225: in __init__
+    self._prepared = TemporalSeedQueries(
+.work/vtm/temporal_seed_queries.py:200: in __init__
+    wp.load_module(module=__name__, device=self.device, block_dim=self.block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5171: in load
+    _raise_recorded_build_error(build_error)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _raise_recorded_build_error(build_error: Exception) -> NoReturn:
+        """Re-raise a build error recorded by an earlier failed build.
+    
+        Raising the recorded exception itself appends the current frames to its
+        ``__traceback__`` every time, so a kernel relaunched in a loop accumulates
+        one traceback per attempt. Building a fresh instance avoids that. If the
+        type cannot be rebuilt from its ``args``, re-raise the original and accept
+        the growing traceback, since reporting the real error matters more.
+        """
+        try:
+            replay = type(build_error)(*build_error.args)
+        except Exception:
+            raise build_error from None
+    
+>       raise replay from None
+E       Exception: CUDA kernel build failed with error code 6
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4183: Exception
+=========================== short test summary info ============================
+FAILED tests/test_proved_completion.py::test_promoted_duplicate_and_restored_owner_receive_fresh_symbolic_proofs
+FAILED tests/test_reuse_delaunay.py::test_changing_device_producer_invalid_phase_and_consumer_in_one_graph[0]
+FAILED tests/test_reuse_delaunay.py::test_changing_device_producer_invalid_phase_and_consumer_in_one_graph[4]
+FAILED tests/test_reuse_delaunay.py::test_bad_retained_fragment_cannot_bypass_fresh_construction[count]
+FAILED tests/test_reuse_delaunay.py::test_bad_retained_fragment_cannot_bypass_fresh_construction[indices]
+FAILED tests/test_reuse_delaunay.py::test_bad_retained_fragment_cannot_bypass_fresh_construction[empty]
+FAILED tests/test_reuse_delaunay.py::test_exhausted_output_capacity_stays_empty_across_replays
+FAILED tests/test_reuse_delaunay.py::test_exact_cospherical_duplicates_and_one_ulp_motion
+FAILED tests/test_large_reuse.py::test_large_route_changes_inputs_and_prefixes_without_host_decisions[2050]
+FAILED tests/test_large_reuse.py::test_large_route_changes_inputs_and_prefixes_without_host_decisions[4096]
+FAILED tests/test_large_reuse.py::test_large_unproved_cell_corruption_requires_ordinary_fallback
+FAILED tests/test_large_reuse.py::test_large_output_exhaustion_does_not_retain_or_publish_partial_cells
+FAILED tests/test_large_reuse.py::test_large_full_route_preserves_cospherical_first_duplicate_owners[8.673617379884035e-19]
+FAILED tests/test_large_reuse.py::test_large_full_route_preserves_cospherical_first_duplicate_owners[1.0]
+FAILED tests/test_large_reuse.py::test_large_full_route_preserves_cospherical_first_duplicate_owners[1.152921504606847e+18]
+15 failed, 54 passed in 13.39s

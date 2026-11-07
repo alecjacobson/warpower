@@ -20,6 +20,11 @@ also let supported faces skip the following candidate search. This preserves the
 certificate requirements and does not reuse proofs across input changes. Those
 reports also contain newer timings and capture audits.
 
+The filter now [shares current sphere geometry across its query lanes](shared-seed-geometry.md).
+It prepares cofactors and conservative boxes once per unique cell on every call;
+the exact/symbolic query semantics and full certificate remain unchanged. Only
+VTM reuse enables the extra fixed buffers and preparation launch.
+
 The fragment is extended for at most four rounds. A successful result must pass
 the existing full certificate: physical orientation, site coverage, paired faces,
 connectivity, convex-hull support and global empty-sphere conditions. If filtering,

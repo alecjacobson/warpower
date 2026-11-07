@@ -318,6 +318,9 @@ It checks them against current original-coordinate sites, completes surviving
 facets with a four-round budget, and requires the full final certificate. The
 ordinary constructor handles any failed attempt. Fresh meshing initialization
 clears the fragment; standalone diagram and Delaunay APIs keep their existing paths.
+The private seed filter [prepares current sphere geometry once per cell](shared-seed-geometry.md)
+and shares it across its query lanes. Every call refreshes these fixed setup
+buffers before querying; ordinary construction retains its original default path.
 Within one unchanged-input completion, [exact cell proofs](completion-proofs.md)
 now follow retained cells through deduplication and compaction. New cells keep
 their full sphere checks; all topology, coverage and hull-support checks remain.

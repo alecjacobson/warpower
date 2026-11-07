@@ -147,8 +147,9 @@ and [source isolation](../results/validation/vtm/integer-isolation.json) retain
 the evidence and scope. Existing diagram paths and README are unchanged;
 filtered-predicate executable code and symbolic tie rules are unchanged.
 
-[Issue #102](https://github.com/alecjacobson/warpower/issues/102) tracks this
-adoption; the complete thin-hand example remains open in
-[issue #93](https://github.com/alecjacobson/warpower/issues/93). Filling certified
-partial meshes instead of repeating whole-cell clipping is tracked in
-[issue #104](https://github.com/alecjacobson/warpower/issues/104).
+[Issue #102](https://github.com/alecjacobson/warpower/issues/102) records this
+adoption. Its deferred complete-example dependency was subsequently met by the
+[published thin hand](examples.md#published-thin-hand-result), so the predicate
+milestone is closed. [Facet completion](facet-completion.md) now fills certified
+partial meshes instead of repeating whole-cell clipping. The
+[quality-matched CPU performance goal](cpu-mesher-baseline.md) remains open.

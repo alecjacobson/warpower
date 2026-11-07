@@ -15,6 +15,9 @@ class SurfaceTree:
     ids: wp.array[int]
     lower: wp.array[wp.vec3]
     upper: wp.array[wp.vec3]
+    left: wp.array[int]
+    right: wp.array[int]
+    escape: wp.array[int]
     leaf_base: int
     n: int
 
@@ -46,6 +49,108 @@ def merge(tree: SurfaceTree, first: int):
     i = first + wp.tid()
     tree.lower[i] = wp.min(tree.lower[2 * i], tree.lower[2 * i + 1])
     tree.upper[i] = wp.max(tree.upper[2 * i], tree.upper[2 * i + 1])
+
+
+@wp.kernel
+def group_keys(sorted_keys: wp.array[wp.uint64], keys: wp.array[wp.uint64]):
+    i = wp.tid()
+    keys[i] = sorted_keys[4 * i]
+
+
+@wp.kernel
+def radix_topology(
+    tree: SurfaceTree,
+    keys: wp.array[wp.uint64],
+    firsts: wp.array[int],
+    ends: wp.array[int],
+    parents: wp.array[int],
+):
+    # Binary radix ranges over four-triangle leaf groups. Equal Morton keys
+    # are disambiguated by their sorted indices in _bvh.prefix.
+    node = wp.tid() + 1
+    n = tree.leaf_base
+    if node >= n:
+        firsts[node] = node - n
+        ends[node] = node - n + 1
+        tree.left[node] = 0
+        tree.right[node] = 0
+        return
+    i = node - 1
+    direction = int(1)
+    if _bvh.prefix(keys, i, i + 1, n) < _bvh.prefix(keys, i, i - 1, n):
+        direction = -1
+    minimum = _bvh.prefix(keys, i, i - direction, n)
+    limit = int(2)
+    while _bvh.prefix(keys, i, i + limit * direction, n) > minimum:
+        limit *= 2
+    length, step = int(0), limit // 2
+    while step >= 1:
+        if _bvh.prefix(keys, i, i + (length + step) * direction, n) > minimum:
+            length += step
+        step //= 2
+    other = i + length * direction
+    first, last = wp.min(i, other), wp.max(i, other)
+    common = _bvh.prefix(keys, first, last, n)
+    # Separate assignments keep the mutable split independent of first in Warp.
+    split = first
+    step = last - first
+    while step > 1:
+        step = (step + 1) // 2
+        candidate = split + step
+        if candidate < last and _bvh.prefix(keys, first, candidate, n) > common:
+            split = candidate
+    left, right = split + 1, split + 2
+    if split == first:
+        left = n + split
+    if split + 1 == last:
+        right = n + split + 1
+    tree.left[node] = left
+    tree.right[node] = right
+    parents[left] = node
+    parents[right] = node
+    firsts[node] = first
+    ends[node] = last + 1
+
+
+@wp.kernel
+def escape_links(tree: SurfaceTree, parents: wp.array[int]):
+    # Next subtree in right-first depth-first order. Zero terminates traversal.
+    node = wp.tid() + 1
+    at = node
+    parent = parents[at]
+    next_node = int(0)
+    while parent > 0:
+        if at == tree.right[parent]:
+            next_node = tree.left[parent]
+            break
+        at = parent
+        parent = parents[at]
+    tree.escape[node] = next_node
+
+
+@wp.kernel
+def radix_bounds(
+    tree: SurfaceTree,
+    segment: SurfaceTree,
+    firsts: wp.array[int],
+    ends: wp.array[int],
+):
+    # Gather exact float32 min/max from a balanced segment tree. Independent
+    # node writes avoid inter-block publication/atomic ordering during refit.
+    node = wp.tid() + 1
+    a, b = firsts[node] + segment.leaf_base, ends[node] + segment.leaf_base
+    lo, hi = wp.vec3(3.4028234e38), wp.vec3(-3.4028234e38)
+    while a < b:
+        if (a & 1) != 0:
+            lo, hi = wp.min(lo, segment.lower[a]), wp.max(hi, segment.upper[a])
+            a += 1
+        if (b & 1) != 0:
+            b -= 1
+            lo, hi = wp.min(lo, segment.lower[b]), wp.max(hi, segment.upper[b])
+        a //= 2
+        b //= 2
+    tree.lower[node] = lo
+    tree.upper[node] = hi
 
 
 @wp.func(inline=True)
@@ -97,7 +202,8 @@ def closest_point(tree: SurfaceTree, p: wp.vec3d, limit: wp.float64):
     result.point = wp.vec3d(0.0)
     result.face = -1
     result.distance2 = limit * limit
-    stack = wp.zeros(shape=64, dtype=int)
+    # 63 Morton bits plus at most 31 index bits bound the radix depth below 96.
+    stack = wp.zeros(shape=128, dtype=int)
     stack[0] = 1
     size = int(1)
     while size > 0:
@@ -119,7 +225,7 @@ def closest_point(tree: SurfaceTree, p: wp.vec3d, limit: wp.float64):
                     result.face = f
                     result.distance2 = distance
         else:
-            left, right = 2 * node, 2 * node + 1
+            left, right = int(tree.left[node]), int(tree.right[node])
             if box_distance(tree, left, p) < box_distance(tree, right, p):
                 left, right = right, left
             stack[size] = left
@@ -153,13 +259,10 @@ def ray_count(tree: SurfaceTree, origin: wp.vec3d, direction: wp.vec3d, excluded
         wp.float64(1.0) / direction[1],
         wp.float64(1.0) / direction[2],
     )
-    stack = wp.zeros(shape=64, dtype=int)
-    stack[0] = 1
-    size = int(1)
-    while size > 0:
-        size -= 1
-        node = stack[size]
+    node = int(1)
+    while node > 0:
         if not ray_box(tree, node, origin, inverse):
+            node = tree.escape[node]
             continue
         if node >= tree.leaf_base:
             first = 4 * (node - tree.leaf_base)
@@ -188,10 +291,9 @@ def ray_count(tree: SurfaceTree, origin: wp.vec3d, direction: wp.vec3d, excluded
                     if u <= tolerance or v <= tolerance or u + v >= wp.float64(1.0) - tolerance:
                         ambiguous = 1
                     crossings += wp.where(det > wp.float64(0.0), 1, -1)
+            node = tree.escape[node]
         else:
-            stack[size] = 2 * node
-            stack[size + 1] = 2 * node + 1
-            size += 2
+            node = tree.right[node]
     return wp.vec2i(crossings, ambiguous)
 
 
@@ -218,7 +320,7 @@ def material_side(tree: SurfaceTree, p: wp.vec3d, excluded_face: int = -1):
 class SurfaceHierarchy:
     def __init__(self, points, indices):
         n = len(indices) // 3
-        self.tree = tree = SurfaceTree()
+        self._segment = tree = SurfaceTree()
         tree.points, tree.indices, tree.n = points, indices, n
         tree.leaf_base = 1 << (((n + 3) // 4 - 1).bit_length())
         device = points.device
@@ -239,12 +341,38 @@ class SurfaceHierarchy:
         wp.launch(_bvh.morton_keys, n, inputs=[centers, bounds, keys, tree.ids], device=device)
         radix_sort_pairs(keys, tree.ids, n, end_bit=63)
         self._setup_buffers = centers, keys, low, high, bounds
+        self.tree = radix = SurfaceTree()
+        radix.points, radix.indices, radix.ids, radix.n = points, indices, tree.ids, n
+        radix.leaf_base = count = (n + 3) // 4
+        radix.lower = wp.empty(2 * count, dtype=wp.vec3, device=device)
+        radix.upper = wp.empty_like(radix.lower)
+        radix.left = wp.empty(2 * count, dtype=int, device=device)
+        radix.right = wp.empty_like(radix.left)
+        radix.escape = wp.empty_like(radix.left)
+        self._firsts = wp.empty_like(radix.left)
+        self._ends = wp.empty_like(radix.left)
+        self._parents = wp.zeros_like(radix.left)
+        self._group_keys = wp.empty(count, dtype=wp.uint64, device=device)
+        wp.launch(group_keys, count, inputs=[keys, self._group_keys], device=device)
+        wp.launch(
+            radix_topology,
+            2 * count - 1,
+            inputs=[radix, self._group_keys, self._firsts, self._ends, self._parents],
+            device=device,
+        )
+        wp.launch(escape_links, 2 * count - 1, inputs=[radix, self._parents], device=device)
         self.refit()
 
     def refit(self):
-        tree = self.tree
+        tree = self._segment
         wp.launch(leaves, tree.leaf_base, inputs=[tree], device=tree.points.device)
         first = tree.leaf_base // 2
         while first:
             wp.launch(merge, first, inputs=[tree, first], device=tree.points.device)
             first //= 2
+        wp.launch(
+            radix_bounds,
+            2 * self.tree.leaf_base - 1,
+            inputs=[self.tree, tree, self._firsts, self._ends],
+            device=tree.points.device,
+        )

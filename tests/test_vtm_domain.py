@@ -245,8 +245,8 @@ def test_guard_failure_restores_core_and_invalidates_output():
     core = VTMWorkspace(domain, data["points"], max_iterations=2)
     original = core._launch
 
-    def launch(kernel, dim, inputs):
-        original(kernel, dim, inputs)
+    def launch(kernel, dim, inputs, **kwargs):
+        original(kernel, dim, inputs, **kwargs)
         if kernel == constrain:
             wp.launch(fail_guard, 1, inputs=[core.error])
 

@@ -131,9 +131,9 @@ class CertifiedSeeds:
             wp.load_module(module="warpower._facet_completion", device=points.device)
             self._prepared = None
             if prepare_geometry:
-                from ._prepared_seeds import PreparedSeedQueries
+                from ._grouped_seeds import GroupedSeedQueries
 
-                self._prepared = PreparedSeedQueries(
+                self._prepared = GroupedSeedQueries(
                     self.points,
                     self.unique,
                     self.unique_count,

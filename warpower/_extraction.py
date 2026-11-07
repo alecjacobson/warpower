@@ -237,6 +237,8 @@ class ExtractionWorkspace:
         source_error=None,
         tolerance=0.4,
         containment_recovery=False,
+        exterior_recovery=False,
+        feature_roles=None,
     ):
         self.domain = domain
         self.points = _contiguous_points(points)
@@ -254,6 +256,12 @@ class ExtractionWorkspace:
             raise ValueError("Extraction tolerance must be finite and in [0, 1)")
         self.tolerance = float(tolerance)
         self.containment_recovery = bool(containment_recovery)
+        self.exterior_recovery = bool(exterior_recovery)
+        self.feature_roles = (
+            None
+            if feature_roles is None
+            else _int_array(feature_roles, self.device, (len(self.points),))
+        )
         with wp.ScopedDevice(self.device):
             self.input_count = (
                 wp.full(1, self.capacity, dtype=int)
@@ -310,6 +318,14 @@ class ExtractionWorkspace:
                 self._repair_additions = wp.zeros(1, dtype=int)
                 self._repair_ready = wp.zeros(1, dtype=int)
                 wp.load_module(module=_containment, device=self.device)
+            self._exterior = None
+            if self.exterior_recovery:
+                from ._exterior_band import ExteriorBandRecovery
+
+                self._exterior = ExteriorBandRecovery(self, self.feature_roles)
+                self.removed_count = self._exterior.removed
+                self.exterior_rounds = self._exterior.rounds
+                self.exterior_rejected = self._exterior.rejected
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as capture:
                 self._record()
@@ -370,6 +386,8 @@ class ExtractionWorkspace:
                 ],
             )
             wp.capture_while(self._repair_ready, self._repair)
+        if self._exterior is not None:
+            self._exterior.run()
         self._launch(
             surface_error,
             len(self.boundary_faces),

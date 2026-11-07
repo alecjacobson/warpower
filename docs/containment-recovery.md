@@ -8,8 +8,10 @@ material subcomplex is nonmanifold.
 `ExtractionWorkspace(..., containment_recovery=True)` enables a bounded device
 repair. The independent extractor defaults to `False`, preserving the paper's
 circumcenter rule exactly. The full `VariationalMeshingWorkspace` enables it by
-default; pass `containment_recovery=False` to use only the original extraction
-and additional-fitting recovery policy. This extension does not change the
+default. Pass both `containment_recovery=False` and `exterior_recovery=False` to
+use only the original extraction and additional-fitting recovery policy. The
+separate [exterior-band policy](exterior-band-recovery.md) can remove tolerance
+cells if containment recovery leaves bad boundary edges. This extension does not change the
 independently callable diagram or Delaunay routines.
 
 ## Which cells can be added

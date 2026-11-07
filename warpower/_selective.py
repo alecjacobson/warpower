@@ -268,7 +268,11 @@ class SelectiveUpdate:
                     core.full_tetrahedra_count,
                     source_error=core.mesh.error,
                     tolerance=tolerance,
-                    containment_recovery=True,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
                 )
             wp.load_module(module=__name__, device=self.device)
             wp.load_module(module="warpower._extraction", device=self.device)

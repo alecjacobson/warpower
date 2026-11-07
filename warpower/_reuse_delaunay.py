@@ -4,8 +4,8 @@ import warp as wp
 
 from . import _validation
 from ._delaunay_recovery import DelaunayWorkspace, reset
-from ._facet_completion import FacetCompletion
 from ._facet_seeds import CertifiedSeeds
+from ._proved_completion import SeededFacetCompletion
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
 
@@ -85,11 +85,8 @@ class ReuseDelaunayWorkspace(DelaunayWorkspace):
                 self._original.tree,
                 block_dim=self._facet_query_block_dim,
             )
-            self._reuse_completion = FacetCompletion(
-                self.points,
-                self._reuse_filter.tetrahedra,
-                self._reuse_filter.tetrahedra_count,
-                self._original.tree,
+            self._reuse_completion = SeededFacetCompletion(
+                self._reuse_filter,
                 max_rounds=reuse_max_rounds,
                 query_block_dim=self._facet_query_block_dim,
             )
@@ -146,7 +143,6 @@ class ReuseDelaunayWorkspace(DelaunayWorkspace):
 
     def _attempt_reuse(self):
         self._refresh_original()
-        self._reuse_filter.run()
         self._reuse_completion.run()
         self._launch(
             completed,

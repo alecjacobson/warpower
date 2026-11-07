@@ -81,8 +81,13 @@ is performed.
 The triangle ordering is established once during setup. A refit updates every
 triangle and hierarchy bound without sorting or allocating. Large deformations
 remain valid but can make this fixed ordering less efficient. Bounds enclose the
-complete triangles, not only their centroids. Traversal uses a fixed 64-entry
-stack; the balanced tree's depth is bounded by the int32 capacity contract.
+complete triangles, not only their centroids. A spatial radix tree groups four
+consecutive Morton-sorted triangles per leaf. Ray, contact and sampler-box
+queries follow precomputed escape links without a stack; near-first closest
+queries use 128 entries. Morton keys and sorted-index tie breaking bound radix
+depth below 96 under the int32 capacity contract. A balanced segment tree supplies
+exact range bounds in one additional refit kernel. See the
+[implementation and measurements](surface-radix.md).
 
 The device `domain.error[0]` is a bit mask:
 

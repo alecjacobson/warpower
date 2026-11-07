@@ -1,0 +1,27 @@
+WARNING: Device-side CUDA Event completion trace is currently enabled.
+         This may increase runtime overhead and the likelihood of false
+         dependencies across CUDA Streams. If you wish to avoid this, please
+         disable the feature with --cuda-event-trace=false.
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+Module warpower._domain 34c6db2 load on device 'cuda:0' took 0.97 ms  (cached)
+Module warpower._surface_bvh 7ad7add load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.70 ms  (cached)
+Module warpower._triangle_contact 9e6db6b load on device 'cuda:0' took 1.43 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.65 ms  (cached)
+Module __main__ 12277da load on device 'cuda:0' took 1.20 ms  (cached)
+Module tests.test_domain 1bba98d load on device 'cuda:0' took 1.26 ms  (cached)
+Capture range started in the application.
+Capture range ended in the application.
+Generating '/run/openclaw/horde/nsys-report-bdb0.qdstrm'
+[1/1] [0%                          ] radix-domain-native.nsys-repProcessing events...
+[1/1] [0%                          ] radix-domain-native.nsys-rep[1/1] [=====32%                    ] radix-domain-native.nsys-rep[1/1] [=======36%                  ] radix-domain-native.nsys-rep[1/1] [========41%                 ] radix-domain-native.nsys-rep[1/1] [==============64%           ] radix-domain-native.nsys-rep[1/1] [=====================87%    ] radix-domain-native.nsys-rep[1/1] [========================100%] radix-domain-native.nsys-rep[1/1] [========================100%] radix-domain-native.nsys-rep
+{"device": "NVIDIA L40", "warp": "1.19.0", "vertices": 4608, "triangles": 9216, "queries": 100000, "surface_samples": 110592, "setup_seconds": 0.18934467434883118, "persistent_workspace_pool_bytes": 14270607, "timings_ms": {"hierarchy_refit": {"samples": [0.03126399964094162, 0.024927999824285507, 0.02409599907696247], "median": 0.024927999824285507, "cpu_quota_delta": {"4": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}, "3": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}}, "cpu_throttled": false}, "queries": {"samples": [26.794815063476562, 27.751359939575195, 27.74835205078125], "median": 27.74835205078125, "cpu_quota_delta": {"4": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}, "3": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}}, "cpu_throttled": false}, "refit_queries_consumer": {"samples": [33.639713287353516, 36.30470275878906, 34.048545837402344], "median": 34.048545837402344, "cpu_quota_delta": {"4": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}, "3": {"cpu_cores": 4.0, "throttled_periods": 0, "throttled_usec": 0}}, "cpu_throttled": false}}, "domain_error": 0, "query_error": 0, "all_queries_valid": true}
+Generated:
+	/home/horde/projects/power-diagram/.work/vtm/radix-domain-native.nsys-rep

@@ -1,0 +1,1002 @@
+{
+  "runtime": "2c9533173010c36c88701e9675f2e7f1cd713a9c",
+  "benchmark": "e08ecb1410528ef457d461cc5fdfba5ec3230ab6",
+  "source_sha256": {
+    "warpower/_sampling.py": "3f4ef9a1ed354dab1a0f54528817683d68af1bc81c1926ec631834d93a8edc70",
+    "warpower/_surface_bvh.py": "8f08d6c1f785e7dfc59554c3cdb44950830b48f6a86fb63f5c308887c8ffdb82",
+    "warpower/_triangle_contact.py": "01ebcddc6501f402157cf4a46738bffb6e8a55932dc11a35d6b79855804388df",
+    "benchmarks/domain.py": "8738c173885f57f82c3168b7b324cca13c35ac70c0d123abbfd96cdbfae34fad",
+    "tests/test_surface_radix.py": "f9a7250a94786794b37aa5b2a989ffa78cb6281c3efeea7025def545a4a86041",
+    "tests/surface_traversal_reference.py": "b27c042e2ffbb4a987350b0818e69fb89143c987bca511d8869afcf873084f3f"
+  },
+  "baseline": "18b18f566ca1bd0c9a4cf5e96caf623ab009f07c",
+  "production_scope": [
+    "warpower/_sampling.py",
+    "warpower/_surface_bvh.py",
+    "warpower/_triangle_contact.py"
+  ],
+  "goal_status": "CPU wide outperformance unmet; standalone paths preserved",
+  "memory_scope": "89 surface/sampling cases and 6 complete mesher cases pass in isolated processes; original combined mesher run interrupted after 2 passed / 1834.97s at device synchronization, no sanitizer errors, retained as INCOMPLETE in issue155; baseline control recorded separately.",
+  "files": [
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/torus1000.json",
+      "bytes": 2902,
+      "sha256": "36020081b9afa6f34ccee068826f8ec06176dbb2e9330befbacf030dcd131810"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/torus1000.log",
+      "bytes": 7078,
+      "sha256": "703c9bcf8dbd577c972c259b7daf3b996392c636c54a4afa42ac9c5268218b6c"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/torus1000.npz",
+      "bytes": 91406,
+      "sha256": "0e70ff5533e79c5c1d587db09e6fade2b2614434ebf961e0ce377d70eb1a60d8"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/torus4096.json",
+      "bytes": 3030,
+      "sha256": "34aadca456c4f2f863ba33baf1315750f6a6410006287d363081c5d39f9fa773"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/torus4096.log",
+      "bytes": 7235,
+      "sha256": "75153237ca3654c54e828ac22e3cf7560554c0d58957df341d655fe1e016b482"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/torus4096.npz",
+      "bytes": 419908,
+      "sha256": "e6f3811206ed622b0f72212db632c8e41d65db5657d37c639b9d5efe4f53f073"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/domain.json",
+      "bytes": 2754,
+      "sha256": "30cfdde9b4b4c39b6cdaa55c727616a7e1852394c8ce3fe70412340db7b8da52"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/domain.log",
+      "bytes": 2830,
+      "sha256": "aae67be1dbb27e2413868e8e35a5a5a765d081b25b4f6eb1ade856a5baa885a0"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/delaunay1000.json",
+      "bytes": 2823,
+      "sha256": "0917c1d98ea209b26b221c1e68619d4db7ae89ae11fbb565115d2b0ebf5e4a5d"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/delaunay1000.log",
+      "bytes": 5113,
+      "sha256": "28b52c68665b768c0dc6b8d1c63eb6927a07a883e5b9d4124df1b8eca28744fb"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/delaunay100000.json",
+      "bytes": 2838,
+      "sha256": "ca2df0348cbe6e8835609a22d28280dec5ce9be2a703690afa48827a435cbad5"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/delaunay100000.log",
+      "bytes": 5062,
+      "sha256": "b4206b80ad2bd06c8949d4f0eacbf45bc749b36596dbfec7b7abd7c3d9a2a568"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/delaunay-grid.json",
+      "bytes": 2828,
+      "sha256": "42b7d32253be62c7e8cb8d8523cdee4556081b639a0ffe94a1c69a9c897e7318"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/delaunay-grid.log",
+      "bytes": 4861,
+      "sha256": "07c297eae1e338f6f62b775157b32157b7e8a81532d1a12a44bac48b5789041f"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/delaunay-fitted-hand.json",
+      "bytes": 2834,
+      "sha256": "6e9fdf7cc42e0907043ce263cd426db816bb9458ca5e0101997849ec8185b94b"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/delaunay-fitted-hand.log",
+      "bytes": 5124,
+      "sha256": "730c04420c24536b0d18df2845bda7f3ae7ada480998d709f437216a992a626a"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/diagram100000.json",
+      "bytes": 2570,
+      "sha256": "004e445c00fe6f7f9a03b7f2555239888e9ab35f2695589b23594ac0b11a9c8d"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/diagram100000.log",
+      "bytes": 3439,
+      "sha256": "9e29ed9b7e7bff925a8e20394a804cad90cfd6cde928e81c44705368095a13c1"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/graded-torus.log",
+      "bytes": 7816,
+      "sha256": "03bcaa29281d1d0b6c16339b39b1ac782e13206646cc8a07b6d093f46214bedd"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/graded-torus/result.json",
+      "bytes": 3641,
+      "sha256": "0bf7754a8804c2bcab088b8b7c7f29c7e38c9cdec0714291b8d1fa79007b8080"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/graded-torus/mesh.npz",
+      "bytes": 123862,
+      "sha256": "48c1736180585790b1543203fca70b48f9ddf845fa72fb5c3ef7a1f5d2e64329"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/graded-torus/mesh.vtu",
+      "bytes": 226524,
+      "sha256": "7c86936969e32def452708cd627b0c1c95f208a751087f448adff8ef9e839857"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/graded-torus/boundary.off",
+      "bytes": 74779,
+      "sha256": "0dc30cc8c41b1efa39860c5e1db274826d6b9bfb0804add919c634140aef4efd"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/thin-hand.log",
+      "bytes": 7717,
+      "sha256": "f0577b12230488b716f0f9d43efeaf0b1dfc05c68f1d918af254c58f984fedc6"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/thin-hand/result.json",
+      "bytes": 3628,
+      "sha256": "09adab55766f46459e2a17bfa0c15b03063b88371bccf091029fc04ecd515fa0"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/thin-hand/mesh.npz",
+      "bytes": 98705,
+      "sha256": "252ebe28791066c32e2bd92cb713dfcb3fb486ac5e3da73eee414e3b3fdee2a4"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/thin-hand/mesh.vtu",
+      "bytes": 177776,
+      "sha256": "d933e06bf3e94f9d78bf5e70a06c6f87c2eb278b1e66fca05073e8a8bf0cfdbd"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/thin-hand/boundary.off",
+      "bytes": 80411,
+      "sha256": "15463ccf361664fc9288ed9f7d31de97a5310e01f0560239e24cedb8ab80f9ab"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/cavity.log",
+      "bytes": 7720,
+      "sha256": "8d6fa03681ff0ac34bc95d2a43cdbca875d9d350b095503922697443b97fc8de"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/cavity/result.json",
+      "bytes": 3631,
+      "sha256": "4975389380852aee05afd14683ac01b803a519f048812221a3572fd9f28f2767"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/cavity/mesh.npz",
+      "bytes": 108517,
+      "sha256": "e83d9846adf3d71de8ed13c65edfe908fe7d06b0d4116c069836c5151a5fd12d"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/cavity/mesh.vtu",
+      "bytes": 224942,
+      "sha256": "82a8f21fc7b3fcccc5eb8774751b39fc1c4a01969a8d5a995d0ed6757571d020"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/cavity/boundary.off",
+      "bytes": 69401,
+      "sha256": "c5a9d95be9097246a8589828bef349e5ce4119cb32423b703b60e5423ca90f5a"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/disconnected.log",
+      "bytes": 7729,
+      "sha256": "4b966b801f94a449b484ec8de024c4567d072846f06cde9fbf332d0aedbb5127"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/disconnected/result.json",
+      "bytes": 3640,
+      "sha256": "13441ca8db882a1e27de20f3b00448803bf3ebe22a347a9822e4d755acfb7ac8"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/disconnected/mesh.npz",
+      "bytes": 110170,
+      "sha256": "72526f85c0203b6418803426650a14a7e8e2fa5c6ac2e53ad7192e868ad74f19"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/disconnected/mesh.vtu",
+      "bytes": 217677,
+      "sha256": "ac41d8b2b4dccdd8180389a6218ffc55842b1a905f748c04754c28fee08df65d"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/disconnected/boundary.off",
+      "bytes": 76359,
+      "sha256": "2aad926037e31fd7ad88687ab53aac192142f078530c475b49a3198f905897d1"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/counterbored-plate.log",
+      "bytes": 7781,
+      "sha256": "819b7f576b46c34851db3091304e7a089a60aedb8dd49963d8ee802250fd6556"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/counterbored-plate/result.json",
+      "bytes": 3700,
+      "sha256": "5cd6d09d4b117dbd89bf09352e96c9e91d227bc37b7e8b344d1ea2295fe321ce"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/counterbored-plate/mesh.npz",
+      "bytes": 109265,
+      "sha256": "ef5ef98a1e365233778a56091066e647999397b7099b0f4b24e193885c9f0c72"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/counterbored-plate/mesh.vtu",
+      "bytes": 210809,
+      "sha256": "60a3984e3cf08628be374b6300493bac642c29d04e5a821d04d32ff4bd100f71"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/counterbored-plate/boundary.off",
+      "bytes": 78252,
+      "sha256": "ab257be08d7feaaa6a259847796aa828f96e603386e7d5fae49ae755df7f3da4"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/armadillo-uniform.log",
+      "bytes": 7893,
+      "sha256": "449c43f8a0ce80f0949b79b46ab3a3a5d1db52cec28b54f2b889c7c1620212cb"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/armadillo-uniform/result.json",
+      "bytes": 3716,
+      "sha256": "4d1cf8fd211ca005ebb6ff01f84c322e3095da16f494282203b138b7fa5f2815"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/armadillo-uniform/mesh.npz",
+      "bytes": 1610876,
+      "sha256": "e232b450c3d8fa386b6d41c233789cc50584a128f697f812c9452112eb5deb07"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/armadillo-uniform/mesh.vtu",
+      "bytes": 1039878,
+      "sha256": "919c849403cda95401b28a8b9b0d69315d10ab0e4c88354345a5a2ed52b14770"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/armadillo-uniform/boundary.off",
+      "bytes": 313604,
+      "sha256": "c3d0ee4ea1b3ec76e448023d85355aa4f62f16af563b52c2dd05e1750268669e"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/armadillo-graded.log",
+      "bytes": 7985,
+      "sha256": "05d5f518a1b0553023d89baed5455a9853deaa82f24a58f73f88652f7bcaf40e"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/armadillo-graded/result.json",
+      "bytes": 3722,
+      "sha256": "fd5a6c96688cf64ec43138c9d06061a8bbc2bf81bc9f720f671844bcffd6d0a5"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/armadillo-graded/mesh.npz",
+      "bytes": 1613014,
+      "sha256": "dc910262b08dab53be2719a7845270723c36e67909aad1d6e6eb13da774c00f8"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/armadillo-graded/mesh.vtu",
+      "bytes": 1051678,
+      "sha256": "088d5b76a83f985f8dad69f5e3653f79dbeff371a92c515831e6d08c26141b37"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/before/armadillo-graded/boundary.off",
+      "bytes": 311406,
+      "sha256": "e128d7b49b2dbb7bf8eda7684d3c7e814d585aa9281a5a338e089f95a2e75955"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/torus1000.json",
+      "bytes": 2897,
+      "sha256": "4e2f801d02b8d8b7150271c28af8f6704b98526d95d835397948ee00616fe505"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/torus1000.log",
+      "bytes": 7131,
+      "sha256": "5c148687209ef948820b46c74cc3b97273678f5363afbce70506852578c86b9e"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/torus1000.npz",
+      "bytes": 91280,
+      "sha256": "c28f0a20e610c8e026bc3e4af8645cd21bd43fd04bf3aa7623506bc6d2c368bb"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/torus4096.json",
+      "bytes": 3032,
+      "sha256": "ae8fdec587c1c1b9b4245867eeefb822d84bea97946a0217fcaa75742b4b51f4"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/torus4096.log",
+      "bytes": 7237,
+      "sha256": "d8ea69add25a806205bf91411825669897363987e0760543079037f23acef920"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/torus4096.npz",
+      "bytes": 420135,
+      "sha256": "a2d4b23f682d1b733c51845311b425e487165ba31928d1e25b438460592ea90c"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/domain.json",
+      "bytes": 2766,
+      "sha256": "c7d2422d5accc43cb6d8e533b396af3d490d321354eb1c4fda4a1ceb14c0c2b5"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/domain.log",
+      "bytes": 2842,
+      "sha256": "740cc79d84b2d351caa64c120b5d5f91ade97765296bd464b1dbb2280287a5d4"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/delaunay1000.json",
+      "bytes": 2820,
+      "sha256": "11becb64d75e8e9ad9805430643c96d831fe55d9c76214110c7058a636e40f87"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/delaunay1000.log",
+      "bytes": 5110,
+      "sha256": "ca3af99667dacba1f48704286860fb8a0147a18a91e04d8a1204bafacb32efa7"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/delaunay100000.json",
+      "bytes": 2832,
+      "sha256": "b431aa3be705276e69e6382eb44952fbb6e2e99903359cedd7fa6f27048d6d52"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/delaunay100000.log",
+      "bytes": 5056,
+      "sha256": "1822ef7c8b8a610cd6e2092beb6aeb298bb6c8f51153af30e5b19d0b5085a3e7"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/delaunay-grid.json",
+      "bytes": 2839,
+      "sha256": "27ae7906c5ae3f1752b0aef4d01f735ecbd2384a06973091651f8f2b9782efe7"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/delaunay-grid.log",
+      "bytes": 4872,
+      "sha256": "4912c999b77b42d102c4db1cf5b7316ad67d108e14b5922c749edefdbbfb7853"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/delaunay-fitted-hand.json",
+      "bytes": 2838,
+      "sha256": "2c64fe10d8901053009305fa71922ff7098b7fe5b91192a28fa882b670113adb"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/delaunay-fitted-hand.log",
+      "bytes": 5128,
+      "sha256": "c664d78662515465fe2af6f09d4942685a60d6b09b6d6144783a5f0bcfb21d6c"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/diagram100000.json",
+      "bytes": 2566,
+      "sha256": "37022ff5b49568283cd056e1456e397829e7073ebd65f6589a5ddfb3d13aef06"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/diagram100000.log",
+      "bytes": 3431,
+      "sha256": "8f662fb7ba9eb629d642ec4bf2d401af86ca07a7e5f5481486dc5549df8579c5"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/graded-torus.log",
+      "bytes": 7819,
+      "sha256": "e68f0ef9560afa6a3c2cd371aa309e8d949e9b4f97736270f9fa7e4932a1ecc1"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/graded-torus/result.json",
+      "bytes": 3644,
+      "sha256": "e0f29b60b77a95f537aa0ce51820f0c50aea8e0f7484cc358e4970d95a524164"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/graded-torus/mesh.npz",
+      "bytes": 123880,
+      "sha256": "06996bf35589a743767b7731c9ac497c7f85c44088875db0affd9b2bdc256837"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/graded-torus/mesh.vtu",
+      "bytes": 226524,
+      "sha256": "8c24084e13ff27215c6cf7ff2b451e7218dffc8e989b503c785b22f789214f13"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/graded-torus/boundary.off",
+      "bytes": 74779,
+      "sha256": "5d28791ab78db3e3cb30c8955b816b66e5bced4fdc9c3121be141dc430866980"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/graded-torus/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "b4e4a8423ba000c2b10a31d535a084d0b11fb83f1fb4f4a395408f6ec733b2be"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/thin-hand.log",
+      "bytes": 7724,
+      "sha256": "492517f23ed704ed550d64e5ed13b80d184f0a5affae7ee1067737cac0b1e511"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/thin-hand/result.json",
+      "bytes": 3635,
+      "sha256": "ff17268e77f54ca46b6b95c46ab1863ef474c6e0a25c7e6ff0a1f4a37cd14b20"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/thin-hand/mesh.npz",
+      "bytes": 98793,
+      "sha256": "87a99aedb6a6327e3f682375ed30b17e79899cb0b7ce40e9065c04af9f7911d8"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/thin-hand/mesh.vtu",
+      "bytes": 177778,
+      "sha256": "7d045d3995709d41e4d975a39a4ee39adb95869921444d7c3264a92edba0ea7f"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/thin-hand/boundary.off",
+      "bytes": 80411,
+      "sha256": "0770752791662c5301a65640d1f29e0c9e73ceacfa0c0a8a3a3e4efc220094f7"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/thin-hand/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/cavity.log",
+      "bytes": 7714,
+      "sha256": "c2e6702774105311e24a7bc40682f86453eb81668f04dcc63f43099e16438db3"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/cavity/result.json",
+      "bytes": 3625,
+      "sha256": "ccfb3b7fe4790f17d8c7216c01a29377a85eac4c8e0b52232522bac59675f151"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/cavity/mesh.npz",
+      "bytes": 108663,
+      "sha256": "b70785a1ca58941ede638bbbc0e4eb4417881c40610899a848db2dc7ffbc205d"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/cavity/mesh.vtu",
+      "bytes": 224942,
+      "sha256": "56c9ffc039d71dbc53cc09b977c3148f1b352f666bbe3e48b3d4090d37918d10"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/cavity/boundary.off",
+      "bytes": 69401,
+      "sha256": "07e3c71da91d5c1f5145eb168c33c1561ab2b342b93f8e4faa2309ff54285f1d"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/cavity/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/disconnected.log",
+      "bytes": 7718,
+      "sha256": "78abfe0f5cc6b4d52909cdd069f83ce5450d10904f562613ae0b811fb17ed0c5"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/disconnected/result.json",
+      "bytes": 3629,
+      "sha256": "bb1cc6b2d052bc1aab41b3312d29c05588f4b4425e1052b08172afeb82d50b26"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/disconnected/mesh.npz",
+      "bytes": 110139,
+      "sha256": "5360a57c929eb33b1f81243a34dcefa3ac17b4d4c41fa50f4c1edc5b459a7118"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/disconnected/mesh.vtu",
+      "bytes": 217677,
+      "sha256": "2accb1b4baaae7ebbcf042d4c3e58d6b3a36fa3c4b28def00e541f539f8d0d0e"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/disconnected/boundary.off",
+      "bytes": 76359,
+      "sha256": "4c36cd065c033fd22fbb13aa1d646664d81087c75e10bc380fa9d6fc9ee8658c"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/disconnected/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/counterbored-plate.log",
+      "bytes": 7788,
+      "sha256": "8d670eaeb8d15ac651243f16fc8efa59a61caf7353cb7f7f0ca23e5824a72bf4"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/counterbored-plate/result.json",
+      "bytes": 3707,
+      "sha256": "4983fdd9fd3aea9493f371df475adf9fc7e1baac5454ee9a819b22d7ddba6b53"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/counterbored-plate/mesh.npz",
+      "bytes": 109346,
+      "sha256": "f4d1e4adb12e3529198fc72f83f5524048a56b1c383a643f85ffd6941b27d178"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/counterbored-plate/mesh.vtu",
+      "bytes": 210809,
+      "sha256": "b0eda4b8c2b889a3839e3e846570d775cd4384e0e756d866f63a88be2ecbf0dd"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/counterbored-plate/boundary.off",
+      "bytes": 78252,
+      "sha256": "408538880dcec7060c2a5b3a89d615fedb07c2798933f0a594378ba9d43c07de"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/counterbored-plate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-uniform.log",
+      "bytes": 7877,
+      "sha256": "a12ad3eea0dbf91ea27234242d1e4034d5e3b332003ab8de0cffe218582d1210"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-uniform/result.json",
+      "bytes": 3700,
+      "sha256": "be3b804c6bdb74562a453292f2ed9cbf68e6afe4c83c6fe686da9409bf91b86d"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-uniform/mesh.npz",
+      "bytes": 1611125,
+      "sha256": "0763a35bd51d1122ebfbd975279b7e327054b89011b9394e826cf35e8557d931"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-uniform/mesh.vtu",
+      "bytes": 1039878,
+      "sha256": "47b6b66e5c7d93905e9418c916c009d785666dc8f990277077798dd105742ae6"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-uniform/boundary.off",
+      "bytes": 313604,
+      "sha256": "1f2dc15bdd665978173e194617d85c02760a4a2d94831ea2771591833b11d405"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-uniform/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-graded.log",
+      "bytes": 7985,
+      "sha256": "ac2f719aa3cea85c248fff2153b8803027877a0052956925b5645c634fed50e4"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-graded/result.json",
+      "bytes": 3722,
+      "sha256": "933bf5014fb71b5cdaa4c6ddc192eb085b5cb57f47c3dab452d436dffc84bb7b"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-graded/mesh.npz",
+      "bytes": 1612920,
+      "sha256": "59ef2be60f4a5adc6fe73f37af60dfe05a9bcf70c62e9931722ffa0f4240f000"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-graded/mesh.vtu",
+      "bytes": 1051678,
+      "sha256": "c5c1a93fb456a5fe8467538a6f50543fa4505ad27dfcb72c3329812035fb9f16"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-graded/boundary.off",
+      "bytes": 311406,
+      "sha256": "8380c973be25e473523b4b6f3311ce9afd456f576384cb04b1931d9fdaefff42"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/timings/after/armadillo-graded/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/thin-hand.log",
+      "bytes": 7385,
+      "sha256": "8be76cb0b2bc3f89c78a9ceae3cbc048d2c7acfb7a21a4f3e4fe52428cb89782"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/thin-hand/result.json",
+      "bytes": 3157,
+      "sha256": "f75962553b93a1530866457bcbb445f7545191e14e2ed56c4ba79606eb6c8b79"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/cavity.log",
+      "bytes": 7650,
+      "sha256": "c2fdc2699b734a12f61f71819d289eff0699f1b560a7428ec6c00c5c836b1749"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/cavity/result.json",
+      "bytes": 3545,
+      "sha256": "364ef4ad9b546864ca80e6076ad326e2227a41d915bd655d0e14b17eb940f13f"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/cavity/mesh.npz",
+      "bytes": 111506,
+      "sha256": "95d6924954ea13e0881b16432ccd5712389f1498a6454fb90e60ac4f04d3195f"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/cavity/mesh.vtu",
+      "bytes": 232894,
+      "sha256": "cbdd833583144f74c2b62e0ea6d964120b1064c8edb85fe82236c70dab526dd3"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/cavity/boundary.off",
+      "bytes": 65977,
+      "sha256": "488c62d15acfc8b0deddb1b15c13b42c9a0ae289aded301a904a4f582d08ab49"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/cavity/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ff612a6b65979ec32d1b76f12e5f97ad1e29ee68b24de063cb58ed9438d4991e"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/disconnected.log",
+      "bytes": 7661,
+      "sha256": "9e0a4a86df15e55eadee61e41d3f139fc86db152772917fce66b541816bf968e"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/disconnected/result.json",
+      "bytes": 3556,
+      "sha256": "b8f2270be88cd00d726dfb817a9840827afbc845625d16b5cd18ee0339773130"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/disconnected/mesh.npz",
+      "bytes": 112742,
+      "sha256": "c14b719b5815977c23eea03f202406d61aa802e6bb85a8a3011bf781c485b272"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/disconnected/mesh.vtu",
+      "bytes": 227830,
+      "sha256": "1e71df59d6082aefa3b9e1281de957c666b2ee2febfa03c83e72089cb100ee5c"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/disconnected/boundary.off",
+      "bytes": 74137,
+      "sha256": "cffd05fc2c99b8bb345d4ac271884c73a2083b415a93244f1e8b9dc73ee24b50"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/coarse/disconnected/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "3648cd18d1e744004b56c5a27f41e7c9108eaf6d225f1c087abf76a522c1d326"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-audit-commands.json",
+      "bytes": 8788,
+      "sha256": "1dd64ce57f2e7644fda66699bbb7941725739337e30a3202a537c042d4975d25"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-audit-initial-commands.json",
+      "bytes": 1489,
+      "sha256": "ab213c958fba4389eee254fd7110086c2768e8ee34aa2890f268600ff42f86c2"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-pilot-commands.json",
+      "bytes": 3540,
+      "sha256": "71a78f853eb2deabab27f3e92fd12bff83b7ef79ac48153622275c643be75809"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-pilot-initial-failure-commands.json",
+      "bytes": 524,
+      "sha256": "7ae87dce799d4db1974a821eb91b843497c7a24d1ecb5b42187c4548ee9875d2"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-remaining-timing-commands.json",
+      "bytes": 14291,
+      "sha256": "bf2c761e3c37f35cf99feb0e14a2a1663c4b799918126a0bee7007a3941c67c8"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-scan-control-commands.json",
+      "bytes": 1623,
+      "sha256": "5c4d5d8ede8e78e56c4f5d2d4c83b30ed595b922c7bb96c8b9b378497d2859b8"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-audit-driver.log",
+      "bytes": 74,
+      "sha256": "6eb83ccba3d291212bfa79cb712b373417db26394498ab40becfd1431f141b59"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-audit-initial-driver.log",
+      "bytes": 74,
+      "sha256": "6eb83ccba3d291212bfa79cb712b373417db26394498ab40becfd1431f141b59"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-audit-resumed-driver.log",
+      "bytes": 367,
+      "sha256": "e1b597d99b8f314b86fc0a59cdbeef357a6f149591d236b2160191eba9fd5c37"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-baseline-memory-driver.log",
+      "bytes": 983,
+      "sha256": "a4349b1226d9b8d070fe14175c8f1ffc31e4aed18e80f5b94d09de0a0f75f3da"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-pilot-driver.log",
+      "bytes": 156,
+      "sha256": "50267616c504821da742666178c735987797200894b38ffa3be32d468a3cedab"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-pilot-initial-failure-driver.log",
+      "bytes": 20,
+      "sha256": "e336835d7021658a50c2c008f16a492e418497baba856e314a5964758bae4454"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-remaining-driver.log",
+      "bytes": 713,
+      "sha256": "b061c1d43195b50356a7c5175881a216ec8041d934215ca31adfc48cff794324"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/commands/radix-scan-control-driver.log",
+      "bytes": 65,
+      "sha256": "7b88afe2ce3ecee87866930e2efd53d17c8cd33cda7fe8f6a5407bb69f53a5d6"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/publish-radix.py",
+      "bytes": 6108,
+      "sha256": "04b7beb1fa841a095b49040472c6d5ef489ce121e7c45331edb60ba55c4a5e5c"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/run-radix-pilot.py",
+      "bytes": 1583,
+      "sha256": "1046d3a8f19a82b10953b0db45df8f3aacec558c7c9ca77d478cbb61144bac07"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/run-radix-timings.py",
+      "bytes": 2643,
+      "sha256": "ce254e0e2489dee1ecccb5888f8d4e50dac38ab2892c517b753fd01014ead379"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/run-radix-scan-controls.py",
+      "bytes": 1253,
+      "sha256": "3dc4b2f133a541d64cea1d87eebe2ce955dd0fb4063990a180f01b45c96a8ea1"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/check-radix-results.py",
+      "bytes": 7270,
+      "sha256": "bc50a816b5f927cb4af337d823fcc4cf437779f7f407f0a06f7ac93f19d7da60"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/run-radix-audits.py",
+      "bytes": 2828,
+      "sha256": "be0ba34ddecfcf9faaee492c3e687b750e023515160066842f02c39d31d2f1ee"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/resume-radix-audits.py",
+      "bytes": 3612,
+      "sha256": "d60ff799d401afa98060853da701e1e0566600264bcce92b61c054d9425b8c80"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/run-radix-baseline-memory-control.py",
+      "bytes": 1517,
+      "sha256": "3729834a34c965f151a58e4c8cfadb87661a88cf81daa757351c52ddc19a87d9"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-memcheck-isolated.py",
+      "bytes": 404,
+      "sha256": "1eb254442a22a41bb76e52855dcdf6ae11c82297e79938744c6589a135c312e0"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-domain-lifetime.py",
+      "bytes": 136,
+      "sha256": "ca2ccaf17d7ad812c332c6c319e17180e25c11f85f52bb5e50a9325e4dabee0f"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-independent.json",
+      "bytes": 54649,
+      "sha256": "c7ebcf22343f9432dff734865dc3e74ff121221e223c3e35b47c934486ea59eb"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-original-torus-comparison.json",
+      "bytes": 421,
+      "sha256": "ed274876ae37a9b4b0d4aa5c529e425fd2e3e8949f2b19a5b7bb3352a07f326d"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-arithmetic-scope.json",
+      "bytes": 330,
+      "sha256": "36164d99f7066a97339310feec82bdf75329700508fd707fdd1a0b429d85ac62"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-independent.log",
+      "bytes": 1065,
+      "sha256": "f7da5deddfe4a8df93297f9aad08822c3f480d201d840694c7e36de91fa7209b"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-full-native-kernel-summary.json",
+      "bytes": 29270,
+      "sha256": "2c337bb2991782f639e2975d927ac4f6b95b9290d4a3b8f0e0331528f9a10fea"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-domain-focused-tests.log",
+      "bytes": 191,
+      "sha256": "2682d9ac06776895b776ca633aca51ed24ef8c6bd32cec4c25d762cedfb5d0ad"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-full-suite.log",
+      "bytes": 752,
+      "sha256": "5075f646aa623f388e8ff0757cd3e6698c7295152ac246f096dcd694cfd475c6"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-memcheck-surface.log",
+      "bytes": 715,
+      "sha256": "14bb1d02e67ee549d133efd041224fa2ea545039bab4ce4d4e6cec18807a7903"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-domain-lifetime.log",
+      "bytes": 2306,
+      "sha256": "5f478d6abca9ff6c255170840fe01e828013e278bd83cacd4f5bd7c5a3e03cd5"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-domain-lifetime.json",
+      "bytes": 1740,
+      "sha256": "04ddfbf9cef173fc00a8326cc52902fa758799a22603b3e977ea85503e1673e5"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-mesher-loop.log",
+      "bytes": 4671,
+      "sha256": "04733bb558d041c78c629e648082592fb6e260a3aeaef55d9b4e274ed516bde5"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-mesher-loop.json",
+      "bytes": 596,
+      "sha256": "aa18babd356032dbd5d73aa24f396f17346ee884a90b2ae241796a3cf8c68c1f"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-after-warm-setup.json",
+      "bytes": 2741,
+      "sha256": "58b635ae80ac1e568a38ac9196abea68b4af4d44a0fd597ec26e6839b0d9dbd3"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-after-warm-setup.log",
+      "bytes": 6932,
+      "sha256": "7e208d1f91faf1f65689651b0045c4eaa76796fe440e8d8f99b3a73416c19e9e"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-memcheck-mesher-cube.log",
+      "bytes": 4314,
+      "sha256": "22e8c50b16da760f92ab2dc010020b1ebf8b789579423094a74de23999a8ff65"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-memcheck-mesher-torus.log",
+      "bytes": 4927,
+      "sha256": "921ff2027f871e21beb41492807f625ef7108b81751bda06c8b8880a7fef9315"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-memcheck-mesher-cavity.log",
+      "bytes": 4928,
+      "sha256": "c0c65def4fdad48bc37566384caec8cb7c640a8afedd47d9f97d908a053e93ef"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-memcheck-mesher-disconnected.log",
+      "bytes": 4927,
+      "sha256": "4a55b5fe840faa4459c9b9f219a0dc2e3fa690c85d4717f6bdf384dc3faaa5c1"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-memcheck-mesher-producer.log",
+      "bytes": 26727,
+      "sha256": "1787ddda7e98ee3e6345103d382da35b098aeb397d53efc2e7a2ef7f8eb67626"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-memcheck-mesher-outer-loop.log",
+      "bytes": 4065,
+      "sha256": "bb0287ae0fb837227fa476f9b6f81718d5ad1652005ade5d831602904e61be3f"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-baseline-mixed-memory.log",
+      "bytes": 9729,
+      "sha256": "ed4b0d826114dce4e55d1b7b5801fe9c9136a5b2a6627f49521b48e9033e5adf"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/radix-baseline-mixed-memory-command.json",
+      "bytes": 1089,
+      "sha256": "0879a0ddb0f0907d00774da85216db19bddd7b3f85ab3d56eab88419e398659c"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/full-native.json",
+      "bytes": 2844,
+      "sha256": "a066ccc235a7f023cd71ee4db98519f2e074efe0d8b76864700742ded284b246"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/full-native.log",
+      "bytes": 9344,
+      "sha256": "7c98364eb0be436eabce8c0aa9a06de4164873992715b1b44aee563935f93d33"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/full-native-export.log",
+      "bytes": 8101,
+      "sha256": "c49797947d1e87cb72a2807a7e81e6071b2214f56c3c2d29c38b2cc4920000ef"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/full-native-audit.json",
+      "bytes": 978,
+      "sha256": "68582444962b058d398682b3af36254dffcc8be7312e626ea3d980cf0cea5745"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/full-native-audit.log",
+      "bytes": 978,
+      "sha256": "68582444962b058d398682b3af36254dffcc8be7312e626ea3d980cf0cea5745"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/full-native.dot.gz",
+      "bytes": 522945,
+      "sha256": "b01a927b29970aec553bf705c049b72d5ec021b48d2a9ea7ca20a431a2f47f4c"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/full-native.sqlite.gz",
+      "bytes": 2764122,
+      "sha256": "ca933223eec6e10803cc10c9549c034db8f2175cbdf533431335a214b768add4"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/domain-native.json",
+      "bytes": 1758,
+      "sha256": "c75f50d3e88acf82a4360e432ccfd411d075492b7462b17af024cfac22f9134f"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/domain-native.log",
+      "bytes": 3243,
+      "sha256": "452a44863a0e23e348a605673bd7813385e8b85037113caf025133b57bbd5e8b"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/domain-native-export.log",
+      "bytes": 8101,
+      "sha256": "9f244abff7d8535abd611f2b7c71f7d92e89897cc4e5520865965e22f0514072"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/domain-native-audit.json",
+      "bytes": 923,
+      "sha256": "e12dd10390dd19a03774c01d9e7f981a10778c0d88758fdace390f067d89ef0a"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/domain-native-audit.log",
+      "bytes": 923,
+      "sha256": "e12dd10390dd19a03774c01d9e7f981a10778c0d88758fdace390f067d89ef0a"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/domain-native.dot.gz",
+      "bytes": 1796,
+      "sha256": "be10f2ad6514bb1be8c5aad1558643df3203de6cba28064888b6d06ce8f37bad"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/native/domain-native.sqlite.gz",
+      "bytes": 56383,
+      "sha256": "afc513300d8c76917d4d1730ae7621f8549406216dfc6abb7dd30615187cdf83"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/initial-failures/radix-focused-tests.log",
+      "bytes": 146299,
+      "sha256": "00497e327726ba55f5eb67c219e3759306ee213e135143c72692257372bdf379"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/initial-failures/radix-focused-fixed-tests.log",
+      "bytes": 10905,
+      "sha256": "c1d77950d19ef7a3cf139a634457bf06b52dd7bb39a4fbb11d61d36928e41664"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/initial-failures/radix-focused-fixed2-tests.log",
+      "bytes": 4072,
+      "sha256": "a8e623c64c64597d8a8b76798c80f90566b4e136d2f9b42ab7da262629a7c761"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/initial-failures/radix-focused-distance-bits.log",
+      "bytes": 4057,
+      "sha256": "cbacbcb019c71010ced96a756b54396dd740b76b2328a220e98a931a570026f8"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/initial-failures/radix-ranges-tests.log",
+      "bytes": 3889,
+      "sha256": "5568828bb04028df01d0d2b30e0f6d03e9648e00c0c32abc8efb57385ab6b17c"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/initial-failures/radix-closest-debug.json",
+      "bytes": 5365,
+      "sha256": "63d597caa98ff8ea2670475516e71d0407edbe628bd11069941e61c486fd9db4"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/initial-failures/radix-domain-uninitialized-assert.log",
+      "bytes": 1176,
+      "sha256": "fee4363b1daa2b5892c9d978161db4bd10e401535a28820ed19a92d591ce1ba9"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/initial-failures/radix-memcheck-mesher-interrupted.log",
+      "bytes": 878,
+      "sha256": "b865076785b949921435f0801f961044029e2b79ee1149586fc7d01c9bdd9497"
+    },
+    {
+      "path": "results/validation/vtm/surface-radix/initial-failures/radix-memcheck-mesher-stack.log",
+      "bytes": 261,
+      "sha256": "734ba920970bc38353a56fc79116cc8fd0cc21c5e1334e0d2b71d501ae53bc32"
+    }
+  ]
+}

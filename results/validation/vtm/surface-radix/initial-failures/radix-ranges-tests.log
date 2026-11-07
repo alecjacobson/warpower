@@ -1,0 +1,83 @@
+...F
+=================================== FAILURES ===================================
+____ test_radix_ranges_escape_and_exact_bounds_after_deformation[False-17] _____
+
+count = 17, equal_keys = False
+
+    @pytest.mark.parametrize("count", [1, 4, 5, 17, 128, 257])
+    @pytest.mark.parametrize("equal_keys", [False, True])
+    def test_radix_ranges_escape_and_exact_bounds_after_deformation(count, equal_keys):
+        rng = np.random.default_rng(712)
+        points = rng.normal(size=(count * 3, 3)).astype(np.float32)
+        faces = np.arange(count * 3, dtype=np.int32).reshape(-1, 3)
+        if equal_keys:
+            # All centers coincide, requiring sorted-index prefix tie breaking.
+            points[:] = np.tile(np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0]], np.float32), (count, 1))
+        device_points = wp.array(points, dtype=wp.vec3)
+        hierarchy = SurfaceHierarchy(device_points, wp.array(faces.ravel(), dtype=int))
+>       verify_topology_and_bounds(hierarchy, points, faces)
+
+tests/test_surface_radix.py:221: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hierarchy = <warpower._surface_bvh.SurfaceHierarchy object at 0x7f4f20d6aef0>
+points = array([[-1.7596987 , -0.06060586,  0.10131665],
+       [ 0.37829566,  1.61729   , -0.8944889 ],
+       [ 0.40270317,  ...3439 ],
+       [ 0.8235787 ,  0.53531086,  0.01309676],
+       [-0.6454164 ,  0.90686494,  0.18150839]], dtype=float32)
+faces = array([[ 0,  1,  2],
+       [ 3,  4,  5],
+       [ 6,  7,  8],
+       [ 9, 10, 11],
+       [12, 13, 14],
+       [15, 1...
+       [36, 37, 38],
+       [39, 40, 41],
+       [42, 43, 44],
+       [45, 46, 47],
+       [48, 49, 50]], dtype=int32)
+
+    def verify_topology_and_bounds(hierarchy, points, faces):
+        tree = hierarchy.tree
+        ids = tree.ids.numpy()[: len(faces)]
+        np.testing.assert_array_equal(np.sort(ids), np.arange(len(faces)))
+        left, right, escape = tree.left.numpy(), tree.right.numpy(), tree.escape.numpy()
+        lower, upper = tree.lower.numpy(), tree.upper.numpy()
+        visited = set()
+        preorder = []
+        expected_escape = {}
+    
+        def visit(node, following, depth):
+            assert node not in visited and 1 <= node < 2 * tree.leaf_base
+            assert depth < 96
+            visited.add(node)
+            preorder.append(node)
+            expected_escape[node] = following
+            if node >= tree.leaf_base:
+                group = node - tree.leaf_base
+                descendant_faces = list(ids[4 * group : min(4 * group + 4, len(faces))])
+                assert left[node] == right[node] == 0
+            else:
+                # The right-first links must skip whole subtrees, including the root.
+                descendant_faces = visit(right[node], left[node], depth + 1)
+                descendant_faces += visit(left[node], following, depth + 1)
+            vertices = points[faces[descendant_faces]].reshape(-1, 3)
+            np.testing.assert_array_equal(lower[node], vertices.min(axis=0))
+            np.testing.assert_array_equal(upper[node], vertices.max(axis=0))
+            return descendant_faces
+    
+        descendants = visit(1, 0, 0)
+>       np.testing.assert_array_equal(np.sort(descendants), np.arange(len(faces)))
+E       AssertionError: 
+E       Arrays are not equal
+E       
+E       (shapes (9,), (17,) mismatch)
+E        ACTUAL: array([ 1,  2,  5,  7,  8, 11, 13, 14, 15], dtype=int32)
+E        DESIRED: array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16])
+
+tests/test_surface_radix.py:198: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_surface_radix.py::test_radix_ranges_escape_and_exact_bounds_after_deformation[False-17]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 3 passed, 37 deselected in 0.96s

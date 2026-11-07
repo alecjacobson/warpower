@@ -1,0 +1,203 @@
+F
+=================================== FAILURES ===================================
+____ test_radix_queries_match_heap_and_independent_geometry[False-cube--60] ____
+
+case = 'cube', exponent = -60, fuse_fp = False
+
+    @pytest.mark.parametrize("exponent", [-60, 0, 60])
+    @pytest.mark.parametrize("case", ["cube", "torus", "plate", "thin-hand", "cavity", "disconnected"])
+    @pytest.mark.parametrize("fuse_fp", [False, True])
+    def test_radix_queries_match_heap_and_independent_geometry(case, exponent, fuse_fp):
+        wp.set_module_options({"fuse_fp": fuse_fp}, module=__name__)
+        p, f = (
+            cube()
+            if case == "cube"
+            else torus(16, 8)
+            if case == "torus"
+            else counterbored_plate(16)
+            if case == "plate"
+            else surface(case)
+        )
+        p = (p * np.float32(2.0**exponent)).astype(np.float32)
+>       domain = SurfaceDomain(p, f, surface_subdivisions=1, crease_subdivisions=1)
+
+tests/test_surface_radix.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+warpower/_domain.py:468: in __init__
+    wp.launch(
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12041: in launch
+    module_exec = kernel.module.load(device, block_dim)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5227: in load
+    raise e
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5224: in load
+    compiled = self._compile(device, module_dir, output_name, output_arch, options=options)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4972: in _compile
+    source_str, source_code_ext, meta, ltoir_values, fatbin_values = self._run_codegen(options, is_cpu)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:1907: in locked_call
+    return func(*args, **kwargs)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:4833: in _run_codegen
+    builder = ModuleBuilder(
+.venv/lib/python3.10/site-packages/warp/_src/context.py:3501: in __init__
+    self.build_kernel(kernel)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:3620: in build_kernel
+    kernel.adj.build(self)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:1907: in locked_call
+    return func(*args, **kwargs)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:2415: in build
+    raise type(original_exc)(*new_args).with_traceback(original_exc.__traceback__) from None
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:2395: in build
+    adj.eval(adj.tree.body[0])
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:3632: in emit_FunctionDef
+    adj.eval(f)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:5646: in emit_Assign
+    rhs = adj.eval(node.value)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:4832: in emit_Call
+    out = adj.add_call(
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:3034: in add_call
+    adj.builder.build_function(func)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:3632: in build_function
+    func.build(self)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:820: in build
+    self.adj.build(builder, default_builder_options)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:1907: in locked_call
+    return func(*args, **kwargs)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:2415: in build
+    raise type(original_exc)(*new_args).with_traceback(original_exc.__traceback__) from None
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:2395: in build
+    adj.eval(adj.tree.body[0])
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:3632: in emit_FunctionDef
+    adj.eval(f)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:4173: in emit_While
+    adj.eval(s)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:3703: in emit_If
+    adj.eval(stmt)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:3680: in emit_If
+    adj.eval(stmt)
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:6693: in eval
+    return emit_node(adj, node)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def emit_Assign(adj, node):
+        if len(node.targets) != 1:
+            raise WarpCodegenError("Assigning the same value to multiple variables is not supported")
+    
+        # Check if the rhs corresponds to an unsupported construct.
+        # Tuples are supported in the context of assigning multiple variables
+        # at once, but not for simple assignments like `x = (1, 2, 3)`.
+        # Therefore, we need to catch this specific case here instead of
+        # more generally in `adj.eval()`.
+        if isinstance(node.value, ast.List):
+            raise WarpCodegenError(
+                "List constructs are not supported in kernels. Use vectors like `wp.vec3()` for small fixed-size collections, or `wp.zeros(shape=N, dtype=...)` for stack-allocated arrays."
+            )
+    
+        lhs = node.targets[0]
+    
+        if isinstance(lhs, ast.Tuple) and isinstance(node.value, ast.Call):
+            # record the expected number of outputs on the node
+            # we do this so we can decide which function to
+            # call based on the number of expected outputs
+            node.value.expects = len(lhs.elts)
+    
+        # evaluate rhs
+        if isinstance(lhs, ast.Tuple) and isinstance(node.value, ast.Tuple):
+            rhs = [adj.eval(v) for v in node.value.elts]
+        else:
+            rhs = adj.eval(node.value)
+    
+        # handle the case where we are assigning multiple output variables
+        if isinstance(lhs, ast.Tuple):
+            subtype = getattr(rhs, "type", None)
+    
+            if isinstance(subtype, warp._src.types.tuple_t):
+                if len(rhs.type.types) != len(lhs.elts):
+                    raise WarpCodegenError(
+                        f"Invalid number of values to unpack (expected {len(lhs.elts)}, got {len(rhs.type.types)})."
+                    )
+                rhs = tuple(adj.add_builtin_call("extract", (rhs, adj.add_constant(i))) for i in range(len(lhs.elts)))
+    
+            names = []
+            for v in lhs.elts:
+                if isinstance(v, ast.Name):
+                    names.append(v.id)
+                else:
+                    raise WarpCodegenError(
+                        "Multiple return functions can only assign to simple variables, e.g.: x, y = func()"
+                    )
+    
+            if len(names) != len(rhs):
+                raise WarpCodegenError(
+                    f"Multiple return functions need to receive all their output values, incorrect number of values to unpack (expected {len(rhs)}, got {len(names)})"
+                )
+    
+            if any(name in adj.ref_params for name in names):
+                # Snapshot reference-valued RHS entries before binding or
+                # storing any ref target so tuple assignment keeps its
+                # simultaneous semantics, e.g. `old, x = x, 2.0`.
+                out = tuple(
+                    adj.load(value) if isinstance(value, Var) and is_reference(value.type) else value for value in rhs
+                )
+            else:
+                out = rhs
+    
+            for name, rhs in zip(names, out, strict=True):
+                # A tuple-unpack target that is a wp.ref[T] parameter mutates
+                # the referenced storage in place, like a scalar `name = rhs`
+                # assignment, rather than rebinding the symbol to a value of a
+                # different type (the parameter's type is Reference(T), not T).
+                if name in adj.ref_params:
+                    adj.store_ref_param_value(name, rhs)
+                    continue
+    
+                if name in adj.symbols:
+                    if isinstance(adj.symbols[name], warp._src.context.GradWrapper):
+                        raise WarpCodegenError(
+                            f"Cannot reassign local '{name}' after binding it to wp.grad(...). Warp treats "
+                            "wp.grad(...) results as static function handles; use a different local variable "
+                            "for the new value."
+                        )
+    
+                    # Sibling query-kind types may rebind over one another: a later
+                    # branch merge decays the symbol to their shared erased parent.
+                    if not types_equal(rhs.type, adj.symbols[name].type) and not type_erasure_join(
+                        rhs.type, adj.symbols[name].type
+                    ):
+>                       raise WarpCodegenTypeError(
+                            f"Error, assigning to existing symbol {name} ({adj.symbols[name].type}) with different type ({rhs.type})"
+                        )
+E                       warp._src.codegen.WarpCodegenTypeError: Error while parsing function "domain_queries" at /home/horde/projects/power-diagram/warpower/_domain.py:338:
+E                           query = closest_point(tree, p, wp.float64(max_distance))
+E                       ;Error while parsing function "closest_point" at /home/horde/projects/power-diagram/warpower/_surface_bvh.py:228:
+E                                       left, right = right, left
+E                       ;Error, assigning to existing symbol left (wp.ref[int32]) with different type (wp.ref[int32])
+
+.venv/lib/python3.10/site-packages/warp/_src/codegen.py:5705: WarpCodegenTypeError
+----------------------------- Captured stdout call -----------------------------
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+Module warpower._domain 6f0b2f8 load on device 'cuda:0' took 96.56 ms  (error)
+----------------------------- Captured stderr call -----------------------------
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+=========================== short test summary info ============================
+FAILED tests/test_surface_radix.py::test_radix_queries_match_heap_and_independent_geometry[False-cube--60]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed in 1.39s

@@ -1,0 +1,126 @@
+[
+  {
+    "phase": "before",
+    "name": "domain",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/benchmarks/domain.py",
+      "--repeats",
+      "15",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/radix-before-domain.json"
+    ],
+    "cwd": "/home/horde/projects/power-diagram/.work/vtm/extraction-geometry",
+    "seconds": 3.398998975753784,
+    "exit_code": 0,
+    "source": "18b18f566ca1bd0c9a4cf5e96caf623ab009f07c"
+  },
+  {
+    "phase": "after",
+    "name": "domain",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/benchmarks/domain.py",
+      "--repeats",
+      "15",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/radix-after-domain.json"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "seconds": 2.35208797454834,
+    "exit_code": 0,
+    "source": "e08ecb1410528ef457d461cc5fdfba5ec3230ab6"
+  },
+  {
+    "phase": "before",
+    "name": "torus1000",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--repeats",
+      "5",
+      "--save-mesh",
+      "/home/horde/projects/power-diagram/.work/vtm/radix-before-torus1000.npz",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/radix-before-torus1000.json"
+    ],
+    "cwd": "/home/horde/projects/power-diagram/.work/vtm/extraction-geometry",
+    "seconds": 10.699665307998657,
+    "exit_code": 0,
+    "source": "18b18f566ca1bd0c9a4cf5e96caf623ab009f07c"
+  },
+  {
+    "phase": "after",
+    "name": "torus1000",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--repeats",
+      "5",
+      "--save-mesh",
+      "/home/horde/projects/power-diagram/.work/vtm/radix-after-torus1000.npz",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/radix-after-torus1000.json"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "seconds": 146.2729115486145,
+    "exit_code": 0,
+    "source": "e08ecb1410528ef457d461cc5fdfba5ec3230ab6"
+  },
+  {
+    "phase": "before",
+    "name": "counterbored-plate",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "examples.vtm_gallery",
+      "--case",
+      "counterbored-plate",
+      "--n",
+      "1000",
+      "--subdivisions",
+      "16",
+      "--crease-subdivisions",
+      "16",
+      "--repeats",
+      "5",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/radix-before-counterbored-plate"
+    ],
+    "cwd": "/home/horde/projects/power-diagram/.work/vtm/extraction-geometry",
+    "seconds": 12.733653545379639,
+    "exit_code": 0,
+    "source": "18b18f566ca1bd0c9a4cf5e96caf623ab009f07c"
+  },
+  {
+    "phase": "after",
+    "name": "counterbored-plate",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "examples.vtm_gallery",
+      "--case",
+      "counterbored-plate",
+      "--n",
+      "1000",
+      "--subdivisions",
+      "16",
+      "--crease-subdivisions",
+      "16",
+      "--repeats",
+      "5",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/radix-after-counterbored-plate"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "seconds": 12.477813959121704,
+    "exit_code": 0,
+    "source": "e08ecb1410528ef457d461cc5fdfba5ec3230ab6"
+  }
+]

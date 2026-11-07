@@ -217,6 +217,10 @@ boundary geometry. It refits triangle bounds in pure Warp and provides float64
 closest-point and oriented-ray queries, manifold/intersection validation, and
 surface/crease/corner quadrature. `DomainQueryWorkspace` composes these queries
 with upstream and downstream device kernels. See [domain API](domains.md).
+Its [spatial radix topology](surface-radix.md) groups four Morton-sorted triangles
+per leaf; device refits gather exact range bounds from a segment tree. Precomputed
+escape links support stackless ray, contact and sampler-box traversal while
+closest queries retain near-first child ordering.
 
 The independent [`BoundaryWorkspace`](boundary.md) rebuilds a site hierarchy,
 assigns surface/crease quadrature, and accumulates weighted centroid targets.

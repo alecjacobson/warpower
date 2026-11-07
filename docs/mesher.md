@@ -209,7 +209,9 @@ usage and CPU quota counters. Setup timing depends on the compilation cache;
 the reported pool delta is not a complete device/process memory peak.
 `--reference` independently checks full-hull Delaunay cells and material topology
 outside the timed region. `--initial N --n N` compares a fixed initial budget to
-progressive growth. Compare quality and fit as well as time.
+progressive growth. Compare quality and fit as well as time. The measured
+[progressive/fixed-site schedule comparison](quality-frontier.md) includes
+quality distributions, fit, alternate seeds and domains; it does not change defaults.
 
 `benchmarks.mesh_quality` performs independent NumPy circumcenter/quality solves,
 face/edge incidence checks, dihedral-angle measurements, and brute-force distance

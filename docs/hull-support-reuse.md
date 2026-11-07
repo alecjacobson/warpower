@@ -1,5 +1,9 @@
 # Reusing current hull-support results
 
+This page records the preceding exhaustive support-mask reuse stage. The current
+[exact exterior-witness shortcut](hull-witness-stop.md) additionally stops work
+once support of a face has been disproved.
+
 VTM's private fragment completion globally checks every boundary face against the
 current sites. A supported face has no site on its outward side, so the following
 facet search cannot produce a new tetrahedron there. The private certificate now

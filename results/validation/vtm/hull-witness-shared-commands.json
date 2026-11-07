@@ -1,0 +1,32 @@
+[
+  {
+    "name": "focused-shared",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_support_reuse.py"
+    ],
+    "exit_code": 0,
+    "seconds": 62.042914628982544
+  },
+  {
+    "name": "shared-torus1000",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "benchmarks.mesher",
+      "--n",
+      "1000",
+      "--repeats",
+      "3",
+      "--save-mesh",
+      ".work/vtm/hull-witness-shared-torus1000.npz",
+      "--output",
+      ".work/vtm/hull-witness-shared-torus1000.json"
+    ],
+    "exit_code": 0,
+    "seconds": 8.411498069763184
+  }
+]

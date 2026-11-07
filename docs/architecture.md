@@ -320,7 +320,10 @@ their full sphere checks; all topology, coverage and hull-support checks remain.
 Proofs are re-established against current input on the next invocation.
 The immediately preceding [hull-support result](hull-support-reuse.md) also
 lets proven hull faces skip candidate search. Each new boundary ordering receives
-a fresh global support check before that mask can be consumed.
+a fresh global support check before that mask can be consumed. The private
+check now [stops a face traversal after an exact exterior witness](hull-witness-stop.md),
+sharing that negative result across partitions while retaining every later
+strided face slot and exhaustive checking for positive support.
 
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).

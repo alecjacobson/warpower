@@ -4,7 +4,13 @@ The complete GPU mesher has **not met the CPU speedup goal**. The first native
 comparison establishes a reproducible baseline and a substantial remaining
 performance gap. Both implementations receive the identical float32 torus
 surface, but their point counts, stopping rules, boundary constraints and quality
-differ. These are not quality-matched time-to-target results.
+differ. These are not quality-matched time-to-target results. Subsequent GPU
+optimizations reduce the complete 1,000-site solve to **1.087 s** at runtime
+`32ee3c6`, preserving the original coordinates and tetrahedron sets. See the
+[latest paired GPU measurement](hull-witness-stop.md) and
+[original-mesh comparison](../results/validation/vtm/hull-stop-original-torus-comparison.json).
+The table below retains the original CPU/GPU experiment; its CPU measurements
+have not been replaced by a new quality-matched comparison.
 
 The input has 1,152 vertices and 2,304 triangles, exported with exact float32
 round-trip coordinates ([OFF](../results/validation/vtm/cpu-mesh3-torus-input.off)).

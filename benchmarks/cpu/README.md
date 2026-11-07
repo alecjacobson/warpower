@@ -136,3 +136,30 @@ and ODT; file input, validity checking and file output are reported separately.
 Independent boundary-distance measurements happen after all timing samples.
 Their three-point quadrature RMS is not a Hausdorff certificate. This runner
 does not itself establish quality parity or a GPU speedup.
+
+## Offline triangle-distance oracle
+
+`surface_distance.cpp` supplies CGAL AABB closest-triangle distances for dense
+surface validation. It is independent of the pure-Warp mesher and is called only
+by optional offline benchmark utilities. Build and validate it with:
+
+```bash
+g++ -O3 -std=c++17 -frounding-math -I/path/to/CGAL-6.2.1/include \
+  benchmarks/cpu/surface_distance.cpp -lgmp -lmpfr -o results/local/surface-distance
+python -m benchmarks.surface_distance_audit --binary results/local/surface-distance \
+  --scratch results/local/distance-scratch --output results/local/distance-audit.json
+```
+
+The executable accepts `target.off queries.txt`. The target is a nonempty
+triangular ASCII OFF mesh; queries start with a count followed by XYZ rows.
+It writes one squared distance per query and rejects malformed input or
+zero-area target triangles. `--version` prints its CGAL version. Coordinates and
+distance constructions are float64; this is not an exact Hausdorff checker.
+
+`benchmarks.mesh_quality --distance-binary results/local/surface-distance` uses
+this oracle for both sampled boundary-distance directions. Topology, volume,
+radius ratios and dihedral angles still use the independent NumPy routines.
+Temporary input files stay under the report's `distance-scratch` directory and
+are removed after each call; final reports record source and executable hashes.
+The default quality checker continues to use brute-force triangle distances.
+See the [scanned Armadillo example](../../docs/scanned-armadillo.md).

@@ -1,0 +1,57 @@
+{
+  "scope": "Offline validator tests only; no runtime or meshing speed claim.",
+  "distance_oracle": {
+    "implementation": "CGAL AABB triangle distances with float64 constructions",
+    "version": "CGAL 6.2.1",
+    "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "source": "benchmarks/cpu/surface_distance.cpp",
+    "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+  },
+  "comparisons": [
+    {
+      "case": "triangle-projections",
+      "scale": 8.673617379884035e-19,
+      "queries": 106,
+      "maximum_error_divided_by_scale": 0.0
+    },
+    {
+      "case": "triangle-projections",
+      "scale": 1.0,
+      "queries": 106,
+      "maximum_error_divided_by_scale": 0.0
+    },
+    {
+      "case": "triangle-projections",
+      "scale": 1.152921504606847e+18,
+      "queries": 106,
+      "maximum_error_divided_by_scale": 0.0
+    },
+    {
+      "case": "multiple-triangles",
+      "scale": 8.673617379884035e-19,
+      "queries": 200,
+      "maximum_error_divided_by_scale": 8.988036009904832e-16
+    },
+    {
+      "case": "multiple-triangles",
+      "scale": 1.0,
+      "queries": 200,
+      "maximum_error_divided_by_scale": 8.988036009904832e-16
+    },
+    {
+      "case": "multiple-triangles",
+      "scale": 1.152921504606847e+18,
+      "queries": 200,
+      "maximum_error_divided_by_scale": 8.988036009904832e-16
+    }
+  ],
+  "rejected_inputs": {
+    "index": "ValueError",
+    "noninteger-index": "ValueError",
+    "nonfinite-point": "ValueError",
+    "nonfinite-query": "ValueError",
+    "degenerate-triangle": "CalledProcessError"
+  },
+  "two_sided_quality_report_matches_brute_reference": true,
+  "empty_queries_supported": true
+}

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/horde/projects/power-diagram/benchmarks/cpu_mesher.py", line 130, in <module>
+    main()
+  File "/home/horde/projects/power-diagram/benchmarks/cpu_mesher.py", line 81, in main
+    result = subprocess.run(command, text=True, capture_output=True, check=True)
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/home/horde/projects/power-diagram/.work/vtm/cpu-mesh3-parallel', '/home/horde/projects/power-diagram/results/validation/vtm/cpu-mesh3-torus-input.off', '/home/horde/projects/power-diagram/.work/vtm/cpu-frontier-torus-019-default-parallel/mesh-0.txt', '0.19', '0.025', '50', '4', '0.02', '0.01']' returned non-zero exit status 2.

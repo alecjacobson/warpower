@@ -9,6 +9,8 @@ optimizations reduce the complete 1,000-site solve to **0.717 s** at runtime
 `6a82244`, preserving the original coordinates and tetrahedron sets. See the
 [latest paired GPU measurement](prepared-point-queries.md) and
 [original-mesh comparison](../results/validation/vtm/prepared-point-queries/prepared-query-original-torus-comparison.json).
+The [new comparison near 4,096 vertices](cpu-size-frontier.md) records the
+remaining gap at a larger budget, including all quality and quota limitations.
 The table below retains the original CPU/GPU experiment; its CPU measurements
 have not been replaced by a new quality-matched comparison.
 

@@ -1,6 +1,6 @@
 # Scanned Armadillo example
 
-The uniform example meshes a closed Stanford Armadillo surface with 43,243 input
+The uniform and prescribed-graded examples mesh a closed Stanford Armadillo surface with 43,243 input
 vertices and 86,482 triangles. It uses the reduced distribution in pinned libigl
 tutorial-data, attributed to the Stanford Computer Graphics Laboratory. This is
 an additional scanned benchmark alongside the examples inspired by Alliez et al.
@@ -112,18 +112,18 @@ projections and the existing brute-force reference, five rejected-input cases,
 empty queries and an entire two-sided quality report. Binary/source hashes and
 CGAL version are recorded with each report.
 
-The Warpower runtime package and main README are byte-identical to `6387888`.
-These additions affect examples, rendering and independent validation. The four
-existing example-domain tests pass; the runtime's preceding full suite has 564
+The uniform artifacts above preserve their original runtime `6387888`. The
+new recovery runtime `058fa60` reproduces that mesh bitwise, with identical
+iteration counts and a fresh warm median of 20.838 s. The full suite has 575
 passing tests. No native oracle is called by the device meshing pipeline.
 
 ## Preserved graded failure
 
-Changing only `--case` to `graded-surface` with these budgets currently fails
-material extraction. The existing min-cone sizing field ranges from relative
+At the preceding runtime, changing only `--case` to `graded-surface` with these
+budgets failed material extraction. The existing min-cone sizing field ranges from relative
 size 0.35 on the left to at most 1 elsewhere. Input validation succeeds, but the
 final material selection has two edges incident to four boundary triangles.
-The public mesher correctly returns error 64, valid 0 and zero output counts.
+That run returned error 64, valid 0 and zero output counts.
 Its failed first replay takes 7.888 s; this is not a valid-mesh performance result.
 
 The saved internal candidate has 4,096 sites, 24,677 independently certified
@@ -135,7 +135,74 @@ are retained separately from the valid uniform example. See the
 [full-hull check](../results/validation/vtm/graded-armadillo-failure/full-hull-check.json)
 and [failure report](../results/validation/vtm/graded-armadillo-failure/result.json).
 
-Recovery is tracked in [issue #142](https://github.com/alecjacobson/warpower/issues/142).
-The uniform/graded scan milestone [#140](https://github.com/alecjacobson/warpower/issues/140)
-remains open until graded meshing is validated. The broader examples and
-quality-matched CPU outperformance goals also remain open.
+## Validated graded result
+
+[Exterior-band recovery](exterior-band-recovery.md) resolves this failure after
+existing fitting recovery is exhausted. It removes exterior-center tolerance
+cells at bad edges within a bounded transaction, preserves referenced vertices
+and prescribed feature cells, and rolls back if topology or volume guards fail.
+This is a boundary approximation; it does not prove removed cells wholly exterior.
+The same recovered material selection is used inside the quality-stage guards.
+
+Reproduce with the command above, changing `--case surface` to
+`--case graded-surface` and the output directory to `armadillo-graded`.
+The prescribed field is a clipped min-cone centered at the left face center of
+the input box, with minimum 0.35, maximum 1 and slope `0.65 / box_width`.
+
+| Measurement | Graded Armadillo |
+| --- | ---: |
+| Sites in full hull / referenced by material cells | 4,096 / 4,092 |
+| Full-hull / material tetrahedra | 24,667 / 18,746 |
+| Material boundary triangles | 3,618 |
+| Material components / boundary Euler characteristic | 1 / 2 |
+| Minimum / first percentile / median radius ratio, 3r/R | 0.07408 / 0.45791 / 0.89740 |
+| Minimum / maximum dihedral angle | 3.61° / 173.85° |
+| Two-sided sampled boundary RMS / input box diagonal | 0.2752% |
+| Relative volume error | −3.6972% |
+| Complete resident solve, median of three warm replays | 20.882 s |
+| First complete replay | 21.792 s |
+| Setup, including graph construction | 2.827 s |
+
+This L40 / Warp 1.19.0 result uses runtime `058fa60`, the same input and budgets
+as the saved failure, seven growth rounds, three recovery rounds and four quality
+rounds. Every replay performs a fresh complete solve. Setup, transfer, export and
+independent validation remain outside resident timing; all measured quota windows
+are unthrottled. The last extraction removes two cells in one accepted pass.
+
+Independent CGAL checks cover 100,937,364 site/sphere queries, 292 full-hull faces,
+1,196,032 supporting-plane queries, face pairing and positive orientation. The
+material boundary has zero self-intersection pairs and single-cycle vertex links;
+NumPy independently verifies quality, volume and incidence, and the VTU round trip
+is exact. Input self-intersection validation is reused only for identical OFF
+bytes. See [independent checks](../results/examples/vtm/armadillo-graded/independent-checks.json),
+[quality](../results/examples/vtm/armadillo-graded/independent-quality.json), and
+[provenance](../results/examples/vtm/armadillo-graded/provenance.json).
+
+The grading reallocates sites at the same total budget. In the leftmost and
+rightmost thirds of the input's x extent:
+
+| Measurement | Uniform left / right | Graded left / right |
+| --- | ---: | ---: |
+| Sites | 690 / 972 | 1,033 / 554 |
+| Median nearest-site distance | 0.05199 / 0.05125 | 0.04427 / 0.06345 |
+| Median material tetrahedron volume | 2.743e−5 / 2.668e−5 | 1.699e−5 / 4.647e−5 |
+
+The finer left region comes with a coarser right region and slightly greater
+whole-surface fit error. [Raw regional measurements](../results/examples/vtm/armadillo-graded/grading-comparison.json)
+use the same bounding-box regions for both meshes.
+
+| Graded material surface | Graded interior cutaway |
+| --- | --- |
+| ![Graded Armadillo surface](../results/examples/vtm/armadillo-graded/surface.png) | ![Graded Armadillo tetrahedral cutaway](../results/examples/vtm/armadillo-graded/cutaway.png) |
+
+Download the [graded VTU](../results/examples/vtm/armadillo-graded/mesh.vtu),
+[NPZ arrays](../results/examples/vtm/armadillo-graded/mesh.npz), and
+[raw timing](../results/examples/vtm/armadillo-graded/result.json).
+The [Stanford data notice](../results/examples/vtm/armadillo-graded/NOTICE.md)
+applies to these model-derived artifacts.
+
+This completes the uniform/graded scanned-example scope in
+[issue #140](https://github.com/alecjacobson/warpower/issues/140) and the specific
+recovery in [#142](https://github.com/alecjacobson/warpower/issues/142).
+The broader examples, difficult-boundary cases and quality-matched CPU
+outperformance goals remain open. No CPU speedup is established by these runs.

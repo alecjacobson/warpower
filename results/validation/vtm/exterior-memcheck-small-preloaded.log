@@ -1,0 +1,741 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 32768, "diagnostic_mempool_enabled": true}
+.........========= Program hit CUDA_ERROR_ILLEGAL_ADDRESS (error 700) due to "an illegal memory access was encountered" on CUDA API call to cuModuleGetFunction.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame: wp_cuda_get_kernel [0xb72316] in warp.so
+=========         Host Frame: get_kernel_hooks in context.py:4034
+=========         Host Frame: launch in context.py:12085
+=========         Host Frame: test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames in test_exterior_band.py:204
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Program hit CUDA_ERROR_ILLEGAL_ADDRESS (error 700) due to "an illegal memory access was encountered" on CUDA API call to cuModuleGetFunction.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame: wp_cuda_get_kernel [0xb72316] in warp.so
+=========         Host Frame: get_kernel_hooks in context.py:4040
+=========         Host Frame: launch in context.py:12085
+=========         Host Frame: test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames in test_exterior_band.py:204
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Program hit CUDA_ERROR_INVALID_HANDLE (error 400) due to "invalid resource handle" on CUDA API call to cuFuncSetAttribute.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame: wp_cuda_configure_kernel_shared_memory [0xb54acf] in warp.so
+=========         Host Frame: configure_smem in context.py:4055
+=========         Host Frame: get_kernel_hooks in context.py:4077
+=========         Host Frame: launch in context.py:12085
+=========         Host Frame: test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames in test_exterior_band.py:204
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Program hit CUDA_ERROR_INVALID_HANDLE (error 400) due to "invalid resource handle" on CUDA API call to cuFuncSetAttribute.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame: wp_cuda_configure_kernel_shared_memory [0xb54acf] in warp.so
+=========         Host Frame: configure_smem in context.py:4055
+=========         Host Frame: get_kernel_hooks in context.py:4079
+=========         Host Frame: launch in context.py:12085
+=========         Host Frame: test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames in test_exterior_band.py:204
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Program hit cudaErrorIllegalAddress (error 700) due to "an illegal memory access was encountered" on CUDA API call to cudaStreamIsCapturing.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame:  [0xbeebb3] in warp.so
+=========         Host Frame: wp_cuda_stream_is_capturing [0xb51f25] in warp.so
+=========         Host Frame: launch in context.py:12230
+=========         Host Frame: test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames in test_exterior_band.py:204
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Program hit CUDA_ERROR_ILLEGAL_ADDRESS (error 700) due to "an illegal memory access was encountered" on CUDA API call to cuStreamGetCaptureInfo_v2.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame: wp_cuda_graph_end_capture [0xb6a042] in warp.so
+=========         Host Frame: capture_end in context.py:13680
+=========         Host Frame: __exit__ in utils.py:2204
+=========         Host Frame: test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames in test_exterior_band.py:203
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Program hit cudaErrorIllegalAddress (error 700) due to "an illegal memory access was encountered" on CUDA API call to cudaStreamEndCapture.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame:  [0xbee9a3] in warp.so
+=========         Host Frame: wp_cuda_graph_end_capture [0xb6ac45] in warp.so
+=========         Host Frame: capture_end in context.py:13680
+=========         Host Frame: __exit__ in utils.py:2204
+=========         Host Frame: test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames in test_exterior_band.py:203
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+========= Program hit cudaErrorIllegalAddress (error 700) due to "an illegal memory access was encountered" on CUDA API call to cudaGetLastError.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame:  [0xbbe6fd] in warp.so
+=========         Host Frame: wp_cuda_graph_end_capture [0xb6ac4a] in warp.so
+=========         Host Frame: capture_end in context.py:13680
+=========         Host Frame: __exit__ in utils.py:2204
+=========         Host Frame: test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames in test_exterior_band.py:203
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+F                                                               [100%]
+=================================== FAILURES ===================================
+_ test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f470e54c0d0>
+tmp_path = PosixPath('/run/openclaw/horde/pytest-of-horde/pytest-247/test_device_producer_consumer_0')
+
+    def test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames(
+        monkeypatch, tmp_path
+    ):
+        wp.load_module(module=__name__, device="cuda:0")
+        p, t, distances, removed = patch()
+        # Captured connectivity keeps its original storage throughout replay.
+        e, _ = transaction(p, t, distances, padding=1)
+        n = len(t)
+        phase = wp.zeros(1, dtype=int, device=e.device)
+        output = wp.empty((5, 5), dtype=int, device=e.device)
+    
+        def forbidden(*args, **kwargs):
+            raise AssertionError("Host allocation, sync or readback during captured recovery")
+    
+        with monkeypatch.context() as m:
+            for name in [
+                "empty",
+                "empty_like",
+                "zeros",
+                "ones",
+                "full",
+                "clone",
+                "synchronize",
+                "synchronize_device",
+                "synchronize_stream",
+            ]:
+                m.setattr(wp, name, forbidden)
+            m.setattr(wp.array, "numpy", forbidden)
+            with wp.ScopedCapture() as cap:
+>               wp.launch(
+                    producer,
+                    max(len(p), n),
+                    inputs=[
+                        phase,
+                        e.selected,
+                        e.feature_roles,
+                        e.input_count,
+                        e.error,
+                        n,
+                        int(t[removed, 0]),
+                    ],
+                )
+
+tests/test_exterior_band.py:204: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+kernel = <warp._src.context.Kernel object at 0x7f4711004190>, dim = (16,)
+inputs = <[AttributeError("'array' object has no attribute 'typecode'") raised in repr()] list object at 0x7f470e552a40>
+outputs = [], adj_inputs = [], adj_outputs = [], device = 'cuda:0'
+stream = <warp._src.context.Stream object at 0x7f49100f2830>, adjoint = False
+record_tape = True, record_cmd = False, max_blocks = 0, block_dim = 256
+
+    def launch(
+        kernel,
+        dim: int | Sequence[int],
+        inputs: Sequence = [],
+        outputs: Sequence = [],
+        adj_inputs: Sequence = [],
+        adj_outputs: Sequence = [],
+        device: DeviceLike = None,
+        stream: Stream | None = None,
+        adjoint: bool = False,
+        record_tape: bool = True,
+        record_cmd: bool = False,
+        max_blocks: int = 0,
+        block_dim: int | None = None,
+    ):
+        """Launch a Warp kernel on the target device
+    
+        Kernel launches are asynchronous with respect to the calling Python thread.
+    
+        The default ``wp.config.LaunchArrayAccessMode.RELAXED`` mode does not check
+        whether array arguments are accessible from the launch device. Cross-device
+        access depends on the access direction, memory kind, and system
+        capabilities. An inaccessible array may cause a segmentation fault in a
+        CPU kernel or a CUDA illegal memory access. Set
+        :attr:`warp.config.launch_array_access_mode` to
+        ``wp.config.LaunchArrayAccessMode.CHECKED`` to detect known-invalid
+        accesses before launch. Use ``wp.config.LaunchArrayAccessMode.STRICT`` to
+        require every Warp array argument to be allocated on the launch device,
+        including cross-device allocations the hardware could access. See
+        :ref:`launch_array_access_checks` for details and limitations.
+    
+        Args:
+            kernel: The name of a Warp kernel function, decorated with the :func:`@wp.kernel <warp.kernel>` decorator
+            dim: The number of threads to launch the kernel, can be an integer or a
+              sequence of integers with a maximum of 4 dimensions.
+            inputs: The input parameters to the kernel (optional)
+            outputs: The output parameters (optional)
+            adj_inputs: The adjoint inputs (optional)
+            adj_outputs: The adjoint outputs (optional)
+            device: The device to launch on.
+            stream: The stream to launch on.
+            adjoint: Whether to run forward or backward pass (typically use ``False``).
+            record_tape: When ``True``, the launch will be recorded the global
+              :class:`warp.Tape` object when present.
+            record_cmd: When ``True``, the launch will return a :class:`Launch`
+              object. The launch will not occur until the user calls
+              :meth:`Launch.launch()`.
+            max_blocks: The maximum number of CUDA thread blocks to use.
+              Requires a grid-stride loop, which is the default. Launching a
+              kernel that opted into the lean launch path with
+              ``@wp.kernel(grid_stride=False)`` and ``max_blocks > 0`` raises
+              a ``RuntimeError``.
+            block_dim: The requested number of threads per block. An omitted or
+              non-positive value defaults to 1 on CPU and 256 on CUDA. Explicit CPU
+              values from 2 through 1024 are honored when
+              :attr:`warp.config.enable_cpu_blocks` is ``True`` and otherwise
+              resolve to 1.
+        """
+    
+        init()
+    
+        # if stream is specified, use the associated device
+        if stream is not None:
+            device = stream.device
+        else:
+            device = runtime.get_device(device)
+    
+        block_dim = _resolve_launch_block_dim(device, block_dim)
+    
+        # check function is a Kernel
+        if not isinstance(kernel, Kernel):
+            raise RuntimeError("Error launching kernel, can only launch functions decorated with @wp.kernel.")
+    
+        # debugging aid
+        if warp.config.print_launches:
+            get_logger().info(f"kernel: {kernel.key} dim: {dim} inputs: {inputs} outputs: {outputs} device: {device}")
+    
+        if not kernel.uses_warp_entry_point_abi:
+            raise RuntimeError(
+                f"Kernel '{kernel.key}' uses entry_point_abi='{kernel.options['entry_point_abi']}' "
+                "and cannot be launched with wp.launch()."
+            )
+    
+        dim, total_dim_size = _normalize_launch_dim(dim)
+    
+        if total_dim_size > 0:
+            fwd_args = []
+            fwd_args.extend(inputs)
+            fwd_args.extend(outputs)
+    
+            adj_args = []
+            adj_args.extend(adj_inputs)
+            adj_args.extend(adj_outputs)
+    
+            if (len(fwd_args)) != (len(kernel.adj.args)):
+                raise RuntimeError(
+                    f"Error launching kernel '{kernel.key}', passed {len(fwd_args)} arguments but kernel requires {len(kernel.adj.args)}."
+                )
+    
+            # if it's a generic kernel, infer the required overload from the arguments
+            if kernel.is_generic:
+                fwd_types = kernel.infer_argument_types(fwd_args)
+                kernel = kernel._add_normalized_overload(fwd_types)
+    
+            # delay load modules, including new overload if needed
+            try:
+                module_exec = kernel.module.load(device, block_dim)
+            except Exception as error:
+                _clear_error_frames(error)
+                # this frame is still running, so drop its own reference
+                del kernel
+                raise
+    
+            if not module_exec:
+                return
+    
+            if not kernel.grid_stride and not device.is_cpu:
+                if max_blocks > 0:
+                    raise RuntimeError(
+                        f"Kernel '{kernel.key}' was launched with max_blocks={max_blocks}, but it was compiled "
+                        f"without a grid-stride loop (grid_stride=False); capping the block count requires a "
+                        f"grid-stride loop. Opt the kernel into grid-stride via @wp.kernel(grid_stride=True), the "
+                        f'"default_grid_stride" module option, or wp.config.default_grid_stride=True; or drop '
+                        f"max_blocks."
+                    )
+    
+                # Fail clearly on the (practically unreachable) lean-grid overflow instead of dropping threads.
+                max_lean_blocks = _lean_grid_max_blocks(block_dim)
+                if _cuda_grid_blocks(total_dim_size, block_dim) > max_lean_blocks:
+                    raise RuntimeError(
+                        f"Kernel '{kernel.key}' was launched with dim.size={total_dim_size} (block_dim={block_dim}), "
+                        f"exceeding the lean 3D grid capacity of {max_lean_blocks * block_dim} work items. Use "
+                        f"@wp.kernel(grid_stride=True) to launch dimensions this large."
+                    )
+    
+            _validate_kernel_tid_extents(kernel, dim, total_dim_size, block_dim)
+            bounds = _build_launch_bounds_from_tuple(dim, kernel.adj.kernel_dim)
+    
+            # first param is the number of threads
+            params = [bounds]
+    
+            # converts arguments to kernel's expected ctypes and packs into params
+            def pack_args(args, params, adjoint=False):
+                for i, a in enumerate(args):
+                    arg_type = kernel.adj.args[i].type
+                    arg_name = kernel.adj.args[i].label
+    
+                    params.append(pack_arg(kernel, arg_type, arg_name, a, device, adjoint))
+    
+            # late bind
+            hooks = module_exec.get_kernel_hooks(kernel)
+    
+            pack_args(fwd_args, params, adjoint=False)
+            pack_args(adj_args, params, adjoint=True)
+    
+            # Deterministic mode: redirect to the launcher that supplies the hidden
+            # deterministic buffers. Backward kernels use the same path so generated
+            # tape adjoints can reduce gradient atomics in a fixed order.
+            det_meta = hooks.det_launch_meta
+            counter_replay_targets = getattr(det_meta, "counter_replay_targets", ())
+            if adjoint and det_meta is not None and det_meta.needs_deterministic and counter_replay_targets:
+                from warp._src.deterministic import unsupported_consumed_counter_backward_error  # noqa: PLC0415
+    
+                raise unsupported_consumed_counter_backward_error(kernel.key)
+            if det_meta is not None and det_meta.needs_deterministic and device.is_cuda:
+                from warp._src.deterministic import create_deterministic_launch, launch_deterministic  # noqa: PLC0415
+    
+                launch_hook = hooks.backward if adjoint else hooks.forward
+                launch_kind = "backward" if adjoint else "forward"
+                if launch_hook is None:
+                    raise RuntimeError(
+                        f"Failed to find {launch_kind} kernel '{kernel.key}' from module '{kernel.module.name}' for device '{device}'"
+                    )
+                if stream is None:
+                    stream = device.stream
+                if record_cmd:
+                    return create_deterministic_launch(
+                        kernel=kernel,
+                        device=device,
+                        det_meta=det_meta,
+                        fwd_args=fwd_args,
+                        adj_args=adj_args,
+                        hooks=hooks,
+                        params=params,
+                        bounds=bounds,
+                        max_blocks=max_blocks,
+                        block_dim=block_dim,
+                        adjoint=adjoint,
+                    )
+                launch_deterministic(
+                    kernel,
+                    hooks,
+                    params,
+                    bounds,
+                    device,
+                    stream,
+                    max_blocks,
+                    block_dim,
+                    det_meta,
+                    fwd_args,
+                    adj_args=adj_args,
+                    adjoint=adjoint,
+                    module_exec=module_exec,
+                )
+    
+            # run kernel
+            elif device.is_cpu:
+                if adjoint:
+                    if hooks.backward is None:
+                        raise RuntimeError(
+                            f"Failed to find backward kernel '{kernel.key}' from module '{kernel.module.name}' for device '{device}'"
+                        )
+    
+                else:
+                    if hooks.forward is None:
+                        raise RuntimeError(
+                            f"Failed to find forward kernel '{kernel.key}' from module '{kernel.module.name}' for device '{device}'"
+                        )
+    
+                if record_cmd:
+                    launch = Launch(
+                        kernel=kernel,
+                        hooks=hooks,
+                        params=params,
+                        params_addr=None,
+                        bounds=bounds,
+                        device=device,
+                        block_dim=block_dim,
+                        adjoint=adjoint,
+                        fwd_args=fwd_args,
+                        adj_args=adj_args,
+                    )
+                    return launch
+    
+                # Record into the APIC byte stream only when a CPU APIC capture
+                # targets this device. runtime._apic_capture is global, so guard on
+                # the capture's device (mirrors the CUDA launch paths below); a CPU
+                # launch during an unrelated CUDA capture must execute normally.
+                apic_capture = _get_apic_capture_for_device(device)
+                if apic_capture is not None:
+                    # Retain the module_exec on the graph so its LLVM shared object
+                    # (and therefore the kernel function pointers stored in
+                    # APICCPUKernel) stays alive until the graph is destroyed.
+                    if runtime._apic_graph is not None:
+                        runtime._apic_graph._retain_module_exec(module_exec)
+                    # Build ArgsStruct and route through C++ for execution + recording
+                    args_struct, adj_args_struct = _build_cpu_args_structs(kernel, hooks, params, adjoint)
+                    apic_info = apic_capture.build_launch_info(
+                        kernel,
+                        module_exec,
+                        hooks,
+                        params,
+                        fwd_args,
+                        adjoint,
+                        adj_args=adj_args if adjoint else None,
+                    )
+                    func = hooks.backward if adjoint else hooks.forward
+                    # Register kernel function pointer for byte-stream replay
+                    key_str = kernel.key if isinstance(kernel.key, str) else kernel.key.decode("utf-8")
+                    module_hash_str = apic_capture._hash_to_str(module_exec.module_hash)
+                    runtime.core.wp_apic_register_cpu_kernel(
+                        apic_capture.apic_state,
+                        key_str.encode("utf-8"),
+                        module_hash_str.encode("utf-8"),
+                        ctypes.cast(hooks.forward, ctypes.c_void_p) if hooks.forward else None,
+                        ctypes.cast(hooks.backward, ctypes.c_void_p) if hooks.backward else None,
+                    )
+                    runtime.core.wp_cpu_launch_kernel(
+                        ctypes.cast(func, ctypes.c_void_p),
+                        ctypes.byref(bounds),
+                        ctypes.byref(args_struct) if args_struct is not None else None,
+                        ctypes.byref(adj_args_struct) if adj_args_struct is not None else None,
+                        ctypes.byref(apic_info),
+                    )
+                elif block_dim > 1:
+                    invoke_cpu_blocks(kernel, hooks, params, adjoint)
+                else:
+                    invoke(kernel, hooks, params, adjoint)
+    
+            else:
+                kernel_args = [ctypes.c_void_p(ctypes.addressof(x)) for x in params]
+                kernel_params = (ctypes.c_void_p * len(kernel_args))(*kernel_args)
+    
+                # cluster_dim is resolved and cached on the hooks at load time; the
+                # only per-launch cluster work is the alignment guards, which
+                # short-circuit for the common unclustered case. Kept on the CUDA
+                # path so CPU launches pay nothing for a CUDA-only feature.
+                cluster_dim = hooks.cluster_dim
+                _validate_cluster_launch(cluster_dim, bounds.size, block_dim, max_blocks)
+    
+                if stream is None:
+                    stream = device.stream
+    
+                # If the stream is capturing, we retain the CUDA module so that it doesn't get unloaded
+                # before the captured graph is released.
+                if len(runtime.captures) > 0 and runtime.core.wp_cuda_stream_is_capturing(stream.cuda_stream):
+                    capture_id = runtime.core.wp_cuda_stream_get_capture_id(stream.cuda_stream)
+                    graph = runtime.captures.get(capture_id)
+                    if graph is not None:
+                        graph._retain_module_exec(module_exec)
+    
+                if adjoint:
+                    if hooks.backward is None:
+                        raise RuntimeError(
+                            f"Failed to find backward kernel '{kernel.key}' from module '{kernel.module.name}' for device '{device}'"
+                        )
+    
+                    if record_cmd:
+                        launch = Launch(
+                            kernel=kernel,
+                            hooks=hooks,
+                            params=params,
+                            params_addr=kernel_params,
+                            bounds=bounds,
+                            device=device,
+                            max_blocks=max_blocks,
+                            block_dim=block_dim,
+                            adjoint=adjoint,
+                            fwd_args=fwd_args,
+                            adj_args=adj_args,
+                        )
+                        return launch
+                    else:
+                        # Build APIC info if a CUDA APIC capture is active so the
+                        # adjoint launch is recorded into the byte stream. The CUDA
+                        # rebuild replays is_forward=0 launches with their adjoint
+                        # parameter block (record-and-execute: the live launch still
+                        # issues onto the captured stream).
+                        apic_info_ptr = None
+                        apic_capture = _get_apic_capture_for_device(device)
+                        if apic_capture is not None:
+                            apic_info = apic_capture.build_launch_info(
+                                kernel,
+                                module_exec,
+                                hooks,
+                                params,
+                                fwd_args,
+                                True,
+                                adj_args=adj_args,
+                            )
+                            apic_info_ptr = ctypes.byref(apic_info)
+                        if runtime.core.wp_cuda_launch_kernel(
+                            device.context,
+                            hooks.backward,
+                            bounds.size,
+                            max_blocks,
+                            block_dim,
+                            int(kernel.grid_stride),
+                            cluster_dim,
+                            hooks.backward_smem_bytes,
+                            kernel_params,
+                            stream.cuda_stream,
+                            apic_info_ptr,
+                        ):
+                            _raise_cuda_launch_error(kernel, device, hooks, True)
+    
+                else:
+                    if hooks.forward is None:
+>                       raise RuntimeError(
+                            f"Failed to find forward kernel '{kernel.key}' from module '{kernel.module.name}' for device '{device}'"
+                        )
+E                       RuntimeError: Failed to find forward kernel 'producer' from module 'tests.test_exterior_band' for device 'cuda:0'
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12293: RuntimeError
+----------------------------- Captured stdout call -----------------------------
+Module tests.test_exterior_band e989ed4 load on device 'cuda:0' took 0.84 ms  (cached)
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 700: an illegal memory access was encountered (in function wp_cuda_get_kernel, /builds/omniverse/warp/warp/native/warp.cu:5797)
+Warp CUDA error: Failed to lookup kernel function producer_911eebee_cuda_kernel_forward in module
+Warp CUDA error 700: an illegal memory access was encountered (in function wp_cuda_get_kernel, /builds/omniverse/warp/warp/native/warp.cu:5797)
+Warp CUDA error: Failed to lookup kernel function producer_911eebee_cuda_kernel_backward in module
+Warp UserWarning: Failed to configure 0 bytes of dynamic shared memory for kernel 'producer' (forward) on cuda:0.
+Warp UserWarning: Failed to configure 0 bytes of dynamic shared memory for kernel 'producer' (backward) on cuda:0.
+Warp CUDA error 700: an illegal memory access was encountered (in function wp_cuda_stream_is_capturing, /builds/omniverse/warp/warp/native/warp.cu:3338)
+Warp CUDA error 700: an illegal memory access was encountered (in function get_capture_graph, /builds/omniverse/warp/warp/native/cuda_util.h:222)
+=========================== short test summary info ============================
+FAILED tests/test_exterior_band.py::test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames
+1 failed, 9 passed in 1.37s
+========= Target application returned an error
+========= ERROR SUMMARY: 8 errors

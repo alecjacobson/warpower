@@ -48,6 +48,12 @@ material cells around a bad boundary edge. Enable it with
 The final selection includes these additions, so it need not equal the
 circumcenter predicate alone. Remaining topology failures are still explicit.
 
+Optional [exterior-band recovery](exterior-band-recovery.md) can remove
+exterior-center tolerance cells around bad boundary edges, with vertex, feature,
+volume and rollback guards. Enable it with `exterior_recovery=True`; its
+independent default is also `False`. This is boundary approximation, not proof
+that a removed cell is wholly outside material.
+
 Inputs must be a nonoverlapping, positively oriented tetrahedral complex. For
 the paper's interpretation, use the complete Delaunay triangulation. Extraction
 checks index validity, finite referenced positions, positive determinants, and

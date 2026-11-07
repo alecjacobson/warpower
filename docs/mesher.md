@@ -89,6 +89,7 @@ recovery; it is not a free preprocessing operation.
 | `jitter_attempts` | 8 | Bounded boundary proposal attempts per round |
 | `extraction_tolerance` | 0.4 | Circumcenter thickening tolerance, `distance/radius` |
 | `containment_recovery` | `True` | Bounded addition of proven wholly material cells around bad boundary edges |
+| `exterior_recovery` | `True` | Transactional removal of exterior-center tolerance cells, with vertex/feature and volume guards |
 | `sampling_resolution` | 32 | Proposal grid resolution per axis |
 | `sampling_max_attempts` | 4096 | Rejection-sampling budget per initial site |
 | `seed` | 2026 | Signed int32 or device int32[1]; caller-owned seed is never incremented |
@@ -114,6 +115,11 @@ full-hull cells around nonmanifold boundary edges and adds only cells proved
 wholly in material. Every pass reruns the topology gate. Once repair is used,
 quality guards evaluate the repaired subcomplex consistently; a fresh solve
 resets this mode. The independent extractor keeps its original rule by default.
+If bad edges remain after the additional-fitting budget, [exterior-band recovery](exterior-band-recovery.md) can
+remove exterior-center tolerance cells while preserving referenced vertices and
+feature-incident cells. It limits volume change and restores the selection on
+failure. This policy is an approximation; it does not prove whole-cell exterior
+membership. Both policies can be disabled independently.
 
 Each optional quality stage starts with a valid-mesh checkpoint. A stage error or
 invalid extracted boundary restores positions, connectivity, counts, statistics,

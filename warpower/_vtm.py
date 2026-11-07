@@ -228,6 +228,9 @@ class VTMWorkspace:
         iteration_limit=None,
         selective_enabled=None,
         material_recovery=None,
+        containment_recovery=True,
+        exterior_recovery=False,
+        exterior_enabled=None,
     ):
         self.max_iterations = operator.index(max_iterations)
         self.max_backtracks = operator.index(max_backtracks)
@@ -296,6 +299,9 @@ class VTMWorkspace:
         self.points = self.mesh.points if active_count is None else self._input_points
         self.device, self.n = self.mesh.device, self.mesh.n
         self.material_recovery = material_recovery
+        self.containment_recovery = bool(containment_recovery)
+        self.exterior_recovery = bool(exterior_recovery)
+        self.exterior_enabled = exterior_enabled
         if material_recovery is not None:
             from ._vtm_controls import scalar
 

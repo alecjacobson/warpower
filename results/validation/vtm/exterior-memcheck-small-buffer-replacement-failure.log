@@ -1,0 +1,243 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 32768, "diagnostic_mempool_enabled": true}
+.........========= Program hit CUDA_ERROR_ILLEGAL_ADDRESS (error 700) due to "an illegal memory access was encountered" on CUDA API call to cuModuleLoadDataEx.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame:  [0xb66033] in warp.so
+=========         Host Frame: wp_cuda_load_module [0xb6697b] in warp.so
+=========         Host Frame: load_cuda in build.py:151
+=========         Host Frame: load in context.py:5273
+=========         Host Frame: force_load in context.py:12906
+=========         Host Frame: load_module in context.py:13074
+=========         Host Frame: test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames in test_exterior_band.py:180
+=========         Host Frame: pytest_pyfunc_call in python.py:187
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: runtest in python.py:1798
+=========         Host Frame: pytest_runtest_call in runner.py:184
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: <lambda> in runner.py:250
+=========         Host Frame: from_call in runner.py:361
+=========         Host Frame: call_and_report in runner.py:249
+=========         Host Frame: runtestprotocol in runner.py:139
+=========         Host Frame: pytest_runtest_protocol in runner.py:118
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: pytest_runtestloop in main.py:411
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in main.py:387
+=========         Host Frame: wrap_session in main.py:333
+=========         Host Frame: pytest_cmdline_main in main.py:380
+=========         Host Frame: _multicall in _execution.py:147
+=========         Host Frame: _hookexec in _manager.py:183
+=========         Host Frame: __call__ in _caller.py:197
+=========         Host Frame: _main in __init__.py:262
+=========         Host Frame: main in __init__.py:231
+========= 
+F                                                               [100%]
+=================================== FAILURES ===================================
+_ test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fae5f3dc250>
+tmp_path = PosixPath('/run/openclaw/horde/pytest-of-horde/pytest-245/test_device_producer_consumer_0')
+
+    def test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames(
+        monkeypatch, tmp_path
+    ):
+        p, t, distances, removed = patch()
+        e, _ = transaction(p, t, distances)
+        n = len(t)
+        # Add inaccessible invalid padding to exercise active-prefix reads.
+        padded = wp.array(np.vstack([t, [-1, -1, -1, -1]]).astype(np.int32), device=e.device)
+        e.input_tetrahedra = padded
+        phase = wp.zeros(1, dtype=int, device=e.device)
+        output = wp.empty((5, 5), dtype=int, device=e.device)
+>       wp.load_module(module=__name__, device=e.device)
+
+tests/test_exterior_band.py:180: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv/lib/python3.10/site-packages/warp/_src/context.py:13074: in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+.venv/lib/python3.10/site-packages/warp/_src/context.py:12906: in force_load
+    m.load(d, block_dim=dim)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load(
+        self,
+        device,
+        block_dim: int | None = None,
+        binary_path: os.PathLike | None = None,
+        output_arch: int | None = None,
+        meta_path: os.PathLike | None = None,
+    ) -> ModuleExec | None:
+        device = runtime.get_device(device)
+    
+        # Resolve the active block_dim without mutating self.options.
+        # Module.options["block_dim"] is the documented per-module default
+        # (settable via wp.set_module_options); per-load variants flow
+        # through active_block_dim and are stored on ModuleExec, so a CPU
+        # launch's block_dim=1 override cannot retarget later CUDA preloads.
+        active_block_dim = block_dim if block_dim is not None else self.options["block_dim"]
+    
+        # check if executable module is already loaded and not stale
+        exec = self.execs.get((device.context, active_block_dim))
+        if exec is not None:
+            current_hash = self.get_module_hash(active_block_dim)
+            if self.options["strip_hash"] or (exec.module_hash == current_hash):
+                return exec
+            # else: Hash mismatch means module changed, need to recompile
+            if warp.config.log_level <= warp.LOG_DEBUG:
+                old_str = exec.module_hash.hex()[:8] if exec.module_hash else "None"
+                new_str = current_hash.hex()[:8] if current_hash else "None"
+                log_debug(f"[Module.load] Module hash changed, recompiling: {self.name} ({old_str} -> {new_str})")
+    
+        # A module that failed to build reports that failure for every kernel in it,
+        # until mark_modified() clears the record and lets the module build again.
+        build_error = self.failed_builds.get((device.context, active_block_dim))
+        if build_error is not None:
+            _raise_recorded_build_error(build_error)
+    
+        module_hash = self.get_module_hash(active_block_dim)
+        options = self.resolved_options[active_block_dim]
+    
+        # use a unique module path using the module short hash
+        module_name_short = self.get_module_identifier(active_block_dim)
+    
+        module_load_timer_name = (
+            f"Module {self.name} {module_hash.hex()[:7]} load on device '{device}'"
+            if self.options["strip_hash"] is False
+            else f"Module {self.name} load on device '{device}'"
+        )
+        module_load_diagnostics = (
+            f"device='{device}', block_dim={active_block_dim}, module_hash={module_hash.hex()[:7]}"
+        )
+    
+        if warp.config.log_level <= warp.LOG_DEBUG:
+            module_load_timer_name += f" (block_dim={active_block_dim})"
+    
+        with warp.ScopedTimer(
+            module_load_timer_name,
+            active=warp.config.log_level <= warp.LOG_INFO,
+        ) as module_load_timer:
+            # -----------------------------------------------------------
+            # Determine binary path and build if necessary
+    
+            compiled = False
+            if binary_path:
+                # We will never re-codegen or re-compile in this situation
+                # The expected files must already exist
+                binary_path = os.fspath(binary_path)
+    
+                if device.is_cuda and output_arch is None:
+                    raise ValueError("'output_arch' must be provided if a 'binary_path' is provided")
+    
+                if meta_path is None:
+                    raise ValueError("'meta_path' must be provided if a 'binary_path' is provided")
+    
+                if not os.path.exists(binary_path):
+                    module_load_timer.extra_msg = " (error)"
+                    raise FileNotFoundError(f"Binary file {binary_path} does not exist")
+                else:
+                    module_load_timer.extra_msg = " (cached)"
+            else:
+                output_name = self._get_compile_output_name(device, block_dim=active_block_dim)
+                output_arch = self._get_compile_arch(device)
+    
+                module_dir = os.path.join(warp.config.kernel_cache_dir, module_name_short)
+                meta_path = os.path.join(module_dir, self._get_meta_name(block_dim=active_block_dim))
+                binary_path = os.path.join(module_dir, output_name)
+    
+                try:
+                    compiled = self._compile(device, module_dir, output_name, output_arch, options=options)
+                except Exception as e:
+                    module_load_timer.extra_msg = " (error)"
+                    raise e
+    
+                module_load_timer.extra_msg = " (compiled)" if compiled else " (cached)"
+    
+            det_launch_meta_map = self._snapshot_deterministic_metadata(active_block_dim, options, rebuild=not compiled)
+    
+            # -----------------------------------------------------------
+            # Load CPU or CUDA binary
+    
+            if os.path.exists(meta_path):
+                with open(meta_path) as meta_file:
+                    meta = json.load(meta_file)
+            else:
+                raise FileNotFoundError(f"Module metadata file {meta_path} was not found in the cache")
+    
+            cuda_compile_artifact = None
+            if device.is_cuda:
+                cuda_compile_artifact = self._snapshot_cuda_compile_artifact(binary_path, output_arch, options)
+    
+            if device.is_cpu:
+                # LLVM modules are identified using strings, so we need to ensure uniqueness
+                id = self.increment_id()
+                module_handle = f"wp_{self.name}_{id}"
+                if (
+                    runtime.llvm.wp_load_obj(
+                        binary_path.encode("utf-8"),
+                        module_handle.encode("utf-8"),
+                        warp.config.legacy_cpu_linker,
+                    )
+                    != 0
+                ):
+                    raise Exception(f"Failed to load CPU module '{self.name}' ({module_load_diagnostics})")
+                module_exec = ModuleExec(
+                    module_handle,
+                    module_hash,
+                    device,
+                    meta,
+                    active_block_dim,
+                    output_arch,
+                    det_launch_meta_map,
+                    self.hashers[active_block_dim].kernel_hashes,
+                    binary_path=binary_path,
+                )
+                self.execs[(None, active_block_dim)] = module_exec
+    
+            elif device.is_cuda:
+                cuda_module = warp._src.build.load_cuda(binary_path, device)
+                if cuda_module is not None:
+                    module_exec = ModuleExec(
+                        cuda_module,
+                        module_hash,
+                        device,
+                        meta,
+                        active_block_dim,
+                        output_arch,
+                        det_launch_meta_map,
+                        self.hashers[active_block_dim].kernel_hashes,
+                        binary_path=binary_path,
+                        cuda_compile_artifact=cuda_compile_artifact,
+                    )
+                    self.execs[(device.context, active_block_dim)] = module_exec
+                else:
+                    module_load_timer.extra_msg = " (error)"
+>                   raise Exception(f"Failed to load CUDA module '{self.name}' ({module_load_diagnostics})")
+E                   Exception: Failed to load CUDA module 'tests.test_exterior_band' (device='cuda:0', block_dim=256, module_hash=e989ed4)
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:5290: Exception
+----------------------------- Captured stdout call -----------------------------
+Module tests.test_exterior_band e989ed4 load on device 'cuda:0' took 52.44 ms  (error)
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 700: an illegal memory access was encountered (in function cuda_load_module_image, /builds/omniverse/warp/warp/native/warp.cu:5604)
+Warp CUDA error: Loading module failed
+=========================== short test summary info ============================
+FAILED tests/test_exterior_band.py::test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames
+1 failed, 9 passed in 1.30s
+========= Target application returned an error
+========= ERROR SUMMARY: 1 error

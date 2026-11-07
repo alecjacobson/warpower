@@ -62,6 +62,7 @@ def test_complete_pipeline_samples_grows_fits_and_preserves_domain_topology(case
     assert mesh.sampler.count.numpy()[0] == initial
     assert mesh.point_count.numpy()[0] == n
     assert mesh.rounds.numpy()[2] == 1
+    assert mesh._exterior_enabled.numpy()[0] == 0  # Existing fitting/containment succeeds.
 
 
 def test_quality_stages_improve_complete_pipeline_worst_element():

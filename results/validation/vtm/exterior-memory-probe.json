@@ -1,0 +1,50 @@
+[
+  {
+    "mode": "retain",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      ".work/vtm/exterior-memory-probe.py",
+      "retain"
+    ],
+    "exit_code": 99
+  },
+  {
+    "mode": "free",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      ".work/vtm/exterior-memory-probe.py",
+      "free"
+    ],
+    "exit_code": 0
+  },
+  {
+    "mode": "no-run",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      ".work/vtm/exterior-memory-probe.py",
+      "no-run"
+    ],
+    "exit_code": 0
+  }
+]

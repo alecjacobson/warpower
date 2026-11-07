@@ -1,0 +1,86 @@
+[
+  {
+    "case": "pair-first",
+    "exit_code": 0,
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      "-m",
+      "benchmarks.memcheck",
+      "--",
+      "-s",
+      "-q",
+      "tests/test_exterior_band.py::test_reduced_exterior_star_preserves_vertices_interior_cells_and_input",
+      "tests/test_exterior_band.py::test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames"
+    ]
+  },
+  {
+    "case": "pair-residual",
+    "exit_code": 0,
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      "-m",
+      "benchmarks.memcheck",
+      "--",
+      "-s",
+      "-q",
+      "tests/test_exterior_band.py::test_residual_bad_edge_rolls_back_all_earlier_changes",
+      "tests/test_exterior_band.py::test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames"
+    ]
+  },
+  {
+    "case": "pair-default",
+    "exit_code": 99,
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      "-m",
+      "benchmarks.memcheck",
+      "--",
+      "-s",
+      "-q",
+      "tests/test_exterior_band.py::test_independent_extractor_has_no_recovery_allocations_by_default",
+      "tests/test_exterior_band.py::test_device_producer_consumer_replay_resets_failure_empty_and_restored_frames"
+    ]
+  },
+  {
+    "case": "all-no-pool",
+    "exit_code": 99,
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      ".venv/bin/python",
+      "-m",
+      "benchmarks.memcheck",
+      "--disable-mempool",
+      "--",
+      "-s",
+      "-q",
+      "tests/test_exterior_band.py"
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /home/horde/.cache/warp/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 32768, "diagnostic_mempool_enabled": true}
+Module warpower._domain 1d6aea8 load on device 'cuda:0' took 1.18 ms  (cached)
+Module warpower._surface_bvh 24f4a38 load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.86 ms  (cached)
+Module warpower._triangle_contact 830b3c9 load on device 'cuda:0' took 1.90 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.85 ms  (cached)
+Module warpower._mesh_topology 20805dd load on device 'cuda:0' took 0.71 ms  (cached)
+Module warpower._extraction 527730c load on device 'cuda:0' took 2.75 ms  (cached)
+Module warpower._extraction 3113c00 load on device 'cuda:0' took 3.44 ms  (cached)
+first complete
+========= Program hit CUDA_ERROR_ILLEGAL_ADDRESS (error 700) due to "an illegal memory access was encountered" on CUDA API call to cuCtxSynchronize.
+=========     Saved host backtrace up to driver entry point at error
+=========         Host Frame: wp_cuda_context_synchronize [0xb69c79] in warp.so
+=========         Host Frame: synchronize_device in context.py:12720
+=========         Host Frame: <module> in exterior-memory-probe2.py:21
+========= 
+Warp CUDA error 700: an illegal memory access was encountered (in function wp_cuda_context_synchronize, /builds/omniverse/warp/warp/native/warp.cu:2869)
+Module warpower._exterior_band 98ccdcc load on device 'cuda:0' took 0.72 ms  (cached)
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/exterior-memory-probe2.py", line 21, in <module>
+    wp.synchronize_device(); print('second complete',f.selected.numpy(),flush=True)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 12721, in synchronize_device
+    raise RuntimeError(f"Failed to synchronize device {device}: {runtime.get_error_string()}")
+RuntimeError: Failed to synchronize device cuda:0: Warp CUDA error 700: an illegal memory access was encountered (in function wp_cuda_context_synchronize, /builds/omniverse/warp/warp/native/warp.cu:2869)
+========= Target application returned an error
+========= ERROR SUMMARY: 1 error

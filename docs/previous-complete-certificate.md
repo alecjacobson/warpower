@@ -100,3 +100,9 @@ There is no new full-suite, broad-gallery, memory-sanitizer, native-capture or
 standalone timing claim for these unadopted prototypes. Selective dispatch would
 need new evidence that it predicts a useful attempt without costing the savings.
 The wide CPU outperformance goal remains unmet.
+
+A later [exact-input observation study](exact-input-observation.md) measures a
+narrower all-coordinate-bit equality opportunity. On the fixed 16K trajectory,
+its three unchanged reconstruction windows cover only 0.42% of the instrumented
+timeline before cache overhead; no equality cache is adopted. The broader
+moved-subset proof remains issue #130.

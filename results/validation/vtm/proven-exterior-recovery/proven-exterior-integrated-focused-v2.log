@@ -1,0 +1,56 @@
+...............................................F.................        [100%]
+=================================== FAILURES ===================================
+_____ test_coarse_graded_nonmanifold_boundary_recovery_strategies[False-0] _____
+
+recovery = 0, containment = False
+
+    @pytest.mark.parametrize("recovery", [0, 3])
+    @pytest.mark.parametrize("containment", [False, True])
+    def test_coarse_graded_nonmanifold_boundary_recovery_strategies(recovery, containment):
+        d = warpower.SurfaceDomain(*cube(), surface_subdivisions=6)
+        field = warpower.SizingField(
+            np.array([[-0.8, 0, 0], [0.8, 0, 0]], np.float32),
+            wp.array([0.2, 0.5], dtype=float, device=d.device),
+            gradation=0.3,
+        )
+        source = wp.array(
+            np.random.default_rng(2026).uniform(-0.9, 0.9, (128, 3)).astype(np.float32),
+            dtype=wp.vec3,
+            device=d.device,
+        )
+        mesh = warpower.VariationalMeshingWorkspace(
+            d,
+            136,
+            target_count=128,
+            initial_count=128,
+            sizing=field,
+            polish_iterations=5,
+            quality_rounds=0,
+            max_recovery_rounds=recovery,
+            containment_recovery=containment,
+        )
+    
+        def reproduce_sampling(stream=None):
+            wp.copy(mesh.sampler.points, source)
+            mesh.sampler.count.fill_(128)
+            mesh.sampler.error.zero_()
+    
+        # Keep the original failing point set independent of sampler changes.
+        mesh.sampler.run = reproduce_sampling
+        with wp.ScopedCapture() as cap:
+            mesh.run()
+        wp.capture_launch(cap.graph)
+        if containment:
+            validate(mesh)
+            assert mesh.extraction.repaired_count.numpy()[0] > 0
+            assert mesh.rounds.numpy()[1] == 0
+            assert mesh.steps.numpy()[0] == 5
+        elif recovery == 0:
+            assert mesh.core.error.numpy()[0] == mesh.extraction.error.numpy()[0] == 0
+>           assert mesh.extraction.diagnostics.numpy()[0] == 2
+E           assert np.int32(0) == 2
+
+tests/test_mesher.py:164: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_mesher.py::test_coarse_graded_nonmanifold_boundary_recovery_strategies[False-0]
+1 failed, 64 passed in 86.39s (0:01:26)

@@ -144,6 +144,9 @@ points before reporting failure. `tangential_recovery=False` omits its storage
 and work. This recovery remains enabled when `quality_rounds=0`; that option only
 omits the ordinary selective/jitter/interior schedule. A small fitting-energy
 increase within the quality bound is allowed; the global-step rule is unchanged.
+Recovery [omits inherited approximate-query scratch](recovery-query-storage.md)
+that its complete candidate extraction does not use. Ordinary quality moves
+and the candidate extractor retain their active caches.
 
 Each optional quality stage starts with a valid-mesh checkpoint. A stage error or
 invalid extracted boundary restores positions, connectivity, counts, statistics,

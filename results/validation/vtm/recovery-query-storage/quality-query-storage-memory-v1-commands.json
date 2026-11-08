@@ -1,0 +1,98 @@
+[
+  {
+    "name": "storage",
+    "mode": "padded",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_recovery_query_storage.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 63.89262008666992,
+    "timeout_seconds": 600,
+    "disable_pool": false,
+    "zero_memcheck_errors": true,
+    "expected_tests": 1
+  },
+  {
+    "name": "storage",
+    "mode": "lifetime",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "use-after-free",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_recovery_query_storage.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 78.91021513938904,
+    "timeout_seconds": 600,
+    "disable_pool": true,
+    "zero_memcheck_errors": true,
+    "expected_tests": 1
+  },
+  {
+    "name": "loop",
+    "mode": "padded",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "/home/horde/projects/power-diagram/.work/vtm/test_tangential_production_loop_v2.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 310.6489989757538,
+    "timeout_seconds": 1200,
+    "disable_pool": false,
+    "zero_memcheck_errors": true,
+    "expected_tests": 1
+  },
+  {
+    "name": "loop",
+    "mode": "lifetime",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "--check-api-memory-access",
+      "yes",
+      "--track-stream-ordered-races",
+      "use-after-free",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "/home/horde/projects/power-diagram/.work/vtm/test_tangential_production_loop_v2.py"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 494.91627049446106,
+    "timeout_seconds": 1200,
+    "disable_pool": true,
+    "zero_memcheck_errors": true,
+    "expected_tests": 1
+  }
+]

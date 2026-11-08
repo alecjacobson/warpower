@@ -1,0 +1,168 @@
+{
+  "scope": "Static self/super callback reachability for the issue241 setup-only proposal.",
+  "runtime": "6178890a2a1f63935a807162e07747899c22b1ad",
+  "source_sha256": {
+    "warpower/_quality_moves.py": "14ab1638e0f3a63165009ff36217daefc8ef9355fd6eebe432cf3b1fc4180ba3",
+    "warpower/_topology_recovery.py": "5658a754bd2e839e67d5b5a7d921dc3c6f06c48e779ea43dae9662d87962bb4c"
+  },
+  "roots": [
+    [
+      "QualityMove",
+      "run"
+    ],
+    [
+      "TopologyRecovery",
+      "reset"
+    ],
+    [
+      "TopologyRecovery",
+      "_record"
+    ],
+    [
+      "QualityMove",
+      "_finish_setup"
+    ]
+  ],
+  "reachable_methods": [
+    [
+      "QualityMove",
+      "_apply"
+    ],
+    [
+      "QualityMove",
+      "_build"
+    ],
+    [
+      "QualityMove",
+      "_commit"
+    ],
+    [
+      "QualityMove",
+      "_complete_quality"
+    ],
+    [
+      "QualityMove",
+      "_finish_setup"
+    ],
+    [
+      "QualityMove",
+      "_launch"
+    ],
+    [
+      "QualityMove",
+      "_metrics"
+    ],
+    [
+      "QualityMove",
+      "_record"
+    ],
+    [
+      "QualityMove",
+      "_try"
+    ],
+    [
+      "QualityMove",
+      "run"
+    ],
+    [
+      "TopologyRecovery",
+      "_initial"
+    ],
+    [
+      "TopologyRecovery",
+      "_operate"
+    ],
+    [
+      "TopologyRecovery",
+      "_prepare_proposal"
+    ],
+    [
+      "TopologyRecovery",
+      "_propose"
+    ],
+    [
+      "TopologyRecovery",
+      "_quality"
+    ],
+    [
+      "TopologyRecovery",
+      "_record"
+    ],
+    [
+      "TopologyRecovery",
+      "_restore"
+    ],
+    [
+      "TopologyRecovery",
+      "reset"
+    ]
+  ],
+  "unused_approximate_fields": {
+    "_query_keep": [
+      [
+        "QualityMove",
+        "__init__"
+      ],
+      [
+        "QualityMove",
+        "_approximate_quality"
+      ]
+    ],
+    "_query_quality": [
+      [
+        "QualityMove",
+        "__init__"
+      ],
+      [
+        "QualityMove",
+        "_approximate_quality"
+      ]
+    ],
+    "_query_count": [
+      [
+        "QualityMove",
+        "__init__"
+      ],
+      [
+        "QualityMove",
+        "_approximate_quality"
+      ]
+    ],
+    "_query_error": [
+      [
+        "QualityMove",
+        "__init__"
+      ],
+      [
+        "QualityMove",
+        "_approximate_quality"
+      ]
+    ],
+    "_query_cache": [
+      [
+        "QualityMove",
+        "__init__"
+      ],
+      [
+        "QualityMove",
+        "_approximate_quality"
+      ]
+    ],
+    "_query_minimum": [
+      [
+        "QualityMove",
+        "__init__"
+      ],
+      [
+        "QualityMove",
+        "_approximate_quality"
+      ]
+    ]
+  },
+  "prototype_sha256": "5dedecea4945099dd7190126c38fd147d62af2c33430d9c1e61201d2e59540e8",
+  "limitations": [
+    "AST audit resolves current explicit self/super method references, including callbacks passed to graph helpers; it is not a general Python alias proof.",
+    "The candidate extractor owns a different active cache and is not changed.",
+    "Runtime graph capture, memory/lifetime and end-to-end performance/geometry checks remain unexecuted."
+  ]
+}

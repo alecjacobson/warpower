@@ -1,0 +1,7 @@
+torus16384-fixed32 0.9994132820031534 {'points_bitwise_equal': True, 'maximum_coordinate_difference': 0.0, 'roles_equal': True, 'full_tets_equal': True, 'material_tets_equal': True, 'oriented_boundary_equal': True, 'changed_scalar_coordinates': 0, 'relative_coordinate_difference': 0.0}
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/check-quality-query-storage-final-v1.py", line 62, in <module>
+    row['comparison']=differences(x,y);row['input_arrays_equal']={k:bool(np.array_equal(x[k],y[k])) for k in ['input_points','input_faces']}
+  File "/home/horde/projects/power-diagram/.work/vtm/check-quality-query-storage-final-v1.py", line 35, in differences
+    assert all(row[k] for k in ['roles_equal','full_tets_equal','material_tets_equal','oriented_boundary_equal']),row
+AssertionError: {'points_bitwise_equal': False, 'maximum_coordinate_difference': 3.469446951953614e-18, 'roles_equal': True, 'full_tets_equal': False, 'material_tets_equal': True, 'oriented_boundary_equal': True, 'changed_scalar_coordinates': 2, 'relative_coordinate_difference': 9.013040442028992e-19}

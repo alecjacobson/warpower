@@ -472,7 +472,9 @@ reference and feature-role guards. Exhaustion restores points and reconstructs
 private certificates. This scoped policy resolves the measured uniform/graded
 8K Armadillo failures; standalone diagram/Delaunay paths and allocations are
 unchanged. The report includes its additional setup/storage cost and bounded
-failure semantics.
+failure semantics. A subsequent [constructor-only reduction](recovery-query-storage.md)
+omits recovery's unused approximate-query cache and scratch while retaining the
+candidate extractor's active cache, ordinary quality-move caches and checkpoints.
 
 The [example gallery](examples.md) includes uniform/graded torus and scanned
 Armadillo meshes, thin geometry, cavities, disconnected domains and a

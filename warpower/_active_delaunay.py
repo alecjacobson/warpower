@@ -89,7 +89,7 @@ class ActiveDelaunayWorkspace:
         ):
             raise ValueError("active_count must be one contiguous device int32")
         self.active_count = active_count
-        self._full_reuses_cells = 2048 < len(points) <= 4096
+        self._full_reuses_cells = 2048 < len(points) <= 16384
         full_constructor = ReuseDelaunayWorkspace if self._full_reuses_cells else DelaunayWorkspace
         self._full = full_constructor(points, **options)
         self.points, self.n, self.device = self._full.points, self._full.n, self._full.device

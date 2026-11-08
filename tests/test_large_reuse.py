@@ -35,7 +35,7 @@ def remove_last_cell(count: wp.array[int]):
     count[0] -= 1
 
 
-@pytest.mark.parametrize("capacity", [2050, 4096])
+@pytest.mark.parametrize("capacity", [2050, 4096, 4097, 8192, 16384])
 def test_large_route_changes_inputs_and_prefixes_without_host_decisions(capacity, monkeypatch):
     rng = np.random.default_rng(161)
     initial = rng.normal(size=(capacity, 3)).astype(np.float32)
@@ -44,9 +44,38 @@ def test_large_route_changes_inputs_and_prefixes_without_host_decisions(capacity
     unrelated = rng.normal(size=(capacity, 3)).astype(np.float32)
     invalid = initial.copy()
     invalid[4, 0] = np.nan
-    counts = [capacity, capacity, 512, capacity, capacity + 1, capacity, capacity, capacity]
-    frames = np.stack([initial, nearby, initial, unrelated, initial, initial, invalid, initial])
-    frames[2, 512:] = np.nan
+    counts = [
+        capacity,
+        capacity,
+        1024,
+        1025,
+        2048,
+        2049,
+        512,
+        capacity,
+        capacity + 1,
+        capacity,
+        capacity,
+        capacity,
+    ]
+    frames = np.stack(
+        [
+            initial,
+            nearby,
+            initial,
+            initial,
+            initial,
+            initial,
+            initial,
+            unrelated,
+            initial,
+            initial,
+            invalid,
+            initial,
+        ]
+    )
+    for i in range(2, 7):
+        frames[i, counts[i] :] = np.nan
     device = "cuda:0"
     source = wp.array(frames, dtype=wp.vec3, device=device)
     sizes = wp.array(counts, dtype=int, device=device)
@@ -115,7 +144,7 @@ def test_large_route_changes_inputs_and_prefixes_without_host_decisions(capacity
     wp.synchronize_stream(stream)
     rows, cells, reused = meta.numpy(), history.numpy(), reuse.numpy()
     for i, count in enumerate(counts):
-        if i in (4, 6):
+        if i in (8, 10):
             assert rows[i, 0] == 0 and rows[i, 1] != 0
         else:
             assert rows[i, 0] > 0 and rows[i, 1] == 0, (i, rows[i])
@@ -123,11 +152,11 @@ def test_large_route_changes_inputs_and_prefixes_without_host_decisions(capacity
             actual = cells[i, : rows[i, 0]]
             assert tet_set(actual) == reference(cloud)
             check_mesh(cloud, actual)
-            assert rows[i, 2] == (1024 if i == 2 else capacity)
+            assert rows[i, 2] == next(n for n in w.capacities if count <= n)
     assert reused[0, 0] == 0
     assert reused[1, :2].tolist() == [1, 1]
     assert reused[1, 2] > 0  # The large completion consumes current-input proofs.
-    assert reused[7, 0] == 0  # Nonfinite input clears the full retained fragment.
+    assert reused[11, 0] == 0  # Nonfinite input clears the full retained fragment.
     assert pointers == (w.tetrahedra.ptr, w.tetrahedra_count.ptr, w.points.ptr)
     np.testing.assert_array_equal(points.numpy().view(np.uint32), initial.view(np.uint32))
 
@@ -144,8 +173,9 @@ def test_large_route_changes_inputs_and_prefixes_without_host_decisions(capacity
     assert tet_set(actual) == reference(initial)
 
 
-def test_large_unproved_cell_corruption_requires_ordinary_fallback():
-    points = np.random.default_rng(162).normal(size=(2050, 3)).astype(np.float32)
+@pytest.mark.parametrize("capacity", [2050, 8192])
+def test_large_unproved_cell_corruption_requires_ordinary_fallback(capacity):
+    points = np.random.default_rng(162).normal(size=(capacity, 3)).astype(np.float32)
     w = ReuseDelaunayWorkspace(points)
     w.run()
     assert w.error.numpy()[0] == 0
@@ -193,9 +223,10 @@ def test_large_unproved_cell_corruption_requires_ordinary_fallback():
     check_mesh(points, actual)
 
 
-def test_large_output_exhaustion_does_not_retain_or_publish_partial_cells():
+@pytest.mark.parametrize("capacity", [2050, 8192])
+def test_large_output_exhaustion_does_not_retain_or_publish_partial_cells(capacity):
     points = wp.array(
-        np.random.default_rng(163).normal(size=(2050, 3)).astype(np.float32),
+        np.random.default_rng(163).normal(size=(capacity, 3)).astype(np.float32),
         dtype=wp.vec3,
         device="cuda:0",
     )
@@ -210,10 +241,11 @@ def test_large_output_exhaustion_does_not_retain_or_publish_partial_cells():
         assert w._full._previous_count.numpy()[0] == 0
 
 
+@pytest.mark.parametrize("capacity", [4096, 16384])
 @pytest.mark.parametrize("scale", [2.0**-60, 1.0, 2.0**60])
-def test_large_full_route_preserves_cospherical_first_duplicate_owners(scale):
+def test_large_full_route_preserves_cospherical_first_duplicate_owners(scale, capacity):
     cloud = np.array(list(product([-1, 1], repeat=3)), np.float32) * np.float32(scale)
-    source = np.tile(cloud[0], (4096, 1))
+    source = np.tile(cloud[0], (capacity, 1))
     source[: len(cloud)] = cloud
     points = wp.array(source, dtype=wp.vec3, device="cuda:0")
     active = wp.full(1, len(points), dtype=int, device=points.device)

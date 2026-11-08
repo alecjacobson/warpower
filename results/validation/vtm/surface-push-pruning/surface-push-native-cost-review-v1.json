@@ -1,0 +1,102 @@
+{
+  "scope": "Compare native kernel attribution at equal recorded work; diagnostic timing only.",
+  "before_runtime": "e6033866f87775b3959d8780e019fd1bf5bf9639",
+  "after_runtime": "7bd8542d1292512b0594a6ac5e6c75451b77aa50",
+  "changed_sources": [
+    "warpower/_surface_bvh.py"
+  ],
+  "inputs": {
+    ".work/vtm/surface-sample-uniform-native-v1-kernels.json": "6470e2e8c672c0bb12ea6f0403e8d0256aedaa0fdd114160c2a2292884614f5d",
+    ".work/vtm/surface-push-uniform-native-v1-kernels.json": "e205b4b8c5abcd4eb23958b911253eb8e63621062dbf0f8864e0cecf6d98100f"
+  },
+  "source_sha256": "300f8c39260d761e1deff2fc36f9ec0cfe4a8366a02b199e641ec4f41cb046de",
+  "rows": [
+    {
+      "kernel": "selection_cached_ordered",
+      "before": {
+        "kernel": "selection_cached_ordered_7ab05e3f_cuda_kernel_forward",
+        "registers": 255,
+        "block_size": 32,
+        "calls": 63,
+        "milliseconds": 683.586157
+      },
+      "after": {
+        "kernel": "selection_cached_ordered_57728e17_cuda_kernel_forward",
+        "registers": 255,
+        "block_size": 32,
+        "calls": 63,
+        "milliseconds": 602.941284
+      }
+    },
+    {
+      "kernel": "classify_cached_ordered",
+      "before": {
+        "kernel": "classify_cached_ordered_dbf33f1b_cuda_kernel_forward",
+        "registers": 255,
+        "block_size": 32,
+        "calls": 60,
+        "milliseconds": 400.839048
+      },
+      "after": {
+        "kernel": "classify_cached_ordered_ed20fbad_cuda_kernel_forward",
+        "registers": 255,
+        "block_size": 32,
+        "calls": 60,
+        "milliseconds": 333.458013
+      }
+    },
+    {
+      "kernel": "surface_error",
+      "before": {
+        "kernel": "surface_error_b1df04f5_cuda_kernel_forward",
+        "registers": 78,
+        "block_size": 32,
+        "calls": 60,
+        "milliseconds": 371.542444
+      },
+      "after": {
+        "kernel": "surface_error_340013a2_cuda_kernel_forward",
+        "registers": 80,
+        "block_size": 32,
+        "calls": 60,
+        "milliseconds": 313.033972
+      }
+    },
+    {
+      "kernel": "accumulate_samples",
+      "before": {
+        "kernel": "accumulate_samples_da8eb4ee_cuda_kernel_forward",
+        "registers": 48,
+        "block_size": 32,
+        "calls": 534,
+        "milliseconds": 495.627344
+      },
+      "after": {
+        "kernel": "accumulate_samples_da8eb4ee_cuda_kernel_forward",
+        "registers": 48,
+        "block_size": 32,
+        "calls": 534,
+        "milliseconds": 500.669281
+      }
+    },
+    {
+      "kernel": "search_unproved_faces",
+      "before": {
+        "kernel": "search_unproved_faces_a941788e_cuda_kernel_forward",
+        "registers": 255,
+        "block_size": 32,
+        "calls": 309,
+        "milliseconds": 239.936676
+      },
+      "after": {
+        "kernel": "search_unproved_faces_a941788e_cuda_kernel_forward",
+        "registers": 255,
+        "block_size": 32,
+        "calls": 309,
+        "milliseconds": 240.052509
+      }
+    }
+  ],
+  "complete": true,
+  "limits": "Separate instrumented native runs; not clean timing samples or an occupancy measurement. Full-solve performance uses the paired benchmark matrix."
+}

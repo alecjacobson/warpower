@@ -1,0 +1,2489 @@
+{
+  "scope": "Publish qualified exact push pruning with immutable evidence and proof dependencies.",
+  "baseline": "55f356c7aa8cf91d5143b1f392e3b96038c6462d",
+  "runtime": "7bd8542d1292512b0594a6ac5e6c75451b77aa50",
+  "runtime_source_sha256": {
+    "LICENSE": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+    "README.md": "e9a30cfc626c653217587791cb947eb7770726e984e4f9ba6d344d306b4c35a4",
+    "benchmarks/__init__.py": "aec4f6323c9af970cf489ad57de6195f5ef87df6edad0eaf51772e8c1b5506b2",
+    "benchmarks/active_delaunay.py": "dedc3721fd0b4eb4aef2c1bac457d64e225e7d44c578543472d16712fa45c06c",
+    "benchmarks/amplitude_order.py": "30b7eff6791a9c223c9014ce294af52b4a55a876aa6a6f85a54575754b1fe9cf",
+    "benchmarks/audit.py": "a1cac06ad03b11f588b8b3ea916091f3a8b238355f1e000f2b6c8e018ec0351e",
+    "benchmarks/bounded_predicate_proof.py": "90ce13274a06dc7a2f9dcf9c684fadc1967317d1e6f714956b08b0dae49a6002",
+    "benchmarks/certificate_fallback.py": "56f63983be10d2cecced520299f5fd8312e56071679b197c5dbef1967cb92e7e",
+    "benchmarks/compare.py": "790623d2707147a0614a828212664dca47c9d5e46a65380817c1e3af2ed5dd50",
+    "benchmarks/containment.py": "deecfe5cb518e1bcbce536e89a2bc1a6a93fc7072088ae9e5b760c7b2215d516",
+    "benchmarks/control_loop.py": "5f242c360349286c62ea42f4c8fa57f07eba58d1f011f32a1da29304a9b61454",
+    "benchmarks/cpu/README.md": "8b867d4ac2b3cf304a3d78d84c8070b72ad4ccd19373f7fd207d54615ebdf1c1",
+    "benchmarks/cpu/check_delaunay.cpp": "1a2b1ec4537bbad7a2ac5edd237d853c88bc2167e864eac2686fd9e98ccc3fcd",
+    "benchmarks/cpu/delaunay.cpp": "63f8510d06858f3641a57d1718fb7bfb4c64972fa6a1185ee2afb403399b8b5d",
+    "benchmarks/cpu/mesh3.cpp": "a46987f8e991372f63795d5a1b4a9f57ae013afb19880329a94355766dc60060",
+    "benchmarks/cpu/surface_distance.cpp": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d",
+    "benchmarks/cpu/surface_intersections.cpp": "227f37892bdc6a783ed12bc110a7c53571862951f264a5b72d07b7d21f341775",
+    "benchmarks/cpu/triangle_contact.cpp": "1ecbf2edad5bdaf0f2f14d4e7c09ef27b842f29d853b35a26b71d827c9f65192",
+    "benchmarks/cpu_mesher.py": "96a2824e9e7388e2cf8a96ccc02d2cb564d301ad3b95e24421d181b81c0a7e30",
+    "benchmarks/datasets.py": "c06985fd7d32f87c193dc096e434b3389a2456a94451c778be5158c808e14f69",
+    "benchmarks/default_path.py": "0c97b2d2e5b5e2a1995fbdb455b1a333ae00c37d2bc673a1f47221e1d05aceed",
+    "benchmarks/delaunay_recovery.py": "a317c72d588feefec484ec85ef11a82f569614f4995131736ff5237ab7348471",
+    "benchmarks/domain.py": "8738c173885f57f82c3168b7b324cca13c35ac70c0d123abbfd96cdbfae34fad",
+    "benchmarks/exterior_loop.py": "f15db0dc5d0bf4d8f7896caf8dd808e8011f5e19a59266c49eda2d3a78cf7374",
+    "benchmarks/extraction.py": "c8b1b6ea55944de8af60da3eea1c989696fb3fb98c2e7e33f1f36e9f23807964",
+    "benchmarks/facet_completion.py": "ac8f46ea57539e83a3925ddb882cc471f4868d36df28837fab9c5ee53ae5bc37",
+    "benchmarks/facet_recovery.py": "48e3da3b1e530a4903e85ed0aac4b359798ff873d580fab13a6f65ca736f7fb6",
+    "benchmarks/fast_candidate_matrix.py": "6d61d8fae12af5266224585a533715dfe243d3a3ca497ae8f43e4a6a90d22387",
+    "benchmarks/fast_candidates.py": "2666a8916fe9677c3d75242867bcd758b940b9963a3aa4edd4d3a1f5dcd614b9",
+    "benchmarks/feature_quality.py": "06f9c355f193ad5c6ff8b63a98d33bbbaaf497b965cf3e84459efd3fa638d4c8",
+    "benchmarks/fetch_scenes.py": "99a8d693aae203927a012a8e4e152c04fb838eb49ea6d0a447ec10a9109644f3",
+    "benchmarks/geometry_regression.py": "34751f0eb34023aab8ba94da7c817b4255bf287239baa0c589551f39f83d8a14",
+    "benchmarks/global_certificate.py": "a7ebe54dd446a63b85378fab4556014e2a01816a9c86be420cf88f4986b6ac20",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f",
+    "benchmarks/graphs.py": "99ce61f786157147024705d2282803dc3d7e6c2d17812dcefd2a3a29f84764dd",
+    "benchmarks/initialization.py": "d4fdbc016406e0f9560912ff3ea687b782bbb90a2d2f17481bb504e00b582f3c",
+    "benchmarks/interior.py": "3b11554d7882e0361fb04929299b06e8c101193177415e4e307ea0539ec1909f",
+    "benchmarks/jitter.py": "ecb96baf3daca6e4a0e62efc2cc10122a3f0339725d90813291cb8e355153153",
+    "benchmarks/local_certificate.py": "9e17b0321af3b6116689245a525717d8c17c5c600e7a0844996836ec4dd6ca9c",
+    "benchmarks/matrix.py": "45135d3e98d852bd18939e56269ae67f4cc503bd81ecec3252175da32009bd57",
+    "benchmarks/memcheck.py": "707d7d29ef6469d9cc52f56d6f21b0dc5464a6aedf858eca09ebb91bcda6df50",
+    "benchmarks/memory.py": "139f0195ef37b2d163797332166b2b70774a1c34324abe742027caac08175c89",
+    "benchmarks/mesh_quality.py": "0a5765c4d82da5e24ccda94bf2c149875c83932bc314c9211b276a99a893e0dd",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "benchmarks/mesher_loop.py": "e384c22f1e2334aeca3d0c7441eca7354d8c1d75a99b3a9fe0e0f93df449c141",
+    "benchmarks/mesher_policy.py": "75a2b13ef4e10aa07ecdbc8e2b856eb171c9da7836c6bf83b0fa4f43fff12d98",
+    "benchmarks/nested_capture.py": "4ba4856c8af8fde4e1c738d9f7924523c02e83dac593864d6c6cf2741704b568",
+    "benchmarks/odt.py": "556322d06aa7108b2a6a76f01d15151db7008a93dcefe68ee08d3b785f49191d",
+    "benchmarks/odt_failure.py": "3b1c7402bc752678048198626919c2de6c5e50a1a1ef28f81860c104531efc99",
+    "benchmarks/radix_capture.py": "9df57f171e7287d4765d89f7875dfcf700b689dcad502c923a3c7498e34d49e7",
+    "benchmarks/recovery_policy.py": "58db4056f1de878f9ee32cd7a722486618dd2ac4b45ee9c396bbac45e00c4d70",
+    "benchmarks/refined_hand.py": "4fdf7e0d8dc05d9b484b242cef42f9832f4082658c2db9629dd59e612e3ce308",
+    "benchmarks/refinement.py": "86cd281caeee343f6cd748f998b72840348c679ad74734a2ba7da07c8b0281fe",
+    "benchmarks/reuse_delaunay.py": "99b23c95af424175126dfe405b588d29e5e7c55947b6ae00b7974c21e9aaf218",
+    "benchmarks/run.py": "30fc6978f5d1ee4f486f69ee3316a27fd7edf30b5d9f4dc4a3a8a47b77419d0e",
+    "benchmarks/selective.py": "c1530960d11574b1f75be7fa6db78bfb4f9455c72ca169b1bd6356e22d113936",
+    "benchmarks/sizing.py": "1086b3e357d960432ab9203eb026f16d28ae70daa81b5b439826bb45d2200680",
+    "benchmarks/stable_centers.py": "cf7a7c05e9cb3b414baec12c425c3788aaa3b26fddc123e896d0ac56dc323d24",
+    "benchmarks/stable_volumes.py": "6da84b42e0a2feee55cce3dc96810f960acda9f2d7122f3f5536466dad58c9fe",
+    "benchmarks/summarize.py": "ef218ab6fb7c60ab87400937292b357712638735799476960cb671418e5e4cb1",
+    "benchmarks/surface_distance.py": "977463196b35b253c1fee0193f87522dd8d43af87ad636c73737d64b678d6f2f",
+    "benchmarks/surface_distance_audit.py": "5c9c83555dc3d75ed5a697ce0bdb0388ffa68ed74dbb36746c19675ae0c58f26",
+    "benchmarks/symbolic_controls.py": "48658b1465d48a921ab4dc66f77c2d25120086c58a467133082b35b6ba23509a",
+    "benchmarks/tetrahedra.py": "b6429485a06a174687b092a3ffda29e8e14e414e825a8232ffc47603381a30e7",
+    "benchmarks/vtm_core.py": "acfae8356f3021a443036c9eda856797b5e8a564e287c4b57910f440fe3c0e2a",
+    "benchmarks/vtm_domain.py": "8244b3e036d038e5bd7ab6c5225144f62545bc02b22df4f1805a813d041bde8d",
+    "benchmarks/wide_extraction.py": "3665c607d1f786caa4d963df721d687a63ee1da5778b467e9bf58a79d016e29b",
+    "examples/__init__.py": "ac121f6f6650b3f9a5d6d9c65729a29df07f7d05998162d8f382d106725e12de",
+    "examples/fetch_armadillo.py": "2a098a8e224973dbb2dab308a75e95ff9b179316e1e81b1dd67a65bfa4ac0dff",
+    "examples/vtm_gallery.py": "7ef17562e1aa3938d2062d99f3d70b0a2b1b6e893ca72bb8742346989f5550d7",
+    "examples/vtm_inputs.py": "83284ecd146010c2d610b221bdfeaa16ce0b98fd59cda561c1602bdfa87bc9a0",
+    "examples/vtm_render.py": "ef908f1733b376be8b77fb1295cb09040984a1578d6058f09dede4d75522a3cd",
+    "pyproject.toml": "082b9b1c8f553f67769fbc39d46fe88eccb418039116ab46c59848a300fa74b4",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/_flushed_bounded_predicates.py": "ee34d64c929fe22400fe5b4184fb59790ed2ccae61eaa203d6c0348aa478e828",
+    "tests/data/NOTICE.md": "a3064a7b40df81d0a31ef9e46484b79765fe0af57eedf7db5b3355f7f501c7bd",
+    "tests/data/exterior-band-patch.json": "72548a0b5c79f4c48de06f4f77a10ea99a6f9aa3cfa45b99f97c65575acec673",
+    "tests/data/hand-fit256.json": "f5e17289d47d83e7f231645a1caa7a9fc6dc934cdcfbedc5de230b692e99b085",
+    "tests/data/hand-fit256.npz": "2e2ba670c80d1658b94fbc37a3daa4d9d5fec13c2049e55ca5aefa91675beb1a",
+    "tests/data/hand-refined384.json": "753d083d4eda168fe26fe68c34e4e2909db869b5b4805df1e81a8db2199d9f56",
+    "tests/data/hand-refined384.npz": "55cb5a457d4936b0dde1774b6661df1e8a4531fecaf3b2c2f23d488cb2b42e9c",
+    "tests/data/intermediate-cell-capacity.json": "bab5f84028c7660c411ea2b81be15da514305a9dcc14235086e2c3b90a653a62",
+    "tests/data/proven-exterior-continuation.npz": "e48c344e29b03852277bc8b0dc183580667d4dd6b21a44f878558e9cac8fc59e",
+    "tests/data/proven-exterior-original.npz": "3a2f9f8146928b144abc33e128f2162dcd7ff5aebd69c9369b2d1af46f624a13",
+    "tests/data/tiny-positive-tets.json": "92d4f78de1bea8fcb0a58baa3d634fdae946589505dc2cc9f02073f0d1721dbe",
+    "tests/data/tiny-positive-tets.npz": "7d235dcfb82d412a646df0bea266c4fce65d8bac19be891942b338740bea8afb",
+    "tests/data/triangle-contact-regressions.json": "95aceb5841ede392999c2e5897e8e582b3cb8b7b89e6275e360940a20df17173",
+    "tests/data/unassigned-hand-sites.json": "5d72f9bd7c5e0e53639bc800637ff0987cfed3bb3d9d9128ea00ae1438b4a508",
+    "tests/data/unassigned-hand-sites.npz": "4f7349b355af0394637b922e3d33d08b8ee48c270d9ef37e1c60973a72c1ff20",
+    "tests/oracle.py": "48420fcd46156f6fd1c0b6bcb9ca0d2696652814253add0620f062fc5dd2113c",
+    "tests/surface_nearest_reference.py": "233067ec3622da5cd2ea49d09cf7d8de978916422de636195f9ed9b460229401",
+    "tests/surface_quadrature_reference.py": "ac0d5bb65a86f443f81cb62aa1f8841efd1af9b9831e57ada54d96cec7b2fa13",
+    "tests/surface_traversal_reference.py": "b27c042e2ffbb4a987350b0818e69fb89143c987bca511d8869afcf873084f3f",
+    "tests/test_active_delaunay.py": "954e144b24c3be5033d787290ac75b6ee8054f2f880d7d33a7d024f4bce5051a",
+    "tests/test_active_sites.py": "193cc7f1dd52f56084a771ee0257036af85e5c0958e063f22356ad5b9bd160b9",
+    "tests/test_amplitude_order.py": "597f577b894740dc9de1a4aea275160b257803e6efd3f76e855e577c46ced1c3",
+    "tests/test_analytic_face_search.py": "42244e86aac930bd92d391413c90a78402e74df89fa04ac06f08da2841546a20",
+    "tests/test_analytic_predicates.py": "125a0dbe23ae98593874a894859412e864fcf1da4a740b80047756322470ca28",
+    "tests/test_api.py": "6f2c11b0e5fb216eb56d001db1cb8095e0e037812876ce8b56242bf086c1ef1f",
+    "tests/test_automatic_sizing.py": "8d0fc304dd32b62913411c6e54bd0911fe02215103f8dcc52bc3ec7cd72b276e",
+    "tests/test_axis_hull_support.py": "632169985a431c359fa41d01e9cdb4d4335c6387302a74816c6933ee14b7b395",
+    "tests/test_boundary.py": "a9f025bdc0c2e0afb1669dadc83a91ddc143100d0f3fdc64c7b4040e3ec37092",
+    "tests/test_boundary_rounding.py": "a126c9aee674cf06ac65c10480e493506b691fb8034c341500526701b9512b3a",
+    "tests/test_bounded_hull_box.py": "78f70047ec5edb551b364e3cc70e9b88d2013dd2cca8bf302391d0554eb8eb76",
+    "tests/test_bounded_hull_support.py": "151b018db30cd8603af564987b315386e168d46066ba6c848187546aaf2e69e2",
+    "tests/test_bounded_predicate_proof.py": "dd889cb288e45200d172f2c5c3c734690bc55173c8d8b3241782c82f94983c01",
+    "tests/test_bounded_predicates.py": "5533a685b89e448b63c6df6d96c92e4cd960aa6bf2a67baf4a99aaeda9e6d05c",
+    "tests/test_bvh.py": "26c93dd7b027de11401933c3384b446c09456c233ba8a3360520e3749fe68696",
+    "tests/test_cell.py": "573f2c8a2a1dca553d7a497fca985a7e06fa8a65c3cd9017610ec7e04110fcb2",
+    "tests/test_centroid_ray_filter.py": "830fabec3d3bf5053a3d664a22985c57b699c4227e76c6abcc8126e288f96baa",
+    "tests/test_containment.py": "6ebae623d294dbe35d33b93aa5ef7eac84994384ca8611e9bcdf16c5d7258db9",
+    "tests/test_containment_mesher.py": "080cd7c1decd7249c2bb4ee8e1ea602ad6142a9b7833be9c6c9f46e3dfd47f87",
+    "tests/test_containment_nested.py": "d43a63c227bf33ade2359994a24a53b0c61498ff05ad9a0e9009bae38a27c0eb",
+    "tests/test_containment_oracle.py": "67ffc0dc4dd5b72c6876bca5139f6fb98d45cd99b4256d7b782b943098bf4ddf",
+    "tests/test_containment_ray_filter.py": "7bff2141f114a2c41fb476538a95086c702625dc3b545911df0ce8d56e51970a",
+    "tests/test_containment_selection.py": "4e2a0932a3b80508f6125b7c10f298023032dd8120cd759c5544a2d6a960ffe2",
+    "tests/test_current_selection.py": "b327bd9bda9851fd13e35db241d58db3d49f117533a0f70db2b2eb67e0486965",
+    "tests/test_delaunay_recovery.py": "a372cdaa6791cd1244fd741cb5ceaa3c194fa369a03661a5720d5030f37530ea",
+    "tests/test_diagram.py": "ad5daaf9e90db281da36e7b880fabcf45c18d759dc8bcc0e1ea5daacd68195b1",
+    "tests/test_domain.py": "dffc6961eaa706bf56fb834c97cbfb603ebd3f075ba37eeb11dad79f2ea413c9",
+    "tests/test_domain_topology.py": "91de7e2903ac06f43d48ab6a829442267d572955c095170cdc4f0276497ec416",
+    "tests/test_exterior_band.py": "0e214e2818915c065eb2efd58126ace605529d519aecc603e9b924561a7a38d6",
+    "tests/test_exterior_proof.py": "843332aa837a688b46665779faeb110896aa48057f6efb2fd52cf96bc980e489",
+    "tests/test_exterior_proof_bvh.py": "1a98b480b8cb494eda3aa2d4fa211047e1afb7ca8e1bdf83029badd7132b3359",
+    "tests/test_exterior_scanned.py": "ca4647d79b32bca8c6880c81921b3cee6cb31db80ebef53e0e99ded2c6b685ff",
+    "tests/test_extraction.py": "32ef87874f704454ac6b58363a4e2f6996685c7a2393e2f6779ef66a6adb97e6",
+    "tests/test_face_certificate.py": "e2f104ac1fcb7443017b5ed5efbb602020bbb99c4fc397598265a9235e3feafa",
+    "tests/test_facet_completion.py": "ad3519ba087a19002d7c650e863e1f1ab6e78f118ce819fa3f7ce304d41cc3cf",
+    "tests/test_facet_recovery.py": "7ea40c5b7186c16584418f8c44df4f91b9d42e21c24f6e8c679d04a63f6018ac",
+    "tests/test_facet_seeds.py": "d4078e9b5390c9feb81eb524ea7831f64329fb307d6218a07a001b91d2b699b2",
+    "tests/test_fast_candidates.py": "0b560788841d415280130eff9aa7a3bbe76bf2b06665e649f4ecf8fd48b28092",
+    "tests/test_feature_quality.py": "e7ee05158baf0c85a8826dcb5622e9eeb03b640b18aa3f16998d51f88cab07e4",
+    "tests/test_filtered_predicates.py": "e88b3e183f6dfce5b657d4c0c6e0a0e73860b3148bb61e47c01716f9518f49ce",
+    "tests/test_graph.py": "8458b3bd5385aa007bbe99089852d81ef57d73162c426b64ce0bd4480936cfc8",
+    "tests/test_grouped_query_bounds.py": "73d737689ea965a7846ac03979ed79a4b85aff93cb309c4d5ecd8eb6f2f09242",
+    "tests/test_grouped_query_masks.py": "a3e766292eaf218e9299b98a4a3b8ff58e89caac032a4d460f4960c3485254c9",
+    "tests/test_halfspace_predicates.py": "943423db62d6c9bbcc0cd13c46dcf297d88ee67e19f5671210b9f25e6e6947d1",
+    "tests/test_integer_arithmetic.py": "86d87aae747f8af078236bd6bfd32f41bc2715b9381684ed605849d63e8b106b",
+    "tests/test_jitter.py": "ce182f424d44d954c0868cfb7b0b625f583afa5e33972c8674f58b0bcaa80cfb",
+    "tests/test_large_cells.py": "4b5eb900e3841eccbbda87249f0c1ef0075eb3ac0dba2e6ccdb040dc35778f2e",
+    "tests/test_large_reuse.py": "9f6056eb18dd1b70b588da14b643f8925060e3209a23df8d975633da7d9a08e3",
+    "tests/test_larger_prefixes.py": "91a9d1b0b7eb7bfd714e8bb4a48dc9e2d3ae8d0f6aab2cdd27c699c493900ecc",
+    "tests/test_local_backtracking.py": "880f38a764218abd10f7a48be4d9efea42a7096a56cb90c7269d6bfc4b1cb045",
+    "tests/test_local_certificate.py": "9dcd6bda42c67533725fb6d60b5fb1a814dba1c93bc193fcc2e252030b2fe17c",
+    "tests/test_mesh_api.py": "3578ea222aff484d6b0b4865e7ba4e99be677160782d3d64c2495eff822d1cbd",
+    "tests/test_mesher.py": "a1542d339adb5f33ba09509befd633319471b38064520222dda9eaaac915e571",
+    "tests/test_odt.py": "8568e3141bfb19b578a331981dea31a7cc6fe738428ad2d7895d7d5aa8ed6015",
+    "tests/test_ordered_surface_queries.py": "d279b2ae718dcc101ac2d7b5d50f755eaa210a7ef708a9b9e3185770134d439c",
+    "tests/test_parallel_certificate.py": "399f5539558e94cb38aec698c8cf0ebd2986c3ffbd68e9b4aaae5477737a6690",
+    "tests/test_predicates.py": "de069e809416286e46ed31a9218a5ae2f568e193cbeaead083094d3f2eda1a19",
+    "tests/test_prepared_point_bounds.py": "07a0d1fadd3b75666242e6b6ca97a1ba1fadc4ffa5c77bdba09048d2ea6a4c30",
+    "tests/test_prepared_query_masks.py": "1792bc27a333e42659213241602e7c1ca3804b3d1facc82126334b6cf88a7faa",
+    "tests/test_proved_completion.py": "d724e4965d65f0be00783753d70c0cdd68ba9103756a8da9a8e904dec34750c7",
+    "tests/test_proven_exterior.py": "ae1eb9a7014c5df90eae2038d42c216ffe972365b94a300760b0bb3e02beaee4",
+    "tests/test_proven_mesher.py": "bd264f1b692474eba71117148e365b844ba9f3250c292cd873b4c1cd1ec75cea",
+    "tests/test_recovery_query_storage.py": "15f1bf59daf54938c320cbaaa0404badad0247b04fc05ef0ad3d54e01478efb7",
+    "tests/test_reference.py": "ad6b665701747046fe37cec98d3ef668c42d376064f2d8ba10cc17a0200259da",
+    "tests/test_refinement.py": "2edb4416c77ef830b251d0550448effb7cdfa8092817dd3bf5603f7b23ab74f2",
+    "tests/test_reuse_delaunay.py": "fa2fcd08bcd8e33a12a6879af17d75ba15a8fcb72d43fb1cefbddb987afa0652",
+    "tests/test_sampling.py": "5205a7b7db6671a2f84e693bbaf7cc0e8d425cb268b8e1f9efc7e94b792cc38b",
+    "tests/test_selection_classification.py": "4fd088676c03625b7d1e953e1cf103038495df3f35e52b2e6fe624443538f0af",
+    "tests/test_selection_extraction.py": "1d4da4cbff877ca67a9e8ead3191e9616aaa727426588aab519db4a564e0ea2a",
+    "tests/test_selective.py": "4a90989cd455a5d23c41f8a75b7a2b2bb99f997a4d98db309c79c76d5c208921",
+    "tests/test_sizing.py": "26a59c31b6f027cc89f33cfbce7d23a509d7bf54eb420b8ecf8f25248cf2471b",
+    "tests/test_sphere_bounds.py": "51168c640fde377c0f38a96f350e3cab44df65c31c23f95a44dc11f1330f039e",
+    "tests/test_sphere_points.py": "9fb240e421f60ddd09b37f9d2ba4a824a6b4f603c42ccbdf63f751960af41643",
+    "tests/test_stable_center.py": "f1429a3bd74bee2fe1bb37e9c9a03fb18041db33ddcea579d1c464fbe5268170",
+    "tests/test_stable_center_fma.py": "4024a777d34c24b5fc8614a0878268f74265e9a9094cfc4bdd43895b4025764f",
+    "tests/test_stable_volume.py": "359662b61e11c78f17fc4501f73f0d7c58ed44e93284e656af41882948d8ff81",
+    "tests/test_stackless_dispatch.py": "2768734d24fd063a287a896fbc61291f7d0d133ab8784037070f1367ea1e91bb",
+    "tests/test_stackless_seeds.py": "4effa213e9d0abcc858291ec87c3d0b1edbe7b6ae33af6cd051775e1191541ca",
+    "tests/test_stackless_traversal.py": "86afb18e2229fddb7b1f6aade7aca17493e0c02c9256cc95200085c4fc494a43",
+    "tests/test_support_reuse.py": "383d324f64dab001f0d9ce3ef223ecfc8e91206e35c4db83cbb6223985370a54",
+    "tests/test_surface_bound_reuse.py": "bf3578e18783df3ece5658d06ce106ae6fee0e339f51b09d6c60df354c24c34c",
+    "tests/test_surface_quadrature.py": "41e6153114ed3be53f3df429d2fea1219ace91075f535210c3f4b2f385565018",
+    "tests/test_surface_query_cache.py": "ee6880166e8384daf0e772bdaa85f4198cf0db73781e438f9a4db1afe7c29d29",
+    "tests/test_surface_radix.py": "f9a7250a94786794b37aa5b2a989ffa78cb6281c3efeea7025def545a4a86041",
+    "tests/test_symbolic_bounds.py": "5ca86f19643fb24b7e77e9a0ff6c05630232e211e379f4345d3dc74554370f6e",
+    "tests/test_symbolic_delaunay.py": "9dced2fb1930a86c59004060c3a9ba2e003b24a92eded7efed56f1fd75aa54a5",
+    "tests/test_teleport.py": "3c4b25b95ce0105e43dac4f1dc0f9fd51f722e678f43d7afee860c3d6e4a91cc",
+    "tests/test_tetrahedra.py": "c2b2fc56d66fa5cfc296ad029c708c92d8d0a9bb50673f4ac13500437f56ca24",
+    "tests/test_topology_recovery.py": "3b32e2ed5a02e83c5ec20742ddb545736615a605deee5f6f69def88f397aaafa",
+    "tests/test_triangle_contact.py": "deb0846b1018626bd84856a749e098c245073b1487d1e549cfed9ca67569a08f",
+    "tests/test_unproved_queries.py": "adcd1bdcceab384378e332b0d4352ed06cebf6231d684986b63827521ee0a6b7",
+    "tests/test_voronoi_volume.py": "73fc95f57da09052e90ac1047871f6fbc8da5a504737297744f65d73b5de7520",
+    "tests/test_vtm_controls.py": "755c5403307c4884c47d7df3104b5290ffaf66faac43a85091aa5a7eb5a1ffc3",
+    "tests/test_vtm_core.py": "1b6725e4bdeb22ec24fd20c2a691ade9d0b8a2b5d20d7c7ce86ec584896cfd58",
+    "tests/test_vtm_domain.py": "f9e8ffd3dbff5751ecf01d8d1189630ea167fe87692a7504a6c74c3511b62ffd",
+    "tests/test_vtm_examples.py": "31117436fbf59e7a1bbebc42655753e9195e826eeb225ad803d34eae2c5f569c",
+    "tests/test_wall_reuse.py": "d83876423fe3a2329cba4cde0ad11d197d1418241167d2a17b973f660d0758ed",
+    "tests/test_wide_center.py": "09c7a84d78b96cfb832f3177d4787f513d83210c5c11a52bf4c9169e9bbdb19c",
+    "warpower/__init__.py": "bc95cfd203def8ddac4d3171fee33feb98bbbef10a8ea5f98eef824140244874",
+    "warpower/_active_delaunay.py": "fb52f8815537614c38747c62fd164d5fb47cf1ffb5b0a7c8fbc46dd2080ed169",
+    "warpower/_active_sites.py": "3c17ffe07d129ee4c46317f1ce1ede2ed0d96a0f237ddb718f77e401a95f7cc1",
+    "warpower/_adjacency.py": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+    "warpower/_analytic_predicates.py": "b6d8ab23dfb23e107f8dde1d9e473085f9a45004115279531bfe219194bfad15",
+    "warpower/_api.py": "f84bec46306a84d7f1b72c6dc1d9dc560cb2905ad74bda63f4bffb97e4e5ad97",
+    "warpower/_automatic_sizing.py": "f6aab578b13d3689648452c49c4e4474b40005a8215bc6787cf6811037fd713b",
+    "warpower/_boundary.py": "68525b60978aef6eaf0f8f02f7693747b5fec6a5e02ba260cc67d82f389c94dd",
+    "warpower/_boundary_rounding.py": "6db76fc3ccce54914710dee1a134655d9b8934a3352686b9f41f2e9e92926e07",
+    "warpower/_bounded_predicates.py": "2a9afb83f8c64eea5f0597ffff0ccc9d5007f71f1d37a41f14da7b3e06df22e3",
+    "warpower/_bvh.py": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+    "warpower/_canonical.py": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+    "warpower/_cell.py": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+    "warpower/_construct.py": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+    "warpower/_containment.py": "e4913d8e25cd8f3a058b9a3175d69646cb3a7845a9fc2cb24ddc038373495e86",
+    "warpower/_delaunay_certificate.py": "bfab680e65db7757c519c0087cbbaf1d04ce5872e354c25bfee50f455fb1f6f0",
+    "warpower/_delaunay_recovery.py": "9f5b5b330bcdeeeb64ebe0eec5823d1357f6c79f1af4e1131dacda7b0d7f8e46",
+    "warpower/_domain.py": "7c82b21b9e1995301d36570a2a455c041c6daee78b5e736d35cd5df69d94a88d",
+    "warpower/_domain_topology.py": "3c0746b94c2940d275be28626e8dd257aa0b5a284d8459bd4cec226e4935826b",
+    "warpower/_exterior_band.py": "4fd5fae2fae29129ec4fc9cb787946491a451dd34ec3d1e0a10a35dd070d60e4",
+    "warpower/_exterior_proof.py": "b8bec5867ef20b2c65462844a078889ca68799696b86c981f811a6af689ec0c7",
+    "warpower/_exterior_proof_bvh.py": "fd97fe83ac95a94f7061f0c9fd737953ffc0d1dd0dc3ce87dad0df2ffb9f3e23",
+    "warpower/_extraction.py": "b14cf2616e6fd921ec4f8c780820a0012a0d8fc9988c0a175d5cd8a4f1e39904",
+    "warpower/_facet_completion.py": "fe32e851c37ff5564393f4f6d3d4cfab6a43cf9927db3fd1bb0bf8d0b4cdb6c8",
+    "warpower/_facet_seeds.py": "8f88e244a9e9529bfc562a2a59edcf41c8f1b045da4a470655549fd6dd32658c",
+    "warpower/_fast_candidates.py": "740377dd16ccfec7b0bc630e4d2a483312a2a8cf398e067d37b3973e18d9a483",
+    "warpower/_filtered_predicates.py": "a9a74285885f362deb634972709ae6fe47dbdb33320e3b8627d3b85669578564",
+    "warpower/_graded_odt.py": "37538c9d51d3282a9ec85b6e1e7f6eeba6876598d5cb79f30d0dd8d736d45778",
+    "warpower/_graph.py": "d7e489b28717f72a25e866b59f1c9dba3855222e83cd97e848bf7e6b68bf18e2",
+    "warpower/_graph_construct.py": "9f305d39185abc6602b85431b887c3bd2b5152864ec18ef35e6a71e3a6690e42",
+    "warpower/_graph_tetrahedra.py": "ddbb067ef02cfd20032cc29d870bb19b9d30b4cd2a649516be5c547ce5b94540",
+    "warpower/_grouped_seeds.py": "8d0ffa1556c179ff11d0ecd357a55cdb198897a4fc4c8336389744b0aff19785",
+    "warpower/_halfspace_predicates.py": "46779c8236dab4048344523a653ed1b864ba77082163f533b991fb85540db164",
+    "warpower/_integer.py": "94205ab5790a308f51b083fedc8cb905050602369061d65d231b91f175a0d641",
+    "warpower/_jitter.py": "b184d21b47ce3e96fcf1587722d9be3c276240fc776ce85ffa10b3442dd85435",
+    "warpower/_mesh_api.py": "37cf23ecf09d34a7bc0a77ebe73d8e2102c37064b1ab4923acccca993ea0678f",
+    "warpower/_mesh_topology.py": "5dcb12b58e59446e5dbf4db6a1bda2eab3a32a55c833e453e3b9d48f3dfbcc24",
+    "warpower/_mesher.py": "489610425da073766937e493535ec7bbba80fe8befe1e9e364302762bd3eee47",
+    "warpower/_odt.py": "53d23df8f23de165d98598c7fbbf53e2944f82ee82f6a74c2b135e142dd589f0",
+    "warpower/_ordered_surface_queries.py": "7d3315db91fac6b766ab890e6766fdc44da5cfdcc80470883ec292ba0af388ec",
+    "warpower/_poles.py": "b93f434020a357025dc3a067bbb0e8ed2c4c0ab66ecee0108db5a2c6762ea18d",
+    "warpower/_predicates.py": "20a204a1f6774353d3ce5d35e241db53a0ac075ef40714542f0067010aa50d26",
+    "warpower/_prepared_seeds.py": "86246833eec66426191c3e5465f6eadcd8437724893f4ccecf6f4f8564d89d56",
+    "warpower/_proved_completion.py": "23336177436b94c6bf99c33e0aef58d921a51b1529c69787bddf743c37a41635",
+    "warpower/_proven_exterior.py": "797e56b17d91683cc1088528aa2437cb68eed4a9f08126fb2ba32ac5444d9778",
+    "warpower/_quality_moves.py": "a784c524f482ae9df0303de778df589a91637f074b5f2d34eee9c500f7520624",
+    "warpower/_refinement.py": "003dc220a88044aa18f624676b5d1941a7bed314f1cb17226f962d8a4d61eb81",
+    "warpower/_reuse_delaunay.py": "862a4671c2daa9df7fe168625eefb4206184d2f9cb7c433f8a1aeab77c248ea5",
+    "warpower/_sampling.py": "3f4ef9a1ed354dab1a0f54528817683d68af1bc81c1926ec631834d93a8edc70",
+    "warpower/_selective.py": "bec29726a2ba58c482f278d50b5b7a6c34b375b6f6e21b0846f23432d1d0fb42",
+    "warpower/_selective_backtracking.py": "e7111bcb1505045a4f73cbb72b4c3c54a4c814e21a4d5bdd69d046670d29223e",
+    "warpower/_site_bvh.py": "60a307c003c02f931cc1d6ee2f4ca1b417d34be6a4fae3f6d968be17dda7c92b",
+    "warpower/_sizing.py": "fe30bc06b3ad23479367a00afb2356e1103e74beb5e764e5f47e91ba8a343464",
+    "warpower/_sphere_bounds.py": "865f1d7eb961ffab42d98213ff52e52cb7a60973233cb03923d3f559e1e72c3c",
+    "warpower/_stable_center.py": "1d3f4a58c799f675edde5dea9f77dd50c36b68b7f8580e809a1b88d761d770d3",
+    "warpower/_stable_volume.py": "c326ad964bd1bf1f11fcd0682e1cacc8df56b7a3ccb3815ceef3694c3ac36a90",
+    "warpower/_stackless_seeds.py": "8e87592618d14f2d411abd7e7b84f823d43aee3ccab35960535b917c5680d22b",
+    "warpower/_surface_bvh.py": "09230cce8cce236f298f71a6a305c7a31fc1cf85c25ce65b07b7963c55d9f5fd",
+    "warpower/_surface_query_cache.py": "6d90d7649cd775bbdda66b30dbe727bfd7adcd9dc5bdb072471cff0c4115942c",
+    "warpower/_symbolic_bounds.py": "b071b45a8a19b93a322406680d10b6137c9cc7677efeb8776b98b7ae8c678db6",
+    "warpower/_symbolic_cell.py": "b3fbd57892ec33cef5e03b094d9cf454d17ffa9ae0ac4d886cce6ca210ecb7a2",
+    "warpower/_symbolic_delaunay.py": "79760a7f1770a8902288f4a8f750eb2170ba87899260a637817b65cc2f2aa451",
+    "warpower/_symbolic_tetrahedra.py": "52af32e5cfd0686fb82548a512f1b89c703057a45e0eb7597b9918d7a931e29a",
+    "warpower/_teleport.py": "4123f2a28bfc4324c5340adf85e93538885cd54b5e3f5b11107bc07183e7ab4f",
+    "warpower/_tetrahedra.py": "5db1eb6583f84bf99a81c9aca8aabb1d8fdc8772d6db7fe9bb87d812ad09f2ec",
+    "warpower/_topology_recovery.py": "1c5cd9ac5090f6077c1d2f1198e5e3314fc364c29e1f40f777aa638a6362c96c",
+    "warpower/_triangle_contact.py": "01ebcddc6501f402157cf4a46738bffb6e8a55932dc11a35d6b79855804388df",
+    "warpower/_unproved_queries.py": "36e2ab604523450b23fae49d4cc68cd35de6a1c9976db3b210feb428b68d1b14",
+    "warpower/_validation.py": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75",
+    "warpower/_voronoi_volume.py": "9b8b6c0f4e29f0907297ce5f13876d50f5728f8283fa73dec7514d5e30e05305",
+    "warpower/_vtm.py": "8955a3c64addc6e58831584c8d0c87978c45b86c2c52a103214c35e6441bd5b3",
+    "warpower/_vtm_controls.py": "a2c08f2f50c4bc189e2bc82a38f50b4137229081ff13344d4b319e11cbff9880",
+    "warpower/_vtm_domain.py": "7e7d79477224b3ddbcd5c11a47bee237ed96474660987268d43dac554aadf76a",
+    "warpower/_wall_candidates.py": "f9a532d2418a9ced7ccd9fcccecf91db74c0548b746e1bcd012cfd08d5d764cb",
+    "warpower/_wall_reuse.py": "8eb33d823e468da70ad1e1540876c5d8eb56c861ddfa2aa493a7bd8177f5e56e",
+    "warpower/_wide_center.py": "ed6c89a6afe3ee4dc4d14db4b92d244ed8483fd9fd55179e7048fc0dd1f13814"
+  },
+  "files": [
+    {
+      "original": ".work/vtm/build-surface-push-production-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/build-surface-push-production-v1.py",
+      "sha256": "0aa6df0ca929661352b5e7ba1dcd68878556da50ed1e84acd8c157f551d23b0f",
+      "bytes": 2806
+    },
+    {
+      "original": ".work/vtm/build-surface-push-pruning-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/build-surface-push-pruning-v1.py",
+      "sha256": "e29ac82cbceb7e9291034a5b535fd9e841a153b310b76d01216e087ce27b5bf6",
+      "bytes": 3337
+    },
+    {
+      "original": ".work/vtm/check-surface-push-loop-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/check-surface-push-loop-v1.py",
+      "sha256": "3ab891185a547129ed381ce0f9ec63eb8fc91e18240054143f4060c11e29fdca",
+      "bytes": 2938
+    },
+    {
+      "original": ".work/vtm/check-surface-push-native-full-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/check-surface-push-native-full-v1.py",
+      "sha256": "d2655645ba1dbf2a45f1d6ca844d60f037de95a64bb670e24f47d63cbdad1ba7",
+      "bytes": 2871
+    },
+    {
+      "original": ".work/vtm/check-surface-push-pairs-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/check-surface-push-pairs-v1.py",
+      "sha256": "0a68b318f4d37cc1a0a300b1187715c188fd100cc0852fc5a97cc89a0eaf183d",
+      "bytes": 8483
+    },
+    {
+      "original": ".work/vtm/check-surface-push-qualified-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/check-surface-push-qualified-v1.py",
+      "sha256": "751dbbed5dace4cb1e5a3377813e4b9d5fda53bfc8e1df01475eef10f4dca38a",
+      "bytes": 1905
+    },
+    {
+      "original": ".work/vtm/prepare-surface-push-qualification-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/prepare-surface-push-qualification-v1.py",
+      "sha256": "dfd89cc6efd9dc8abb2e9736cea1cbff00c0014c3736790136293051ecfe6def",
+      "bytes": 4036
+    },
+    {
+      "original": ".work/vtm/profile-surface-push-pruning-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/profile-surface-push-pruning-v1.py",
+      "sha256": "172178ecf0b185a5f7125a6c7e19d9b0c2ca3af56e701600806dd2bbed454554",
+      "bytes": 6284
+    },
+    {
+      "original": ".work/vtm/profile-surface-push-uniform-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/profile-surface-push-uniform-v1.py",
+      "sha256": "a53639c99507af1d26b1a0b4b6c54a3d5edb19404ddd0d5572d3a4c487352b34",
+      "bytes": 4472
+    },
+    {
+      "original": ".work/vtm/publish-surface-push-doc-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/publish-surface-push-doc-v1.py",
+      "sha256": "d4f32b08ba3a7a573ae7b92345a04dfae69e11a6fc23c5cdaf9557df5dfbc286",
+      "bytes": 11567
+    },
+    {
+      "original": ".work/vtm/publish-surface-push-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/publish-surface-push-v1.py",
+      "sha256": "bb681d78140a82610dd1c5e10066f764ddb666ceefbb494d075d0f75f61e9cab",
+      "bytes": 7604
+    },
+    {
+      "original": ".work/vtm/review-surface-push-native-cost-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/review-surface-push-native-cost-v1.py",
+      "sha256": "300f8c39260d761e1deff2fc36f9ec0cfe4a8366a02b199e641ec4f41cb046de",
+      "bytes": 1772
+    },
+    {
+      "original": ".work/vtm/review-surface-push-variation-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/review-surface-push-variation-v1.py",
+      "sha256": "503eea1bd6c22be35a92ee1507b1ffff6ac3418361d0d45e179fd9b67a59a9cc",
+      "bytes": 2744
+    },
+    {
+      "original": ".work/vtm/run-surface-push-final-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/run-surface-push-final-v1.py",
+      "sha256": "69a6c6f5a16b78d91e62704d8e55f162099880531deb127f39f966fba9b2d9ec",
+      "bytes": 5469
+    },
+    {
+      "original": ".work/vtm/run-surface-push-full-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/run-surface-push-full-v1.py",
+      "sha256": "398625579fb1d5c665e1ec63f94087867247e1792962d116cd707b779eca9665",
+      "bytes": 2121
+    },
+    {
+      "original": ".work/vtm/run-surface-push-independent-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/run-surface-push-independent-v1.py",
+      "sha256": "b70168ad628d6b518736195389a8879c9e03f01b3cebd1eaa386738979a1eeb4",
+      "bytes": 1477
+    },
+    {
+      "original": ".work/vtm/run-surface-push-loop-native-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/run-surface-push-loop-native-v1.py",
+      "sha256": "ef47832ff92707820e98b8efe4a8cc7c2b975a4fb9174e4f7abdf63e7605b466",
+      "bytes": 3188
+    },
+    {
+      "original": ".work/vtm/run-surface-push-memory-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/run-surface-push-memory-v1.py",
+      "sha256": "a5a42bf003758c55e4ddcfe9f1b6376ca463f29677aa837360d3e670490e265c",
+      "bytes": 2103
+    },
+    {
+      "original": ".work/vtm/run-surface-push-pilot-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/run-surface-push-pilot-v1.py",
+      "sha256": "a4282fca1a0d48e5d6681d0cf414393df1c65353982c641d55ba931d90e7a1b8",
+      "bytes": 4559
+    },
+    {
+      "original": ".work/vtm/run-surface-push-pipeline-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/run-surface-push-pipeline-v1.py",
+      "sha256": "42fcae3a04523bdb5ea78fb032a3ca9f16561efbf6cbea65cb59e1f7e8c270be",
+      "bytes": 1420
+    },
+    {
+      "original": ".work/vtm/run-surface-push-production-tests-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/run-surface-push-production-tests-v1.py",
+      "sha256": "cb0d7b80fc4be5c6d08add1a63a2452e585950f2a612e8730a59b29621d3e0ee",
+      "bytes": 1986
+    },
+    {
+      "original": ".work/vtm/run-surface-push-pruning-static-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/run-surface-push-pruning-static-v1.py",
+      "sha256": "d17875cc2c18233fcc9cbfb6c808e5f0c519ddc68d91741e088ad752cd78a0bd",
+      "bytes": 2493
+    },
+    {
+      "original": ".work/vtm/run-surface-push-qualification-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/run-surface-push-qualification-v1.py",
+      "sha256": "ed8d7a8826e0faea0f210d3830edb05a58315d75ebbe9ecfe2960a2cbd0201b7",
+      "bytes": 1254
+    },
+    {
+      "original": ".work/vtm/run-surface-push-uniform-native-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/run-surface-push-uniform-native-v1.py",
+      "sha256": "12a30924377ba8cb5db1e062abf6b519f2b5a3feb56c60932888ea770b364099",
+      "bytes": 4052
+    },
+    {
+      "original": ".work/vtm/summarize-surface-push-static-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/summarize-surface-push-static-v1.py",
+      "sha256": "feaed5659b0e30d1ad865699e081545fbb3abe994c40a911023e352a713988e5",
+      "bytes": 2287
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-after/boundary.off.gz",
+      "sha256": "e6454406b2b4d8efa673b270fb846e2aaa0f500cafc148483946ac5a5b0dff1c",
+      "bytes": 139521
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-after/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-after/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-after/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-after/mesh.npz",
+      "sha256": "4ccf84da9937001f6020c522b30aa429d52611657f0679d673e70f49396f3516",
+      "bytes": 1612525
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-after/mesh.vtu.gz",
+      "sha256": "65afae0fb74d909d46735370323dae0c8b802a8444585c5c220f6443bbffcb28",
+      "bytes": 428009
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-after/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-after/result.json",
+      "sha256": "15a231c5c571c35126cfffa6ab5272c858267d8715f2e5636c35e7b6c777eb5b",
+      "bytes": 4141
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-after-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-after-observer.json",
+      "sha256": "2d6ec3eafafb5c461e4ae1f05fbb4325bbd8eef1bffd68774d3faba27237c38e",
+      "bytes": 1386
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-after.log",
+      "sha256": "39002b2e1441cd8e14bf3bbee55aec3848f671c79964b85f0091dd7399cf4a5d",
+      "bytes": 10102
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-before/boundary.off.gz",
+      "sha256": "0a04b4a19e3e061bab253ad39177326a8a9c2f7e23ab7f0c7791698d497da4cc",
+      "bytes": 139449
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-before/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-before/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-before/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-before/mesh.npz",
+      "sha256": "ba20572c6ff1190243ad82744ecc8755f77b1d1b944e2bc2078aee089fe49f03",
+      "bytes": 1612517
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-before/mesh.vtu.gz",
+      "sha256": "22c3b3a9b8ba651d9d46f9077885e145b386c30bf4d9ac1d5d22889b72a023fc",
+      "bytes": 428110
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-before/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-before/result.json",
+      "sha256": "985107f67e1cf09e2ddb0367139ba0152a427cfa4d9c5e24fe960aabd42aae63",
+      "bytes": 4147
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-before-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-before-observer.json",
+      "sha256": "e2ca271a574fb69255e0482f0dcb7e55c199804d19cdade7030a07bd84f3d6b7",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded4096-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded4096-before.log",
+      "sha256": "361b957e15229ab8f13857cc0c3fe29e8f8b7ac78ba7d26587d84391c2ef459d",
+      "bytes": 10107
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-after/boundary.off.gz",
+      "sha256": "ebe19640feff8c14b1535a8ca469d08748b9b6661ec4a49c74f479f0e1d875a8",
+      "bytes": 273820
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-after/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-after/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-after/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-after/mesh.npz",
+      "sha256": "4e6fcb8bbd65f711600ae9293757d1d905918d2479385e7912c72b1638bf8bcb",
+      "bytes": 2260637
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-after/mesh.vtu.gz",
+      "sha256": "06f7a10a2bc4d1af41e698adc89ef36f4b6e0370c18b8f1aef3e93789fee42b3",
+      "bytes": 921643
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-after/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-after/result.json",
+      "sha256": "f8dba2205679fbd758ae714963909e6b009d5f7b6e08f6a209ec29ef805bf9aa",
+      "bytes": 4170
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-after-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-after-observer.json",
+      "sha256": "31cc101fd771add4305f0dc45cc8469565dd443c6443da156dc4318b384710c7",
+      "bytes": 1754
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-after.log",
+      "sha256": "7edd35f2e5beb518ea326403620d6d23eb528a48de65eb72b3f5b8c6bcfb21c4",
+      "bytes": 10868
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-before/boundary.off.gz",
+      "sha256": "0d079b4f7d71261193be78ba5dd3065338b26a18f4bfd888d3a4693c7a0101dd",
+      "bytes": 273867
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-before/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-before/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-before/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-before/mesh.npz",
+      "sha256": "98cab7a175f82827129873f9fc6f006e8b00d4b848d2eff1f76a4aa6f3c1421d",
+      "bytes": 2260312
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-before/mesh.vtu.gz",
+      "sha256": "3394ea9d3f0a7795ce0b0cd1e85394be786e99acfcbd2f617c66827fee922950",
+      "bytes": 922135
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-before/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-before/result.json",
+      "sha256": "7b5e6b9dac1dccbf3e96e6b5fc992896cbcfd6bc35b99dce517d60d783a3a1a5",
+      "bytes": 4161
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-before-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-before-observer.json",
+      "sha256": "345dab5feab00a13c3e5d56c52043fed4ddf92aeba61dbd8ce1e53b7545913ec",
+      "bytes": 1754
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-graded8192-recovery-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-graded8192-recovery-before.log",
+      "sha256": "cd41f5d03717eab17b64f5a5f4128cab81f7767723e572967f27d22b935a3a96",
+      "bytes": 10859
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-after/boundary.off.gz",
+      "sha256": "8a48db4cd1c2a02612766ffc451638b6a9ff6cec09004882858c3f71778dcf40",
+      "bytes": 274137
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-after/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-after/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+      "sha256": "ee27926870c02d60c5889f98dba30abd15dcba58df655b80bd413df8211a6af3",
+      "bytes": 2258243
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-after/mesh.vtu.gz",
+      "sha256": "ed7da3bbd930317351e745979383b2886012acb6ee70cdb37a9bfe56ef7866e3",
+      "bytes": 918822
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-after/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-after/result.json",
+      "sha256": "64e5e96fdf726971dc347d00ac98b272f229860cfd2b299783a2054ca2aa5a3f",
+      "bytes": 4166
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-after-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-after-observer.json",
+      "sha256": "17284fe337ba954d5d99a1d9d3ac117cfc4acaacefe7c86ee1e1baf54f12d20d",
+      "bytes": 1754
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-after.log",
+      "sha256": "28a016b29bd35ec3ba5f777d83df99000afea3cc8f08e870a62eb78983b61e64",
+      "bytes": 10778
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-before/boundary.off.gz",
+      "sha256": "a09ea8e89c08cc55e2126606039ba0c6f669e9f0242ec0255fe76971f09baa2a",
+      "bytes": 274143
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-before/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-before/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-before/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-before/mesh.npz",
+      "sha256": "0410a356d16c6cabaa712406b2112216e7835e1709fa60293b9955053609da01",
+      "bytes": 2258179
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-before/mesh.vtu.gz",
+      "sha256": "8d17776f810ad7423ffbda7391ac1c0c91eeaea14da01b65eba2a5c09e8fd219",
+      "bytes": 918615
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-before/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-before/result.json",
+      "sha256": "703baa616e170fcf3eeb4c4bfb887273f39f1d4e6d5fd255505c9ae84126ec25",
+      "bytes": 4154
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-before-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-before-observer.json",
+      "sha256": "67590f89b7db20685ad5ae389e9cae6da2cf79319dea6846099fe95133c795ae",
+      "bytes": 1755
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/armadillo-uniform8192-recovery-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/armadillo-uniform8192-recovery-before.log",
+      "sha256": "986ef7b2eb48844c33f5cf222ea7f161ef94560b34fa59c8469045cb4e763205",
+      "bytes": 10767
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-after/boundary.off.gz",
+      "sha256": "76ffae85e6dfe3c049622d473af28aae7e9ded4fff42186f680431ff96edcbca",
+      "bytes": 30617
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-after/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-after/input.off",
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "bytes": 783
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-after/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-after/mesh.npz",
+      "sha256": "610af3ba6ca862a7cedc3295d4f828db1d1257e0596faf4dd36a6b804a6c3472",
+      "bytes": 108667
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-after/mesh.vtu.gz",
+      "sha256": "fca2bb5b2a6adda4b20888005c8c61d939041a7e110713ee14e24848f2268c0a",
+      "bytes": 92593
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-after/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-after/result.json",
+      "sha256": "6c4924b594f29c97efa565f59d92a290c9f13e2ed3a0ebb3d6b01cc9a46a5cb2",
+      "bytes": 4041
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-after-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-after-observer.json",
+      "sha256": "c5aeeade15cbb2d6d16c2d49e823155fde915ccac014a5def50579cadfa408eb",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-after.log",
+      "sha256": "8e0a7a04b7c957f896782afbacb32f6b028379c7bfe291c9f7cb2f6739ec0253",
+      "bytes": 9827
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-before/boundary.off.gz",
+      "sha256": "517b8d348c0c91b763686a7e8e08b37657f58eb6a44381f3f83ac3d27978a4e1",
+      "bytes": 30638
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-before/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-before/input.off",
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+      "bytes": 783
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-before/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-before/mesh.npz",
+      "sha256": "956131a77dcfff5eb64b88537d82cf81db9bf7afe486a4f5cbfaeff084849163",
+      "bytes": 108667
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-before/mesh.vtu.gz",
+      "sha256": "2e3ebe586674b8ff65f1af9dea3bbf4e70335c884644c8cfd67643a3857b7b60",
+      "bytes": 92597
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-before/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-before/result.json",
+      "sha256": "93d287492f4115478fd6405075aee8a44ee2c5be3bc672919e250c873911653f",
+      "bytes": 4040
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-before-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-before-observer.json",
+      "sha256": "db47ff21e16bfa3c97075cdd5111956a7a7efb1296d278ae54d4eb1c5f8efc0a",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/cavity-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/cavity-before.log",
+      "sha256": "942a910821cc44dbe4d8718e68fc8eabd1ee5e8854925b6ec61ded73c048ca1e",
+      "bytes": 9826
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/commands.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/commands.json",
+      "sha256": "bed40da7c2a4041e31f525c0bc991accdcffd7d42eb31b1a57f6701d1f911446",
+      "bytes": 34418
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay-fitted-hand-after.json",
+      "sha256": "b0ece1b4a771b536e961acfcb49832d6e0f042c5e0b9ce2418a5d670a56a5543",
+      "bytes": 2837
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay-fitted-hand-after.log",
+      "sha256": "6595420eeeb10cc790b0f83d64278a84eaaad6d8154cac38368e8bc72eae080d",
+      "bytes": 5133
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay-fitted-hand-before.json",
+      "sha256": "e09564158f368de0f158687baaa030de615e1992418c0419bc85c2e99a6f7fb2",
+      "bytes": 2836
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay-fitted-hand-before.log",
+      "sha256": "377aa8bdce5d972e4fced3bf73b92566614aef58142a10cd63384247493487cf",
+      "bytes": 5132
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay-grid-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay-grid-after.json",
+      "sha256": "2031186a023570ecd8f40c05fe8aaba9412367f76f067afd229bed7099fc1683",
+      "bytes": 2836
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay-grid-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay-grid-after.log",
+      "sha256": "b8f592f17df8e5302e547c73aaf272b5cd4860e3de8679e91582af8b4b50bb85",
+      "bytes": 4875
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay-grid-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay-grid-before.json",
+      "sha256": "f74b94b72b05ee404eccb3ff148ff0a5a58a61b42e98933449698a958bb3d898",
+      "bytes": 2825
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay-grid-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay-grid-before.log",
+      "sha256": "72218abec6bf204e54bcdd8109cc4320c91ad2405571a4578cf54cffce7e616c",
+      "bytes": 4864
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay1000-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay1000-after.json",
+      "sha256": "1357e0d2a89c39d9bc7ec261ff1da6c7eb9d44d9cec0e755318e01f3022176bd",
+      "bytes": 2821
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay1000-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay1000-after.log",
+      "sha256": "7c5729e5089c02e3d5196da427dc39e307d633af7cd4ff25702d526c64f2822f",
+      "bytes": 5117
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay1000-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay1000-before.json",
+      "sha256": "edd313d8285d5cec4789188ab78e2d630e1cb94dbf311e1e6e0488f24f8338ce",
+      "bytes": 2826
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay1000-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay1000-before.log",
+      "sha256": "a51a09169d6a2fbec357d99993889a0b0b98d63e469205362ec85c2d7ea4451f",
+      "bytes": 5122
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay100000-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay100000-after.json",
+      "sha256": "8955083e3fc2a4d4c5e5484e16df02e39cd6bca90ee9cbf1d5fa29920636770c",
+      "bytes": 2836
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay100000-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay100000-after.log",
+      "sha256": "01a8da275b5dd3bb155e917ce4ce8c97ec68d9027b83bcee165762e4a13638f6",
+      "bytes": 5066
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay100000-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay100000-before.json",
+      "sha256": "d48f2dec119b0c1dc785b9e40db980c24f8f66425d9598a1a38042580932a0c6",
+      "bytes": 2831
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/delaunay100000-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/delaunay100000-before.log",
+      "sha256": "ebc98acd724c0e0207435ebb4360194c70e64e6b768c3fb86898d9a77bc2c53e",
+      "bytes": 5061
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/diagram100000-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/diagram100000-after.json",
+      "sha256": "1680a2ee1ae090c4caa4c0939c6cea20b3a3607afb28da04220d661b79d8b125",
+      "bytes": 2565
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/diagram100000-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/diagram100000-after.log",
+      "sha256": "8a64c444505145210e80e7e090c7b15851cbf2f0aa8550e8cce86a268a05d6f0",
+      "bytes": 3436
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/diagram100000-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/diagram100000-before.json",
+      "sha256": "3fc2be976c0895f2a91f643c8bf38b9e1eae037776a43bbf8840a4310ccf71dc",
+      "bytes": 2565
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/diagram100000-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/diagram100000-before.log",
+      "sha256": "c7b32fc454108b8c628cf046f0429ded269291b6e4b38f29dbd7a3d360a1b807",
+      "bytes": 3436
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-after/boundary.off.gz",
+      "sha256": "f06642aefdecc328946a69edce42061d1de064d87482dc5a588933829219ca94",
+      "bytes": 30556
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-after/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-after/input.off",
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "bytes": 1199
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-after/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-after/mesh.npz",
+      "sha256": "0c406d1bf3c11b1873e093ffcaf12f99d342adb0a9135adf12ad3fa0859c1624",
+      "bytes": 110120
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-after/mesh.vtu.gz",
+      "sha256": "40c89188be718c6baf02e6bdb76d6ae3db31bfcb7806af2c493cef0da2f753eb",
+      "bytes": 88073
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-after/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-after/result.json",
+      "sha256": "d3068629785610694b51de25dc7b372afbcf20ae31920c5a2eabb2b734722f14",
+      "bytes": 4050
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-after-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-after-observer.json",
+      "sha256": "fb212d214b388f67e1ea6aa722fb80b3ea8daec7e74ea1117de69a08849f5fa0",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-after.log",
+      "sha256": "8edd97366f985171fbba25c9277be190dc78b17fc8a93695fe44e114392d496b",
+      "bytes": 9836
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-before/boundary-self-intersections.txt",
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-before/boundary.off.gz",
+      "sha256": "89cd76def9db3c098844e3289540508a62038479c42d0919171c84844ec8c1e4",
+      "bytes": 30529
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-before/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-before/input.off",
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23",
+      "bytes": 1199
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-before/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-before/mesh.npz",
+      "sha256": "28441a1ade2e0142e5f2d38f1079af90d11ba2fba8021074798d2b6dfbd89e79",
+      "bytes": 110093
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-before/mesh.vtu.gz",
+      "sha256": "c2c17a914dacd9bb6def069ef73caeabd530c6d72a3465e0e849d6037c81e835",
+      "bytes": 88107
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-before/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-before/result.json",
+      "sha256": "ba1d2cc5563581a0d4a77c9df4b47dabbfbb34b7cb09f59cdff05196961c3c7b",
+      "bytes": 4054
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-before-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-before-observer.json",
+      "sha256": "6ef9fd848f7a3de55fd8ff5cf787060a5e7c14f83bb8b20544b8d890d4215a52",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/disconnected-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/disconnected-before.log",
+      "sha256": "28f0d09a1d746af1cf09f9f5e9db9e5af1d6ee32d885c11528dcef4c8483c483",
+      "bytes": 9840
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/lossless-archives.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/lossless-archives.json",
+      "sha256": "bba51e6acbd214561a31de396ee09e8bf67ba6ef9c87c94c52a6cb8ecc978716",
+      "bytes": 11691
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-after/boundary.off.gz",
+      "sha256": "125a913e99aca29e41d4b6cbdf85488d789d77b66c381df7f7578edf878f27bf",
+      "bytes": 32369
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-after/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-after/input.off",
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed",
+      "bytes": 18040
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-after/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-after/mesh.npz",
+      "sha256": "a52fc5f2a3c58eb8305724913bdce3e4999edafd5d3c464a26fa8699127f8770",
+      "bytes": 109307
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-after/mesh.vtu.gz",
+      "sha256": "6fdf0b31aca3d96eca3eac71adac8f866cd9380259a4941a93e2a61c66f6349b",
+      "bytes": 85963
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-after/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-after/result.json",
+      "sha256": "2e04a8d9d7a116512d945451f19088a120444a0ab6c195af5f5bafea3ac5fe5a",
+      "bytes": 4057
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-after-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-after-observer.json",
+      "sha256": "5c2611ff5e11a6e34fa22f012052c80802e651ae144bc7fa2ebdcef1f423b4f4",
+      "bytes": 1384
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-after.log",
+      "sha256": "8e61c1d9450a9b3479f365001fc03fd2b2c23227439f7cee9e12a641188b6c0a",
+      "bytes": 9842
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-before/boundary.off.gz",
+      "sha256": "8d32d8ff8a8fbb0aaeff0017eaacd82e45d568f12c936d69f12883af8ef2d560",
+      "bytes": 32366
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-before/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-before/input.off",
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed",
+      "bytes": 18040
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-before/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-before/mesh.npz",
+      "sha256": "efb2260856b6ce2ff59817e939b0eda06457f8a3b9286af0ff9976a271ecb1a3",
+      "bytes": 109303
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-before/mesh.vtu.gz",
+      "sha256": "0eb27fd93639fbcf13886004a05571dab4ee7cae0a2a18b3b5273e2c4ea671ac",
+      "bytes": 85982
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-before/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-before/result.json",
+      "sha256": "374cc3bda3e2b4abff0766e10b1df2aaa3c7e0262a08097c40ee726855179b0e",
+      "bytes": 4055
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-before-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-before-observer.json",
+      "sha256": "9d4bed0ae14d44e2353fbeda7b1d920a88a42b5e93fbaf3066f36f4cb217a3ff",
+      "bytes": 1384
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/plate-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/plate-before.log",
+      "sha256": "a4828a9696314f12f04cad5f0a831ecaec613a0f98cb54c3917be4231e048226",
+      "bytes": 9840
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-after/boundary-self-intersections.txt",
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-after/boundary.off.gz",
+      "sha256": "2ef182fd8b9719feca148a61cfdf47e31900c1fd92295121ad96b27de3763d65",
+      "bytes": 28586
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-after/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-after/input.off",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "bytes": 3249
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-after/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-after/mesh.npz",
+      "sha256": "a664d3288ee5e1d5d7fb242255f35bb5e5ce5ce83bef5c0aa1cbd9268d692695",
+      "bytes": 89543
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-after/mesh.vtu.gz",
+      "sha256": "36da465676aee9382f1fcfe63b7cd15433624d73d2366caa73272a5a2e8a81e3",
+      "bytes": 71135
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-after/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-after/result.json",
+      "sha256": "5ffd6d80020204180a650a6536206fda03dc507e03f69a95fc6b1e809f6368f1",
+      "bytes": 4070
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-after-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-after-observer.json",
+      "sha256": "5376cd0ff179ce284ea6284b4816538a633296296dfcbc96f7aea41fa5c156bf",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-after.log",
+      "sha256": "f6fc832ab597db769f25349514bf54772a68a34d180e781d0e53cc1b2408a538",
+      "bytes": 9856
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-before/boundary-self-intersections.txt",
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-before/boundary.off.gz",
+      "sha256": "912f09560aa0e68c910b1617c82ee2a92d0f07379aaec4484b275ba82b6ebecf",
+      "bytes": 28576
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-before/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-before/input.off",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "bytes": 3249
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-before/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-before/mesh.npz",
+      "sha256": "58499d5cf6e21692f3e36ad193869eb7876d085160c39bce9958bff53b7e91a4",
+      "bytes": 89492
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-before/mesh.vtu.gz",
+      "sha256": "6a6b98317cd18a3d86a115426c154cf459e02d62737f91da62755ea4afe82b4f",
+      "bytes": 71181
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-before/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-before/result.json",
+      "sha256": "d9c39717e3ae6307a5a1e9fb52b048d1726eb0ab57872932f979038f68deeb84",
+      "bytes": 4071
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-before-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-before-observer.json",
+      "sha256": "c944f55668c20ca2357d9f2971a73bcd5c6ba101f7ea401d7596ad2522ceb604",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/thin-hand-seed7-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/thin-hand-seed7-before.log",
+      "sha256": "14623a37bf1d4603497c4a13901909923f82b52705e2d4623ae9427df93b7b0f",
+      "bytes": 9857
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus1000-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus1000-after.json",
+      "sha256": "b014cad1d2fb10628d762632cce6949030c27e7408e8943648d38f6091d7e047",
+      "bytes": 2887
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus1000-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus1000-after.log",
+      "sha256": "d23a7d3eced6d79696579a5f4ecb8ba7be362be1770bbf433e8e4b3ea5109fc7",
+      "bytes": 8038
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus1000-after.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus1000-after.npz",
+      "sha256": "f6d830df5f5675e1383a614bd1997991be1cb7046d971681fdc3b6d7f254d120",
+      "bytes": 91391
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus1000-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus1000-before.json",
+      "sha256": "3bc70bb83dcf3e22f67f2b12309cea62f44ea216d153320be2ed2d43c199e2a2",
+      "bytes": 2882
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus1000-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus1000-before.log",
+      "sha256": "4a21e9c549b7b290d6a0beaa5203932ee0bce96b1c1f233d62e85a22cdc3086b",
+      "bytes": 8033
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus1000-before.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus1000-before.npz",
+      "sha256": "d7427fb2f911e7d1373162a038d5ab80efcdff5bb55a9f16e8febc77bb8dd927",
+      "bytes": 91258
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus16384-fixed32-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus16384-fixed32-after.json",
+      "sha256": "67e65a1167708a89f9d6755980360c76683331bbe666622d92511507da79b8a7",
+      "bytes": 3129
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus16384-fixed32-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus16384-fixed32-after.log",
+      "sha256": "c8951727c21b399be6f730cc5983dfa5621b321ec3cbb5f1e8147fda2fe419db",
+      "bytes": 8481
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus16384-fixed32-after.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus16384-fixed32-after.npz",
+      "sha256": "702607c9b002e90af76a3c76822e7cb4a4a13ae129f700a81baa27581028fbe9",
+      "bytes": 2002392
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus16384-fixed32-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus16384-fixed32-before.json",
+      "sha256": "1bb99f5b18ceeebfff9f00fa6fd8445b994a64056def6c1b82def3ab3cffc9a1",
+      "bytes": 3117
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus16384-fixed32-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus16384-fixed32-before.log",
+      "sha256": "a8c1efaf0474f47e0a642b80a7e94c843b877374da3898672cb5fbb4e3a4960b",
+      "bytes": 8469
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus16384-fixed32-before.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus16384-fixed32-before.npz",
+      "sha256": "865aa4d3f624485fd25fdfca9d8b2881e4897a65cad56edafa52fa18d83e8b9b",
+      "bytes": 2001440
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-fixed32-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-fixed32-after.json",
+      "sha256": "dbd71353170ec8efc38b98f4ba25cc98ab7b23d3f4702d55d4da4e94a2d2523c",
+      "bytes": 3114
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-fixed32-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-fixed32-after.log",
+      "sha256": "ceafe39d7086c9d4ffc56bb50743aa95a104fe13a5423822ded234fdceb624f7",
+      "bytes": 8478
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-fixed32-after.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-fixed32-after.npz",
+      "sha256": "0f08476ce373bb3cb33b1ea39319025ee556308fee80abf5c5fdb6390e01d91c",
+      "bytes": 916146
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-fixed32-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-fixed32-before.json",
+      "sha256": "230390df2e915666912dc57f0e01e1bfe55ed950edbd2c492542950447d1a2c1",
+      "bytes": 3105
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-fixed32-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-fixed32-before.log",
+      "sha256": "1ee0513bd327d830ab4aebc3e374fe6456c24ab996753b9bfaf763656395cdb2",
+      "bytes": 8469
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-fixed32-before.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-fixed32-before.npz",
+      "sha256": "42a426484c961b85fbc7663cadb7bc2f2d3493e694f00aa324c1721f6d28b756",
+      "bytes": 916938
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-progressive-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-progressive-after.json",
+      "sha256": "6c2d3666f421eb2acb912299bad5f1d22c86b86a5c29465d7c5b10b1e4e25bb0",
+      "bytes": 3115
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-progressive-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-progressive-after.log",
+      "sha256": "90bd77348f9351464363f362e9bc44495fedf06b1048a7cdaa92b3c8a0f44b86",
+      "bytes": 8645
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-progressive-after.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-progressive-after.npz",
+      "sha256": "c0d8fbc07cc31acfc355efde50c3e3e75037447044146c59ffef9542e75540db",
+      "bytes": 918633
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-progressive-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-progressive-before.json",
+      "sha256": "a99be020b83c36e601ac08cf781ff47d9a1b53012d1257f218201f0f62dd7c0f",
+      "bytes": 3122
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-progressive-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-progressive-before.log",
+      "sha256": "1159c043b8150f3220d461ccac56ce830f421eecb203173d91ff1a4a37c5417d",
+      "bytes": 8652
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1/torus8192-progressive-before.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1/torus8192-progressive-before.npz",
+      "sha256": "0407861fd7ef481168f5eaefa5c408847dff0ef846f1e394f31accbe3c757899",
+      "bytes": 917771
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1-independent.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1-independent.json",
+      "sha256": "c25bd531625f36d7f378d6e473fea1e20bcf462e038a74c02cf6ff5bec8bace7",
+      "bytes": 104215
+    },
+    {
+      "original": ".work/vtm/surface-push-final-v1-independent.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-final-v1-independent.log",
+      "sha256": "ec6db4a25d34cf09c8b4696c3ab470b228a0e39401f2dd7e6e25729af8616a13",
+      "bytes": 4455
+    },
+    {
+      "original": ".work/vtm/surface-push-independent-driver-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-independent-driver-v1.log",
+      "sha256": "ee8aa6d3bf5345904b8b9639537de76284a48a480b986dcb183b16b1e1587d14",
+      "bytes": 452
+    },
+    {
+      "original": ".work/vtm/surface-push-independent-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-independent-v1.json",
+      "sha256": "999a32ffe13640cc9ff04100f9b800f1dd7ce514ae8dfd39e3e80ef4d2b6fb36",
+      "bytes": 492
+    },
+    {
+      "original": ".work/vtm/surface-push-lifetime-loop-comparison-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-lifetime-loop-comparison-v1.json",
+      "sha256": "11a97bd9e7b5306802ecf14722a5e43d562368e88630fea4ef52a63a4236b516",
+      "bytes": 4962
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1-audit.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1-audit.json",
+      "sha256": "5b04dcbbc84691f3e22c12f3fa7630542f44f5f5e986d6c7a978bd05326c6069",
+      "bytes": 992
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1-audit.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1-audit.log",
+      "sha256": "5b04dcbbc84691f3e22c12f3fa7630542f44f5f5e986d6c7a978bd05326c6069",
+      "bytes": 992
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1-command.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1-command.json",
+      "sha256": "df51f969b033f46361b038642df5eaf776746313e05c8677dbab031eabfd6656",
+      "bytes": 610
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1-export.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1-export.log",
+      "sha256": "3b2240f5d5876f9ca45e6acec0ac196b1d2bd14d128ab8cab065b42385ad6f8e",
+      "bytes": 8101
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1-frames/frame0.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1-frames/frame0.npz",
+      "sha256": "8f2cdec2a77d0605d7cfde0bd671bebec4c11a9c6fc080712b7482a8222762d3",
+      "bytes": 2109376
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1-frames/frame1.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1-frames/frame1.npz",
+      "sha256": "ec91b6e8a7de4c385fca1ebeed884a518e19f02a0d9f553c71b84292e0d2437a",
+      "bytes": 2483723
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1-frames/frame4.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1-frames/frame4.npz",
+      "sha256": "76893fe820bdcf6f15092033c1a770f8ccccdd103c43827f2f385d9d1f5a7a21",
+      "bytes": 2486461
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1-frames/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1-frames/result.json",
+      "sha256": "d7012083a65aa9fcf8973b627c03f5a74a73efd9ddb1a8f9883416ef7d488a40",
+      "bytes": 2474
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1-kernels.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1-kernels.json",
+      "sha256": "3897ed499919e006614c3c54ef36688f89e8a07eb81d358af3e661d3d83326ce",
+      "bytes": 35169
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1.dot.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1.dot.gz",
+      "sha256": "34f109ed43d24766b176dd9e00b23f8245b1878b510987dab139569d2f2e262f",
+      "bytes": 3766293
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1.log",
+      "sha256": "15272f0bd6a0974a0525e8f586bd1c73bd43bf1d7b0e759ce999617d375ccdc5",
+      "bytes": 12738
+    },
+    {
+      "original": ".work/vtm/surface-push-loop-native-v1.nsys-rep.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-loop-native-v1.nsys-rep.gz",
+      "sha256": "b686211edc714c4a6abbf06d7fb9096cd2b0cc548fb243d2675064759eb4c8c9",
+      "bytes": 6662747
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-commands.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-commands.json",
+      "sha256": "41e1a83074221c77ef22ebd11d8a742e473b423697ab7698084aa2bd90d819ec",
+      "bytes": 2955
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-kernels-lifetime.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-kernels-lifetime.log",
+      "sha256": "5a44eee1951437aa67b284bd6aa84e161173cf5f03b55ff602e32ada09c41be6",
+      "bytes": 7056
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-kernels-padded.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-kernels-padded.log",
+      "sha256": "a2a129e3a412678b3cb1ef74c982192334176c7e9d471fc0eb1a6bf8cb1bc93a",
+      "bytes": 7054
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-loop-lifetime-frames/frame0.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-loop-lifetime-frames/frame0.npz",
+      "sha256": "5f5a4ac420e6d04cd7597b6a85d37433ea806e739d7c2e6ac778a045c6e2dcc9",
+      "bytes": 2109297
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-loop-lifetime-frames/frame1.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-loop-lifetime-frames/frame1.npz",
+      "sha256": "f77150e5482619ea65a4b4dfed8110b9581bd5f148a53c9e2cc0c22e3dc3b825",
+      "bytes": 2484068
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-loop-lifetime-frames/frame4.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-loop-lifetime-frames/frame4.npz",
+      "sha256": "6b54e7fd527818cf6b33b6f14c6be95880aeeea26b6fea393e3e7d4d4f71112c",
+      "bytes": 2485263
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-loop-lifetime-frames/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-loop-lifetime-frames/result.json",
+      "sha256": "ac36362bce83eda9bf79601f6796c93df4d6520ba7e608b0e1c4b5d67825af86",
+      "bytes": 2475
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-loop-lifetime.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-loop-lifetime.log",
+      "sha256": "a872601273295f2223b410d6db9ef29689ab2e460faa0262a0cdfe69043fd327",
+      "bytes": 40105
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-loop-padded-frames/frame0.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-loop-padded-frames/frame0.npz",
+      "sha256": "a72414f44ff6d7ada1fbe01ac980faa7d6c2145efd4b4e82aaa250f131c43cc2",
+      "bytes": 2109272
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-loop-padded-frames/frame1.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-loop-padded-frames/frame1.npz",
+      "sha256": "cf82515b466679c25bd037fe576e87980e08e653fe4ecdaf4ceb8afbe23e2bcf",
+      "bytes": 2485917
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-loop-padded-frames/frame4.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-loop-padded-frames/frame4.npz",
+      "sha256": "71a1c13de2468a84e90577145b4b8b76d59af09b801736f3c761a4c690f0dff1",
+      "bytes": 2485226
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-loop-padded-frames/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-loop-padded-frames/result.json",
+      "sha256": "ba0f1a5b511888855936fe193bb7a1ed66f174dc3debd0a72fbbea63b13e1e46",
+      "bytes": 2475
+    },
+    {
+      "original": ".work/vtm/surface-push-memory-v1-loop-padded.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-memory-v1-loop-padded.log",
+      "sha256": "f55a1d42ee86be19e393ee563938d3e2aa1c862551d3482802efcdf7a4dbe9a0",
+      "bytes": 23960
+    },
+    {
+      "original": ".work/vtm/surface-push-native-cost-review-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-native-cost-review-v1.json",
+      "sha256": "5a84978d63f7e9163f648c17387fd4b0ae0d0821e8ba24014e55d4a497f40ec6",
+      "bytes": 3159
+    },
+    {
+      "original": ".work/vtm/surface-push-native-full-v1-comparison.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-native-full-v1-comparison.json",
+      "sha256": "bade57a5006816bda5350247da5a622546242f4b6dc9ee385aadba7f1ca5a2be",
+      "bytes": 864
+    },
+    {
+      "original": ".work/vtm/surface-push-native-loop-comparison-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-native-loop-comparison-v1.json",
+      "sha256": "dbbf945e96afbf7a0b0cbfd9ed89dd06151d104b8a9b09af66a7a5378b38777c",
+      "bytes": 4953
+    },
+    {
+      "original": ".work/vtm/surface-push-ordinary-loop-comparison-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-ordinary-loop-comparison-v1.json",
+      "sha256": "1f80347440223f08d6c1f45efca91718e13bc9acf79075a26a5bb71a244c4f32",
+      "bytes": 4950
+    },
+    {
+      "original": ".work/vtm/surface-push-padded-loop-comparison-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-padded-loop-comparison-v1.json",
+      "sha256": "83be618083565f5bb8f56111c38259660692b0508500405ff1a93a002fc7fd3a",
+      "bytes": 4960
+    },
+    {
+      "original": ".work/vtm/surface-push-pipeline-driver-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pipeline-driver-v1.log",
+      "sha256": "4bdcd446c27e28ee62894bab4bddedb70818244097f3eebdc06e116c216036ac",
+      "bytes": 493
+    },
+    {
+      "original": ".work/vtm/surface-push-pipeline-v1-qualification.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pipeline-v1-qualification.log",
+      "sha256": "0bb7ce884093fb72f7198123375b228ca04f051924347fc51b124a45208daa0e",
+      "bytes": 744
+    },
+    {
+      "original": ".work/vtm/surface-push-pipeline-v1-timing.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pipeline-v1-timing.log",
+      "sha256": "fc92cd104ae57a82244336af3dea758a349daf807abad81c4d62b420ca7586f9",
+      "bytes": 29051
+    },
+    {
+      "original": ".work/vtm/surface-push-pipeline-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pipeline-v1.json",
+      "sha256": "fdedb4adeb77c8a7d4aef69bc3b411a90909fedc067b67b666288bc637a3f20b",
+      "bytes": 762
+    },
+    {
+      "original": ".work/vtm/surface-push-production-full-suite-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-production-full-suite-v1.json",
+      "sha256": "809c2fd6753912e09bd67637d2e2baef29da15fea8ca15857fbfdec868350756",
+      "bytes": 406
+    },
+    {
+      "original": ".work/vtm/surface-push-production-full-suite-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-production-full-suite-v1.log",
+      "sha256": "1e516cb3164e1004555bbe120df4b57240f3e6da67462aa944cc28bb529eda26",
+      "bytes": 1633
+    },
+    {
+      "original": ".work/vtm/surface-push-production-loop-v1/frame0.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-production-loop-v1/frame0.npz",
+      "sha256": "e813971f240b4873c0b8b4029de8a96865688bdc925b5363faeacc8bc9cb2090",
+      "bytes": 2109271
+    },
+    {
+      "original": ".work/vtm/surface-push-production-loop-v1/frame1.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-production-loop-v1/frame1.npz",
+      "sha256": "f0e6603ba379e5c1be250669cc826804f6e1b85943b4b7dc9d6407ad1f201b93",
+      "bytes": 2484573
+    },
+    {
+      "original": ".work/vtm/surface-push-production-loop-v1/frame4.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-production-loop-v1/frame4.npz",
+      "sha256": "10cd49106a2470e1f1fac51b980bae7133a172ee06d6f76405ee552168539711",
+      "bytes": 2484899
+    },
+    {
+      "original": ".work/vtm/surface-push-production-loop-v1/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-production-loop-v1/result.json",
+      "sha256": "a7b124253d2ec0a0f5316c9b032980ff99ff6193ad7dbe659edbb2b79276c180",
+      "bytes": 2474
+    },
+    {
+      "original": ".work/vtm/surface-push-production-loop-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-production-loop-v1.json",
+      "sha256": "9fd748eec0b00049d1e6a3c3c7e25cf67b320716e66b8d1f3d061d6680528e56",
+      "bytes": 497
+    },
+    {
+      "original": ".work/vtm/surface-push-production-loop-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-production-loop-v1.log",
+      "sha256": "9b283ab287bd64eb713dc23037437125eac20fb46ecca22c2c71630fcddb34e3",
+      "bytes": 7615
+    },
+    {
+      "original": ".work/vtm/surface-push-production-source-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-production-source-v1.json",
+      "sha256": "b213156d5f18e509ad29d7085b2ab981fa61367e57519e74efc7d9f63145fde9",
+      "bytes": 37346
+    },
+    {
+      "original": ".work/vtm/surface-push-production-tests-driver-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-production-tests-driver-v1.log",
+      "sha256": "cd6d9e59c26d5cbfb202b08b0a1cdab576bac7b48c8facf0e3fc5528ce6a81af",
+      "bytes": 815
+    },
+    {
+      "original": ".work/vtm/surface-push-production-tests-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-production-tests-v1.json",
+      "sha256": "b20d481fc85b3e299b8d29ea63d0442f733ff9524237f9f3e97204319384b0ef",
+      "bytes": 976
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-cache-contracts-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-cache-contracts-v1.json",
+      "sha256": "a4c17f14b679ebc36b19484bcedd4aa22f81c1f3c333d74f465bffa5fc66c31a",
+      "bytes": 8636
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-cache-contracts-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-cache-contracts-v1.log",
+      "sha256": "5852293054873d5e14d702b5ad3d3853c0ff5dadf83f0767394acbc9f84fdca6",
+      "bytes": 99
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-contracts-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-contracts-v1.json",
+      "sha256": "1bbeb8234bff8bc163a92644f781836c355c954acb9a27374c5cf5354961438a",
+      "bytes": 8999
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-contracts-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-contracts-v1.log",
+      "sha256": "c97154b6042ad33765d83db577e4572787baa6a122854b371ea3aaeca8cfb56a",
+      "bytes": 272
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-integration-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-integration-v1.json",
+      "sha256": "dd03131e07b992d7974b92fd1bba42da9f03c4b07c19e2d24af918c784445b69",
+      "bytes": 677
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-driver-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-driver-v1.log",
+      "sha256": "f30033b0accbb981e8819d91bf237d28d6ffd5c074938ac97841c55278284961",
+      "bytes": 7632
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after/boundary.off.gz",
+      "sha256": "e94cca4bf28a28c93bc31f773640988adf9229a6440be325fcf4d972a5d39ed5",
+      "bytes": 273826
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after/mesh.npz",
+      "sha256": "fb8f86390361a3ac95d5ac0c7550c06af94ae0d29a671f594b89c4bf00a6d2da",
+      "bytes": 2261251
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after/mesh.vtu.gz",
+      "sha256": "09437f15b06df3beecb3507d6ac5e0b8cf58253daf110b1a6fe1b5472a00f3c2",
+      "bytes": 922307
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after/result.json",
+      "sha256": "da132a770659f0dad264551cf87abc5073f35dd8d2c835f00e95c33599b45758",
+      "bytes": 4179
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after-observer.json",
+      "sha256": "7edb6ee548de72f2cb2e42cf17a633d10327eb8d18dda77382a156c9c5767e1f",
+      "bytes": 9849
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-after.log",
+      "sha256": "9321ad4568f454d72193af1f3c11465c02de8678a893e8cedf51e57c3fe85dff",
+      "bytes": 9685
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before/boundary.off.gz",
+      "sha256": "6118057c1b509ce5f12d459cdf8f86d19239725ec20ba909678277fb6b48ced5",
+      "bytes": 273841
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before/mesh.npz",
+      "sha256": "d7f2c959c89268006c418b2adf65ca31072409df5ae628cdca24c58b041f929b",
+      "bytes": 2260290
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before/mesh.vtu.gz",
+      "sha256": "3e0ebf4ef94d79d9abd35f41917a8fc2ac18bd74e5bee59794a6bccf2ab79bc4",
+      "bytes": 921764
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before/result.json",
+      "sha256": "cddbdd0c9b876bbe171f96f7324b98a450fffc20d9ab94704e93e2fd3a852fc8",
+      "bytes": 4180
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before-observer.json",
+      "sha256": "90ac66e737d5f1cefb86f5190ea2a32c81d9b41ebb6af5455e21ffceba2bd3f3",
+      "bytes": 9852
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-graded8192-recovery-before.log",
+      "sha256": "4a29b24a68c4da470f75f6cc8f4d7e9e071b050d4be4d2307b41929390abd312",
+      "bytes": 9686
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after/boundary.off.gz",
+      "sha256": "dbf387e6b3cd122a074803f099728ae2db38f922e8bdedfc8e4b12df51d57f2d",
+      "bytes": 274157
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+      "sha256": "3790ed856c3efd405a00f2917ea44a0053f39f81b293f5870be5da0905ca4c8f",
+      "bytes": 2258039
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after/mesh.vtu.gz",
+      "sha256": "f1f3cd7046861a0a02dca544cccbe32278d0cc0c339aba593fffe86afc3a4b01",
+      "bytes": 918405
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after/result.json",
+      "sha256": "344530a48882b67e0c94a001216ec1eb5bf0b4243c4f818a9e99256c3b27ff8e",
+      "bytes": 4171
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after-observer.json",
+      "sha256": "80c4121f7f520225764c74b8702d0519baca96d0e0affe0ec9b8b076326a9f29",
+      "bytes": 9852
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-after.log",
+      "sha256": "3db8ad1d4d66a2c44df9a44b8f1e5a8859a452bea42227cee5e91bed538dc885",
+      "bytes": 9591
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before/boundary.off.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before/boundary.off.gz",
+      "sha256": "9bc58be252eb516c06381bed3a3daf31f326e654bdb4f57f84f55f8aa2aa7933",
+      "bytes": 274169
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before/input.off",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before/mesh.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before/mesh.npz",
+      "sha256": "6bcc09caf37143893582e281505a4aec21deb3395d80be89b63583a926690933",
+      "bytes": 2258342
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before/mesh.vtu.gz",
+      "sha256": "576f21c892e38e44757d96e2502b47d1f1ef7940b59707b51c41068446f4deef",
+      "bytes": 918746
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before/result.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before/result.json",
+      "sha256": "f230f3976858a6eb0d5f7b0b61fb42273a57164b48dcf0b2947c9a4403c57a30",
+      "bytes": 4175
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before-observer.json",
+      "sha256": "956f2ccb38cea7fb2b8e8715b0f4cc4b0bd4dcdf99cf17dae49573ed2fb12866",
+      "bytes": 9849
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/armadillo-uniform8192-recovery-before.log",
+      "sha256": "7cdb065a6cb915a5c8a68dd1d22d6c6f36b98baf2c12153a2c0ba3b50e96ee48",
+      "bytes": 9595
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/commands.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/commands.json",
+      "sha256": "97e908c4b2f9e803d27deaaf004354fb8a0cc7a4ca41f473171b76d94d53d5fd",
+      "bytes": 9131
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/lossless-archives.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/lossless-archives.json",
+      "sha256": "786f927f6e6f2d0ce732b3912c3fbfd91001cc5e1bca2ee6979405fc9479de55",
+      "bytes": 3675
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus1000-after-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus1000-after-observer.json",
+      "sha256": "34e63b84495b2a3f01920e7fe506c7ba71ed68172a951d7d3580e1a9d6ca5894",
+      "bytes": 9482
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus1000-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus1000-after.json",
+      "sha256": "c98a074b1bd27767d68677302bb826fea69ae1c03df4efb392f1c2118a5e328a",
+      "bytes": 2901
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus1000-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus1000-after.log",
+      "sha256": "2f7eda1247a82f897364f02ca708a74df4d2c917718dc2725c31fb4ac62ddf23",
+      "bytes": 8061
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus1000-after.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus1000-after.npz",
+      "sha256": "5d503818c9d09d5d63e3714fda126d267cc73a1651e211aa984da7c4ef3998d2",
+      "bytes": 91402
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus1000-before-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus1000-before-observer.json",
+      "sha256": "59c6ae95c95e118be5229e4e43f98f8091446f12b33662fd8edf6c411b220217",
+      "bytes": 9483
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus1000-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus1000-before.json",
+      "sha256": "d17c88db6b506b68d8b49564f3e28c56aa0ca7b062a7b97f1a9ed7d3a73e867e",
+      "bytes": 2905
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus1000-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus1000-before.log",
+      "sha256": "39fe83c7cce81eff6db6ad255fd1c85b5b3a633e7695b34066bcc8bfa16a9c49",
+      "bytes": 8056
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus1000-before.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus1000-before.npz",
+      "sha256": "7f9fadf741998b34e3a9988e3babd353f206f7fc968ffae14475395f93256972",
+      "bytes": 91342
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus16384-fixed32-after-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus16384-fixed32-after-observer.json",
+      "sha256": "d3918459969bccf64d158fe2ca7a71c039e633170799b6d66d63869a0dff3ff4",
+      "bytes": 9483
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus16384-fixed32-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus16384-fixed32-after.json",
+      "sha256": "bc91ddf6d8793ee1d1c229de93d560a2118867739baf5264f5ca3141b1ff09e2",
+      "bytes": 3141
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus16384-fixed32-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus16384-fixed32-after.log",
+      "sha256": "cef856cbf3c3bc05bf4c821624f139eac431e4e50e8c7dfd9a4e6d55e763e2d8",
+      "bytes": 8493
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus16384-fixed32-after.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus16384-fixed32-after.npz",
+      "sha256": "4f9b95de7a3f687c794547fccb5768669eb802028110a319bfff4cad322022de",
+      "bytes": 2001743
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus16384-fixed32-before-observer.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus16384-fixed32-before-observer.json",
+      "sha256": "c8a1a1a756a5e8402eb7de3d79a76d841a59084ca9da6dff9a93ea8cb207d1e1",
+      "bytes": 9483
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus16384-fixed32-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus16384-fixed32-before.json",
+      "sha256": "09fc3f33497d2bdc8e6c544f63af746ba630f69bce2cd8b2200ee2645d32d05b",
+      "bytes": 3147
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus16384-fixed32-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus16384-fixed32-before.log",
+      "sha256": "1eeb48544f641a4b766f49e6aa07a8c1be9433b363c39f9fd7d9af21fc1aa6ab",
+      "bytes": 8499
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1/torus16384-fixed32-before.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1/torus16384-fixed32-before.npz",
+      "sha256": "d72ded2fd7767c94b768a06aab6c246db7eabeb5c85958ddb9edd2e33ec62eb0",
+      "bytes": 2001525
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1-independent.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1-independent.json",
+      "sha256": "4de064105020a87dd01c4fd2d7b1c57771911a899f45624bcc127d6a4c930843",
+      "bytes": 38528
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-pilot-v1-independent.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-pilot-v1-independent.log",
+      "sha256": "76e94bb06284a4c942a943c5a88d33b9ecb67bb74bb5e9665855bf3af035729b",
+      "bytes": 1603
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-source-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-source-v1.json",
+      "sha256": "962c497eeedd3be2e152de886d9eb5eaa53fd07d094047fa59ef27e87c8363d8",
+      "bytes": 864
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-driver-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-driver-v1.log",
+      "sha256": "4ca5c0399c1ce6eb51e7197120c3701a32f0ab1ef2caba1d8585039c83c53e0d",
+      "bytes": 4388
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-summary-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-summary-v1.json",
+      "sha256": "2d920904745cf0228d20561dedbfc91117a4714bc7131d1877f3ff33d418ad48",
+      "bytes": 38365
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/armadillo-graded8192-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/armadillo-graded8192-after.json",
+      "sha256": "2000f5cd788538fe87791c993eca7555f513782486082f20a8ba261e5ae8c5a3",
+      "bytes": 27058
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/armadillo-graded8192-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/armadillo-graded8192-after.log",
+      "sha256": "d4251453865251d8e668f0d4e0b5097339e8b994251261f4f283df50d9d81493",
+      "bytes": 1677
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/armadillo-graded8192-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/armadillo-graded8192-before.json",
+      "sha256": "8b10348a8d84eb44de4a781d71b95e6aa073da632d00f3cfea4422bfbc29bc99",
+      "bytes": 27058
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/armadillo-graded8192-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/armadillo-graded8192-before.log",
+      "sha256": "498ea4c6aa4fae693996dc5bd2e2a536b42be434410c3a110392d8bd27d8897d",
+      "bytes": 1674
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/armadillo-uniform8192-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/armadillo-uniform8192-after.json",
+      "sha256": "8c0f43b311742d0b96c8636f6f9955c27712ac28e75b2c1503d06473aa63bdd6",
+      "bytes": 27065
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/armadillo-uniform8192-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/armadillo-uniform8192-after.log",
+      "sha256": "c6a9e394e196f726300b10e0c0866ef5fdfbc8a96f36ec14f916ca8c24ee0305",
+      "bytes": 1674
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/armadillo-uniform8192-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/armadillo-uniform8192-before.json",
+      "sha256": "bbb7897cb801f7b8d8e2df3f963c9109f6a635e940ead5259052adc0c4be6f54",
+      "bytes": 27032
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/armadillo-uniform8192-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/armadillo-uniform8192-before.log",
+      "sha256": "9385cb65e2c31e7998f975be1c58a937b0b1b631e77deb60b13baa4276477a43",
+      "bytes": 1674
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/commands.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/commands.json",
+      "sha256": "ff133dc81953cec6399d2bd2752ce085e1c27fd29b50127e8165df87808c0c0c",
+      "bytes": 4923
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/torus1000-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/torus1000-after.json",
+      "sha256": "6eaaacc8a9be90680de4125ba7dd8b9f095804b95207ce34b79b1540dc3726a7",
+      "bytes": 26525
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/torus1000-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/torus1000-after.log",
+      "sha256": "56ee712ed094e463ede3af32cd31fd74b146d9b712fc47df7a4c1ab88d1cbdc4",
+      "bytes": 1501
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/torus1000-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/torus1000-before.json",
+      "sha256": "f61013646a71d42d391de20c5fe1c2b6028a15092692c8a92f1f4baf51314634",
+      "bytes": 26529
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/torus1000-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/torus1000-before.log",
+      "sha256": "87ed4bcbf886c0548aab9d7b83a5a0fad91cd67cbb93772b2c9852fbe6ac193b",
+      "bytes": 1493
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/torus16384-after.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/torus16384-after.json",
+      "sha256": "8ba975df4944bee7a4327b32432d1c06391155bf320d83d44330824712d246ad",
+      "bytes": 27094
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/torus16384-after.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/torus16384-after.log",
+      "sha256": "d69b3014a92b425a88687eee70a2f142ff2def79097c37bfad4bcec3ab947133",
+      "bytes": 1690
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/torus16384-before.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/torus16384-before.json",
+      "sha256": "0a0b57ef824a0f5c3dc621405909473883969b6e18257266f258c387fd50bfb3",
+      "bytes": 27081
+    },
+    {
+      "original": ".work/vtm/surface-push-pruning-static-v1/torus16384-before.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-pruning-static-v1/torus16384-before.log",
+      "sha256": "c5b9c23fd557ec3428334d3dc40e35dad3dc73fabb4e1324bd99d28f66aeee32",
+      "bytes": 1675
+    },
+    {
+      "original": ".work/vtm/surface-push-qualification-preparation-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualification-preparation-v1.json",
+      "sha256": "92374812802004f959ae9b35b1c38c044d53b5bc305414fd684ef84d34a8a52e",
+      "bytes": 5215
+    },
+    {
+      "original": ".work/vtm/surface-push-qualification-v1-memory.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualification-v1-memory.log",
+      "sha256": "4ca4667c060ce6ed7716552cd110b051b22995aa47516b25e7cacfcdae857c20",
+      "bytes": 2432
+    },
+    {
+      "original": ".work/vtm/surface-push-qualification-v1-native-full.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualification-v1-native-full.log",
+      "sha256": "5b58d8c3528f5add394485fffb17e29c8d9050f88c3f8ec6447637f40844e7ae",
+      "bytes": 1971
+    },
+    {
+      "original": ".work/vtm/surface-push-qualification-v1-native-loop.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualification-v1-native-loop.log",
+      "sha256": "d911a5e2a450c865266a3ccbd72cc19d917b7ba93d13a5721badabd5b0cb979f",
+      "bytes": 1957
+    },
+    {
+      "original": ".work/vtm/surface-push-qualification-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualification-v1.json",
+      "sha256": "7a29dd6303ccd88985cfcd3b79ca0ed0d6691f9d3b6c7141256c627a9e12c1d4",
+      "bytes": 882
+    },
+    {
+      "original": ".work/vtm/surface-push-qualified-driver-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualified-driver-v1.log",
+      "sha256": "5b6c77270973afefa57fcf4eee50133f536679639fec38db9d6a35dc3512c108",
+      "bytes": 1930
+    },
+    {
+      "original": ".work/vtm/surface-push-qualified-v1-lifetime-loop.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualified-v1-lifetime-loop.log",
+      "sha256": "f925d3a162997dc41afd93085566ff51da0fd39884bdcc489ad506abbfd028db",
+      "bytes": 110
+    },
+    {
+      "original": ".work/vtm/surface-push-qualified-v1-native-full.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualified-v1-native-full.log",
+      "sha256": "94c8ad66e4e3c2ebc80c8c86628b7e9547e049fb38507f000fae81ee8b2f693a",
+      "bytes": 105
+    },
+    {
+      "original": ".work/vtm/surface-push-qualified-v1-native-loop.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualified-v1-native-loop.log",
+      "sha256": "f925d3a162997dc41afd93085566ff51da0fd39884bdcc489ad506abbfd028db",
+      "bytes": 110
+    },
+    {
+      "original": ".work/vtm/surface-push-qualified-v1-ordinary-loop.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualified-v1-ordinary-loop.log",
+      "sha256": "f925d3a162997dc41afd93085566ff51da0fd39884bdcc489ad506abbfd028db",
+      "bytes": 110
+    },
+    {
+      "original": ".work/vtm/surface-push-qualified-v1-padded-loop.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualified-v1-padded-loop.log",
+      "sha256": "f925d3a162997dc41afd93085566ff51da0fd39884bdcc489ad506abbfd028db",
+      "bytes": 110
+    },
+    {
+      "original": ".work/vtm/surface-push-qualified-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-qualified-v1.json",
+      "sha256": "975ad0030008e8fdbc5b1066387a5704575f41746262c580f7709238779afa40",
+      "bytes": 2234
+    },
+    {
+      "original": ".work/vtm/surface-push-uniform-native-v1-audit.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-uniform-native-v1-audit.json",
+      "sha256": "fd60039452c47fba04c07e1aae11cc9221a2fe0dbcb05b4293422700b5fb060d",
+      "bytes": 911
+    },
+    {
+      "original": ".work/vtm/surface-push-uniform-native-v1-audit.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-uniform-native-v1-audit.log",
+      "sha256": "fd60039452c47fba04c07e1aae11cc9221a2fe0dbcb05b4293422700b5fb060d",
+      "bytes": 911
+    },
+    {
+      "original": ".work/vtm/surface-push-uniform-native-v1-command.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-uniform-native-v1-command.json",
+      "sha256": "95d8f69230d428eab52671a65c77d844f7198843602e5218a8083e3cd102cae6",
+      "bytes": 770
+    },
+    {
+      "original": ".work/vtm/surface-push-uniform-native-v1-export.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-uniform-native-v1-export.log",
+      "sha256": "9c83503ce7ea117f72da8756fd8e7f3d99e64d49cbdea9edbf7aa14a93032501",
+      "bytes": 8101
+    },
+    {
+      "original": ".work/vtm/surface-push-uniform-native-v1-kernels.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-uniform-native-v1-kernels.json",
+      "sha256": "e205b4b8c5abcd4eb23958b911253eb8e63621062dbf0f8864e0cecf6d98100f",
+      "bytes": 41474
+    },
+    {
+      "original": ".work/vtm/surface-push-uniform-native-v1-windows.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-uniform-native-v1-windows.json",
+      "sha256": "4bc1743d841d602a74ff366fbaca4e2da5e526219d36d0a1b1edbfed2dd67860",
+      "bytes": 37644
+    },
+    {
+      "original": ".work/vtm/surface-push-uniform-native-v1.dot.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-uniform-native-v1.dot.gz",
+      "sha256": "2470bf2a550f7c5bdfbfc0db279acdd6344f00519ca30536e5c449f572f64d17",
+      "bytes": 2741852
+    },
+    {
+      "original": ".work/vtm/surface-push-uniform-native-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-uniform-native-v1.json",
+      "sha256": "d77d61ca5e097211d054770239d8f5b9f16c09e37a8c547a429706095c2fce40",
+      "bytes": 2190
+    },
+    {
+      "original": ".work/vtm/surface-push-uniform-native-v1.log",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-uniform-native-v1.log",
+      "sha256": "1e301d434af0774a69cee525a4bcdcff92b2c7768ee54611aff8bcfd54def10a",
+      "bytes": 12802
+    },
+    {
+      "original": ".work/vtm/surface-push-uniform-native-v1.npz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-uniform-native-v1.npz",
+      "sha256": "f1820e6b56959e1ea7e771b0c9ee5209c3bf6814899d11449f8821289cfb1e5d",
+      "bytes": 2257803
+    },
+    {
+      "original": ".work/vtm/surface-push-uniform-native-v1.nsys-rep.gz",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-uniform-native-v1.nsys-rep.gz",
+      "sha256": "2bd06bbb84398e849c1ac000d58d97609b52cec80e56958f990c472a670ecd36",
+      "bytes": 4490459
+    },
+    {
+      "original": ".work/vtm/surface-push-variation-review-v1.json",
+      "path": "results/validation/vtm/surface-push-pruning/surface-push-variation-review-v1.json",
+      "sha256": "8dba85df164c6e29abe2b40f7eee1723c61285bb3598c6a611b53d5765affdd5",
+      "bytes": 10530
+    },
+    {
+      "original": ".work/vtm/surface_push_pruning_install_v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/surface_push_pruning_install_v1.py",
+      "sha256": "b4fc7bc4b81cb5ed89629d8323fe3288c6aeb344b4d4f1018e91b93759ca61f0",
+      "bytes": 728
+    },
+    {
+      "original": ".work/vtm/surface_push_pruning_v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/surface_push_pruning_v1.py",
+      "sha256": "d93db8fee0d61d265f4fcb356034aadbe16b734bd4fa034df9dcb4c94ccff97e",
+      "bytes": 3021
+    },
+    {
+      "original": ".work/vtm/test-surface-push-cache-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/test-surface-push-cache-v1.py",
+      "sha256": "cfd773e7b5806e13bfe427cdb1960fac6cb67bced1728ad87882f2f7e45a8010",
+      "bytes": 1336
+    },
+    {
+      "original": ".work/vtm/test-surface-push-pruning-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/test-surface-push-pruning-v1.py",
+      "sha256": "c3b2d4d1ddabda217add3659a864c74d7ddda3b36b3cb77d3a3a1ff072104de0",
+      "bytes": 1259
+    },
+    {
+      "original": ".work/vtm/test_surface_push_pruning_v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/test_surface_push_pruning_v1.py",
+      "sha256": "f3a3b2c4487af235bd978e4c96f046d3f8a54e9d48abc6fc9960dd46b73e44bc",
+      "bytes": 5620
+    },
+    {
+      "original": ".work/vtm/verify-surface-push-v1.py",
+      "path": "results/validation/vtm/surface-push-pruning/verify-surface-push-v1.py",
+      "sha256": "31931572563ca0eb631b046d53383e279e18c04f87635cdbf387fcf04c13bd97",
+      "bytes": 8298
+    }
+  ],
+  "shared_references": [
+    {
+      "path": ".work/vtm/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "path": ".work/vtm/check-surface-bound-reuse-final-v2.py",
+      "sha256": "043e6a45bc7f2723bce7411d587cafc15f0f3aa3789b81868f0fe5f4a81dd83a"
+    },
+    {
+      "path": ".work/vtm/check-surface-query-order-final-v1.py",
+      "sha256": "5b382c1510ed5d56619e32f45683b48b4bdfa6736f4209f325918fac1db9e1d6"
+    },
+    {
+      "path": ".work/vtm/check-surface-sample-loop-v1.py",
+      "sha256": "f14d851d8abce573016d7d41372db88cb9fb1ecc9e19c8061b3de8a7e4b05a4b"
+    },
+    {
+      "path": ".work/vtm/check-surface-sample-native-full-v1.py",
+      "sha256": "a507cc2327305470ed5ff07f7c08525eba2a1c8702a57fa852ba454064d39a0b"
+    },
+    {
+      "path": ".work/vtm/check-surface-sample-pairs-v4.py",
+      "sha256": "0e4b4d8be5080efd0fe09eae7c8bc530074ba2fe9531aab4ca616359668d611a"
+    },
+    {
+      "path": ".work/vtm/check-surface-sample-qualified-v1.py",
+      "sha256": "7099005cbf59ab2eaa9508bf169a012409793a282192408519693d110c8ce32d"
+    },
+    {
+      "path": ".work/vtm/check-tangential-production-memory-v3.py",
+      "sha256": "fb51c236a61ee85dffc0d43549179d98ed21bf712cbadb5307869b9e9af81df5"
+    },
+    {
+      "path": ".work/vtm/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    },
+    {
+      "path": ".work/vtm/profile-surface-sample-uniform-v1.py",
+      "sha256": "7100a3339cc6c7bde6c11bf7216523b1c8896c8be650500a6c3dcc9278e92857"
+    },
+    {
+      "path": ".work/vtm/run-surface-sample-final-v1.py",
+      "sha256": "9ff608b1cf98dba995c426ae59fbbcb453dcb03d5356b33b6fadbcb4abc30dd2"
+    },
+    {
+      "path": ".work/vtm/run-surface-sample-independent-v1.py",
+      "sha256": "582b3d95946c23c7010a754a935a66d1ae83a925a891c78a804d41daf8f9dd54"
+    },
+    {
+      "path": ".work/vtm/run-surface-sample-loop-native-v1.py",
+      "sha256": "1ef5d16c57738383c67bc98366b89b1e59a4d1943a0b12bc99a0cabddcba3209"
+    },
+    {
+      "path": ".work/vtm/run-surface-sample-memory-v1.py",
+      "sha256": "f5df08f492ea73ee9a2073f47a05110009e264c5560ce03dd9e729d9c3ab9014"
+    },
+    {
+      "path": ".work/vtm/run-surface-sample-pipeline-v1.py",
+      "sha256": "a99d1c675ee0eb8703a8259a986c85ebe4693c7a7a35b4cd47210431e6c42493"
+    },
+    {
+      "path": ".work/vtm/run-surface-sample-production-tests-v2.py",
+      "sha256": "19e52fc110d88c4566ed77f56388f9660f1f43a240e4704ba7060652352e82c0"
+    },
+    {
+      "path": ".work/vtm/run-surface-sample-qualification-v1.py",
+      "sha256": "646dd00374960bfbac136293e7637e243ef2eb44a799636ef50b56dd14983290"
+    },
+    {
+      "path": ".work/vtm/run-surface-sample-uniform-native-v1.py",
+      "sha256": "bf15b54c1fc2885eb185a24356c0a967fc7966ad5cb6456f81e41f89937709f3"
+    },
+    {
+      "path": ".work/vtm/run-tangential-production-gallery-v1.py",
+      "sha256": "234e0bd80ec46fb9be95c28681cfeba8eb55031bd6a46e360a9ffd354ac481a7"
+    },
+    {
+      "path": ".work/vtm/scanned-armadillo-input/armadillo.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/armadillo-graded4096-after/mesh.npz",
+      "sha256": "7a238ad69f03ca3650d99168e7dca26ec3721e3cd4ec1008305db06a74764be4"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/armadillo-graded4096-before/mesh.npz",
+      "sha256": "8986d02dc326589e7a9039d3b21a7a9b1ada203d0a2219b08b19cdb09bb0bad4"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/armadillo-graded8192-recovery-after/mesh.npz",
+      "sha256": "0b697d9812481fc0a742a3500797d49805df9af6674b451ae398732312fb06c2"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/armadillo-graded8192-recovery-before/mesh.npz",
+      "sha256": "c74cc5f27c2af0a4c67711b798a7fd49d03cd78721389bd37cc987378d217dc4"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+      "sha256": "fcbeb5511ba16e2f9570ef26bfadee630a125038ff7b5728214214fcf58b9379"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/armadillo-uniform8192-recovery-before/mesh.npz",
+      "sha256": "14897ee4e03a0ae3fbefbc154f74e9b9044002f27ca39fa7f6f0568c9b3ad5d9"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/cavity-after/mesh.npz",
+      "sha256": "7800aa608792fd3286d317aa6277d6a03e0b39b87b4e75d307f7802757a48306"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/cavity-before/mesh.npz",
+      "sha256": "57afd00d62e244605fb89937bd3ce43e35c3c9e4e7c4f20d6f077c1f89d084a5"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/commands.json",
+      "sha256": "d2c1d6a2e189f83854796d96f749132d7144d170a02319b6b331d8f00002343a"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/disconnected-after/mesh.npz",
+      "sha256": "cf54406757aed4639bb4c21adea9b46198135680a195e6dc0e70f713ca9c007f"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/disconnected-before/mesh.npz",
+      "sha256": "c33cb70e065a99b319e4bedda716bfe71f24e06b1244c96fd039735a29d6b8e7"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/plate-after/mesh.npz",
+      "sha256": "6fdc581ac208fdd86490dfa7585c3337810659e39520e48d909a304ace34ee34"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/plate-before/mesh.npz",
+      "sha256": "368f34f7d001888bab527e45ad8e5061c1524c7c67c880aa264c691259cd1782"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/thin-hand-seed7-after/mesh.npz",
+      "sha256": "7052956e86285f5457cf7c6e744819fbb3d1e45ea0d7b086f8ebd6b9c87c2e25"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/thin-hand-seed7-before/mesh.npz",
+      "sha256": "c90b0ab6d3b5b1335618f1020067fc03b87da4392e8672d00fc3927cdea8ba7a"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/torus1000-after.npz",
+      "sha256": "c9d37011557a1300f7374f9bcbeecfa3f29982c90e1c5ebb70c899352d6fa39d"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/torus1000-before.npz",
+      "sha256": "dc0b732545f06e0258fd799750faa44aa92c6bcd74cd55ac06202b41ec75c7a5"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/torus16384-fixed32-after.npz",
+      "sha256": "f11fd85f2f760b0583e752614b296e73240750ef8287ce0d95e493602acc6954"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/torus16384-fixed32-before.npz",
+      "sha256": "08321fe15909edbb7e8f0afb81f7ee27c19a82c405ba3091d62332d44d479c0f"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/torus8192-fixed32-after.npz",
+      "sha256": "5838d7247fb5891b388db1f1bc4f825ece13c44a605593788210dbf9fe40a7e1"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/torus8192-fixed32-before.npz",
+      "sha256": "ada61195002599ff3342c7e837ef31aa162944e987608ec1a21b3a5b194a330d"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/torus8192-progressive-after.npz",
+      "sha256": "b028cf93d2be83cda2ef1b26164d8b27c67e09d4e2bfa476a9f5472dbbfc1fac"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1/torus8192-progressive-before.npz",
+      "sha256": "4495b57513340b6ed765a8a9184461803c192318d76f8a6c57e0fe09a0fb6adb"
+    },
+    {
+      "path": ".work/vtm/surface-query-order-final-v1-independent.json",
+      "sha256": "fda9450a3ef27440ebb96e45fd4598ee66df00e4df493315257ecce6fd29d16a"
+    },
+    {
+      "path": ".work/vtm/surface-sample-final-v1/armadillo-graded8192-recovery-after/mesh.npz",
+      "sha256": "83f017f9db31757fc872a4fb7dcab6de9184cf70b42a431002cccb336461fb9c"
+    },
+    {
+      "path": ".work/vtm/surface-sample-final-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+      "sha256": "22c94570592a930b814c55fa48f5f785d0774c1035b2e76ecf0bf410b59a2cf0"
+    },
+    {
+      "path": ".work/vtm/surface-sample-final-v1/commands.json",
+      "sha256": "664b9ae04d96f237f8914f6ef3ee9435bfcafb5264f57a364827fd7e0fd5e48c"
+    },
+    {
+      "path": ".work/vtm/surface-sample-final-v1/torus1000-after.npz",
+      "sha256": "bcd7ee3671bfde2bb007485a15a4bf7a1b8c71d963c74584a3c3178ab169e255"
+    },
+    {
+      "path": ".work/vtm/surface-sample-final-v1/torus16384-fixed32-after.npz",
+      "sha256": "61789c148d3194e6c474b88dbd24b454c84e793b4c783a3e0655a3272e0edd09"
+    },
+    {
+      "path": ".work/vtm/surface-sample-production-source-v2.json",
+      "sha256": "780982421c0dbcd3e1ad6a7e35ed715347800c7832bd3aa5928d5abaabcd1c7f"
+    },
+    {
+      "path": ".work/vtm/surface-sample-uniform-native-v1-kernels.json",
+      "sha256": "6470e2e8c672c0bb12ea6f0403e8d0256aedaa0fdd114160c2a2292884614f5d"
+    },
+    {
+      "path": ".work/vtm/tangential-production-loop-v2/frame0.npz",
+      "sha256": "2a6e5fec6f07243631b2104a8858b538fe4abb7f52d83f23ccaf8665debd3800"
+    },
+    {
+      "path": ".work/vtm/tangential-production-loop-v2/frame1.npz",
+      "sha256": "70d21d99fd9b92602cf39c96de9403d0df6ffc3df0f92a0974176e8c4bc90905"
+    },
+    {
+      "path": ".work/vtm/tangential-production-loop-v2/frame4.npz",
+      "sha256": "03da2e66f8fd807573c4b6949d7e0340a8019eb94d1e32a2cfc1856638f463bc"
+    },
+    {
+      "path": ".work/vtm/tangential-production-loop-v2/result.json",
+      "sha256": "10876619ad79e0242111d093c878ea0665622d52afc2a9a0a5e8a75f1fcb2110"
+    },
+    {
+      "path": ".work/vtm/tangential-production-loop-v2-independent.json",
+      "sha256": "01c7f96f99e2c8f3e47dcb375f039c80bc5677f2271297e2b3932f81406ffc92"
+    },
+    {
+      "path": ".work/vtm/test_tangential_production_loop_v2.py",
+      "sha256": "87ac3e4079c982d9f8e1d4d164b7a3b2cc41a906369a8d85f938376e4f5503c5"
+    },
+    {
+      "path": "results/validation/vtm/ordered-surface-queries/manifest.json",
+      "sha256": "203845f2887ad9e10df539a0e8695563eb9dceba8988f1b7c35ad33da700508a"
+    },
+    {
+      "path": "results/validation/vtm/surface-sample-quadrature/manifest.json",
+      "sha256": "3f52be98d1672d474c5de2fa5dd963c54ef73a3254bd5f74f436d436d98c520c"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/manifest.json",
+      "sha256": "5fc106af4815a8a2c273e4b61d74e3a30f9f74bcdd2a10972bc92ab1deaddbd8"
+    }
+  ],
+  "limits": [
+    "GPU revision improvements do not establish comparable-quality CPU outperformance.",
+    "The exact traversal preserves surviving visits and arithmetic; floating-point atomic reductions are not promised deterministic.",
+    "Setup/upload excluded from warmed replay; setup and first calls are separate.",
+    "Sampled surface distances are not Hausdorff certificates.",
+    "Previous independent proofs transfer only through exact array/oriented-connectivity/quality comparisons; current exports receive round-trip checks.",
+    "The graded retained static regression is retained."
+  ],
+  "reproduction": [
+    "Use pinned baseline/runtime sources, NVIDIA L40 and Warp 1.19.0+cu12. Restore original .work/vtm paths or adapt copies of retained scripts.",
+    "Use .venv/bin/python with PYTHONDONTWRITEBYTECODE=1 WARP_CACHE_PATH=/opt/warpower-generated-cache OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 PYTHONPATH=.:.work/vtm. One GPU job; no heavy CPU work during clean timing.",
+    "Run private nearest/extraction contracts, static profiles, independent cache contracts, then complete pilot and its geometry checks; integrate and run production tests/final timings/native/memory/paired-frame qualification.",
+    "Restore shared inputs/helpers/proof records from prior published evidence. Native validators are documented in benchmarks/cpu/README.md.",
+    "Keep original Stanford/libigl scanned-input provenance; the input is not relicensed under MIT."
+  ]
+}

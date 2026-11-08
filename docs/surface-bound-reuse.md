@@ -151,3 +151,7 @@ This completes [#200](https://github.com/alecjacobson/warpower/issues/200).
 The float32-filter experiment remains separate in
 [#198](https://github.com/alecjacobson/warpower/issues/198), and the overall CPU
 performance target remains open in [#40](https://github.com/alecjacobson/warpower/issues/40).
+
+[Exact push-time rejection](surface-push-pruning.md) subsequently skips children
+already rejected by the existing bound comparison, preserving the pop-time check
+and nearest-hit arithmetic.

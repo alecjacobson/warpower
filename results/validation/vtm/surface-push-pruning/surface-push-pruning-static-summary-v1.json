@@ -1,0 +1,1226 @@
+{
+  "scope": "Summarize all static rows, retaining regressions and query-output comparisons.",
+  "complete": true,
+  "adopted": false,
+  "complete_solve_measured": false,
+  "cases": {
+    "torus1000": {
+      "input_sha256": "bcd7ee3671bfde2bb007485a15a4bf7a1b8c71d963c74584a3c3178ab169e255",
+      "sites": 1000,
+      "cells": 5826,
+      "capacity": 8000,
+      "face_capacity": 32000,
+      "rows": [
+        {
+          "name": "full-cold",
+          "before_ms": 3.8619680404663086,
+          "after_ms": 3.483471989631653,
+          "reduction_percent": 9.800600286400996,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            }
+          }
+        },
+        {
+          "name": "full-warm",
+          "before_ms": 0.028144000098109245,
+          "after_ms": 0.028303999453783035,
+          "reduction_percent": -0.5685025409182698,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            }
+          }
+        },
+        {
+          "name": "selection-cold",
+          "before_ms": 3.7946239709854126,
+          "after_ms": 3.463296055793762,
+          "reduction_percent": 8.731508516392184,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36024
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36032
+            }
+          }
+        },
+        {
+          "name": "selection-warm",
+          "before_ms": 0.03086400032043457,
+          "after_ms": 0.030928000807762146,
+          "reduction_percent": -0.20736290391107914,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36024
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36032
+            }
+          }
+        },
+        {
+          "name": "retained-cold",
+          "before_ms": 0.8835200071334839,
+          "after_ms": 0.8475839793682098,
+          "reduction_percent": 4.067370005786952,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35976
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35984
+            }
+          }
+        },
+        {
+          "name": "retained-warm",
+          "before_ms": 0.027488000690937042,
+          "after_ms": 0.027615999802947044,
+          "reduction_percent": -0.4656544993910883,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35976
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35984
+            }
+          }
+        },
+        {
+          "name": "nearest-live",
+          "before_ms": 3.229200005531311,
+          "after_ms": 2.8749279975891113,
+          "reduction_percent": 10.970890850221904,
+          "equal_output_fields": {
+            "hits.point": true,
+            "hits.distance2": true,
+            "hits.face": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          },
+          "after_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          }
+        },
+        {
+          "name": "quadrature",
+          "before_ms": 0.3568800091743469,
+          "after_ms": 0.3224640041589737,
+          "reduction_percent": 9.64357883059792,
+          "equal_output_fields": {
+            "integral": false,
+            "maximum": true,
+            "error": true
+          },
+          "relative_integral_difference": 1.1582473603105743e-15,
+          "before_properties": {
+            "register_count": 78,
+            "local_memory_size": 3296
+          },
+          "after_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          }
+        }
+      ],
+      "reports": {
+        "/home/horde/projects/power-diagram/.work/vtm/surface-push-pruning-static-v1/torus1000-before.json": "f61013646a71d42d391de20c5fe1c2b6028a15092692c8a92f1f4baf51314634",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-push-pruning-static-v1/torus1000-after.json": "6eaaacc8a9be90680de4125ba7dd8b9f095804b95207ce34b79b1540dc3726a7"
+      }
+    },
+    "torus16384": {
+      "input_sha256": "61789c148d3194e6c474b88dbd24b454c84e793b4c783a3e0655a3272e0edd09",
+      "sites": 16384,
+      "cells": 98092,
+      "capacity": 131072,
+      "face_capacity": 524288,
+      "rows": [
+        {
+          "name": "full-cold",
+          "before_ms": 15.54256010055542,
+          "after_ms": 14.896016120910645,
+          "reduction_percent": 4.159829368275503,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35952
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          }
+        },
+        {
+          "name": "full-warm",
+          "before_ms": 0.23430399596691132,
+          "after_ms": 0.234047994017601,
+          "reduction_percent": 0.1092605989299722,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35952
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          }
+        },
+        {
+          "name": "selection-cold",
+          "before_ms": 12.558144092559814,
+          "after_ms": 11.528671741485596,
+          "reduction_percent": 8.197647227858607,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36024
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36008
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36032
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36016
+            }
+          }
+        },
+        {
+          "name": "selection-warm",
+          "before_ms": 0.21620800346136093,
+          "after_ms": 0.21593599766492844,
+          "reduction_percent": 0.12580745951946692,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36024
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36008
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36032
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36016
+            }
+          }
+        },
+        {
+          "name": "retained-cold",
+          "before_ms": 3.479088068008423,
+          "after_ms": 3.3359360694885254,
+          "reduction_percent": 4.114641415267295,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35976
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35984
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            }
+          }
+        },
+        {
+          "name": "retained-warm",
+          "before_ms": 0.2030079960823059,
+          "after_ms": 0.20310400426387787,
+          "reduction_percent": -0.04729280788182688,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35976
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35984
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            }
+          }
+        },
+        {
+          "name": "nearest-live",
+          "before_ms": 18.9563045501709,
+          "after_ms": 17.457712173461914,
+          "reduction_percent": 7.905509076110906,
+          "equal_output_fields": {
+            "hits.point": true,
+            "hits.distance2": true,
+            "hits.face": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          },
+          "after_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          }
+        },
+        {
+          "name": "quadrature",
+          "before_ms": 0.5989760160446167,
+          "after_ms": 0.5771200060844421,
+          "reduction_percent": 3.648895677743891,
+          "equal_output_fields": {
+            "integral": false,
+            "maximum": true,
+            "error": true
+          },
+          "relative_integral_difference": -2.5602748966555757e-15,
+          "before_properties": {
+            "register_count": 78,
+            "local_memory_size": 3296
+          },
+          "after_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          }
+        }
+      ],
+      "reports": {
+        "/home/horde/projects/power-diagram/.work/vtm/surface-push-pruning-static-v1/torus16384-before.json": "0a0b57ef824a0f5c3dc621405909473883969b6e18257266f258c387fd50bfb3",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-push-pruning-static-v1/torus16384-after.json": "8ba975df4944bee7a4327b32432d1c06391155bf320d83d44330824712d246ad"
+      }
+    },
+    "armadillo-uniform8192": {
+      "input_sha256": "22c94570592a930b814c55fa48f5f785d0774c1035b2e76ecf0bf410b59a2cf0",
+      "sites": 8192,
+      "cells": 49595,
+      "capacity": 65536,
+      "face_capacity": 262144,
+      "rows": [
+        {
+          "name": "full-cold",
+          "before_ms": 38.69326400756836,
+          "after_ms": 31.582736015319824,
+          "reduction_percent": 18.376655923516104,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35952
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          }
+        },
+        {
+          "name": "full-warm",
+          "before_ms": 0.18280000239610672,
+          "after_ms": 0.1831039935350418,
+          "reduction_percent": -0.16629711977593775,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35952
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          }
+        },
+        {
+          "name": "selection-cold",
+          "before_ms": 18.42846393585205,
+          "after_ms": 17.22748851776123,
+          "reduction_percent": 6.516958886379875,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36024
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36008
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36032
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36016
+            }
+          }
+        },
+        {
+          "name": "selection-warm",
+          "before_ms": 0.1756800040602684,
+          "after_ms": 0.1754079982638359,
+          "reduction_percent": 0.15483025395376382,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36024
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36008
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36032
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36016
+            }
+          }
+        },
+        {
+          "name": "retained-cold",
+          "before_ms": 7.872095823287964,
+          "after_ms": 7.588207960128784,
+          "reduction_percent": 3.606255176916884,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35976
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35984
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            }
+          }
+        },
+        {
+          "name": "retained-warm",
+          "before_ms": 0.1682560071349144,
+          "after_ms": 0.1666399985551834,
+          "reduction_percent": 0.960446290892425,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35976
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35984
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            }
+          }
+        },
+        {
+          "name": "nearest-live",
+          "before_ms": 26.660320281982422,
+          "after_ms": 22.453760147094727,
+          "reduction_percent": 15.778355587613003,
+          "equal_output_fields": {
+            "hits.point": true,
+            "hits.distance2": true,
+            "hits.face": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          },
+          "after_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          }
+        },
+        {
+          "name": "quadrature",
+          "before_ms": 6.071151971817017,
+          "after_ms": 5.229455947875977,
+          "reduction_percent": 13.863860233581526,
+          "equal_output_fields": {
+            "integral": false,
+            "maximum": true,
+            "error": true
+          },
+          "relative_integral_difference": 3.139305577981755e-16,
+          "before_properties": {
+            "register_count": 78,
+            "local_memory_size": 3296
+          },
+          "after_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          }
+        }
+      ],
+      "reports": {
+        "/home/horde/projects/power-diagram/.work/vtm/surface-push-pruning-static-v1/armadillo-uniform8192-before.json": "bbb7897cb801f7b8d8e2df3f963c9109f6a635e940ead5259052adc0c4be6f54",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-push-pruning-static-v1/armadillo-uniform8192-after.json": "8c0f43b311742d0b96c8636f6f9955c27712ac28e75b2c1503d06473aa63bdd6"
+      }
+    },
+    "armadillo-graded8192": {
+      "input_sha256": "83f017f9db31757fc872a4fb7dcab6de9184cf70b42a431002cccb336461fb9c",
+      "sites": 8192,
+      "cells": 49660,
+      "capacity": 65536,
+      "face_capacity": 262144,
+      "rows": [
+        {
+          "name": "full-cold",
+          "before_ms": 35.55129623413086,
+          "after_ms": 28.815775871276855,
+          "reduction_percent": 18.945920617059244,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35952
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          }
+        },
+        {
+          "name": "full-warm",
+          "before_ms": 0.18295999616384506,
+          "after_ms": 0.18294399976730347,
+          "reduction_percent": 0.008743111541864579,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35952
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          }
+        },
+        {
+          "name": "selection-cold",
+          "before_ms": 18.182640075683594,
+          "after_ms": 15.61249589920044,
+          "reduction_percent": 14.135154002857464,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36024
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36008
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36032
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36016
+            }
+          }
+        },
+        {
+          "name": "selection-warm",
+          "before_ms": 0.1743839979171753,
+          "after_ms": 0.17337600141763687,
+          "reduction_percent": 0.5780326816553272,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "center": true,
+            "radius": true,
+            "distance": true,
+            "volume": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36024
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36008
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 36032
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 36016
+            }
+          }
+        },
+        {
+          "name": "retained-cold",
+          "before_ms": 9.142848014831543,
+          "after_ms": 9.602863788604736,
+          "reduction_percent": -5.031427548909861,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35976
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35984
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            }
+          }
+        },
+        {
+          "name": "retained-warm",
+          "before_ms": 0.1663680002093315,
+          "after_ms": 0.16707199811935425,
+          "reduction_percent": -0.4231570429030329,
+          "equal_output_fields": {
+            "error": true,
+            "keep": true,
+            "quality": true,
+            "probe.centers": true,
+            "probe.valid": true,
+            "probe.rays": true,
+            "probe.sides": true,
+            "probe.nearest": true,
+            "probe.limits": true,
+            "probe.distances": true,
+            "probe.faces": true,
+            "probe.hit_points": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35976
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35960
+            }
+          },
+          "after_properties": {
+            "unordered": {
+              "register_count": 255,
+              "local_memory_size": 35984
+            },
+            "ordered": {
+              "register_count": 255,
+              "local_memory_size": 35968
+            }
+          }
+        },
+        {
+          "name": "nearest-live",
+          "before_ms": 27.07140827178955,
+          "after_ms": 22.935935974121094,
+          "reduction_percent": 15.276162422543537,
+          "equal_output_fields": {
+            "hits.point": true,
+            "hits.distance2": true,
+            "hits.face": true
+          },
+          "relative_integral_difference": null,
+          "before_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          },
+          "after_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          }
+        },
+        {
+          "name": "quadrature",
+          "before_ms": 6.562608003616333,
+          "after_ms": 5.417279958724976,
+          "reduction_percent": 17.452330601800735,
+          "equal_output_fields": {
+            "integral": false,
+            "maximum": true,
+            "error": true
+          },
+          "relative_integral_difference": -5.046017946673354e-16,
+          "before_properties": {
+            "register_count": 78,
+            "local_memory_size": 3296
+          },
+          "after_properties": {
+            "register_count": 80,
+            "local_memory_size": 3296
+          }
+        }
+      ],
+      "reports": {
+        "/home/horde/projects/power-diagram/.work/vtm/surface-push-pruning-static-v1/armadillo-graded8192-before.json": "8b10348a8d84eb44de4a781d71b95e6aa073da632d00f3cfea4422bfbc29bc99",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-push-pruning-static-v1/armadillo-graded8192-after.json": "2000f5cd788538fe87791c993eca7555f513782486082f20a8ba261e5ae8c5a3"
+      }
+    }
+  },
+  "sources": {
+    "/home/horde/projects/power-diagram/.work/vtm/summarize-surface-push-static-v1.py": "feaed5659b0e30d1ad865699e081545fbb3abe994c40a911023e352a713988e5"
+  },
+  "rows": 64,
+  "paired_rows": 32,
+  "decision": "Advance to paired complete-solve pilot. Graded retained cold classification regresses 5.03%; full/selection cold classifiers and quadrature improve in all four cases. No adoption or whole-solve speed claim from static rows."
+}

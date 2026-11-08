@@ -425,6 +425,11 @@ VTM defaults retain their ordinary paths. The report records the memory cost,
 clean speed comparisons and explicitly investigated baseline variability in
 one hand's material triangulation.
 
+A separate [boundary owner-seeding probe](boundary-owner-seed.md) tries a
+previous owner's current distance as an initial nearest-site search bound.
+It remains unadopted because its complete hand solve regresses and its strict
+material comparison fails; production does not use the prototype.
+
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).
 Preallocated 1,024- and 2,048-site constructors handle the smallest fitting prefix;

@@ -415,6 +415,16 @@ retained across queries or refits. The
 [operation counts and bounded-arithmetic probes](surface-bound-investigation.md)
 explain this choice and record the separate experimental float32 filter.
 
+The complete mesher also [reuses exact repeated surface queries](surface-query-cache.md)
+in separate private consumer caches. Full center bits, nearest-cutoff bits and
+a device surface generation must match; refits advance the generation, and
+saturation permanently disables reuse. Current geometry, quality, thresholds
+and validation still run. Preallocated snapshots and table construction remain
+inside captured execution. Standalone diagram, Delaunay, extraction and core
+VTM defaults retain their ordinary paths. The report records the memory cost,
+clean speed comparisons and explicitly investigated baseline variability in
+one hand's material triangulation.
+
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).
 Preallocated 1,024- and 2,048-site constructors handle the smallest fitting prefix;

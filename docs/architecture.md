@@ -342,6 +342,10 @@ At capacities 4,097–16,384, the VTM filter instead [traverses the existing
 current segment hierarchy](hierarchical-seed-queries.md) down to those 32-site
 groups. This skips excluded subtrees and removes the separate group-box buffers
 and preparation launch, while retaining the same point predicates and certificate.
+On these larger routes, [strict and exact queries run separately](cached-exact-seed-queries.md).
+Each lane caches one unresolved point from the current invocation; overflow
+retains the complete rescan. Fixed setup storage and device-only dispatch preserve
+the existing exact policy and standalone API paths.
 Within one unchanged-input completion, [exact cell proofs](completion-proofs.md)
 now follow retained cells through deduplication and compaction. New cells keep
 their full sphere checks; all topology, coverage and hull-support checks remain.

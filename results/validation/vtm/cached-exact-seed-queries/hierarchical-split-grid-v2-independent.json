@@ -1,0 +1,126 @@
+{
+  "scope": "Independent full-hull and physical quality checks for retained-grid stress outputs.",
+  "cases": {
+    "before": {
+      "result_sha256": "1f9b29709b4838fbfcfe85bdeeedcac50c2287c80d163c037c86484a86c9798e",
+      "mesh_sha256": "eaf6696659ab66cbd682cb10a3bf522bcbf2dd64f59a2e43cee2bb4a9acccb68",
+      "full_hull": {
+        "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+        "CGAL": "6.2.1",
+        "sites": 4913,
+        "tetrahedra": 24034,
+        "sphere_tests": 117982906,
+        "cospherical_ties": 96136,
+        "hull_faces": 3072,
+        "hull_support_tests": 15092736,
+        "valid": true
+      },
+      "quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 4913,
+        "referenced_vertices": 4913,
+        "tetrahedra": 24034,
+        "boundary_triangles": 3072,
+        "components": 1,
+        "boundary_euler": 2,
+        "volume": 4095.999999999999,
+        "input_volume": 4096.0,
+        "relative_volume_error": -2.220446049250313e-16,
+        "mean_radius_ratio": 0.7067419249626309,
+        "radius_ratio_percentiles": {
+          "0": 0.6229863075268963,
+          "1": 0.6229863075268963,
+          "5": 0.6229863075268963,
+          "50": 0.7174389352143009,
+          "95": 0.7320508075688774,
+          "100": 1.0000000000000002
+        },
+        "dihedral_degrees_min": 35.264389682754654,
+        "dihedral_degrees_max": 125.26438968275465,
+        "output_to_input": {
+          "area": 1535.9999999999995,
+          "squared_integral": 2.892597581096605e-27,
+          "rms": 1.372297908689328e-15,
+          "max_sample": 3.2023728339893768e-15
+        },
+        "input_to_output": {
+          "area": 1536.0000000000002,
+          "squared_integral": 1.6155871338926322e-27,
+          "rms": 1.0255800994045674e-15,
+          "max_sample": 1.7763568394002505e-15
+        },
+        "two_sided_area_weighted_rms": 1.2114074645815471e-15,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 4.37129016109049e-15
+      },
+      "median_ms": 4.351391792297363
+    },
+    "after": {
+      "result_sha256": "c40867f09702cc38a15531d7092842d10f97eabcde5f925bea87d8b806ac57cd",
+      "mesh_sha256": "804095f7468198543b058b677cf9b427153a5b4bc0cf4fa819c381982adc5a09",
+      "full_hull": {
+        "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+        "CGAL": "6.2.1",
+        "sites": 4913,
+        "tetrahedra": 24034,
+        "sphere_tests": 117982906,
+        "cospherical_ties": 96136,
+        "hull_faces": 3072,
+        "hull_support_tests": 15092736,
+        "valid": true
+      },
+      "quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and brute-force triangle distances; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 4913,
+        "referenced_vertices": 4913,
+        "tetrahedra": 24034,
+        "boundary_triangles": 3072,
+        "components": 1,
+        "boundary_euler": 2,
+        "volume": 4095.999999999999,
+        "input_volume": 4096.0,
+        "relative_volume_error": -2.220446049250313e-16,
+        "mean_radius_ratio": 0.7067419249626309,
+        "radius_ratio_percentiles": {
+          "0": 0.6229863075268963,
+          "1": 0.6229863075268963,
+          "5": 0.6229863075268963,
+          "50": 0.7174389352143009,
+          "95": 0.7320508075688774,
+          "100": 1.0000000000000002
+        },
+        "dihedral_degrees_min": 35.264389682754654,
+        "dihedral_degrees_max": 125.26438968275465,
+        "output_to_input": {
+          "area": 1535.9999999999995,
+          "squared_integral": 2.8925975810966042e-27,
+          "rms": 1.3722979086893275e-15,
+          "max_sample": 3.2023728339893768e-15
+        },
+        "input_to_output": {
+          "area": 1536.0000000000002,
+          "squared_integral": 1.6155871338926322e-27,
+          "rms": 1.0255800994045674e-15,
+          "max_sample": 1.7763568394002505e-15
+        },
+        "two_sided_area_weighted_rms": 1.211407464581547e-15,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 4.371290161090489e-15
+      },
+      "median_ms": 2.683743953704834
+    }
+  },
+  "points_bitwise_equal": true,
+  "canonical_cells_equal": true,
+  "work_equal": {
+    "n": true,
+    "count": true,
+    "reuse_attempted": true,
+    "reuse_accepted": true,
+    "reuse_error": true,
+    "reuse_seeds": true,
+    "reuse_rounds": true,
+    "base_attempted": true,
+    "points_sha256": true
+  },
+  "relative_time_change": -0.383244699211991,
+  "complete": true
+}

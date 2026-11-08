@@ -1,5 +1,9 @@
 # Hierarchical checking of retained VTM cells
 
+The subsequent [cached exact-query split](cached-exact-seed-queries.md) builds on
+this traversal with separate strict/exact kernels and bounded fallback storage.
+The measurements in this report describe the earlier implementation.
+
 For VTM capacities 4,097–16,384, the retained-cell filter now traverses the
 existing current segment hierarchy in groups of 32 sites. It can exclude a
 whole subtree before inspecting any of its groups. The point predicates,

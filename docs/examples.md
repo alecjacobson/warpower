@@ -261,3 +261,19 @@ Reproduce the measured configurations with:
 python -m examples.vtm_gallery --case cavity --n 1000 --subdivisions 20 --crease-subdivisions 20 --repeats 3 --independent-quality --output results/local/cavity
 python -m examples.vtm_gallery --case disconnected --n 1000 --subdivisions 20 --crease-subdivisions 20 --repeats 3 --independent-quality --output results/local/disconnected
 ```
+
+The [8K scanned Armadillo recovery study](tangential-topology-recovery.md) adds
+validated uniform and graded examples with the existing gallery commands:
+
+```bash
+python -m examples.vtm_gallery --case surface --input path/to/armadillo.off \
+  --n 8192 --initial 256 --seed 2026 --subdivisions 1 --crease-subdivisions 1 \
+  --feature-angle 120 --corner-angle 45 --quality-rounds 4 --output results/local/armadillo8k
+python -m examples.vtm_gallery --case graded-surface --input path/to/armadillo.off \
+  --n 8192 --initial 256 --seed 2026 --subdivisions 1 --crease-subdivisions 1 \
+  --feature-angle 120 --corner-angle 45 --quality-rounds 4 --output results/local/graded-armadillo8k
+```
+
+Use the [documented normalized input and asset provenance](scanned-armadillo.md).
+These scans supplement the paper-inspired analytic and feature examples; they
+are not presented as reproductions of the paper's meshes.

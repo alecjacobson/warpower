@@ -92,6 +92,7 @@ recovery; it is not a free preprocessing operation.
 | `containment_recovery` | `True` | Bounded addition of proven wholly material cells around bad boundary edges |
 | `exterior_recovery` | `True` | Transactional removal of exterior-center tolerance cells, with vertex/feature and volume guards |
 | `proven_exterior_recovery` | `None` | Inherit `exterior_recovery`; after ordinary recovery fails, try one midpoint-aware fitting step and remove only cells proved wholly exterior |
+| `tangential_recovery` | `None` | Inherit `exterior_recovery`; bounded surface-vertex quality recovery after rejected pinched-link transactions, with complete hull recertification |
 | `sampling_resolution` | 32 | Proposal grid resolution per axis |
 | `sampling_max_attempts` | 4096 | Rejection-sampling budget per initial site |
 | `seed` | 2026 | Signed int32 or device int32[1]; caller-owned seed is never incremented |
@@ -133,6 +134,16 @@ Subsequent quality stages use the same extraction policy. Healthy trajectories
 do not execute this final fitting step. `proven_exterior_recovery=None` inherits
 the exterior policy, preserving the existing `exterior_recovery=False` opt-out;
 explicit `True` or `False` selects it independently.
+
+If those policies still leave a pinched boundary, [tangential topology recovery](tangential-topology-recovery.md)
+can move an eligible surface vertex within 10/20% of its shortest incident edge.
+At most 32 candidates retain the existing quality-move fit/volume/minimum-quality
+bounds, strict deficit improvement, input topology, references and feature roles.
+Every candidate certifies the complete hull; exhaustion reconstructs the original
+points before reporting failure. `tangential_recovery=False` omits its storage
+and work. This recovery remains enabled when `quality_rounds=0`; that option only
+omits the ordinary selective/jitter/interior schedule. A small fitting-energy
+increase within the quality bound is allowed; the global-step rule is unchanged.
 
 Each optional quality stage starts with a valid-mesh checkpoint. A stage error or
 invalid extracted boundary restores positions, connectivity, counts, statistics,

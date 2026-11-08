@@ -4,9 +4,11 @@ Whole-tetrahedron exterior recovery now uses the current surface hierarchy for
 plane-separation candidates and rational-centroid rays. Exact leaf predicates,
 transactional reference/volume/topology guards and the failure reporting contract remain in
 place. This addresses [#239](https://github.com/alecjacobson/warpower/issues/239).
-The tangential recovery used to expose the large uniform Armadillo workload
-remains a separate private experiment under
-[#228](https://github.com/alecjacobson/warpower/issues/228).
+The tangential recovery used in this historical benchmark was a separate private
+experiment under [#228](https://github.com/alecjacobson/warpower/issues/228).
+Its later production integration and independent qualification are documented in
+[bounded tangential topology recovery](tangential-topology-recovery.md); the timing
+pairs below still describe their original pinned revisions and private helper.
 
 ## Conservative bounds
 

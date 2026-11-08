@@ -341,6 +341,7 @@ class ProvedCertificate(DelaunayCertificate):
             self.proof_statistics = wp.zeros(2, dtype=int)
             self._face_supported = wp.empty_like(self._boundary)
             self.face_statistics = wp.zeros(2, dtype=int)
+            self._prepared_unproved = None
             wp.load_module(module=__name__, device=self.device)
             wp.load_module(module=__name__, device=self.device, block_dim=32)
 
@@ -353,6 +354,9 @@ class ProvedCertificate(DelaunayCertificate):
         super()._check(tree)
 
     def _global_spheres(self, tree):
+        if self._prepared_unproved is not None and self.point_parallel:
+            self._prepared_unproved.run(tree)
+            return
         if not (self.point_parallel or 128 <= len(self.points) <= 512):
             # Large clouds retain the original complete BVH check.
             super()._global_spheres(tree)
@@ -407,6 +411,33 @@ class SeededFacetCompletion(FacetCompletion):
             seed_filter.tree,
             **kwargs,
         )
+        seed = seed_filter._prepared
+        if seed is not None and 4096 < len(seed_filter.points) <= 16384:
+            from ._stackless_seeds import StacklessSeedQueries
+            from ._unproved_queries import PreparedUnprovedQueries
+
+            c = self._certificate
+            if (
+                isinstance(seed, StacklessSeedQueries)
+                and len(c.tetrahedra) <= len(seed.shapes)
+                and len(c.tetrahedra) <= len(seed.boxes)
+            ):
+                # Seed queries finish before completion begins. Their geometry
+                # is dead scratch; every later consumer prepares its own current
+                # cells again. Keep direct array references, without a cycle.
+                c._prepared_unproved = PreparedUnprovedQueries(
+                    c.points,
+                    c.tetrahedra,
+                    c.tetrahedra_count,
+                    c.tree,
+                    c.error,
+                    c.statistics,
+                    c._proved,
+                    c.proof_statistics,
+                    segment=seed.segment,
+                    shapes=seed.shapes,
+                    boxes=seed.boxes,
+                )
 
     def run(self):
         self._seed_filter.run()

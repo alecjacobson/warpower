@@ -1,0 +1,14 @@
+{
+  "issue": 177,
+  "status": "Prepared source only, not executed or adopted. Wait until capacity extension229 completes before experiments.",
+  "prototype": "large_stackless_v1.py",
+  "basis": "Earlier unadopted prepared_stackless_queries.py, updated to preserve current bounded binary32 sphere_filter -> strict Ball64 -> symbolic predicate order.",
+  "scope": "Only private VTM grouped seed checks at query-array capacities4097..16384. Smaller/larger arrays retain current flat scan. Uses existing current SiteHierarchy segment bounds.",
+  "qualification": "Needs exact masks/errors comparison to current flat scan on changed input and degeneracies; old76/36traversal checks plus meaningful fullmeshes; clean large complete timings; independent geometry if useful. Production would pass segment explicitly, not use setup registry.",
+  "attribution": "Do not combine with one-line capacity extension: baseline must be merged229runtime.",
+  "prepared_tests": {
+    "test_large_stackless_flat_v1.py": "54cases=9clouds*3scales*2blockshapes;changedcapturedinputs, currentflat/exhaustive/rationalmasks;invalidboxforcesexhaustive;torus4k/8k/16kfromvalidatedf8production snapshots",
+    "test_large_stackless_traversal_v1.py": "52cases=30recursivecoverageoracle+22currentcontainment;includes8192/16384/16385;extremefloat32/subnormal/empty/paddedgroups"
+  },
+  "tests_status": "Source prepared and formatted only, not collected/executed. Do not run while229qualificationGPU active."
+}

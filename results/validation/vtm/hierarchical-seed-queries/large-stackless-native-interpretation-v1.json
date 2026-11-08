@@ -1,0 +1,45 @@
+{
+  "scope": "Interpret raw native trace APIs without conflating initial executable preparation with device-loop decisions.",
+  "audits": {
+    "full": {
+      "path": ".work/vtm/large-stackless-full-native-v1-audit.json",
+      "sha256": "83b829f61b85a12dd6cc3f6ad40628d855a3bdbd78832e2fcce08fcaaf461655",
+      "cuda_api_calls": {
+        "cuCtxSynchronize": 1,
+        "cuProfilerStart": 1,
+        "cudaGraphLaunch_v10000": 1,
+        "cudaStreamIsCapturing_v10000": 1
+      },
+      "node_types": {
+        "KERNEL": 34675,
+        "MEMCPY": 3464,
+        "MEMSET": 11687,
+        "CONDITIONAL": 3906
+      }
+    },
+    "loop": {
+      "path": ".work/vtm/large-stackless-loop-native-v1-audit.json",
+      "sha256": "85661654f317580daf158740cf957e5a01b1b78c6c3e6c29127290707447491c",
+      "cuda_api_calls": {
+        "cuCtxSynchronize": 1,
+        "cuProfilerStart": 1,
+        "cudaGraphInstantiateWithFlags_v11040": 1,
+        "cudaGraphLaunch_v10000": 1,
+        "cudaGraphUpload_v10000": 1,
+        "cudaStreamIsCapturing_v10000": 1
+      },
+      "node_types": {
+        "MEMSET": 15522,
+        "KERNEL": 45943,
+        "CONDITIONAL": 5377,
+        "MEMCPY": 4694
+      }
+    }
+  },
+  "observations": [
+    "The warmed full-solve profile contains one graph launch and one final external synchronization, with no executable instantiation/upload APIs.",
+    "The first loop graph launch records deferred cudaGraphInstantiateWithFlags and cudaGraphUpload before its single graph launch. These occur once outside the five device-controlled phases.",
+    "All DOT copies are device-to-device; no HOST, MEMALLOC or MEMFREE nodes are recorded. No explicit allocation/free or host-copy APIs are recorded. This is not a claim about driver-internal preparation work or storage.",
+    "Array/workspace construction and final output readback occur outside the trace; profiling durations are diagnostic."
+  ]
+}

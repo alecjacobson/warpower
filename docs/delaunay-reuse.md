@@ -10,9 +10,11 @@ selects a smaller constructor that can use this strategy.
 The active mesher's full route also [uses reuse at reserved capacities of
 2,049–16,384 sites](extended-fragment-reuse.md), with current-input proof consumption
 enabled throughout completion. Larger full routes retain ordinary construction;
-the exhaustive seed filter costs O(sites × retained cells). The later report
-records complete uniform/graded torus and Armadillo gains, storage costs and
-validation of the extension. The measurements below describe the earlier change.
+the exhaustive worst case remains O(sites × retained cells). The newer
+[hierarchical traversal](hierarchical-seed-queries.md) prunes current segment
+subtrees on capacities 4,097–16,384. The extension report records complete
+uniform/graded torus gains, unchanged Armadillo failures, storage costs and
+validation. The measurements below describe the earlier change.
 
 Every reconstruction rebuilds canonical duplicate owners and the current spatial
 hierarchy on device. The seed filter removes malformed, duplicate, flat or

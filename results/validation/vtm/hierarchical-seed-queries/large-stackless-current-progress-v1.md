@@ -1,0 +1,5 @@
+The large-capacity revisit is underway after merged #229. The new private prototype preserves the current bounded float32 → strict prepared Ball64 → symbolic point predicate sequence and changes only group traversal, using the already rebuilt segment bounds. It is gated to query-array capacities 4,097–16,384; other sizes keep the current flat scan. No production changes are made.
+
+The first **106 primitive checks pass**: 54 captured current-flat/exhaustive/rational mask cases, and 52 independent traversal-coverage/current-bound cases. Coverage includes changed input/permutations, invalid sphere enclosures, partial/padded groups, extreme finite/subnormal bounds, scaled degeneracies, and current validated 4k/8k/16k torus snapshots. Existing reuse/completion tests are running with the prototype installed.
+
+Next are clean full-solve pilots against the newly merged baseline and independent geometry/work checks. No traversal speedup is claimed yet. Production adoption would pass the segment explicitly rather than use the private setup registry.

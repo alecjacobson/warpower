@@ -519,6 +519,7 @@ class VariationalMeshingWorkspace:
                 tetrahedra_cell_capacity=tetrahedra_cell_capacity,
                 chunk_size=chunk_size,
                 _cache_surface_queries=True,
+                _selective_step_history=True,
             )
             self._boundary_rounding = None
             if self.proven_exterior_recovery:
@@ -644,6 +645,8 @@ class VariationalMeshingWorkspace:
         wp.launch(kernel, dim, inputs=args, device=self.device)
 
     def _record(self):
+        if self.core.step_history is not None:
+            self.core.step_history.statistics.zero_()
         if self.topology_recovery is not None:
             self.topology_recovery.reset()
         self.topology.zero_()

@@ -124,11 +124,10 @@ which has differing counts/quality and includes throttled samples. The
 The earlier native diagnostic attributes 3.03 of 7.08 seconds of kernel activity
 to grouped seed checks. [Issue #177](https://github.com/alecjacobson/warpower/issues/177)
 is now implemented by the separately measured [hierarchical seed queries](hierarchical-seed-queries.md).
-The timings in this report predate that follow-up. Larger active prefixes still pay for the full
-reservation after 2,048 sites; [#230](https://github.com/alecjacobson/warpower/issues/230)
-tracks additional routes, with scratch sharing in
-[#122](https://github.com/alecjacobson/warpower/issues/122). These are separate
-follow-ups so their timing and storage costs can be measured independently.
+The timings in this report predate that follow-up. A later
+[larger-prefix extension](larger-active-prefixes.md) adds device-selected 4,096/8,192
+routes and measures their additional memory/setup cost separately. Scratch sharing
+remains [#122](https://github.com/alecjacobson/warpower/issues/122).
 
 Reproduction commands, pinned source and native binary hashes, raw results,
 failed cases, and lossless native traces are linked in the

@@ -188,11 +188,11 @@ Both outputs independently certify the complete hull and physical quality and
 have identical coordinates/canonical cells. This is retained-mesh stress, not a
 fresh VTM solve or CPU speedup comparison.
 
-Tracked in [#233](https://github.com/alecjacobson/warpower/issues/233). Larger
-active-prefix routing [#230](https://github.com/alecjacobson/warpower/issues/230),
-scratch sharing [#122](https://github.com/alecjacobson/warpower/issues/122), and
-Armadillo extraction failures [#228](https://github.com/alecjacobson/warpower/issues/228)
-remain open. No extraction guard or quality criterion is weakened.
+Tracked in [#233](https://github.com/alecjacobson/warpower/issues/233). A later
+[larger-prefix extension](larger-active-prefixes.md) implements #230 with separately
+measured storage and setup costs. Scratch sharing
+[#122](https://github.com/alecjacobson/warpower/issues/122) and Armadillo extraction
+failures [#228](https://github.com/alecjacobson/warpower/issues/228) remain open. No extraction guard or quality criterion is weakened.
 
 An [additional cross-reservation comparison](../results/validation/vtm/prepared-new-cell-queries/larger-prefix-reservation-comparison-v2.json)
 finds identical validated coordinates, connectivity, boundary and solver work for

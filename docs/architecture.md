@@ -449,8 +449,10 @@ original accumulation order and kernel.
 
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).
-Preallocated 1,024- and 2,048-site constructors handle the smallest fitting prefix;
-the full constructor handles larger inputs and prefix failures. At reserved
+Preallocated 1,024/2,048/4,096/8,192-site constructors below the reservation
+handle the smallest fitting prefix; the full constructor handles larger inputs
+and prefix failures. The [larger-prefix report](larger-active-prefixes.md) measures
+the speed gains and additional persistent storage/setup cost. At reserved
 capacities of 2,049–16,384 sites, that full route now
 [uses certified fragment reuse](extended-fragment-reuse.md), retaining current-input
 cell proofs throughout completion. Larger capacities retain ordinary full

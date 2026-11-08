@@ -1,0 +1,41 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.78 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.53 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.68 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.54 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.57 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.62 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.54 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.57 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 4.82 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 1.04 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 3.09 ms  (cached)
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 1.70 ms  (cached)
+Module warpower._facet_completion bb6aebe load on device 'cuda:0' took 2.44 ms  (cached)
+Module warpower._facet_completion 62c1043 load on device 'cuda:0' took 2.46 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.74 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.63 ms  (cached)
+Module warpower._facet_seeds fa4cd6c load on device 'cuda:0' took 2.17 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.84 ms  (cached)
+Module warpower._prepared_seeds 4fb5246 load on device 'cuda:0' took 1.88 ms  (cached)
+Module warpower._stackless_seeds af32e1d load on device 'cuda:0' took 1.81 ms  (cached)
+Module warpower._proved_completion fdde69b load on device 'cuda:0' took 3.60 ms  (cached)
+Module warpower._proved_completion e03c811 load on device 'cuda:0' took 2.66 ms  (cached)
+Module warpower._unproved_queries 3472818 load on device 'cuda:0' took 0.98 ms  (cached)
+Module warpower._reuse_delaunay 58b0d1a load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._wall_candidates 954a0c3 load on device 'cuda:0' took 0.69 ms  (cached)
+Module warpower._wall_reuse a53e752 load on device 'cuda:0' took 0.54 ms  (cached)
+Module warpower._wall_candidates 7f00c7b load on device 'cuda:0' took 0.64 ms  (cached)
+{'scope': 'Structured tie stress for the private retained-mesh route, not full VTM timing.', 'n': 4913, 'side': 17, 'source': '670bd3b1a801e5397f55837d3caf685c20286656', 'runtime_query_sha256': {'warpower/_active_delaunay.py': 'fb52f8815537614c38747c62fd164d5fb47cf1ffb5b0a7c8fbc46dd2080ed169', 'warpower/_vtm.py': '8955a3c64addc6e58831584c8d0c87978c45b86c2c52a103214c35e6441bd5b3', 'warpower/_proved_completion.py': '23336177436b94c6bf99c33e0aef58d921a51b1529c69787bddf743c37a41635', 'warpower/_unproved_queries.py': '36e2ab604523450b23fae49d4cc68cd35de6a1c9976db3b210feb428b68d1b14'}, 'points_sha256': '847ed70873587cd0b83fdfbabff685b65ab16ba3b3129838db027fb936763536', 'setup_seconds': 0.8888912200927734, 'initial_cpu_quota_delta': {'4': {'cpu_cores': 4.0, 'throttled_periods': 0, 'throttled_usec': 0}, '3': {'cpu_cores': 4.0, 'throttled_periods': 0, 'throttled_usec': 0}}, 'error': 0, 'count': 24034, 'interpretation': 'Initial full construction and setup are outside retained-mesh timing. Each timed replay rebuilds current owners/hierarchy, certifies the retained fragment and publishes a complete full hull on unchanged grid points. This is a stress/performance guard, not a fresh VTM or CPU speedup comparison.', 'cpu_quota_delta': {'4': {'cpu_cores': 4.0, 'throttled_periods': 0, 'throttled_usec': 0}, '3': {'cpu_cores': 4.0, 'throttled_periods': 0, 'throttled_usec': 0}}, 'gpu_milliseconds': [2.6908481121063232, 2.6850240230560303, 2.6955840587615967, 2.6987199783325195, 2.684096097946167, 2.6810240745544434, 2.6821439266204834, 2.6883199214935303, 2.684448003768921], 'median_ms': 2.6850240230560303, 'reuse_attempted': [1], 'reuse_accepted': [1], 'reuse_error': [0], 'reuse_seeds': [24034], 'reuse_rounds': [0], 'base_attempted': [0], 'snapshot_sha256': '79ec0c9cb1f9d9825bf835cffc35fb2d634ae11ecbd95807f723be1f57dd69e9'}

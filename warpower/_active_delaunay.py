@@ -76,8 +76,8 @@ class ActiveDelaunayWorkspace:
 
     def __init__(self, points, *, active_count, prefix_capacities=(1024, 2048), **options):
         levels = tuple(operator.index(n) for n in prefix_capacities)
-        if not levels or any(n < 4 or n > 2048 for n in levels):
-            raise ValueError("Prefix capacities must be in [4, 2048]")
+        if not levels or any(n < 4 or n > 8192 for n in levels):
+            raise ValueError("Prefix capacities must be in [4, 8192]")
         if tuple(sorted(set(levels))) != levels or levels[-1] >= len(points):
             raise ValueError("Prefix capacities must be increasing and smaller than full capacity")
         if (

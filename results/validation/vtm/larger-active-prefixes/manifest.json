@@ -1,0 +1,1825 @@
+{
+  "scope": "Publish qualified larger-prefix routing with exact sources, costs and rejection guards.",
+  "runtime": "670bd3b1a801e5397f55837d3caf685c20286656",
+  "baseline": "df74493c97633324147cb39ef4c41a7d34c7b90a",
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "python_runtime": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "numpy": "2.2.6",
+  "files": [
+    {
+      "original": ".work/vtm/audit-larger-prefix-production-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/audit-larger-prefix-production-v1.py",
+      "bytes": 3212,
+      "sha256": "3538fa0a8204df96f0c88540b82311edde8cf5ed62c1771ac21d1175f64b11ac"
+    },
+    {
+      "original": ".work/vtm/audit-larger-prefix-production-v2.py",
+      "path": "results/validation/vtm/larger-active-prefixes/audit-larger-prefix-production-v2.py",
+      "bytes": 3167,
+      "sha256": "6c72757d720489ce6b648fedf4f1bea757184fc489c7f7367b0354bb9ceb12f5"
+    },
+    {
+      "original": ".work/vtm/bench-larger-prefix-production-grid-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/bench-larger-prefix-production-grid-v1.py",
+      "bytes": 3195,
+      "sha256": "0c40898438689a3a2b706a8ca286de7693dc82375632871304168c85d1f7fd1d"
+    },
+    {
+      "original": ".work/vtm/build-larger-prefix-prototype-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/build-larger-prefix-prototype-v1.py",
+      "bytes": 2965,
+      "sha256": "06ed92efa4c15c33b73994c6b88feb7873649ba418454ded483e46d90a543a9a"
+    },
+    {
+      "original": ".work/vtm/build-larger-prefix-qualification-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/build-larger-prefix-qualification-v1.py",
+      "bytes": 3661,
+      "sha256": "651c494b308e7294c21e5e06c5219c40b367f9086e851d433f0d49595abc9a62"
+    },
+    {
+      "original": ".work/vtm/check-larger-prefix-final-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/check-larger-prefix-final-v1.log",
+      "bytes": 7575,
+      "sha256": "88ca9b4b197e0c8b4fd3d9949b71b27e131e2b58cfe04158cffbbf147bd5567b"
+    },
+    {
+      "original": ".work/vtm/check-larger-prefix-final-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/check-larger-prefix-final-v1.py",
+      "bytes": 5899,
+      "sha256": "16be8a142e44a27ebd595be7ab8f2ccc14f4ee337e7caabe33be98248649dc6e"
+    },
+    {
+      "original": ".work/vtm/check-larger-prefix-grid-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/check-larger-prefix-grid-v1.log",
+      "bytes": 770,
+      "sha256": "1d47095a07647905674e51d3efb872f7d10618ce5c685aef9dcd0853a56fb312"
+    },
+    {
+      "original": ".work/vtm/check-larger-prefix-grid-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/check-larger-prefix-grid-v1.py",
+      "bytes": 2209,
+      "sha256": "9ab6c087c6f22bfa6a3fb67f5bff4833c2c58fa871471299df8f2d8d50fa2faa"
+    },
+    {
+      "original": ".work/vtm/check-larger-prefix-native-loop-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/check-larger-prefix-native-loop-v1.py",
+      "bytes": 2437,
+      "sha256": "5ca43211966e2ca4b9a18aab2e43a2551f558775a6e50b54c6d768806254da63"
+    },
+    {
+      "original": ".work/vtm/check-larger-prefix-pilot-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/check-larger-prefix-pilot-v1.py",
+      "bytes": 5718,
+      "sha256": "42c7300a21df2671296857b2cc0a72ca315014c575289d3a8ce06490d0be05e1"
+    },
+    {
+      "original": ".work/vtm/compare-larger-prefix-current-reservations-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/compare-larger-prefix-current-reservations-v1.py",
+      "bytes": 2357,
+      "sha256": "229dda7308dc10e385c20a267734ce85eda36d78ad459da7d4c9f1c592f549fd"
+    },
+    {
+      "original": ".work/vtm/compare-larger-prefix-reservations-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/compare-larger-prefix-reservations-v1.py",
+      "bytes": 2266,
+      "sha256": "0024bec1781e1189bf69e83ecef1193a071ebb20b1950e7e3ed5e704886b65fb"
+    },
+    {
+      "original": ".work/vtm/compare-larger-prefix-reservations-v2.py",
+      "path": "results/validation/vtm/larger-active-prefixes/compare-larger-prefix-reservations-v2.py",
+      "bytes": 2474,
+      "sha256": "61beb3302228904bf3e8c2f31eb7d606788500aad869894affa621244e314c25"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-adoption-decision-v1.md",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-adoption-decision-v1.md",
+      "bytes": 2741,
+      "sha256": "abc84cc37704c73a9ece97514f3e142cee2943644b2147ed6b0130969946492f"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-collection-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-collection-v1.log",
+      "bytes": 4546,
+      "sha256": "3463d809860eac4fd98299104a4040b23fa974679f07a0711dec10cf546603f7"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-current-reservation-comparison-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-current-reservation-comparison-v1.json",
+      "bytes": 4011,
+      "sha256": "bc197aa7bf7fdc872ecc73d7c1db44faca674978c2aca4ae0bbbc3aba515f91d"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-edge-tests-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-edge-tests-v1.json",
+      "bytes": 663,
+      "sha256": "f97e78da7d7352f1e2b8b938aacada1d98b04f7d3f4afd351d4844916974f0ca"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-edge-tests-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-edge-tests-v1.log",
+      "bytes": 98,
+      "sha256": "bd3b567dc8426f61b151e5e44d9faa2ee5e91e13d45408cea45c558a792c5878"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-independent-v1-commands.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-independent-v1-commands.json",
+      "bytes": 660,
+      "sha256": "75b65b3115b36183dde9f977dd64aac08fabfeee302169c4a846bac16bc30b8d"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-independent-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-independent-v1.log",
+      "bytes": 575,
+      "sha256": "0e3ebb9177ee7421de6fb06aa48d1d6577d4f5f46626026ae31c5dce9affcbe3"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/armadillo8192-graded-q2-after/input.off",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/armadillo8192-graded-q2-after/input.off",
+      "bytes": 4325935,
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/armadillo8192-graded-q2-after/result.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/armadillo8192-graded-q2-after/result.json",
+      "bytes": 3762,
+      "sha256": "250bdacfadf0b24ea80d79c3acd61b30ef8236a1dd1700df9bf841c9e8ddd663"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/armadillo8192-graded-q2-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/armadillo8192-graded-q2-after.log",
+      "bytes": 9109,
+      "sha256": "d858fe76909b6e2771000e7213e98d90358a91f744cfee93ae3f784a18ab4861"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/armadillo8192-graded-q2-before/input.off",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/armadillo8192-graded-q2-before/input.off",
+      "bytes": 4325935,
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/armadillo8192-graded-q2-before/result.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/armadillo8192-graded-q2-before/result.json",
+      "bytes": 3767,
+      "sha256": "2bb89cbd574bfb4ee9f30a8e6be8034589e869e655a5244ca7a7a3ddce9c4bc2"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/armadillo8192-graded-q2-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/armadillo8192-graded-q2-before.log",
+      "bytes": 9114,
+      "sha256": "2a5dd32dac736b720e546bc742f459c69dfa7bcae284bdddc361b02123fb834e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/commands.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/commands.json",
+      "bytes": 36307,
+      "sha256": "d589ec37379d6de1d11ce33be46b4ccd6220de8357d9ff9aa6b30f2b2cd5588f"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay-fitted-hand-after.json",
+      "bytes": 2840,
+      "sha256": "825b8cdb07527113d3978c53fc92ab324ab9bbae66c749af6505d9b9478a7c2b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay-fitted-hand-after.log",
+      "bytes": 5136,
+      "sha256": "4c566cbaf47362f35ef5f8cf85274cccc1182fae81a1972bd159ec25e41dd60a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay-fitted-hand-before.json",
+      "bytes": 2845,
+      "sha256": "79781125982c33f1ef28038029d679565413a5ee809e72df1f01a1e8d7ae96b8"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay-fitted-hand-before.log",
+      "bytes": 5141,
+      "sha256": "0cbfbb34817985a8c800774e71240e405585ebe1fcea4561f83eeee7bfaee492"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay-grid-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay-grid-after.json",
+      "bytes": 2830,
+      "sha256": "8fd49cd6b4019553a0d979989aec4a3c0cb980f4ffb9877346e91b6cdb8effde"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay-grid-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay-grid-after.log",
+      "bytes": 4869,
+      "sha256": "ab439d421d87ef8fdf6b9877c37e21f24dcb7f37e71457f2d2c0003ec8e7cd13"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay-grid-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay-grid-before.json",
+      "bytes": 2841,
+      "sha256": "c3a285d71112a95840724452c980df6b36309e2b2964734b3db302af68020d70"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay-grid-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay-grid-before.log",
+      "bytes": 4880,
+      "sha256": "69c302cab9df158273741c201b39adc2a5ed53265a8a0a37f8653d0cc66e5bc1"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay1000-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay1000-after.json",
+      "bytes": 2823,
+      "sha256": "7e86a1c9d6924bd2dd6fe9b12cb7cd60470f3f50b845d98eb78515df739c3a5d"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay1000-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay1000-after.log",
+      "bytes": 5119,
+      "sha256": "42ac2f733e98ee87ab2f828e1e8c93ff8c6121711aeecb5968436fee95a1d08a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay1000-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay1000-before.json",
+      "bytes": 2825,
+      "sha256": "cbade1470cb41d3eea6ac701aea19ec35f7b07da115b812b0c0c9b895444aedb"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay1000-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay1000-before.log",
+      "bytes": 5121,
+      "sha256": "e24ebb926012ed764b4ecfc42383b89658155349de6b7e4b62d5bf241d8f172f"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay100000-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay100000-after.json",
+      "bytes": 2829,
+      "sha256": "ef1381e7399dacba6b9feb9b04f9a6d1591f05b8906c9a54a47cf8ca9687a39b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay100000-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay100000-after.log",
+      "bytes": 5059,
+      "sha256": "891bd7bbb05d90ee83d82cbac308d7f817451fcd7e61f1e82d7af3787c359b55"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay100000-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay100000-before.json",
+      "bytes": 2832,
+      "sha256": "1ad89349a08e3f8d191380e448716245ee295a755ff6934c880b3a3fb43424f9"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/delaunay100000-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/delaunay100000-before.log",
+      "bytes": 5062,
+      "sha256": "ada9583b835c666fcdfe4f04cf1e66ecae3aa088f7b3f91fd34fd64b310f1470"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/diagram100000-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/diagram100000-after.json",
+      "bytes": 2566,
+      "sha256": "3fdc140f6a9f38d6ca95facd5d3755efe340acb59e8543b326a3e2f3b1ad3d17"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/diagram100000-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/diagram100000-after.log",
+      "bytes": 3437,
+      "sha256": "40e900a61a8b49a316188af9afa7549a85232144c62df8ea9aeca7a1980a9e7e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/diagram100000-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/diagram100000-before.json",
+      "bytes": 2565,
+      "sha256": "a10fefa2b2039588bbce68aaf65b3a49991c533d38d451efa7bfb9d1e27eac81"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/diagram100000-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/diagram100000-before.log",
+      "bytes": 3436,
+      "sha256": "c7343c053c262c459bd194a32a2315e7350b1eba3bda42fbcd73de27cdbd624b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-after/boundary-self-intersections.txt",
+      "bytes": 13,
+      "sha256": "ed614f21b453246ebd00834c5358ea791999fd7fbc040557aea44e735c0cd83b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-after/boundary.off.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-after/boundary.off.gz",
+      "bytes": 511265,
+      "sha256": "7882a11a741a080401d735376359309e187ec11468eb8c7fc9314535cbf65a3b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-after/input.off",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-after/mesh.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-after/mesh.npz",
+      "bytes": 2650598,
+      "sha256": "04d387bfc529ab1ac0f46d9abc402feda48f46e53e3be15b837cc5c34a7f0099"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-after/mesh.vtu.gz",
+      "bytes": 2071957,
+      "sha256": "9abbafb9a09ec9a68e50a0acc401842c30b2dafe29b90eaa209da7f2c8a29140"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-after/result.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-after/result.json",
+      "bytes": 4061,
+      "sha256": "8b4fb734f4b34ae22edf076cec51c782ba77667df65ef99c381473768f6c1def"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-after.log",
+      "bytes": 9285,
+      "sha256": "9b8c7846dba670fddd18ebfd4406c8d2200f97f5d64e79e44bddf87cfc634d9d"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-before/boundary-self-intersections.txt",
+      "bytes": 13,
+      "sha256": "ed614f21b453246ebd00834c5358ea791999fd7fbc040557aea44e735c0cd83b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-before/boundary.off.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-before/boundary.off.gz",
+      "bytes": 511211,
+      "sha256": "b2a3cf9b6955469d57fab406dc6bde89081df47980b0774b1445889061d5d590"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-before/input.off",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-before/mesh.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-before/mesh.npz",
+      "bytes": 2651881,
+      "sha256": "b2b8c0c6e76eea69063453744a1ffa1bade9638d57431fb34ba3ea8935589dd4"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-before/mesh.vtu.gz",
+      "bytes": 2072647,
+      "sha256": "8d8251cf1f7cee785cb168d51e309eb09e77822fddc2976bf54d951f8a9641ec"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-before/result.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-before/result.json",
+      "bytes": 4055,
+      "sha256": "e0c90752033edfe988a3ee0d7434205a308ddc4017ecbb733c1c8d4807896e4d"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/graded-torus16384-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/graded-torus16384-before.log",
+      "bytes": 9279,
+      "sha256": "3bdf6b6ef7dfac1259d1ea7d27501096582819c851706a4d0994a9dc99c6ce03"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/lossless-archives.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/lossless-archives.json",
+      "bytes": 1873,
+      "sha256": "db039ab51d52df65892d91ea84cbbdd0ea7e23c7488c653a20b5d633c2ba3ebf"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target4096-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target4096-after.json",
+      "bytes": 3150,
+      "sha256": "495c93c0df518d80e62b33021488d6fa96a97ad858856b7ea776c1c173b30ac9"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target4096-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target4096-after.log",
+      "bytes": 8386,
+      "sha256": "fb815e8fe3e07d53b1616c633f71da24da09e918f6b46e26f9858f696a34229e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target4096-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target4096-after.npz",
+      "bytes": 419056,
+      "sha256": "b90c1033d17f0c0e698a7388c946b6c723fed759c65e0c8a1ebcd8053e7f5982"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target4096-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target4096-before.json",
+      "bytes": 3085,
+      "sha256": "d8aa0a77735769b40c671b25a77042bc9a441ce9b65eb51cd6747869ba2a7a19"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target4096-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target4096-before.log",
+      "bytes": 8345,
+      "sha256": "e838fdcfd4e27150e9f7852482071491b599b02a3efcfd0b393307124a309dfb"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target4096-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target4096-before.npz",
+      "bytes": 419468,
+      "sha256": "5f36b676cd3fe240013e20a88314fae483ca160f87b03113aafd1f7099b4016e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target8192-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target8192-after.json",
+      "bytes": 3145,
+      "sha256": "4c6e39fee4a5163929d9e0a81847dd838d9f8dd27424dae9fe6ffc3fb8ff6ebf"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target8192-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target8192-after.log",
+      "bytes": 8381,
+      "sha256": "d186eda3e5a7c7d86d20de2c92497f23c37b1536a0f0fa4f3fab9ec000526a7c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target8192-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target8192-after.npz",
+      "bytes": 917926,
+      "sha256": "46124a6d84c2263cca5eaa3d53606b0dd19d73b04ebce33bbd4f0219dbc0088c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target8192-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target8192-before.json",
+      "bytes": 3100,
+      "sha256": "a1341ad451223cacff01914e718727b0c5fdde9a5e5520b4bf6ec36e0af3f42c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target8192-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target8192-before.log",
+      "bytes": 8360,
+      "sha256": "d9a6b068e9250880d1c8cf7b164ca8de3d6659109169a2e85c9541fe3abf88e4"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved16384-target8192-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved16384-target8192-before.npz",
+      "bytes": 918103,
+      "sha256": "09158c677064dbfb3ef02fbb360933f597bcee6fa93c38773cfe5dd9415e7bbf"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved8192-target4096-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved8192-target4096-after.json",
+      "bytes": 3118,
+      "sha256": "d3f6291fdeab074ab94bdd0397a35250395346f8caa23346bd722d8e8eb2d055"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved8192-target4096-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved8192-target4096-after.log",
+      "bytes": 8366,
+      "sha256": "c5243681a009de21fd518639f93f6dc6673cf7d4d02e9ea4e7878c414a264273"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved8192-target4096-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved8192-target4096-after.npz",
+      "bytes": 419092,
+      "sha256": "45b578e648005571849a1a3ddb197fb7e8cdc529ff82fa06c027407aeab7f593"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved8192-target4096-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved8192-target4096-before.json",
+      "bytes": 3099,
+      "sha256": "463dec0fefdb45eb4dde34aa1724528b2e4422ea5dd1e8c43b4cb70e2afca542"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved8192-target4096-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved8192-target4096-before.log",
+      "bytes": 8359,
+      "sha256": "d432daeb1d89d9061fd67e587bdfd9d41c7e6d9dbbc8e63d5d8a209a3285ff9c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/reserved8192-target4096-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/reserved8192-target4096-before.npz",
+      "bytes": 419079,
+      "sha256": "d0d952b89d717437a136b18b324294e5e32fbe4a95c6e756989684a6a445c517"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/retained-grid-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/retained-grid-after.json",
+      "bytes": 2110,
+      "sha256": "327a6a9e610a3fcd6141a16ae516c7c86dfb2339e88f0513cd50f0866575caa7"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/retained-grid-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/retained-grid-after.log",
+      "bytes": 5013,
+      "sha256": "bb6b25f16721f639e6e4c04543acb3a7d6e1f73e15cbf3da9af0dafafa1c2d63"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/retained-grid-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/retained-grid-after.npz",
+      "bytes": 187887,
+      "sha256": "79ec0c9cb1f9d9825bf835cffc35fb2d634ae11ecbd95807f723be1f57dd69e9"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/retained-grid-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/retained-grid-before.json",
+      "bytes": 2106,
+      "sha256": "08575c67736327e47c8cc30020881e40ac59282b09ff1ed17fdb6e9501c175c0"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/retained-grid-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/retained-grid-before.log",
+      "bytes": 5009,
+      "sha256": "f4829b79aff58d7fcc09f9f1b75efe37c75b8437dd2459dc756b7385cf625bf1"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/retained-grid-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/retained-grid-before.npz",
+      "bytes": 187968,
+      "sha256": "68ccaded7bc0ad60418c2502a9a8d4a486e93207250d1ecc4f9cbeb22aa31da7"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus1000-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus1000-after.json",
+      "bytes": 2886,
+      "sha256": "535e5e389820d3a2feb0f0f63181a18681f91beff143e775963a0854ed33a709"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus1000-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus1000-after.log",
+      "bytes": 7947,
+      "sha256": "fa39ac93d6f32047ebfffa7123231b6618d66d0da66274a308f6f08de01f5dba"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus1000-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus1000-after.npz",
+      "bytes": 91460,
+      "sha256": "8611296e42c0dab2d653fb1a810442dad84471839809aa1387c7fceb448c9f5b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus1000-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus1000-before.json",
+      "bytes": 2893,
+      "sha256": "2ec5beacf20f329d0ef44008b386e01f23dd7ab3c69dfe3520f0c72b8ab4c6a5"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus1000-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus1000-before.log",
+      "bytes": 7954,
+      "sha256": "ed7f7fbbdfdfa3baeb6fac750252a7e9d6b888ff91d5a6895c7f3e4806712e38"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus1000-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus1000-before.npz",
+      "bytes": 91403,
+      "sha256": "dac5988eaef6d2cd0dd760b62e691aeadb37e9329dc3b028800087901a9cdbb0"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus16384-fixed32-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus16384-fixed32-after.json",
+      "bytes": 3127,
+      "sha256": "b690b3ba283ada30b19242e9ad7d871150e9b53b12524efdd66e186b2ef41ab9"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus16384-fixed32-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus16384-fixed32-after.log",
+      "bytes": 8197,
+      "sha256": "0f68aaa19cb0fcdf199b57749c928abfede9a85641f799eb8e6193ca6417685d"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus16384-fixed32-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus16384-fixed32-after.npz",
+      "bytes": 2002126,
+      "sha256": "f30e9d5d9fae1e12457e7acfc7a286210e25934b1ef9a4dc9f1c3332135073a8"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus16384-fixed32-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus16384-fixed32-before.json",
+      "bytes": 3091,
+      "sha256": "949915e1b5310919a42c6d52118d86813cf8d7287995be0a96d6fdd2be27b26b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus16384-fixed32-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus16384-fixed32-before.log",
+      "bytes": 8185,
+      "sha256": "cd971e875afdf4837fd543fcec965df87e0ab2ea8e6badc1a230b15f9bcfe187"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus16384-fixed32-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus16384-fixed32-before.npz",
+      "bytes": 2001424,
+      "sha256": "90a3b2ee9c6e7959759c6854da9f659c1c5c6bb4686163e95c854b4793e9b0c5"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus4096-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus4096-after.json",
+      "bytes": 3075,
+      "sha256": "dafb47daf985a07731f07a4df6e248ff8adf231a47edf06ba89d89e973a5e0c1"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus4096-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus4096-after.log",
+      "bytes": 8158,
+      "sha256": "ba9deefb7571fe58af2aec47b1f874336bb3e46cff933a15ffb1c17576abbcf9"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus4096-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus4096-after.npz",
+      "bytes": 419371,
+      "sha256": "ec75fc40dcd5c0c96d2873bda6be4c2ce0d0e3e1ab79a0c6d1bfa83f8da555a4"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus4096-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus4096-before.json",
+      "bytes": 3073,
+      "sha256": "a1ac0ffed138ea243221f653b08f15ec6062905d6e1c3e931f1b2f5e2fd7ba71"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus4096-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus4096-before.log",
+      "bytes": 8156,
+      "sha256": "023c46088314718b515ce06af8fd73d9ca1a9a80862055835b9a3b0a10f15691"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus4096-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus4096-before.npz",
+      "bytes": 419401,
+      "sha256": "8bcbc2b30a780a3762b8e9b66ac5e2771b3b944f645c640759f2c4abfa0f154b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-fixed32-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-fixed32-after.json",
+      "bytes": 3113,
+      "sha256": "faec471d88382826590cda64af8d26b8f85018efe08bb054ab3ee87724919721"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-fixed32-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-fixed32-after.log",
+      "bytes": 8195,
+      "sha256": "d989533f2f03758bddd8e1c78b04d5003adf39962d875bed3b5f36aad0053b03"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-fixed32-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-fixed32-after.npz",
+      "bytes": 917119,
+      "sha256": "80f4fe1a0250f0331e4b0ab0f79b9a24b9f9b8140bb363981a27db2a03a02cfe"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-fixed32-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-fixed32-before.json",
+      "bytes": 3088,
+      "sha256": "512d8bfaf621f80daaac21c93d791882338ff6e85c34e97c009b344a328f8547"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-fixed32-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-fixed32-before.log",
+      "bytes": 8182,
+      "sha256": "31bb777c439ead7e57d944e0d06544880bebfb26a11edb4d7197094bb07710fc"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-fixed32-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-fixed32-before.npz",
+      "bytes": 916026,
+      "sha256": "73beff7eac39134109f00cd7b3d23bf6073ff2370fc03a6961113cd606c9fe43"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-progressive-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-progressive-after.json",
+      "bytes": 3117,
+      "sha256": "8a15bb17bbeb6352b492d87c5dd84e0af9d4dc764b9d0734b71e8b500691eb93"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-progressive-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-progressive-after.log",
+      "bytes": 8365,
+      "sha256": "d8ce99655ade39edc8d4e33977abcef819a7596302104d083d9f8c22eeff52a4"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-progressive-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-progressive-after.npz",
+      "bytes": 917653,
+      "sha256": "2300e9b0ae8a8036cc9a21f690c24e4ccaefc86c642711ed0c6413191d4fd08c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-progressive-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-progressive-before.json",
+      "bytes": 3094,
+      "sha256": "8fc96239be1a1d925df99d1fe4e7dce2179f09972156f6c59660f3b9494930dc"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-progressive-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-progressive-before.log",
+      "bytes": 8354,
+      "sha256": "d99e79fd6863a75e0e33dd4e2bef726a736f41781fbd4397769db242bfd0eeb6"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/torus8192-progressive-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/torus8192-progressive-before.npz",
+      "bytes": 919191,
+      "sha256": "d963aeb028cf04715785ced656305630fd00dfb4f54ee734cd9fa9d6a8aea090"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/uniform-armadillo8192-after/input.off",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/uniform-armadillo8192-after/input.off",
+      "bytes": 4325935,
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/uniform-armadillo8192-after/result.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/uniform-armadillo8192-after/result.json",
+      "bytes": 3748,
+      "sha256": "a96ba4d3802af727d3dd094076cc4177d5038dbfae877ef7a6b4f60f98cbd909"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/uniform-armadillo8192-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/uniform-armadillo8192-after.log",
+      "bytes": 9009,
+      "sha256": "e44ae845aec29335ec35fd14d7cfec843bb6432b5341f97ff9eca7e10ec6c6ba"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/uniform-armadillo8192-before/input.off",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/uniform-armadillo8192-before/input.off",
+      "bytes": 4325935,
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/uniform-armadillo8192-before/result.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/uniform-armadillo8192-before/result.json",
+      "bytes": 3751,
+      "sha256": "96530e5d5b7a6c4d4ce32d975fbdd36115036331d41ab042e9badff6b8ae6b25"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1/uniform-armadillo8192-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/uniform-armadillo8192-before.log",
+      "bytes": 9012,
+      "sha256": "dbec2d5180834a36899a85c8e16894fb79049b1022eb9ff622e9f8702d88973a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1-driver.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1-driver.log",
+      "bytes": 30622,
+      "sha256": "e914995b7fb710805cd420ecc3900c75d203fdd08d8b7dede38739fdeac60b14"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-final-v1-independent.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1-independent.json",
+      "bytes": 72130,
+      "sha256": "ddd2253ba4ad97c89362ef3550d8facd93ab098def0f5098423cfc1e3a656909"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-focused-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-focused-v1.json",
+      "bytes": 1329,
+      "sha256": "9c0d26d0ceced3eadc18dde5fb1728647f40b2cdc5df79e52ae48797fc63c607"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-focused-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-focused-v1.log",
+      "bytes": 110,
+      "sha256": "3e4b91c685d11cf959de3f00bb6d22771925c280ec9416d34e593245fefc72e5"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-native-v1-audit.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-native-v1-audit.json",
+      "bytes": 905,
+      "sha256": "5f30c59a087a04cb342dd27490b876ad5a3646414121134978b5737b09ae0bde"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-native-v1-audit.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-native-v1-audit.log",
+      "bytes": 905,
+      "sha256": "5f30c59a087a04cb342dd27490b876ad5a3646414121134978b5737b09ae0bde"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-native-v1-command.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-native-v1-command.json",
+      "bytes": 768,
+      "sha256": "5f867304f3fca4c5449b749710f48ce1abc84620c40b9d9089792e48bf6c1ca0"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-native-v1-export.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-native-v1-export.log",
+      "bytes": 8101,
+      "sha256": "2fbd0d3ea36ffd2d857da0b071671c6fa606e1447ede21f6deb6daabd30510b8"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-native-v1-kernels.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-native-v1-kernels.json",
+      "bytes": 33268,
+      "sha256": "a9acf952a5c47980c8dbe3d24da043092f38db55d77397d0ad61ef165f63c13b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-native-v1.dot.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-native-v1.dot.gz",
+      "bytes": 2053483,
+      "sha256": "93f1f2c68617cf70540b4d5d33ec444244cbdcf1dd01a7113931b6c9e8539a58"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-native-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-native-v1.json",
+      "bytes": 2018,
+      "sha256": "bcc81824c225865e856be1ae04659194f0a2977d69647acafb49d6ac9662d30e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-native-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-native-v1.log",
+      "bytes": 11334,
+      "sha256": "7872d14540a86bf34d9455f7143887d7d5e747eec7bda0378e0f7f7aef75a3c5"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-native-v1.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-native-v1.npz",
+      "bytes": 2641128,
+      "sha256": "64f6c7727959f492344423993ff4877e6b5aef5f64bd657d9189fc10b6fdd967"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-native-v1.nsys-rep.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-native-v1.nsys-rep.gz",
+      "bytes": 3330787,
+      "sha256": "713ee7c91120b0b22e6b6a00130d79d000931dd3fe29c02a607fdfb7cc1456e4"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-suite-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-suite-v1.json",
+      "bytes": 374,
+      "sha256": "540dc5a565b46f94fcb2afd082c3d6a5aa54d22ab51d28388c08ce48a4482c5d"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-full-suite-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-full-suite-v1.log",
+      "bytes": 1473,
+      "sha256": "b9e034da01827cece221007359ba82b032d84ee0c881026b000d8910e1a034e5"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-grid-v1-independent.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-grid-v1-independent.json",
+      "bytes": 4972,
+      "sha256": "793c4175d14b22d681f6ea90d5a5e1f22a50bf2296b247150758ce90496b8fa9"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1-audit.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1-audit.json",
+      "bytes": 952,
+      "sha256": "480a6a6a6843845e30ddcf8b233aa35edaa684470aa0792eb896bda87c805e97"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1-audit.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1-audit.log",
+      "bytes": 952,
+      "sha256": "480a6a6a6843845e30ddcf8b233aa35edaa684470aa0792eb896bda87c805e97"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1-command.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1-command.json",
+      "bytes": 762,
+      "sha256": "99d799885020e9d0c8720ce2ca37a4b8618855e8022e7a26d6451459b178ad85"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1-export.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1-export.log",
+      "bytes": 8101,
+      "sha256": "92a741007e2b349b6174e5a1b90b471099527595326d50959a0cd67db8187260"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1-frame0.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1-frame0.npz",
+      "bytes": 419093,
+      "sha256": "0423cf25b4b511ed8de035bdafaba6cadaf4ccb88d10369acb5445d55dac885a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1-frame1.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1-frame1.npz",
+      "bytes": 907954,
+      "sha256": "15d11d8d613d9a951b1305e3021163fddc4b1a3c0b281414148e0d3140c804fe"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1-frame4.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1-frame4.npz",
+      "bytes": 419631,
+      "sha256": "90755fca240d1afdab0b1db065b42a2d36cf6b5a4a7f599baa7b3426f95c479d"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1-kernels.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1-kernels.json",
+      "bytes": 38151,
+      "sha256": "8ccc034128859e33421591626ea6f64058ab4abb1356eaa8a0ac9a6ae96d7168"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1.dot.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1.dot.gz",
+      "bytes": 2799306,
+      "sha256": "710270a0bb44de99f82df4a9614dd9a5ea920692736f52614c7ea78cdbf3c3d5"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1.json",
+      "bytes": 1530,
+      "sha256": "12c817d61da12b43f2442aed7e243f13a768ae786321e4869bee3d328f33ab2e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1.log",
+      "bytes": 12104,
+      "sha256": "c3958b2ff18485065537ea15dcfeec860b5d144a5beac9ec9d341b48710fda68"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-loop-native-v1.nsys-rep.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-loop-native-v1.nsys-rep.gz",
+      "bytes": 7187976,
+      "sha256": "b004b70f2dd718045e8af291d6b18b1920f2940f558ab967cbbb6923689758c0"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case00-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case00-lifetime.log",
+      "bytes": 11757,
+      "sha256": "2fdca3a47fe775302851fc88f16adb6b9e01c7fbe2804cbda354dc51f3b8c449"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case00-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case00-padded.log",
+      "bytes": 7752,
+      "sha256": "64c8b3fc5b5d4c64bc07b5888f01e706f0c3ac0413cb5ea524b3f568679277bb"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case01-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case01-lifetime.log",
+      "bytes": 19773,
+      "sha256": "65ac7627466c00c09542a0872964f7fc08a92faaf4a264656bd39d8332b8f984"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case01-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case01-padded.log",
+      "bytes": 15764,
+      "sha256": "c8de9923aa46bd031ee49285a84ae5197a9fd6e3954ecf903c264bdaf4cc0671"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case02-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case02-lifetime.log",
+      "bytes": 3560,
+      "sha256": "6d8f5a15dcdccba9a580a454c0a6f2d9efc2d4114013a9d522bb6795de1b4899"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case02-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case02-padded.log",
+      "bytes": 3559,
+      "sha256": "95cdd2fc74a0f263b0b5af25e25734c934d2754cdf54681eff5385ee911199bf"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case03-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case03-lifetime.log",
+      "bytes": 3560,
+      "sha256": "8f9391d141b8c4f04e4110ec6533f9c2f4ec391fa7f6251de6abf2143b4d9163"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case03-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case03-padded.log",
+      "bytes": 3559,
+      "sha256": "88c93716332298b0c8b702aa54f6b2399e23476ee3ddb8a20275bc80d683e3e2"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case04-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case04-lifetime.log",
+      "bytes": 3560,
+      "sha256": "f98d17417b1ebf7d1556222cbc48227e942194a2c95fe153ce5111ff7b95ce24"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case04-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case04-padded.log",
+      "bytes": 3559,
+      "sha256": "8ddf71dbfb56284378c445febdfe1d82f6d779b3d16ba78f127930225f691088"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case05-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case05-lifetime.log",
+      "bytes": 3560,
+      "sha256": "2258072f89f4b6cc00e327de6c4ac9b70daf26ffcc95675a2817fad48b978d78"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case05-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case05-padded.log",
+      "bytes": 3559,
+      "sha256": "93b1092ba970d6a476073e942694b70e809cfbac46283a93407d69ef3a7cc965"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case06-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case06-lifetime.log",
+      "bytes": 3560,
+      "sha256": "d5f9cee68cba49629b69b6698c41a684a62dd59193b61aa5d00413b4c2349a30"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case06-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case06-padded.log",
+      "bytes": 3558,
+      "sha256": "be9b9cc903accdbbc601f30cb18f14b51a6d3af62ca1d16e2d33f9592cac9cac"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case07-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case07-lifetime.log",
+      "bytes": 12263,
+      "sha256": "0fd0e0741c0d93ead6c1ea2adde01f5fbf4eda06f3864881854429d282e21634"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case07-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case07-padded.log",
+      "bytes": 12262,
+      "sha256": "d4b976ed9d9f6c292d631ad62b2f67a5e53ddf12a7112e4be60f8e4beb7290c7"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case08-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case08-lifetime.log",
+      "bytes": 16609,
+      "sha256": "3ffa9dc26f90623588166ae6930c1a6feb382dd23a5f23e05c6da018c08949cc"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case08-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case08-padded.log",
+      "bytes": 16608,
+      "sha256": "9cd06302066e736d1e75e1d18e2af0c15f1ca1a16379c3dac7f2db1f4c10974e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case09-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case09-lifetime.log",
+      "bytes": 3560,
+      "sha256": "8d3304778277b0b78f4ac8bb588aa9a336f4fb7f41ce3cc22d28a4e5797dd91e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case09-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case09-padded.log",
+      "bytes": 3559,
+      "sha256": "5a74b1f2d0ca8b559cec56f960c591c05d378935b8c7b57ea9e7e891d6284281"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case10-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case10-lifetime.log",
+      "bytes": 3560,
+      "sha256": "123a9a3d6bd5790e9704528f0488ddd847f83fb91bd37a028db159ff5d597439"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case10-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case10-padded.log",
+      "bytes": 3559,
+      "sha256": "b7fbabb411aa61b9f7936790ce125731b5dcfa66aba7475649dae73a69e4193b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case11-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case11-lifetime.log",
+      "bytes": 7927,
+      "sha256": "9973f618c0ce5a464e5c9586cceb0854ee9a6b1621c3854a19eb6d70970c1858"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case11-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case11-padded.log",
+      "bytes": 7582,
+      "sha256": "eb0d3bd4d57f03c3db230d51b306ae499cf12de6eb7e6fc8d538642b3bb60321"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case12-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case12-lifetime.log",
+      "bytes": 3298,
+      "sha256": "fedf7f5cd33c45fe6c0fce9961f183697fdb3f0cbb85bc8b602ebd18e67b5818"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case12-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case12-padded.log",
+      "bytes": 3297,
+      "sha256": "54f1881246eca756d9cf63528cc6e110a6c7010514b7c3512cbc4d4274e3945d"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case13-lifetime.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case13-lifetime.log",
+      "bytes": 4018,
+      "sha256": "1fdf9748f7c42b69d0e0b6de46771801083c314b58890209d4dfcf91b173c008"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-case13-padded.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-case13-padded.log",
+      "bytes": 4017,
+      "sha256": "c73b8612c7d31b45a5aafb1ca7650968543457bc65deaddbefcaee9e96d55343"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-memory-v1-commands.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-memory-v1-commands.json",
+      "bytes": 19724,
+      "sha256": "1ff7aa12e2a2490ecb21120bae4513518ce66f3a219c9b102352211bbc770bec"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-native-loop-independent-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-native-loop-independent-v1.json",
+      "bytes": 8586,
+      "sha256": "88cd2a22b825fb019f259072fd091d06268eb6f72c7f872b9b0e04f8abfbaeb8"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-native-loop-independent-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-native-loop-independent-v1.log",
+      "bytes": 650,
+      "sha256": "dfd4ec1c77cfe4b165a71e6fc6a71f925440b00f0ba4a1dc0d3c0c1ba377643a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-independent-v1-command.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-independent-v1-command.json",
+      "bytes": 304,
+      "sha256": "bed8db2692aff4845d28cfa314378061c60791e45a4dcae7e54cbd06b3209fee"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-independent-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-independent-v1.log",
+      "bytes": 1429,
+      "sha256": "95be047ed1baf6bef02040c2aac87fc5ce0c62e212b500c8509bba863afd7f99"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/commands.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/commands.json",
+      "bytes": 10972,
+      "sha256": "5dc9a530b15bd70a071e828a3bf56610222d8b52c7f5a105885b818ef8d919b1"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-after/boundary-self-intersections.txt",
+      "bytes": 13,
+      "sha256": "ed614f21b453246ebd00834c5358ea791999fd7fbc040557aea44e735c0cd83b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-after/boundary.off.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-after/boundary.off.gz",
+      "bytes": 511283,
+      "sha256": "4dda0dec4b3fd1d80a03b5d542a04a8bfb9a63604389e5c1faa4e386284af18a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-after/input.off",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-after/mesh.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-after/mesh.npz",
+      "bytes": 2651396,
+      "sha256": "8dd27094c15182c96ec74205faaee4f5fd9288205a1185f54f11424f46b903c1"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-after/mesh.vtu.gz",
+      "bytes": 2071854,
+      "sha256": "919c99c1f7936fc0f4501d1566fa93c5d3789c9ca772b8fc9bc36994bac4b866"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-after/result.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-after/result.json",
+      "bytes": 4056,
+      "sha256": "5f55ae06ee242db6b572e06c2c8d10f399fe32df1bd6a743121579e61b2dd97a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-after.log",
+      "bytes": 9280,
+      "sha256": "8cafeafd6da6c1daabf657ffd9333cd85f2fd10c81041dec6799e4f0b0a56679"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-before/boundary-self-intersections.txt",
+      "bytes": 13,
+      "sha256": "ed614f21b453246ebd00834c5358ea791999fd7fbc040557aea44e735c0cd83b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-before/boundary.off.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-before/boundary.off.gz",
+      "bytes": 511206,
+      "sha256": "fd87a40dfdb0ec94b1a70449fcc293c5e85356877a5cf9a8e61ccf10d6e05a6d"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-before/input.off",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-before/mesh.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-before/mesh.npz",
+      "bytes": 2652065,
+      "sha256": "259b3a290ca3f8859194127dfc68df304574b137d03629940722cdd09544d8e7"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-before/mesh.vtu.gz",
+      "bytes": 2072755,
+      "sha256": "fa19c1ccb085dc44c45b81d0fd44f9cd6006dfe2eadb898f7a8e5c545c71bd5d"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-before/result.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-before/result.json",
+      "bytes": 4062,
+      "sha256": "2707ff9a574f22404631440122e4a0d1f3ee955499a9f93ec1c9581498ea5174"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/graded-torus16384-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/graded-torus16384-before.log",
+      "bytes": 9286,
+      "sha256": "1e81f2be0a73363f3ad1a43a6c221fac183e4459e98310660ed32315e6a1beaf"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/lossless-archives.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/lossless-archives.json",
+      "bytes": 1193,
+      "sha256": "c38b03616d681798eac747c66526c9357d233941a88ca31064e239923f4615b7"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/reserved16384-target4096-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/reserved16384-target4096-after.json",
+      "bytes": 3151,
+      "sha256": "419c111452326dadf8c24aa8d76b29af9c7de8ce28f61b076194bbf61fa87ac7"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/reserved16384-target4096-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/reserved16384-target4096-after.log",
+      "bytes": 8387,
+      "sha256": "37f8ae8989f921f7ef6999aed0be5835cb29060aca7f844897e5c0bf225cb7e2"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/reserved16384-target4096-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/reserved16384-target4096-after.npz",
+      "bytes": 419691,
+      "sha256": "862cd47ba425625dcdeb6591023056c0706cd5e1125c3b64a2abff404917693c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/reserved16384-target4096-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/reserved16384-target4096-before.json",
+      "bytes": 3100,
+      "sha256": "d30e4e6b82b64789419258488109e6b8fa780ab3f6ddbcfb11c336a55e3c4538"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/reserved16384-target4096-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/reserved16384-target4096-before.log",
+      "bytes": 8360,
+      "sha256": "8a07c34ffc702d3e0607589509fa9e6311a4788f2173d97fd52ecc4dd7c835b9"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/reserved16384-target4096-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/reserved16384-target4096-before.npz",
+      "bytes": 418873,
+      "sha256": "afde14f307fe72ac31690904743858cd4eba9f56c23e281f898303fb0cbd75a5"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus16384-fixed32-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus16384-fixed32-after.json",
+      "bytes": 3128,
+      "sha256": "d89d42da0eb6d1fe6db34e3f93681b9f75801d5021013e6fe006a44bfc584d2e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus16384-fixed32-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus16384-fixed32-after.log",
+      "bytes": 8198,
+      "sha256": "b9508c36c63dfe0605f434b535faa50f6dc39c716371d331b73f650e524d7d43"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus16384-fixed32-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus16384-fixed32-after.npz",
+      "bytes": 2001560,
+      "sha256": "d69843d7697faa4d3c469db3bcc4e8cb4a5f858c9d0a462cf99e98733d031f5e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus16384-fixed32-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus16384-fixed32-before.json",
+      "bytes": 3091,
+      "sha256": "60511abbe95e79c6904734b92d093e4d31cf8f0ac729b96f320ad29a13f217ca"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus16384-fixed32-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus16384-fixed32-before.log",
+      "bytes": 8185,
+      "sha256": "d5e1b414ca5d8350795121831efb13a3a5dd910c9c53e6583f1bd46d758071e8"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus16384-fixed32-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus16384-fixed32-before.npz",
+      "bytes": 2002043,
+      "sha256": "f4756beb9327e6bcc525f6bce7f574cffe0dff96be271214cb894a47f87f806a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus8192-progressive-after.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus8192-progressive-after.json",
+      "bytes": 3119,
+      "sha256": "c79072d4cdc5e3d2486dba181dc6a706e725684a0e5a545467e74ac73236639e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus8192-progressive-after.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus8192-progressive-after.log",
+      "bytes": 8367,
+      "sha256": "2dc8f3b2d505582f11829e1d9a850c3a0f751ded4c52f0ad7056e7e8b940d006"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus8192-progressive-after.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus8192-progressive-after.npz",
+      "bytes": 917778,
+      "sha256": "762fd26347c5f4d9e8923fa441ba29064f2d490e116f44e287bd2ccc93d1a492"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus8192-progressive-before.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus8192-progressive-before.json",
+      "bytes": 3087,
+      "sha256": "0a5e69bd75a862b2d9e72dfe72026dc05c5dcde99b173d69635a4e5dd3ce2314"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus8192-progressive-before.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus8192-progressive-before.log",
+      "bytes": 8347,
+      "sha256": "fef143c2e651d206ecc724c3190010ac12f9bad036fd52e229adb9dc7601fe91"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1/torus8192-progressive-before.npz",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1/torus8192-progressive-before.npz",
+      "bytes": 917985,
+      "sha256": "7571ab422f5948c0d2f9e1b7a70c4ebd1be3b32417754d1e5b0e5527690981fc"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1-driver.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1-driver.log",
+      "bytes": 9041,
+      "sha256": "6123c8c99807d7b72db35550125d0eeb12194fecc9cb80f6e9bf5bf41a46ff1c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-pilot-v1-independent.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-pilot-v1-independent.json",
+      "bytes": 28858,
+      "sha256": "1687f069c2a93293f1667051c63f5b7218f939112f7f79a5ef85a0be23841225"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-policy-v1.md",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-policy-v1.md",
+      "bytes": 2211,
+      "sha256": "8bbaa699ca5c95b8109a6e68a5c3db5a447a79a67a7633219af55dfd7f1bc09a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-production-source-audit-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-production-source-audit-v1.json",
+      "bytes": 19246,
+      "sha256": "ad8a8c8b60687a0bdba2fd8895e7d2ce7f54e4815493118c35fae745bf6fa71c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-production-source-audit-v2.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-production-source-audit-v2.json",
+      "bytes": 20270,
+      "sha256": "8fff02ce4447561dc0f0aaeac277f6b04478e8a2544428fce0cf3a3332b999f8"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-proof-v1.md",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-proof-v1.md",
+      "bytes": 3168,
+      "sha256": "229e9be025ecad9b95bcb57477c09f6d55cbd152acb8fc7f2b2706aec626bb6f"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-prototype-source-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-prototype-source-v1.json",
+      "bytes": 477,
+      "sha256": "174926381e2ebc44a2ffb84d301b73f8104304cd7941d4708b83197a10b5f58b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-qualification-v1-full.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-qualification-v1-full.log",
+      "bytes": 1962,
+      "sha256": "511dc645e44a6a83e777f9f92d114d3f8707107a0804d7ca1ca6f5587f54806a"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-qualification-v1-loop.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-qualification-v1-loop.log",
+      "bytes": 1969,
+      "sha256": "5ce1f680a6609be8ec19b4d5e92dbedcd7082dacef8ceba8f23124505309d684"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-qualification-v1-memory.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-qualification-v1-memory.log",
+      "bytes": 16333,
+      "sha256": "756c2c81d6d119b67a01fc5ab2c9af60e35b756435165dd4b520d2d6624fae3e"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-qualification-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-qualification-v1.json",
+      "bytes": 875,
+      "sha256": "76c889f2e43f077dbfd149701f4d5df624f36d9828fe550da17737b5ee89a370"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-qualification-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-qualification-v1.log",
+      "bytes": 731,
+      "sha256": "1c464197a49d1351edb4474475e5c6bc4f4090bfe31e13b50c7da463c836300b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-reservation-comparison-v2.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-reservation-comparison-v2.json",
+      "bytes": 1778,
+      "sha256": "9196563f13fae76cb6412f41878f95f1cb9cfcdd65775a3718fb36131175081b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-reservation-first-attempt-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-reservation-first-attempt-v1.json",
+      "bytes": 325,
+      "sha256": "567c24014070f450d9f731dc80766aeb3324a5840f3135ae4f49cae885fa82ad"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-routing-comparison-v1.md",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-routing-comparison-v1.md",
+      "bytes": 634,
+      "sha256": "d75eb85bcd12d0ab2e183d983a34bb0a166a661f0ed5c3a5320a1b1d0c964727"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-routing-design-v1.md",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-routing-design-v1.md",
+      "bytes": 3228,
+      "sha256": "3fc46a08e17d7d4b0127b4821117f63898369b13b20d12e3cfad8f8da245de2c"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-tests-v1.json",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-tests-v1.json",
+      "bytes": 648,
+      "sha256": "9acb49ba77075711932a9e5f6e93d0bf4c7d4706b2e1746052a9f1be8558c710"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-tests-v1.log",
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-tests-v1.log",
+      "bytes": 99,
+      "sha256": "14d4c841b5dd796919a73b2f4bed79893d86375bc0377b911f3ba6fc2db75890"
+    },
+    {
+      "original": ".work/vtm/larger_prefix_v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/larger_prefix_v1.py",
+      "bytes": 3848,
+      "sha256": "cb9363aaf06ff23a1cccf3ea8dfb97d929f2bfdda508815fbe382e60d17e38e8"
+    },
+    {
+      "original": ".work/vtm/profile-larger-prefix-loop-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/profile-larger-prefix-loop-v1.py",
+      "bytes": 6646,
+      "sha256": "07d73ca8c367c6522717c9777fc991919b7877c7562b8727dee53f983aa12b86"
+    },
+    {
+      "original": ".work/vtm/profile-larger-prefix-production-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/profile-larger-prefix-production-v1.py",
+      "bytes": 3830,
+      "sha256": "630819e91f98258abe9b0fdfbece1ebc888ebc5d5de22d1e8cf8c17aa02f6e19"
+    },
+    {
+      "original": ".work/vtm/promote-larger-prefix-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/promote-larger-prefix-v1.py",
+      "bytes": 2842,
+      "sha256": "398f6172967100c8eddbda6091b3f295a092f1f1a60000eb564bc0cf7a820b43"
+    },
+    {
+      "original": ".work/vtm/publish-larger-prefix-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/publish-larger-prefix-v1.py",
+      "bytes": 8118,
+      "sha256": "22cb60f5568427bc00438a660e1144350e06dd3ba72d0627f9c4f400a6c1cf34"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-edge-tests-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-edge-tests-v1.py",
+      "bytes": 921,
+      "sha256": "c67baca06d65bbc47f46dfe3bba7ce9f6f73f4ae6af4d6ac79829089c022ebcb"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-final-independent-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-final-independent-v1.py",
+      "bytes": 917,
+      "sha256": "d3a656e7f4afc0a1d960f2599526b64d23ecd9a9b6dba095eef6002640d45406"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-final-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-final-v1.py",
+      "bytes": 5915,
+      "sha256": "b308646d124d0d738605e175d8828890a7bbbbe6273e8e4661604e7778e342ac"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-focused-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-focused-v1.py",
+      "bytes": 1317,
+      "sha256": "907a6b8b6f14bb2142a1ce522d600d843d1d471de995520d6cfcc4db21edb2ef"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-full-suite-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-full-suite-v1.py",
+      "bytes": 1056,
+      "sha256": "2dcfcb067c11db6724f08a6b81ace9777c3309624b6c91e922bef6145745e31b"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-gallery-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-gallery-v1.py",
+      "bytes": 236,
+      "sha256": "4f73893dd4953d681a8090eca45b6d7aed49f7ce7e46bac499f510d70bc5a92d"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-independent-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-independent-v1.py",
+      "bytes": 890,
+      "sha256": "0ae6a47b9439d97cb8cb72ca21dfb1ad7c34868dd8329c3ca8a788c3b1e57fa1"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-memory-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-memory-v1.py",
+      "bytes": 2294,
+      "sha256": "ad1a9b4517eee299768c1390b15447c3240b2a712d6acbbfb810b93c03dad262"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-mesher-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-mesher-v1.py",
+      "bytes": 233,
+      "sha256": "a9ff2522d45b54edc412dd1b1869832cc15378ac6a5ad1de195ad14fe50dd2da"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-native-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-native-v1.py",
+      "bytes": 3216,
+      "sha256": "abac397646bb481d8a92f69b2efe859488e29fbc6d6a6c3b900b6c562b443666"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-pilot-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-pilot-v1.py",
+      "bytes": 3256,
+      "sha256": "4e645ded1dfd1c0e6a0575342119b44176bea13aa820c57c0222f0b019d8934a"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-qualification-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-qualification-v1.py",
+      "bytes": 1298,
+      "sha256": "9bd5db441da6ca459d7238231b896ce13cf55619b04ea544c9a1d64cc37e7f37"
+    },
+    {
+      "original": ".work/vtm/run-larger-prefix-tests-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/run-larger-prefix-tests-v1.py",
+      "bytes": 899,
+      "sha256": "ded902407fa82ba56c29ca690ea719adadd10bf4b85899ccf2834d55189a80ba"
+    },
+    {
+      "original": ".work/vtm/test_larger_prefix_edges_v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/test_larger_prefix_edges_v1.py",
+      "bytes": 2048,
+      "sha256": "ec0cab3ec6f545333a587ee3dc512464157338c927fb01bcfc8d2d1b2ed8a0e7"
+    },
+    {
+      "original": ".work/vtm/test_larger_prefix_v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/test_larger_prefix_v1.py",
+      "bytes": 7672,
+      "sha256": "e34d7fcbb8a4395a6c4ad2471885a1edaf0993b9d9a6cad8a147197ffcd2aded"
+    },
+    {
+      "original": ".work/vtm/update-larger-prefix-docs-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/update-larger-prefix-docs-v1.py",
+      "bytes": 4860,
+      "sha256": "8fb6296256b0a1684753e678a4832bc7371cafa67b0f52c3b25573bb2236bb65"
+    },
+    {
+      "original": ".work/vtm/update-larger-prefix-grid-sources-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/update-larger-prefix-grid-sources-v1.py",
+      "bytes": 435,
+      "sha256": "c1ebd83ae1920332a1655e65258dae545aa6a77bbc12e6d09afa109d07cf79a2"
+    },
+    {
+      "original": ".work/vtm/update-larger-prefix-qualification-guards-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/update-larger-prefix-qualification-guards-v1.py",
+      "bytes": 911,
+      "sha256": "4eb85343f1fc248f43de0edf7176741ac11bf01dacd0ed4830655f03b1371354"
+    },
+    {
+      "original": ".work/vtm/update-larger-prefix-qualification-v2.py",
+      "path": "results/validation/vtm/larger-active-prefixes/update-larger-prefix-qualification-v2.py",
+      "bytes": 2328,
+      "sha256": "b058aeb36188847d7092d5adb9c0897401240a30a5fc77cf6753d20d9e498dd8"
+    },
+    {
+      "original": ".work/vtm/update-larger-prefix-report-comparison-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/update-larger-prefix-report-comparison-v1.py",
+      "bytes": 1883,
+      "sha256": "250100b9471b181eed822629ee7e9b66bd0c6afdc44f1af759a6fb42266e0bec"
+    },
+    {
+      "original": ".work/vtm/write-larger-prefix-report-v1.py",
+      "path": "results/validation/vtm/larger-active-prefixes/write-larger-prefix-report-v1.py",
+      "bytes": 11841,
+      "sha256": "637159e84487683d535018b20f49ae29ba4daebec2db9c27c19a7cdce28fae2c"
+    }
+  ],
+  "source_sha256": {
+    "README.md": "e9a30cfc626c653217587791cb947eb7770726e984e4f9ba6d344d306b4c35a4",
+    "benchmarks/__init__.py": "aec4f6323c9af970cf489ad57de6195f5ef87df6edad0eaf51772e8c1b5506b2",
+    "benchmarks/active_delaunay.py": "dedc3721fd0b4eb4aef2c1bac457d64e225e7d44c578543472d16712fa45c06c",
+    "benchmarks/amplitude_order.py": "30b7eff6791a9c223c9014ce294af52b4a55a876aa6a6f85a54575754b1fe9cf",
+    "benchmarks/audit.py": "a1cac06ad03b11f588b8b3ea916091f3a8b238355f1e000f2b6c8e018ec0351e",
+    "benchmarks/bounded_predicate_proof.py": "90ce13274a06dc7a2f9dcf9c684fadc1967317d1e6f714956b08b0dae49a6002",
+    "benchmarks/certificate_fallback.py": "56f63983be10d2cecced520299f5fd8312e56071679b197c5dbef1967cb92e7e",
+    "benchmarks/compare.py": "790623d2707147a0614a828212664dca47c9d5e46a65380817c1e3af2ed5dd50",
+    "benchmarks/containment.py": "deecfe5cb518e1bcbce536e89a2bc1a6a93fc7072088ae9e5b760c7b2215d516",
+    "benchmarks/control_loop.py": "5f242c360349286c62ea42f4c8fa57f07eba58d1f011f32a1da29304a9b61454",
+    "benchmarks/cpu/README.md": "8295626d1200d5d4bd1bc49c25d6d648f16daf64481c6a68dda8923a2083774b",
+    "benchmarks/cpu/check_delaunay.cpp": "1a2b1ec4537bbad7a2ac5edd237d853c88bc2167e864eac2686fd9e98ccc3fcd",
+    "benchmarks/cpu/delaunay.cpp": "63f8510d06858f3641a57d1718fb7bfb4c64972fa6a1185ee2afb403399b8b5d",
+    "benchmarks/cpu/mesh3.cpp": "2be80a2312f8093dc9fea912b5e5aaa8b6b160dc084dee5a1926cfa9223e0f29",
+    "benchmarks/cpu/surface_distance.cpp": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d",
+    "benchmarks/cpu/surface_intersections.cpp": "227f37892bdc6a783ed12bc110a7c53571862951f264a5b72d07b7d21f341775",
+    "benchmarks/cpu/triangle_contact.cpp": "1ecbf2edad5bdaf0f2f14d4e7c09ef27b842f29d853b35a26b71d827c9f65192",
+    "benchmarks/cpu_mesher.py": "dcd64bb8bb725adefd5d4e5dc9852b0090ed835e33f6673bc938e6437424698a",
+    "benchmarks/datasets.py": "c06985fd7d32f87c193dc096e434b3389a2456a94451c778be5158c808e14f69",
+    "benchmarks/default_path.py": "0c97b2d2e5b5e2a1995fbdb455b1a333ae00c37d2bc673a1f47221e1d05aceed",
+    "benchmarks/delaunay_recovery.py": "a317c72d588feefec484ec85ef11a82f569614f4995131736ff5237ab7348471",
+    "benchmarks/domain.py": "8738c173885f57f82c3168b7b324cca13c35ac70c0d123abbfd96cdbfae34fad",
+    "benchmarks/exterior_loop.py": "f15db0dc5d0bf4d8f7896caf8dd808e8011f5e19a59266c49eda2d3a78cf7374",
+    "benchmarks/extraction.py": "c8b1b6ea55944de8af60da3eea1c989696fb3fb98c2e7e33f1f36e9f23807964",
+    "benchmarks/facet_completion.py": "ac8f46ea57539e83a3925ddb882cc471f4868d36df28837fab9c5ee53ae5bc37",
+    "benchmarks/facet_recovery.py": "48e3da3b1e530a4903e85ed0aac4b359798ff873d580fab13a6f65ca736f7fb6",
+    "benchmarks/fast_candidate_matrix.py": "6d61d8fae12af5266224585a533715dfe243d3a3ca497ae8f43e4a6a90d22387",
+    "benchmarks/fast_candidates.py": "2666a8916fe9677c3d75242867bcd758b940b9963a3aa4edd4d3a1f5dcd614b9",
+    "benchmarks/feature_quality.py": "06f9c355f193ad5c6ff8b63a98d33bbbaaf497b965cf3e84459efd3fa638d4c8",
+    "benchmarks/fetch_scenes.py": "99a8d693aae203927a012a8e4e152c04fb838eb49ea6d0a447ec10a9109644f3",
+    "benchmarks/geometry_regression.py": "34751f0eb34023aab8ba94da7c817b4255bf287239baa0c589551f39f83d8a14",
+    "benchmarks/global_certificate.py": "a7ebe54dd446a63b85378fab4556014e2a01816a9c86be420cf88f4986b6ac20",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f",
+    "benchmarks/graphs.py": "99ce61f786157147024705d2282803dc3d7e6c2d17812dcefd2a3a29f84764dd",
+    "benchmarks/initialization.py": "d4fdbc016406e0f9560912ff3ea687b782bbb90a2d2f17481bb504e00b582f3c",
+    "benchmarks/interior.py": "3b11554d7882e0361fb04929299b06e8c101193177415e4e307ea0539ec1909f",
+    "benchmarks/jitter.py": "ecb96baf3daca6e4a0e62efc2cc10122a3f0339725d90813291cb8e355153153",
+    "benchmarks/local_certificate.py": "9e17b0321af3b6116689245a525717d8c17c5c600e7a0844996836ec4dd6ca9c",
+    "benchmarks/matrix.py": "45135d3e98d852bd18939e56269ae67f4cc503bd81ecec3252175da32009bd57",
+    "benchmarks/memcheck.py": "707d7d29ef6469d9cc52f56d6f21b0dc5464a6aedf858eca09ebb91bcda6df50",
+    "benchmarks/memory.py": "139f0195ef37b2d163797332166b2b70774a1c34324abe742027caac08175c89",
+    "benchmarks/mesh_quality.py": "0a5765c4d82da5e24ccda94bf2c149875c83932bc314c9211b276a99a893e0dd",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "benchmarks/mesher_loop.py": "e384c22f1e2334aeca3d0c7441eca7354d8c1d75a99b3a9fe0e0f93df449c141",
+    "benchmarks/mesher_policy.py": "75a2b13ef4e10aa07ecdbc8e2b856eb171c9da7836c6bf83b0fa4f43fff12d98",
+    "benchmarks/nested_capture.py": "4ba4856c8af8fde4e1c738d9f7924523c02e83dac593864d6c6cf2741704b568",
+    "benchmarks/odt.py": "556322d06aa7108b2a6a76f01d15151db7008a93dcefe68ee08d3b785f49191d",
+    "benchmarks/odt_failure.py": "3b1c7402bc752678048198626919c2de6c5e50a1a1ef28f81860c104531efc99",
+    "benchmarks/radix_capture.py": "9df57f171e7287d4765d89f7875dfcf700b689dcad502c923a3c7498e34d49e7",
+    "benchmarks/recovery_policy.py": "58db4056f1de878f9ee32cd7a722486618dd2ac4b45ee9c396bbac45e00c4d70",
+    "benchmarks/refined_hand.py": "4fdf7e0d8dc05d9b484b242cef42f9832f4082658c2db9629dd59e612e3ce308",
+    "benchmarks/refinement.py": "86cd281caeee343f6cd748f998b72840348c679ad74734a2ba7da07c8b0281fe",
+    "benchmarks/reuse_delaunay.py": "99b23c95af424175126dfe405b588d29e5e7c55947b6ae00b7974c21e9aaf218",
+    "benchmarks/run.py": "30fc6978f5d1ee4f486f69ee3316a27fd7edf30b5d9f4dc4a3a8a47b77419d0e",
+    "benchmarks/selective.py": "c1530960d11574b1f75be7fa6db78bfb4f9455c72ca169b1bd6356e22d113936",
+    "benchmarks/sizing.py": "1086b3e357d960432ab9203eb026f16d28ae70daa81b5b439826bb45d2200680",
+    "benchmarks/stable_centers.py": "cf7a7c05e9cb3b414baec12c425c3788aaa3b26fddc123e896d0ac56dc323d24",
+    "benchmarks/stable_volumes.py": "6da84b42e0a2feee55cce3dc96810f960acda9f2d7122f3f5536466dad58c9fe",
+    "benchmarks/summarize.py": "ef218ab6fb7c60ab87400937292b357712638735799476960cb671418e5e4cb1",
+    "benchmarks/surface_distance.py": "977463196b35b253c1fee0193f87522dd8d43af87ad636c73737d64b678d6f2f",
+    "benchmarks/surface_distance_audit.py": "5c9c83555dc3d75ed5a697ce0bdb0388ffa68ed74dbb36746c19675ae0c58f26",
+    "benchmarks/symbolic_controls.py": "48658b1465d48a921ab4dc66f77c2d25120086c58a467133082b35b6ba23509a",
+    "benchmarks/tetrahedra.py": "b6429485a06a174687b092a3ffda29e8e14e414e825a8232ffc47603381a30e7",
+    "benchmarks/vtm_core.py": "acfae8356f3021a443036c9eda856797b5e8a564e287c4b57910f440fe3c0e2a",
+    "benchmarks/vtm_domain.py": "8244b3e036d038e5bd7ab6c5225144f62545bc02b22df4f1805a813d041bde8d",
+    "benchmarks/wide_extraction.py": "3665c607d1f786caa4d963df721d687a63ee1da5778b467e9bf58a79d016e29b",
+    "examples/__init__.py": "ac121f6f6650b3f9a5d6d9c65729a29df07f7d05998162d8f382d106725e12de",
+    "examples/fetch_armadillo.py": "2a098a8e224973dbb2dab308a75e95ff9b179316e1e81b1dd67a65bfa4ac0dff",
+    "examples/vtm_gallery.py": "7ef17562e1aa3938d2062d99f3d70b0a2b1b6e893ca72bb8742346989f5550d7",
+    "examples/vtm_inputs.py": "83284ecd146010c2d610b221bdfeaa16ce0b98fd59cda561c1602bdfa87bc9a0",
+    "examples/vtm_render.py": "ef908f1733b376be8b77fb1295cb09040984a1578d6058f09dede4d75522a3cd",
+    "tests/test_active_delaunay.py": "954e144b24c3be5033d787290ac75b6ee8054f2f880d7d33a7d024f4bce5051a",
+    "tests/test_active_sites.py": "193cc7f1dd52f56084a771ee0257036af85e5c0958e063f22356ad5b9bd160b9",
+    "tests/test_large_reuse.py": "9f6056eb18dd1b70b588da14b643f8925060e3209a23df8d975633da7d9a08e3",
+    "tests/test_larger_prefixes.py": "91a9d1b0b7eb7bfd714e8bb4a48dc9e2d3ae8d0f6aab2cdd27c699c493900ecc",
+    "warpower/__init__.py": "bc95cfd203def8ddac4d3171fee33feb98bbbef10a8ea5f98eef824140244874",
+    "warpower/_active_delaunay.py": "fb52f8815537614c38747c62fd164d5fb47cf1ffb5b0a7c8fbc46dd2080ed169",
+    "warpower/_active_sites.py": "3c17ffe07d129ee4c46317f1ce1ede2ed0d96a0f237ddb718f77e401a95f7cc1",
+    "warpower/_adjacency.py": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+    "warpower/_analytic_predicates.py": "b6d8ab23dfb23e107f8dde1d9e473085f9a45004115279531bfe219194bfad15",
+    "warpower/_api.py": "f84bec46306a84d7f1b72c6dc1d9dc560cb2905ad74bda63f4bffb97e4e5ad97",
+    "warpower/_automatic_sizing.py": "f6aab578b13d3689648452c49c4e4474b40005a8215bc6787cf6811037fd713b",
+    "warpower/_boundary.py": "68525b60978aef6eaf0f8f02f7693747b5fec6a5e02ba260cc67d82f389c94dd",
+    "warpower/_boundary_rounding.py": "6db76fc3ccce54914710dee1a134655d9b8934a3352686b9f41f2e9e92926e07",
+    "warpower/_bounded_predicates.py": "2a9afb83f8c64eea5f0597ffff0ccc9d5007f71f1d37a41f14da7b3e06df22e3",
+    "warpower/_bvh.py": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+    "warpower/_canonical.py": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+    "warpower/_cell.py": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+    "warpower/_construct.py": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+    "warpower/_containment.py": "e4913d8e25cd8f3a058b9a3175d69646cb3a7845a9fc2cb24ddc038373495e86",
+    "warpower/_delaunay_certificate.py": "bfab680e65db7757c519c0087cbbaf1d04ce5872e354c25bfee50f455fb1f6f0",
+    "warpower/_delaunay_recovery.py": "9f5b5b330bcdeeeb64ebe0eec5823d1357f6c79f1af4e1131dacda7b0d7f8e46",
+    "warpower/_domain.py": "7c82b21b9e1995301d36570a2a455c041c6daee78b5e736d35cd5df69d94a88d",
+    "warpower/_domain_topology.py": "3c0746b94c2940d275be28626e8dd257aa0b5a284d8459bd4cec226e4935826b",
+    "warpower/_exterior_band.py": "d875e2b215020ee4b29ed7be89b191fd5cf866339970619673fd7b0244cc995d",
+    "warpower/_exterior_proof.py": "b8bec5867ef20b2c65462844a078889ca68799696b86c981f811a6af689ec0c7",
+    "warpower/_extraction.py": "58d747bba2a5f04e814c2db0bb8abf5158590296f0c0b1450347638a726feca2",
+    "warpower/_facet_completion.py": "fe32e851c37ff5564393f4f6d3d4cfab6a43cf9927db3fd1bb0bf8d0b4cdb6c8",
+    "warpower/_facet_seeds.py": "8f88e244a9e9529bfc562a2a59edcf41c8f1b045da4a470655549fd6dd32658c",
+    "warpower/_fast_candidates.py": "740377dd16ccfec7b0bc630e4d2a483312a2a8cf398e067d37b3973e18d9a483",
+    "warpower/_filtered_predicates.py": "a9a74285885f362deb634972709ae6fe47dbdb33320e3b8627d3b85669578564",
+    "warpower/_graded_odt.py": "37538c9d51d3282a9ec85b6e1e7f6eeba6876598d5cb79f30d0dd8d736d45778",
+    "warpower/_graph.py": "d7e489b28717f72a25e866b59f1c9dba3855222e83cd97e848bf7e6b68bf18e2",
+    "warpower/_graph_construct.py": "9f305d39185abc6602b85431b887c3bd2b5152864ec18ef35e6a71e3a6690e42",
+    "warpower/_graph_tetrahedra.py": "ddbb067ef02cfd20032cc29d870bb19b9d30b4cd2a649516be5c547ce5b94540",
+    "warpower/_grouped_seeds.py": "8d0ffa1556c179ff11d0ecd357a55cdb198897a4fc4c8336389744b0aff19785",
+    "warpower/_halfspace_predicates.py": "46779c8236dab4048344523a653ed1b864ba77082163f533b991fb85540db164",
+    "warpower/_integer.py": "94205ab5790a308f51b083fedc8cb905050602369061d65d231b91f175a0d641",
+    "warpower/_jitter.py": "b184d21b47ce3e96fcf1587722d9be3c276240fc776ce85ffa10b3442dd85435",
+    "warpower/_mesh_api.py": "37cf23ecf09d34a7bc0a77ebe73d8e2102c37064b1ab4923acccca993ea0678f",
+    "warpower/_mesh_topology.py": "5dcb12b58e59446e5dbf4db6a1bda2eab3a32a55c833e453e3b9d48f3dfbcc24",
+    "warpower/_mesher.py": "faac42c14b9b9b2c7b8947361b9d53b5d5dbee8854ade65a91ac9e2717419e65",
+    "warpower/_odt.py": "53d23df8f23de165d98598c7fbbf53e2944f82ee82f6a74c2b135e142dd589f0",
+    "warpower/_poles.py": "b93f434020a357025dc3a067bbb0e8ed2c4c0ab66ecee0108db5a2c6762ea18d",
+    "warpower/_predicates.py": "20a204a1f6774353d3ce5d35e241db53a0ac075ef40714542f0067010aa50d26",
+    "warpower/_prepared_seeds.py": "86246833eec66426191c3e5465f6eadcd8437724893f4ccecf6f4f8564d89d56",
+    "warpower/_proved_completion.py": "23336177436b94c6bf99c33e0aef58d921a51b1529c69787bddf743c37a41635",
+    "warpower/_proven_exterior.py": "447d9b4ececb6045712e4ce66b4dad08a55928c2cf97aec6f5fcdfaa997f552e",
+    "warpower/_quality_moves.py": "52d776f7186693107329bc216021b212546fed0b9aac50aa83e56d9c074b6d7e",
+    "warpower/_refinement.py": "003dc220a88044aa18f624676b5d1941a7bed314f1cb17226f962d8a4d61eb81",
+    "warpower/_reuse_delaunay.py": "862a4671c2daa9df7fe168625eefb4206184d2f9cb7c433f8a1aeab77c248ea5",
+    "warpower/_sampling.py": "3f4ef9a1ed354dab1a0f54528817683d68af1bc81c1926ec631834d93a8edc70",
+    "warpower/_selective.py": "4fd3235060bbbddc31b6b06d2508129318f6066b8fca8c7cd7f6c9e6e333ff19",
+    "warpower/_selective_backtracking.py": "e7111bcb1505045a4f73cbb72b4c3c54a4c814e21a4d5bdd69d046670d29223e",
+    "warpower/_site_bvh.py": "60a307c003c02f931cc1d6ee2f4ca1b417d34be6a4fae3f6d968be17dda7c92b",
+    "warpower/_sizing.py": "fe30bc06b3ad23479367a00afb2356e1103e74beb5e764e5f47e91ba8a343464",
+    "warpower/_sphere_bounds.py": "865f1d7eb961ffab42d98213ff52e52cb7a60973233cb03923d3f559e1e72c3c",
+    "warpower/_stable_center.py": "1d3f4a58c799f675edde5dea9f77dd50c36b68b7f8580e809a1b88d761d770d3",
+    "warpower/_stable_volume.py": "c326ad964bd1bf1f11fcd0682e1cacc8df56b7a3ccb3815ceef3694c3ac36a90",
+    "warpower/_stackless_seeds.py": "8e87592618d14f2d411abd7e7b84f823d43aee3ccab35960535b917c5680d22b",
+    "warpower/_surface_bvh.py": "b8bb9d8bb798fb5b38fcf59aa55c858a1af56de1d57e98b630f0b37b593edcf4",
+    "warpower/_surface_query_cache.py": "6d90d7649cd775bbdda66b30dbe727bfd7adcd9dc5bdb072471cff0c4115942c",
+    "warpower/_symbolic_bounds.py": "b071b45a8a19b93a322406680d10b6137c9cc7677efeb8776b98b7ae8c678db6",
+    "warpower/_symbolic_cell.py": "b3fbd57892ec33cef5e03b094d9cf454d17ffa9ae0ac4d886cce6ca210ecb7a2",
+    "warpower/_symbolic_delaunay.py": "79760a7f1770a8902288f4a8f750eb2170ba87899260a637817b65cc2f2aa451",
+    "warpower/_symbolic_tetrahedra.py": "52af32e5cfd0686fb82548a512f1b89c703057a45e0eb7597b9918d7a931e29a",
+    "warpower/_teleport.py": "4123f2a28bfc4324c5340adf85e93538885cd54b5e3f5b11107bc07183e7ab4f",
+    "warpower/_tetrahedra.py": "5db1eb6583f84bf99a81c9aca8aabb1d8fdc8772d6db7fe9bb87d812ad09f2ec",
+    "warpower/_triangle_contact.py": "01ebcddc6501f402157cf4a46738bffb6e8a55932dc11a35d6b79855804388df",
+    "warpower/_unproved_queries.py": "36e2ab604523450b23fae49d4cc68cd35de6a1c9976db3b210feb428b68d1b14",
+    "warpower/_validation.py": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75",
+    "warpower/_voronoi_volume.py": "9b8b6c0f4e29f0907297ce5f13876d50f5728f8283fa73dec7514d5e30e05305",
+    "warpower/_vtm.py": "8955a3c64addc6e58831584c8d0c87978c45b86c2c52a103214c35e6441bd5b3",
+    "warpower/_vtm_controls.py": "a2c08f2f50c4bc189e2bc82a38f50b4137229081ff13344d4b319e11cbff9880",
+    "warpower/_vtm_domain.py": "7e7d79477224b3ddbcd5c11a47bee237ed96474660987268d43dac554aadf76a",
+    "warpower/_wall_candidates.py": "f9a532d2418a9ced7ccd9fcccecf91db74c0548b746e1bcd012cfd08d5d764cb",
+    "warpower/_wall_reuse.py": "8eb33d823e468da70ad1e1540876c5d8eb56c861ddfa2aa493a7bd8177f5e56e",
+    "warpower/_wide_center.py": "ed6c89a6afe3ee4dc4d14db4b92d244ed8483fd9fd55179e7048fc0dd1f13814"
+  },
+  "shared_helpers": [
+    {
+      "original": ".work/vtm/check-surface-bound-reuse-final-v2.py",
+      "path": "results/validation/vtm/surface-bound-reuse/check-surface-bound-reuse-final-v2.py",
+      "sha256": "043e6a45bc7f2723bce7411d587cafc15f0f3aa3789b81868f0fe5f4a81dd83a"
+    },
+    {
+      "original": ".work/vtm/check-large-reuse-proof-pairs.py",
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "original": ".work/vtm/large-reuse-isolated-test.py",
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    }
+  ],
+  "shared_prior_evidence": [
+    {
+      "path": "results/validation/vtm/prepared-new-cell-queries/manifest.json",
+      "sha256": "9f225564c8650ca4fbfc1262a786d28722bf1279cb5bd8928c1b4e7cbbf83e15"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-reservation-comparison-v2.json",
+      "path": "results/validation/vtm/prepared-new-cell-queries/larger-prefix-reservation-comparison-v2.json",
+      "bytes": 1778,
+      "sha256": "9196563f13fae76cb6412f41878f95f1cb9cfcdd65775a3718fb36131175081b"
+    },
+    {
+      "original": ".work/vtm/larger-prefix-routing-design-v1.md",
+      "path": "results/validation/vtm/prepared-new-cell-queries/larger-prefix-routing-design-v1.md",
+      "bytes": 3228,
+      "sha256": "3fc46a08e17d7d4b0127b4821117f63898369b13b20d12e3cfad8f8da245de2c"
+    },
+    {
+      "original": ".work/vtm/prepared-new-cell-final-v2/commands.json",
+      "path": "results/validation/vtm/prepared-new-cell-queries/prepared-new-cell-final-v2/commands.json",
+      "bytes": 28235,
+      "sha256": "1deff223c61f7cf654027b9366f8803640fca8bdf02c14be8078e06dba057edc"
+    },
+    {
+      "path": "results/validation/vtm/extended-fragment-reuse/manifest.json",
+      "sha256": "0fbc462a56bf781206c2f225d59234195a5259772c1290ddd9376e332f0e6c08"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/commands.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/commands.json",
+      "bytes": 26260,
+      "sha256": "02f3892a02bace1bfbbe1c2c5eec3e7d00cb2072a97ba46915f8de087233ba8f"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-gallery-dense-v1/commands.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-gallery-dense-v1/commands.json",
+      "bytes": 2502,
+      "sha256": "26577892ab64f6ef10d5a08cb7128eef35d711cd8c5246fe1b971bc96d7a0dc2"
+    }
+  ],
+  "input_fixtures": [
+    {
+      "path": "tests/data/hand-fit256.npz",
+      "sha256": "2e2ba670c80d1658b94fbc37a3daa4d9d5fec13c2049e55ca5aefa91675beb1a"
+    },
+    {
+      "path": ".work/vtm/scanned-armadillo-input/armadillo.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    }
+  ],
+  "native_binary_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "limitations": [
+    "Wide comparable-quality native CPU speedup remains unmet; these timings compare GPU revisions.",
+    "Additional children add 1,853,169,562 persistent workspace bytes at 16K and 894,484,877 at 8K in measured configurations, plus setup; not scratch sharing or process peak memory.",
+    "Known uniform/graded 8K Armadillo error 64 remains; rejection timings are not successful-mesh speedups.",
+    "Native trace/sanitizer times are diagnostic; cold loop launch can instantiate/upload before its single graph launch.",
+    "Retained-grid timing excludes initial construction.",
+    "Original-coordinate proof does not imply bitwise floating VTM trajectories for every input; strict equality is established for saved measured pairs."
+  ],
+  "reproduction": [
+    "Check out the pinned runtime/baseline; restore original .work/vtm artifact paths and referenced helpers/prior inputs. Replace the absolute workspace root as needed. Drivers refuse overwrites.",
+    "Private pilot uses larger_prefix_v1.py before unchanged benchmark setup; production uses the committed VTM-owned policy. Source/AST audit binds their constructor bodies.",
+    "Use PYTHONDONTWRITEBYTECODE=1 WARP_CACHE_PATH=/opt/warpower-generated-cache OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 PYTHONPATH=. (append .work/vtm for private prototype). One GPU process; no heavy CPU validation during clean timings.",
+    "Build native validators from retained benchmarks/cpu source; executable hashes and input hashes retained. /opt is regenerable scratch only."
+  ]
+}

@@ -346,6 +346,10 @@ A private [fresh complete-mesh certificate experiment](previous-complete-certifi
 tries to avoid fragment filtering when the entire previous topology survives.
 Its ordinary schedule is slower; earlier rejection is effectively neutral at 4k
 and slower at 1k. Both variants remain unadopted.
+A further [bounded local-flip experiment](local-flip-experiments.md) repairs six
+saved torus/Armadillo inputs with strict 2→3/3→2 cavities and full final
+certification. Both complete VTM schedules regress performance and remain
+unadopted; retained coplanar hand cavities motivate a separate 4→4 investigation.
 After an absent or unsuccessful fragment, these private routes now try
 [shared wall reconstruction](shared-wall-reconstruction.md). The bounded
 [Local DeWall candidates](local-dewall-candidates.md) borrow the consumed fragment

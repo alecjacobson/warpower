@@ -3,6 +3,8 @@
 The subsequent [cached exact-query split](cached-exact-seed-queries.md) builds on
 this traversal with separate strict/exact kernels and bounded fallback storage.
 The measurements in this report describe the earlier implementation.
+A later [new-cell checker](prepared-new-cell-queries.md) borrows consumed seed
+geometry for current-cell preparation and hierarchical queries.
 
 Nearby optimization steps often preserve most Delaunay tetrahedra. The internal
 VTM core uses previous connectivity as a candidate fragment at capacities from

@@ -1,0 +1,8 @@
+"""Private setup binding before unchanged benchmark setup."""
+import sys
+if '--candidate' in sys.argv:
+    sys.argv.remove('--candidate')
+    from prepared_new_cell_integration_v1 import install
+    install()
+from benchmarks.mesher import main
+main()

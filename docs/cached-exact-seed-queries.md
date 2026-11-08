@@ -141,8 +141,8 @@ The public APIs remain independently callable and their code paths are unchanged
 Tracked in [#175](https://github.com/alecjacobson/warpower/issues/175). The
 [manifest](../results/validation/vtm/cached-exact-seed-queries/manifest.json)
 pins sources, every positive/negative experiment, complete timings, independent
-checks, memory logs and native traces. New-cell queries
-[#233](https://github.com/alecjacobson/warpower/issues/233), larger active-prefix
+checks, memory logs and native traces. The later [new-cell checker](prepared-new-cell-queries.md)
+shares current geometry and traverses existing bounds. Larger active-prefix
 routing [#230](https://github.com/alecjacobson/warpower/issues/230), scratch sharing
 [#122](https://github.com/alecjacobson/warpower/issues/122), and known Armadillo
 extraction failures [#228](https://github.com/alecjacobson/warpower/issues/228)

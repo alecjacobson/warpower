@@ -1,0 +1,144 @@
+{
+  "scope": "Complete resident-device meshing: input topology, optional automatic sizing, fresh initial sampling, progressive growth, global fitting and recovery, optional quality rounds, final extraction and diagnostics. Allocation, compilation, upload and serialization excluded from replay; setup reported separately.",
+  "domain_refit_included": true,
+  "parameters": {
+    "case": "torus",
+    "n": 8192,
+    "capacity": null,
+    "initial": 256,
+    "growth_iterations": 5,
+    "polish_iterations": 20,
+    "selective_iterations": 10,
+    "quality_rounds": 4,
+    "subdivisions": 4,
+    "automatic_sizing": false,
+    "static_domain": false,
+    "repeats": 3,
+    "seed": 2026,
+    "reference": false,
+    "profile": false,
+    "dot": null,
+    "save_mesh": "/home/horde/projects/power-diagram/.work/vtm/prepared-new-cell-final-v1/torus8192-progressive-before.npz",
+    "output": "/home/horde/projects/power-diagram/.work/vtm/prepared-new-cell-final-v1/torus8192-progressive-before.json"
+  },
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "setup_seconds": 3.947856243699789,
+  "persistent_workspace_pool_bytes": 2044662012,
+  "first_replay_wall_seconds": 3.946214109659195,
+  "first_replay_gpu_milliseconds": 3946.05810546875,
+  "gpu_milliseconds": [
+    3228.776611328125,
+    3216.78955078125,
+    3217.65087890625
+  ],
+  "median_gpu_milliseconds": 3217.65087890625,
+  "cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "cpu_throttled": false,
+  "initial_replays_cpu_quota_delta": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  },
+  "error": 0,
+  "valid": 1,
+  "status": 1,
+  "counts": [
+    8192,
+    49296,
+    41562,
+    5360
+  ],
+  "rounds": [
+    9,
+    0,
+    4
+  ],
+  "optimizer_steps": [
+    65,
+    12
+  ],
+  "quality_moves": [
+    4,
+    4
+  ],
+  "refinement_rejections": 0,
+  "quality_rejections": 0,
+  "last_errors": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "last_bad_extraction": 0,
+  "topology": [
+    1,
+    1,
+    0,
+    0
+  ],
+  "reconstruction_routing": {
+    "capacities": [
+      1024,
+      2048,
+      8192
+    ],
+    "calls": [
+      27,
+      14,
+      208
+    ],
+    "last_capacity": 8192
+  },
+  "quality": {
+    "tetrahedra": 41562,
+    "diagnostics": 0,
+    "components": 1,
+    "shell_euler": [
+      0
+    ],
+    "volume": 18.868845840699066,
+    "surface_rms_distance": 0.004504570360210076,
+    "radius_ratio_percentiles": {
+      "0": 0.047410691720246756,
+      "1": 0.38642899248152507,
+      "5": 0.6406265942858836,
+      "50": 0.8857242085319699,
+      "95": 0.9693225377419762,
+      "100": 0.9982879502238929
+    },
+    "relative_volume_error": -0.010529413355671377,
+    "worst_tetrahedron": [
+      1675,
+      1761,
+      4570,
+      4585
+    ],
+    "worst_vertex_roles": [
+      0,
+      0,
+      1,
+      1
+    ]
+  }
+}

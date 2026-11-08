@@ -1,0 +1,60 @@
+[
+  {
+    "phase": "before",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/prepared-new-cell-hand-trace-v1/before",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.delaunay_recovery",
+      "--case",
+      "fitted-hand",
+      "--repeats",
+      "9",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/prepared-new-cell-hand-trace-v1/before.json",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/prepared-new-cell-hand-trace-v1/before.dot"
+    ],
+    "cwd": "/home/horde/projects/power-diagram/.work/vtm/prepared-new-cell-baseline",
+    "source": "a4f7215fbf99249d11f765a4902c586daa606829",
+    "exit_code": 0,
+    "wall_seconds": 14.334498882293701
+  },
+  {
+    "phase": "after",
+    "command": [
+      "nsys",
+      "profile",
+      "--trace=cuda",
+      "--cuda-graph-trace=node",
+      "--sample=none",
+      "--cpuctxsw=none",
+      "--force-overwrite=true",
+      "-o",
+      "/home/horde/projects/power-diagram/.work/vtm/prepared-new-cell-hand-trace-v1/after",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.delaunay_recovery",
+      "--case",
+      "fitted-hand",
+      "--repeats",
+      "9",
+      "--output",
+      "/home/horde/projects/power-diagram/.work/vtm/prepared-new-cell-hand-trace-v1/after.json",
+      "--dot",
+      "/home/horde/projects/power-diagram/.work/vtm/prepared-new-cell-hand-trace-v1/after.dot"
+    ],
+    "cwd": "/home/horde/projects/power-diagram",
+    "source": "3b68a6043860209d3c507951b0e51309ed8bb8c5",
+    "exit_code": 0,
+    "wall_seconds": 14.334501266479492
+  }
+]

@@ -1,0 +1,696 @@
+{
+  "scope": "Summarize every private register-cap timing without selecting an adoption candidate.",
+  "source_sha256": "006fe4bcdf9bf7bc6d6f80d0009ae3537fd923f13ad15bfd2faf36124f9f61ae",
+  "cases": {
+    "torus1000": {
+      "report_sha256": "30779fddbaa1a10f625759633c33e32d61da499d89105aa1c02fed47bb8d45a3",
+      "input": "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/torus1000-after.npz",
+      "input_sha256": "c9d37011557a1300f7374f9bcbeecfa3f29982c90e1c5ebb70c899352d6fa39d",
+      "ordering_storage": false,
+      "properties": {
+        "before": {
+          "classify_cached": {
+            "register_count": 255,
+            "local_memory_size": 35952
+          },
+          "selection_cached": {
+            "register_count": 255,
+            "local_memory_size": 36008
+          },
+          "retained_cached": {
+            "register_count": 255,
+            "local_memory_size": 35960
+          }
+        },
+        "r96": {
+          "classify_cached": {
+            "register_count": 96,
+            "local_memory_size": 36704
+          },
+          "selection_cached": {
+            "register_count": 96,
+            "local_memory_size": 36784
+          },
+          "retained_cached": {
+            "register_count": 96,
+            "local_memory_size": 36752
+          }
+        },
+        "r128": {
+          "classify_cached": {
+            "register_count": 128,
+            "local_memory_size": 36496
+          },
+          "selection_cached": {
+            "register_count": 128,
+            "local_memory_size": 36552
+          },
+          "retained_cached": {
+            "register_count": 128,
+            "local_memory_size": 36504
+          }
+        },
+        "r192": {
+          "classify_cached": {
+            "register_count": 192,
+            "local_memory_size": 36240
+          },
+          "selection_cached": {
+            "register_count": 192,
+            "local_memory_size": 36296
+          },
+          "retained_cached": {
+            "register_count": 192,
+            "local_memory_size": 36248
+          }
+        }
+      },
+      "rows": [
+        {
+          "mode": "full",
+          "cache": "cold",
+          "ms": {
+            "before": 3.8256319761276245,
+            "r96": 3.8268799781799316,
+            "r128": 3.827615976333618,
+            "r192": 3.825536012649536
+          },
+          "relative_change": {
+            "r96": 0.00032622114727565155,
+            "r128": 0.0005186071787286473,
+            "r192": -2.5084346504611332e-05
+          }
+        },
+        {
+          "mode": "full",
+          "cache": "warm",
+          "ms": {
+            "before": 0.028047999367117882,
+            "r96": 0.028351999819278717,
+            "r128": 0.028144000098109245,
+            "r192": 0.027871999889612198
+          },
+          "relative_change": {
+            "r96": 0.0108385788298766,
+            "r128": 0.0034227300754972045,
+            "r192": -0.006274938729213475
+          }
+        },
+        {
+          "mode": "selection",
+          "cache": "cold",
+          "ms": {
+            "before": 3.8218560218811035,
+            "r96": 3.8209599256515503,
+            "r128": 3.8231040239334106,
+            "r192": 3.8213759660720825
+          },
+          "relative_change": {
+            "r96": -0.0002344662447834045,
+            "r128": 0.0003265434503973985,
+            "r192": -0.00012560803082917182
+          }
+        },
+        {
+          "mode": "selection",
+          "cache": "warm",
+          "ms": {
+            "before": 0.02971199993044138,
+            "r96": 0.030287999659776688,
+            "r128": 0.029872000217437744,
+            "r192": 0.030128000304102898
+          },
+          "relative_change": {
+            "r96": 0.019386097559362492,
+            "r128": 0.005385039289544258,
+            "r192": 0.014001089614815942
+          }
+        },
+        {
+          "mode": "retained",
+          "cache": "cold",
+          "ms": {
+            "before": 0.8381440043449402,
+            "r96": 0.8387679755687714,
+            "r128": 0.8383199870586395,
+            "r192": 0.8382560014724731
+          },
+          "relative_change": {
+            "r96": 0.0007444678009942418,
+            "r128": 0.0002099671569408823,
+            "r192": 0.00013362516101333988
+          }
+        },
+        {
+          "mode": "retained",
+          "cache": "warm",
+          "ms": {
+            "before": 0.027855999767780304,
+            "r96": 0.027999999932944775,
+            "r128": 0.02800000086426735,
+            "r192": 0.027504000812768936
+          },
+          "relative_change": {
+            "r96": 0.005169448821256362,
+            "r128": 0.005169482254720803,
+            "r192": -0.01263637844434895
+          }
+        }
+      ]
+    },
+    "torus16384": {
+      "report_sha256": "c94767846fd15cdfcb74ba30af9fb0aaf5f750bf06812428a4c4962615c39a5b",
+      "input": "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/torus16384-fixed32-after.npz",
+      "input_sha256": "f11fd85f2f760b0583e752614b296e73240750ef8287ce0d95e493602acc6954",
+      "ordering_storage": true,
+      "properties": {
+        "before": {
+          "classify_cached": {
+            "register_count": 255,
+            "local_memory_size": 35952
+          },
+          "selection_cached": {
+            "register_count": 255,
+            "local_memory_size": 36008
+          },
+          "retained_cached": {
+            "register_count": 255,
+            "local_memory_size": 35960
+          }
+        },
+        "r96": {
+          "classify_cached": {
+            "register_count": 96,
+            "local_memory_size": 36704
+          },
+          "selection_cached": {
+            "register_count": 96,
+            "local_memory_size": 36784
+          },
+          "retained_cached": {
+            "register_count": 96,
+            "local_memory_size": 36752
+          }
+        },
+        "r128": {
+          "classify_cached": {
+            "register_count": 128,
+            "local_memory_size": 36496
+          },
+          "selection_cached": {
+            "register_count": 128,
+            "local_memory_size": 36552
+          },
+          "retained_cached": {
+            "register_count": 128,
+            "local_memory_size": 36504
+          }
+        },
+        "r192": {
+          "classify_cached": {
+            "register_count": 192,
+            "local_memory_size": 36240
+          },
+          "selection_cached": {
+            "register_count": 192,
+            "local_memory_size": 36296
+          },
+          "retained_cached": {
+            "register_count": 192,
+            "local_memory_size": 36248
+          }
+        }
+      },
+      "rows": [
+        {
+          "mode": "full",
+          "cache": "cold",
+          "ms": {
+            "before": 15.95534372329712,
+            "r96": 18.288559913635254,
+            "r128": 19.63315200805664,
+            "r192": 15.978352069854736
+          },
+          "relative_change": {
+            "r96": 0.1462341539487677,
+            "r128": 0.23050636504868183,
+            "r192": 0.0014420464363937846
+          }
+        },
+        {
+          "mode": "full",
+          "cache": "warm",
+          "ms": {
+            "before": 0.23550400137901306,
+            "r96": 0.23662400245666504,
+            "r128": 0.23691199719905853,
+            "r192": 0.23468799889087677
+          },
+          "relative_change": {
+            "r96": 0.004755762412076647,
+            "r128": 0.00597864924502689,
+            "r192": -0.0034649198457695762
+          }
+        },
+        {
+          "mode": "selection",
+          "cache": "cold",
+          "ms": {
+            "before": 12.178879737854004,
+            "r96": 15.423264026641846,
+            "r128": 13.654880046844482,
+            "r192": 12.163072109222412
+          },
+          "relative_change": {
+            "r96": 0.2663943120075116,
+            "r128": 0.12119343821113704,
+            "r192": -0.0012979542430704427
+          }
+        },
+        {
+          "mode": "selection",
+          "cache": "warm",
+          "ms": {
+            "before": 0.21676799654960632,
+            "r96": 0.2104479968547821,
+            "r128": 0.21700800210237503,
+            "r192": 0.21700800210237503
+          },
+          "relative_change": {
+            "r96": -0.029155593977997163,
+            "r128": 0.001107200124506269,
+            "r192": 0.001107200124506269
+          }
+        },
+        {
+          "mode": "retained",
+          "cache": "cold",
+          "ms": {
+            "before": 3.529296040534973,
+            "r96": 3.6713600158691406,
+            "r128": 3.6959840059280396,
+            "r192": 3.4639840126037598
+          },
+          "relative_change": {
+            "r96": 0.04025277950688233,
+            "r128": 0.04722980545655786,
+            "r192": -0.018505681354322845
+          }
+        },
+        {
+          "mode": "retained",
+          "cache": "warm",
+          "ms": {
+            "before": 0.20332800596952438,
+            "r96": 0.2014400064945221,
+            "r128": 0.20600000023841858,
+            "r192": 0.20342400670051575
+          },
+          "relative_change": {
+            "r96": -0.009285486600824067,
+            "r128": 0.013141299724813482,
+            "r192": 0.00047214711290566314
+          }
+        }
+      ]
+    },
+    "armadillo-uniform8192": {
+      "report_sha256": "ff92c7436401e3b36cc30b669b9dc3fa3cdbef298b2fbd035d25c19d81048a99",
+      "input": "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+      "input_sha256": "fcbeb5511ba16e2f9570ef26bfadee630a125038ff7b5728214214fcf58b9379",
+      "ordering_storage": true,
+      "properties": {
+        "before": {
+          "classify_cached": {
+            "register_count": 255,
+            "local_memory_size": 35952
+          },
+          "selection_cached": {
+            "register_count": 255,
+            "local_memory_size": 36008
+          },
+          "retained_cached": {
+            "register_count": 255,
+            "local_memory_size": 35960
+          }
+        },
+        "r96": {
+          "classify_cached": {
+            "register_count": 96,
+            "local_memory_size": 36704
+          },
+          "selection_cached": {
+            "register_count": 96,
+            "local_memory_size": 36784
+          },
+          "retained_cached": {
+            "register_count": 96,
+            "local_memory_size": 36752
+          }
+        },
+        "r128": {
+          "classify_cached": {
+            "register_count": 128,
+            "local_memory_size": 36496
+          },
+          "selection_cached": {
+            "register_count": 128,
+            "local_memory_size": 36552
+          },
+          "retained_cached": {
+            "register_count": 128,
+            "local_memory_size": 36504
+          }
+        },
+        "r192": {
+          "classify_cached": {
+            "register_count": 192,
+            "local_memory_size": 36240
+          },
+          "selection_cached": {
+            "register_count": 192,
+            "local_memory_size": 36296
+          },
+          "retained_cached": {
+            "register_count": 192,
+            "local_memory_size": 36248
+          }
+        }
+      },
+      "rows": [
+        {
+          "mode": "full",
+          "cache": "cold",
+          "ms": {
+            "before": 38.69396781921387,
+            "r96": 39.50372886657715,
+            "r128": 39.54444694519043,
+            "r192": 38.73334312438965
+          },
+          "relative_change": {
+            "r96": 0.020927320019147544,
+            "r128": 0.02197963077733922,
+            "r192": 0.0010176083610693443
+          }
+        },
+        {
+          "mode": "full",
+          "cache": "warm",
+          "ms": {
+            "before": 0.18382399529218674,
+            "r96": 0.1716799959540367,
+            "r128": 0.17179200053215027,
+            "r192": 0.18316800147294998
+          },
+          "relative_change": {
+            "r96": -0.066063188969684,
+            "r128": -0.06545388560895826,
+            "r192": -0.0035685973324323106
+          }
+        },
+        {
+          "mode": "selection",
+          "cache": "cold",
+          "ms": {
+            "before": 18.455391883850098,
+            "r96": 20.908672332763672,
+            "r128": 20.891632080078125,
+            "r192": 18.43824005126953
+          },
+          "relative_change": {
+            "r96": 0.1329302820743885,
+            "r128": 0.1320069609770751,
+            "r192": -0.0009293670212213723
+          }
+        },
+        {
+          "mode": "selection",
+          "cache": "warm",
+          "ms": {
+            "before": 0.1735839992761612,
+            "r96": 0.16476799547672272,
+            "r128": 0.16444799304008484,
+            "r192": 0.17368000000715256
+          },
+          "relative_change": {
+            "r96": -0.05078811316826948,
+            "r128": -0.05263161509225023,
+            "r192": 0.0005530505771942362
+          }
+        },
+        {
+          "mode": "retained",
+          "cache": "cold",
+          "ms": {
+            "before": 7.871216058731079,
+            "r96": 7.997423887252808,
+            "r128": 7.999488115310669,
+            "r192": 7.88043212890625
+          },
+          "relative_change": {
+            "r96": 0.016034095313866237,
+            "r128": 0.016296345523040934,
+            "r192": 0.0011708572228745773
+          }
+        },
+        {
+          "mode": "retained",
+          "cache": "warm",
+          "ms": {
+            "before": 0.16633599996566772,
+            "r96": 0.15627200156450272,
+            "r128": 0.15699200332164764,
+            "r192": 0.1664000004529953
+          },
+          "relative_change": {
+            "r96": -0.06050403041579844,
+            "r128": -0.056175431932646624,
+            "r192": 0.00038476630038464243
+          }
+        }
+      ]
+    },
+    "armadillo-graded8192": {
+      "report_sha256": "797f29300ee544b877336ebdb84d284febd188a7c540aedc122122b0516937cb",
+      "input": "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/armadillo-graded8192-recovery-after/mesh.npz",
+      "input_sha256": "0b697d9812481fc0a742a3500797d49805df9af6674b451ae398732312fb06c2",
+      "ordering_storage": true,
+      "properties": {
+        "before": {
+          "classify_cached": {
+            "register_count": 255,
+            "local_memory_size": 35952
+          },
+          "selection_cached": {
+            "register_count": 255,
+            "local_memory_size": 36008
+          },
+          "retained_cached": {
+            "register_count": 255,
+            "local_memory_size": 35960
+          }
+        },
+        "r96": {
+          "classify_cached": {
+            "register_count": 96,
+            "local_memory_size": 36704
+          },
+          "selection_cached": {
+            "register_count": 96,
+            "local_memory_size": 36784
+          },
+          "retained_cached": {
+            "register_count": 96,
+            "local_memory_size": 36752
+          }
+        },
+        "r128": {
+          "classify_cached": {
+            "register_count": 128,
+            "local_memory_size": 36496
+          },
+          "selection_cached": {
+            "register_count": 128,
+            "local_memory_size": 36552
+          },
+          "retained_cached": {
+            "register_count": 128,
+            "local_memory_size": 36504
+          }
+        },
+        "r192": {
+          "classify_cached": {
+            "register_count": 192,
+            "local_memory_size": 36240
+          },
+          "selection_cached": {
+            "register_count": 192,
+            "local_memory_size": 36296
+          },
+          "retained_cached": {
+            "register_count": 192,
+            "local_memory_size": 36248
+          }
+        }
+      },
+      "rows": [
+        {
+          "mode": "full",
+          "cache": "cold",
+          "ms": {
+            "before": 35.52691078186035,
+            "r96": 39.01990509033203,
+            "r128": 39.051231384277344,
+            "r192": 35.529855728149414
+          },
+          "relative_change": {
+            "r96": 0.09831967462409263,
+            "r128": 0.09920143701929951,
+            "r192": 8.289339613964941e-05
+          }
+        },
+        {
+          "mode": "full",
+          "cache": "warm",
+          "ms": {
+            "before": 0.18243199586868286,
+            "r96": 0.17107199877500534,
+            "r128": 0.17159999907016754,
+            "r192": 0.18292799592018127
+          },
+          "relative_change": {
+            "r96": -0.06226976271122209,
+            "r128": -0.05937553194513279,
+            "r192": 0.002718821603286292
+          }
+        },
+        {
+          "mode": "selection",
+          "cache": "cold",
+          "ms": {
+            "before": 18.183568000793457,
+            "r96": 19.4344482421875,
+            "r128": 19.42788791656494,
+            "r192": 18.113152503967285
+          },
+          "relative_change": {
+            "r96": 0.0687917927515358,
+            "r128": 0.06843100956408477,
+            "r192": -0.0038724796378301063
+          }
+        },
+        {
+          "mode": "selection",
+          "cache": "warm",
+          "ms": {
+            "before": 0.172495998442173,
+            "r96": 0.1643040031194687,
+            "r128": 0.1642720028758049,
+            "r192": 0.17257599532604218
+          },
+          "relative_change": {
+            "r96": -0.047490929625538914,
+            "r128": -0.047676442587884615,
+            "r192": 0.0004637608094775203
+          }
+        },
+        {
+          "mode": "retained",
+          "cache": "cold",
+          "ms": {
+            "before": 9.140864372253418,
+            "r96": 8.534736156463623,
+            "r128": 8.542991638183594,
+            "r192": 8.774944305419922
+          },
+          "relative_change": {
+            "r96": -0.06630972642255395,
+            "r128": -0.06540658626164864,
+            "r192": -0.04003123248871587
+          }
+        },
+        {
+          "mode": "retained",
+          "cache": "warm",
+          "ms": {
+            "before": 0.1658399999141693,
+            "r96": 0.1560159996151924,
+            "r128": 0.15564800053834915,
+            "r192": 0.16625600308179855
+          },
+          "relative_change": {
+            "r96": -0.05923782141860423,
+            "r128": -0.06145682212430681,
+            "r192": 0.002508460973495774
+          }
+        }
+      ]
+    }
+  },
+  "contracts": {
+    "96": {
+      "report_sha256": "696b10b86f1d3b5f1cd17edf39389beb953fa3871d69bf3904421100cc63dc03",
+      "properties": {
+        "classify_cached": {
+          "register_count": 96,
+          "local_memory_size": 36704
+        },
+        "selection_cached": {
+          "register_count": 96,
+          "local_memory_size": 36784
+        },
+        "retained_cached": {
+          "register_count": 96,
+          "local_memory_size": 36752
+        }
+      },
+      "tests": 19
+    },
+    "128": {
+      "report_sha256": "1c9c23aa10596cf2e4c2320d955718f4c1b59f809547d4568bdb3911bb52bbec",
+      "properties": {
+        "classify_cached": {
+          "register_count": 128,
+          "local_memory_size": 36496
+        },
+        "selection_cached": {
+          "register_count": 128,
+          "local_memory_size": 36552
+        },
+        "retained_cached": {
+          "register_count": 128,
+          "local_memory_size": 36504
+        }
+      },
+      "tests": 19
+    },
+    "192": {
+      "report_sha256": "b00934ee45e6345849e6953119df0a134a083db0c07616a5ade44ff9304d9414",
+      "properties": {
+        "classify_cached": {
+          "register_count": 192,
+          "local_memory_size": 36240
+        },
+        "selection_cached": {
+          "register_count": 192,
+          "local_memory_size": 36296
+        },
+        "retained_cached": {
+          "register_count": 192,
+          "local_memory_size": 36248
+        }
+      },
+      "tests": 19
+    }
+  },
+  "complete": true,
+  "adopted": false,
+  "complete_solve_measured": false,
+  "limits": [
+    "Static immutable final meshes only. Includes keying/sorting/query/cache work, not a full trajectory or setup comparison.",
+    "Every candidate output is bitwise checked, but no candidate native/memory/lifetime adoption audit is claimed.",
+    "Observed register/local-memory properties do not establish an occupancy bottleneck.",
+    "No comparable-quality CPU speedup claim."
+  ],
+  "decision": "Reject broad register caps for current full/selection hotspots:96/128 regress substantially and192 is essentially flat. Retained/warm static improvements do not establish a complete-solve gain. Production unchanged."
+}

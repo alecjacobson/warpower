@@ -1,0 +1,1033 @@
+........................................................................ [  6%]
+........................................................................ [ 13%]
+......................................................F.FFFFFF.......... [ 19%]
+........................................................................ [ 26%]
+......F................................................................. [ 33%]
+........................................................................ [ 39%]
+........................................................................ [ 46%]
+........................................................................ [ 53%]
+........................................................................ [ 59%]
+........................................................................ [ 66%]
+........................................................................ [ 73%]
+........FFFFFF.......................................................... [ 79%]
+........................................................................ [ 86%]
+........................................................................ [ 93%]
+........................................................................ [ 99%]
+...                                                                      [100%]
+=================================== FAILURES ===================================
+___ test_device_selected_quality_uses_the_recovered_subcomplex_and_recovers ____
+
+    def test_device_selected_quality_uses_the_recovered_subcomplex_and_recovers():
+        class Core:
+            pass
+    
+        core = Core()
+        p, t = fan()
+        core.domain = warpower.SurfaceDomain(*cavity())
+        core.device = core.domain.device
+        base = wp.array(p, dtype=wp.vec3, device=core.device)
+        core.points = wp.clone(base)
+        core.full_tetrahedra = wp.array(t, device=core.device)
+        core.full_tetrahedra_count = wp.full(1, len(t), dtype=int, device=core.device)
+        core.n = len(p)
+        core.mesh = Core()
+        core.mesh.error = wp.zeros(1, dtype=int, device=core.device)
+        core.material_recovery = wp.zeros(1, dtype=int, device=core.device)
+>       selection = SelectiveUpdate(core, 0.4)
+
+tests/test_containment_selection.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7e30251900>
+core = <tests.test_containment_selection.test_device_selected_quality_uses_the_recovered_subcomplex_and_recovers.<locals>.Core object at 0x7f7e30251390>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=core.proven_exterior_recovery,
+                    proven_exterior_enabled=core.proven_exterior_enabled,
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+___ test_recovered_current_results_match_fresh_with_device_failure_recovery ____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f7e3027dff0>
+
+    def test_recovered_current_results_match_fresh_with_device_failure_recovery(monkeypatch):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:157: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7e302901f0>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7e3027e1d0>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=core.proven_exterior_recovery,
+                    proven_exterior_enabled=core.proven_exterior_enabled,
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+_____ test_direct_calls_remain_fresh_even_after_an_accepted_check[select] ______
+
+operation = 'select'
+
+    @pytest.mark.parametrize("operation", ["select", "evaluate"])
+    def test_direct_calls_remain_fresh_even_after_an_accepted_check(operation):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:211: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7df0899ff0>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7df089aec0>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=core.proven_exterior_recovery,
+                    proven_exterior_enabled=core.proven_exterior_enabled,
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+____ test_direct_calls_remain_fresh_even_after_an_accepted_check[evaluate] _____
+
+operation = 'evaluate'
+
+    @pytest.mark.parametrize("operation", ["select", "evaluate"])
+    def test_direct_calls_remain_fresh_even_after_an_accepted_check(operation):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:211: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7df096c040>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7df096c490>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=core.proven_exterior_recovery,
+                    proven_exterior_enabled=core.proven_exterior_enabled,
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+___ test_interrupted_accepted_evaluation_recomputes_before_selection[reset] ____
+
+invalidate = 'reset'
+
+    @pytest.mark.parametrize("invalidate", ["reset", "_select_all", "rejected_check"])
+    def test_interrupted_accepted_evaluation_recomputes_before_selection(invalidate):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:229: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7df089bc10>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7df0898370>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=core.proven_exterior_recovery,
+                    proven_exterior_enabled=core.proven_exterior_enabled,
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+_ test_interrupted_accepted_evaluation_recomputes_before_selection[_select_all] _
+
+invalidate = '_select_all'
+
+    @pytest.mark.parametrize("invalidate", ["reset", "_select_all", "rejected_check"])
+    def test_interrupted_accepted_evaluation_recomputes_before_selection(invalidate):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:229: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7e302889d0>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7e3028a3e0>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=core.proven_exterior_recovery,
+                    proven_exterior_enabled=core.proven_exterior_enabled,
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+_ test_interrupted_accepted_evaluation_recomputes_before_selection[rejected_check] _
+
+invalidate = 'rejected_check'
+
+    @pytest.mark.parametrize("invalidate", ["reset", "_select_all", "rejected_check"])
+    def test_interrupted_accepted_evaluation_recomputes_before_selection(invalidate):
+>       c, s = recovered_selection()
+
+tests/test_current_selection.py:229: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7e30290160>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7e30290220>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=core.proven_exterior_recovery,
+                    proven_exterior_enabled=core.proven_exterior_enabled,
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+_ test_scanned_failure_recovers_and_quality_guard_measures_the_same_subcomplex _
+
+    def test_scanned_failure_recovers_and_quality_guard_measures_the_same_subcomplex():
+        path = (
+            Path(__file__).parents[1]
+            / "results/validation/vtm/graded-armadillo-failure"
+            / "failed-candidate.npz"
+        )
+        data = np.load(path)
+        d = warpower.SurfaceDomain(
+            data["input_points"],
+            data["input_faces"],
+            feature_angle=120,
+            surface_subdivisions=1,
+            crease_subdivisions=1,
+        )
+        points = wp.array(data["points"], dtype=wp.vec3, device=d.device)
+        full = data["full_tetrahedra"]
+        tets = wp.array(np.vstack([full, [-1, -1, -1, -1]]).astype(np.int32), device=d.device)
+        count = wp.full(1, len(full), dtype=int, device=d.device)
+        error = wp.zeros(1, dtype=int, device=d.device)
+        roles = wp.array(data["roles"], device=d.device)
+        enabled = wp.zeros(1, dtype=int, device=d.device)
+        e = warpower.ExtractionWorkspace(
+            d,
+            points,
+            tets,
+            count,
+            source_error=error,
+            containment_recovery=True,
+            exterior_recovery=True,
+            feature_roles=roles,
+            exterior_enabled=enabled,
+        )
+        with wp.ScopedCapture() as cap:
+            e.run()
+        wp.capture_launch(cap.graph)
+        assert e.valid.numpy()[0] == 0 and e.diagnostics.numpy()[0] == 2
+        assert e.removed_count.numpy()[0] == e.exterior_rounds.numpy()[0] == 0
+        enabled.fill_(1)
+        wp.capture_launch(cap.graph)
+        p, actual, _ = extracted(e)
+        expected = data["selected"].copy()
+        expected[[2187, 23964]] = 0
+        np.testing.assert_array_equal(e.selected.numpy(), np.r_[expected, 0])
+        np.testing.assert_array_equal(actual, full[expected != 0])
+        np.testing.assert_array_equal(np.unique(actual), np.unique(full[data["selected"] != 0]))
+        np.testing.assert_array_equal(e.selected.numpy()[: len(full)][data["signed_distance"] <= 0], 1)
+        assert e.removed_count.numpy()[0] == 2 and e.exterior_rejected.numpy()[0] == 0
+    
+        core = SimpleNamespace(
+            domain=d,
+            device=d.device,
+            points=points,
+            full_tetrahedra=tets,
+            full_tetrahedra_count=count,
+            n=len(points),
+            mesh=SimpleNamespace(error=error),
+            boundary=SimpleNamespace(roles=roles),
+            containment_recovery=True,
+            exterior_recovery=True,
+            exterior_enabled=enabled,
+            material_recovery=wp.ones(1, dtype=int, device=d.device),
+        )
+    
+        # SelectiveUpdate holds a weak reference; use a weak-referenceable object.
+        class Core:
+            pass
+    
+        owner = Core()
+        owner.__dict__.update(core.__dict__)
+>       selection = SelectiveUpdate(owner, 0.4)
+
+tests/test_exterior_scanned.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7df096db70>
+core = <tests.test_exterior_scanned.test_scanned_failure_recovers_and_quality_guard_measures_the_same_subcomplex.<locals>.Core object at 0x7f7df096d4b0>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=core.proven_exterior_recovery,
+                    proven_exterior_enabled=core.proven_exterior_enabled,
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'. Did you mean: 'exterior_recovery'?
+
+warpower/_selective.py:283: AttributeError
+_____ test_private_status_matches_full_extraction_after_device_changes[0] ______
+
+value = 0
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f7df081a0e0>
+
+    @pytest.mark.parametrize("value", range(6))
+    def test_private_status_matches_full_extraction_after_device_changes(value, monkeypatch):
+>       c, s = recovered_selection()
+
+tests/test_selection_extraction.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7df07f4a30>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7df081b910>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=getattr(core, "proven_exterior_recovery", False),
+                    proven_exterior_enabled=getattr(core, "proven_exterior_enabled", None),
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+_____ test_private_status_matches_full_extraction_after_device_changes[1] ______
+
+value = 1
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f7df0936d70>
+
+    @pytest.mark.parametrize("value", range(6))
+    def test_private_status_matches_full_extraction_after_device_changes(value, monkeypatch):
+>       c, s = recovered_selection()
+
+tests/test_selection_extraction.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7df0934f70>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7df0937340>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=getattr(core, "proven_exterior_recovery", False),
+                    proven_exterior_enabled=getattr(core, "proven_exterior_enabled", None),
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+_____ test_private_status_matches_full_extraction_after_device_changes[2] ______
+
+value = 2
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f7e30324e80>
+
+    @pytest.mark.parametrize("value", range(6))
+    def test_private_status_matches_full_extraction_after_device_changes(value, monkeypatch):
+>       c, s = recovered_selection()
+
+tests/test_selection_extraction.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7e303a6a10>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7e30325960>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=getattr(core, "proven_exterior_recovery", False),
+                    proven_exterior_enabled=getattr(core, "proven_exterior_enabled", None),
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+_____ test_private_status_matches_full_extraction_after_device_changes[3] ______
+
+value = 3
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f7df08657b0>
+
+    @pytest.mark.parametrize("value", range(6))
+    def test_private_status_matches_full_extraction_after_device_changes(value, monkeypatch):
+>       c, s = recovered_selection()
+
+tests/test_selection_extraction.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7df0866410>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7df08662c0>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=getattr(core, "proven_exterior_recovery", False),
+                    proven_exterior_enabled=getattr(core, "proven_exterior_enabled", None),
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+_____ test_private_status_matches_full_extraction_after_device_changes[4] ______
+
+value = 4
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f7e5010bc70>
+
+    @pytest.mark.parametrize("value", range(6))
+    def test_private_status_matches_full_extraction_after_device_changes(value, monkeypatch):
+>       c, s = recovered_selection()
+
+tests/test_selection_extraction.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7e501095a0>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7e50109d20>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=getattr(core, "proven_exterior_recovery", False),
+                    proven_exterior_enabled=getattr(core, "proven_exterior_enabled", None),
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+_____ test_private_status_matches_full_extraction_after_device_changes[5] ______
+
+value = 5
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f7e3020b850>
+
+    @pytest.mark.parametrize("value", range(6))
+    def test_private_status_matches_full_extraction_after_device_changes(value, monkeypatch):
+>       c, s = recovered_selection()
+
+tests/test_selection_extraction.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_current_selection.py:153: in recovered_selection
+    return c, SelectiveUpdate(c, 0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <warpower._selective.SelectiveUpdate object at 0x7f7e30208b80>
+core = <tests.test_current_selection.recovered_selection.<locals>.Core object at 0x7f7e3020ab60>
+threshold = 0.4, tolerance = 0.4, enabled = None
+
+    def __init__(self, core, threshold, tolerance=0.4, *, enabled=None):
+        if not math.isfinite(threshold) or not 0 < threshold <= 1:
+            raise ValueError("selective_threshold must be in (0,1]")
+        if not math.isfinite(tolerance) or not 0 <= tolerance < 1:
+            raise ValueError("selective_tolerance must be finite and in [0,1)")
+        self.core, self.device = weakref.proxy(core), core.device
+        self.enabled = enabled
+        if enabled is not None:
+            from ._vtm_controls import scalar
+    
+            scalar(enabled, self.device, "selective_enabled")
+        self.threshold, self.tolerance = threshold, tolerance
+        self._m = len(core.full_tetrahedra)
+        with wp.ScopedDevice(self.device):
+            self.error = wp.zeros(1, dtype=int)
+            self.ready = wp.zeros(1, dtype=int)
+            self.retained_count = wp.zeros(1, dtype=int)
+            self.selected_count = wp.zeros(1, dtype=int)
+            self.rejections = wp.zeros(1, dtype=int)
+            self.last_error = wp.zeros(1, dtype=int)
+            self._current_needed = wp.ones(1, dtype=int)
+            self.minimum = wp.ones(1, dtype=wp.float64)
+            self.previous_minimum = wp.ones(1, dtype=wp.float64)
+            self.keep = wp.empty(self._m, dtype=int)
+            self.quality = wp.empty(self._m, dtype=wp.float64)
+            self.bad_vertices = wp.zeros(core.n, dtype=int)
+            self.mask = wp.zeros(core.n, dtype=int)
+            self.recovery_extraction = None
+            if core.material_recovery is not None:
+                self.recovery_extraction = _extraction._SelectionExtractionWorkspace(
+                    core.domain,
+                    core.points,
+                    core.full_tetrahedra,
+                    core.full_tetrahedra_count,
+                    source_error=core.mesh.error,
+                    tolerance=tolerance,
+                    containment_recovery=getattr(core, "containment_recovery", True),
+                    exterior_recovery=getattr(core, "exterior_recovery", False),
+                    feature_roles=(
+                        core.boundary.roles if getattr(core, "exterior_recovery", False) else None
+                    ),
+                    exterior_enabled=getattr(core, "exterior_enabled", None),
+>                   proven_exterior_recovery=getattr(core, "proven_exterior_recovery", False),
+                    proven_exterior_enabled=getattr(core, "proven_exterior_enabled", None),
+                )
+E               AttributeError: 'Core' object has no attribute 'proven_exterior_recovery'
+
+warpower/_selective.py:283: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_containment_selection.py::test_device_selected_quality_uses_the_recovered_subcomplex_and_recovers
+FAILED tests/test_current_selection.py::test_recovered_current_results_match_fresh_with_device_failure_recovery
+FAILED tests/test_current_selection.py::test_direct_calls_remain_fresh_even_after_an_accepted_check[select]
+FAILED tests/test_current_selection.py::test_direct_calls_remain_fresh_even_after_an_accepted_check[evaluate]
+FAILED tests/test_current_selection.py::test_interrupted_accepted_evaluation_recomputes_before_selection[reset]
+FAILED tests/test_current_selection.py::test_interrupted_accepted_evaluation_recomputes_before_selection[_select_all]
+FAILED tests/test_current_selection.py::test_interrupted_accepted_evaluation_recomputes_before_selection[rejected_check]
+FAILED tests/test_exterior_scanned.py::test_scanned_failure_recovers_and_quality_guard_measures_the_same_subcomplex
+FAILED tests/test_selection_extraction.py::test_private_status_matches_full_extraction_after_device_changes[0]
+FAILED tests/test_selection_extraction.py::test_private_status_matches_full_extraction_after_device_changes[1]
+FAILED tests/test_selection_extraction.py::test_private_status_matches_full_extraction_after_device_changes[2]
+FAILED tests/test_selection_extraction.py::test_private_status_matches_full_extraction_after_device_changes[3]
+FAILED tests/test_selection_extraction.py::test_private_status_matches_full_extraction_after_device_changes[4]
+FAILED tests/test_selection_extraction.py::test_private_status_matches_full_extraction_after_device_changes[5]
+14 failed, 1069 passed in 369.00s (0:06:08)

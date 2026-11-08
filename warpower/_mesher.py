@@ -359,6 +359,7 @@ class VariationalMeshingWorkspace:
         extraction_tolerance=0.4,
         containment_recovery=True,
         exterior_recovery=True,
+        proven_exterior_recovery=None,
         sampling_resolution=32,
         sampling_max_attempts=4096,
         tetrahedra_capacity=None,
@@ -368,7 +369,15 @@ class VariationalMeshingWorkspace:
         self.domain, self.device = domain, domain.device
         self.containment_recovery = bool(containment_recovery)
         self.exterior_recovery = bool(exterior_recovery)
-        self._uses_recovery = self.containment_recovery or self.exterior_recovery
+        # Inherit the existing exterior-policy opt-out unless explicitly set.
+        self.proven_exterior_recovery = (
+            self.exterior_recovery
+            if proven_exterior_recovery is None
+            else bool(proven_exterior_recovery)
+        )
+        self._uses_recovery = (
+            self.containment_recovery or self.exterior_recovery or self.proven_exterior_recovery
+        )
         self.capacity = operator.index(capacity)
         if not 4 <= self.capacity < 2**29:
             raise ValueError("capacity must be in [4,2**29)")
@@ -462,6 +471,9 @@ class VariationalMeshingWorkspace:
             self._mode = wp.zeros(1, dtype=int)
             self._material_recovery = wp.zeros(1, dtype=int)
             self._exterior_enabled = wp.zeros(1, dtype=int)
+            self._proven_exterior_enabled = (
+                wp.zeros(1, dtype=int) if self.proven_exterior_recovery else None
+            )
             self._jitter_seed = wp.zeros(1, dtype=int)
             self._refinement_target = wp.full(1, self.capacity, dtype=int)
             self.input_topology = DomainTopology(domain)
@@ -481,6 +493,7 @@ class VariationalMeshingWorkspace:
                     self.growth_iterations,
                     self.polish_iterations,
                     self.selective_iterations if self.quality_rounds else 0,
+                    int(self.proven_exterior_recovery),
                 ),
                 active_count=self.active_count,
                 sizing=sizing,
@@ -493,10 +506,17 @@ class VariationalMeshingWorkspace:
                 containment_recovery=self.containment_recovery,
                 exterior_recovery=self.exterior_recovery,
                 exterior_enabled=self._exterior_enabled,
+                proven_exterior_recovery=self.proven_exterior_recovery,
+                proven_exterior_enabled=self._proven_exterior_enabled,
                 tetrahedra_capacity=tetrahedra_capacity,
                 tetrahedra_cell_capacity=tetrahedra_cell_capacity,
                 chunk_size=chunk_size,
             )
+            self._boundary_rounding = None
+            if self.proven_exterior_recovery:
+                from ._boundary_rounding import BoundaryRounding
+
+                self._boundary_rounding = BoundaryRounding(self.core)
             self.refinement = None
             if self.initial_count < self.capacity and self.max_growth_rounds:
                 self.refinement = RefinementWorkspace(
@@ -528,6 +548,8 @@ class VariationalMeshingWorkspace:
                 exterior_recovery=self.exterior_recovery,
                 feature_roles=self.core.boundary.roles,
                 exterior_enabled=self._exterior_enabled,
+                proven_exterior_recovery=self.proven_exterior_recovery,
+                proven_exterior_enabled=self._proven_exterior_enabled,
             )
             self.full_tetrahedra = self.core.full_tetrahedra
             self.tetrahedra = self.extraction.tetrahedra
@@ -609,6 +631,9 @@ class VariationalMeshingWorkspace:
         self.metrics.zero_()
         self._material_recovery.zero_()
         self._exterior_enabled.zero_()
+        if self.proven_exterior_recovery:
+            self._proven_exterior_enabled.zero_()
+            self._boundary_rounding.statistics.zero_()
         self._launch(begin, 1, [self._state, self.domain.error, self.domain.corner_count])
         wp.capture_if(self.ready, self._initialize)
         e = self.extraction
@@ -706,6 +731,12 @@ class VariationalMeshingWorkspace:
             self._launch(
                 remember_material_recovery, 1, [e.valid, e.removed_count, self._material_recovery]
             )
+        if self.proven_exterior_recovery:
+            self._launch(
+                remember_material_recovery,
+                1,
+                [e.valid, e.proven_removed_count, self._material_recovery],
+            )
         self.topology.zero_()
         self._launch(sum_euler, len(e.shell_euler), [e.shell_euler, self.topology])
         self._launch(
@@ -732,8 +763,20 @@ class VariationalMeshingWorkspace:
             # Preserve fitting and quality on previously successful trajectories.
             self._launch(enable_exterior_recovery, 1, [self._state, self._exterior_enabled])
             wp.capture_if(self._exterior_enabled, self._extract)
+        if self.proven_exterior_recovery:
+            self._launch(enable_exterior_recovery, 1, [self._state, self._proven_exterior_enabled])
+            wp.capture_if(self._proven_exterior_enabled, self._proven_recovery)
         self._launch(require_extraction, 1, [self._state])
         wp.capture_if(self.ready, self._improve)
+
+    def _proven_recovery(self):
+        # One extra certified/energy-guarded global step only after ordinary
+        # fitting and exterior-band recovery failed. No host replay decisions.
+        self._budget.fill_(1)
+        self._mode.zero_()
+        self.core._record_boundary_recovery(self._boundary_rounding)
+        self._launch(finish_core, 1, [self._state, self.core.error, self.core.iterations, 0])
+        wp.capture_if(self.ready, self._extract)
 
     def _recovery(self):
         self._global(self.polish_iterations)

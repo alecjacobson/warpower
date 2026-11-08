@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/check-proven-exterior-baseline-variation-v2.py", line 39, in <module>
+    np.testing.assert_allclose(np.sort(x['radius_ratio']),np.sort(y['radius_ratio']),rtol=1e-11,atol=1e-14)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/numpy/testing/_private/utils.py", line 1715, in assert_allclose
+    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/numpy/testing/_private/utils.py", line 921, in assert_array_compare
+    raise AssertionError(msg)
+AssertionError: 
+Not equal to tolerance rtol=1e-11, atol=1e-14
+
+Mismatched elements: 651 / 3213 (20.3%)
+Max absolute difference among violations: 0.00367259
+Max relative difference among violations: 0.00593008
+ ACTUAL: array([0.104178, 0.10466 , 0.107747, ..., 0.991649, 0.992015, 0.992933],
+      shape=(3213,))
+ DESIRED: array([0.104178, 0.10466 , 0.107747, ..., 0.991649, 0.992015, 0.992933],
+      shape=(3213,))

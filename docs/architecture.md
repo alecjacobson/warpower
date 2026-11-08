@@ -311,6 +311,13 @@ If bad edges remain after the additional-fitting budget, [exterior-band recovery
 transactionally remove exterior-center tolerance cells. Referenced vertices,
 feature-incident cells, a one-percent volume limit and final topology checks
 guard this approximation; unsuccessful attempts restore the original selection.
+The final [proven-exterior fallback](proven-exterior-recovery.md) runs only if
+that policy still fails. One ordinary fitting transaction uses a midpoint-aware
+boundary proposal, then a plane-separation and rational-centroid winding proof
+can remove wholly exterior cells at edge or vertex contacts. Certified binary64
+bounds filter the exact integer signs. All selection, rollback, and subsequent
+quality checks remain in the captured device graph. This optional layer adds no
+work or storage to standalone power-diagram or Delaunay construction.
 
 At capacities of 256–2,048 sites, the VTM core first attempts to
 [reuse Delaunay fragments](delaunay-reuse.md) from the preceding reconstruction.

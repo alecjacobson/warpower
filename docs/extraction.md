@@ -54,6 +54,14 @@ volume and rollback guards. Enable it with `exterior_recovery=True`; its
 independent default is also `False`. This is boundary approximation, not proof
 that a removed cell is wholly outside material.
 
+Optional [proven exterior recovery](proven-exterior-recovery.md) removes only
+cells whose entire open interior is certified outside the input material. Enable
+`proven_exterior_recovery=True`; the independent default is `False`. It follows
+the other enabled policies and handles edge or vertex contacts. Referenced sites,
+the one-percent volume limit, and topology checks guard the transaction. It may
+remove a cell incident to a crease or corner when the geometric proof succeeds;
+it does not promise exact preservation of input feature edges.
+
 Inputs must be a nonoverlapping, positively oriented tetrahedral complex. For
 the paper's interpretation, use the complete Delaunay triangulation. Extraction
 checks index validity, finite referenced positions, positive determinants, and

@@ -17,3 +17,19 @@ failed material candidate in [issue #142](https://github.com/alecjacobson/warpow
 Its initial boundary is nonmanifold. It tests a post-classification recovery
 transaction; it is not a complete mesher output. This notice applies only to
 `exterior-band-patch.json`, not to other test fixtures in this directory.
+
+# Proven exterior recovery fixtures
+
+`proven-exterior-original.npz` and `proven-exterior-continuation.npz` are reduced
+field exports from Warpower's own procedural thin-hand example, seed 7, with
+1,000 sites. They contain no third-party scan. The original snapshot is the
+failed material extraction after the ordinary fitting schedule at revision
+`a34910d64a27dbb8e0fb03f0813e76e00e799744`. The continuation snapshot follows one
+certified, energy-guarded midpoint-aware fitting step on that same failed state.
+Its supplied connectivity is the complete Delaunay hull, before material
+extraction. Tests use the snapshots to check successful proof removal, complete
+rollback, and captured producer/consumer failure recovery independently of fresh
+sampling. Fresh-solve tests separately generate their inputs on device.
+
+Source snapshots and independent geometric checks are retained in the
+[proven exterior recovery evidence](../../results/validation/vtm/proven-exterior-recovery/manifest.json).

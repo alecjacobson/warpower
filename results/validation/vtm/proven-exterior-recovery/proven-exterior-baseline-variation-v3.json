@@ -1,0 +1,876 @@
+{
+  "scope": "The sole final canonical mismatch also occurs between identical-parameter baseline runs at a34910d. Production matches one baseline connectivity. This demonstrates pre-existing output variation, not its exact kernel origin. All three meshes were independently certified; this is not a claim of bitwise reproducibility.",
+  "source_sha256": "c46c2a1dba9183a865b1782638423571be14b0b0cf9d3212e3289a7ba053be9c",
+  "independent_reports": [
+    {
+      "path": ".work/vtm/proven-recovery-broad-v1-independent.json",
+      "sha256": "a2d8148508de687651fb8766b71d7c018cb10e0716a4a63db01bef25788771ce"
+    },
+    {
+      "path": ".work/vtm/proven-exterior-final-independent-v2.json",
+      "sha256": "3100d8ef32a81d334be563bf6644d50f71a49ecfe7d8ec859f556b82c3f395c1"
+    }
+  ],
+  "variants": {
+    "earlier_baseline": {
+      "path": ".work/vtm/proven-recovery-broad-v1/hand-seed1-before",
+      "source": "a34910d64a27dbb8e0fb03f0813e76e00e799744",
+      "result_sha256": "9172eaaf0354bf2aa902ad3e1ed99fda3f484db3d957c4b4745a5bdcde4036c9",
+      "mesh_sha256": "dd17cda804204f7c6804e0220902bbfcafec79fea2f0a1519a2b77f409633768",
+      "parameters": {
+        "case": "thin-hand",
+        "input": null,
+        "n": 1000,
+        "initial": 256,
+        "seed": 1,
+        "subdivisions": 20,
+        "crease_subdivisions": 20,
+        "feature_angle": 45.0,
+        "corner_angle": 45.0,
+        "quality_rounds": 4,
+        "local_quality_retries": 0,
+        "automatic_sizing": false,
+        "repeats": 3,
+        "independent_quality": false
+      },
+      "work": {
+        "counts": [
+          1000,
+          5551,
+          3213,
+          1656
+        ],
+        "rounds": [
+          4,
+          2,
+          4
+        ],
+        "steps": [
+          80,
+          16
+        ],
+        "moves": [
+          4,
+          0
+        ],
+        "quality_rejections": 0,
+        "refinement_rejections": 0
+      },
+      "quality": {
+        "radius_ratio_percentiles": {
+          "0": 0.10417759680990524,
+          "1": 0.2923021750109643,
+          "5": 0.5548734285978931,
+          "50": 0.8492537813635883,
+          "95": 0.9581944344438307,
+          "100": 0.9929326924380033
+        },
+        "volume": 1.04236164698541,
+        "relative_volume_error": 0.0013080402746529062,
+        "directed_surface_rms": 0.001728070547439937
+      },
+      "independent_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 1000,
+        "referenced_vertices": 1000,
+        "tetrahedra": 3213,
+        "boundary_triangles": 1656,
+        "components": 1,
+        "boundary_euler": 2,
+        "volume": 1.0423616469854107,
+        "input_volume": 1.0409999770894647,
+        "relative_volume_error": 0.0013080402746530329,
+        "mean_radius_ratio": 0.8134324617780175,
+        "radius_ratio_percentiles": {
+          "0": 0.10417759680990525,
+          "1": 0.29230217501096445,
+          "5": 0.5548734285978931,
+          "50": 0.8492537813635885,
+          "95": 0.9581944344438307,
+          "100": 0.9929326924380034
+        },
+        "dihedral_degrees_min": 5.081026989111612,
+        "dihedral_degrees_max": 171.96933699730516,
+        "output_to_input": {
+          "area": 13.144780618154456,
+          "squared_integral": 3.9253309529366715e-05,
+          "rms": 0.0017280705474399354,
+          "max_sample": 0.04999999205271399
+        },
+        "input_to_output": {
+          "area": 13.142227057326567,
+          "squared_integral": 1.9220955665096245e-05,
+          "rms": 0.0012093527747394622,
+          "max_sample": 0.028824767445561297
+        },
+        "two_sided_area_weighted_rms": 0.0014914606874930742,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.03874564355711517,
+        "distance_oracle": {
+          "implementation": "CGAL AABB triangle distances with float64 constructions",
+          "version": "CGAL 6.2.1",
+          "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+          "source": "benchmarks/cpu/surface_distance.cpp",
+          "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+        }
+      }
+    },
+    "final_baseline": {
+      "path": ".work/vtm/proven-exterior-final/hand-seed1-before",
+      "source": "a34910d64a27dbb8e0fb03f0813e76e00e799744",
+      "result_sha256": "0a6fb3ca0d63e944a0bbbc8923088162d0cb9bba355ba21d5db4e8b8c4794d29",
+      "mesh_sha256": "0c384c6964b5fd9ec305c43922cf416f4661e79a739d12db0e11ad795bab80c3",
+      "parameters": {
+        "case": "thin-hand",
+        "input": null,
+        "n": 1000,
+        "initial": 256,
+        "seed": 1,
+        "subdivisions": 20,
+        "crease_subdivisions": 20,
+        "feature_angle": 45.0,
+        "corner_angle": 45.0,
+        "quality_rounds": 4,
+        "local_quality_retries": 0,
+        "automatic_sizing": false,
+        "repeats": 3,
+        "independent_quality": false
+      },
+      "work": {
+        "counts": [
+          1000,
+          5551,
+          3213,
+          1656
+        ],
+        "rounds": [
+          4,
+          2,
+          4
+        ],
+        "steps": [
+          80,
+          16
+        ],
+        "moves": [
+          4,
+          0
+        ],
+        "quality_rejections": 0,
+        "refinement_rejections": 0
+      },
+      "quality": {
+        "radius_ratio_percentiles": {
+          "0": 0.10417759680990524,
+          "1": 0.2923021750109643,
+          "5": 0.5548734285978931,
+          "50": 0.8492537813635883,
+          "95": 0.9581944344438307,
+          "100": 0.9929326924380033
+        },
+        "volume": 1.0423616469854102,
+        "relative_volume_error": 0.0013080402746531194,
+        "directed_surface_rms": 0.0017280705474399351
+      },
+      "independent_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 1000,
+        "referenced_vertices": 1000,
+        "tetrahedra": 3213,
+        "boundary_triangles": 1656,
+        "components": 1,
+        "boundary_euler": 2,
+        "volume": 1.0423616469854105,
+        "input_volume": 1.0409999770894647,
+        "relative_volume_error": 0.0013080402746528108,
+        "mean_radius_ratio": 0.8133956439947354,
+        "radius_ratio_percentiles": {
+          "0": 0.10417759680990525,
+          "1": 0.29230217501096445,
+          "5": 0.5548734285978931,
+          "50": 0.8492537813635885,
+          "95": 0.9581944344438307,
+          "100": 0.9929326924380034
+        },
+        "dihedral_degrees_min": 5.081026989111612,
+        "dihedral_degrees_max": 171.96933699730516,
+        "output_to_input": {
+          "area": 13.144780618154456,
+          "squared_integral": 3.925330952936673e-05,
+          "rms": 0.0017280705474399356,
+          "max_sample": 0.04999999205271399
+        },
+        "input_to_output": {
+          "area": 13.142227057326567,
+          "squared_integral": 1.9220955665096245e-05,
+          "rms": 0.0012093527747394622,
+          "max_sample": 0.028824767445561297
+        },
+        "two_sided_area_weighted_rms": 0.0014914606874930744,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.03874564355711518,
+        "distance_oracle": {
+          "implementation": "CGAL AABB triangle distances with float64 constructions",
+          "version": "CGAL 6.2.1",
+          "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+          "source": "benchmarks/cpu/surface_distance.cpp",
+          "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+        }
+      }
+    },
+    "production": {
+      "path": ".work/vtm/proven-exterior-final/hand-seed1-after",
+      "source": "fe3e46910270e28f0b53394a042d09d2a229cee9",
+      "result_sha256": "421a8ab89fe96b2030c623560755f1d18c35b5bdcfc3b6de8f5ef39f6889a9b6",
+      "mesh_sha256": "8c10dc7c838f63755d54df29aca88da5142cd6b2dbf72d5d97e1fc508b0d3db4",
+      "parameters": {
+        "case": "thin-hand",
+        "input": null,
+        "n": 1000,
+        "initial": 256,
+        "seed": 1,
+        "subdivisions": 20,
+        "crease_subdivisions": 20,
+        "feature_angle": 45.0,
+        "corner_angle": 45.0,
+        "quality_rounds": 4,
+        "local_quality_retries": 0,
+        "automatic_sizing": false,
+        "repeats": 3,
+        "independent_quality": false
+      },
+      "work": {
+        "counts": [
+          1000,
+          5551,
+          3213,
+          1656
+        ],
+        "rounds": [
+          4,
+          2,
+          4
+        ],
+        "steps": [
+          80,
+          16
+        ],
+        "moves": [
+          4,
+          0
+        ],
+        "quality_rejections": 0,
+        "refinement_rejections": 0
+      },
+      "quality": {
+        "radius_ratio_percentiles": {
+          "0": 0.10417759680990524,
+          "1": 0.2923021750109643,
+          "5": 0.5548734285978931,
+          "50": 0.8492537813635883,
+          "95": 0.9581944344438307,
+          "100": 0.9929326924380033
+        },
+        "volume": 1.0423616469854105,
+        "relative_volume_error": 0.0013080402746533327,
+        "directed_surface_rms": 0.001728070547439936
+      },
+      "independent_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 1000,
+        "referenced_vertices": 1000,
+        "tetrahedra": 3213,
+        "boundary_triangles": 1656,
+        "components": 1,
+        "boundary_euler": 2,
+        "volume": 1.0423616469854105,
+        "input_volume": 1.0409999770894647,
+        "relative_volume_error": 0.0013080402746528108,
+        "mean_radius_ratio": 0.8134324617780175,
+        "radius_ratio_percentiles": {
+          "0": 0.10417759680990525,
+          "1": 0.29230217501096445,
+          "5": 0.5548734285978931,
+          "50": 0.8492537813635885,
+          "95": 0.9581944344438307,
+          "100": 0.9929326924380034
+        },
+        "dihedral_degrees_min": 5.081026989111612,
+        "dihedral_degrees_max": 171.96933699730516,
+        "output_to_input": {
+          "area": 13.144780618154456,
+          "squared_integral": 3.9253309529366715e-05,
+          "rms": 0.0017280705474399354,
+          "max_sample": 0.04999999205271399
+        },
+        "input_to_output": {
+          "area": 13.142227057326567,
+          "squared_integral": 1.9220955665096245e-05,
+          "rms": 0.0012093527747394622,
+          "max_sample": 0.028824767445561297
+        },
+        "two_sided_area_weighted_rms": 0.0014914606874930742,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.03874564355711517,
+        "distance_oracle": {
+          "implementation": "CGAL AABB triangle distances with float64 constructions",
+          "version": "CGAL 6.2.1",
+          "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+          "source": "benchmarks/cpu/surface_distance.cpp",
+          "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+        }
+      }
+    }
+  },
+  "pairs": {
+    "earlier_baseline__final_baseline": {
+      "maximum_coordinate_difference": 4.038405972300504e-18,
+      "changed_coordinates": [
+        {
+          "site": 125,
+          "axis": 0,
+          "role": 1,
+          "before": -1.302477972140538e-18,
+          "after": -1.6655423288435112e-18
+        },
+        {
+          "site": 280,
+          "axis": 2,
+          "role": 2,
+          "before": -1.7583913880486337e-18,
+          "after": 2.28001458425187e-18
+        },
+        {
+          "site": 433,
+          "axis": 2,
+          "role": 2,
+          "before": 5.134784140005212e-19,
+          "after": 6.218986312490717e-19
+        },
+        {
+          "site": 830,
+          "axis": 2,
+          "role": 2,
+          "before": 2.7059156127898575e-18,
+          "after": 1.4636014851300217e-18
+        }
+      ],
+      "differences": {
+        "full_tetrahedra": {
+          "removed": [
+            [
+              42,
+              90,
+              310,
+              430
+            ],
+            [
+              42,
+              90,
+              430,
+              962
+            ],
+            [
+              45,
+              59,
+              280,
+              315
+            ],
+            [
+              45,
+              59,
+              280,
+              616
+            ],
+            [
+              59,
+              280,
+              315,
+              430
+            ],
+            [
+              59,
+              280,
+              430,
+              616
+            ],
+            [
+              90,
+              280,
+              310,
+              430
+            ],
+            [
+              90,
+              280,
+              430,
+              962
+            ]
+          ],
+          "added": [
+            [
+              42,
+              90,
+              280,
+              310
+            ],
+            [
+              42,
+              90,
+              280,
+              962
+            ],
+            [
+              42,
+              280,
+              310,
+              430
+            ],
+            [
+              42,
+              280,
+              430,
+              962
+            ],
+            [
+              45,
+              59,
+              315,
+              430
+            ],
+            [
+              45,
+              59,
+              430,
+              616
+            ],
+            [
+              45,
+              280,
+              315,
+              430
+            ],
+            [
+              45,
+              280,
+              430,
+              616
+            ]
+          ]
+        },
+        "tetrahedra": {
+          "removed": [
+            [
+              42,
+              90,
+              310,
+              430
+            ],
+            [
+              45,
+              59,
+              280,
+              315
+            ],
+            [
+              45,
+              59,
+              280,
+              616
+            ],
+            [
+              59,
+              280,
+              315,
+              430
+            ],
+            [
+              59,
+              280,
+              430,
+              616
+            ],
+            [
+              90,
+              280,
+              310,
+              430
+            ]
+          ],
+          "added": [
+            [
+              42,
+              90,
+              280,
+              310
+            ],
+            [
+              42,
+              280,
+              310,
+              430
+            ],
+            [
+              45,
+              59,
+              315,
+              430
+            ],
+            [
+              45,
+              59,
+              430,
+              616
+            ],
+            [
+              45,
+              280,
+              315,
+              430
+            ],
+            [
+              45,
+              280,
+              430,
+              616
+            ]
+          ],
+          "removed_qualities": [
+            0.7381202006812643,
+            0.7895407470007523,
+            0.7405798612408336,
+            0.680186518651738,
+            0.7023443599741969,
+            0.7458222571998331
+          ],
+          "added_qualities": [
+            0.6363283527058332,
+            0.7727682672370555,
+            0.7811495311340605,
+            0.6180564398880709,
+            0.7194551767371072,
+            0.7505406393606252
+          ]
+        },
+        "boundary": {
+          "removed": [
+            [
+              42,
+              90,
+              430
+            ],
+            [
+              90,
+              280,
+              430
+            ]
+          ],
+          "added": [
+            [
+              42,
+              90,
+              280
+            ],
+            [
+              42,
+              280,
+              430
+            ]
+          ]
+        }
+      }
+    },
+    "earlier_baseline__production": {
+      "maximum_coordinate_difference": 1.8414220524896477e-18,
+      "changed_coordinates": [
+        {
+          "site": 125,
+          "axis": 0,
+          "role": 1,
+          "before": -1.302477972140538e-18,
+          "after": -1.6662081058390398e-18
+        },
+        {
+          "site": 280,
+          "axis": 2,
+          "role": 2,
+          "before": -1.7583913880486337e-18,
+          "after": 8.303066444101392e-20
+        },
+        {
+          "site": 433,
+          "axis": 2,
+          "role": 2,
+          "before": 5.134784140005212e-19,
+          "after": 6.218986312490717e-19
+        },
+        {
+          "site": 830,
+          "axis": 2,
+          "role": 2,
+          "before": 2.7059156127898575e-18,
+          "after": 1.4636014851300217e-18
+        }
+      ],
+      "differences": {
+        "full_tetrahedra": {
+          "removed": [],
+          "added": []
+        },
+        "tetrahedra": {
+          "removed": [],
+          "added": [],
+          "removed_qualities": [],
+          "added_qualities": []
+        },
+        "boundary": {
+          "removed": [],
+          "added": []
+        }
+      }
+    },
+    "final_baseline__production": {
+      "maximum_coordinate_difference": 2.196983919810856e-18,
+      "changed_coordinates": [
+        {
+          "site": 125,
+          "axis": 0,
+          "role": 1,
+          "before": -1.6655423288435112e-18,
+          "after": -1.6662081058390398e-18
+        },
+        {
+          "site": 280,
+          "axis": 2,
+          "role": 2,
+          "before": 2.28001458425187e-18,
+          "after": 8.303066444101392e-20
+        }
+      ],
+      "differences": {
+        "full_tetrahedra": {
+          "removed": [
+            [
+              42,
+              90,
+              280,
+              310
+            ],
+            [
+              42,
+              90,
+              280,
+              962
+            ],
+            [
+              42,
+              280,
+              310,
+              430
+            ],
+            [
+              42,
+              280,
+              430,
+              962
+            ],
+            [
+              45,
+              59,
+              315,
+              430
+            ],
+            [
+              45,
+              59,
+              430,
+              616
+            ],
+            [
+              45,
+              280,
+              315,
+              430
+            ],
+            [
+              45,
+              280,
+              430,
+              616
+            ]
+          ],
+          "added": [
+            [
+              42,
+              90,
+              310,
+              430
+            ],
+            [
+              42,
+              90,
+              430,
+              962
+            ],
+            [
+              45,
+              59,
+              280,
+              315
+            ],
+            [
+              45,
+              59,
+              280,
+              616
+            ],
+            [
+              59,
+              280,
+              315,
+              430
+            ],
+            [
+              59,
+              280,
+              430,
+              616
+            ],
+            [
+              90,
+              280,
+              310,
+              430
+            ],
+            [
+              90,
+              280,
+              430,
+              962
+            ]
+          ]
+        },
+        "tetrahedra": {
+          "removed": [
+            [
+              42,
+              90,
+              280,
+              310
+            ],
+            [
+              42,
+              280,
+              310,
+              430
+            ],
+            [
+              45,
+              59,
+              315,
+              430
+            ],
+            [
+              45,
+              59,
+              430,
+              616
+            ],
+            [
+              45,
+              280,
+              315,
+              430
+            ],
+            [
+              45,
+              280,
+              430,
+              616
+            ]
+          ],
+          "added": [
+            [
+              42,
+              90,
+              310,
+              430
+            ],
+            [
+              45,
+              59,
+              280,
+              315
+            ],
+            [
+              45,
+              59,
+              280,
+              616
+            ],
+            [
+              59,
+              280,
+              315,
+              430
+            ],
+            [
+              59,
+              280,
+              430,
+              616
+            ],
+            [
+              90,
+              280,
+              310,
+              430
+            ]
+          ],
+          "removed_qualities": [
+            0.6363283527058332,
+            0.7727682672370555,
+            0.7811495311340605,
+            0.6180564398880709,
+            0.7194551767371072,
+            0.7505406393606252
+          ],
+          "added_qualities": [
+            0.7381202006812643,
+            0.7895407470007523,
+            0.7405798612408336,
+            0.680186518651738,
+            0.7023443599741969,
+            0.7458222571998331
+          ]
+        },
+        "boundary": {
+          "removed": [
+            [
+              42,
+              90,
+              280
+            ],
+            [
+              42,
+              280,
+              430
+            ]
+          ],
+          "added": [
+            [
+              42,
+              90,
+              430
+            ],
+            [
+              90,
+              280,
+              430
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "audited_existing_baseline_variation": true,
+  "other_healthy_pairs_canonical_unchanged": true,
+  "all_nine_healthy_pairs_same_work": true
+}

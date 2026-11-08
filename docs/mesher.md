@@ -91,6 +91,7 @@ recovery; it is not a free preprocessing operation.
 | `extraction_tolerance` | 0.4 | Circumcenter thickening tolerance, `distance/radius` |
 | `containment_recovery` | `True` | Bounded addition of proven wholly material cells around bad boundary edges |
 | `exterior_recovery` | `True` | Transactional removal of exterior-center tolerance cells, with vertex/feature and volume guards |
+| `proven_exterior_recovery` | `None` | Inherit `exterior_recovery`; after ordinary recovery fails, try one midpoint-aware fitting step and remove only cells proved wholly exterior |
 | `sampling_resolution` | 32 | Proposal grid resolution per axis |
 | `sampling_max_attempts` | 4096 | Rejection-sampling budget per initial site |
 | `seed` | 2026 | Signed int32 or device int32[1]; caller-owned seed is never incremented |
@@ -99,7 +100,9 @@ recovery; it is not a free preprocessing operation.
 configure the underlying reconstruction reserves. Allocations scale with capacity,
 not the current target. Iteration and round budgets are setup constants; loop
 termination and stage selection use device counters and CUDA conditional nodes.
-Zero polish iterations disable additional-fitting recovery. The independent
+Zero polish iterations disable ordinary additional-fitting rounds. The final
+proven-exterior fallback has a separate one-step budget; disable it with
+`proven_exterior_recovery=False` to suppress that step too. The independent
 [containment repair](containment-recovery.md) can still resolve supported bad
 boundary edges without moving sites.
 
@@ -121,6 +124,15 @@ remove exterior-center tolerance cells while preserving referenced vertices and
 feature-incident cells. It limits volume change and restores the selection on
 failure. This policy is an approximation; it does not prove whole-cell exterior
 membership. Both policies can be disabled independently.
+
+If extraction still fails, [proven exterior recovery](proven-exterior-recovery.md)
+records one final global fitting step with exact midpoint rounding for boundary
+sites, followed by whole-cell exterior proofs and transactional removal. The
+usual Delaunay, displacement, energy, topology, and volume guards still apply.
+Subsequent quality stages use the same extraction policy. Healthy trajectories
+do not execute this final fitting step. `proven_exterior_recovery=None` inherits
+the exterior policy, preserving the existing `exterior_recovery=False` opt-out;
+explicit `True` or `False` selects it independently.
 
 Each optional quality stage starts with a valid-mesh checkpoint. A stage error or
 invalid extracted boundary restores positions, connectivity, counts, statistics,

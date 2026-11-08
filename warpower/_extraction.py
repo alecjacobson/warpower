@@ -419,6 +419,7 @@ class ExtractionWorkspace:
         exterior_enabled=None,
         proven_exterior_recovery=False,
         proven_exterior_enabled=None,
+        _cache_surface_queries=False,
     ):
         self.domain = domain
         self.points = _contiguous_points(points)
@@ -451,6 +452,11 @@ class ExtractionWorkspace:
             if proven_exterior_enabled is None
             else _int_array(proven_exterior_enabled, self.device, (1,))
         )
+        self._query_cache = None
+        if _cache_surface_queries:
+            from ._surface_query_cache import SurfaceQueryCache
+
+            self._query_cache = SurfaceQueryCache(domain, self.capacity)
         with wp.ScopedDevice(self.device):
             self.input_count = (
                 wp.full(1, self.capacity, dtype=int)
@@ -595,26 +601,25 @@ class ExtractionWorkspace:
         self._classify_with(classify)
 
     def _classify_with(self, kernel):
-        # Register-heavy surface queries need enough blocks for small cell sets.
-        self._launch(
-            kernel,
-            self.capacity,
-            [
-                self.domain.tree,
-                self.points,
-                self.input_tetrahedra,
-                self.input_count,
-                self.tolerance,
-                self.error,
-                self.circumcenters,
-                self.circumradii,
-                self.signed_distance,
-                self.selected,
-                self._input_volume,
-                self._input_quality,
-            ],
-            block_dim=32,
-        )
+        args = [
+            self.domain.tree,
+            self.points,
+            self.input_tetrahedra,
+            self.input_count,
+            self.tolerance,
+            self.error,
+            self.circumcenters,
+            self.circumradii,
+            self.signed_distance,
+            self.selected,
+            self._input_volume,
+            self._input_quality,
+        ]
+        if self._query_cache is not None:
+            self._query_cache.extraction(args, selection=kernel is classify_selection)
+        else:
+            # Register-heavy surface queries need enough blocks for small sets.
+            self._launch(kernel, self.capacity, args, block_dim=32)
 
     def _surface_metrics(self):
         self._launch(

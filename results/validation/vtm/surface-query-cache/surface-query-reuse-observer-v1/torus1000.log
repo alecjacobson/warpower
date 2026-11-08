@@ -1,0 +1,108 @@
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._domain 6c84e07 load on device 'cuda:0' took 0.98 ms  (cached)
+Module warpower._surface_bvh 7ad7add load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._triangle_contact 9e6db6b load on device 'cuda:0' took 1.29 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._domain_topology 52a6f22 load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._sampling 473e0ae load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.53 ms  (cached)
+Module warpower._active_sites e183170 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.52 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.51 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.57 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.58 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 5.04 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 1.01 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 3.07 ms  (cached)
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 1.52 ms  (cached)
+Module warpower._facet_completion bb6aebe load on device 'cuda:0' took 2.32 ms  (cached)
+Module warpower._facet_completion 62c1043 load on device 'cuda:0' took 2.30 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.60 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._facet_seeds fa4cd6c load on device 'cuda:0' took 1.95 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.68 ms  (cached)
+Module warpower._prepared_seeds 4fb5246 load on device 'cuda:0' took 1.65 ms  (cached)
+Module warpower._grouped_seeds 9582e1f load on device 'cuda:0' took 1.41 ms  (cached)
+Module warpower._proved_completion fdde69b load on device 'cuda:0' took 3.47 ms  (cached)
+Module warpower._proved_completion e03c811 load on device 'cuda:0' took 2.54 ms  (cached)
+Module warpower._reuse_delaunay 58b0d1a load on device 'cuda:0' took 0.53 ms  (cached)
+Module warpower._wall_candidates 954a0c3 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._wall_reuse a53e752 load on device 'cuda:0' took 0.54 ms  (cached)
+Module warpower._wall_candidates 7f00c7b load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._boundary 6f19e8b load on device 'cuda:0' took 0.68 ms  (cached)
+Module warpower._boundary b9921e4 load on device 'cuda:0' took 0.65 ms  (cached)
+Module surface_query_reuse_kernels_v1 c063fdb load on device 'cuda:0' took 29463.99 ms  (compiled)
+Module surface_query_reuse_observer_v1 c728bb0 load on device 'cuda:0' took 13.64 ms  (error)
+[]
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/run-surface-query-reuse-observer-v1.py", line 7, in <module>
+    try:main()
+  File "/home/horde/projects/power-diagram/examples/vtm_gallery.py", line 139, in main
+    mesh = VariationalMeshingWorkspace(
+  File "/home/horde/projects/power-diagram/warpower/_mesher.py", line 489, in __init__
+    self.core = VTMWorkspace(
+  File "/home/horde/projects/power-diagram/warpower/_vtm.py", line 379, in __init__
+    self.selection = SelectiveUpdate(
+  File "/home/horde/projects/power-diagram/.work/vtm/surface_query_reuse_observer_v1.py", line 120, in init
+    self._surface_observation=Observation(core.domain,len(core.full_tetrahedra),label+'-'+type(self).__name__,core.n)
+  File "/home/horde/projects/power-diagram/.work/vtm/surface_query_reuse_observer_v1.py", line 88, in __init__
+    wp.load_module(module=__name__,device=self.device)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 13074, in load_module
+    force_load(device=device, modules=modules, block_dim=block_dim, max_workers=max_workers)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 12906, in force_load
+    m.load(d, block_dim=dim)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 5227, in load
+    raise e
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 5224, in load
+    compiled = self._compile(device, module_dir, output_name, output_arch, options=options)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 4972, in _compile
+    source_str, source_code_ext, meta, ltoir_values, fatbin_values = self._run_codegen(options, is_cpu)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 1907, in locked_call
+    return func(*args, **kwargs)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 4833, in _run_codegen
+    builder = ModuleBuilder(
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 3501, in __init__
+    self.build_kernel(kernel)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 3620, in build_kernel
+    kernel.adj.build(self)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 1907, in locked_call
+    return func(*args, **kwargs)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 2415, in build
+    raise type(original_exc)(*new_args).with_traceback(original_exc.__traceback__) from None
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 2395, in build
+    adj.eval(adj.tree.body[0])
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 3632, in emit_FunctionDef
+    adj.eval(f)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 4391, in emit_For
+    adj.eval(s)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 3680, in emit_If
+    adj.eval(stmt)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 6693, in eval
+    return emit_node(adj, node)
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 4399, in emit_Break
+    adj.materialize_redefinitions(adj.loop_symbols[-1])
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/codegen.py", line 4138, in materialize_redefinitions
+    raise WarpCodegenError(
+warp._src.codegen.WarpCodegenError: Error while parsing function "measure" at /home/horde/projects/power-diagram/.work/vtm/surface_query_reuse_observer_v1.py:55:
+            break
+;Error mutating a constant stopped inside a dynamic loop, use the following syntax: pi = float(3.141) to declare a dynamic variable

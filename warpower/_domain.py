@@ -421,7 +421,13 @@ class SurfaceDomain:
         feature_angle=45.0,
         corner_angle=45.0,
         validate_geometry=True,
+        query_backend="reference",
     ):
+        if query_backend not in ("reference", "native"):
+            raise ValueError("query_backend must be 'reference' or 'native'")
+        self.query_backend = query_backend
+        self._native_mesh = None
+        self._native_queries = None
         self.points = _contiguous_points(points)
         self.device = self.points.device
         self._owners = (points, triangles)
@@ -513,6 +519,13 @@ class SurfaceDomain:
             wp.launch(safe_points, n, inputs=[self.points, self._points, self.error])
             self._hierarchy = SurfaceHierarchy(self._points, self._indices)
             self.tree = self._hierarchy.tree
+            if query_backend == "native":
+                from . import _native_surface_queries
+
+                self._native_queries = _native_surface_queries
+                self._native_mesh = wp.Mesh(self._points, self._indices, bvh_constructor="lbvh")
+                wp.load_module(module=_native_surface_queries, device=self.device)
+                wp.load_module(module=_native_surface_queries, device=self.device, block_dim=32)
             self.surface_points = wp.empty(samples, dtype=wp.vec3)
             self.surface_weights = wp.empty(samples, dtype=wp.float64)
             self.feature_edges = wp.empty(m, dtype=wp.vec2i)
@@ -544,6 +557,8 @@ class SurfaceDomain:
             wp.copy(self.error, self._topology_error)
             wp.launch(safe_points, len(self.points), inputs=[self.points, self._points, self.error])
             self._hierarchy.refit()
+            if self._native_mesh is not None:
+                self._native_mesh.refit()
             wp.launch(
                 face_geometry,
                 self.face_count,
@@ -658,10 +673,14 @@ class DomainQueryWorkspace:
         with wp.ScopedDevice(self.device), wp.ScopedStream(stream):
             wp.copy(self.error, self.domain.error)
             wp.launch(
-                domain_queries,
+                domain_queries
+                if self.domain._native_queries is None
+                else self.domain._native_queries.domain_queries,
                 len(self.points),
                 inputs=[
-                    self.domain.tree,
+                    self.domain.tree
+                    if self.domain._native_mesh is None
+                    else self.domain._native_mesh.id,
                     self.points,
                     self.domain.error,
                     self.max_distance,

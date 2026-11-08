@@ -22,6 +22,13 @@ reduces measured full-solve replay time by 10.0% on the 16K torus and 5.7% on
 the graded 8K scan, with unchanged standalone geometry paths.
 The wide comparable-quality CPU performance goal remains unmet.
 
+The [current performance plan](https://github.com/alecjacobson/warpower/issues/264)
+prioritizes good smooth surfaces and sparse features: native surface queries,
+selectable accumulation precision and working defaults. Specialized degeneracy
+research is deferred; existing public API and standalone geometry tests remain
+release gates. The [native query backend](native-surface-queries.md) is explicitly
+selected, with the reference backend still the default.
+
 The target includes ODT relocation, boundary and sharp-feature fitting, graded
 sizing, initial sampling, refinement, final domain extraction, and GPU convergence
 and recovery decisions. Geometry processing must compose in a captured GPU loop;

@@ -444,8 +444,9 @@ def outer_record(
     running[0] = int(i < 2)
 
 
-def test_mesher_composes_inside_an_outer_device_controlled_loop(monkeypatch):
-    d = warpower.SurfaceDomain(*cube(), surface_subdivisions=4)
+@pytest.mark.parametrize("query_backend", ["reference", "native"])
+def test_mesher_composes_inside_an_outer_device_controlled_loop(monkeypatch, query_backend):
+    d = warpower.SurfaceDomain(*cube(), surface_subdivisions=4, query_backend=query_backend)
     target = wp.full(1, 96, dtype=int, device=d.device)
     mesh = warpower.VariationalMeshingWorkspace(
         d, 128, target_count=target, initial_count=64, quality_rounds=0

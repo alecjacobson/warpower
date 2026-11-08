@@ -1,0 +1,62 @@
+[
+  {
+    "name": "plate",
+    "command": [
+      ".venv/bin/python",
+      ".work/vtm/run-axis-hull-audit-v2.py",
+      "--case",
+      "counterbored-plate",
+      "--n",
+      "1000",
+      "--initial",
+      "256",
+      "--quality-rounds",
+      "4",
+      "--repeats",
+      "1",
+      "--output",
+      ".work/vtm/axis-hull-audit-v2/plate"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "cavity",
+    "command": [
+      ".venv/bin/python",
+      ".work/vtm/run-axis-hull-audit-v2.py",
+      "--case",
+      "cavity",
+      "--n",
+      "1000",
+      "--initial",
+      "256",
+      "--quality-rounds",
+      "4",
+      "--repeats",
+      "1",
+      "--output",
+      ".work/vtm/axis-hull-audit-v2/cavity"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "torus4096",
+    "command": [
+      ".venv/bin/python",
+      ".work/vtm/run-axis-hull-audit-v2.py",
+      "--case",
+      "torus",
+      "--n",
+      "4096",
+      "--initial",
+      "256",
+      "--quality-rounds",
+      "4",
+      "--repeats",
+      "1",
+      "--output",
+      ".work/vtm/axis-hull-audit-v2/torus4096"
+    ],
+    "exit_code": 0
+  }
+]

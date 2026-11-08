@@ -1,0 +1,2590 @@
+{
+  "production_runtime": "677033b0ecebe0824ee596a86e0c6a7fb2219d48",
+  "baseline_runtime": "92a8e2b3553e697a2ded817c62297c9eb9d23a34",
+  "scope": "Exact coordinate-plane hull support from positive current cells and current original-site bounds, retaining the original filtered/exact fallback. Private pure-Warp VTM optimization; no native CPU outperformance claim.",
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "files": [
+    {
+      "original": ".work/vtm/axis-hull-audit-batch-v2.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-batch-v2.log",
+      "bytes": 341,
+      "sha256": "4d91e397eaafe3dae0bf9126bf27599b8b07e5a703bd1934e44172a1613a6e55"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v1/hand7/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v1/hand7/boundary.off.gz",
+      "bytes": 28595,
+      "sha256": "1322bd8083cfb0f98835ec4404816d67d895f96c8d622fecf16ed7f4d6aec965"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v1/hand7/decision-audit.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v1/hand7/decision-audit.json",
+      "bytes": 761,
+      "sha256": "92ddf5834b017076aa143060382de615d048ddabd5d17ba5819d6fe76ca4500f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v1/hand7/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v1/hand7/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v1/hand7/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v1/hand7/mesh.npz",
+      "bytes": 89536,
+      "sha256": "8dda8a1ff552a358411ee67c06d44e51db25b0ec3bc07dfa3bd6887eb080b878"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v1/hand7/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v1/hand7/mesh.vtu.gz",
+      "bytes": 71219,
+      "sha256": "784640ed606823b84d4958ab737274160d14abc3b0bc1a32edc334bf29bccd0e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v1/hand7/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v1/hand7/result.json",
+      "bytes": 3969,
+      "sha256": "17f7c1f8b47588e1fbd0799d1af9e0d30d89983c8d09d6d44746719233e1c03e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v1-hand7.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v1-hand7.log",
+      "bytes": 9474,
+      "sha256": "408b1c960ee4a09c888462f89bd7a2e38ecfc5e8ae5f9a10e803d455d71974c5"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/batch-commands.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/batch-commands.json",
+      "bytes": 1113,
+      "sha256": "a733a020197aeeb6e6e223e994c448c9f16a97cf12b4495d8e5dc546f2132df8"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/cavity/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/cavity/boundary.off.gz",
+      "bytes": 30624,
+      "sha256": "9f3837415cddd0826000db8a0c4a8c5db6c6065407949c963245c18d7f4a1f10"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/cavity/decision-audit.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/cavity/decision-audit.json",
+      "bytes": 868,
+      "sha256": "7ed27b244ebbc02887f26ae63e4807fb125da5a083cedbfc436d9d20dea05c31"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/cavity/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/cavity/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/cavity/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/cavity/mesh.npz",
+      "bytes": 108509,
+      "sha256": "442267afeac4239d8e7b080fa65bf1ada89552cb175b864236dc1e11e7b45a4e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/cavity/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/cavity/mesh.vtu.gz",
+      "bytes": 92493,
+      "sha256": "70f9be7eeceff34f05e02decaed3246fc82438026c0ec5ed6ad7dde8d18fe5f0"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/cavity/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/cavity/result.json",
+      "bytes": 3949,
+      "sha256": "5926f0504bd3f08a97d1841d741b59c1ea1893cc47ba3faf4023ce0d305b5b75"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/plate/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/plate/boundary.off.gz",
+      "bytes": 32391,
+      "sha256": "a1aba8da7c85942da5f09f4e990b37f19f806c427eb4837bb010c78c9fd08a4a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/plate/decision-audit.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/plate/decision-audit.json",
+      "bytes": 868,
+      "sha256": "784d22102937f12061fcde0330edefc249ea9d2d4a7484850d12c127541afea5"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/plate/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/plate/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/plate/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/plate/mesh.npz",
+      "bytes": 109516,
+      "sha256": "621d609e1a2954eda8dd94c41c028454afae082f7c572e690d4f902b64380b26"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/plate/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/plate/mesh.vtu.gz",
+      "bytes": 86134,
+      "sha256": "0cd3c9c93ec0774aa2db4cd297fe4bbad73f8f6ca910ba695857594245a3ad38"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/plate/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/plate/result.json",
+      "bytes": 3969,
+      "sha256": "d6e4ad3f644ab2f9da5b431c18f2a7530d3f26d1eb12ed27ddb07bbfe1002c8d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/torus4096/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/torus4096/boundary.off.gz",
+      "bytes": 135033,
+      "sha256": "497cb67ccb944c9270cd08fec27b45088f80f3fc0bc7ee6c98fd09a9eb225c7a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/torus4096/decision-audit.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/torus4096/decision-audit.json",
+      "bytes": 1134,
+      "sha256": "15cbe055b4acaffaf0e08a4ee7651458c5b69b61abd764ff0010fce6962a2fe4"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/torus4096/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/torus4096/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/torus4096/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/torus4096/mesh.npz",
+      "bytes": 565798,
+      "sha256": "8ccb5983197f000a0bed02a538b6b3882b2e7bba31fdbcdb47b20a8259ad7b0e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/torus4096/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/torus4096/mesh.vtu.gz",
+      "bytes": 445106,
+      "sha256": "13a45da55d4899f0ed8a5711144a1dc5568a2de30bf57fc4c2fb621670a9f958"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2/torus4096/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2/torus4096/result.json",
+      "bytes": 3951,
+      "sha256": "05af6930af97a7509ac072c9f4632c05371d6d7f6b77a691ffb967e984a29ccf"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2-cavity.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2-cavity.log",
+      "bytes": 9554,
+      "sha256": "403f5894d03f643c1dacd95d54be3a7676338562c8072a420a38a196e317a89d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2-plate.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2-plate.log",
+      "bytes": 9583,
+      "sha256": "7947244ade5ade3eaed25fabbf25e384a3c48de27a938d01fd6897964ba17d48"
+    },
+    {
+      "original": ".work/vtm/axis-hull-audit-v2-torus4096.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-audit-v2-torus4096.log",
+      "bytes": 9770,
+      "sha256": "03206da8544c27a2f220ee419ecf0b13ee83f8e149272a2d571ef76223355baa"
+    },
+    {
+      "original": ".work/vtm/axis-hull-existing-v1.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-existing-v1.log",
+      "bytes": 698,
+      "sha256": "d07dc69036b29560e475cad6a1e160b79dc9445c8f597ec51c1f5f64aac2d338"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ff612a6b65979ec32d1b76f12e5f97ad1e29ee68b24de063cb58ed9438d4991e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-after/boundary.off.gz",
+      "bytes": 27499,
+      "sha256": "d75d60608806c58fdecc898e1171a5e850cb9845627c76dff1e84efce5bc7adf"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-after/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-after/mesh.npz",
+      "bytes": 111478,
+      "sha256": "66e3e304c7dda31f2d6943e7c16982fe685481210fee0947b2ce656b1c8c7a96"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-after/mesh.vtu.gz",
+      "bytes": 95141,
+      "sha256": "dd3bd9d2b438b94a0ad656837f7e80f6dca2a0339f8edfcd85bfcbdf828b159b"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-after/result.json",
+      "bytes": 4038,
+      "sha256": "387700efe851650803a3ba0946b774a57bfb0cc4b1b7baab4f27d6c8f0dfa241"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-after.log",
+      "bytes": 8730,
+      "sha256": "3a3f1012faf5082a160918aa3203a2d4c0f0d50ab27eab6ce7b32eee12ce1324"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ff612a6b65979ec32d1b76f12e5f97ad1e29ee68b24de063cb58ed9438d4991e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-before/boundary.off.gz",
+      "bytes": 27503,
+      "sha256": "d2abc1b4dbe60c410f6c6712c435336030c66d13fadabc5ec0acf5e3d19bc842"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-before/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-before/mesh.npz",
+      "bytes": 111452,
+      "sha256": "57d373bb10d4082c8a04794673f96150bca81dcf0f0f83d99a2eb7c9cabb1fc9"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-before/mesh.vtu.gz",
+      "bytes": 95153,
+      "sha256": "5dd51b4025984560ed662eb5b958337d6962046a5655dba0721797bb704ba314"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-before/result.json",
+      "bytes": 4039,
+      "sha256": "d4021da14cd8c1dad986287b270b323c6057f2ab7231f6818faa9a82407bf775"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-cavity-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-cavity-before.log",
+      "bytes": 8731,
+      "sha256": "c41721f8095d57a6804c901d279fc89846549dd17e7ac7ecffa94378331ff898"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "3648cd18d1e744004b56c5a27f41e7c9108eaf6d225f1c087abf76a522c1d326"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-after/boundary.off.gz",
+      "bytes": 27710,
+      "sha256": "35ef1589ae299000b2b517c16faa6befd0f7775aeffc808924094e627ecac915"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-after/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-after/mesh.npz",
+      "bytes": 112841,
+      "sha256": "2c863284ffcbfb69a02dadcc1d24af72bbff7af24b5873d8cd62e00fe0ae2153"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-after/mesh.vtu.gz",
+      "bytes": 91482,
+      "sha256": "0a1095b2269ab817d6e18d0f517e682192724e3895cbabbeb624fc27e1711c34"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-after/result.json",
+      "bytes": 4045,
+      "sha256": "f12d5e1c0f77966559711edbc91c18c99fb97cfde3d97791aac5a891bdfcd56a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-after.log",
+      "bytes": 8737,
+      "sha256": "f7230fba46552787a87f88a1ae699889270942b39f9b67885570557caa37ea22"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "3648cd18d1e744004b56c5a27f41e7c9108eaf6d225f1c087abf76a522c1d326"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-before/boundary.off.gz",
+      "bytes": 27731,
+      "sha256": "b4b6dfd3d5646222542a003ccaba1e5c4bb5fe6ea5d255607744ad5cacccc192"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-before/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-before/mesh.npz",
+      "bytes": 112666,
+      "sha256": "9a1b82875bf91329395c7521c7a41993221d94eb924a30f428304f1c80e02c83"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-before/mesh.vtu.gz",
+      "bytes": 91505,
+      "sha256": "66a14d6c727e193f3e359e7cee4ce1833fb9437bb18934f5aed3cffda7d24e87"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-before/result.json",
+      "bytes": 4050,
+      "sha256": "478dc71ae66b975a3e8e10e1fa599a06d2ec7468e6235caf7699e0872b0addc9"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-disconnected-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-disconnected-before.log",
+      "bytes": 8742,
+      "sha256": "f62a05d805b8aa182eaa24957b5b9c664bed001895320c2d5deeb1ccb9028e80"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-hand-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-hand-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-hand-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-hand-after/result.json",
+      "bytes": 3648,
+      "sha256": "39150649d21a68fafc14d34a0f4e1429b915a0ba98a40e791f24954db5a10815"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-hand-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-hand-after.log",
+      "bytes": 8463,
+      "sha256": "32e91d8d0cb41d2e7321436e02412e235be158a70d7144e013e4673814844361"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-hand-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-hand-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-hand-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-hand-before/result.json",
+      "bytes": 3647,
+      "sha256": "f9c7cf7b94d79801a3c3716fb11ac7db7638aad54a74ecf7b5e8f806e1868793"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/coarse-hand-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/coarse-hand-before.log",
+      "bytes": 8462,
+      "sha256": "e544cfc12a01bf2232f27abe18843dcd995fd1fd95fd05c4635e2fd4fc085e38"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/commands.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/commands.json",
+      "bytes": 35048,
+      "sha256": "12a64f47878cb6b86ed867a302bdd55f2628bb995302bcfa084ed61610584fc4"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay-fitted-hand-after.json",
+      "bytes": 2843,
+      "sha256": "9a372f80d74e6e07105a80781e0eee71bf3a2225de33c87aff739341050d9712"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay-fitted-hand-after.log",
+      "bytes": 5139,
+      "sha256": "cf9d8014f633d08ebbffb4480aafe11500dedb2560d8ef2e0735e040d0eb9e43"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay-fitted-hand-before.json",
+      "bytes": 2844,
+      "sha256": "6619889eb60e2e035412ab3d56877ed038267727e8d433e3c2db7e5d862912cb"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay-fitted-hand-before.log",
+      "bytes": 5140,
+      "sha256": "2020a6922e9358326eb9e03430aa6ec849a9bb64d22fe912271ab30fdd4bc9f0"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay-grid-after.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay-grid-after.json",
+      "bytes": 2839,
+      "sha256": "8159b40b1c99aec08b0c3c18757ad9173daa3cd366b782dc4e919dea82d33b1d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay-grid-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay-grid-after.log",
+      "bytes": 4878,
+      "sha256": "4cdd53de4e9d13a3fc1d513293c38be9a8d1db6a30f6b55b301cb89fbdb221f6"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay-grid-before.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay-grid-before.json",
+      "bytes": 2832,
+      "sha256": "7508435334524847f502562b9a76bc298f867b765fd9f918e03ff07c0303245d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay-grid-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay-grid-before.log",
+      "bytes": 4871,
+      "sha256": "547c3d8bb317588fbb29e2b3ef86ac46efef0dca71c784bb4997f8680efbe22f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay1000-after.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay1000-after.json",
+      "bytes": 2826,
+      "sha256": "da7bfce65fea288e48e03dd97ff56a980c8c13be85f9ccfc346ec685b4daf5a1"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay1000-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay1000-after.log",
+      "bytes": 5122,
+      "sha256": "e19fa11dada0c607ce966db245c6fdf48cf95169e386d9fb5da0dbe20b73835b"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay1000-before.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay1000-before.json",
+      "bytes": 2815,
+      "sha256": "e822a3ae16825cf120159f1f9cff04e954847a80f8cd8a91d16b44c0249a1027"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay1000-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay1000-before.log",
+      "bytes": 5111,
+      "sha256": "676631c818826e0e819bd52f095075f50f63b8626b66ce95bc8ea53f931a1095"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay100000-after.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay100000-after.json",
+      "bytes": 2829,
+      "sha256": "edff97279103edf7ef56428cd45d6c6c16888cf1f3c8d9664220500a5467ae70"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay100000-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay100000-after.log",
+      "bytes": 5059,
+      "sha256": "15a578702d814239e4b8f194bce59850a622318581e0c4cdde1a0309606f7bc7"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay100000-before.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay100000-before.json",
+      "bytes": 2824,
+      "sha256": "063c345527445a27d0e8c74a41f720829045b3c3a6cc104e28c90c820e83aa7c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/delaunay100000-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/delaunay100000-before.log",
+      "bytes": 5054,
+      "sha256": "8d7d23fe79ebe61a54bc6d464c7a97d20bfbdc1496d5c5d9b3999ca39a876292"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/diagram100000-after.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/diagram100000-after.json",
+      "bytes": 2566,
+      "sha256": "b98c566a530915201e030b7385d0a1ff68091b1f37ece1371f8e7e5d134d5825"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/diagram100000-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/diagram100000-after.log",
+      "bytes": 3437,
+      "sha256": "c82d0580f77edf1b21390582a366a5d2ac1450bb5bb562bb2dd036995cfa7e0a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/diagram100000-before.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/diagram100000-before.json",
+      "bytes": 2572,
+      "sha256": "a46fb8e74dc9871b4aff0fcd3803b787adf446ccbdf31bc30a537d2d7fe5f554"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/diagram100000-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/diagram100000-before.log",
+      "bytes": 3443,
+      "sha256": "e242ee8b7dfa21e2e22e01b48eee532032bb755852df88bc09793d4d9a1edeab"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-after/boundary.off.gz",
+      "bytes": 139507,
+      "sha256": "24ba62bd915ef61978231d5371cc7bd994855b51f2cb692d65d658776472b82d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-after/mesh.npz",
+      "bytes": 1612843,
+      "sha256": "6f50fda4bc8501284f09dc7b10b19bcc9cc508609eab738bbaed7c64d5dd4b53"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-after/mesh.vtu.gz",
+      "bytes": 428078,
+      "sha256": "ffbbc692fa3f1ae3f4d85d4b9e86731c8a7075972f5a19aeb8e05039a499e93a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-after/result.json",
+      "bytes": 4133,
+      "sha256": "146910e65872c36d0034777eb07d8467e137046686a572cfcc2c094b4d8f7220"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-after.log",
+      "bytes": 8999,
+      "sha256": "fb78d737b8205553c2f90a17f780320d42a13ac89254ee9efde47c655c9e3143"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-before/boundary.off.gz",
+      "bytes": 139494,
+      "sha256": "03a104a5c7970a5a419921abe278d6091e30fc968e7ffd79d942fc082b838b52"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-before/mesh.npz",
+      "bytes": 1612064,
+      "sha256": "18e6c252a8af4587a9794171373bf9498aec1df1ab562315037925378ce43456"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-before/mesh.vtu.gz",
+      "bytes": 427498,
+      "sha256": "ed948bfdb71f3f8e0c40394f7938f22bd2bd10ff61acbe511ced3b9fcc0af3a8"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-before/result.json",
+      "bytes": 4134,
+      "sha256": "314f51899113094192d21ec2f7a374030f38e0fec566ba2ea955b2f41fd06be7"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/graded-armadillo-before.log",
+      "bytes": 9000,
+      "sha256": "217859d798ab65af749be141a762f8ccbbd46c031983eae769b4991456f5a7ff"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "48394a3a9fe70e4ec6214c114f4e2bb6579a2cc31073054bc05e22a84531ee28"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-after/boundary.off.gz",
+      "bytes": 28950,
+      "sha256": "85e9fbe5e23ad330ff845e7eda0f738cd2e72ccb07c5181fb6798b0078b8e611"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-after/mesh.npz",
+      "bytes": 98852,
+      "sha256": "dc69ed1f81b83fb8c9993665d89e209dccda76abdeae72fd78b86482ed2a41b9"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-after/mesh.vtu.gz",
+      "bytes": 70780,
+      "sha256": "54f93032579ecdd84bb0fcf0af154b4d0cc9c4fda5154b28bb060efeab6d4162"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-after/result.json",
+      "bytes": 4045,
+      "sha256": "109d77f9c6adbd5ece00eed857a5eb136bea6e566d42bed14271bad949b54fec"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-after.log",
+      "bytes": 8737,
+      "sha256": "83c79fc9024f342f36f3bafe9cecf62049987776fc7ac081f4d30a38f316c373"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "48394a3a9fe70e4ec6214c114f4e2bb6579a2cc31073054bc05e22a84531ee28"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-before/boundary.off.gz",
+      "bytes": 28946,
+      "sha256": "c75f87c1c2e6597cb177e5bf074c88d21a5d6d15dbd9868248932ccfdc67a597"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-before/mesh.npz",
+      "bytes": 98934,
+      "sha256": "a83193d330dbc99c419511f9d82bd00f7ed295a58f8318eeb4c041e30e4c6f73"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-before/mesh.vtu.gz",
+      "bytes": 70837,
+      "sha256": "7ee69bd6fe253900127eda030347d7e6aaf00720f6fe3521f1d12ecac98d9ce1"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-before/result.json",
+      "bytes": 4047,
+      "sha256": "0cf50f4d46d973a49cb85663dcf349f180fabba6ef3864a103f0c1d0e96dc9d7"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed0-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed0-before.log",
+      "bytes": 8739,
+      "sha256": "520ad9bcfc2013adea150a8894e33f6400157e29c27ca51b857eb887847e3bc5"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "15b2166df336f98f87c3a44afc49ebd1c5565d5be724267d461496b8d89fc7ab"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-after/boundary.off.gz",
+      "bytes": 28865,
+      "sha256": "bbbf35c85bdf0b3d58ced500dcea4d7720fade71c9d09df58bc27f1b39f204a3"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-after/mesh.npz",
+      "bytes": 98270,
+      "sha256": "5fd7fc1f8c4dc8c359c11d570cac985afd494e951ba7e5a37b241b5207fb5b4f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-after/mesh.vtu.gz",
+      "bytes": 70102,
+      "sha256": "9942ac5d944ce91d2ca106d536d01f58a280d3cb569927dce77d4cd0aeb75df8"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-after/result.json",
+      "bytes": 4043,
+      "sha256": "533dc8f978613c1811baaee2ab8c310e8102dc544544a50eb0b72fd0dd2cf127"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-after.log",
+      "bytes": 8735,
+      "sha256": "80f2f0ebb2010b57ebdedc0abbc2469d1d3d467c8b7b5c9373d0711db120fdcf"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "15b2166df336f98f87c3a44afc49ebd1c5565d5be724267d461496b8d89fc7ab"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-before/boundary.off.gz",
+      "bytes": 28878,
+      "sha256": "1ff1e7eaba90a3cf5edfbfac304ec904dfbda387944c8b40b878e372016822d8"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-before/mesh.npz",
+      "bytes": 98494,
+      "sha256": "c0cf4c671d3ce0dc4b64c7d8cd4fa58d5defe2c56cc355a435fa532c86f6cd70"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-before/mesh.vtu.gz",
+      "bytes": 70174,
+      "sha256": "2e275d457583d36a69ed19ecf6a7044056a800f9ba5080912910e331d2a0f5f9"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-before/result.json",
+      "bytes": 4043,
+      "sha256": "423ec394171b31451e856c7f62faef04fa3e1bf4f76e94d0f74d287d38039268"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed1-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed1-before.log",
+      "bytes": 8735,
+      "sha256": "3213c239c1b6f8bc44cdbc5e32f31aa4d6156f99c627b5b67d3d7348d2949906"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "503bfe960bc3c86cd48d2a7ea8b2ab79c85da4c8299bff57ef8b71730589ddd2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-after/boundary.off.gz",
+      "bytes": 28649,
+      "sha256": "ace1ba671574c0b9830e3eec3c82d42305985df1003f2dbf14fd782f212112f9"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-after/mesh.npz",
+      "bytes": 88707,
+      "sha256": "cc9fc2f7160e822fe2fab4d3a6c366df92f38a6b9fa04db4a2a810f31022708b"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-after/mesh.vtu.gz",
+      "bytes": 70274,
+      "sha256": "7acdfef9fe865a240871640ce776b05fae02b16bcdf55a43af03ee2db9c8ad00"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-after/result.json",
+      "bytes": 4052,
+      "sha256": "3c094a23641d4af800858e4bf81f54a9a624664d1dce804357c64627d1da58ef"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-after.log",
+      "bytes": 8744,
+      "sha256": "7195504671649bfb1b8a3a9a9215ccd7e23f065a9d1594fa3b141aee5579e1ad"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "503bfe960bc3c86cd48d2a7ea8b2ab79c85da4c8299bff57ef8b71730589ddd2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-before/boundary.off.gz",
+      "bytes": 28656,
+      "sha256": "2ee6f2f9c780853a6346906ea33ea6780e87c0e230bc423c264bd71fc9dbb9c2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-before/mesh.npz",
+      "bytes": 88743,
+      "sha256": "2043c492377558ae0edac59faec42aca8bb286e85f79160d31986779103a60fc"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-before/mesh.vtu.gz",
+      "bytes": 70201,
+      "sha256": "3a3d7bd7bf81ad52da7eb07997f49d9f90f8f96dedd73a5c77494e31d16a9182"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-before/result.json",
+      "bytes": 4052,
+      "sha256": "1fd394f52d56acf7518c48fc16a87c9f6e0d5dc20916584508caa2bdea2cc44f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2-before.log",
+      "bytes": 8744,
+      "sha256": "91fcecb04dc3b68412ae76482f4130d6853def47e39b6c927335ac37b994a254"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-after/boundary.off.gz",
+      "bytes": 28756,
+      "sha256": "3343642a05954e30d396b281c86bb9f3d3297162ee699f7810091f71f1046305"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-after/mesh.npz",
+      "bytes": 98641,
+      "sha256": "033c721fec9f728e2ecf7fa45ae1370f187d4d63dfcba9d0129a8590b884a65f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-after/mesh.vtu.gz",
+      "bytes": 70610,
+      "sha256": "c4fea3e69c83d2e46f0f01c8c1d31e19bdccd1d3fb04dcf01dc53d2a53ec4fb4"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-after/result.json",
+      "bytes": 4055,
+      "sha256": "3c97864fddc4b7dff718206104193c3b71cb1ee177e0acb7b6eecdc9bd7f485c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-after.log",
+      "bytes": 8747,
+      "sha256": "404ed5246bd77d0b7b25ccffeafe93e42c61f03cdf6f0ab86ef7b85d5d65af2e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-before/boundary.off.gz",
+      "bytes": 28755,
+      "sha256": "9f56b1148f24b853c463db0e0ae944e9ac7387896e272a9adb8ae0616ed4fc90"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-before/mesh.npz",
+      "bytes": 98627,
+      "sha256": "0d016afdfe918777013e8ee18be7622066eb72ef3dd6cc1642e639acaa1f3e41"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-before/mesh.vtu.gz",
+      "bytes": 70684,
+      "sha256": "51a627770f9a933074738d238c1280bb103f3339c323a7c38f685896150176eb"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-before/result.json",
+      "bytes": 4058,
+      "sha256": "9b6b49962e87962e50827cec79803ceac3fad771b69186b1ef8f70b2c31839b2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed2026-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed2026-before.log",
+      "bytes": 8750,
+      "sha256": "5e1975f2226b2359f8a095bc28a059e750f7b92e599f10da6fa6401b8f167729"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "12cc7ad82fed635c7c119ecb9c989571766ef0f76c61a205432fae769c2b0e49"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-after/boundary.off.gz",
+      "bytes": 29060,
+      "sha256": "171051d543a9d1416a1993b6d4522a4524dfa4d1fd0f5ebd03891f97137a1e4c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-after/mesh.npz",
+      "bytes": 99083,
+      "sha256": "3f3368a735718606d0d2e1579036b8afaaea283ee084b8ef2be9f14a9bc3bdac"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-after/mesh.vtu.gz",
+      "bytes": 71056,
+      "sha256": "7f0bc6329f6424ed596fcad1af6716ccae342364ac1a83bcf2cf7e933707d5a2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-after/result.json",
+      "bytes": 4041,
+      "sha256": "466cd920fde99d75cef84f8235fa50b69e34b5d05bc3296ed259ada8d826b7c1"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-after.log",
+      "bytes": 8733,
+      "sha256": "9aed039461ecca0e2ec915e993d51a2a906fb272f856390f81e2cc884c60161f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "12cc7ad82fed635c7c119ecb9c989571766ef0f76c61a205432fae769c2b0e49"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-before/boundary.off.gz",
+      "bytes": 29067,
+      "sha256": "01c27cc69eaed28ac9781b54aaee488b556b9084fd031f89507806a3bad4f5d4"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-before/mesh.npz",
+      "bytes": 99090,
+      "sha256": "bcdb3220932636c2cf0cf6047feb177d39a9e0880eaaa884f52dac416cd4a325"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-before/mesh.vtu.gz",
+      "bytes": 70993,
+      "sha256": "b9421c02da57e2c7c5cc20beec3b7aceb2786fc4a2d299f3424e1783b2bdcd3d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-before/result.json",
+      "bytes": 4046,
+      "sha256": "72154dddbdf14d2615b925249288c96796de48fa33061842c3ffe40bed24d9e4"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed42-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed42-before.log",
+      "bytes": 8738,
+      "sha256": "ae0941b60a2e3a401c39c20c2171c18a55e850627f276cbbfde8680eceabe681"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-after/boundary.off.gz",
+      "bytes": 28573,
+      "sha256": "7a93a7476d388ba6ddbe6b85d1032074cbfb3c57eef0958e6c21cbf2348c06ae"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-after/mesh.npz",
+      "bytes": 89594,
+      "sha256": "4a825f02316c745abf8fe3cbce31d8f0c1913d2ea918c508ed62d5113ab204e1"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-after/mesh.vtu.gz",
+      "bytes": 71206,
+      "sha256": "8365672a3373a7ec53a286eeb1d6941214ac9b971f01ea39ec828baa7c695462"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-after/result.json",
+      "bytes": 4059,
+      "sha256": "73ef50dc543e930296c78ec4d60ec064455aaab1d8285b6a67af5c7f92bcc93c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-after.log",
+      "bytes": 8751,
+      "sha256": "46e0b7c481005d71bef6488af099cc30351bc93ede6b31965ae18d9b85ca0bc0"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-before/boundary.off.gz",
+      "bytes": 28565,
+      "sha256": "c4355ca748e751a80860a055522037973194f8bab24963d1e438fd822e6ae91c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-before/mesh.npz",
+      "bytes": 89467,
+      "sha256": "444a9fff13c6e8c0169d3c6a8feadd3a9fc019929228fc47269952d9f49b2768"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-before/mesh.vtu.gz",
+      "bytes": 71081,
+      "sha256": "984c71a415ddffa9120e8aa1c89389e5fd6f81d25e2e5c9273a75f8a0b1f9462"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-before/result.json",
+      "bytes": 4056,
+      "sha256": "76296dd263da0fc52e693a7c68bee1a4b0636b190400f9282964bd0e43f2efea"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-before.log",
+      "bytes": 8748,
+      "sha256": "7659253486bd406a3db39e54d00038d022e37e24455ce617255451ab9eac47ac"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-after/boundary.off.gz",
+      "bytes": 28585,
+      "sha256": "d06e4d8d60cd45c3c8ff70364b5167ad42c5fc7be97b30f3d36d6e163b971f85"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-after/mesh.npz",
+      "bytes": 89550,
+      "sha256": "1d08849ec49d9d3008a62ae5f9537abd8a89410fe9490153c6c17ce89ae7ecdd"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-after/mesh.vtu.gz",
+      "bytes": 71167,
+      "sha256": "7150049886f21040faed673e35c52e624ebd7c17b3c47f2e7a7fd5e1aee98917"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-after/result.json",
+      "bytes": 4068,
+      "sha256": "f27cdc68915cfea20ec0844d950da4cd98afccbdc1b84a1d97c493889ef085bb"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-after.log",
+      "bytes": 8855,
+      "sha256": "851a0d59cfbd3f5a18ab0142154ec03d1ca2ebb8ab5ed807cba05319114aa146"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-before/boundary.off.gz",
+      "bytes": 28546,
+      "sha256": "fb68b0092aca59d8a3df2a4248be4f6863f1d7ee54588cd624de421d30a62961"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-before/mesh.npz",
+      "bytes": 89504,
+      "sha256": "16fb0c17b6cf68a9541a34cd953ff201c3dccfeba57e885d1cbb3668be43391e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-before/mesh.vtu.gz",
+      "bytes": 71145,
+      "sha256": "59f44604dd775efe92e240df14bc79648d500c1bcebdc95b64119c8840e85237"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-before/result.json",
+      "bytes": 4062,
+      "sha256": "b1461f51233c3bf6627ffb865922eb769dab001e2c714953dee01ac9024f394d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/hand-seed7-local4-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/hand-seed7-local4-before.log",
+      "bytes": 8849,
+      "sha256": "f5266b204cff493629667b5d323035c1c7d2e27275828b9ac0de7f012401d9cc"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/lossless-archives.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/lossless-archives.json",
+      "bytes": 21155,
+      "sha256": "e455ae22dcf2a658d59efdbb1f4c3660dac2d0650b299d7bbfd490fb10e705c8"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-after/boundary.off.gz",
+      "bytes": 32373,
+      "sha256": "31bfd31378683cb494f737e3efb0d16344bdb1654aead792016f9261d47a420f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-after/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-after/mesh.npz",
+      "bytes": 109317,
+      "sha256": "5650a763874b63a4b4dcb189a6db87c5e735b2cf9bb8a887c222459fabdd4153"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-after/mesh.vtu.gz",
+      "bytes": 86048,
+      "sha256": "5206be9bcaac246324a43f53f3256bbdad2160f1c0003ecd9a88d8daf2a1d16f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-after/result.json",
+      "bytes": 4051,
+      "sha256": "ef9337fdf9a5d7eca81f936274ad0a79ef4cfc1dbed3faa2e5b037eb75f7ef9f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-after.log",
+      "bytes": 8743,
+      "sha256": "7058ff1a7e1fd6a237cb74a337b328522ed7d60bc97ee5f6ff6d79e8e60eebe4"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-before/boundary.off.gz",
+      "bytes": 32371,
+      "sha256": "405fa8392c026fdc62bab532a1f83bd38212cc1214233cd4f061c0daa9f7d16c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-before/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-before/mesh.npz",
+      "bytes": 109218,
+      "sha256": "3f3227ac3f319cca43e4fc0c94253e143de3d92350abec4a3f45f18758088a2f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-before/mesh.vtu.gz",
+      "bytes": 85892,
+      "sha256": "02637f95467452e81410a9fc527c529a9723084da6b5850aff5fecadcda427de"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-before/result.json",
+      "bytes": 4053,
+      "sha256": "b6bd31053e668323f3a0c42927c4cbd5f6b8bedef4c5b1f05b8052f3cedbd572"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/plate-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/plate-before.log",
+      "bytes": 8745,
+      "sha256": "e80c76fb9c7c0b2702a4faa86740027dc036cb7d3ead51bb8b485dafa0ff8680"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "f7ad322baf26b642fb2642afae761ca68f726db3778805565890295826d77f08"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-after/boundary.off.gz",
+      "bytes": 135017,
+      "sha256": "4d81e7c6092db4941e72c95814f47b47b345d4ebf1f0f109598ffbc0bc30aacc"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-after/mesh.npz",
+      "bytes": 566044,
+      "sha256": "7eaf02df453764195fd415c6162307e83366d9659e82d2e8dc02b1ff8cf566cb"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-after/mesh.vtu.gz",
+      "bytes": 445135,
+      "sha256": "67fbc83830cdf26b7d446ae6fdada730fe7fa683803a00c3c8530129c336e2d5"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-after/result.json",
+      "bytes": 4044,
+      "sha256": "50e4e2829837e7b8097ba2cb37ca099ef4494138513a0004be02fc7312ee4f9f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-after.log",
+      "bytes": 8824,
+      "sha256": "8146c8f9b88a750ebc8a742462f6091c0fccacfb02620ecbfd3e7abbc66c325a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "f7ad322baf26b642fb2642afae761ca68f726db3778805565890295826d77f08"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-before/boundary.off.gz",
+      "bytes": 135014,
+      "sha256": "b35ab378d7df2428ebdbce744fa0d2b1aeba807b2b9c98dfdb967f18191f91cc"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-before/mesh.npz",
+      "bytes": 565822,
+      "sha256": "fdba9cb704fbd7d3870d074639b867d7e30505a3c52a713eed8252b3a28cc68a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-before/mesh.vtu.gz",
+      "bytes": 445097,
+      "sha256": "68cde699e1bae778a80bb4a897101d52a33c6098516af98ffc849b18a452f34e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-before/result.json",
+      "bytes": 4047,
+      "sha256": "8561699026f6619c8d34dd10ddc1ea5c2a9744ae36b5328af57d1828582fe04a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/torus4096-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final/torus4096-before.log",
+      "bytes": 8827,
+      "sha256": "b3ac80fe7a5a61b74958cfce2c916281da3a00ccb9995318f0a40a240c867c01"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final-independent-v1.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final-independent-v1.json",
+      "bytes": 1075706,
+      "sha256": "216654fc4ca1eb69f10d30081eb79260d390bd57a7885db203970f1a89dab797"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final-independent-v1.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final-independent-v1.log",
+      "bytes": 5239,
+      "sha256": "06e65797e9639c82f3d34f899e450a5cf6e16e7a7e8323c7a85d034702ff1e11"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final-v1.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-final-v1.log",
+      "bytes": 29177,
+      "sha256": "f63365c68ffd5b271a0c6fd2f5e2188717eab3ae765911cc1445fe5a5a417ab9"
+    },
+    {
+      "original": ".work/vtm/axis-hull-focused-v1.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-focused-v1.log",
+      "bytes": 190,
+      "sha256": "88ebac0b8eedaa03938c5e011a90ae36eaa395579607d184f80ef37d6330b654"
+    },
+    {
+      "original": ".work/vtm/axis-hull-full-native-v1-audit.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-full-native-v1-audit.json",
+      "bytes": 949,
+      "sha256": "27bb82eafef5af960a2d1dbf4295df015362efea5f564daed3ae4fd1e5fd91f7"
+    },
+    {
+      "original": ".work/vtm/axis-hull-full-native-v1-audit.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-full-native-v1-audit.log",
+      "bytes": 949,
+      "sha256": "27bb82eafef5af960a2d1dbf4295df015362efea5f564daed3ae4fd1e5fd91f7"
+    },
+    {
+      "original": ".work/vtm/axis-hull-full-native-v1-command.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-full-native-v1-command.json",
+      "bytes": 750,
+      "sha256": "138c56f3a84cdd4e5516e8408f5f8cd7e58b8327add8a926aa24214f4367c4a3"
+    },
+    {
+      "original": ".work/vtm/axis-hull-full-native-v1-driver.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-full-native-v1-driver.log",
+      "bytes": 1944,
+      "sha256": "bcaf913df2638fb4041f73f312fb8a4868297bd93e42197342030f8071f428d8"
+    },
+    {
+      "original": ".work/vtm/axis-hull-full-native-v1-export.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-full-native-v1-export.log",
+      "bytes": 8101,
+      "sha256": "3609bce1a6cf474f23b1e02f2d5355dd32bd30037b20cf52162407c490f207f2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-full-native-v1-kernels.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-full-native-v1-kernels.json",
+      "bytes": 35655,
+      "sha256": "f98ad77304c87280b1ba361c5bafdf020b6740fb8e43487081c8a72d225d43bd"
+    },
+    {
+      "original": ".work/vtm/axis-hull-full-native-v1.dot.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-full-native-v1.dot.gz",
+      "bytes": 712197,
+      "sha256": "207acfa40a4151987d60215b878e03017e318aeb5f953ddcdbdba70f81470da7"
+    },
+    {
+      "original": ".work/vtm/axis-hull-full-native-v1.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-full-native-v1.json",
+      "bytes": 626,
+      "sha256": "04c0307b932748f2bdb15df959628d24ae66577045e9314e9f361266f224243b"
+    },
+    {
+      "original": ".work/vtm/axis-hull-full-native-v1.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-full-native-v1.log",
+      "bytes": 8622,
+      "sha256": "c7a9efd2cb95697c6a99ff0c75ef2e2465ef26725231f76310011a24c2257a72"
+    },
+    {
+      "original": ".work/vtm/axis-hull-full-native-v1.nsys-rep.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-full-native-v1.nsys-rep.gz",
+      "bytes": 1899791,
+      "sha256": "32f97c45b18dd252ef5da269bcb1234e659c04f035dccb515fdafea5b6b57ad9"
+    },
+    {
+      "original": ".work/vtm/axis-hull-full-suite-v1.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-full-suite-v1.log",
+      "bytes": 1313,
+      "sha256": "9708df54b90bb14ef45ba187705447b1a37c296b65e1bd727bd0940bcbe8f890"
+    },
+    {
+      "original": ".work/vtm/axis-hull-loop-native-v1-audit.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-loop-native-v1-audit.json",
+      "bytes": 916,
+      "sha256": "db6688a9cc49e7ec97f6dbf47dd69a4e596b62b3fbc4c17281e0d395f65a9e3f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-loop-native-v1-audit.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-loop-native-v1-audit.log",
+      "bytes": 916,
+      "sha256": "db6688a9cc49e7ec97f6dbf47dd69a4e596b62b3fbc4c17281e0d395f65a9e3f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-loop-native-v1-command.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-loop-native-v1-command.json",
+      "bytes": 765,
+      "sha256": "2089a6d80badcb6ba10b4929bde66db2c16d783f21f96e4d8a35408ef7bb4a35"
+    },
+    {
+      "original": ".work/vtm/axis-hull-loop-native-v1-driver.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-loop-native-v1-driver.log",
+      "bytes": 1953,
+      "sha256": "42a55f424551b695c8773d27afaa1f60ad17061294d7ded89a5625caf0d7315a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-loop-native-v1-export.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-loop-native-v1-export.log",
+      "bytes": 8101,
+      "sha256": "ac47a0211ff7cd693a703b912e4a638c36668e0d59c3f6f7abeee97dc94f6058"
+    },
+    {
+      "original": ".work/vtm/axis-hull-loop-native-v1-kernels.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-loop-native-v1-kernels.json",
+      "bytes": 36914,
+      "sha256": "c4efa0c3ff3318d92ae9d395644169dfc711eddc093bffabb38be143a5543496"
+    },
+    {
+      "original": ".work/vtm/axis-hull-loop-native-v1.dot.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-loop-native-v1.dot.gz",
+      "bytes": 712451,
+      "sha256": "503347bf0b0eb2f0a18bdba5432948f6756e8dfeb36f636e898f3a823002fd12"
+    },
+    {
+      "original": ".work/vtm/axis-hull-loop-native-v1.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-loop-native-v1.json",
+      "bytes": 1192,
+      "sha256": "9e66b2dcc8279d9293c0aff88c3beb2bb9c9e59086492bf0ad4cb572eba269f6"
+    },
+    {
+      "original": ".work/vtm/axis-hull-loop-native-v1.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-loop-native-v1.log",
+      "bytes": 9409,
+      "sha256": "14cbfc640f00744d24ec3955d4d90662a4aa0df110343098c36ab739942707a7"
+    },
+    {
+      "original": ".work/vtm/axis-hull-loop-native-v1.nsys-rep.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-loop-native-v1.nsys-rep.gz",
+      "bytes": 3322567,
+      "sha256": "00525fc99c9474daacdf15fe92b54efe56791e14d52712b0b7f670cafc5d1049"
+    },
+    {
+      "original": ".work/vtm/axis-hull-memory-v1-commands.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-memory-v1-commands.json",
+      "bytes": 5439,
+      "sha256": "5dfbe1fdc03f8fe2e9174dbc41ec60c6b29973e98bf9f16ed84eebda0e989fec"
+    },
+    {
+      "original": ".work/vtm/axis-hull-memory-v1-full-local4-lifetime.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-memory-v1-full-local4-lifetime.log",
+      "bytes": 10173,
+      "sha256": "79c383b3c749b0a575b41cf0037087e41b6cfcc03ddefc7539467a2d9c67899c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-memory-v1-full-local4-padded.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-memory-v1-full-local4-padded.log",
+      "bytes": 10172,
+      "sha256": "dee77df17cbb2a4682d00262568d41a0fb66eea12c16318e888f4661854def1c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-memory-v1-loop-lifetime.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-memory-v1-loop-lifetime.log",
+      "bytes": 18779,
+      "sha256": "e3ef7fcfd97d12cfe3879666763ba39ad24603f33381c7a228e8b8c374600204"
+    },
+    {
+      "original": ".work/vtm/axis-hull-memory-v1-loop-padded.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-memory-v1-loop-padded.log",
+      "bytes": 14426,
+      "sha256": "cb1bcdcee95ff791f30cb713f3b8f2eec5fc08fb3ad19d21c258dd32095b19c8"
+    },
+    {
+      "original": ".work/vtm/axis-hull-memory-v1-primitives-lifetime.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-memory-v1-primitives-lifetime.log",
+      "bytes": 1250,
+      "sha256": "ba2cefd046393a2fe52ae69ea9118768b3774e5ac7789c28b51fe926b32a0291"
+    },
+    {
+      "original": ".work/vtm/axis-hull-memory-v1-primitives-padded.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-memory-v1-primitives-padded.log",
+      "bytes": 1249,
+      "sha256": "6724c7f6ad22d18272d8089a8728a9f0e599dfc0a1e6210c4813a03c5960e19f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-memory-v1-support-motion-lifetime.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-memory-v1-support-motion-lifetime.log",
+      "bytes": 1540,
+      "sha256": "f88c34ae20ba73f496fcbc202ecf5006141f463fb433a6f6089387440a9d2c8c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-memory-v1-support-motion-padded.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-memory-v1-support-motion-padded.log",
+      "bytes": 1539,
+      "sha256": "732d9399358bafbc9179f164c3db18c04c81b0c776b08e4de24bfd256494304f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-memory-v1.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-memory-v1.log",
+      "bytes": 4468,
+      "sha256": "703268cb3bb96b7f3867ad7cd794156d8c6767be4fc8a3991b19697dbfc4a29e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observation-archives-v1.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observation-archives-v1.json",
+      "bytes": 1207,
+      "sha256": "42fe35289d55c81c8c0afad2f5a97896b03e3f56eaa43b986e2f356455f9db28"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-batch-v1.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-batch-v1.log",
+      "bytes": 461,
+      "sha256": "94abff83d96efba5e562668086b25c84192e37b19dc411f25367337e41e132a8"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/batch-commands.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/batch-commands.json",
+      "bytes": 1131,
+      "sha256": "f7d09db7a2c22f860a4922669b7707a23700a0af979029aaf699324e11c83412"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/cavity/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/cavity/boundary.off.gz",
+      "bytes": 30638,
+      "sha256": "9a9af1d7d6d41d592f263ccade958aaff9ec9e44df02362c23f64a3e1c914eba"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/cavity/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/cavity/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/cavity/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/cavity/mesh.npz",
+      "bytes": 108633,
+      "sha256": "fc8b324f0a70ea10774fd57fa2d94f9bd870ffb39fce821132703ca443c904d9"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/cavity/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/cavity/mesh.vtu.gz",
+      "bytes": 92518,
+      "sha256": "5214519e6d694fc8dcebe871c99138cf53d03fe3708d293d1db530b4d39d6d47"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/cavity/observer.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/cavity/observer.json",
+      "bytes": 829,
+      "sha256": "205f7987917d480beb48c0757e33f3d4f0619c6b755be7864bc0f8d686e75720"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/cavity/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/cavity/result.json",
+      "bytes": 3953,
+      "sha256": "c5a4583e934b0edb1b2fee2d19bee4061bdb26bc77e62f7a0f6f6a80b7ba1aa5"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/hand7/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/hand7/boundary.off.gz",
+      "bytes": 28567,
+      "sha256": "9fdcaaae27946597a546649e7ad5efb4b560d75e2f1868f04b50e99000d9758c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/hand7/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/hand7/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/hand7/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/hand7/mesh.npz",
+      "bytes": 89545,
+      "sha256": "d3f940c321d3f6e30f405d92b1c40c9dc88a91af2ef8d1baf37186798397d095"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/hand7/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/hand7/mesh.vtu.gz",
+      "bytes": 71155,
+      "sha256": "0bdd824385d6a87caf7aba67f7f74af25c296f8aeceae87652c5378e959a8247"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/hand7/observer.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/hand7/observer.json",
+      "bytes": 832,
+      "sha256": "9c7d45a9c2d37a0c156595e8480287fd22b44e7e37f266c1f3e4e754b011e8c3"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/hand7/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/hand7/result.json",
+      "bytes": 3974,
+      "sha256": "5d58730c7cea786e24e08e240b9f2557a3f5510d2e8fc30f0b9412208a77b10d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/plate/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/plate/boundary.off.gz",
+      "bytes": 32369,
+      "sha256": "28388c0b8c24a7767b9b96c86e59c4d9fe6e5b860e089b83c9d1f348b8408f4a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/plate/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/plate/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/plate/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/plate/mesh.npz",
+      "bytes": 109327,
+      "sha256": "ad932219dc8106777f6705e43a7853e5a1005ba6103351ddcd2b2d7b6e23d273"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/plate/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/plate/mesh.vtu.gz",
+      "bytes": 85975,
+      "sha256": "e7e145b8fa2d044381dbaaddbb4021ea9b7d33994ea85dc7c96e3be71d4331a5"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/plate/observer.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/plate/observer.json",
+      "bytes": 832,
+      "sha256": "80c432b2aeb651a33b05d792840d1b4aefc693f1836652645d131a4726dfd618"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/plate/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/plate/result.json",
+      "bytes": 3963,
+      "sha256": "bdfbf300c25366bb4352520c396b02a58f7fde2d10b2b4d489ef36c28359dbcd"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/torus4096/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/torus4096/boundary.off.gz",
+      "bytes": 135003,
+      "sha256": "1ac28c1e0b57dc825903e5a0233540e73a3a2f49a65cff826ffe0466bbce6093"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/torus4096/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/torus4096/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/torus4096/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/torus4096/mesh.npz",
+      "bytes": 565859,
+      "sha256": "6adcf9319a7b50528be8dbca63ae3c1c449f2a47cd19c1d3d9dc07c4a4363e07"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/torus4096/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/torus4096/mesh.vtu.gz",
+      "bytes": 445226,
+      "sha256": "ee1b1c6fa9b7ecd84a780f1568dc652fbdf5a64fd812ee4d69662f06fb4f36fc"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/torus4096/observer.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/torus4096/observer.json",
+      "bytes": 1163,
+      "sha256": "955c1faeaa29a38f13b6d69ccdadf3171ee9c281c6206c62df4c32e0d429be5d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1/torus4096/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1/torus4096/result.json",
+      "bytes": 3959,
+      "sha256": "30eda15c52f09d6b8489c213a883388769974f552962b342e582cb7363b4c781"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1-cavity.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1-cavity.log",
+      "bytes": 9386,
+      "sha256": "26d6b4629819196124d3a6de072fe1051c53eddcb12efc16e531be48f576ebff"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1-hand7.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1-hand7.log",
+      "bytes": 9414,
+      "sha256": "a6c014430307e3a69cee7cecb206391e03b6c8cca515ff05fb7bddb9993f48ae"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1-plate.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1-plate.log",
+      "bytes": 9399,
+      "sha256": "8afa9bfb158ecebab06d9d7102b9ce559182f178096500f1caacc38d2b8e775f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-observer-v1-torus4096.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-observer-v1-torus4096.log",
+      "bytes": 9594,
+      "sha256": "53bb5afb3b7c5f9bd4bbbec3737dd5a14f5a678974b94ae021ea4dc3f57916cd"
+    },
+    {
+      "original": ".work/vtm/axis-hull-original-kernel-equivalence-v1.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-original-kernel-equivalence-v1.json",
+      "bytes": 194,
+      "sha256": "2100e3cd2f067fcb449d76d7e9709d6234963c0de95c722ee0d160a4de788cdc"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-after/boundary.off.gz",
+      "bytes": 30635,
+      "sha256": "8d126278ee030d1793e3b0c09d244dee1e55d6f00266d8dbf79d99a85c719ce8"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-after/candidate-source.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-after/candidate-source.json",
+      "bytes": 369,
+      "sha256": "ea40e172cc1c7f654efaa1ba7f2a41f12f3d78fce95eb319ea3fe768a4776d6e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-after/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-after/mesh.npz",
+      "bytes": 108712,
+      "sha256": "e80b576551f8260db73581bdd8e5383dcfcd460a4a957970b02e6cf5bd2e91ae"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-after/mesh.vtu.gz",
+      "bytes": 92633,
+      "sha256": "6a20c3142d8a68f692198d0c038c9815c0f9e83db222a9a5f932c8433c14242a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-after/result.json",
+      "bytes": 4001,
+      "sha256": "65273bb7c64e0355e918d47b9b82bbf2f1d7134f39dff21079462107a888304f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-after.log",
+      "bytes": 8859,
+      "sha256": "63a874cfb99327fb568a195886f9acaa05feb9e54c9a735275cf5d4264ce15e8"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-before/boundary.off.gz",
+      "bytes": 30625,
+      "sha256": "02c88ac468043cc01469d75f2981560f87ac5741548bcd2a8408a78c2d5c81ea"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-before/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-before/mesh.npz",
+      "bytes": 108616,
+      "sha256": "8c2c1d3e855e310a0b0429ad10c7b68ef770fbcbd32196f13eb787a4b89077fc"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-before/mesh.vtu.gz",
+      "bytes": 92517,
+      "sha256": "992209af8d6ea5df018f8b51a075ba71c4697a03fd8d4edfbed1a7185dbfb654"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-before/result.json",
+      "bytes": 4006,
+      "sha256": "211092466e0cb1fafeb8aa5288b91bccd43238ef26bbd7b5aee633ffcb5fa8f4"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/cavity-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/cavity-before.log",
+      "bytes": 8698,
+      "sha256": "02782d56fd8983c3aefe6ae4c53cae712ca852402ca8797ad56a70fad32236b9"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/commands.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/commands.json",
+      "bytes": 6778,
+      "sha256": "12afc97c28597f0cc9664cc111a7efda426946044b5373417da22f8dc0ba0b0d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-after/boundary.off.gz",
+      "bytes": 28561,
+      "sha256": "206170342f6c7dcf7e4adb130fdf36a9e782ab4477f843ef8341cb3b0876247e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-after/candidate-source.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-after/candidate-source.json",
+      "bytes": 369,
+      "sha256": "ea40e172cc1c7f654efaa1ba7f2a41f12f3d78fce95eb319ea3fe768a4776d6e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-after/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-after/mesh.npz",
+      "bytes": 89520,
+      "sha256": "a06065135cef9d4de8cfa047d2513ec0adfe80a586355afca0d3d438e62fc734"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-after/mesh.vtu.gz",
+      "bytes": 71113,
+      "sha256": "0a9f7372dc5197d8a3fe33addae48041d3ab7f322621a258a80d7e9e03cce50f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-after/result.json",
+      "bytes": 4017,
+      "sha256": "23f62127671fa89a2e303ec368764b0674056f6fceae14c8c5def2c3911f3c7d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-after.log",
+      "bytes": 8885,
+      "sha256": "16714325b72da72eedf387c1fa6cc73992a2dc4ad894ca1bb81e81f9de6e1d0a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-before/boundary.off.gz",
+      "bytes": 28534,
+      "sha256": "a493fe0608c05b8f88420438b622240708102974f41d92244ba9777ed76955d3"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-before/mesh.npz",
+      "bytes": 89596,
+      "sha256": "c4f2413c31fd9da3e5550dda8e9f9ce2308093a2c1658da4bfbf00ea738ea8ac"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-before/mesh.vtu.gz",
+      "bytes": 71195,
+      "sha256": "69d0736121a0d2e58c0598577b3f8174df89769d3b86ecd181788965c445fdef"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-before/result.json",
+      "bytes": 4026,
+      "sha256": "86dd42b5407cd0ded5af255c9de31e71af7020727b8b5237961deb45aeb36278"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/hand7-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/hand7-before.log",
+      "bytes": 8718,
+      "sha256": "53163c1dbd453df8b009fe30f2efbc9a6c405188541f9db02de70921f981bcda"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-after/boundary.off.gz",
+      "bytes": 32372,
+      "sha256": "0b165de376d46c9d0651d40fa73ad0db5c92f19599199594e308c45c150e53f9"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-after/candidate-source.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-after/candidate-source.json",
+      "bytes": 369,
+      "sha256": "ea40e172cc1c7f654efaa1ba7f2a41f12f3d78fce95eb319ea3fe768a4776d6e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-after/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-after/mesh.npz",
+      "bytes": 109439,
+      "sha256": "7744e1bc0f9b4612d6cecb960fecc47f02ca9e9c1c27643e3b686412bebc2e38"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-after/mesh.vtu.gz",
+      "bytes": 85974,
+      "sha256": "5c9d37e17898f153e63beb834203d0a2897a520fa8b2222ba21d990662d4f7bc"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-after/result.json",
+      "bytes": 4020,
+      "sha256": "33264efc08f57e552b1fc05dea991e90d0e78f18df933a58f92e1112259850a3"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-after.log",
+      "bytes": 8878,
+      "sha256": "7ea44479118933ff115fcecdd6bea9f2c52d48b0eee32b330cc426222bef3ef6"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-before/boundary.off.gz",
+      "bytes": 32368,
+      "sha256": "01be793e7e49565c0a661e92016cb5da0e02e85274c9a5c2b9eee0095bf4cc34"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-before/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-before/mesh.npz",
+      "bytes": 109163,
+      "sha256": "3c0e46db853f61cd471034b369f46f03f478a1ef7072be2c35a3f346c661981f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-before/mesh.vtu.gz",
+      "bytes": 85972,
+      "sha256": "b663c7dbcea6559581aed693542787fd55bcc8aa157a443d7c51310e1b0d9a30"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-before/result.json",
+      "bytes": 4020,
+      "sha256": "b783f24a373ced9d1ace0c4133a50c4b03024b99549ae780c0829fb7f99260b4"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/plate-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/plate-before.log",
+      "bytes": 8712,
+      "sha256": "2615dd978a6012d4ea30200869bb7153a656123ec0ec802725ad2b4cba914451"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-after/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "f7ad322baf26b642fb2642afae761ca68f726db3778805565890295826d77f08"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-after/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-after/boundary.off.gz",
+      "bytes": 135010,
+      "sha256": "0f7fe7e0d091679ba4f8aa6e35413a9298516ee523885890d73d93854aeff516"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-after/candidate-source.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-after/candidate-source.json",
+      "bytes": 369,
+      "sha256": "ea40e172cc1c7f654efaa1ba7f2a41f12f3d78fce95eb319ea3fe768a4776d6e"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-after/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-after/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-after/mesh.npz",
+      "bytes": 565717,
+      "sha256": "c32527d5956ee03aa9586f0e2d026630ce75c84550cc4123a0eba96fdc782ee5"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-after/mesh.vtu.gz",
+      "bytes": 445137,
+      "sha256": "8a39ed88c60ae2d9637ef6fe6b4ec5cc189b4347947855676079f5838cd32de3"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-after/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-after/result.json",
+      "bytes": 3997,
+      "sha256": "260a48477812edeb5c7941f2eca2887f1ba4bfc0bb9ba4d21b486a90c286ac9d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-after.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-after.log",
+      "bytes": 8943,
+      "sha256": "af23e04ddce404d1ff6ecfc3f0c828ff98ff007610d6b9ec1f7dcb55f45e2a8f"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "f7ad322baf26b642fb2642afae761ca68f726db3778805565890295826d77f08"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-before/boundary.off.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-before/boundary.off.gz",
+      "bytes": 134985,
+      "sha256": "585598db90d0fbc2c5072af999dc252a492f6b0742a8dfb492a0cbedd087ce6b"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-before/input.off",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-before/mesh.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-before/mesh.npz",
+      "bytes": 566011,
+      "sha256": "11cef756e499f3ededa294cbd82a732803b0130a4992e1ba78e45b10a7c31f62"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-before/mesh.vtu.gz",
+      "bytes": 445192,
+      "sha256": "67bbb6575de0e03bafb753b8d2d7492dc1540f6290fec3404331c9c19ba25390"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-before/result.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-before/result.json",
+      "bytes": 4004,
+      "sha256": "aae57472068aada6fe89b427c3732110efdb0deb9da869297f9caef25979526b"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1/torus4096-before.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1/torus4096-before.log",
+      "bytes": 8784,
+      "sha256": "3a2786ea51853b7608b7f3ddad7a18aa982d8b430b68f6fde6d0a6a51fdef3d0"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1-independent.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1-independent.json",
+      "bytes": 34243,
+      "sha256": "6ebdc985cd160e4c51844d443c39e536a5956ea62a079fd219d62c8790e2e4db"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1-independent.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1-independent.log",
+      "bytes": 1311,
+      "sha256": "1e416332003847f7eae2b0ed2f6da1f255eb907f925dae73b1b36aa878cb2024"
+    },
+    {
+      "original": ".work/vtm/axis-hull-pilot-v1.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-pilot-v1.log",
+      "bytes": 5295,
+      "sha256": "55724a7313c0214f444fb8eaa4926e2f212b64c9dd493ba08f425cb4ac77e682"
+    },
+    {
+      "original": ".work/vtm/axis-hull-primitive-v1.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-primitive-v1.json",
+      "bytes": 78885,
+      "sha256": "394a92071bf4e84457d0b27fd232ef2360f652b2fd2a957c2d16b9e10acc6986"
+    },
+    {
+      "original": ".work/vtm/axis-hull-primitive-v1.log",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-primitive-v1.log",
+      "bytes": 466,
+      "sha256": "82907a9ed0985ea22f2b8f58659f30474796c15505bc11c3abb4d2ba5169ee8d"
+    },
+    {
+      "original": ".work/vtm/axis-hull-primitive-v1.npz",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-primitive-v1.npz",
+      "bytes": 15058,
+      "sha256": "e3a932b65c4a3b4429cd4c77ebc33aea85a9e3e9f02f663e5f4615817b1906f8"
+    },
+    {
+      "original": ".work/vtm/axis-hull-private-production-equivalence-v1.json",
+      "path": "results/validation/vtm/axis-hull-support/axis-hull-private-production-equivalence-v1.json",
+      "bytes": 576,
+      "sha256": "9036d279778b9a2e6d1be4187df7a55b3608d34838c207cf8819a824f88847c9"
+    },
+    {
+      "original": ".work/vtm/axis_hull_audit_v1.py",
+      "path": "results/validation/vtm/axis-hull-support/axis_hull_audit_v1.py",
+      "bytes": 1966,
+      "sha256": "d0f950c9a3b3316f8e1265c2dc96f3178e28187c6638959f17a0abee1b177e8d"
+    },
+    {
+      "original": ".work/vtm/axis_hull_audit_v2.py",
+      "path": "results/validation/vtm/axis-hull-support/axis_hull_audit_v2.py",
+      "bytes": 1902,
+      "sha256": "797bcc5c4b2118b39e2c749965ba15c6c87ff082efd514e50f16e1fa1df11d18"
+    },
+    {
+      "original": ".work/vtm/axis_hull_observer_v1.py",
+      "path": "results/validation/vtm/axis-hull-support/axis_hull_observer_v1.py",
+      "bytes": 1986,
+      "sha256": "6641fad0e2a669c24ad26499b79be5c06a0a14ef2a90bf6b43d38a2bad1fe32a"
+    },
+    {
+      "original": ".work/vtm/axis_hull_original_v1.py",
+      "path": "results/validation/vtm/axis-hull-support/axis_hull_original_v1.py",
+      "bytes": 3291,
+      "sha256": "ebaa45406196c2ef24939b2a62c878049503f0a0f637390a857b4c57783ba3d3"
+    },
+    {
+      "original": ".work/vtm/axis_hull_support_v1.py",
+      "path": "results/validation/vtm/axis-hull-support/axis_hull_support_v1.py",
+      "bytes": 4349,
+      "sha256": "7a1b00bdcb681820ba932df1f8cf5d479395f1ac1b449942a6dc27fb42987390"
+    },
+    {
+      "original": ".work/vtm/check-axis-hull-final-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/check-axis-hull-final-v1.py",
+      "bytes": 4423,
+      "sha256": "9db1f1d29a586a31cfdca3622c00982b359bf387ad9bdfdff0416b46a8605c8e"
+    },
+    {
+      "original": ".work/vtm/check-axis-hull-pilot-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/check-axis-hull-pilot-v1.py",
+      "bytes": 1763,
+      "sha256": "99c5c219b7fb74e9c46e7784e672b4bada1b22c8aff68770222a9fb137f9f176"
+    },
+    {
+      "original": ".work/vtm/profile-axis-hull-production-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/profile-axis-hull-production-v1.py",
+      "bytes": 2973,
+      "sha256": "ba5f2ffb1e65904d5003cf04e3708d0d73ad5de5e7348620e33858079bd4ed60"
+    },
+    {
+      "original": ".work/vtm/publish-axis-hull-support-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/publish-axis-hull-support-v1.py",
+      "bytes": 7323,
+      "sha256": "ef1ab176a31ae4ee1775e98beee9c65a3be908dba77cdfe4d748da76dd5d846a"
+    },
+    {
+      "original": ".work/vtm/run-axis-hull-audit-batch-v2.py",
+      "path": "results/validation/vtm/axis-hull-support/run-axis-hull-audit-batch-v2.py",
+      "bytes": 1349,
+      "sha256": "d633d854ec023fb6daec13f0e25017d18fce2503880019e511fba499abd0ed93"
+    },
+    {
+      "original": ".work/vtm/run-axis-hull-audit-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/run-axis-hull-audit-v1.py",
+      "bytes": 950,
+      "sha256": "5e6e3679d6a28d5d1dbf399a0af1cf12918c3d7831ad2c8c3f2240c7b5bf7e2d"
+    },
+    {
+      "original": ".work/vtm/run-axis-hull-audit-v2.py",
+      "path": "results/validation/vtm/axis-hull-support/run-axis-hull-audit-v2.py",
+      "bytes": 990,
+      "sha256": "6b0d0e3b59d2ce3d8d2928af52edf44874a27df400a49af1171d95d7a5ad18f3"
+    },
+    {
+      "original": ".work/vtm/run-axis-hull-final-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/run-axis-hull-final-v1.py",
+      "bytes": 5111,
+      "sha256": "2fd34f0999572fdf9070151e88981f2870d84eaabf771a24bdbaf88ef535b031"
+    },
+    {
+      "original": ".work/vtm/run-axis-hull-gallery-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/run-axis-hull-gallery-v1.py",
+      "bytes": 683,
+      "sha256": "aa54984c3495c430a36f14025de9dc8c85136f4ab44294682c4e57ebbd272220"
+    },
+    {
+      "original": ".work/vtm/run-axis-hull-memory-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/run-axis-hull-memory-v1.py",
+      "bytes": 2108,
+      "sha256": "c232e3540cfb23d54715235a4c83401d223794f866e1f1a38563bca0d9f585c9"
+    },
+    {
+      "original": ".work/vtm/run-axis-hull-native-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/run-axis-hull-native-v1.py",
+      "bytes": 3239,
+      "sha256": "1b23e7a244996f053ae3824de0024652ddacb7fc92cda82e9d1224ec10fc5b53"
+    },
+    {
+      "original": ".work/vtm/run-axis-hull-observer-batch-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/run-axis-hull-observer-batch-v1.py",
+      "bytes": 1327,
+      "sha256": "7676d8a7e9ad2d7a9b0e7abc12347e18ebc319d5b2fd88d0563d60bbacfe1609"
+    },
+    {
+      "original": ".work/vtm/run-axis-hull-observer-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/run-axis-hull-observer-v1.py",
+      "bytes": 779,
+      "sha256": "a1897d02508b4ddf919a722908163ced3d8cf931cbf7823215a01822a18688e8"
+    },
+    {
+      "original": ".work/vtm/run-axis-hull-pilot-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/run-axis-hull-pilot-v1.py",
+      "bytes": 2122,
+      "sha256": "629503b08c3b9bab8399d4e3d9932b68d045b48276138b66be609c2bd752e43a"
+    },
+    {
+      "original": ".work/vtm/test-axis-hull-existing-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/test-axis-hull-existing-v1.py",
+      "bytes": 497,
+      "sha256": "fff8bb60d64a7a236c02b38dc223d6f4d8a384c7de3340eaa7a98244d0449f47"
+    },
+    {
+      "original": ".work/vtm/test_axis_hull_support_v1.py",
+      "path": "results/validation/vtm/axis-hull-support/test_axis_hull_support_v1.py",
+      "bytes": 4647,
+      "sha256": "04869eac5ecf4be7bd99dbdb239c24bc6b04e394bfd55ed56493357fbe04d116"
+    },
+    {
+      "original": ".work/vtm/verify-axis-hull-publication-v1.py",
+      "path": "results/validation/vtm/axis-hull-support/verify-axis-hull-publication-v1.py",
+      "bytes": 2574,
+      "sha256": "0c8d87fa52bafc73861991305ba37e34dad4b4c0ffa73f6221cc062a956cff87"
+    }
+  ],
+  "shared_helpers": [
+    {
+      "original": ".work/vtm/check-surface-bound-reuse-final-v2.py",
+      "path": "results/validation/vtm/surface-bound-reuse/check-surface-bound-reuse-final-v2.py",
+      "sha256": "043e6a45bc7f2723bce7411d587cafc15f0f3aa3789b81868f0fe5f4a81dd83a"
+    },
+    {
+      "original": ".work/vtm/check-large-reuse-proof-pairs.py",
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "original": ".work/vtm/large-reuse-isolated-test.py",
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    },
+    {
+      "original": ".work/vtm/boundary-timing-commands.json",
+      "path": "results/validation/vtm/analytic-filters/boundary-timing-commands.json",
+      "sha256": "c75b0a3c89cf49e7e1dec7a109ec6a7497370ddcc801f2c22ad78cc4c6174c49"
+    }
+  ],
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/scanned-armadillo-input/armadillo.off",
+      "path": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-after/input.off",
+      "path": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/axis-hull-final/graded-armadillo-before/input.off",
+      "path": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    }
+  ],
+  "source_sha256": {
+    "warpower/__init__.py": "bc95cfd203def8ddac4d3171fee33feb98bbbef10a8ea5f98eef824140244874",
+    "warpower/_active_delaunay.py": "cab5fecb5959856729df080b36bb72c80980eb38a823949044140be7854654ae",
+    "warpower/_active_sites.py": "3c17ffe07d129ee4c46317f1ce1ede2ed0d96a0f237ddb718f77e401a95f7cc1",
+    "warpower/_adjacency.py": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+    "warpower/_analytic_predicates.py": "b6d8ab23dfb23e107f8dde1d9e473085f9a45004115279531bfe219194bfad15",
+    "warpower/_api.py": "f84bec46306a84d7f1b72c6dc1d9dc560cb2905ad74bda63f4bffb97e4e5ad97",
+    "warpower/_automatic_sizing.py": "f6aab578b13d3689648452c49c4e4474b40005a8215bc6787cf6811037fd713b",
+    "warpower/_boundary.py": "68525b60978aef6eaf0f8f02f7693747b5fec6a5e02ba260cc67d82f389c94dd",
+    "warpower/_boundary_rounding.py": "6db76fc3ccce54914710dee1a134655d9b8934a3352686b9f41f2e9e92926e07",
+    "warpower/_bounded_predicates.py": "2a9afb83f8c64eea5f0597ffff0ccc9d5007f71f1d37a41f14da7b3e06df22e3",
+    "warpower/_bvh.py": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+    "warpower/_canonical.py": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+    "warpower/_cell.py": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+    "warpower/_construct.py": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+    "warpower/_containment.py": "e4913d8e25cd8f3a058b9a3175d69646cb3a7845a9fc2cb24ddc038373495e86",
+    "warpower/_delaunay_certificate.py": "bfab680e65db7757c519c0087cbbaf1d04ce5872e354c25bfee50f455fb1f6f0",
+    "warpower/_delaunay_recovery.py": "9f5b5b330bcdeeeb64ebe0eec5823d1357f6c79f1af4e1131dacda7b0d7f8e46",
+    "warpower/_domain.py": "db605f2e5d07a4efea6640f63985368d3b8af49b71ee84befcffefe108018d4b",
+    "warpower/_domain_topology.py": "3c0746b94c2940d275be28626e8dd257aa0b5a284d8459bd4cec226e4935826b",
+    "warpower/_exterior_band.py": "d875e2b215020ee4b29ed7be89b191fd5cf866339970619673fd7b0244cc995d",
+    "warpower/_exterior_proof.py": "b8bec5867ef20b2c65462844a078889ca68799696b86c981f811a6af689ec0c7",
+    "warpower/_extraction.py": "47227eefaf918e5487d25bf72e4a3eedb6520e4fc8cc814e1e4de3351e209f3f",
+    "warpower/_facet_completion.py": "fe32e851c37ff5564393f4f6d3d4cfab6a43cf9927db3fd1bb0bf8d0b4cdb6c8",
+    "warpower/_facet_seeds.py": "30d44e71d8ccf2b1fa4f16a6d9793dce7f736dcd56a04205d1bc52a8c0dfc5b9",
+    "warpower/_fast_candidates.py": "740377dd16ccfec7b0bc630e4d2a483312a2a8cf398e067d37b3973e18d9a483",
+    "warpower/_filtered_predicates.py": "a9a74285885f362deb634972709ae6fe47dbdb33320e3b8627d3b85669578564",
+    "warpower/_graded_odt.py": "37538c9d51d3282a9ec85b6e1e7f6eeba6876598d5cb79f30d0dd8d736d45778",
+    "warpower/_graph.py": "d7e489b28717f72a25e866b59f1c9dba3855222e83cd97e848bf7e6b68bf18e2",
+    "warpower/_graph_construct.py": "9f305d39185abc6602b85431b887c3bd2b5152864ec18ef35e6a71e3a6690e42",
+    "warpower/_graph_tetrahedra.py": "ddbb067ef02cfd20032cc29d870bb19b9d30b4cd2a649516be5c547ce5b94540",
+    "warpower/_grouped_seeds.py": "8d0ffa1556c179ff11d0ecd357a55cdb198897a4fc4c8336389744b0aff19785",
+    "warpower/_halfspace_predicates.py": "46779c8236dab4048344523a653ed1b864ba77082163f533b991fb85540db164",
+    "warpower/_integer.py": "94205ab5790a308f51b083fedc8cb905050602369061d65d231b91f175a0d641",
+    "warpower/_jitter.py": "b184d21b47ce3e96fcf1587722d9be3c276240fc776ce85ffa10b3442dd85435",
+    "warpower/_mesh_api.py": "37cf23ecf09d34a7bc0a77ebe73d8e2102c37064b1ab4923acccca993ea0678f",
+    "warpower/_mesh_topology.py": "5dcb12b58e59446e5dbf4db6a1bda2eab3a32a55c833e453e3b9d48f3dfbcc24",
+    "warpower/_mesher.py": "2542afb7e2c47308d4ba039eafd0e71a237b57334840905ba9cb247149e33602",
+    "warpower/_odt.py": "53d23df8f23de165d98598c7fbbf53e2944f82ee82f6a74c2b135e142dd589f0",
+    "warpower/_poles.py": "b93f434020a357025dc3a067bbb0e8ed2c4c0ab66ecee0108db5a2c6762ea18d",
+    "warpower/_predicates.py": "20a204a1f6774353d3ce5d35e241db53a0ac075ef40714542f0067010aa50d26",
+    "warpower/_prepared_seeds.py": "86246833eec66426191c3e5465f6eadcd8437724893f4ccecf6f4f8564d89d56",
+    "warpower/_proved_completion.py": "f2b6b1c6469367b23ff63096a4496981ac51a95e032f4f0085c4fc08468ed075",
+    "warpower/_proven_exterior.py": "447d9b4ececb6045712e4ce66b4dad08a55928c2cf97aec6f5fcdfaa997f552e",
+    "warpower/_quality_moves.py": "8ad6754073b4b560b7f94972b82b997eae37c4548885d334d6a2ff3a5369310b",
+    "warpower/_refinement.py": "003dc220a88044aa18f624676b5d1941a7bed314f1cb17226f962d8a4d61eb81",
+    "warpower/_reuse_delaunay.py": "a15d8beb82263abfa7001046cba419fd8f1608959ffffdb35c2f4ec30d5b4ce8",
+    "warpower/_sampling.py": "3f4ef9a1ed354dab1a0f54528817683d68af1bc81c1926ec631834d93a8edc70",
+    "warpower/_selective.py": "61be5006d5ec7de38960190c1afc0b374685ea763a8f79fc975b4610a7e2fef6",
+    "warpower/_selective_backtracking.py": "e7111bcb1505045a4f73cbb72b4c3c54a4c814e21a4d5bdd69d046670d29223e",
+    "warpower/_site_bvh.py": "60a307c003c02f931cc1d6ee2f4ca1b417d34be6a4fae3f6d968be17dda7c92b",
+    "warpower/_sizing.py": "fe30bc06b3ad23479367a00afb2356e1103e74beb5e764e5f47e91ba8a343464",
+    "warpower/_sphere_bounds.py": "865f1d7eb961ffab42d98213ff52e52cb7a60973233cb03923d3f559e1e72c3c",
+    "warpower/_stable_center.py": "1d3f4a58c799f675edde5dea9f77dd50c36b68b7f8580e809a1b88d761d770d3",
+    "warpower/_stable_volume.py": "c326ad964bd1bf1f11fcd0682e1cacc8df56b7a3ccb3815ceef3694c3ac36a90",
+    "warpower/_surface_bvh.py": "b8bb9d8bb798fb5b38fcf59aa55c858a1af56de1d57e98b630f0b37b593edcf4",
+    "warpower/_symbolic_bounds.py": "b071b45a8a19b93a322406680d10b6137c9cc7677efeb8776b98b7ae8c678db6",
+    "warpower/_symbolic_cell.py": "b3fbd57892ec33cef5e03b094d9cf454d17ffa9ae0ac4d886cce6ca210ecb7a2",
+    "warpower/_symbolic_delaunay.py": "79760a7f1770a8902288f4a8f750eb2170ba87899260a637817b65cc2f2aa451",
+    "warpower/_symbolic_tetrahedra.py": "52af32e5cfd0686fb82548a512f1b89c703057a45e0eb7597b9918d7a931e29a",
+    "warpower/_teleport.py": "4123f2a28bfc4324c5340adf85e93538885cd54b5e3f5b11107bc07183e7ab4f",
+    "warpower/_tetrahedra.py": "5db1eb6583f84bf99a81c9aca8aabb1d8fdc8772d6db7fe9bb87d812ad09f2ec",
+    "warpower/_triangle_contact.py": "01ebcddc6501f402157cf4a46738bffb6e8a55932dc11a35d6b79855804388df",
+    "warpower/_validation.py": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75",
+    "warpower/_voronoi_volume.py": "9b8b6c0f4e29f0907297ce5f13876d50f5728f8283fa73dec7514d5e30e05305",
+    "warpower/_vtm.py": "5205d04d82e589411a3cc168ee5a97751b574507c83df3779f354a0ecfe6f26d",
+    "warpower/_vtm_controls.py": "a2c08f2f50c4bc189e2bc82a38f50b4137229081ff13344d4b319e11cbff9880",
+    "warpower/_vtm_domain.py": "7e7d79477224b3ddbcd5c11a47bee237ed96474660987268d43dac554aadf76a",
+    "warpower/_wall_candidates.py": "f9a532d2418a9ced7ccd9fcccecf91db74c0548b746e1bcd012cfd08d5d764cb",
+    "warpower/_wall_reuse.py": "8eb33d823e468da70ad1e1540876c5d8eb56c861ddfa2aa493a7bd8177f5e56e",
+    "warpower/_wide_center.py": "ed6c89a6afe3ee4dc4d14db4b92d244ed8483fd9fd55179e7048fc0dd1f13814",
+    "benchmarks/__init__.py": "aec4f6323c9af970cf489ad57de6195f5ef87df6edad0eaf51772e8c1b5506b2",
+    "benchmarks/active_delaunay.py": "dedc3721fd0b4eb4aef2c1bac457d64e225e7d44c578543472d16712fa45c06c",
+    "benchmarks/amplitude_order.py": "30b7eff6791a9c223c9014ce294af52b4a55a876aa6a6f85a54575754b1fe9cf",
+    "benchmarks/audit.py": "a1cac06ad03b11f588b8b3ea916091f3a8b238355f1e000f2b6c8e018ec0351e",
+    "benchmarks/bounded_predicate_proof.py": "90ce13274a06dc7a2f9dcf9c684fadc1967317d1e6f714956b08b0dae49a6002",
+    "benchmarks/certificate_fallback.py": "56f63983be10d2cecced520299f5fd8312e56071679b197c5dbef1967cb92e7e",
+    "benchmarks/compare.py": "790623d2707147a0614a828212664dca47c9d5e46a65380817c1e3af2ed5dd50",
+    "benchmarks/containment.py": "deecfe5cb518e1bcbce536e89a2bc1a6a93fc7072088ae9e5b760c7b2215d516",
+    "benchmarks/control_loop.py": "5f242c360349286c62ea42f4c8fa57f07eba58d1f011f32a1da29304a9b61454",
+    "benchmarks/cpu_mesher.py": "dcd64bb8bb725adefd5d4e5dc9852b0090ed835e33f6673bc938e6437424698a",
+    "benchmarks/datasets.py": "c06985fd7d32f87c193dc096e434b3389a2456a94451c778be5158c808e14f69",
+    "benchmarks/default_path.py": "0c97b2d2e5b5e2a1995fbdb455b1a333ae00c37d2bc673a1f47221e1d05aceed",
+    "benchmarks/delaunay_recovery.py": "a317c72d588feefec484ec85ef11a82f569614f4995131736ff5237ab7348471",
+    "benchmarks/domain.py": "8738c173885f57f82c3168b7b324cca13c35ac70c0d123abbfd96cdbfae34fad",
+    "benchmarks/exterior_loop.py": "f15db0dc5d0bf4d8f7896caf8dd808e8011f5e19a59266c49eda2d3a78cf7374",
+    "benchmarks/extraction.py": "c8b1b6ea55944de8af60da3eea1c989696fb3fb98c2e7e33f1f36e9f23807964",
+    "benchmarks/facet_completion.py": "ac8f46ea57539e83a3925ddb882cc471f4868d36df28837fab9c5ee53ae5bc37",
+    "benchmarks/facet_recovery.py": "48e3da3b1e530a4903e85ed0aac4b359798ff873d580fab13a6f65ca736f7fb6",
+    "benchmarks/fast_candidate_matrix.py": "6d61d8fae12af5266224585a533715dfe243d3a3ca497ae8f43e4a6a90d22387",
+    "benchmarks/fast_candidates.py": "2666a8916fe9677c3d75242867bcd758b940b9963a3aa4edd4d3a1f5dcd614b9",
+    "benchmarks/feature_quality.py": "06f9c355f193ad5c6ff8b63a98d33bbbaaf497b965cf3e84459efd3fa638d4c8",
+    "benchmarks/fetch_scenes.py": "99a8d693aae203927a012a8e4e152c04fb838eb49ea6d0a447ec10a9109644f3",
+    "benchmarks/geometry_regression.py": "34751f0eb34023aab8ba94da7c817b4255bf287239baa0c589551f39f83d8a14",
+    "benchmarks/global_certificate.py": "a7ebe54dd446a63b85378fab4556014e2a01816a9c86be420cf88f4986b6ac20",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f",
+    "benchmarks/graphs.py": "99ce61f786157147024705d2282803dc3d7e6c2d17812dcefd2a3a29f84764dd",
+    "benchmarks/initialization.py": "d4fdbc016406e0f9560912ff3ea687b782bbb90a2d2f17481bb504e00b582f3c",
+    "benchmarks/interior.py": "3b11554d7882e0361fb04929299b06e8c101193177415e4e307ea0539ec1909f",
+    "benchmarks/jitter.py": "ecb96baf3daca6e4a0e62efc2cc10122a3f0339725d90813291cb8e355153153",
+    "benchmarks/local_certificate.py": "9e17b0321af3b6116689245a525717d8c17c5c600e7a0844996836ec4dd6ca9c",
+    "benchmarks/matrix.py": "45135d3e98d852bd18939e56269ae67f4cc503bd81ecec3252175da32009bd57",
+    "benchmarks/memcheck.py": "707d7d29ef6469d9cc52f56d6f21b0dc5464a6aedf858eca09ebb91bcda6df50",
+    "benchmarks/memory.py": "139f0195ef37b2d163797332166b2b70774a1c34324abe742027caac08175c89",
+    "benchmarks/mesh_quality.py": "0a5765c4d82da5e24ccda94bf2c149875c83932bc314c9211b276a99a893e0dd",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "benchmarks/mesher_loop.py": "e384c22f1e2334aeca3d0c7441eca7354d8c1d75a99b3a9fe0e0f93df449c141",
+    "benchmarks/mesher_policy.py": "75a2b13ef4e10aa07ecdbc8e2b856eb171c9da7836c6bf83b0fa4f43fff12d98",
+    "benchmarks/nested_capture.py": "4ba4856c8af8fde4e1c738d9f7924523c02e83dac593864d6c6cf2741704b568",
+    "benchmarks/odt.py": "556322d06aa7108b2a6a76f01d15151db7008a93dcefe68ee08d3b785f49191d",
+    "benchmarks/odt_failure.py": "3b1c7402bc752678048198626919c2de6c5e50a1a1ef28f81860c104531efc99",
+    "benchmarks/radix_capture.py": "9df57f171e7287d4765d89f7875dfcf700b689dcad502c923a3c7498e34d49e7",
+    "benchmarks/recovery_policy.py": "58db4056f1de878f9ee32cd7a722486618dd2ac4b45ee9c396bbac45e00c4d70",
+    "benchmarks/refined_hand.py": "4fdf7e0d8dc05d9b484b242cef42f9832f4082658c2db9629dd59e612e3ce308",
+    "benchmarks/refinement.py": "86cd281caeee343f6cd748f998b72840348c679ad74734a2ba7da07c8b0281fe",
+    "benchmarks/reuse_delaunay.py": "99b23c95af424175126dfe405b588d29e5e7c55947b6ae00b7974c21e9aaf218",
+    "benchmarks/run.py": "30fc6978f5d1ee4f486f69ee3316a27fd7edf30b5d9f4dc4a3a8a47b77419d0e",
+    "benchmarks/selective.py": "c1530960d11574b1f75be7fa6db78bfb4f9455c72ca169b1bd6356e22d113936",
+    "benchmarks/sizing.py": "1086b3e357d960432ab9203eb026f16d28ae70daa81b5b439826bb45d2200680",
+    "benchmarks/stable_centers.py": "cf7a7c05e9cb3b414baec12c425c3788aaa3b26fddc123e896d0ac56dc323d24",
+    "benchmarks/stable_volumes.py": "6da84b42e0a2feee55cce3dc96810f960acda9f2d7122f3f5536466dad58c9fe",
+    "benchmarks/summarize.py": "ef218ab6fb7c60ab87400937292b357712638735799476960cb671418e5e4cb1",
+    "benchmarks/surface_distance.py": "977463196b35b253c1fee0193f87522dd8d43af87ad636c73737d64b678d6f2f",
+    "benchmarks/surface_distance_audit.py": "5c9c83555dc3d75ed5a697ce0bdb0388ffa68ed74dbb36746c19675ae0c58f26",
+    "benchmarks/symbolic_controls.py": "48658b1465d48a921ab4dc66f77c2d25120086c58a467133082b35b6ba23509a",
+    "benchmarks/tetrahedra.py": "b6429485a06a174687b092a3ffda29e8e14e414e825a8232ffc47603381a30e7",
+    "benchmarks/vtm_core.py": "acfae8356f3021a443036c9eda856797b5e8a564e287c4b57910f440fe3c0e2a",
+    "benchmarks/vtm_domain.py": "8244b3e036d038e5bd7ab6c5225144f62545bc02b22df4f1805a813d041bde8d",
+    "benchmarks/wide_extraction.py": "3665c607d1f786caa4d963df721d687a63ee1da5778b467e9bf58a79d016e29b",
+    "examples/__init__.py": "ac121f6f6650b3f9a5d6d9c65729a29df07f7d05998162d8f382d106725e12de",
+    "examples/fetch_armadillo.py": "2a098a8e224973dbb2dab308a75e95ff9b179316e1e81b1dd67a65bfa4ac0dff",
+    "examples/vtm_gallery.py": "7ef17562e1aa3938d2062d99f3d70b0a2b1b6e893ca72bb8742346989f5550d7",
+    "examples/vtm_inputs.py": "83284ecd146010c2d610b221bdfeaa16ce0b98fd59cda561c1602bdfa87bc9a0",
+    "examples/vtm_render.py": "ef908f1733b376be8b77fb1295cb09040984a1578d6058f09dede4d75522a3cd",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/_flushed_bounded_predicates.py": "ee34d64c929fe22400fe5b4184fb59790ed2ccae61eaa203d6c0348aa478e828",
+    "tests/oracle.py": "48420fcd46156f6fd1c0b6bcb9ca0d2696652814253add0620f062fc5dd2113c",
+    "tests/surface_nearest_reference.py": "233067ec3622da5cd2ea49d09cf7d8de978916422de636195f9ed9b460229401",
+    "tests/surface_traversal_reference.py": "b27c042e2ffbb4a987350b0818e69fb89143c987bca511d8869afcf873084f3f",
+    "tests/test_active_delaunay.py": "954e144b24c3be5033d787290ac75b6ee8054f2f880d7d33a7d024f4bce5051a",
+    "tests/test_active_sites.py": "193cc7f1dd52f56084a771ee0257036af85e5c0958e063f22356ad5b9bd160b9",
+    "tests/test_amplitude_order.py": "597f577b894740dc9de1a4aea275160b257803e6efd3f76e855e577c46ced1c3",
+    "tests/test_analytic_face_search.py": "42244e86aac930bd92d391413c90a78402e74df89fa04ac06f08da2841546a20",
+    "tests/test_analytic_predicates.py": "125a0dbe23ae98593874a894859412e864fcf1da4a740b80047756322470ca28",
+    "tests/test_api.py": "6f2c11b0e5fb216eb56d001db1cb8095e0e037812876ce8b56242bf086c1ef1f",
+    "tests/test_automatic_sizing.py": "8d0fc304dd32b62913411c6e54bd0911fe02215103f8dcc52bc3ec7cd72b276e",
+    "tests/test_axis_hull_support.py": "632169985a431c359fa41d01e9cdb4d4335c6387302a74816c6933ee14b7b395",
+    "tests/test_boundary.py": "a9f025bdc0c2e0afb1669dadc83a91ddc143100d0f3fdc64c7b4040e3ec37092",
+    "tests/test_boundary_rounding.py": "a126c9aee674cf06ac65c10480e493506b691fb8034c341500526701b9512b3a",
+    "tests/test_bounded_hull_support.py": "151b018db30cd8603af564987b315386e168d46066ba6c848187546aaf2e69e2",
+    "tests/test_bounded_predicate_proof.py": "dd889cb288e45200d172f2c5c3c734690bc55173c8d8b3241782c82f94983c01",
+    "tests/test_bounded_predicates.py": "5533a685b89e448b63c6df6d96c92e4cd960aa6bf2a67baf4a99aaeda9e6d05c",
+    "tests/test_bvh.py": "26c93dd7b027de11401933c3384b446c09456c233ba8a3360520e3749fe68696",
+    "tests/test_cell.py": "573f2c8a2a1dca553d7a497fca985a7e06fa8a65c3cd9017610ec7e04110fcb2",
+    "tests/test_centroid_ray_filter.py": "830fabec3d3bf5053a3d664a22985c57b699c4227e76c6abcc8126e288f96baa",
+    "tests/test_containment.py": "6ebae623d294dbe35d33b93aa5ef7eac84994384ca8611e9bcdf16c5d7258db9",
+    "tests/test_containment_mesher.py": "080cd7c1decd7249c2bb4ee8e1ea602ad6142a9b7833be9c6c9f46e3dfd47f87",
+    "tests/test_containment_nested.py": "d43a63c227bf33ade2359994a24a53b0c61498ff05ad9a0e9009bae38a27c0eb",
+    "tests/test_containment_oracle.py": "67ffc0dc4dd5b72c6876bca5139f6fb98d45cd99b4256d7b782b943098bf4ddf",
+    "tests/test_containment_ray_filter.py": "7bff2141f114a2c41fb476538a95086c702625dc3b545911df0ce8d56e51970a",
+    "tests/test_containment_selection.py": "4e2a0932a3b80508f6125b7c10f298023032dd8120cd759c5544a2d6a960ffe2",
+    "tests/test_current_selection.py": "b327bd9bda9851fd13e35db241d58db3d49f117533a0f70db2b2eb67e0486965",
+    "tests/test_delaunay_recovery.py": "a372cdaa6791cd1244fd741cb5ceaa3c194fa369a03661a5720d5030f37530ea",
+    "tests/test_diagram.py": "ad5daaf9e90db281da36e7b880fabcf45c18d759dc8bcc0e1ea5daacd68195b1",
+    "tests/test_domain.py": "dffc6961eaa706bf56fb834c97cbfb603ebd3f075ba37eeb11dad79f2ea413c9",
+    "tests/test_domain_topology.py": "91de7e2903ac06f43d48ab6a829442267d572955c095170cdc4f0276497ec416",
+    "tests/test_exterior_band.py": "0e214e2818915c065eb2efd58126ace605529d519aecc603e9b924561a7a38d6",
+    "tests/test_exterior_proof.py": "843332aa837a688b46665779faeb110896aa48057f6efb2fd52cf96bc980e489",
+    "tests/test_exterior_scanned.py": "ca4647d79b32bca8c6880c81921b3cee6cb31db80ebef53e0e99ded2c6b685ff",
+    "tests/test_extraction.py": "32ef87874f704454ac6b58363a4e2f6996685c7a2393e2f6779ef66a6adb97e6",
+    "tests/test_face_certificate.py": "e2f104ac1fcb7443017b5ed5efbb602020bbb99c4fc397598265a9235e3feafa",
+    "tests/test_facet_completion.py": "ad3519ba087a19002d7c650e863e1f1ab6e78f118ce819fa3f7ce304d41cc3cf",
+    "tests/test_facet_recovery.py": "7ea40c5b7186c16584418f8c44df4f91b9d42e21c24f6e8c679d04a63f6018ac",
+    "tests/test_facet_seeds.py": "d4078e9b5390c9feb81eb524ea7831f64329fb307d6218a07a001b91d2b699b2",
+    "tests/test_fast_candidates.py": "0b560788841d415280130eff9aa7a3bbe76bf2b06665e649f4ecf8fd48b28092",
+    "tests/test_feature_quality.py": "e7ee05158baf0c85a8826dcb5622e9eeb03b640b18aa3f16998d51f88cab07e4",
+    "tests/test_filtered_predicates.py": "e88b3e183f6dfce5b657d4c0c6e0a0e73860b3148bb61e47c01716f9518f49ce",
+    "tests/test_graph.py": "8458b3bd5385aa007bbe99089852d81ef57d73162c426b64ce0bd4480936cfc8",
+    "tests/test_grouped_query_bounds.py": "73d737689ea965a7846ac03979ed79a4b85aff93cb309c4d5ecd8eb6f2f09242",
+    "tests/test_grouped_query_masks.py": "a3e766292eaf218e9299b98a4a3b8ff58e89caac032a4d460f4960c3485254c9",
+    "tests/test_halfspace_predicates.py": "943423db62d6c9bbcc0cd13c46dcf297d88ee67e19f5671210b9f25e6e6947d1",
+    "tests/test_integer_arithmetic.py": "86d87aae747f8af078236bd6bfd32f41bc2715b9381684ed605849d63e8b106b",
+    "tests/test_jitter.py": "ce182f424d44d954c0868cfb7b0b625f583afa5e33972c8674f58b0bcaa80cfb",
+    "tests/test_large_cells.py": "4b5eb900e3841eccbbda87249f0c1ef0075eb3ac0dba2e6ccdb040dc35778f2e",
+    "tests/test_large_reuse.py": "cbae7a639153bfb907a854d0d8c1682fbd864dc83a1a64424352d07fd22d2173",
+    "tests/test_local_backtracking.py": "880f38a764218abd10f7a48be4d9efea42a7096a56cb90c7269d6bfc4b1cb045",
+    "tests/test_local_certificate.py": "9dcd6bda42c67533725fb6d60b5fb1a814dba1c93bc193fcc2e252030b2fe17c",
+    "tests/test_mesh_api.py": "3578ea222aff484d6b0b4865e7ba4e99be677160782d3d64c2495eff822d1cbd",
+    "tests/test_mesher.py": "a1542d339adb5f33ba09509befd633319471b38064520222dda9eaaac915e571",
+    "tests/test_odt.py": "8568e3141bfb19b578a331981dea31a7cc6fe738428ad2d7895d7d5aa8ed6015",
+    "tests/test_parallel_certificate.py": "399f5539558e94cb38aec698c8cf0ebd2986c3ffbd68e9b4aaae5477737a6690",
+    "tests/test_predicates.py": "de069e809416286e46ed31a9218a5ae2f568e193cbeaead083094d3f2eda1a19",
+    "tests/test_prepared_point_bounds.py": "07a0d1fadd3b75666242e6b6ca97a1ba1fadc4ffa5c77bdba09048d2ea6a4c30",
+    "tests/test_prepared_query_masks.py": "1792bc27a333e42659213241602e7c1ca3804b3d1facc82126334b6cf88a7faa",
+    "tests/test_proved_completion.py": "d724e4965d65f0be00783753d70c0cdd68ba9103756a8da9a8e904dec34750c7",
+    "tests/test_proven_exterior.py": "ae1eb9a7014c5df90eae2038d42c216ffe972365b94a300760b0bb3e02beaee4",
+    "tests/test_proven_mesher.py": "bd264f1b692474eba71117148e365b844ba9f3250c292cd873b4c1cd1ec75cea",
+    "tests/test_reference.py": "ad6b665701747046fe37cec98d3ef668c42d376064f2d8ba10cc17a0200259da",
+    "tests/test_refinement.py": "2edb4416c77ef830b251d0550448effb7cdfa8092817dd3bf5603f7b23ab74f2",
+    "tests/test_reuse_delaunay.py": "fa2fcd08bcd8e33a12a6879af17d75ba15a8fcb72d43fb1cefbddb987afa0652",
+    "tests/test_sampling.py": "5205a7b7db6671a2f84e693bbaf7cc0e8d425cb268b8e1f9efc7e94b792cc38b",
+    "tests/test_selection_classification.py": "4fd088676c03625b7d1e953e1cf103038495df3f35e52b2e6fe624443538f0af",
+    "tests/test_selection_extraction.py": "1d4da4cbff877ca67a9e8ead3191e9616aaa727426588aab519db4a564e0ea2a",
+    "tests/test_selective.py": "4a90989cd455a5d23c41f8a75b7a2b2bb99f997a4d98db309c79c76d5c208921",
+    "tests/test_sizing.py": "26a59c31b6f027cc89f33cfbce7d23a509d7bf54eb420b8ecf8f25248cf2471b",
+    "tests/test_sphere_bounds.py": "51168c640fde377c0f38a96f350e3cab44df65c31c23f95a44dc11f1330f039e",
+    "tests/test_sphere_points.py": "9fb240e421f60ddd09b37f9d2ba4a824a6b4f603c42ccbdf63f751960af41643",
+    "tests/test_stable_center.py": "f1429a3bd74bee2fe1bb37e9c9a03fb18041db33ddcea579d1c464fbe5268170",
+    "tests/test_stable_center_fma.py": "4024a777d34c24b5fc8614a0878268f74265e9a9094cfc4bdd43895b4025764f",
+    "tests/test_stable_volume.py": "359662b61e11c78f17fc4501f73f0d7c58ed44e93284e656af41882948d8ff81",
+    "tests/test_support_reuse.py": "383d324f64dab001f0d9ce3ef223ecfc8e91206e35c4db83cbb6223985370a54",
+    "tests/test_surface_bound_reuse.py": "bf3578e18783df3ece5658d06ce106ae6fee0e339f51b09d6c60df354c24c34c",
+    "tests/test_surface_radix.py": "f9a7250a94786794b37aa5b2a989ffa78cb6281c3efeea7025def545a4a86041",
+    "tests/test_symbolic_bounds.py": "5ca86f19643fb24b7e77e9a0ff6c05630232e211e379f4345d3dc74554370f6e",
+    "tests/test_symbolic_delaunay.py": "9dced2fb1930a86c59004060c3a9ba2e003b24a92eded7efed56f1fd75aa54a5",
+    "tests/test_teleport.py": "3c4b25b95ce0105e43dac4f1dc0f9fd51f722e678f43d7afee860c3d6e4a91cc",
+    "tests/test_tetrahedra.py": "c2b2fc56d66fa5cfc296ad029c708c92d8d0a9bb50673f4ac13500437f56ca24",
+    "tests/test_triangle_contact.py": "deb0846b1018626bd84856a749e098c245073b1487d1e549cfed9ca67569a08f",
+    "tests/test_voronoi_volume.py": "73fc95f57da09052e90ac1047871f6fbc8da5a504737297744f65d73b5de7520",
+    "tests/test_vtm_controls.py": "755c5403307c4884c47d7df3104b5290ffaf66faac43a85091aa5a7eb5a1ffc3",
+    "tests/test_vtm_core.py": "1b6725e4bdeb22ec24fd20c2a691ade9d0b8a2b5d20d7c7ce86ec584896cfd58",
+    "tests/test_vtm_domain.py": "f9e8ffd3dbff5751ecf01d8d1189630ea167fe87692a7504a6c74c3511b62ffd",
+    "tests/test_vtm_examples.py": "31117436fbf59e7a1bbebc42655753e9195e826eeb225ad803d34eae2c5f569c",
+    "tests/test_wall_reuse.py": "d83876423fe3a2329cba4cde0ad11d197d1418241167d2a17b973f660d0758ed",
+    "tests/test_wide_center.py": "09c7a84d78b96cfb832f3177d4787f513d83210c5c11a52bf4c9169e9bbdb19c",
+    "tests/data/hand-fit256.npz": "2e2ba670c80d1658b94fbc37a3daa4d9d5fec13c2049e55ca5aefa91675beb1a",
+    "tests/data/proven-exterior-original.npz": "3a2f9f8146928b144abc33e128f2162dcd7ff5aebd69c9369b2d1af46f624a13",
+    "tests/data/proven-exterior-continuation.npz": "e48c344e29b03852277bc8b0dc183580667d4dd6b21a44f878558e9cac8fc59e"
+  },
+  "reproduction": [
+    "Use separate persistent checkouts of the pinned baseline and production commits. Build independent CGAL validators from benchmarks/cpu; binaries are not included.",
+    "Restore published helpers to their original .work/vtm paths in an empty reproduction workspace, substituting local roots for recorded absolute paths. Do not prepopulate result paths: the harnesses refuse overwrite. Validate retained evidence in a separate workspace.",
+    "Final harness uses .work/vtm/axis-hull-baseline. Use PYTHONDONTWRITEBYTECODE=1 WARP_CACHE_PATH=/opt/warpower-generated-cache OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 PYTHONPATH=.; add .work/vtm for private instrumentation.",
+    "GPU jobs run one at a time. No heavy independent CPU validation runs during clean performance timings. CPU geometry validators may overlap correctness tests and sanitizer instrumentation.",
+    "Observer and private pilot were run before runtime promotion. Private production-equivalence JSON binds the identical helper and kernel AST to the runtime. Duplicate audit v1 captures the old kernel before installing the candidate and must run on the baseline; audit v2 loads the explicitly retained original kernel and compares it against production.",
+    "The observer counts exact-plane applicability; duplicate audits compare complete per-face support flags and error states on the same current inputs. Their timings are diagnostic, not speed evidence.",
+    "Nsight/DOT archives are lossless gzip; regenerate SQLite from each retained native report using the recorded export command. Memory instrumentation uses the existing diagnostic stack allowance; production timings and native traces use normal configuration.",
+    "Run this publisher with stdout named outside the collected prefixes, such as publication-axis-hull-support-v1.log, so it never hashes its own still-open output."
+  ],
+  "limitations": [
+    "Coarse hand remains explicitly invalid in both versions and is excluded from valid mesh speed comparisons.",
+    "All final canonical full/material/boundary connectivity and recorded work agree, but seven hand pairs have small coordinate variations; maximum 5.820766091346741e-11. The evidence does not establish bitwise reproducibility or a causal kernel.",
+    "Independent distance/feature measurements use samples and are not Hausdorff certificates. Exact feature-edge conformity and wide comparable-quality native CPU outperformance remain open.",
+    "Native profiler activity records may omit some graph copies; DOT directions are independently audited."
+  ],
+  "reference_binaries_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  }
+}

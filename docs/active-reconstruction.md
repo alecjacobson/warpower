@@ -46,7 +46,7 @@ device active count keep their preceding paths.
 ## Complete resident-solve measurements
 
 The following records describe the original routing change. The
-[later full-route extension](large-fragment-reuse.md) provides current larger-case
+[later full-route extension](extended-fragment-reuse.md) provides current larger-case
 timings, its additional scratch cost and new validation; it preserves the routing
 capacities and the ordinary standalone APIs.
 

@@ -102,8 +102,9 @@ For capacities of 256–2,048 sites, the VTM core additionally
 falling back to full reconstruction. Standalone geometry defaults are unchanged.
 Larger reserved workspaces with a device active count
 [route reconstruction through smaller preallocated prefixes](active-reconstruction.md)
-until the sites outgrow them. Full original-coordinate certification and the
-ordinary full-capacity fallback remain mandatory.
+until the sites outgrow them. Their [full route reuses certified fragments through
+16,384 reserved sites](extended-fragment-reuse.md). Full original-coordinate
+certification and the ordinary full-capacity fallback remain mandatory.
 The [sampled sizing layer](sizing.md) supplies device Lipschitz extension and
 graded interior/boundary updates, pole-based automatic feature-size estimates,
 and fixed-budget device initial sampling. The internal

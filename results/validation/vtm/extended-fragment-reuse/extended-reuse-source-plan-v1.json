@@ -1,0 +1,10 @@
+{
+  "issue": 226,
+  "baseline": "b44ab9e7332551a7a8a1c9bf9697f7bf8d7c109c",
+  "runtime_changed": false,
+  "prototype": "extended_reuse_v1.py",
+  "change": "Only ActiveDelaunayWorkspace full-route upper capacity bound4096->16384; reuses existing WallReuseDelaunayWorkspace class, including its fresh-wall fallback and original certified constructor.",
+  "checks_prepared": 8,
+  "important": "WallReuse is the existing production class alias. All kernels/functions and proof propagation settings remain unchanged; this is not a new geometry algorithm.",
+  "validation": "Tests/prototype timing not yet run. No adoption claim."
+}

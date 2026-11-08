@@ -1,0 +1,12 @@
+{
+  "scope": "Clarification of lazy executable-graph setup in the raw first-launch loop trace.",
+  "sources": {
+    ".work/vtm/extended-reuse-loop-native-v1.json": "e9d136bd46f294e7e0e317ea98d37725e683d2d101f442329f288d9bcccea996",
+    ".work/vtm/extended-reuse-loop-native-v1-audit.json": "0913fce93eb9f6dcf6268060049303b90dc86e3c94470b303dd0289cf9bd5498",
+    ".work/vtm/extended-reuse-full-native-v1-audit.json": "301372866c8ba07b2d1f38fa93796c872ca1e73bff6bcd655c8f230f1fe341d5"
+  },
+  "first_loop_launch": "The trace includes one cudaGraphInstantiateWithFlags and one cudaGraphUpload before its single cudaGraphLaunch. The raw source scope says setup is outside the trace; that refers to explicit array/workspace setup, not these deferred Warp executable-graph preparation calls.",
+  "device_execution": "All five producer/mesher/consumer phases execute within the single device conditional graph. No per-phase host decision/readback, host callback, host copy, explicit allocation/free API, or allocation/free graph node is observed.",
+  "warmed_full_launch": "The separate warmed full-solve trace has no graph-instantiation/upload calls.",
+  "limitation": "No claim that driver-internal executable-graph preparation requires zero host work or zero internal memory allocation. Repeated use should prepare the executable graph once before a timing-critical loop."
+}

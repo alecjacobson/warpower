@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/check-surface-sample-pairs-v1.py", line 28, in <module>
+    report=dict(scope=__doc__,folder=str(args.folder),cases={},standalone={},complete=False,prior_proof=str(proof_path),prior_proof_sha256=prior_digest,source_sha256={str(p):sha(p) for p in [Path(__file__),helper,old,orientation_helper,w/'check-large-reuse-proof-pairs.py']})
+  File "/home/horde/projects/power-diagram/.work/vtm/check-surface-sample-pairs-v1.py", line 28, in <dictcomp>
+    report=dict(scope=__doc__,folder=str(args.folder),cases={},standalone={},complete=False,prior_proof=str(proof_path),prior_proof_sha256=prior_digest,source_sha256={str(p):sha(p) for p in [Path(__file__),helper,old,orientation_helper,w/'check-large-reuse-proof-pairs.py']})
+  File "/home/horde/projects/power-diagram/.work/vtm/check-surface-query-order-final-v1.py", line 25, in sha
+    def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+AttributeError: 'str' object has no attribute 'read_bytes'

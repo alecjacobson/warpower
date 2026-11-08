@@ -1,0 +1,214 @@
+{
+  "scope": "Static surface-error cost with production-sized reserved faces; no full-solve claim.",
+  "baseline": "c4dcae4bb764ad6640a81308ffdace1c3f27fd8f",
+  "input": "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/torus16384-fixed32-after.npz",
+  "input_sha256": "f11fd85f2f760b0583e752614b296e73240750ef8287ce0d95e493602acc6954",
+  "source_sha256": {
+    "/home/horde/projects/power-diagram/.work/vtm/profile-surface-sample-parallel-v1.py": "10f7104278dca8533ef78f5a086d7a89a6a721c170218d3b64770e99826f904c",
+    "/home/horde/projects/power-diagram/.work/vtm/surface_sample_parallel_v1.py": "e67ca3dd9f6582278447c2c20cbe8b0a524e68206866befb00a04c86ebf0577c",
+    "warpower/_extraction.py": "8c6deea7bf5722867e69c5577175af3aa46fd6fe74359293b7888610dfd85992",
+    "warpower/_surface_bvh.py": "b8bb9d8bb798fb5b38fcf59aa55c858a1af56de1d57e98b630f0b37b593edcf4"
+  },
+  "sites": 16384,
+  "surface_triangles": 2304,
+  "boundary_faces": 8604,
+  "face_capacity": 524288,
+  "properties": {
+    "original32": {
+      "register_count": 96,
+      "local_memory_size": 3296
+    },
+    "samples32": {
+      "register_count": 78,
+      "local_memory_size": 3296
+    },
+    "samples64": {
+      "register_count": 78,
+      "local_memory_size": 3296
+    },
+    "samples128": {
+      "register_count": 78,
+      "local_memory_size": 3296
+    }
+  },
+  "rows": [
+    {
+      "variant": "original32",
+      "gpu_ms": [
+        0.9527040123939514,
+        0.9472320079803467,
+        0.947808027267456,
+        0.9462720155715942,
+        0.9475520253181458,
+        1.006432056427002,
+        0.9468479752540588,
+        1.0248960256576538,
+        1.025215983390808,
+        0.9448320269584656,
+        1.006719946861267,
+        0.945855975151062,
+        0.9449920058250427,
+        1.0088319778442383,
+        0.9475200176239014,
+        0.9469760060310364,
+        0.9762240052223206,
+        0.9496319890022278,
+        0.9460160136222839,
+        0.9450240135192871
+      ],
+      "median_ms": 0.9475360214710236,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "integral": 0.00046581810074064836,
+      "maximum": 0.02885896490246041,
+      "error": 0,
+      "relative_integral_difference": 0.0,
+      "maximum_bitwise_equal": true
+    },
+    {
+      "variant": "samples32",
+      "gpu_ms": [
+        0.6016960144042969,
+        0.5980160236358643,
+        0.5964480042457581,
+        0.5966079831123352,
+        0.5941759943962097,
+        0.5989120006561279,
+        0.5973119735717773,
+        0.5960000157356262,
+        0.594111979007721,
+        0.5946559906005859,
+        0.5952000021934509,
+        0.5962240099906921,
+        0.5952960252761841,
+        0.5922560095787048,
+        0.5980160236358643,
+        0.5942720174789429,
+        0.593504011631012,
+        0.5983999967575073,
+        0.5940799713134766,
+        0.5963199734687805
+      ],
+      "median_ms": 0.5961120128631592,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "integral": 0.00046581810074064765,
+      "maximum": 0.02885896490246041,
+      "error": 0,
+      "relative_integral_difference": -1.5128897116601064e-15,
+      "maximum_bitwise_equal": true
+    },
+    {
+      "variant": "samples64",
+      "gpu_ms": [
+        0.5794240236282349,
+        0.575007975101471,
+        0.5777279734611511,
+        0.5732799768447876,
+        0.5722879767417908,
+        0.5762240290641785,
+        0.5725439786911011,
+        0.5756160020828247,
+        0.5748159885406494,
+        0.5745599865913391,
+        0.576479971408844,
+        0.5752320289611816,
+        0.5734720230102539,
+        0.5752639770507812,
+        0.5766400098800659,
+        0.572767972946167,
+        0.574720025062561,
+        0.5733439922332764,
+        0.5726400017738342,
+        0.5768640041351318
+      ],
+      "median_ms": 0.5749119818210602,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "integral": 0.00046581810074064684,
+      "maximum": 0.02885896490246041,
+      "error": 0,
+      "relative_integral_difference": -3.2585316866525368e-15,
+      "maximum_bitwise_equal": true
+    },
+    {
+      "variant": "samples128",
+      "gpu_ms": [
+        1.0296319723129272,
+        1.026047945022583,
+        1.0206079483032227,
+        1.0272639989852905,
+        1.0249919891357422,
+        1.0225919485092163,
+        1.0260159969329834,
+        1.0252480506896973,
+        1.0246399641036987,
+        1.026304006576538,
+        1.0233279466629028,
+        1.024672031402588,
+        1.0215359926223755,
+        1.0252799987792969,
+        1.0246080160140991,
+        1.025439977645874,
+        1.023360013961792,
+        1.0306240320205688,
+        1.0259519815444946,
+        1.0281920433044434
+      ],
+      "median_ms": 1.025264024734497,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "integral": 0.00046581810074064863,
+      "maximum": 0.02885896490246041,
+      "error": 0,
+      "relative_integral_difference": 5.818806583308101e-16,
+      "maximum_bitwise_equal": true
+    }
+  ],
+  "complete": true,
+  "limits": "Static successful final meshes; no complete trajectory or adoption. Reset/launch/capacity costs included; setup and host checks excluded. Atomic summation order may differ."
+}

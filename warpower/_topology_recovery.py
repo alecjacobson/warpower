@@ -215,6 +215,7 @@ class TopologyRecovery(qm.QualityMove):
             max_attempts=32,
             extraction_tolerance=owner.extraction.tolerance,
             _proven_exterior_recovery=False,
+            _approximate_queries=False,
         )
         with wp.ScopedDevice(self.device):
             self.chosen = wp.full(1, -1, dtype=int)

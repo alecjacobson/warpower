@@ -323,6 +323,7 @@ class QualityMove:
         max_attempts=8,
         extraction_tolerance=0.4,
         _proven_exterior_recovery=None,
+        _approximate_queries=True,
     ):
         if not math.isfinite(threshold) or not 0 < threshold <= 1:
             raise ValueError("threshold must be in (0,1]")
@@ -339,7 +340,7 @@ class QualityMove:
         self.points, self.full_tetrahedra = core.points, core.full_tetrahedra
         self._m = len(self.full_tetrahedra)
         self._query_cache = None
-        if getattr(core, "_cache_surface_queries", False):
+        if _approximate_queries and getattr(core, "_cache_surface_queries", False):
             from ._surface_query_cache import SurfaceQueryCache
 
             self._query_cache = SurfaceQueryCache(core.domain, self._m)
@@ -409,11 +410,14 @@ class QualityMove:
             self._old_tets = wp.empty_like(core.full_tetrahedra)
             self._old_count = wp.empty(1, dtype=int)
             self._old_active = wp.empty(1, dtype=int)
-            self._query_error = wp.zeros(1, dtype=int)
-            self._query_count = wp.zeros(1, dtype=int)
-            self._query_minimum = wp.ones(1, dtype=wp.float64)
-            self._query_keep = wp.zeros(self._m, dtype=int)
-            self._query_quality = wp.zeros(self._m, dtype=wp.float64)
+            # Complete-extraction subclasses never use the approximate callback.
+            self._query_error = wp.zeros(1, dtype=int) if _approximate_queries else None
+            self._query_count = wp.zeros(1, dtype=int) if _approximate_queries else None
+            self._query_minimum = wp.ones(1, dtype=wp.float64) if _approximate_queries else None
+            self._query_keep = wp.zeros(self._m, dtype=int) if _approximate_queries else None
+            self._query_quality = (
+                wp.zeros(self._m, dtype=wp.float64) if _approximate_queries else None
+            )
 
     def _finish_setup(self):
         with wp.ScopedDevice(self.device):

@@ -1,5 +1,9 @@
 # Reusing certified fragments during VTM
 
+The subsequent [cached exact-query split](cached-exact-seed-queries.md) builds on
+this traversal with separate strict/exact kernels and bounded fallback storage.
+The measurements in this report describe the earlier implementation.
+
 Nearby optimization steps often preserve most Delaunay tetrahedra. The internal
 VTM core uses previous connectivity as a candidate fragment at capacities from
 256 through 2,048 sites. The independently callable `DelaunayWorkspace`, power

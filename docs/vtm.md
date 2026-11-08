@@ -8,6 +8,8 @@ nonconvex-domain pipeline. The [current schedule and size study](fixed-site-curr
 measures existing options through 16,384 sites against native size controls.
 The [hierarchical retained-cell queries](hierarchical-seed-queries.md) improve
 large complete GPU solves while preserving their coordinates and connectivity.
+The [cached exact-query split](cached-exact-seed-queries.md) further improves
+these larger solves while retaining complete exact fallback.
 The wide comparable-quality CPU performance goal remains unmet.
 
 The target includes ODT relocation, boundary and sharp-feature fitting, graded

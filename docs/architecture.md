@@ -318,7 +318,9 @@ The final [proven-exterior fallback](proven-exterior-recovery.md) runs only if
 that policy still fails. One ordinary fitting transaction uses a midpoint-aware
 boundary proposal, then a plane-separation and rational-centroid winding proof
 can remove wholly exterior cells at edge or vertex contacts. Certified binary64
-bounds filter the exact integer signs. All selection, rollback, and subsequent
+bounds filter the exact integer signs. [Hierarchy exclusion](exterior-proof-hierarchy.md)
+uses current exact surface boxes and conservative rational-centroid slab bounds
+to avoid unrelated triangles without rounding the centroid. All selection, rollback, and subsequent
 quality checks remain in the captured device graph. This optional layer adds no
 work or storage to standalone power-diagram or Delaunay construction.
 

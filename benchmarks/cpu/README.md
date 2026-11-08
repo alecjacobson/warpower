@@ -103,13 +103,22 @@ g++ -O3 -DNDEBUG -std=c++17 -DWARPOWER_CGAL_PARALLEL -DCGAL_LINKED_WITH_TBB \
   -lgmp -lmpfr -ltbb -ltbbmalloc -o results/local/cgal-mesh3-parallel
 ```
 
-The executable takes nine arguments including its program name:
-`surface.off mesh.txt size facet_distance odt_iterations threads convergence freeze_bound`.
+The executable takes eight required arguments after its program name:
+`surface.off mesh.txt size facet_distance odt_iterations threads convergence freeze_bound`,
+followed optionally by `feature_angle [non_manifold|manifold]`.
 The sequential binary requires `threads=1`; use `threads=4` for the four-thread
-comparison. The RNG seed is 2026. Feature detection uses 45 degrees, the facet
+comparison. The RNG seed is 2026. Feature detection defaults to 45 degrees, the facet
 angle criterion is 25 degrees, and the cell radius-edge bound is 2. Perturbation
 and exudation are disabled so the reported optimization is ODT; these settings
 are not a claim that this is CGAL's best achievable quality or speed.
+
+The Python runner exposes `--feature-angle` and `--topology`. The defaults retain
+the historical 45-degree, `non_manifold` policy and command compatibility with
+older binaries. An explicit `manifold` request uses CGAL's closed-manifold
+refinement option. Native triangulation validity alone does not establish a valid
+material boundary, and an initially manifold result still needs validation after
+ODT. Equal feature angles also do not establish equivalent GPU/CPU corner or
+boundary-update constraints. See the [CGAL topology options](https://doc.cgal.org/latest/Mesh_3/group__PkgMesh3Parameters.html).
 
 Convergence 0.02 and freeze bound 0.01 match the shipped CGAL 6.2.1 ODT stopping
 defaults. Zero disables the respective early stop for a separately labeled
@@ -129,8 +138,24 @@ python -m benchmarks.cpu_mesher --binary results/local/cgal-mesh3-sequential \
   --repeats 3 --output results/local/cpu-torus
 ```
 
-The output directory contains each native mesh, raw process output, and a
-`result.json` with stage timings, hashes, parameters and independent quality.
+For dense scanned surfaces, add `--distance-binary results/local/surface-distance`
+to use the optional native AABB oracle described below during offline validation.
+Its binary/source hashes are recorded; it runs after the native timing samples.
+
+The output directory must be empty. It contains each native mesh, raw process
+output, a progressively saved `runs.json`, and a `result.json` with stage timings,
+hashes, parameters and independent quality. Native timing and quota records are
+saved before quality validation, so a failed check does not discard them.
+The runner exits nonzero if any repeat fails. `native_valid` and `quality_valid`
+are separate: the latter means the independent material metric routine passed,
+not that every possible geometric property has been certified. Studies also
+check boundary vertex links and exact self-intersections where claimed.
+
+`median_complete_seconds` and `median_unthrottled_complete_seconds` use only
+individually successful samples; they are null when none qualify. A mixed batch
+can have a successful-sample median while its overall `valid` flag is false.
+`median_native_complete_seconds` retains native-process observations even when
+their material meshes fail validation; it is not an accepted meshing result.
 Complete CPU time includes domain construction, feature protection, meshing
 and ODT; file input, validity checking and file output are reported separately.
 Independent boundary-distance measurements happen after all timing samples.

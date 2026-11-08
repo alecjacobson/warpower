@@ -1,0 +1,66 @@
+{
+  "scope": "Build fresh optional-feature-angle native references; preserve historical binaries.",
+  "compiler": "c++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "source": ".work/vtm/cpu-mesh3-feature-policy-v1.cpp",
+  "source_sha256": "945cfa9d7162f2a6cf8555f9690dd73d6f2bd7f5123cc049a81b009694938443",
+  "historical_source_sha256": "2be80a2312f8093dc9fea912b5e5aaa8b6b160dc084dee5a1926cfa9223e0f29",
+  "historical_binary_sha256": {
+    "sequential": "710b380dc8b5f9417a935583ffbf3e48d71d9afa1f1724911853238bb8316a97",
+    "parallel": "8ba8e92a0a0f006ead4115212e168990c18c82d56455e54641facc69915b1f82"
+  },
+  "cgal_version": "6.2.1",
+  "cgal_source_revision": "44ab808c25399fc6dbd89a6e114f3fd6b5ae8142",
+  "builds": [
+    {
+      "mode": "sequential",
+      "command": [
+        "c++",
+        "-O3",
+        "-DNDEBUG",
+        "-std=c++17",
+        "-I/home/horde/references/CGAL-6.2.1/include",
+        "-I/usr/include/eigen3",
+        ".work/vtm/cpu-mesh3-feature-policy-v1.cpp",
+        "-lgmp",
+        "-lmpfr",
+        "-o",
+        ".work/vtm/cpu-mesh3-feature-policy-v1-sequential"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 44.97278308868408,
+      "timeout_seconds": 1200,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_sha256": "da4f0d5be8853dd3380d336aedf91e68778e049f44779f88210768d0b91582e8",
+      "bytes": 2409912
+    },
+    {
+      "mode": "parallel",
+      "command": [
+        "c++",
+        "-O3",
+        "-DNDEBUG",
+        "-std=c++17",
+        "-DWARPOWER_CGAL_PARALLEL",
+        "-DCGAL_LINKED_WITH_TBB",
+        "-I/home/horde/references/CGAL-6.2.1/include",
+        "-I/usr/include/eigen3",
+        ".work/vtm/cpu-mesh3-feature-policy-v1.cpp",
+        "-lgmp",
+        "-lmpfr",
+        "-ltbb",
+        "-ltbbmalloc",
+        "-o",
+        ".work/vtm/cpu-mesh3-feature-policy-v1-parallel"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 49.32672691345215,
+      "timeout_seconds": 1200,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_sha256": "68c4596a1264c54f2934ea77afcdb1b7781afb4757e8f322516f708d03e6ac11",
+      "bytes": 3055192
+    }
+  ],
+  "complete": true,
+  "limits": "Build qualification only. No native benchmark or geometry validation has run. Native studies must run separately from clean GPU timings.",
+  "historical_binaries_unchanged": true
+}

@@ -1,0 +1,173 @@
+{
+  "scope": "Initial scanned-domain CPU quality control; no quality-matched speedup claim.",
+  "source_sha256": {
+    ".work/vtm/run-cpu-scan-feature-pilot-v2.py": "c73ff27b47ebc90e65ebc7517db8dd90e0ecc9638a8ff3a66543b6d3cfbaeb5a",
+    ".work/vtm/cpu_mesher_feature_policy_v3.py": "687278283dcee18b4e93a6c11546553ffd2f120482b363c6f691f9babe5b1581",
+    ".work/vtm/cpu-mesh3-feature-policy-v2.cpp": "a46987f8e991372f63795d5a1b4a9f57ae013afb19880329a94355766dc60060",
+    "benchmarks/mesh_quality.py": "0a5765c4d82da5e24ccda94bf2c149875c83932bc314c9211b276a99a893e0dd",
+    "benchmarks/surface_distance.py": "977463196b35b253c1fee0193f87522dd8d43af87ad636c73737d64b678d6f2f",
+    ".work/vtm/surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    ".work/vtm/surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "build_sha256": "0cf6e5599c0a171ed8e5984a8f76f3a4d0f604ba9eb15b895cf16d9f613bf76f",
+  "surface": "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/armadillo-uniform8192-recovery-after/input.off",
+  "surface_sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+  "gpu_mesh_sha256": "fcbeb5511ba16e2f9570ef26bfadee630a125038ff7b5728214214fcf58b9379",
+  "identical_input_arrays": true,
+  "configuration": {
+    "size": 0.045,
+    "facet_distance": 0.005,
+    "feature_angle": 120,
+    "odt_iterations": 32,
+    "convergence": 0.02,
+    "freeze_bound": 0.01
+  },
+  "selection": "Initial size estimate only, not selected for an asserted match. Results determine subsequent size/fit/ODT controls.",
+  "runs": {
+    "sequential-default": {
+      "command": [
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu_mesher_feature_policy_v3.py",
+        "--binary",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-mesh3-feature-policy-v2-sequential",
+        "--surface",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/armadillo-uniform8192-recovery-after/input.off",
+        "--size",
+        ".045",
+        "--facet-distance",
+        ".005",
+        "--odt-iterations",
+        "32",
+        "--feature-angle",
+        "120",
+        "--convergence",
+        ".02",
+        "--freeze-bound",
+        ".01",
+        "--threads",
+        "1",
+        "--repeats",
+        "1",
+        "--topology",
+        "non_manifold",
+        "--distance-binary",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-distance",
+        "--output",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-scan-feature-pilot-v2/sequential-default"
+      ],
+      "exit_code": 1,
+      "wall_seconds": 8.424664497375488,
+      "binary_sha256": "d9011dc3ea9eb54728f2f4f490d30e2c5c33693bd040d0b9e35032f7b34eb676",
+      "log_sha256": "fcbdb64ef69d55f6630cd7eddd9096b3e9dd8472e37ef3a0c30378fba58ddd96",
+      "result_sha256": "1158e87e15882557e4e1e15f005df522e473547ca00689ae95bd43376da0bfe4",
+      "valid": false,
+      "accepted_timing": null,
+      "quality_errors": [
+        {
+          "type": "AssertionError",
+          "message": "",
+          "stage": "independent_material_quality_and_topology"
+        }
+      ]
+    },
+    "sequential-manifold": {
+      "command": [
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu_mesher_feature_policy_v3.py",
+        "--binary",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-mesh3-feature-policy-v2-sequential",
+        "--surface",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/armadillo-uniform8192-recovery-after/input.off",
+        "--size",
+        ".045",
+        "--facet-distance",
+        ".005",
+        "--odt-iterations",
+        "32",
+        "--feature-angle",
+        "120",
+        "--convergence",
+        ".02",
+        "--freeze-bound",
+        ".01",
+        "--threads",
+        "1",
+        "--repeats",
+        "3",
+        "--topology",
+        "manifold",
+        "--distance-binary",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-distance",
+        "--output",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-scan-feature-pilot-v2/sequential-manifold"
+      ],
+      "exit_code": 1,
+      "wall_seconds": 14.832185506820679,
+      "binary_sha256": "d9011dc3ea9eb54728f2f4f490d30e2c5c33693bd040d0b9e35032f7b34eb676",
+      "log_sha256": "bb7366d1050192b7f01beeab09c6c1850ac718418539eb9401992693f1e16e44",
+      "result_sha256": "ffdb7f5751f083cf9c2f74ea515fc2db164362fb68eb581246704837fd7e29c9",
+      "valid": false,
+      "accepted_timing": null,
+      "quality_errors": [
+        {
+          "type": "AssertionError",
+          "message": "",
+          "stage": "independent_material_quality_and_topology"
+        },
+        {
+          "type": "AssertionError",
+          "message": "",
+          "stage": "independent_material_quality_and_topology"
+        },
+        {
+          "type": "AssertionError",
+          "message": "",
+          "stage": "independent_material_quality_and_topology"
+        }
+      ]
+    },
+    "parallel-manifold": {
+      "command": [
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu_mesher_feature_policy_v3.py",
+        "--binary",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-mesh3-feature-policy-v2-parallel",
+        "--surface",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/armadillo-uniform8192-recovery-after/input.off",
+        "--size",
+        ".045",
+        "--facet-distance",
+        ".005",
+        "--odt-iterations",
+        "32",
+        "--feature-angle",
+        "120",
+        "--convergence",
+        ".02",
+        "--freeze-bound",
+        ".01",
+        "--threads",
+        "4",
+        "--repeats",
+        "3",
+        "--topology",
+        "manifold",
+        "--distance-binary",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-distance",
+        "--output",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-scan-feature-pilot-v2/parallel-manifold"
+      ],
+      "exit_code": 1,
+      "wall_seconds": 22.89194655418396,
+      "binary_sha256": "d05226b2d14952c098723da97d96555a78fec5523e9868a9276d7be1624c8ac2",
+      "log_sha256": "b0e33426819aee91a54ea8200d9d9e9184682d5ed86ec4221a68143911895ca7"
+    }
+  },
+  "complete": false,
+  "limitations": [
+    "GPU corner-angle and boundary-update semantics are not established equivalent to CGAL feature protection merely by equal feature-angle values.",
+    "CPU outputs are material complexes with feature-protection weights; no independent unweighted complete-hull claim is made.",
+    "Native complete time includes domain/setup, meshing and ODT, while GPU warmed replay excludes workspace setup. Both scopes and native component times remain explicit.",
+    "This first control is not a matched-quality speedup comparison. All throttled/failed samples remain retained."
+  ]
+}

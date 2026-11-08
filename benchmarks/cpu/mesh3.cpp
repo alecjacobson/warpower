@@ -16,6 +16,7 @@
 #include <iostream>
 #include <map>
 #include <stdexcept>
+#include <string>
 #ifdef WARPOWER_CGAL_PARALLEL
 #include <tbb/global_control.h>
 using Concurrency = CGAL::Parallel_tag;
@@ -36,8 +37,8 @@ static double elapsed(Clock::time_point a, Clock::time_point b) {
 
 int main(int argc, char** argv) {
     try {
-        if (argc != 9) {
-            std::cerr << "usage: cgal-mesh3 surface.off mesh.txt size facet_distance odt_iterations threads convergence freeze_bound\n";
+        if (argc != 9 && argc != 10 && argc != 11) {
+            std::cerr << "usage: cgal-mesh3 surface.off mesh.txt size facet_distance odt_iterations threads convergence freeze_bound [feature_angle [non_manifold|manifold]]\n";
             return 2;
         }
         const int threads=std::stoi(argv[6]);
@@ -61,16 +62,24 @@ int main(int argc, char** argv) {
         if (!std::isfinite(convergence) || !std::isfinite(freeze_bound) || convergence<0 || convergence>1 || freeze_bound<0 || freeze_bound>1) throw std::runtime_error("Invalid stopping parameters");
         if (!std::isfinite(h) || h<=0 || !std::isfinite(distance) || distance<=0 || iterations<0)
             throw std::runtime_error("Invalid criteria");
+        const double feature_angle = argc >= 10 ? std::stod(argv[9]) : 45.0;
+        if (!std::isfinite(feature_angle) || feature_angle <= 0 || feature_angle >= 180)
+            throw std::runtime_error("Feature angle must be finite and strictly between 0 and 180 degrees");
+        const std::string topology = argc == 11 ? argv[10] : "non_manifold";
+        if (topology != "non_manifold" && topology != "manifold")
+            throw std::runtime_error("Topology must be non_manifold or manifold");
+        const auto topology_options = topology == "manifold"
+            ? CGAL::parameters::manifold() : CGAL::parameters::non_manifold();
         const auto start = Clock::now();
         CGAL::get_default_random() = CGAL::Random(2026);
         CGAL::Random rng(2026);
         Domain domain(surface, &rng);
-        domain.detect_features(45.0);
+        domain.detect_features(feature_angle);
         Criteria criteria(CGAL::parameters::edge_size(h).facet_angle(25.0)
             .facet_size(h).facet_distance(distance).cell_radius_edge_ratio(2.0).cell_size(h));
         const auto domain_end = Clock::now();
         Complex mesh = CGAL::make_mesh_3<Complex>(domain, criteria,
-            CGAL::parameters::no_perturb(), CGAL::parameters::no_exude());
+            CGAL::parameters::no_perturb(), CGAL::parameters::no_exude(), topology_options);
         const auto mesh_end = Clock::now();
         int result=-1;
         if (iterations>0)
@@ -103,7 +112,8 @@ int main(int argc, char** argv) {
             << "{\"cgal\":\"" << CGAL_VERSION_STR << "\",\"concurrency\":\"" << concurrency
             << "\",\"threads\":" << threads << ",\"seed\":2026"
             << ",\"size\":" << h << ",\"facet_distance\":" << distance
-            << ",\"facet_angle\":25,\"feature_angle\":45,\"cell_radius_edge_ratio\":2"
+            << ",\"facet_angle\":25,\"feature_angle\":" << feature_angle << ",\"cell_radius_edge_ratio\":2"
+            << ",\"topology\":\"" << topology << "\""
             << ",\"odt_convergence\":" << convergence << ",\"odt_freeze_bound\":" << freeze_bound
             << ",\"requested_odt_iterations\":" << iterations << ",\"odt_return_code\":" << result
             << ",\"vertices\":" << id

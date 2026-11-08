@@ -1,0 +1,66 @@
+{
+  "scope": "Check optional native distance validation against the original offline metric.",
+  "source_sha256": {
+    "cpu_mesher_feature_policy_v2.py": "58c31543161077961768e07fc60f4f71fe88a10385c3a565074a9fbe56c4599d",
+    "cpu-mesh3-feature-policy-v1-sequential": "da4f0d5be8853dd3380d336aedf91e68778e049f44779f88210768d0b91582e8",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe"
+  },
+  "runs": {
+    "brute": {
+      "command": [
+        ".venv/bin/python",
+        ".work/vtm/cpu_mesher_feature_policy_v2.py",
+        "--binary",
+        ".work/vtm/cpu-mesh3-feature-policy-v1-sequential",
+        "--surface",
+        ".work/vtm/cpu-feature-policy-contracts-v2/cube.off",
+        "--size",
+        "0.7",
+        "--facet-distance",
+        "0.05",
+        "--odt-iterations",
+        "0",
+        "--feature-angle",
+        "120",
+        "--repeats",
+        "1",
+        "--output",
+        ".work/vtm/cpu-distance-policy-contracts-v1/brute"
+      ],
+      "exit_code": 0,
+      "result_sha256": "b2eb97401cc8290c965619d4d32ede8d009b6e4346dacaa9799fe5d7a9396f7d",
+      "mesh_sha256": "1910ed7d2f3c28cd9c121f44bf54cccbb1d3ad291652eeb0e8b8978e4cae525c"
+    },
+    "native": {
+      "command": [
+        ".venv/bin/python",
+        ".work/vtm/cpu_mesher_feature_policy_v2.py",
+        "--binary",
+        ".work/vtm/cpu-mesh3-feature-policy-v1-sequential",
+        "--surface",
+        ".work/vtm/cpu-feature-policy-contracts-v2/cube.off",
+        "--size",
+        "0.7",
+        "--facet-distance",
+        "0.05",
+        "--odt-iterations",
+        "0",
+        "--feature-angle",
+        "120",
+        "--repeats",
+        "1",
+        "--output",
+        ".work/vtm/cpu-distance-policy-contracts-v1/native",
+        "--distance-binary",
+        ".work/vtm/surface-distance"
+      ],
+      "exit_code": 0,
+      "result_sha256": "b4e9871370485174d8fdbe8008a4bb206861ad4ba52b8f5b2c04d012384caee6",
+      "mesh_sha256": "1910ed7d2f3c28cd9c121f44bf54cccbb1d3ad291652eeb0e8b8978e4cae525c"
+    }
+  },
+  "complete": true,
+  "limits": "Functional diagnostic only; not a clean CPU performance sample.",
+  "mesh_equal": true,
+  "independent_quality_agrees": true
+}

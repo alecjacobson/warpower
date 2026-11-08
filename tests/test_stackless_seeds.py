@@ -17,7 +17,7 @@ from warpower._delaunay_certificate import Sphere, outside, symbolic_sphere
 from warpower._facet_seeds import reset_live
 from warpower._grouped_seeds import GroupedSeedQueries
 from warpower._site_bvh import SiteHierarchy
-from warpower._stackless_seeds import StacklessSeedQueries, check_stackless
+from warpower._stackless_seeds import StacklessSeedQueries, exact_check, strict_check
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
 
@@ -273,12 +273,16 @@ def test_captured_producers_preserve_exhaustive_and_rational_masks(case, exponen
                     reset_live, capacity, inputs=[count, live], device=device, block_dim=block
                 )
                 if kernel is None:
+                    prepared.pending.fill_(wp.uint32(0xFFFFFFFF))
+                    prepared.unresolved.fill_(-177)
                     prepared.run()
                 elif kernel == "flat":
                     flat.lower.fill_(wp.vec3(wp.nan))
                     flat.upper.fill_(wp.vec3(wp.nan))
                     flat.run()
                 elif kernel == "invalid":
+                    prepared.pending.zero_()
+                    prepared.unresolved.fill_(-177)
                     wp.launch(
                         invalidate,
                         capacity,
@@ -286,13 +290,14 @@ def test_captured_producers_preserve_exhaustive_and_rational_masks(case, exponen
                         device=device,
                         block_dim=block,
                     )
-                    wp.launch(
-                        check_stackless,
-                        32 * capacity,
-                        inputs=prepared._query_inputs,
-                        device=device,
-                        block_dim=block,
-                    )
+                    for checker in [strict_check, exact_check]:
+                        wp.launch(
+                            checker,
+                            32 * capacity,
+                            inputs=prepared._query_inputs,
+                            device=device,
+                            block_dim=block,
+                        )
                 else:
                     wp.launch(
                         kernel,

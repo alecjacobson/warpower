@@ -1,0 +1,24 @@
+[
+  {
+    "name": "large-reuse",
+    "mode": "padded",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_large_reuse.py"
+    ],
+    "exit_code": -15,
+    "wall_seconds": 453.92180824279785,
+    "timeout_seconds": 1200,
+    "disable_pool": false,
+    "zero_memcheck_errors": false,
+    "expected_tests": 15
+  }
+]

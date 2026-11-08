@@ -439,8 +439,8 @@ For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).
 Preallocated 1,024- and 2,048-site constructors handle the smallest fitting prefix;
 the full constructor handles larger inputs and prefix failures. At reserved
-capacities of 2,049–4,096 sites, that full route now
-[uses certified fragment reuse](large-fragment-reuse.md), retaining current-input
+capacities of 2,049–16,384 sites, that full route now
+[uses certified fragment reuse](extended-fragment-reuse.md), retaining current-input
 cell proofs throughout completion. Larger capacities retain ordinary full
 construction. Each fresh solve clears all fragments. Inactive
 scratch sites are exact duplicates of site zero, so the prefix contains every

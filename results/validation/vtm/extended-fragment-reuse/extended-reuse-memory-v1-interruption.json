@@ -1,0 +1,20 @@
+{
+  "time": "2026-11-08T07:34:30.638530+00:00",
+  "pid": 1135982,
+  "process_group": 1135982,
+  "command": [
+    "/usr/local/cuda-12.9/bin/../compute-sanitizer/compute-sanitizer",
+    "--tool",
+    "memcheck",
+    "--padding",
+    "32",
+    "--error-exitcode",
+    "99",
+    "/home/horde/projects/power-diagram/.venv/bin/python",
+    "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+    "tests/test_large_reuse.py"
+  ],
+  "action": "SIGTERM to the combined sanitizer process group",
+  "reason": "After two completed test markers, repeated 60-second traces stayed at synchronize_device in WallReuseDelaunayWorkspace.__init__ for multiple minutes. GPU utilization0%,memory31862MiB; no further test progress. Preserve as incomplete, not passed.",
+  "next": "Isolate parameterized cases in fresh processes; keep both padded and pool-disabled lifetime checks."
+}

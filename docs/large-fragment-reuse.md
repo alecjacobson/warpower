@@ -1,7 +1,10 @@
 # Certified fragment reuse through 4,096 sites
 
-The active VTM mesher now uses certified fragment reuse on its full reconstruction
-route at reserved capacities from 2,049 through 4,096 sites. This reduces complete
+This report describes the earlier 4k integration. The [current full route extends
+through 16,384 reserved sites](extended-fragment-reuse.md).
+
+The initial integration enabled certified fragment reuse on the active VTM full
+reconstruction route at reserved capacities from 2,049 through 4,096 sites. This reduces complete
 4k torus and Armadillo solves by 1.82–2.96× in the measured cases. Only two host
 classes change; all existing Warp kernels/functions and independently callable
 power-diagram, Delaunay and fixed-boundary ODT implementations stay unchanged.

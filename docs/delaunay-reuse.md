@@ -8,7 +8,7 @@ For a small active prefix inside a larger
 reserved VTM workspace, [device capacity routing](active-reconstruction.md) now
 selects a smaller constructor that can use this strategy.
 The active mesher's full route also [uses reuse at reserved capacities of
-2,049–4,096 sites](large-fragment-reuse.md), with current-input proof consumption
+2,049–16,384 sites](extended-fragment-reuse.md), with current-input proof consumption
 enabled throughout completion. Larger full routes retain ordinary construction;
 the exhaustive seed filter costs O(sites × retained cells). The later report
 records complete uniform/graded torus and Armadillo gains, storage costs and

@@ -4,8 +4,9 @@ The [implementation goal](https://github.com/alecjacobson/warpower/issues/29)
 tracks a pure-Warp, device-resident implementation of
 [Alliez et al., Variational Tetrahedral Meshing (2005)](https://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Alliez05.pdf).
 The [public mesher](mesher.md) now composes the numerical stages in a captured
-nonconvex-domain pipeline. Broad example validation and the CPU performance goal
-remain work in progress.
+nonconvex-domain pipeline. The [current schedule and size study](fixed-site-current.md)
+measures existing options through 16,384 sites against native size controls.
+The wide comparable-quality CPU performance goal remains unmet.
 
 The target includes ODT relocation, boundary and sharp-feature fitting, graded
 sizing, initial sampling, refinement, final domain extraction, and GPU convergence
@@ -37,7 +38,9 @@ usable. New meshing modules are lazy imports, and their optional computation is
 separate from the existing default diagram path. The standalone
 `delaunay_tetrahedra` and `regular_tetrahedra` convenience functions return the
 full-hull mesh without constructing bounded adjacency. For captured standalone
-meshing, use `DiagramWorkspace(adjacency=False, return_tetrahedra=True)`.
+certified unweighted meshing, use [`DelaunayWorkspace`](delaunay-recovery.md).
+`DiagramWorkspace(adjacency=False, return_tetrahedra=True)` also exposes the
+diagram-based tetrahedral output, including weighted regular triangulations.
 
 Changes to shared geometry code require independent correctness checks and
 paired performance comparisons against the baseline, including diagram calls

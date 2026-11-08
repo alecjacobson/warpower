@@ -1,0 +1,60 @@
+{
+  "scope": "Isolated observer buffer and complete captured-workspace memory checks.\n\nThe two earlier multi-workspace batches stopped in setup synchronization and\nremain incomplete. This scope verifies buffer exhaustion and real captured\nproducer/consumer/failure/local-retry execution in separate processes.\n",
+  "source_sha256": {
+    "/home/horde/projects/power-diagram/.work/vtm/run-step-observer-memory-v3.py": "10769f7eb2c42a97831fc2323ad6ea6a6681b0778206474a14b337012951efdf",
+    "/home/horde/projects/power-diagram/.work/vtm/test_step_observer_buffer_v1.py": "1892bef738c13ef0fcc11f28734aa3f6acc612a67d16f0f6110b2fce2d41cf45",
+    "/home/horde/projects/power-diagram/.work/vtm/step_observer_v1.py": "9cc3072b43f6b467913b28b0e15f7387cc21dddf166abbe9a3421208ef831650",
+    "/home/horde/projects/power-diagram/.work/vtm/step_observer_pytest_plugin_v1.py": "5e789bd65e4b4441af03cb8c1b2709a459da8105e5f33148fe21723e41515b51",
+    "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78",
+    "/home/horde/projects/power-diagram/benchmarks/memcheck.py": "707d7d29ef6469d9cc52f56d6f21b0dc5464a6aedf858eca09ebb91bcda6df50"
+  },
+  "rows": [
+    {
+      "name": "buffer",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--padding",
+        "32",
+        "--error-exitcode",
+        "99",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+        "-p",
+        "step_observer_pytest_plugin_v1",
+        "/home/horde/projects/power-diagram/.work/vtm/test_step_observer_buffer_v1.py"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.116701364517212,
+      "timeout_seconds": 300,
+      "zero_memcheck_errors": true,
+      "passed": true,
+      "expected_tests": 2
+    },
+    {
+      "name": "producer",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--padding",
+        "32",
+        "--error-exitcode",
+        "99",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+        "-p",
+        "step_observer_pytest_plugin_v1",
+        "tests/test_mesher.py::test_full_device_producer_mesher_consumer_with_changing_input_and_recovery"
+      ],
+      "exit_code": 124,
+      "wall_seconds": 300.00262808799744,
+      "timeout_seconds": 300,
+      "zero_memcheck_errors": false,
+      "passed": false,
+      "expected_tests": 1
+    }
+  ],
+  "complete": false
+}

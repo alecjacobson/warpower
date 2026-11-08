@@ -1,0 +1,133 @@
+{
+  "scope": "Static total key/sort/query/cache cost under private register limits; no full-solve claim.",
+  "limits": "Immutable validated final meshes only; no full-solve or invalid-input qualification. Warm rows repeatedly query unchanged input; cold rows include clearing the cache. Both include cache rebuild. Setup and host validation are outside timing.",
+  "source": "0a2ce5e4ed48ca9cf91a3c8ddacb6abdc34aa0ef",
+  "input": "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/torus1000-after.npz",
+  "input_sha256": "c9d37011557a1300f7374f9bcbeecfa3f29982c90e1c5ebb70c899352d6fa39d",
+  "sites": 1000,
+  "cells": 5826,
+  "capacity": 5863,
+  "source_sha256": {
+    "/home/horde/projects/power-diagram/.work/vtm/profile-surface-register-limits-v1.py": "20a88e2ecccadf03f715c45471ed80e4b92360a3cea3c0b99b59f10de8bfa132",
+    "/home/horde/projects/power-diagram/.work/vtm/surface_register_limits_v1.py": "b4b1b5aacf4d5925b3e0afaa15498c08db89998f67820a6172c9e25d5d2cdcfa",
+    "warpower/_surface_query_cache.py": "6d90d7649cd775bbdda66b30dbe727bfd7adcd9dc5bdb072471cff0c4115942c",
+    "warpower/_ordered_surface_queries.py": "7d3315db91fac6b766ab890e6766fdc44da5cfdcc80470883ec292ba0af388ec",
+    "/home/horde/projects/power-diagram/.work/vtm/surface_register_limit_96_v1.py": "79883f9ecbebeced8a5e0a575c7cd09c6aef39004f45333d52a339901dcd8e51",
+    "/home/horde/projects/power-diagram/.work/vtm/surface_register_limit_128_v1.py": "00a35e6bcecf2c5b14d34b3c0d3093e66aa3025192d634f8b66bfdad761a72c0",
+    "/home/horde/projects/power-diagram/.work/vtm/surface_register_limit_192_v1.py": "c78fe3ce44f0a695d9286a0c173fabdf9deb54b3b809c7d299214d51bb75edd5"
+  },
+  "rows": [
+    {
+      "mode": "full",
+      "cache": "cold",
+      "phase": "before",
+      "gpu_ms": [
+        3.822144031524658,
+        3.814847946166992,
+        3.816864013671875,
+        3.8134078979492188,
+        3.8124799728393555,
+        3.8163840770721436,
+        3.812704086303711,
+        3.814336061477661,
+        3.812704086303711,
+        3.8143680095672607,
+        3.8132801055908203,
+        3.816256046295166,
+        3.8137919902801514,
+        3.81494402885437,
+        3.814239978790283,
+        3.8162879943847656,
+        3.814847946166992,
+        3.81276798248291,
+        3.812096118927002,
+        3.813983917236328
+      ],
+      "median_ms": 3.814288020133972,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": false,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "c11df10fc4315e03b02de6a89202a294177ea73306367de8edef1be61d03d010",
+        "quality": "50a8582a2427a008f8ec62d63477a5072db866dc66484e4402369b667b181c4c",
+        "center": "97e4ddb1fb97ea3d7b2d7f683b781b199b844a9c16dc79ff78607de42602c457",
+        "radius": "b62ed7dade01aa1acb0dc11b2d5c45a332df7cc4ee18eef3be717e5fc11ad741",
+        "distance": "4da423f45b9169dfa74e417dc259d9b7aa6e150ac2f4e5e18755dd687a43757f",
+        "volume": "f7035669d35a9f536c982c3549dd33ec04f09496799eb545c7bcd58fd0b99c08"
+      }
+    }
+  ],
+  "compiled_kernel_properties": {
+    "before": {
+      "classify_cached": {
+        "register_count": 255,
+        "local_memory_size": 35952
+      },
+      "selection_cached": {
+        "register_count": 255,
+        "local_memory_size": 36008
+      },
+      "retained_cached": {
+        "register_count": 255,
+        "local_memory_size": 35960
+      }
+    },
+    "r96": {
+      "classify_cached": {
+        "register_count": 96,
+        "local_memory_size": 36704
+      },
+      "selection_cached": {
+        "register_count": 96,
+        "local_memory_size": 36784
+      },
+      "retained_cached": {
+        "register_count": 96,
+        "local_memory_size": 36752
+      }
+    },
+    "r128": {
+      "classify_cached": {
+        "register_count": 128,
+        "local_memory_size": 36496
+      },
+      "selection_cached": {
+        "register_count": 128,
+        "local_memory_size": 36552
+      },
+      "retained_cached": {
+        "register_count": 128,
+        "local_memory_size": 36504
+      }
+    },
+    "r192": {
+      "classify_cached": {
+        "register_count": 192,
+        "local_memory_size": 36240
+      },
+      "selection_cached": {
+        "register_count": 192,
+        "local_memory_size": 36296
+      },
+      "retained_cached": {
+        "register_count": 192,
+        "local_memory_size": 36248
+      }
+    }
+  },
+  "query_count_gate": 32768,
+  "ordering_storage": false
+}

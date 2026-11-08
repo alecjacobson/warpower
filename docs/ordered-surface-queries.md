@@ -142,3 +142,7 @@ This closes the bounded adoption milestone
 [#245](https://github.com/alecjacobson/warpower/issues/245);
 the broader surface-query work in
 [#197](https://github.com/alecjacobson/warpower/issues/197) remains open.
+
+A subsequent [register-limit probe](surface-register-limits.md) retained the
+original kernels: lower caps regressed important cold batches and no complete-solve
+gain was established.

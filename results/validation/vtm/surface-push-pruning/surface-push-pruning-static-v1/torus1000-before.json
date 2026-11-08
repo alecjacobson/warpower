@@ -1,0 +1,567 @@
+{
+  "scope": "Static complete classifier/cache and padded quadrature costs; no solve claim.",
+  "source": "55f356c7aa8cf91d5143b1f392e3b96038c6462d",
+  "phase": "before",
+  "input": "/home/horde/projects/power-diagram/.work/vtm/surface-sample-final-v1/torus1000-after.npz",
+  "input_sha256": "bcd7ee3671bfde2bb007485a15a4bf7a1b8c71d963c74584a3c3178ab169e255",
+  "source_sha256": {
+    "/home/horde/projects/power-diagram/.work/vtm/profile-surface-push-pruning-v1.py": "172178ecf0b185a5f7125a6c7e19d9b0c2ca3af56e701600806dd2bbed454554",
+    "/home/horde/projects/power-diagram/.work/vtm/surface_push_pruning_v1.py": "d93db8fee0d61d265f4fcb356034aadbe16b734bd4fa034df9dcb4c94ccff97e",
+    "/home/horde/projects/power-diagram/.work/vtm/surface_push_pruning_install_v1.py": "b4fc7bc4b81cb5ed89629d8323fe3288c6aeb344b4d4f1018e91b93759ca61f0",
+    "warpower/_adjacency.py": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+    "warpower/_domain.py": "7c82b21b9e1995301d36570a2a455c041c6daee78b5e736d35cd5df69d94a88d",
+    "warpower/_analytic_predicates.py": "b6d8ab23dfb23e107f8dde1d9e473085f9a45004115279531bfe219194bfad15",
+    "warpower/_stable_center.py": "1d3f4a58c799f675edde5dea9f77dd50c36b68b7f8580e809a1b88d761d770d3",
+    "warpower/_quality_moves.py": "a784c524f482ae9df0303de778df589a91637f074b5f2d34eee9c500f7520624",
+    "warpower/_containment.py": "e4913d8e25cd8f3a058b9a3175d69646cb3a7845a9fc2cb24ddc038373495e86",
+    "warpower/_proved_completion.py": "23336177436b94c6bf99c33e0aef58d921a51b1529c69787bddf743c37a41635",
+    "warpower/_wall_reuse.py": "8eb33d823e468da70ad1e1540876c5d8eb56c861ddfa2aa493a7bd8177f5e56e",
+    "warpower/_bvh.py": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+    "warpower/_canonical.py": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+    "warpower/_cell.py": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+    "warpower/_construct.py": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+    "warpower/_validation.py": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75",
+    "warpower/_api.py": "f84bec46306a84d7f1b72c6dc1d9dc560cb2905ad74bda63f4bffb97e4e5ad97",
+    "warpower/_tetrahedra.py": "5db1eb6583f84bf99a81c9aca8aabb1d8fdc8772d6db7fe9bb87d812ad09f2ec",
+    "warpower/_graph_construct.py": "9f305d39185abc6602b85431b887c3bd2b5152864ec18ef35e6a71e3a6690e42",
+    "warpower/_graph_tetrahedra.py": "ddbb067ef02cfd20032cc29d870bb19b9d30b4cd2a649516be5c547ce5b94540",
+    "warpower/_mesh_api.py": "37cf23ecf09d34a7bc0a77ebe73d8e2102c37064b1ab4923acccca993ea0678f",
+    "warpower/_extraction.py": "b14cf2616e6fd921ec4f8c780820a0012a0d8fc9988c0a175d5cd8a4f1e39904",
+    "warpower/_selective_backtracking.py": "e7111bcb1505045a4f73cbb72b4c3c54a4c814e21a4d5bdd69d046670d29223e",
+    "warpower/_graph.py": "d7e489b28717f72a25e866b59f1c9dba3855222e83cd97e848bf7e6b68bf18e2",
+    "warpower/_sampling.py": "3f4ef9a1ed354dab1a0f54528817683d68af1bc81c1926ec631834d93a8edc70",
+    "warpower/_boundary.py": "68525b60978aef6eaf0f8f02f7693747b5fec6a5e02ba260cc67d82f389c94dd",
+    "warpower/_bounded_predicates.py": "2a9afb83f8c64eea5f0597ffff0ccc9d5007f71f1d37a41f14da7b3e06df22e3",
+    "warpower/_site_bvh.py": "60a307c003c02f931cc1d6ee2f4ca1b417d34be6a4fae3f6d968be17dda7c92b",
+    "warpower/_reuse_delaunay.py": "862a4671c2daa9df7fe168625eefb4206184d2f9cb7c433f8a1aeab77c248ea5",
+    "warpower/_mesh_topology.py": "5dcb12b58e59446e5dbf4db6a1bda2eab3a32a55c833e453e3b9d48f3dfbcc24",
+    "warpower/_mesher.py": "489610425da073766937e493535ec7bbba80fe8befe1e9e364302762bd3eee47",
+    "warpower/_surface_bvh.py": "b8bb9d8bb798fb5b38fcf59aa55c858a1af56de1d57e98b630f0b37b593edcf4",
+    "warpower/_exterior_proof.py": "b8bec5867ef20b2c65462844a078889ca68799696b86c981f811a6af689ec0c7",
+    "warpower/_filtered_predicates.py": "a9a74285885f362deb634972709ae6fe47dbdb33320e3b8627d3b85669578564",
+    "warpower/_halfspace_predicates.py": "46779c8236dab4048344523a653ed1b864ba77082163f533b991fb85540db164",
+    "warpower/_integer.py": "94205ab5790a308f51b083fedc8cb905050602369061d65d231b91f175a0d641",
+    "warpower/_predicates.py": "20a204a1f6774353d3ce5d35e241db53a0ac075ef40714542f0067010aa50d26",
+    "warpower/_graded_odt.py": "37538c9d51d3282a9ec85b6e1e7f6eeba6876598d5cb79f30d0dd8d736d45778",
+    "warpower/_stable_volume.py": "c326ad964bd1bf1f11fcd0682e1cacc8df56b7a3ccb3815ceef3694c3ac36a90",
+    "warpower/_prepared_seeds.py": "86246833eec66426191c3e5465f6eadcd8437724893f4ccecf6f4f8564d89d56",
+    "warpower/_proven_exterior.py": "797e56b17d91683cc1088528aa2437cb68eed4a9f08126fb2ba32ac5444d9778",
+    "warpower/_selective.py": "bec29726a2ba58c482f278d50b5b7a6c34b375b6f6e21b0846f23432d1d0fb42",
+    "warpower/_sizing.py": "fe30bc06b3ad23479367a00afb2356e1103e74beb5e764e5f47e91ba8a343464",
+    "warpower/_delaunay_certificate.py": "bfab680e65db7757c519c0087cbbaf1d04ce5872e354c25bfee50f455fb1f6f0",
+    "warpower/_boundary_rounding.py": "6db76fc3ccce54914710dee1a134655d9b8934a3352686b9f41f2e9e92926e07",
+    "warpower/_symbolic_delaunay.py": "79760a7f1770a8902288f4a8f750eb2170ba87899260a637817b65cc2f2aa451",
+    "warpower/_automatic_sizing.py": "f6aab578b13d3689648452c49c4e4474b40005a8215bc6787cf6811037fd713b",
+    "warpower/_poles.py": "b93f434020a357025dc3a067bbb0e8ed2c4c0ab66ecee0108db5a2c6762ea18d",
+    "warpower/_active_sites.py": "3c17ffe07d129ee4c46317f1ce1ede2ed0d96a0f237ddb718f77e401a95f7cc1",
+    "warpower/_facet_seeds.py": "8f88e244a9e9529bfc562a2a59edcf41c8f1b045da4a470655549fd6dd32658c",
+    "warpower/_grouped_seeds.py": "8d0ffa1556c179ff11d0ecd357a55cdb198897a4fc4c8336389744b0aff19785",
+    "warpower/_wall_candidates.py": "f9a532d2418a9ced7ccd9fcccecf91db74c0548b746e1bcd012cfd08d5d764cb",
+    "warpower/_jitter.py": "b184d21b47ce3e96fcf1587722d9be3c276240fc776ce85ffa10b3442dd85435",
+    "warpower/_teleport.py": "4123f2a28bfc4324c5340adf85e93538885cd54b5e3f5b11107bc07183e7ab4f",
+    "warpower/_exterior_band.py": "4fd5fae2fae29129ec4fc9cb787946491a451dd34ec3d1e0a10a35dd070d60e4",
+    "warpower/_vtm.py": "8955a3c64addc6e58831584c8d0c87978c45b86c2c52a103214c35e6441bd5b3",
+    "warpower/_vtm_controls.py": "a2c08f2f50c4bc189e2bc82a38f50b4137229081ff13344d4b319e11cbff9880",
+    "warpower/__init__.py": "bc95cfd203def8ddac4d3171fee33feb98bbbef10a8ea5f98eef824140244874",
+    "warpower/_domain_topology.py": "3c0746b94c2940d275be28626e8dd257aa0b5a284d8459bd4cec226e4935826b",
+    "warpower/_sphere_bounds.py": "865f1d7eb961ffab42d98213ff52e52cb7a60973233cb03923d3f559e1e72c3c",
+    "warpower/_facet_completion.py": "fe32e851c37ff5564393f4f6d3d4cfab6a43cf9927db3fd1bb0bf8d0b4cdb6c8",
+    "warpower/_active_delaunay.py": "fb52f8815537614c38747c62fd164d5fb47cf1ffb5b0a7c8fbc46dd2080ed169",
+    "warpower/_voronoi_volume.py": "9b8b6c0f4e29f0907297ce5f13876d50f5728f8283fa73dec7514d5e30e05305",
+    "warpower/_refinement.py": "003dc220a88044aa18f624676b5d1941a7bed314f1cb17226f962d8a4d61eb81",
+    "warpower/_triangle_contact.py": "01ebcddc6501f402157cf4a46738bffb6e8a55932dc11a35d6b79855804388df",
+    "warpower/_symbolic_bounds.py": "b071b45a8a19b93a322406680d10b6137c9cc7677efeb8776b98b7ae8c678db6",
+    "warpower/_symbolic_cell.py": "b3fbd57892ec33cef5e03b094d9cf454d17ffa9ae0ac4d886cce6ca210ecb7a2",
+    "warpower/_symbolic_tetrahedra.py": "52af32e5cfd0686fb82548a512f1b89c703057a45e0eb7597b9918d7a931e29a",
+    "warpower/_fast_candidates.py": "740377dd16ccfec7b0bc630e4d2a483312a2a8cf398e067d37b3973e18d9a483",
+    "warpower/_odt.py": "53d23df8f23de165d98598c7fbbf53e2944f82ee82f6a74c2b135e142dd589f0",
+    "warpower/_vtm_domain.py": "7e7d79477224b3ddbcd5c11a47bee237ed96474660987268d43dac554aadf76a",
+    "warpower/_wide_center.py": "ed6c89a6afe3ee4dc4d14db4b92d244ed8483fd9fd55179e7048fc0dd1f13814",
+    "warpower/_delaunay_recovery.py": "9f5b5b330bcdeeeb64ebe0eec5823d1357f6c79f1af4e1131dacda7b0d7f8e46",
+    "warpower/_surface_query_cache.py": "6d90d7649cd775bbdda66b30dbe727bfd7adcd9dc5bdb072471cff0c4115942c",
+    "warpower/_stackless_seeds.py": "8e87592618d14f2d411abd7e7b84f823d43aee3ccab35960535b917c5680d22b",
+    "warpower/_unproved_queries.py": "36e2ab604523450b23fae49d4cc68cd35de6a1c9976db3b210feb428b68d1b14",
+    "warpower/_exterior_proof_bvh.py": "fd97fe83ac95a94f7061f0c9fd737953ffc0d1dd0dc3ce87dad0df2ffb9f3e23",
+    "warpower/_topology_recovery.py": "1c5cd9ac5090f6077c1d2f1198e5e3314fc364c29e1f40f777aa638a6362c96c",
+    "warpower/_ordered_surface_queries.py": "7d3315db91fac6b766ab890e6766fdc44da5cfdcc80470883ec292ba0af388ec"
+  },
+  "sites": 1000,
+  "cells": 5826,
+  "capacity": 8000,
+  "face_capacity": 32000,
+  "rows": [
+    {
+      "name": "full-cold",
+      "gpu_ms": [
+        3.856640100479126,
+        3.8691840171813965,
+        3.850912094116211,
+        3.8683199882507324,
+        3.850559949874878,
+        3.8702080249786377,
+        3.8541440963745117,
+        3.8690240383148193,
+        3.851583957672119,
+        3.8684160709381104,
+        3.849407911300659,
+        3.871328115463257,
+        3.8506240844726562,
+        3.8679358959198,
+        3.8505280017852783,
+        3.8689920902252197,
+        3.8507840633392334,
+        3.867295980453491,
+        3.8498880863189697,
+        3.8688321113586426
+      ],
+      "median_ms": 3.8619680404663086,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "efd66456ab5ccb32675fdfc1f6e9725a5a6ae5334c7a3dff0e9afa631991987e",
+        "quality": "fd4d64d74629eb9a3e6d1db40457620deae66dc5c844c363b70e2e8bd3117f85",
+        "center": "989130343ca47d15f650c999a1b8a09e938565975aa73156d59f187985f1bfc9",
+        "radius": "cd066d5c4b69fb3b19999b590ffaf9b1b48756a5d9a3745fd0a4503ecaf9eaf6",
+        "distance": "1cb841d94297a621b39401e6e2d6420c1c71e0776ebd50da239907f928ce0858",
+        "volume": "e069c816dce5e6377f80c5bc57e3a233eff4354cdba730d0f7477efb958752bb",
+        "probe.centers": "8a2d3c57af9317ed8cee55586b3efa37098536dc95d2a342dc85b4458a09941a",
+        "probe.valid": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.rays": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.sides": "f48890459b3bd68238f720f31432b0de5e8cc208c4ff62f83737af3c04b7f269",
+        "probe.nearest": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.limits": "8ac4500bdbe84d74d6e9873babc9fdb4f834f999ac92b7bc475056a4a624b6a4",
+        "probe.distances": "4592b9748ffa8998e96148b5f3f2bc09f1768496cf7e2851daebb1b0438b3bec",
+        "probe.faces": "4341436cc9155e802a79555f8e25447055c8d9d04381a7a400e0c78166679b8f",
+        "probe.hit_points": "7cbd92faf4ee5a7d4e4506efa3bbf457bc56d4c0a26613fdd9177b45adf2c5fd"
+      },
+      "properties": {
+        "unordered": {
+          "register_count": 255,
+          "local_memory_size": 35960
+        }
+      }
+    },
+    {
+      "name": "full-warm",
+      "gpu_ms": [
+        0.03331200033426285,
+        0.029055999591946602,
+        0.02816000021994114,
+        0.028063999488949776,
+        0.028224000707268715,
+        0.02812799997627735,
+        0.028255999088287354,
+        0.028095999732613564,
+        0.028384000062942505,
+        0.028095999732613564,
+        0.02812799997627735,
+        0.028224000707268715,
+        0.02800000086426735,
+        0.027936000376939774,
+        0.028416000306606293,
+        0.027712000533938408,
+        0.02816000021994114,
+        0.028255999088287354,
+        0.02800000086426735,
+        0.028031999245285988
+      ],
+      "median_ms": 0.028144000098109245,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "efd66456ab5ccb32675fdfc1f6e9725a5a6ae5334c7a3dff0e9afa631991987e",
+        "quality": "fd4d64d74629eb9a3e6d1db40457620deae66dc5c844c363b70e2e8bd3117f85",
+        "center": "989130343ca47d15f650c999a1b8a09e938565975aa73156d59f187985f1bfc9",
+        "radius": "cd066d5c4b69fb3b19999b590ffaf9b1b48756a5d9a3745fd0a4503ecaf9eaf6",
+        "distance": "1cb841d94297a621b39401e6e2d6420c1c71e0776ebd50da239907f928ce0858",
+        "volume": "e069c816dce5e6377f80c5bc57e3a233eff4354cdba730d0f7477efb958752bb",
+        "probe.centers": "8a2d3c57af9317ed8cee55586b3efa37098536dc95d2a342dc85b4458a09941a",
+        "probe.valid": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.rays": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.sides": "f48890459b3bd68238f720f31432b0de5e8cc208c4ff62f83737af3c04b7f269",
+        "probe.nearest": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.limits": "8ac4500bdbe84d74d6e9873babc9fdb4f834f999ac92b7bc475056a4a624b6a4",
+        "probe.distances": "4592b9748ffa8998e96148b5f3f2bc09f1768496cf7e2851daebb1b0438b3bec",
+        "probe.faces": "4341436cc9155e802a79555f8e25447055c8d9d04381a7a400e0c78166679b8f",
+        "probe.hit_points": "7cbd92faf4ee5a7d4e4506efa3bbf457bc56d4c0a26613fdd9177b45adf2c5fd"
+      },
+      "properties": {
+        "unordered": {
+          "register_count": 255,
+          "local_memory_size": 35960
+        }
+      }
+    },
+    {
+      "name": "selection-cold",
+      "gpu_ms": [
+        3.8077759742736816,
+        3.7863359451293945,
+        3.8029439449310303,
+        3.784543991088867,
+        3.8037118911743164,
+        3.785792112350464,
+        3.805216073989868,
+        3.7848639488220215,
+        3.8034238815307617,
+        3.7849280834198,
+        3.804255962371826,
+        3.7855679988861084,
+        3.8029119968414307,
+        3.7856318950653076,
+        3.8032639026641846,
+        3.7857279777526855,
+        3.8033599853515625,
+        3.7858240604400635,
+        3.803999900817871,
+        3.784480094909668
+      ],
+      "median_ms": 3.7946239709854126,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "efd66456ab5ccb32675fdfc1f6e9725a5a6ae5334c7a3dff0e9afa631991987e",
+        "quality": "fd4d64d74629eb9a3e6d1db40457620deae66dc5c844c363b70e2e8bd3117f85",
+        "center": "989130343ca47d15f650c999a1b8a09e938565975aa73156d59f187985f1bfc9",
+        "radius": "cd066d5c4b69fb3b19999b590ffaf9b1b48756a5d9a3745fd0a4503ecaf9eaf6",
+        "distance": "1944b36ddbdbede1e20581248f79daee674d440435e25ceecede8d3d30cc3027",
+        "volume": "e069c816dce5e6377f80c5bc57e3a233eff4354cdba730d0f7477efb958752bb",
+        "probe.centers": "8a2d3c57af9317ed8cee55586b3efa37098536dc95d2a342dc85b4458a09941a",
+        "probe.valid": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.rays": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.sides": "f48890459b3bd68238f720f31432b0de5e8cc208c4ff62f83737af3c04b7f269",
+        "probe.nearest": "45eab7093467d16688afbdb2510f92e8852878c186f8e84ffe8b74aeb24aec31",
+        "probe.limits": "803581dbf848f5846021725ab3fc811c8bff015ea376777309223102d3a4f713",
+        "probe.distances": "fb313715b8effeaa24689d5a34b83b7ef8bad8cb0ad367c33c085c48665984a7",
+        "probe.faces": "a03665d3089b6ffc9fd331ff6555005f87af899a633c83abf771edb0cad5e72f",
+        "probe.hit_points": "b3d11fea55537cbc2791d78bbc5e10d13cfe77275b1e223a0b0e7fd139d82044"
+      },
+      "properties": {
+        "unordered": {
+          "register_count": 255,
+          "local_memory_size": 36024
+        }
+      }
+    },
+    {
+      "name": "selection-warm",
+      "gpu_ms": [
+        0.03519999980926514,
+        0.031136000528931618,
+        0.030848000198602676,
+        0.03097599931061268,
+        0.03097599931061268,
+        0.030880000442266464,
+        0.030848000198602676,
+        0.0307839997112751,
+        0.03081599995493889,
+        0.03097599931061268,
+        0.03081599995493889,
+        0.030848000198602676,
+        0.031136000528931618,
+        0.030751999467611313,
+        0.031168000772595406,
+        0.03081599995493889,
+        0.030751999467611313,
+        0.030880000442266464,
+        0.03152000159025192,
+        0.030848000198602676
+      ],
+      "median_ms": 0.03086400032043457,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "efd66456ab5ccb32675fdfc1f6e9725a5a6ae5334c7a3dff0e9afa631991987e",
+        "quality": "fd4d64d74629eb9a3e6d1db40457620deae66dc5c844c363b70e2e8bd3117f85",
+        "center": "989130343ca47d15f650c999a1b8a09e938565975aa73156d59f187985f1bfc9",
+        "radius": "cd066d5c4b69fb3b19999b590ffaf9b1b48756a5d9a3745fd0a4503ecaf9eaf6",
+        "distance": "1944b36ddbdbede1e20581248f79daee674d440435e25ceecede8d3d30cc3027",
+        "volume": "e069c816dce5e6377f80c5bc57e3a233eff4354cdba730d0f7477efb958752bb",
+        "probe.centers": "8a2d3c57af9317ed8cee55586b3efa37098536dc95d2a342dc85b4458a09941a",
+        "probe.valid": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.rays": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.sides": "f48890459b3bd68238f720f31432b0de5e8cc208c4ff62f83737af3c04b7f269",
+        "probe.nearest": "45eab7093467d16688afbdb2510f92e8852878c186f8e84ffe8b74aeb24aec31",
+        "probe.limits": "803581dbf848f5846021725ab3fc811c8bff015ea376777309223102d3a4f713",
+        "probe.distances": "fb313715b8effeaa24689d5a34b83b7ef8bad8cb0ad367c33c085c48665984a7",
+        "probe.faces": "a03665d3089b6ffc9fd331ff6555005f87af899a633c83abf771edb0cad5e72f",
+        "probe.hit_points": "b3d11fea55537cbc2791d78bbc5e10d13cfe77275b1e223a0b0e7fd139d82044"
+      },
+      "properties": {
+        "unordered": {
+          "register_count": 255,
+          "local_memory_size": 36024
+        }
+      }
+    },
+    {
+      "name": "retained-cold",
+      "gpu_ms": [
+        0.8878719806671143,
+        0.8845120072364807,
+        0.8835200071334839,
+        0.8830080032348633,
+        0.8845440149307251,
+        0.8832319974899292,
+        0.8834879994392395,
+        0.884223997592926,
+        0.883135974407196,
+        0.8833919763565063,
+        0.8838719725608826,
+        0.8835200071334839,
+        0.8839679956436157,
+        0.8837440013885498,
+        0.8845120072364807,
+        0.8835200071334839,
+        0.8831999897956848,
+        0.8827840089797974,
+        0.8836159706115723,
+        0.8835200071334839
+      ],
+      "median_ms": 0.8835200071334839,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "efd66456ab5ccb32675fdfc1f6e9725a5a6ae5334c7a3dff0e9afa631991987e",
+        "quality": "fd4d64d74629eb9a3e6d1db40457620deae66dc5c844c363b70e2e8bd3117f85",
+        "probe.centers": "8a2d3c57af9317ed8cee55586b3efa37098536dc95d2a342dc85b4458a09941a",
+        "probe.valid": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.rays": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.sides": "f48890459b3bd68238f720f31432b0de5e8cc208c4ff62f83737af3c04b7f269",
+        "probe.nearest": "45eab7093467d16688afbdb2510f92e8852878c186f8e84ffe8b74aeb24aec31",
+        "probe.limits": "ce9c883cbf05513a951bb449439bb5efa0f7565ab7ce48bd667be0f6c13fc8e3",
+        "probe.distances": "69079b6ca093debc478187e0ea77aa8d96192084c470ae1734b677c288253432",
+        "probe.faces": "44a822c2085182de31d7f471ff9af29e3e6404207b81a44277598f3d8479fe7b",
+        "probe.hit_points": "12473534d0d73d6935b6ff5755addc06f4e70fe545bfcaa5d1e83107aad3c2d9"
+      },
+      "properties": {
+        "unordered": {
+          "register_count": 255,
+          "local_memory_size": 35976
+        }
+      }
+    },
+    {
+      "name": "retained-warm",
+      "gpu_ms": [
+        0.03206399828195572,
+        0.028511999174952507,
+        0.027615999802947044,
+        0.027456000447273254,
+        0.027456000447273254,
+        0.028031999245285988,
+        0.027583999559283257,
+        0.02739199995994568,
+        0.02735999971628189,
+        0.027295999228954315,
+        0.027424000203609467,
+        0.027648000046610832,
+        0.02735999971628189,
+        0.027648000046610832,
+        0.029023999348282814,
+        0.028736000880599022,
+        0.027488000690937042,
+        0.027456000447273254,
+        0.027488000690937042,
+        0.027327999472618103
+      ],
+      "median_ms": 0.027488000690937042,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "efd66456ab5ccb32675fdfc1f6e9725a5a6ae5334c7a3dff0e9afa631991987e",
+        "quality": "fd4d64d74629eb9a3e6d1db40457620deae66dc5c844c363b70e2e8bd3117f85",
+        "probe.centers": "8a2d3c57af9317ed8cee55586b3efa37098536dc95d2a342dc85b4458a09941a",
+        "probe.valid": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.rays": "259238402112568ae8f765fe1fdb28415bf8349f6163ec87e301ef55b4c0fb57",
+        "probe.sides": "f48890459b3bd68238f720f31432b0de5e8cc208c4ff62f83737af3c04b7f269",
+        "probe.nearest": "45eab7093467d16688afbdb2510f92e8852878c186f8e84ffe8b74aeb24aec31",
+        "probe.limits": "ce9c883cbf05513a951bb449439bb5efa0f7565ab7ce48bd667be0f6c13fc8e3",
+        "probe.distances": "69079b6ca093debc478187e0ea77aa8d96192084c470ae1734b677c288253432",
+        "probe.faces": "44a822c2085182de31d7f471ff9af29e3e6404207b81a44277598f3d8479fe7b",
+        "probe.hit_points": "12473534d0d73d6935b6ff5755addc06f4e70fe545bfcaa5d1e83107aad3c2d9"
+      },
+      "properties": {
+        "unordered": {
+          "register_count": 255,
+          "local_memory_size": 35976
+        }
+      }
+    },
+    {
+      "name": "nearest-live",
+      "gpu_ms": [
+        3.2434239387512207,
+        3.232703924179077,
+        3.228192090988159,
+        3.2387518882751465,
+        3.2270400524139404,
+        3.2315518856048584,
+        3.2268478870391846,
+        3.226207971572876,
+        3.2278079986572266,
+        3.2311038970947266,
+        3.226975917816162,
+        3.228640079498291,
+        3.227231979370117,
+        3.2298879623413086,
+        3.228447914123535,
+        3.2297921180725098,
+        3.226720094680786,
+        3.2339839935302734,
+        3.229759931564331,
+        3.230207920074463
+      ],
+      "median_ms": 3.229200005531311,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "output_sha256": {
+        "hits.point": "ad175a360fb829ce6bf281ed5dbce30b7840aaf01ea8dbd890d30d509701c679",
+        "hits.distance2": "d7323feca1e86cb0e3a9b6aab84f60c2f3562f9e63780cc487868435b9fd0ead",
+        "hits.face": "cef97402749c3629526c21e3e43c548a927322a70c848c22f70972ac4e02d084"
+      },
+      "properties": {
+        "register_count": 80,
+        "local_memory_size": 3296
+      }
+    },
+    {
+      "name": "quadrature",
+      "gpu_ms": [
+        0.363647997379303,
+        0.359391987323761,
+        0.35660800337791443,
+        0.35631999373435974,
+        0.3563840091228485,
+        0.35571199655532837,
+        0.3566719889640808,
+        0.35712000727653503,
+        0.3566719889640808,
+        0.35715198516845703,
+        0.36480000615119934,
+        0.3588480055332184,
+        0.35712000727653503,
+        0.35702401399612427,
+        0.35660800337791443,
+        0.35756799578666687,
+        0.3567360043525696,
+        0.3555839955806732,
+        0.355648010969162,
+        0.35846400260925293
+      ],
+      "median_ms": 0.3568800091743469,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "output_sha256": {
+        "integral": "62696a80c276855527a25c29178c492857243ada076f04c876a37a452b0164b6",
+        "maximum": "61bb312b6fe2bfa297b88406667ce42028ea633490210e52614f78f6a5fcdb0a",
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      },
+      "properties": {
+        "register_count": 78,
+        "local_memory_size": 3296
+      },
+      "values": {
+        "integral": 0.020967998284203454,
+        "maximum": 0.09508842540135234,
+        "error": 0.0
+      }
+    }
+  ],
+  "complete": true,
+  "limits": "Static validated final meshes. Setup and host reads excluded. Classifier rows include ordering, sorting, cache rebuild, and cold reset when selected. Full reserved capacities are launched. Nearest-only rows use live cell centers."
+}

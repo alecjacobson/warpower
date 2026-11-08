@@ -131,6 +131,29 @@ def unique_proved_pool(
     wp.atomic_or(error, 0, 4)
 
 
+@wp.func
+def axis_supported(a: wp.vec3, b: wp.vec3, c: wp.vec3, opposite: wp.vec3, lo: wp.vec3, hi: wp.vec3):
+    # The caller just certified a positive tetrahedron. Its oriented face has
+    # the opposite vertex strictly on its interior side. Exact coordinate
+    # equality therefore identifies both the plane and the interior direction.
+    # Current original-site bounds prove support even at exact coplanarity.
+    for axis in range(3):
+        plane = a[axis]
+        if plane != b[axis] or plane != c[axis] or plane == opposite[axis]:
+            continue
+        if not wp.isfinite(plane) or not wp.isfinite(opposite[axis]):
+            continue
+        if not wp.isfinite(lo[axis]) or not wp.isfinite(hi[axis]) or lo[axis] > hi[axis]:
+            continue
+        if opposite[axis] > plane:
+            if lo[axis] >= plane:
+                return True
+        else:
+            if hi[axis] <= plane:
+                return True
+    return False
+
+
 @wp.kernel
 def record_face_support(
     points: wp.array[wp.vec3],
@@ -169,6 +192,10 @@ def record_face_support(
             continue
         ids = face_vertices(tets, boundary[slot])
         a, b, c = points[ids[0]], points[ids[1]], points[ids[2]]
+        face = boundary[slot]
+        opposite = points[tets[face // 4, face % 4]]
+        if axis_supported(a, b, c, opposite, tree.lower[1], tree.upper[1]):
+            continue
         plane = halfspace(a, b, c)
         stack = wp.zeros(shape=128, dtype=int)
         stack[0] = root

@@ -342,6 +342,10 @@ Within one unchanged-input completion, [exact cell proofs](completion-proofs.md)
 now follow retained cells through deduplication and compaction. New cells keep
 their full sphere checks; all topology, coverage and hull-support checks remain.
 Proofs are re-established against current input on the next invocation.
+The private hull-support pass also proves [exact coordinate-plane faces](axis-hull-support.md)
+directly against current original-site bounds. A freshly certified positive cell
+supplies the interior direction; all other faces retain the existing traversal.
+This adds no buffers or graph nodes and leaves standalone construction unchanged.
 A private [fresh complete-mesh certificate experiment](previous-complete-certificate.md)
 tries to avoid fragment filtering when the entire previous topology survives.
 Its ordinary schedule is slower; earlier rejection is effectively neutral at 4k

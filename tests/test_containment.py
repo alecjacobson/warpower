@@ -9,6 +9,8 @@ from tests.test_extraction import extracted
 from warpower._containment import contained, ray_count, strict_material_side
 from warpower._surface_bvh import SurfaceTree
 
+wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
+
 
 def cavity():
     inner = cube(0.4)

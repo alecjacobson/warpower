@@ -5,7 +5,7 @@ import weakref
 import warp as wp
 
 from ._exterior_band import accept, references, reject_orphans
-from ._exterior_proof import exterior
+from ._exterior_proof_bvh import exterior
 from ._surface_bvh import SurfaceTree
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})

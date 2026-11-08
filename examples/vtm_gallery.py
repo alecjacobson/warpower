@@ -75,6 +75,7 @@ def main():
         "--corner-angle", type=float, default=45.0, help="Corner detection angle in degrees"
     )
     parser.add_argument("--quality-rounds", type=int, default=4)
+    parser.add_argument("--local-quality-retries", type=int, default=0)
     parser.add_argument("--automatic-sizing", action="store_true")
     parser.add_argument(
         "--repeats", type=int, default=0, help="Additional replays after the first complete solve"
@@ -136,6 +137,7 @@ def main():
         seed=args.seed,
         sizing=sizing,
         quality_rounds=args.quality_rounds,
+        local_quality_retries=args.local_quality_retries,
         automatic_sizing=args.automatic_sizing,
     )
     with wp.ScopedCapture() as captured:

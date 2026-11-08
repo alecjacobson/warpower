@@ -418,3 +418,9 @@ removes exact midpoint rounding stalls through ordinary accepted proposals.
 Fresh hand solves expose a quality/fit tradeoff: the selective minimum guard
 then reduces the shared step 1,024-fold. The recorded cell/step investigation
 motivates localized backtracking; production behavior remains unchanged.
+
+Optional [local quality backtracking](local-quality-backtracking.md) now provides
+bounded partial rollback after fresh selective quality rejections. Every retry
+retains complete reconstruction/certification and all acceptance checks. The
+default zero keeps existing kernels and storage; standalone geometry APIs have
+no dependency on this helper.

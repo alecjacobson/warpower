@@ -354,6 +354,7 @@ class VariationalMeshingWorkspace:
         quality_rounds=4,
         refinement_fraction=0.5,
         quality_threshold=0.3,
+        local_quality_retries=0,
         jitter_attempts=8,
         extraction_tolerance=0.4,
         containment_recovery=True,
@@ -395,6 +396,11 @@ class VariationalMeshingWorkspace:
         self.selective_iterations = operator.index(selective_iterations)
         self.max_recovery_rounds = operator.index(max_recovery_rounds)
         self.quality_rounds = operator.index(quality_rounds)
+        self.local_quality_retries = operator.index(local_quality_retries)
+        if not 0 <= self.local_quality_retries < 2**31:
+            raise ValueError("local_quality_retries must be in [0,2**31)")
+        if self.local_quality_retries and self.quality_rounds == 0:
+            raise ValueError("local_quality_retries requires quality_rounds > 0")
         if max_growth_rounds is None:
             max_growth_rounds = (
                 math.ceil(
@@ -481,6 +487,7 @@ class VariationalMeshingWorkspace:
                 iteration_limit=self._budget,
                 selective_threshold=quality_threshold if self.quality_rounds else None,
                 selective_tolerance=extraction_tolerance,
+                local_quality_retries=self.local_quality_retries,
                 selective_enabled=self._mode if self.quality_rounds else None,
                 material_recovery=self._material_recovery if self._uses_recovery else None,
                 containment_recovery=self.containment_recovery,

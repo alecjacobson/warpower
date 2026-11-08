@@ -86,6 +86,7 @@ recovery; it is not a free preprocessing operation.
 | `selective_iterations` | 10 | Selective optimization budget per quality round |
 | `quality_rounds` | 4 | Maximum selective/jitter/interior rounds; zero omits all three stages and their storage |
 | `quality_threshold` | 0.3 | Radius-ratio threshold selecting poor elements |
+| `local_quality_retries` | 0 | Additional [local rollback trials](local-quality-backtracking.md) per selective step; opt-in, shape-dependent tradeoff |
 | `jitter_attempts` | 8 | Bounded boundary proposal attempts per round |
 | `extraction_tolerance` | 0.4 | Circumcenter thickening tolerance, `distance/radius` |
 | `containment_recovery` | `True` | Bounded addition of proven wholly material cells around bad boundary edges |

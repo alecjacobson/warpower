@@ -1,0 +1,2961 @@
+{
+  "production_runtime": "6aa4ba63a34910ba7e9148966dd8a9015a261d06",
+  "baseline_runtime": "39f8f54fa5cc410b46cd9b057e617fc92f7e4c28",
+  "private_experiment_runtime": "39f8f54fa5cc410b46cd9b057e617fc92f7e4c28",
+  "attribution_runtime": "4334f459fe743d662e600844bf8bdfe01ae25bd3",
+  "attribution_runtime_note": "Attribution ran before the docs-only PR203 merge. Library sources are identical to baseline39f8f54.",
+  "scope": "Opt-in on-device local quality backtracking; complete-solve quality/time tradeoffs, unchanged defaults/standalone APIs, full tests, memory and native capture evidence. No CPU outperformance claim.",
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "files": [
+    {
+      "original": ".work/vtm/analyze-local-backtracking-audit.py",
+      "path": "results/validation/vtm/local-quality-backtracking/analyze-local-backtracking-audit.py",
+      "bytes": 4267,
+      "sha256": "e2857599db957004759bce23f7a2927aa66fab3d9548e54b98130ad2b615e54f"
+    },
+    {
+      "original": ".work/vtm/build-local-blocking-variants-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/build-local-blocking-variants-v1.py",
+      "bytes": 2808,
+      "sha256": "332a2a2a6b06c5e2d62322f9a5316239341fb2ed1f582bc3100811d5d99f80eb"
+    },
+    {
+      "original": ".work/vtm/check-local-backtracking-attribution-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/check-local-backtracking-attribution-v1.py",
+      "bytes": 2358,
+      "sha256": "59ea0ec97ac981e68e72c3e8c3961db9d863193692d7f3a6152101116b175373"
+    },
+    {
+      "original": ".work/vtm/check-local-backtracking-broad-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/check-local-backtracking-broad-v1.py",
+      "bytes": 1462,
+      "sha256": "d864c2f4f821cc1fecbbb03c729d21c15f5394c206d50df5c03bdfd4ea359d36"
+    },
+    {
+      "original": ".work/vtm/check-local-backtracking-final-v2.py",
+      "path": "results/validation/vtm/local-quality-backtracking/check-local-backtracking-final-v2.py",
+      "bytes": 4753,
+      "sha256": "35d43f55d3f26bcd9280cbe5eb1137a93d33e5ccbb3463a7862094a4d9f0a753"
+    },
+    {
+      "original": ".work/vtm/check-local-backtracking-full-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/check-local-backtracking-full-v1.py",
+      "bytes": 1511,
+      "sha256": "43368dbc1297bfd2d4c579663a3d21bd2525ba5bfc409c3d48d2ced734fa1702"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-attribution-independent-v1.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-attribution-independent-v1.json",
+      "bytes": 1726,
+      "sha256": "9314c837e2d6465d823173f712acb0cb16c65d3388108bebac8fac0a451840fb"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-attribution-independent-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-attribution-independent-v1.log",
+      "bytes": 1726,
+      "sha256": "9314c837e2d6465d823173f712acb0cb16c65d3388108bebac8fac0a451840fb"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-attribution-v1.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-attribution-v1.json",
+      "bytes": 1985,
+      "sha256": "86456ccc95145dede1cbeb4a5e3553efb77412e34d823905c5eec18468ce6454"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-attribution-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-attribution-v1.log",
+      "bytes": 7384,
+      "sha256": "4d913c3c4ca917a868a94a3077b3b52fda99cc44d76fdc2b033c58cf24b50fe8"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-attribution-v1.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-attribution-v1.npz",
+      "bytes": 119172,
+      "sha256": "4ede5c0292a39f7c24121bc1c4514721c29c3cf1cd66a4154473fcce7307382c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-independent-v1.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-independent-v1.json",
+      "bytes": 71170,
+      "sha256": "da3187e21616018d019d37dd17f57ae5cf615b31ff6a03be0a82712cda652aea"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-independent-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-independent-v1.log",
+      "bytes": 680,
+      "sha256": "a69ce3f0de96dea37f84616405595508c1bf5dcc691e71b166273a96a121c7b0"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-baseline/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-baseline/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-baseline/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-baseline/boundary.off.gz",
+      "bytes": 30644,
+      "sha256": "2eec326dad232c6c94b0b68aa09e616877dabe5872c82a8d9c19583f4cce3390"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-baseline/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-baseline/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-baseline/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-baseline/mesh.npz",
+      "bytes": 108778,
+      "sha256": "dbf0d0a73af46e8755775afe63e3e74b8f5e7fad1a3cbc9150d763380ad49bdf"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-baseline/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-baseline/mesh.vtu.gz",
+      "bytes": 92580,
+      "sha256": "a609cc06386b17a070f85e91af5994c85a7165292fb54a697d4cfbc2e6f209b8"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-baseline/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-baseline/result.json",
+      "bytes": 3594,
+      "sha256": "845fcd62b901496eda13bd72ea81131042a62b741fd39f28154e7b40c832b137"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-baseline.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-baseline.log",
+      "bytes": 8206,
+      "sha256": "3561148c9c61f2cd0d86894eea129abcde5fab537ed7fd82c997d264b6683240"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "549c75e55032de25eaffdf6b69576bd2322f1d380ac0c4d63f3106810c2da2cf"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-candidate/boundary.off.gz",
+      "bytes": 30534,
+      "sha256": "99fc825e15604d705f6589925a9c77f9f17479753e618ece07cb1abc538ecfe6"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-candidate/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-candidate/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-candidate/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-candidate/mesh.npz",
+      "bytes": 107505,
+      "sha256": "71a8c790e2beb6dbbfb2a1499245e7ab9f91bbf85079578933b498b5898a2bc1"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-candidate/mesh.vtu.gz",
+      "bytes": 92010,
+      "sha256": "1528cea75ab4697b1033d8535259f425fdfbea335fd18e8050ad406999f8ff2e"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-candidate/pilot.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-candidate/pilot.json",
+      "bytes": 768,
+      "sha256": "8fade5f66e04d3d29a9ca523a66d3c686866f90d6cdb6fb700861af6ae49740d"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-candidate/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-candidate/result.json",
+      "bytes": 3595,
+      "sha256": "7f7034e8d64fa9db9c74375a0e96a7a59e40f2d46c7627152b2082a75dbf59fa"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/cavity-candidate.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/cavity-candidate.log",
+      "bytes": 8379,
+      "sha256": "63725c8873059376c9471a28285af739453afe87be56bc55452449cbfc797b1b"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/commands.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/commands.json",
+      "bytes": 23424,
+      "sha256": "dfb094dc94251a1927d12e6d0bbd2f6ef185823c2aded0fbb96db38e575353ef"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-baseline/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-baseline/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-baseline/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-baseline/boundary.off.gz",
+      "bytes": 30543,
+      "sha256": "8823a408dea7f56acddb2a90a881431704cac7cc2c94f9f372d9cef56315fd5f"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-baseline/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-baseline/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-baseline/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-baseline/mesh.npz",
+      "bytes": 110425,
+      "sha256": "7ef2c5e1a82aa8bb360c499322f45bbc942aa3a6c9ec19d4626f12ff444fe65a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-baseline/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-baseline/mesh.vtu.gz",
+      "bytes": 88194,
+      "sha256": "657715fa9a3ce0fcfb208e315ccea2c3e2343bd53e8b7909c42553509523dd8a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-baseline/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-baseline/result.json",
+      "bytes": 3608,
+      "sha256": "7ce8aa1ebbc428354046947736947ab34d11222cf0a455b4eee33034a96c6790"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-baseline.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-baseline.log",
+      "bytes": 8220,
+      "sha256": "dd63f47c6602f2124456e55cca6fc34bff1dc7780b4d5af99f9fb658d74f2665"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-candidate/boundary.off.gz",
+      "bytes": 29963,
+      "sha256": "c7a5c2f37bba18b6b5853898630fed262453b5f591d98fdd64746b16cc43350e"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-candidate/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-candidate/mesh.npz",
+      "bytes": 109086,
+      "sha256": "d9f2d8a2441d74b75a3b4602fb14b2d9ac997d4c14944828df71c92660338e00"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-candidate/mesh.vtu.gz",
+      "bytes": 87453,
+      "sha256": "8c17dbaba739f6b67b35da632e75385eb3fae13008e436ed189dfe2aa3cc52a6"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate/pilot.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-candidate/pilot.json",
+      "bytes": 768,
+      "sha256": "3a1d84d5d793b39b3744a326e329a8dd9009928d7dc79169a78f7c7cb610ff7d"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-candidate/result.json",
+      "bytes": 3611,
+      "sha256": "618ae0fc2cae8755c5e7dd353a64419d8ee1903400ce650d5f6cba924500d4a3"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/disconnected-candidate.log",
+      "bytes": 8395,
+      "sha256": "b717c56c013b24e92aafa6f4c09e56598679ce65b4672bbc3f495a6586ce3707"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-baseline/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-baseline/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-baseline/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-baseline/boundary.off.gz",
+      "bytes": 32359,
+      "sha256": "3bbddc03bbae330d0c8a77591d37356a008c1e4daaf4df45fdaa31a9f2cc33a8"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-baseline/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-baseline/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-baseline/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-baseline/mesh.npz",
+      "bytes": 109323,
+      "sha256": "c451c1ed420f10077d496e9e8f074b13fc8de13141954fcb249ff9be7da6a3af"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-baseline/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-baseline/mesh.vtu.gz",
+      "bytes": 86015,
+      "sha256": "976d413a8a471923a809db0ac33f0f03204260a032fcd7710d69bc9350417986"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-baseline/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-baseline/result.json",
+      "bytes": 3602,
+      "sha256": "555e641196590b59a5289803700254f83ed16d978bf47b03ba5523fe67a2c5ba"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-baseline.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-baseline.log",
+      "bytes": 8214,
+      "sha256": "fdf80c54ea69dd7bed004ad1e2829a554860ea03b22f6673d7b65429bf29657c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "47321d7528206c7a6f0faa7a3615bb946623fc63ae45218f40b1733c93fd69ab"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-candidate/boundary.off.gz",
+      "bytes": 32104,
+      "sha256": "3959c6e306b43ef9ed8a1cc8a49ca7bb1b72330110e4db34058c1bfa650fc774"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-candidate/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-candidate/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-candidate/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-candidate/mesh.npz",
+      "bytes": 107931,
+      "sha256": "2f1da0ee0c94c4454516e698f7cf80c8217f78085685b159b822b1a948d6d963"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-candidate/mesh.vtu.gz",
+      "bytes": 85246,
+      "sha256": "4c728e7323919e81a741e93b3e60bb21eb2d5b7f8e61537a3f4da04e9185c6d2"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-candidate/pilot.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-candidate/pilot.json",
+      "bytes": 768,
+      "sha256": "39b7deda5bfeb033b1b04aa02a5d3618bfbba17b1dd5b40adfa8bcef9a4a81d8"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-candidate/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-candidate/result.json",
+      "bytes": 3611,
+      "sha256": "9f679cfa11ae9651ba8f8f71bf16feb7ef641d71511e279e69117a89c4fcc708"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/plate-candidate.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/plate-candidate.log",
+      "bytes": 8395,
+      "sha256": "7beb0f101f6ba4513919302bb31cfacf8ae34f37147dc2ef32def26c03e962eb"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-baseline/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-baseline/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a61ebe6d45dbde62aab088d4406ace29d998b7e525f77785b2e7d79c3a89bfbc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-baseline/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-baseline/boundary.off.gz",
+      "bytes": 35285,
+      "sha256": "c618a982671d7eb263978ad9ab3373893cd9a992f3401d59dd8f352a7b23a245"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-baseline/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-baseline/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-baseline/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-baseline/mesh.npz",
+      "bytes": 123023,
+      "sha256": "90efb1b85c7de737d1c94739ca4c0cc847df4e925c4967d6508ebb430dbf3b20"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-baseline/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-baseline/mesh.vtu.gz",
+      "bytes": 92771,
+      "sha256": "e4e55788672c53dbfabab588c1d440002b25644746727290e2d58b31f02a5633"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-baseline/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-baseline/result.json",
+      "bytes": 3595,
+      "sha256": "97343dc554d787a51c31ee58b43a7aa61306725dd643c0aa212fd587c9371cc8"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-baseline.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-baseline.log",
+      "bytes": 8207,
+      "sha256": "e754d780f2b6d139733c84925f71eca9c432dbc7d73090a117e2b637c2b334a3"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-candidate/boundary.off.gz",
+      "bytes": 35204,
+      "sha256": "0056f0ac0e803c80d89a7a0ae11679df0421f06ba3d932125e4514b4719d9127"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-candidate/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-candidate/mesh.npz",
+      "bytes": 122056,
+      "sha256": "e6eb4974d7c607bb85bd10c0553b463b01264d4a7fa464bec4515343e06b19e4"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-candidate/mesh.vtu.gz",
+      "bytes": 92030,
+      "sha256": "46d18a019756475eba728df33b82d8dd7657453002cd149f37cadcdb7ec31312"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate/pilot.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-candidate/pilot.json",
+      "bytes": 769,
+      "sha256": "a2ecd41f60cbff95623265b76484a678884d1bf3c4d2036b97cf3cdc2c6eadc3"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-candidate/result.json",
+      "bytes": 3598,
+      "sha256": "cbf6f307016ed4e9d3b72f8f51d13413e20f1d728db04cb641ec1224cbdcc4a4"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus1000-candidate.log",
+      "bytes": 8382,
+      "sha256": "bbd4f0ceb43fe6c54844bd8f9a95fe2239a6267207d6ec211aec42b36592b7c8"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-baseline/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-baseline/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "f7ad322baf26b642fb2642afae761ca68f726db3778805565890295826d77f08"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-baseline/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-baseline/boundary.off.gz",
+      "bytes": 135022,
+      "sha256": "cb99d06f8347f0a98895035e71d8c0e1df7f3018d065ef769fdfafa705a6347e"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-baseline/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-baseline/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-baseline/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-baseline/mesh.npz",
+      "bytes": 565732,
+      "sha256": "f55214403fc798766c33bdf569f651263ffca6fd6b0c75699c14767c059ed42d"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-baseline/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-baseline/mesh.vtu.gz",
+      "bytes": 445167,
+      "sha256": "6f7cd192ed72338b0470af0c43f9f152b7a46a59f715508bcb2cbd4b2605fb55"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-baseline/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-baseline/result.json",
+      "bytes": 3601,
+      "sha256": "d81555d3b3ca79ff29590847c734a658e1937f9704b61603fef615dbb0b844df"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-baseline.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-baseline.log",
+      "bytes": 8301,
+      "sha256": "018709c91f9c7d11f2cfae50f9c711561faf92426ccc943310a529801563b659"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-candidate/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "f7ad322baf26b642fb2642afae761ca68f726db3778805565890295826d77f08"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-candidate/boundary.off.gz",
+      "bytes": 134708,
+      "sha256": "efca51299b56fc8b21c186d26b7d9355d970a23850cab991c671ffe99162074a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-candidate/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-candidate/mesh.npz",
+      "bytes": 563977,
+      "sha256": "2aee9666f54204d62a0a8fae8a5de9d7e7eb66396bdca0879c9d9aaa6fb5707c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-candidate/mesh.vtu.gz",
+      "bytes": 443388,
+      "sha256": "277227ddab6c884923da250ffe8679ea28449bf84d0cd2e01b556f37d92b4824"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate/pilot.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-candidate/pilot.json",
+      "bytes": 768,
+      "sha256": "a73817ed75eb8dcde1c5ff2dfac4ffae177146af167082ef4ebe61214d7cd36b"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-candidate/result.json",
+      "bytes": 3598,
+      "sha256": "76b72e64b6eb474153fb9997067b79d7c9163610da575679920f7b7897268538"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1/torus4096-candidate.log",
+      "bytes": 8470,
+      "sha256": "f7558a8223c0abdfff683b645ff665704ac69a90c7bb3f24a17071939b0779b5"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-broad-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-broad-v1.log",
+      "bytes": 18005,
+      "sha256": "ece536e11409e0308630b4cc31e517692158c1e2126cecadd001a399afcbe365"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-existing-tests-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-existing-tests-v1.log",
+      "bytes": 1973,
+      "sha256": "af29000c558beb729d3620df4646a80bf527c99cbb59557936f5eeda1d267cf6"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-existing-tests-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-existing-tests-v1.py",
+      "bytes": 426,
+      "sha256": "10e95da768ad3e66e6174dcd9a68ce5c974963ef8e37f3e8888ee02e7bc504fa"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-before/boundary.off.gz",
+      "bytes": 139477,
+      "sha256": "e7aafa13209f3b767c1d24cf896acd8f6313d8600b0dfdfacef2f56cda9b9af9"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-before/mesh.npz",
+      "bytes": 1612194,
+      "sha256": "043a4d6d8530dd24a872598be78deaab1f45e79afe34a20a28205b75d13246ab"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-before/mesh.vtu.gz",
+      "bytes": 427933,
+      "sha256": "9154945d0367ec422a6d24ef7bdfe6f9e0905b2343b43a0f5be919bb7b40d642"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-before/result.json",
+      "bytes": 3749,
+      "sha256": "482c7fbb85d752f62f96cbdb516a2ec9f729b7f429b7d304c427341a69649b22"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-before.log",
+      "bytes": 8531,
+      "sha256": "b192703ed8aa63e545846f2503c691e0bb741d49b1fe0197f3165b612302ce1f"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-enabled/boundary.off.gz",
+      "bytes": 139588,
+      "sha256": "464d97cac1e113d2d19c6b11835808e6fa2841218ad4991b796848adf6b8befd"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-enabled/mesh.npz",
+      "bytes": 1612209,
+      "sha256": "cddf67241680a7d1ac42246a9100bb50a6ea58ea68d414424145a4ab7495df99"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-enabled/mesh.vtu.gz",
+      "bytes": 427827,
+      "sha256": "86b3cdaa0c8bd590b19fd21ef5febc7ddae2c01ba1ed3051bf1723be4be7db3d"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-enabled/result.json",
+      "bytes": 3773,
+      "sha256": "f33e89e114c03a2fb52eaa724492c19d13c9139d8a028af3b79be25fddd32239"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-graded-enabled.log",
+      "bytes": 8646,
+      "sha256": "d05f6ec5c15683ea64b9850361eda799cd9e29e30d1018eff38c9bdafb07cc91"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-before/boundary.off.gz",
+      "bytes": 140794,
+      "sha256": "c6666b5dbed9319040df236f385112d5af72852dad67cbc0bd6d43c699987a55"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-before/mesh.npz",
+      "bytes": 1610460,
+      "sha256": "cf68252d932672b4fb270b800e88da7d585a538ad66f4f57f04b7ab45200be7d"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-before/mesh.vtu.gz",
+      "bytes": 423412,
+      "sha256": "354b3f05bb60fc7cb5d913bab7d35362c658127940c7fe346b1ab528bfff7ee3"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-before/result.json",
+      "bytes": 3741,
+      "sha256": "6ec27bd48afa34946a2d24c89d5259fdc4ab45504fc525bf61cf9040c8941b5b"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-before.log",
+      "bytes": 8437,
+      "sha256": "4d26ba79d910affb26a43a5987033dbfb0058941acee84c26033c432cba46291"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a1432eb6f328db8f98f70645c7fbd931e1069854df891fe0adacfbb229d82265"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-enabled/boundary.off.gz",
+      "bytes": 140573,
+      "sha256": "2afaa9a3298b1804b99a971970c6a7025965fa2c0da0073849ae5bba4b446dec"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-enabled/mesh.npz",
+      "bytes": 1610977,
+      "sha256": "8cca5df2716f3361fb5c785222461fe61a0d3040eba234ec98f4d5d662ea41fd"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-enabled/mesh.vtu.gz",
+      "bytes": 423642,
+      "sha256": "eb89e0c4e5658c9953925ab0448bee41846d1fe0d09d90a6e6b2dccd306ccc58"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-enabled/result.json",
+      "bytes": 3772,
+      "sha256": "aa0e51ae2773163313d107e78d951a536a18c0f3c604c77d231d0a9bd8fdfc20"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/armadillo-uniform-enabled.log",
+      "bytes": 8559,
+      "sha256": "62c0294784ed59d141ddbc81ae2e49209282c8e77b9f2d332b8f093ae1bba665"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-before/boundary.off.gz",
+      "bytes": 30628,
+      "sha256": "5032915bb884e6e122881da17d1818fe61f6e678c0c34dd229137d3d82c8ffc6"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-before/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-before/mesh.npz",
+      "bytes": 108550,
+      "sha256": "df0bfd3ead5c03da8c4fc242254ff08bb65d6d05bb2729aa6456aebddf9c8100"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-before/mesh.vtu.gz",
+      "bytes": 92551,
+      "sha256": "80833918547b1e91614de4e743add542070348d34ac95ed1ad86397cf2c9bfb4"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-before/result.json",
+      "bytes": 3641,
+      "sha256": "e781fded4951caa5fc7eaa287c6d87f41e1805e9351ee454df039e4c25701932"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-before.log",
+      "bytes": 8249,
+      "sha256": "37bb516f3f8803221604d15f5c6e8c7405335559d39f85d4fa7ed8e9dd1fde40"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "549c75e55032de25eaffdf6b69576bd2322f1d380ac0c4d63f3106810c2da2cf"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-enabled/boundary.off.gz",
+      "bytes": 30555,
+      "sha256": "23a7694e50dce8d5d6ec79d40d8e1816791144159b6397d0da2335413b2fa3b4"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-enabled/input.off",
+      "bytes": 783,
+      "sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-enabled/mesh.npz",
+      "bytes": 107477,
+      "sha256": "a20365d561f07da07a5382baebbc82cded988dde275c5110a201ee309cb4be8a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-enabled/mesh.vtu.gz",
+      "bytes": 92014,
+      "sha256": "6a86dc7b7096a23d8f39ea893e6a7c6d8b1503286b768aab3f0b1d0cde8a59fa"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-enabled/result.json",
+      "bytes": 3683,
+      "sha256": "045a4fc3be166f750802e757acbddd15841b19d213d45ab046f4668dd2576df1"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/cavity-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/cavity-enabled.log",
+      "bytes": 8382,
+      "sha256": "b65d2b87f18dd48946d187c2018c351c2d884ef1901fafb2889d135193d668d4"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/coarse-hand-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/coarse-hand-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/coarse-hand-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/coarse-hand-before/result.json",
+      "bytes": 3261,
+      "sha256": "74cda0a44fa009c6dfceaf602ea406004ce6b7e805692d7473e8825d541d6386"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/coarse-hand-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/coarse-hand-before.log",
+      "bytes": 7992,
+      "sha256": "46dffde5284e672baa4efdf0e52a667228565305672b4c0295c2b5982c88a1b1"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/coarse-hand-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/coarse-hand-enabled/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/coarse-hand-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/coarse-hand-enabled/result.json",
+      "bytes": 3296,
+      "sha256": "c184552b1ea8754ddea79289a2e024e2a6724cf7a89cd0ff81bb558b73354ddb"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/coarse-hand-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/coarse-hand-enabled.log",
+      "bytes": 8118,
+      "sha256": "63a042ef7b86f18f8eaf6887d53159057e48357ed9fdf65e93aa71f19dbc558f"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/commands-first22-before-seed-failure-resume.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/commands-first22-before-seed-failure-resume.json",
+      "bytes": 19374,
+      "sha256": "f1b9c149b0ad561a8b0461536f44bcd68e636f281e6a933421d2b3e29ab40c1e"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/commands.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/commands.json",
+      "bytes": 35591,
+      "sha256": "b7aa9450c262bcf569566bd5792596bf31d6bdab04b6d65a84448664a06653d6"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay-fitted-hand-before.json",
+      "bytes": 2840,
+      "sha256": "688fc5475f2928b9dc38dfb2eb9efe25c4631b2ce9ce2d1d8c62994c0a73a977"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay-fitted-hand-before.log",
+      "bytes": 5136,
+      "sha256": "6506ab5665cbe61c899d3e31f5f5c91124c34c86b6c6c918d4309307dda9005c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay-fitted-hand-disabled.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay-fitted-hand-disabled.json",
+      "bytes": 2840,
+      "sha256": "1920a2fe71a9fbf412cde04b124ebcee8d0a9c328716d0305e663f7180e89442"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay-fitted-hand-disabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay-fitted-hand-disabled.log",
+      "bytes": 5136,
+      "sha256": "62596d9122b6a145eb8fbb4bb273b53c0d78045e99c168d5db0f1ddb1afbdb91"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay-grid-before.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay-grid-before.json",
+      "bytes": 2842,
+      "sha256": "718762db2c62fb8c6b9fec0580b12533f4d4c074dc683b3d380e7a38e1d56ad2"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay-grid-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay-grid-before.log",
+      "bytes": 4881,
+      "sha256": "a5202f9ac52ecb8d1bc70ded0a1d9aedd9a73f8320481292aa5da837ba7ca110"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay-grid-disabled.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay-grid-disabled.json",
+      "bytes": 2827,
+      "sha256": "216d6791ea83b2e5f14f6388a29f5651c71992826a8f4a80e0a788e28c1480c2"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay-grid-disabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay-grid-disabled.log",
+      "bytes": 4866,
+      "sha256": "dff918c79a4de13a2a1fb056c0709a51438319b4e219e92d1c1b95222cef62c7"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay1000-before.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay1000-before.json",
+      "bytes": 2822,
+      "sha256": "55bfec129863a608e6c5b77c81adf8c214400012334ac7285c61eea6b0d3740b"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay1000-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay1000-before.log",
+      "bytes": 5118,
+      "sha256": "4e15709cf667f18860cdf9576347415e2afd708ef48e2a7052d20e3776708c93"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay1000-disabled.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay1000-disabled.json",
+      "bytes": 2820,
+      "sha256": "7d6c6ccbb0483b618cd29fd5221ac77b4e5177912d93b8152d4f86df1860d901"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay1000-disabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay1000-disabled.log",
+      "bytes": 5116,
+      "sha256": "e3e4ff7bd6e39f7245c0d375b4b6b8d027b9ddc0608205eb1748c297f96e76cc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay100000-before.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay100000-before.json",
+      "bytes": 2832,
+      "sha256": "41c284bece2056afc69b506ebee8ddbb3b77b6a629a53c3c18efdcbcab22d128"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay100000-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay100000-before.log",
+      "bytes": 5062,
+      "sha256": "725a7df83851618d622ca5df177ad1611818211beb8b340b424012370a09ded4"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay100000-disabled.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay100000-disabled.json",
+      "bytes": 2836,
+      "sha256": "53d58152d84658bd93708834ae038294fd1816b4d6be8dc7e19ea169de6d0054"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/delaunay100000-disabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/delaunay100000-disabled.log",
+      "bytes": 5066,
+      "sha256": "b05494f504dfe4625206aed41f0183ffab4e551d0b409e4587ca53342a8ae896"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/diagram100000-before.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/diagram100000-before.json",
+      "bytes": 2570,
+      "sha256": "aacb5c5172cdc6fb26369bd960d11134e714db588d117f199d9cf82853758b33"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/diagram100000-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/diagram100000-before.log",
+      "bytes": 3441,
+      "sha256": "ce80bdaf92ff1881144e4418e729c6dcac92e71faccb9ced4bb1155353400211"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/diagram100000-disabled.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/diagram100000-disabled.json",
+      "bytes": 2569,
+      "sha256": "d93923727070dd9cc75147126a1a7f7aca834b9fd1a348c50e2a91000b67aec9"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/diagram100000-disabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/diagram100000-disabled.log",
+      "bytes": 3440,
+      "sha256": "6468e3c342bb1d2eaea596481983743e0320dbc45f2855a2d92380247c67904b"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-before/boundary.off.gz",
+      "bytes": 30546,
+      "sha256": "7dba24a192aac377f8671b35ff14aab717b0052597e8ad8cf0f20092a3277312"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-before/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-before/mesh.npz",
+      "bytes": 110307,
+      "sha256": "9f1e2ba849521d608643df79386d7aecb5221ed53861ddbf1404cd69fe0e636a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-before/mesh.vtu.gz",
+      "bytes": 88222,
+      "sha256": "3ccb5c6675c2bb221ea9a85381017f67047befe72660381a40a66210fb69a297"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-before/result.json",
+      "bytes": 3658,
+      "sha256": "8521cbce5581be13cea4a688068fe51bfb6f9f8459ec67d0bc5d018d7e68de07"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-before.log",
+      "bytes": 8266,
+      "sha256": "be58e87037b0617392fd229a4b352a40b494bb19af2b806ae48586452dc4a121"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "32f9d34bece72658e6ba1e1f4e67a2ed56e347bd17ed17e7486fa6a5a634d349"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-enabled/boundary.off.gz",
+      "bytes": 29934,
+      "sha256": "6a740e72efc5834e856ee081795a639b582393633eac703fec84faadeb9dccbb"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-enabled/input.off",
+      "bytes": 1199,
+      "sha256": "27217209e00627db2d32c48f255c483d9d2da900eea3f056ac1309d1e9f45a23"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-enabled/mesh.npz",
+      "bytes": 108974,
+      "sha256": "95b034136cde0f7dbe36441da011dd746f20343c2e465026d873cfd98505bbd9"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-enabled/mesh.vtu.gz",
+      "bytes": 87404,
+      "sha256": "ee3154fb3010dcb35dbc0cb73c90f4f041c1b0588874464910b34c04eca690d3"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-enabled/result.json",
+      "bytes": 3697,
+      "sha256": "a4ab419a0e27210c9486188ef168c14f2e742cb340843078b54e88df765c5faf"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/disconnected-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/disconnected-enabled.log",
+      "bytes": 8396,
+      "sha256": "b244bc95d72542a54148f39967369e00038bba4f763546af756068cf956396ff"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "53dec8fd09c49a516a5edb0e0200f303af7a12917a0d294e5b9831e3daa5c0a0"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-before/boundary.off.gz",
+      "bytes": 133255,
+      "sha256": "4c36bb46427a4d86b4fb71a4c9e1ce0442dacd30748b58a9bbdf220d820b304c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-before/mesh.npz",
+      "bytes": 572092,
+      "sha256": "e1329f9ee26d2ed55a3f513c40c1fc781b67475aa59368f9b7035d8f06e8126c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-before/mesh.vtu.gz",
+      "bytes": 452968,
+      "sha256": "95be86063c589dfd602ad786920c02d373f8654507bdd3776a76988aff729b07"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-before/result.json",
+      "bytes": 3655,
+      "sha256": "8c0ba5a0a0c2e047c3ed1b4f83175f4c842dd767d9ccba6d7c65edb46170d214"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-before.log",
+      "bytes": 8437,
+      "sha256": "2de64f8f467e67cf092084693e58a4c6f5447d3bc20a931757529ca0b74571ee"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "864624e6cdc17831707ec0c1b76f38f184afc6608a098aa45c705b82f9a498a9"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-enabled/boundary.off.gz",
+      "bytes": 133177,
+      "sha256": "4f44647bc858b8198248672da457dda400926a7d140d20e07c1447228a916d52"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-enabled/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-enabled/mesh.npz",
+      "bytes": 569559,
+      "sha256": "8af67dacac126f95cc59a3fe4c0f2ad6443d309e3cbf630d24d3b140d722da9a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-enabled/mesh.vtu.gz",
+      "bytes": 450979,
+      "sha256": "af4b80003b32a105ae221b149521395df2151c9b4b815b309693e31b9e45658d"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-enabled/result.json",
+      "bytes": 3693,
+      "sha256": "2c23d717d5d17bd3b68e0d3c00e7ab6bef60e84ab2889423770cf6a4cdf726a1"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/graded-torus-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/graded-torus-enabled.log",
+      "bytes": 8566,
+      "sha256": "a984535b24d95fb7c2e0b32a74af07fae659b7d23b631fc40e80085d450ee3ba"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/hand-seed7-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/hand-seed7-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/hand-seed7-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/hand-seed7-before/result.json",
+      "bytes": 3250,
+      "sha256": "d28db0933e20d9d2261810f64fa74722ef1638cef998ef93c505a4c9988f0a37"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/hand-seed7-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/hand-seed7-before.log",
+      "bytes": 7981,
+      "sha256": "9f231e3c78a28ee0e1578b38d00ca8f43749510c895a3540cccd0ec9eb73f109"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/hand-seed7-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/hand-seed7-enabled/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/hand-seed7-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/hand-seed7-enabled/result.json",
+      "bytes": 3292,
+      "sha256": "4fa263337eaedccd0bc20404bcbc438e746f247be2190adbc71a8c25992468cb"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/hand-seed7-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/hand-seed7-enabled.log",
+      "bytes": 8114,
+      "sha256": "d4e5d64039dfc16150924187d2625a865efa94a1f737b2abee302f8fc58254da"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-before/boundary.off.gz",
+      "bytes": 32370,
+      "sha256": "a3dd0a5541769e95b572822304348ab2249868641d558a67ebf0f950575e9379"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-before/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-before/mesh.npz",
+      "bytes": 109348,
+      "sha256": "0d7ecead4e238245902eddac7004547577fd706fa8f07d39eb67b7873f6a19d7"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-before/mesh.vtu.gz",
+      "bytes": 86052,
+      "sha256": "e32849a5d3a6d4af1066b5f6b71da5b5e27430b88a5ef401ab69a172ebe04769"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-before/result.json",
+      "bytes": 3665,
+      "sha256": "a04c115b9eeadd34a73a991514ecc353ed429b27fcc2d7e04d5d71dbafe7ac0f"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-before.log",
+      "bytes": 8273,
+      "sha256": "da2021b8b5df93ac34cfbadc23a38cf9dcf26b017d74ffc609347eaafb83bff3"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-disabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-disabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "b95c439bb3badef1e9202709abdee89a1053bfa38d117f1389d21e6d28dbc492"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-disabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-disabled/boundary.off.gz",
+      "bytes": 32374,
+      "sha256": "575f82f23b5310ee93d8560c04cdf28b1bbc6775d5ee30ca8e207df8325cc502"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-disabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-disabled/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-disabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-disabled/mesh.npz",
+      "bytes": 109362,
+      "sha256": "f055ce141bd61606254b28b4d0266f5519d6379accaa7933aceb510eab857182"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-disabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-disabled/mesh.vtu.gz",
+      "bytes": 86003,
+      "sha256": "2c4fd33657e3c64728c4a656e0ef48a873588a724902a670ccbb38dfa563dc61"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-disabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-disabled/result.json",
+      "bytes": 3699,
+      "sha256": "e35b920e96b98264975bec054516ad46e20116da53863ca32170a237db430fba"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-disabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-disabled.log",
+      "bytes": 8303,
+      "sha256": "1afb00d0f105f7f2827012b6611328bdc2928341c6f325e9d6839bb403588490"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "47321d7528206c7a6f0faa7a3615bb946623fc63ae45218f40b1733c93fd69ab"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-enabled/boundary.off.gz",
+      "bytes": 32111,
+      "sha256": "9c5cf4ca6497e8a5ce29b51ccb3392171b7a8859758442656336e563fc1f1109"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-enabled/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-enabled/mesh.npz",
+      "bytes": 108007,
+      "sha256": "8ae0f7d2737f666e49f7220ba8dc3471a49ea3a5499bf8064f4f6dd2167db0a0"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-enabled/mesh.vtu.gz",
+      "bytes": 85390,
+      "sha256": "dda7a82c8363b20485178d5eff09f7458cd3725055e45c8af25679ecea0d4c04"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-enabled/result.json",
+      "bytes": 3695,
+      "sha256": "3a326dc5bcad033f4d89950b7d739971149bfb7f1f200a2e6134564fb9225e3b"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-enabled.log",
+      "bytes": 8394,
+      "sha256": "7ddf05edb2b52dd00bb89dc3d7ea5a052ffb1890190043152abcd30b5a3ed137"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "bb422c820358699625797989931a47696eead578709ec59468f2ab92d6458641"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-before/boundary.off.gz",
+      "bytes": 32048,
+      "sha256": "7b1cf5a17958505319458dccb4eb50ec2f96bcc999e848610b1f08e5d18c5420"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-before/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-before/mesh.npz",
+      "bytes": 108367,
+      "sha256": "cd53b492c7550c46fe9d80d182c1b22c38890208ff9afafe6cfaa3ba4c8548df"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-before/mesh.vtu.gz",
+      "bytes": 85700,
+      "sha256": "ef185696a382cd8d6374542a96ed4d91128011e03bd1e58dae1c5a274134b15a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-before/result.json",
+      "bytes": 3669,
+      "sha256": "f96359ef7df2f409d6397d6e473ca968cc57c1261c3883018a05b49c5e605ef2"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-before.log",
+      "bytes": 8277,
+      "sha256": "7153187e8c00a84759b451736da385788d3fdefad53f30a40d89e5f727897ba8"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "2bcdd3a0f2dd9da94f71a8f100f588bd7077b29495d6bc8fc54ae8ec6b14d8ba"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-enabled/boundary.off.gz",
+      "bytes": 31807,
+      "sha256": "ddd770b2e7018abd7497b51f81b0658f12ff410d16553132fcd80a71e1b49d62"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-enabled/input.off",
+      "bytes": 18040,
+      "sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-enabled/mesh.npz",
+      "bytes": 107181,
+      "sha256": "21326a8763b3085a61c0bc5944b82ce202c84b4ea1f35d1b5a892c8b38d6df4b"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-enabled/mesh.vtu.gz",
+      "bytes": 85083,
+      "sha256": "dfce838f584be1d04aa325f411603c9507ccd31b771dc9d6acf6e017e246c878"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-enabled/result.json",
+      "bytes": 3700,
+      "sha256": "bfd394ba610d43e633d5d7ecf866deaa9f1ee6b172ae570e6e46876f5aba5f10"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/plate-seed7-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/plate-seed7-enabled.log",
+      "bytes": 8399,
+      "sha256": "35cc95f2148201c93d4a8dd60b4b2c3fe5b2411a50672532c3f149cc02d58449"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-before/boundary.off.gz",
+      "bytes": 28739,
+      "sha256": "83c5956fe79a833adf5b1b13670d7b5ad13fe4551295e52f2566c403028034ac"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-before/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-before/mesh.npz",
+      "bytes": 98694,
+      "sha256": "bc5f2c8edb6c03da9530c55819b2b06d54b38278d7fcefbbb2caf6ed4672820a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-before/mesh.vtu.gz",
+      "bytes": 70663,
+      "sha256": "c17eb019b0667aa0ac42ae7dca8d9016466fde6573b3e244a642eecd411311eb"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-before/result.json",
+      "bytes": 3661,
+      "sha256": "f04dcaf1dfac13d0817e74f2a9597cc088a6106db647bcfb3f05dc535c562782"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-before.log",
+      "bytes": 8269,
+      "sha256": "1bcdc0aac443d2072d7e17134b1cbc1b264069ad538f53f6419c53e05e506270"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-disabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-disabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-disabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-disabled/boundary.off.gz",
+      "bytes": 28759,
+      "sha256": "2d9824635c4a8da70177e04011a18aeaf92fb8ae76ddfb9475aceabc8969c543"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-disabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-disabled/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-disabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-disabled/mesh.npz",
+      "bytes": 98629,
+      "sha256": "d8e1bd009ff5705c742b19e8981a3e39ea4c2644c35fc45dcae141e82432f85c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-disabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-disabled/mesh.vtu.gz",
+      "bytes": 70602,
+      "sha256": "1cf17bcaa75107e2712f6e5435c3c829b6fa88e8c610ea25c8539b3bdb22a634"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-disabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-disabled/result.json",
+      "bytes": 3689,
+      "sha256": "03ab901f30e1194ead28505cae332bae49ab866ba04cac9d4c7bd5afafe93dfc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-disabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-disabled.log",
+      "bytes": 8293,
+      "sha256": "5029ced4247b43b6b3642ab1a53aa93a264ed96cabae84e90ef68027905f3dc4"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-enabled/boundary.off.gz",
+      "bytes": 28786,
+      "sha256": "53e43b7ef1753715ba8e34d9f44628e0f8027bc1abbefdb4422679a72eaf4a28"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-enabled/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-enabled/mesh.npz",
+      "bytes": 98703,
+      "sha256": "815bbde8dda96bc56adeeeb92b8081b5e587eeaad5a7098ab77507bb8bde10b6"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-enabled/mesh.vtu.gz",
+      "bytes": 70657,
+      "sha256": "f92107528031cbdfc2285a96d528fdd713d9a6baeff5bdda0fc87c2cdc926652"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-enabled/result.json",
+      "bytes": 3689,
+      "sha256": "e73e1cbf5d50f8068c9e484a82ad009d003d91214e61123f40a7189181ec6688"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/thin-hand-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/thin-hand-enabled.log",
+      "bytes": 8388,
+      "sha256": "af5da9be4176298ac6d93766835bfc165839210d9f0dc74b2855d9fa6806f948"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a61ebe6d45dbde62aab088d4406ace29d998b7e525f77785b2e7d79c3a89bfbc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-before/boundary.off.gz",
+      "bytes": 35319,
+      "sha256": "73180bc953e4e1db4a4e4da4f175fc3eaf279f43ba76ac6178dd6dfb8ad638d6"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-before/mesh.npz",
+      "bytes": 123040,
+      "sha256": "f01f49d56553453ec73af95baf18487c5b3e1045bbfedbc95640c47e94762197"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-before/mesh.vtu.gz",
+      "bytes": 92900,
+      "sha256": "1cb75fe82df7e3d202ebb23412eae5677367460e26d66fa39652f84f469c859b"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-before/result.json",
+      "bytes": 3650,
+      "sha256": "028e872a1c09aa969e021b4b07bcc694eaae426ee8d6b85f538abfae531e4517"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-before.log",
+      "bytes": 8258,
+      "sha256": "be759ff28b117440412f64203921294fe1e1b43c488c03cabaf1d1d4c3e3340f"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-enabled/boundary.off.gz",
+      "bytes": 35189,
+      "sha256": "a4c8377249e0ff44ad73779f65a4306c502b363e1c55b393de1f79cb0fdda125"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-enabled/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-enabled/mesh.npz",
+      "bytes": 122895,
+      "sha256": "b32d9ee7f4d978ef9f1885083614ed68982472c52a23e55f4809bd7930360fec"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-enabled/mesh.vtu.gz",
+      "bytes": 92821,
+      "sha256": "3c5dfcda43eb8ed6c68b71f143779f752cd9b93cc4c683dc2687c45c4733f080"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-enabled/result.json",
+      "bytes": 3687,
+      "sha256": "78fc80836d3a0819deebc185adc3998af06a91c8e0ba67f2966d354882d7063e"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round1-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round1-enabled.log",
+      "bytes": 8386,
+      "sha256": "72662121b940c685577c76ebfecfabaace2f57f4d179721f52805e53141b558f"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a61ebe6d45dbde62aab088d4406ace29d998b7e525f77785b2e7d79c3a89bfbc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-before/boundary.off.gz",
+      "bytes": 35304,
+      "sha256": "988330774cfe8e95d4183448f8d3ab6394d4f5b03f0c78c42b3c1f7b1ce77ec3"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-before/mesh.npz",
+      "bytes": 123146,
+      "sha256": "2fd68c119c019bc0f3016eeb4633d50a597acde436a1be4c71c05de135a3bfdb"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-before/mesh.vtu.gz",
+      "bytes": 92900,
+      "sha256": "2683360d15643171cc1a9d9a0370df610e389b18d25a8ea619e6d78f837683ef"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-before/result.json",
+      "bytes": 3654,
+      "sha256": "b16ab63253459878e98a42e33e8846e5620d47904694f0ed3b98e3173c8b2648"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-before.log",
+      "bytes": 8262,
+      "sha256": "ccc80b6fbbd4178bd125424e76be4a26398fd44316867c5deeefd8278461a5b9"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-enabled/boundary.off.gz",
+      "bytes": 35204,
+      "sha256": "30c0dca2732b659015d63f935a210c0746c81cc8ecc1e105d0497537843a613d"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-enabled/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-enabled/mesh.npz",
+      "bytes": 122292,
+      "sha256": "6c114454b89ce9a863cbf6e136b03f50e16a29f3f0e5c757e3a1e6d1fdc0ab5a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-enabled/mesh.vtu.gz",
+      "bytes": 92101,
+      "sha256": "a2d5e16e55c497d8d113d51bb4150d785871069f36dc3dc310dd6ec1a0b5d575"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-enabled/result.json",
+      "bytes": 3681,
+      "sha256": "a8d08c4ce353b71d975e1433d0ed4c9d159d54eced29c459c5afc635938d21f1"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus-round2-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus-round2-enabled.log",
+      "bytes": 8380,
+      "sha256": "43bd3e8fc715aa059ad3c5cbf89a6c9a383a0d3681dffb98b8307e2102a91390"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a61ebe6d45dbde62aab088d4406ace29d998b7e525f77785b2e7d79c3a89bfbc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-before/boundary.off.gz",
+      "bytes": 35288,
+      "sha256": "200cd99b934c963e5ccb88eb8dda6e4bd546345e7541c0ed33337059e94fbf2f"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-before/mesh.npz",
+      "bytes": 122990,
+      "sha256": "ada4a2d6a740a85b1d3c4fcc2ad95a1ec91917cb633336b31a99a2d821e735ab"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-before/mesh.vtu.gz",
+      "bytes": 92860,
+      "sha256": "0a0900f98c19b953660ee21793444bfde4657eaa43c60222a947ce4ce7768d53"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-before/result.json",
+      "bytes": 3650,
+      "sha256": "5d66d6e5aeafdc718c2378f7f7e976bb0a21c8c346a838146e28b13f83c347bf"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-before.log",
+      "bytes": 8258,
+      "sha256": "f1b8ebc0ebfc1fd75429a0937d155f5ad7eb812b0c5e769f4a1ac6f5e270cacd"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-disabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-disabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a61ebe6d45dbde62aab088d4406ace29d998b7e525f77785b2e7d79c3a89bfbc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-disabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-disabled/boundary.off.gz",
+      "bytes": 35311,
+      "sha256": "6df346dc7896bef9c19f61032f211c8665cee72f0e2ba18689c5a786f2c66c20"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-disabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-disabled/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-disabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-disabled/mesh.npz",
+      "bytes": 122960,
+      "sha256": "d828183e23e481f30260848c9633b6fc9dcc7763248bbbea1e06569e643411aa"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-disabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-disabled/mesh.vtu.gz",
+      "bytes": 92818,
+      "sha256": "7c05387335781fc94b7f50b208ee8a6baf119c7b2e0cffa01b4047cc7325ebc9"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-disabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-disabled/result.json",
+      "bytes": 3683,
+      "sha256": "ad29c1dd1ccd0747d6cee34e04df7eba41c5b2a4948798fe7a97c4b7044952b6"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-disabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-disabled.log",
+      "bytes": 8287,
+      "sha256": "2fafecc8be63928ac91c6afdfcd796f710e7ab01ce333ffea62605d7ec8965ed"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "ca3151626e87c2ee9c32c214578384a7a247ef7b6cd188c7b2b8093ae37c4c77"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-enabled/boundary.off.gz",
+      "bytes": 35219,
+      "sha256": "e7c0ba609ad473b9b525cd02572f42b868dabac6e528c07e205aed9a3afbb94d"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-enabled/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-enabled/mesh.npz",
+      "bytes": 122225,
+      "sha256": "96733fd6770f4b431529099bc3a5160088b1a7cba930ce6e941aec824b15b2ca"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-enabled/mesh.vtu.gz",
+      "bytes": 91965,
+      "sha256": "3432d0652a9919be76e68635ea0c3c3d2b55f89633c66f52259042a8c2d59ccf"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-enabled/result.json",
+      "bytes": 3685,
+      "sha256": "0700751cb2fb8555568fdf9885d079d710994b1ee7bb8a3880e8d7d9404b2da2"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus1000-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus1000-enabled.log",
+      "bytes": 8384,
+      "sha256": "00c49a71375ee6b24009da92e442f3db44986002278e575ff0a8f4064a073caa"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-before/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "f7ad322baf26b642fb2642afae761ca68f726db3778805565890295826d77f08"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-before/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-before/boundary.off.gz",
+      "bytes": 135002,
+      "sha256": "ce39e376c8abda8b8812eda008d31aeda98e4a17373140a5def2960f5fa3b7eb"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-before/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-before/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-before/mesh.npz",
+      "bytes": 566359,
+      "sha256": "6d6bf39417dc9cc57c5b1b4ae3282ab21a927fbb8ecb4483c78a1dda9f364d3c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-before/mesh.vtu.gz",
+      "bytes": 445405,
+      "sha256": "4b026ef0cce43b70eda70c998a3cc1d381aae877f62f62c046bdfda231ad392c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-before/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-before/result.json",
+      "bytes": 3652,
+      "sha256": "45e1e38244008991cbd946692686fea961785658fcf1271c3e031528081fe8f4"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-before.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-before.log",
+      "bytes": 8348,
+      "sha256": "beb47f12ef330032b5cd7abe7f2e49ea9f80b1c1c415cb6f6a0355415b207f99"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-enabled/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-enabled/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "f7ad322baf26b642fb2642afae761ca68f726db3778805565890295826d77f08"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-enabled/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-enabled/boundary.off.gz",
+      "bytes": 134707,
+      "sha256": "735498606cdd31677987ffc72fea1860af02ab6a917eec879596ce9e91a1110b"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-enabled/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-enabled/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-enabled/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-enabled/mesh.npz",
+      "bytes": 564517,
+      "sha256": "cc80709edbcec034f42ffb910b925fc046de086c50b668a7cc2906228f1dc8d7"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-enabled/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-enabled/mesh.vtu.gz",
+      "bytes": 443692,
+      "sha256": "9a50c654b9d3ff37aedbc29d05c5f8c0e3726a4177c3c6d682f56c4f445d5267"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-enabled/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-enabled/result.json",
+      "bytes": 3683,
+      "sha256": "b1834ae2889fa8bb5179b29b4fda2c3ca9e09cf84766ce24ec2cd653f0aeadd5"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/torus4096-enabled.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final/torus4096-enabled.log",
+      "bytes": 8470,
+      "sha256": "e5f4071738f0b4c950ae8691b6e1f99fd0185fe28d5e25a206354b0b7e77bae9"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final-independent-v2.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final-independent-v2.json",
+      "bytes": 415242,
+      "sha256": "072d94cc09687941182bd9b537f3d7537b7fcf0fcab2cdab153da7a0be8696a4"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final-independent-v2.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final-independent-v2.log",
+      "bytes": 6317,
+      "sha256": "bc84fab7639a02ed20f6f82cb15df3717be83cfc9d14a295b53ac46aff4ed3fd"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final-lossless-archives.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final-lossless-archives.json",
+      "bytes": 19896,
+      "sha256": "dc16638fae6f1794e631c1486c34da6e0b25843ad1e0759e768850d1f8191b98"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final-run-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final-run-v1.log",
+      "bytes": 17363,
+      "sha256": "61db059f96e2379b9399627442c76daaf3bf6cebcae9a922a754972456d94886"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final-run-v2.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-final-run-v2.log",
+      "bytes": 13584,
+      "sha256": "9a32f4468e263bf6eebcb4d5b1711cc721e8db2012cc7f4c177ed53c296ad204"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-independent-v1.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-independent-v1.json",
+      "bytes": 365096,
+      "sha256": "dc0ee6df4f881e2b1478c036c13ddb32009717a815a4a7097846837fdf3eff3c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-independent-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-independent-v1.log",
+      "bytes": 880,
+      "sha256": "9b3cfb703cd2d3d2febef287d95b0153a819b4a65e4ca9463f5adcc08d68d3f0"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-native-audit.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-native-audit.json",
+      "bytes": 1169,
+      "sha256": "f7fe80514a132d33f6d55fc7b5cac900789e9ecf56e7eb38ec23ebcf1cfaa7a7"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-native-audit.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-native-audit.log",
+      "bytes": 1169,
+      "sha256": "f7fe80514a132d33f6d55fc7b5cac900789e9ecf56e7eb38ec23ebcf1cfaa7a7"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-native-export.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-native-export.log",
+      "bytes": 8101,
+      "sha256": "9287ead5e12f388c00d2068ac5992e52d21529cd5d0d6e1f2e205939d50661ba"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-native.dot.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-native.dot.gz",
+      "bytes": 571751,
+      "sha256": "79b51540a548dce82ac475d828d65940d10037be375b6443f1adbcd101d616cb"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-native.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-native.json",
+      "bytes": 552,
+      "sha256": "e69be71debd473dc2b146487246d8df8f815ea681a0a1a24306894b096be0fe0"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-native.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-native.log",
+      "bytes": 8121,
+      "sha256": "c30dcc724f5e3dcb7ae3da23d33fdedcc36009a1d0dd3916c791e40f0678643a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-native.nsys-rep.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-native.nsys-rep.gz",
+      "bytes": 1400486,
+      "sha256": "a310ccd7ed3de4df69c265ec59a528c45ccacfbc43bcea8ffd0c58496e0c84a6"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-native.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-native.py",
+      "bytes": 1982,
+      "sha256": "13a7da4497926b80d489eaa54ced8adf31727183a8a32f2af0c1e3b8602ba192"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-trace-archive.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-trace-archive.json",
+      "bytes": 216,
+      "sha256": "5fc46cd926ea65c8909fe1bb9286d5b511329a256e5ef7b453c7c0eaae4c6892"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-v1/dense-hand-combined/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-v1/dense-hand-combined/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-v1/dense-hand-combined/boundary.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-v1/dense-hand-combined/boundary.off",
+      "bytes": 80398,
+      "sha256": "e26af1b4585c0f500e92d771cbfca19cc909dccab092a5fda4c1401293c978ea"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-v1/dense-hand-combined/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-v1/dense-hand-combined/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-v1/dense-hand-combined/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-v1/dense-hand-combined/mesh.npz",
+      "bytes": 89000,
+      "sha256": "0a33ee0fbaec85212fae558a256dd3a703d482c34a486a92f8670bea75ada8fe"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-v1/dense-hand-combined/mesh.vtu",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-v1/dense-hand-combined/mesh.vtu",
+      "bytes": 178609,
+      "sha256": "5d873f7606ca65b9894a23871ec1c06d4b0d80514d4650bb48a82dc6b5af9738"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-v1/dense-hand-combined/pilot.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-v1/dense-hand-combined/pilot.json",
+      "bytes": 780,
+      "sha256": "6518ea87931d804bf3d79759876ce836b4b053dad94c94122eb3378bd609b5b5"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-v1/dense-hand-combined/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-v1/dense-hand-combined/result.json",
+      "bytes": 3581,
+      "sha256": "81e2139f695ac020d9359348464ba1e7a07bafeb7a1d3657701973374ca857e4"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-full-v1-dense-hand-combined.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-full-v1-dense-hand-combined.log",
+      "bytes": 8373,
+      "sha256": "495262c97c75e0d1e0fdfd4b5f1c62d5297ffc93eccbc36b5a7bcb8fba917b01"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-loop-native-audit.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-loop-native-audit.json",
+      "bytes": 1115,
+      "sha256": "42cf5522cf05e04d38404d93ddd3e74e9b93a8f91f763229056cca7f6fd40950"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-loop-native-audit.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-loop-native-audit.log",
+      "bytes": 1115,
+      "sha256": "42cf5522cf05e04d38404d93ddd3e74e9b93a8f91f763229056cca7f6fd40950"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-loop-native-export.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-loop-native-export.log",
+      "bytes": 8101,
+      "sha256": "f3d845f9cf6a589fe8fb82f708585ad18cc31b0ee77f84340510943f4ec44813"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-loop-native.dot.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-loop-native.dot.gz",
+      "bytes": 40316,
+      "sha256": "437b438ccaee61bb44deadc09af201e13fb245eb3ddaa694fa1aac431ee2962a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-loop-native.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-loop-native.json",
+      "bytes": 895,
+      "sha256": "a9e08b56fa614f027c66fd40504015b21c7702598eb63b9898d59e447fde0089"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-loop-native.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-loop-native.log",
+      "bytes": 5218,
+      "sha256": "2c83a7bce8114acdd6d634f5724a5baf6750759b9a604dbb4b5f5b10e4ebdaf1"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-loop-native.nsys-rep.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-loop-native.nsys-rep.gz",
+      "bytes": 142710,
+      "sha256": "580f9decbaa3787a359ceeb7639d769b6c2f559fe027749b6ecc8479c2e97fb7"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-loop-native.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-loop-native.py",
+      "bytes": 3707,
+      "sha256": "37fea45bf0c2e16902b1383f447b482dc41a0b1b055b0bece232273e150d3c81"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-loop-trace-archive.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-loop-trace-archive.json",
+      "bytes": 214,
+      "sha256": "673a392995cf58b47981758179cd7244c91e67cb70a81d14c4a75960e9debd4c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-memory-run-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-memory-run-v1.log",
+      "bytes": 1166,
+      "sha256": "bd06792d00ef7f612020730fbc8a3bb8d7bd5f289b42e7e989fe6e7c63ea2dc9"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-memory-run-v2.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-memory-run-v2.log",
+      "bytes": 3477,
+      "sha256": "667e472c0df628605a0a5a224974c9466e5c41b6dff6e3c61803ddb98a6276df"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-memory-v1-commands.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-memory-v1-commands.json",
+      "bytes": 582,
+      "sha256": "377cc21ccdd157ac2c21000cc9ec232eb5878ad41dfb98f01b56f2dc9f5594fe"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-memory-v2-commands.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-memory-v2-commands.json",
+      "bytes": 4230,
+      "sha256": "2d4d27f7891000ebace6efbd651b027e8eb8ef1f3d45513aa368cd0cce487ddc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-native-analysis.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-native-analysis.log",
+      "bytes": 57,
+      "sha256": "801b505f72c5e335a276c36193240e5aa5b656226d7a358e5a852b90dd76c7c5"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-native-audit-summary.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-native-audit-summary.json",
+      "bytes": 109745,
+      "sha256": "ab4489b9de710784b643973b87de8a6264d579d4971bccfc3dadae01133d2994"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-native-commands.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-native-commands.json",
+      "bytes": 2009,
+      "sha256": "ec27ad79a85afdd4d1e9694e8de4546c858241340baded42f950a3d3fb93c683"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-native-run-v2.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-native-run-v2.log",
+      "bytes": 1685,
+      "sha256": "3dde088aeaf9f85e523aa359f480002e1783e83c8e093316fd84af1723e00669"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v1/commands.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v1/commands.json",
+      "bytes": 528,
+      "sha256": "eff0a629c0f4a2192de06c6687fbc404f0465596d561f26dc32f9e607368ff30"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v1/dense-hand-v2-midpoint1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v1/dense-hand-v2-midpoint1.log",
+      "bytes": 206,
+      "sha256": "db07696f6191881a69102bc6da565825d40dd5a12d1ac8b89431d5ae88de02f3"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v1.log",
+      "bytes": 608,
+      "sha256": "ab18b2d0917b73bbaddaaf8f6a6a45d4f0f6f2b2abe0304792bce65697bdc6b5"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/commands.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/commands.json",
+      "bytes": 8574,
+      "sha256": "f1ab3140f269e574195ccd908d882ca0404e2ddd1b1ce0d38804a7f98ff7a192"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/boundary.off.gz",
+      "bytes": 28649,
+      "sha256": "6a2e6ef537a2b605460965619092a864e345e8a8f3b0b50183167c82bf1c5e61"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/mesh.npz",
+      "bytes": 88893,
+      "sha256": "58a5e41cc11b1f62d1e18d9f8d80c3a2fc5162665fac0b012b76829a209d41c5"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/mesh.vtu.gz",
+      "bytes": 70556,
+      "sha256": "3f22d2d3bdf30b166fe8165d9612458d9bad9afe3952db4b4988443aec7411a1"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/pilot.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/pilot.json",
+      "bytes": 780,
+      "sha256": "f8033ed2a6dcb1ed1c1a93632c76ea45f208e60c0cb46a44e7f318c2d23767eb"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v2-midpoint1/result.json",
+      "bytes": 3587,
+      "sha256": "35a095181d5347a7c7a437c141b15dbd990b5e6012cbc4616980e9ba0b3b6e1e"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v2-midpoint1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v2-midpoint1.log",
+      "bytes": 8379,
+      "sha256": "24e267482f76e26cba2edadd3963f41a48074c35f8a1be26db777f05c37b12dc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/boundary.off.gz",
+      "bytes": 28778,
+      "sha256": "b7fea05fce3faa685fd2ded8199ee18154a63f9b030231fd55d57293f0ba19a0"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/mesh.npz",
+      "bytes": 98604,
+      "sha256": "33ceca10fc209abbbc5c9322ae87fecd7b388695e2e85b8c9bca5da9ce7e9a45"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/mesh.vtu.gz",
+      "bytes": 70662,
+      "sha256": "293b318a1bdd17acdbffd0f239c4580ec56108eec7d4fe920bb00cee3c154291"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/pilot.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/pilot.json",
+      "bytes": 768,
+      "sha256": "24bbb29777ea71f2c85825de6b4298708162a8da471052d3729c6088d41b8035"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint0/result.json",
+      "bytes": 3588,
+      "sha256": "ddb81b28f8be63e60ef166a2e636ae8480ee8c2fc3139dc3cf5e26cdcfa0fa7a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint0.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint0.log",
+      "bytes": 8376,
+      "sha256": "9a23db8036eeb52456eae10bdc1bfa860f615df582374867d40b7e87a0656082"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "29a12814592006c991a3242e86b976dbec257d904acac2867aebcfd7b3b7a1e7"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/boundary.off.gz",
+      "bytes": 28687,
+      "sha256": "f6f0bdbba8ba8de634e48441366f359840e5ecd26a0dd9d4c83325c7faf400d8"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/mesh.npz",
+      "bytes": 89144,
+      "sha256": "a33e81272af380fa8da3675eafbd96b85ce76b5961625d95e223dd52f0fea645"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/mesh.vtu.gz",
+      "bytes": 70625,
+      "sha256": "5f453d349d5be33ec2bb2f4b2cc25db9659b81d4ddb1ece0a3c0b8134e856bcc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/pilot.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/pilot.json",
+      "bytes": 780,
+      "sha256": "a3076e7dad4b786490ba91ba3b06c322806fd56ce7839c4915f8c305d96c6f3f"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint1/result.json",
+      "bytes": 3589,
+      "sha256": "e4513b72facaa27be8fa8aec1ddf557ac384c63b0755112162d7d1e382236e76"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2/dense-hand-v3-midpoint1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2/dense-hand-v3-midpoint1.log",
+      "bytes": 8381,
+      "sha256": "1c6575b10b6d14131f4a040f9d421ac492089a0f84f83de77652afddb73e6ecd"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v2.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v2.log",
+      "bytes": 6516,
+      "sha256": "82a69e1c6217e5cce8682b0b36b1a59ebb2337a0d5838167db6a04ab3b47133e"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/commands.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/commands.json",
+      "bytes": 5704,
+      "sha256": "f2faa71e9ee7d26ba408b5c98b2a5d105bfc037d230431555af9308cab8f6914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/boundary.off.gz",
+      "bytes": 28806,
+      "sha256": "3e3afdd3d61823efac53f3b6a3765777ab01c7053975232b77b63f2f885c9be9"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/mesh.npz",
+      "bytes": 98665,
+      "sha256": "27de61b66eb4d70064cbfd03e4b5b5157f26bfb2afe11b2006a5d641659ac547"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/mesh.vtu.gz",
+      "bytes": 70708,
+      "sha256": "39940a72b1b5758f4ae45c93ebbb61db6983460a146732694e64d19b637dd32a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/pilot.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/pilot.json",
+      "bytes": 769,
+      "sha256": "ee76fe93a0ecce6d9ff731447e7a9eb6bd8e8998910311becdd4c9fd98dedcc3"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v1-midpoint0/result.json",
+      "bytes": 3587,
+      "sha256": "32972209787f95aa4ec74fc893453f36d73f67160bf6b4e6c3501fe5f70361b8"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v1-midpoint0.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v1-midpoint0.log",
+      "bytes": 8375,
+      "sha256": "5725d86fcd059eff3cba91ef303108c817bcd9a5e20ead6aa69616afbff2c233"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/boundary-self-intersections.txt",
+      "bytes": 12,
+      "sha256": "a48dd1127abd53a72ef37f01b3336188c5195505a1e7359f02948af14dbcee29"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/boundary.off.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/boundary.off.gz",
+      "bytes": 28781,
+      "sha256": "d26dfc56f12b6886cf67acd1669058d6acd3381d5809e5358e3c46d51223850a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/input.off",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/input.off",
+      "bytes": 3249,
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/mesh.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/mesh.npz",
+      "bytes": 98571,
+      "sha256": "6e0991ffb35ccedbf0ccff19f85d3b55167c0625ee8774363b4bd72c3f683c72"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/mesh.vtu.gz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/mesh.vtu.gz",
+      "bytes": 70600,
+      "sha256": "06b9989b74a85af91bd4000b83022cf8e115023102d109bc0c5cd2dea19aa424"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/pilot.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/pilot.json",
+      "bytes": 767,
+      "sha256": "87b265faab2f3215333e94bd3c007dcd5fe7591cd93768b8bf73a12541fb23b8"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/result.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v2-midpoint0/result.json",
+      "bytes": 3589,
+      "sha256": "4603105afefc61c62237b6ca8cf8e5c18cb222a8fcf02be917ef9e3f966b4fb3"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3/dense-hand-v2-midpoint0.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3/dense-hand-v2-midpoint0.log",
+      "bytes": 8377,
+      "sha256": "0221738c7f6d121cdf0a6520ac2ea0d4f1d35e58c3b99335db371a5dbd63e08b"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-pilots-v3.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-pilots-v3.log",
+      "bytes": 4331,
+      "sha256": "0f2dcca658565d0054bba1d19a47a23f7bdefa215b49e04473cf39d5ae568168"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-production-focused-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-production-focused-v1.log",
+      "bytes": 14566,
+      "sha256": "c6895ff3d14211bf4b234ea7cceabbcf5600a3299f7793700581158e1fb493b5"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-production-focused-v2.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-production-focused-v2.log",
+      "bytes": 100,
+      "sha256": "11d6ef394ff71c2950f2a1a4d4226ceb9f979f227b46fc131664b061fc95f95e"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-production-full-suite-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-production-full-suite-v1.log",
+      "bytes": 1233,
+      "sha256": "4842a3cb67ae1574aa33ba285e040cf169ef552146b1a8f90045e87efb54bbcf"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-quality-frontier-v1.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-quality-frontier-v1.json",
+      "bytes": 1498,
+      "sha256": "ca820c4b871b14a6ac5a6a9bd1ef0859a287ce50f295de12d7eaf90220a0241e"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-quality-frontier-v1.png",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-quality-frontier-v1.png",
+      "bytes": 128576,
+      "sha256": "cea279c93649ea55eed485ebce6c3fda8eff86490653344ed6254c5b95b606ed"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-quality-frontier-v1.svg",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-quality-frontier-v1.svg",
+      "bytes": 77208,
+      "sha256": "5aa3dd4c0a1045abe76b63732f2965c110a56665af4b586ada57c9871131fe61"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-stages-budget12-v1.json",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-stages-budget12-v1.json",
+      "bytes": 7828,
+      "sha256": "69f1eb5c83e8c22dc134a4269c88581b61c945f2220ce2bf90cec616194dfdcd"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-stages-budget12-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-stages-budget12-v1.log",
+      "bytes": 7233,
+      "sha256": "3f6fc3c4c403f9386aa607c31619c00a3265ca61ce0825359e11c9c3375b4265"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-stages-budget12-v1.npz",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-stages-budget12-v1.npz",
+      "bytes": 58896,
+      "sha256": "147b2dcc036c23d40e44240fe85c804d3d2fe508885ecc7ba241932856826d4f"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-tests-v1.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-tests-v1.log",
+      "bytes": 6283,
+      "sha256": "921513f60e451c3c071c6bca42d336f642ad71e644e35563bc7dd7319547d1ae"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-tests-v2.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-tests-v2.log",
+      "bytes": 98,
+      "sha256": "499182082177bf0b6ecf911c9e721830cd84a4ce1144a469210a74767ab710cc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-v1-local-transactions-padded.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-v1-local-transactions-padded.log",
+      "bytes": 42533,
+      "sha256": "931f7a8cf37e48a9dbb734395be71ae5a89a3db7a803c3dbeef364fa31a076e7"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-v2-core-lifetime.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-v2-core-lifetime.log",
+      "bytes": 12156,
+      "sha256": "7339190a10187af36590db48e5c42d289df33c71e2c270961db15c6d0190308c"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-v2-core-padded.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-v2-core-padded.log",
+      "bytes": 12249,
+      "sha256": "43334a4c41f4fbfc4cc4e3d0793d98410d0ae21cad111bd87368b76b06cc8245"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-v2-mesher2026-lifetime.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-v2-mesher2026-lifetime.log",
+      "bytes": 8952,
+      "sha256": "4c2d79e3f6da0cd6a0ff6d9df5e5f462b0f459f5059260dbfb900bd56013d5dc"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-v2-mesher2026-padded.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-v2-mesher2026-padded.log",
+      "bytes": 8951,
+      "sha256": "d567da408e595f67887318aedd8faacf2195cc6ac547451c178e6be20f918f56"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-v2-mesher7-lifetime.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-v2-mesher7-lifetime.log",
+      "bytes": 8952,
+      "sha256": "28bf1464d5083899968cfb18ab64e13c6a83180ed256d2b0c2728426e816724f"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-v2-mesher7-padded.log",
+      "path": "results/validation/vtm/local-quality-backtracking/local-backtracking-v2-mesher7-padded.log",
+      "bytes": 8951,
+      "sha256": "105daee0c495f61ad545a867a6c5d3c9aab7d6f1bd073c97f0c5368d0a4f80cf"
+    },
+    {
+      "original": ".work/vtm/local_backtracking_attribution_v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local_backtracking_attribution_v1.py",
+      "bytes": 4124,
+      "sha256": "407aac7a10b6dc8bd4430552c22d524eea5533262c82dc42f089ddb7fad7cdb0"
+    },
+    {
+      "original": ".work/vtm/local_backtracking_full_v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local_backtracking_full_v1.py",
+      "bytes": 1784,
+      "sha256": "04d9926f3ab0616a4be236e41763a8e3a8d33c4168a8176b0a69f56f8bc17b14"
+    },
+    {
+      "original": ".work/vtm/local_backtracking_full_v2.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local_backtracking_full_v2.py",
+      "bytes": 1785,
+      "sha256": "acc25bc5a59f6e2d0b2e091cc41aecbf157fdf6c2c06f7914b93b9d502f1dedc"
+    },
+    {
+      "original": ".work/vtm/local_backtracking_full_v3.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local_backtracking_full_v3.py",
+      "bytes": 1785,
+      "sha256": "2697e3cea7f416331c006898ec5c8abee1b7d04aff08c5d044c3ab21fc5d870d"
+    },
+    {
+      "original": ".work/vtm/local_backtracking_observer_v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local_backtracking_observer_v1.py",
+      "bytes": 1493,
+      "sha256": "a4e833a4edbe99bd99351484448652c55629606b297779e3fb61bcbffa541656"
+    },
+    {
+      "original": ".work/vtm/local_backtracking_stage_probe_v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local_backtracking_stage_probe_v1.py",
+      "bytes": 6407,
+      "sha256": "94917bdfd6dc596ea67196554d6fff1dfd3653e99b14c3a61fc63674b87ed22f"
+    },
+    {
+      "original": ".work/vtm/local_backtracking_v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local_backtracking_v1.py",
+      "bytes": 6156,
+      "sha256": "12d334c7f7aa16b4d0c3bc09aa83e86fd6bcd22820be0af7f3dd520cb7611e07"
+    },
+    {
+      "original": ".work/vtm/local_backtracking_v2.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local_backtracking_v2.py",
+      "bytes": 6149,
+      "sha256": "b37d03796969dd72719afe2b8cd0c6a43b836a29ed41e3bdc10994dcc0c757ed"
+    },
+    {
+      "original": ".work/vtm/local_backtracking_v3.py",
+      "path": "results/validation/vtm/local-quality-backtracking/local_backtracking_v3.py",
+      "bytes": 6725,
+      "sha256": "0b99bd2882291d36bc0be17c2bd569cda2bcf30417881bdd8cc5c47e8ab729d3"
+    },
+    {
+      "original": ".work/vtm/plot-local-backtracking-frontier-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/plot-local-backtracking-frontier-v1.py",
+      "bytes": 2394,
+      "sha256": "f6b9612151d4aa0ad9c7dcf575e2cc3d71efe7c78e2701c9a6f00e5f28b63135"
+    },
+    {
+      "original": ".work/vtm/publish-local-quality-backtracking-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/publish-local-quality-backtracking-v1.py",
+      "bytes": 8814,
+      "sha256": "4afe266a3f2b6a869988e8bb89fc70b3266610ec0b56044e943ff2dfd0acf600"
+    },
+    {
+      "original": ".work/vtm/run-local-backtracking-broad-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/run-local-backtracking-broad-v1.py",
+      "bytes": 2126,
+      "sha256": "69cbb478cc6d0cd78e951c0eba8c4da2115af6548330dba62d20f8b7915ebe8c"
+    },
+    {
+      "original": ".work/vtm/run-local-backtracking-final-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/run-local-backtracking-final-v1.py",
+      "bytes": 5797,
+      "sha256": "80e9b96554e4b320d07b4eef04c921548e4cd78e3228113bf2d456be5f2f8b61"
+    },
+    {
+      "original": ".work/vtm/run-local-backtracking-final-v2.py",
+      "path": "results/validation/vtm/local-quality-backtracking/run-local-backtracking-final-v2.py",
+      "bytes": 6176,
+      "sha256": "7de555f7ae03593b7c4b0fa126e3090dcde3ddd45442e41dd52cb32373da6e44"
+    },
+    {
+      "original": ".work/vtm/run-local-backtracking-memory-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/run-local-backtracking-memory-v1.py",
+      "bytes": 2037,
+      "sha256": "80664838162b3fb7c7eac34d5afd9153fe8236f0f1503f6e387cd373e1f6c333"
+    },
+    {
+      "original": ".work/vtm/run-local-backtracking-memory-v2.py",
+      "path": "results/validation/vtm/local-quality-backtracking/run-local-backtracking-memory-v2.py",
+      "bytes": 2153,
+      "sha256": "00e4e98cf3fcdec3eba5ef135ac400653d685efab35ba0d03b043356a6ceb5a5"
+    },
+    {
+      "original": ".work/vtm/run-local-backtracking-native-v2.py",
+      "path": "results/validation/vtm/local-quality-backtracking/run-local-backtracking-native-v2.py",
+      "bytes": 2799,
+      "sha256": "bfc0f7c6fd5e0ab9d0e3d98cfeb6e4812140214aa3dc2c9b98a5cf281f0864a7"
+    },
+    {
+      "original": ".work/vtm/run-local-blocking-pilots-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/run-local-blocking-pilots-v1.py",
+      "bytes": 1861,
+      "sha256": "b9831fa5e99891322287ff28025ef47b4b65f980c0910a36bf460af82509270c"
+    },
+    {
+      "original": ".work/vtm/run-local-blocking-pilots-v2.py",
+      "path": "results/validation/vtm/local-quality-backtracking/run-local-blocking-pilots-v2.py",
+      "bytes": 1856,
+      "sha256": "f04a3c37a99f4db1aff984b3b48932b8b343ad2b3083aa3701e43bba9770a9ec"
+    },
+    {
+      "original": ".work/vtm/run-local-blocking-pilots-v3.py",
+      "path": "results/validation/vtm/local-quality-backtracking/run-local-blocking-pilots-v3.py",
+      "bytes": 1850,
+      "sha256": "6485c0d164a949b6ce12c7325c8aa4f55d47d1c5147cfec62a002a084275f810"
+    },
+    {
+      "original": ".work/vtm/test_local_backtracking_v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/test_local_backtracking_v1.py",
+      "bytes": 4485,
+      "sha256": "98f9bbf663538f28aa8a353ae16957120855c3be24323a51dba7c8efab5d8d06"
+    },
+    {
+      "original": ".work/vtm/test_local_backtracking_v2.py",
+      "path": "results/validation/vtm/local-quality-backtracking/test_local_backtracking_v2.py",
+      "bytes": 4927,
+      "sha256": "912d361dc00426e55bf9cf0e5a97bf9914ce64e8b4e168f53d0043aebe9eebab"
+    },
+    {
+      "original": ".work/vtm/write-local-backtracking-results-v1.py",
+      "path": "results/validation/vtm/local-quality-backtracking/write-local-backtracking-results-v1.py",
+      "bytes": 6459,
+      "sha256": "55075c5e551ab61709de36ed75666392567300676e6a0d64b3869c08b2c50b55"
+    }
+  ],
+  "shared_inputs": [
+    {
+      "original": ".work/vtm/boundary-timing-commands.json",
+      "path": "results/validation/vtm/analytic-filters/boundary-timing-commands.json",
+      "sha256": "c75b0a3c89cf49e7e1dec7a109ec6a7497370ddcc801f2c22ad78cc4c6174c49"
+    },
+    {
+      "original": ".work/vtm/representable-full-v1/dense-hand-candidate/mesh.npz",
+      "path": "results/validation/vtm/representable-boundary-probe/representable-full-v1/dense-hand-candidate/mesh.npz",
+      "sha256": "e16743cf01f85c28deac866e3ab64475b09827e6ee1ceeba0ba944d0452c92b4"
+    },
+    {
+      "original": ".work/vtm/scanned-armadillo-input/armadillo.off",
+      "path": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-before/input.off",
+      "path": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-graded-enabled/input.off",
+      "path": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-before/input.off",
+      "path": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/local-backtracking-final/armadillo-uniform-enabled/input.off",
+      "path": "results/examples/vtm/armadillo-uniform/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    }
+  ],
+  "shared_helpers": [
+    {
+      "original": ".work/vtm/representable_boundary_v1.py",
+      "path": "results/validation/vtm/representable-boundary-probe/representable_boundary_v1.py",
+      "sha256": "daf11106647fc8d78e92a7af41681d88a3dee96b8adf2212504bd7deaddcb177"
+    },
+    {
+      "original": ".work/vtm/test_representable_transactions_v2.py",
+      "path": "results/validation/vtm/representable-boundary-probe/test_representable_transactions_v2.py",
+      "sha256": "3d44fe5b90364b671f1cfc2fbe1b0f5f17ed2963eb2ce72415707468f9ad4d24"
+    },
+    {
+      "original": ".work/vtm/check-surface-bound-reuse-final-v2.py",
+      "path": "results/validation/vtm/surface-bound-reuse/check-surface-bound-reuse-final-v2.py",
+      "sha256": "043e6a45bc7f2723bce7411d587cafc15f0f3aa3789b81868f0fe5f4a81dd83a"
+    },
+    {
+      "original": ".work/vtm/check-large-reuse-proof-pairs.py",
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "original": ".work/vtm/large-reuse-isolated-test.py",
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    }
+  ],
+  "source_sha256": {
+    "warpower/__init__.py": "bc95cfd203def8ddac4d3171fee33feb98bbbef10a8ea5f98eef824140244874",
+    "warpower/_active_delaunay.py": "cab5fecb5959856729df080b36bb72c80980eb38a823949044140be7854654ae",
+    "warpower/_active_sites.py": "3c17ffe07d129ee4c46317f1ce1ede2ed0d96a0f237ddb718f77e401a95f7cc1",
+    "warpower/_adjacency.py": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+    "warpower/_analytic_predicates.py": "b6d8ab23dfb23e107f8dde1d9e473085f9a45004115279531bfe219194bfad15",
+    "warpower/_api.py": "f84bec46306a84d7f1b72c6dc1d9dc560cb2905ad74bda63f4bffb97e4e5ad97",
+    "warpower/_automatic_sizing.py": "f6aab578b13d3689648452c49c4e4474b40005a8215bc6787cf6811037fd713b",
+    "warpower/_boundary.py": "68525b60978aef6eaf0f8f02f7693747b5fec6a5e02ba260cc67d82f389c94dd",
+    "warpower/_bounded_predicates.py": "2a9afb83f8c64eea5f0597ffff0ccc9d5007f71f1d37a41f14da7b3e06df22e3",
+    "warpower/_bvh.py": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+    "warpower/_canonical.py": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+    "warpower/_cell.py": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+    "warpower/_construct.py": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+    "warpower/_containment.py": "a5a4dc4b1e4c56d737f380778b457903986fe279a664bb6ad15e01fec3fefa48",
+    "warpower/_delaunay_certificate.py": "bfab680e65db7757c519c0087cbbaf1d04ce5872e354c25bfee50f455fb1f6f0",
+    "warpower/_delaunay_recovery.py": "9f5b5b330bcdeeeb64ebe0eec5823d1357f6c79f1af4e1131dacda7b0d7f8e46",
+    "warpower/_domain.py": "db605f2e5d07a4efea6640f63985368d3b8af49b71ee84befcffefe108018d4b",
+    "warpower/_domain_topology.py": "3c0746b94c2940d275be28626e8dd257aa0b5a284d8459bd4cec226e4935826b",
+    "warpower/_exterior_band.py": "d875e2b215020ee4b29ed7be89b191fd5cf866339970619673fd7b0244cc995d",
+    "warpower/_extraction.py": "f69cf3a721103fe751c2ffeaebd9a22d85d31213e2df5ca7a03959a31654f889",
+    "warpower/_facet_completion.py": "fe32e851c37ff5564393f4f6d3d4cfab6a43cf9927db3fd1bb0bf8d0b4cdb6c8",
+    "warpower/_facet_seeds.py": "30d44e71d8ccf2b1fa4f16a6d9793dce7f736dcd56a04205d1bc52a8c0dfc5b9",
+    "warpower/_fast_candidates.py": "740377dd16ccfec7b0bc630e4d2a483312a2a8cf398e067d37b3973e18d9a483",
+    "warpower/_filtered_predicates.py": "a9a74285885f362deb634972709ae6fe47dbdb33320e3b8627d3b85669578564",
+    "warpower/_graded_odt.py": "37538c9d51d3282a9ec85b6e1e7f6eeba6876598d5cb79f30d0dd8d736d45778",
+    "warpower/_graph.py": "d7e489b28717f72a25e866b59f1c9dba3855222e83cd97e848bf7e6b68bf18e2",
+    "warpower/_graph_construct.py": "9f305d39185abc6602b85431b887c3bd2b5152864ec18ef35e6a71e3a6690e42",
+    "warpower/_graph_tetrahedra.py": "ddbb067ef02cfd20032cc29d870bb19b9d30b4cd2a649516be5c547ce5b94540",
+    "warpower/_grouped_seeds.py": "8d0ffa1556c179ff11d0ecd357a55cdb198897a4fc4c8336389744b0aff19785",
+    "warpower/_halfspace_predicates.py": "46779c8236dab4048344523a653ed1b864ba77082163f533b991fb85540db164",
+    "warpower/_integer.py": "94205ab5790a308f51b083fedc8cb905050602369061d65d231b91f175a0d641",
+    "warpower/_jitter.py": "b184d21b47ce3e96fcf1587722d9be3c276240fc776ce85ffa10b3442dd85435",
+    "warpower/_mesh_api.py": "37cf23ecf09d34a7bc0a77ebe73d8e2102c37064b1ab4923acccca993ea0678f",
+    "warpower/_mesh_topology.py": "5dcb12b58e59446e5dbf4db6a1bda2eab3a32a55c833e453e3b9d48f3dfbcc24",
+    "warpower/_mesher.py": "e4c25455561523df150206cb01bf94276539bece4000d1b32cf798ac318eadfa",
+    "warpower/_odt.py": "53d23df8f23de165d98598c7fbbf53e2944f82ee82f6a74c2b135e142dd589f0",
+    "warpower/_poles.py": "b93f434020a357025dc3a067bbb0e8ed2c4c0ab66ecee0108db5a2c6762ea18d",
+    "warpower/_predicates.py": "20a204a1f6774353d3ce5d35e241db53a0ac075ef40714542f0067010aa50d26",
+    "warpower/_prepared_seeds.py": "86246833eec66426191c3e5465f6eadcd8437724893f4ccecf6f4f8564d89d56",
+    "warpower/_proved_completion.py": "aa593becd183bf90685e2b0ab8fefc94ad708b687f547eb87d34ebd5fe3838cc",
+    "warpower/_quality_moves.py": "d515e12a38b75642c2a8beba29a4925fc14bc4d96dffbfacab692301a54ea9cc",
+    "warpower/_refinement.py": "003dc220a88044aa18f624676b5d1941a7bed314f1cb17226f962d8a4d61eb81",
+    "warpower/_reuse_delaunay.py": "a15d8beb82263abfa7001046cba419fd8f1608959ffffdb35c2f4ec30d5b4ce8",
+    "warpower/_sampling.py": "3f4ef9a1ed354dab1a0f54528817683d68af1bc81c1926ec631834d93a8edc70",
+    "warpower/_selective.py": "8d1afafaf8db2b598b2a9f0c2cde01f4161195c844f8b6e7091d6e7493279c15",
+    "warpower/_selective_backtracking.py": "e7111bcb1505045a4f73cbb72b4c3c54a4c814e21a4d5bdd69d046670d29223e",
+    "warpower/_site_bvh.py": "60a307c003c02f931cc1d6ee2f4ca1b417d34be6a4fae3f6d968be17dda7c92b",
+    "warpower/_sizing.py": "fe30bc06b3ad23479367a00afb2356e1103e74beb5e764e5f47e91ba8a343464",
+    "warpower/_sphere_bounds.py": "865f1d7eb961ffab42d98213ff52e52cb7a60973233cb03923d3f559e1e72c3c",
+    "warpower/_stable_center.py": "1d3f4a58c799f675edde5dea9f77dd50c36b68b7f8580e809a1b88d761d770d3",
+    "warpower/_stable_volume.py": "c326ad964bd1bf1f11fcd0682e1cacc8df56b7a3ccb3815ceef3694c3ac36a90",
+    "warpower/_surface_bvh.py": "b8bb9d8bb798fb5b38fcf59aa55c858a1af56de1d57e98b630f0b37b593edcf4",
+    "warpower/_symbolic_bounds.py": "b071b45a8a19b93a322406680d10b6137c9cc7677efeb8776b98b7ae8c678db6",
+    "warpower/_symbolic_cell.py": "b3fbd57892ec33cef5e03b094d9cf454d17ffa9ae0ac4d886cce6ca210ecb7a2",
+    "warpower/_symbolic_delaunay.py": "79760a7f1770a8902288f4a8f750eb2170ba87899260a637817b65cc2f2aa451",
+    "warpower/_symbolic_tetrahedra.py": "52af32e5cfd0686fb82548a512f1b89c703057a45e0eb7597b9918d7a931e29a",
+    "warpower/_teleport.py": "4123f2a28bfc4324c5340adf85e93538885cd54b5e3f5b11107bc07183e7ab4f",
+    "warpower/_tetrahedra.py": "5db1eb6583f84bf99a81c9aca8aabb1d8fdc8772d6db7fe9bb87d812ad09f2ec",
+    "warpower/_triangle_contact.py": "01ebcddc6501f402157cf4a46738bffb6e8a55932dc11a35d6b79855804388df",
+    "warpower/_validation.py": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75",
+    "warpower/_voronoi_volume.py": "9b8b6c0f4e29f0907297ce5f13876d50f5728f8283fa73dec7514d5e30e05305",
+    "warpower/_vtm.py": "3e2714615f2f85962007bdb6b3f78cf7ff0d95132d88bb61b594874af475ce56",
+    "warpower/_vtm_controls.py": "a2c08f2f50c4bc189e2bc82a38f50b4137229081ff13344d4b319e11cbff9880",
+    "warpower/_vtm_domain.py": "7e7d79477224b3ddbcd5c11a47bee237ed96474660987268d43dac554aadf76a",
+    "warpower/_wall_candidates.py": "f9a532d2418a9ced7ccd9fcccecf91db74c0548b746e1bcd012cfd08d5d764cb",
+    "warpower/_wall_reuse.py": "8eb33d823e468da70ad1e1540876c5d8eb56c861ddfa2aa493a7bd8177f5e56e",
+    "warpower/_wide_center.py": "ed6c89a6afe3ee4dc4d14db4b92d244ed8483fd9fd55179e7048fc0dd1f13814",
+    "benchmarks/__init__.py": "aec4f6323c9af970cf489ad57de6195f5ef87df6edad0eaf51772e8c1b5506b2",
+    "benchmarks/active_delaunay.py": "dedc3721fd0b4eb4aef2c1bac457d64e225e7d44c578543472d16712fa45c06c",
+    "benchmarks/amplitude_order.py": "30b7eff6791a9c223c9014ce294af52b4a55a876aa6a6f85a54575754b1fe9cf",
+    "benchmarks/audit.py": "a1cac06ad03b11f588b8b3ea916091f3a8b238355f1e000f2b6c8e018ec0351e",
+    "benchmarks/bounded_predicate_proof.py": "90ce13274a06dc7a2f9dcf9c684fadc1967317d1e6f714956b08b0dae49a6002",
+    "benchmarks/certificate_fallback.py": "56f63983be10d2cecced520299f5fd8312e56071679b197c5dbef1967cb92e7e",
+    "benchmarks/compare.py": "790623d2707147a0614a828212664dca47c9d5e46a65380817c1e3af2ed5dd50",
+    "benchmarks/containment.py": "deecfe5cb518e1bcbce536e89a2bc1a6a93fc7072088ae9e5b760c7b2215d516",
+    "benchmarks/control_loop.py": "5f242c360349286c62ea42f4c8fa57f07eba58d1f011f32a1da29304a9b61454",
+    "benchmarks/cpu_mesher.py": "dcd64bb8bb725adefd5d4e5dc9852b0090ed835e33f6673bc938e6437424698a",
+    "benchmarks/datasets.py": "c06985fd7d32f87c193dc096e434b3389a2456a94451c778be5158c808e14f69",
+    "benchmarks/default_path.py": "0c97b2d2e5b5e2a1995fbdb455b1a333ae00c37d2bc673a1f47221e1d05aceed",
+    "benchmarks/delaunay_recovery.py": "a317c72d588feefec484ec85ef11a82f569614f4995131736ff5237ab7348471",
+    "benchmarks/domain.py": "8738c173885f57f82c3168b7b324cca13c35ac70c0d123abbfd96cdbfae34fad",
+    "benchmarks/exterior_loop.py": "f15db0dc5d0bf4d8f7896caf8dd808e8011f5e19a59266c49eda2d3a78cf7374",
+    "benchmarks/extraction.py": "c8b1b6ea55944de8af60da3eea1c989696fb3fb98c2e7e33f1f36e9f23807964",
+    "benchmarks/facet_completion.py": "ac8f46ea57539e83a3925ddb882cc471f4868d36df28837fab9c5ee53ae5bc37",
+    "benchmarks/facet_recovery.py": "48e3da3b1e530a4903e85ed0aac4b359798ff873d580fab13a6f65ca736f7fb6",
+    "benchmarks/fast_candidate_matrix.py": "6d61d8fae12af5266224585a533715dfe243d3a3ca497ae8f43e4a6a90d22387",
+    "benchmarks/fast_candidates.py": "2666a8916fe9677c3d75242867bcd758b940b9963a3aa4edd4d3a1f5dcd614b9",
+    "benchmarks/feature_quality.py": "06f9c355f193ad5c6ff8b63a98d33bbbaaf497b965cf3e84459efd3fa638d4c8",
+    "benchmarks/fetch_scenes.py": "99a8d693aae203927a012a8e4e152c04fb838eb49ea6d0a447ec10a9109644f3",
+    "benchmarks/geometry_regression.py": "34751f0eb34023aab8ba94da7c817b4255bf287239baa0c589551f39f83d8a14",
+    "benchmarks/global_certificate.py": "a7ebe54dd446a63b85378fab4556014e2a01816a9c86be420cf88f4986b6ac20",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f",
+    "benchmarks/graphs.py": "99ce61f786157147024705d2282803dc3d7e6c2d17812dcefd2a3a29f84764dd",
+    "benchmarks/initialization.py": "d4fdbc016406e0f9560912ff3ea687b782bbb90a2d2f17481bb504e00b582f3c",
+    "benchmarks/interior.py": "3b11554d7882e0361fb04929299b06e8c101193177415e4e307ea0539ec1909f",
+    "benchmarks/jitter.py": "ecb96baf3daca6e4a0e62efc2cc10122a3f0339725d90813291cb8e355153153",
+    "benchmarks/local_certificate.py": "9e17b0321af3b6116689245a525717d8c17c5c600e7a0844996836ec4dd6ca9c",
+    "benchmarks/matrix.py": "45135d3e98d852bd18939e56269ae67f4cc503bd81ecec3252175da32009bd57",
+    "benchmarks/memcheck.py": "707d7d29ef6469d9cc52f56d6f21b0dc5464a6aedf858eca09ebb91bcda6df50",
+    "benchmarks/memory.py": "139f0195ef37b2d163797332166b2b70774a1c34324abe742027caac08175c89",
+    "benchmarks/mesh_quality.py": "0a5765c4d82da5e24ccda94bf2c149875c83932bc314c9211b276a99a893e0dd",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "benchmarks/mesher_loop.py": "e384c22f1e2334aeca3d0c7441eca7354d8c1d75a99b3a9fe0e0f93df449c141",
+    "benchmarks/mesher_policy.py": "75a2b13ef4e10aa07ecdbc8e2b856eb171c9da7836c6bf83b0fa4f43fff12d98",
+    "benchmarks/nested_capture.py": "4ba4856c8af8fde4e1c738d9f7924523c02e83dac593864d6c6cf2741704b568",
+    "benchmarks/odt.py": "556322d06aa7108b2a6a76f01d15151db7008a93dcefe68ee08d3b785f49191d",
+    "benchmarks/odt_failure.py": "3b1c7402bc752678048198626919c2de6c5e50a1a1ef28f81860c104531efc99",
+    "benchmarks/radix_capture.py": "9df57f171e7287d4765d89f7875dfcf700b689dcad502c923a3c7498e34d49e7",
+    "benchmarks/recovery_policy.py": "58db4056f1de878f9ee32cd7a722486618dd2ac4b45ee9c396bbac45e00c4d70",
+    "benchmarks/refined_hand.py": "4fdf7e0d8dc05d9b484b242cef42f9832f4082658c2db9629dd59e612e3ce308",
+    "benchmarks/refinement.py": "86cd281caeee343f6cd748f998b72840348c679ad74734a2ba7da07c8b0281fe",
+    "benchmarks/reuse_delaunay.py": "99b23c95af424175126dfe405b588d29e5e7c55947b6ae00b7974c21e9aaf218",
+    "benchmarks/run.py": "30fc6978f5d1ee4f486f69ee3316a27fd7edf30b5d9f4dc4a3a8a47b77419d0e",
+    "benchmarks/selective.py": "c1530960d11574b1f75be7fa6db78bfb4f9455c72ca169b1bd6356e22d113936",
+    "benchmarks/sizing.py": "1086b3e357d960432ab9203eb026f16d28ae70daa81b5b439826bb45d2200680",
+    "benchmarks/stable_centers.py": "cf7a7c05e9cb3b414baec12c425c3788aaa3b26fddc123e896d0ac56dc323d24",
+    "benchmarks/stable_volumes.py": "6da84b42e0a2feee55cce3dc96810f960acda9f2d7122f3f5536466dad58c9fe",
+    "benchmarks/summarize.py": "ef218ab6fb7c60ab87400937292b357712638735799476960cb671418e5e4cb1",
+    "benchmarks/surface_distance.py": "977463196b35b253c1fee0193f87522dd8d43af87ad636c73737d64b678d6f2f",
+    "benchmarks/surface_distance_audit.py": "5c9c83555dc3d75ed5a697ce0bdb0388ffa68ed74dbb36746c19675ae0c58f26",
+    "benchmarks/symbolic_controls.py": "48658b1465d48a921ab4dc66f77c2d25120086c58a467133082b35b6ba23509a",
+    "benchmarks/tetrahedra.py": "b6429485a06a174687b092a3ffda29e8e14e414e825a8232ffc47603381a30e7",
+    "benchmarks/vtm_core.py": "acfae8356f3021a443036c9eda856797b5e8a564e287c4b57910f440fe3c0e2a",
+    "benchmarks/vtm_domain.py": "8244b3e036d038e5bd7ab6c5225144f62545bc02b22df4f1805a813d041bde8d",
+    "benchmarks/wide_extraction.py": "3665c607d1f786caa4d963df721d687a63ee1da5778b467e9bf58a79d016e29b",
+    "examples/__init__.py": "ac121f6f6650b3f9a5d6d9c65729a29df07f7d05998162d8f382d106725e12de",
+    "examples/fetch_armadillo.py": "2a098a8e224973dbb2dab308a75e95ff9b179316e1e81b1dd67a65bfa4ac0dff",
+    "examples/vtm_gallery.py": "bb0f2c51ffe6bfe56000b6e73dfe2fde6f096b7e4fe31095ed696004cadfbe07",
+    "examples/vtm_inputs.py": "83284ecd146010c2d610b221bdfeaa16ce0b98fd59cda561c1602bdfa87bc9a0",
+    "examples/vtm_render.py": "ef908f1733b376be8b77fb1295cb09040984a1578d6058f09dede4d75522a3cd",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/_flushed_bounded_predicates.py": "ee34d64c929fe22400fe5b4184fb59790ed2ccae61eaa203d6c0348aa478e828",
+    "tests/oracle.py": "48420fcd46156f6fd1c0b6bcb9ca0d2696652814253add0620f062fc5dd2113c",
+    "tests/surface_nearest_reference.py": "233067ec3622da5cd2ea49d09cf7d8de978916422de636195f9ed9b460229401",
+    "tests/surface_traversal_reference.py": "b27c042e2ffbb4a987350b0818e69fb89143c987bca511d8869afcf873084f3f",
+    "tests/test_active_delaunay.py": "954e144b24c3be5033d787290ac75b6ee8054f2f880d7d33a7d024f4bce5051a",
+    "tests/test_active_sites.py": "193cc7f1dd52f56084a771ee0257036af85e5c0958e063f22356ad5b9bd160b9",
+    "tests/test_amplitude_order.py": "597f577b894740dc9de1a4aea275160b257803e6efd3f76e855e577c46ced1c3",
+    "tests/test_analytic_face_search.py": "42244e86aac930bd92d391413c90a78402e74df89fa04ac06f08da2841546a20",
+    "tests/test_analytic_predicates.py": "125a0dbe23ae98593874a894859412e864fcf1da4a740b80047756322470ca28",
+    "tests/test_api.py": "6f2c11b0e5fb216eb56d001db1cb8095e0e037812876ce8b56242bf086c1ef1f",
+    "tests/test_automatic_sizing.py": "8d0fc304dd32b62913411c6e54bd0911fe02215103f8dcc52bc3ec7cd72b276e",
+    "tests/test_boundary.py": "a9f025bdc0c2e0afb1669dadc83a91ddc143100d0f3fdc64c7b4040e3ec37092",
+    "tests/test_bounded_hull_support.py": "151b018db30cd8603af564987b315386e168d46066ba6c848187546aaf2e69e2",
+    "tests/test_bounded_predicate_proof.py": "dd889cb288e45200d172f2c5c3c734690bc55173c8d8b3241782c82f94983c01",
+    "tests/test_bounded_predicates.py": "5533a685b89e448b63c6df6d96c92e4cd960aa6bf2a67baf4a99aaeda9e6d05c",
+    "tests/test_bvh.py": "26c93dd7b027de11401933c3384b446c09456c233ba8a3360520e3749fe68696",
+    "tests/test_cell.py": "573f2c8a2a1dca553d7a497fca985a7e06fa8a65c3cd9017610ec7e04110fcb2",
+    "tests/test_containment.py": "8427d00a9e9977ec6c2ff458236f5f8a7c4a16997470312115c4f89ba0c843fc",
+    "tests/test_containment_mesher.py": "080cd7c1decd7249c2bb4ee8e1ea602ad6142a9b7833be9c6c9f46e3dfd47f87",
+    "tests/test_containment_nested.py": "d43a63c227bf33ade2359994a24a53b0c61498ff05ad9a0e9009bae38a27c0eb",
+    "tests/test_containment_oracle.py": "67ffc0dc4dd5b72c6876bca5139f6fb98d45cd99b4256d7b782b943098bf4ddf",
+    "tests/test_containment_selection.py": "4e2a0932a3b80508f6125b7c10f298023032dd8120cd759c5544a2d6a960ffe2",
+    "tests/test_current_selection.py": "b327bd9bda9851fd13e35db241d58db3d49f117533a0f70db2b2eb67e0486965",
+    "tests/test_delaunay_recovery.py": "a372cdaa6791cd1244fd741cb5ceaa3c194fa369a03661a5720d5030f37530ea",
+    "tests/test_diagram.py": "ad5daaf9e90db281da36e7b880fabcf45c18d759dc8bcc0e1ea5daacd68195b1",
+    "tests/test_domain.py": "dffc6961eaa706bf56fb834c97cbfb603ebd3f075ba37eeb11dad79f2ea413c9",
+    "tests/test_domain_topology.py": "91de7e2903ac06f43d48ab6a829442267d572955c095170cdc4f0276497ec416",
+    "tests/test_exterior_band.py": "b975f96965b6f92924f728fdf98d35a234d5431bacb5b8fc0501d269a24b9df9",
+    "tests/test_exterior_scanned.py": "ca4647d79b32bca8c6880c81921b3cee6cb31db80ebef53e0e99ded2c6b685ff",
+    "tests/test_extraction.py": "32ef87874f704454ac6b58363a4e2f6996685c7a2393e2f6779ef66a6adb97e6",
+    "tests/test_face_certificate.py": "e2f104ac1fcb7443017b5ed5efbb602020bbb99c4fc397598265a9235e3feafa",
+    "tests/test_facet_completion.py": "ad3519ba087a19002d7c650e863e1f1ab6e78f118ce819fa3f7ce304d41cc3cf",
+    "tests/test_facet_recovery.py": "7ea40c5b7186c16584418f8c44df4f91b9d42e21c24f6e8c679d04a63f6018ac",
+    "tests/test_facet_seeds.py": "d4078e9b5390c9feb81eb524ea7831f64329fb307d6218a07a001b91d2b699b2",
+    "tests/test_fast_candidates.py": "0b560788841d415280130eff9aa7a3bbe76bf2b06665e649f4ecf8fd48b28092",
+    "tests/test_feature_quality.py": "e7ee05158baf0c85a8826dcb5622e9eeb03b640b18aa3f16998d51f88cab07e4",
+    "tests/test_filtered_predicates.py": "e88b3e183f6dfce5b657d4c0c6e0a0e73860b3148bb61e47c01716f9518f49ce",
+    "tests/test_graph.py": "8458b3bd5385aa007bbe99089852d81ef57d73162c426b64ce0bd4480936cfc8",
+    "tests/test_grouped_query_bounds.py": "73d737689ea965a7846ac03979ed79a4b85aff93cb309c4d5ecd8eb6f2f09242",
+    "tests/test_grouped_query_masks.py": "a3e766292eaf218e9299b98a4a3b8ff58e89caac032a4d460f4960c3485254c9",
+    "tests/test_halfspace_predicates.py": "943423db62d6c9bbcc0cd13c46dcf297d88ee67e19f5671210b9f25e6e6947d1",
+    "tests/test_integer_arithmetic.py": "86d87aae747f8af078236bd6bfd32f41bc2715b9381684ed605849d63e8b106b",
+    "tests/test_jitter.py": "ce182f424d44d954c0868cfb7b0b625f583afa5e33972c8674f58b0bcaa80cfb",
+    "tests/test_large_cells.py": "4b5eb900e3841eccbbda87249f0c1ef0075eb3ac0dba2e6ccdb040dc35778f2e",
+    "tests/test_large_reuse.py": "cbae7a639153bfb907a854d0d8c1682fbd864dc83a1a64424352d07fd22d2173",
+    "tests/test_local_backtracking.py": "880f38a764218abd10f7a48be4d9efea42a7096a56cb90c7269d6bfc4b1cb045",
+    "tests/test_local_certificate.py": "9dcd6bda42c67533725fb6d60b5fb1a814dba1c93bc193fcc2e252030b2fe17c",
+    "tests/test_mesh_api.py": "3578ea222aff484d6b0b4865e7ba4e99be677160782d3d64c2495eff822d1cbd",
+    "tests/test_mesher.py": "37c159cd464de14dc87ac6206af01ca786946f49c52608f8e63c66eef70b77e7",
+    "tests/test_odt.py": "8568e3141bfb19b578a331981dea31a7cc6fe738428ad2d7895d7d5aa8ed6015",
+    "tests/test_parallel_certificate.py": "399f5539558e94cb38aec698c8cf0ebd2986c3ffbd68e9b4aaae5477737a6690",
+    "tests/test_predicates.py": "de069e809416286e46ed31a9218a5ae2f568e193cbeaead083094d3f2eda1a19",
+    "tests/test_prepared_point_bounds.py": "07a0d1fadd3b75666242e6b6ca97a1ba1fadc4ffa5c77bdba09048d2ea6a4c30",
+    "tests/test_prepared_query_masks.py": "1792bc27a333e42659213241602e7c1ca3804b3d1facc82126334b6cf88a7faa",
+    "tests/test_proved_completion.py": "d724e4965d65f0be00783753d70c0cdd68ba9103756a8da9a8e904dec34750c7",
+    "tests/test_reference.py": "ad6b665701747046fe37cec98d3ef668c42d376064f2d8ba10cc17a0200259da",
+    "tests/test_refinement.py": "2edb4416c77ef830b251d0550448effb7cdfa8092817dd3bf5603f7b23ab74f2",
+    "tests/test_reuse_delaunay.py": "fa2fcd08bcd8e33a12a6879af17d75ba15a8fcb72d43fb1cefbddb987afa0652",
+    "tests/test_sampling.py": "5205a7b7db6671a2f84e693bbaf7cc0e8d425cb268b8e1f9efc7e94b792cc38b",
+    "tests/test_selection_classification.py": "4fd088676c03625b7d1e953e1cf103038495df3f35e52b2e6fe624443538f0af",
+    "tests/test_selection_extraction.py": "1d4da4cbff877ca67a9e8ead3191e9616aaa727426588aab519db4a564e0ea2a",
+    "tests/test_selective.py": "4a90989cd455a5d23c41f8a75b7a2b2bb99f997a4d98db309c79c76d5c208921",
+    "tests/test_sizing.py": "26a59c31b6f027cc89f33cfbce7d23a509d7bf54eb420b8ecf8f25248cf2471b",
+    "tests/test_sphere_bounds.py": "51168c640fde377c0f38a96f350e3cab44df65c31c23f95a44dc11f1330f039e",
+    "tests/test_sphere_points.py": "9fb240e421f60ddd09b37f9d2ba4a824a6b4f603c42ccbdf63f751960af41643",
+    "tests/test_stable_center.py": "f1429a3bd74bee2fe1bb37e9c9a03fb18041db33ddcea579d1c464fbe5268170",
+    "tests/test_stable_center_fma.py": "4024a777d34c24b5fc8614a0878268f74265e9a9094cfc4bdd43895b4025764f",
+    "tests/test_stable_volume.py": "359662b61e11c78f17fc4501f73f0d7c58ed44e93284e656af41882948d8ff81",
+    "tests/test_support_reuse.py": "383d324f64dab001f0d9ce3ef223ecfc8e91206e35c4db83cbb6223985370a54",
+    "tests/test_surface_bound_reuse.py": "bf3578e18783df3ece5658d06ce106ae6fee0e339f51b09d6c60df354c24c34c",
+    "tests/test_surface_radix.py": "f9a7250a94786794b37aa5b2a989ffa78cb6281c3efeea7025def545a4a86041",
+    "tests/test_symbolic_bounds.py": "5ca86f19643fb24b7e77e9a0ff6c05630232e211e379f4345d3dc74554370f6e",
+    "tests/test_symbolic_delaunay.py": "9dced2fb1930a86c59004060c3a9ba2e003b24a92eded7efed56f1fd75aa54a5",
+    "tests/test_teleport.py": "3c4b25b95ce0105e43dac4f1dc0f9fd51f722e678f43d7afee860c3d6e4a91cc",
+    "tests/test_tetrahedra.py": "c2b2fc56d66fa5cfc296ad029c708c92d8d0a9bb50673f4ac13500437f56ca24",
+    "tests/test_triangle_contact.py": "deb0846b1018626bd84856a749e098c245073b1487d1e549cfed9ca67569a08f",
+    "tests/test_voronoi_volume.py": "73fc95f57da09052e90ac1047871f6fbc8da5a504737297744f65d73b5de7520",
+    "tests/test_vtm_controls.py": "755c5403307c4884c47d7df3104b5290ffaf66faac43a85091aa5a7eb5a1ffc3",
+    "tests/test_vtm_core.py": "1b6725e4bdeb22ec24fd20c2a691ade9d0b8a2b5d20d7c7ce86ec584896cfd58",
+    "tests/test_vtm_domain.py": "f9e8ffd3dbff5751ecf01d8d1189630ea167fe87692a7504a6c74c3511b62ffd",
+    "tests/test_vtm_examples.py": "31117436fbf59e7a1bbebc42655753e9195e826eeb225ad803d34eae2c5f569c",
+    "tests/test_wall_reuse.py": "d83876423fe3a2329cba4cde0ad11d197d1418241167d2a17b973f660d0758ed",
+    "tests/test_wide_center.py": "09c7a84d78b96cfb832f3177d4787f513d83210c5c11a52bf4c9169e9bbdb19c",
+    "tests/data/hand-fit256.npz": "2e2ba670c80d1658b94fbc37a3daa4d9d5fec13c2049e55ca5aefa91675beb1a"
+  },
+  "reproduction": [
+    "Use separate persistent checkouts of the pinned baseline and production commits. Install dependencies and build independent validators from benchmarks/cpu; executables are not included.",
+    "Restore source helpers and required shared inputs to their original .work/vtm paths in an empty reproduction workspace. Do not prepopulate generated output paths: harnesses reject existing outputs. Published outputs can instead be restored into a separate validation workspace for the independent checkers.",
+    "Substitute checkout roots in recorded absolute paths. The final harness expects a baseline worktree at .work/vtm/local-backtracking-baseline. Preserve the pinned commit and code/test files there.",
+    "Use PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 WARP_CACHE_PATH=/opt/warpower-generated-cache, PYTHONPATH=. for production and PYTHONPATH=.:.work/vtm for private probes. Run GPU jobs sequentially; independent CPU validators follow clean timings.",
+    "Final harness v1 stopped at the baseline seed7 failure. v2 resumes the recorded prefix without replacing outputs. All41 commands are retained. Native v2 follows all six completed memory-v2 jobs. v1 memory timeout and earlier failed tests/runner logs are retained.",
+    "Some original baseline test log prerequisites are recorded gates, not experiment inputs. Re-run tests at the corresponding pinned runtime before the measurement harness. Private policy sources are experiments and must not be installed on top of the production helper.",
+    "mesh.vtu.gz, boundary.off.gz, graph DOT and Nsight gzip archives are lossless. Restore uncompressed copies to disposable scratch when needed. SQLite exports are regenerable from the retained Nsight reports; exact export/analyze commands are in the audit script."
+  ],
+  "omitted_unexecuted_sources": [
+    "check-local-backtracking-final-v1.py",
+    "run-local-backtracking-native-v1.py"
+  ],
+  "limitations": [
+    "Private pilots are exploratory instrumented variants, not production performance evidence. Direct blocking with ordinary rounding is the only adopted option; midpoint correction, halving factors, and old-star blocking remain unadopted.",
+    "All tested policies and budget points are retained, including slower runs and worse minima/fit. Default local_quality_retries remains zero.",
+    "Four final production results are explicitly invalid: coarse-hand and dense-hand seed7 before/enabled. They have error64 and zero public counts, and are excluded from mesh-speed results. Gallery does not export their invalid candidate meshes.",
+    "Sampled surface/crease errors are not Hausdorff bounds or proof of constrained-feature conformity. All three feature-table crease RMS values worsen with this option.",
+    "Original combined padded sanitizer run timed out at600s; no pass is inferred. Same seven tests passed in isolated5/1/1 groups in both padded and pool-disabled lifetime modes at900s limits, no kernel exclusions.",
+    "Memory instrumentation uses the existing131072-byte diagnostic stack limit. Ordinary production benchmarks and native traces use normal runtime configuration.",
+    "Native Nsight may omit graph-copy activity records; DOT copy direction is independently checked. First-launch instantiation/upload and a final external synchronization are present.",
+    "The overall native CPU comparable-quality speedup goal remains unmet."
+  ],
+  "reference_binaries_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  }
+}

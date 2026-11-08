@@ -1,0 +1,49 @@
+..................F.........................                             [100%]
+=================================== FAILURES ===================================
+____ test_rejected_quality_updates_restore_original_geometry_and_statistics ____
+
+    def test_rejected_quality_updates_restore_original_geometry_and_statistics():
+        source = initial(64, 5)
+        before = source.points.numpy()
+        core = VTMWorkspace(
+            source.domain, source.points, max_iterations=2, max_backtracks=2, selective_threshold=1.0
+        )
+        real_evaluate = core.selection.evaluate
+    
+        def reject_quality():
+            real_evaluate()
+            core.selection.minimum.zero_()
+    
+        # Only trial checks are replaced; initial selection retains the real minimum.
+        def check():
+            from warpower._selective import guard_quality
+    
+            reject_quality()
+            wp.launch(
+                guard_quality,
+                1,
+                inputs=[
+                    core.selection.error,
+                    core.selection.retained_count,
+                    core.selection.minimum,
+                    core.selection.previous_minimum,
+                    core._accepted,
+                    core.selection.rejections,
+                    core.selection.last_error,
+                ],
+            )
+    
+        core.selection.check = check
+        with wp.ScopedCapture() as cap:
+            core.run()
+        wp.capture_launch(cap.graph)
+        assert core.error.numpy()[0] == 0
+        assert core.iterations.numpy()[0] == 0
+        assert core.termination.numpy()[0] == 2
+>       assert core.selection.rejections.numpy()[0] == 3
+E       assert np.int32(6) == 3
+
+tests/test_selective.py:146: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_selective.py::test_rejected_quality_updates_restore_original_geometry_and_statistics
+1 failed, 43 passed in 11.83s

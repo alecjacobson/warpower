@@ -1,0 +1,818 @@
+[
+  {
+    "case": "torus1000",
+    "mode": "baseline",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "examples.vtm_gallery",
+      "--case",
+      "torus",
+      "--n",
+      "1000",
+      "--repeats",
+      "2",
+      "--output",
+      ".work/vtm/local-backtracking-broad-v1/torus1000-baseline"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 5.722522974014282,
+    "archives": [
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/torus1000-baseline/mesh.vtu",
+        "path": ".work/vtm/local-backtracking-broad-v1/torus1000-baseline/mesh.vtu.gz",
+        "raw_sha256": "556ddb10bc57b74601f855a89798c6b44253f91f39edd9dad054e8b720c0fed5",
+        "sha256": "e4e55788672c53dbfabab588c1d440002b25644746727290e2d58b31f02a5633"
+      },
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/torus1000-baseline/boundary.off",
+        "path": ".work/vtm/local-backtracking-broad-v1/torus1000-baseline/boundary.off.gz",
+        "raw_sha256": "1b8ae667839b5fd5ab8e23cae038491515220676ff904297c46952844cb19525",
+        "sha256": "c618a982671d7eb263978ad9ab3373893cd9a992f3401d59dd8f352a7b23a245"
+      }
+    ],
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      5826,
+      4225,
+      1122
+    ],
+    "steps": [
+      40,
+      8
+    ],
+    "moves": [
+      4,
+      2
+    ],
+    "quality": {
+      "radius_ratio_percentiles": {
+        "0": 0.0928580886613543,
+        "1": 0.3064781115473783,
+        "5": 0.5938737287257493,
+        "50": 0.8744211904981688,
+        "95": 0.9642281426853945,
+        "100": 0.9959915151012723
+      },
+      "volume": 18.099110914765113,
+      "relative_volume_error": -0.050893836021189326,
+      "directed_surface_rms": 0.019722933864496847
+    },
+    "median_additional_replay_ms": 606.0863647460938
+  },
+  {
+    "case": "torus1000",
+    "mode": "candidate",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      ".work/vtm/local_backtracking_full_v2.py",
+      "--local-midpoint",
+      "0",
+      "--case",
+      "torus",
+      "--n",
+      "1000",
+      "--repeats",
+      "2",
+      "--output",
+      ".work/vtm/local-backtracking-broad-v1/torus1000-candidate"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 6.122173547744751,
+    "archives": [
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate/mesh.vtu",
+        "path": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate/mesh.vtu.gz",
+        "raw_sha256": "bb8a1bead62c8f5d4b0d7c1be12a15cd738b8a09cff4dcc3da86ce4bad6d2708",
+        "sha256": "46d18a019756475eba728df33b82d8dd7657453002cd149f37cadcdb7ec31312"
+      },
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate/boundary.off",
+        "path": ".work/vtm/local-backtracking-broad-v1/torus1000-candidate/boundary.off.gz",
+        "raw_sha256": "b1d53cd03222f76872b7816d9c18538ff98816bd14430a37305c87478468add6",
+        "sha256": "0056f0ac0e803c80d89a7a0ae11679df0421f06ba3d932125e4514b4719d9127"
+      }
+    ],
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      5787,
+      4182,
+      1124
+    ],
+    "steps": [
+      40,
+      36
+    ],
+    "moves": [
+      4,
+      1
+    ],
+    "quality": {
+      "radius_ratio_percentiles": {
+        "0": 0.14822704503538794,
+        "1": 0.376747700806727,
+        "5": 0.6451700349818922,
+        "50": 0.8812238067849247,
+        "95": 0.9665841255768699,
+        "100": 0.9981224723299724
+      },
+      "volume": 18.144968992012004,
+      "relative_volume_error": -0.04848906685942145,
+      "directed_surface_rms": 0.018359568774967822
+    },
+    "median_additional_replay_ms": 721.3330383300781,
+    "pilot": {
+      "parameters": {
+        "local_midpoint": 0,
+        "local_budget": 12
+      },
+      "source_sha256": {
+        "/home/horde/projects/power-diagram/.work/vtm/local_backtracking_full_v2.py": "acc25bc5a59f6e2d0b2e091cc41aecbf157fdf6c2c06f7914b93b9d502f1dedc",
+        ".work/vtm/local_backtracking_v2.py": "b37d03796969dd72719afe2b8cd0c6a43b836a29ed41e3bdc10994dcc0c757ed",
+        ".work/vtm/representable_boundary_v1.py": "daf11106647fc8d78e92a7af41681d88a3dee96b8adf2212504bd7deaddcb177"
+      },
+      "local_columns": [
+        "local_retries",
+        "blocked_sites",
+        "global_retries",
+        "core_accepts_after_local"
+      ],
+      "cores": [
+        {
+          "local": [
+            55,
+            892,
+            19,
+            33
+          ],
+          "midpoint": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "case": "torus4096",
+    "mode": "baseline",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "examples.vtm_gallery",
+      "--case",
+      "torus",
+      "--n",
+      "4096",
+      "--repeats",
+      "2",
+      "--output",
+      ".work/vtm/local-backtracking-broad-v1/torus4096-baseline"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 11.979966878890991,
+    "archives": [
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/torus4096-baseline/mesh.vtu",
+        "path": ".work/vtm/local-backtracking-broad-v1/torus4096-baseline/mesh.vtu.gz",
+        "raw_sha256": "94a24fe44ea3a671289d0879d42664cd396b0f53ce530f4174d10d8a5be8402d",
+        "sha256": "6f7cd192ed72338b0470af0c43f9f152b7a46a59f715508bcb2cbd4b2605fb55"
+      },
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/torus4096-baseline/boundary.off",
+        "path": ".work/vtm/local-backtracking-broad-v1/torus4096-baseline/boundary.off.gz",
+        "raw_sha256": "794b015fd5ebc60c471897e8d7519853de86483a3fb28c447a4071738eb69815",
+        "sha256": "cb99d06f8347f0a98895035e71d8c0e1df7f3018d065ef769fdfafa705a6347e"
+      }
+    ],
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      4096,
+      24519,
+      19711,
+      3260
+    ],
+    "steps": [
+      55,
+      12
+    ],
+    "moves": [
+      4,
+      1
+    ],
+    "quality": {
+      "radius_ratio_percentiles": {
+        "0": 0.056507891216208896,
+        "1": 0.4089617555081838,
+        "5": 0.6490778910746205,
+        "50": 0.8845481321280941,
+        "95": 0.9695790320131671,
+        "100": 0.9988341233049022
+      },
+      "volume": 18.739066913724184,
+      "relative_volume_error": -0.017334939888244815,
+      "directed_surface_rms": 0.006889024981066854
+    },
+    "median_additional_replay_ms": 1785.2083129882812
+  },
+  {
+    "case": "torus4096",
+    "mode": "candidate",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      ".work/vtm/local_backtracking_full_v2.py",
+      "--local-midpoint",
+      "0",
+      "--case",
+      "torus",
+      "--n",
+      "4096",
+      "--repeats",
+      "2",
+      "--output",
+      ".work/vtm/local-backtracking-broad-v1/torus4096-candidate"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 10.98005199432373,
+    "archives": [
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate/mesh.vtu",
+        "path": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate/mesh.vtu.gz",
+        "raw_sha256": "8f956c5188ca72653a57c44655c9be1cd34930c8d59233d9af0004bacbbbfb73",
+        "sha256": "277227ddab6c884923da250ffe8679ea28449bf84d0cd2e01b556f37d92b4824"
+      },
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate/boundary.off",
+        "path": ".work/vtm/local-backtracking-broad-v1/torus4096-candidate/boundary.off.gz",
+        "raw_sha256": "d6e8ead980a1280630babb3c7a1fe1babfadf49cfd48f7a297e0b383443abde4",
+        "sha256": "efca51299b56fc8b21c186d26b7d9355d970a23850cab991c671ffe99162074a"
+      }
+    ],
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      4096,
+      24468,
+      19626,
+      3260
+    ],
+    "steps": [
+      55,
+      40
+    ],
+    "moves": [
+      4,
+      4
+    ],
+    "quality": {
+      "radius_ratio_percentiles": {
+        "0": 0.09151879781113514,
+        "1": 0.4532444057790784,
+        "5": 0.6658099583831368,
+        "50": 0.8872845043774641,
+        "95": 0.9701023709708185,
+        "100": 0.9986446262898684
+      },
+      "volume": 18.741968848357487,
+      "relative_volume_error": -0.01718276423382017,
+      "directed_surface_rms": 0.006777458848696771
+    },
+    "median_additional_replay_ms": 1497.7996826171875,
+    "pilot": {
+      "parameters": {
+        "local_midpoint": 0,
+        "local_budget": 12
+      },
+      "source_sha256": {
+        "/home/horde/projects/power-diagram/.work/vtm/local_backtracking_full_v2.py": "acc25bc5a59f6e2d0b2e091cc41aecbf157fdf6c2c06f7914b93b9d502f1dedc",
+        ".work/vtm/local_backtracking_v2.py": "b37d03796969dd72719afe2b8cd0c6a43b836a29ed41e3bdc10994dcc0c757ed",
+        ".work/vtm/representable_boundary_v1.py": "daf11106647fc8d78e92a7af41681d88a3dee96b8adf2212504bd7deaddcb177"
+      },
+      "local_columns": [
+        "local_retries",
+        "blocked_sites",
+        "global_retries",
+        "core_accepts_after_local"
+      ],
+      "cores": [
+        {
+          "local": [
+            38,
+            947,
+            0,
+            38
+          ],
+          "midpoint": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "case": "plate",
+    "mode": "baseline",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "examples.vtm_gallery",
+      "--case",
+      "counterbored-plate",
+      "--n",
+      "1000",
+      "--repeats",
+      "2",
+      "--output",
+      ".work/vtm/local-backtracking-broad-v1/plate-baseline"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 7.02434778213501,
+    "archives": [
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/plate-baseline/mesh.vtu",
+        "path": ".work/vtm/local-backtracking-broad-v1/plate-baseline/mesh.vtu.gz",
+        "raw_sha256": "0f67329145d22de0857380dc74420ddcf97de7177ea4c7db3a951926d4732771",
+        "sha256": "976d413a8a471923a809db0ac33f0f03204260a032fcd7710d69bc9350417986"
+      },
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/plate-baseline/boundary.off",
+        "path": ".work/vtm/local-backtracking-broad-v1/plate-baseline/boundary.off.gz",
+        "raw_sha256": "38c4534172b1d81ed9dad76fcba3b1b061ac0adfc5ac84dbcb07d571841ac466",
+        "sha256": "3bbddc03bbae330d0c8a77591d37356a008c1e4daaf4df45fdaa31a9f2cc33a8"
+      }
+    ],
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      5458,
+      3951,
+      1338
+    ],
+    "steps": [
+      40,
+      11
+    ],
+    "moves": [
+      4,
+      1
+    ],
+    "quality": {
+      "radius_ratio_percentiles": {
+        "0": 0.10274692876049102,
+        "1": 0.34753010335511836,
+        "5": 0.5601792129149352,
+        "50": 0.8468354901797849,
+        "95": 0.95788471244838,
+        "100": 0.9947980060435843
+      },
+      "volume": 2.438387028513409,
+      "relative_volume_error": 0.00495953681629279,
+      "directed_surface_rms": 0.0027889783270622554
+    },
+    "median_additional_replay_ms": 1073.703125
+  },
+  {
+    "case": "plate",
+    "mode": "candidate",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      ".work/vtm/local_backtracking_full_v2.py",
+      "--local-midpoint",
+      "0",
+      "--case",
+      "counterbored-plate",
+      "--n",
+      "1000",
+      "--repeats",
+      "2",
+      "--output",
+      ".work/vtm/local-backtracking-broad-v1/plate-candidate"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 6.72262978553772,
+    "archives": [
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/plate-candidate/mesh.vtu",
+        "path": ".work/vtm/local-backtracking-broad-v1/plate-candidate/mesh.vtu.gz",
+        "raw_sha256": "82a6a538bbf76ca44625ecee42176e986c3f4359504c3f73cdfa288b250ac714",
+        "sha256": "4c728e7323919e81a741e93b3e60bb21eb2d5b7f8e61537a3f4da04e9185c6d2"
+      },
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/plate-candidate/boundary.off",
+        "path": ".work/vtm/local-backtracking-broad-v1/plate-candidate/boundary.off.gz",
+        "raw_sha256": "8066004fadf12ca9cd313161af369d565a3efcabee8b308ef7d6d97eb910ec9b",
+        "sha256": "3959c6e306b43ef9ed8a1cc8a49ca7bb1b72330110e4db34058c1bfa650fc774"
+      }
+    ],
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      5318,
+      3926,
+      1340
+    ],
+    "steps": [
+      40,
+      40
+    ],
+    "moves": [
+      4,
+      1
+    ],
+    "quality": {
+      "radius_ratio_percentiles": {
+        "0": 0.23999141578410402,
+        "1": 0.38277505053698235,
+        "5": 0.5857346552823349,
+        "50": 0.8499800072663035,
+        "95": 0.957770862842287,
+        "100": 0.9929601255180505
+      },
+      "volume": 2.4383218546026546,
+      "relative_volume_error": 0.004932675968364424,
+      "directed_surface_rms": 0.002691702189169103
+    },
+    "median_additional_replay_ms": 919.2477111816406,
+    "pilot": {
+      "parameters": {
+        "local_midpoint": 0,
+        "local_budget": 12
+      },
+      "source_sha256": {
+        "/home/horde/projects/power-diagram/.work/vtm/local_backtracking_full_v2.py": "acc25bc5a59f6e2d0b2e091cc41aecbf157fdf6c2c06f7914b93b9d502f1dedc",
+        ".work/vtm/local_backtracking_v2.py": "b37d03796969dd72719afe2b8cd0c6a43b836a29ed41e3bdc10994dcc0c757ed",
+        ".work/vtm/representable_boundary_v1.py": "daf11106647fc8d78e92a7af41681d88a3dee96b8adf2212504bd7deaddcb177"
+      },
+      "local_columns": [
+        "local_retries",
+        "blocked_sites",
+        "global_retries",
+        "core_accepts_after_local"
+      ],
+      "cores": [
+        {
+          "local": [
+            45,
+            611,
+            0,
+            40
+          ],
+          "midpoint": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "case": "cavity",
+    "mode": "baseline",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "examples.vtm_gallery",
+      "--case",
+      "cavity",
+      "--n",
+      "1000",
+      "--repeats",
+      "2",
+      "--subdivisions",
+      "20",
+      "--crease-subdivisions",
+      "20",
+      "--output",
+      ".work/vtm/local-backtracking-broad-v1/cavity-baseline"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 5.171103239059448,
+    "archives": [
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/cavity-baseline/mesh.vtu",
+        "path": ".work/vtm/local-backtracking-broad-v1/cavity-baseline/mesh.vtu.gz",
+        "raw_sha256": "86b34a06564e17b321287741c6d895b740a46de0226e689d47ec7b64f4aec17c",
+        "sha256": "a609cc06386b17a070f85e91af5994c85a7165292fb54a697d4cfbc2e6f209b8"
+      },
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/cavity-baseline/boundary.off",
+        "path": ".work/vtm/local-backtracking-broad-v1/cavity-baseline/boundary.off.gz",
+        "raw_sha256": "676f0ab9436b38b9f8c51d7a67fc67af3eb7d3c4676953d0ab168bc3e187e0bb",
+        "sha256": "2eec326dad232c6c94b0b68aa09e616877dabe5872c82a8d9c19583f4cce3390"
+      }
+    ],
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      5064,
+      4344,
+      1124
+    ],
+    "steps": [
+      40,
+      8
+    ],
+    "moves": [
+      4,
+      3
+    ],
+    "quality": {
+      "radius_ratio_percentiles": {
+        "0": 0.23680989082084075,
+        "1": 0.406407014670497,
+        "5": 0.6002673918062933,
+        "50": 0.8712768369976791,
+        "95": 0.9651659013962846,
+        "100": 0.9973193585007177
+      },
+      "volume": 7.507092978613403,
+      "relative_volume_error": 0.0025498132425145017,
+      "directed_surface_rms": 0.005462388576531082
+    },
+    "median_additional_replay_ms": 445.2674102783203
+  },
+  {
+    "case": "cavity",
+    "mode": "candidate",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      ".work/vtm/local_backtracking_full_v2.py",
+      "--local-midpoint",
+      "0",
+      "--case",
+      "cavity",
+      "--n",
+      "1000",
+      "--repeats",
+      "2",
+      "--subdivisions",
+      "20",
+      "--crease-subdivisions",
+      "20",
+      "--output",
+      ".work/vtm/local-backtracking-broad-v1/cavity-candidate"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 5.471044540405273,
+    "archives": [
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/cavity-candidate/mesh.vtu",
+        "path": ".work/vtm/local-backtracking-broad-v1/cavity-candidate/mesh.vtu.gz",
+        "raw_sha256": "beb7bc6c70c6f38bda6954942f4aab1a21cb73111ccfeca18fcb05da75dfd035",
+        "sha256": "1528cea75ab4697b1033d8535259f425fdfbea335fd18e8050ad406999f8ff2e"
+      },
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/cavity-candidate/boundary.off",
+        "path": ".work/vtm/local-backtracking-broad-v1/cavity-candidate/boundary.off.gz",
+        "raw_sha256": "7c5140c2b3089a60e44651845922da0e69f43489d5a5e30cdb51c371e0631afd",
+        "sha256": "99fc825e15604d705f6589925a9c77f9f17479753e618ece07cb1abc538ecfe6"
+      }
+    ],
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      4951,
+      4320,
+      1130
+    ],
+    "steps": [
+      40,
+      40
+    ],
+    "moves": [
+      4,
+      1
+    ],
+    "quality": {
+      "radius_ratio_percentiles": {
+        "0": 0.18442328882691736,
+        "1": 0.4243325673622234,
+        "5": 0.6299215313114502,
+        "50": 0.8736905507612147,
+        "95": 0.9669443514047029,
+        "100": 0.997516843111081
+      },
+      "volume": 7.501947714920168,
+      "relative_volume_error": 0.0018626786659971081,
+      "directed_surface_rms": 0.0054073064603272925
+    },
+    "median_additional_replay_ms": 511.0844421386719,
+    "pilot": {
+      "parameters": {
+        "local_midpoint": 0,
+        "local_budget": 12
+      },
+      "source_sha256": {
+        "/home/horde/projects/power-diagram/.work/vtm/local_backtracking_full_v2.py": "acc25bc5a59f6e2d0b2e091cc41aecbf157fdf6c2c06f7914b93b9d502f1dedc",
+        ".work/vtm/local_backtracking_v2.py": "b37d03796969dd72719afe2b8cd0c6a43b836a29ed41e3bdc10994dcc0c757ed",
+        ".work/vtm/representable_boundary_v1.py": "daf11106647fc8d78e92a7af41681d88a3dee96b8adf2212504bd7deaddcb177"
+      },
+      "local_columns": [
+        "local_retries",
+        "blocked_sites",
+        "global_retries",
+        "core_accepts_after_local"
+      ],
+      "cores": [
+        {
+          "local": [
+            48,
+            738,
+            1,
+            37
+          ],
+          "midpoint": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "case": "disconnected",
+    "mode": "baseline",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "examples.vtm_gallery",
+      "--case",
+      "disconnected",
+      "--n",
+      "1000",
+      "--repeats",
+      "2",
+      "--subdivisions",
+      "20",
+      "--crease-subdivisions",
+      "20",
+      "--output",
+      ".work/vtm/local-backtracking-broad-v1/disconnected-baseline"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 5.221501350402832,
+    "archives": [
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/disconnected-baseline/mesh.vtu",
+        "path": ".work/vtm/local-backtracking-broad-v1/disconnected-baseline/mesh.vtu.gz",
+        "raw_sha256": "cd98045bcd9edd81374030c3e90fc1d2703baf77e3f29b0f22553e83cdc35462",
+        "sha256": "657715fa9a3ce0fcfb208e315ccea2c3e2343bd53e8b7909c42553509523dd8a"
+      },
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/disconnected-baseline/boundary.off",
+        "path": ".work/vtm/local-backtracking-broad-v1/disconnected-baseline/boundary.off.gz",
+        "raw_sha256": "cf17d268e33a8dc3f838af4eb7a9cbf21bc42fe8c8eb389fe267e24024b2068d",
+        "sha256": "8823a408dea7f56acddb2a90a881431704cac7cc2c94f9f372d9cef56315fd5f"
+      }
+    ],
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      5768,
+      4115,
+      1166
+    ],
+    "steps": [
+      40,
+      0
+    ],
+    "moves": [
+      4,
+      1
+    ],
+    "quality": {
+      "radius_ratio_percentiles": {
+        "0": 0.08111278323339892,
+        "1": 0.34897764750951976,
+        "5": 0.6003738140054631,
+        "50": 0.8694326248981813,
+        "95": 0.96687074661291,
+        "100": 0.9970127738416658
+      },
+      "volume": 5.484568552484108,
+      "relative_volume_error": -0.0006252977986820149,
+      "directed_surface_rms": 0.0016035948406358809
+    },
+    "median_additional_replay_ms": 501.2447052001953
+  },
+  {
+    "case": "disconnected",
+    "mode": "candidate",
+    "command": [
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      ".work/vtm/local_backtracking_full_v2.py",
+      "--local-midpoint",
+      "0",
+      "--case",
+      "disconnected",
+      "--n",
+      "1000",
+      "--repeats",
+      "2",
+      "--subdivisions",
+      "20",
+      "--crease-subdivisions",
+      "20",
+      "--output",
+      ".work/vtm/local-backtracking-broad-v1/disconnected-candidate"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 5.621482849121094,
+    "archives": [
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate/mesh.vtu",
+        "path": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate/mesh.vtu.gz",
+        "raw_sha256": "d1aac66a12fc1de5ed43b9a29723f30cf190473ebb54fb474fd89c1418ccdc64",
+        "sha256": "8c17dbaba739f6b67b35da632e75385eb3fae13008e436ed189dfe2aa3cc52a6"
+      },
+      {
+        "original": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate/boundary.off",
+        "path": ".work/vtm/local-backtracking-broad-v1/disconnected-candidate/boundary.off.gz",
+        "raw_sha256": "78508d9d773e558fef5accc9adf155ae2b23c8ff79e8ad321fee3bf7c26f4c02",
+        "sha256": "c7a5c2f37bba18b6b5853898630fed262453b5f591d98fdd64746b16cc43350e"
+      }
+    ],
+    "valid": 1,
+    "error": 0,
+    "counts": [
+      1000,
+      5660,
+      4091,
+      1166
+    ],
+    "steps": [
+      40,
+      40
+    ],
+    "moves": [
+      4,
+      1
+    ],
+    "quality": {
+      "radius_ratio_percentiles": {
+        "0": 0.12647338294992397,
+        "1": 0.37789936827085974,
+        "5": 0.6217273343180969,
+        "50": 0.8772386153204391,
+        "95": 0.9688728127681658,
+        "100": 0.9981269082115743
+      },
+      "volume": 5.487734208985877,
+      "relative_volume_error": -4.8465365382476226e-05,
+      "directed_surface_rms": 0.00010264969084180476
+    },
+    "median_additional_replay_ms": 609.5299987792969,
+    "pilot": {
+      "parameters": {
+        "local_midpoint": 0,
+        "local_budget": 12
+      },
+      "source_sha256": {
+        "/home/horde/projects/power-diagram/.work/vtm/local_backtracking_full_v2.py": "acc25bc5a59f6e2d0b2e091cc41aecbf157fdf6c2c06f7914b93b9d502f1dedc",
+        ".work/vtm/local_backtracking_v2.py": "b37d03796969dd72719afe2b8cd0c6a43b836a29ed41e3bdc10994dcc0c757ed",
+        ".work/vtm/representable_boundary_v1.py": "daf11106647fc8d78e92a7af41681d88a3dee96b8adf2212504bd7deaddcb177"
+      },
+      "local_columns": [
+        "local_retries",
+        "blocked_sites",
+        "global_retries",
+        "core_accepts_after_local"
+      ],
+      "cores": [
+        {
+          "local": [
+            37,
+            722,
+            0,
+            37
+          ],
+          "midpoint": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  }
+]

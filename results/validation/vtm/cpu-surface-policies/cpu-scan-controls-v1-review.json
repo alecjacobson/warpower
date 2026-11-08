@@ -1,0 +1,136 @@
+{
+  "scope": "Review every completed CPU control, including mixed valid/invalid repeated outputs.",
+  "cases": {
+    "odt0": {
+      "result_sha256": "65fe94f804b8b21cd8db96d4a4d0ba215494785dde184410e3d20b4284c58794",
+      "records": [
+        {
+          "mesh_sha256": "5db4ba8061a2441a5d9990c2d7e398fd37304621f4a4c18a5869f1a5fa80864d",
+          "initial_quality_valid": true,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": true,
+          "bad_vertex_links": [],
+          "boundary_self_intersection_pairs": 0,
+          "components": 1,
+          "boundary_euler": 2
+        }
+      ],
+      "accepted_samples": 1,
+      "accepted_unthrottled_samples": 1
+    },
+    "odt1": {
+      "result_sha256": "ae24d764918e529f2fef2b70e7414f0ad512a1fb36f8e63aed6fb7c157a01ff5",
+      "records": [
+        {
+          "mesh_sha256": "82462c486412e0464ec8f0f00c8fcea48bc6fccad2a06a337ccd5b9257e9ccce",
+          "initial_quality_valid": false,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": false,
+          "rejection": {
+            "type": "AssertionError",
+            "message": "",
+            "stage": "independent_material_quality_and_topology"
+          }
+        }
+      ],
+      "accepted_samples": 0,
+      "accepted_unthrottled_samples": 0
+    },
+    "odt8": {
+      "result_sha256": "a42239c127a097d2712d7d18d096c2e11055fd35a26ece920cb846af51ffb6d3",
+      "records": [
+        {
+          "mesh_sha256": "16691f8f01763a436a5025ccc3a8795124cb61c9d0a3de3cd06b344060a97440",
+          "initial_quality_valid": false,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": false,
+          "rejection": {
+            "type": "AssertionError",
+            "message": "",
+            "stage": "independent_material_quality_and_topology"
+          }
+        }
+      ],
+      "accepted_samples": 0,
+      "accepted_unthrottled_samples": 0
+    },
+    "tight-fit": {
+      "result_sha256": "a00bc7e265411e363f67d8dd96c85e63d83732dfdca2f838755c0a7d4ff9c59e",
+      "records": [
+        {
+          "mesh_sha256": "59337b42de0ffed20f632d513811908ed4de8f6cf5e82f27188a4fb94bf5ed5a",
+          "initial_quality_valid": true,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": true,
+          "bad_vertex_links": [],
+          "boundary_self_intersection_pairs": 0,
+          "components": 1,
+          "boundary_euler": 2
+        }
+      ],
+      "accepted_samples": 1,
+      "accepted_unthrottled_samples": 1
+    },
+    "loose-fit": {
+      "result_sha256": "c3cf01f09ad9548e19e98767686c1027f43029a73f28e8dd3e51596bbfc230c5",
+      "records": [
+        {
+          "mesh_sha256": "9b79750b4f2baa39bf80971f4958865eb00de01eb8b1403c81d44dbac0baea69",
+          "initial_quality_valid": true,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": true,
+          "bad_vertex_links": [],
+          "boundary_self_intersection_pairs": 0,
+          "components": 1,
+          "boundary_euler": 2
+        }
+      ],
+      "accepted_samples": 1,
+      "accepted_unthrottled_samples": 1
+    },
+    "loose-finer": {
+      "result_sha256": "be9e4f215cfea5e931b1b956025dd5f34baaeff101e0c66781a4c7afbe825aca",
+      "records": [
+        {
+          "mesh_sha256": "41c17e89f98b6e436172c4716ac52253962ed1035b2871782b4dbcca07850a77",
+          "initial_quality_valid": false,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": false,
+          "rejection": {
+            "type": "AssertionError",
+            "message": "",
+            "stage": "independent_material_quality_and_topology"
+          }
+        }
+      ],
+      "accepted_samples": 0,
+      "accepted_unthrottled_samples": 0
+    },
+    "loose-strict-odt": {
+      "result_sha256": "503c99830ceb2552f94ab5c5a189cceeab8c3787eab91ed5b6fb76fed9edb672",
+      "records": [
+        {
+          "mesh_sha256": "53a145734b4b3bd04af000bba8fd4ea95ebe07c8bfadb72c22c9a64de93c5056",
+          "initial_quality_valid": true,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": true,
+          "bad_vertex_links": [],
+          "boundary_self_intersection_pairs": 0,
+          "components": 1,
+          "boundary_euler": 2
+        }
+      ],
+      "accepted_samples": 1,
+      "accepted_unthrottled_samples": 1
+    }
+  },
+  "complete": true,
+  "limits": "Single control per setting. Every initially valid output receives vertex-link and exact self-intersection checks; all rejected controls remain explicit. This is not a quality-matched speedup comparison."
+}

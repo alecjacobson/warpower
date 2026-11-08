@@ -1,0 +1,107 @@
+{
+  "stage": "complete",
+  "runs": [
+    {
+      "command": [
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-mesh3-feature-policy-v2-sequential",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/armadillo-uniform8192-recovery-after/input.off",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-scan-controls-v1/odt0/mesh-0.txt",
+        "0.045",
+        "0.005",
+        "0",
+        "1",
+        "0.02",
+        "0.01",
+        "120.0",
+        "manifold"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.0207187235355377,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "cpu_throttled": false,
+      "native_valid": true,
+      "quality_valid": true,
+      "mesh_sha256": "5db4ba8061a2441a5d9990c2d7e398fd37304621f4a4c18a5869f1a5fa80864d",
+      "cgal": "6.2.1",
+      "concurrency": "sequential",
+      "threads": 1,
+      "seed": 2026,
+      "size": 0.045,
+      "facet_distance": 0.005,
+      "facet_angle": 25,
+      "feature_angle": 120,
+      "cell_radius_edge_ratio": 2,
+      "topology": "manifold",
+      "odt_convergence": 0.02,
+      "odt_freeze_bound": 0.01,
+      "requested_odt_iterations": 0,
+      "odt_return_code": -1,
+      "vertices": 8240,
+      "triangulation_vertices": 8240,
+      "tetrahedra": 34729,
+      "input_seconds": 0.164683095,
+      "domain_seconds": 0.148010961,
+      "mesh_seconds": 0.559830415,
+      "odt_seconds": 5.99e-07,
+      "complete_seconds": 0.707841975,
+      "validation_seconds": 0.070197496,
+      "output_seconds": 0.057372322,
+      "topology_native_reported": true,
+      "independent_quality": {
+        "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+        "sites": 8240,
+        "referenced_vertices": 8240,
+        "tetrahedra": 34729,
+        "boundary_triangles": 10292,
+        "components": 1,
+        "boundary_euler": 2,
+        "volume": 0.5443261039442588,
+        "input_volume": 0.5490302536253366,
+        "relative_volume_error": -0.008568106493249683,
+        "mean_radius_ratio": 0.7142201513156495,
+        "radius_ratio_percentiles": {
+          "0": 0.010145210709351213,
+          "1": 0.1402117377514522,
+          "5": 0.32321711957948573,
+          "50": 0.7623253181456409,
+          "95": 0.9381557648181129,
+          "100": 0.9991195360033305
+        },
+        "dihedral_degrees_min": 0.4939253493594781,
+        "dihedral_degrees_max": 179.18520701814387,
+        "output_to_input": {
+          "area": 6.459085291804348,
+          "squared_integral": 2.3945902512222554e-05,
+          "rms": 0.0019254404678462373,
+          "max_sample": 0.010744796531712522
+        },
+        "input_to_output": {
+          "area": 6.6292747534098675,
+          "squared_integral": 2.7575012613621264e-05,
+          "rms": 0.0020395053571919466,
+          "max_sample": 0.01298553880090753
+        },
+        "two_sided_area_weighted_rms": 0.0019840342613962883,
+        "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.06562192754238555,
+        "distance_oracle": {
+          "implementation": "CGAL AABB triangle distances with float64 constructions",
+          "version": "CGAL 6.2.1",
+          "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+          "source": "benchmarks/cpu/surface_distance.cpp",
+          "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+        }
+      }
+    }
+  ]
+}

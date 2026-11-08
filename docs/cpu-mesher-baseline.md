@@ -1,5 +1,9 @@
 # Native CPU comparison: initial torus result
 
+[Native surface policies and scanned-domain controls](cpu-surface-policies.md)
+add explicit feature/topology settings and retained rejection records. The
+original torus experiment below remains unchanged.
+
 The complete GPU mesher has **not met the CPU speedup goal**. The first native
 comparison establishes a reproducible baseline and a substantial remaining
 performance gap. Both implementations receive the identical float32 torus

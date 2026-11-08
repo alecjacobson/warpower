@@ -1,0 +1,111 @@
+{
+  "scope": "Review every completed CPU control, including mixed valid/invalid repeated outputs.",
+  "cases": {
+    "sequential-default": {
+      "result_sha256": "1158e87e15882557e4e1e15f005df522e473547ca00689ae95bd43376da0bfe4",
+      "records": [
+        {
+          "mesh_sha256": "09a714f9eff3d6c85f91200fb8f2e05b4e68f56d0956b6f0fc4f35d49e32f6f5",
+          "initial_quality_valid": false,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": false,
+          "rejection": {
+            "type": "AssertionError",
+            "message": "",
+            "stage": "independent_material_quality_and_topology"
+          }
+        }
+      ],
+      "accepted_samples": 0,
+      "accepted_unthrottled_samples": 0
+    },
+    "sequential-manifold": {
+      "result_sha256": "ffdb7f5751f083cf9c2f74ea515fc2db164362fb68eb581246704837fd7e29c9",
+      "records": [
+        {
+          "mesh_sha256": "09a714f9eff3d6c85f91200fb8f2e05b4e68f56d0956b6f0fc4f35d49e32f6f5",
+          "initial_quality_valid": false,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": false,
+          "rejection": {
+            "type": "AssertionError",
+            "message": "",
+            "stage": "independent_material_quality_and_topology"
+          }
+        },
+        {
+          "mesh_sha256": "09a714f9eff3d6c85f91200fb8f2e05b4e68f56d0956b6f0fc4f35d49e32f6f5",
+          "initial_quality_valid": false,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": false,
+          "rejection": {
+            "type": "AssertionError",
+            "message": "",
+            "stage": "independent_material_quality_and_topology"
+          }
+        },
+        {
+          "mesh_sha256": "09a714f9eff3d6c85f91200fb8f2e05b4e68f56d0956b6f0fc4f35d49e32f6f5",
+          "initial_quality_valid": false,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": false,
+          "rejection": {
+            "type": "AssertionError",
+            "message": "",
+            "stage": "independent_material_quality_and_topology"
+          }
+        }
+      ],
+      "accepted_samples": 0,
+      "accepted_unthrottled_samples": 0
+    },
+    "parallel-manifold": {
+      "result_sha256": "e78c697df391ed06e1f7d360fb14a1b48500164ee6c621efb8240fb692bca117",
+      "records": [
+        {
+          "mesh_sha256": "74cd22fbe66dc41007bb2e9855e4f4e90a182aba2bcd84d0573e4dd26f56e2d5",
+          "initial_quality_valid": true,
+          "native_valid": true,
+          "cpu_throttled": true,
+          "accepted": true,
+          "bad_vertex_links": [],
+          "boundary_self_intersection_pairs": 0,
+          "components": 1,
+          "boundary_euler": 2
+        },
+        {
+          "mesh_sha256": "e233cf3f0894c4f5ba5ac9df5571a733ade9651e424293d8c950ad13fd1e2972",
+          "initial_quality_valid": false,
+          "native_valid": true,
+          "cpu_throttled": false,
+          "accepted": false,
+          "rejection": {
+            "type": "AssertionError",
+            "message": "",
+            "stage": "independent_material_quality_and_topology"
+          }
+        },
+        {
+          "mesh_sha256": "4632969823e440268c73a3949de219afa7412d74e2bbb1776631559b13a87a77",
+          "initial_quality_valid": true,
+          "native_valid": true,
+          "cpu_throttled": true,
+          "accepted": true,
+          "bad_vertex_links": [],
+          "boundary_self_intersection_pairs": 0,
+          "components": 1,
+          "boundary_euler": 2
+        }
+      ],
+      "accepted_samples": 2,
+      "accepted_unthrottled_samples": 0
+    }
+  },
+  "complete": true,
+  "driver_error": "The v2 driver incorrectly expected every failed repeat group to have no individually valid samples. The parallel group had two initially valid and one invalid output. The runner retained all three native/quota/quality records; this separate review retains the mixed result and validates each individually valid mesh.",
+  "limits": "No quality-matched CPU speedup claim; initial material metric success is followed by vertex-link and exact boundary self-intersection checks."
+}

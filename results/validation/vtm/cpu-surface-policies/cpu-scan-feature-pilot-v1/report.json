@@ -1,0 +1,69 @@
+{
+  "scope": "Initial scanned-domain CPU quality control; no quality-matched speedup claim.",
+  "source_sha256": {
+    ".work/vtm/run-cpu-scan-feature-pilot-v1.py": "eff36cdeed2570cfd27164d3b413d8d1db1f37d75f5a488544feb4c0c244c5a6",
+    ".work/vtm/cpu_mesher_feature_policy_v2.py": "58c31543161077961768e07fc60f4f71fe88a10385c3a565074a9fbe56c4599d",
+    ".work/vtm/cpu-mesh3-feature-policy-v1.cpp": "945cfa9d7162f2a6cf8555f9690dd73d6f2bd7f5123cc049a81b009694938443",
+    "benchmarks/mesh_quality.py": "0a5765c4d82da5e24ccda94bf2c149875c83932bc314c9211b276a99a893e0dd",
+    "benchmarks/surface_distance.py": "977463196b35b253c1fee0193f87522dd8d43af87ad636c73737d64b678d6f2f",
+    ".work/vtm/surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    ".work/vtm/surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "build_sha256": "a21256da25b43a6ee74a6516447335098d6953a69331e11615658767ad03f0b7",
+  "surface": "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/armadillo-uniform8192-recovery-after/input.off",
+  "surface_sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+  "gpu_mesh_sha256": "fcbeb5511ba16e2f9570ef26bfadee630a125038ff7b5728214214fcf58b9379",
+  "identical_input_arrays": true,
+  "configuration": {
+    "size": 0.045,
+    "facet_distance": 0.005,
+    "feature_angle": 120,
+    "odt_iterations": 32,
+    "convergence": 0.02,
+    "freeze_bound": 0.01
+  },
+  "selection": "Initial size estimate only, not selected for an asserted match. Results determine subsequent size/fit/ODT controls.",
+  "runs": {
+    "sequential": {
+      "command": [
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu_mesher_feature_policy_v2.py",
+        "--binary",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-mesh3-feature-policy-v1-sequential",
+        "--surface",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-query-order-final-v1/armadillo-uniform8192-recovery-after/input.off",
+        "--size",
+        ".045",
+        "--facet-distance",
+        ".005",
+        "--odt-iterations",
+        "32",
+        "--feature-angle",
+        "120",
+        "--convergence",
+        ".02",
+        "--freeze-bound",
+        ".01",
+        "--threads",
+        "1",
+        "--repeats",
+        "3",
+        "--distance-binary",
+        "/home/horde/projects/power-diagram/.work/vtm/surface-distance",
+        "--output",
+        "/home/horde/projects/power-diagram/.work/vtm/cpu-scan-feature-pilot-v1/sequential"
+      ],
+      "exit_code": 1,
+      "wall_seconds": 15.034335374832153,
+      "binary_sha256": "da4f0d5be8853dd3380d336aedf91e68778e049f44779f88210768d0b91582e8",
+      "log_sha256": "51c848558fb5cdb1ab7b4c222ad3cd7aa823211dc83b067999f302acb1c6f297"
+    }
+  },
+  "complete": false,
+  "limitations": [
+    "GPU corner-angle and boundary-update semantics are not established equivalent to CGAL feature protection merely by equal feature-angle values.",
+    "CPU outputs are material complexes with feature-protection weights; no independent unweighted complete-hull claim is made.",
+    "Native complete time includes domain/setup, meshing and ODT, while GPU warmed replay excludes workspace setup. Both scopes and native component times remain explicit.",
+    "This first control is not a matched-quality speedup comparison. All throttled/failed samples remain retained."
+  ]
+}

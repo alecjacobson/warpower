@@ -236,11 +236,16 @@ def closest_point(tree: SurfaceTree, p: wp.vec3d, limit: wp.float64):
             if left_distance < right_distance:
                 left, right = right, left
                 left_distance, right_distance = right_distance, left_distance
-            stack[size] = left
-            stack[size + 1] = right
-            bounds[size] = left_distance
-            bounds[size + 1] = right_distance
-            size += 2
+            # Keep the original rejection comparison, including unordered NaNs.
+            # The best distance only decreases; a rejected child cannot revive.
+            if not (left_distance >= result.distance2):
+                stack[size] = left
+                bounds[size] = left_distance
+                size += 1
+            if not (right_distance >= result.distance2):
+                stack[size] = right
+                bounds[size] = right_distance
+                size += 1
     return result
 
 

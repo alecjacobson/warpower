@@ -299,7 +299,15 @@ class VTMWorkspace:
             from ._active_delaunay import ActiveDelaunayWorkspace
 
             mesh_type = ActiveDelaunayWorkspace
-            mesh_options = dict(active_count=active_count)
+            # Device-controlled solves can grow or shrink without reallocating.
+            # Reserve fitting children during setup; each retains its complete
+            # current-input certificate and the full-constructor fallback.
+            mesh_options = dict(
+                active_count=active_count,
+                prefix_capacities=tuple(
+                    n for n in (1024, 2048, 4096, 8192) if n < len(mesh_points)
+                ),
+            )
             self.reuses_delaunay_cells = True
         self.mesh = mesh_type(
             mesh_points,

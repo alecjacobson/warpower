@@ -322,6 +322,7 @@ class QualityMove:
         volume_tolerance=0.01,
         max_attempts=8,
         extraction_tolerance=0.4,
+        _proven_exterior_recovery=None,
     ):
         if not math.isfinite(threshold) or not 0 < threshold <= 1:
             raise ValueError("threshold must be in (0,1]")
@@ -354,7 +355,9 @@ class QualityMove:
             feature_roles=core.boundary.roles,
             exterior_enabled=core.exterior_enabled,
             proven_exterior_recovery=(
-                core.material_recovery is not None and core.proven_exterior_recovery
+                (core.material_recovery is not None and core.proven_exterior_recovery)
+                if _proven_exterior_recovery is None
+                else bool(_proven_exterior_recovery)
             ),
             proven_exterior_enabled=core.proven_exterior_enabled,
             _cache_surface_queries=getattr(core, "_cache_surface_queries", False),

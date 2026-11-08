@@ -1,0 +1,26 @@
+{
+  "scope": "Prepare an unexecuted scalar-query ordering probe without altering geometric expressions.",
+  "input_sha256": "6d90d7649cd775bbdda66b30dbe727bfd7adcd9dc5bdb072471cff0c4115942c",
+  "prototype_sha256": "7869814ab1d3c2889cf08f39f9e7ae874b72f00c48acd626fc053249e97e3dc7",
+  "kernel_ast_checks": {
+    "classify_cached": {
+      "only_added_order_argument_and_index_lookup": true,
+      "original_ast_sha256": "61c3858d0af1ddd14f7016495a04c3a923e81f5c04e5b95cc84c3b56b23b46c7"
+    },
+    "selection_cached": {
+      "only_added_order_argument_and_index_lookup": true,
+      "original_ast_sha256": "99619cb4481210c5b0e9175ceafb1dc2244afa719f53bd12c3a387e253061037"
+    },
+    "retained_cached": {
+      "only_added_order_argument_and_index_lookup": true,
+      "original_ast_sha256": "55d01e0b9fbaa31ae695dabc01290055f0f1d4bb4eabdff1c037449f6f439035"
+    }
+  },
+  "limitations": [
+    "Prototype is unexecuted: no compilation, numerical, capture, performance or memory qualification claimed.",
+    "Centroids are ordering keys only, not circumcenter replacements or geometric proofs.",
+    "Invalid inputs retain original classifiers; shared early-error flags require explicit multi-fault diagnostic tests.",
+    "Key generation, sorting, graph scratch and extra24*capacity array bytes must be included in end-to-end measurement.",
+    "Surface_error and other floating reductions are unchanged."
+  ]
+}

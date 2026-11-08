@@ -253,7 +253,7 @@ class SelectiveUpdate:
         self._m = len(core.full_tetrahedra)
         self._query_cache = None
         if getattr(core, "_cache_surface_queries", False):
-            from ._surface_query_cache import SurfaceQueryCache
+            from ._ordered_surface_queries import OrderedSurfaceQueryCache as SurfaceQueryCache
 
             self._query_cache = SurfaceQueryCache(core.domain, self._m)
         with wp.ScopedDevice(self.device):

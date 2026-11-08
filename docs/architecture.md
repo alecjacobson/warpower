@@ -475,6 +475,9 @@ unchanged. The report includes its additional setup/storage cost and bounded
 failure semantics. A subsequent [constructor-only reduction](recovery-query-storage.md)
 omits recovery's unused approximate-query cache and scratch while retaining the
 candidate extractor's active cache, ordinary quality-move caches and checkpoints.
+[Spatial ordering of large surface-query batches](ordered-surface-queries.md)
+reduces measured full-solve replay time by 10.0% on the 16K torus and 5.7% on
+the graded 8K scan, with unchanged standalone geometry paths.
 
 The [example gallery](examples.md) includes uniform/graded torus and scanned
 Armadillo meshes, thin geometry, cavities, disconnected domains and a

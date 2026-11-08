@@ -1,0 +1,1124 @@
+.FFFFFFFFF                                                               [100%]
+=================================== FAILURES ===================================
+__________ test_cold_warm_classification_matches_ordinary[1e-30-full] __________
+
+mode = 'full', scale = 1e-30
+
+    @pytest.mark.parametrize("mode", ["full", "selection", "retained"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    def test_cold_warm_classification_matches_ordinary(mode, scale):
+        surface, faces = cube()
+        domain = SurfaceDomain((surface * scale).astype(np.float32), faces)
+        source = np.random.default_rng(218).uniform(-3, 3, (32, 3)).astype(np.float32)
+        cells = orient(source, Delaunay(source).simplices)
+        n = len(cells)
+        capacity = n + 9
+        padded = np.full((capacity, 4), -7, np.int32)
+        padded[:n] = cells
+        points = wp.array((source * scale).astype(np.float32), dtype=wp.vec3)
+        tets = wp.array(padded, dtype=int)
+        count = wp.full(1, n, dtype=int)
+        cache = Cache(domain, capacity)
+        reference = {
+            "full": _extraction.classify,
+            "selection": _extraction.classify_selection,
+            "retained": classify_retained,
+        }[mode]
+        target = {
+            "full": k.classify_cached,
+            "selection": k.selection_cached,
+            "retained": k.retained_cached,
+        }[mode]
+        phases = []
+        for _ in range(3):
+            error = wp.zeros(1, dtype=int)
+            keep = wp.full(capacity, 77, dtype=int)
+            quality = wp.full(capacity, 77, dtype=wp.float64)
+            arrays = [error, keep, quality]
+            args = [domain.tree, points, tets, count, 0.4, error]
+            if mode == "retained":
+                args += [keep, quality]
+            else:
+                center = wp.full(capacity, wp.vec3d(77), dtype=wp.vec3d)
+                radius = wp.full(capacity, 77, dtype=wp.float64)
+                distance = wp.full(capacity, 77, dtype=wp.float64)
+                volume = wp.full(capacity, 77, dtype=wp.float64)
+                arrays += [center, radius, distance, volume]
+                args += [center, radius, distance, keep, volume, quality]
+            phases.append((args, arrays))
+        with wp.ScopedCapture() as capture:
+            wp.launch(reference, capacity, inputs=phases[0][0], block_dim=32)
+>           cache.launch(target, capacity, phases[1][0])
+
+tests/test_surface_query_cache.py:263: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.work/vtm/surface_query_order_v1.py:263: in launch
+    wp.capture_launch(self.order_graph)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+graph = <warp._src.context.Graph object at 0x7fb96a7950f0>
+stream = <warp._src.context.Stream object at 0x7fb96a748ac0>
+
+    def capture_launch(graph: Graph, stream: Stream | None = None):
+        """Launch a previously captured graph.
+    
+        For CUDA graphs, this launches via ``cudaGraphLaunch()``.
+        For CPU graphs, this replays recorded operations in a C++ loop inside Warp.
+    
+        Args:
+            graph: A :class:`Graph` returned by :func:`~warp.capture_end()` or
+              :func:`~warp.capture_load()`.
+            stream: A :class:`Stream` to launch the graph on (CUDA only)
+        """
+    
+        # ---- APIC loaded graph path ----
+        if graph._native_graph is not None:
+            # CPU loaded graph: replay directly from byte stream
+            if graph.device.is_cpu:
+                if not runtime.core.wp_apic_cpu_replay_graph(graph._native_graph):
+                    raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string()}")
+                return
+    
+            # CUDA loaded graph: use cudaGraphLaunch
+            if stream is not None:
+                device = stream.device
+            else:
+                device = graph.device
+                stream = device.stream
+    
+            if graph.graph_exec is None:
+                graph.graph = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph(graph._native_graph))
+                graph.graph_exec = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph_exec(graph._native_graph))
+                if not graph.graph_exec:
+                    raise RuntimeError(f"Failed to build CUDA graph from APIC: {runtime.get_error_string()}")
+    
+            if not runtime.core.wp_cuda_graph_launch(graph.graph_exec, stream.cuda_stream):
+                raise RuntimeError(f"Graph launch error: {runtime.get_error_string()}")
+            return
+    
+        # ---- CPU graph path (live capture) ----
+        if graph.device.is_cpu and graph.apic_state is not None:
+            if not runtime.core.wp_apic_cpu_replay_state(graph.apic_state):
+                raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string() or 'no operations recorded'}")
+            return
+    
+        # ---- CUDA graph path ----
+        if stream is not None:
+            if stream.device != graph.device:
+                raise RuntimeError(f"Cannot launch graph from device {graph.device} on stream from device {stream.device}")
+            device = stream.device
+        else:
+            device = graph.device
+            stream = device.stream
+    
+        if graph.graph_exec is None:
+            g = ctypes.c_void_p()
+            result = runtime.core.wp_cuda_graph_create_exec(
+                graph.device.context, stream.cuda_stream, graph.graph, ctypes.byref(g)
+            )
+            if not result:
+>               raise RuntimeError(f"Graph creation error: {runtime.get_error_string()}")
+E               RuntimeError: Graph creation error: Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:14407: RuntimeError
+----------------------------- Captured stdout call -----------------------------
+Module warpower._extraction 79b0da7 load on device 'cuda:0' took 1.49 ms  (cached)
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+_______ test_cold_warm_classification_matches_ordinary[1e-30-selection] ________
+
+mode = 'selection', scale = 1e-30
+
+    @pytest.mark.parametrize("mode", ["full", "selection", "retained"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    def test_cold_warm_classification_matches_ordinary(mode, scale):
+        surface, faces = cube()
+        domain = SurfaceDomain((surface * scale).astype(np.float32), faces)
+        source = np.random.default_rng(218).uniform(-3, 3, (32, 3)).astype(np.float32)
+        cells = orient(source, Delaunay(source).simplices)
+        n = len(cells)
+        capacity = n + 9
+        padded = np.full((capacity, 4), -7, np.int32)
+        padded[:n] = cells
+        points = wp.array((source * scale).astype(np.float32), dtype=wp.vec3)
+        tets = wp.array(padded, dtype=int)
+        count = wp.full(1, n, dtype=int)
+        cache = Cache(domain, capacity)
+        reference = {
+            "full": _extraction.classify,
+            "selection": _extraction.classify_selection,
+            "retained": classify_retained,
+        }[mode]
+        target = {
+            "full": k.classify_cached,
+            "selection": k.selection_cached,
+            "retained": k.retained_cached,
+        }[mode]
+        phases = []
+        for _ in range(3):
+            error = wp.zeros(1, dtype=int)
+            keep = wp.full(capacity, 77, dtype=int)
+            quality = wp.full(capacity, 77, dtype=wp.float64)
+            arrays = [error, keep, quality]
+            args = [domain.tree, points, tets, count, 0.4, error]
+            if mode == "retained":
+                args += [keep, quality]
+            else:
+                center = wp.full(capacity, wp.vec3d(77), dtype=wp.vec3d)
+                radius = wp.full(capacity, 77, dtype=wp.float64)
+                distance = wp.full(capacity, 77, dtype=wp.float64)
+                volume = wp.full(capacity, 77, dtype=wp.float64)
+                arrays += [center, radius, distance, volume]
+                args += [center, radius, distance, keep, volume, quality]
+            phases.append((args, arrays))
+        with wp.ScopedCapture() as capture:
+            wp.launch(reference, capacity, inputs=phases[0][0], block_dim=32)
+>           cache.launch(target, capacity, phases[1][0])
+
+tests/test_surface_query_cache.py:263: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.work/vtm/surface_query_order_v1.py:263: in launch
+    wp.capture_launch(self.order_graph)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+graph = <warp._src.context.Graph object at 0x7fb9480cc190>
+stream = <warp._src.context.Stream object at 0x7fb96a748ac0>
+
+    def capture_launch(graph: Graph, stream: Stream | None = None):
+        """Launch a previously captured graph.
+    
+        For CUDA graphs, this launches via ``cudaGraphLaunch()``.
+        For CPU graphs, this replays recorded operations in a C++ loop inside Warp.
+    
+        Args:
+            graph: A :class:`Graph` returned by :func:`~warp.capture_end()` or
+              :func:`~warp.capture_load()`.
+            stream: A :class:`Stream` to launch the graph on (CUDA only)
+        """
+    
+        # ---- APIC loaded graph path ----
+        if graph._native_graph is not None:
+            # CPU loaded graph: replay directly from byte stream
+            if graph.device.is_cpu:
+                if not runtime.core.wp_apic_cpu_replay_graph(graph._native_graph):
+                    raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string()}")
+                return
+    
+            # CUDA loaded graph: use cudaGraphLaunch
+            if stream is not None:
+                device = stream.device
+            else:
+                device = graph.device
+                stream = device.stream
+    
+            if graph.graph_exec is None:
+                graph.graph = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph(graph._native_graph))
+                graph.graph_exec = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph_exec(graph._native_graph))
+                if not graph.graph_exec:
+                    raise RuntimeError(f"Failed to build CUDA graph from APIC: {runtime.get_error_string()}")
+    
+            if not runtime.core.wp_cuda_graph_launch(graph.graph_exec, stream.cuda_stream):
+                raise RuntimeError(f"Graph launch error: {runtime.get_error_string()}")
+            return
+    
+        # ---- CPU graph path (live capture) ----
+        if graph.device.is_cpu and graph.apic_state is not None:
+            if not runtime.core.wp_apic_cpu_replay_state(graph.apic_state):
+                raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string() or 'no operations recorded'}")
+            return
+    
+        # ---- CUDA graph path ----
+        if stream is not None:
+            if stream.device != graph.device:
+                raise RuntimeError(f"Cannot launch graph from device {graph.device} on stream from device {stream.device}")
+            device = stream.device
+        else:
+            device = graph.device
+            stream = device.stream
+    
+        if graph.graph_exec is None:
+            g = ctypes.c_void_p()
+            result = runtime.core.wp_cuda_graph_create_exec(
+                graph.device.context, stream.cuda_stream, graph.graph, ctypes.byref(g)
+            )
+            if not result:
+>               raise RuntimeError(f"Graph creation error: {runtime.get_error_string()}")
+E               RuntimeError: Graph creation error: Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:14407: RuntimeError
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+________ test_cold_warm_classification_matches_ordinary[1e-30-retained] ________
+
+mode = 'retained', scale = 1e-30
+
+    @pytest.mark.parametrize("mode", ["full", "selection", "retained"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    def test_cold_warm_classification_matches_ordinary(mode, scale):
+        surface, faces = cube()
+        domain = SurfaceDomain((surface * scale).astype(np.float32), faces)
+        source = np.random.default_rng(218).uniform(-3, 3, (32, 3)).astype(np.float32)
+        cells = orient(source, Delaunay(source).simplices)
+        n = len(cells)
+        capacity = n + 9
+        padded = np.full((capacity, 4), -7, np.int32)
+        padded[:n] = cells
+        points = wp.array((source * scale).astype(np.float32), dtype=wp.vec3)
+        tets = wp.array(padded, dtype=int)
+        count = wp.full(1, n, dtype=int)
+        cache = Cache(domain, capacity)
+        reference = {
+            "full": _extraction.classify,
+            "selection": _extraction.classify_selection,
+            "retained": classify_retained,
+        }[mode]
+        target = {
+            "full": k.classify_cached,
+            "selection": k.selection_cached,
+            "retained": k.retained_cached,
+        }[mode]
+        phases = []
+        for _ in range(3):
+            error = wp.zeros(1, dtype=int)
+            keep = wp.full(capacity, 77, dtype=int)
+            quality = wp.full(capacity, 77, dtype=wp.float64)
+            arrays = [error, keep, quality]
+            args = [domain.tree, points, tets, count, 0.4, error]
+            if mode == "retained":
+                args += [keep, quality]
+            else:
+                center = wp.full(capacity, wp.vec3d(77), dtype=wp.vec3d)
+                radius = wp.full(capacity, 77, dtype=wp.float64)
+                distance = wp.full(capacity, 77, dtype=wp.float64)
+                volume = wp.full(capacity, 77, dtype=wp.float64)
+                arrays += [center, radius, distance, volume]
+                args += [center, radius, distance, keep, volume, quality]
+            phases.append((args, arrays))
+        with wp.ScopedCapture() as capture:
+            wp.launch(reference, capacity, inputs=phases[0][0], block_dim=32)
+>           cache.launch(target, capacity, phases[1][0])
+
+tests/test_surface_query_cache.py:263: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.work/vtm/surface_query_order_v1.py:263: in launch
+    wp.capture_launch(self.order_graph)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+graph = <warp._src.context.Graph object at 0x7fb96a7ae170>
+stream = <warp._src.context.Stream object at 0x7fb96a748ac0>
+
+    def capture_launch(graph: Graph, stream: Stream | None = None):
+        """Launch a previously captured graph.
+    
+        For CUDA graphs, this launches via ``cudaGraphLaunch()``.
+        For CPU graphs, this replays recorded operations in a C++ loop inside Warp.
+    
+        Args:
+            graph: A :class:`Graph` returned by :func:`~warp.capture_end()` or
+              :func:`~warp.capture_load()`.
+            stream: A :class:`Stream` to launch the graph on (CUDA only)
+        """
+    
+        # ---- APIC loaded graph path ----
+        if graph._native_graph is not None:
+            # CPU loaded graph: replay directly from byte stream
+            if graph.device.is_cpu:
+                if not runtime.core.wp_apic_cpu_replay_graph(graph._native_graph):
+                    raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string()}")
+                return
+    
+            # CUDA loaded graph: use cudaGraphLaunch
+            if stream is not None:
+                device = stream.device
+            else:
+                device = graph.device
+                stream = device.stream
+    
+            if graph.graph_exec is None:
+                graph.graph = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph(graph._native_graph))
+                graph.graph_exec = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph_exec(graph._native_graph))
+                if not graph.graph_exec:
+                    raise RuntimeError(f"Failed to build CUDA graph from APIC: {runtime.get_error_string()}")
+    
+            if not runtime.core.wp_cuda_graph_launch(graph.graph_exec, stream.cuda_stream):
+                raise RuntimeError(f"Graph launch error: {runtime.get_error_string()}")
+            return
+    
+        # ---- CPU graph path (live capture) ----
+        if graph.device.is_cpu and graph.apic_state is not None:
+            if not runtime.core.wp_apic_cpu_replay_state(graph.apic_state):
+                raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string() or 'no operations recorded'}")
+            return
+    
+        # ---- CUDA graph path ----
+        if stream is not None:
+            if stream.device != graph.device:
+                raise RuntimeError(f"Cannot launch graph from device {graph.device} on stream from device {stream.device}")
+            device = stream.device
+        else:
+            device = graph.device
+            stream = device.stream
+    
+        if graph.graph_exec is None:
+            g = ctypes.c_void_p()
+            result = runtime.core.wp_cuda_graph_create_exec(
+                graph.device.context, stream.cuda_stream, graph.graph, ctypes.byref(g)
+            )
+            if not result:
+>               raise RuntimeError(f"Graph creation error: {runtime.get_error_string()}")
+E               RuntimeError: Graph creation error: Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:14407: RuntimeError
+----------------------------- Captured stdout call -----------------------------
+Module warpower._selective 2fa6e2c load on device 'cuda:0' took 2.43 ms  (cached)
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+___________ test_cold_warm_classification_matches_ordinary[1.0-full] ___________
+
+mode = 'full', scale = 1.0
+
+    @pytest.mark.parametrize("mode", ["full", "selection", "retained"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    def test_cold_warm_classification_matches_ordinary(mode, scale):
+        surface, faces = cube()
+        domain = SurfaceDomain((surface * scale).astype(np.float32), faces)
+        source = np.random.default_rng(218).uniform(-3, 3, (32, 3)).astype(np.float32)
+        cells = orient(source, Delaunay(source).simplices)
+        n = len(cells)
+        capacity = n + 9
+        padded = np.full((capacity, 4), -7, np.int32)
+        padded[:n] = cells
+        points = wp.array((source * scale).astype(np.float32), dtype=wp.vec3)
+        tets = wp.array(padded, dtype=int)
+        count = wp.full(1, n, dtype=int)
+        cache = Cache(domain, capacity)
+        reference = {
+            "full": _extraction.classify,
+            "selection": _extraction.classify_selection,
+            "retained": classify_retained,
+        }[mode]
+        target = {
+            "full": k.classify_cached,
+            "selection": k.selection_cached,
+            "retained": k.retained_cached,
+        }[mode]
+        phases = []
+        for _ in range(3):
+            error = wp.zeros(1, dtype=int)
+            keep = wp.full(capacity, 77, dtype=int)
+            quality = wp.full(capacity, 77, dtype=wp.float64)
+            arrays = [error, keep, quality]
+            args = [domain.tree, points, tets, count, 0.4, error]
+            if mode == "retained":
+                args += [keep, quality]
+            else:
+                center = wp.full(capacity, wp.vec3d(77), dtype=wp.vec3d)
+                radius = wp.full(capacity, 77, dtype=wp.float64)
+                distance = wp.full(capacity, 77, dtype=wp.float64)
+                volume = wp.full(capacity, 77, dtype=wp.float64)
+                arrays += [center, radius, distance, volume]
+                args += [center, radius, distance, keep, volume, quality]
+            phases.append((args, arrays))
+        with wp.ScopedCapture() as capture:
+            wp.launch(reference, capacity, inputs=phases[0][0], block_dim=32)
+>           cache.launch(target, capacity, phases[1][0])
+
+tests/test_surface_query_cache.py:263: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.work/vtm/surface_query_order_v1.py:263: in launch
+    wp.capture_launch(self.order_graph)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+graph = <warp._src.context.Graph object at 0x7fb9481059f0>
+stream = <warp._src.context.Stream object at 0x7fb96a748ac0>
+
+    def capture_launch(graph: Graph, stream: Stream | None = None):
+        """Launch a previously captured graph.
+    
+        For CUDA graphs, this launches via ``cudaGraphLaunch()``.
+        For CPU graphs, this replays recorded operations in a C++ loop inside Warp.
+    
+        Args:
+            graph: A :class:`Graph` returned by :func:`~warp.capture_end()` or
+              :func:`~warp.capture_load()`.
+            stream: A :class:`Stream` to launch the graph on (CUDA only)
+        """
+    
+        # ---- APIC loaded graph path ----
+        if graph._native_graph is not None:
+            # CPU loaded graph: replay directly from byte stream
+            if graph.device.is_cpu:
+                if not runtime.core.wp_apic_cpu_replay_graph(graph._native_graph):
+                    raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string()}")
+                return
+    
+            # CUDA loaded graph: use cudaGraphLaunch
+            if stream is not None:
+                device = stream.device
+            else:
+                device = graph.device
+                stream = device.stream
+    
+            if graph.graph_exec is None:
+                graph.graph = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph(graph._native_graph))
+                graph.graph_exec = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph_exec(graph._native_graph))
+                if not graph.graph_exec:
+                    raise RuntimeError(f"Failed to build CUDA graph from APIC: {runtime.get_error_string()}")
+    
+            if not runtime.core.wp_cuda_graph_launch(graph.graph_exec, stream.cuda_stream):
+                raise RuntimeError(f"Graph launch error: {runtime.get_error_string()}")
+            return
+    
+        # ---- CPU graph path (live capture) ----
+        if graph.device.is_cpu and graph.apic_state is not None:
+            if not runtime.core.wp_apic_cpu_replay_state(graph.apic_state):
+                raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string() or 'no operations recorded'}")
+            return
+    
+        # ---- CUDA graph path ----
+        if stream is not None:
+            if stream.device != graph.device:
+                raise RuntimeError(f"Cannot launch graph from device {graph.device} on stream from device {stream.device}")
+            device = stream.device
+        else:
+            device = graph.device
+            stream = device.stream
+    
+        if graph.graph_exec is None:
+            g = ctypes.c_void_p()
+            result = runtime.core.wp_cuda_graph_create_exec(
+                graph.device.context, stream.cuda_stream, graph.graph, ctypes.byref(g)
+            )
+            if not result:
+>               raise RuntimeError(f"Graph creation error: {runtime.get_error_string()}")
+E               RuntimeError: Graph creation error: Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:14407: RuntimeError
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+________ test_cold_warm_classification_matches_ordinary[1.0-selection] _________
+
+mode = 'selection', scale = 1.0
+
+    @pytest.mark.parametrize("mode", ["full", "selection", "retained"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    def test_cold_warm_classification_matches_ordinary(mode, scale):
+        surface, faces = cube()
+        domain = SurfaceDomain((surface * scale).astype(np.float32), faces)
+        source = np.random.default_rng(218).uniform(-3, 3, (32, 3)).astype(np.float32)
+        cells = orient(source, Delaunay(source).simplices)
+        n = len(cells)
+        capacity = n + 9
+        padded = np.full((capacity, 4), -7, np.int32)
+        padded[:n] = cells
+        points = wp.array((source * scale).astype(np.float32), dtype=wp.vec3)
+        tets = wp.array(padded, dtype=int)
+        count = wp.full(1, n, dtype=int)
+        cache = Cache(domain, capacity)
+        reference = {
+            "full": _extraction.classify,
+            "selection": _extraction.classify_selection,
+            "retained": classify_retained,
+        }[mode]
+        target = {
+            "full": k.classify_cached,
+            "selection": k.selection_cached,
+            "retained": k.retained_cached,
+        }[mode]
+        phases = []
+        for _ in range(3):
+            error = wp.zeros(1, dtype=int)
+            keep = wp.full(capacity, 77, dtype=int)
+            quality = wp.full(capacity, 77, dtype=wp.float64)
+            arrays = [error, keep, quality]
+            args = [domain.tree, points, tets, count, 0.4, error]
+            if mode == "retained":
+                args += [keep, quality]
+            else:
+                center = wp.full(capacity, wp.vec3d(77), dtype=wp.vec3d)
+                radius = wp.full(capacity, 77, dtype=wp.float64)
+                distance = wp.full(capacity, 77, dtype=wp.float64)
+                volume = wp.full(capacity, 77, dtype=wp.float64)
+                arrays += [center, radius, distance, volume]
+                args += [center, radius, distance, keep, volume, quality]
+            phases.append((args, arrays))
+        with wp.ScopedCapture() as capture:
+            wp.launch(reference, capacity, inputs=phases[0][0], block_dim=32)
+>           cache.launch(target, capacity, phases[1][0])
+
+tests/test_surface_query_cache.py:263: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.work/vtm/surface_query_order_v1.py:263: in launch
+    wp.capture_launch(self.order_graph)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+graph = <warp._src.context.Graph object at 0x7fb96a7ad060>
+stream = <warp._src.context.Stream object at 0x7fb96a748ac0>
+
+    def capture_launch(graph: Graph, stream: Stream | None = None):
+        """Launch a previously captured graph.
+    
+        For CUDA graphs, this launches via ``cudaGraphLaunch()``.
+        For CPU graphs, this replays recorded operations in a C++ loop inside Warp.
+    
+        Args:
+            graph: A :class:`Graph` returned by :func:`~warp.capture_end()` or
+              :func:`~warp.capture_load()`.
+            stream: A :class:`Stream` to launch the graph on (CUDA only)
+        """
+    
+        # ---- APIC loaded graph path ----
+        if graph._native_graph is not None:
+            # CPU loaded graph: replay directly from byte stream
+            if graph.device.is_cpu:
+                if not runtime.core.wp_apic_cpu_replay_graph(graph._native_graph):
+                    raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string()}")
+                return
+    
+            # CUDA loaded graph: use cudaGraphLaunch
+            if stream is not None:
+                device = stream.device
+            else:
+                device = graph.device
+                stream = device.stream
+    
+            if graph.graph_exec is None:
+                graph.graph = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph(graph._native_graph))
+                graph.graph_exec = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph_exec(graph._native_graph))
+                if not graph.graph_exec:
+                    raise RuntimeError(f"Failed to build CUDA graph from APIC: {runtime.get_error_string()}")
+    
+            if not runtime.core.wp_cuda_graph_launch(graph.graph_exec, stream.cuda_stream):
+                raise RuntimeError(f"Graph launch error: {runtime.get_error_string()}")
+            return
+    
+        # ---- CPU graph path (live capture) ----
+        if graph.device.is_cpu and graph.apic_state is not None:
+            if not runtime.core.wp_apic_cpu_replay_state(graph.apic_state):
+                raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string() or 'no operations recorded'}")
+            return
+    
+        # ---- CUDA graph path ----
+        if stream is not None:
+            if stream.device != graph.device:
+                raise RuntimeError(f"Cannot launch graph from device {graph.device} on stream from device {stream.device}")
+            device = stream.device
+        else:
+            device = graph.device
+            stream = device.stream
+    
+        if graph.graph_exec is None:
+            g = ctypes.c_void_p()
+            result = runtime.core.wp_cuda_graph_create_exec(
+                graph.device.context, stream.cuda_stream, graph.graph, ctypes.byref(g)
+            )
+            if not result:
+>               raise RuntimeError(f"Graph creation error: {runtime.get_error_string()}")
+E               RuntimeError: Graph creation error: Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:14407: RuntimeError
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+_________ test_cold_warm_classification_matches_ordinary[1.0-retained] _________
+
+mode = 'retained', scale = 1.0
+
+    @pytest.mark.parametrize("mode", ["full", "selection", "retained"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    def test_cold_warm_classification_matches_ordinary(mode, scale):
+        surface, faces = cube()
+        domain = SurfaceDomain((surface * scale).astype(np.float32), faces)
+        source = np.random.default_rng(218).uniform(-3, 3, (32, 3)).astype(np.float32)
+        cells = orient(source, Delaunay(source).simplices)
+        n = len(cells)
+        capacity = n + 9
+        padded = np.full((capacity, 4), -7, np.int32)
+        padded[:n] = cells
+        points = wp.array((source * scale).astype(np.float32), dtype=wp.vec3)
+        tets = wp.array(padded, dtype=int)
+        count = wp.full(1, n, dtype=int)
+        cache = Cache(domain, capacity)
+        reference = {
+            "full": _extraction.classify,
+            "selection": _extraction.classify_selection,
+            "retained": classify_retained,
+        }[mode]
+        target = {
+            "full": k.classify_cached,
+            "selection": k.selection_cached,
+            "retained": k.retained_cached,
+        }[mode]
+        phases = []
+        for _ in range(3):
+            error = wp.zeros(1, dtype=int)
+            keep = wp.full(capacity, 77, dtype=int)
+            quality = wp.full(capacity, 77, dtype=wp.float64)
+            arrays = [error, keep, quality]
+            args = [domain.tree, points, tets, count, 0.4, error]
+            if mode == "retained":
+                args += [keep, quality]
+            else:
+                center = wp.full(capacity, wp.vec3d(77), dtype=wp.vec3d)
+                radius = wp.full(capacity, 77, dtype=wp.float64)
+                distance = wp.full(capacity, 77, dtype=wp.float64)
+                volume = wp.full(capacity, 77, dtype=wp.float64)
+                arrays += [center, radius, distance, volume]
+                args += [center, radius, distance, keep, volume, quality]
+            phases.append((args, arrays))
+        with wp.ScopedCapture() as capture:
+            wp.launch(reference, capacity, inputs=phases[0][0], block_dim=32)
+>           cache.launch(target, capacity, phases[1][0])
+
+tests/test_surface_query_cache.py:263: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.work/vtm/surface_query_order_v1.py:263: in launch
+    wp.capture_launch(self.order_graph)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+graph = <warp._src.context.Graph object at 0x7fb9480e1ea0>
+stream = <warp._src.context.Stream object at 0x7fb96a748ac0>
+
+    def capture_launch(graph: Graph, stream: Stream | None = None):
+        """Launch a previously captured graph.
+    
+        For CUDA graphs, this launches via ``cudaGraphLaunch()``.
+        For CPU graphs, this replays recorded operations in a C++ loop inside Warp.
+    
+        Args:
+            graph: A :class:`Graph` returned by :func:`~warp.capture_end()` or
+              :func:`~warp.capture_load()`.
+            stream: A :class:`Stream` to launch the graph on (CUDA only)
+        """
+    
+        # ---- APIC loaded graph path ----
+        if graph._native_graph is not None:
+            # CPU loaded graph: replay directly from byte stream
+            if graph.device.is_cpu:
+                if not runtime.core.wp_apic_cpu_replay_graph(graph._native_graph):
+                    raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string()}")
+                return
+    
+            # CUDA loaded graph: use cudaGraphLaunch
+            if stream is not None:
+                device = stream.device
+            else:
+                device = graph.device
+                stream = device.stream
+    
+            if graph.graph_exec is None:
+                graph.graph = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph(graph._native_graph))
+                graph.graph_exec = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph_exec(graph._native_graph))
+                if not graph.graph_exec:
+                    raise RuntimeError(f"Failed to build CUDA graph from APIC: {runtime.get_error_string()}")
+    
+            if not runtime.core.wp_cuda_graph_launch(graph.graph_exec, stream.cuda_stream):
+                raise RuntimeError(f"Graph launch error: {runtime.get_error_string()}")
+            return
+    
+        # ---- CPU graph path (live capture) ----
+        if graph.device.is_cpu and graph.apic_state is not None:
+            if not runtime.core.wp_apic_cpu_replay_state(graph.apic_state):
+                raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string() or 'no operations recorded'}")
+            return
+    
+        # ---- CUDA graph path ----
+        if stream is not None:
+            if stream.device != graph.device:
+                raise RuntimeError(f"Cannot launch graph from device {graph.device} on stream from device {stream.device}")
+            device = stream.device
+        else:
+            device = graph.device
+            stream = device.stream
+    
+        if graph.graph_exec is None:
+            g = ctypes.c_void_p()
+            result = runtime.core.wp_cuda_graph_create_exec(
+                graph.device.context, stream.cuda_stream, graph.graph, ctypes.byref(g)
+            )
+            if not result:
+>               raise RuntimeError(f"Graph creation error: {runtime.get_error_string()}")
+E               RuntimeError: Graph creation error: Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:14407: RuntimeError
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+__________ test_cold_warm_classification_matches_ordinary[1e+30-full] __________
+
+mode = 'full', scale = 1e+30
+
+    @pytest.mark.parametrize("mode", ["full", "selection", "retained"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    def test_cold_warm_classification_matches_ordinary(mode, scale):
+        surface, faces = cube()
+        domain = SurfaceDomain((surface * scale).astype(np.float32), faces)
+        source = np.random.default_rng(218).uniform(-3, 3, (32, 3)).astype(np.float32)
+        cells = orient(source, Delaunay(source).simplices)
+        n = len(cells)
+        capacity = n + 9
+        padded = np.full((capacity, 4), -7, np.int32)
+        padded[:n] = cells
+        points = wp.array((source * scale).astype(np.float32), dtype=wp.vec3)
+        tets = wp.array(padded, dtype=int)
+        count = wp.full(1, n, dtype=int)
+        cache = Cache(domain, capacity)
+        reference = {
+            "full": _extraction.classify,
+            "selection": _extraction.classify_selection,
+            "retained": classify_retained,
+        }[mode]
+        target = {
+            "full": k.classify_cached,
+            "selection": k.selection_cached,
+            "retained": k.retained_cached,
+        }[mode]
+        phases = []
+        for _ in range(3):
+            error = wp.zeros(1, dtype=int)
+            keep = wp.full(capacity, 77, dtype=int)
+            quality = wp.full(capacity, 77, dtype=wp.float64)
+            arrays = [error, keep, quality]
+            args = [domain.tree, points, tets, count, 0.4, error]
+            if mode == "retained":
+                args += [keep, quality]
+            else:
+                center = wp.full(capacity, wp.vec3d(77), dtype=wp.vec3d)
+                radius = wp.full(capacity, 77, dtype=wp.float64)
+                distance = wp.full(capacity, 77, dtype=wp.float64)
+                volume = wp.full(capacity, 77, dtype=wp.float64)
+                arrays += [center, radius, distance, volume]
+                args += [center, radius, distance, keep, volume, quality]
+            phases.append((args, arrays))
+        with wp.ScopedCapture() as capture:
+            wp.launch(reference, capacity, inputs=phases[0][0], block_dim=32)
+>           cache.launch(target, capacity, phases[1][0])
+
+tests/test_surface_query_cache.py:263: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.work/vtm/surface_query_order_v1.py:263: in launch
+    wp.capture_launch(self.order_graph)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+graph = <warp._src.context.Graph object at 0x7fb94828b070>
+stream = <warp._src.context.Stream object at 0x7fb96a748ac0>
+
+    def capture_launch(graph: Graph, stream: Stream | None = None):
+        """Launch a previously captured graph.
+    
+        For CUDA graphs, this launches via ``cudaGraphLaunch()``.
+        For CPU graphs, this replays recorded operations in a C++ loop inside Warp.
+    
+        Args:
+            graph: A :class:`Graph` returned by :func:`~warp.capture_end()` or
+              :func:`~warp.capture_load()`.
+            stream: A :class:`Stream` to launch the graph on (CUDA only)
+        """
+    
+        # ---- APIC loaded graph path ----
+        if graph._native_graph is not None:
+            # CPU loaded graph: replay directly from byte stream
+            if graph.device.is_cpu:
+                if not runtime.core.wp_apic_cpu_replay_graph(graph._native_graph):
+                    raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string()}")
+                return
+    
+            # CUDA loaded graph: use cudaGraphLaunch
+            if stream is not None:
+                device = stream.device
+            else:
+                device = graph.device
+                stream = device.stream
+    
+            if graph.graph_exec is None:
+                graph.graph = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph(graph._native_graph))
+                graph.graph_exec = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph_exec(graph._native_graph))
+                if not graph.graph_exec:
+                    raise RuntimeError(f"Failed to build CUDA graph from APIC: {runtime.get_error_string()}")
+    
+            if not runtime.core.wp_cuda_graph_launch(graph.graph_exec, stream.cuda_stream):
+                raise RuntimeError(f"Graph launch error: {runtime.get_error_string()}")
+            return
+    
+        # ---- CPU graph path (live capture) ----
+        if graph.device.is_cpu and graph.apic_state is not None:
+            if not runtime.core.wp_apic_cpu_replay_state(graph.apic_state):
+                raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string() or 'no operations recorded'}")
+            return
+    
+        # ---- CUDA graph path ----
+        if stream is not None:
+            if stream.device != graph.device:
+                raise RuntimeError(f"Cannot launch graph from device {graph.device} on stream from device {stream.device}")
+            device = stream.device
+        else:
+            device = graph.device
+            stream = device.stream
+    
+        if graph.graph_exec is None:
+            g = ctypes.c_void_p()
+            result = runtime.core.wp_cuda_graph_create_exec(
+                graph.device.context, stream.cuda_stream, graph.graph, ctypes.byref(g)
+            )
+            if not result:
+>               raise RuntimeError(f"Graph creation error: {runtime.get_error_string()}")
+E               RuntimeError: Graph creation error: Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:14407: RuntimeError
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+_______ test_cold_warm_classification_matches_ordinary[1e+30-selection] ________
+
+mode = 'selection', scale = 1e+30
+
+    @pytest.mark.parametrize("mode", ["full", "selection", "retained"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    def test_cold_warm_classification_matches_ordinary(mode, scale):
+        surface, faces = cube()
+        domain = SurfaceDomain((surface * scale).astype(np.float32), faces)
+        source = np.random.default_rng(218).uniform(-3, 3, (32, 3)).astype(np.float32)
+        cells = orient(source, Delaunay(source).simplices)
+        n = len(cells)
+        capacity = n + 9
+        padded = np.full((capacity, 4), -7, np.int32)
+        padded[:n] = cells
+        points = wp.array((source * scale).astype(np.float32), dtype=wp.vec3)
+        tets = wp.array(padded, dtype=int)
+        count = wp.full(1, n, dtype=int)
+        cache = Cache(domain, capacity)
+        reference = {
+            "full": _extraction.classify,
+            "selection": _extraction.classify_selection,
+            "retained": classify_retained,
+        }[mode]
+        target = {
+            "full": k.classify_cached,
+            "selection": k.selection_cached,
+            "retained": k.retained_cached,
+        }[mode]
+        phases = []
+        for _ in range(3):
+            error = wp.zeros(1, dtype=int)
+            keep = wp.full(capacity, 77, dtype=int)
+            quality = wp.full(capacity, 77, dtype=wp.float64)
+            arrays = [error, keep, quality]
+            args = [domain.tree, points, tets, count, 0.4, error]
+            if mode == "retained":
+                args += [keep, quality]
+            else:
+                center = wp.full(capacity, wp.vec3d(77), dtype=wp.vec3d)
+                radius = wp.full(capacity, 77, dtype=wp.float64)
+                distance = wp.full(capacity, 77, dtype=wp.float64)
+                volume = wp.full(capacity, 77, dtype=wp.float64)
+                arrays += [center, radius, distance, volume]
+                args += [center, radius, distance, keep, volume, quality]
+            phases.append((args, arrays))
+        with wp.ScopedCapture() as capture:
+            wp.launch(reference, capacity, inputs=phases[0][0], block_dim=32)
+>           cache.launch(target, capacity, phases[1][0])
+
+tests/test_surface_query_cache.py:263: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.work/vtm/surface_query_order_v1.py:263: in launch
+    wp.capture_launch(self.order_graph)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+graph = <warp._src.context.Graph object at 0x7fb96a901d80>
+stream = <warp._src.context.Stream object at 0x7fb96a748ac0>
+
+    def capture_launch(graph: Graph, stream: Stream | None = None):
+        """Launch a previously captured graph.
+    
+        For CUDA graphs, this launches via ``cudaGraphLaunch()``.
+        For CPU graphs, this replays recorded operations in a C++ loop inside Warp.
+    
+        Args:
+            graph: A :class:`Graph` returned by :func:`~warp.capture_end()` or
+              :func:`~warp.capture_load()`.
+            stream: A :class:`Stream` to launch the graph on (CUDA only)
+        """
+    
+        # ---- APIC loaded graph path ----
+        if graph._native_graph is not None:
+            # CPU loaded graph: replay directly from byte stream
+            if graph.device.is_cpu:
+                if not runtime.core.wp_apic_cpu_replay_graph(graph._native_graph):
+                    raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string()}")
+                return
+    
+            # CUDA loaded graph: use cudaGraphLaunch
+            if stream is not None:
+                device = stream.device
+            else:
+                device = graph.device
+                stream = device.stream
+    
+            if graph.graph_exec is None:
+                graph.graph = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph(graph._native_graph))
+                graph.graph_exec = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph_exec(graph._native_graph))
+                if not graph.graph_exec:
+                    raise RuntimeError(f"Failed to build CUDA graph from APIC: {runtime.get_error_string()}")
+    
+            if not runtime.core.wp_cuda_graph_launch(graph.graph_exec, stream.cuda_stream):
+                raise RuntimeError(f"Graph launch error: {runtime.get_error_string()}")
+            return
+    
+        # ---- CPU graph path (live capture) ----
+        if graph.device.is_cpu and graph.apic_state is not None:
+            if not runtime.core.wp_apic_cpu_replay_state(graph.apic_state):
+                raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string() or 'no operations recorded'}")
+            return
+    
+        # ---- CUDA graph path ----
+        if stream is not None:
+            if stream.device != graph.device:
+                raise RuntimeError(f"Cannot launch graph from device {graph.device} on stream from device {stream.device}")
+            device = stream.device
+        else:
+            device = graph.device
+            stream = device.stream
+    
+        if graph.graph_exec is None:
+            g = ctypes.c_void_p()
+            result = runtime.core.wp_cuda_graph_create_exec(
+                graph.device.context, stream.cuda_stream, graph.graph, ctypes.byref(g)
+            )
+            if not result:
+>               raise RuntimeError(f"Graph creation error: {runtime.get_error_string()}")
+E               RuntimeError: Graph creation error: Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:14407: RuntimeError
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+________ test_cold_warm_classification_matches_ordinary[1e+30-retained] ________
+
+mode = 'retained', scale = 1e+30
+
+    @pytest.mark.parametrize("mode", ["full", "selection", "retained"])
+    @pytest.mark.parametrize("scale", [1e-30, 1.0, 1e30])
+    def test_cold_warm_classification_matches_ordinary(mode, scale):
+        surface, faces = cube()
+        domain = SurfaceDomain((surface * scale).astype(np.float32), faces)
+        source = np.random.default_rng(218).uniform(-3, 3, (32, 3)).astype(np.float32)
+        cells = orient(source, Delaunay(source).simplices)
+        n = len(cells)
+        capacity = n + 9
+        padded = np.full((capacity, 4), -7, np.int32)
+        padded[:n] = cells
+        points = wp.array((source * scale).astype(np.float32), dtype=wp.vec3)
+        tets = wp.array(padded, dtype=int)
+        count = wp.full(1, n, dtype=int)
+        cache = Cache(domain, capacity)
+        reference = {
+            "full": _extraction.classify,
+            "selection": _extraction.classify_selection,
+            "retained": classify_retained,
+        }[mode]
+        target = {
+            "full": k.classify_cached,
+            "selection": k.selection_cached,
+            "retained": k.retained_cached,
+        }[mode]
+        phases = []
+        for _ in range(3):
+            error = wp.zeros(1, dtype=int)
+            keep = wp.full(capacity, 77, dtype=int)
+            quality = wp.full(capacity, 77, dtype=wp.float64)
+            arrays = [error, keep, quality]
+            args = [domain.tree, points, tets, count, 0.4, error]
+            if mode == "retained":
+                args += [keep, quality]
+            else:
+                center = wp.full(capacity, wp.vec3d(77), dtype=wp.vec3d)
+                radius = wp.full(capacity, 77, dtype=wp.float64)
+                distance = wp.full(capacity, 77, dtype=wp.float64)
+                volume = wp.full(capacity, 77, dtype=wp.float64)
+                arrays += [center, radius, distance, volume]
+                args += [center, radius, distance, keep, volume, quality]
+            phases.append((args, arrays))
+        with wp.ScopedCapture() as capture:
+            wp.launch(reference, capacity, inputs=phases[0][0], block_dim=32)
+>           cache.launch(target, capacity, phases[1][0])
+
+tests/test_surface_query_cache.py:263: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.work/vtm/surface_query_order_v1.py:263: in launch
+    wp.capture_launch(self.order_graph)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+graph = <warp._src.context.Graph object at 0x7fb94831f190>
+stream = <warp._src.context.Stream object at 0x7fb96a748ac0>
+
+    def capture_launch(graph: Graph, stream: Stream | None = None):
+        """Launch a previously captured graph.
+    
+        For CUDA graphs, this launches via ``cudaGraphLaunch()``.
+        For CPU graphs, this replays recorded operations in a C++ loop inside Warp.
+    
+        Args:
+            graph: A :class:`Graph` returned by :func:`~warp.capture_end()` or
+              :func:`~warp.capture_load()`.
+            stream: A :class:`Stream` to launch the graph on (CUDA only)
+        """
+    
+        # ---- APIC loaded graph path ----
+        if graph._native_graph is not None:
+            # CPU loaded graph: replay directly from byte stream
+            if graph.device.is_cpu:
+                if not runtime.core.wp_apic_cpu_replay_graph(graph._native_graph):
+                    raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string()}")
+                return
+    
+            # CUDA loaded graph: use cudaGraphLaunch
+            if stream is not None:
+                device = stream.device
+            else:
+                device = graph.device
+                stream = device.stream
+    
+            if graph.graph_exec is None:
+                graph.graph = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph(graph._native_graph))
+                graph.graph_exec = ctypes.c_void_p(runtime.core.wp_apic_get_cuda_graph_exec(graph._native_graph))
+                if not graph.graph_exec:
+                    raise RuntimeError(f"Failed to build CUDA graph from APIC: {runtime.get_error_string()}")
+    
+            if not runtime.core.wp_cuda_graph_launch(graph.graph_exec, stream.cuda_stream):
+                raise RuntimeError(f"Graph launch error: {runtime.get_error_string()}")
+            return
+    
+        # ---- CPU graph path (live capture) ----
+        if graph.device.is_cpu and graph.apic_state is not None:
+            if not runtime.core.wp_apic_cpu_replay_state(graph.apic_state):
+                raise RuntimeError(f"CPU graph replay failed: {runtime.get_error_string() or 'no operations recorded'}")
+            return
+    
+        # ---- CUDA graph path ----
+        if stream is not None:
+            if stream.device != graph.device:
+                raise RuntimeError(f"Cannot launch graph from device {graph.device} on stream from device {stream.device}")
+            device = stream.device
+        else:
+            device = graph.device
+            stream = device.stream
+    
+        if graph.graph_exec is None:
+            g = ctypes.c_void_p()
+            result = runtime.core.wp_cuda_graph_create_exec(
+                graph.device.context, stream.cuda_stream, graph.graph, ctypes.byref(g)
+            )
+            if not result:
+>               raise RuntimeError(f"Graph creation error: {runtime.get_error_string()}")
+E               RuntimeError: Graph creation error: Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+
+.venv/lib/python3.10/site-packages/warp/_src/context.py:14407: RuntimeError
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 900: operation not permitted when stream is capturing (in function wp_cuda_graph_create_exec, /builds/omniverse/warp/warp/native/warp.cu:3640)
+=========================== short test summary info ============================
+FAILED tests/test_surface_query_cache.py::test_cold_warm_classification_matches_ordinary[1e-30-full]
+FAILED tests/test_surface_query_cache.py::test_cold_warm_classification_matches_ordinary[1e-30-selection]
+FAILED tests/test_surface_query_cache.py::test_cold_warm_classification_matches_ordinary[1e-30-retained]
+FAILED tests/test_surface_query_cache.py::test_cold_warm_classification_matches_ordinary[1.0-full]
+FAILED tests/test_surface_query_cache.py::test_cold_warm_classification_matches_ordinary[1.0-selection]
+FAILED tests/test_surface_query_cache.py::test_cold_warm_classification_matches_ordinary[1.0-retained]
+FAILED tests/test_surface_query_cache.py::test_cold_warm_classification_matches_ordinary[1e+30-full]
+FAILED tests/test_surface_query_cache.py::test_cold_warm_classification_matches_ordinary[1e+30-selection]
+FAILED tests/test_surface_query_cache.py::test_cold_warm_classification_matches_ordinary[1e+30-retained]
+9 failed, 1 passed in 81.45s (0:01:21)

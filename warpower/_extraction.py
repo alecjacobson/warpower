@@ -460,7 +460,7 @@ class ExtractionWorkspace:
         )
         self._query_cache = None
         if _cache_surface_queries:
-            from ._surface_query_cache import SurfaceQueryCache
+            from ._ordered_surface_queries import OrderedSurfaceQueryCache as SurfaceQueryCache
 
             self._query_cache = SurfaceQueryCache(domain, self.capacity)
         with wp.ScopedDevice(self.device):

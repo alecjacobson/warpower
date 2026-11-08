@@ -15,6 +15,7 @@ from . import _sphere_bounds as sb
 from ._bvh import Tree
 from ._delaunay_certificate import (
     DelaunayCertificate,
+    Halfspace,
     halfspace,
     inside_halfspace,
     outside,
@@ -154,6 +155,51 @@ def axis_supported(a: wp.vec3, b: wp.vec3, c: wp.vec3, opposite: wp.vec3, lo: wp
     return False
 
 
+@wp.func
+def nonnegative(value: fp.Ball):
+    if (
+        not wp.isfinite(value.value)
+        or not wp.isfinite(value.error)
+        or value.error < wp.float64(0.0)
+    ):
+        return -1
+    if value.value >= value.error:
+        return 1
+    if value.value <= -value.error:
+        return 0
+    return -1
+
+
+@wp.func
+def maximum_corner(plane: Halfspace):
+    # Certified normal signs identify a corner maximizing the exact plane value.
+    # Uncertain components retain the original box test.
+    x, y, z = nonnegative(plane.nx), nonnegative(plane.ny), nonnegative(plane.nz)
+    if x < 0 or y < 0 or z < 0:
+        return -1
+    return x + 2 * y + 4 * z
+
+
+@wp.func
+def bounded_box_state(a: wp.vec3, b: wp.vec3, c: wp.vec3, mask: int, lo: wp.vec3, hi: wp.vec3):
+    if mask < 0 or mask > 7 or not af.bounded(lo) or not af.bounded(hi):
+        return 0
+    if lo[0] > hi[0] or lo[1] > hi[1] or lo[2] > hi[2]:
+        return 0
+    q = wp.vec3(
+        wp.where((mask & 1) != 0, hi[0], lo[0]),
+        wp.where((mask & 2) != 0, hi[1], lo[1]),
+        wp.where((mask & 4) != 0, hi[2], lo[2]),
+    )
+    value = af.orientation_filter(a, b, c, q)
+    if value.value < -value.error:
+        return 1
+    if value.value > value.error:
+        # This rejects box containment only. Its sites still need traversal.
+        return -1
+    return 0
+
+
 @wp.kernel
 def record_face_support(
     points: wp.array[wp.vec3],
@@ -197,6 +243,7 @@ def record_face_support(
         if axis_supported(a, b, c, opposite, tree.lower[1], tree.upper[1]):
             continue
         plane = halfspace(a, b, c)
+        mask = maximum_corner(plane)
         stack = wp.zeros(shape=128, dtype=int)
         stack[0] = root
         size = int(1)
@@ -205,7 +252,10 @@ def record_face_support(
                 break
             size -= 1
             node = stack[size]
-            if inside_halfspace(plane, tree.lower[node], tree.upper[node]):
+            state = bounded_box_state(a, b, c, mask, tree.lower[node], tree.upper[node])
+            if state == 1:
+                continue
+            if state == 0 and inside_halfspace(plane, tree.lower[node], tree.upper[node]):
                 continue
             if tree.count[node] > 0:
                 for k in range(tree.start[node], tree.start[node] + tree.count[node]):

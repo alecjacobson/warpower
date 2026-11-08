@@ -430,6 +430,11 @@ previous owner's current distance as an initial nearest-site search bound.
 It remains unadopted because its complete hand solve regresses and its strict
 material comparison fails; production does not use the prototype.
 
+A [grouped boundary reduction probe](boundary-global-reduce.md) combines energy,
+weight and maximum-distance updates within existing Warp blocks. It also remains
+unadopted: complete torus and hand timings show no benefit. Production keeps its
+original accumulation order and kernel.
+
 For an active prefix in a larger reserved workspace, the core now
 [selects a reconstruction capacity on device](active-reconstruction.md).
 Preallocated 1,024- and 2,048-site constructors handle the smallest fitting prefix;

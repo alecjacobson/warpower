@@ -346,6 +346,11 @@ The private hull-support pass also proves [exact coordinate-plane faces](axis-hu
 directly against current original-site bounds. A freshly certified positive cell
 supplies the interior direction; all other faces retain the existing traversal.
 This adds no buffers or graph nodes and leaves standalone construction unchanged.
+The remaining traversal uses [certified maximum-corner box signs](bounded-hull-box.md):
+the existing normal intervals select the plane's exact maximizing box corner,
+then the bounded orientation filter certifies containment or avoids a redundant
+interval test. Uncertain signs retain the original box test and exact site checks;
+a box corner outside the halfspace does not itself reject face support.
 A private [fresh complete-mesh certificate experiment](previous-complete-certificate.md)
 tries to avoid fragment filtering when the entire previous topology survives.
 Its ordinary schedule is slower; earlier rejection is effectively neutral at 4k

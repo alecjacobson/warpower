@@ -1,0 +1,7 @@
+{
+  "source": ".work/vtm/check-cpu-quality-optimizers-v1.py",
+  "source_sha256": "dd6d5136cd822be7f622bf3b40e16ad98c879f6720b7646e78d2cf3c0ac158bc",
+  "target": ".work/vtm/check-cpu-quality-optimizers-v2.py",
+  "target_sha256": "8c72fe26adc8af87a7743c91ce679e15d66b1958e905123359ad2d6a34b47aa1",
+  "reason": "The v1 test incorrectly required exudation to change the global maximum weight. Feature protection already owns a larger 0.36 weight. Exudation increases nonzero material weights from32to34, changes connectivity and improves the independent minimum dihedral from7.23to20.40degrees; v2 checks those effects and reuses all8 alreadyvalidated native meshes by exact hashes. No native or runner code changed."
+}

@@ -1,0 +1,60 @@
+{
+  "scope": "Build fresh optional CGAL quality-optimizer references after clean GPU timings end.",
+  "source": ".work/vtm/cpu-mesh3-quality-optimizers-v1.cpp",
+  "source_sha256": "646f2dea98a2c1d08723c55359e8b321fd477b07df2d6c97b29d6773b18c1d7a",
+  "compiler": "c++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "cgal_version": "6.2.1",
+  "cgal_source_revision": "44ab808c25399fc6dbd89a6e114f3fd6b5ae8142",
+  "builds": [
+    {
+      "mode": "sequential",
+      "command": [
+        "c++",
+        "-O3",
+        "-DNDEBUG",
+        "-std=c++17",
+        "-I/home/horde/references/CGAL-6.2.1/include",
+        "-I/usr/include/eigen3",
+        ".work/vtm/cpu-mesh3-quality-optimizers-v1.cpp",
+        "-lgmp",
+        "-lmpfr",
+        "-o",
+        ".work/vtm/cpu-mesh3-quality-optimizers-v1-sequential"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 44.3278694152832,
+      "timeout_seconds": 1200,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_sha256": "574b5723ddcdf0e98b0ca731216b404378fcde0036182559f4899125d23a6c5a",
+      "bytes": 2415176
+    },
+    {
+      "mode": "parallel",
+      "command": [
+        "c++",
+        "-O3",
+        "-DNDEBUG",
+        "-std=c++17",
+        "-DWARPOWER_CGAL_PARALLEL",
+        "-DCGAL_LINKED_WITH_TBB",
+        "-I/home/horde/references/CGAL-6.2.1/include",
+        "-I/usr/include/eigen3",
+        ".work/vtm/cpu-mesh3-quality-optimizers-v1.cpp",
+        "-lgmp",
+        "-lmpfr",
+        "-ltbb",
+        "-ltbbmalloc",
+        "-o",
+        ".work/vtm/cpu-mesh3-quality-optimizers-v1-parallel"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 48.582717180252075,
+      "timeout_seconds": 1200,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binary_sha256": "ee287c2d2f7f89b297aefcf3d6c98a08e9c0ff1ada7e5acdf9d47d1ce89b9886",
+      "bytes": 3051696
+    }
+  ],
+  "complete": true,
+  "historical_binaries_and_public_source_unchanged": true
+}

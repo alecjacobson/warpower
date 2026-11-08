@@ -251,6 +251,11 @@ class SelectiveUpdate:
             scalar(enabled, self.device, "selective_enabled")
         self.threshold, self.tolerance = threshold, tolerance
         self._m = len(core.full_tetrahedra)
+        self._query_cache = None
+        if getattr(core, "_cache_surface_queries", False):
+            from ._surface_query_cache import SurfaceQueryCache
+
+            self._query_cache = SurfaceQueryCache(core.domain, self._m)
         with wp.ScopedDevice(self.device):
             self.error = wp.zeros(1, dtype=int)
             self.ready = wp.zeros(1, dtype=int)
@@ -282,6 +287,7 @@ class SelectiveUpdate:
                     exterior_enabled=getattr(core, "exterior_enabled", None),
                     proven_exterior_recovery=getattr(core, "proven_exterior_recovery", False),
                     proven_exterior_enabled=getattr(core, "proven_exterior_enabled", None),
+                    _cache_surface_queries=getattr(core, "_cache_surface_queries", False),
                 )
             wp.load_module(module=__name__, device=self.device)
             wp.load_module(module="warpower._extraction", device=self.device)
@@ -342,21 +348,20 @@ class SelectiveUpdate:
                 self.error,
             ],
         )
-        self._launch(
-            classify_retained,
-            self._m,
-            [
-                core.domain.tree,
-                core.points,
-                core.full_tetrahedra,
-                core.full_tetrahedra_count,
-                self.tolerance,
-                self.error,
-                self.keep,
-                self.quality,
-            ],
-            block_dim=32,
-        )
+        args = [
+            core.domain.tree,
+            core.points,
+            core.full_tetrahedra,
+            core.full_tetrahedra_count,
+            self.tolerance,
+            self.error,
+            self.keep,
+            self.quality,
+        ]
+        if self._query_cache is not None:
+            self._query_cache.retained(args)
+        else:
+            self._launch(classify_retained, self._m, args, block_dim=32)
         self._launch(
             summarize,
             self._m,

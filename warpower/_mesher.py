@@ -511,6 +511,7 @@ class VariationalMeshingWorkspace:
                 tetrahedra_capacity=tetrahedra_capacity,
                 tetrahedra_cell_capacity=tetrahedra_cell_capacity,
                 chunk_size=chunk_size,
+                _cache_surface_queries=True,
             )
             self._boundary_rounding = None
             if self.proven_exterior_recovery:
@@ -550,6 +551,7 @@ class VariationalMeshingWorkspace:
                 exterior_enabled=self._exterior_enabled,
                 proven_exterior_recovery=self.proven_exterior_recovery,
                 proven_exterior_enabled=self._proven_exterior_enabled,
+                _cache_surface_queries=True,
             )
             self.full_tetrahedra = self.core.full_tetrahedra
             self.tetrahedra = self.extraction.tetrahedra

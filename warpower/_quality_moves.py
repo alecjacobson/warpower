@@ -337,6 +337,11 @@ class QualityMove:
         self.core, self.device = core, core.device
         self.points, self.full_tetrahedra = core.points, core.full_tetrahedra
         self._m = len(self.full_tetrahedra)
+        self._query_cache = None
+        if getattr(core, "_cache_surface_queries", False):
+            from ._surface_query_cache import SurfaceQueryCache
+
+            self._query_cache = SurfaceQueryCache(core.domain, self._m)
         self.extraction = ExtractionWorkspace(
             core.domain,
             self.points,
@@ -352,6 +357,7 @@ class QualityMove:
                 core.material_recovery is not None and core.proven_exterior_recovery
             ),
             proven_exterior_enabled=core.proven_exterior_enabled,
+            _cache_surface_queries=getattr(core, "_cache_surface_queries", False),
         )
         self.tetrahedra = self.extraction.tetrahedra
         self._tolerance = extraction_tolerance
@@ -521,21 +527,20 @@ class QualityMove:
             1,
             [c.domain.error, c.mesh.error, c.full_tetrahedra_count, self._m, self._query_error],
         )
-        self._launch(
-            _selective.classify_retained,
-            self._m,
-            [
-                c.domain.tree,
-                self.points,
-                self.full_tetrahedra,
-                c.full_tetrahedra_count,
-                self._tolerance,
-                self._query_error,
-                self._query_keep,
-                self._query_quality,
-            ],
-            block_dim=32,
-        )
+        args = [
+            c.domain.tree,
+            self.points,
+            self.full_tetrahedra,
+            c.full_tetrahedra_count,
+            self._tolerance,
+            self._query_error,
+            self._query_keep,
+            self._query_quality,
+        ]
+        if self._query_cache is not None:
+            self._query_cache.retained(args)
+        else:
+            self._launch(_selective.classify_retained, self._m, args, block_dim=32)
         self._launch(
             _selective.summarize,
             self._m,

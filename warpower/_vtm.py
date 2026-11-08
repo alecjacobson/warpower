@@ -234,7 +234,9 @@ class VTMWorkspace:
         exterior_enabled=None,
         proven_exterior_recovery=False,
         proven_exterior_enabled=None,
+        _cache_surface_queries=False,
     ):
+        self._cache_surface_queries = bool(_cache_surface_queries)
         self.max_iterations = operator.index(max_iterations)
         self.max_backtracks = operator.index(max_backtracks)
         if self.max_iterations < 0 or self.max_backtracks < 0:

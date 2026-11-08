@@ -26,6 +26,13 @@ def previous_edge(e: int):
 
 
 @wp.kernel
+def advance_query_epoch(version: wp.array[wp.int64]):
+    # Saturation disables cache lookup permanently; an old generation never wraps.
+    if version[0] < wp.int64(9223372036854775807):
+        version[0] += wp.int64(1)
+
+
+@wp.kernel
 def safe_faces(source: wp.array[int], indices: wp.array[int], n: int, error: wp.array[int]):
     e = wp.tid()
     v = source[e]
@@ -450,6 +457,7 @@ class SurfaceDomain:
             raise ValueError("Domain capacities exceed int32 indexing")
         with wp.ScopedDevice(self.device):
             self._topology_error = wp.zeros(1, dtype=int)
+            self._query_epoch = wp.zeros(1, dtype=wp.int64)
             self.error = wp.zeros(1, dtype=int)
             self._points = wp.empty_like(self.points)
             self._indices = wp.empty(m, dtype=int)
@@ -530,6 +538,9 @@ class SurfaceDomain:
     def refit(self, stream=None):
         """Refit the boundary, validate geometry, and update quadrature on device."""
         with wp.ScopedDevice(self.device), wp.ScopedStream(stream):
+            wp.launch(
+                advance_query_epoch, 1, inputs=[self._query_epoch], device=self.device, block_dim=32
+            )
             wp.copy(self.error, self._topology_error)
             wp.launch(safe_points, len(self.points), inputs=[self.points, self._points, self.error])
             self._hierarchy.refit()

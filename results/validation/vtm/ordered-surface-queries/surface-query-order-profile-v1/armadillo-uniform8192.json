@@ -1,0 +1,627 @@
+{
+  "scope": "Static full cost of centroid keying, sorting, scalar queries and cache rebuild.",
+  "limits": "Immutable validated final meshes only; no full-solve or invalid-input qualification. Warm rows repeatedly query unchanged input; cold rows include clearing the cache. Both include cache rebuild. Setup and host validation are outside timing.",
+  "source": "5035fa5895a3bdcc9542bbeebabd75f3d955450b",
+  "input": "/home/horde/projects/power-diagram/.work/vtm/tangential-production-final-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+  "input_sha256": "bd50d86481ba30f64d8bd5538ba8e00b45d40285e83cf219d3d1dbebbb353aa4",
+  "sites": 8192,
+  "cells": 49595,
+  "capacity": 49632,
+  "source_sha256": {
+    "/home/horde/projects/power-diagram/.work/vtm/profile-surface-query-order-v1.py": "7b39493ded8333791f6563a89a29ac5ec996c27f189b427cd5f329f6080f7313",
+    "/home/horde/projects/power-diagram/.work/vtm/surface_query_order_v1.py": "c967db117e6c04437bdf84d63842794bea76950296a72d74a410089ed42d83ae",
+    "/home/horde/projects/power-diagram/.work/vtm/surface_query_order_v2.py": "83dcba6090d257721d65402157e271746cfd69a672c8fad454270408fc55d259",
+    "warpower/_surface_query_cache.py": "6d90d7649cd775bbdda66b30dbe727bfd7adcd9dc5bdb072471cff0c4115942c"
+  },
+  "rows": [
+    {
+      "mode": "full",
+      "cache": "cold",
+      "phase": "before",
+      "gpu_ms": [
+        41.38447952270508,
+        41.341217041015625,
+        42.37001419067383,
+        41.999359130859375,
+        42.36735916137695,
+        42.03046417236328,
+        40.72742462158203,
+        42.37529754638672,
+        41.38383865356445,
+        42.37836837768555,
+        42.36579132080078,
+        41.64905548095703,
+        41.937950134277344,
+        41.99033737182617,
+        43.3770866394043,
+        41.22643280029297,
+        42.39388656616211,
+        41.05753707885742,
+        42.01023864746094,
+        41.471134185791016
+      ],
+      "median_ms": 41.99484825134277,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": false,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4",
+        "center": "46f74c91bd07a9aa4aec87a9e8b6c72a1a1f839b044d812cbddb4829b1bd52b7",
+        "radius": "d0244f229ecc016abca1663f85d344df162a8a0f4c18fefb63578ff290ba6b35",
+        "distance": "2f85287a39784e756b3241c3d0d16944f701203694985d16ef4f8bcd688736d3",
+        "volume": "993eaaaf4fd2a852d703d468d73e7cfc385df2838cba2c3174c3b087f559c65b"
+      }
+    },
+    {
+      "mode": "full",
+      "cache": "cold",
+      "phase": "after",
+      "gpu_ms": [
+        38.8109130859375,
+        38.66972732543945,
+        38.69728088378906,
+        38.695743560791016,
+        38.67670440673828,
+        38.67270278930664,
+        38.70121765136719,
+        38.693023681640625,
+        38.69331359863281,
+        38.679649353027344,
+        38.67424011230469,
+        38.68476867675781,
+        38.67222213745117,
+        38.6748161315918,
+        38.688865661621094,
+        38.68278503417969,
+        38.69686508178711,
+        38.69830322265625,
+        38.69987106323242,
+        38.694847106933594
+      ],
+      "median_ms": 38.69094467163086,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4",
+        "center": "46f74c91bd07a9aa4aec87a9e8b6c72a1a1f839b044d812cbddb4829b1bd52b7",
+        "radius": "d0244f229ecc016abca1663f85d344df162a8a0f4c18fefb63578ff290ba6b35",
+        "distance": "2f85287a39784e756b3241c3d0d16944f701203694985d16ef4f8bcd688736d3",
+        "volume": "993eaaaf4fd2a852d703d468d73e7cfc385df2838cba2c3174c3b087f559c65b"
+      }
+    },
+    {
+      "mode": "full",
+      "cache": "warm",
+      "phase": "before",
+      "gpu_ms": [
+        0.06425599753856659,
+        0.05961599946022034,
+        0.059007998555898666,
+        0.05913599953055382,
+        0.05967999994754791,
+        0.059647999703884125,
+        0.05897599831223488,
+        0.05936000123620033,
+        0.0586559996008873,
+        0.05923200026154518,
+        0.058687999844551086,
+        0.058559998869895935,
+        0.058687999844551086,
+        0.05923200026154518,
+        0.05862399935722351,
+        0.0589120015501976,
+        0.05993599817156792,
+        0.05923200026154518,
+        0.0589120015501976,
+        0.05939200147986412
+      ],
+      "median_ms": 0.0591839998960495,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": false,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4",
+        "center": "46f74c91bd07a9aa4aec87a9e8b6c72a1a1f839b044d812cbddb4829b1bd52b7",
+        "radius": "d0244f229ecc016abca1663f85d344df162a8a0f4c18fefb63578ff290ba6b35",
+        "distance": "2f85287a39784e756b3241c3d0d16944f701203694985d16ef4f8bcd688736d3",
+        "volume": "993eaaaf4fd2a852d703d468d73e7cfc385df2838cba2c3174c3b087f559c65b"
+      }
+    },
+    {
+      "mode": "full",
+      "cache": "warm",
+      "phase": "after",
+      "gpu_ms": [
+        0.1870719939470291,
+        0.18223999440670013,
+        0.18038399517536163,
+        0.18108800053596497,
+        0.1809920072555542,
+        0.182559996843338,
+        0.181536003947258,
+        0.17955200374126434,
+        0.1804479956626892,
+        0.18031999468803406,
+        0.18111999332904816,
+        0.18105599284172058,
+        0.18140800297260284,
+        0.18195199966430664,
+        0.181536003947258,
+        0.181536003947258,
+        0.18166400492191315,
+        0.1810240000486374,
+        0.18089599907398224,
+        0.18095999956130981
+      ],
+      "median_ms": 0.18110399693250656,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4",
+        "center": "46f74c91bd07a9aa4aec87a9e8b6c72a1a1f839b044d812cbddb4829b1bd52b7",
+        "radius": "d0244f229ecc016abca1663f85d344df162a8a0f4c18fefb63578ff290ba6b35",
+        "distance": "2f85287a39784e756b3241c3d0d16944f701203694985d16ef4f8bcd688736d3",
+        "volume": "993eaaaf4fd2a852d703d468d73e7cfc385df2838cba2c3174c3b087f559c65b"
+      }
+    },
+    {
+      "mode": "selection",
+      "cache": "cold",
+      "phase": "before",
+      "gpu_ms": [
+        23.792287826538086,
+        24.32035255432129,
+        23.606304168701172,
+        23.8024959564209,
+        24.948640823364258,
+        24.813631057739258,
+        23.54265594482422,
+        23.30441665649414,
+        24.238847732543945,
+        24.88368034362793,
+        23.60576057434082,
+        23.343263626098633,
+        25.02787208557129,
+        23.818143844604492,
+        24.829631805419922,
+        23.477088928222656,
+        24.891359329223633,
+        24.83024024963379,
+        23.212383270263672,
+        24.656896591186523
+      ],
+      "median_ms": 24.02849578857422,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": false,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4",
+        "center": "46f74c91bd07a9aa4aec87a9e8b6c72a1a1f839b044d812cbddb4829b1bd52b7",
+        "radius": "d0244f229ecc016abca1663f85d344df162a8a0f4c18fefb63578ff290ba6b35",
+        "distance": "cc7b204d3398af7042d91720953c63cdb154f2c42dbef777c289d2ebe7266eed",
+        "volume": "993eaaaf4fd2a852d703d468d73e7cfc385df2838cba2c3174c3b087f559c65b"
+      }
+    },
+    {
+      "mode": "selection",
+      "cache": "cold",
+      "phase": "after",
+      "gpu_ms": [
+        18.434816360473633,
+        18.426847457885742,
+        18.417888641357422,
+        18.422719955444336,
+        18.4322566986084,
+        18.436128616333008,
+        18.42278480529785,
+        18.436992645263672,
+        18.421472549438477,
+        18.431072235107422,
+        18.4150390625,
+        19.45462417602539,
+        18.42108726501465,
+        18.423744201660156,
+        18.415775299072266,
+        18.44259262084961,
+        18.428255081176758,
+        18.435775756835938,
+        20.828031539916992,
+        18.416767120361328
+      ],
+      "median_ms": 18.42755126953125,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4",
+        "center": "46f74c91bd07a9aa4aec87a9e8b6c72a1a1f839b044d812cbddb4829b1bd52b7",
+        "radius": "d0244f229ecc016abca1663f85d344df162a8a0f4c18fefb63578ff290ba6b35",
+        "distance": "cc7b204d3398af7042d91720953c63cdb154f2c42dbef777c289d2ebe7266eed",
+        "volume": "993eaaaf4fd2a852d703d468d73e7cfc385df2838cba2c3174c3b087f559c65b"
+      }
+    },
+    {
+      "mode": "selection",
+      "cache": "warm",
+      "phase": "before",
+      "gpu_ms": [
+        0.07452800124883652,
+        0.06719999760389328,
+        0.06700800359249115,
+        0.06838399916887283,
+        0.06684800237417221,
+        0.06806399673223495,
+        0.06790400296449661,
+        0.06550399959087372,
+        0.06537599861621857,
+        0.06524799764156342,
+        0.06643199920654297,
+        0.06764800101518631,
+        0.0674239993095398,
+        0.06771200150251389,
+        0.06732799857854843,
+        0.06726399809122086,
+        0.06777600198984146,
+        0.06796800345182419,
+        0.06796800345182419,
+        0.07833600044250488
+      ],
+      "median_ms": 0.06753600016236305,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": false,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4",
+        "center": "46f74c91bd07a9aa4aec87a9e8b6c72a1a1f839b044d812cbddb4829b1bd52b7",
+        "radius": "d0244f229ecc016abca1663f85d344df162a8a0f4c18fefb63578ff290ba6b35",
+        "distance": "cc7b204d3398af7042d91720953c63cdb154f2c42dbef777c289d2ebe7266eed",
+        "volume": "993eaaaf4fd2a852d703d468d73e7cfc385df2838cba2c3174c3b087f559c65b"
+      }
+    },
+    {
+      "mode": "selection",
+      "cache": "warm",
+      "phase": "after",
+      "gpu_ms": [
+        0.17824000120162964,
+        0.1703680008649826,
+        0.17337599396705627,
+        0.1717119961977005,
+        0.17523199319839478,
+        0.17414399981498718,
+        0.1756799966096878,
+        0.17334400117397308,
+        0.17161600291728973,
+        0.1690240055322647,
+        0.17392000555992126,
+        0.17369599640369415,
+        0.17363199591636658,
+        0.17030400037765503,
+        0.17468799650669098,
+        0.17312000691890717,
+        0.17235200107097626,
+        0.17443199455738068,
+        0.17078399658203125,
+        0.16886399686336517
+      ],
+      "median_ms": 0.17335999757051468,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4",
+        "center": "46f74c91bd07a9aa4aec87a9e8b6c72a1a1f839b044d812cbddb4829b1bd52b7",
+        "radius": "d0244f229ecc016abca1663f85d344df162a8a0f4c18fefb63578ff290ba6b35",
+        "distance": "cc7b204d3398af7042d91720953c63cdb154f2c42dbef777c289d2ebe7266eed",
+        "volume": "993eaaaf4fd2a852d703d468d73e7cfc385df2838cba2c3174c3b087f559c65b"
+      }
+    },
+    {
+      "mode": "retained",
+      "cache": "cold",
+      "phase": "before",
+      "gpu_ms": [
+        10.522591590881348,
+        10.393856048583984,
+        10.521151542663574,
+        10.478240013122559,
+        10.65283203125,
+        10.835583686828613,
+        10.949055671691895,
+        11.023776054382324,
+        10.87769603729248,
+        10.872639656066895,
+        10.863615989685059,
+        10.653056144714355,
+        10.819680213928223,
+        10.667231559753418,
+        10.568608283996582,
+        10.80624008178711,
+        10.989855766296387,
+        10.799712181091309,
+        10.818079948425293,
+        10.591423988342285
+      ],
+      "median_ms": 10.802976131439209,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": false,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4"
+      }
+    },
+    {
+      "mode": "retained",
+      "cache": "cold",
+      "phase": "after",
+      "gpu_ms": [
+        7.872992038726807,
+        7.868031978607178,
+        7.865344047546387,
+        7.925536155700684,
+        7.864960193634033,
+        7.867199897766113,
+        7.870304107666016,
+        7.920608043670654,
+        7.921631813049316,
+        7.867551803588867,
+        7.867487907409668,
+        7.918752193450928,
+        7.627007961273193,
+        7.866208076477051,
+        7.868256092071533,
+        7.917312145233154,
+        7.86348819732666,
+        7.868800163269043,
+        7.866432189941406,
+        7.917791843414307
+      ],
+      "median_ms": 7.8681440353393555,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4"
+      }
+    },
+    {
+      "mode": "retained",
+      "cache": "warm",
+      "phase": "before",
+      "gpu_ms": [
+        0.06284800171852112,
+        0.056223999708890915,
+        0.05526399984955788,
+        0.05523199960589409,
+        0.05532800033688545,
+        0.05558399856090546,
+        0.055456001311540604,
+        0.05488000065088272,
+        0.05539200082421303,
+        0.05558399856090546,
+        0.05555199831724167,
+        0.05587200075387955,
+        0.05567999929189682,
+        0.0551999993622303,
+        0.055296000093221664,
+        0.05523199960589409,
+        0.056671999394893646,
+        0.05558399856090546,
+        0.05532800033688545,
+        0.055424001067876816
+      ],
+      "median_ms": 0.05544000118970871,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": false,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4"
+      }
+    },
+    {
+      "mode": "retained",
+      "cache": "warm",
+      "phase": "after",
+      "gpu_ms": [
+        0.16918399930000305,
+        0.16329599916934967,
+        0.16252799332141876,
+        0.1642879992723465,
+        0.1650879979133606,
+        0.1653120070695877,
+        0.16288000345230103,
+        0.1637759953737259,
+        0.1626559942960739,
+        0.16326400637626648,
+        0.16316799819469452,
+        0.16307200491428375,
+        0.1653759926557541,
+        0.16518400609493256,
+        0.16326400637626648,
+        0.16329599916934967,
+        0.1650560051202774,
+        0.1650879979133606,
+        0.16371199488639832,
+        0.16415999829769135
+      ],
+      "median_ms": 0.1637439951300621,
+      "cpu_quota_delta": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "quota_clean": true,
+      "error": 0,
+      "exact_outputs_match": true,
+      "output_sha256": {
+        "error": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "keep": "d346886a3006b44edb3f395fb21aa6e092272ebe94aa1bb992cdbed4cdd18ab5",
+        "quality": "9da636289fc8be44ad701443fae98409e3654b195c1f0d9818c9d5b14ec426e4"
+      }
+    }
+  ],
+  "complete": true
+}

@@ -147,6 +147,9 @@ increase within the quality bound is allowed; the global-step rule is unchanged.
 Recovery [omits inherited approximate-query scratch](recovery-query-storage.md)
 that its complete candidate extraction does not use. Ordinary quality moves
 and the candidate extractor retain their active caches.
+[Spatial ordering of large surface-query batches](ordered-surface-queries.md)
+reduces measured full-solve replay time by 10.0% on the 16K torus and 5.7% on
+the graded 8K scan, with unchanged standalone geometry paths.
 
 Each optional quality stage starts with a valid-mesh checkpoint. A stage error or
 invalid extracted boundary restores positions, connectivity, counts, statistics,

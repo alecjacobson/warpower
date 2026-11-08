@@ -17,6 +17,9 @@ the recorded uniform/graded 8K scanned Armadillo extraction failures while keepi
 all meshing decisions in the captured device graph.
 [Unused recovery query storage](recovery-query-storage.md) is now omitted,
 saving 12.85 MB at 8K sites without changing kernels or replay methods.
+[Spatial ordering of large surface-query batches](ordered-surface-queries.md)
+reduces measured full-solve replay time by 10.0% on the 16K torus and 5.7% on
+the graded 8K scan, with unchanged standalone geometry paths.
 The wide comparable-quality CPU performance goal remains unmet.
 
 The target includes ODT relocation, boundary and sharp-feature fitting, graded

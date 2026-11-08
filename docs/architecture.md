@@ -304,7 +304,10 @@ independent geometry routines.
 
 Optional [containment recovery](containment-recovery.md) can restore omitted,
 wholly material tetrahedra around nonmanifold boundary edges. Exact containment
-witnesses gate additions, and every bounded pass reruns topology checks. The full
+witnesses gate additions, and every bounded pass reruns topology checks.
+[Certified predicate filters](containment-filters.md) avoid integer work when
+binary64 bounds prove the signs, retaining the exact fallback and selection.
+The full
 mesher enables this extension and carries its selection into quality guards;
 the independently callable extractor retains its original default rule.
 If bad edges remain after the additional-fitting budget, [exterior-band recovery](exterior-band-recovery.md) can

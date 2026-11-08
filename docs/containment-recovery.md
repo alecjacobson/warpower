@@ -30,14 +30,15 @@ the closed material:
    with disjoint boxes cannot contain it, so this vertex is off the entire
    surface. The plane conditions prevent any input triangle from crossing the
    tetrahedron interior.
-3. Establish material membership of this strict witness using exact integer
+3. Establish material membership of this strict witness using exact
    ray winding. Strict triangle-interior crossings contribute their oriented
    signs. Rays hitting an edge or lying in a triangle plane are inconclusive;
    retry up to three fixed directions. Accept only an unambiguous winding of
    one. Arithmetic failure or exhausted witnesses leave the cell excluded.
 
-The membership calculation uses bounded integer arithmetic on the original
-float32 coordinates. No perturbed site, rounded centroid, CPU query or host
+The membership calculation uses [certified binary64 filters](containment-filters.md)
+with bounded integer fallback on the original float32 coordinates. Uncertain
+signs retain the original integer calculation. No perturbed site, rounded centroid, CPU query or host
 decision is substituted. The test is sufficient, not necessary: safe cells can
 fail its conservative plane or witness requirements. Testing only the four
 vertices for material membership would be insufficient; a tetrahedron can have
@@ -90,6 +91,10 @@ switches the device recovery flag and verifies that all five repaired cells
 contribute. The measured validation follows.
 
 ## Measured results
+
+The [containment-filter report](containment-filters.md) records the later
+optimization of these exact predicates. The measurements below retain the
+original recovery implementation and its pinned baselines.
 
 The [comparison record](../results/validation/vtm/containment-summary.json) and
 [artifact manifest](../results/validation/vtm/containment-provenance.json) retain

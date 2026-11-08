@@ -3,17 +3,110 @@
 Input surface topology/contact validation and tet orientation validation are
 prerequisites. Plane support plus a strict material witness prove that an entire
 tet is in the closed material. Rejection is inconclusive, not proof of exterior.
-All decisions use original float32 coordinates and bounded integer predicates.
+All decisions use original float32 coordinates. Certified binary64 bounds
+resolve unambiguous signs; uncertain signs retain the dyadic-integer fallback.
+Calling kernels must disable fast math and floating-point contraction. For
+finite binary32 inputs the degree-three products and error terms stay normal
+in binary64, including when the original coordinates are subnormal.
 """
 
 import warp as wp
 
+from . import _filtered_predicates as predicates
 from . import _integer as integer
-from . import _predicates as predicates
 from ._domain import next_edge
 from ._surface_bvh import SurfaceTree
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
+
+
+@wp.func(inline=False)
+def exact_triangle(p: wp.vec3, q0: wp.vec3, q1: wp.vec3, q2: wp.vec3, direction: wp.vec3):
+    base = wp.min(
+        wp.min(integer.vector_base(p), integer.vector_base(direction)),
+        wp.min(integer.vector_base(q0), wp.min(integer.vector_base(q1), integer.vector_base(q2))),
+    )
+    a, b, c = (
+        integer.relative(q0, p, base),
+        integer.relative(q1, p, base),
+        integer.relative(q2, p, base),
+    )
+    d = integer.relative(direction, wp.vec3(), base)
+    n = integer.det3(a, b, c)
+    u, v, w = integer.det3(d, b, c), integer.det3(d, c, a), integer.det3(d, a, b)
+    denominator = integer.plus(integer.plus(u, v), w)
+    if n.valid == 0 or u.valid == 0 or v.valid == 0 or w.valid == 0 or denominator.valid == 0:
+        return wp.vec2i(0, 2)
+    return triangle_event(n.sign, u.sign, v.sign, w.sign, denominator.sign)
+
+
+@wp.func
+def triangle_event(n: int, u: int, v: int, w: int, denominator: int):
+    if denominator == 0:
+        if n == 0:
+            return wp.vec2i(0, 1)
+        return wp.vec2i(0, 0)
+    if n == 0 or n != denominator:
+        return wp.vec2i(0, 0)
+    if (
+        (u == 0 or u == denominator)
+        and (v == 0 or v == denominator)
+        and (w == 0 or w == denominator)
+    ):
+        if u == 0 or v == 0 or w == 0:
+            return wp.vec2i(0, 1)
+        return wp.vec2i(denominator, 0)
+    return wp.vec2i(0, 0)
+
+
+@wp.func
+def triangle_bounds(p: wp.vec3, q0: wp.vec3, q1: wp.vec3, q2: wp.vec3, direction: wp.vec3):
+    ax, ay, az = (
+        predicates.difference(q0[0], p[0]),
+        predicates.difference(q0[1], p[1]),
+        predicates.difference(q0[2], p[2]),
+    )
+    bx, by, bz = (
+        predicates.difference(q1[0], p[0]),
+        predicates.difference(q1[1], p[1]),
+        predicates.difference(q1[2], p[2]),
+    )
+    cx, cy, cz = (
+        predicates.difference(q2[0], p[0]),
+        predicates.difference(q2[1], p[1]),
+        predicates.difference(q2[2], p[2]),
+    )
+    dx, dy, dz = (
+        predicates.scalar(wp.float64(direction[0])),
+        predicates.scalar(wp.float64(direction[1])),
+        predicates.scalar(wp.float64(direction[2])),
+    )
+    n = predicates.det3(ax, ay, az, bx, by, bz, cx, cy, cz)
+    u = predicates.det3(dx, dy, dz, bx, by, bz, cx, cy, cz)
+    v = predicates.det3(dx, dy, dz, cx, cy, cz, ax, ay, az)
+    w = predicates.det3(dx, dy, dz, ax, ay, az, bx, by, bz)
+    denominator = predicates.plus(predicates.plus(u, v), w)
+    return n, u, v, w, denominator
+
+
+@wp.func(inline=False)
+def triangle(p: wp.vec3, q0: wp.vec3, q1: wp.vec3, q2: wp.vec3, direction: wp.vec3):
+    n, u, v, w, denominator = triangle_bounds(p, q0, q1, q2, direction)
+    if (
+        predicates.certain(n)
+        and predicates.certain(u)
+        and predicates.certain(v)
+        and predicates.certain(w)
+        and predicates.certain(denominator)
+    ):
+        return triangle_event(
+            predicates.predicate(n).sign,
+            predicates.predicate(u).sign,
+            predicates.predicate(v).sign,
+            predicates.predicate(w).sign,
+            predicates.predicate(denominator).sign,
+        )
+    return exact_triangle(p, q0, q1, q2, direction)
 
 
 @wp.func(inline=False)
@@ -28,37 +121,10 @@ def ray_count(tree: SurfaceTree, p: wp.vec3, direction: wp.vec3):
             tree.points[tree.indices[3 * f + 1]],
             tree.points[tree.indices[3 * f + 2]],
         )
-        base = wp.min(
-            wp.min(integer.vector_base(p), integer.vector_base(direction)),
-            wp.min(
-                integer.vector_base(q0), wp.min(integer.vector_base(q1), integer.vector_base(q2))
-            ),
-        )
-        a, b, c = (
-            integer.relative(q0, p, base),
-            integer.relative(q1, p, base),
-            integer.relative(q2, p, base),
-        )
-        d = integer.relative(direction, wp.vec3(), base)
-        n = integer.det3(a, b, c)
-        u, v, w = integer.det3(d, b, c), integer.det3(d, c, a), integer.det3(d, a, b)
-        denominator = integer.plus(integer.plus(u, v), w)
-        if n.valid == 0 or u.valid == 0 or v.valid == 0 or w.valid == 0 or denominator.valid == 0:
-            return wp.vec2i(0, 2)
-        if denominator.sign == 0:
-            if n.sign == 0:
-                return wp.vec2i(0, 1)
-            continue
-        if n.sign == 0 or n.sign != denominator.sign:
-            continue
-        if (
-            (u.sign == 0 or u.sign == denominator.sign)
-            and (v.sign == 0 or v.sign == denominator.sign)
-            and (w.sign == 0 or w.sign == denominator.sign)
-        ):
-            if u.sign == 0 or v.sign == 0 or w.sign == 0:
-                return wp.vec2i(0, 1)
-            count += denominator.sign
+        result = triangle(p, q0, q1, q2, direction)
+        if result[1] != 0:
+            return result
+        count += result[0]
     return wp.vec2i(count, 0)
 
 

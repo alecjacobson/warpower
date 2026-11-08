@@ -15,6 +15,8 @@ work without adding device arrays.
 [Bounded tangential topology recovery](tangential-topology-recovery.md) now resolves
 the recorded uniform/graded 8K scanned Armadillo extraction failures while keeping
 all meshing decisions in the captured device graph.
+[Unused recovery query storage](recovery-query-storage.md) is now omitted,
+saving 12.85 MB at 8K sites without changing kernels or replay methods.
 The wide comparable-quality CPU performance goal remains unmet.
 
 The target includes ODT relocation, boundary and sharp-feature fitting, graded

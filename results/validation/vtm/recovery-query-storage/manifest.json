@@ -1,0 +1,1941 @@
+{
+  "scope": "Publish constructor-only recovery storage qualification without altering raw evidence.",
+  "runtime": "cbaa691a55db0bfc6465373b1ce72342896a1197",
+  "baseline": "5035fa5895a3bdcc9542bbeebabd75f3d955450b",
+  "runtime_source_sha256": {
+    "README.md": "e9a30cfc626c653217587791cb947eb7770726e984e4f9ba6d344d306b4c35a4",
+    "benchmarks/__init__.py": "aec4f6323c9af970cf489ad57de6195f5ef87df6edad0eaf51772e8c1b5506b2",
+    "benchmarks/active_delaunay.py": "dedc3721fd0b4eb4aef2c1bac457d64e225e7d44c578543472d16712fa45c06c",
+    "benchmarks/amplitude_order.py": "30b7eff6791a9c223c9014ce294af52b4a55a876aa6a6f85a54575754b1fe9cf",
+    "benchmarks/audit.py": "a1cac06ad03b11f588b8b3ea916091f3a8b238355f1e000f2b6c8e018ec0351e",
+    "benchmarks/bounded_predicate_proof.py": "90ce13274a06dc7a2f9dcf9c684fadc1967317d1e6f714956b08b0dae49a6002",
+    "benchmarks/certificate_fallback.py": "56f63983be10d2cecced520299f5fd8312e56071679b197c5dbef1967cb92e7e",
+    "benchmarks/compare.py": "790623d2707147a0614a828212664dca47c9d5e46a65380817c1e3af2ed5dd50",
+    "benchmarks/containment.py": "deecfe5cb518e1bcbce536e89a2bc1a6a93fc7072088ae9e5b760c7b2215d516",
+    "benchmarks/control_loop.py": "5f242c360349286c62ea42f4c8fa57f07eba58d1f011f32a1da29304a9b61454",
+    "benchmarks/cpu/README.md": "8295626d1200d5d4bd1bc49c25d6d648f16daf64481c6a68dda8923a2083774b",
+    "benchmarks/cpu/check_delaunay.cpp": "1a2b1ec4537bbad7a2ac5edd237d853c88bc2167e864eac2686fd9e98ccc3fcd",
+    "benchmarks/cpu/delaunay.cpp": "63f8510d06858f3641a57d1718fb7bfb4c64972fa6a1185ee2afb403399b8b5d",
+    "benchmarks/cpu/mesh3.cpp": "2be80a2312f8093dc9fea912b5e5aaa8b6b160dc084dee5a1926cfa9223e0f29",
+    "benchmarks/cpu/surface_distance.cpp": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d",
+    "benchmarks/cpu/surface_intersections.cpp": "227f37892bdc6a783ed12bc110a7c53571862951f264a5b72d07b7d21f341775",
+    "benchmarks/cpu/triangle_contact.cpp": "1ecbf2edad5bdaf0f2f14d4e7c09ef27b842f29d853b35a26b71d827c9f65192",
+    "benchmarks/cpu_mesher.py": "dcd64bb8bb725adefd5d4e5dc9852b0090ed835e33f6673bc938e6437424698a",
+    "benchmarks/datasets.py": "c06985fd7d32f87c193dc096e434b3389a2456a94451c778be5158c808e14f69",
+    "benchmarks/default_path.py": "0c97b2d2e5b5e2a1995fbdb455b1a333ae00c37d2bc673a1f47221e1d05aceed",
+    "benchmarks/delaunay_recovery.py": "a317c72d588feefec484ec85ef11a82f569614f4995131736ff5237ab7348471",
+    "benchmarks/domain.py": "8738c173885f57f82c3168b7b324cca13c35ac70c0d123abbfd96cdbfae34fad",
+    "benchmarks/exterior_loop.py": "f15db0dc5d0bf4d8f7896caf8dd808e8011f5e19a59266c49eda2d3a78cf7374",
+    "benchmarks/extraction.py": "c8b1b6ea55944de8af60da3eea1c989696fb3fb98c2e7e33f1f36e9f23807964",
+    "benchmarks/facet_completion.py": "ac8f46ea57539e83a3925ddb882cc471f4868d36df28837fab9c5ee53ae5bc37",
+    "benchmarks/facet_recovery.py": "48e3da3b1e530a4903e85ed0aac4b359798ff873d580fab13a6f65ca736f7fb6",
+    "benchmarks/fast_candidate_matrix.py": "6d61d8fae12af5266224585a533715dfe243d3a3ca497ae8f43e4a6a90d22387",
+    "benchmarks/fast_candidates.py": "2666a8916fe9677c3d75242867bcd758b940b9963a3aa4edd4d3a1f5dcd614b9",
+    "benchmarks/feature_quality.py": "06f9c355f193ad5c6ff8b63a98d33bbbaaf497b965cf3e84459efd3fa638d4c8",
+    "benchmarks/fetch_scenes.py": "99a8d693aae203927a012a8e4e152c04fb838eb49ea6d0a447ec10a9109644f3",
+    "benchmarks/geometry_regression.py": "34751f0eb34023aab8ba94da7c817b4255bf287239baa0c589551f39f83d8a14",
+    "benchmarks/global_certificate.py": "a7ebe54dd446a63b85378fab4556014e2a01816a9c86be420cf88f4986b6ac20",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f",
+    "benchmarks/graphs.py": "99ce61f786157147024705d2282803dc3d7e6c2d17812dcefd2a3a29f84764dd",
+    "benchmarks/initialization.py": "d4fdbc016406e0f9560912ff3ea687b782bbb90a2d2f17481bb504e00b582f3c",
+    "benchmarks/interior.py": "3b11554d7882e0361fb04929299b06e8c101193177415e4e307ea0539ec1909f",
+    "benchmarks/jitter.py": "ecb96baf3daca6e4a0e62efc2cc10122a3f0339725d90813291cb8e355153153",
+    "benchmarks/local_certificate.py": "9e17b0321af3b6116689245a525717d8c17c5c600e7a0844996836ec4dd6ca9c",
+    "benchmarks/matrix.py": "45135d3e98d852bd18939e56269ae67f4cc503bd81ecec3252175da32009bd57",
+    "benchmarks/memcheck.py": "707d7d29ef6469d9cc52f56d6f21b0dc5464a6aedf858eca09ebb91bcda6df50",
+    "benchmarks/memory.py": "139f0195ef37b2d163797332166b2b70774a1c34324abe742027caac08175c89",
+    "benchmarks/mesh_quality.py": "0a5765c4d82da5e24ccda94bf2c149875c83932bc314c9211b276a99a893e0dd",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "benchmarks/mesher_loop.py": "e384c22f1e2334aeca3d0c7441eca7354d8c1d75a99b3a9fe0e0f93df449c141",
+    "benchmarks/mesher_policy.py": "75a2b13ef4e10aa07ecdbc8e2b856eb171c9da7836c6bf83b0fa4f43fff12d98",
+    "benchmarks/nested_capture.py": "4ba4856c8af8fde4e1c738d9f7924523c02e83dac593864d6c6cf2741704b568",
+    "benchmarks/odt.py": "556322d06aa7108b2a6a76f01d15151db7008a93dcefe68ee08d3b785f49191d",
+    "benchmarks/odt_failure.py": "3b1c7402bc752678048198626919c2de6c5e50a1a1ef28f81860c104531efc99",
+    "benchmarks/radix_capture.py": "9df57f171e7287d4765d89f7875dfcf700b689dcad502c923a3c7498e34d49e7",
+    "benchmarks/recovery_policy.py": "58db4056f1de878f9ee32cd7a722486618dd2ac4b45ee9c396bbac45e00c4d70",
+    "benchmarks/refined_hand.py": "4fdf7e0d8dc05d9b484b242cef42f9832f4082658c2db9629dd59e612e3ce308",
+    "benchmarks/refinement.py": "86cd281caeee343f6cd748f998b72840348c679ad74734a2ba7da07c8b0281fe",
+    "benchmarks/reuse_delaunay.py": "99b23c95af424175126dfe405b588d29e5e7c55947b6ae00b7974c21e9aaf218",
+    "benchmarks/run.py": "30fc6978f5d1ee4f486f69ee3316a27fd7edf30b5d9f4dc4a3a8a47b77419d0e",
+    "benchmarks/selective.py": "c1530960d11574b1f75be7fa6db78bfb4f9455c72ca169b1bd6356e22d113936",
+    "benchmarks/sizing.py": "1086b3e357d960432ab9203eb026f16d28ae70daa81b5b439826bb45d2200680",
+    "benchmarks/stable_centers.py": "cf7a7c05e9cb3b414baec12c425c3788aaa3b26fddc123e896d0ac56dc323d24",
+    "benchmarks/stable_volumes.py": "6da84b42e0a2feee55cce3dc96810f960acda9f2d7122f3f5536466dad58c9fe",
+    "benchmarks/summarize.py": "ef218ab6fb7c60ab87400937292b357712638735799476960cb671418e5e4cb1",
+    "benchmarks/surface_distance.py": "977463196b35b253c1fee0193f87522dd8d43af87ad636c73737d64b678d6f2f",
+    "benchmarks/surface_distance_audit.py": "5c9c83555dc3d75ed5a697ce0bdb0388ffa68ed74dbb36746c19675ae0c58f26",
+    "benchmarks/symbolic_controls.py": "48658b1465d48a921ab4dc66f77c2d25120086c58a467133082b35b6ba23509a",
+    "benchmarks/tetrahedra.py": "b6429485a06a174687b092a3ffda29e8e14e414e825a8232ffc47603381a30e7",
+    "benchmarks/vtm_core.py": "acfae8356f3021a443036c9eda856797b5e8a564e287c4b57910f440fe3c0e2a",
+    "benchmarks/vtm_domain.py": "8244b3e036d038e5bd7ab6c5225144f62545bc02b22df4f1805a813d041bde8d",
+    "benchmarks/wide_extraction.py": "3665c607d1f786caa4d963df721d687a63ee1da5778b467e9bf58a79d016e29b",
+    "examples/__init__.py": "ac121f6f6650b3f9a5d6d9c65729a29df07f7d05998162d8f382d106725e12de",
+    "examples/fetch_armadillo.py": "2a098a8e224973dbb2dab308a75e95ff9b179316e1e81b1dd67a65bfa4ac0dff",
+    "examples/vtm_gallery.py": "7ef17562e1aa3938d2062d99f3d70b0a2b1b6e893ca72bb8742346989f5550d7",
+    "examples/vtm_inputs.py": "83284ecd146010c2d610b221bdfeaa16ce0b98fd59cda561c1602bdfa87bc9a0",
+    "examples/vtm_render.py": "ef908f1733b376be8b77fb1295cb09040984a1578d6058f09dede4d75522a3cd",
+    "pyproject.toml": "082b9b1c8f553f67769fbc39d46fe88eccb418039116ab46c59848a300fa74b4",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/_flushed_bounded_predicates.py": "ee34d64c929fe22400fe5b4184fb59790ed2ccae61eaa203d6c0348aa478e828",
+    "tests/data/NOTICE.md": "a3064a7b40df81d0a31ef9e46484b79765fe0af57eedf7db5b3355f7f501c7bd",
+    "tests/data/exterior-band-patch.json": "72548a0b5c79f4c48de06f4f77a10ea99a6f9aa3cfa45b99f97c65575acec673",
+    "tests/data/hand-fit256.json": "f5e17289d47d83e7f231645a1caa7a9fc6dc934cdcfbedc5de230b692e99b085",
+    "tests/data/hand-fit256.npz": "2e2ba670c80d1658b94fbc37a3daa4d9d5fec13c2049e55ca5aefa91675beb1a",
+    "tests/data/hand-refined384.json": "753d083d4eda168fe26fe68c34e4e2909db869b5b4805df1e81a8db2199d9f56",
+    "tests/data/hand-refined384.npz": "55cb5a457d4936b0dde1774b6661df1e8a4531fecaf3b2c2f23d488cb2b42e9c",
+    "tests/data/intermediate-cell-capacity.json": "bab5f84028c7660c411ea2b81be15da514305a9dcc14235086e2c3b90a653a62",
+    "tests/data/proven-exterior-continuation.npz": "e48c344e29b03852277bc8b0dc183580667d4dd6b21a44f878558e9cac8fc59e",
+    "tests/data/proven-exterior-original.npz": "3a2f9f8146928b144abc33e128f2162dcd7ff5aebd69c9369b2d1af46f624a13",
+    "tests/data/tiny-positive-tets.json": "92d4f78de1bea8fcb0a58baa3d634fdae946589505dc2cc9f02073f0d1721dbe",
+    "tests/data/tiny-positive-tets.npz": "7d235dcfb82d412a646df0bea266c4fce65d8bac19be891942b338740bea8afb",
+    "tests/data/triangle-contact-regressions.json": "95aceb5841ede392999c2e5897e8e582b3cb8b7b89e6275e360940a20df17173",
+    "tests/data/unassigned-hand-sites.json": "5d72f9bd7c5e0e53639bc800637ff0987cfed3bb3d9d9128ea00ae1438b4a508",
+    "tests/data/unassigned-hand-sites.npz": "4f7349b355af0394637b922e3d33d08b8ee48c270d9ef37e1c60973a72c1ff20",
+    "tests/oracle.py": "48420fcd46156f6fd1c0b6bcb9ca0d2696652814253add0620f062fc5dd2113c",
+    "tests/surface_nearest_reference.py": "233067ec3622da5cd2ea49d09cf7d8de978916422de636195f9ed9b460229401",
+    "tests/surface_traversal_reference.py": "b27c042e2ffbb4a987350b0818e69fb89143c987bca511d8869afcf873084f3f",
+    "tests/test_active_delaunay.py": "954e144b24c3be5033d787290ac75b6ee8054f2f880d7d33a7d024f4bce5051a",
+    "tests/test_active_sites.py": "193cc7f1dd52f56084a771ee0257036af85e5c0958e063f22356ad5b9bd160b9",
+    "tests/test_amplitude_order.py": "597f577b894740dc9de1a4aea275160b257803e6efd3f76e855e577c46ced1c3",
+    "tests/test_analytic_face_search.py": "42244e86aac930bd92d391413c90a78402e74df89fa04ac06f08da2841546a20",
+    "tests/test_analytic_predicates.py": "125a0dbe23ae98593874a894859412e864fcf1da4a740b80047756322470ca28",
+    "tests/test_api.py": "6f2c11b0e5fb216eb56d001db1cb8095e0e037812876ce8b56242bf086c1ef1f",
+    "tests/test_automatic_sizing.py": "8d0fc304dd32b62913411c6e54bd0911fe02215103f8dcc52bc3ec7cd72b276e",
+    "tests/test_axis_hull_support.py": "632169985a431c359fa41d01e9cdb4d4335c6387302a74816c6933ee14b7b395",
+    "tests/test_boundary.py": "a9f025bdc0c2e0afb1669dadc83a91ddc143100d0f3fdc64c7b4040e3ec37092",
+    "tests/test_boundary_rounding.py": "a126c9aee674cf06ac65c10480e493506b691fb8034c341500526701b9512b3a",
+    "tests/test_bounded_hull_box.py": "78f70047ec5edb551b364e3cc70e9b88d2013dd2cca8bf302391d0554eb8eb76",
+    "tests/test_bounded_hull_support.py": "151b018db30cd8603af564987b315386e168d46066ba6c848187546aaf2e69e2",
+    "tests/test_bounded_predicate_proof.py": "dd889cb288e45200d172f2c5c3c734690bc55173c8d8b3241782c82f94983c01",
+    "tests/test_bounded_predicates.py": "5533a685b89e448b63c6df6d96c92e4cd960aa6bf2a67baf4a99aaeda9e6d05c",
+    "tests/test_bvh.py": "26c93dd7b027de11401933c3384b446c09456c233ba8a3360520e3749fe68696",
+    "tests/test_cell.py": "573f2c8a2a1dca553d7a497fca985a7e06fa8a65c3cd9017610ec7e04110fcb2",
+    "tests/test_centroid_ray_filter.py": "830fabec3d3bf5053a3d664a22985c57b699c4227e76c6abcc8126e288f96baa",
+    "tests/test_containment.py": "6ebae623d294dbe35d33b93aa5ef7eac84994384ca8611e9bcdf16c5d7258db9",
+    "tests/test_containment_mesher.py": "080cd7c1decd7249c2bb4ee8e1ea602ad6142a9b7833be9c6c9f46e3dfd47f87",
+    "tests/test_containment_nested.py": "d43a63c227bf33ade2359994a24a53b0c61498ff05ad9a0e9009bae38a27c0eb",
+    "tests/test_containment_oracle.py": "67ffc0dc4dd5b72c6876bca5139f6fb98d45cd99b4256d7b782b943098bf4ddf",
+    "tests/test_containment_ray_filter.py": "7bff2141f114a2c41fb476538a95086c702625dc3b545911df0ce8d56e51970a",
+    "tests/test_containment_selection.py": "4e2a0932a3b80508f6125b7c10f298023032dd8120cd759c5544a2d6a960ffe2",
+    "tests/test_current_selection.py": "b327bd9bda9851fd13e35db241d58db3d49f117533a0f70db2b2eb67e0486965",
+    "tests/test_delaunay_recovery.py": "a372cdaa6791cd1244fd741cb5ceaa3c194fa369a03661a5720d5030f37530ea",
+    "tests/test_diagram.py": "ad5daaf9e90db281da36e7b880fabcf45c18d759dc8bcc0e1ea5daacd68195b1",
+    "tests/test_domain.py": "dffc6961eaa706bf56fb834c97cbfb603ebd3f075ba37eeb11dad79f2ea413c9",
+    "tests/test_domain_topology.py": "91de7e2903ac06f43d48ab6a829442267d572955c095170cdc4f0276497ec416",
+    "tests/test_exterior_band.py": "0e214e2818915c065eb2efd58126ace605529d519aecc603e9b924561a7a38d6",
+    "tests/test_exterior_proof.py": "843332aa837a688b46665779faeb110896aa48057f6efb2fd52cf96bc980e489",
+    "tests/test_exterior_proof_bvh.py": "1a98b480b8cb494eda3aa2d4fa211047e1afb7ca8e1bdf83029badd7132b3359",
+    "tests/test_exterior_scanned.py": "ca4647d79b32bca8c6880c81921b3cee6cb31db80ebef53e0e99ded2c6b685ff",
+    "tests/test_extraction.py": "32ef87874f704454ac6b58363a4e2f6996685c7a2393e2f6779ef66a6adb97e6",
+    "tests/test_face_certificate.py": "e2f104ac1fcb7443017b5ed5efbb602020bbb99c4fc397598265a9235e3feafa",
+    "tests/test_facet_completion.py": "ad3519ba087a19002d7c650e863e1f1ab6e78f118ce819fa3f7ce304d41cc3cf",
+    "tests/test_facet_recovery.py": "7ea40c5b7186c16584418f8c44df4f91b9d42e21c24f6e8c679d04a63f6018ac",
+    "tests/test_facet_seeds.py": "d4078e9b5390c9feb81eb524ea7831f64329fb307d6218a07a001b91d2b699b2",
+    "tests/test_fast_candidates.py": "0b560788841d415280130eff9aa7a3bbe76bf2b06665e649f4ecf8fd48b28092",
+    "tests/test_feature_quality.py": "e7ee05158baf0c85a8826dcb5622e9eeb03b640b18aa3f16998d51f88cab07e4",
+    "tests/test_filtered_predicates.py": "e88b3e183f6dfce5b657d4c0c6e0a0e73860b3148bb61e47c01716f9518f49ce",
+    "tests/test_graph.py": "8458b3bd5385aa007bbe99089852d81ef57d73162c426b64ce0bd4480936cfc8",
+    "tests/test_grouped_query_bounds.py": "73d737689ea965a7846ac03979ed79a4b85aff93cb309c4d5ecd8eb6f2f09242",
+    "tests/test_grouped_query_masks.py": "a3e766292eaf218e9299b98a4a3b8ff58e89caac032a4d460f4960c3485254c9",
+    "tests/test_halfspace_predicates.py": "943423db62d6c9bbcc0cd13c46dcf297d88ee67e19f5671210b9f25e6e6947d1",
+    "tests/test_integer_arithmetic.py": "86d87aae747f8af078236bd6bfd32f41bc2715b9381684ed605849d63e8b106b",
+    "tests/test_jitter.py": "ce182f424d44d954c0868cfb7b0b625f583afa5e33972c8674f58b0bcaa80cfb",
+    "tests/test_large_cells.py": "4b5eb900e3841eccbbda87249f0c1ef0075eb3ac0dba2e6ccdb040dc35778f2e",
+    "tests/test_large_reuse.py": "9f6056eb18dd1b70b588da14b643f8925060e3209a23df8d975633da7d9a08e3",
+    "tests/test_larger_prefixes.py": "91a9d1b0b7eb7bfd714e8bb4a48dc9e2d3ae8d0f6aab2cdd27c699c493900ecc",
+    "tests/test_local_backtracking.py": "880f38a764218abd10f7a48be4d9efea42a7096a56cb90c7269d6bfc4b1cb045",
+    "tests/test_local_certificate.py": "9dcd6bda42c67533725fb6d60b5fb1a814dba1c93bc193fcc2e252030b2fe17c",
+    "tests/test_mesh_api.py": "3578ea222aff484d6b0b4865e7ba4e99be677160782d3d64c2495eff822d1cbd",
+    "tests/test_mesher.py": "a1542d339adb5f33ba09509befd633319471b38064520222dda9eaaac915e571",
+    "tests/test_odt.py": "8568e3141bfb19b578a331981dea31a7cc6fe738428ad2d7895d7d5aa8ed6015",
+    "tests/test_parallel_certificate.py": "399f5539558e94cb38aec698c8cf0ebd2986c3ffbd68e9b4aaae5477737a6690",
+    "tests/test_predicates.py": "de069e809416286e46ed31a9218a5ae2f568e193cbeaead083094d3f2eda1a19",
+    "tests/test_prepared_point_bounds.py": "07a0d1fadd3b75666242e6b6ca97a1ba1fadc4ffa5c77bdba09048d2ea6a4c30",
+    "tests/test_prepared_query_masks.py": "1792bc27a333e42659213241602e7c1ca3804b3d1facc82126334b6cf88a7faa",
+    "tests/test_proved_completion.py": "d724e4965d65f0be00783753d70c0cdd68ba9103756a8da9a8e904dec34750c7",
+    "tests/test_proven_exterior.py": "ae1eb9a7014c5df90eae2038d42c216ffe972365b94a300760b0bb3e02beaee4",
+    "tests/test_proven_mesher.py": "bd264f1b692474eba71117148e365b844ba9f3250c292cd873b4c1cd1ec75cea",
+    "tests/test_recovery_query_storage.py": "15f1bf59daf54938c320cbaaa0404badad0247b04fc05ef0ad3d54e01478efb7",
+    "tests/test_reference.py": "ad6b665701747046fe37cec98d3ef668c42d376064f2d8ba10cc17a0200259da",
+    "tests/test_refinement.py": "2edb4416c77ef830b251d0550448effb7cdfa8092817dd3bf5603f7b23ab74f2",
+    "tests/test_reuse_delaunay.py": "fa2fcd08bcd8e33a12a6879af17d75ba15a8fcb72d43fb1cefbddb987afa0652",
+    "tests/test_sampling.py": "5205a7b7db6671a2f84e693bbaf7cc0e8d425cb268b8e1f9efc7e94b792cc38b",
+    "tests/test_selection_classification.py": "4fd088676c03625b7d1e953e1cf103038495df3f35e52b2e6fe624443538f0af",
+    "tests/test_selection_extraction.py": "1d4da4cbff877ca67a9e8ead3191e9616aaa727426588aab519db4a564e0ea2a",
+    "tests/test_selective.py": "4a90989cd455a5d23c41f8a75b7a2b2bb99f997a4d98db309c79c76d5c208921",
+    "tests/test_sizing.py": "26a59c31b6f027cc89f33cfbce7d23a509d7bf54eb420b8ecf8f25248cf2471b",
+    "tests/test_sphere_bounds.py": "51168c640fde377c0f38a96f350e3cab44df65c31c23f95a44dc11f1330f039e",
+    "tests/test_sphere_points.py": "9fb240e421f60ddd09b37f9d2ba4a824a6b4f603c42ccbdf63f751960af41643",
+    "tests/test_stable_center.py": "f1429a3bd74bee2fe1bb37e9c9a03fb18041db33ddcea579d1c464fbe5268170",
+    "tests/test_stable_center_fma.py": "4024a777d34c24b5fc8614a0878268f74265e9a9094cfc4bdd43895b4025764f",
+    "tests/test_stable_volume.py": "359662b61e11c78f17fc4501f73f0d7c58ed44e93284e656af41882948d8ff81",
+    "tests/test_stackless_dispatch.py": "2768734d24fd063a287a896fbc61291f7d0d133ab8784037070f1367ea1e91bb",
+    "tests/test_stackless_seeds.py": "4effa213e9d0abcc858291ec87c3d0b1edbe7b6ae33af6cd051775e1191541ca",
+    "tests/test_stackless_traversal.py": "86afb18e2229fddb7b1f6aade7aca17493e0c02c9256cc95200085c4fc494a43",
+    "tests/test_support_reuse.py": "383d324f64dab001f0d9ce3ef223ecfc8e91206e35c4db83cbb6223985370a54",
+    "tests/test_surface_bound_reuse.py": "bf3578e18783df3ece5658d06ce106ae6fee0e339f51b09d6c60df354c24c34c",
+    "tests/test_surface_query_cache.py": "ee6880166e8384daf0e772bdaa85f4198cf0db73781e438f9a4db1afe7c29d29",
+    "tests/test_surface_radix.py": "f9a7250a94786794b37aa5b2a989ffa78cb6281c3efeea7025def545a4a86041",
+    "tests/test_symbolic_bounds.py": "5ca86f19643fb24b7e77e9a0ff6c05630232e211e379f4345d3dc74554370f6e",
+    "tests/test_symbolic_delaunay.py": "9dced2fb1930a86c59004060c3a9ba2e003b24a92eded7efed56f1fd75aa54a5",
+    "tests/test_teleport.py": "3c4b25b95ce0105e43dac4f1dc0f9fd51f722e678f43d7afee860c3d6e4a91cc",
+    "tests/test_tetrahedra.py": "c2b2fc56d66fa5cfc296ad029c708c92d8d0a9bb50673f4ac13500437f56ca24",
+    "tests/test_topology_recovery.py": "3b32e2ed5a02e83c5ec20742ddb545736615a605deee5f6f69def88f397aaafa",
+    "tests/test_triangle_contact.py": "deb0846b1018626bd84856a749e098c245073b1487d1e549cfed9ca67569a08f",
+    "tests/test_unproved_queries.py": "adcd1bdcceab384378e332b0d4352ed06cebf6231d684986b63827521ee0a6b7",
+    "tests/test_voronoi_volume.py": "73fc95f57da09052e90ac1047871f6fbc8da5a504737297744f65d73b5de7520",
+    "tests/test_vtm_controls.py": "755c5403307c4884c47d7df3104b5290ffaf66faac43a85091aa5a7eb5a1ffc3",
+    "tests/test_vtm_core.py": "1b6725e4bdeb22ec24fd20c2a691ade9d0b8a2b5d20d7c7ce86ec584896cfd58",
+    "tests/test_vtm_domain.py": "f9e8ffd3dbff5751ecf01d8d1189630ea167fe87692a7504a6c74c3511b62ffd",
+    "tests/test_vtm_examples.py": "31117436fbf59e7a1bbebc42655753e9195e826eeb225ad803d34eae2c5f569c",
+    "tests/test_wall_reuse.py": "d83876423fe3a2329cba4cde0ad11d197d1418241167d2a17b973f660d0758ed",
+    "tests/test_wide_center.py": "09c7a84d78b96cfb832f3177d4787f513d83210c5c11a52bf4c9169e9bbdb19c",
+    "warpower/__init__.py": "bc95cfd203def8ddac4d3171fee33feb98bbbef10a8ea5f98eef824140244874",
+    "warpower/_active_delaunay.py": "fb52f8815537614c38747c62fd164d5fb47cf1ffb5b0a7c8fbc46dd2080ed169",
+    "warpower/_active_sites.py": "3c17ffe07d129ee4c46317f1ce1ede2ed0d96a0f237ddb718f77e401a95f7cc1",
+    "warpower/_adjacency.py": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+    "warpower/_analytic_predicates.py": "b6d8ab23dfb23e107f8dde1d9e473085f9a45004115279531bfe219194bfad15",
+    "warpower/_api.py": "f84bec46306a84d7f1b72c6dc1d9dc560cb2905ad74bda63f4bffb97e4e5ad97",
+    "warpower/_automatic_sizing.py": "f6aab578b13d3689648452c49c4e4474b40005a8215bc6787cf6811037fd713b",
+    "warpower/_boundary.py": "68525b60978aef6eaf0f8f02f7693747b5fec6a5e02ba260cc67d82f389c94dd",
+    "warpower/_boundary_rounding.py": "6db76fc3ccce54914710dee1a134655d9b8934a3352686b9f41f2e9e92926e07",
+    "warpower/_bounded_predicates.py": "2a9afb83f8c64eea5f0597ffff0ccc9d5007f71f1d37a41f14da7b3e06df22e3",
+    "warpower/_bvh.py": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+    "warpower/_canonical.py": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+    "warpower/_cell.py": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+    "warpower/_construct.py": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+    "warpower/_containment.py": "e4913d8e25cd8f3a058b9a3175d69646cb3a7845a9fc2cb24ddc038373495e86",
+    "warpower/_delaunay_certificate.py": "bfab680e65db7757c519c0087cbbaf1d04ce5872e354c25bfee50f455fb1f6f0",
+    "warpower/_delaunay_recovery.py": "9f5b5b330bcdeeeb64ebe0eec5823d1357f6c79f1af4e1131dacda7b0d7f8e46",
+    "warpower/_domain.py": "7c82b21b9e1995301d36570a2a455c041c6daee78b5e736d35cd5df69d94a88d",
+    "warpower/_domain_topology.py": "3c0746b94c2940d275be28626e8dd257aa0b5a284d8459bd4cec226e4935826b",
+    "warpower/_exterior_band.py": "4fd5fae2fae29129ec4fc9cb787946491a451dd34ec3d1e0a10a35dd070d60e4",
+    "warpower/_exterior_proof.py": "b8bec5867ef20b2c65462844a078889ca68799696b86c981f811a6af689ec0c7",
+    "warpower/_exterior_proof_bvh.py": "fd97fe83ac95a94f7061f0c9fd737953ffc0d1dd0dc3ce87dad0df2ffb9f3e23",
+    "warpower/_extraction.py": "6951564e7a231d46538fb0d9bfbf6b948b68624f4f350208451e171f00cf11c3",
+    "warpower/_facet_completion.py": "fe32e851c37ff5564393f4f6d3d4cfab6a43cf9927db3fd1bb0bf8d0b4cdb6c8",
+    "warpower/_facet_seeds.py": "8f88e244a9e9529bfc562a2a59edcf41c8f1b045da4a470655549fd6dd32658c",
+    "warpower/_fast_candidates.py": "740377dd16ccfec7b0bc630e4d2a483312a2a8cf398e067d37b3973e18d9a483",
+    "warpower/_filtered_predicates.py": "a9a74285885f362deb634972709ae6fe47dbdb33320e3b8627d3b85669578564",
+    "warpower/_graded_odt.py": "37538c9d51d3282a9ec85b6e1e7f6eeba6876598d5cb79f30d0dd8d736d45778",
+    "warpower/_graph.py": "d7e489b28717f72a25e866b59f1c9dba3855222e83cd97e848bf7e6b68bf18e2",
+    "warpower/_graph_construct.py": "9f305d39185abc6602b85431b887c3bd2b5152864ec18ef35e6a71e3a6690e42",
+    "warpower/_graph_tetrahedra.py": "ddbb067ef02cfd20032cc29d870bb19b9d30b4cd2a649516be5c547ce5b94540",
+    "warpower/_grouped_seeds.py": "8d0ffa1556c179ff11d0ecd357a55cdb198897a4fc4c8336389744b0aff19785",
+    "warpower/_halfspace_predicates.py": "46779c8236dab4048344523a653ed1b864ba77082163f533b991fb85540db164",
+    "warpower/_integer.py": "94205ab5790a308f51b083fedc8cb905050602369061d65d231b91f175a0d641",
+    "warpower/_jitter.py": "b184d21b47ce3e96fcf1587722d9be3c276240fc776ce85ffa10b3442dd85435",
+    "warpower/_mesh_api.py": "37cf23ecf09d34a7bc0a77ebe73d8e2102c37064b1ab4923acccca993ea0678f",
+    "warpower/_mesh_topology.py": "5dcb12b58e59446e5dbf4db6a1bda2eab3a32a55c833e453e3b9d48f3dfbcc24",
+    "warpower/_mesher.py": "489610425da073766937e493535ec7bbba80fe8befe1e9e364302762bd3eee47",
+    "warpower/_odt.py": "53d23df8f23de165d98598c7fbbf53e2944f82ee82f6a74c2b135e142dd589f0",
+    "warpower/_poles.py": "b93f434020a357025dc3a067bbb0e8ed2c4c0ab66ecee0108db5a2c6762ea18d",
+    "warpower/_predicates.py": "20a204a1f6774353d3ce5d35e241db53a0ac075ef40714542f0067010aa50d26",
+    "warpower/_prepared_seeds.py": "86246833eec66426191c3e5465f6eadcd8437724893f4ccecf6f4f8564d89d56",
+    "warpower/_proved_completion.py": "23336177436b94c6bf99c33e0aef58d921a51b1529c69787bddf743c37a41635",
+    "warpower/_proven_exterior.py": "797e56b17d91683cc1088528aa2437cb68eed4a9f08126fb2ba32ac5444d9778",
+    "warpower/_quality_moves.py": "ab113bd452fd54f76fd29e6f93c457cf99978a06bd8d8911226d558760affe88",
+    "warpower/_refinement.py": "003dc220a88044aa18f624676b5d1941a7bed314f1cb17226f962d8a4d61eb81",
+    "warpower/_reuse_delaunay.py": "862a4671c2daa9df7fe168625eefb4206184d2f9cb7c433f8a1aeab77c248ea5",
+    "warpower/_sampling.py": "3f4ef9a1ed354dab1a0f54528817683d68af1bc81c1926ec631834d93a8edc70",
+    "warpower/_selective.py": "4fd3235060bbbddc31b6b06d2508129318f6066b8fca8c7cd7f6c9e6e333ff19",
+    "warpower/_selective_backtracking.py": "e7111bcb1505045a4f73cbb72b4c3c54a4c814e21a4d5bdd69d046670d29223e",
+    "warpower/_site_bvh.py": "60a307c003c02f931cc1d6ee2f4ca1b417d34be6a4fae3f6d968be17dda7c92b",
+    "warpower/_sizing.py": "fe30bc06b3ad23479367a00afb2356e1103e74beb5e764e5f47e91ba8a343464",
+    "warpower/_sphere_bounds.py": "865f1d7eb961ffab42d98213ff52e52cb7a60973233cb03923d3f559e1e72c3c",
+    "warpower/_stable_center.py": "1d3f4a58c799f675edde5dea9f77dd50c36b68b7f8580e809a1b88d761d770d3",
+    "warpower/_stable_volume.py": "c326ad964bd1bf1f11fcd0682e1cacc8df56b7a3ccb3815ceef3694c3ac36a90",
+    "warpower/_stackless_seeds.py": "8e87592618d14f2d411abd7e7b84f823d43aee3ccab35960535b917c5680d22b",
+    "warpower/_surface_bvh.py": "b8bb9d8bb798fb5b38fcf59aa55c858a1af56de1d57e98b630f0b37b593edcf4",
+    "warpower/_surface_query_cache.py": "6d90d7649cd775bbdda66b30dbe727bfd7adcd9dc5bdb072471cff0c4115942c",
+    "warpower/_symbolic_bounds.py": "b071b45a8a19b93a322406680d10b6137c9cc7677efeb8776b98b7ae8c678db6",
+    "warpower/_symbolic_cell.py": "b3fbd57892ec33cef5e03b094d9cf454d17ffa9ae0ac4d886cce6ca210ecb7a2",
+    "warpower/_symbolic_delaunay.py": "79760a7f1770a8902288f4a8f750eb2170ba87899260a637817b65cc2f2aa451",
+    "warpower/_symbolic_tetrahedra.py": "52af32e5cfd0686fb82548a512f1b89c703057a45e0eb7597b9918d7a931e29a",
+    "warpower/_teleport.py": "4123f2a28bfc4324c5340adf85e93538885cd54b5e3f5b11107bc07183e7ab4f",
+    "warpower/_tetrahedra.py": "5db1eb6583f84bf99a81c9aca8aabb1d8fdc8772d6db7fe9bb87d812ad09f2ec",
+    "warpower/_topology_recovery.py": "1c5cd9ac5090f6077c1d2f1198e5e3314fc364c29e1f40f777aa638a6362c96c",
+    "warpower/_triangle_contact.py": "01ebcddc6501f402157cf4a46738bffb6e8a55932dc11a35d6b79855804388df",
+    "warpower/_unproved_queries.py": "36e2ab604523450b23fae49d4cc68cd35de6a1c9976db3b210feb428b68d1b14",
+    "warpower/_validation.py": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75",
+    "warpower/_voronoi_volume.py": "9b8b6c0f4e29f0907297ce5f13876d50f5728f8283fa73dec7514d5e30e05305",
+    "warpower/_vtm.py": "8955a3c64addc6e58831584c8d0c87978c45b86c2c52a103214c35e6441bd5b3",
+    "warpower/_vtm_controls.py": "a2c08f2f50c4bc189e2bc82a38f50b4137229081ff13344d4b319e11cbff9880",
+    "warpower/_vtm_domain.py": "7e7d79477224b3ddbcd5c11a47bee237ed96474660987268d43dac554aadf76a",
+    "warpower/_wall_candidates.py": "f9a532d2418a9ced7ccd9fcccecf91db74c0548b746e1bcd012cfd08d5d764cb",
+    "warpower/_wall_reuse.py": "8eb33d823e468da70ad1e1540876c5d8eb56c861ddfa2aa493a7bd8177f5e56e",
+    "warpower/_wide_center.py": "ed6c89a6afe3ee4dc4d14db4b92d244ed8483fd9fd55179e7048fc0dd1f13814"
+  },
+  "files": [
+    {
+      "original": ".work/vtm/audit-quality-query-storage-production-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/audit-quality-query-storage-production-v1.py",
+      "sha256": "935af940202f965c1d96f1f092d9c4cd5e62813be0e048f647b76ebaae29f878",
+      "bytes": 4830
+    },
+    {
+      "original": ".work/vtm/audit-quality-query-storage-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/audit-quality-query-storage-v1.py",
+      "sha256": "1805bbbe685653f7d62904dfbf7b80cb93ad1c8880f55d6410f6f130ea8589f8",
+      "bytes": 3013
+    },
+    {
+      "original": ".work/vtm/check-quality-query-storage-final-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/check-quality-query-storage-final-v1.py",
+      "sha256": "58d05c21e366cddcf25078012e5ce0ee98b6e37909ce0c025342c518d6e04efa",
+      "bytes": 7859
+    },
+    {
+      "original": ".work/vtm/check-quality-query-storage-final-v2.py",
+      "path": "results/validation/vtm/recovery-query-storage/check-quality-query-storage-final-v2.py",
+      "sha256": "d2f5833b0c6cdd70e0efe165508efecac3b24545acedf1be15b401be65270d44",
+      "bytes": 9659
+    },
+    {
+      "original": ".work/vtm/check-quality-query-storage-hand-variation-v2.py",
+      "path": "results/validation/vtm/recovery-query-storage/check-quality-query-storage-hand-variation-v2.py",
+      "sha256": "c92d96067125a28af9d7fef890c3db33ffccf7e40d6852ee2fd64cd426b478d0",
+      "bytes": 4225
+    },
+    {
+      "original": ".work/vtm/check-quality-query-storage-loop-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/check-quality-query-storage-loop-v1.py",
+      "sha256": "c75bf08f0717e8b83934039cdcf2c8448a1ffd76b52cf2ec7b441e05df08667e",
+      "bytes": 2936
+    },
+    {
+      "original": ".work/vtm/check-quality-query-storage-native-full-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/check-quality-query-storage-native-full-v1.py",
+      "sha256": "90c0a571317ca110797084fafd068fb710e8855891ddb4a22cc4648badca2916",
+      "bytes": 2922
+    },
+    {
+      "original": ".work/vtm/check-quality-query-storage-pilot-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/check-quality-query-storage-pilot-v1.py",
+      "sha256": "113dc5cae33dbb4f101d0710195694188a4fab750484ed6c2eb2a399075cc4ee",
+      "bytes": 4476
+    },
+    {
+      "original": ".work/vtm/profile-quality-query-storage-uniform-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/profile-quality-query-storage-uniform-v1.py",
+      "sha256": "751ebf57b2f926ee0d6024969ad23c7936975f2825bfa312ab6fb67606e709dd",
+      "bytes": 4380
+    },
+    {
+      "original": ".work/vtm/publish-quality-query-storage-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/publish-quality-query-storage-v1.py",
+      "sha256": "f4958079cb42817f3885eaa15b507160e8f05ac3ad4b2b1d8cb7ffb97e4cb61b",
+      "bytes": 7977
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-design-v1.md",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-design-v1.md",
+      "sha256": "48a0870115625d82f7850c6ff95e9aaa926db148d6301159476d5555993b667e",
+      "bytes": 2282
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-after/boundary-self-intersections.txt",
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-after/boundary.off.gz",
+      "sha256": "f25064bda2b2a026a3e7292e2028e490bd8a476b68eb5efa13840dc248e11cb1",
+      "bytes": 139478
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-after/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-after/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-after/mesh.npz",
+      "sha256": "260def2ec0b710702f28bc22e9b999d7064f44a077539c1f8d04409c5a73905e",
+      "bytes": 1611839
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-after/mesh.vtu.gz",
+      "sha256": "01b58b164769dedd4dcc320efc5586f8a4a0ba699a004645ccf93c34cbc840e1",
+      "bytes": 427617
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-after/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-after/result.json",
+      "sha256": "e83e2913db081afebe7323b827544fe86ec758088b9dc880bdc9589d70bf6fb7",
+      "bytes": 4162
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-after-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-after-recovery.json",
+      "sha256": "79ca9b2adcfa96f854c6959692b73e71d570f49eb7df79cf8229c9e2562242ef",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-after-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-after-storage.json",
+      "sha256": "45b27f2d72680d5476aa081ff2681703275a0ad2d4427e326d78e176b7d72695",
+      "bytes": 1155
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-after.log",
+      "sha256": "a0716a4d5224670e891e054d1de90c60f5e3ac6e8448fc543293963a18e2536a",
+      "bytes": 11135
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-before/boundary-self-intersections.txt",
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-before/boundary.off.gz",
+      "sha256": "8ea8f2981b104c7191ff055d775a2ea6922297ddc561cff6635c8bc6517b1a8b",
+      "bytes": 139464
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-before/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-before/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-before/mesh.npz",
+      "sha256": "6ca7760a9cd9c1bd0f9ead85c1357cedd2278ce26c00f5f705c4d5501f421381",
+      "bytes": 1611691
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-before/mesh.vtu.gz",
+      "sha256": "fbf70c0a013d57ff99efa71bb44f7d2a1ec605322513aeb211fcb893f09d3370",
+      "bytes": 427792
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-before/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-before/result.json",
+      "sha256": "ee4aee754e25a9e6bbd4b9e5f49978af4827ac6051b9bf5f6a7abff7958ec71a",
+      "bytes": 4156
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-before-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-before-recovery.json",
+      "sha256": "e31f9823a8901642d4bca140bf23772d0125129c0dbfeb46a6ce3506edd6c308",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-before-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-before-storage.json",
+      "sha256": "ef1d304cfdfe4ca290155fb6642e5bf85786f66ef6f95c8a934fc071f6a7da9b",
+      "bytes": 1162
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded4096-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded4096-before.log",
+      "sha256": "33fc921e7602042cbd725efef6c501106adc600d90568701ab8c41608994a3b8",
+      "bytes": 11136
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/boundary-self-intersections.txt",
+      "sha256": "e5e549340f49e73b8687221f1728fe44743614bd67a33f2902f4d4a752e2428e",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/boundary.off.gz",
+      "sha256": "45f3cf8dd31b14240898da31373e261091cf87709b6cd6af71c4c602ec283114",
+      "bytes": 273799
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/mesh.npz",
+      "sha256": "7fe7ef3347ffcb597da6966da6160128a017360f30ec15c33ba1137bc824d63c",
+      "bytes": 2260280
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/mesh.vtu.gz",
+      "sha256": "a69a6bc69fd6f6325497dbec085484e55b10e9469138dacb3991c406aa0bea32",
+      "bytes": 921641
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-after/result.json",
+      "sha256": "93da91abda6ec49906cb8b05405e88b6640735a3f805a11e03e6cd610b3bcfb9",
+      "bytes": 4166
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-after-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-after-recovery.json",
+      "sha256": "2831a56acdf0564db42ec6a6331c7158e8e6e21242ccb50755e4e4fb5c0f9967",
+      "bytes": 1755
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-after-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-after-storage.json",
+      "sha256": "41e03a08f31e1760981bef412e03cfcba0ae39e9c805215c3f3be52aa801af12",
+      "bytes": 1156
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-after.log",
+      "sha256": "ca5460fba3f4f4aa988df0c853c1d3274b34cdc86f2c275a741d796290a3e85b",
+      "bytes": 11687
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/boundary-self-intersections.txt",
+      "sha256": "e5e549340f49e73b8687221f1728fe44743614bd67a33f2902f4d4a752e2428e",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/boundary.off.gz",
+      "sha256": "97a52a78c888cc5a46cf81b21d88f278d80df31652e363b25a002c518d1c178e",
+      "bytes": 273857
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/mesh.npz",
+      "sha256": "e14f15793d8cddda910651e4e93da6b3281153d9180af3a46907b0be01656481",
+      "bytes": 2260308
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/mesh.vtu.gz",
+      "sha256": "4f78b8e122d33ac05c62fe3c659dfa428a77bf12501c82dbd703c15943a74250",
+      "bytes": 921519
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-before/result.json",
+      "sha256": "15a30bb2e1934e0c0017b7b2a955baed914bde14b315548c7dc9df4f0726d682",
+      "bytes": 4166
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-before-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-before-recovery.json",
+      "sha256": "51a6181e9f7efd4544d15e919e41ce75e5070ed11381da0d5e5a261f9cfd0ef9",
+      "bytes": 1749
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-before-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-before-storage.json",
+      "sha256": "54fa3f44bba98446423871488040c7e5123ca74e4366d7bfc7180af3cdbb672a",
+      "bytes": 1163
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-graded8192-recovery-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-graded8192-recovery-before.log",
+      "sha256": "e439f08771cde12e56faef9fcac3bed13309d00baf69921bd00c6f32bfd6b86c",
+      "bytes": 11688
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/boundary-self-intersections.txt",
+      "sha256": "b96505260ceb789317202fec8c9b09d893aff35ee94df8ca7102099b89a6d49d",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/boundary.off.gz",
+      "sha256": "749e19f505a3f27b33e931fdf3bfb8a176d9be09426b93bce1c340a915ac3619",
+      "bytes": 274065
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+      "sha256": "8b0751007c05e353b3638f564920f85ab87560650f35591dd00ade61d97cb832",
+      "bytes": 2258882
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/mesh.vtu.gz",
+      "sha256": "9cae4cdb157d99fc0c90d3c22ebd3ed8b6d6acd81b4e52d8c7521b3b0cab68af",
+      "bytes": 918658
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after/result.json",
+      "sha256": "4165956ffaf37672a64f2fdf885e0d3172a4c9cc078d5a2a8d1dfda90f813d4c",
+      "bytes": 4171
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after-recovery.json",
+      "sha256": "cde43ca28d161f8e9ca96e07ba083bf36285d1bf5b4601fed5301c148b0e4311",
+      "bytes": 1755
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after-storage.json",
+      "sha256": "41e03a08f31e1760981bef412e03cfcba0ae39e9c805215c3f3be52aa801af12",
+      "bytes": 1156
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-after.log",
+      "sha256": "fff9e52e49ba6151e47c59ae5b34a638d9aafef6fed0ba3dfc3a1d020db82bb0",
+      "bytes": 11606
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/boundary-self-intersections.txt",
+      "sha256": "b96505260ceb789317202fec8c9b09d893aff35ee94df8ca7102099b89a6d49d",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/boundary.off.gz",
+      "sha256": "d1beb524d1917b6e37db8b794b5b9ddc37280d04fdfeb7efdc198853170d95be",
+      "bytes": 274109
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/mesh.npz",
+      "sha256": "4de3e9f87baacaedfd962f214d37790a89f6478213b5ccf6da03213a599001c8",
+      "bytes": 2258111
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/mesh.vtu.gz",
+      "sha256": "e88eaa32bc71fcddbc4647128644a5184c63e67d418a3a39b6d2d8a865bd095d",
+      "bytes": 918473
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before/result.json",
+      "sha256": "eacf38fa2e4abecebaaf9bf12d082668efacc2b5a5a9fcec24f5d7615b0a19ee",
+      "bytes": 4177
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before-recovery.json",
+      "sha256": "2330f552c4383cba8abb458096afcfd6c40b12b57d1515065421597f428536a8",
+      "bytes": 1751
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before-storage.json",
+      "sha256": "54fa3f44bba98446423871488040c7e5123ca74e4366d7bfc7180af3cdbb672a",
+      "bytes": 1163
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/armadillo-uniform8192-recovery-before.log",
+      "sha256": "c3b5983e4e7c7d0011d68d1b866fb8b0a0ea34a36eabf0487e0461a1bf5d9a05",
+      "bytes": 11615
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/commands.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/commands.json",
+      "sha256": "03ccc3c343334bd196723803661a3f4c7f374d6fb8b1615b59f3931f7a609e14",
+      "bytes": 21894
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay-fitted-hand-after.json",
+      "sha256": "533d3267eb3894781367bde52cdfbb70428afb38410ffeacb6e7423d07277b88",
+      "bytes": 2839
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay-fitted-hand-after.log",
+      "sha256": "81159d97eba181fd6974d8862cd05ec84350a2929176ee0e224bb68e6447b3ae",
+      "bytes": 5135
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay-fitted-hand-before.json",
+      "sha256": "375f273d66c5181c6c188efd3fadf32fa777539f43e6b02e1b980fbbd3094219",
+      "bytes": 2830
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay-fitted-hand-before.log",
+      "sha256": "e1b96e6b6b33e6a577ea26af89fe16751f9d65a96726ee69b88b8c10e745d2db",
+      "bytes": 5126
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay-grid-after.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay-grid-after.json",
+      "sha256": "26c728c357afd8f71946399ac7312c0e9d3023699a4dccd1144c877967202b9c",
+      "bytes": 2828
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay-grid-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay-grid-after.log",
+      "sha256": "ac89b2bd5833f116abff0f30599f1b905c3be52bbe69872f976f266b42359625",
+      "bytes": 4867
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay-grid-before.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay-grid-before.json",
+      "sha256": "97559f281d11b2040a6e309dcebfa45a9d55fc016d3c668b4697cc42f12a96cd",
+      "bytes": 2838
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay-grid-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay-grid-before.log",
+      "sha256": "8188243329b68059df7cc931e3b452c26b86ad1eff299d2676d16d8221be055c",
+      "bytes": 4877
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay1000-after.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay1000-after.json",
+      "sha256": "4cb46a0e2d2d919d79c6f7fcb70f8f10f9591659bfceaac9369cf439f2a3ac1a",
+      "bytes": 2822
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay1000-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay1000-after.log",
+      "sha256": "c9a072dc62a6a2e08736d107b8b0d24358a454c2ba71db9543c703683254ecbe",
+      "bytes": 5118
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay1000-before.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay1000-before.json",
+      "sha256": "5dfeddc7a5340191aa4a519a15b38b8355094ecdbdd9c7a14eae255863e470b1",
+      "bytes": 2821
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay1000-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay1000-before.log",
+      "sha256": "8b1ef80db018aa30dccd05d0c422f9c5800e5e13f128c5893a71de5597fe37fc",
+      "bytes": 5117
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay100000-after.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay100000-after.json",
+      "sha256": "006362e0dcd8da81d74de18c1175c627bcb41783b4845da0962b3b2ce4ccf28a",
+      "bytes": 2838
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay100000-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay100000-after.log",
+      "sha256": "d19daa0f795158223264758fefa4c4ce597633d279b38a7bccf912c4b85321d2",
+      "bytes": 5068
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay100000-before.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay100000-before.json",
+      "sha256": "297a0551cca339115fbf8b17bf345ec2bc73793a275a59f1ff0e73ca7c39a5a4",
+      "bytes": 2832
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/delaunay100000-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/delaunay100000-before.log",
+      "sha256": "aa2c23dfdc2e3ba3546d80637e31f6a59d13ed751853de0fa2db1fdee205b000",
+      "bytes": 5062
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/diagram100000-after.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/diagram100000-after.json",
+      "sha256": "074ca57f2472c0506a77f557e66f9d11a8da99675326130ec0396a9e769470db",
+      "bytes": 2564
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/diagram100000-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/diagram100000-after.log",
+      "sha256": "f2821b913b7461460a2a54f7d8d22767c7419d65b66a7efde6be8229d0c12d81",
+      "bytes": 3435
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/diagram100000-before.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/diagram100000-before.json",
+      "sha256": "a1bb53fd75621bd09ec14ac6ecbd3a9eca3417a1eb8a7ad11cc66d2c013f2b63",
+      "bytes": 2571
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/diagram100000-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/diagram100000-before.log",
+      "sha256": "3aba6db1d57aef979b4fe1ec83e2217be06527a959ec0a33425f544f3e75ff99",
+      "bytes": 3442
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/lossless-archives.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/lossless-archives.json",
+      "sha256": "a03e41f668ab255da1a171c00bd7b50ae8bcd5673656a3bec8499e9967595c4f",
+      "bytes": 7923
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-after/boundary-self-intersections.txt",
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-after/boundary.off.gz",
+      "sha256": "609ca7f10b1a1d1526ade0354ed85214e2bdc23e884ca7cb063b1b9c26e8cd89",
+      "bytes": 28586
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-after/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-after/input.off",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "bytes": 3249
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-after/mesh.npz",
+      "sha256": "7a8e65b6c007e441cbbac69756a1b62fe1aacac9dd6e0107b12bde127c620e81",
+      "bytes": 89615
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-after/mesh.vtu.gz",
+      "sha256": "c2f8137e02beef268c976a8e1550110c3b42b77fd5f276b4dbb1b93e8400e3c3",
+      "bytes": 71130
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-after/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-after/result.json",
+      "sha256": "bcba71d3ffde535c91f0772a8d2ef53d859dd383578a446bdeb9f2ecf4799e87",
+      "bytes": 4078
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-after-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-after-recovery.json",
+      "sha256": "6da3e99b915853ac8dad15bae2b8e301bd3a5b171b3994809762fd67c6dfd0df",
+      "bytes": 1384
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-after-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-after-storage.json",
+      "sha256": "f422ceeeee5b0bd5e4d17a289fefeb6f02343dcdf2ae61d8497f00bcf1af5bbd",
+      "bytes": 1154
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-after.log",
+      "sha256": "c388ca943320203f99061dde105ff9d002269efb7ccfe83758062d3157df58c2",
+      "bytes": 10875
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-before/boundary-self-intersections.txt",
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-before/boundary.off.gz",
+      "sha256": "1ef856fe10e9d9ab176d831ef61ada604674ce8f153a7d1112ef4d7b46230c6b",
+      "bytes": 28577
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-before/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-before/input.off",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "bytes": 3249
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-before/mesh.npz",
+      "sha256": "bbd167014c2cae7f49840f7f0b198d2b7f168ca0b27e8b383c67155a70cf4581",
+      "bytes": 89659
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-before/mesh.vtu.gz",
+      "sha256": "33597f6bb1b8563ec0f9857f96eba7f4bc4e7af947995828953eaea5ca979927",
+      "bytes": 71130
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-before/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-before/result.json",
+      "sha256": "2a069f2704b7dcca5bedb558353cb9f2e2fafd769153be0ec556a67884004e82",
+      "bytes": 4080
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-before-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-before-recovery.json",
+      "sha256": "5a6ecb36e257f174352966c8f70697080a4384280aad45c1bb512cbf7623ce2a",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-before-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-before-storage.json",
+      "sha256": "01a8d9c60dfaa4c10fca61ad172d1a7b9df54e6ff8e192789e2fbc9f99d908ad",
+      "bytes": 1161
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/thin-hand-seed7-before.log",
+      "sha256": "dc991d789688fa019e1a02cc8d7a8c1a32c48eb595120f29613548a298898469",
+      "bytes": 10885
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/torus16384-fixed32-after.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/torus16384-fixed32-after.json",
+      "sha256": "c632cf98a970fe4e36c7ca98498acc19515dc3a95f5aa96931e0afdb9164f24b",
+      "bytes": 3144
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/torus16384-fixed32-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/torus16384-fixed32-after.log",
+      "sha256": "0d6a6f696abb0f824fcdef19c62fb8f699633c560869bf94011336495370272d",
+      "bytes": 8304
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/torus16384-fixed32-after.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/torus16384-fixed32-after.npz",
+      "sha256": "f53c20a407bd90d6319e66540c8d27bca4ae2d7c33913ed484f5943ac16ddc60",
+      "bytes": 2001729
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/torus16384-fixed32-before.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/torus16384-fixed32-before.json",
+      "sha256": "0aac051577e2899d7739558b10e3c252bb46ca05053ebfdcf8fb5e22525eb3c9",
+      "bytes": 3134
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/torus16384-fixed32-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/torus16384-fixed32-before.log",
+      "sha256": "9ec0952140a95e597eb14036e1da4288f0b9befc766aa01b1a30fea3680d3d78",
+      "bytes": 8294
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1/torus16384-fixed32-before.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1/torus16384-fixed32-before.npz",
+      "sha256": "d590e2d68249347926f952ae6adfcdaa399bb64ecd46b37b3001dcbf35ab4794",
+      "bytes": 2001881
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1-independent.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1-independent.json",
+      "sha256": "d88146c2f25f8c5545a01caa8e8fd0af150b1ea6bf9023a85ccc91d70e769c1c",
+      "bytes": 7444
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v1-independent.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v1-independent.log",
+      "sha256": "dfb5f658c60520a2f544b26759e19da0fe076d972f10ee1afe1c09374d96635e",
+      "bytes": 1119
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v2-independent.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v2-independent.json",
+      "sha256": "ed82a4749f9a2b0100c849b8841c4a4f9f685cc945d841f1a73f149761a03d86",
+      "bytes": 62749
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-final-v2-independent.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-final-v2-independent.log",
+      "sha256": "ebd9501e3ba657db46825eace4f26951b9f07a281751901ce4a183467f36efee",
+      "bytes": 6555
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-hand-variation-v1.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-hand-variation-v1.json",
+      "sha256": "dbf5d334d4473efa69c89646667ffd67cecd85532748fa88dd8a9429aa889f11",
+      "bytes": 6822
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-hand-variation-v2.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-hand-variation-v2.json",
+      "sha256": "f7c36668066f031ceb27d46347a006ee1cee96ffa00a01a88c0da43edd8d8ac7",
+      "bytes": 2782
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-independent-v1.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-independent-v1.json",
+      "sha256": "c741cb1d13727dd0e6389bb9c56cbeaa54a347e90ca43ad756a33566af564cc6",
+      "bytes": 314
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-independent-v2.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-independent-v2.json",
+      "sha256": "e415a0194b033d99c5a1c0fc312c9cb0385532505fca64985e080039355c71b9",
+      "bytes": 269
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1-audit.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1-audit.json",
+      "sha256": "20ba09d8149fee955f0b843bfd563fb0d6d677c0e38ad8942507c59f87394d0a",
+      "bytes": 992
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1-audit.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1-audit.log",
+      "sha256": "20ba09d8149fee955f0b843bfd563fb0d6d677c0e38ad8942507c59f87394d0a",
+      "bytes": 992
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1-command.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1-command.json",
+      "sha256": "3680291e9da160e34de4822dbc54ce79e6b4dcf619afda24ce18d247afca7a41",
+      "bytes": 619
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1-comparison.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1-comparison.json",
+      "sha256": "adf9e1ae568ffe5301de02649493ec718c1ace2056e8c5dd888972d2afd37985",
+      "bytes": 4916
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1-export.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1-export.log",
+      "sha256": "03ab348dc893346cfb104594c0f8d2d0a32b5541448c94db5b562e529e59a274",
+      "bytes": 8101
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1-frames/frame0.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1-frames/frame0.npz",
+      "sha256": "ae820b98badd4c0b7d8ca9cf294ed75163855f23d37d998c959df69ebd5beaa7",
+      "bytes": 2109478
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1-frames/frame1.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1-frames/frame1.npz",
+      "sha256": "18296da3bd8e5ea2bac6f7d0d21dbc47814204d25db980798857724ce3fa5cd8",
+      "bytes": 2485143
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1-frames/frame4.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1-frames/frame4.npz",
+      "sha256": "e1559dec57cd756d9ee3bf78f46d98d958fb344fd3e1f6937a83e1770bc59b6b",
+      "bytes": 2485481
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1-frames/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1-frames/result.json",
+      "sha256": "851186014190a5e6329b6b17545255c3b439cd545855973a4e36b08dc6673bdf",
+      "bytes": 2475
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1-kernels.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1-kernels.json",
+      "sha256": "b864d73152ce8b4dbcb2c8d84cb7cf8b5e96ecdd93d7ac8f144176c3d1e53556",
+      "bytes": 34816
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1.dot.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1.dot.gz",
+      "sha256": "20b89efbd32584fb88af14bd12eab5f5b29ba4f1a7efde11b041bdca1eb649ea",
+      "bytes": 3751694
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1.log",
+      "sha256": "f6685372dae4b197122220c6444199465f6099277a689d5a32ada73f451c3215",
+      "bytes": 13114
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-loop-native-v1.nsys-rep.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-loop-native-v1.nsys-rep.gz",
+      "sha256": "9356db3d045b7cec78543275eedb02bb29c011db33f252ae453e2f5a3b4f234a",
+      "bytes": 6676063
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-commands.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-commands.json",
+      "sha256": "9ac8ea85cd5d978328ef08d616972b5d5fbd310036f3f6a84b2e8868ff1c2908",
+      "bytes": 2690
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-lifetime-comparison.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-lifetime-comparison.json",
+      "sha256": "441a66a04c87db208d354c4da86aa8c8e5faebb110d00ee6ce1fec4c03bcaff3",
+      "bytes": 4925
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-lifetime-frames/frame0.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-lifetime-frames/frame0.npz",
+      "sha256": "81a93d240f23ca444a2bea59ac660c52cec17a232c0fb339d0f315cc6e4a680f",
+      "bytes": 2108805
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-lifetime-frames/frame1.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-lifetime-frames/frame1.npz",
+      "sha256": "d61f7acab9a46307caef892ee647e03f1d2f5b423815ae1017d51dbf586aa775",
+      "bytes": 2484045
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-lifetime-frames/frame4.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-lifetime-frames/frame4.npz",
+      "sha256": "3ec7fe99ad68a14677e70956bd86c5779d92d4b4c6247f551822b08d209e2156",
+      "bytes": 2484451
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-lifetime-frames/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-lifetime-frames/result.json",
+      "sha256": "e4b567b4ab20cf09a34a2eecfc6fdac7c950d8cf2ff06e9eb11f397c798c32fd",
+      "bytes": 2475
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-lifetime.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-lifetime.log",
+      "sha256": "aa0babce44089defaad737a91e686e7edfc39264dd04b15545e3f77b6c9db6d1",
+      "bytes": 39913
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-padded-comparison.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-padded-comparison.json",
+      "sha256": "db75d7a9cb6d6e8feced98beb4333448423063560df4bc0f9e15a11ea7ef01a9",
+      "bytes": 4923
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-padded-frames/frame0.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-padded-frames/frame0.npz",
+      "sha256": "7066939dfb95e6d18abe298e77a0da05b835516683ba174f610da4b3b7bdcc35",
+      "bytes": 2109330
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-padded-frames/frame1.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-padded-frames/frame1.npz",
+      "sha256": "bb341eb48e0fb05bee6537eedc4d6214b10bd15cd1ea9b77c74290fbac334b53",
+      "bytes": 2484541
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-padded-frames/frame4.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-padded-frames/frame4.npz",
+      "sha256": "e10d03bd88a4fa53c0f47b09575c9194bad319bb483f89fe9049fa93b3f98ede",
+      "bytes": 2483758
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-padded-frames/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-padded-frames/result.json",
+      "sha256": "4852a68143311d138718abc400752f63036704ccad8aad4a19657f4bf5dc3425",
+      "bytes": 2475
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-loop-padded.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-loop-padded.log",
+      "sha256": "62c2034d19e1b42d31f130211d9a66e2271e9bda3527580737c15f814c02b15e",
+      "bytes": 27806
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-storage-lifetime.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-storage-lifetime.log",
+      "sha256": "afa99c00d5deb5b34753bf0285c50f0b86ef1d86db8aee251b22a83730ac2bc9",
+      "bytes": 9322
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-memory-v1-storage-padded.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-memory-v1-storage-padded.log",
+      "sha256": "4d56ada154d490d32cb7a2e00cb91da143233a20b077add93c9ca62277f183df",
+      "bytes": 9321
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-native-full-v1-comparison.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-native-full-v1-comparison.json",
+      "sha256": "61e7c5bfdfc0adca66a454a755cbb7175b827758de4b420ce5afab118640899c",
+      "bytes": 864
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-after/boundary-self-intersections.txt",
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-after/boundary.off.gz",
+      "sha256": "8e8b4168fe366e5adb1ea5543ec22186cb18b134b979e69f3777d66632447a7a",
+      "bytes": 139470
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-after/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-after/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-after/mesh.npz",
+      "sha256": "b80d609fb24fdffce1ecf099d7adcd59f31e61bac68302aa4837356af78b6936",
+      "bytes": 1612186
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-after/mesh.vtu.gz",
+      "sha256": "86aeff08fa41e9f260f9571a2d8721050f6ab0b8cd1e546a33bd97624cc4164e",
+      "bytes": 428022
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-after/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-after/result.json",
+      "sha256": "02bb797b417c5a8abb0a6518dbc7ffc079e306dbefff79b39514c203bb297e40",
+      "bytes": 4158
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-after-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-after-recovery.json",
+      "sha256": "70663af4a83533927699c2bc2bd019d3c566e6a9fdc6df2c2416e8d303c1af9c",
+      "bytes": 1386
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-after-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-after-storage.json",
+      "sha256": "b190509585bd7c87dbcacf27497d928fe77d61a2be0a06b5263a565faafb61f8",
+      "bytes": 1139
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-after.log",
+      "sha256": "390a78c8b442b7d9b7d29a7f965b95328f2b39fe7d22b0b9d957d7567039c4e5",
+      "bytes": 11116
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-before/boundary-self-intersections.txt",
+      "sha256": "9e8f8c1fdd4289078cccc19ac9be292e461f98fad85727e734ee36c0c0893c59",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-before/boundary.off.gz",
+      "sha256": "9fbf15b9e1ad479b847912cb54f006d22e1157d144c60d4211f1b33004c247b7",
+      "bytes": 139494
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-before/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-before/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-before/mesh.npz",
+      "sha256": "cdcb18f3a246600ad3893fa7f3790288f5da1291e331911c585e0430dd8cde05",
+      "bytes": 1612382
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-before/mesh.vtu.gz",
+      "sha256": "a12b73c897db21647b7b4a1a7db38e978ea9a496492514e9f9a19791cf2f575f",
+      "bytes": 427842
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-before/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-before/result.json",
+      "sha256": "1d8ee4d5f5ab204acd0744b4a0657f19a548c47d59243dd8385634dd74f177e9",
+      "bytes": 4157
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-before-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-before-recovery.json",
+      "sha256": "a6271bd6b2725a6b2da1d62d7d582643a4965a775e30d73b937caea2130f56e8",
+      "bytes": 1386
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-before-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-before-storage.json",
+      "sha256": "ed64dff70e9b5218f7d009012bdc9844078c7781a8a2a62c9f309975663a6dfc",
+      "bytes": 1146
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded4096-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded4096-before.log",
+      "sha256": "8b4ddbdb6449a184a8fb06c6283f512c9fab8eb5fcc5aaf5cb39627819322c9b",
+      "bytes": 11122
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/boundary-self-intersections.txt",
+      "sha256": "e5e549340f49e73b8687221f1728fe44743614bd67a33f2902f4d4a752e2428e",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/boundary.off.gz",
+      "sha256": "d401b59ed0c6ca36fe9c9b7b4fe554751e28f51b2ce0d3e8fab3e63f574eb99b",
+      "bytes": 273839
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/mesh.npz",
+      "sha256": "c8685d33c06696f0432c96a4ee89884cabc4e7beccf36d246fa8f105f578d36a",
+      "bytes": 2260409
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/mesh.vtu.gz",
+      "sha256": "c80aa64109da728b9d0d1540146ac58bd16fb3d9284a4c68c1ce00eb35015250",
+      "bytes": 921185
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after/result.json",
+      "sha256": "d1b7868a3385c78b213d618b26c7ae096fe95063632c1e95ce8ec5fdeaa12700",
+      "bytes": 4173
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after-recovery.json",
+      "sha256": "13cf8694bc30c7d124761d1e8e0273f3e8d4378ea26ff50321c6191ad4065be1",
+      "bytes": 1752
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after-storage.json",
+      "sha256": "f7d1b15e6db0d4ffd43ad91a43bb988e4c2463ef3311284f691abab1643cfe09",
+      "bytes": 1140
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-after.log",
+      "sha256": "d27011ab0b0f880cbe626c7de52e0a207a81cc275a91a68f42bb203d4af60b60",
+      "bytes": 11675
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/boundary-self-intersections.txt",
+      "sha256": "e5e549340f49e73b8687221f1728fe44743614bd67a33f2902f4d4a752e2428e",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/boundary.off.gz",
+      "sha256": "85023730437b811171515282d388c899b939043521c3ade604da8e9df086b778",
+      "bytes": 273830
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/mesh.npz",
+      "sha256": "f4d26d78fc693f0540e6ad72867e55260c19e6cdf90f536c5b6ab8f3a98cc848",
+      "bytes": 2260131
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/mesh.vtu.gz",
+      "sha256": "ece1700e7f9f8817f5866e004f2caa798c811ed05dc302a1501cf7e1529ddd8a",
+      "bytes": 921715
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before/result.json",
+      "sha256": "f4dfcbfcf9270a800b750a5c07ab4edfe4ebefa867699585bf6a4c854bdd8189",
+      "bytes": 4175
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before-recovery.json",
+      "sha256": "253fd6dae3ea4323bcbac2512a04c19f1423b7840172934f262e5b22deb24a01",
+      "bytes": 1751
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before-storage.json",
+      "sha256": "4632a5b985fd57625efd0ae0ffb952d9cb3dfd64cab1a0af09c58f95d3be9c5e",
+      "bytes": 1147
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-graded8192-recovery-before.log",
+      "sha256": "c7e2bdb91591ecce626b04514791dd8adeb247f483d31be3c9ab91b35bcce7d3",
+      "bytes": 11683
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/boundary-self-intersections.txt",
+      "sha256": "b96505260ceb789317202fec8c9b09d893aff35ee94df8ca7102099b89a6d49d",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/boundary.off.gz",
+      "sha256": "633d003a76502ee22583f66128d1102a8b2ae462ba5352a2e37a3d32dd7a5e11",
+      "bytes": 274147
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/mesh.npz",
+      "sha256": "61a23577a9262925f319b0b5a973339b8a31c73b6938d45e3309222e47bb1eb2",
+      "bytes": 2258510
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/mesh.vtu.gz",
+      "sha256": "a75f7e79992240540d5c5af77f5504d18f806ab0f74f5035e10d0b794b557948",
+      "bytes": 918760
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after/result.json",
+      "sha256": "c30e15d83d16b3f96ec58f99cb1da738fb20a2cf717c328e3f2f1d844c07a7c8",
+      "bytes": 4165
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after-recovery.json",
+      "sha256": "002b1b6c186fd6e6f6d9b3edee1b16b999e8883a8c7569909e009361a6fc7abf",
+      "bytes": 1756
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after-storage.json",
+      "sha256": "f7d1b15e6db0d4ffd43ad91a43bb988e4c2463ef3311284f691abab1643cfe09",
+      "bytes": 1140
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-after.log",
+      "sha256": "7043f9d874b7ccb25b00986e0aa048b3ebdcab71e4f7cf6a3eb67b5b2826055b",
+      "bytes": 11585
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/boundary-self-intersections.txt",
+      "sha256": "b96505260ceb789317202fec8c9b09d893aff35ee94df8ca7102099b89a6d49d",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/boundary.off.gz",
+      "sha256": "d56e75c930fd62a9c96ac2cfa3db0e7056d31763f2edd2ada2536fe9013f1432",
+      "bytes": 274164
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/input.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+      "bytes": 4325935
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/mesh.npz",
+      "sha256": "9dbdc91ea6baba4082dc77a237bf9e01c5fee7099522611904b58f060115db7e",
+      "bytes": 2257848
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/mesh.vtu.gz",
+      "sha256": "87ec40ae1c53e68a32b2ad72a8fb8fbd944e1eca7c94c84a7621e9ed89173e6b",
+      "bytes": 918393
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before/result.json",
+      "sha256": "e58952492624915a52973229b5e3be1e17f60123d6c846728f4923a31dfeb93a",
+      "bytes": 4174
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before-recovery.json",
+      "sha256": "f3fe188623abe412d57f28ba3c5e53733e9587ef26dd1c7e07233034a1a3efec",
+      "bytes": 1754
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before-storage.json",
+      "sha256": "4632a5b985fd57625efd0ae0ffb952d9cb3dfd64cab1a0af09c58f95d3be9c5e",
+      "bytes": 1147
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/armadillo-uniform8192-recovery-before.log",
+      "sha256": "46df7c3988a483309b0d818fb7fac29cbb0c3383850a78961a20f64d32c91ba3",
+      "bytes": 11599
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/commands.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/commands.json",
+      "sha256": "6600e4b117e3754bda63a2a7d3d7726f3f8b9a067fc4607af88b6f3ed585b96b",
+      "bytes": 9376
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/lossless-archives.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/lossless-archives.json",
+      "sha256": "2039a0c00c71236a43be0c8f254c4a305def46d99bc8e9bcea0e7d868f0c9e76",
+      "bytes": 7187
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-after/boundary-self-intersections.txt",
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-after/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-after/boundary.off.gz",
+      "sha256": "39e07c06422d1a359a779884fe82cc1eb2543b86695088acb3b9f8052256232d",
+      "bytes": 28573
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-after/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-after/input.off",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "bytes": 3249
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-after/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-after/mesh.npz",
+      "sha256": "96a5c7b4c1ee4e41c5eaf428e1602f31c660b916bb8064e7b1663fe86f5b9484",
+      "bytes": 89714
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-after/mesh.vtu.gz",
+      "sha256": "5c4a7a10f3bb966f2b45a05dd10115cc8f9a837833af9c8e89fb7b7183afa1b3",
+      "bytes": 71148
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-after/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-after/result.json",
+      "sha256": "6e98dd3197882a7e49e00ad7c20cd18b8b48d5ee3b771a713f217e9320aab581",
+      "bytes": 4077
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-after-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-after-recovery.json",
+      "sha256": "1c6cc75467f4d244715d49130d1d70f0ed5167816fa4d431c162c5da7a6e2dc4",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-after-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-after-storage.json",
+      "sha256": "11a5c59970bee65e31ed8d0e5eed902a6bf0eaf7d1d5208169e7b9c4066780ab",
+      "bytes": 1138
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-after.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-after.log",
+      "sha256": "2d5339ae30b8c3f8a16f9975591f2df19b5ee3bad74a6c746df9b22b09e8faac",
+      "bytes": 10859
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-before/boundary-self-intersections.txt",
+      "sha256": "e977c91cafea02fa205f358996bfe9442bb02f958aebfbf4ff491be842732d1e",
+      "bytes": 12
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-before/boundary.off.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-before/boundary.off.gz",
+      "sha256": "2b834683263d97b9977f526165d9bd0f75553cb5b59429cad1b004f8ec72785d",
+      "bytes": 28562
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-before/input.off",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-before/input.off",
+      "sha256": "1d965631618abd0fe43bca501fd7e3fcdc7d0714cccfe92f9c4cbab9620ad914",
+      "bytes": 3249
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-before/mesh.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-before/mesh.npz",
+      "sha256": "5885b824797280ffc3c73a5c83a658153a15d16ca9bd265497630a30e9ab5386",
+      "bytes": 89706
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-before/mesh.vtu.gz",
+      "sha256": "052315f7ee9a8b801d530b996905878900cab6f7b79cde542824d451f778026b",
+      "bytes": 71175
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-before/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-before/result.json",
+      "sha256": "7fff8090f93ef6cbbf457d6e3d53e2093b72fe41dca518fb04034f8d8af9c993",
+      "bytes": 4079
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-before-recovery.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-before-recovery.json",
+      "sha256": "3de8b3fe8fec0d391b954c7bf143b76c896384a173d154a083bc603287c566a4",
+      "bytes": 1385
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-before-storage.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-before-storage.json",
+      "sha256": "b65ae23192d6dad27539f734f43946ba748059430772fa99127c9f3f4ba8c35b",
+      "bytes": 1145
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-before.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1/thin-hand-seed7-before.log",
+      "sha256": "af185ea2a3aa424244f28c0e4d746cf4cd3c84c6530fe45c3ed0aacd4bb8e002",
+      "bytes": 10868
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1-independent.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1-independent.json",
+      "sha256": "c9c210916dfbc072b6f79006cf358ff0254d4f2619b9bc067419fbc44e7aae3e",
+      "bytes": 40625
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pilot-v1-independent.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pilot-v1-independent.log",
+      "sha256": "18b19b7fb3b47aa5606a86f597e8ecf28ceda90a65176db6f093e94790bd5d79",
+      "bytes": 1885
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pipeline-v1-qualification.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pipeline-v1-qualification.log",
+      "sha256": "301ae6df116455b583c68537ec8b808eca543e60bc183f27ebe4309f01cf8596",
+      "bytes": 770
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pipeline-v1-timing.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pipeline-v1-timing.log",
+      "sha256": "7fc0405119efa4fe73c7cbaba93fd093a372ad579e02e2c005ae6f0d7d7b7b50",
+      "bytes": 18615
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-pipeline-v1.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-pipeline-v1.json",
+      "sha256": "2d11e9f6ed166b1d4863200df4a29b709fd7fbaa13a88c25266d7f9f47b99d82",
+      "bytes": 605
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-production-focused-v1.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-production-focused-v1.log",
+      "sha256": "3ec7927e269c05330fd953eb934694e7ec541fd7e34c4ed0016a6b6a54f701ba",
+      "bytes": 100
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-production-full-suite-v1.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-production-full-suite-v1.json",
+      "sha256": "7e55a046fc605a28a1d1f51c4971bafefb605ea741e5de4a16defca0ffbda3f6",
+      "bytes": 322
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-production-full-suite-v1.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-production-full-suite-v1.log",
+      "sha256": "9205344010acc85fd9549eea1dc221698a8d37c23e23295f33e3b4c61e891f23",
+      "bytes": 1553
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-production-loop-v1/frame0.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-production-loop-v1/frame0.npz",
+      "sha256": "8a9562e60b29ecf0e5594e5dc5e1bc2601936b1cb352257fbf1057f65833ced3",
+      "bytes": 2108348
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-production-loop-v1/frame1.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-production-loop-v1/frame1.npz",
+      "sha256": "d39890ba225a358a533e7ecd21e0a3065cb72cceeb301b3c76583593e35e0d24",
+      "bytes": 2484906
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-production-loop-v1/frame4.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-production-loop-v1/frame4.npz",
+      "sha256": "6be769517e84ab4881bed021ecf9deaa8cce191ddccf4ac2cebcde24a21f8f4b",
+      "bytes": 2485236
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-production-loop-v1/result.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-production-loop-v1/result.json",
+      "sha256": "acc434783f6c6098aa571c0e7489c8728e77a5d905ac2d78e8a2856e464c191b",
+      "bytes": 2475
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-production-loop-v1-comparison.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-production-loop-v1-comparison.json",
+      "sha256": "b42dc9953c1926628f5ba258d83c77b9a47f7d227ac3d18a5306f91a7ce72279",
+      "bytes": 4913
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-production-source-v1.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-production-source-v1.json",
+      "sha256": "bc4fc34a34d401ee6a252940c3e5a7908831091bc65e34c43347df5ecb8c8b18",
+      "bytes": 37018
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-qualification-v1-memory.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-qualification-v1-memory.log",
+      "sha256": "db4de47febc05dcaf5d23b4e3b89d0a1ba6ee655af9c65bf2e8e3f26bcd33e02",
+      "bytes": 2203
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-qualification-v1-native-full.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-qualification-v1-native-full.log",
+      "sha256": "00155d27a60f1c2541b1f60eb59845dd82d7c10f7f681480b1b137df8fcbc4a9",
+      "bytes": 1954
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-qualification-v1-native-loop.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-qualification-v1-native-loop.log",
+      "sha256": "f1c21c0bbc1d1d64ad3cb0cc36dff7e25ca87b44aee4c9eb1d629990c929c9e4",
+      "bytes": 1950
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-qualification-v1.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-qualification-v1.json",
+      "sha256": "b86156a747fbdad2e614bd68a414405335a3132d03ac43cf5dfcdf177b42f884",
+      "bytes": 908
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-static-v1.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-static-v1.json",
+      "sha256": "aeada296536a3805a2e459770043ffc44350d7f8e0a873a7a881d182ece9ddc3",
+      "bytes": 3050
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-uniform-native-v1-audit.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-uniform-native-v1-audit.json",
+      "sha256": "2b8beb1e64bae8f3f3aa58637e830cae10dbc60fa987e001e813494ea13a36e0",
+      "bytes": 911
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-uniform-native-v1-audit.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-uniform-native-v1-audit.log",
+      "sha256": "2b8beb1e64bae8f3f3aa58637e830cae10dbc60fa987e001e813494ea13a36e0",
+      "bytes": 911
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-uniform-native-v1-command.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-uniform-native-v1-command.json",
+      "sha256": "1806ff61ed2b349b63df8c70b6134c359826ba91453fb5449f7d636d71d153f6",
+      "bytes": 804
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-uniform-native-v1-export.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-uniform-native-v1-export.log",
+      "sha256": "6f40ff749784b460e85ea585e8651a4fefdf0803ca5a19607f00881136452041",
+      "bytes": 8101
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-uniform-native-v1-kernels.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-uniform-native-v1-kernels.json",
+      "sha256": "800b387669c637c90fc8203a56e4d0d4feebd82e732243cf20862e2126ffd6b9",
+      "bytes": 41110
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-uniform-native-v1-windows.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-uniform-native-v1-windows.json",
+      "sha256": "a0b1e111c8f5adcf5a6dad5c1f322061e79097947532ce110e86256dd7aeaf55",
+      "bytes": 36946
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-uniform-native-v1.dot.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-uniform-native-v1.dot.gz",
+      "sha256": "0178eb41661ce1a8afbfa60b28c412b4db4a3ebd70d96e05352b06248de5a9af",
+      "bytes": 2697615
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-uniform-native-v1.json",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-uniform-native-v1.json",
+      "sha256": "f6d0a4093fd594d95d0eab3dc6d90335cdeef839d90f64f38aa64aebe41b9991",
+      "bytes": 1897
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-uniform-native-v1.log",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-uniform-native-v1.log",
+      "sha256": "4762b567d5ef46aa1cec138ffa18911a0a7b955b5a07131410d3588190f03b77",
+      "bytes": 12833
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-uniform-native-v1.npz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-uniform-native-v1.npz",
+      "sha256": "67e81415b8629d013bb5c1787ebee0addd24f813315293ffe398b360b04de46c",
+      "bytes": 2258039
+    },
+    {
+      "original": ".work/vtm/quality-query-storage-uniform-native-v1.nsys-rep.gz",
+      "path": "results/validation/vtm/recovery-query-storage/quality-query-storage-uniform-native-v1.nsys-rep.gz",
+      "sha256": "d468e3b9f08a4de76546763ae0b4514cd2b45e9355c2cb75d4c567cfb1caca4b",
+      "bytes": 4393033
+    },
+    {
+      "original": ".work/vtm/quality_query_storage_v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/quality_query_storage_v1.py",
+      "sha256": "5dedecea4945099dd7190126c38fd147d62af2c33430d9c1e61201d2e59540e8",
+      "bytes": 1082
+    },
+    {
+      "original": ".work/vtm/run-quality-query-storage-final-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/run-quality-query-storage-final-v1.py",
+      "sha256": "9bdea3b8e761f3e8bbd6070db2e2fb93e50a2a5db5d9f28a03cb1bfbd3aed644",
+      "bytes": 5572
+    },
+    {
+      "original": ".work/vtm/run-quality-query-storage-gallery-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/run-quality-query-storage-gallery-v1.py",
+      "sha256": "6038dfb4effa26bc14cbbcf32af73fecc389e1ea29713df865d00f0eecbbd19d",
+      "bytes": 2185
+    },
+    {
+      "original": ".work/vtm/run-quality-query-storage-independent-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/run-quality-query-storage-independent-v1.py",
+      "sha256": "03537a3f8c91126803eac44e9d4e493b196c601f1a658fe3271488c9b59fdafa",
+      "bytes": 1747
+    },
+    {
+      "original": ".work/vtm/run-quality-query-storage-loop-native-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/run-quality-query-storage-loop-native-v1.py",
+      "sha256": "4b6fc38e91798a716297b9555198fbf1eb4f2eca096736f0ec8f9223721b9ab7",
+      "bytes": 3206
+    },
+    {
+      "original": ".work/vtm/run-quality-query-storage-memory-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/run-quality-query-storage-memory-v1.py",
+      "sha256": "cd026ccb42a18e3f65efe0b63398aef7b7c7bb14de58f3241552acb46b37b715",
+      "bytes": 1985
+    },
+    {
+      "original": ".work/vtm/run-quality-query-storage-pilot-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/run-quality-query-storage-pilot-v1.py",
+      "sha256": "caf3b2753d68b651540734931492e8ad78b716fdffbfe42c47d2a3437b87c402",
+      "bytes": 3921
+    },
+    {
+      "original": ".work/vtm/run-quality-query-storage-pipeline-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/run-quality-query-storage-pipeline-v1.py",
+      "sha256": "be0bf0516be1f5f46e5e72808cd00bf4c6cfff12aca16ba4bedd640b602770f4",
+      "bytes": 1137
+    },
+    {
+      "original": ".work/vtm/run-quality-query-storage-production-gallery-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/run-quality-query-storage-production-gallery-v1.py",
+      "sha256": "5cf51a465bd7a1e8584abd84b02d77b42d71f5d05a56821e0712608a19be2d1c",
+      "bytes": 2059
+    },
+    {
+      "original": ".work/vtm/run-quality-query-storage-qualification-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/run-quality-query-storage-qualification-v1.py",
+      "sha256": "2031042bedb2d444dd7d6e8115abc3b4b54cf4b76497fb2c97842b040aa31ae8",
+      "bytes": 1308
+    },
+    {
+      "original": ".work/vtm/run-quality-query-storage-uniform-native-v1.py",
+      "path": "results/validation/vtm/recovery-query-storage/run-quality-query-storage-uniform-native-v1.py",
+      "sha256": "ff183f45d0df15ebf7249783314088f9296c5deee814f7defe763942071112f1",
+      "bytes": 4070
+    }
+  ],
+  "shared_references": [
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/manifest.json",
+      "sha256": "5fc106af4815a8a2c273e4b61d74e3a30f9f74bcdd2a10972bc92ab1deaddbd8"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/run-tangential-production-gallery-v1.py",
+      "sha256": "234e0bd80ec46fb9be95c28681cfeba8eb55031bd6a46e360a9ffd354ac481a7"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/test_tangential_production_loop_v2.py",
+      "sha256": "87ac3e4079c982d9f8e1d4d164b7a3b2cc41a906369a8d85f938376e4f5503c5"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/check-tangential-production-memory-v3.py",
+      "sha256": "fb51c236a61ee85dffc0d43549179d98ed21bf712cbadb5307869b9e9af81df5"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/tangential-production-loop-v2-independent.json",
+      "sha256": "01c7f96f99e2c8f3e47dcb375f039c80bc5677f2271297e2b3932f81406ffc92"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/tangential-production-source-audit-v1.json",
+      "sha256": "60c0064d23f8ac19abd284396b04b4b51c12aa5b919e7311cd0794f8c8c24448"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/tangential-production-memory-v3-commands.json",
+      "sha256": "b6103fba43cd56ffaaec843141d0e893f304166cc92bd8e58cae6b1046b6849f"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/tangential-production-final-v1/commands.json",
+      "sha256": "96726fa8a50c65bfc462360d97878af5f0f59d3e87576f3fdfe3f04665c82b56"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/tangential-production-loop-v2/result.json",
+      "sha256": "10876619ad79e0242111d093c878ea0665622d52afc2a9a0a5e8a75f1fcb2110"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/tangential-production-loop-v2/frame0.npz",
+      "sha256": "2a6e5fec6f07243631b2104a8858b538fe4abb7f52d83f23ccaf8665debd3800"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/tangential-production-loop-v2/frame1.npz",
+      "sha256": "70d21d99fd9b92602cf39c96de9403d0df6ffc3df0f92a0974176e8c4bc90905"
+    },
+    {
+      "path": "results/validation/vtm/tangential-topology-recovery/tangential-production-loop-v2/frame4.npz",
+      "sha256": "03da2e66f8fd807573c4b6949d7e0340a8019eb94d1e32a2cfc1856638f463bc"
+    },
+    {
+      "path": "results/validation/vtm/surface-bound-reuse/check-surface-bound-reuse-final-v2.py",
+      "sha256": "043e6a45bc7f2723bce7411d587cafc15f0f3aa3789b81868f0fe5f4a81dd83a"
+    },
+    {
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "path": "results/validation/vtm/larger-active-prefixes/larger-prefix-final-v1/commands.json",
+      "sha256": "d589ec37379d6de1d11ce33be46b4ccd6220de8357d9ff9aa6b30f2b2cd5588f"
+    },
+    {
+      "path": "results/validation/vtm/exterior-proof-hierarchy/scanned-armadillo-input/armadillo.off",
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "path": "results/validation/vtm/exterior-proof-hierarchy/scanned-armadillo-input/provenance.json",
+      "sha256": "30e8f081e5efd96275c3af983ec84ee1f6eaf8557a40a3fc8c94687a3e549948"
+    }
+  ],
+  "native_validators": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  },
+  "limitations": [
+    "Storage savings only; no replay speedup or comparable-quality CPU speedup claimed.",
+    "Hand full-hull variation is explicitly retained and demonstrated on unchanged baseline runs; material cells and oriented boundary agree.",
+    "Failed strict v1 comparison and incorrectly serialized v1 diagnostic remain retained, with v2 corrections and proof bindings.",
+    "Native and memory diagnostic times are not clean performance samples.",
+    "Finite recovery and previous combined-process instrumentation limitations remain."
+  ],
+  "reproduction": [
+    "Use pinned baseline/runtime with Warp 1.19.0 on NVIDIA L40; one GPU process and no heavy CPU validators during clean timings.",
+    "Restore originals to their .work/vtm paths from this manifest and referenced prior publications; adjust absolute workspace paths as needed. Drivers refuse overwrites.",
+    "Use venv Python, PYTHONDONTWRITEBYTECODE=1 WARP_CACHE_PATH=/opt/warpower-generated-cache OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 PYTHONPATH=.:.work/vtm. Compile offline validators from benchmarks/cpu.",
+    "Original Stanford/libigl scan provenance and terms are retained; no asset relicensing."
+  ]
+}

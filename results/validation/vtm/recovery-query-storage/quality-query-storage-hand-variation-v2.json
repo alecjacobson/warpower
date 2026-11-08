@@ -1,0 +1,114 @@
+{
+  "scope": "Bind the hand hull difference to independently validated unchanged-baseline variation.",
+  "baseline": "5035fa5895a3bdcc9542bbeebabd75f3d955450b",
+  "reference_proof_sha256": "c9c210916dfbc072b6f79006cf358ff0254d4f2619b9bc067419fbc44e7aae3e",
+  "meshes": {
+    "other_baseline": {
+      "path": ".work/vtm/quality-query-storage-pilot-v1/thin-hand-seed7-before/mesh.npz",
+      "sha256": "5885b824797280ffc3c73a5c83a658153a15d16ca9bd265497630a30e9ab5386"
+    },
+    "before": {
+      "path": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-before/mesh.npz",
+      "sha256": "bbd167014c2cae7f49840f7f0b198d2b7f168ca0b27e8b383c67155a70cf4581"
+    },
+    "after": {
+      "path": ".work/vtm/quality-query-storage-final-v1/thin-hand-seed7-after/mesh.npz",
+      "sha256": "7a8e65b6c007e441cbbac69756a1b62fe1aacac9dd6e0107b12bde127c620e81"
+    }
+  },
+  "parameters_equal": true,
+  "work_equal": true,
+  "complete": true,
+  "limitations": [
+    "The v1 diagnostic JSON incorrectly encoded NumPy integer cell IDs as booleans through a generic serialization fallback. This version writes Python integer IDs; the original v1 diagnostic remains retained and is not a connectivity proof.",
+    "This demonstrates baseline output variation; it does not identify a particular reduction or prove its exact cause.",
+    "The main v2 independent checker must still validate both current before/after meshes; this report does not replace those checks."
+  ],
+  "production_full_hull_matches_other_unchanged_baseline": true,
+  "baseline_variation_matches_production_difference": true,
+  "removed_full_cells": [
+    [
+      11,
+      16,
+      449,
+      584
+    ],
+    [
+      11,
+      449,
+      584,
+      901
+    ],
+    [
+      150,
+      211,
+      874,
+      901
+    ],
+    [
+      211,
+      584,
+      874,
+      901
+    ]
+  ],
+  "added_full_cells": [
+    [
+      11,
+      16,
+      449,
+      901
+    ],
+    [
+      16,
+      449,
+      584,
+      901
+    ],
+    [
+      150,
+      211,
+      584,
+      874
+    ],
+    [
+      150,
+      584,
+      874,
+      901
+    ]
+  ],
+  "all_changed_full_cells_are_outside_material": true,
+  "baseline_variation": [
+    {
+      "site": 901,
+      "axis": 2,
+      "role": 2,
+      "before": -1.9966142345850773e-18,
+      "after": -4.154861008429088e-19
+    },
+    {
+      "site": 938,
+      "axis": 2,
+      "role": 1,
+      "before": 3.104405968401558e-11,
+      "after": 3.104406662290948e-11
+    }
+  ],
+  "production_difference": [
+    {
+      "site": 901,
+      "axis": 2,
+      "role": 2,
+      "before": -4.154861008429088e-19,
+      "after": -1.9966142345850773e-18
+    },
+    {
+      "site": 938,
+      "axis": 2,
+      "role": 1,
+      "before": 3.104406662290948e-11,
+      "after": 3.104406315346253e-11
+    }
+  ]
+}

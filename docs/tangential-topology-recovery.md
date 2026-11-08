@@ -122,9 +122,11 @@ Standalone inputs and diagnostics match in the paired measurements:
 
 The optional recovery adds preallocated extraction, checkpoint and proposal
 storage. Constructor allocator deltas below include owned workspace storage;
-they are not process peak-memory measurements. [Issue #241](https://github.com/alecjacobson/warpower/issues/241)
-tracks omitting inherited approximate-query scratch unused by this complete-extraction
-recovery; that saving is not part of these measurements. Setup includes construction and
+they are not process peak-memory measurements. The subsequent
+[query-storage reduction](recovery-query-storage.md) omits inherited scratch
+unused by this complete-extraction recovery, saving 12.85 MB at 8K sites and
+25.69 MB at 16K. Those savings are not part of the historical table below.
+Setup includes construction and
 capture, using the available compilation cache, and is outside replay timing.
 
 | Case | Before bytes | After bytes | Added bytes | Constructor seconds |

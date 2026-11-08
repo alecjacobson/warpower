@@ -18,6 +18,12 @@ failure enables one extra global fitting iteration, followed by proof recovery.
 `proven_exterior_recovery=False` disables both that iteration and proof recovery.
 An explicit `True` also works independently of the older exterior-band option.
 
+Current traversal uses [conservative surface-hierarchy bounds](exterior-proof-hierarchy.md)
+for both plane candidates and exact rational-centroid rays. The report distinguishes
+safe removal of disjoint coplanar-ray ambiguity from exact leaf predicate decisions
+and records the newer performance/capture/memory qualification. The measurements
+below remain the original recovery-policy study.
+
 ## Whole-cell proof
 
 The input must be a valid, closed, consistently oriented triangle domain and the

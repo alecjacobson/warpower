@@ -76,6 +76,12 @@ def main():
     )
     parser.add_argument("--quality-rounds", type=int, default=4)
     parser.add_argument("--local-quality-retries", type=int, default=0)
+    parser.add_argument(
+        "--proven-exterior-recovery",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="Final whole-exterior proof recovery (default: follows exterior recovery)",
+    )
     parser.add_argument("--automatic-sizing", action="store_true")
     parser.add_argument(
         "--repeats", type=int, default=0, help="Additional replays after the first complete solve"
@@ -138,6 +144,7 @@ def main():
         sizing=sizing,
         quality_rounds=args.quality_rounds,
         local_quality_retries=args.local_quality_retries,
+        proven_exterior_recovery=args.proven_exterior_recovery,
         automatic_sizing=args.automatic_sizing,
     )
     with wp.ScopedCapture() as captured:
@@ -228,6 +235,19 @@ def main():
             last_removed_cells=int(mesh.extraction.removed_count.numpy()[0]),
             last_passes=int(mesh.extraction.exterior_rounds.numpy()[0]),
             last_rejected=int(mesh.extraction.exterior_rejected.numpy()[0]),
+        )
+    if mesh.proven_exterior_recovery:
+        result["proven_exterior_recovery"] = dict(
+            enabled_after_fitting=int(mesh._proven_exterior_enabled.numpy()[0]),
+            last_removed_cells=int(mesh.extraction.proven_removed_count.numpy()[0]),
+            last_rejected=int(mesh.extraction.proven_exterior_rejected.numpy()[0]),
+            midpoint_statistics=mesh._boundary_rounding.statistics.numpy().tolist(),
+            midpoint_statistics_columns=[
+                "proposed_axes",
+                "proposed_sites",
+                "accepted_axes",
+                "accepted_sites",
+            ],
         )
     if result["valid"]:
         n, full_count, m, boundary_count = result["counts"]

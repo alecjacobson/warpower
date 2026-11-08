@@ -348,6 +348,10 @@ class QualityMove:
             exterior_recovery=(core.material_recovery is not None and core.exterior_recovery),
             feature_roles=core.boundary.roles,
             exterior_enabled=core.exterior_enabled,
+            proven_exterior_recovery=(
+                core.material_recovery is not None and core.proven_exterior_recovery
+            ),
+            proven_exterior_enabled=core.proven_exterior_enabled,
         )
         self.tetrahedra = self.extraction.tetrahedra
         self._tolerance = extraction_tolerance

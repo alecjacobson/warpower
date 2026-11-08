@@ -232,6 +232,8 @@ class VTMWorkspace:
         containment_recovery=True,
         exterior_recovery=False,
         exterior_enabled=None,
+        proven_exterior_recovery=False,
+        proven_exterior_enabled=None,
     ):
         self.max_iterations = operator.index(max_iterations)
         self.max_backtracks = operator.index(max_backtracks)
@@ -246,6 +248,7 @@ class VTMWorkspace:
         self.damping, self.step_limit, self.tolerance = damping, step_limit, tolerance
         self.selection = None
         self.local_backtracking = None
+        self._boundary_rounding = None
         self.controls = None
         local_quality_retries = operator.index(local_quality_retries)
         if not 0 <= local_quality_retries < 2**31:
@@ -309,6 +312,8 @@ class VTMWorkspace:
         self.containment_recovery = bool(containment_recovery)
         self.exterior_recovery = bool(exterior_recovery)
         self.exterior_enabled = exterior_enabled
+        self.proven_exterior_recovery = bool(proven_exterior_recovery)
+        self.proven_exterior_enabled = proven_exterior_enabled
         if material_recovery is not None:
             from ._vtm_controls import scalar
 
@@ -525,6 +530,8 @@ class VTMWorkspace:
             ]
             + self._direction_args,
         )
+        if self._boundary_rounding is not None:
+            self._boundary_rounding.freeze(self)
         self._launch(
             constrain,
             self.n,
@@ -563,11 +570,16 @@ class VTMWorkspace:
         if self.local_backtracking is not None:
             self.local_backtracking.begin_attempt()
         self._max_move.zero_()
+        proposal, arguments = self._propose, self._propose_args
+        if self._boundary_rounding is not None:
+            # This variant is recorded only for a global recovery step. Local
+            # selective blocking is reset and ineligible in that stage.
+            proposal, arguments = self._boundary_rounding.propose, self._boundary_rounding.args
         self._launch(
-            self._propose,
+            proposal,
             self.n,
             [self._original, self.points, self._direction, self._edge, self._alpha, self._max_move]
-            + self._propose_args,
+            + arguments,
         )
         self._reconstruct()
         self._evaluate(False)
@@ -622,6 +634,18 @@ class VTMWorkspace:
 
     def _accept(self):
         self._evaluate(True)
+        if self._boundary_rounding is not None:
+            self._boundary_rounding.accepted(self)
+
+    def _record_boundary_recovery(self, rounding):
+        # Python chooses the recorded kernels, never a replay-time outcome.
+        # Restore the ordinary recording path even if capture raises.
+        previous = self._boundary_rounding
+        self._boundary_rounding = rounding
+        try:
+            self._record()
+        finally:
+            self._boundary_rounding = previous
 
     def _restore(self):
         if self.selection is not None:

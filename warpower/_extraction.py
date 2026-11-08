@@ -417,6 +417,8 @@ class ExtractionWorkspace:
         exterior_recovery=False,
         feature_roles=None,
         exterior_enabled=None,
+        proven_exterior_recovery=False,
+        proven_exterior_enabled=None,
     ):
         self.domain = domain
         self.points = _contiguous_points(points)
@@ -435,6 +437,7 @@ class ExtractionWorkspace:
         self.tolerance = float(tolerance)
         self.containment_recovery = bool(containment_recovery)
         self.exterior_recovery = bool(exterior_recovery)
+        self.proven_exterior_recovery = bool(proven_exterior_recovery)
         self.feature_roles = (
             None
             if feature_roles is None
@@ -442,6 +445,11 @@ class ExtractionWorkspace:
         )
         self.exterior_enabled = (
             None if exterior_enabled is None else _int_array(exterior_enabled, self.device, (1,))
+        )
+        self.proven_exterior_enabled = (
+            None
+            if proven_exterior_enabled is None
+            else _int_array(proven_exterior_enabled, self.device, (1,))
         )
         with wp.ScopedDevice(self.device):
             self.input_count = (
@@ -509,6 +517,13 @@ class ExtractionWorkspace:
                 self.removed_count = self._exterior.removed
                 self.exterior_rounds = self._exterior.rounds
                 self.exterior_rejected = self._exterior.rejected
+            self._proven_exterior = None
+            if self.proven_exterior_recovery:
+                from ._proven_exterior import ProvenExteriorRecovery
+
+                self._proven_exterior = ProvenExteriorRecovery(self, self.proven_exterior_enabled)
+                self.proven_removed_count = self._proven_exterior.removed
+                self.proven_exterior_rejected = self._proven_exterior.rejected
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as capture:
                 self._record()
@@ -552,6 +567,8 @@ class ExtractionWorkspace:
             wp.capture_while(self._repair_ready, self._repair)
         if self._exterior is not None:
             self._exterior.run()
+        if self._proven_exterior is not None:
+            self._proven_exterior.run()
         self._surface_metrics()
         self._launch(
             domain_volume, self.domain.tree.n, [self.domain.tree, self.domain_volume, self.error]

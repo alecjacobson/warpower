@@ -280,6 +280,8 @@ class SelectiveUpdate:
                         core.boundary.roles if getattr(core, "exterior_recovery", False) else None
                     ),
                     exterior_enabled=getattr(core, "exterior_enabled", None),
+                    proven_exterior_recovery=getattr(core, "proven_exterior_recovery", False),
+                    proven_exterior_enabled=getattr(core, "proven_exterior_enabled", None),
                 )
             wp.load_module(module=__name__, device=self.device)
             wp.load_module(module="warpower._extraction", device=self.device)

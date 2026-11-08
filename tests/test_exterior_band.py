@@ -131,6 +131,7 @@ def test_independent_extractor_has_no_recovery_allocations_by_default():
     e = warpower.ExtractionWorkspace(warpower.SurfaceDomain(*cube(5)), p, t).run()
     wp.synchronize_device(e.device)
     assert e._exterior is None and not hasattr(e, "removed_count")
+    assert e._proven_exterior is None and not hasattr(e, "proven_removed_count")
     np.testing.assert_array_equal(e.selected.numpy(), 1)
 
 

@@ -1,0 +1,48 @@
+{
+  "scope": "Preserve every policy assertion while separating independent constructors for instrumentation.",
+  "source": "tests/test_topology_recovery.py",
+  "source_sha256": "3b32e2ed5a02e83c5ec20742ddb545736615a605deee5f6f69def88f397aaafa",
+  "generated": ".work/vtm/test_tangential_policy_isolated_v1.py",
+  "generated_sha256": "04da800c742c7f99700e2643c669da1ba3e20072fec19fe1c502d44894002780",
+  "all_original_statements_preserved_once_except_repeated_domain_setup": true,
+  "groups": {
+    "healthy": {
+      "function": "test_isolated_policy_healthy",
+      "original_statement_indices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "original_statements_AST_equal": true
+    },
+    "disabled": {
+      "function": "test_isolated_policy_disabled",
+      "original_statement_indices": [
+        14,
+        15,
+        16
+      ],
+      "original_statements_AST_equal": true
+    },
+    "implied": {
+      "function": "test_isolated_policy_implied",
+      "original_statement_indices": [
+        17,
+        18,
+        19
+      ],
+      "original_statements_AST_equal": true
+    }
+  },
+  "limitation": "Isolation changes workspace coexistence during instrumentation. The unchanged original combined test passed the ordinary full suite; its incomplete sanitizer runs remain failures to complete, not passes."
+}

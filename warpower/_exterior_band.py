@@ -10,6 +10,7 @@ import weakref
 import warp as wp
 
 from ._containment import bad_edge
+from ._mesh_topology import previous_edge
 
 wp.set_module_options({"enable_backward": False, "fast_math": False})
 
@@ -121,10 +122,39 @@ def accept(
         rejected[0] = 1
 
 
+@wp.kernel
+def remember_pinched(
+    first: wp.array[int],
+    degree: wp.array[int],
+    twins: wp.array[int],
+    error: wp.array[int],
+    diagnostics: wp.array[int],
+    roles: wp.array[int],
+    site: wp.array[int],
+):
+    i = wp.tid()
+    if error[0] != 0 or diagnostics[0] != 4 or roles[i] != 1 or degree[i] <= 0:
+        return
+    e = first[i]
+    visited = int(0)
+    if e < 0 or e >= twins.shape[0]:
+        return
+    for _ in range(degree[i]):
+        visited += 1
+        e = twins[previous_edge(e)]
+        if e < 0 or e >= twins.shape[0]:
+            return
+        if e == first[i]:
+            break
+    if visited != degree[i] or e != first[i]:
+        wp.atomic_min(site, 0, i)
+
+
 class ExteriorBandRecovery:
-    def __init__(self, extraction, roles, enabled):
+    def __init__(self, extraction, roles, enabled, *, pinched_site=None):
         self.extraction = weakref.proxy(extraction)
         self.device = extraction.device
+        self.pinched_site = pinched_site
         self.roles = roles if roles is not None else wp.zeros(len(extraction.points), dtype=int)
         self.enabled = enabled if enabled is not None else wp.ones(1, dtype=int)
         self.before = wp.empty_like(extraction.selected)
@@ -158,6 +188,8 @@ class ExteriorBandRecovery:
         wp.capture_if(self.ready, self._attempt)
 
     def _attempt(self):
+        if self.pinched_site is not None:
+            self.pinched_site.fill_(2**31 - 1)
         e = self.extraction
         wp.copy(self.before, e.selected)
         wp.copy(self.before_volume, e.volume)
@@ -203,6 +235,21 @@ class ExteriorBandRecovery:
 
     def _restore(self):
         e = self.extraction
+        if self.pinched_site is not None:
+            t = e._topology
+            self._launch(
+                remember_pinched,
+                len(e.points),
+                [
+                    t._first,
+                    t._degree,
+                    t._twins,
+                    e.error,
+                    e.diagnostics,
+                    self.roles,
+                    self.pinched_site,
+                ],
+            )
         wp.copy(e.selected, self.before)
         e._recompact()
         self.removed.zero_()

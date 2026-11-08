@@ -360,6 +360,7 @@ class VariationalMeshingWorkspace:
         containment_recovery=True,
         exterior_recovery=True,
         proven_exterior_recovery=None,
+        tangential_recovery=None,
         sampling_resolution=32,
         sampling_max_attempts=4096,
         tetrahedra_capacity=None,
@@ -375,6 +376,12 @@ class VariationalMeshingWorkspace:
             if proven_exterior_recovery is None
             else bool(proven_exterior_recovery)
         )
+        self.tangential_recovery = (
+            self.exterior_recovery if tangential_recovery is None else bool(tangential_recovery)
+        )
+        if self.tangential_recovery and not self.exterior_recovery:
+            raise ValueError("tangential_recovery requires exterior_recovery")
+        self.topology_recovery = None
         self._uses_recovery = (
             self.containment_recovery or self.exterior_recovery or self.proven_exterior_recovery
         )
@@ -538,6 +545,9 @@ class VariationalMeshingWorkspace:
                     threshold=quality_threshold,
                     extraction_tolerance=extraction_tolerance,
                 )
+            self._pinched_site = (
+                wp.full(1, 2**31 - 1, dtype=int) if self.tangential_recovery else None
+            )
             self.extraction = ExtractionWorkspace(
                 domain,
                 self.points,
@@ -552,6 +562,7 @@ class VariationalMeshingWorkspace:
                 proven_exterior_recovery=self.proven_exterior_recovery,
                 proven_exterior_enabled=self._proven_exterior_enabled,
                 _cache_surface_queries=True,
+                _rejected_link_witness=self._pinched_site,
             )
             self.full_tetrahedra = self.core.full_tetrahedra
             self.tetrahedra = self.extraction.tetrahedra
@@ -619,6 +630,10 @@ class VariationalMeshingWorkspace:
                 self._old_active = wp.empty(1, dtype=int)
                 self._old_minimum = wp.empty(1, dtype=wp.float64)
             self._field_error = wp.zeros(1, dtype=int) if sizing is None else sizing.error
+            if self.tangential_recovery:
+                from ._topology_recovery import TopologyRecovery
+
+                self.topology_recovery = TopologyRecovery(self, threshold=quality_threshold)
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as cap:
                 self._record()
@@ -629,6 +644,8 @@ class VariationalMeshingWorkspace:
         wp.launch(kernel, dim, inputs=args, device=self.device)
 
     def _record(self):
+        if self.topology_recovery is not None:
+            self.topology_recovery.reset()
         self.topology.zero_()
         self.metrics.zero_()
         self._material_recovery.zero_()
@@ -768,6 +785,9 @@ class VariationalMeshingWorkspace:
         if self.proven_exterior_recovery:
             self._launch(enable_exterior_recovery, 1, [self._state, self._proven_exterior_enabled])
             wp.capture_if(self._proven_exterior_enabled, self._proven_recovery)
+        if self.topology_recovery is not None:
+            self.topology_recovery.run()
+            wp.capture_if(self.topology_recovery.invoked, self._extract)
         self._launch(require_extraction, 1, [self._state])
         wp.capture_if(self.ready, self._improve)
 

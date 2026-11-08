@@ -420,6 +420,7 @@ class ExtractionWorkspace:
         proven_exterior_recovery=False,
         proven_exterior_enabled=None,
         _cache_surface_queries=False,
+        _rejected_link_witness=None,
     ):
         self.domain = domain
         self.points = _contiguous_points(points)
@@ -451,6 +452,11 @@ class ExtractionWorkspace:
             None
             if proven_exterior_enabled is None
             else _int_array(proven_exterior_enabled, self.device, (1,))
+        )
+        self._rejected_link_witness = (
+            None
+            if _rejected_link_witness is None
+            else _int_array(_rejected_link_witness, self.device, (1,))
         )
         self._query_cache = None
         if _cache_surface_queries:
@@ -518,7 +524,10 @@ class ExtractionWorkspace:
                 from ._exterior_band import ExteriorBandRecovery
 
                 self._exterior = ExteriorBandRecovery(
-                    self, self.feature_roles, self.exterior_enabled
+                    self,
+                    self.feature_roles,
+                    self.exterior_enabled,
+                    pinched_site=self._rejected_link_witness,
                 )
                 self.removed_count = self._exterior.removed
                 self.exterior_rounds = self._exterior.rounds

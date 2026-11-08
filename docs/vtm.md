@@ -12,6 +12,9 @@ The [cached exact-query split](cached-exact-seed-queries.md) further improves
 these larger solves while retaining complete exact fallback.
 [Shared new-cell geometry](prepared-new-cell-queries.md) further reduces completion
 work without adding device arrays.
+[Bounded tangential topology recovery](tangential-topology-recovery.md) now resolves
+the recorded uniform/graded 8K scanned Armadillo extraction failures while keeping
+all meshing decisions in the captured device graph.
 The wide comparable-quality CPU performance goal remains unmet.
 
 The target includes ODT relocation, boundary and sharp-feature fitting, graded

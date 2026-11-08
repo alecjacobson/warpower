@@ -464,6 +464,16 @@ distinct site and retains original IDs. Each branch still certifies the complete
 active convex hull. Stable output buffers let downstream kernels consume either
 branch without allocation, host decisions or graph recapture.
 
+After ordinary extraction recovery fails, the full mesher can use a
+[bounded tangential quality transaction](tangential-topology-recovery.md) at a
+surface vertex identified from a rejected pinched-link boundary. Each of at most
+32 proposals certifies the current complete hull and retains quality, topology,
+reference and feature-role guards. Exhaustion restores points and reconstructs
+private certificates. This scoped policy resolves the measured uniform/graded
+8K Armadillo failures; standalone diagram/Delaunay paths and allocations are
+unchanged. The report includes its additional setup/storage cost and bounded
+failure semantics.
+
 The [example gallery](examples.md) includes uniform/graded torus and scanned
 Armadillo meshes, thin geometry, cavities, disconnected domains and a
 [sharp-feature mechanical plate](mechanical-plate.md). Integrated time-to-quality

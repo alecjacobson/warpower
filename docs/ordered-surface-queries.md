@@ -146,3 +146,7 @@ the broader surface-query work in
 A subsequent [register-limit probe](surface-register-limits.md) retained the
 original kernels: lower caps regressed important cold batches and no complete-solve
 gain was established.
+
+[Parallel boundary quadrature](surface-sample-quadrature.md) subsequently reduces
+complete scanned-example replay time without changing classifier ordering or
+adding persistent arrays.

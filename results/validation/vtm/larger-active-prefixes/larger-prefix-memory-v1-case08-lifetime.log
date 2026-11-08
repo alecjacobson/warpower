@@ -1,0 +1,158 @@
+========= COMPUTE-SANITIZER
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+{"diagnostic_cuda_stack_bytes_before": 1024, "diagnostic_cuda_stack_bytes_after": 131072, "diagnostic_mempool_enabled": false}
+Timeout (0:01:00)!
+Thread 0x00007fac3469b9c0 (most recent call first):
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 15353 in copy
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 10503 in clone
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/types.py", line 4833 in to
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/types.py", line 4734 in numpy
+  File "/home/horde/projects/power-diagram/tests/test_larger_prefixes.py", line 225 in test_large_prefix_output_exhaustion_fails_closed
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/python.py", line 187 in pytest_pyfunc_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/python.py", line 1798 in runtest
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 184 in pytest_runtest_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 250 in <lambda>
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 361 in from_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 249 in call_and_report
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 139 in runtestprotocol
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 118 in pytest_runtest_protocol
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 411 in pytest_runtestloop
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 387 in _main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 333 in wrap_session
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 380 in pytest_cmdline_main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/config/__init__.py", line 262 in _main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/config/__init__.py", line 231 in main
+  File "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py", line 9 in <module>
+Timeout (0:01:00)!
+Thread 0x00007fac3469b9c0 (most recent call first):
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 15353 in copy
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 10503 in clone
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/types.py", line 4833 in to
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/types.py", line 4734 in numpy
+  File "/home/horde/projects/power-diagram/tests/test_larger_prefixes.py", line 225 in test_large_prefix_output_exhaustion_fails_closed
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/python.py", line 187 in pytest_pyfunc_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/python.py", line 1798 in runtest
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 184 in pytest_runtest_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 250 in <lambda>
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 361 in from_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 249 in call_and_report
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 139 in runtestprotocol
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 118 in pytest_runtest_protocol
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 411 in pytest_runtestloop
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 387 in _main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 333 in wrap_session
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 380 in pytest_cmdline_main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/config/__init__.py", line 262 in _main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/config/__init__.py", line 231 in main
+  File "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py", line 9 in <module>
+Timeout (0:01:00)!
+Thread 0x00007fac3469b9c0 (most recent call first):
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 15353 in copy
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/context.py", line 10503 in clone
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/types.py", line 4833 in to
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/warp/_src/types.py", line 4734 in numpy
+  File "/home/horde/projects/power-diagram/tests/test_larger_prefixes.py", line 225 in test_large_prefix_output_exhaustion_fails_closed
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/python.py", line 187 in pytest_pyfunc_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/python.py", line 1798 in runtest
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 184 in pytest_runtest_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 250 in <lambda>
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 361 in from_call
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 249 in call_and_report
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 139 in runtestprotocol
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/runner.py", line 118 in pytest_runtest_protocol
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 411 in pytest_runtestloop
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 387 in _main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 333 in wrap_session
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/main.py", line 380 in pytest_cmdline_main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/config/__init__.py", line 262 in _main
+  File "/home/horde/projects/power-diagram/.venv/lib/python3.10/site-packages/_pytest/config/__init__.py", line 231 in main
+  File "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py", line 9 in <module>
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.72 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.80 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.73 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.61 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.61 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.66 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.69 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.72 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.65 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.68 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 10.40 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 1.07 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 6.67 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.77 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.74 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.97 ms  (cached)
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 1.69 ms  (cached)
+Module warpower._facet_completion bb6aebe load on device 'cuda:0' took 6.23 ms  (cached)
+Module warpower._prepared_seeds 4fb5246 load on device 'cuda:0' took 2.62 ms  (cached)
+Module warpower._stackless_seeds af32e1d load on device 'cuda:0' took 3.75 ms  (cached)
+Module warpower._proved_completion fdde69b load on device 'cuda:0' took 7.79 ms  (cached)
+Module warpower._proved_completion e03c811 load on device 'cuda:0' took 6.78 ms  (cached)
+Module warpower._facet_completion 62c1043 load on device 'cuda:0' took 6.03 ms  (cached)
+Module warpower._unproved_queries 3472818 load on device 'cuda:0' took 2.70 ms  (cached)
+Module warpower._reuse_delaunay 58b0d1a load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._facet_seeds fa4cd6c load on device 'cuda:0' took 4.14 ms  (cached)
+Module warpower._wall_candidates 954a0c3 load on device 'cuda:0' took 0.89 ms  (cached)
+Module warpower._wall_reuse a53e752 load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._wall_candidates 7f00c7b load on device 'cuda:0' took 0.70 ms  (cached)
+Module warpower._grouped_seeds 9582e1f load on device 'cuda:0' took 1.59 ms  (cached)
+Module warpower._active_delaunay 6b514e5 load on device 'cuda:0' took 0.86 ms  (cached)
+.
+1 passed in 201.68s (0:03:21)
+========= ERROR SUMMARY: 0 errors

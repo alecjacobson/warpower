@@ -5,15 +5,17 @@ reconstruction processed that full allocation, padding inactive sites with
 duplicates. This also disabled small-cloud reconstruction strategies whenever the
 reservation exceeded their size limits, even if few sites were active.
 
-The internal VTM core now preallocates constructors for 1,024 and 2,048 sites
-alongside the full constructor when a device active count is present
-and reserved capacity exceeds 2,048. A device kernel selects the smallest fitting
-prefix. Each small constructor can recertify and complete previous fragments;
-the full route now also [uses fragment reuse at reserved capacities of
-2,049–4,096 sites](large-fragment-reuse.md), with current-input proofs retained
-through completion. Larger reserved capacities use ordinary reconstruction.
-A failed small attempt also falls
-back to the full constructor, preserving its larger output and strategy budgets.
+The internal VTM core preallocates constructors at fitting capacities from
+1,024/2,048/4,096/8,192, alongside the full constructor, when a device active
+count is present and reserved capacity exceeds 2,048. The later
+[larger-prefix extension](larger-active-prefixes.md) adds the 4,096/8,192 branches
+and reports their memory/setup cost. A device kernel selects the smallest
+fitting prefix. Each child can recertify and complete previous fragments;
+the full route also [uses fragment reuse at reserved capacities of
+2,049–16,384 sites](extended-fragment-reuse.md), with current-input proofs
+retained through completion. The full route above 16,384 uses ordinary
+reconstruction. A failed child also falls back to the full constructor,
+preserving its larger output and strategy budgets.
 If that fails, publication remains an explicit error with zero tetrahedra.
 
 ## Geometry and graph contract
@@ -46,9 +48,10 @@ device active count keep their preceding paths.
 ## Complete resident-solve measurements
 
 The following records describe the original routing change. The
-[later full-route extension](extended-fragment-reuse.md) provides current larger-case
-timings, its additional scratch cost and new validation; it preserves the routing
-capacities and the ordinary standalone APIs.
+[later full-route extension](extended-fragment-reuse.md) measures larger-case
+reuse and its scratch cost. The subsequent [larger-prefix extension](larger-active-prefixes.md)
+adds two routing capacities with separate timing, storage and validation evidence.
+The ordinary standalone APIs retain their paths.
 
 Fresh measurements on NVIDIA L40 / Warp 1.19.0 compare main `3b3ca21` against
 runtime `f81bbaf`. Each median contains three additional complete replays after

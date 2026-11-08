@@ -1,0 +1,3 @@
+The saved production meshes are now independently validated and compared across reservations. Target 4,096 with capacity 4,096 vs 16,384 has **bitwise identical positions**, identical roles/canonical full and material cells/oriented boundaries, and identical recorded iteration work. The 1,511.032 vs 7,566.430 ms difference therefore occurs for the same observed mesh and work, rather than differing output quality.
+
+The hash-bound comparison is retained as `extended-reuse-cross-reservation-v1.json` for publication with #229. This strengthens the motivation for larger device-selected prefixes while keeping scratch cost explicit.

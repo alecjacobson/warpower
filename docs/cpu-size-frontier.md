@@ -1,5 +1,9 @@
 # Native CPU comparison near 4,096 vertices
 
+The [current schedule and size frontier](fixed-site-current.md) adds optional
+fixed-site schedules and native controls near 8k and 16k vertices. It retains all
+quality tradeoffs and quota observations; the wide CPU speedup goal remains unmet.
+
 The latest [exact surface-query reuse](surface-query-cache.md) measures the same
 4,096-site GPU solve at 1.511 seconds. Its positions and canonical full/material/
 oriented-boundary connectivity match the immediately preceding GPU baseline.

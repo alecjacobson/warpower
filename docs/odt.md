@@ -3,8 +3,9 @@
 `ODTWorkspace` is the first optimization component of the
 [VTM implementation](vtm.md). It optimizes uniform tetrahedral interpolation
 energy inside the initial convex hull, holding the hull vertices fixed. It does
-not yet fit a supplied surface, extract a nonconvex domain, grade element sizes,
-or guarantee good worst-element quality.
+not fit a supplied surface, extract a nonconvex domain, grade element sizes,
+or guarantee good worst-element quality. The [public full mesher](mesher.md)
+composes boundary fitting, graded sizing, extraction and quality stages separately.
 
 ```python
 import warp as wp

@@ -1,5 +1,9 @@
 # Progressive and fixed-site VTM schedules
 
+The [current-runtime study](fixed-site-current.md) extends this comparison through
+16,384 sites and adds native CPU size controls. The historical results below
+remain unchanged; neither study changes scheduling defaults.
+
 Starting with all 1,000 sites and using 32 global fitting iterations takes
 **628 ms versus 823 ms** for the progressive default on the seed-2026 torus:
 23.7% less resident solve time. The minimum, 1st/5th/50th/95th-percentile radius

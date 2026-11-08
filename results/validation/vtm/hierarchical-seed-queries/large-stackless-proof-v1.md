@@ -1,0 +1,13 @@
+# Prepared large-capacity traversal argument (unexecuted prototype)
+
+This is a proof outline for the next #177 experiment, not a validation result or a production change. The baseline must be the completed #229 runtime. The prototype only substitutes private grouped queries for arrays with 4,097–16,384 sites; other sizes keep the current flat implementation.
+
+Let B be the complete segment tree's power-of-two leaf base, with B >= n. Let G = max(1, B/32). At depth log2(G), node G+g contains the 32 Morton ranks 32g through 32g+31 (or the entire smaller tree when B < 32). Invalid padded ranks are masked. Current finite point leaves and conservative min/max merges enclose every point assigned to each node. Empty leaves contribute +infinity/-infinity bounds. Refit uses the current permutation and coordinates before queries.
+
+Each query traverses this binary group tree in left-first preorder. A disjoint sphere enclosure skips a node's entire subtree, using the existing `sb.outside` proof. A surviving internal node descends to its left child. After a pruned node or leaf, `successor` ascends while at a right child and chooses the next right sibling, or zero when the root's subtree is finished. Thus no group is visited twice, every unpruned group is visited, and at most 2G-1 nodes are examined. Exhaustion with a nonzero node fails closed. An invalid sphere enclosure cannot prune a group and therefore forces all ranks to be considered.
+
+All 32 lanes for a candidate see the same prepared sphere and node bounds. A group leaf assigns one rank per lane; bounds, canonical duplicate ownership and incident-site exclusions use the existing policy. Every surviving point follows exactly the current `low.sphere_filter` / strict-sign test, prepared Ball64 test, then symbolic predicate sequence. The prototype does not change arithmetic formulas, error bounds, tie-breaking, or proof lifetime. Left-first leaf order agrees with the original increasing group order. Rejected cells continue to be queried, preserving exhaustive diagnostics.
+
+The segment tree is already rebuilt for this input by the owning SiteHierarchy. A weak setup registry is only an experimental way to find that exact hierarchy (checked by point/permutation pointers and dimensions). Production adoption would pass the segment explicitly. No registry lookup, allocation, host decision, or host copy belongs in captured query execution.
+
+Required checks remain: recursive traversal/rank coverage; conservative current bounds including padding and extreme finite/subnormal inputs; current-flat/exhaustive/rational mask equivalence after captured input changes and invalid sphere boxes; full trajectory validity; clean large-case timing. No speedup is established by this outline.

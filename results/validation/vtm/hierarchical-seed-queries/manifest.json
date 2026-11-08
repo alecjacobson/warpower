@@ -1,0 +1,2225 @@
+{
+  "scope": "Publish production hierarchical-query evidence with immutable local aliases.",
+  "runtime": "1ecaf4794567aca19c563d3174fc5cb4bfd211b5",
+  "baseline": "5998b1384e97c04532fd5f928feb0e09c2fa702a",
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "files": [
+    {
+      "original": ".work/vtm/audit-large-stackless-production-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/audit-large-stackless-production-v1.py",
+      "bytes": 1552,
+      "sha256": "7cc815309d0bcb977c58d4fdc35701c2f0151750d6e17ad1d09acd82837fd98e"
+    },
+    {
+      "original": ".work/vtm/check-large-stackless-final-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/check-large-stackless-final-v1.py",
+      "bytes": 5773,
+      "sha256": "e68a3d7c460a0f8cf58bc2e7636080ab10e02e17c93c84e417d2ef9828dd1c87"
+    },
+    {
+      "original": ".work/vtm/check-large-stackless-native-loop-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/check-large-stackless-native-loop-v1.py",
+      "bytes": 2215,
+      "sha256": "5a93b065d655ef1e2b3f936d293a9fe3403053453502583e8e1d6d3689f97b15"
+    },
+    {
+      "original": ".work/vtm/check-large-stackless-pilot-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/check-large-stackless-pilot-v1.py",
+      "bytes": 5770,
+      "sha256": "e23445332a52705678cd9bc7d01db2242e635fcd97910b73508025fdee6df9ad"
+    },
+    {
+      "original": ".work/vtm/check-large-stackless-publication-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/check-large-stackless-publication-v1.py",
+      "bytes": 2810,
+      "sha256": "eb280dc9b0aac6983e33ee6386bedf02229cf64106c37ac21fad9a5e067db0bd"
+    },
+    {
+      "original": ".work/vtm/large-stackless-current-progress-v1.md",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-current-progress-v1.md",
+      "bytes": 1061,
+      "sha256": "9e06090ed1aeb563e8c26efb2b09b7718d518c8356f3b7244c2997232136c8eb"
+    },
+    {
+      "original": ".work/vtm/large-stackless-existing-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-existing-v1.json",
+      "bytes": 330,
+      "sha256": "023743ed13b8ac79ab6bb0360776f045cb8eea1ca21108161b3bf7f0fa93d04e"
+    },
+    {
+      "original": ".work/vtm/large-stackless-existing-v1.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-existing-v1.log",
+      "bytes": 180,
+      "sha256": "56b5f20541e49563d1aafd0a446e38d4b163bdf4e754e0bd004aadd339f6c392"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/commands.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/commands.json",
+      "bytes": 22733,
+      "sha256": "2dfad5d578ae9c8bbf6533501caba67dacf6103576e95607982af6ea63704c6d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay-fitted-hand-after.json",
+      "bytes": 2834,
+      "sha256": "24fdd5e6f72e792f124cdff5517fa81b7557324457ebf4c79b6f1e865cd747a0"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay-fitted-hand-after.log",
+      "bytes": 5130,
+      "sha256": "3042270b2572239f1448621680584e6424849eb410c9937f30354064d16c98e0"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay-fitted-hand-before.json",
+      "bytes": 2840,
+      "sha256": "a827b27ff1724aefd6f719bf7dee706910140a903940e5d0b00065bdcc51d3ea"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay-fitted-hand-before.log",
+      "bytes": 5136,
+      "sha256": "3419887c45a7f365bfe52460ef5d6094d750ee22f6489d01229d706fd7117f0f"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay-grid-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay-grid-after.json",
+      "bytes": 2828,
+      "sha256": "f2cfb41f701baa92ecd452e37e3e7044f5eab39322a019ac1abde9bbcec04d86"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay-grid-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay-grid-after.log",
+      "bytes": 4867,
+      "sha256": "bc2e6739f863251041a901cecfa41aefc6e0791d5c1037dce6306477f7fb0a60"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay-grid-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay-grid-before.json",
+      "bytes": 2840,
+      "sha256": "780e3ce0181a6880963f976768049b9552f516c58b7c7b0b08ef828eec6e3294"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay-grid-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay-grid-before.log",
+      "bytes": 4879,
+      "sha256": "03fb6855562f27a5dbc7c30be534630b6bef2a6f6339367a5bab7b472aa7dfab"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay1000-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay1000-after.json",
+      "bytes": 2827,
+      "sha256": "4479fb037f5fb22a1923d5a9f4157ca7c8d16fd977c24e8eb3932861a88034e4"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay1000-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay1000-after.log",
+      "bytes": 5123,
+      "sha256": "7bd097798fa43787dd2fa97b4f5f3328d27b37a12a1e3ec4aaa4cd75c9c77409"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay1000-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay1000-before.json",
+      "bytes": 2824,
+      "sha256": "0c537074a099439ac7b6095df2445911cb7d6cad0d0e8273aaebfae2fb110a0e"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay1000-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay1000-before.log",
+      "bytes": 5120,
+      "sha256": "5bd8fc219c2c542efe465c7a54cd272d78d580ac4dd5609092ab347241c5f037"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay100000-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay100000-after.json",
+      "bytes": 2826,
+      "sha256": "5c35823af0eb05daebbe9ab054f15a2dfffb0416a243b6af18c7090aa2cef4b7"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay100000-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay100000-after.log",
+      "bytes": 5056,
+      "sha256": "b4bc6c5992ac33a95cbb150735f7ad3160e61fd4bc3e1dc1a9dcbabb94e0a0eb"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay100000-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay100000-before.json",
+      "bytes": 2829,
+      "sha256": "dc2ad891a95b6991af5afd3f8c620c12909e38d19b98c133361bdc82bbfb98f0"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/delaunay100000-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/delaunay100000-before.log",
+      "bytes": 5059,
+      "sha256": "479dfed88c9bd91325c3c30514b9f5be1b4d74804c150d16542710415b7b271d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/diagram100000-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/diagram100000-after.json",
+      "bytes": 2572,
+      "sha256": "e4956884fc8f6debdb66ea2accfd396fb360d15ce5ff4e7761885767e123dd8f"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/diagram100000-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/diagram100000-after.log",
+      "bytes": 3443,
+      "sha256": "728bd6342136fbaad5e34d60006fcc55c738e9a3524e0d1d0483cd3e00355978"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/diagram100000-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/diagram100000-before.json",
+      "bytes": 2570,
+      "sha256": "dcf1d786da678276a9c61c70c2ebf4d71cdc8d6582882488252de3a875978306"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/diagram100000-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/diagram100000-before.log",
+      "bytes": 3441,
+      "sha256": "3304b1d6f45b7dff7f7ea928db4e0780078255db0bf49e4c05a84e472fcd7b0f"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-after/boundary-self-intersections.txt",
+      "bytes": 13,
+      "sha256": "ed614f21b453246ebd00834c5358ea791999fd7fbc040557aea44e735c0cd83b"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-after/boundary.off.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-after/boundary.off.gz",
+      "bytes": 511181,
+      "sha256": "96fcfa1aaf0aa1271fd8dca860622d404a30ffc30a40702d1014210bd75b9458"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-after/input.off",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-after/mesh.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-after/mesh.npz",
+      "bytes": 2651918,
+      "sha256": "3ce7a1a7a863c004bcd955e2cbb9323ffd9b159ecabfe5401c23d7fe5727f578"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-after/mesh.vtu.gz",
+      "bytes": 2071908,
+      "sha256": "8820641cc40b2c024c0d67759fd92c2568c7a49f3df107e75eeda2985c2c7004"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-after/result.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-after/result.json",
+      "bytes": 4052,
+      "sha256": "9c5d366bed2e1312656dbc41bfe7dbff320e5bddc02ae40ed454123ee9a20912"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-after.log",
+      "bytes": 9187,
+      "sha256": "effc5786cc8eb593d420161000c6b06deca5afd7ebb5c103ef423045c8ea86b5"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-before/boundary-self-intersections.txt",
+      "bytes": 13,
+      "sha256": "ed614f21b453246ebd00834c5358ea791999fd7fbc040557aea44e735c0cd83b"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-before/boundary.off.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-before/boundary.off.gz",
+      "bytes": 511144,
+      "sha256": "4704fa2556ebe46b4c844a35b1bf59a1e07c3415d3b78c7e05480d259890e8fb"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-before/input.off",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-before/mesh.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-before/mesh.npz",
+      "bytes": 2650741,
+      "sha256": "92f0eb8bcb06f4b207fe202fb24638bc0ebd1d6e2f3dfbad2f175832c7839642"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-before/mesh.vtu.gz",
+      "bytes": 2071700,
+      "sha256": "4f735d120b1e82c08f5956931c7e7e4c6fbb3816fb2d19eced00899afb7745ba"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-before/result.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-before/result.json",
+      "bytes": 4055,
+      "sha256": "17f4ebb36b2c2060c39a9db009f8569911bb10e12c918f9abeaff583bce83423"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/graded-torus16384-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/graded-torus16384-before.log",
+      "bytes": 9102,
+      "sha256": "7c13dace481644e373e3700e79457bb4d4e81de556ef5ff31859e49f6dac97c8"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/lossless-archives.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/lossless-archives.json",
+      "bytes": 1889,
+      "sha256": "e15686569b8b59e0da1e1281a7446cdb4de652389d9b3acfb26fc347232f1cc0"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/reserved16384-target4096-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/reserved16384-target4096-after.json",
+      "bytes": 3103,
+      "sha256": "c73aa8f248ab32f4a59539e3c765312007a2bdf7ff36abbad2f4fb1cfcb602be"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/reserved16384-target4096-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/reserved16384-target4096-after.log",
+      "bytes": 8274,
+      "sha256": "1fd15a1473ca4192dc54fa6b8c0040a4232c5d651e89c1b75f757b17a9c75438"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/reserved16384-target4096-after.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/reserved16384-target4096-after.npz",
+      "bytes": 419430,
+      "sha256": "60537a6850d941baee9d656baf0311d40a2399ff10eb6f63a186d5f8cb3d1050"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/reserved16384-target4096-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/reserved16384-target4096-before.json",
+      "bytes": 3103,
+      "sha256": "52ee6df2ae15fc4450a7149c09be185aa4adad63ddf01748a7643b706ca48b41"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/reserved16384-target4096-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/reserved16384-target4096-before.log",
+      "bytes": 8186,
+      "sha256": "012389a35c4257a5eef2ce22a059a482ec422e82cc7964a17ce2e6e8c55909c7"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/reserved16384-target4096-before.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/reserved16384-target4096-before.npz",
+      "bytes": 419378,
+      "sha256": "e993857652e52da25d70d9d60e03c64d932874a6aaedc152950c0dc919684306"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus1000-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus1000-after.json",
+      "bytes": 2896,
+      "sha256": "593340e9f3ec8cb5b7def5b2117fc11e07f8bc6494eb91664811cc7d760a36b4"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus1000-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus1000-after.log",
+      "bytes": 7957,
+      "sha256": "7836575cb9954aa123f1f2435b1f0c23e91580e44c7ceb22b9c6fb3980a67de0"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus1000-after.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus1000-after.npz",
+      "bytes": 91344,
+      "sha256": "89fc0f1417fbf91fa53c3f04966da0d804406b2ffb0aab51c4777b0826e633fc"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus1000-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus1000-before.json",
+      "bytes": 2892,
+      "sha256": "6a3287aa39ba8532aa7fb9ba62f22a72fa153a5d0dccbdf967bcbbdb84094623"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus1000-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus1000-before.log",
+      "bytes": 7953,
+      "sha256": "c9a029933cc7d52ca6d9ee9e984ac4896f7a758f053d25c7fd2500fef2fdf626"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus1000-before.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus1000-before.npz",
+      "bytes": 91523,
+      "sha256": "0ba9c635e7817046cc1ff4ce7f89e2ce4e7858f262626fbe88c895a2f44dc5cc"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus16384-fixed32-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus16384-fixed32-after.json",
+      "bytes": 3091,
+      "sha256": "7e85909d744bba40a1a1cb2a25e6d838a0e006ca8196e24e0b2568b31668da2b"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus16384-fixed32-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus16384-fixed32-after.log",
+      "bytes": 8096,
+      "sha256": "a4e5b81f4315e8c71d48bd0300e63b4ea2d8b4b3f246c406a46d515b36291c04"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus16384-fixed32-after.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus16384-fixed32-after.npz",
+      "bytes": 2002945,
+      "sha256": "dc153ae5d03cce2702b9f46b059b384d4ee9daca09e841c250bd663a262fe789"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus16384-fixed32-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus16384-fixed32-before.json",
+      "bytes": 3093,
+      "sha256": "0775bb9ddcb3788acf231c2538dc128b08858edf873382c8332598d483353b25"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus16384-fixed32-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus16384-fixed32-before.log",
+      "bytes": 8010,
+      "sha256": "fe657a14365b774025ade6ad8bdfecd39beac3798585ce175e146fdef9e65ce9"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus16384-fixed32-before.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus16384-fixed32-before.npz",
+      "bytes": 2002774,
+      "sha256": "a2c4dfd24b387bd9eed8201a7cbc0ac82bae3a9eb8b6ad0e32757855db7cb725"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus4096-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus4096-after.json",
+      "bytes": 3080,
+      "sha256": "b699d4adb868b0fa1d6ea0ffef6c71009266c0f44aabb226e24cd7ad9e59062a"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus4096-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus4096-after.log",
+      "bytes": 8163,
+      "sha256": "18502dd3946c5c2aa4ffbad640ff8d93fc480b9bba8d0dd42014f7e5bc9ca87a"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus4096-after.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus4096-after.npz",
+      "bytes": 418652,
+      "sha256": "909937cf21a93dd50d93aead83f3cb2144fe3c83804c1dae42ea95940618933a"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus4096-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus4096-before.json",
+      "bytes": 3078,
+      "sha256": "eb890e6b73f1bf5273da3e57ed0dd660ef96016b22e36e7beca73efdb77aa823"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus4096-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus4096-before.log",
+      "bytes": 8161,
+      "sha256": "3c23ead633f1a88f88d32399c273275bf5e432c17aae55c813f3f3f55bddfa8d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus4096-before.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus4096-before.npz",
+      "bytes": 418940,
+      "sha256": "08b4308ff9e8b4e17afa05970ebee34b208d34a4509730a700d6c723680b0cd0"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus8192-progressive-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus8192-progressive-after.json",
+      "bytes": 3103,
+      "sha256": "1e302171aa6f5ee9ead6d90cf83cd0dca53529da5b97cd801f3d7970116ceef2"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus8192-progressive-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus8192-progressive-after.log",
+      "bytes": 8274,
+      "sha256": "01f3b2d37dbd374894d90bd790c9d697cb09c49046f4d9e518e2d347d97ec789"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus8192-progressive-after.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus8192-progressive-after.npz",
+      "bytes": 917256,
+      "sha256": "8ae3a85020b7448a58ff5f5eb1a66fcd89a98a7b6e2d5fea9032824ac712e243"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus8192-progressive-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus8192-progressive-before.json",
+      "bytes": 3099,
+      "sha256": "59fc71f8e0a06bb3c67decd7ed69af0029c5406637f036a8d246b1d629ac89bb"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus8192-progressive-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus8192-progressive-before.log",
+      "bytes": 8182,
+      "sha256": "cd9c5bd4ff6dee9fc36f211a4758aade3b6cbd42cdd9aaf558c2a3e8af420972"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1/torus8192-progressive-before.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1/torus8192-progressive-before.npz",
+      "bytes": 918534,
+      "sha256": "338685a975e667b5a5cd3ee810ea5035de9c911dc12122156e441c4032b120a9"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1-independent.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1-independent.json",
+      "bytes": 47537,
+      "sha256": "4d3ed37b9ce0ed48dc0c680e9d4ed88d99461e66b5f54a97e5be2f1619b88877"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1-independent.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1-independent.log",
+      "bytes": 6162,
+      "sha256": "2d370fb1118b223d33c81f13ae78d678742f698e6d25e0b7b322e123419ffbf8"
+    },
+    {
+      "original": ".work/vtm/large-stackless-final-v1.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-final-v1.log",
+      "bytes": 19208,
+      "sha256": "947a2781fb7266d4d15a24c07a82242940051c2f893b09d738ccd25f2ee2096d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-native-v1-audit.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-native-v1-audit.json",
+      "bytes": 892,
+      "sha256": "83b829f61b85a12dd6cc3f6ad40628d855a3bdbd78832e2fcce08fcaaf461655"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-native-v1-audit.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-native-v1-audit.log",
+      "bytes": 892,
+      "sha256": "83b829f61b85a12dd6cc3f6ad40628d855a3bdbd78832e2fcce08fcaaf461655"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-native-v1-command.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-native-v1-command.json",
+      "bytes": 775,
+      "sha256": "38ccc49a667ef1c7263e4647fa5f74b606f1f4d504a5b7e2f22588dca33b5ce8"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-native-v1-export.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-native-v1-export.log",
+      "bytes": 8101,
+      "sha256": "88188843cf9b76e2bc6583ab9475e8b99eb89caf38b97ea8f1fccf1eaa80e93d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-native-v1-kernels.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-native-v1-kernels.json",
+      "bytes": 32913,
+      "sha256": "588bdb7e8f12d991842deb0989c1502f0d3c8d2a5c75709ab3b7b3bfdb16372a"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-native-v1.dot.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-native-v1.dot.gz",
+      "bytes": 1471870,
+      "sha256": "dd7f46aa06f7718a308b9417cbd3b1a13a92e9b005715a8b75b0253af369dc3f"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-native-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-native-v1.json",
+      "bytes": 1800,
+      "sha256": "df1510d3f001fbd18b215fdc875964dd64cf2f555365db0e05c7fa928fd04ab4"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-native-v1.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-native-v1.log",
+      "bytes": 10826,
+      "sha256": "75dfca6a1d6e1e37c8363d43f32ecc77b9150951ddd1bd9f0dd0031841d5fba8"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-native-v1.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-native-v1.npz",
+      "bytes": 2641669,
+      "sha256": "ccbf97a3b48bef1361d1c3a6b9c7a3aea9a0dbcf54526a37615aee93f9e9f11e"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-native-v1.nsys-rep.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-native-v1.nsys-rep.gz",
+      "bytes": 2684271,
+      "sha256": "a192a8b2c6ab0fb32f849ff0ee23f29fddd2cf619eecbec754945f827aaf95ae"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-suite-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-suite-v1.json",
+      "bytes": 310,
+      "sha256": "0a832bf1491c1d11fa5e08ffbe31db59d494bbb41278a288f9aa7feeca2c0e38"
+    },
+    {
+      "original": ".work/vtm/large-stackless-full-suite-v1.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-full-suite-v1.log",
+      "bytes": 1473,
+      "sha256": "71ff0392c80bac5f1acb9dd91b9996a67af25d9d0ed0aaf9a820880c0f7b3da5"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1-audit.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1-audit.json",
+      "bytes": 939,
+      "sha256": "85661654f317580daf158740cf957e5a01b1b78c6c3e6c29127290707447491c"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1-audit.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1-audit.log",
+      "bytes": 939,
+      "sha256": "85661654f317580daf158740cf957e5a01b1b78c6c3e6c29127290707447491c"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1-command.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1-command.json",
+      "bytes": 769,
+      "sha256": "39d8cdf426ee1d20eba9b2f34341629b07198b677eb9cb382e4342574431a08d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1-export.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1-export.log",
+      "bytes": 8101,
+      "sha256": "538d6d40e57ba155ef28cce78049e73a327cc63fe7ce4836a1344fb8353f4331"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1-frame0.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1-frame0.npz",
+      "bytes": 419249,
+      "sha256": "4851296e0c92c6c812726a1ae95c69136e7668cd8692876ee31cb9413cf0fd3e"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1-frame1.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1-frame1.npz",
+      "bytes": 908176,
+      "sha256": "026fec3e57bb95b03b7c72912aed63d76f2d7090cdedbc093293546d26f4f358"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1-frame4.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1-frame4.npz",
+      "bytes": 419465,
+      "sha256": "de71743f6dee4008c2b40ac3ec084152deb8e6ac7f812e434aacb282a64cbbd7"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1-kernels.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1-kernels.json",
+      "bytes": 37351,
+      "sha256": "57d6db860e1f91a2ca8e9907f88efa11c21958996f3c2ecbf49c82f55b28e7dd"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1.dot.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1.dot.gz",
+      "bytes": 1965204,
+      "sha256": "4c3e4d7dd4a504db4e03c23125abc4fabcd3761cec750e84145e9b561eccbca9"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1.json",
+      "bytes": 1530,
+      "sha256": "e63e592c5c79f65dad9a8b1c26bd486275e4eafdbfe5e71325e8f65ec38e28e0"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1.log",
+      "bytes": 11673,
+      "sha256": "9e8ce1f39e311985cda5731826d81f1690521aaf231b8245e65e897294740698"
+    },
+    {
+      "original": ".work/vtm/large-stackless-loop-native-v1.nsys-rep.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-loop-native-v1.nsys-rep.gz",
+      "bytes": 5854932,
+      "sha256": "b46c668c36817d987de16d5472b46312afbeffae603e6c26b3ee386c54c614da"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case00-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case00-lifetime.log",
+      "bytes": 1232,
+      "sha256": "267ea3abfcacd39fc1f0920647b01ddaa3297df498aad58871c6688cf399fa6b"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case00-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case00-padded.log",
+      "bytes": 1231,
+      "sha256": "0a82d81ba25bb6cec91ceae20d7984e46675a6319626efaa8c7701a85da9f547"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case01-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case01-lifetime.log",
+      "bytes": 1232,
+      "sha256": "42f992e748c92208484958a97b0b9955ac0ebde7046514f8e5a9b113693b4ebd"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case01-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case01-padded.log",
+      "bytes": 1231,
+      "sha256": "c09172ad4bca513f8dd42a10b0e3830205bf7004f47f6f96d466f7993d4d34c9"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case02-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case02-lifetime.log",
+      "bytes": 655,
+      "sha256": "051e17bc9b5b7ee320c864ea973c5d3cc2b062fdb99e157283927ac6dd0bd5c4"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case02-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case02-padded.log",
+      "bytes": 654,
+      "sha256": "b0c887953998aef425cd59669fd010b9e372d6cf15e8d4465cb4d6f6c99dee3b"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case03-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case03-lifetime.log",
+      "bytes": 732,
+      "sha256": "2303c1a30c4d05a5c5651a047fdfd59a8c4cbfb317461ac4537aeb71debd86dc"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case03-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case03-padded.log",
+      "bytes": 731,
+      "sha256": "8d84fc5a7b831b107fa74269eb090897684d9da066fe5f9672574b119ff651c3"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case04-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case04-lifetime.log",
+      "bytes": 3730,
+      "sha256": "f5eac1e80c420d0f4ded18f024aeffda62e52090a01287146607e369426cda23"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case04-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case04-padded.log",
+      "bytes": 3729,
+      "sha256": "125c0b33fcdee6914cf455982f66555de0213ff0cd33fbed87c21b0433c3e7bf"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case05-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case05-lifetime.log",
+      "bytes": 3730,
+      "sha256": "12f1b6c9b74158540d65c4c0c9c0de54e1d6110aa54fa8e93412782c6b57c65a"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case05-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case05-padded.log",
+      "bytes": 3729,
+      "sha256": "4f8f74b9f3c9bb00e23c59aae63b46dc0eb09f0481fd09c958aaeff3c0852355"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case06-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case06-lifetime.log",
+      "bytes": 7852,
+      "sha256": "b85982243986e8825bffa08e13fbbc305e014839acc20cb3f6120181fd07e7b8"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case06-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case06-padded.log",
+      "bytes": 3729,
+      "sha256": "62d7b5d8bdda83897955641fe790bc2e883ca4d137ac745820eabb1e2818791e"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case07-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case07-lifetime.log",
+      "bytes": 3213,
+      "sha256": "ddef0766258636b76d65b90b140354dbd9fd2ab16d8399566890f41c5824a2bb"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case07-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case07-padded.log",
+      "bytes": 3212,
+      "sha256": "67c674bcb86a7fe9a9c8eb9ff2773e8d27ea6c1920606ea26dfd2cc878b4f817"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case08-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case08-lifetime.log",
+      "bytes": 7844,
+      "sha256": "8686dd892fd6831b6941b9ac05ed97c381e633aaaa49d593682f82eda0dbb43e"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case08-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case08-padded.log",
+      "bytes": 7843,
+      "sha256": "821e2e109fc1a7c4c797e4bd623018d63201d5bb62c1f943576e58d66745eefd"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case09-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case09-lifetime.log",
+      "bytes": 3471,
+      "sha256": "97489936414067ec8265bd27f7ba20e3e2c0e6d5f8a56ad249a3437d5a6cfc93"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case09-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case09-padded.log",
+      "bytes": 3469,
+      "sha256": "ec0546ef2e45410a715759b07e6730d25952ff93c604fd1bba6b49073443df9d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case10-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case10-lifetime.log",
+      "bytes": 3471,
+      "sha256": "0487757320e2ef96563ae0f67b0cb71eeece84e11a9401c728f103348e3f3946"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case10-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case10-padded.log",
+      "bytes": 3469,
+      "sha256": "79dbfb915acc017b8db3b05e8ecf4af0f614524589c2ad3a0229e74181621535"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case11-lifetime.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case11-lifetime.log",
+      "bytes": 3471,
+      "sha256": "6564f287b384e72f673cc4128b8f40e9460cfa740e531f99a6100361bef43b4f"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-case11-padded.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-case11-padded.log",
+      "bytes": 3469,
+      "sha256": "dad7cd9c635bfcf995d79ee9bc148102374c8d58f9c338af19a0d8cd7688cd59"
+    },
+    {
+      "original": ".work/vtm/large-stackless-memory-v1-commands.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-memory-v1-commands.json",
+      "bytes": 17258,
+      "sha256": "4ea6ef76b94875c15e7a6ee8c3fefbb56f12f8737667a16a949f31a81ca1fbeb"
+    },
+    {
+      "original": ".work/vtm/large-stackless-native-interpretation-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-native-interpretation-v1.json",
+      "bytes": 1909,
+      "sha256": "e6975ac48b071eaea003c22ea063c94e8cf18ebf23817db29602e67bebdd9978"
+    },
+    {
+      "original": ".work/vtm/large-stackless-native-loop-independent-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-native-loop-independent-v1.json",
+      "bytes": 8588,
+      "sha256": "124f2b61cb673ee45b14851338fc4704483eb1e71b212e17293b575efbec528e"
+    },
+    {
+      "original": ".work/vtm/large-stackless-native-loop-independent-v1.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-native-loop-independent-v1.log",
+      "bytes": 652,
+      "sha256": "606d4eb5c47c1435b529cd336995f67c1c6f5221e1a61653261af3251e261ad6"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/commands.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/commands.json",
+      "bytes": 15504,
+      "sha256": "43df6dfb4e303d9684d24ffd9a98a7774b37e7bb3c81d3039427ea2806396704"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-after/boundary-self-intersections.txt",
+      "bytes": 13,
+      "sha256": "ed614f21b453246ebd00834c5358ea791999fd7fbc040557aea44e735c0cd83b"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-after/boundary.off.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-after/boundary.off.gz",
+      "bytes": 511162,
+      "sha256": "588ad4cf366c1a963be137e5d9649bd0d4f4e9a7763b6059322bd0a1b3d953f1"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-after/input.off",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-after/mesh.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-after/mesh.npz",
+      "bytes": 2650745,
+      "sha256": "b5077b15811c259b45e22f3baae6792b97b8d630130c4b5c0b39c3dee0bcbb89"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-after/mesh.vtu.gz",
+      "bytes": 2072116,
+      "sha256": "1ca3b210d59dc4ffa3b8cc9ee11eac45c144d16c9d66ad4a9e58147db83962e8"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-after/result.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-after/result.json",
+      "bytes": 4055,
+      "sha256": "b28b2177753f5caccc2c98d0bd4de311a749a55f3daac363f65092fa7befea3b"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-after.log",
+      "bytes": 9183,
+      "sha256": "474e5debf94f92cd205c4b99ff2f4447e916e0cb1c2eeacc80514c374d5d9f2c"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-before/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-before/boundary-self-intersections.txt",
+      "bytes": 13,
+      "sha256": "ed614f21b453246ebd00834c5358ea791999fd7fbc040557aea44e735c0cd83b"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-before/boundary.off.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-before/boundary.off.gz",
+      "bytes": 511165,
+      "sha256": "1c084e36c2644d3d6ae360213b1b2e37496cb096b88640f03a6ec64d91d45548"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-before/input.off",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-before/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-before/mesh.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-before/mesh.npz",
+      "bytes": 2651903,
+      "sha256": "e62f399c28b47a6c98273b857241f5a089faf8055ec290cd79829f84a965373e"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-before/mesh.vtu.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-before/mesh.vtu.gz",
+      "bytes": 2072294,
+      "sha256": "5495d72fc5f987b40a8c472fe72279b03ae4175bfeaa0843aae3054caba31a9e"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-before/result.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-before/result.json",
+      "bytes": 4044,
+      "sha256": "91fd057407bb2287aa8f228644197f605ab8be06977b4bbe30414418f1520f0d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/graded-torus16384-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/graded-torus16384-before.log",
+      "bytes": 9091,
+      "sha256": "58080065f8a52986ffceb6473bbccb669957e31fddc82dd049794bb30fecdfe7"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/lossless-archives.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/lossless-archives.json",
+      "bytes": 1201,
+      "sha256": "0fb9d7e24b226f36fa4de2e27b4033406931c6d135f82745a6f3f9f50201cebb"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/reserved16384-target4096-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/reserved16384-target4096-after.json",
+      "bytes": 3106,
+      "sha256": "d55bc8eb9c23f156128da49f2f5496dd26b50101a5ac9a7bf7a75aba93642497"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/reserved16384-target4096-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/reserved16384-target4096-after.log",
+      "bytes": 8270,
+      "sha256": "25548a5c4dc7cdf46a57eb732e210aa4fe77579a6716513e8c1f30f4215a6f42"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/reserved16384-target4096-after.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/reserved16384-target4096-after.npz",
+      "bytes": 419609,
+      "sha256": "74bd6c33fc5be9c60f623dcc752c231b5520898e20524ed472923838984c0c60"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/reserved16384-target4096-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/reserved16384-target4096-before.json",
+      "bytes": 3102,
+      "sha256": "0f7b1994fa3a4cf0cf85d61383e31f2ac895a6c0678c8008238b10723c79a371"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/reserved16384-target4096-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/reserved16384-target4096-before.log",
+      "bytes": 8185,
+      "sha256": "fabad29fd87fb9815d1a7b507099c2eef24c6d1a031e14d67ba7359d2756e272"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/reserved16384-target4096-before.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/reserved16384-target4096-before.npz",
+      "bytes": 419461,
+      "sha256": "be4f60f68b3b51f91e6090bce01790dd2384eb81adede00c4905d8bfbbfe7f79"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus1000-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus1000-after.json",
+      "bytes": 2883,
+      "sha256": "6138ea68772088bd5ce914f895c840c1a755bea853df3d02a0d83317e84d251d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus1000-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus1000-after.log",
+      "bytes": 7944,
+      "sha256": "c87999a7ba07b28c60a47b5f57811518a89c9a730fcf3ae219bcf5cacf258020"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus1000-after.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus1000-after.npz",
+      "bytes": 91500,
+      "sha256": "8d12812e86794949b65bc930ff861de1e062a73245ca6934d38f9cc02b61590a"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus1000-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus1000-before.json",
+      "bytes": 2897,
+      "sha256": "a4364d8813ccad4c9930433c34271ea6623d8cce20c40e298660af8c6c8d7249"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus1000-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus1000-before.log",
+      "bytes": 7958,
+      "sha256": "14a3478bb89257ee59df6ec23ff86d8ae5e82ace3809b52f0debdfd1f6ff1510"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus1000-before.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus1000-before.npz",
+      "bytes": 91400,
+      "sha256": "9b2f14bdfa8916368fbce6935162694697d066928044d4ce2505f1469948128a"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus16384-fixed32-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus16384-fixed32-after.json",
+      "bytes": 3091,
+      "sha256": "f17d60d64161c4448de5102c8fd5dc2f8b9a3a061aff423da55278521fd3f96d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus16384-fixed32-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus16384-fixed32-after.log",
+      "bytes": 8089,
+      "sha256": "555b3729130e5db2956bb37bca94fa76eb2a374c4fa64aeba3cab9e046c252a4"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus16384-fixed32-after.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus16384-fixed32-after.npz",
+      "bytes": 2001496,
+      "sha256": "b86b09c89aec7723ec494dea9a2bac436c566b0892c246b0bda33b9deef2bb6f"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus16384-fixed32-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus16384-fixed32-before.json",
+      "bytes": 3098,
+      "sha256": "86091d699697ed3f57eb6675d28e49703a9881fb6b755b26ebaddddc067e8a36"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus16384-fixed32-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus16384-fixed32-before.log",
+      "bytes": 8015,
+      "sha256": "792a41407c4be18c2ecb0486aa6540af2f7a5d4427621125bf754f4b112fede9"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus16384-fixed32-before.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus16384-fixed32-before.npz",
+      "bytes": 2001317,
+      "sha256": "f101e354ce14d7849b06da146b82843d74ed2fa2c9f46bd4e3748bceca1d42c7"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus4096-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus4096-after.json",
+      "bytes": 3079,
+      "sha256": "468961623ccbb39418a5946255ae1236b62ae350773fe66a1a4661d864f489b0"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus4096-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus4096-after.log",
+      "bytes": 8162,
+      "sha256": "2f434a1df7a487a14d91b99bae41e88f93890ba1432fcbadc0c556b88d2da5f4"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus4096-after.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus4096-after.npz",
+      "bytes": 418808,
+      "sha256": "01096faa1da4d432e1537ab6885f4a5023671e745bb4eb6de6795a78dd073633"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus4096-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus4096-before.json",
+      "bytes": 3083,
+      "sha256": "648a49acd972ab330f1ec04610afe4ddef953dd17f1ddc19235fa53f87d2a0f5"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus4096-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus4096-before.log",
+      "bytes": 8166,
+      "sha256": "a32b76943513a4f7a9baaf4c102536c27e3eabc9a8c448e807a6a31315b92cc9"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus4096-before.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus4096-before.npz",
+      "bytes": 419371,
+      "sha256": "eb10e94e4e32da7ea3f3d9f54981c09d0bf6e9761697ac0827e594b46a103fe8"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus8192-progressive-after.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus8192-progressive-after.json",
+      "bytes": 3098,
+      "sha256": "470dc46f661373a88923afb6004413a87c4e6c7cfa58bbb33770d2de9c73c2c1"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus8192-progressive-after.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus8192-progressive-after.log",
+      "bytes": 8262,
+      "sha256": "6dfc9545d2bce4b871227ba4e16ac33b94d1896fd493c2654a361cd31704227b"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus8192-progressive-after.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus8192-progressive-after.npz",
+      "bytes": 918290,
+      "sha256": "8e2bc8e55741144c31559a94d006a68949db90876a03da859c90c2ca53a3ca88"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus8192-progressive-before.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus8192-progressive-before.json",
+      "bytes": 3100,
+      "sha256": "e28cd4894cced0ab117ada8a72e5a1a3424ed53a2bb810f94b0344ae3cf121b8"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus8192-progressive-before.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus8192-progressive-before.log",
+      "bytes": 8183,
+      "sha256": "f20f3b22678456b90aab15b3dc19dd44c2311ef108041d82f0d55b3457927410"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1/torus8192-progressive-before.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1/torus8192-progressive-before.npz",
+      "bytes": 917760,
+      "sha256": "79de74ef01fc2c8238327b51b410145bc4dd18ff9c2ed97460953b471b45110d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1-independent.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1-independent.json",
+      "bytes": 43197,
+      "sha256": "1cde2ef8aca02491b6002477e2aec1fecc54dbee8d4f258eca9afc2c5dcc908d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1-independent.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1-independent.log",
+      "bytes": 2122,
+      "sha256": "76019dbcf84491400103284d7ac00100833fe4e7bb014a41570a803a996d56ef"
+    },
+    {
+      "original": ".work/vtm/large-stackless-pilot-v1.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-pilot-v1.log",
+      "bytes": 12909,
+      "sha256": "48a4a0f9d70a4f9bde102129df15e3956c6a608b9283cf419802905981d9dc4f"
+    },
+    {
+      "original": ".work/vtm/large-stackless-point-policy-audit-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-point-policy-audit-v1.json",
+      "bytes": 497,
+      "sha256": "5960bba29c394046ea38d614a3c7f7e226fc8a5d64d247fa00b48a9a7f65a2ce"
+    },
+    {
+      "original": ".work/vtm/large-stackless-preparation-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-preparation-v1.json",
+      "bytes": 1478,
+      "sha256": "3480d76a01366df478820147093351a958976afb50da8b89332be30792180ff1"
+    },
+    {
+      "original": ".work/vtm/large-stackless-primitive-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-primitive-v1.json",
+      "bytes": 624,
+      "sha256": "4471626c60efe84357095ba88ad571a7b3b6acf0fd02e31a248c251a09b01124"
+    },
+    {
+      "original": ".work/vtm/large-stackless-primitive-v1.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-primitive-v1.log",
+      "bytes": 191,
+      "sha256": "f019c0131f29f8ad5a16a45018961446c3fb0d3ab0618f4f47e3c2010aedc3a3"
+    },
+    {
+      "original": ".work/vtm/large-stackless-production-collection-v1.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-production-collection-v1.log",
+      "bytes": 11187,
+      "sha256": "ab023cf3ef9b2294360fdec7bff42eb446747937bd23ede788373ecd68e0d536"
+    },
+    {
+      "original": ".work/vtm/large-stackless-production-focused-v1.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-production-focused-v1.log",
+      "bytes": 192,
+      "sha256": "cdc73d2221ed72325fe71ba230f6a901f6313e3620dacd6ec0088a56aff53362"
+    },
+    {
+      "original": ".work/vtm/large-stackless-production-source-audit-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-production-source-audit-v1.json",
+      "bytes": 15006,
+      "sha256": "b2539f4fe530cb31f99d1d5e63298c99336988e6e9f69eca2a0bb1148c28e7ed"
+    },
+    {
+      "original": ".work/vtm/large-stackless-profile-v1-audit.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-profile-v1-audit.json",
+      "bytes": 929,
+      "sha256": "b04118d080367eaba019e0e8ae707d82d65158a8fc252862653152801a7e5ec0"
+    },
+    {
+      "original": ".work/vtm/large-stackless-profile-v1-audit.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-profile-v1-audit.log",
+      "bytes": 929,
+      "sha256": "b04118d080367eaba019e0e8ae707d82d65158a8fc252862653152801a7e5ec0"
+    },
+    {
+      "original": ".work/vtm/large-stackless-profile-v1-command.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-profile-v1-command.json",
+      "bytes": 752,
+      "sha256": "7aae0ee46e69143e2c91642d811834fa3bc6b1690228d95043bba675dae12de6"
+    },
+    {
+      "original": ".work/vtm/large-stackless-profile-v1-driver.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-profile-v1-driver.log",
+      "bytes": 1966,
+      "sha256": "1e4c663b6724a68641ac29bdf0deca2abe4771ce1f75e6ebc406d03cec24a3e6"
+    },
+    {
+      "original": ".work/vtm/large-stackless-profile-v1-export.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-profile-v1-export.log",
+      "bytes": 8101,
+      "sha256": "88188843cf9b76e2bc6583ab9475e8b99eb89caf38b97ea8f1fccf1eaa80e93d"
+    },
+    {
+      "original": ".work/vtm/large-stackless-profile-v1-kernels.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-profile-v1-kernels.json",
+      "bytes": 76523,
+      "sha256": "991b4b51e790fe1d464222c35482655bd0a2ef34dcd881d38b810ed4b614f6e9"
+    },
+    {
+      "original": ".work/vtm/large-stackless-profile-v1.dot.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-profile-v1.dot.gz",
+      "bytes": 1472237,
+      "sha256": "477adebc00e05dd152d886ca47c25e38646e22454d84e17ffd3b5fff4d64bd1e"
+    },
+    {
+      "original": ".work/vtm/large-stackless-profile-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-profile-v1.json",
+      "bytes": 1795,
+      "sha256": "b27cca87db0541ee7287b711b7ba93b569db070580cb5778cfc0e9b8a7e86fd8"
+    },
+    {
+      "original": ".work/vtm/large-stackless-profile-v1.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-profile-v1.log",
+      "bytes": 10573,
+      "sha256": "2033ea256ff8d0c29f8152effc77cd44c3ae99276ad24cf81f1ddc6c2289c547"
+    },
+    {
+      "original": ".work/vtm/large-stackless-profile-v1.npz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-profile-v1.npz",
+      "bytes": 2640638,
+      "sha256": "3469c1cb985419de58868477c928589e69fdff45cf0a4e722dee50a6f9903e41"
+    },
+    {
+      "original": ".work/vtm/large-stackless-profile-v1.nsys-rep.gz",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-profile-v1.nsys-rep.gz",
+      "bytes": 2674457,
+      "sha256": "ba526fd9e41df15dc57d6bf06357330244419563d228387579e772e896235ed8"
+    },
+    {
+      "original": ".work/vtm/large-stackless-proof-v1.md",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-proof-v1.md",
+      "bytes": 2758,
+      "sha256": "15d37c8513613d13876b250968967f1fcc011b554cf23d2253fbd72cb10c2ea9"
+    },
+    {
+      "original": ".work/vtm/large-stackless-qualification-v1-full.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-qualification-v1-full.log",
+      "bytes": 1966,
+      "sha256": "06d31acc5e96ff813f725f17086ee156bc4b549c77a369761af66c1e03e403d8"
+    },
+    {
+      "original": ".work/vtm/large-stackless-qualification-v1-loop.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-qualification-v1-loop.log",
+      "bytes": 1968,
+      "sha256": "34b548663eefe8936bee6c2cb9abd72b9568172d956e9b5425ae0ca4c9a2eef7"
+    },
+    {
+      "original": ".work/vtm/large-stackless-qualification-v1-memory.log",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-qualification-v1-memory.log",
+      "bytes": 14351,
+      "sha256": "b66d6cee898f32c7dea4c6f0d15b7061eca2fcb3fb9cc93c694890170876931e"
+    },
+    {
+      "original": ".work/vtm/large-stackless-qualification-v1.json",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large-stackless-qualification-v1.json",
+      "bytes": 880,
+      "sha256": "d5efa9ea320939d35b1516392de96541c73944eaefa5594df17b582195257db1"
+    },
+    {
+      "original": ".work/vtm/large_stackless_v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/large_stackless_v1.py",
+      "bytes": 5080,
+      "sha256": "b40dfd2327d0aa7e0675387d819ab28aa74cc3735596f58bffcf1ded444f7299"
+    },
+    {
+      "original": ".work/vtm/prepare-large-stackless-gates-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/prepare-large-stackless-gates-v1.py",
+      "bytes": 4212,
+      "sha256": "668a2a08a66561dc005912f64c5bf16f5cda194b0cb860a14dd4b29a95172bc4"
+    },
+    {
+      "original": ".work/vtm/profile-large-stackless-loop-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/profile-large-stackless-loop-v1.py",
+      "bytes": 6640,
+      "sha256": "e4bb8782e7417baa89e499b5965dccf8cfae15cbb3bb571f5ee06e1a9cfb0f95"
+    },
+    {
+      "original": ".work/vtm/profile-large-stackless-production-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/profile-large-stackless-production-v1.py",
+      "bytes": 3641,
+      "sha256": "307f622be8a8ad5869ecf970cc511332d8e8f96d3a2644bc1976c96bec0e2486"
+    },
+    {
+      "original": ".work/vtm/profile-large-stackless-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/profile-large-stackless-v1.py",
+      "bytes": 3685,
+      "sha256": "3a4ff345a137d90fbf9f06f7e70ddfbd828c0de6aa4835a491c5f8a349147d2a"
+    },
+    {
+      "original": ".work/vtm/promote-large-stackless-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/promote-large-stackless-v1.py",
+      "bytes": 3330,
+      "sha256": "9017beaae6b9e4c15f4d3c6a5b02528be4da9d38c8beffc19c31e7e20f82563e"
+    },
+    {
+      "original": ".work/vtm/publish-large-stackless-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/publish-large-stackless-v1.py",
+      "bytes": 6767,
+      "sha256": "e99a9bb6d6ffa2967fb17fdca21c3d801f06ac3cd587e1666c7ab56ae9f05d83"
+    },
+    {
+      "original": ".work/vtm/run-large-stackless-final-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/run-large-stackless-final-v1.py",
+      "bytes": 4686,
+      "sha256": "d551870deda6f97165eb8c33de8c21bb4d26f3e8c0a02d1e45f96738937c2b09"
+    },
+    {
+      "original": ".work/vtm/run-large-stackless-gallery-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/run-large-stackless-gallery-v1.py",
+      "bytes": 257,
+      "sha256": "e3f1cbdbf22659a3fa751bfda7e5898f8245b4f276351306adc87fc5ced68eff"
+    },
+    {
+      "original": ".work/vtm/run-large-stackless-memory-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/run-large-stackless-memory-v1.py",
+      "bytes": 2560,
+      "sha256": "f103bac8db9991707691df6df49827ec9aee842e2a3226fb22a4430cecf1b454"
+    },
+    {
+      "original": ".work/vtm/run-large-stackless-mesher-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/run-large-stackless-mesher-v1.py",
+      "bytes": 256,
+      "sha256": "b5272a5fc83cf5d93013af4586534ddb738ecff03b09ec6a6caefc8f2242d136"
+    },
+    {
+      "original": ".work/vtm/run-large-stackless-native-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/run-large-stackless-native-v1.py",
+      "bytes": 3301,
+      "sha256": "156765d00dcdd24fef0eb77297c92a742e689a871b93258dc369f2e0ddc59779"
+    },
+    {
+      "original": ".work/vtm/run-large-stackless-pilot-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/run-large-stackless-pilot-v1.py",
+      "bytes": 3335,
+      "sha256": "a4966142368673c7d6ff0dfb9f5b381726aae44a7f286495d932191797bfc70a"
+    },
+    {
+      "original": ".work/vtm/run-large-stackless-profile-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/run-large-stackless-profile-v1.py",
+      "bytes": 3547,
+      "sha256": "92576f2070a7c5ead2d855d4e152ca323c65bea5ec9d5349cf8e2710b4b64fe0"
+    },
+    {
+      "original": ".work/vtm/run-large-stackless-qualification-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/run-large-stackless-qualification-v1.py",
+      "bytes": 1220,
+      "sha256": "5b7e2f8e2de304cfdf1e62ef0cf276f3f15ed91e5fb75c9d8aa9599531901d0c"
+    },
+    {
+      "original": ".work/vtm/run-large-stackless-suite-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/run-large-stackless-suite-v1.py",
+      "bytes": 843,
+      "sha256": "655aa02df4f2d1d76b0f4e3acaf8b0c9d369892942b96f591097eea4400545ed"
+    },
+    {
+      "original": ".work/vtm/test-large-stackless-existing-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/test-large-stackless-existing-v1.py",
+      "bytes": 269,
+      "sha256": "13832e5c7136ded70bf769868eae0a7a7c239f8a818c82e722064bb6c009eb9a"
+    },
+    {
+      "original": ".work/vtm/test_large_stackless_flat_v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/test_large_stackless_flat_v1.py",
+      "bytes": 11450,
+      "sha256": "ae94e0add4834e16928e1e424c236707ebe409ecaa802eb4b0482b1396d2ca6f"
+    },
+    {
+      "original": ".work/vtm/test_large_stackless_traversal_v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/test_large_stackless_traversal_v1.py",
+      "bytes": 5526,
+      "sha256": "138ff78b9d999deb5a6f6a74ad7266b2b67004d42ce9b0a9ac50a99a7c118132"
+    },
+    {
+      "original": ".work/vtm/write-large-stackless-doc-v1.py",
+      "path": "results/validation/vtm/hierarchical-seed-queries/write-large-stackless-doc-v1.py",
+      "bytes": 11736,
+      "sha256": "ed3f1b996aa946cef3a9c0e0fef2f22f970beeb0e47f1fa8e0372a86f2f45300"
+    }
+  ],
+  "source_sha256": {
+    "benchmarks/__init__.py": "aec4f6323c9af970cf489ad57de6195f5ef87df6edad0eaf51772e8c1b5506b2",
+    "benchmarks/active_delaunay.py": "dedc3721fd0b4eb4aef2c1bac457d64e225e7d44c578543472d16712fa45c06c",
+    "benchmarks/amplitude_order.py": "30b7eff6791a9c223c9014ce294af52b4a55a876aa6a6f85a54575754b1fe9cf",
+    "benchmarks/audit.py": "a1cac06ad03b11f588b8b3ea916091f3a8b238355f1e000f2b6c8e018ec0351e",
+    "benchmarks/bounded_predicate_proof.py": "90ce13274a06dc7a2f9dcf9c684fadc1967317d1e6f714956b08b0dae49a6002",
+    "benchmarks/certificate_fallback.py": "56f63983be10d2cecced520299f5fd8312e56071679b197c5dbef1967cb92e7e",
+    "benchmarks/compare.py": "790623d2707147a0614a828212664dca47c9d5e46a65380817c1e3af2ed5dd50",
+    "benchmarks/containment.py": "deecfe5cb518e1bcbce536e89a2bc1a6a93fc7072088ae9e5b760c7b2215d516",
+    "benchmarks/control_loop.py": "5f242c360349286c62ea42f4c8fa57f07eba58d1f011f32a1da29304a9b61454",
+    "benchmarks/cpu/README.md": "8295626d1200d5d4bd1bc49c25d6d648f16daf64481c6a68dda8923a2083774b",
+    "benchmarks/cpu/check_delaunay.cpp": "1a2b1ec4537bbad7a2ac5edd237d853c88bc2167e864eac2686fd9e98ccc3fcd",
+    "benchmarks/cpu/delaunay.cpp": "63f8510d06858f3641a57d1718fb7bfb4c64972fa6a1185ee2afb403399b8b5d",
+    "benchmarks/cpu/mesh3.cpp": "2be80a2312f8093dc9fea912b5e5aaa8b6b160dc084dee5a1926cfa9223e0f29",
+    "benchmarks/cpu/surface_distance.cpp": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d",
+    "benchmarks/cpu/surface_intersections.cpp": "227f37892bdc6a783ed12bc110a7c53571862951f264a5b72d07b7d21f341775",
+    "benchmarks/cpu/triangle_contact.cpp": "1ecbf2edad5bdaf0f2f14d4e7c09ef27b842f29d853b35a26b71d827c9f65192",
+    "benchmarks/cpu_mesher.py": "dcd64bb8bb725adefd5d4e5dc9852b0090ed835e33f6673bc938e6437424698a",
+    "benchmarks/datasets.py": "c06985fd7d32f87c193dc096e434b3389a2456a94451c778be5158c808e14f69",
+    "benchmarks/default_path.py": "0c97b2d2e5b5e2a1995fbdb455b1a333ae00c37d2bc673a1f47221e1d05aceed",
+    "benchmarks/delaunay_recovery.py": "a317c72d588feefec484ec85ef11a82f569614f4995131736ff5237ab7348471",
+    "benchmarks/domain.py": "8738c173885f57f82c3168b7b324cca13c35ac70c0d123abbfd96cdbfae34fad",
+    "benchmarks/exterior_loop.py": "f15db0dc5d0bf4d8f7896caf8dd808e8011f5e19a59266c49eda2d3a78cf7374",
+    "benchmarks/extraction.py": "c8b1b6ea55944de8af60da3eea1c989696fb3fb98c2e7e33f1f36e9f23807964",
+    "benchmarks/facet_completion.py": "ac8f46ea57539e83a3925ddb882cc471f4868d36df28837fab9c5ee53ae5bc37",
+    "benchmarks/facet_recovery.py": "48e3da3b1e530a4903e85ed0aac4b359798ff873d580fab13a6f65ca736f7fb6",
+    "benchmarks/fast_candidate_matrix.py": "6d61d8fae12af5266224585a533715dfe243d3a3ca497ae8f43e4a6a90d22387",
+    "benchmarks/fast_candidates.py": "2666a8916fe9677c3d75242867bcd758b940b9963a3aa4edd4d3a1f5dcd614b9",
+    "benchmarks/feature_quality.py": "06f9c355f193ad5c6ff8b63a98d33bbbaaf497b965cf3e84459efd3fa638d4c8",
+    "benchmarks/fetch_scenes.py": "99a8d693aae203927a012a8e4e152c04fb838eb49ea6d0a447ec10a9109644f3",
+    "benchmarks/geometry_regression.py": "34751f0eb34023aab8ba94da7c817b4255bf287239baa0c589551f39f83d8a14",
+    "benchmarks/global_certificate.py": "a7ebe54dd446a63b85378fab4556014e2a01816a9c86be420cf88f4986b6ac20",
+    "benchmarks/graph_capture.py": "00f77de4f6f3f8485c44c240c3dea83d9c6132501196f1aee5a83e929131864f",
+    "benchmarks/graphs.py": "99ce61f786157147024705d2282803dc3d7e6c2d17812dcefd2a3a29f84764dd",
+    "benchmarks/initialization.py": "d4fdbc016406e0f9560912ff3ea687b782bbb90a2d2f17481bb504e00b582f3c",
+    "benchmarks/interior.py": "3b11554d7882e0361fb04929299b06e8c101193177415e4e307ea0539ec1909f",
+    "benchmarks/jitter.py": "ecb96baf3daca6e4a0e62efc2cc10122a3f0339725d90813291cb8e355153153",
+    "benchmarks/local_certificate.py": "9e17b0321af3b6116689245a525717d8c17c5c600e7a0844996836ec4dd6ca9c",
+    "benchmarks/matrix.py": "45135d3e98d852bd18939e56269ae67f4cc503bd81ecec3252175da32009bd57",
+    "benchmarks/memcheck.py": "707d7d29ef6469d9cc52f56d6f21b0dc5464a6aedf858eca09ebb91bcda6df50",
+    "benchmarks/memory.py": "139f0195ef37b2d163797332166b2b70774a1c34324abe742027caac08175c89",
+    "benchmarks/mesh_quality.py": "0a5765c4d82da5e24ccda94bf2c149875c83932bc314c9211b276a99a893e0dd",
+    "benchmarks/mesher.py": "6fef54e2d691b0b2a1537bc81e1bb71586af06561c51aa9974fb15523291b1da",
+    "benchmarks/mesher_loop.py": "e384c22f1e2334aeca3d0c7441eca7354d8c1d75a99b3a9fe0e0f93df449c141",
+    "benchmarks/mesher_policy.py": "75a2b13ef4e10aa07ecdbc8e2b856eb171c9da7836c6bf83b0fa4f43fff12d98",
+    "benchmarks/nested_capture.py": "4ba4856c8af8fde4e1c738d9f7924523c02e83dac593864d6c6cf2741704b568",
+    "benchmarks/odt.py": "556322d06aa7108b2a6a76f01d15151db7008a93dcefe68ee08d3b785f49191d",
+    "benchmarks/odt_failure.py": "3b1c7402bc752678048198626919c2de6c5e50a1a1ef28f81860c104531efc99",
+    "benchmarks/radix_capture.py": "9df57f171e7287d4765d89f7875dfcf700b689dcad502c923a3c7498e34d49e7",
+    "benchmarks/recovery_policy.py": "58db4056f1de878f9ee32cd7a722486618dd2ac4b45ee9c396bbac45e00c4d70",
+    "benchmarks/refined_hand.py": "4fdf7e0d8dc05d9b484b242cef42f9832f4082658c2db9629dd59e612e3ce308",
+    "benchmarks/refinement.py": "86cd281caeee343f6cd748f998b72840348c679ad74734a2ba7da07c8b0281fe",
+    "benchmarks/reuse_delaunay.py": "99b23c95af424175126dfe405b588d29e5e7c55947b6ae00b7974c21e9aaf218",
+    "benchmarks/run.py": "30fc6978f5d1ee4f486f69ee3316a27fd7edf30b5d9f4dc4a3a8a47b77419d0e",
+    "benchmarks/selective.py": "c1530960d11574b1f75be7fa6db78bfb4f9455c72ca169b1bd6356e22d113936",
+    "benchmarks/sizing.py": "1086b3e357d960432ab9203eb026f16d28ae70daa81b5b439826bb45d2200680",
+    "benchmarks/stable_centers.py": "cf7a7c05e9cb3b414baec12c425c3788aaa3b26fddc123e896d0ac56dc323d24",
+    "benchmarks/stable_volumes.py": "6da84b42e0a2feee55cce3dc96810f960acda9f2d7122f3f5536466dad58c9fe",
+    "benchmarks/summarize.py": "ef218ab6fb7c60ab87400937292b357712638735799476960cb671418e5e4cb1",
+    "benchmarks/surface_distance.py": "977463196b35b253c1fee0193f87522dd8d43af87ad636c73737d64b678d6f2f",
+    "benchmarks/surface_distance_audit.py": "5c9c83555dc3d75ed5a697ce0bdb0388ffa68ed74dbb36746c19675ae0c58f26",
+    "benchmarks/symbolic_controls.py": "48658b1465d48a921ab4dc66f77c2d25120086c58a467133082b35b6ba23509a",
+    "benchmarks/tetrahedra.py": "b6429485a06a174687b092a3ffda29e8e14e414e825a8232ffc47603381a30e7",
+    "benchmarks/vtm_core.py": "acfae8356f3021a443036c9eda856797b5e8a564e287c4b57910f440fe3c0e2a",
+    "benchmarks/vtm_domain.py": "8244b3e036d038e5bd7ab6c5225144f62545bc02b22df4f1805a813d041bde8d",
+    "benchmarks/wide_extraction.py": "3665c607d1f786caa4d963df721d687a63ee1da5778b467e9bf58a79d016e29b",
+    "examples/__init__.py": "ac121f6f6650b3f9a5d6d9c65729a29df07f7d05998162d8f382d106725e12de",
+    "examples/fetch_armadillo.py": "2a098a8e224973dbb2dab308a75e95ff9b179316e1e81b1dd67a65bfa4ac0dff",
+    "examples/vtm_gallery.py": "7ef17562e1aa3938d2062d99f3d70b0a2b1b6e893ca72bb8742346989f5550d7",
+    "examples/vtm_inputs.py": "83284ecd146010c2d610b221bdfeaa16ce0b98fd59cda561c1602bdfa87bc9a0",
+    "examples/vtm_render.py": "ef908f1733b376be8b77fb1295cb09040984a1578d6058f09dede4d75522a3cd",
+    "warpower/__init__.py": "bc95cfd203def8ddac4d3171fee33feb98bbbef10a8ea5f98eef824140244874",
+    "warpower/_active_delaunay.py": "bb1c30442687bbb621717abac5ba705fb684243527c1036b31eeb74d0fe9b5c1",
+    "warpower/_active_sites.py": "3c17ffe07d129ee4c46317f1ce1ede2ed0d96a0f237ddb718f77e401a95f7cc1",
+    "warpower/_adjacency.py": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+    "warpower/_analytic_predicates.py": "b6d8ab23dfb23e107f8dde1d9e473085f9a45004115279531bfe219194bfad15",
+    "warpower/_api.py": "f84bec46306a84d7f1b72c6dc1d9dc560cb2905ad74bda63f4bffb97e4e5ad97",
+    "warpower/_automatic_sizing.py": "f6aab578b13d3689648452c49c4e4474b40005a8215bc6787cf6811037fd713b",
+    "warpower/_boundary.py": "68525b60978aef6eaf0f8f02f7693747b5fec6a5e02ba260cc67d82f389c94dd",
+    "warpower/_boundary_rounding.py": "6db76fc3ccce54914710dee1a134655d9b8934a3352686b9f41f2e9e92926e07",
+    "warpower/_bounded_predicates.py": "2a9afb83f8c64eea5f0597ffff0ccc9d5007f71f1d37a41f14da7b3e06df22e3",
+    "warpower/_bvh.py": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+    "warpower/_canonical.py": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+    "warpower/_cell.py": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+    "warpower/_construct.py": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+    "warpower/_containment.py": "e4913d8e25cd8f3a058b9a3175d69646cb3a7845a9fc2cb24ddc038373495e86",
+    "warpower/_delaunay_certificate.py": "bfab680e65db7757c519c0087cbbaf1d04ce5872e354c25bfee50f455fb1f6f0",
+    "warpower/_delaunay_recovery.py": "9f5b5b330bcdeeeb64ebe0eec5823d1357f6c79f1af4e1131dacda7b0d7f8e46",
+    "warpower/_domain.py": "7c82b21b9e1995301d36570a2a455c041c6daee78b5e736d35cd5df69d94a88d",
+    "warpower/_domain_topology.py": "3c0746b94c2940d275be28626e8dd257aa0b5a284d8459bd4cec226e4935826b",
+    "warpower/_exterior_band.py": "d875e2b215020ee4b29ed7be89b191fd5cf866339970619673fd7b0244cc995d",
+    "warpower/_exterior_proof.py": "b8bec5867ef20b2c65462844a078889ca68799696b86c981f811a6af689ec0c7",
+    "warpower/_extraction.py": "58d747bba2a5f04e814c2db0bb8abf5158590296f0c0b1450347638a726feca2",
+    "warpower/_facet_completion.py": "fe32e851c37ff5564393f4f6d3d4cfab6a43cf9927db3fd1bb0bf8d0b4cdb6c8",
+    "warpower/_facet_seeds.py": "8f88e244a9e9529bfc562a2a59edcf41c8f1b045da4a470655549fd6dd32658c",
+    "warpower/_fast_candidates.py": "740377dd16ccfec7b0bc630e4d2a483312a2a8cf398e067d37b3973e18d9a483",
+    "warpower/_filtered_predicates.py": "a9a74285885f362deb634972709ae6fe47dbdb33320e3b8627d3b85669578564",
+    "warpower/_graded_odt.py": "37538c9d51d3282a9ec85b6e1e7f6eeba6876598d5cb79f30d0dd8d736d45778",
+    "warpower/_graph.py": "d7e489b28717f72a25e866b59f1c9dba3855222e83cd97e848bf7e6b68bf18e2",
+    "warpower/_graph_construct.py": "9f305d39185abc6602b85431b887c3bd2b5152864ec18ef35e6a71e3a6690e42",
+    "warpower/_graph_tetrahedra.py": "ddbb067ef02cfd20032cc29d870bb19b9d30b4cd2a649516be5c547ce5b94540",
+    "warpower/_grouped_seeds.py": "8d0ffa1556c179ff11d0ecd357a55cdb198897a4fc4c8336389744b0aff19785",
+    "warpower/_halfspace_predicates.py": "46779c8236dab4048344523a653ed1b864ba77082163f533b991fb85540db164",
+    "warpower/_integer.py": "94205ab5790a308f51b083fedc8cb905050602369061d65d231b91f175a0d641",
+    "warpower/_jitter.py": "b184d21b47ce3e96fcf1587722d9be3c276240fc776ce85ffa10b3442dd85435",
+    "warpower/_mesh_api.py": "37cf23ecf09d34a7bc0a77ebe73d8e2102c37064b1ab4923acccca993ea0678f",
+    "warpower/_mesh_topology.py": "5dcb12b58e59446e5dbf4db6a1bda2eab3a32a55c833e453e3b9d48f3dfbcc24",
+    "warpower/_mesher.py": "faac42c14b9b9b2c7b8947361b9d53b5d5dbee8854ade65a91ac9e2717419e65",
+    "warpower/_odt.py": "53d23df8f23de165d98598c7fbbf53e2944f82ee82f6a74c2b135e142dd589f0",
+    "warpower/_poles.py": "b93f434020a357025dc3a067bbb0e8ed2c4c0ab66ecee0108db5a2c6762ea18d",
+    "warpower/_predicates.py": "20a204a1f6774353d3ce5d35e241db53a0ac075ef40714542f0067010aa50d26",
+    "warpower/_prepared_seeds.py": "86246833eec66426191c3e5465f6eadcd8437724893f4ccecf6f4f8564d89d56",
+    "warpower/_proved_completion.py": "93a534463f25f41e05135250de6b17fe0b4b22141b45c601564d1a308f14cb86",
+    "warpower/_proven_exterior.py": "447d9b4ececb6045712e4ce66b4dad08a55928c2cf97aec6f5fcdfaa997f552e",
+    "warpower/_quality_moves.py": "52d776f7186693107329bc216021b212546fed0b9aac50aa83e56d9c074b6d7e",
+    "warpower/_refinement.py": "003dc220a88044aa18f624676b5d1941a7bed314f1cb17226f962d8a4d61eb81",
+    "warpower/_reuse_delaunay.py": "862a4671c2daa9df7fe168625eefb4206184d2f9cb7c433f8a1aeab77c248ea5",
+    "warpower/_sampling.py": "3f4ef9a1ed354dab1a0f54528817683d68af1bc81c1926ec631834d93a8edc70",
+    "warpower/_selective.py": "4fd3235060bbbddc31b6b06d2508129318f6066b8fca8c7cd7f6c9e6e333ff19",
+    "warpower/_selective_backtracking.py": "e7111bcb1505045a4f73cbb72b4c3c54a4c814e21a4d5bdd69d046670d29223e",
+    "warpower/_site_bvh.py": "60a307c003c02f931cc1d6ee2f4ca1b417d34be6a4fae3f6d968be17dda7c92b",
+    "warpower/_sizing.py": "fe30bc06b3ad23479367a00afb2356e1103e74beb5e764e5f47e91ba8a343464",
+    "warpower/_sphere_bounds.py": "865f1d7eb961ffab42d98213ff52e52cb7a60973233cb03923d3f559e1e72c3c",
+    "warpower/_stable_center.py": "1d3f4a58c799f675edde5dea9f77dd50c36b68b7f8580e809a1b88d761d770d3",
+    "warpower/_stable_volume.py": "c326ad964bd1bf1f11fcd0682e1cacc8df56b7a3ccb3815ceef3694c3ac36a90",
+    "warpower/_surface_bvh.py": "b8bb9d8bb798fb5b38fcf59aa55c858a1af56de1d57e98b630f0b37b593edcf4",
+    "warpower/_surface_query_cache.py": "6d90d7649cd775bbdda66b30dbe727bfd7adcd9dc5bdb072471cff0c4115942c",
+    "warpower/_symbolic_bounds.py": "b071b45a8a19b93a322406680d10b6137c9cc7677efeb8776b98b7ae8c678db6",
+    "warpower/_symbolic_cell.py": "b3fbd57892ec33cef5e03b094d9cf454d17ffa9ae0ac4d886cce6ca210ecb7a2",
+    "warpower/_symbolic_delaunay.py": "79760a7f1770a8902288f4a8f750eb2170ba87899260a637817b65cc2f2aa451",
+    "warpower/_symbolic_tetrahedra.py": "52af32e5cfd0686fb82548a512f1b89c703057a45e0eb7597b9918d7a931e29a",
+    "warpower/_teleport.py": "4123f2a28bfc4324c5340adf85e93538885cd54b5e3f5b11107bc07183e7ab4f",
+    "warpower/_tetrahedra.py": "5db1eb6583f84bf99a81c9aca8aabb1d8fdc8772d6db7fe9bb87d812ad09f2ec",
+    "warpower/_triangle_contact.py": "01ebcddc6501f402157cf4a46738bffb6e8a55932dc11a35d6b79855804388df",
+    "warpower/_validation.py": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75",
+    "warpower/_voronoi_volume.py": "9b8b6c0f4e29f0907297ce5f13876d50f5728f8283fa73dec7514d5e30e05305",
+    "warpower/_vtm.py": "da0211189ab585f753558e73b07f2d12471fc184327cab1b65b51cf71e78936f",
+    "warpower/_vtm_controls.py": "a2c08f2f50c4bc189e2bc82a38f50b4137229081ff13344d4b319e11cbff9880",
+    "warpower/_vtm_domain.py": "7e7d79477224b3ddbcd5c11a47bee237ed96474660987268d43dac554aadf76a",
+    "warpower/_wall_candidates.py": "f9a532d2418a9ced7ccd9fcccecf91db74c0548b746e1bcd012cfd08d5d764cb",
+    "warpower/_wall_reuse.py": "8eb33d823e468da70ad1e1540876c5d8eb56c861ddfa2aa493a7bd8177f5e56e",
+    "warpower/_wide_center.py": "ed6c89a6afe3ee4dc4d14db4b92d244ed8483fd9fd55179e7048fc0dd1f13814",
+    "warpower/_stackless_seeds.py": "9d99f861b5d6865576d459871c7bdb5b61bcfc50aefdac120df5a9eb0acfe2b7",
+    "tests/test_stackless_seeds.py": "dea116b176661f23b8490fc2dcd8e547a63cff676d962d673f683947f615a16c",
+    "tests/test_stackless_traversal.py": "86afb18e2229fddb7b1f6aade7aca17493e0c02c9256cc95200085c4fc494a43",
+    "tests/test_large_reuse.py": "bba02a7a8c0529cb9d16ef1500569efabdb8b003fa904f6655f178e8bfed48e4"
+  },
+  "shared_helpers": [
+    {
+      "original": ".work/vtm/check-surface-bound-reuse-final-v2.py",
+      "path": "results/validation/vtm/surface-bound-reuse/check-surface-bound-reuse-final-v2.py",
+      "sha256": "043e6a45bc7f2723bce7411d587cafc15f0f3aa3789b81868f0fe5f4a81dd83a"
+    },
+    {
+      "original": ".work/vtm/check-large-reuse-proof-pairs.py",
+      "path": "results/validation/vtm/large-fragment-reuse/check-large-reuse-proof-pairs.py",
+      "sha256": "df6760f8f948dd861d6142bc37513c11da73777e5708e29d50507ec6242d70a5"
+    },
+    {
+      "original": ".work/vtm/large-reuse-isolated-test.py",
+      "path": "results/validation/vtm/large-fragment-reuse/large-reuse-isolated-test.py",
+      "sha256": "d4c82fdb4655cc1384950ac986e5ba034dd9d651ad89748ab919629e96504e78"
+    }
+  ],
+  "shared_prior_evidence": [
+    {
+      "path": "results/validation/vtm/extended-fragment-reuse/manifest.json",
+      "sha256": "0fbc462a56bf781206c2f225d59234195a5259772c1290ddd9376e332f0e6c08"
+    },
+    {
+      "original": ".work/vtm/check-extended-reuse-dense-failure-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/check-extended-reuse-dense-failure-v1.py",
+      "bytes": 1786,
+      "sha256": "88418eca5216832a2812e605317f5ee73c5356892461ffd17a447fd085b739b8"
+    },
+    {
+      "original": ".work/vtm/check-extended-reuse-final-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/check-extended-reuse-final-v1.py",
+      "bytes": 6080,
+      "sha256": "492d1b1dc38522796a7f211e7abba276488de672fc9eaa81939bce641a6c257d"
+    },
+    {
+      "original": ".work/vtm/check-extended-reuse-gallery-dense-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/check-extended-reuse-gallery-dense-v1.py",
+      "bytes": 2668,
+      "sha256": "9d9137722a80f5c3a6c0520f699483020344bc3134bc736a2ceee4e385b77027"
+    },
+    {
+      "original": ".work/vtm/check-extended-reuse-gallery-pilot-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/check-extended-reuse-gallery-pilot-v1.py",
+      "bytes": 2242,
+      "sha256": "59c4459308e1023729fcfac984862a372c8d178fbf20f892dc529b9e45d94f11"
+    },
+    {
+      "original": ".work/vtm/check-extended-reuse-gallery-pilot-v2.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/check-extended-reuse-gallery-pilot-v2.py",
+      "bytes": 2764,
+      "sha256": "3af9052bd5636831598506d77fd509c828a459238b3a0c38531834186cde3853"
+    },
+    {
+      "original": ".work/vtm/check-extended-reuse-native-loop-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/check-extended-reuse-native-loop-v1.py",
+      "bytes": 2210,
+      "sha256": "43359424114a614ca7233c47eeaf94b5460c89f5f4b0af6a57e3a92836cbe5d0"
+    },
+    {
+      "original": ".work/vtm/check-extended-reuse-pilot-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/check-extended-reuse-pilot-v1.py",
+      "bytes": 3754,
+      "sha256": "e004830c063d23484e9f330e91a9768962129021d1d5044baac2ef075f436385"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-collection-v1.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-collection-v1.log",
+      "bytes": 1632,
+      "sha256": "cba6db15321e5d17a6927eba5031f20f5af27356c2a17ea3691b96c143204def"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/commands.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/commands.json",
+      "bytes": 26260,
+      "sha256": "02f3892a02bace1bfbbe1c2c5eec3e7d00cb2072a97ba46915f8de087233ba8f"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay-fitted-hand-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay-fitted-hand-after.json",
+      "bytes": 2827,
+      "sha256": "bcfdc130ebd60a4221034dd6c889a34635f8541f54afb397d262857f26daa503"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay-fitted-hand-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay-fitted-hand-after.log",
+      "bytes": 5123,
+      "sha256": "72b86e3a8759e608dfbdb7427a6b3a440eef408d0e2d1c03e13a3c856a1a130b"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay-fitted-hand-before.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay-fitted-hand-before.json",
+      "bytes": 2831,
+      "sha256": "e2a586d5fd4689a40d3ab4638320e2cfde1168ceb499bb7a6e1a2fb1589beff7"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay-fitted-hand-before.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay-fitted-hand-before.log",
+      "bytes": 5127,
+      "sha256": "aa68f8fd2e8f5e7a8bb0fb08ac3f94a4fb2b6e3a410cb18cd2ef636aefe1e68c"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay-grid-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay-grid-after.json",
+      "bytes": 2825,
+      "sha256": "a219324c274f873ef57ad51345277a3ee21dbb9432b234029d88bd0bbeafe9be"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay-grid-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay-grid-after.log",
+      "bytes": 4864,
+      "sha256": "49fb25e0f7e42b23d727f8f7a27fe762dce40bc5c8265c5fd9041aefd4c7cd9d"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay-grid-before.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay-grid-before.json",
+      "bytes": 2836,
+      "sha256": "dac5e81623161ac4b80069e5f8bf93289b3ed1b3f9d5e714306fb39d6fe42215"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay-grid-before.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay-grid-before.log",
+      "bytes": 4875,
+      "sha256": "24640e67e25ab494fab7aa60ad942d1729539e815352cac0d5b81cbb89415443"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay1000-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay1000-after.json",
+      "bytes": 2821,
+      "sha256": "50e91350efdaebc5e53c6e9ef3fd9bfb07b6a585871476c878af6108f4e68d35"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay1000-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay1000-after.log",
+      "bytes": 5117,
+      "sha256": "90452fec0deece03f5401979d5001bdb07b304a1a89426ced99f6073b4abcd2a"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay1000-before.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay1000-before.json",
+      "bytes": 2830,
+      "sha256": "9c64d62d0bd59c50a6eeea384d9d1cff46411311e91221dae0fbe63d2ed6e43d"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay1000-before.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay1000-before.log",
+      "bytes": 5126,
+      "sha256": "4a3e902028f4e477bb2287c2ff8b13068a5421b07ed6389ae5acaa4027cdd7a6"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay100000-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay100000-after.json",
+      "bytes": 2832,
+      "sha256": "0bede80e30d6190085d184bb0ba06713e49c5124c7ecca9a6deb64b38020e742"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay100000-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay100000-after.log",
+      "bytes": 5062,
+      "sha256": "5a3c0a1a9100e142f24c65201285a5a2615130a258c6f8a618cb61af2691d6c6"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay100000-before.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay100000-before.json",
+      "bytes": 2832,
+      "sha256": "200f76de4325d1bcdc373d28f7c09d9459cd63760c9d71595ec6b138bd06b77b"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/delaunay100000-before.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/delaunay100000-before.log",
+      "bytes": 5062,
+      "sha256": "97c1df9cff4cc98e3205f9350b861b88151f7bebce6074597add9e3d6d5d01b1"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/diagram100000-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/diagram100000-after.json",
+      "bytes": 2562,
+      "sha256": "9fce764cb561bea3309ec122a70104b02819c3e2a5097248d629dfd084814025"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/diagram100000-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/diagram100000-after.log",
+      "bytes": 3433,
+      "sha256": "70c9b7849253b02bf287a1dc2dc37353db613f8184e98ccbdf0219c41e5ba344"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/diagram100000-before.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/diagram100000-before.json",
+      "bytes": 2570,
+      "sha256": "afaea04a1c67d5c7bcede530560012727445fb31dc27d977098bd4ca2f7f9cb9"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/diagram100000-before.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/diagram100000-before.log",
+      "bytes": 3441,
+      "sha256": "a19b39e0d618bede34267177cc07d053ade1a315c78d481ab15939cafc3f722a"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/graded-torus16384-after/boundary-self-intersections.txt",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/graded-torus16384-after/boundary-self-intersections.txt",
+      "bytes": 13,
+      "sha256": "ed614f21b453246ebd00834c5358ea791999fd7fbc040557aea44e735c0cd83b"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/graded-torus16384-after/boundary.off.gz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/graded-torus16384-after/boundary.off.gz",
+      "bytes": 511293,
+      "sha256": "dff79b9a3745d145e296d628a9fd588ef98e92c33533c55fc279ae8e0d74767b"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/graded-torus16384-after/input.off",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/graded-torus16384-after/input.off",
+      "bytes": 100133,
+      "sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/graded-torus16384-after/mesh.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/graded-torus16384-after/mesh.npz",
+      "bytes": 2651533,
+      "sha256": "7673aad0051b3fd54331484ae31fa183b15f07692eac09c0b1bdea611a16b0d5"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/graded-torus16384-after/mesh.vtu.gz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/graded-torus16384-after/mesh.vtu.gz",
+      "bytes": 2071639,
+      "sha256": "083e35b567b4890579b3a630b1b3cfc9139bdaa25b6799cddaa5a5b9c347253b"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/graded-torus16384-after/result.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/graded-torus16384-after/result.json",
+      "bytes": 4045,
+      "sha256": "93469a45c5fd2c697d4de3d1b630e1a56065a798793269d45c3ff8b4bc09934d"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/graded-torus16384-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/graded-torus16384-after.log",
+      "bytes": 9092,
+      "sha256": "b2df38d4b993db0d01b6d8c20a45054c5830cb02326bbff3c17a8b10a1ac616d"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/lossless-archives.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/lossless-archives.json",
+      "bytes": 940,
+      "sha256": "09d940045b8fab242dee431d50cdfe5e1fde9f8f898b0f728e00ae8f7063306b"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved16384-target4096-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved16384-target4096-after.json",
+      "bytes": 3094,
+      "sha256": "5e4fc89bdbbc256cfaf7318608cc0e67a866e6a7a9d9a583640223e2849007c6"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved16384-target4096-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved16384-target4096-after.log",
+      "bytes": 8177,
+      "sha256": "111e6e6b5455bcdb750a828941b35be676e6f66f2662f51dda4b7b1b7dd5708a"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved16384-target4096-after.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved16384-target4096-after.npz",
+      "bytes": 419621,
+      "sha256": "4e959beb91883881afef8c64801f6b994cdde0a131ce53871fba58c5fc44267d"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved16384-target4096-before.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved16384-target4096-before.json",
+      "bytes": 3091,
+      "sha256": "60815447f95869677adc9878127a8d01e0273afb351ca70f72548dbda92ef9af"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved16384-target4096-before.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved16384-target4096-before.log",
+      "bytes": 8174,
+      "sha256": "2df2a4e20738a71853b5706cb1e1abfd6204e602d28adf1a8ccb8308c569d6c2"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved16384-target4096-before.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved16384-target4096-before.npz",
+      "bytes": 419558,
+      "sha256": "f6eb6ae741865ccae9f366dfe092c02573a43033abf27818ba978d268c8ebf0b"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved8192-target1000-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved8192-target1000-after.json",
+      "bytes": 3086,
+      "sha256": "32438f085fb1c21594ec6c6581f4a4fef3aad4f60cb2a9181ba667e0ae5d4456"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved8192-target1000-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved8192-target1000-after.log",
+      "bytes": 8169,
+      "sha256": "9e4d584c9debf0bb7de0204912551d5cc44ef22f4376f3802c2f7eaa4ca763a8"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved8192-target1000-after.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved8192-target1000-after.npz",
+      "bytes": 91468,
+      "sha256": "7395d1ef1c3e0bb715d9eb39475f599b3f3d91e6ea2ac4afdcb4071c0c0f2099"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved8192-target1000-before.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved8192-target1000-before.json",
+      "bytes": 3090,
+      "sha256": "a29dd0861a660ffe596855559469d2b108d43fbdde74410a071e3e68394ff50b"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved8192-target1000-before.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved8192-target1000-before.log",
+      "bytes": 8173,
+      "sha256": "814c614a54c433486dd6aabf05b91cc4123a83069996f4ab9e4b790d3c7d0083"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/reserved8192-target1000-before.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/reserved8192-target1000-before.npz",
+      "bytes": 91426,
+      "sha256": "aaec2b896e3420f79ae4598a344572208d0d52418c792e686f7954eb66217071"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus1000-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus1000-after.json",
+      "bytes": 2891,
+      "sha256": "d1e7b2bec9e7c63ad33d7f663771baf9f2604d5b3adaf27c93c92194df4eeb49"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus1000-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus1000-after.log",
+      "bytes": 7952,
+      "sha256": "0d70ce2cdf61224dfeff4d01a0dab54099db66917f8610db94dbb3b5e455a3f0"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus1000-after.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus1000-after.npz",
+      "bytes": 91285,
+      "sha256": "6e8175976d1570a49bead35fce76edf622e7c81dae086bc4ba7aa48edd229119"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus1000-before.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus1000-before.json",
+      "bytes": 2893,
+      "sha256": "6d919cf567116f2ea213d5724e4ff9b3ab771ec72a52ba6a01e792a22ca7731e"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus1000-before.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus1000-before.log",
+      "bytes": 7954,
+      "sha256": "cb11cc4a6b2aa74bfd2d3bb11dd58bcb5ae83405e44131a36bb9faf04e1c45f3"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus1000-before.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus1000-before.npz",
+      "bytes": 91396,
+      "sha256": "f22f3ce959d32eae069f5bb32240c2fea6733342beba27ad1e6a4bf6d17c3802"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus16384-fixed32-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus16384-fixed32-after.json",
+      "bytes": 3087,
+      "sha256": "bf9d649f52afc3a787b2aedba55352b671c610e2a6ce29a9a9fa664bdc79a6bc"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus16384-fixed32-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus16384-fixed32-after.log",
+      "bytes": 8004,
+      "sha256": "264f3f6be9fd2aba307c9d9369fc1e5a6cafdf96183a6b3a200fe408cbb08026"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus16384-fixed32-after.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus16384-fixed32-after.npz",
+      "bytes": 2001086,
+      "sha256": "79fd70b8cde08b39bbd0d39feb2a95f1df65a614ed6c87afc3c3883ff1378a80"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus16384-progressive-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus16384-progressive-after.json",
+      "bytes": 3097,
+      "sha256": "7e3cb3b0b753170083edfcabcc2411df6a2ffef423576941e9605ab1fba35d98"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus16384-progressive-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus16384-progressive-after.log",
+      "bytes": 8180,
+      "sha256": "0317b64644c4a03075b4ec075a122aa8cfe577f3b47a7cb0a8c0d40ed0ebe576"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus16384-progressive-after.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus16384-progressive-after.npz",
+      "bytes": 2000712,
+      "sha256": "19e68302bc37e5382d04003b87bb70d9d302f80d861d7852f5dd4b5c2aecbe55"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus4096-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus4096-after.json",
+      "bytes": 3079,
+      "sha256": "644ceb7e0a4d7889fdfdabd8cfb3528c31fb6deecf6e4f607604de39d5b89614"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus4096-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus4096-after.log",
+      "bytes": 8162,
+      "sha256": "e128c06d985ce985dc42b8232c1e19a670308b41424a8384620f8b652722dd51"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus4096-after.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus4096-after.npz",
+      "bytes": 419219,
+      "sha256": "c1841dfd1984f0311311230edb24554cbe633309ebaf85a95579006d6325c351"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus4096-before.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus4096-before.json",
+      "bytes": 3080,
+      "sha256": "0b6f8df4c3f85d8d15face2854ce8765c3a7c5250f3e97d156352e0ddfb7592d"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus4096-before.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus4096-before.log",
+      "bytes": 8163,
+      "sha256": "1626598813fbc57628bc961ad778cbc0b42acdd3e8c8bde9430a3fd248d2037b"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus4096-before.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus4096-before.npz",
+      "bytes": 419123,
+      "sha256": "688b852cd8a61dda25d60475f20ca893272810fcb75cf88472d61b8453995a10"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus8192-fixed32-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus8192-fixed32-after.json",
+      "bytes": 3094,
+      "sha256": "912a135aca6f79ee4247735ab318ff8e8c93cb635f09226077f84a8642d31b2f"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus8192-fixed32-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus8192-fixed32-after.log",
+      "bytes": 8011,
+      "sha256": "7347ca3b0c6094a421f26feae950d71474a3d76864ed04ebc54ac7572bb2d080"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus8192-fixed32-after.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus8192-fixed32-after.npz",
+      "bytes": 916815,
+      "sha256": "340f17e9433d257c998e4b5d2186b6da130a8fcc461e4055136ecd67bb7ab7b5"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus8192-progressive-after.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus8192-progressive-after.json",
+      "bytes": 3095,
+      "sha256": "543aff0e98fcfb7ec3f8dd45e7300a401b65836e68ac42119702851cfe26bd05"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus8192-progressive-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus8192-progressive-after.log",
+      "bytes": 8178,
+      "sha256": "c3ba43091f2194b305bdb86b89b3ad8863ba7e8f9f0846fe680d2a2cd5ce93eb"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/torus8192-progressive-after.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/torus8192-progressive-after.npz",
+      "bytes": 917923,
+      "sha256": "a8baa7a2f823a88a5fcba94806c2980f53876579a20abfa5a6acddd17936564d"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/uniform-armadillo8192-after/input.off",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/uniform-armadillo8192-after/input.off",
+      "bytes": 4325935,
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/uniform-armadillo8192-after/result.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/uniform-armadillo8192-after/result.json",
+      "bytes": 3760,
+      "sha256": "5cb30054db1a18f0d17ef9d839a5f0e28833afd4a2f24e6879babe75b2ee72b1"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/uniform-armadillo8192-after.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/uniform-armadillo8192-after.log",
+      "bytes": 8844,
+      "sha256": "87de502c942a639f0ef390886632ae95bd9cbcd7439a0f5b11ca8a12fd63ab37"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/uniform-armadillo8192-before/input.off",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/uniform-armadillo8192-before/input.off",
+      "bytes": 4325935,
+      "sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/uniform-armadillo8192-before/result.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/uniform-armadillo8192-before/result.json",
+      "bytes": 3749,
+      "sha256": "fe1303089553068dbf602767b5ca4adbb27d88fadd5e39a50cc94b598d74853c"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1/uniform-armadillo8192-before.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1/uniform-armadillo8192-before.log",
+      "bytes": 8833,
+      "sha256": "7f5608f649b9aec96ac081591dca985d56e3631dcda4f47293a55480298d8c64"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1-independent.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1-independent.json",
+      "bytes": 57456,
+      "sha256": "404a2b690ad30ac7ea082cc5e0be00c25ded62903f697b9d6a8781182d501576"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1-independent.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1-independent.log",
+      "bytes": 7399,
+      "sha256": "2f1061f09e0d16590d10e85392b86687cb6add930c7b953f0c001b38d8d04f48"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-final-v1.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-final-v1.log",
+      "bytes": 22138,
+      "sha256": "e59717c419565414a5d2c6ce674cdbed5088f3ab6f45e9074608fde0ebc3a34b"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/commands.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/commands.json",
+      "bytes": 4910,
+      "sha256": "0bed4b1d964e952c03a5f88a2834076930ad5a5b28e85cb5b20a5933519f8c25"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus16384-fixed32.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus16384-fixed32.json",
+      "bytes": 3075,
+      "sha256": "1364810495f3f9a123aaa1ee7bd84905b538096cc76009510ef343231520099c"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus16384-fixed32.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus16384-fixed32.log",
+      "bytes": 7992,
+      "sha256": "56b0d6a1c4bd66b7b5aba7acd4fd6ff6901a68c8f6b3ccc6ede3399e05aa451c"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus16384-fixed32.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus16384-fixed32.npz",
+      "bytes": 2002272,
+      "sha256": "ab822bcd077f865f424ea4e740d81a2d298fef23c9b7c9dc6e3df9d792d0b25e"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus16384-fixed32.route.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus16384-fixed32.route.json",
+      "bytes": 594,
+      "sha256": "589e7eb6fde93a25503249d229097de8ca0235e4616f5de7f629116ef7644e63"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus16384-progressive.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus16384-progressive.json",
+      "bytes": 3082,
+      "sha256": "4796b0ff2358377818d7eebf06e37cc433f8fa81710352b26026826ef1288c70"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus16384-progressive.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus16384-progressive.log",
+      "bytes": 8165,
+      "sha256": "89c9769a42d777cd028b3c93595e98afd82ef2d476de6b8252f2bf11795a8495"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus16384-progressive.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus16384-progressive.npz",
+      "bytes": 2000564,
+      "sha256": "7d49c799a7645fba260c6c278011bea192542892b2c27d6f2244bf747ab2467e"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus16384-progressive.route.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus16384-progressive.route.json",
+      "bytes": 594,
+      "sha256": "589e7eb6fde93a25503249d229097de8ca0235e4616f5de7f629116ef7644e63"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus8192-fixed32.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus8192-fixed32.json",
+      "bytes": 3081,
+      "sha256": "da3a8095002b3214d7cfb9aef3a7f27a710da29eb90c77471f2464778c42d2be"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus8192-fixed32.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus8192-fixed32.log",
+      "bytes": 7998,
+      "sha256": "932f3a216bf008501f3a5247656799e2274cdf4508cb373c2787d22b6dfd85d4"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus8192-fixed32.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus8192-fixed32.npz",
+      "bytes": 916303,
+      "sha256": "77ed7792f9b156d3031aca3ec241093b67df177c5d6778282d11ee4228637b80"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus8192-fixed32.route.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus8192-fixed32.route.json",
+      "bytes": 594,
+      "sha256": "589e7eb6fde93a25503249d229097de8ca0235e4616f5de7f629116ef7644e63"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus8192-progressive.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus8192-progressive.json",
+      "bytes": 3087,
+      "sha256": "aa92b2eab0dedf98b654391e50c5bbeb53dbf6292d07649f8fedc98fc77bac80"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus8192-progressive.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus8192-progressive.log",
+      "bytes": 8170,
+      "sha256": "a1586d36ef58f3ecd464fe9558a5baa3d390faa581f47953be741bd7eed0bbe1"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus8192-progressive.npz",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus8192-progressive.npz",
+      "bytes": 918022,
+      "sha256": "c90f9ac8d499beb7a5309e31118cfc2d72018cc095c2a0180a37753a652f963c"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1/torus8192-progressive.route.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1/torus8192-progressive.route.json",
+      "bytes": 594,
+      "sha256": "589e7eb6fde93a25503249d229097de8ca0235e4616f5de7f629116ef7644e63"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1-independent.json",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1-independent.json",
+      "bytes": 22675,
+      "sha256": "377bafb044957a653273351e81fd327b829c0e8648e80c19a48edd17d794046c"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1-independent.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1-independent.log",
+      "bytes": 2443,
+      "sha256": "09897331381994cbd3a4f87a9b2a749a3b00d4cd406e93eeeed84015b605846a"
+    },
+    {
+      "original": ".work/vtm/extended-reuse-pilot-v1.log",
+      "path": "results/validation/vtm/extended-fragment-reuse/extended-reuse-pilot-v1.log",
+      "bytes": 3895,
+      "sha256": "071a907620306aaf1fbfdd472b16b8595d49f0c46b70aab41949544cc5cc7304"
+    },
+    {
+      "original": ".work/vtm/profile-extended-reuse-loop-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/profile-extended-reuse-loop-v1.py",
+      "bytes": 6640,
+      "sha256": "e4bb8782e7417baa89e499b5965dccf8cfae15cbb3bb571f5ee06e1a9cfb0f95"
+    },
+    {
+      "original": ".work/vtm/profile-extended-reuse-production-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/profile-extended-reuse-production-v1.py",
+      "bytes": 3630,
+      "sha256": "e24bdc24ce0cce252dfb07deb479f15ef9aefbb322faf8ca1a51852f21433144"
+    },
+    {
+      "original": ".work/vtm/profile-extended-reuse-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/profile-extended-reuse-v1.py",
+      "bytes": 3675,
+      "sha256": "2189ea3ef56c97a88ad71a7fe2c5b7ebc21df5e50a529fc3dca483be5af44f88"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-final-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-final-v1.py",
+      "bytes": 5447,
+      "sha256": "a927b3c3f60d362042658eaf0a40531e496cf0572169776b1babd8b488fe7162"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-gallery-dense-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-gallery-dense-v1.py",
+      "bytes": 3037,
+      "sha256": "46819c619a7209a66fd7cddef95b6919a66a63ac433e5e33702c404153e26ab1"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-gallery-pilot-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-gallery-pilot-v1.py",
+      "bytes": 3080,
+      "sha256": "2e42b39d0fcc5d0cd21e14498ec835f8a1c7da96c00deb863d67905a8080a5de"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-gallery-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-gallery-v1.py",
+      "bytes": 869,
+      "sha256": "396641ff1359a3a9f54f02788edb2118d9478d8a87a37d7308630a5d94b37e28"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-memory-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-memory-v1.py",
+      "bytes": 1816,
+      "sha256": "2ede43013c7298d94f77f7c23170ad6a516fe831f6b06bed95d8bcd3fabcd5e9"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-memory-v2.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-memory-v2.py",
+      "bytes": 1991,
+      "sha256": "c3e1ff5de4953bd8d379fe31ba5ecb16fb43ae05ac0ed9729f18b5cfcee44a83"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-mesher-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-mesher-v1.py",
+      "bytes": 908,
+      "sha256": "9e17dbd584183a2cb5839b1f59832229ada5eebc2af2a3a7933973a8a36f9c72"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-native-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-native-v1.py",
+      "bytes": 3294,
+      "sha256": "6cb96211ab97e0e31aeedc1b632e366cd1d239fb271c9c22d660684a474623d5"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-pilot-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-pilot-v1.py",
+      "bytes": 2033,
+      "sha256": "de51d6358c10b2d27faabae6d81e54a7209bebd184a866b349427b357ee7b494"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-profile-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-profile-v1.py",
+      "bytes": 3540,
+      "sha256": "3dd0d7288fbf3ca56cd913131e4b68db9a7cd891324e0c4edfbebc83ba682043"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-qualification-v1.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-qualification-v1.py",
+      "bytes": 1213,
+      "sha256": "04faefaebdd2b040ef88526dea79bb33f3e0ece127292cad38e4fdd12733f98c"
+    },
+    {
+      "original": ".work/vtm/run-extended-reuse-qualification-v2.py",
+      "path": "results/validation/vtm/extended-fragment-reuse/run-extended-reuse-qualification-v2.py",
+      "bytes": 1214,
+      "sha256": "d54047a42cf0cbee9f2b8577ee401c59ff6ee757d731163c3ae5d2d2216f3bfc"
+    }
+  ],
+  "limitations": [
+    "GPU-versus-GPU traversal gains do not meet the comparable-quality native CPU speed goal.",
+    "Native trace and sanitizer durations are diagnostic, not clean timing samples.",
+    "Fresh solve timing excludes setup, compilation and transfers.",
+    "Previous Armadillo extraction failures are unchanged and not presented as successful meshes.",
+    "The first captured-loop launch includes deferred graph instantiation and upload before its single graph launch; driver-internal preparation is not claimed host-free or allocation-free."
+  ],
+  "reproduction": [
+    "Restore original .work/vtm paths and shared helpers/prior artifacts in checkouts of the pinned source commits; replace absolute workspace root as needed. Drivers refuse output overwrites.",
+    "Private probes use baseline5998b13; production validation uses the recorded runtime commit. Production imports no private prototype.",
+    "Use PYTHONDONTWRITEBYTECODE=1 WARP_CACHE_PATH=/opt/warpower-generated-cache OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=4 PYTHONPATH=.:.work/vtm. One GPU process at a time; no heavy CPU work during clean timing.",
+    "Build native CGAL validators from benchmarks/cpu; binary hashes are retained. /opt contains only regenerable cache/scratch."
+  ],
+  "native_binary_sha256": {
+    "check-delaunay": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "surface-distance": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+    "surface-reference": "a7828fd95e15a50c7910df9e203b1bf0fccabf5f477e52c3c37b2277c844728a"
+  }
+}

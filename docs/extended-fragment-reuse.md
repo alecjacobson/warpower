@@ -123,7 +123,8 @@ which has differing counts/quality and includes throttled samples. The
 
 The earlier native diagnostic attributes 3.03 of 7.08 seconds of kernel activity
 to grouped seed checks. [Issue #177](https://github.com/alecjacobson/warpower/issues/177)
-tracks hierarchical traversal. Larger active prefixes still pay for the full
+is now implemented by the separately measured [hierarchical seed queries](hierarchical-seed-queries.md).
+The timings in this report predate that follow-up. Larger active prefixes still pay for the full
 reservation after 2,048 sites; [#230](https://github.com/alecjacobson/warpower/issues/230)
 tracks additional routes, with scratch sharing in
 [#122](https://github.com/alecjacobson/warpower/issues/122). These are separate

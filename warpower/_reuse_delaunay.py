@@ -85,6 +85,7 @@ class ReuseDelaunayWorkspace(DelaunayWorkspace):
                 self._original.tree,
                 block_dim=self._facet_query_block_dim,
                 prepare_geometry=True,
+                query_segment=self._original._segment,
             )
             self._reuse_completion = SeededFacetCompletion(
                 self._reuse_filter,

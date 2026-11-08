@@ -109,7 +109,17 @@ def compact(
 class CertifiedSeeds:
     """Preallocated exact seed filter; input is a device-count prefix of cells."""
 
-    def __init__(self, points, source, count, tree, *, block_dim=256, prepare_geometry=False):
+    def __init__(
+        self,
+        points,
+        source,
+        count,
+        tree,
+        *,
+        block_dim=256,
+        prepare_geometry=False,
+        query_segment=None,
+    ):
         self.points, self.source, self.count, self.tree = points, source, count, tree
         self.device = points.device
         self._block_dim = block_dim
@@ -133,7 +143,14 @@ class CertifiedSeeds:
             if prepare_geometry:
                 from ._grouped_seeds import GroupedSeedQueries
 
-                self._prepared = GroupedSeedQueries(
+                query_type = GroupedSeedQueries
+                query_options = {}
+                if query_segment is not None and 4096 < len(points) <= 16384:
+                    from ._stackless_seeds import StacklessSeedQueries
+
+                    query_type = StacklessSeedQueries
+                    query_options["segment"] = query_segment
+                self._prepared = query_type(
                     self.points,
                     self.unique,
                     self.unique_count,
@@ -141,6 +158,7 @@ class CertifiedSeeds:
                     self.live,
                     self.error,
                     block_dim=self._block_dim,
+                    **query_options,
                 )
 
     def run(self):

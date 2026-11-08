@@ -338,6 +338,10 @@ points](grouped-seed-queries.md) in batches of 32, with freshly computed exact
 group boxes. Strict sphere-box separation can skip an entire group; unresolved
 groups retain the same individual point tests. This adds fixed group storage and
 one preparation launch while keeping standalone construction paths unchanged.
+At capacities 4,097–16,384, the VTM filter instead [traverses the existing
+current segment hierarchy](hierarchical-seed-queries.md) down to those 32-site
+groups. This skips excluded subtrees and removes the separate group-box buffers
+and preparation launch, while retaining the same point predicates and certificate.
 Within one unchanged-input completion, [exact cell proofs](completion-proofs.md)
 now follow retained cells through deduplication and compaction. New cells keep
 their full sphere checks; all topology, coverage and hull-support checks remain.

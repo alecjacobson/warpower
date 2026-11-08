@@ -6,6 +6,8 @@ tracks a pure-Warp, device-resident implementation of
 The [public mesher](mesher.md) now composes the numerical stages in a captured
 nonconvex-domain pipeline. The [current schedule and size study](fixed-site-current.md)
 measures existing options through 16,384 sites against native size controls.
+The [hierarchical retained-cell queries](hierarchical-seed-queries.md) improve
+large complete GPU solves while preserving their coordinates and connectivity.
 The wide comparable-quality CPU performance goal remains unmet.
 
 The target includes ODT relocation, boundary and sharp-feature fitting, graded

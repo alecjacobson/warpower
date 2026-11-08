@@ -1,0 +1,8 @@
+{
+  "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python .work/vtm/verify-bounded-hull-box-publication-v1.py",
+  "exit_code": 1,
+  "exception": "KeyError: 'sha256'",
+  "location": "line 19, archive packed-hash check",
+  "cause": "Observer/audit archive records bind raw_sha256 only; packed hashes are already bound by the main manifest.",
+  "resolution": "Verifier v2 accepts both retained archive-record schemas and still requires all manifest packed hashes and every recorded raw hash."
+}

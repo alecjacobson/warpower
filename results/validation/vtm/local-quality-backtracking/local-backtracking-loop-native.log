@@ -1,0 +1,55 @@
+WARNING: Device-side CUDA Event completion trace is currently enabled.
+         This may increase runtime overhead and the likelihood of false
+         dependencies across CUDA Streams. If you wish to avoid this, please
+         disable the feature with --cuda-event-trace=false.
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Capture range started in the application.
+Capture range ended in the application.
+Generating '/run/openclaw/horde/nsys-report-6234.qdstrm'
+[1/1] [0%                          ] local-backtracking-loop-native.nsys-repProcessing events...
+[1/1] [0%                          ] local-backtracking-loop-native.nsys-rep[1/1] [7%                          ] local-backtracking-loop-native.nsys-rep[1/1] [=15%                        ] local-backtracking-loop-native.nsys-rep[1/1] [============57%             ] local-backtracking-loop-native.nsys-rep[1/1] [========================99% ] local-backtracking-loop-native.nsys-rep[1/1] [====================83%     ] local-backtracking-loop-native.nsys-rep[1/1] [========================100%] local-backtracking-loop-native.nsys-rep[1/1] [========================100%] local-backtracking-loop-native.nsys-rep
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._domain 6c84e07 load on device 'cuda:0' took 1.11 ms  (cached)
+Module warpower._surface_bvh 7ad7add load on device 'cuda:0' took 0.73 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.75 ms  (cached)
+Module warpower._triangle_contact 9e6db6b load on device 'cuda:0' took 1.53 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.69 ms  (cached)
+Module warpower._sizing 3f064d7 load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._active_sites e183170 load on device 'cuda:0' took 0.63 ms  (cached)
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.54 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.53 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.51 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.57 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.57 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 6.70 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 1.12 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 4.38 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.63 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.59 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.79 ms  (cached)
+Module warpower._graded_odt 514c8a8 load on device 'cuda:0' took 0.98 ms  (cached)
+Module warpower._boundary 6f19e8b load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._boundary b9921e4 load on device 'cuda:0' took 0.78 ms  (cached)
+Module warpower._selective f5125e4 load on device 'cuda:0' took 2.20 ms  (cached)
+Module warpower._extraction 553386e load on device 'cuda:0' took 4.39 ms  (cached)
+Module warpower._selective_backtracking 897fd98 load on device 'cuda:0' took 0.74 ms  (cached)
+Module warpower._vtm_domain 90cb295 load on device 'cuda:0' took 0.57 ms  (cached)
+Module warpower._vtm a9d88de load on device 'cuda:0' took 0.57 ms  (cached)
+Module warpower._selective 2fa6e2c load on device 'cuda:0' took 2.52 ms  (cached)
+Module __main__ aae0b72 load on device 'cuda:0' took 553.07 ms  (compiled)
+Module tests.test_vtm_core 3da53b4 load on device 'cuda:0' took 0.66 ms  (cached)
+{"scope": "First native launch of one captured three-phase device producer/domain+sizing refit/local-selective optimizer/volume-consumer loop. Active prefix64, invalid prefix0, prefix64 recovery; reserved inactive NaN tail. Setup and final readback excluded.", "metadata": [[0, 333, 3, 3, 3, 16], [8, 0, 0, 0, 0, 0], [0, 333, 3, 3, 3, 16]], "columns": ["error", "count", "accepted_iterations", "rejected_attempts", "local_retries", "blocked_vertex_events"], "metrics": [[8.000000000000005, 8.000000000000005], [0.0, 0.0], [8.000000000000007, 8.000000000000007]], "metric_columns": ["consumed_volume", "core_volume"], "phase": 3}
+Generated:
+	/home/horde/projects/power-diagram/.work/vtm/local-backtracking-loop-native.nsys-rep

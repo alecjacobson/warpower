@@ -1,0 +1,23 @@
+[
+  {
+    "name": "local-transactions",
+    "mode": "padded",
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--padding",
+      "32",
+      "--error-exitcode",
+      "99",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py",
+      "tests/test_local_backtracking.py"
+    ],
+    "exit_code": 124,
+    "wall_seconds": 600.0048027038574,
+    "timeout_seconds": 600,
+    "disable_pool": false,
+    "zero_memcheck_errors": false
+  }
+]

@@ -1,0 +1,90 @@
+F........                                                                [100%]
+=================================== FAILURES ===================================
+_______ test_forced_quality_failure_is_bounded_restores_and_recovers[1] ________
+
+version = 1
+fitted = (<warpower._domain.SurfaceDomain object at 0x7f43f96bf850>, array([[ 1.3924768 ,  2.067514  , -0.23188153],
+       [-1...9617],
+       [-2.0296218 ,  0.04504059, -0.602457  ],
+       [ 2.0740318 ,  1.2615671 , -0.12548529]], dtype=float32))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f43d80db370>
+
+    @pytest.mark.parametrize('version',[1,2,3])
+    def test_forced_quality_failure_is_bounded_restores_and_recovers(version,fitted,monkeypatch):
+        domain,points=fitted
+        c=_vtm.VTMWorkspace(domain,points.copy(),max_iterations=1,max_backtracks=2,selective_threshold=1.0)
+        importlib.import_module(f'local_backtracking_v{version}').install(c,midpoint=False,budget=2)
+        enabled=wp.ones(1,dtype=int);s=c.selection
+        def check():
+            s.evaluate()
+            wp.launch(force_quality,len(s.keep),inputs=[enabled,s.keep,s.quality])
+            wp.launch(force_minimum,1,inputs=[enabled,s.minimum])
+            wp.launch(_selective.guard_quality,1,inputs=[s.error,s.retained_count,s.minimum,s.previous_minimum,c._accepted,s.rejections,s.last_error])
+            wp.launch(_selective.accepted_evaluation,1,inputs=[s.error,c._accepted,s._current_needed])
+        s.check=check
+        wp.load_module(module=__name__,device=c.device)
+        def forbidden(*args,**kwargs):raise AssertionError('host activity during capture/replay')
+        with monkeypatch.context() as m:
+            for name in ['empty','zeros','ones','full','empty_like','clone','synchronize','synchronize_device','synchronize_stream']:m.setattr(wp,name,forbidden)
+            m.setattr(wp.array,'numpy',forbidden)
+            with wp.ScopedCapture() as cap:
+                c._local_stats.zero_();c.run()
+            wp.capture_launch(cap.graph)
+        result,_=valid_core(c)
+        np.testing.assert_array_equal(result.view(np.uint32),points.view(np.uint32))
+        assert c.iterations.numpy()[0]==0 and c.termination.numpy()[0]==2
+        assert 3<=c.rejected_steps.numpy()[0]<=5
+        assert 0<c._local_stats.numpy()[0]<=2
+        # Replay the same graph with the synthetic failure disabled and fresh input.
+        c.points.assign(points);enabled.zero_();wp.capture_launch(cap.graph)
+>       valid_core(c);assert c.iterations.numpy()[0]==1
+E       assert np.int32(0) == 1
+
+.work/vtm/test_local_backtracking_v1.py:53: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._domain 6c84e07 load on device 'cuda:0' took 0.95 ms  (cached)
+Module warpower._surface_bvh 7ad7add load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._triangle_contact 9e6db6b load on device 'cuda:0' took 1.18 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.71 ms  (cached)
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.52 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.53 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.51 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.59 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.58 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.55 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.53 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.57 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 4.57 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 0.85 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 2.84 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.60 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.58 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.68 ms  (cached)
+Module warpower._boundary 6f19e8b load on device 'cuda:0' took 0.70 ms  (cached)
+Module warpower._boundary b9921e4 load on device 'cuda:0' took 0.71 ms  (cached)
+Module warpower._vtm_domain 90cb295 load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._vtm a9d88de load on device 'cuda:0' took 0.60 ms  (cached)
+Module warpower._odt 6e95820 load on device 'cuda:0' took 1.09 ms  (cached)
+---------------------------- Captured stderr setup -----------------------------
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+----------------------------- Captured stdout call -----------------------------
+Module warpower._selective f5125e4 load on device 'cuda:0' took 1.96 ms  (cached)
+Module warpower._extraction 553386e load on device 'cuda:0' took 3.35 ms  (cached)
+Module warpower._selective 2fa6e2c load on device 'cuda:0' took 1.03 ms  (cached)
+Module representable_boundary_v1 83eba88 load on device 'cuda:0' took 0.64 ms  (cached)
+Module local_backtracking_v1 ff85e5c load on device 'cuda:0' took 0.60 ms  (cached)
+Module test_local_backtracking_v1 8c02600 load on device 'cuda:0' took 449.13 ms  (compiled)
+=========================== short test summary info ============================
+FAILED .work/vtm/test_local_backtracking_v1.py::test_forced_quality_failure_is_bounded_restores_and_recovers[1]
+1 failed, 8 passed in 5.24s

@@ -1,0 +1,5 @@
+{'name': 'local-transactions', 'mode': 'padded', 'command': ['/usr/local/cuda-12.9/bin/compute-sanitizer', '--tool', 'memcheck', '--padding', '32', '--error-exitcode', '99', '/home/horde/projects/power-diagram/.venv/bin/python', '/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py', 'tests/test_local_backtracking.py'], 'exit_code': 124, 'wall_seconds': 600.0048027038574, 'timeout_seconds': 600, 'disable_pool': False, 'zero_memcheck_errors': False}
+Traceback (most recent call last):
+  File "/home/horde/projects/power-diagram/.work/vtm/run-local-backtracking-memory-v1.py", line 34, in <module>
+    assert code==0 and row['zero_memcheck_errors'],row
+AssertionError: {'name': 'local-transactions', 'mode': 'padded', 'command': ['/usr/local/cuda-12.9/bin/compute-sanitizer', '--tool', 'memcheck', '--padding', '32', '--error-exitcode', '99', '/home/horde/projects/power-diagram/.venv/bin/python', '/home/horde/projects/power-diagram/.work/vtm/large-reuse-isolated-test.py', 'tests/test_local_backtracking.py'], 'exit_code': 124, 'wall_seconds': 600.0048027038574, 'timeout_seconds': 600, 'disable_pool': False, 'zero_memcheck_errors': False}

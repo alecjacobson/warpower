@@ -90,6 +90,12 @@ def test_large_route_changes_inputs_and_prefixes_without_host_decisions(capacity
     )
     if capacity > 4096:
         assert full._reuse_filter._prepared.segment is full._original._segment
+        queries = full._reuse_completion._certificate._prepared_unproved
+        assert queries.shapes is full._reuse_filter._prepared.shapes
+        assert queries.boxes is full._reuse_filter._prepared.boxes
+        assert queries.segment is full._original._segment
+    else:
+        assert full._reuse_completion._certificate._prepared_unproved is None
     history = wp.empty((len(counts), len(w.tetrahedra), 4), dtype=int, device=device)
     meta = wp.empty((len(counts), 3), dtype=int, device=device)
     reuse = wp.empty((len(counts), 4), dtype=int, device=device)

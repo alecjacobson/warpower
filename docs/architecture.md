@@ -350,6 +350,10 @@ Within one unchanged-input completion, [exact cell proofs](completion-proofs.md)
 now follow retained cells through deduplication and compaction. New cells keep
 their full sphere checks; all topology, coverage and hull-support checks remain.
 Proofs are re-established against current input on the next invocation.
+On the larger private routes, [new-cell sphere geometry](prepared-new-cell-queries.md)
+is prepared once and queried through the current segment hierarchy. Consumed seed
+Sphere/Box arrays supply the scratch, with no extra device storage; the original
+point predicates and query/error/proof-counter definitions remain unchanged.
 The private hull-support pass also proves [exact coordinate-plane faces](axis-hull-support.md)
 directly against current original-site bounds. A freshly certified positive cell
 supplies the interior direction; all other faces retain the existing traversal.

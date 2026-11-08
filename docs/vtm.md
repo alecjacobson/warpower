@@ -10,6 +10,8 @@ The [hierarchical retained-cell queries](hierarchical-seed-queries.md) improve
 large complete GPU solves while preserving their coordinates and connectivity.
 The [cached exact-query split](cached-exact-seed-queries.md) further improves
 these larger solves while retaining complete exact fallback.
+[Shared new-cell geometry](prepared-new-cell-queries.md) further reduces completion
+work without adding device arrays.
 The wide comparable-quality CPU performance goal remains unmet.
 
 The target includes ODT relocation, boundary and sharp-feature fitting, graded

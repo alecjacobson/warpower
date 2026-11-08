@@ -1,0 +1,76 @@
+{
+  "scope": "Bound the #233 nonregression conclusion; retain #235's unexplained existing variability.",
+  "issue": 235,
+  "runtime": "3b68a6043860209d3c507951b0e51309ed8bb8c5",
+  "baseline": "a4f7215fbf99249d11f765a4902c586daa606829",
+  "fixture_sha256": "2e2ba670c80d1658b94fbc37a3daa4d9d5fec13c2049e55ca5aefa91675beb1a",
+  "loaded_project_modules": 40,
+  "loaded_module_sources_identical": true,
+  "modified_modules_not_loaded": true,
+  "profiled_full_replays": 18,
+  "kernel_signature_identical": true,
+  "kernels_per_replay": 143,
+  "trace_samples": {
+    "before": {
+      "local_kernel_ms": [
+        0.50314,
+        0.547364,
+        0.571013,
+        0.514404,
+        0.556292,
+        0.550628,
+        0.606053,
+        0.624837,
+        0.912007
+      ],
+      "event_ms": [
+        13.737600326538086,
+        13.779040336608887,
+        13.779168128967285,
+        13.738880157470703,
+        13.758720397949219,
+        13.782719612121582,
+        13.801919937133789,
+        13.842752456665039,
+        14.103391647338867
+      ],
+      "correlation": 0.9942645855409541,
+      "local_min_ms": 0.50314,
+      "local_max_ms": 0.912007
+    },
+    "after": {
+      "local_kernel_ms": [
+        0.866952,
+        0.527332,
+        0.577701,
+        0.556516,
+        0.570628,
+        0.894408,
+        0.511524,
+        0.517956,
+        0.56522
+      ],
+      "event_ms": [
+        14.093184471130371,
+        13.713536262512207,
+        13.746591567993164,
+        13.719776153564453,
+        13.724255561828613,
+        14.05628776550293,
+        13.672351837158203,
+        13.68995189666748,
+        13.720959663391113
+      ],
+      "correlation": 0.9925062834904679,
+      "local_min_ms": 0.511524,
+      "local_max_ms": 0.894408
+    }
+  },
+  "conclusion": "The changed runtime modules are absent from this standalone workload; no new standalone work or code dependency was introduced. Both source versions exhibit slow/fast behavior in the existing local-sphere kernel. Preserve all primary/repeat timings. The detailed cause and a possible optimization of this preexisting variability remain open in #235.",
+  "limits": [
+    "Native tracing perturbs timings; it is diagnostic, not a replacement benchmark.",
+    "Equal kernel configurations do not prove identical instruction counts or warp scheduling.",
+    "Correlation localizes the observed variation; it does not establish row ordering, scheduling or another low-level cause."
+  ],
+  "complete": true
+}

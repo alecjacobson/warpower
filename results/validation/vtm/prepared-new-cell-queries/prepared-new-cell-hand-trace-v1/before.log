@@ -1,0 +1,172 @@
+WARNING: Device-side CUDA Event completion trace is currently enabled.
+         This may increase runtime overhead and the likelihood of false
+         dependencies across CUDA Streams. If you wish to avoid this, please
+         disable the feature with --cuda-event-trace=false.
+Warp FutureWarning: Support for Python 3.10 is deprecated and will be removed in Warp 1.20. Please upgrade to Python 3.11 or newer.
+Warp 1.19.0 initialized:
+   CUDA Toolkit 12.9, Driver 12.8
+   Devices:
+     "cpu"      : "x86_64"
+     "cuda:0"   : "NVIDIA L40" (47 GiB, sm_89, mempool enabled)
+   Kernel cache:
+     /opt/warpower-generated-cache/1.19.0
+Module warpower._validation 0b680d6 load on device 'cuda:0' took 0.66 ms  (cached)
+Module warpower._graph e20b9f9 load on device 'cuda:0' took 0.80 ms  (cached)
+Module warpower._bvh 3d60952 load on device 'cuda:0' took 0.67 ms  (cached)
+Module warpower._canonical 12b3dea load on device 'cuda:0' took 0.54 ms  (cached)
+Module make_cells__locals__build_cells_2b343352 acbdf5c load on device 'cuda:0' took 0.59 ms  (cached)
+Module warpower._construct dcd3f51 load on device 'cuda:0' took 0.54 ms  (cached)
+Module make_cells__locals__build_cells_e4ba68aa b7edb98 load on device 'cuda:0' took 0.62 ms  (cached)
+Module make_cells__locals__build_cells_a79ee94c b2a8eb1 load on device 'cuda:0' took 0.60 ms  (cached)
+Module make_cells__locals__build_cells_87afc4ed b324341 load on device 'cuda:0' took 0.59 ms  (cached)
+Module warpower._graph_tetrahedra cea9d84 load on device 'cuda:0' took 0.56 ms  (cached)
+Module warpower._tetrahedra 7b67ffb load on device 'cuda:0' took 0.57 ms  (cached)
+Module warpower._graph_tetrahedra e278d05 load on device 'cuda:0' took 0.57 ms  (cached)
+Module warpower._tetrahedra 22389e4 load on device 'cuda:0' took 0.59 ms  (cached)
+Module warpower._delaunay_certificate 4d23efc load on device 'cuda:0' took 6.62 ms  (cached)
+Module warpower._symbolic_delaunay 3b80dbd load on device 'cuda:0' took 1.37 ms  (cached)
+Module warpower._symbolic_tetrahedra 1dacc06 load on device 'cuda:0' took 4.30 ms  (cached)
+Module warpower._facet_seeds 17f88e0 load on device 'cuda:0' took 2.30 ms  (cached)
+Module warpower._facet_completion bb6aebe load on device 'cuda:0' took 4.21 ms  (cached)
+Module warpower._delaunay_recovery 15543c5 load on device 'cuda:0' took 0.64 ms  (cached)
+Module warpower._mesh_topology 4cd51b2 load on device 'cuda:0' took 0.61 ms  (cached)
+Module warpower._facet_seeds fa4cd6c load on device 'cuda:0' took 2.63 ms  (cached)
+Module warpower._graph 9246d3b load on device 'cuda:0' took 0.81 ms  (cached)
+{
+  "case": "fitted-hand",
+  "n": 256,
+  "seed": 2026,
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "first_replay_ms": 1049.306884765625,
+  "full": {
+    "median_ms": 13.779168128967285,
+    "samples_ms": [
+      13.737600326538086,
+      13.779040336608887,
+      13.779168128967285,
+      13.738880157470703,
+      13.758720397949219,
+      13.782719612121582,
+      13.801919937133789,
+      13.842752456665039,
+      14.103391647338867
+    ],
+    "cpu": {
+      "4": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      },
+      "3": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      }
+    }
+  },
+  "base": {
+    "median_ms": 895.7547607421875,
+    "samples_ms": [
+      895.826416015625,
+      895.7738647460938,
+      895.7494506835938,
+      895.6068725585938,
+      895.7607421875,
+      895.6153564453125,
+      895.7547607421875,
+      895.6128540039062,
+      895.7596435546875
+    ],
+    "cpu": {
+      "4": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      },
+      "3": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      }
+    }
+  },
+  "auxiliary": {
+    "median_ms": 12.645952224731445,
+    "samples_ms": [
+      12.645952224731445,
+      12.649279594421387,
+      12.659392356872559,
+      12.632575988769531,
+      12.635519981384277,
+      12.662303924560547,
+      12.657088279724121,
+      12.643712043762207,
+      12.624223709106445
+    ],
+    "cpu": {
+      "4": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      },
+      "3": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      }
+    }
+  },
+  "certificate": {
+    "median_ms": 1.1411839723587036,
+    "samples_ms": [
+      0.8940799832344055,
+      1.2905280590057373,
+      1.2571840286254883,
+      0.8734080195426941,
+      1.1411839723587036,
+      1.1598399877548218,
+      1.175487995147705,
+      0.8147519826889038,
+      1.1312639713287354
+    ],
+    "cpu": {
+      "4": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      },
+      "3": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      }
+    }
+  },
+  "tetrahedra": 1430,
+  "error": 0,
+  "base_error": 0,
+  "candidate_error": 0,
+  "certificate_error": 0,
+  "attempts": 1,
+  "cache_strategy": true,
+  "fast_candidates": false,
+  "fast_attempted": 0,
+  "fast_accepted": 0,
+  "fast_error": 0,
+  "fast_repaired_cells": 0,
+  "symbolic_first": false,
+  "recovery_first": 1,
+  "base_attempted": 0,
+  "symbolic_attempted": 0,
+  "symbolic_recovered": 0,
+  "symbolic_error": 0,
+  "symbolic_expansions": 0,
+  "certificate_point_tests": 2840,
+  "certificate_node_visits": 0
+}
+Collecting data...
+Generating '/run/openclaw/horde/nsys-report-ab8e.qdstrm'
+[1/1] [0%                          ] before.nsys-rep[1/1] [0%                          ] before.nsys-rep[1/1] [====================85%     ] before.nsys-rep[1/1] [========================100%] before.nsys-rep[1/1] [========================100%] before.nsys-rep
+Generated:
+	/home/horde/projects/power-diagram/.work/vtm/prepared-new-cell-hand-trace-v1/before.nsys-rep

@@ -1,0 +1,45 @@
+{
+  "scope": "Issue230 motivation from already independently validated production meshes.",
+  "runtime": "3b68a6043860209d3c507951b0e51309ed8bb8c5",
+  "source_results": [
+    {
+      "path": ".work/vtm/prepared-new-cell-final-v2/torus4096-after.json",
+      "sha256": "81408b027efc71688f5c2c92523222d9dc865988cafecdca90fea0b2c54c422e",
+      "mesh_sha256": "b7cdb9802af9d07a24a37bd363a987cf35784872dccdd1cd1a338df7c4de4e7f"
+    },
+    {
+      "path": ".work/vtm/prepared-new-cell-final-v2/reserved16384-target4096-after.json",
+      "sha256": "d556f0bb831b8c3bc725ae0a0aaf1dd7d6532546a22caf95a1557e5bf2dbc8d1",
+      "mesh_sha256": "c0207e9a57f6749cc0f2292e1b8b76c5c19f34bffc172938bb0f401805a0bfeb"
+    }
+  ],
+  "independent_report": ".work/vtm/prepared-new-cell-final-v2-independent.json",
+  "independent_report_sha256": "cff838bd1866542255adeb10a3d15191bcdcca741a1f439741b0287a2d3543ff",
+  "parameters_except_reservation_equal": true,
+  "comparison": {
+    "points_bitwise_equal": true,
+    "maximum_coordinate_difference": 0.0,
+    "roles_equal": true,
+    "full_tets_equal": true,
+    "material_tets_equal": true,
+    "oriented_boundary_equal": true
+  },
+  "work_equal": {
+    "counts": true,
+    "rounds": true,
+    "topology": true,
+    "quality_rejections": true,
+    "refinement_rejections": true,
+    "steps": true,
+    "moves": true
+  },
+  "capacity4096_ms": 1510.678466796875,
+  "capacity16384_ms": 7220.298828125,
+  "ratio": 4.779507345090024,
+  "pool_bytes": [
+    1786879740,
+    2551578988
+  ],
+  "interpretation": "This isolates reservation cost in current production, not a result of any proposed larger-prefix implementation. Existing routing uses full16384 above2048 active sites. All inputs/work/outputs match across these capacities.",
+  "complete": true
+}

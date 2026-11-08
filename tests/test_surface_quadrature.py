@@ -10,6 +10,18 @@ from tests.test_domain import cube, torus
 from warpower import SurfaceDomain, _extraction
 
 
+@pytest.fixture(autouse=True)
+def restore_compilation_options():
+    options = [
+        (module, dict(wp.get_module_options(module=module))) for module in (reference, _extraction)
+    ]
+    try:
+        yield
+    finally:
+        for module, original in options:
+            wp.set_module_options(original, module=module)
+
+
 def evaluate(domain, points, faces, live, error=0):
     points = wp.array(points, dtype=wp.vec3)
     faces = wp.array(faces, dtype=int)
@@ -100,6 +112,7 @@ def test_captured_counts_refit_and_recovery_on_another_stream():
     stream = wp.Stream(d.device)
     observed = wp.zeros(4, dtype=int)
     wp.load_module(module=__name__, device=d.device)
+    wp.synchronize_device(d.device)
     with wp.ScopedStream(stream):
         with wp.ScopedCapture() as capture:
             w.input_count.fill_(0)

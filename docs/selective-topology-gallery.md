@@ -31,7 +31,8 @@ within its pair, except whether the experimental endpoint policy is installed.
 
 Both uniform 8K scans exercise six local retries, 24 blocked-site events, 18 fresh
 eligible failures and one acceptance immediately after a local retry. Accepted
-selective steps increase from three to four. The other eleven cases never enter
+selective steps increase from two to four with the reference backend and from
+three to four with native/mixed queries. The other eleven cases never enter
 the local retry path; their measured changes stay below 1% in magnitude. These
 five-repeat observations do not establish a universal performance bound.
 

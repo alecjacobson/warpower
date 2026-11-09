@@ -171,3 +171,25 @@ the initial 300-second limit. These are diagnostic durations, not performance
 samples. The six direct query cases also pass allocation-lifetime checking with
 synchronous Warp array allocation. Full nested native lifetime checking remains
 unqualified because of #269; no production allocator/stack settings are changed.
+
+## Event-dependency control
+
+An additional minimal Warp 1.19.0 / L40 diagnostic records an event after Mesh
+construction and a synchronized warm query, then waits on it before replayed
+queries. All Mesh, event and array owners remain alive. This does not fix #269:
+
+| Query placement / dependency | Allocation-lifetime result |
+|---|---|
+| One conditional, no wait | Access-before-allocation reports |
+| One conditional, top-level explicit event wait | Same reports |
+| One conditional, top-level implicit event wait | Same reports |
+| Two conditionals, top-level explicit event wait | Same reports |
+| Event wait inside the conditional | Capture rejects unsupported event wait |
+| Top-level query with explicit event wait | Three replays, zero errors |
+
+Every successfully captured case returns the expected interior sign, including
+the cases with lifetime diagnostics. Correct output does not waive those reports.
+The unsupported event-wait case is a failed capture, not a passing memory test.
+No runtime change follows from this negative result. Source, exact commands,
+reported outcomes and raw-log hashes are retained in
+[experiments/native-query-events](../experiments/native-query-events/).

@@ -100,7 +100,7 @@ def main():
         help="Validate surface intersections/orientation during refit; disable for trusted input",
     )
     parser.add_argument(
-        "--boundary-query-precision", choices=["float64", "float32"], default="float64"
+        "--boundary-query-precision", choices=["float64", "float32", "mixed"], default="float64"
     )
     parser.add_argument(
         "--repeats", type=int, default=0, help="Additional replays after the first complete solve"

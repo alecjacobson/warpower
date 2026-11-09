@@ -14,7 +14,8 @@ mesh = VariationalMeshingWorkspace(domain, 8192,
 ```
 
 `VTMWorkspace` also accepts `boundary_query_precision`. The gallery option is
-`--boundary-query-precision float32`. All defaults remain `float64`; default
+`--boundary-query-precision float32`. The additional [`mixed` mode](mixed-boundary-queries.md) uses FP32 bounds with
+FP64 nearest-site decisions. All defaults remain `float64`; default
 device kernels and standalone power-diagram/Delaunay paths are unchanged.
 
 This choice is independent of `SurfaceDomain(query_backend="native")`. Native
@@ -56,7 +57,8 @@ ratio falls from 0.236810 to 0.094167; mean quality changes from 0.840038 to 0.8
 Independent two-sided sampled RMS improves from 0.167783% to 0.155172% of the input
 bounding-box diagonal. Its timing is **not a quality-matched speedup**.
 The precision option remains explicit; [#276](https://github.com/alecjacobson/warpower/issues/276)
-tracks a mixed-precision tie experiment and diagnosis of this trajectory change.
+tracks the mixed-precision tie experiment and diagnosis of this trajectory change.
+The [mixed-mode controls](mixed-boundary-queries.md) preserve the reference cavity output.
 
 ## Why accumulation remains FP64
 

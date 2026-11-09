@@ -70,7 +70,12 @@ def make_cells(queue_capacity=128, resuming=True):
     queue_size = wp.constant(queue_capacity)
     can_resume = wp.constant(resuming)
 
-    @wp.kernel(enable_backward=False, module="unique", module_options={"fast_math": False})
+    @wp.kernel(
+        enable_backward=False,
+        module="unique",
+        module_options={"fast_math": False},
+        cuda_max_registers=96 if not resuming else None,
+    )
     def build_cells(
         points: wp.array[wp.vec3],
         weights: wp.array[float],

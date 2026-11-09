@@ -89,3 +89,21 @@ records the independent download check. Original persistent files remain intact.
 This is a prerelease of experimental evidence. Interrupted qualification and failed
 CPU comparisons remain included; neither PR #260 nor the wide CPU-speedup goal is
 marked complete by this publication.
+
+## Precision, CPU baseline and continuation bundle
+
+The [VTM precision and baseline evidence release](https://github.com/alecjacobson/warpower/releases/tag/evidence-vtm-precision-and-baselines-f3b35c9)
+contains raw outputs for mixed boundary queries (#279), CGAL optimizer controls
+(#281), initial corner budgets (#277), and the negative cell-continuation trials
+(#282). All 1,047 members of the 106,229,911-byte archive were verified again after
+an independent download. The [manifest](../experiments/artifact-bundles/vtm-precision-and-baselines/manifest.json)
+and [verification record](../experiments/artifact-bundles/vtm-precision-and-baselines/remote-verification.json)
+pin both the complete archive and each member.
+
+The archive preserves failed trials, commands, source snapshots and one-off
+drivers as well as accepted results. It does not include subsequent selective
+step-history qualification. Each experiment identifies its actual runtime; the
+included `f3b35c9` main snapshot is for convenience. This is not a repository or
+environment backup, resolution of the default Armadillo boundary problem, or a
+quality-matched CPU speedup claim. Original persistent evidence and historical
+Git objects remain intact.

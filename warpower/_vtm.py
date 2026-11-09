@@ -80,8 +80,8 @@ def directions(
     output[i] = delta
 
 
-@wp.kernel
-def start_attempt(
+@wp.func
+def _start_attempt(
     alpha: wp.array[wp.float64],
     damping: wp.float64,
     attempt: wp.array[int],
@@ -96,6 +96,19 @@ def start_attempt(
         running[0] = 0
     accepted[0] = 0
     backtracks[0] = 0
+
+
+@wp.kernel
+def start_attempt(
+    alpha: wp.array[wp.float64],
+    damping: wp.float64,
+    attempt: wp.array[int],
+    accepted: wp.array[int],
+    backtracks: wp.array[int],
+    error: wp.array[int],
+    running: wp.array[int],
+):
+    _start_attempt(alpha, damping, attempt, accepted, backtracks, error, running)
 
 
 @wp.kernel
@@ -153,8 +166,8 @@ def candidate_ready(
     )
 
 
-@wp.kernel
-def finish_attempt(
+@wp.func
+def _finish_attempt(
     mesh_error: wp.array[int],
     boundary_error: wp.array[int],
     accepted: wp.array[int],
@@ -199,6 +212,51 @@ def finish_attempt(
 
 
 @wp.kernel
+def finish_attempt(
+    mesh_error: wp.array[int],
+    boundary_error: wp.array[int],
+    accepted: wp.array[int],
+    attempt: wp.array[int],
+    alpha: wp.array[wp.float64],
+    backtracks: wp.array[int],
+    rejected: wp.array[int],
+    last_geometry: wp.array[int],
+    last_boundary: wp.array[int],
+    iterations: wp.array[int],
+    running: wp.array[int],
+    termination: wp.array[int],
+    maximum: wp.array[wp.float64],
+    tolerance: wp.float64,
+    max_iterations: int,
+    max_backtracks: int,
+    energy: wp.array[wp.float64],
+    boundary_energy: wp.array[wp.float64],
+    history: wp.array2d[wp.float64],
+):
+    _finish_attempt(
+        mesh_error,
+        boundary_error,
+        accepted,
+        attempt,
+        alpha,
+        backtracks,
+        rejected,
+        last_geometry,
+        last_boundary,
+        iterations,
+        running,
+        termination,
+        maximum,
+        tolerance,
+        max_iterations,
+        max_backtracks,
+        energy,
+        boundary_energy,
+        history,
+    )
+
+
+@wp.kernel
 def final_count(error: wp.array[int], count: wp.array[int]):
     if error[0] != 0:
         count[0] = 0
@@ -235,6 +293,7 @@ class VTMWorkspace:
         proven_exterior_recovery=False,
         proven_exterior_enabled=None,
         _cache_surface_queries=False,
+        _selective_step_history=False,
         boundary_query_precision="float64",
     ):
         self._cache_surface_queries = bool(_cache_surface_queries)
@@ -251,6 +310,9 @@ class VTMWorkspace:
         self.damping, self.step_limit, self.tolerance = damping, step_limit, tolerance
         self.selection = None
         self.local_backtracking = None
+        self.step_history = None
+        self._start_attempt_kernel, self._start_attempt_args = start_attempt, []
+        self._finish_attempt_kernel, self._finish_attempt_args = finish_attempt, []
         self._boundary_rounding = None
         self.controls = None
         local_quality_retries = operator.index(local_quality_retries)
@@ -403,6 +465,14 @@ class VTMWorkspace:
                 from ._vtm_controls import DeviceControls
 
                 self.controls = DeviceControls(self, iteration_limit, selective_enabled)
+            if (
+                _selective_step_history
+                and selective_enabled is not None
+                and local_quality_retries == 0
+            ):
+                from ._selective_step_history import SelectiveStepHistory
+
+                self.step_history = SelectiveStepHistory(self)
             wp.load_module(module="warpower._vtm_domain", device=self.device, block_dim=32)
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as capture:
@@ -443,6 +513,8 @@ class VTMWorkspace:
         )
 
     def _record(self):
+        if self.step_history is not None:
+            self.step_history.reset()
         self._interior_known.zero_()
         if self.local_backtracking is not None:
             self.local_backtracking.reset()
@@ -564,7 +636,7 @@ class VTMWorkspace:
             block_dim=32,
         )
         self._launch(
-            start_attempt,
+            self._start_attempt_kernel,
             1,
             [
                 self._alpha,
@@ -574,7 +646,8 @@ class VTMWorkspace:
                 self._backtracks,
                 self.error,
                 self._running,
-            ],
+            ]
+            + self._start_attempt_args,
         )
         wp.capture_while(self._attempt, self._try_step)
         wp.capture_if(self._accepted, self._accept, self._restore)
@@ -622,7 +695,7 @@ class VTMWorkspace:
 
     def _finish_attempt(self):
         self._launch(
-            finish_attempt,
+            self._finish_attempt_kernel,
             1,
             [
                 self.mesh.error,
@@ -644,7 +717,8 @@ class VTMWorkspace:
                 self.energy,
                 self.boundary.energy,
                 self.energy_history,
-            ],
+            ]
+            + self._finish_attempt_args,
         )
 
     def _accept(self):

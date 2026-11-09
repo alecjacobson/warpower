@@ -259,7 +259,7 @@ def install(mesh, budget, neighborhood):
 
 
 def main():
-    p = argparse.ArgumentParser(description=__doc__)
+    p = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
     p.add_argument("--neighborhood", choices=["baseline", "endpoints", "star"], required=True)
     p.add_argument("--budget", type=int, default=1)
     p.add_argument("--report", type=Path, required=True)

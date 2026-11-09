@@ -522,3 +522,13 @@ construction below 32K allocated sites starts at 256 slots; normalized and symbo
 recovery keep their original schedules, and large clouds retain their FP32 pass.
 Fresh construction on the two measured 8K Armadillo clouds takes about 15% less
 time. Complete VTM solve time is essentially unchanged by this storage change.
+
+The complete mesher optionally supports [local material-topology rollback](local-topology-backtracking.md)
+through `local_topology_retries=1`. A fresh rejected selection supplies current
+bad-edge endpoints; only moved, eligible noncorner sites are frozen for a bounded
+retry. Reconstruction and all ordinary acceptance guards still run. Exhaustion
+or another rejection preserves global backtracking and rollback. The default
+zero adds no arrays or graph operations, and independent power/Delaunay routines
+are unchanged. The optional policy has a measured uniform-scan improvement with
+a small worst-element-quality tradeoff; it does not repair invalid initial
+material extraction. It is currently mutually exclusive with local-quality retries.

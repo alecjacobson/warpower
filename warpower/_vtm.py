@@ -294,6 +294,7 @@ class VTMWorkspace:
         proven_exterior_enabled=None,
         _cache_surface_queries=False,
         _selective_step_history=False,
+        _local_topology_retries=0,
         boundary_query_precision="float64",
     ):
         self._cache_surface_queries = bool(_cache_surface_queries)
@@ -320,6 +321,20 @@ class VTMWorkspace:
             raise ValueError("local_quality_retries must be in [0,2**31)")
         if local_quality_retries and selective_threshold is None:
             raise ValueError("local_quality_retries requires selective_threshold")
+        _local_topology_retries = operator.index(_local_topology_retries)
+        if not 0 <= _local_topology_retries < 2**31:
+            raise ValueError("local_topology_retries must be in [0,2**31)")
+        if _local_topology_retries and (
+            local_quality_retries
+            or selective_threshold is None
+            or selective_enabled is None
+            or active_count is None
+            or material_recovery is None
+        ):
+            raise ValueError(
+                "local_topology_retries requires a recovered active scheduler "
+                "and local_quality_retries=0"
+            )
         if selective_enabled is not None and selective_threshold is None:
             raise ValueError("selective_enabled requires selective_threshold")
         self._directions, self._direction_args = directions, []
@@ -473,6 +488,10 @@ class VTMWorkspace:
                 from ._selective_step_history import SelectiveStepHistory
 
                 self.step_history = SelectiveStepHistory(self)
+            if _local_topology_retries:
+                from ._topology_backtracking import LocalTopologyBacktracking
+
+                self.local_backtracking = LocalTopologyBacktracking(self, _local_topology_retries)
             wp.load_module(module="warpower._vtm_domain", device=self.device, block_dim=32)
             wp.load_module(module=__name__, device=self.device)
             with wp.ScopedCapture() as capture:

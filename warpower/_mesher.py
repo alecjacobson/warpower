@@ -365,6 +365,7 @@ class VariationalMeshingWorkspace:
         refinement_fraction=0.5,
         quality_threshold=0.3,
         local_quality_retries=0,
+        local_topology_retries=0,
         jitter_attempts=8,
         extraction_tolerance=0.4,
         containment_recovery=True,
@@ -424,6 +425,16 @@ class VariationalMeshingWorkspace:
         self.selective_iterations = operator.index(selective_iterations)
         self.max_recovery_rounds = operator.index(max_recovery_rounds)
         self.quality_rounds = operator.index(quality_rounds)
+        self.local_topology_retries = operator.index(local_topology_retries)
+        if not 0 <= self.local_topology_retries < 2**31:
+            raise ValueError("local_topology_retries must be in [0,2**31)")
+        if self.local_topology_retries and (
+            self.quality_rounds == 0 or not self._uses_recovery or local_quality_retries != 0
+        ):
+            raise ValueError(
+                "local_topology_retries requires quality rounds, material recovery, "
+                "and local_quality_retries=0"
+            )
         self.local_quality_retries = operator.index(local_quality_retries)
         if not 0 <= self.local_quality_retries < 2**31:
             raise ValueError("local_quality_retries must be in [0,2**31)")
@@ -534,6 +545,7 @@ class VariationalMeshingWorkspace:
                 chunk_size=chunk_size,
                 _cache_surface_queries=True,
                 _selective_step_history=True,
+                _local_topology_retries=self.local_topology_retries,
                 boundary_query_precision=boundary_query_precision,
             )
             self._boundary_rounding = None
@@ -664,6 +676,8 @@ class VariationalMeshingWorkspace:
     def _record(self):
         if self.core.step_history is not None:
             self.core.step_history.statistics.zero_()
+        if self.local_topology_retries:
+            self.core.local_backtracking.statistics.zero_()
         if self.topology_recovery is not None:
             self.topology_recovery.reset()
         self.topology.zero_()

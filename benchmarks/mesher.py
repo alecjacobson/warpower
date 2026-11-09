@@ -38,6 +38,7 @@ def main():
     parser.add_argument("--polish-iterations", type=int, default=20)
     parser.add_argument("--selective-iterations", type=int, default=10)
     parser.add_argument("--quality-rounds", type=int, default=4)
+    parser.add_argument("--local-topology-retries", type=int, default=0)
     parser.add_argument("--subdivisions", type=int, default=4)
     parser.add_argument("--automatic-sizing", action="store_true")
     parser.add_argument("--static-domain", action="store_true")
@@ -66,6 +67,7 @@ def main():
         polish_iterations=args.polish_iterations,
         selective_iterations=args.selective_iterations,
         quality_rounds=args.quality_rounds,
+        local_topology_retries=args.local_topology_retries,
         automatic_sizing=args.automatic_sizing,
     )
     with wp.ScopedCapture() as cap:

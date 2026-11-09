@@ -7,6 +7,8 @@
 #include <CGAL/Mesh_criteria_3.h>
 #include <CGAL/make_mesh_3.h>
 #include <CGAL/odt_optimize_mesh_3.h>
+#include <CGAL/perturb_mesh_3.h>
+#include <CGAL/exude_mesh_3.h>
 #include <CGAL/IO/Polyhedron_iostream.h>
 #include <CGAL/version.h>
 #include <chrono>
@@ -37,8 +39,8 @@ static double elapsed(Clock::time_point a, Clock::time_point b) {
 
 int main(int argc, char** argv) {
     try {
-        if (argc != 9 && argc != 10 && argc != 11) {
-            std::cerr << "usage: cgal-mesh3 surface.off mesh.txt size facet_distance odt_iterations threads convergence freeze_bound [feature_angle [non_manifold|manifold]]\n";
+        if (argc != 9 && argc != 10 && argc != 11 && argc != 17) {
+            std::cerr << "usage: cgal-mesh3 surface.off mesh.txt size facet_distance odt_iterations threads convergence freeze_bound [feature_angle [non_manifold|manifold [perturb_enabled perturb_seconds perturb_bound exude_enabled exude_seconds exude_bound]]]\n";
             return 2;
         }
         const int threads=std::stoi(argv[6]);
@@ -65,11 +67,22 @@ int main(int argc, char** argv) {
         const double feature_angle = argc >= 10 ? std::stod(argv[9]) : 45.0;
         if (!std::isfinite(feature_angle) || feature_angle <= 0 || feature_angle >= 180)
             throw std::runtime_error("Feature angle must be finite and strictly between 0 and 180 degrees");
-        const std::string topology = argc == 11 ? argv[10] : "non_manifold";
+        const std::string topology = argc >= 11 ? argv[10] : "non_manifold";
         if (topology != "non_manifold" && topology != "manifold")
             throw std::runtime_error("Topology must be non_manifold or manifold");
         const auto topology_options = topology == "manifold"
             ? CGAL::parameters::manifold() : CGAL::parameters::non_manifold();
+        const int perturb_enabled = argc == 17 ? std::stoi(argv[11]) : 0;
+        const double perturb_seconds = argc == 17 ? std::stod(argv[12]) : 1.0;
+        const double perturb_bound = argc == 17 ? std::stod(argv[13]) : 10.0;
+        const int exude_enabled = argc == 17 ? std::stoi(argv[14]) : 0;
+        const double exude_seconds = argc == 17 ? std::stod(argv[15]) : 1.0;
+        const double exude_bound = argc == 17 ? std::stod(argv[16]) : 10.0;
+        if ((perturb_enabled != 0 && perturb_enabled != 1) || (exude_enabled != 0 && exude_enabled != 1))
+            throw std::runtime_error("Optimizer enable flags must be 0 or 1");
+        if (!std::isfinite(perturb_seconds) || !std::isfinite(exude_seconds) || perturb_seconds < 0 || exude_seconds < 0
+            || !std::isfinite(perturb_bound) || !std::isfinite(exude_bound) || perturb_bound < 0 || perturb_bound > 180 || exude_bound < 0 || exude_bound > 180)
+            throw std::runtime_error("Optimizer limits must be finite, seconds >= 0, angles in [0,180]");
         const auto start = Clock::now();
         CGAL::get_default_random() = CGAL::Random(2026);
         CGAL::Random rng(2026);
@@ -86,27 +99,45 @@ int main(int argc, char** argv) {
             result=int(CGAL::odt_optimize_mesh_3(mesh,domain,
                 CGAL::parameters::max_iteration_number(iterations).convergence(convergence).freeze_bound(freeze_bound)));
         const auto odt_end = Clock::now();
+        int perturb_result=-1, exude_result=-1;
+        if (perturb_enabled)
+            perturb_result=int(CGAL::perturb_mesh_3(mesh,domain,
+                CGAL::parameters::time_limit(perturb_seconds).sliver_bound(perturb_bound)));
+        const auto perturb_end = Clock::now();
+        // Exudation changes vertex weights and must be the final optimizer.
+        if (exude_enabled)
+            exude_result=int(CGAL::exude_mesh_3(mesh,
+                CGAL::parameters::time_limit(exude_seconds).sliver_bound(exude_bound)));
+        const auto optimize_end = Clock::now();
         if (!mesh.triangulation().is_valid()) throw std::runtime_error("Invalid triangulation");
         const auto checked = Clock::now();
         std::ofstream output(argv[2]);
+        std::ofstream weights(std::string(argv[2])+".weights");
         output << std::setprecision(17);
+        weights << std::setprecision(17);
         std::map<Triangulation::Vertex_handle,int> ids;
         for (auto c=mesh.cells_in_complex_begin();c!=mesh.cells_in_complex_end();++c)
             for (int j=0;j<4;++j) ids.emplace(c->vertex(j),-1);
         output << ids.size() << ' ' << mesh.number_of_cells_in_complex() << '\n';
-        int id=0;
+        weights << ids.size() << '\n';
+        int id=0, nonzero_weights=0;
         for (auto v=mesh.triangulation().finite_vertices_begin();v!=mesh.triangulation().finite_vertices_end();++v) {
             if (ids.find(v)==ids.end()) continue;
             ids[v]=id++;
             const auto& p=v->point().point();
             output << CGAL::to_double(p.x()) << ' ' << CGAL::to_double(p.y()) << ' ' << CGAL::to_double(p.z()) << '\n';
+            const double weight=CGAL::to_double(v->point().weight());
+            weights << weight << '\n';
+            nonzero_weights += weight != 0.0;
         }
         for (auto c=mesh.cells_in_complex_begin();c!=mesh.cells_in_complex_end();++c) {
             for (int j=0;j<4;++j) output << ids.at(c->vertex(j)) << ' ';
             output << '\n';
         }
-        if (!output) throw std::runtime_error("Output failed");
+        if (!output || !weights) throw std::runtime_error("Output failed");
         output.close();
+        weights.close();
+        if (!output || !weights) throw std::runtime_error("Closing output failed");
         const auto done=Clock::now();
         std::cout << std::setprecision(17)
             << "{\"cgal\":\"" << CGAL_VERSION_STR << "\",\"concurrency\":\"" << concurrency
@@ -116,6 +147,11 @@ int main(int argc, char** argv) {
             << ",\"topology\":\"" << topology << "\""
             << ",\"odt_convergence\":" << convergence << ",\"odt_freeze_bound\":" << freeze_bound
             << ",\"requested_odt_iterations\":" << iterations << ",\"odt_return_code\":" << result
+            << ",\"perturb_enabled\":" << perturb_enabled << ",\"perturb_time_limit\":" << perturb_seconds
+            << ",\"perturb_sliver_bound\":" << perturb_bound << ",\"perturb_return_code\":" << perturb_result
+            << ",\"exude_enabled\":" << exude_enabled << ",\"exude_time_limit\":" << exude_seconds
+            << ",\"exude_sliver_bound\":" << exude_bound << ",\"exude_return_code\":" << exude_result
+            << ",\"triangulation_kind\":\"weighted_regular\",\"nonzero_exported_weights\":" << nonzero_weights
             << ",\"vertices\":" << id
             << ",\"triangulation_vertices\":" << mesh.triangulation().number_of_vertices()
             << ",\"tetrahedra\":" << mesh.number_of_cells_in_complex()
@@ -123,8 +159,12 @@ int main(int argc, char** argv) {
             << ",\"domain_seconds\":" << elapsed(start,domain_end)
             << ",\"mesh_seconds\":" << elapsed(domain_end,mesh_end)
             << ",\"odt_seconds\":" << elapsed(mesh_end,odt_end)
-            << ",\"complete_seconds\":" << elapsed(start,odt_end)
-            << ",\"validation_seconds\":" << elapsed(odt_end,checked)
+            << ",\"perturb_seconds\":" << elapsed(odt_end,perturb_end)
+            << ",\"exude_seconds\":" << elapsed(perturb_end,optimize_end)
+            << ",\"optimization_seconds\":" << elapsed(mesh_end,optimize_end)
+            << ",\"prepared_domain_seconds\":" << elapsed(domain_end,optimize_end)
+            << ",\"complete_seconds\":" << elapsed(start,optimize_end)
+            << ",\"validation_seconds\":" << elapsed(optimize_end,checked)
             << ",\"output_seconds\":" << elapsed(checked,done) << "}\n";
     } catch (const std::exception& e) {
         std::cerr << e.what() << '\n'; return 1;

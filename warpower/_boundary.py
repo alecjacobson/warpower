@@ -264,8 +264,23 @@ class BoundaryWorkspace:
     """
 
     def __init__(
-        self, domain, points, *, active_count=None, surface_sizing=None, crease_sizing=None
+        self,
+        domain,
+        points,
+        *,
+        active_count=None,
+        surface_sizing=None,
+        crease_sizing=None,
+        query_precision="float64",
     ):
+        if query_precision not in ("float32", "float64"):
+            raise ValueError("query_precision must be 'float32' or 'float64'")
+        self.query_precision = query_precision
+        self._accumulate_samples = accumulate_samples
+        if query_precision == "float32":
+            from ._boundary_precision import accumulate_samples32
+
+            self._accumulate_samples = accumulate_samples32
         self.domain = domain
         self.points = _contiguous_points(points)
         self.n, self.device = len(self.points), self.points.device
@@ -427,7 +442,7 @@ class BoundaryWorkspace:
             mass.zero_()
             moment.zero_()
             wp.launch(
-                accumulate_samples,
+                self._accumulate_samples,
                 len(samples),
                 inputs=[
                     self._hierarchy.tree,

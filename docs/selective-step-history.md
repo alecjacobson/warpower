@@ -122,3 +122,5 @@ inventories are in [experiments/selective-step-history](../experiments/selective
 Raw meshes and traces remain outside ordinary Git. This closes the bounded
 history study (#257/#255), not uniform-scan material recovery (#258), the default
 input problem (#263), or comparable-quality CPU performance (#40).
+
+[Current raw evidence](https://github.com/alecjacobson/warpower/releases/tag/evidence-selective-history-current-de9d5a2) contains 587 members, verified after download. Archive SHA-256: `3a7c2c685a789bc4e73b020759e7aa938f200b77de54a46f603e657b94db3364`.

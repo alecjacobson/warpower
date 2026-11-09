@@ -35,9 +35,40 @@ class Continuations:
     capacity: int
 
 
+@wp.func(inline=False)
+def save_geometry(cache: Continuations, scratch: Scratch64, cell: Cell64, entry: int):
+    cache.cells[entry] = cell
+    for k in range(cell.np):
+        at = cell.base + 32 * k
+        cache.planes[entry, k] = scratch.planes[at]
+        cache.neighbors[entry, k] = scratch.neighbors[at]
+    for k in range(cell.nv):
+        at = cell.base + 32 * k
+        cache.vertices[entry, k] = scratch.vertices[at]
+        cache.positions[entry, k] = scratch.positions[at]
+        cache.cartesian[entry, k] = scratch.cartesian[at]
+
+
+@wp.func(inline=False)
+def restore_geometry(cache: Continuations, scratch: Scratch64, base: int, entry: int):
+    cell = cache.cells[entry]
+    cell.base = base
+    for k in range(cell.np):
+        at = base + 32 * k
+        scratch.planes[at] = cache.planes[entry, k]
+        scratch.neighbors[at] = cache.neighbors[entry, k]
+    for k in range(cell.nv):
+        at = base + 32 * k
+        scratch.vertices[at] = cache.vertices[entry, k]
+        scratch.positions[at] = cache.positions[entry, k]
+        scratch.cartesian[at] = cache.cartesian[entry, k]
+    return cell
+
+
 @lru_cache(maxsize=None)
-def make_cells(queue_capacity=128):
+def make_cells(queue_capacity=128, resuming=True):
     queue_size = wp.constant(queue_capacity)
+    can_resume = wp.constant(resuming)
 
     @wp.kernel(enable_backward=False, module="unique", module_options={"fast_math": False})
     def build_cells(
@@ -74,28 +105,18 @@ def make_cells(queue_capacity=128):
         size = int(1)
         pending = int(-1)
         offset = int(0)
-        entry = cache.entries[i]
-        if entry >= 0:
-            saved = cache.cells[entry]
-            # The destination's capacity/layout changed; all plane IDs remain local.
-            saved.base = cell.base
-            cell = saved
-            for k in range(cell.np):
-                at = cell.base + 32 * k
-                scratch.planes[at] = cache.planes[entry, k]
-                scratch.neighbors[at] = cache.neighbors[entry, k]
-            for k in range(cell.nv):
-                at = cell.base + 32 * k
-                scratch.vertices[at] = cache.vertices[entry, k]
-                scratch.positions[at] = cache.positions[entry, k]
-                scratch.cartesian[at] = cache.cartesian[entry, k]
-            size = cache.sizes[entry]
-            for k in range(size):
-                nodes[k] = cache.nodes[entry, k]
-                distances[k] = cache.distances[entry, k]
-            pending = cache.pending[entry]
-            offset = cache.offsets[entry]
-            wp.atomic_add(cache.statistics, 1, 1)
+        entry = int(-1)
+        if wp.static(can_resume):
+            entry = cache.entries[i]
+            if entry >= 0:
+                cell = restore_geometry(cache, scratch, cell.base, entry)
+                size = cache.sizes[entry]
+                for k in range(size):
+                    nodes[k] = cache.nodes[entry, k]
+                    distances[k] = cache.distances[entry, k]
+                pending = cache.pending[entry]
+                offset = cache.offsets[entry]
+                wp.atomic_add(cache.statistics, 1, 1)
         while (size > 0 or pending >= 0) and cell.status == 0:
             node = pending
             begin = offset
@@ -127,22 +148,13 @@ def make_cells(queue_capacity=128):
                                     wp.atomic_add(cache.statistics, 2, 1)
                                 cache.entries[i] = entry
                             if entry >= 0:
-                                cache.cells[entry] = cell
+                                save_geometry(cache, scratch, cell, entry)
                                 cache.sizes[entry] = size
                                 cache.pending[entry] = node
                                 cache.offsets[entry] = k
                                 for h in range(size):
                                     cache.nodes[entry, h] = nodes[h]
                                     cache.distances[entry, h] = distances[h]
-                                for h in range(cell.np):
-                                    at = cell.base + 32 * h
-                                    cache.planes[entry, h] = scratch.planes[at]
-                                    cache.neighbors[entry, h] = scratch.neighbors[at]
-                                for h in range(cell.nv):
-                                    at = cell.base + 32 * h
-                                    cache.vertices[entry, h] = scratch.vertices[at]
-                                    cache.positions[entry, h] = scratch.positions[at]
-                                    cache.cartesian[entry, h] = scratch.cartesian[at]
                                 wp.atomic_add(cache.statistics, 0, 1)
                                 status[i] = 2
                                 return
@@ -216,7 +228,9 @@ def install(workspace, *, slots=64):
         cache.statistics = wp.zeros(3, dtype=int)
         cache.capacity = capacity
         launch, iteration, record = base._launch, base._tet_iteration, workspace._record
-        replacements = {_graph_tetrahedra.make_cells(c): make_cells(c) for c in capacities}
+        replacements = {
+            _graph_tetrahedra.make_cells(c): make_cells(c, c != capacities[0]) for c in capacities
+        }
 
         def launch_continuation(kernel, dim, args, **kwargs):
             if kernel in replacements:

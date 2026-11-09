@@ -236,7 +236,6 @@ class VTMWorkspace:
         proven_exterior_enabled=None,
         _cache_surface_queries=False,
         boundary_query_precision="float64",
-        boundary_accumulation_precision="float64",
     ):
         self._cache_surface_queries = bool(_cache_surface_queries)
         self.max_iterations = operator.index(max_iterations)
@@ -356,7 +355,6 @@ class VTMWorkspace:
             self.points,
             active_count=active_count,
             query_precision=boundary_query_precision,
-            accumulation_precision=boundary_accumulation_precision,
             **boundary_options,
         )
         self.full_tetrahedra = self.mesh.tetrahedra

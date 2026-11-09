@@ -55,16 +55,8 @@ def main():
         sq = SizingQueryWorkspace(field, domain.surface_points).run()
         cq = SizingQueryWorkspace(field, domain.crease_points).run()
         options = dict(surface_sizing=sq.values, crease_sizing=cq.values)
-    modes = [
-        ("float64", "float64"),
-        ("float32", "float64"),
-        ("float64", "float32"),
-        ("float32", "float32"),
-    ]
-    fits = [
-        BoundaryWorkspace(domain, points, query_precision=q, accumulation_precision=a, **options)
-        for q, a in modes
-    ]
+    modes = [("float64", "float64"), ("float32", "float64")]
+    fits = [BoundaryWorkspace(domain, points, query_precision=q, **options) for q, a in modes]
     first, last = wp.Event(enable_timing=True), wp.Event(enable_timing=True)
     report = dict(
         input_sha256=hashlib.sha256(args.input.read_bytes()).hexdigest(),
@@ -88,7 +80,7 @@ def main():
         wp.synchronize()
         quota = cpu_quota_snapshot()
         for repeat in range(args.repeats):
-            for k in range(4) if repeat % 2 == 0 else reversed(range(4)):
+            for k in range(len(fits)) if repeat % 2 == 0 else reversed(range(len(fits))):
                 wp.record_event(first)
                 fits[k].run()
                 wp.record_event(last)

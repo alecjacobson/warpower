@@ -1,11 +1,8 @@
-"""Opt-in query and boundary accumulation precision; topology stays unchanged."""
-
-from functools import lru_cache
+"""Opt-in FP32 nearest-site queries; moments, energy and topology stay FP64."""
 
 import warp as wp
 
 from . import _bvh
-from ._site_bvh import nearest_site
 
 wp.set_module_options({"enable_backward": False, "fast_math": False})
 
@@ -70,87 +67,48 @@ def nearest_site32(
     return result
 
 
-@lru_cache(maxsize=None)
-def make_accumulate(query_precision, accumulation_precision):
-    query = nearest_site32 if query_precision == "float32" else nearest_site
-    query_vector = wp.vec3 if query_precision == "float32" else wp.vec3d
-    scalar = wp.float32 if accumulation_precision == "float32" else wp.float64
-    vector = wp.vec3 if accumulation_precision == "float32" else wp.vec3d
-
-    @wp.kernel(enable_backward=False, module="unique", module_options={"fast_math": False})
-    def accumulate(
-        tree: _bvh.Tree,
-        points: wp.array[wp.vec3],
-        active: wp.array[int],
-        occupied: wp.array[int],
-        samples: wp.array[wp.vec3],
-        base_weights: wp.array[wp.float64],
-        sizing: wp.array[float],
-        dimension: int,
-        owners: wp.array[int],
-        mass: wp.array[scalar],
-        moment: wp.array[vector],
-        energies: wp.array[wp.float64],
-        total: wp.array[wp.float64],
-        maximum: wp.array[wp.float64],
-        component: int,
-        error: wp.array[int],
-    ):
-        s = wp.tid()
-        owners[s] = -1
-        if error[0] != 0 or base_weights[s] == wp.float64(0.0):
-            return
-        h = wp.float64(sizing[s])
-        if h <= wp.float64(0.0) or not wp.isfinite(h):
-            wp.atomic_or(error, 0, 8)
-            return
-        denominator = h * h * h
-        if dimension == 2:
-            denominator *= h
-        weight = base_weights[s] / denominator
-        hit = query(tree, points, query_vector(samples[s]), active, occupied, False)
-        if hit.index < 0 or not wp.isfinite(weight):
-            wp.atomic_or(error, 0, 16)
-            return
-        local_weight = scalar(weight)
-        local_moment = local_weight * (vector(samples[s]) - vector(points[hit.index]))
-        if local_weight <= scalar(0.0) or not wp.isfinite(local_weight):
-            wp.atomic_or(error, 0, 16)
-            return
-        for k in range(3):
-            if not wp.isfinite(local_moment[k]):
-                wp.atomic_or(error, 0, 16)
-                return
-        owners[s] = hit.index
-        wp.atomic_add(mass, hit.index, local_weight)
-        wp.atomic_add(moment, hit.index, local_moment)
-        # Keep acceptance diagnostics in FP64 even for FP32 nearest-site queries.
-        # The selected owner may differ; no reference query is hidden here.
-        delta = wp.vec3d(samples[s]) - wp.vec3d(points[hit.index])
-        distance2 = wp.dot(delta, delta)
-        wp.atomic_add(energies, component, weight * distance2)
-        wp.atomic_add(total, component, weight)
-        wp.atomic_max(maximum, component, wp.sqrt(distance2))
-
-    return accumulate
-
-
 @wp.kernel
-def publish(
-    mass: wp.array[float],
-    moment: wp.array[wp.vec3],
-    output_mass: wp.array[wp.float64],
-    output_moment: wp.array[wp.vec3d],
+def accumulate_samples32(
+    tree: _bvh.Tree,
+    points: wp.array[wp.vec3],
+    active: wp.array[int],
+    occupied: wp.array[int],
+    samples: wp.array[wp.vec3],
+    base_weights: wp.array[wp.float64],
+    sizing: wp.array[float],
+    dimension: int,
+    owners: wp.array[int],
+    mass: wp.array[wp.float64],
+    moment: wp.array[wp.vec3d],
+    energies: wp.array[wp.float64],
+    total: wp.array[wp.float64],
+    maximum: wp.array[wp.float64],
+    component: int,
     error: wp.array[int],
 ):
-    i = wp.tid()
-    m, v = mass[i], moment[i]
-    if (
-        not wp.isfinite(m)
-        or not wp.isfinite(v[0])
-        or not wp.isfinite(v[1])
-        or not wp.isfinite(v[2])
-    ):
+    s = wp.tid()
+    owners[s] = -1
+    if error[0] != 0 or base_weights[s] == wp.float64(0.0):
+        return
+    h = wp.float64(sizing[s])
+    if h <= wp.float64(0.0) or not wp.isfinite(h):
+        wp.atomic_or(error, 0, 8)
+        return
+    denominator = h * h * h
+    if dimension == 2:
+        denominator *= h
+    weight = base_weights[s] / denominator
+    sample = wp.vec3d(samples[s])
+    hit = nearest_site32(tree, points, samples[s], active, occupied, False)
+    if hit.index < 0 or not wp.isfinite(weight):
         wp.atomic_or(error, 0, 16)
-    output_mass[i] = wp.float64(m)
-    output_moment[i] = wp.vec3d(v)
+        return
+    owners[s] = hit.index
+    delta = sample - wp.vec3d(points[hit.index])
+    # Recompute selected-owner distances in FP64 for acceptance diagnostics.
+    distance2 = wp.dot(delta, delta)
+    wp.atomic_add(mass, hit.index, weight)
+    wp.atomic_add(moment, hit.index, weight * delta)
+    wp.atomic_add(energies, component, weight * distance2)
+    wp.atomic_add(total, component, weight)
+    wp.atomic_max(maximum, component, wp.sqrt(distance2))

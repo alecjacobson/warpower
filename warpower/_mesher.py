@@ -367,7 +367,6 @@ class VariationalMeshingWorkspace:
         tetrahedra_cell_capacity=1024,
         chunk_size=None,
         boundary_query_precision="float64",
-        boundary_accumulation_precision="float64",
     ):
         self.domain, self.device = domain, domain.device
         self.containment_recovery = bool(containment_recovery)
@@ -522,7 +521,6 @@ class VariationalMeshingWorkspace:
                 chunk_size=chunk_size,
                 _cache_surface_queries=True,
                 boundary_query_precision=boundary_query_precision,
-                boundary_accumulation_precision=boundary_accumulation_precision,
             )
             self._boundary_rounding = None
             if self.proven_exterior_recovery:

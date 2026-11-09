@@ -74,6 +74,8 @@ corner counts between captured replays does not allocate storage or read geometr
 back to the host. The owned sampler reserves enough storage at setup for the
 possible corner budget and draws only the resolved prefix; the independently
 callable `InitialSamplingWorkspace` keeps its fixed-count contract.
+See [the budget report](initial-corner-budget.md) for controls and the remaining
+default Armadillo boundary failure.
 
 The target counts sites; some full-hull sites can be unused by retained material
 tetrahedra. Consumers should use connectivity to identify the material vertices.

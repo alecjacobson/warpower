@@ -340,6 +340,7 @@ class DelaunayWorkspace:
         symbolic_max_expansions=16,
         facet_recovery=None,
         facet_max_rounds=64,
+        _scratch_owner=None,
     ):
         # Below 256 sites, difficult normalized seeds can cost more than the
         # existing symbolic strategy (the 128-site torus is a measured example).
@@ -365,6 +366,7 @@ class DelaunayWorkspace:
             tetrahedra_capacity=tetrahedra_capacity,
             tetrahedra_cell_capacity=tetrahedra_cell_capacity,
             chunk_size=chunk_size,
+            _scratch_owner=_scratch_owner,
         )
         self.fast_candidates = bool(fast_candidates) and len(points) >= 32768
         builder = DiagramWorkspace
@@ -372,7 +374,12 @@ class DelaunayWorkspace:
             from ._fast_candidates import CandidateWorkspace
 
             builder = CandidateWorkspace
-        self._base = builder(points, **settings)
+        # The 128-slot pass is FP32 in the large-cloud candidate builder and
+        # must remain there. Small-cloud FP64 construction avoids an expensive
+        # restart for cells just above 128 vertices. Normalized recovery keeps
+        # its original schedule.
+        first_capacity = 256 if len(points) < 32768 else 128
+        self._base = builder(points, _tetrahedra_first_capacity=first_capacity, **settings)
         self.points, self.device, self.n = self._base.points, self._base.device, self._base.n
         if self.n < 4:
             raise ValueError("DelaunayWorkspace requires at least four sites")

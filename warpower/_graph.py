@@ -220,6 +220,8 @@ class DiagramWorkspace:
         chunk_size=None,
         leaf_size=4,
         max_expansions=12,
+        _scratch_owner=None,
+        _tetrahedra_first_capacity=128,
     ):
         self.points, self._torch = _points_array(points)
         self.device = self.points.device
@@ -248,6 +250,8 @@ class DiagramWorkspace:
         self.tetrahedra_cell_capacity = operator.index(tetrahedra_cell_capacity)
         if self.tetrahedra_cell_capacity not in (512, 1024):
             raise ValueError("tetrahedra_cell_capacity must be 512 or 1024")
+        if _tetrahedra_first_capacity not in (128, 256):
+            raise ValueError("Private first tetrahedron capacity must be 128 or 256")
         if not self._tetrahedra and self.tetrahedra_cell_capacity != 512:
             raise ValueError("Larger tetrahedron cells require return_tetrahedra=True")
         self._tet_capacities = (128, 256, 512)
@@ -320,8 +324,15 @@ class DiagramWorkspace:
                     length = blocks
                 self._scratch = allocate_scratch(self.chunk_size, 64, self.device)
                 self._retry32 = allocate_scratch(self.retry_chunk, 128, self.device)
-            self._scratch64 = allocate_scratch(
-                self.retry_chunk, self.tetrahedra_cell_capacity, self.device, robust=True
+            self._scratch_owner = _scratch_owner
+            self._scratch64 = (
+                allocate_scratch(
+                    self.retry_chunk, self.tetrahedra_cell_capacity, self.device, robust=True
+                )
+                if _scratch_owner is None
+                else _scratch_owner.allocate(
+                    self.retry_chunk, self.tetrahedra_cell_capacity, self.device
+                )
             )
             self._robust = {}
             for capacity in self._tet_capacities:
@@ -330,6 +341,10 @@ class DiagramWorkspace:
                     setattr(scratch, name, getattr(self._scratch64, name))
                 scratch.capacity = capacity
                 self._robust[capacity] = scratch
+            # Keep the 128-slot view for symbolic recovery even when the first
+            # original-coordinate FP64 pass starts at 256 slots.
+            if _tetrahedra_first_capacity == 256:
+                self._tet_capacities = self._tet_capacities[1:]
             if self._tetrahedra:
                 self._init_tetrahedra(tc)
             # Prewarm Warp's native primitive scratch outside any conditional body.

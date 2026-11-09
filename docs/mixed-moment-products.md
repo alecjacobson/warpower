@@ -24,6 +24,8 @@ quality rounds. The scans use 8,192 sites, 256 initial sites, one surface/crease
 subdivision, feature angle 120 and seed 2026. Other cases use 1,000 sites and
 their gallery defaults. Setup, transfer, export and independent validation are
 outside replay timing; their quota windows are checked separately too.
+The experimental kernel preload precedes the gallery setup timer, so the
+reported setup field is not a complete startup-cost comparison.
 
 | Case | Reference ms | FP32 products ms | Time change | Minimum radius ratio, reference → products |
 |---|---:|---:|---:|---:|

@@ -19,9 +19,14 @@ def main():
     parser.add_argument("--input", type=Path, required=True, help="Triangular surface OFF")
     parser.add_argument("--sites", type=Path, required=True, help="NPZ mesh or NPY trajectory")
     parser.add_argument("--graded", action="store_true")
+    parser.add_argument(
+        "--mixed", action="store_true", help="Include private conservative-pruning prototype"
+    )
     parser.add_argument("--repeats", type=int, default=9)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.repeats < 3:
+        parser.error("At least three timing samples are required")
     surface, faces = read_off(args.input)
     domain = SurfaceDomain(
         surface,
@@ -57,11 +62,21 @@ def main():
         options = dict(surface_sizing=sq.values, crease_sizing=cq.values)
     modes = [("float64", "float64"), ("float32", "float64")]
     fits = [BoundaryWorkspace(domain, points, query_precision=q, **options) for q, a in modes]
+    if args.mixed:
+        from benchmarks._mixed_boundary import MixedBoundaryWorkspace
+
+        modes.append(("mixed-experiment", "float64"))
+        fits.append(MixedBoundaryWorkspace(domain, points, **options))
     first, last = wp.Event(enable_timing=True), wp.Event(enable_timing=True)
     report = dict(
         input_sha256=hashlib.sha256(args.input.read_bytes()).hexdigest(),
         sites_sha256=hashlib.sha256(args.sites.read_bytes()).hexdigest(),
         graded=args.graded,
+        mixed_experiment=args.mixed,
+        experimental_source_sha256={
+            str(p): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in [Path(__file__), Path("benchmarks/_mixed_boundary.py")]
+        },
         runtime_sha256={
             str(p): hashlib.sha256(p.read_bytes()).hexdigest()
             for p in sorted(Path("warpower").glob("*.py"))

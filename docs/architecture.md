@@ -505,3 +505,11 @@ bounded partial rollback after fresh selective quality rejections. Every retry
 retains complete reconstruction/certification and all acceptance checks. The
 default zero keeps existing kernels and storage; standalone geometry APIs have
 no dependency on this helper.
+
+The complete mesher also uses [bounded selective step history](selective-step-history.md)
+after quality-only rejections. It tries twice the previous accepted scale and
+retries the full original bracket on non-quality failure, exhaustion or apparent
+convergence. History resets within the captured graph at each core invocation;
+44 device bytes hold state and counters. The measured 16K torus solve improves
+from 4.39 to 2.91 seconds with identical final geometry. Standalone VTM cores,
+power diagrams and Delaunay workspaces retain their existing defaults.

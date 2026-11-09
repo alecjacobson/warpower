@@ -7,7 +7,6 @@ import pytest
 
 from benchmarks.corner_intersections import clip_triangle, rational_points, verify_certificate
 
-
 TET = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]], np.float32)
 CASES = [
     ([[0.1, 0.1, 0.1], [0.2, 0.1, 0.1], [0.1, 0.2, 0.1]], True, True),

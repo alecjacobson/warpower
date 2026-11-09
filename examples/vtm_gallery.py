@@ -80,6 +80,7 @@ def main():
     )
     parser.add_argument("--quality-rounds", type=int, default=4)
     parser.add_argument("--local-quality-retries", type=int, default=0)
+    parser.add_argument("--local-topology-retries", type=int, default=0)
     parser.add_argument(
         "--proven-exterior-recovery",
         action=argparse.BooleanOptionalAction,
@@ -166,6 +167,7 @@ def main():
         sizing=sizing,
         quality_rounds=args.quality_rounds,
         local_quality_retries=args.local_quality_retries,
+        local_topology_retries=args.local_topology_retries,
         proven_exterior_recovery=args.proven_exterior_recovery,
         automatic_sizing=args.automatic_sizing,
     )

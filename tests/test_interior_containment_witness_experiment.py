@@ -35,6 +35,7 @@ def rational_interior(p, q):
 
 
 def paired(domain, points, *, count=None, capacity=None):
+    assert int(domain.error.numpy()[0]) == 0
     n = len(points)
     capacity = n if capacity is None else capacity
     p = wp.array(points.reshape(-1, 3), dtype=wp.vec3, device=domain.device)
@@ -50,7 +51,10 @@ def paired(domain, points, *, count=None, capacity=None):
 
 @pytest.mark.parametrize("scale", [2.0**-60, 1.0, 2.0**60])
 def test_boundary_only_tetrahedron_gets_proved_material_witness(scale):
-    domain = SurfaceDomain(*cube(scale))
+    # Orient at unit scale: the generic helper's binary32 cross/dot can
+    # underflow while choosing face winding at the smallest test scale.
+    vertices, faces = cube()
+    domain = SurfaceDomain(vertices * np.float32(scale), faces)
     p = scale * np.array([[[1, 1, 1], [-1, -1, 1], [-1, 1, -1], [1, -1, -1]]], np.float32)
     before, after = paired(domain, p)
     assert before.tolist() == [0]

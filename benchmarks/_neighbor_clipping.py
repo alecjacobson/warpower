@@ -196,9 +196,10 @@ def install(workspace, *, hint_capacity=128, starting_capacity=128):
     if hint_capacity < 1 or hint_capacity & (hint_capacity - 1):
         raise ValueError("hint_capacity must be a positive power of two")
     base = workspace._base
-    if starting_capacity not in base._tet_capacities:
+    capacities = tuple(sorted(base._robust))
+    if starting_capacity not in capacities:
         raise ValueError("Unsupported starting capacity")
-    base._tet_capacities = tuple(c for c in base._tet_capacities if c >= starting_capacity)
+    base._tet_capacities = tuple(c for c in capacities if c >= starting_capacity)
     with wp.ScopedDevice(workspace.device):
         table = wp.full((workspace.n, hint_capacity), -1, dtype=int)
         ordered = wp.empty_like(table)

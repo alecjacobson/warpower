@@ -47,6 +47,41 @@ def read_mesh(path):
     return points, tets
 
 
+def add_optimizer_arguments(parser):
+    for name in ("perturb", "exude"):
+        parser.add_argument("--" + name, action="store_true")
+        parser.add_argument("--" + name + "-seconds", type=float, default=1.0)
+        parser.add_argument("--" + name + "-bound", type=float, default=10.0)
+
+
+def optimizer_arguments(args):
+    values = []
+    for name in ("perturb", "exude"):
+        seconds, bound = getattr(args, name + "_seconds"), getattr(args, name + "_bound")
+        if not np.isfinite(seconds) or seconds < 0:
+            raise ValueError("--" + name + "-seconds must be finite and nonnegative")
+        if not np.isfinite(bound) or not 0 <= bound <= 180:
+            raise ValueError("--" + name + "-bound must be finite and in [0,180]")
+        values.extend([str(int(getattr(args, name))), str(seconds), str(bound)])
+    # Historical binaries still receive their original positional arguments.
+    return values if args.perturb or args.exude else []
+
+
+def check_optimizer_report(args, native):
+    for name in ("perturb", "exude"):
+        enabled = getattr(args, name)
+        if bool(native.get(name + "_enabled", False)) != enabled:
+            raise ValueError("Native " + name + " enable flag does not match requested policy")
+        if enabled:
+            for suffix, option in [("_time_limit", "_seconds"), ("_sliver_bound", "_bound")]:
+                if native.get(name + suffix) != getattr(args, name + option):
+                    raise ValueError("Native " + name + suffix + " does not match requested policy")
+            if native.get(name + "_return_code", -1) < 0:
+                raise ValueError("Native " + name + " did not report completion")
+    if args.exude and native.get("triangulation_kind") != "weighted_regular":
+        raise ValueError("Exudation must report a weighted regular triangulation")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--binary", type=Path, required=True)
@@ -60,6 +95,8 @@ def main():
     parser.add_argument("--topology", choices=["non_manifold", "manifold"], default="non_manifold")
     parser.add_argument("--threads", type=int, choices=[1, 4], default=1)
     parser.add_argument("--repeats", type=int, default=3)
+    parser.add_argument("--timeout", type=float, default=600.0)
+    add_optimizer_arguments(parser)
     parser.add_argument(
         "--distance-binary",
         type=Path,
@@ -71,6 +108,12 @@ def main():
         parser.error("--feature-angle must be finite and strictly between 0 and 180 degrees")
     if args.repeats < 1:
         parser.error("--repeats must be positive")
+    if not np.isfinite(args.timeout) or args.timeout <= 0:
+        parser.error("--timeout must be finite and positive")
+    try:
+        optimizers = optimizer_arguments(args)
+    except ValueError as error:
+        parser.error(str(error))
     points, faces = read_surface(args.surface)
     args.output.mkdir(parents=True, exist_ok=True)
     if any(args.output.iterdir()):
@@ -96,13 +139,25 @@ def main():
             str(args.freeze_bound),
         ]
         # Keep the default command compatible with historical 45-degree binaries.
-        if args.feature_angle != 45.0 or args.topology != "non_manifold":
+        if args.feature_angle != 45.0 or args.topology != "non_manifold" or optimizers:
             command.append(str(args.feature_angle))
-        if args.topology != "non_manifold":
+        if args.topology != "non_manifold" or optimizers:
             command.append(args.topology)
+        command.extend(optimizers)
         start = time.perf_counter()
         before = cpu_quota_snapshot()
-        result = subprocess.run(command, text=True, capture_output=True)
+        timed_out = False
+        try:
+            result = subprocess.run(command, text=True, capture_output=True, timeout=args.timeout)
+        except subprocess.TimeoutExpired as error:
+            timed_out = True
+
+            def decode(value):
+                return value.decode(errors="replace") if isinstance(value, bytes) else value or ""
+
+            result = subprocess.CompletedProcess(
+                command, 124, decode(error.stdout), decode(error.stderr)
+            )
         quota = cpu_quota_delta(before, cpu_quota_snapshot())
         wall_seconds = time.perf_counter() - start
         (args.output / f"run-{i}.stdout").write_text(result.stdout)
@@ -111,6 +166,7 @@ def main():
             command=command,
             exit_code=result.returncode,
             wall_seconds=wall_seconds,
+            timed_out=timed_out,
             cpu_quota_delta=quota,
             cpu_throttled=any(
                 x["throttled_periods"] or x["throttled_usec"] for x in quota.values()
@@ -130,8 +186,23 @@ def main():
                 raise ValueError("Native feature angle does not match requested policy")
             if native.get("topology", "non_manifold") != args.topology:
                 raise ValueError("Native topology does not match requested policy")
+            check_optimizer_report(args, native)
             if "mesh_sha256" not in record:
                 raise ValueError("Native process did not produce a mesh")
+            if "triangulation_kind" in native:
+                weights_path = Path(str(mesh_path) + ".weights")
+                weights = np.loadtxt(weights_path, skiprows=1, ndmin=1)
+                with weights_path.open() as weight_file:
+                    weight_count = int(weight_file.readline())
+                if (
+                    weights.shape != (native["vertices"],)
+                    or weight_count != len(weights)
+                    or not np.isfinite(weights).all()
+                ):
+                    raise ValueError("Malformed native vertex weights")
+                if np.count_nonzero(weights) != native["nonzero_exported_weights"]:
+                    raise ValueError("Native weight count disagrees with export")
+                record["weights_sha256"] = hashlib.sha256(weights_path.read_bytes()).hexdigest()
             record.update(native)
             record["native_valid"] = True
             record["topology_native_reported"] = "topology" in native
@@ -179,7 +250,7 @@ def main():
         "unknown",
     )
     report = dict(
-        scope="Fresh native CGAL Mesh_3 with feature protection and optional ODT. Complete time includes domain construction, meshing and optimization; file I/O, triangulation validation, serialization and independent quality checks are separate. No GPU speedup is inferred by this runner.",
+        scope="Fresh native CGAL Mesh_3 with feature protection, optional ODT, perturbation then exudation. Complete time includes domain construction, meshing and optimization; prepared-domain time excludes domain construction. File I/O, triangulation validation, serialization and independent quality checks are separate. No GPU speedup is inferred by this runner.",
         platform=platform.platform(),
         cpu_model=cpu_model,
         visible_cpu_count=os.cpu_count(),
@@ -204,6 +275,17 @@ def main():
         else None,
         unthrottled_samples=len(clean),
         median_unthrottled_complete_seconds=float(np.median(clean)) if clean else None,
+        median_unthrottled_prepared_domain_seconds=float(
+            np.median(
+                [
+                    x["prepared_domain_seconds"]
+                    for x in valid
+                    if not x["cpu_throttled"] and "prepared_domain_seconds" in x
+                ]
+            )
+        )
+        if any(not x["cpu_throttled"] and "prepared_domain_seconds" in x for x in valid)
+        else None,
         runs=records,
     )
     (args.output / "result.json").write_text(json.dumps(report, indent=2) + "\n")

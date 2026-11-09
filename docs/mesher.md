@@ -59,11 +59,24 @@ scheduler or add meshing stages to their graphs.
 ## Inputs and budgets
 
 `capacity` is the maximum number of sites. `target_count` is an integer or a
-contiguous device `int32[1]`, defaulting to capacity. `initial_count` is a setup
-integer, defaulting to `min(256, target)` for a static target and
-`min(256, capacity)` for a device target. Every replay requires
-`4 <= initial_count <= target <= capacity` and enough initial sites for all
-current corner anchors. Increasing the device target does not allocate storage.
+contiguous device `int32[1]`, defaulting to capacity. An explicit `initial_count`
+is a minimum, with `4 <= initial_count <= target <= capacity`. When omitted,
+the minimum is up to 256 sites and follows the current device target. Each fresh
+solve resolves `min(target, max(minimum, corner_count + 4))` on device before
+sampling. The four extra sites provide volume samples after anchoring when the
+target permits them; this is an initialization policy, not a mesh-quality guarantee.
+The resolved scalar is available as `effective_initial_count`.
+
+If the target cannot hold all mandatory corners, the solve reports input error 1
+and zero output counts. The gallery adds a diagnostic giving the required corner
+count. It never silently drops explicit feature constraints. Changing target or
+corner counts between captured replays does not allocate storage or read geometry
+back to the host. The owned sampler reserves enough storage at setup for the
+possible corner budget and draws only the resolved prefix; the independently
+callable `InitialSamplingWorkspace` keeps its fixed-count contract.
+See [the budget report](initial-corner-budget.md) for controls and the remaining
+default Armadillo boundary failure.
+
 The target counts sites; some full-hull sites can be unused by retained material
 tetrahedra. Consumers should use connectivity to identify the material vertices.
 

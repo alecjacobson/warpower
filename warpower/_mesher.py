@@ -5,12 +5,12 @@ import operator
 
 import warp as wp
 
+from ._budgeted_sampling import BudgetedSamplingWorkspace
 from ._domain_topology import DomainTopology
 from ._extraction import ExtractionWorkspace
 from ._jitter import BoundaryJitterWorkspace
 from ._quality_moves import history_start, sum_euler
 from ._refinement import RefinementWorkspace
-from ._sampling import InitialSamplingWorkspace
 from ._teleport import InteriorImprovementWorkspace
 from ._vtm import VTMWorkspace
 from ._vtm_controls import scalar
@@ -21,6 +21,7 @@ wp.set_module_options({"enable_backward": False, "fast_math": False})
 @wp.struct
 class State:
     target: wp.array[int]
+    initial_count: wp.array[int]
     active: wp.array[int]
     error: wp.array[int]
     status: wp.array[int]
@@ -43,6 +44,7 @@ class State:
     valid: wp.array[int]
     capacity: int
     initial: int
+    automatic_initial: int
     growth_limit: int
     recovery_limit: int
     quality_limit: int
@@ -73,10 +75,18 @@ def begin(state: State, domain_error: wp.array[int], corners: wp.array[int]):
         state.last_errors[k] = 0
     for k in range(4):
         state.counts[k] = 0
+    minimum = state.initial
+    if state.automatic_initial != 0:
+        minimum = wp.min(minimum, state.target[0])
+    # Leave volumetric samples after anchoring where the target permits it;
+    # an entire corner set can lie on a plane even for a volumetric domain.
+    initial = wp.min(state.target[0], wp.max(minimum, corners[0] + 4))
+    state.initial_count[0] = initial
     if (
         domain_error[0] != 0
-        or corners[0] > state.initial
-        or state.target[0] < state.initial
+        or state.target[0] < 4
+        or corners[0] > state.target[0]
+        or state.target[0] < minimum
         or state.target[0] > state.capacity
     ):
         state.error[0] = 1
@@ -94,7 +104,7 @@ def check(state: State, error: wp.array[int], bit: int, slot: int):
 
 @wp.kernel
 def sampled(state: State, count: wp.array[int]):
-    if count[0] != state.initial:
+    if count[0] != state.initial_count[0]:
         state.error[0] |= 4
     if state.error[0] == 0:
         state.active[0] = count[0]
@@ -394,6 +404,7 @@ class VariationalMeshingWorkspace:
             target = operator.index(target)
             if not 4 <= target <= self.capacity:
                 raise ValueError("target_count must be in [4,capacity]")
+        self.automatic_initial_count = initial_count is None
         if initial_count is None:
             initial_count = min(256, self.capacity if isinstance(target, wp.array) else target)
         self.initial_count = operator.index(initial_count)
@@ -474,6 +485,7 @@ class VariationalMeshingWorkspace:
                 else wp.full(1, target, dtype=int)
             )
             self.active_count = wp.full(1, self.initial_count, dtype=int)
+            self.effective_initial_count = wp.full(1, self.initial_count, dtype=int)
             self.points = wp.zeros(self.capacity, dtype=wp.vec3)
             self._budget = wp.zeros(1, dtype=int)
             self._mode = wp.zeros(1, dtype=int)
@@ -485,9 +497,10 @@ class VariationalMeshingWorkspace:
             self._jitter_seed = wp.zeros(1, dtype=int)
             self._refinement_target = wp.full(1, self.capacity, dtype=int)
             self.input_topology = DomainTopology(domain)
-            self.sampler = InitialSamplingWorkspace(
+            self.sampler = BudgetedSamplingWorkspace(
                 domain,
-                self.initial_count,
+                min(self.capacity, max(self.initial_count, len(domain.points) + 4)),
+                self.effective_initial_count,
                 sizing=sizing,
                 resolution=sampling_resolution,
                 seed=seed,
@@ -585,6 +598,8 @@ class VariationalMeshingWorkspace:
             state = self._state = State()
             state.target, state.active = self.target_count, self.active_count
             state.capacity, state.initial = self.capacity, self.initial_count
+            state.initial_count = self.effective_initial_count
+            state.automatic_initial = int(self.automatic_initial_count)
             state.growth_limit, state.recovery_limit, state.quality_limit = (
                 self.max_growth_rounds,
                 self.max_recovery_rounds,
@@ -702,7 +717,7 @@ class VariationalMeshingWorkspace:
             self.core.mesh.clear_reuse()
         if self.core.mesh.fast_candidates:
             self.core.mesh._fast_available.fill_(1)
-        wp.copy(self.points, self.sampler.points, count=self.initial_count)
+        wp.copy(self.points, self.sampler.points, count=self.sampler.n)
         self._launch(start_growth, 1, [self._state])
         if self.refinement is not None:
             wp.capture_while(self.grow, self._growth)

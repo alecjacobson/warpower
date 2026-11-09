@@ -40,6 +40,7 @@ def main():
     parser.add_argument("--scale", type=float, default=1.0)
     parser.add_argument("--repeats", type=int, default=9)
     parser.add_argument("--checker", type=Path, required=True)
+    parser.add_argument("--reference-connectivity", action="store_true")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.repeats < 3 or args.n < 4:
@@ -73,6 +74,7 @@ def main():
         input=str(args.input),
         input_sha256=hashlib.sha256(points.tobytes()).hexdigest(),
         scale=args.scale,
+        reference_connectivity=args.reference_connectivity,
         device=wp.get_device().name,
         warp=wp.__version__,
         source_revision=subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
@@ -81,6 +83,8 @@ def main():
             for p in [Path(__file__), *sorted(Path("warpower").glob("*.py"))]
         },
         records={},
+        validation_complete=False,
+        eligible_comparison=False,
     )
     start = time.perf_counter()
     mesh = DelaunayWorkspace(points, cache_strategy=False)
@@ -136,6 +140,8 @@ def main():
         mesh_path = args.output.with_name(args.output.stem + "-" + name + ".npz")
         np.savez_compressed(mesh_path, points=points, tetrahedra=outputs[name])
         row["mesh_sha256"] = hashlib.sha256(mesh_path.read_bytes()).hexdigest()
+        report["records"] = results
+        args.output.write_text(json.dumps(report, indent=2) + "\n")
         if row["successful_replays"]:
             with tempfile.TemporaryDirectory(
                 prefix="capacity-check-", dir=args.output.parent
@@ -143,9 +149,10 @@ def main():
                 pp, tp = Path(tmp) / "points.txt", Path(tmp) / "tets.txt"
                 np.savetxt(pp, points, fmt="%.17g", header=str(len(points)), comments="")
                 np.savetxt(tp, outputs[name], fmt="%d", header=str(len(outputs[name])), comments="")
-                check = subprocess.run(
-                    [str(args.checker), str(pp), str(tp)], capture_output=True, text=True
-                )
+                command = [str(args.checker), str(pp), str(tp)]
+                if args.reference_connectivity:
+                    command += ["--cgal-connectivity"]
+                check = subprocess.run(command, capture_output=True, text=True)
                 row["independent"] = dict(
                     exit_code=check.returncode, stdout=check.stdout, stderr=check.stderr
                 )
@@ -155,6 +162,7 @@ def main():
         else:
             row["independent_valid"] = False
     report["records"] = results
+    report["validation_complete"] = True
     report["same_connectivity"] = bool(
         np.array_equal(canonical(outputs["128"]), canonical(outputs["256"]))
     )

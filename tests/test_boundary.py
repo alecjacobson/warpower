@@ -130,11 +130,14 @@ def test_smooth_boundary_centroid_iterations_reduce_sampled_error():
     assert domain.corner_count.numpy()[0] == 0
 
 
-def test_ties_choose_lowest_active_site_and_inactive_storage_is_ignored():
+@pytest.mark.parametrize("precision", ["float64", "float32"])
+def test_ties_choose_lowest_active_site_and_inactive_storage_is_ignored(precision):
     domain = warpower.SurfaceDomain(*cube(), feature_angle=179)
     points = np.array([[0, 0, 0], [0, 0, 0], [np.nan, np.nan, np.nan]], np.float32)
     active = wp.array([2], dtype=int, device="cuda:0")
-    workspace = warpower.BoundaryWorkspace(domain, points, active_count=active).run()
+    workspace = warpower.BoundaryWorkspace(
+        domain, points, active_count=active, query_precision=precision
+    ).run()
     assert workspace.error.numpy()[0] == 0
     np.testing.assert_array_equal(workspace.surface_owners.numpy(), 0)
     np.testing.assert_array_equal(workspace.roles.numpy(), [1, 0, 0])
@@ -144,7 +147,8 @@ def test_ties_choose_lowest_active_site_and_inactive_storage_is_ignored():
     np.testing.assert_array_equal(workspace.role_counts.numpy(), [0, 1, 0, 0])
 
 
-def test_capture_producer_fitting_and_apply_without_host_work(monkeypatch, tmp_path):
+@pytest.mark.parametrize("precision", ["float64", "float32"])
+def test_capture_producer_fitting_and_apply_without_host_work(monkeypatch, tmp_path, precision):
     domain = warpower.SurfaceDomain(*cube(), surface_subdivisions=3)
     source = wp.array(
         np.random.default_rng(2).normal(0, 0.4, (40, 3)).astype(np.float32),
@@ -154,7 +158,9 @@ def test_capture_producer_fitting_and_apply_without_host_work(monkeypatch, tmp_p
     points = wp.clone(source)
     scale = wp.ones(1, dtype=float, device="cuda:0")
     active = wp.array([40], dtype=int, device="cuda:0")
-    workspace = warpower.BoundaryWorkspace(domain, points, active_count=active)
+    workspace = warpower.BoundaryWorkspace(
+        domain, points, active_count=active, query_precision=precision
+    )
     wp.load_module(module="tests.test_domain", device="cuda:0")
 
     def forbidden(*args, **kwargs):
@@ -201,13 +207,14 @@ def test_capture_producer_fitting_and_apply_without_host_work(monkeypatch, tmp_p
 @pytest.mark.parametrize(
     "failure, bit", [("sites", 2), ("active", 2), ("corner_capacity", 4), ("sizing", 8)]
 )
-def test_errors_suppress_updates_and_can_recover(failure, bit):
+@pytest.mark.parametrize("precision", ["float64", "float32"])
+def test_errors_suppress_updates_and_can_recover(failure, bit, precision):
     domain = warpower.SurfaceDomain(*cube())
     points = np.random.default_rng(4).uniform(-1, 1, (12, 3)).astype(np.float32)
     active = wp.array([12], dtype=int, device="cuda:0")
     sizing = wp.ones(len(domain.surface_points), dtype=float, device="cuda:0")
     workspace = warpower.BoundaryWorkspace(
-        domain, points, active_count=active, surface_sizing=sizing
+        domain, points, active_count=active, surface_sizing=sizing, query_precision=precision
     )
     if failure == "sites":
         workspace.points.fill_(wp.vec3(float("nan")))

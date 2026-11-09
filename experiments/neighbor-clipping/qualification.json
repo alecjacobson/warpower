@@ -1,0 +1,83 @@
+{
+  "ordinary_tests": "3 passed in 3.45s",
+  "padded": "3 passed, 0 memory errors",
+  "lifetime": "3 passed, 0 allocation-order/memory errors",
+  "diagnostic_stack_bytes": 32768,
+  "commands": [
+    {
+      "name": "actual-trials",
+      "command": [
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "-m",
+        "benchmarks.neighbor_clipping_trials",
+        "--record-input",
+        ".work/vtm/scanned-armadillo-input/armadillo.off",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/neighbor-clipping-v2/actual-trials"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 25.849538628011942
+    },
+    {
+      "name": "padded",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "-m",
+        "benchmarks.memcheck",
+        "--stack-bytes",
+        "32768",
+        "--",
+        "-q",
+        "tests/test_neighbor_clipping_experiment.py"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 63.49541898444295
+    },
+    {
+      "name": "lifetime",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "-m",
+        "benchmarks.memcheck",
+        "--stack-bytes",
+        "32768",
+        "--disable-mempool",
+        "--",
+        "-q",
+        "tests/test_neighbor_clipping_experiment.py"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 64.95704632997513
+    }
+  ],
+  "logs": [
+    {
+      "path": "results/local/neighbor-clipping-v1/prototype-tests-v2.log",
+      "sha256": "28e17a83a437ef0318af69f3bea6e0a19a0a6bd344d79889061e7d7296ea3dec"
+    },
+    {
+      "path": "results/local/neighbor-clipping-v2/padded.log",
+      "sha256": "7b67d60b2c089a1dcd69dc6c4be828a6b40a78ae985d6d3a974a9e3c1f8e5db3"
+    },
+    {
+      "path": "results/local/neighbor-clipping-v2/lifetime.log",
+      "sha256": "a7c3582fef41d9261a5631f72b057eb28040fe2cf3dacd71e27a7ed4fdfb4362"
+    }
+  ]
+}

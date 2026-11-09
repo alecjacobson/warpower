@@ -95,7 +95,7 @@ def test_fixed_budget_skips_growth_and_automatic_sizing_composes():
 def test_budget_failures_publish_zero_counts_and_metrics():
     d = warpower.SurfaceDomain(*cube(), surface_subdivisions=2)
     for options, expected in [
-        (dict(initial_count=4), 1),
+        (dict(initial_count=4, target_count=4), 1),
         (dict(initial_count=32, max_growth_rounds=0), 32),
         (dict(initial_count=32, max_growth_rounds=1), 32),
     ]:
@@ -444,8 +444,9 @@ def outer_record(
     running[0] = int(i < 2)
 
 
-def test_mesher_composes_inside_an_outer_device_controlled_loop(monkeypatch):
-    d = warpower.SurfaceDomain(*cube(), surface_subdivisions=4)
+@pytest.mark.parametrize("query_backend", ["reference", "native"])
+def test_mesher_composes_inside_an_outer_device_controlled_loop(monkeypatch, query_backend):
+    d = warpower.SurfaceDomain(*cube(), surface_subdivisions=4, query_backend=query_backend)
     target = wp.full(1, 96, dtype=int, device=d.device)
     mesh = warpower.VariationalMeshingWorkspace(
         d, 128, target_count=target, initial_count=64, quality_rounds=0

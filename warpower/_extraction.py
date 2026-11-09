@@ -460,7 +460,7 @@ class ExtractionWorkspace:
             else _int_array(_rejected_link_witness, self.device, (1,))
         )
         self._query_cache = None
-        if _cache_surface_queries:
+        if _cache_surface_queries and domain._native_mesh is None:
             from ._ordered_surface_queries import OrderedSurfaceQueryCache as SurfaceQueryCache
 
             self._query_cache = SurfaceQueryCache(domain, self.capacity)
@@ -625,7 +625,10 @@ class ExtractionWorkspace:
             self._input_volume,
             self._input_quality,
         ]
-        if self._query_cache is not None:
+        if self.domain._native_mesh is not None:
+            args[0] = self.domain._native_mesh.id
+            self._launch(self.domain._native_queries.classify, self.capacity, args, block_dim=32)
+        elif self._query_cache is not None:
             self._query_cache.extraction(args, selection=kernel is classify_selection)
         else:
             # Register-heavy surface queries need enough blocks for small sets.
@@ -633,10 +636,14 @@ class ExtractionWorkspace:
 
     def _surface_metrics(self):
         self._launch(
-            surface_error,
+            surface_error
+            if self.domain._native_queries is None
+            else self.domain._native_queries.surface_error,
             3 * len(self.boundary_faces),
             [
-                self.domain.tree,
+                self.domain.tree
+                if self.domain._native_mesh is None
+                else self.domain._native_mesh.id,
                 self.points,
                 self.boundary_faces,
                 self.boundary_count,
@@ -736,10 +743,14 @@ class _SelectionExtractionWorkspace(ExtractionWorkspace):
 
     def _surface_metrics(self):
         self._launch(
-            selection_surface_status,
+            selection_surface_status
+            if self.domain._native_queries is None
+            else self.domain._native_queries.selection_surface_status,
             len(self.boundary_faces),
             [
-                self.domain.tree,
+                self.domain.tree
+                if self.domain._native_mesh is None
+                else self.domain._native_mesh.id,
                 self.points,
                 self.boundary_faces,
                 self.boundary_count,

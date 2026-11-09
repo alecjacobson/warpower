@@ -252,7 +252,7 @@ class SelectiveUpdate:
         self.threshold, self.tolerance = threshold, tolerance
         self._m = len(core.full_tetrahedra)
         self._query_cache = None
-        if getattr(core, "_cache_surface_queries", False):
+        if getattr(core, "_cache_surface_queries", False) and core.domain._native_mesh is None:
             from ._ordered_surface_queries import OrderedSurfaceQueryCache as SurfaceQueryCache
 
             self._query_cache = SurfaceQueryCache(core.domain, self._m)
@@ -358,7 +358,10 @@ class SelectiveUpdate:
             self.keep,
             self.quality,
         ]
-        if self._query_cache is not None:
+        if core.domain._native_mesh is not None:
+            args[0] = core.domain._native_mesh.id
+            self._launch(core.domain._native_queries.classify_retained, self._m, args, block_dim=32)
+        elif self._query_cache is not None:
             self._query_cache.retained(args)
         else:
             self._launch(classify_retained, self._m, args, block_dim=32)

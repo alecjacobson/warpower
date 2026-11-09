@@ -5,6 +5,8 @@ feature fitting in Alliez et al. It is independently callable, and does not
 construct tetrahedra. Current surface and crease samples are assigned to their
 nearest active sites; weighted moments determine targets. Site roles can change
 on every pass.
+The optional [FP32 query mode](boundary-query-precision.md) accelerates sample
+assignment while retaining FP64 accumulation; the default remains FP64 throughout.
 
 ```python
 import warp as wp

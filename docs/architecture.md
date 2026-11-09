@@ -479,6 +479,13 @@ candidate extractor's active cache, ordinary quality-move caches and checkpoints
 reduces measured full-solve replay time by 10.0% on the 16K torus and 5.7% on
 the graded 8K scan, with unchanged standalone geometry paths.
 
+The optional [native surface-query backend](native-surface-queries.md) replaces
+VTM's surface distance and selection queries with Warp FP32 mesh queries while
+retaining FP64 tetrahedron geometry and certification. The reference backend
+remains the default. Native queries support nested captured meshing against a
+fixed surface; native refit currently requires a top-level capture because Warp's
+scan introduces device allocation nodes.
+
 The [example gallery](examples.md) includes uniform/graded torus and scanned
 Armadillo meshes, thin geometry, cavities, disconnected domains and a
 [sharp-feature mechanical plate](mechanical-plate.md). Integrated time-to-quality

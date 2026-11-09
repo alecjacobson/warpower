@@ -1,0 +1,89 @@
+{
+  "runtime": "0dc7217e58bfb8ec60b33f1ca756a3b8749519db",
+  "scope": "Five warmed producer/refit/mesher/consumer replays, including changed target/seed, domain deformation, invalid input and recovery.",
+  "runtime_calls": {
+    "cuCtxSynchronize": 1,
+    "cuProfilerStart": 1,
+    "cudaGraphLaunch_v10000": 5,
+    "cudaStreamIsCapturing_v10000": 1
+  },
+  "gpu_kernel_activities": 48467,
+  "dot_node_types": {
+    "KERNEL": 13503,
+    "MEMCPY": 761,
+    "MEM_ALLOC": 1,
+    "MEM_FREE": 1,
+    "MEMSET": 5396,
+    "CONDITIONAL": 1482
+  },
+  "dot_copy_kinds": {
+    "DtoD (DEVICE to DEVICE)": 761
+  },
+  "observed_copy_kinds": {
+    "CUDA_MEMCPY_KIND_DTOD": 5
+  },
+  "all_copies_device_to_device": true,
+  "copy_trace_limit": "Nsight omits some graph copy activities; all DOT copy nodes are checked too.",
+  "native_refit_allocation_limitation": "One device allocation/free pair from native scan; top-level capturable, not fixed-buffer/nested-refit qualified. Issue #267. Default graph validator remains unchanged.",
+  "loop": {
+    "phases": [
+      "valid96",
+      "deformed128",
+      "invalid_target",
+      "collapsed_domain",
+      "recovered96"
+    ],
+    "error_and_counts": [
+      [
+        0,
+        96,
+        430,
+        303,
+        152
+      ],
+      [
+        0,
+        128,
+        534,
+        426,
+        192
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        96,
+        410,
+        295,
+        152
+      ]
+    ],
+    "consumed_volumes": [
+      7.995695098111486,
+      9.181788748682193,
+      0.0,
+      0.0,
+      13.822775219974252
+    ],
+    "device": "NVIDIA L40",
+    "query_backend": "native"
+  },
+  "raw_sha256": {
+    "native-loop.nsys-rep": "d60e26fd3ec28d10c6c4c8c5aa892a5f764c20fb33d317079de8564a6e52135d",
+    "native-loop.dot": "4fa06344dcd4c6f3c322162afa2ddcd17e6810be3b6b97462d53e12b887b0091",
+    "native-loop.sqlite": "e6b175ae7832fb97de4b21628f16023bc834f5a18ea9f394c0f23cdfae66e551",
+    "native-loop.log": "92e51ea9277ca5be23d94e03aa86fdbe6253729824998bc912239d8dc46bd88e"
+  }
+}

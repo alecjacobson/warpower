@@ -12,7 +12,7 @@ replay starts fresh with `cache_strategy=False`; setup, upload, output readback
 and independent CPU checks are separate. In particular, the lattice and hand
 times include failed construction strategies on every replay. They are not the
 much shorter cached-strategy timings of an unchanged cloud. All 450 measured
-outputs are repeatable within each variant; 50 saved outputs are independently
+outputs retain the same canonical connectivity within each variant; 50 saved outputs are independently
 validated, and each pair has identical canonical connectivity. All timing windows
 have full CPU quota.
 
@@ -53,8 +53,11 @@ changes; the compact report corrects that interpretation explicitly. Preserve
 the 128-slot fast pass on large clouds. None of the smaller tested cases has a
 paired 95% confidence interval wholly above the +2% regression threshold.
 
-There are no additional device arrays in this experiment. Only the base schedule
-changes; normalized construction and symbolic recovery retain their schedules.
+There are no additional device arrays in this experiment. Normalized construction
+retains its schedule. Symbolic recovery reads the base schedule in this runtime,
+so its capacity order also changes on cases that use it. This detail matters when
+interpreting the structured cases. Production work must separate the schedules
+explicitly if only original-coordinate FP64 construction is to change.
 This table is not a complete VTM result or a weighted-diagram qualification.
 Any adoption needs changed-input/prefix, memory, complete time-to-quality and
 public power/regular-diagram gates (#270), as well as preserving large-cloud paths.

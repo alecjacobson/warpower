@@ -1,6 +1,8 @@
 // Offline, quadratic-cost validation of an unweighted full-hull tet mesh.
 // This executable is not used by warpower or by its GPU execution path.
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+#include <CGAL/Delaunay_triangulation_3.h>
+#include <CGAL/Triangulation_vertex_base_with_info_3.h>
 #include <CGAL/version.h>
 #include <algorithm>
 #include <array>
@@ -9,6 +11,7 @@
 #include <iostream>
 #include <map>
 #include <set>
+#include <string>
 #include <vector>
 
 using K = CGAL::Exact_predicates_inexact_constructions_kernel;
@@ -26,8 +29,9 @@ int fail(const char* message) {
 }
 
 int main(int argc, char** argv) {
-    if (argc != 3) {
-        std::cerr << "usage: check-delaunay points.txt tetrahedra.txt\n";
+    const bool reference = argc == 4 && std::string(argv[3]) == "--cgal-connectivity";
+    if (argc != 3 && !reference) {
+        std::cerr << "usage: check-delaunay points.txt tetrahedra.txt [--cgal-connectivity]\n";
         return 2;
     }
     K::Orientation_3 orientation;
@@ -53,6 +57,27 @@ int main(int argc, char** argv) {
         unique_points.insert({x, y, z});
     }
     std::set<Tet> unique_tets;
+    std::set<Tet> reference_tets;
+    if (reference) {
+        // Strict equality to an independently built, validated CGAL triangulation.
+        // This mode may reject valid cospherical alternatives; it never approves
+        // a nonmatching candidate. Use exhaustive mode for those alternatives.
+        using Vertex = CGAL::Triangulation_vertex_base_with_info_3<int, K>;
+        using Data = CGAL::Triangulation_data_structure_3<Vertex>;
+        using Delaunay = CGAL::Delaunay_triangulation_3<K, Data>;
+        std::vector<std::pair<K::Point_3, int>> indexed;
+        for (int i = 0; i < n; ++i) indexed.emplace_back(points[i], i);
+        Delaunay expected;
+        expected.insert(indexed.begin(), indexed.end());
+        if (expected.dimension() != 3 || !expected.is_valid())
+            return fail("invalid independent CGAL reference");
+        for (auto c = expected.finite_cells_begin(); c != expected.finite_cells_end(); ++c) {
+            Tet key;
+            for (int j = 0; j < 4; ++j) key[j] = c->vertex(j)->info();
+            std::sort(key.begin(), key.end());
+            reference_tets.insert(key);
+        }
+    }
     std::map<Triple, Face> faces;
     const int local_faces[4][3] = {{1, 2, 3}, {0, 3, 2}, {0, 1, 3}, {0, 2, 1}};
     unsigned long long tests = 0, ties = 0, hull_tests = 0;
@@ -70,7 +95,7 @@ int main(int argc, char** argv) {
         if (!unique_tets.insert(key).second) return fail("duplicate cell");
         if (orientation(points[t[0]], points[t[1]], points[t[2]], points[t[3]]) != CGAL::POSITIVE)
             return fail("nonpositive physical cell orientation");
-        for (int q = 0; q < n; ++q) {
+        for (int q = 0; q < (reference ? 0 : n); ++q) {
             if (std::find(t.begin(), t.end(), q) != t.end()) continue;
             const auto side = sphere(points[t[0]], points[t[1]], points[t[2]], points[t[3]], points[q]);
             ++tests;
@@ -92,6 +117,8 @@ int main(int argc, char** argv) {
             if (face.count > 2) return fail("face incidence exceeds two");
         }
     }
+    if (reference && unique_tets != reference_tets)
+        return fail("candidate differs from independent CGAL connectivity (cospherical alternatives require exhaustive mode)");
     if (referenced_points != unique_points) return fail("unreferenced distinct input site");
     int boundary_faces = 0;
     std::map<std::array<int, 2>, int> boundary_edges;
@@ -116,7 +143,11 @@ int main(int argc, char** argv) {
     }
     for (const auto& pair : boundary_edges)
         if (pair.second != 2) return fail("full-hull boundary edge is not manifold");
-    std::cout << "{\"scope\":\"Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.\","
+    std::cout << "{\"scope\":\""
+              << (reference
+                  ? "Offline validated independent CGAL connectivity equality, exact original-coordinate orientation, face pairing and hull support; nonmatching cospherical alternatives rejected. Not a speed comparison."
+                  : "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.")
+              << "\",\"cgal_connectivity_match\":" << (reference ? "true" : "false") << ","
               << "\"CGAL\":\"" << CGAL_VERSION_STR << "\",\"sites\":" << n
               << ",\"tetrahedra\":" << m << ",\"sphere_tests\":" << tests
               << ",\"cospherical_ties\":" << ties << ",\"hull_faces\":" << boundary_faces

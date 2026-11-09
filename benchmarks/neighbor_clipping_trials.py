@@ -103,6 +103,10 @@ def measure_trials(out):
         DelaunayWorkspace(frames[0]),
         WallReuseDelaunayWorkspace(frames[0]),
     ]
+    from benchmarks._cell_continuation import original_schedule
+
+    for mesh in workspaces:
+        original_schedule(mesh)
     cache = install(workspaces[1], starting_capacity=256)
     names = ["fresh", "neighbors-larger", "fragment"]
     begin, end = wp.Event(enable_timing=True), wp.Event(enable_timing=True)

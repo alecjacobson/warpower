@@ -68,7 +68,7 @@ def main():
     points = np.asarray(points * np.float32(args.scale), np.float32)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     report = dict(
-        scope="Alternating complete certified fresh constructions; only the base FP64 capacity schedule differs. Setup, upload, output checking and independent CPU validation excluded from replay timing. No VTM or weighted-API promotion.",
+        scope="Alternating complete certified fresh constructions with explicit 128-first/256-first base schedules. Large variants can omit the FP32 first pass; older runtimes can also change inherited symbolic schedules. Setup, upload, output checking and independent CPU validation excluded from replay timing. No VTM or weighted-API promotion.",
         case=args.case,
         n=len(points),
         input=str(args.input),
@@ -90,8 +90,19 @@ def main():
     mesh = DelaunayWorkspace(points, cache_strategy=False)
     report["constructor_seconds"] = time.perf_counter() - start
     original = mesh._base._tet_capacities
-    assert original == (128, 256, 512, 1024)
-    graphs = {"128": mesh.graph}
+    report["public_base_schedule"] = list(original)
+    capacities = tuple(sorted(mesh._base._robust))
+    assert capacities == (128, 256, 512, 1024)
+    report["large_variant_can_omit_fp32_first_pass"] = mesh.fast_candidates
+    report["symbolic_schedule_independent_of_base"] = (
+        mesh._symbolic is not None and hasattr(mesh._symbolic, "_capacities")
+    )
+    start = time.perf_counter()
+    mesh._base._tet_capacities = capacities
+    with wp.ScopedCapture() as capture:
+        mesh._record()
+    graphs = {"128": capture.graph}
+    report["reference_capture_seconds"] = time.perf_counter() - start
     start = time.perf_counter()
     mesh._base._tet_capacities = (256, 512, 1024)
     with wp.ScopedCapture() as capture:

@@ -89,6 +89,12 @@ class ActiveDelaunayWorkspace:
         ):
             raise ValueError("active_count must be one contiguous device int32")
         self.active_count = active_count
+        from ._clipping_scratch import ClippingScratch
+
+        # The full builder is constructed first and has the largest scratch
+        # requirement. Prefixes and normalized/symbolic retries run serially.
+        self._clipping_scratch = ClippingScratch()
+        options = dict(options, _scratch_owner=self._clipping_scratch)
         self._full_reuses_cells = 2048 < len(points) <= 16384
         full_constructor = ReuseDelaunayWorkspace if self._full_reuses_cells else DelaunayWorkspace
         self._full = full_constructor(points, **options)

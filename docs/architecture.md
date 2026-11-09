@@ -513,3 +513,12 @@ convergence. History resets within the captured graph at each core invocation;
 44 device bytes hold state and counters. The measured 16K torus solve improves
 from 4.39 to 2.91 seconds with identical final geometry. Standalone VTM cores,
 power diagrams and Delaunay workspaces retain their existing defaults.
+
+Active-prefix constructors now share [transient FP64 clipping storage](clipping-workspace.md)
+within one serial constructor family. Independent workspaces retain separate owners;
+retained tetrahedra, certificates and strategy state remain separate. An 8K VTM
+workspace saves 1.89 GB of active pool storage. Original-coordinate Delaunay
+construction below 32K allocated sites starts at 256 slots; normalized and symbolic
+recovery keep their original schedules, and large clouds retain their FP32 pass.
+Fresh construction on the two measured 8K Armadillo clouds takes about 15% less
+time. Complete VTM solve time is essentially unchanged by this storage change.

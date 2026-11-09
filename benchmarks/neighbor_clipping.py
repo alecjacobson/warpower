@@ -67,6 +67,11 @@ def main():
         start = time.perf_counter()
         cls = WallReuseDelaunayWorkspace if strategy == "fragment" else DelaunayWorkspace
         mesh = cls(points)
+        # Keep this historical comparison's reference independent of a newer
+        # public constructor's choice of its first FP64 pass.
+        from benchmarks._cell_continuation import original_schedule
+
+        original_schedule(mesh)
         cache = None
         if strategy.startswith("neighbors"):
             cache = install(mesh, starting_capacity=256 if strategy.endswith("larger") else 128)

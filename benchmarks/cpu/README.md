@@ -188,3 +188,36 @@ Temporary input files stay under the report's `distance-scratch` directory and
 are removed after each call; final reports record source and executable hashes.
 The default quality checker continues to use brute-force triangle distances.
 See the [scanned Armadillo example](../../docs/scanned-armadillo.md).
+
+## Optional quality optimizers
+
+New binaries additionally accept six trailing arguments, after an explicit
+feature angle and topology:
+`perturb_enabled perturb_seconds perturb_bound exude_enabled exude_seconds exude_bound`.
+Each enable flag is 0 or 1; time limits are finite and nonnegative; angle targets
+are in [0,180]. Zero time means no optimizer time limit. The Python switches are
+`--perturb`, `--perturb-seconds`, `--perturb-bound`, and the analogous `--exude`
+options. Both optimizers stay disabled by default. When enabled, this benchmark's
+default limit is one second and target is ten degrees; these are benchmark
+settings, not a claim about CGAL's optimal configuration.
+
+The order is ODT, perturbation, then exudation. Perturbation moves vertices;
+exudation changes weights and must run last. See the
+[CGAL optimizer reference](https://doc.cgal.org/latest/Mesh_3/group__PkgMesh3Functions.html).
+All phase times and return codes are recorded. An iteration count is a requested
+limit, not an observed count. `prepared_domain_seconds` measures meshing and all
+optimizers after domain preparation; `complete_seconds` additionally includes
+that preparation. Neither includes input, validation, or output.
+
+Each new native run exports `mesh-N.txt.weights`, with the exported vertex count
+then one weight per vertex in the same order as its coordinate file. The runner
+validates and hashes this sidecar. The triangulation is labeled `weighted_regular`;
+feature protection can already give nonzero weights before exudation. Independent
+material-quality checks do not certify an ordinary unweighted Delaunay mesh.
+The coordinate/tet file remains compatible with the historical format.
+
+The runner sends the original positional command when both optimizers are off,
+so older executables remain usable. `--timeout` bounds each native process
+(default 600 seconds); timed-out runs retain partial stdout/stderr and failure
+records, are excluded from successful timing medians, and cause a nonzero runner
+exit. Native optimizer time limits and this process timeout have different scopes.

@@ -34,5 +34,40 @@ saved rejected default Armadillo meshes. Those snapshots are diagnostic inputs,
 not published valid meshes. No result is assumed: if their plane checks already
 reject the cells, the extra witness will not fix those defaults.
 
-Qualification results and performance are pending. This experiment neither
-relaxes feature constraints nor changes which production cells are retained.
+## Result: no recovery of the retained Armadillo candidates
+
+Tested source `15bfb42` passes eleven focused tests, including seven new
+experimental cases. The proposed interior witnesses agree with exact rational
+barycentric sign checks on 164 ordinary, flattened, extreme-scale, subnormal,
+one-ULP and coplanar tetrahedra. The boundary-only primitive succeeds at scales
+2^-60, 1 and 2^60, while cavity and crossing counterexamples remain rejected.
+The captured producer/consumer case changes current points, passes an empty
+active prefix containing invalid padding, and recovers. All seven new cases
+also pass isolated padded and full allocation-order memory checks with zero
+reported errors.
+
+| Rejected snapshot | Sites | Unselected cells incident to bad edges | Rejected by support planes | Newly certified cells |
+|---|---:|---:|---:|---:|
+| Default Armadillo | 1,000 | 98 | 98 | 0 |
+| Denser Armadillo | 8,192 | 33 | 33 | 0 |
+
+These are retained rejected candidates from the earlier initial-budget study.
+Both have independently certified full hulls, but invalid material boundaries.
+The new witness is never reached in any of the 131 examined cells. This does not
+prove those cells exterior: a failed support-plane test remains inconclusive.
+It does show that this specific fallback cannot recover these selections.
+No production adoption or complete-solve speed claim follows from the experiment.
+The default workflow remains open in #263.
+
+Two earlier attempts are retained. The first used an unsupported tuple assignment
+to Warp array elements and failed compilation (seven new tests failed; four old
+controls passed). The second passed ten tests but failed the smallest-scale
+primitive because the generic CPU fixture helper oriented faces with an
+underflowing binary32 cross/dot calculation. An independent binary64 check found
+six inward faces. The corrected fixture orients the unit cube before scaling,
+checks domain validity explicitly, and has twelve outward faces. The production
+geometry predicates and common fixture helper were not changed.
+
+Compact records and checksums are in the
+[evidence index](../experiments/interior-containment-witness/). Runtime source,
+public APIs and the flagship README are unchanged.

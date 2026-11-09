@@ -101,4 +101,5 @@ def compare_containment(
 def inspect_witness(points: wp.array2d[wp.vec3], witness: wp.array[wp.vec3], valid: wp.array[int]):
     i = wp.tid()
     q, ok = interior_witness(points[i, 0], points[i, 1], points[i, 2], points[i, 3])
-    witness[i], valid[i] = q, ok
+    witness[i] = q
+    valid[i] = ok

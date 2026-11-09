@@ -1,0 +1,102 @@
+{
+  "issue": 269,
+  "reproducer_sha256": "d1e4b46d6f39cdf78c15972fd2a72e19b710a38bf5f363914993e09347d8f9f3",
+  "reproducer_imports_warpower_geometry": false,
+  "control_results": [
+    {
+      "name": "ordinary-nested-refit",
+      "command": [
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/native_mesh_lifetime_v1.py",
+        "--depth",
+        "1",
+        "--refit",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/native-mesh-controls/ordinary-nested-refit.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1653063893318176,
+      "log_sha256": "84555905a80fa48e501c5d7b1b8da158aa4c6a7cde7ff5253170e9280ad2c7ac",
+      "error_summary": []
+    },
+    {
+      "name": "padded-nested-refit",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/native_mesh_lifetime_v1.py",
+        "--depth",
+        "1",
+        "--refit",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/native-mesh-controls/padded-nested-refit.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3154626600444317,
+      "log_sha256": "04d6e9178227a14d091d4f0c0e68255cf5ea770a0f93cbcdbdcc8f8f0e4a4296",
+      "error_summary": [
+        "========= ERROR SUMMARY: 0 errors"
+      ]
+    },
+    {
+      "name": "lifetime-top-refit",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/native_mesh_lifetime_v1.py",
+        "--depth",
+        "0",
+        "--refit",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/native-mesh-controls/lifetime-top-refit.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.265565063804388,
+      "log_sha256": "e539143a7ca825fd855f61f3a59dcf443c27b814f2bf74ed886b66a0fe4c10a2",
+      "error_summary": [
+        "========= ERROR SUMMARY: 0 errors"
+      ]
+    },
+    {
+      "name": "lifetime-nested-static",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/native_mesh_lifetime_v1.py",
+        "--depth",
+        "1",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/native-mesh-controls/lifetime-nested-static.json"
+      ],
+      "exit_code": 99,
+      "seconds": 1.6159071922302246,
+      "log_sha256": "59dcabc3d3c39e61262eeefd83622a539c060a1fb446ed7ec3a3f7e2e7c46d95",
+      "error_summary": [
+        "========= ERROR SUMMARY: 2 errors"
+      ]
+    }
+  ],
+  "scope": "Native Mesh descriptor lifetime tracking in conditional graphs; separate from refit allocations. Ordinary and padded nested controls pass; top-level lifetime control passes; nested lifetime control fails even without refit. This does not establish arbitrary native lifetime correctness."
+}

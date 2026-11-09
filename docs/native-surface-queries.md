@@ -78,3 +78,96 @@ python -m examples.vtm_gallery --case surface --input armadillo.off \
 Use `--query-backend reference` with the same other options for the backend
 ablation. The input is the pinned reduced Stanford Armadillo described in the
 [gallery](examples.md). The main README's earned Paragram result is unchanged.
+
+## Complete-solve comparison
+
+NVIDIA L40, Warp 1.19.0, runtime `0dc7217`, based on main `afec85d`.
+Both backends use `validate_geometry=False`, seed 2026, 256 initial sites and four
+quality rounds. Each value is the median of three additional fresh captured
+solves, including refit, sampling, growth, fitting, quality moves and extraction.
+Setup/first graph instantiation, transfers, export and independent checking are
+outside these replay timings. CPU-quota windows are clean in all ten jobs.
+
+| Case | Reference, ms | Native, ms | Reference/native |
+|---|---:|---:|---:|
+| Uniform Armadillo, 8,192 sites | 3455.885 | 2594.664 | 1.332× |
+| Graded Armadillo, 8,192 sites | 3651.010 | 2750.585 | 1.327× |
+| Torus, 1,000 sites | 485.272 | 484.032 | 1.003× |
+| Mechanical plate, 1,000 sites | 829.187 | 746.223 | 1.111× |
+| Cavity, 1,000 sites | 352.495 | 339.189 | 1.039× |
+
+These are short GPU-backend comparisons, not CPU speedup measurements or a
+universal gain. Dense Armadillo solves use about 25% less GPU time. The small
+torus is effectively unchanged.
+
+All ten meshes pass fresh independent full-hull orientation/Delaunay/hull checks,
+positive material-cell and incidence checks, single-cycle boundary vertex links,
+exact boundary self-intersection checks, and VTU round trips. Full/material
+connectivity, oriented boundary and roles agree in all five pairs. Four pairs
+have bitwise identical points. Uniform Armadillo differs by at most `3.58e-7` per
+coordinate and takes three accepted selective steps instead of two (the
+126 accepted global steps and rejection counters agree). Different valid
+trajectories remain allowed for this backend.
+
+Uniform/graded Armadillo retain 39,377/39,510 material tetrahedra and minimum
+radius ratios of 0.031019/0.060836. Independently measured two-sided sampled
+surface RMS is 0.14799%/0.16776% of the input box diagonal. These fitting metrics
+are sampled estimates, not Hausdorff bounds, and do not promise minimum-quality
+thresholds. The wide comparable-quality CPU speedup goal remains open.
+
+## Existing APIs and capture checks
+
+The ordinary test suite passes all 1,396 cases, including public routines, invalid-input recovery,
+changing-domain queries and nested meshing against a static native surface.
+Existing device definitions in the three edited runtime modules are unchanged;
+the other 73 existing runtime files are byte identical to main. Backend selection
+happens in Python at setup/capture construction, with no new default GPU work.
+
+The paired standalone geometry gate passes for eager uniform/clustered diagrams
+through one million sites, and weighted/unweighted captured adjacency,
+tetrahedron-only and combined output. Outputs match, and eager kernel/allocation
+traces match. No paired 95% interval lies wholly above the +2% regression threshold.
+Individual means range from −1.85% to +1.56%; this is a measured gate, not a
+universal performance guarantee. The compact record includes all samples,
+intervals and allocator measurements.
+
+Separate certified Delaunay controls change by −0.06% to +0.30% across 1K/100K
+random points, a lattice and fitted hand. The default 1K torus mesher changes by
++0.05% (489.143 → 489.401 ms). All reported full-workspace timing windows are
+unthrottled; the retained raw control also records throttling during the lattice's
+separate base-builder measurement, which is not the reported full-workspace time.
+
+A warmed native producer/refit/mesher/consumer trace executes five graph replays
+through valid input, changed geometry/target/seed, invalid input and recovery.
+It has 48,467 kernel activities, five graph launches and one final synchronization.
+All observed transfers and all 761 graph copy nodes are device-to-device; there
+are no host callbacks. Its one device allocation/free pair is the documented
+native-refit limitation, not a pass of the default no-allocation validator.
+
+[Compact evidence](../experiments/native-surface-queries/README.md) retains the
+complete backend comparison, independent checks, public regression controls and
+native capture audit. Raw meshes and traces remain outside Git.
+
+Native lifetime instrumentation has a separate limitation tracked in
+[#269](https://github.com/alecjacobson/warpower/issues/269): with
+`--track-stream-ordered-races all`, a conditional query reports that the live
+328-byte native mesh descriptor may be read before allocation. The
+[minimal Warp-only reproducer](../experiments/native-surface-queries/native_mesh_lifetime_v1.py)
+imports no Warpower geometry, keeps every owner alive, warms the query and
+synchronizes before capture. Ordinary and padded nested controls pass; a
+top-level query passes lifetime tracking; one conditional query fails even when
+the surface is static and there is no refit in the graph. Disabling Warp's array
+pool does not disable native stream-ordered descriptor allocation.
+
+These controls isolate a native Mesh/nested-capture tracking limitation. They do
+not justify claiming clean full-pipeline lifetime instrumentation or unrestricted
+lifetime correctness. The failed reports are retained alongside the passing
+controls, and the default reference backend remains available.
+
+All eight new native cases pass padded memcheck in isolated jobs with a diagnostic
+32 KiB stack allowance. The cube/torus complete solves take 230/356 seconds under
+instrumentation; the torus passes an isolated 600-second retry after exceeding
+the initial 300-second limit. These are diagnostic durations, not performance
+samples. The six direct query cases also pass allocation-lifetime checking with
+synchronous Warp array allocation. Full nested native lifetime checking remains
+unqualified because of #269; no production allocator/stack settings are changed.

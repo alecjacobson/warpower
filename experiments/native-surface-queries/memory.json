@@ -1,0 +1,297 @@
+{
+  "runtime": "0dc7217e58bfb8ec60b33f1ca756a3b8749519db",
+  "diagnostic_stack_bytes": 32768,
+  "padded_eight_cases_pass_in_isolated_jobs": true,
+  "lifetime_six_direct_query_cases_pass": true,
+  "full_nested_lifetime_qualification": false,
+  "lifetime_limit_issue": 269,
+  "isolated": [
+    {
+      "name": "padded-queries",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "-m",
+        "benchmarks.memcheck",
+        "--stack-bytes",
+        "32768",
+        "--",
+        "-q",
+        "-s",
+        "-o",
+        "faulthandler_timeout=60",
+        "tests/test_native_surface_queries.py",
+        "-k",
+        "not complete"
+      ],
+      "timeout_seconds": 300,
+      "exit_code": 0,
+      "wall_seconds": 3.1682587191462517,
+      "log_sha256": "4eae6e17dfdc8f4b7479a5ba8f73e5301461cc1e9448133a73a97c53eaed33f7",
+      "error_summary": [
+        "========= ERROR SUMMARY: 0 errors"
+      ]
+    },
+    {
+      "name": "padded-cube",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "-m",
+        "benchmarks.memcheck",
+        "--stack-bytes",
+        "32768",
+        "--",
+        "-q",
+        "-s",
+        "-o",
+        "faulthandler_timeout=60",
+        "tests/test_native_surface_queries.py::test_native_complete_captured_mesher_and_fresh_replay[cube]"
+      ],
+      "timeout_seconds": 300,
+      "exit_code": 0,
+      "wall_seconds": 232.46863965317607,
+      "log_sha256": "ad8f7191875d9282577c3253b323603b53c0ff9c6de49164c5238b6d14ac90af",
+      "error_summary": [
+        "========= ERROR SUMMARY: 0 errors"
+      ]
+    },
+    {
+      "name": "padded-torus",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "-m",
+        "benchmarks.memcheck",
+        "--stack-bytes",
+        "32768",
+        "--",
+        "-q",
+        "-s",
+        "-o",
+        "faulthandler_timeout=60",
+        "tests/test_native_surface_queries.py::test_native_complete_captured_mesher_and_fresh_replay[torus]"
+      ],
+      "timeout_seconds": 300,
+      "exit_code": 124,
+      "wall_seconds": 300.00254336744547,
+      "log_sha256": "5dc474d23d2c7b51de9ad19b3ccb640341500709bd4f0ea90daacdb1e9017a2f",
+      "error_summary": []
+    },
+    {
+      "name": "lifetime-queries",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "-m",
+        "benchmarks.memcheck",
+        "--stack-bytes",
+        "32768",
+        "--disable-mempool",
+        "--",
+        "-q",
+        "-s",
+        "-o",
+        "faulthandler_timeout=60",
+        "tests/test_native_surface_queries.py",
+        "-k",
+        "not complete"
+      ],
+      "timeout_seconds": 300,
+      "exit_code": 0,
+      "wall_seconds": 3.31833191588521,
+      "log_sha256": "f14b911538ec99aa736cec81aa9e056259ae90f34c8046b8105cacc06a3263c5",
+      "error_summary": [
+        "========= ERROR SUMMARY: 0 errors"
+      ]
+    },
+    {
+      "name": "lifetime-cube",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "-m",
+        "benchmarks.memcheck",
+        "--stack-bytes",
+        "32768",
+        "--disable-mempool",
+        "--",
+        "-q",
+        "-s",
+        "-o",
+        "faulthandler_timeout=60",
+        "tests/test_native_surface_queries.py::test_native_complete_captured_mesher_and_fresh_replay[cube]"
+      ],
+      "timeout_seconds": 300,
+      "exit_code": 99,
+      "wall_seconds": 59.33890138193965,
+      "log_sha256": "4c48f3b958160f412dc1de00fe1bb24a3791bcd3d1ab192cf0b882bff2b744a0",
+      "error_summary": [
+        "========= ERROR SUMMARY: 571 errors",
+        "========= ERROR SUMMARY: 471 errors were not printed. Use --print-limit option to adjust the number of printed errors"
+      ]
+    },
+    {
+      "name": "lifetime-torus",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "-m",
+        "benchmarks.memcheck",
+        "--stack-bytes",
+        "32768",
+        "--disable-mempool",
+        "--",
+        "-q",
+        "-s",
+        "-o",
+        "faulthandler_timeout=60",
+        "tests/test_native_surface_queries.py::test_native_complete_captured_mesher_and_fresh_replay[torus]"
+      ],
+      "timeout_seconds": 300,
+      "exit_code": 99,
+      "wall_seconds": 40.16522151604295,
+      "log_sha256": "5f3ba4314ffe2d5c013911b03d058e56de86bc0b65b2446d4467894833fd5588",
+      "error_summary": [
+        "========= ERROR SUMMARY: 1332 errors",
+        "========= ERROR SUMMARY: 1232 errors were not printed. Use --print-limit option to adjust the number of printed errors"
+      ]
+    }
+  ],
+  "larger_case_retry": {
+    "command": [
+      "/usr/local/cuda-12.9/bin/compute-sanitizer",
+      "--tool",
+      "memcheck",
+      "--error-exitcode",
+      "99",
+      "--padding",
+      "32",
+      "/home/horde/projects/power-diagram/.venv/bin/python",
+      "-m",
+      "benchmarks.memcheck",
+      "--stack-bytes",
+      "32768",
+      "--",
+      "-q",
+      "-s",
+      "-o",
+      "faulthandler_timeout=120",
+      "tests/test_native_surface_queries.py::test_native_complete_captured_mesher_and_fresh_replay[torus]"
+    ],
+    "timeout_seconds": 600,
+    "exit_code": 0,
+    "wall_seconds": 358.4622828513384,
+    "log_sha256": "7c998607d38dcaade492de293043885c84c15b7a66da92d5fa2eefc410bd7c7c",
+    "error_summary": [
+      "========= ERROR SUMMARY: 0 errors"
+    ]
+  },
+  "mixed_attempts": [
+    {
+      "name": "native-loop",
+      "command": [
+        "nsys",
+        "profile",
+        "--trace=cuda",
+        "--sample=none",
+        "--cpuctxsw=none",
+        "--cuda-graph-trace=node",
+        "--capture-range=cudaProfilerApi",
+        "--capture-range-end=stop",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/qualification/native-loop",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "-m",
+        "benchmarks.mesher_loop",
+        "--query-backend",
+        "native",
+        "--profile",
+        "--dot",
+        "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/qualification/native-loop.dot",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/qualification/native-loop.json"
+      ],
+      "timeout_seconds": 180,
+      "exit_code": 0,
+      "wall_seconds": 23.093731325119734
+    },
+    {
+      "name": "native-tests-padded",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "-m",
+        "benchmarks.memcheck",
+        "--stack-bytes",
+        "32768",
+        "--",
+        "-q",
+        "tests/test_native_surface_queries.py"
+      ],
+      "timeout_seconds": 300,
+      "exit_code": 124,
+      "wall_seconds": 300.00203431770205
+    }
+  ],
+  "mixed_cleanup": {
+    "pids": [
+      1224250,
+      1224458,
+      1224452,
+      1224829,
+      1224823,
+      1224820
+    ],
+    "reason": "Padded mixed suite exceeded 300 s after seven completed tests. subprocess.run killed only the checker parent, leaving its child alive; all owned children and the automatically started lifetime run were stopped. Lifetime attempt is invalid, not qualification evidence.",
+    "next": "Use isolated tests with process-group timeout cleanup."
+  }
+}

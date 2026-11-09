@@ -262,6 +262,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
     p.add_argument("--neighborhood", choices=["baseline", "endpoints", "star"], required=True)
     p.add_argument("--budget", type=int, default=1)
+    p.add_argument("--driver", choices=["gallery", "mesher", "loop"], default="gallery")
     p.add_argument("--report", type=Path, required=True)
     args, remaining = p.parse_known_args()
     if args.report.exists():
@@ -301,7 +302,8 @@ def main():
     try:
         warpower.VariationalMeshingWorkspace = _mesher.VariationalMeshingWorkspace = Measured
         sys.argv = [sys.argv[0], *remaining]
-        runpy.run_module("examples.vtm_gallery", run_name="__main__")
+        module = {"gallery": "examples.vtm_gallery", "mesher": "benchmarks.mesher", "loop": "benchmarks.mesher_loop"}[args.driver]
+        runpy.run_module(module, run_name="__main__")
         report["completed"] = True
     finally:
         warpower.VariationalMeshingWorkspace = _mesher.VariationalMeshingWorkspace = base

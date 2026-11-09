@@ -108,8 +108,8 @@ The executable takes eight required arguments after its program name:
 followed optionally by `feature_angle [non_manifold|manifold]`.
 The sequential binary requires `threads=1`; use `threads=4` for the four-thread
 comparison. The RNG seed is 2026. Feature detection defaults to 45 degrees, the facet
-angle criterion is 25 degrees, and the cell radius-edge bound is 2. Perturbation
-and exudation are disabled so the reported optimization is ODT; these settings
+angle criterion is 25 degrees, and the cell radius-edge bound is 2. By default,
+perturbation and exudation are disabled so the reported optimization is ODT; these settings
 are not a claim that this is CGAL's best achievable quality or speed.
 
 The Python runner exposes `--feature-angle` and `--topology`. The defaults retain
@@ -221,3 +221,6 @@ so older executables remain usable. `--timeout` bounds each native process
 (default 600 seconds); timed-out runs retain partial stdout/stderr and failure
 records, are excluded from successful timing medians, and cause a nonzero runner
 exit. Native optimizer time limits and this process timeout have different scopes.
+
+The [qualified optimizer study](../../docs/cpu-quality-optimizers.md) retains
+complete/prepared-domain timings, quality tradeoffs and rejected controls.

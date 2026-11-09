@@ -21,8 +21,10 @@ def query_pair(
     i = wp.tid()
     exact = nearest_site(tree, points, wp.vec3d(queries[i]), active, occupied, False)
     mixed = nearest_site_mixed(tree, points, queries[i], active, occupied, False)
-    owners[i, 0], owners[i, 1] = exact.index, mixed.index
-    distances[i, 0], distances[i, 1] = exact.distance2, mixed.distance2
+    owners[i, 0] = exact.index
+    owners[i, 1] = mixed.index
+    distances[i, 0] = exact.distance2
+    distances[i, 1] = mixed.distance2
 
 
 @pytest.mark.parametrize("exponent", [-120, -60, 0, 60, 120])

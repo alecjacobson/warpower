@@ -302,7 +302,11 @@ def main():
     try:
         warpower.VariationalMeshingWorkspace = _mesher.VariationalMeshingWorkspace = Measured
         sys.argv = [sys.argv[0], *remaining]
-        module = {"gallery": "examples.vtm_gallery", "mesher": "benchmarks.mesher", "loop": "benchmarks.mesher_loop"}[args.driver]
+        module = {
+            "gallery": "examples.vtm_gallery",
+            "mesher": "benchmarks.mesher",
+            "loop": "benchmarks.mesher_loop",
+        }[args.driver]
         runpy.run_module(module, run_name="__main__")
         report["completed"] = True
     finally:

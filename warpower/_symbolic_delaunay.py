@@ -159,6 +159,9 @@ class SymbolicConstructor:
         self.candidate, self.candidate_count = candidate, candidate_count
         self.device, self.n = base.device, base.n
         self.max_expansions = max_expansions
+        # Original-coordinate FP64 tuning must not silently change the
+        # independent symbolic recovery schedule. Every scratch view remains.
+        self._capacities = tuple(sorted(base._robust))
         with wp.ScopedDevice(self.device):
             self.error = wp.zeros(1, dtype=int)
             self.expansions = wp.zeros(1, dtype=int)
@@ -192,7 +195,7 @@ class SymbolicConstructor:
         b._tet_status.fill_(1)
         b._job_count.fill_(self.n)
         wp.copy(b._jobs, tree.ids, count=self.n)
-        for capacity in b._tet_capacities:
+        for capacity in self._capacities:
             self._launch(begin_chunks, 1, [b._job_count, b._cursor, b._chunks])
 
             def body(capacity=capacity):

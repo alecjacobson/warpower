@@ -10,7 +10,7 @@ import numpy as np
 import warp as wp
 from scipy.spatial import Delaunay
 
-from benchmarks._cell_continuation import install
+from benchmarks._cell_continuation import install, original_schedule
 from benchmarks.run import cpu_quota_delta, cpu_quota_snapshot
 from benchmarks.tetrahedra import canonical
 from warpower import DelaunayWorkspace
@@ -36,6 +36,7 @@ def main():
     expected = canonical(Delaunay(points.astype(float)).simplices)
     start = time.perf_counter()
     mesh = DelaunayWorkspace(points, cache_strategy=False)
+    original_schedule(mesh)
     baseline = mesh.graph
     setup = time.perf_counter() - start
     start = time.perf_counter()

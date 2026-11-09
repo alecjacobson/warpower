@@ -242,10 +242,26 @@ def make_cells(queue_capacity=128, resuming=True):
     return build_cells
 
 
+def original_schedule(workspace):
+    """Explicitly retain the experiment's 128-slot overflow/resume workload."""
+    base = workspace._base
+    capacities = tuple(sorted(base._robust))
+    if base._tet_capacities != capacities:
+        base._tet_capacities = capacities
+        with wp.ScopedDevice(workspace.device):
+            with wp.ScopedCapture() as captured:
+                base._record()
+            base.graph = captured.graph
+            with wp.ScopedCapture() as captured:
+                workspace._record()
+            workspace.graph = captured.graph
+
+
 def install(workspace, *, slots=64):
     """Patch one benchmark instance, preserving certified fallbacks and defaults."""
     if slots < 1:
         raise ValueError("Continuation slots must be positive")
+    original_schedule(workspace)
     base = workspace._base
     capacities = base._tet_capacities
     if len(capacities) < 2:

@@ -1,0 +1,264 @@
+{
+  "runtime_base": "8977b31f6b58cf2577ba59f8f0cf0d9c9bcdd47d",
+  "warp": "1.19.0",
+  "device": "NVIDIA L40",
+  "commands": [
+    {
+      "label": "baseline",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/native_mesh_lifetime_event_v2.py",
+        "--depth",
+        "1",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/native-query-events-v1/baseline.json"
+      ],
+      "exit_code": 99,
+      "wall_seconds": 1.7160689383745193,
+      "source_sha256": "f144f8c60f015bc80bd406da1633ed479505b9cd3aad41a94690ac80c70bb570",
+      "result": null,
+      "log_sha256": "a06dcbbcb834546c6b7e9e70c5d6c2cdf982f847af7e67e59004101a28673f48",
+      "error_summary": [
+        "========= ERROR SUMMARY: 2 errors"
+      ],
+      "diagnostic_excerpt": [
+        "========= Invalid __global__ read of size 8 bytes",
+        "=========     and is inside the nearest allocation at 0x1ab4000400 of size 328 bytes"
+      ]
+    },
+    {
+      "label": "top-explicit",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/native_mesh_lifetime_event_v2.py",
+        "--depth",
+        "1",
+        "--event",
+        "top",
+        "--external",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/native-query-events-v1/top-explicit.json"
+      ],
+      "exit_code": 99,
+      "wall_seconds": 1.6664347648620605,
+      "source_sha256": "f144f8c60f015bc80bd406da1633ed479505b9cd3aad41a94690ac80c70bb570",
+      "result": null,
+      "log_sha256": "8ad8f23fd296ac2d2d45b980a82c94e7a86cb5cc2c8cc36d5dbd82a0e7bc3f0d",
+      "error_summary": [
+        "========= ERROR SUMMARY: 2 errors"
+      ],
+      "diagnostic_excerpt": [
+        "========= Invalid __global__ read of size 8 bytes",
+        "=========     and is inside the nearest allocation at 0x1ab4000400 of size 328 bytes"
+      ]
+    },
+    {
+      "label": "top-implicit",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/native_mesh_lifetime_event_v2.py",
+        "--depth",
+        "1",
+        "--event",
+        "top",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/native-query-events-v1/top-implicit.json"
+      ],
+      "exit_code": 99,
+      "wall_seconds": 1.316009733825922,
+      "source_sha256": "f144f8c60f015bc80bd406da1633ed479505b9cd3aad41a94690ac80c70bb570",
+      "result": null,
+      "log_sha256": "2e47743d1bbb22afb3a4a04e166f270075474285d1ada64170676d1cf4916fcd",
+      "error_summary": [
+        "========= ERROR SUMMARY: 3 errors"
+      ],
+      "diagnostic_excerpt": []
+    },
+    {
+      "label": "inner-explicit",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/native_mesh_lifetime_event_v2.py",
+        "--depth",
+        "1",
+        "--event",
+        "inner",
+        "--external",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/native-query-events-v1/inner-explicit.json"
+      ],
+      "exit_code": 1,
+      "wall_seconds": 1.2655151896178722,
+      "source_sha256": "f144f8c60f015bc80bd406da1633ed479505b9cd3aad41a94690ac80c70bb570",
+      "result": null,
+      "log_sha256": "c8f0359c5b2a4590c03b6259b014b32ea66ae64c307b9d9faaf3d81e32e5d4e3",
+      "error_summary": [
+        "========= ERROR SUMMARY: 0 errors"
+      ],
+      "diagnostic_excerpt": [
+        "Conditional body graph contains an unsupported operation (event wait)",
+        "RuntimeError: Conditional body graph contains an unsupported operation (event wait)"
+      ]
+    },
+    {
+      "label": "depth2-explicit",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/native_mesh_lifetime_event_v2.py",
+        "--depth",
+        "2",
+        "--event",
+        "top",
+        "--external",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/native-query-events-v1/depth2-explicit.json"
+      ],
+      "exit_code": 99,
+      "wall_seconds": 1.6661827638745308,
+      "source_sha256": "f144f8c60f015bc80bd406da1633ed479505b9cd3aad41a94690ac80c70bb570",
+      "result": null,
+      "log_sha256": "d2899c2028fafc8ade8447d0ded754e7152d2aecfd70bb8225906e0b4750beaf",
+      "error_summary": [
+        "========= ERROR SUMMARY: 2 errors"
+      ],
+      "diagnostic_excerpt": [
+        "========= Invalid __global__ read of size 8 bytes",
+        "=========     and is inside the nearest allocation at 0x1ab4000400 of size 328 bytes"
+      ]
+    },
+    {
+      "label": "top-query-explicit",
+      "command": [
+        "/usr/local/cuda-12.9/bin/compute-sanitizer",
+        "--tool",
+        "memcheck",
+        "--error-exitcode",
+        "99",
+        "--padding",
+        "32",
+        "--track-stream-ordered-races",
+        "all",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/.work/vtm/native_mesh_lifetime_event_v2.py",
+        "--depth",
+        "0",
+        "--event",
+        "top",
+        "--external",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/native-query-events-v1/top-query-explicit.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.3156258687376976,
+      "source_sha256": "f144f8c60f015bc80bd406da1633ed479505b9cd3aad41a94690ac80c70bb570",
+      "result": {
+        "depth": 0,
+        "refit": false,
+        "event": "top",
+        "external": true,
+        "mesh_id": "0x1ab4000400",
+        "replays": 3,
+        "result": -1.0,
+        "all_owners_alive": true,
+        "setup_and_capture_synchronized": true
+      },
+      "log_sha256": "b953771f00f297c0528b5934b7985e36608f77f4727d513e453247841d2c1e71",
+      "error_summary": [
+        "========= ERROR SUMMARY: 0 errors"
+      ],
+      "diagnostic_excerpt": []
+    }
+  ],
+  "raw_files": [
+    {
+      "path": "results/local/native-query-events-v1/baseline.log",
+      "bytes": 2566,
+      "sha256": "a06dcbbcb834546c6b7e9e70c5d6c2cdf982f847af7e67e59004101a28673f48"
+    },
+    {
+      "path": "results/local/native-query-events-v1/commands.json",
+      "bytes": 4500,
+      "sha256": "d6aae7303c58b16f4f60e99749998a14527f798801b3e43646d2bb4e3b08ebde"
+    },
+    {
+      "path": "results/local/native-query-events-v1/depth2-explicit.log",
+      "bytes": 2566,
+      "sha256": "d2899c2028fafc8ade8447d0ded754e7152d2aecfd70bb8225906e0b4750beaf"
+    },
+    {
+      "path": "results/local/native-query-events-v1/inner-explicit.log",
+      "bytes": 1352,
+      "sha256": "c8f0359c5b2a4590c03b6259b014b32ea66ae64c307b9d9faaf3d81e32e5d4e3"
+    },
+    {
+      "path": "results/local/native-query-events-v1/running.json",
+      "bytes": 20,
+      "sha256": "96631b90715fc04b2f9cdca57d40966f07c26ff57444ca678c648456e1c658cc"
+    },
+    {
+      "path": "results/local/native-query-events-v1/top-explicit.log",
+      "bytes": 2566,
+      "sha256": "8ad8f23fd296ac2d2d45b980a82c94e7a86cb5cc2c8cc36d5dbd82a0e7bc3f0d"
+    },
+    {
+      "path": "results/local/native-query-events-v1/top-implicit.log",
+      "bytes": 3117,
+      "sha256": "2e47743d1bbb22afb3a4a04e166f270075474285d1ada64170676d1cf4916fcd"
+    },
+    {
+      "path": "results/local/native-query-events-v1/top-query-explicit.json",
+      "bytes": 206,
+      "sha256": "bac13238dbadc90615a341c2793ea0affc3b2b34f2a50d405c57650df0f3b954"
+    },
+    {
+      "path": "results/local/native-query-events-v1/top-query-explicit.log",
+      "bytes": 827,
+      "sha256": "b953771f00f297c0528b5934b7985e36608f77f4727d513e453247841d2c1e71"
+    }
+  ]
+}

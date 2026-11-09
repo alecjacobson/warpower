@@ -8,7 +8,7 @@ from tests.test_mesher import validate
 from warpower import BoundaryWorkspace, SurfaceDomain, VariationalMeshingWorkspace
 
 
-@pytest.mark.parametrize("query", ["float32", "float64"])
+@pytest.mark.parametrize("query", ["float32", "float64", "mixed"])
 def test_precision_modes_against_independent_weighted_centroids(query):
     domain = SurfaceDomain(*cube(), surface_subdivisions=8, crease_subdivisions=8)
     rng = np.random.default_rng(12)
@@ -95,14 +95,15 @@ def test_fp32_query_out_of_range_is_explicit_and_recovers():
     assert fit.error.numpy()[0] == 0
 
 
-def test_complete_pipeline_precision_and_fresh_capture_replay():
+@pytest.mark.parametrize("query", ["float32", "mixed"])
+def test_complete_pipeline_precision_and_fresh_capture_replay(query):
     domain = SurfaceDomain(*torus(24, 12))
     mesh = VariationalMeshingWorkspace(
         domain,
         256,
         initial_count=64,
         quality_rounds=1,
-        boundary_query_precision="float32",
+        boundary_query_precision=query,
     )
     with wp.ScopedCapture() as capture:
         domain.refit()

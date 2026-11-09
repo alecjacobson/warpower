@@ -273,14 +273,18 @@ class BoundaryWorkspace:
         crease_sizing=None,
         query_precision="float64",
     ):
-        if query_precision not in ("float32", "float64"):
-            raise ValueError("query_precision must be 'float32' or 'float64'")
+        if query_precision not in ("float32", "float64", "mixed"):
+            raise ValueError("query_precision must be 'float32', 'float64' or 'mixed'")
         self.query_precision = query_precision
         self._accumulate_samples = accumulate_samples
         if query_precision == "float32":
             from ._boundary_precision import accumulate_samples32
 
             self._accumulate_samples = accumulate_samples32
+        elif query_precision == "mixed":
+            from ._mixed_boundary import accumulate_samples_mixed
+
+            self._accumulate_samples = accumulate_samples_mixed
         self.domain = domain
         self.points = _contiguous_points(points)
         self.n, self.device = len(self.points), self.points.device

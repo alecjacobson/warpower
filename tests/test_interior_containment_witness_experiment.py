@@ -73,7 +73,9 @@ def test_rounded_proposals_match_exact_rational_strict_interior_test():
     low, high = np.float32(1), np.nextafter(np.float32(1), np.float32(2))
     one_ulp = np.array([[low, low, low], [high, low, low], [low, high, low], [low, low, high]])
     flat = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0]], np.float32)
-    p = np.concatenate([p, one_ulp[None], flat[None]])
+    tiny = np.nextafter(np.float32(0), np.float32(1))
+    axes = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]], np.float32)
+    p = np.concatenate([p, (8 * tiny * axes)[None], (tiny * axes)[None], one_ulp[None], flat[None]])
     device = "cuda:0"
     array = wp.array(p, dtype=wp.vec3, device=device)
     witness, valid = (
@@ -84,6 +86,7 @@ def test_rounded_proposals_match_exact_rational_strict_interior_test():
     q, ok = witness.numpy(), valid.numpy()
     expected = [int(rational_interior(row, point)) for row, point in zip(p, q)]
     np.testing.assert_array_equal(ok, expected)
+    assert ok[-4:-2].tolist() == [1, 0]
     assert ok[-2:].tolist() == [0, 0]
 
 
@@ -96,3 +99,71 @@ def test_inactive_bad_indices_are_never_read_and_changed_prefix_recovers():
         before, after = paired(domain, p, count=count, capacity=3)
         assert after[:, 0].tolist() == [n, 0, 0]
         assert not before.any()
+
+
+@wp.kernel
+def produce(
+    base: wp.array[wp.vec3], points: wp.array[wp.vec3], phase: wp.array[int], count: wp.array[int]
+):
+    i = wp.tid()
+    points[i] = base[i]
+    if phase[0] == 1:
+        points[i] = base[i] + wp.vec3(8.0, 0.0, 0.0)
+    elif phase[0] == 2:
+        points[i] = wp.vec3(wp.nan)
+    if i == 0:
+        count[0] = int(phase[0] != 2)
+
+
+@wp.kernel
+def consume(
+    phase: wp.array[int], before: wp.array[int], after: wp.array2d[int], log: wp.array2d[int]
+):
+    log[phase[0], 0] = before[0]
+    for k in range(3):
+        log[phase[0], k + 1] = after[k, 0]
+    phase[0] += 1
+
+
+def test_captured_current_input_empty_frame_and_recovery(monkeypatch):
+    domain = SurfaceDomain(*cube())
+    base = wp.array(
+        [[1, 1, 1], [-1, -1, 1], [-1, 1, -1], [1, -1, -1]], dtype=wp.vec3, device=domain.device
+    )
+    points = wp.clone(base)
+    tets = wp.array([[0, 1, 2, 3], [-999] * 4, [-999] * 4], dtype=int, device=domain.device)
+    count, phase = [wp.zeros(1, dtype=int, device=domain.device) for _ in range(2)]
+    before = wp.empty(3, dtype=int, device=domain.device)
+    after = wp.empty((3, 4), dtype=int, device=domain.device)
+    log = wp.empty((4, 4), dtype=int, device=domain.device)
+    for module in [__name__, "benchmarks.interior_containment_witness"]:
+        wp.load_module(module=module, device=domain.device)
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("host allocation or readback during capture/replay")
+
+    with monkeypatch.context() as patch:
+        for name in [
+            "empty",
+            "zeros",
+            "ones",
+            "full",
+            "clone",
+            "empty_like",
+            "synchronize",
+            "synchronize_device",
+            "synchronize_stream",
+        ]:
+            patch.setattr(wp, name, forbidden)
+        patch.setattr(wp.array, "numpy", forbidden)
+        with wp.ScopedCapture() as cap:
+            wp.launch(produce, 4, inputs=[base, points, phase, count])
+            wp.launch(
+                compare_containment, 3, inputs=[domain.tree, points, tets, count, before, after]
+            )
+            wp.launch(consume, 1, inputs=[phase, before, after, log])
+        for _ in range(4):
+            wp.capture_launch(cap.graph)
+    np.testing.assert_array_equal(
+        log.numpy(), [[0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 1, 0, 0]]
+    )

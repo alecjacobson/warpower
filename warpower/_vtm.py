@@ -235,6 +235,7 @@ class VTMWorkspace:
         proven_exterior_recovery=False,
         proven_exterior_enabled=None,
         _cache_surface_queries=False,
+        boundary_query_precision="float64",
     ):
         self._cache_surface_queries = bool(_cache_surface_queries)
         self.max_iterations = operator.index(max_iterations)
@@ -350,7 +351,11 @@ class VTMWorkspace:
             )
             wp.load_module(module="warpower._graded_odt", device=self.device)
         self.boundary = BoundaryWorkspace(
-            domain, self.points, active_count=active_count, **boundary_options
+            domain,
+            self.points,
+            active_count=active_count,
+            query_precision=boundary_query_precision,
+            **boundary_options,
         )
         self.full_tetrahedra = self.mesh.tetrahedra
         self.full_tetrahedra_count = self.mesh.tetrahedra_count

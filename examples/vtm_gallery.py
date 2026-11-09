@@ -56,7 +56,11 @@ def main():
     )
     parser.add_argument("--input", type=Path, help="Closed oriented triangular ASCII OFF surface")
     parser.add_argument("--n", type=int, default=1000)
-    parser.add_argument("--initial", type=int, default=256)
+    parser.add_argument(
+        "--initial",
+        type=int,
+        help="Minimum initial sites (default: up to 256, with room for mandatory corners)",
+    )
     parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument(
         "--subdivisions",
@@ -112,7 +116,7 @@ def main():
         args.subdivisions = default_subdivisions
     if args.crease_subdivisions is None:
         args.crease_subdivisions = default_subdivisions
-    if args.n < 4 or args.initial < 4 or args.repeats < 0:
+    if args.n < 4 or (args.initial is not None and args.initial < 4) or args.repeats < 0:
         parser.error("Require n>=4, initial>=4, repeats>=0")
     if min(args.subdivisions, args.crease_subdivisions) < 1:
         parser.error("Quadrature subdivisions must be positive")
@@ -199,6 +203,8 @@ def main():
         domain_error=int(domain.error.numpy()[0]),
         detected_feature_edges=int(domain.feature_count.numpy()[0]),
         detected_corners=int(domain.corner_count.numpy()[0]),
+        minimum_initial_sites=mesh.initial_count,
+        effective_initial_sites=int(mesh.effective_initial_count.numpy()[0]),
         surface_quadrature_capacity=len(domain.surface_points),
         crease_quadrature_capacity=len(domain.crease_points),
         input_off_sha256=hashlib.sha256((args.output / "input.off").read_bytes()).hexdigest(),
@@ -236,6 +242,12 @@ def main():
         },
         quality_stage_diagnostic_scope="Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
     )
+    if result["error"] & 1 and result["detected_corners"] > args.n:
+        result["configuration_failure"] = (
+            f"The surface has {result['detected_corners']} mandatory corners but the target is "
+            f"{args.n} sites. Increase --n to at least {result['detected_corners']} "
+            "or explicitly choose a different feature policy."
+        )
     if mesh.containment_recovery:
         result["material_recovery"] = dict(
             activated=int(mesh._material_recovery.numpy()[0]),

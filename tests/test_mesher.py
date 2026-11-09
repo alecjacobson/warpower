@@ -95,7 +95,7 @@ def test_fixed_budget_skips_growth_and_automatic_sizing_composes():
 def test_budget_failures_publish_zero_counts_and_metrics():
     d = warpower.SurfaceDomain(*cube(), surface_subdivisions=2)
     for options, expected in [
-        (dict(initial_count=4), 1),
+        (dict(initial_count=4, target_count=4), 1),
         (dict(initial_count=32, max_growth_rounds=0), 32),
         (dict(initial_count=32, max_growth_rounds=1), 32),
     ]:

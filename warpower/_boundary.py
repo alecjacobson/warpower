@@ -264,8 +264,32 @@ class BoundaryWorkspace:
     """
 
     def __init__(
-        self, domain, points, *, active_count=None, surface_sizing=None, crease_sizing=None
+        self,
+        domain,
+        points,
+        *,
+        active_count=None,
+        surface_sizing=None,
+        crease_sizing=None,
+        query_precision="float64",
+        accumulation_precision="float64",
     ):
+        for name, value in (
+            ("query_precision", query_precision),
+            ("accumulation_precision", accumulation_precision),
+        ):
+            if value not in ("float32", "float64"):
+                raise ValueError(f"{name} must be 'float32' or 'float64'")
+        self.query_precision = query_precision
+        self.accumulation_precision = accumulation_precision
+        self._accumulate_samples = accumulate_samples
+        self._publish_accumulation = None
+        if query_precision != "float64" or accumulation_precision != "float64":
+            from ._boundary_precision import make_accumulate, publish
+
+            self._accumulate_samples = make_accumulate(query_precision, accumulation_precision)
+            if accumulation_precision == "float32":
+                self._publish_accumulation = publish
         self.domain = domain
         self.points = _contiguous_points(points)
         self.n, self.device = len(self.points), self.points.device
@@ -300,6 +324,15 @@ class BoundaryWorkspace:
             self.crease_mass = wp.zeros(self.n, dtype=wp.float64)
             self._surface_moment = wp.zeros(self.n, dtype=wp.vec3d)
             self._crease_moment = wp.zeros(self.n, dtype=wp.vec3d)
+            self._surface_accumulation_mass = self.surface_mass
+            self._crease_accumulation_mass = self.crease_mass
+            self._surface_accumulation_moment = self._surface_moment
+            self._crease_accumulation_moment = self._crease_moment
+            if self._publish_accumulation is not None:
+                self._surface_accumulation_mass = wp.zeros(self.n, dtype=float)
+                self._crease_accumulation_mass = wp.zeros(self.n, dtype=float)
+                self._surface_accumulation_moment = wp.zeros(self.n, dtype=wp.vec3)
+                self._crease_accumulation_moment = wp.zeros(self.n, dtype=wp.vec3)
             self.energy = wp.zeros(2, dtype=wp.float64)
             self.total_weight = wp.zeros(2, dtype=wp.float64)
             self.max_distance = wp.zeros(2, dtype=wp.float64)
@@ -408,8 +441,8 @@ class BoundaryWorkspace:
                 self.domain.surface_weights,
                 self.surface_sizing,
                 self.surface_owners,
-                self.surface_mass,
-                self._surface_moment,
+                self._surface_accumulation_mass,
+                self._surface_accumulation_moment,
                 2,
                 0,
             ),
@@ -418,8 +451,8 @@ class BoundaryWorkspace:
                 self.domain.crease_weights,
                 self.crease_sizing,
                 self.crease_owners,
-                self.crease_mass,
-                self._crease_moment,
+                self._crease_accumulation_mass,
+                self._crease_accumulation_moment,
                 1,
                 1,
             ),
@@ -427,7 +460,7 @@ class BoundaryWorkspace:
             mass.zero_()
             moment.zero_()
             wp.launch(
-                accumulate_samples,
+                self._accumulate_samples,
                 len(samples),
                 inputs=[
                     self._hierarchy.tree,
@@ -450,6 +483,27 @@ class BoundaryWorkspace:
                 block_dim=32,
                 device=self.device,
             )
+        if self._publish_accumulation is not None:
+            for mass, moment, output_mass, output_moment in (
+                (
+                    self._surface_accumulation_mass,
+                    self._surface_accumulation_moment,
+                    self.surface_mass,
+                    self._surface_moment,
+                ),
+                (
+                    self._crease_accumulation_mass,
+                    self._crease_accumulation_moment,
+                    self.crease_mass,
+                    self._crease_moment,
+                ),
+            ):
+                wp.launch(
+                    self._publish_accumulation,
+                    self.n,
+                    inputs=[mass, moment, output_mass, output_moment, self.error],
+                    device=self.device,
+                )
         wp.launch(
             make_targets,
             self.n,

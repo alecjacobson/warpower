@@ -34,8 +34,9 @@ def main():
     parser.add_argument("--profile", action="store_true")
     parser.add_argument("--dot", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--query-backend", choices=["reference", "native"], default="reference")
     args = parser.parse_args()
-    d = warpower.SurfaceDomain(*cube(), surface_subdivisions=4)
+    d = warpower.SurfaceDomain(*cube(), surface_subdivisions=4, query_backend=args.query_backend)
     source = wp.clone(d.points)
     target = wp.full(1, 96, dtype=int, device=d.device)
     seed = wp.full(1, 2026, dtype=int, device=d.device)
@@ -84,6 +85,7 @@ def main():
         error_and_counts=values.tolist(),
         consumed_volumes=consumed.tolist(),
         device=d.device.name,
+        query_backend=args.query_backend,
     )
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)

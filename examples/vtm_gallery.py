@@ -84,6 +84,18 @@ def main():
     )
     parser.add_argument("--automatic-sizing", action="store_true")
     parser.add_argument(
+        "--query-backend",
+        choices=["reference", "native"],
+        default="reference",
+        help="Surface queries: reference float64 traversal or native Warp float32 queries",
+    )
+    parser.add_argument(
+        "--validate-geometry",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Validate surface intersections/orientation during refit; disable for trusted input",
+    )
+    parser.add_argument(
         "--repeats", type=int, default=0, help="Additional replays after the first complete solve"
     )
     parser.add_argument(
@@ -121,6 +133,8 @@ def main():
         crease_subdivisions=args.crease_subdivisions,
         feature_angle=args.feature_angle,
         corner_angle=args.corner_angle,
+        query_backend=args.query_backend,
+        validate_geometry=args.validate_geometry,
     )
     sizing = None
     if args.case.startswith("graded-"):

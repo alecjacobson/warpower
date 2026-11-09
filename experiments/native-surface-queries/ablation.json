@@ -1,0 +1,2509 @@
+{
+  "runtime": "0dc7217e58bfb8ec60b33f1ca756a3b8749519db",
+  "baseline": "afec85de70d6c65b95e2c8d745edef5ecc9ca965",
+  "device": "NVIDIA L40",
+  "warp": "1.19.0",
+  "scope": "Reference/native trusted-input ablation; complete fresh GPU replays, including refit. Not CPU speedup evidence.",
+  "cases": {
+    "armadillo-uniform": {
+      "modes": {
+        "reference": {
+          "result": {
+            "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+            "parameters": {
+              "case": "surface",
+              "input": "/home/horde/projects/power-diagram/.work/vtm/scanned-armadillo-input/armadillo.off",
+              "n": 8192,
+              "initial": 256,
+              "seed": 2026,
+              "subdivisions": 1,
+              "crease_subdivisions": 1,
+              "feature_angle": 120.0,
+              "corner_angle": 45.0,
+              "quality_rounds": 4,
+              "local_quality_retries": 0,
+              "proven_exterior_recovery": null,
+              "automatic_sizing": false,
+              "query_backend": "reference",
+              "validate_geometry": false,
+              "repeats": 3,
+              "independent_quality": false,
+              "output": "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/matrix/armadillo-uniform-reference"
+            },
+            "device": "NVIDIA L40",
+            "warp": "1.19.0",
+            "input_points": 43243,
+            "input_faces": 86482,
+            "domain_error": 0,
+            "detected_feature_edges": 0,
+            "detected_corners": 0,
+            "surface_quadrature_capacity": 259446,
+            "crease_quadrature_capacity": 518892,
+            "input_off_sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+            "setup_seconds": 5.569673955440521,
+            "first_replay_wall_seconds": 4.506303209811449,
+            "first_replay_gpu_ms": 4506.146484375,
+            "additional_replay_gpu_ms": [
+              3457.9130859375,
+              3455.88525390625,
+              3454.70703125
+            ],
+            "median_additional_replay_ms": 3455.88525390625,
+            "cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "setup_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "first_replay_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "additional_replays_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "valid": 1,
+            "error": 0,
+            "status": 1,
+            "counts": [
+              8192,
+              49595,
+              39377,
+              6276
+            ],
+            "topology": [
+              1,
+              1,
+              0,
+              2
+            ],
+            "rounds": [
+              9,
+              3,
+              4
+            ],
+            "steps": [
+              126,
+              2
+            ],
+            "moves": [
+              4,
+              2
+            ],
+            "last_errors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "refinement_rejections": 0,
+            "quality_rejections": 0,
+            "last_bad_extraction": 0,
+            "final_extraction_error": 0,
+            "final_extraction_diagnostics": 0,
+            "last_quality_stage_errors": {
+              "selection": 16,
+              "jitter": 0,
+              "interior": 0,
+              "bounded_dual": 0
+            },
+            "quality_stage_diagnostic_scope": "Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
+            "material_recovery": {
+              "activated": 1,
+              "last_added_cells": 0,
+              "last_passes": 1
+            },
+            "exterior_band_recovery": {
+              "material_quality_guard_active": 1,
+              "enabled_after_fitting": 1,
+              "last_removed_cells": 2,
+              "last_passes": 1,
+              "last_rejected": 0
+            },
+            "proven_exterior_recovery": {
+              "enabled_after_fitting": 1,
+              "last_removed_cells": 0,
+              "last_rejected": 0,
+              "midpoint_statistics": [
+                3460,
+                2051,
+                3460,
+                2051
+              ],
+              "midpoint_statistics_columns": [
+                "proposed_axes",
+                "proposed_sites",
+                "accepted_axes",
+                "accepted_sites"
+              ]
+            },
+            "quality": {
+              "radius_ratio_percentiles": {
+                "0": 0.03101918236050918,
+                "1": 0.45657419713863057,
+                "5": 0.693309986430476,
+                "50": 0.8991838057781807,
+                "95": 0.9736760190397352,
+                "100": 0.9998604252099332
+              },
+              "volume": 0.5379817946954518,
+              "relative_volume_error": -0.02012358855805072,
+              "directed_surface_rms": 0.003751456769638682
+            }
+          },
+          "independent": {
+            "mesh_sha256": "cffad012560255ec63df256311efc142c0e2b41062556615ea87eacb4da86b39",
+            "full_hull": {
+              "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+              "CGAL": "6.2.1",
+              "sites": 8192,
+              "tetrahedra": 49595,
+              "sphere_tests": 406083860,
+              "cospherical_ties": 0,
+              "hull_faces": 434,
+              "hull_support_tests": 3555328,
+              "valid": true
+            },
+            "all_boundary_vertex_links_single_cycles": true,
+            "quality": {
+              "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+              "sites": 8192,
+              "referenced_vertices": 8188,
+              "tetrahedra": 39377,
+              "boundary_triangles": 6276,
+              "components": 1,
+              "boundary_euler": 2,
+              "volume": 0.5379817946954524,
+              "input_volume": 0.5490302536253366,
+              "relative_volume_error": -0.02012358855806118,
+              "mean_radius_ratio": 0.8745650216379746,
+              "radius_ratio_percentiles": {
+                "0": 0.031019182360509222,
+                "1": 0.4565741971386302,
+                "5": 0.693309986430476,
+                "50": 0.8991838057781815,
+                "95": 0.9736760190397354,
+                "100": 0.9998604252099341
+              },
+              "dihedral_degrees_min": 1.5157131402141153,
+              "dihedral_degrees_max": 177.45734322199797,
+              "output_to_input": {
+                "area": 6.135031512238352,
+                "squared_integral": 8.634092361777492e-05,
+                "rms": 0.003751456769638685,
+                "max_sample": 0.02491653318096411
+              },
+              "input_to_output": {
+                "area": 6.6292747534098675,
+                "squared_integral": 0.00016920243199425997,
+                "rms": 0.0050520808376796275,
+                "max_sample": 0.064096941783736
+              },
+              "two_sided_area_weighted_rms": 0.004474388484844783,
+              "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.14799038638694242,
+              "distance_oracle": {
+                "implementation": "CGAL AABB triangle distances with float64 constructions",
+                "version": "CGAL 6.2.1",
+                "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+                "source": "benchmarks/cpu/surface_distance.cpp",
+                "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+              }
+            },
+            "vtu_round_trip_exact": true,
+            "boundary_self_intersection_pairs": 0
+          },
+          "result_sha256": "0e0900e1496e3291bfb339af18c6b5817c052e36b0b832b32bc2b2dda1e8bab4"
+        },
+        "native": {
+          "result": {
+            "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+            "parameters": {
+              "case": "surface",
+              "input": "/home/horde/projects/power-diagram/.work/vtm/scanned-armadillo-input/armadillo.off",
+              "n": 8192,
+              "initial": 256,
+              "seed": 2026,
+              "subdivisions": 1,
+              "crease_subdivisions": 1,
+              "feature_angle": 120.0,
+              "corner_angle": 45.0,
+              "quality_rounds": 4,
+              "local_quality_retries": 0,
+              "proven_exterior_recovery": null,
+              "automatic_sizing": false,
+              "query_backend": "native",
+              "validate_geometry": false,
+              "repeats": 3,
+              "independent_quality": false,
+              "output": "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/matrix/armadillo-uniform-native"
+            },
+            "device": "NVIDIA L40",
+            "warp": "1.19.0",
+            "input_points": 43243,
+            "input_faces": 86482,
+            "domain_error": 0,
+            "detected_feature_edges": 0,
+            "detected_corners": 0,
+            "surface_quadrature_capacity": 259446,
+            "crease_quadrature_capacity": 518892,
+            "input_off_sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+            "setup_seconds": 5.1707726158201694,
+            "first_replay_wall_seconds": 3.5720873214304447,
+            "first_replay_gpu_ms": 3571.99560546875,
+            "additional_replay_gpu_ms": [
+              2597.274169921875,
+              2594.6640625,
+              2589.423583984375
+            ],
+            "median_additional_replay_ms": 2594.6640625,
+            "cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "setup_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "first_replay_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "additional_replays_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "valid": 1,
+            "error": 0,
+            "status": 1,
+            "counts": [
+              8192,
+              49595,
+              39377,
+              6276
+            ],
+            "topology": [
+              1,
+              1,
+              0,
+              2
+            ],
+            "rounds": [
+              9,
+              3,
+              4
+            ],
+            "steps": [
+              126,
+              3
+            ],
+            "moves": [
+              4,
+              2
+            ],
+            "last_errors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "refinement_rejections": 0,
+            "quality_rejections": 0,
+            "last_bad_extraction": 0,
+            "final_extraction_error": 0,
+            "final_extraction_diagnostics": 0,
+            "last_quality_stage_errors": {
+              "selection": 16,
+              "jitter": 0,
+              "interior": 0,
+              "bounded_dual": 0
+            },
+            "quality_stage_diagnostic_scope": "Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
+            "material_recovery": {
+              "activated": 1,
+              "last_added_cells": 0,
+              "last_passes": 1
+            },
+            "exterior_band_recovery": {
+              "material_quality_guard_active": 1,
+              "enabled_after_fitting": 1,
+              "last_removed_cells": 2,
+              "last_passes": 1,
+              "last_rejected": 0
+            },
+            "proven_exterior_recovery": {
+              "enabled_after_fitting": 1,
+              "last_removed_cells": 0,
+              "last_rejected": 0,
+              "midpoint_statistics": [
+                3460,
+                2051,
+                3460,
+                2051
+              ],
+              "midpoint_statistics_columns": [
+                "proposed_axes",
+                "proposed_sites",
+                "accepted_axes",
+                "accepted_sites"
+              ]
+            },
+            "quality": {
+              "radius_ratio_percentiles": {
+                "0": 0.03101918236050918,
+                "1": 0.4565747587553884,
+                "5": 0.693309986430476,
+                "50": 0.8991838057781807,
+                "95": 0.9736760190397352,
+                "100": 0.9998604252099332
+              },
+              "volume": 0.5379817954345191,
+              "relative_volume_error": -0.02012358721192535,
+              "directed_surface_rms": 0.0037514563487842196
+            }
+          },
+          "independent": {
+            "mesh_sha256": "64af450422a2e6c526309ec5eb3ca5d9eebca4c96d61d96e36e986897b6990fd",
+            "full_hull": {
+              "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+              "CGAL": "6.2.1",
+              "sites": 8192,
+              "tetrahedra": 49595,
+              "sphere_tests": 406083860,
+              "cospherical_ties": 0,
+              "hull_faces": 434,
+              "hull_support_tests": 3555328,
+              "valid": true
+            },
+            "all_boundary_vertex_links_single_cycles": true,
+            "quality": {
+              "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+              "sites": 8192,
+              "referenced_vertices": 8188,
+              "tetrahedra": 39377,
+              "boundary_triangles": 6276,
+              "components": 1,
+              "boundary_euler": 2,
+              "volume": 0.5379817954345212,
+              "input_volume": 0.5490302536253366,
+              "relative_volume_error": -0.020123587211926308,
+              "mean_radius_ratio": 0.8745650243478132,
+              "radius_ratio_percentiles": {
+                "0": 0.031019182360509222,
+                "1": 0.4565747587553882,
+                "5": 0.693309986430476,
+                "50": 0.8991838057781815,
+                "95": 0.9736760190397354,
+                "100": 0.9998604252099341
+              },
+              "dihedral_degrees_min": 1.5157131402141153,
+              "dihedral_degrees_max": 177.45734322199797,
+              "output_to_input": {
+                "area": 6.1350314952333855,
+                "squared_integral": 8.634091943339554e-05,
+                "rms": 0.003751456683933517,
+                "max_sample": 0.02491653318096411
+              },
+              "input_to_output": {
+                "area": 6.6292747534098675,
+                "squared_integral": 0.00016920242746610122,
+                "rms": 0.005052080770078282,
+                "max_sample": 0.064096941783736
+              },
+              "two_sided_area_weighted_rms": 0.004474388411549959,
+              "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.14799038396271633,
+              "distance_oracle": {
+                "implementation": "CGAL AABB triangle distances with float64 constructions",
+                "version": "CGAL 6.2.1",
+                "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+                "source": "benchmarks/cpu/surface_distance.cpp",
+                "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+              }
+            },
+            "vtu_round_trip_exact": true,
+            "boundary_self_intersection_pairs": 0
+          },
+          "result_sha256": "c4665fa2b938bade4c16c84406368cb582e13472854753b6dacf0a67bf44701e"
+        }
+      },
+      "comparison": {
+        "points_bitwise_equal": false,
+        "maximum_coordinate_difference": 3.5762786865234375e-07,
+        "roles_equal": true,
+        "full_tets_equal": true,
+        "material_tets_equal": true,
+        "oriented_boundary_equal": true
+      }
+    },
+    "armadillo-graded": {
+      "modes": {
+        "reference": {
+          "result": {
+            "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+            "parameters": {
+              "case": "graded-surface",
+              "input": "/home/horde/projects/power-diagram/.work/vtm/scanned-armadillo-input/armadillo.off",
+              "n": 8192,
+              "initial": 256,
+              "seed": 2026,
+              "subdivisions": 1,
+              "crease_subdivisions": 1,
+              "feature_angle": 120.0,
+              "corner_angle": 45.0,
+              "quality_rounds": 4,
+              "local_quality_retries": 0,
+              "proven_exterior_recovery": null,
+              "automatic_sizing": false,
+              "query_backend": "reference",
+              "validate_geometry": false,
+              "repeats": 3,
+              "independent_quality": false,
+              "output": "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/matrix/armadillo-graded-reference"
+            },
+            "device": "NVIDIA L40",
+            "warp": "1.19.0",
+            "input_points": 43243,
+            "input_faces": 86482,
+            "domain_error": 0,
+            "detected_feature_edges": 0,
+            "detected_corners": 0,
+            "surface_quadrature_capacity": 259446,
+            "crease_quadrature_capacity": 518892,
+            "input_off_sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+            "setup_seconds": 5.192331373691559,
+            "first_replay_wall_seconds": 4.721012860536575,
+            "first_replay_gpu_ms": 4720.8505859375,
+            "additional_replay_gpu_ms": [
+              3651.009521484375,
+              3650.179931640625,
+              3651.607177734375
+            ],
+            "median_additional_replay_ms": 3651.009521484375,
+            "cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "setup_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "first_replay_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "additional_replays_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "valid": 1,
+            "error": 0,
+            "status": 1,
+            "counts": [
+              8192,
+              49660,
+              39510,
+              6204
+            ],
+            "topology": [
+              1,
+              1,
+              0,
+              2
+            ],
+            "rounds": [
+              9,
+              3,
+              4
+            ],
+            "steps": [
+              126,
+              15
+            ],
+            "moves": [
+              4,
+              2
+            ],
+            "last_errors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "refinement_rejections": 0,
+            "quality_rejections": 0,
+            "last_bad_extraction": 0,
+            "final_extraction_error": 0,
+            "final_extraction_diagnostics": 0,
+            "last_quality_stage_errors": {
+              "selection": 0,
+              "jitter": 0,
+              "interior": 0,
+              "bounded_dual": 0
+            },
+            "quality_stage_diagnostic_scope": "Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
+            "material_recovery": {
+              "activated": 1,
+              "last_added_cells": 0,
+              "last_passes": 1
+            },
+            "exterior_band_recovery": {
+              "material_quality_guard_active": 1,
+              "enabled_after_fitting": 1,
+              "last_removed_cells": 6,
+              "last_passes": 1,
+              "last_rejected": 0
+            },
+            "proven_exterior_recovery": {
+              "enabled_after_fitting": 1,
+              "last_removed_cells": 0,
+              "last_rejected": 0,
+              "midpoint_statistics": [
+                3558,
+                2099,
+                3558,
+                2099
+              ],
+              "midpoint_statistics_columns": [
+                "proposed_axes",
+                "proposed_sites",
+                "accepted_axes",
+                "accepted_sites"
+              ]
+            },
+            "quality": {
+              "radius_ratio_percentiles": {
+                "0": 0.06083603327719634,
+                "1": 0.46436721084608323,
+                "5": 0.6958053170911244,
+                "50": 0.8977938481869359,
+                "95": 0.9741981936329573,
+                "100": 0.9990766307709693
+              },
+              "volume": 0.5361367842329384,
+              "relative_volume_error": -0.023484078167385344,
+              "directed_surface_rms": 0.004198453461479065
+            }
+          },
+          "independent": {
+            "mesh_sha256": "a53007b62be97f6d7ade2468385cdc6bfab708d8022e64d875ffaa1c2a8d32c9",
+            "full_hull": {
+              "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+              "CGAL": "6.2.1",
+              "sites": 8192,
+              "tetrahedra": 49660,
+              "sphere_tests": 406616080,
+              "cospherical_ties": 0,
+              "hull_faces": 394,
+              "hull_support_tests": 3227648,
+              "valid": true
+            },
+            "all_boundary_vertex_links_single_cycles": true,
+            "quality": {
+              "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+              "sites": 8192,
+              "referenced_vertices": 8191,
+              "tetrahedra": 39510,
+              "boundary_triangles": 6204,
+              "components": 1,
+              "boundary_euler": 2,
+              "volume": 0.5361367842329379,
+              "input_volume": 0.5490302536253366,
+              "relative_volume_error": -0.023484078167388955,
+              "mean_radius_ratio": 0.8737637952956016,
+              "radius_ratio_percentiles": {
+                "0": 0.06083603327719616,
+                "1": 0.46436721084608257,
+                "5": 0.6958053170911249,
+                "50": 0.8977938481869353,
+                "95": 0.9741981936329565,
+                "100": 0.9990766307709689
+              },
+              "dihedral_degrees_min": 2.752956622832293,
+              "dihedral_degrees_max": 174.79229649460737,
+              "output_to_input": {
+                "area": 6.094706546411384,
+                "squared_integral": 0.00010743146218894069,
+                "rms": 0.004198453461479062,
+                "max_sample": 0.023204029544722834
+              },
+              "input_to_output": {
+                "area": 6.6292747534098675,
+                "squared_integral": 0.00021990179714426037,
+                "rms": 0.005759454873694808,
+                "max_sample": 0.09257627482989537
+              },
+              "two_sided_area_weighted_rms": 0.005072050352881655,
+              "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.16775805096928742,
+              "distance_oracle": {
+                "implementation": "CGAL AABB triangle distances with float64 constructions",
+                "version": "CGAL 6.2.1",
+                "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+                "source": "benchmarks/cpu/surface_distance.cpp",
+                "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+              }
+            },
+            "vtu_round_trip_exact": true,
+            "boundary_self_intersection_pairs": 0
+          },
+          "result_sha256": "7f27c2ead6735ef4cf1467c28d75bd61f519220aba72b3948cd1aac81d35e1ab"
+        },
+        "native": {
+          "result": {
+            "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+            "parameters": {
+              "case": "graded-surface",
+              "input": "/home/horde/projects/power-diagram/.work/vtm/scanned-armadillo-input/armadillo.off",
+              "n": 8192,
+              "initial": 256,
+              "seed": 2026,
+              "subdivisions": 1,
+              "crease_subdivisions": 1,
+              "feature_angle": 120.0,
+              "corner_angle": 45.0,
+              "quality_rounds": 4,
+              "local_quality_retries": 0,
+              "proven_exterior_recovery": null,
+              "automatic_sizing": false,
+              "query_backend": "native",
+              "validate_geometry": false,
+              "repeats": 3,
+              "independent_quality": false,
+              "output": "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/matrix/armadillo-graded-native"
+            },
+            "device": "NVIDIA L40",
+            "warp": "1.19.0",
+            "input_points": 43243,
+            "input_faces": 86482,
+            "domain_error": 0,
+            "detected_feature_edges": 0,
+            "detected_corners": 0,
+            "surface_quadrature_capacity": 259446,
+            "crease_quadrature_capacity": 518892,
+            "input_off_sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+            "setup_seconds": 5.208544597029686,
+            "first_replay_wall_seconds": 3.7595021538436413,
+            "first_replay_gpu_ms": 3759.341796875,
+            "additional_replay_gpu_ms": [
+              2751.8134765625,
+              2750.58544921875,
+              2749.10546875
+            ],
+            "median_additional_replay_ms": 2750.58544921875,
+            "cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "setup_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "first_replay_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "additional_replays_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "valid": 1,
+            "error": 0,
+            "status": 1,
+            "counts": [
+              8192,
+              49660,
+              39510,
+              6204
+            ],
+            "topology": [
+              1,
+              1,
+              0,
+              2
+            ],
+            "rounds": [
+              9,
+              3,
+              4
+            ],
+            "steps": [
+              126,
+              15
+            ],
+            "moves": [
+              4,
+              2
+            ],
+            "last_errors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "refinement_rejections": 0,
+            "quality_rejections": 0,
+            "last_bad_extraction": 0,
+            "final_extraction_error": 0,
+            "final_extraction_diagnostics": 0,
+            "last_quality_stage_errors": {
+              "selection": 0,
+              "jitter": 0,
+              "interior": 0,
+              "bounded_dual": 0
+            },
+            "quality_stage_diagnostic_scope": "Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
+            "material_recovery": {
+              "activated": 1,
+              "last_added_cells": 0,
+              "last_passes": 1
+            },
+            "exterior_band_recovery": {
+              "material_quality_guard_active": 1,
+              "enabled_after_fitting": 1,
+              "last_removed_cells": 6,
+              "last_passes": 1,
+              "last_rejected": 0
+            },
+            "proven_exterior_recovery": {
+              "enabled_after_fitting": 1,
+              "last_removed_cells": 0,
+              "last_rejected": 0,
+              "midpoint_statistics": [
+                3558,
+                2099,
+                3558,
+                2099
+              ],
+              "midpoint_statistics_columns": [
+                "proposed_axes",
+                "proposed_sites",
+                "accepted_axes",
+                "accepted_sites"
+              ]
+            },
+            "quality": {
+              "radius_ratio_percentiles": {
+                "0": 0.06083603327719634,
+                "1": 0.46436721084608323,
+                "5": 0.6958053170911244,
+                "50": 0.8977938481869359,
+                "95": 0.9741981936329573,
+                "100": 0.9990766307709693
+              },
+              "volume": 0.5361367842329374,
+              "relative_volume_error": -0.023484078167392102,
+              "directed_surface_rms": 0.004198453023434259
+            }
+          },
+          "independent": {
+            "mesh_sha256": "7ecaeaa75b6868d849e23ce95ac68b26d8985e787f39e20161e886d847a63b91",
+            "full_hull": {
+              "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+              "CGAL": "6.2.1",
+              "sites": 8192,
+              "tetrahedra": 49660,
+              "sphere_tests": 406616080,
+              "cospherical_ties": 0,
+              "hull_faces": 394,
+              "hull_support_tests": 3227648,
+              "valid": true
+            },
+            "all_boundary_vertex_links_single_cycles": true,
+            "quality": {
+              "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+              "sites": 8192,
+              "referenced_vertices": 8191,
+              "tetrahedra": 39510,
+              "boundary_triangles": 6204,
+              "components": 1,
+              "boundary_euler": 2,
+              "volume": 0.5361367842329378,
+              "input_volume": 0.5490302536253366,
+              "relative_volume_error": -0.023484078167389177,
+              "mean_radius_ratio": 0.8737637952956013,
+              "radius_ratio_percentiles": {
+                "0": 0.06083603327719616,
+                "1": 0.46436721084608257,
+                "5": 0.6958053170911249,
+                "50": 0.8977938481869353,
+                "95": 0.9741981936329565,
+                "100": 0.9990766307709689
+              },
+              "dihedral_degrees_min": 2.752956622832293,
+              "dihedral_degrees_max": 174.79229649460737,
+              "output_to_input": {
+                "area": 6.094706546411383,
+                "squared_integral": 0.00010743146218894069,
+                "rms": 0.004198453461479062,
+                "max_sample": 0.023204029544722834
+              },
+              "input_to_output": {
+                "area": 6.6292747534098675,
+                "squared_integral": 0.00021990179714426037,
+                "rms": 0.005759454873694808,
+                "max_sample": 0.09257627482989537
+              },
+              "two_sided_area_weighted_rms": 0.005072050352881655,
+              "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.16775805096928742,
+              "distance_oracle": {
+                "implementation": "CGAL AABB triangle distances with float64 constructions",
+                "version": "CGAL 6.2.1",
+                "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+                "source": "benchmarks/cpu/surface_distance.cpp",
+                "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+              }
+            },
+            "vtu_round_trip_exact": true,
+            "boundary_self_intersection_pairs": 0
+          },
+          "result_sha256": "d7c3029c47b7cb02ffa41c2992754a786aae124e81efc47a5a85228183b378e9"
+        }
+      },
+      "comparison": {
+        "points_bitwise_equal": true,
+        "maximum_coordinate_difference": 0.0,
+        "roles_equal": true,
+        "full_tets_equal": true,
+        "material_tets_equal": true,
+        "oriented_boundary_equal": true
+      }
+    },
+    "torus": {
+      "modes": {
+        "reference": {
+          "result": {
+            "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+            "parameters": {
+              "case": "torus",
+              "input": null,
+              "n": 1000,
+              "initial": 256,
+              "seed": 2026,
+              "subdivisions": 4,
+              "crease_subdivisions": 4,
+              "feature_angle": 45.0,
+              "corner_angle": 45.0,
+              "quality_rounds": 4,
+              "local_quality_retries": 0,
+              "proven_exterior_recovery": null,
+              "automatic_sizing": false,
+              "query_backend": "reference",
+              "validate_geometry": false,
+              "repeats": 3,
+              "independent_quality": false,
+              "output": "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/matrix/torus-reference"
+            },
+            "device": "NVIDIA L40",
+            "warp": "1.19.0",
+            "input_points": 1152,
+            "input_faces": 2304,
+            "domain_error": 0,
+            "detected_feature_edges": 0,
+            "detected_corners": 0,
+            "surface_quadrature_capacity": 110592,
+            "crease_quadrature_capacity": 55296,
+            "input_off_sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+            "setup_seconds": 2.120284788310528,
+            "first_replay_wall_seconds": 0.7837781831622124,
+            "first_replay_gpu_ms": 783.6016235351562,
+            "additional_replay_gpu_ms": [
+              484.705078125,
+              486.4322509765625,
+              485.27227783203125
+            ],
+            "median_additional_replay_ms": 485.27227783203125,
+            "cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "setup_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "first_replay_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "additional_replays_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "valid": 1,
+            "error": 0,
+            "status": 1,
+            "counts": [
+              1000,
+              5826,
+              4225,
+              1122
+            ],
+            "topology": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "rounds": [
+              4,
+              0,
+              4
+            ],
+            "steps": [
+              40,
+              8
+            ],
+            "moves": [
+              4,
+              2
+            ],
+            "last_errors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "refinement_rejections": 0,
+            "quality_rejections": 0,
+            "last_bad_extraction": 0,
+            "final_extraction_error": 0,
+            "final_extraction_diagnostics": 0,
+            "last_quality_stage_errors": {
+              "selection": 0,
+              "jitter": 0,
+              "interior": 0,
+              "bounded_dual": 0
+            },
+            "quality_stage_diagnostic_scope": "Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
+            "material_recovery": {
+              "activated": 0,
+              "last_added_cells": 0,
+              "last_passes": 0
+            },
+            "exterior_band_recovery": {
+              "material_quality_guard_active": 0,
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_passes": 0,
+              "last_rejected": 0
+            },
+            "proven_exterior_recovery": {
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_rejected": 0,
+              "midpoint_statistics": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "midpoint_statistics_columns": [
+                "proposed_axes",
+                "proposed_sites",
+                "accepted_axes",
+                "accepted_sites"
+              ]
+            },
+            "quality": {
+              "radius_ratio_percentiles": {
+                "0": 0.0928580886613543,
+                "1": 0.3064781115473783,
+                "5": 0.5938737287257493,
+                "50": 0.8744211904981688,
+                "95": 0.9642281426853945,
+                "100": 0.9959915151012723
+              },
+              "volume": 18.099110914765067,
+              "relative_volume_error": -0.050893836021190866,
+              "directed_surface_rms": 0.019722933864496833
+            }
+          },
+          "independent": {
+            "mesh_sha256": "47a32692812d5fa4f4c0601651c2c4d5d0f91bce48503134c2cff4e75e89b5b9",
+            "full_hull": {
+              "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+              "CGAL": "6.2.1",
+              "sites": 1000,
+              "tetrahedra": 5826,
+              "sphere_tests": 5802696,
+              "cospherical_ties": 0,
+              "hull_faces": 672,
+              "hull_support_tests": 672000,
+              "valid": true
+            },
+            "all_boundary_vertex_links_single_cycles": true,
+            "quality": {
+              "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+              "sites": 1000,
+              "referenced_vertices": 1000,
+              "tetrahedra": 4225,
+              "boundary_triangles": 1122,
+              "components": 1,
+              "boundary_euler": 0,
+              "volume": 18.099110914765088,
+              "input_volume": 19.0696379411241,
+              "relative_volume_error": -0.05089383602118891,
+              "mean_radius_ratio": 0.8411199405310114,
+              "radius_ratio_percentiles": {
+                "0": 0.09285808866135435,
+                "1": 0.3064781115473784,
+                "5": 0.5938737287257491,
+                "50": 0.8744211904981686,
+                "95": 0.9642281426853946,
+                "100": 0.9959915151012726
+              },
+              "dihedral_degrees_min": 3.0619168350385793,
+              "dihedral_degrees_max": 171.8139964582497,
+              "output_to_input": {
+                "area": 53.90312396538547,
+                "squared_integral": 0.02096799828420363,
+                "rms": 0.019722933864496913,
+                "max_sample": 0.09508842540135287
+              },
+              "input_to_output": {
+                "area": 55.01379994263034,
+                "squared_integral": 0.02213802344840667,
+                "rms": 0.020060123372006577,
+                "max_sample": 0.08560797998543264
+              },
+              "two_sided_area_weighted_rms": 0.019893962187454615,
+              "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.25623276268099726,
+              "distance_oracle": {
+                "implementation": "CGAL AABB triangle distances with float64 constructions",
+                "version": "CGAL 6.2.1",
+                "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+                "source": "benchmarks/cpu/surface_distance.cpp",
+                "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+              }
+            },
+            "vtu_round_trip_exact": true,
+            "boundary_self_intersection_pairs": 0
+          },
+          "result_sha256": "e87f8af83c4faef72aa5c4d78eb4cd86b1210af0910f28816c429c698881102b"
+        },
+        "native": {
+          "result": {
+            "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+            "parameters": {
+              "case": "torus",
+              "input": null,
+              "n": 1000,
+              "initial": 256,
+              "seed": 2026,
+              "subdivisions": 4,
+              "crease_subdivisions": 4,
+              "feature_angle": 45.0,
+              "corner_angle": 45.0,
+              "quality_rounds": 4,
+              "local_quality_retries": 0,
+              "proven_exterior_recovery": null,
+              "automatic_sizing": false,
+              "query_backend": "native",
+              "validate_geometry": false,
+              "repeats": 3,
+              "independent_quality": false,
+              "output": "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/matrix/torus-native"
+            },
+            "device": "NVIDIA L40",
+            "warp": "1.19.0",
+            "input_points": 1152,
+            "input_faces": 2304,
+            "domain_error": 0,
+            "detected_feature_edges": 0,
+            "detected_corners": 0,
+            "surface_quadrature_capacity": 110592,
+            "crease_quadrature_capacity": 55296,
+            "input_off_sha256": "bb559995e7f96e0b789297cf25f9b9695008a5e728e3a4c1f965d8dd3a82be1c",
+            "setup_seconds": 2.060405410826206,
+            "first_replay_wall_seconds": 0.7921182215213776,
+            "first_replay_gpu_ms": 792.0264892578125,
+            "additional_replay_gpu_ms": [
+              484.0323486328125,
+              483.4613952636719,
+              484.0843505859375
+            ],
+            "median_additional_replay_ms": 484.0323486328125,
+            "cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "setup_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "first_replay_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "additional_replays_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "valid": 1,
+            "error": 0,
+            "status": 1,
+            "counts": [
+              1000,
+              5826,
+              4225,
+              1122
+            ],
+            "topology": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "rounds": [
+              4,
+              0,
+              4
+            ],
+            "steps": [
+              40,
+              8
+            ],
+            "moves": [
+              4,
+              2
+            ],
+            "last_errors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "refinement_rejections": 0,
+            "quality_rejections": 0,
+            "last_bad_extraction": 0,
+            "final_extraction_error": 0,
+            "final_extraction_diagnostics": 0,
+            "last_quality_stage_errors": {
+              "selection": 0,
+              "jitter": 0,
+              "interior": 0,
+              "bounded_dual": 0
+            },
+            "quality_stage_diagnostic_scope": "Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
+            "material_recovery": {
+              "activated": 0,
+              "last_added_cells": 0,
+              "last_passes": 0
+            },
+            "exterior_band_recovery": {
+              "material_quality_guard_active": 0,
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_passes": 0,
+              "last_rejected": 0
+            },
+            "proven_exterior_recovery": {
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_rejected": 0,
+              "midpoint_statistics": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "midpoint_statistics_columns": [
+                "proposed_axes",
+                "proposed_sites",
+                "accepted_axes",
+                "accepted_sites"
+              ]
+            },
+            "quality": {
+              "radius_ratio_percentiles": {
+                "0": 0.0928580886613543,
+                "1": 0.3064781115473783,
+                "5": 0.5938737287257493,
+                "50": 0.8744211904981688,
+                "95": 0.9642281426853945,
+                "100": 0.9959915151012723
+              },
+              "volume": 18.099110914765063,
+              "relative_volume_error": -0.0508938360211907,
+              "directed_surface_rms": 0.019722934696572787
+            }
+          },
+          "independent": {
+            "mesh_sha256": "4153c061eaec8900a2ef1ca853b1c7330ccd122f58aad96497c639989fcdbdd8",
+            "full_hull": {
+              "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+              "CGAL": "6.2.1",
+              "sites": 1000,
+              "tetrahedra": 5826,
+              "sphere_tests": 5802696,
+              "cospherical_ties": 0,
+              "hull_faces": 672,
+              "hull_support_tests": 672000,
+              "valid": true
+            },
+            "all_boundary_vertex_links_single_cycles": true,
+            "quality": {
+              "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+              "sites": 1000,
+              "referenced_vertices": 1000,
+              "tetrahedra": 4225,
+              "boundary_triangles": 1122,
+              "components": 1,
+              "boundary_euler": 0,
+              "volume": 18.099110914765088,
+              "input_volume": 19.0696379411241,
+              "relative_volume_error": -0.05089383602118891,
+              "mean_radius_ratio": 0.8411199405310115,
+              "radius_ratio_percentiles": {
+                "0": 0.09285808866135435,
+                "1": 0.3064781115473784,
+                "5": 0.5938737287257491,
+                "50": 0.8744211904981686,
+                "95": 0.9642281426853946,
+                "100": 0.9959915151012726
+              },
+              "dihedral_degrees_min": 3.0619168350385793,
+              "dihedral_degrees_max": 171.8139964582497,
+              "output_to_input": {
+                "area": 53.903123965385475,
+                "squared_integral": 0.020967998284203634,
+                "rms": 0.019722933864496913,
+                "max_sample": 0.09508842540135287
+              },
+              "input_to_output": {
+                "area": 55.01379994263034,
+                "squared_integral": 0.02213802344840667,
+                "rms": 0.020060123372006577,
+                "max_sample": 0.08560797998543264
+              },
+              "two_sided_area_weighted_rms": 0.019893962187454615,
+              "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.25623276268099726,
+              "distance_oracle": {
+                "implementation": "CGAL AABB triangle distances with float64 constructions",
+                "version": "CGAL 6.2.1",
+                "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+                "source": "benchmarks/cpu/surface_distance.cpp",
+                "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+              }
+            },
+            "vtu_round_trip_exact": true,
+            "boundary_self_intersection_pairs": 0
+          },
+          "result_sha256": "677182ea1de2ed8b75d877d17480372552a14d3aa801b18425b239b18d14dfff"
+        }
+      },
+      "comparison": {
+        "points_bitwise_equal": true,
+        "maximum_coordinate_difference": 0.0,
+        "roles_equal": true,
+        "full_tets_equal": true,
+        "material_tets_equal": true,
+        "oriented_boundary_equal": true
+      }
+    },
+    "plate": {
+      "modes": {
+        "reference": {
+          "result": {
+            "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+            "parameters": {
+              "case": "counterbored-plate",
+              "input": null,
+              "n": 1000,
+              "initial": 256,
+              "seed": 2026,
+              "subdivisions": 16,
+              "crease_subdivisions": 16,
+              "feature_angle": 45.0,
+              "corner_angle": 45.0,
+              "quality_rounds": 4,
+              "local_quality_retries": 0,
+              "proven_exterior_recovery": null,
+              "automatic_sizing": false,
+              "query_backend": "reference",
+              "validate_geometry": false,
+              "repeats": 3,
+              "independent_quality": false,
+              "output": "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/matrix/plate-reference"
+            },
+            "device": "NVIDIA L40",
+            "warp": "1.19.0",
+            "input_points": 216,
+            "input_faces": 432,
+            "domain_error": 0,
+            "detected_feature_edges": 220,
+            "detected_corners": 8,
+            "surface_quadrature_capacity": 331776,
+            "crease_quadrature_capacity": 41472,
+            "input_off_sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed",
+            "setup_seconds": 2.0716421604156494,
+            "first_replay_wall_seconds": 1.1444540359079838,
+            "first_replay_gpu_ms": 1144.30517578125,
+            "additional_replay_gpu_ms": [
+              830.4146118164062,
+              828.451416015625,
+              829.1868286132812
+            ],
+            "median_additional_replay_ms": 829.1868286132812,
+            "cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "setup_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "first_replay_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "additional_replays_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "valid": 1,
+            "error": 0,
+            "status": 1,
+            "counts": [
+              1000,
+              5458,
+              3951,
+              1338
+            ],
+            "topology": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "rounds": [
+              4,
+              0,
+              4
+            ],
+            "steps": [
+              40,
+              11
+            ],
+            "moves": [
+              4,
+              1
+            ],
+            "last_errors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "refinement_rejections": 0,
+            "quality_rejections": 0,
+            "last_bad_extraction": 0,
+            "final_extraction_error": 0,
+            "final_extraction_diagnostics": 0,
+            "last_quality_stage_errors": {
+              "selection": 0,
+              "jitter": 0,
+              "interior": 0,
+              "bounded_dual": 0
+            },
+            "quality_stage_diagnostic_scope": "Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
+            "material_recovery": {
+              "activated": 0,
+              "last_added_cells": 0,
+              "last_passes": 0
+            },
+            "exterior_band_recovery": {
+              "material_quality_guard_active": 0,
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_passes": 0,
+              "last_rejected": 0
+            },
+            "proven_exterior_recovery": {
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_rejected": 0,
+              "midpoint_statistics": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "midpoint_statistics_columns": [
+                "proposed_axes",
+                "proposed_sites",
+                "accepted_axes",
+                "accepted_sites"
+              ]
+            },
+            "quality": {
+              "radius_ratio_percentiles": {
+                "0": 0.10274692876049102,
+                "1": 0.34753010335511836,
+                "5": 0.5601792129149352,
+                "50": 0.8468354901797849,
+                "95": 0.95788471244838,
+                "100": 0.9947980060435843
+              },
+              "volume": 2.4383870285134086,
+              "relative_volume_error": 0.0049595368162933424,
+              "directed_surface_rms": 0.002788978327062257
+            }
+          },
+          "independent": {
+            "mesh_sha256": "f54302ba081d174da8aa0a5abef00e5570b680d8ad654d6dac7fcfc0f4318ab0",
+            "full_hull": {
+              "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+              "CGAL": "6.2.1",
+              "sites": 1000,
+              "tetrahedra": 5458,
+              "sphere_tests": 5436168,
+              "cospherical_ties": 4,
+              "hull_faces": 410,
+              "hull_support_tests": 410000,
+              "valid": true
+            },
+            "all_boundary_vertex_links_single_cycles": true,
+            "quality": {
+              "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+              "sites": 1000,
+              "referenced_vertices": 1000,
+              "tetrahedra": 3951,
+              "boundary_triangles": 1338,
+              "components": 1,
+              "boundary_euler": 0,
+              "volume": 2.4383870285134064,
+              "input_volume": 2.4263534393018524,
+              "relative_volume_error": 0.0049595368162917985,
+              "mean_radius_ratio": 0.8173624429076185,
+              "radius_ratio_percentiles": {
+                "0": 0.10274692876049105,
+                "1": 0.3475301033551186,
+                "5": 0.560179212914935,
+                "50": 0.8468354901797852,
+                "95": 0.9578847124483798,
+                "100": 0.994798006043584
+              },
+              "dihedral_degrees_min": 4.955778438673483,
+              "dihedral_degrees_max": 171.90700343422972,
+              "output_to_input": {
+                "area": 15.757566585629505,
+                "squared_integral": 0.00012256865764444648,
+                "rms": 0.0027889783270622624,
+                "max_sample": 0.03272545588056953
+              },
+              "input_to_output": {
+                "area": 15.71671046028466,
+                "squared_integral": 0.00010693854459785554,
+                "rms": 0.0026084727753511636,
+                "max_sample": 0.024728900453087215
+              },
+              "two_sided_area_weighted_rms": 0.002700351366831614,
+              "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.08701760599493126,
+              "distance_oracle": {
+                "implementation": "CGAL AABB triangle distances with float64 constructions",
+                "version": "CGAL 6.2.1",
+                "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+                "source": "benchmarks/cpu/surface_distance.cpp",
+                "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+              }
+            },
+            "vtu_round_trip_exact": true,
+            "boundary_self_intersection_pairs": 0
+          },
+          "result_sha256": "bf6eafe3234c818973713b63942eeb5344b55b7fe2eb4168ab22283664c2d472"
+        },
+        "native": {
+          "result": {
+            "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+            "parameters": {
+              "case": "counterbored-plate",
+              "input": null,
+              "n": 1000,
+              "initial": 256,
+              "seed": 2026,
+              "subdivisions": 16,
+              "crease_subdivisions": 16,
+              "feature_angle": 45.0,
+              "corner_angle": 45.0,
+              "quality_rounds": 4,
+              "local_quality_retries": 0,
+              "proven_exterior_recovery": null,
+              "automatic_sizing": false,
+              "query_backend": "native",
+              "validate_geometry": false,
+              "repeats": 3,
+              "independent_quality": false,
+              "output": "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/matrix/plate-native"
+            },
+            "device": "NVIDIA L40",
+            "warp": "1.19.0",
+            "input_points": 216,
+            "input_faces": 432,
+            "domain_error": 0,
+            "detected_feature_edges": 220,
+            "detected_corners": 8,
+            "surface_quadrature_capacity": 331776,
+            "crease_quadrature_capacity": 41472,
+            "input_off_sha256": "27faaac4d631914392351ab59c985de56322fc63b82ee18069159b52f95964ed",
+            "setup_seconds": 2.0445513278245926,
+            "first_replay_wall_seconds": 1.0440476685762405,
+            "first_replay_gpu_ms": 1043.9708251953125,
+            "additional_replay_gpu_ms": [
+              746.2227783203125,
+              747.0394287109375,
+              745.926025390625
+            ],
+            "median_additional_replay_ms": 746.2227783203125,
+            "cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "setup_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "first_replay_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "additional_replays_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "valid": 1,
+            "error": 0,
+            "status": 1,
+            "counts": [
+              1000,
+              5458,
+              3951,
+              1338
+            ],
+            "topology": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "rounds": [
+              4,
+              0,
+              4
+            ],
+            "steps": [
+              40,
+              11
+            ],
+            "moves": [
+              4,
+              1
+            ],
+            "last_errors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "refinement_rejections": 0,
+            "quality_rejections": 0,
+            "last_bad_extraction": 0,
+            "final_extraction_error": 0,
+            "final_extraction_diagnostics": 0,
+            "last_quality_stage_errors": {
+              "selection": 0,
+              "jitter": 0,
+              "interior": 0,
+              "bounded_dual": 0
+            },
+            "quality_stage_diagnostic_scope": "Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
+            "material_recovery": {
+              "activated": 0,
+              "last_added_cells": 0,
+              "last_passes": 0
+            },
+            "exterior_band_recovery": {
+              "material_quality_guard_active": 0,
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_passes": 0,
+              "last_rejected": 0
+            },
+            "proven_exterior_recovery": {
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_rejected": 0,
+              "midpoint_statistics": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "midpoint_statistics_columns": [
+                "proposed_axes",
+                "proposed_sites",
+                "accepted_axes",
+                "accepted_sites"
+              ]
+            },
+            "quality": {
+              "radius_ratio_percentiles": {
+                "0": 0.10274692876049102,
+                "1": 0.34753010335511836,
+                "5": 0.5601792129149352,
+                "50": 0.8468354901797849,
+                "95": 0.95788471244838,
+                "100": 0.9947980060435843
+              },
+              "volume": 2.4383870285133997,
+              "relative_volume_error": 0.004959536816288579,
+              "directed_surface_rms": 0.0027889953821412976
+            }
+          },
+          "independent": {
+            "mesh_sha256": "9948f41f31b372a9fe9389b8bad6fac5b3db90bba9d0bef3592ef8d1820f2920",
+            "full_hull": {
+              "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+              "CGAL": "6.2.1",
+              "sites": 1000,
+              "tetrahedra": 5458,
+              "sphere_tests": 5436168,
+              "cospherical_ties": 4,
+              "hull_faces": 410,
+              "hull_support_tests": 410000,
+              "valid": true
+            },
+            "all_boundary_vertex_links_single_cycles": true,
+            "quality": {
+              "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+              "sites": 1000,
+              "referenced_vertices": 1000,
+              "tetrahedra": 3951,
+              "boundary_triangles": 1338,
+              "components": 1,
+              "boundary_euler": 0,
+              "volume": 2.4383870285134064,
+              "input_volume": 2.4263534393018524,
+              "relative_volume_error": 0.0049595368162917985,
+              "mean_radius_ratio": 0.8173624429076184,
+              "radius_ratio_percentiles": {
+                "0": 0.10274692876049105,
+                "1": 0.3475301033551186,
+                "5": 0.560179212914935,
+                "50": 0.8468354901797852,
+                "95": 0.9578847124483798,
+                "100": 0.994798006043584
+              },
+              "dihedral_degrees_min": 4.955778438673483,
+              "dihedral_degrees_max": 171.90700343422972,
+              "output_to_input": {
+                "area": 15.757566585629505,
+                "squared_integral": 0.00012256865764444648,
+                "rms": 0.0027889783270622624,
+                "max_sample": 0.03272545588056953
+              },
+              "input_to_output": {
+                "area": 15.71671046028466,
+                "squared_integral": 0.00010693854459785554,
+                "rms": 0.0026084727753511636,
+                "max_sample": 0.024728900453087215
+              },
+              "two_sided_area_weighted_rms": 0.002700351366831614,
+              "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.08701760599493126,
+              "distance_oracle": {
+                "implementation": "CGAL AABB triangle distances with float64 constructions",
+                "version": "CGAL 6.2.1",
+                "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+                "source": "benchmarks/cpu/surface_distance.cpp",
+                "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+              }
+            },
+            "vtu_round_trip_exact": true,
+            "boundary_self_intersection_pairs": 0
+          },
+          "result_sha256": "2e0400be5023907776cb24e8429c43b6f595b5e9138d72c0835c46f99668cc69"
+        }
+      },
+      "comparison": {
+        "points_bitwise_equal": true,
+        "maximum_coordinate_difference": 0.0,
+        "roles_equal": true,
+        "full_tets_equal": true,
+        "material_tets_equal": true,
+        "oriented_boundary_equal": true
+      }
+    },
+    "cavity": {
+      "modes": {
+        "reference": {
+          "result": {
+            "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+            "parameters": {
+              "case": "cavity",
+              "input": null,
+              "n": 1000,
+              "initial": 256,
+              "seed": 2026,
+              "subdivisions": 20,
+              "crease_subdivisions": 20,
+              "feature_angle": 45.0,
+              "corner_angle": 45.0,
+              "quality_rounds": 4,
+              "local_quality_retries": 0,
+              "proven_exterior_recovery": null,
+              "automatic_sizing": false,
+              "query_backend": "reference",
+              "validate_geometry": false,
+              "repeats": 3,
+              "independent_quality": false,
+              "output": "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/matrix/cavity-reference"
+            },
+            "device": "NVIDIA L40",
+            "warp": "1.19.0",
+            "input_points": 16,
+            "input_faces": 24,
+            "domain_error": 0,
+            "detected_feature_edges": 24,
+            "detected_corners": 16,
+            "surface_quadrature_capacity": 28800,
+            "crease_quadrature_capacity": 2880,
+            "input_off_sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+            "setup_seconds": 2.05175469443202,
+            "first_replay_wall_seconds": 0.6453180499374866,
+            "first_replay_gpu_ms": 645.2504272460938,
+            "additional_replay_gpu_ms": [
+              352.4953308105469,
+              352.808349609375,
+              352.4927673339844
+            ],
+            "median_additional_replay_ms": 352.4953308105469,
+            "cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "setup_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "first_replay_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "additional_replays_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "valid": 1,
+            "error": 0,
+            "status": 1,
+            "counts": [
+              1000,
+              5064,
+              4344,
+              1124
+            ],
+            "topology": [
+              1,
+              2,
+              1,
+              4
+            ],
+            "rounds": [
+              4,
+              0,
+              4
+            ],
+            "steps": [
+              40,
+              8
+            ],
+            "moves": [
+              4,
+              3
+            ],
+            "last_errors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "refinement_rejections": 0,
+            "quality_rejections": 0,
+            "last_bad_extraction": 0,
+            "final_extraction_error": 0,
+            "final_extraction_diagnostics": 0,
+            "last_quality_stage_errors": {
+              "selection": 0,
+              "jitter": 0,
+              "interior": 0,
+              "bounded_dual": 0
+            },
+            "quality_stage_diagnostic_scope": "Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
+            "material_recovery": {
+              "activated": 0,
+              "last_added_cells": 0,
+              "last_passes": 0
+            },
+            "exterior_band_recovery": {
+              "material_quality_guard_active": 0,
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_passes": 0,
+              "last_rejected": 0
+            },
+            "proven_exterior_recovery": {
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_rejected": 0,
+              "midpoint_statistics": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "midpoint_statistics_columns": [
+                "proposed_axes",
+                "proposed_sites",
+                "accepted_axes",
+                "accepted_sites"
+              ]
+            },
+            "quality": {
+              "radius_ratio_percentiles": {
+                "0": 0.23680989082084075,
+                "1": 0.406407014670497,
+                "5": 0.6002673918062933,
+                "50": 0.8712768369976791,
+                "95": 0.9651659013962846,
+                "100": 0.9973193585007177
+              },
+              "volume": 7.507092978613404,
+              "relative_volume_error": 0.0025498132425146205,
+              "directed_surface_rms": 0.00546238857653108
+            }
+          },
+          "independent": {
+            "mesh_sha256": "ba919e70f43b706b31352918730765431fbf60d553faad07c651f9acbf4d2ce4",
+            "full_hull": {
+              "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+              "CGAL": "6.2.1",
+              "sites": 1000,
+              "tetrahedra": 5064,
+              "sphere_tests": 5043744,
+              "cospherical_ties": 0,
+              "hull_faces": 642,
+              "hull_support_tests": 642000,
+              "valid": true
+            },
+            "all_boundary_vertex_links_single_cycles": true,
+            "quality": {
+              "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+              "sites": 1000,
+              "referenced_vertices": 1000,
+              "tetrahedra": 4344,
+              "boundary_triangles": 1124,
+              "components": 1,
+              "boundary_euler": 4,
+              "volume": 7.507092978613395,
+              "input_volume": 7.487999977111816,
+              "relative_volume_error": 0.0025498132425132436,
+              "mean_radius_ratio": 0.8400381267706394,
+              "radius_ratio_percentiles": {
+                "0": 0.23680989082084067,
+                "1": 0.4064070146704969,
+                "5": 0.6002673918062935,
+                "50": 0.8712768369976787,
+                "95": 0.965165901396284,
+                "100": 0.9973193585007176
+              },
+              "dihedral_degrees_min": 10.184009675105852,
+              "dihedral_degrees_max": 161.17765257794298,
+              "output_to_input": {
+                "area": 27.802188413237392,
+                "squared_integral": 0.0008295530503097761,
+                "rms": 0.0054623885765310845,
+                "max_sample": 0.07982053607702255
+              },
+              "input_to_output": {
+                "area": 27.84000011444091,
+                "squared_integral": 0.0010501162353875907,
+                "rms": 0.006141635955346669,
+                "max_sample": 0.0929795360158003
+              },
+              "two_sided_area_weighted_rms": 0.005812174179758181,
+              "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.16778301636301893,
+              "distance_oracle": {
+                "implementation": "CGAL AABB triangle distances with float64 constructions",
+                "version": "CGAL 6.2.1",
+                "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+                "source": "benchmarks/cpu/surface_distance.cpp",
+                "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+              }
+            },
+            "vtu_round_trip_exact": true,
+            "boundary_self_intersection_pairs": 0
+          },
+          "result_sha256": "0dfafe8639f7c4cc15042a98cae0d29f6129c707e733eeb165a0290c30d072db"
+        },
+        "native": {
+          "result": {
+            "scope": "Complete device-resident meshing, including domain/sizing refit, fresh sampling, progressive fitting, refinement, quality improvement and extraction. Setup, upload, download, validation and export are outside replay timing.",
+            "parameters": {
+              "case": "cavity",
+              "input": null,
+              "n": 1000,
+              "initial": 256,
+              "seed": 2026,
+              "subdivisions": 20,
+              "crease_subdivisions": 20,
+              "feature_angle": 45.0,
+              "corner_angle": 45.0,
+              "quality_rounds": 4,
+              "local_quality_retries": 0,
+              "proven_exterior_recovery": null,
+              "automatic_sizing": false,
+              "query_backend": "native",
+              "validate_geometry": false,
+              "repeats": 3,
+              "independent_quality": false,
+              "output": "/home/horde/projects/power-diagram/results/local/fast-vtm-pivot-v1/matrix/cavity-native"
+            },
+            "device": "NVIDIA L40",
+            "warp": "1.19.0",
+            "input_points": 16,
+            "input_faces": 24,
+            "domain_error": 0,
+            "detected_feature_edges": 24,
+            "detected_corners": 16,
+            "surface_quadrature_capacity": 28800,
+            "crease_quadrature_capacity": 2880,
+            "input_off_sha256": "0f904d9238bd51619b08100a37d5d277612612d9836d9be535ce4eabbd7fb6d2",
+            "setup_seconds": 2.0461882017552853,
+            "first_replay_wall_seconds": 0.6563967764377594,
+            "first_replay_gpu_ms": 656.3148193359375,
+            "additional_replay_gpu_ms": [
+              338.8372497558594,
+              339.6195068359375,
+              339.1886291503906
+            ],
+            "median_additional_replay_ms": 339.1886291503906,
+            "cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "setup_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "first_replay_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "additional_replays_cpu_quota_delta": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "valid": 1,
+            "error": 0,
+            "status": 1,
+            "counts": [
+              1000,
+              5064,
+              4344,
+              1124
+            ],
+            "topology": [
+              1,
+              2,
+              1,
+              4
+            ],
+            "rounds": [
+              4,
+              0,
+              4
+            ],
+            "steps": [
+              40,
+              8
+            ],
+            "moves": [
+              4,
+              3
+            ],
+            "last_errors": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "refinement_rejections": 0,
+            "quality_rejections": 0,
+            "last_bad_extraction": 0,
+            "final_extraction_error": 0,
+            "final_extraction_diagnostics": 0,
+            "last_quality_stage_errors": {
+              "selection": 0,
+              "jitter": 0,
+              "interior": 0,
+              "bounded_dual": 0
+            },
+            "quality_stage_diagnostic_scope": "Child scratch can describe a rejected or skipped trial; published mesh validity is determined by the parent error/valid/counts.",
+            "material_recovery": {
+              "activated": 0,
+              "last_added_cells": 0,
+              "last_passes": 0
+            },
+            "exterior_band_recovery": {
+              "material_quality_guard_active": 0,
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_passes": 0,
+              "last_rejected": 0
+            },
+            "proven_exterior_recovery": {
+              "enabled_after_fitting": 0,
+              "last_removed_cells": 0,
+              "last_rejected": 0,
+              "midpoint_statistics": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "midpoint_statistics_columns": [
+                "proposed_axes",
+                "proposed_sites",
+                "accepted_axes",
+                "accepted_sites"
+              ]
+            },
+            "quality": {
+              "radius_ratio_percentiles": {
+                "0": 0.23680989082084075,
+                "1": 0.406407014670497,
+                "5": 0.6002673918062933,
+                "50": 0.8712768369976791,
+                "95": 0.9651659013962846,
+                "100": 0.9973193585007177
+              },
+              "volume": 7.507092978613398,
+              "relative_volume_error": 0.002549813242513909,
+              "directed_surface_rms": 0.005462388680195144
+            }
+          },
+          "independent": {
+            "mesh_sha256": "7ac667cded58965299c92c2c6fdc69538fb89985ff205130d576916f8799c830",
+            "full_hull": {
+              "scope": "Offline CGAL exact original-coordinate orientation, global empty-sphere, face pairing and hull-support checks; cospherical alternatives allowed. Not meshing or a speed comparison.",
+              "CGAL": "6.2.1",
+              "sites": 1000,
+              "tetrahedra": 5064,
+              "sphere_tests": 5043744,
+              "cospherical_ties": 0,
+              "hull_faces": 642,
+              "hull_support_tests": 642000,
+              "valid": true
+            },
+            "all_boundary_vertex_links_single_cycles": true,
+            "quality": {
+              "scope": "Independent NumPy solves, face/edge incidence and CGAL AABB triangle distances with float64 constructions; outside mesher timing. Three quadrature points per boundary face, not a Hausdorff certificate.",
+              "sites": 1000,
+              "referenced_vertices": 1000,
+              "tetrahedra": 4344,
+              "boundary_triangles": 1124,
+              "components": 1,
+              "boundary_euler": 4,
+              "volume": 7.507092978613395,
+              "input_volume": 7.487999977111816,
+              "relative_volume_error": 0.0025498132425132436,
+              "mean_radius_ratio": 0.8400381267706393,
+              "radius_ratio_percentiles": {
+                "0": 0.23680989082084067,
+                "1": 0.4064070146704969,
+                "5": 0.6002673918062935,
+                "50": 0.8712768369976787,
+                "95": 0.965165901396284,
+                "100": 0.9973193585007176
+              },
+              "dihedral_degrees_min": 10.184009675105852,
+              "dihedral_degrees_max": 161.17765257794298,
+              "output_to_input": {
+                "area": 27.802188413237392,
+                "squared_integral": 0.0008295530503097762,
+                "rms": 0.005462388576531085,
+                "max_sample": 0.07982053607702255
+              },
+              "input_to_output": {
+                "area": 27.84000011444091,
+                "squared_integral": 0.0010501162353875907,
+                "rms": 0.006141635955346669,
+                "max_sample": 0.0929795360158003
+              },
+              "two_sided_area_weighted_rms": 0.005812174179758181,
+              "two_sided_area_weighted_rms_percent_bbox_diagonal": 0.16778301636301893,
+              "distance_oracle": {
+                "implementation": "CGAL AABB triangle distances with float64 constructions",
+                "version": "CGAL 6.2.1",
+                "binary_sha256": "de6ef7100c20546480c610b711c878545b4dfe5ea1dc0ee45d8ecac2b9499cfe",
+                "source": "benchmarks/cpu/surface_distance.cpp",
+                "source_sha256": "d4416d1afa5bc40d7ff1d27d48cb3a2cd908084a0d5391a19d2377068c5ff27d"
+              }
+            },
+            "vtu_round_trip_exact": true,
+            "boundary_self_intersection_pairs": 0
+          },
+          "result_sha256": "3057139e8e786378631c556a20b0d0eec0ae96a8c047ef5f9f80c5903002862b"
+        }
+      },
+      "comparison": {
+        "points_bitwise_equal": true,
+        "maximum_coordinate_difference": 0.0,
+        "roles_equal": true,
+        "full_tets_equal": true,
+        "material_tets_equal": true,
+        "oriented_boundary_equal": true
+      }
+    }
+  }
+}

@@ -5,6 +5,11 @@ variational mesher. It is independently useful for closest-surface queries,
 inside/outside tests, and surface integration. This is a domain service, not a
 complete tetrahedral mesher.
 
+The default `query_backend="reference"` retains the contracts below. For good,
+well-scaled input, an optional [native Warp query backend](native-surface-queries.md)
+uses FP32 surface queries. Its native refit has a narrower capture contract;
+query and validation options are independent.
+
 ```python
 import numpy as np
 import warp as wp

@@ -35,7 +35,10 @@ The default follows Section 3.7 of
 retain a tetrahedron if its circumcenter is inside the domain, or its outside
 distance to the boundary divided by its circumradius is **strictly less than
 0.4**. Set `tolerance=0` to retain only centers in the closed domain. The supported
-range is `[0, 1)`. Calculations use float64 on float32 input positions.
+range is `[0, 1)`. The default calculations use float64 on float32 input positions.
+With `SurfaceDomain(query_backend="native")`, surface queries use FP32 native
+Warp operations while tetrahedron geometry and quality remain FP64; see the
+[backend's precision and capture contract](native-surface-queries.md).
 
 This is boundary approximation. Retained tetrahedra may extend beyond the input
 surface, and an outside circumcenter can be retained intentionally. The rule

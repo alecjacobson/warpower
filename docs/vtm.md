@@ -28,6 +28,9 @@ selectable accumulation precision and working defaults. Specialized degeneracy
 research is deferred; existing public API and standalone geometry tests remain
 release gates. The [native query backend](native-surface-queries.md) is explicitly
 selected, with the reference backend still the default.
+The [previous-neighbor clipping experiment](neighbor-clipping.md) improves some
+fresh scan reconstructions but loses to the existing tetrahedron reuse path on
+the tested VTM transitions; it remains outside the public runtime.
 
 The target includes ODT relocation, boundary and sharp-feature fitting, graded
 sizing, initial sampling, refinement, final domain extraction, and GPU convergence

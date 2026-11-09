@@ -5,7 +5,14 @@ import os
 import numpy as np
 import warp as wp
 
-from benchmarks.selective_failures import COLUMNS, Inputs, begin_call, record
+from benchmarks.selective_failures import (
+    COLUMNS,
+    Inputs,
+    begin_call,
+    record,
+    save_cells,
+    save_points,
+)
 
 DEVICE = os.environ.get("WARPOWER_DIAGNOSTIC_TEST_DEVICE", "cuda:0")
 
@@ -79,3 +86,47 @@ def test_stale_or_ordinary_extraction_fields_are_unavailable():
     np.testing.assert_array_equal(observed[:, -1], -1)
     assert observed[:, 8].tolist() == [0, 1]
     assert state.numpy()[4] == 0
+
+
+def test_snapshot_preserves_inactive_tails_and_other_slots():
+    state = wp.zeros(8, dtype=int, device=DEVICE)
+    state.assign(np.array([0, 0, 0, 0, 0, 0, 0, 1], dtype=np.int32))
+    active = wp.array([2], dtype=int, device=DEVICE)
+    count = wp.array([1], dtype=int, device=DEVICE)
+    points = wp.array(np.arange(12).reshape(4, 3), dtype=wp.vec3, device=DEVICE)
+    roles = wp.array([0, 1, 2, 3], dtype=int, device=DEVICE)
+    cells = wp.array([[0, 1, 2, 3], [3, 2, 1, 0]], dtype=int, device=DEVICE)
+    selected = wp.array([1, 0], dtype=int, device=DEVICE)
+    saved_points = wp.full((2, 4), wp.vec3(-9), dtype=wp.vec3, device=DEVICE)
+    saved_roles = wp.full((2, 4), -9, dtype=int, device=DEVICE)
+    saved_cells = wp.full((2, 2, 4), -9, dtype=int, device=DEVICE)
+    saved_selected = wp.full((2, 2), -9, dtype=int, device=DEVICE)
+
+    def launch():
+        wp.launch(
+            save_points,
+            4,
+            inputs=[state, active, points, roles, saved_points, saved_roles],
+            device=DEVICE,
+        )
+        wp.launch(
+            save_cells,
+            2,
+            inputs=[state, count, cells, selected, saved_cells, saved_selected],
+            device=DEVICE,
+        )
+
+    launch()
+    np.testing.assert_array_equal(saved_points.numpy()[1, :2], points.numpy()[:2])
+    np.testing.assert_array_equal(saved_roles.numpy()[1, :2], [0, 1])
+    np.testing.assert_array_equal(saved_cells.numpy()[1, :1], cells.numpy()[:1])
+    np.testing.assert_array_equal(saved_selected.numpy()[1, :1], [1])
+    arrays = [saved_points, saved_roles, saved_cells, saved_selected]
+    for output, prefix in zip(arrays, [2, 2, 1, 1]):
+        np.testing.assert_array_equal(output.numpy()[0], -9)
+        np.testing.assert_array_equal(output.numpy()[1, prefix:], -9)
+    before = [a.numpy() for a in arrays]
+    state.assign(np.array([0, 0, 0, 0, 0, 0, 0, -1], dtype=np.int32))
+    launch()
+    for a, b in zip(arrays, before):
+        np.testing.assert_array_equal(a.numpy(), b)

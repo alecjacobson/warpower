@@ -178,6 +178,7 @@ def checkpoint(model, optimizer, step, path, config):
                 for name in ["primal_points", "density", "att_dc", "att_sh"]
             },
             "optimizer": optimizer.state_dict(),
+            "num_init_points": model.num_init_points,
             "step": step,
             "config": config,
             "torch_rng": torch.get_rng_state(),

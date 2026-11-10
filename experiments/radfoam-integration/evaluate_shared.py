@@ -28,6 +28,7 @@ def main():
     )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--data", type=Path, default=Path("data/radfoam-training"))
+    parser.add_argument("--downsample", type=int, choices=[2, 4], default=4)
     parser.add_argument(
         "--source",
         type=Path,
@@ -46,11 +47,11 @@ def main():
         ),
         rays_per_batch=0,
     )
-    test.reload("test", downsample=4)
+    test.reload("test", downsample=args.downsample)
     report = {
         "resolution": test.img_wh,
         "views": len(test.rays),
-        "protocol": "Official COLMAP every-eighth-view held-out split, images_4, full-image rays, explicit precomputed starting cells, white background and [0,1] clamp; each checkpoint retains its saved graph.",
+        "protocol": f"Official COLMAP every-eighth-view held-out split, images_{args.downsample}, full-image rays, explicit precomputed starting cells, white background and [0,1] clamp; each checkpoint retains its saved graph.",
         "metrics": {
             "official": "Mean over images of mean over channels of -10 log10(mean pixel squared error in each channel).",
             "pooled_rgb": "Mean over images of -10 log10(mean squared error over all pixels and RGB channels).",

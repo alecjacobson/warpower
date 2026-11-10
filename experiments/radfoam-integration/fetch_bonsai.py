@@ -1,10 +1,12 @@
 """Fetch only Bonsai's calibrated low-resolution images from the official ZIP."""
 
+import argparse
 import hashlib
 import io
 import json
 import urllib.request
 import zipfile
+import zlib
 from pathlib import Path
 
 URL = "https://storage.googleapis.com/gresearch/refraw360/360_v2.zip"
@@ -62,7 +64,13 @@ class RangeFile(io.RawIOBase):
 
 
 def main():
-    ROOT.mkdir(parents=True, exist_ok=True)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--downsample", nargs="+", type=int, choices=[2, 4], default=[4])
+    parser.add_argument("--root", type=Path, default=ROOT)
+    args = parser.parse_args()
+    root = args.root
+    root.mkdir(parents=True, exist_ok=True)
+    image_prefixes = tuple(f"bonsai/images_{factor}/" for factor in args.downsample)
     remote = RangeFile(URL)
     with zipfile.ZipFile(remote) as archive:
         selected = [
@@ -70,7 +78,7 @@ def main():
             for x in archive.infolist()
             if not x.is_dir()
             and (
-                x.filename.startswith("bonsai/images_4/")
+                x.filename.startswith(image_prefixes)
                 or x.filename.startswith("bonsai/sparse/0/")
                 or x.filename == "bonsai/poses_bounds.npy"
             )
@@ -88,11 +96,18 @@ def main():
         )
         entries = []
         for i, entry in enumerate(sorted(selected, key=lambda x: x.header_offset)):
-            path = ROOT / entry.filename
-            assert path.resolve().is_relative_to(ROOT.resolve())
-            data = archive.read(entry)  # zipfile checks the ZIP CRC.
+            path = root / entry.filename
+            assert path.resolve().is_relative_to(root.resolve())
+            existing = path.read_bytes() if path.exists() else None
+            reused = (
+                existing is not None
+                and len(existing) == entry.file_size
+                and zlib.crc32(existing) == entry.CRC
+            )
+            data = existing if reused else archive.read(entry)  # zipfile checks the ZIP CRC.
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_bytes(data)
+            if not reused:
+                path.write_bytes(data)
             entries.append(
                 {
                     "path": entry.filename,
@@ -111,9 +126,11 @@ def main():
         "archive_etag": remote.etag,
         "archive_bytes": remote.size,
         "network_bytes": remote.transferred,
+        "downsample": args.downsample,
         "files": entries,
     }
-    (ROOT / "bonsai-manifest.json").write_text(json.dumps(report, indent=2) + "\n")
+    suffix = "" if args.downsample == [4] else "-" + "-".join(map(str, args.downsample))
+    (root / f"bonsai-manifest{suffix}.json").write_text(json.dumps(report, indent=2) + "\n")
     print(
         json.dumps({"complete": True, "files": len(entries), "network_bytes": remote.transferred}),
         flush=True,

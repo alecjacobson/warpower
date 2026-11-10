@@ -1,4 +1,4 @@
-"""Run upstream train.py with the reduced workload, retaining its training loop."""
+"""Run pinned upstream train.py at reduced or full budget, optionally replacing geometry."""
 
 import argparse
 import hashlib
@@ -32,8 +32,18 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--data", type=Path, default=Path("data/radfoam-training"))
-    parser.add_argument("--rays", type=int, default=65536)
-    parser.add_argument("--final-sites", type=int, default=262144)
+    parser.add_argument("--budget", choices=["reduced", "full"], default="reduced")
+    parser.add_argument("--backend", choices=["native", "warpower-morton"], default="native")
+    parser.add_argument("--rays", type=int)
+    parser.add_argument("--final-sites", type=int)
+    parser.add_argument(
+        "--steps", type=int, help="Short validation runs only; defaults to the upstream 20000"
+    )
+    parser.add_argument(
+        "--skip-ply",
+        action="store_true",
+        help="Save the renderable PT checkpoint without the redundant PLY export",
+    )
     parser.add_argument("--recipe", choices=["official", "adapter-settings"], default="official")
     parser.add_argument(
         "--source",
@@ -46,6 +56,16 @@ def main():
         default=Path(os.environ.get("RADFOAM_BUILD_DIR", ".work/radfoam-fitting-20261110/native")),
     )
     args = parser.parse_args()
+    if args.backend != "native" and args.recipe != "official":
+        parser.error("The Warp backend requires --recipe official")
+    args.rays = (
+        args.rays if args.rays is not None else (1000000 if args.budget == "full" else 65536)
+    )
+    args.final_sites = (
+        args.final_sites
+        if args.final_sites is not None
+        else (2097152 if args.budget == "full" else 262144)
+    )
     output, data, source, build = [
         p.resolve() for p in (args.output, args.data, args.source, args.build)
     ]
@@ -62,11 +82,13 @@ def main():
     config = config_parser.parse_args(["-c", str(source / "configs/mipnerf360_indoor.yaml")])
     overrides = dict(
         final_points=args.final_sites,
-        downsample=[4],
-        downsample_iterations=[0],
         data_path=str(data),
         experiment_name="fit",
     )
+    if args.budget == "reduced":
+        overrides.update(downsample=[4], downsample_iterations=[0])
+    if args.steps is not None:
+        overrides["iterations"] = args.steps
     vars(config).update(overrides)
 
     histories = {}
@@ -79,6 +101,35 @@ def main():
 
     upstream.DataHandler = WorkloadDataHandler
     original_scene = upstream.RadFoamScene
+
+    if args.backend == "warpower-morton":
+        from integration import Scene as AdapterScene
+        from integration import initialize_runtime
+
+        initialize_runtime()
+        torch.manual_seed(42)
+        np.random.seed(42)
+
+    class WarpGeometryScene(original_scene):
+        def __init__(self, *a, **kw):
+            super().__init__(*a, **kw)
+            self.backend = "warpower-morton"
+            self.diagram = None
+            self.geometry_records = []
+            self.frame_callback = None
+            self._warp_ready = True
+
+        def declare_optimizer(self, *a, **kw):
+            super().declare_optimizer(*a, **kw)
+            # Build and warm Warp geometry before the official loop timer.
+            # Optimizer groups now exist, so its permutation preserves all state.
+            self.update_triangulation(incremental=False)
+            self.triangulation = None
+
+        def update_triangulation(self, rebuild=True, incremental=False):
+            if not getattr(self, "_warp_ready", False):
+                return super().update_triangulation(rebuild=rebuild, incremental=incremental)
+            return AdapterScene.update_triangulation(self, rebuild=rebuild, incremental=incremental)
 
     class AdapterSettingsScene(original_scene):
         """Match the small experiment's initialization and error-map budgets."""
@@ -117,9 +168,21 @@ def main():
             np.random.seed(2026)
             model = AdapterSettingsScene(*a, **kw)
         else:
-            model = original_scene(*a, **kw)
+            model = (WarpGeometryScene if args.backend == "warpower-morton" else original_scene)(
+                *a, **kw
+            )
         state["model"] = model
         state["initial_points"] = len(model.primal_points)
+        if args.recipe == "official":
+            physical = {
+                name: getattr(model, name).detach().cpu().numpy()
+                for name in ["primal_points", "density", "att_dc", "att_sh"]
+            }
+            state["initial_physical_sha256"] = hashlib.sha256(
+                b"".join(physical[name].tobytes() for name in sorted(physical))
+            ).hexdigest()
+        if args.skip_ply:
+            model.save_ply = lambda path: None
         write(
             output / "initial-state.json",
             {
@@ -143,6 +206,8 @@ def main():
                     official_psnr=float(scalar_value),
                     sites=len(state["model"].primal_points),
                     elapsed_seconds=time.perf_counter() - state["loop_start"],
+                    backend=args.backend,
+                    budget=args.budget,
                 )
                 write(output / "progress.json", progress)
                 print(json.dumps(progress), flush=True)
@@ -176,9 +241,17 @@ def main():
         source / "data_loader/colmap.py",
         Path(__file__).resolve(),
     ]
+    if args.backend == "warpower-morton":
+        source_files += [
+            Path(__file__).with_name("integration.py"),
+            Path(__file__).with_name("spatial.py"),
+        ]
     report = {
         "complete": False,
-        "scope": "Official native training loop at reduced resolution, ray and final-site budgets; asynchronous batches and every-100-step evaluation retained. Recipe selects official initialization/error maps or the small adapter's settings.",
+        "scope": "Pinned official training loop with explicit full/reduced budget and geometry backend; asynchronous batches, optimizer, losses, densification and every-100-step evaluation retained. Native initialization is shared; Warp replaces subsequent adjacency updates and physical ordering.",
+        "budget": args.budget,
+        "backend": args.backend,
+        "skip_ply": args.skip_ply,
         "recipe": args.recipe,
         "recipe_settings": {
             "seed": 2026 if args.recipe == "adapter-settings" else 42,
@@ -204,10 +277,10 @@ def main():
         "gpu": torch.cuda.get_device_name(),
         "torch": torch.__version__,
         "cpu_affinity": sorted(os.sched_getaffinity(0)),
-        "timing_scope": "Loop timer includes official evaluation every 100 steps and synchronous scalar logging; excludes loading, model setup, serialization and final image export. Not comparable to fit_scene.py's four training evaluations.",
+        "timing_scope": "Loop timer includes official evaluation every 100 steps and synchronous scalar logging; excludes loading, model setup, initial geometry compilation, serialization and final image export. Total wall time is recorded separately. Identical official batching/evaluation policy across the paired backends.",
+        "audit_scope": "Official renderer/backward including its gradient masking retained without synchronized per-call numerical audits. Warp adjacency status is checked on every rebuild. Final shared evaluation separately checks raw RGBA and traversal counts.",
         "unchanged": [
             "renderer/backward",
-            "native geometry",
             "losses",
             "optimizer/schedules",
             "pruning/densification",
@@ -215,11 +288,14 @@ def main():
             "held-out split",
             "PSNR function",
             "evaluation cadence",
-            "serialization",
         ],
     }
     if args.recipe == "official":
         report["unchanged"].append("initialization and error-map selection")
+    if args.backend == "native":
+        report["unchanged"].append("native geometry")
+    if not args.skip_ply:
+        report["unchanged"].append("serialization")
     write(output / "report.json", report)
     (output / "executed_driver.py").write_bytes(Path(__file__).read_bytes())
     quota = cpu_quota_snapshot()
@@ -240,6 +316,7 @@ def main():
             histories=histories,
             torch_peak_allocated_bytes=torch.cuda.max_memory_allocated(),
             torch_peak_reserved_bytes=torch.cuda.max_memory_reserved(),
+            geometry=getattr(state["model"], "geometry_records", []),
         )
     except BaseException as error:
         report.update(

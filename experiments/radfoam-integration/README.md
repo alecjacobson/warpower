@@ -39,6 +39,44 @@ unlocalized and unresolved; successful final evaluation does not clear it.
 include both PSNR definitions, stage timings, numerical counters, exact executed
 sources and a checksum inventory of local raw outputs.
 
+## Full-budget comparison
+
+`run_full_comparison.py` runs the pinned official training loop with native
+geometry, then with WarPower Morton-ordered geometry, sequentially on the same
+GPU. Its goal is to match PSNR while reducing training time. Both use the official
+20,000 steps, 1,000,000 rays per step, 2,097,152-site target, seed 42, all-view
+densification maps, and quarter-to-half-resolution schedule at step 5,000.
+Evaluation uses all 37 half-resolution held-out views every 100 steps.
+
+The native initializer is shared, including its bootstrap triangulation. Warp
+replaces subsequent adjacency updates and permutes parameters and Adam moments
+together. Both runs retain the original asynchronous batch fetching, renderer,
+backward pass, loss, optimizer and densification implementation. The loop timer
+includes intermediate evaluation and the resolution switch, but excludes data
+loading, initial setup/compilation and final exports. Total wall time is recorded
+separately. Original renderable PT checkpoints and final PNGs are kept; redundant
+PLY exports outside the loop timer are skipped to fit persistent storage.
+
+```bash
+.venv/bin/python experiments/radfoam-integration/fetch_bonsai.py --downsample 2
+.venv/bin/python experiments/radfoam-integration/run_full_comparison.py \
+  --output results/local/my-full-bonsai-comparison
+```
+
+The runner first performs a two-step Warp preflight with full ray and evaluation
+budgets, then runs both full fits and a shared evaluation. Use a detached process
+for unattended execution. `plan.json` records immutable driver snapshots and
+checksums; `status.json` records the current stage and latest PSNR. Each stage has
+its own log and report. A failed stage stops the queue. `comparison.json` is only
+written after both full fits and the common evaluation succeed.
+
+The paper's Bonsai reference is 32.15 dB and roughly 70 minutes on RTX 4090.
+Our primary timing comparison is native versus Warp on the same L40; comparison
+with 70 minutes is cross-hardware context. Full-budget quality and speed remain
+unmeasured until this run finishes. Training retains upstream gradient masking;
+the shared evaluator checks raw final RGBA values and traversal caps. It does
+not provide the custom harness's per-call raw training-gradient audit.
+
 ## Earlier small-recipe fits
 
 The custom 20,000-step reduced-budget fit on NVIDIA L40 took 184.15 seconds with
@@ -237,7 +275,8 @@ defaults point at the original experiment workspace.
 
 The downloader fetches only Bonsai quarter-resolution images and COLMAP data
 from the official Mip-NeRF 360 archive, checking ZIP CRCs and recording SHA-256
-hashes. It does not download the entire 12.5 GB archive. Outputs include the
+hashes. `--downsample 2` adds the official half-resolution images (1559 by 1039)
+and reuses verified COLMAP files. It does not download the entire 12.5 GB archive. Outputs include the
 renderable model, training state, JSON measurements and held-out target/render
 images. Use a new output directory for each run. The defaults without the larger
 budget flags give a shorter 2,000-step example. Available backends are `native`,

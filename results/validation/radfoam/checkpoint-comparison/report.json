@@ -1,0 +1,4738 @@
+{
+  "scope": "Unweighted construction on full public RadFoam v1 site arrays. Separate sequential backend processes; no rendering or training speed claim.",
+  "revision": "730ec233505bcc474c248d0ab237b10042fa029e",
+  "harness_sha256": "5fe6521f024c68fa69eadde48375c39cf33e77d47137dcc695ce381e72dc1bc2",
+  "cgal_source_sha256": "19d82c0268ab2ff6116d79bfb9e5897711a63c752c2225c2e9a480d6b281c95c",
+  "platform": "Architecture:                       x86_64\nCPU op-mode(s):                     32-bit, 64-bit\nAddress sizes:                      46 bits physical, 57 bits virtual\nByte Order:                         Little Endian\nCPU(s):                             128\nOn-line CPU(s) list:                0-127\nVendor ID:                          GenuineIntel\nModel name:                         Intel(R) Xeon(R) Platinum 8362 CPU @ 2.80GHz\nCPU family:                         6\nModel:                              106\nThread(s) per core:                 2\nCore(s) per socket:                 32\nSocket(s):                          2\nStepping:                           6\nCPU max MHz:                        3600.0000\nCPU min MHz:                        800.0000\nBogoMIPS:                           5600.00\nFlags:                              fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l3 invpcid_single intel_ppin ssbd mba ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local split_lock_detect wbnoinvd dtherm ida arat pln pts avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg tme avx512_vpopcntdq la57 rdpid fsrm md_clear pconfig flush_l1d arch_capabilities\nVirtualization:                     VT-x\nL1d cache:                          3 MiB (64 instances)\nL1i cache:                          2 MiB (64 instances)\nL2 cache:                           80 MiB (64 instances)\nL3 cache:                           96 MiB (2 instances)\nNUMA node(s):                       2\nNUMA node0 CPU(s):                  0-31,64-95\nNUMA node1 CPU(s):                  32-63,96-127\nVulnerability Gather data sampling: Vulnerable: No microcode\nVulnerability Itlb multihit:        Not affected\nVulnerability L1tf:                 Not affected\nVulnerability Mds:                  Not affected\nVulnerability Meltdown:             Not affected\nVulnerability Mmio stale data:      Mitigation; Clear CPU buffers; SMT vulnerable\nVulnerability Retbleed:             Not affected\nVulnerability Spec rstack overflow: Not affected\nVulnerability Spec store bypass:    Mitigation; Speculative Store Bypass disabled via prctl and seccomp\nVulnerability Spectre v1:           Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:           Mitigation; Enhanced IBRS; IBPB conditional; RSB filling; PBRSB-eIBRS SW sequence; BHI Syscall hardening, KVM SW loop\nVulnerability Srbds:                Not affected\nVulnerability Tsx async abort:      Not affected\n",
+  "cpu_limits": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 81189,
+      "throttled_usec": 192803408008
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 82233,
+      "throttled_usec": 185222545266
+    }
+  },
+  "scenes": {
+    "bonsai": {
+      "input": {
+        "scene": "bonsai",
+        "checkpoint_version": "RadFoam checkpoints_v1",
+        "google_drive_id": "1QPT5soWRQ4JT8KGPrbT7mmviCVpYzsu9",
+        "checkpoint_sha256": "68811d6af93794843a3ddd201c04e91a1f3d7514d664d4a2832139c0795fd203",
+        "n": 1968522,
+        "positions_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+        "npz_sha256": "3faca2f9882c5a596e20c0380c3828845c0f8debfb9d08cdd02397e9792ab3cb",
+        "source": "https://github.com/theialab/radfoam#checkpoints"
+      },
+      "backends": {
+        "warpower": {
+          "backend": "warpower",
+          "points_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+          "weights_sha256": null,
+          "distribution": "bonsai",
+          "n": 1968522,
+          "seed": 42,
+          "weighted": false,
+          "memory": {
+            "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+            "interval_seconds": 0.001,
+            "before_construction_bytes": 1137836032,
+            "peak_bytes": 8505131008,
+            "samples": 4253,
+            "error": null
+          },
+          "cpu_quota_during_measurement": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "cpu_throttled": false,
+          "mempool_retain_mb": 32768,
+          "warmup": 3,
+          "repeats": 10,
+          "seconds": [
+            0.2250172719359398,
+            0.22430873289704323,
+            0.22334853559732437,
+            0.22409691289067268,
+            0.22521262243390083,
+            0.22449185326695442,
+            0.225717443972826,
+            0.22473010420799255,
+            0.22404248639941216,
+            0.2254611812531948
+          ],
+          "mean_seconds": 0.22464271448552608,
+          "median_seconds": 0.2246109787374735,
+          "nnz": 30267974,
+          "status_counts": {
+            "0": 1968522
+          },
+          "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+          "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+          "python": "3.10.12",
+          "versions": {
+            "warp": "1.19.0",
+            "warpower_source_sha256": "677b7c15d41be045411eefdf121c2e6e703c683bd54a90392b811cdca69be3e1",
+            "warpower_dirty": false,
+            "warpower_commit": "730ec233505bcc474c248d0ab237b10042fa029e",
+            "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+          },
+          "diagnostics": {
+            "retried_cells": 288,
+            "double_precision_cells": 1,
+            "consistency_retried_cells": 4,
+            "asymmetric_cells_remaining": 0,
+            "chunk_size": 1968522,
+            "leaf_size": 4,
+            "knn_requested": 8,
+            "knn_effective": 0,
+            "warm_start": "nearest leaf"
+          },
+          "command": [
+            "/home/horde/projects/power-diagram/.venv/bin/python",
+            "-m",
+            "benchmarks.run",
+            "--backend",
+            "warpower",
+            "--input",
+            "data/radfoam/bonsai.npz",
+            "--distribution",
+            "bonsai",
+            "--warmup",
+            "3",
+            "--repeats",
+            "10",
+            "--output",
+            "results/local/radfoam-comparison-20261109-v1/bonsai/warpower.json",
+            "--save-diagram",
+            "results/local/radfoam-comparison-20261109-v1/bonsai/warpower-graph.npz",
+            "--mempool-retain-mb",
+            "32768"
+          ],
+          "graph_npz_sha256": "5134cce96dd7dbdce21d72be823bfb76617712365643c5ea1b4afd04b92acf39"
+        },
+        "paragram": {
+          "backend": "paragram",
+          "points_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+          "weights_sha256": null,
+          "distribution": "bonsai",
+          "n": 1968522,
+          "seed": 42,
+          "weighted": false,
+          "memory": {
+            "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+            "interval_seconds": 0.001,
+            "before_construction_bytes": 1129447424,
+            "peak_bytes": 7179730944,
+            "samples": 5737,
+            "error": null
+          },
+          "cpu_quota_during_measurement": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "cpu_throttled": false,
+          "mempool_retain_mb": null,
+          "warmup": 3,
+          "repeats": 10,
+          "seconds": [
+            0.419675849378109,
+            0.42157966643571854,
+            0.42083294317126274,
+            0.42072718963027,
+            0.42226897925138474,
+            0.4212272875010967,
+            0.42049846425652504,
+            0.4214446544647217,
+            0.4221556559205055,
+            0.42035890370607376
+          ],
+          "mean_seconds": 0.42107695937156675,
+          "median_seconds": 0.42103011533617973,
+          "nnz": 30274076,
+          "status_counts": {
+            "0": 1967903,
+            "1": 348,
+            "2": 139,
+            "3": 6,
+            "5": 126
+          },
+          "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+          "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+          "python": "3.10.12",
+          "versions": {
+            "torch": "2.7.1+cu126",
+            "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+            "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+          },
+          "command": [
+            "/home/horde/projects/power-diagram/.venv/bin/python",
+            "-m",
+            "benchmarks.run",
+            "--backend",
+            "paragram",
+            "--input",
+            "data/radfoam/bonsai.npz",
+            "--distribution",
+            "bonsai",
+            "--warmup",
+            "3",
+            "--repeats",
+            "10",
+            "--output",
+            "results/local/radfoam-comparison-20261109-v1/bonsai/paragram.json",
+            "--save-diagram",
+            "results/local/radfoam-comparison-20261109-v1/bonsai/paragram-graph.npz"
+          ],
+          "graph_npz_sha256": "8d786a8285d6352d50e09807a9eec72b7e0516f987162b0b91443c2ab56e1c13"
+        },
+        "cgal-1thread": {
+          "backend": "cgal-1thread",
+          "command": [
+            "/home/horde/projects/power-diagram/.work/radfoam-comparison-20261109/cgal-adjacency",
+            "results/local/radfoam-comparison-20261109-v1/bonsai/input.f32",
+            "results/local/radfoam-comparison-20261109-v1/bonsai/cgal-1thread.bin",
+            "3",
+            "10",
+            "1"
+          ],
+          "binary_sha256": "9faaed9212e0e815f83033651072443c1d177c4e9a6cf86d7ec5ccbb9d040f50",
+          "input_f32_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+          "warmups": 3,
+          "repeats": 10,
+          "samples": [
+            {
+              "iteration": -3,
+              "build_seconds": 9.499243129,
+              "csr_seconds": 8.857224133,
+              "total_seconds": 18.356467262,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": -2,
+              "build_seconds": 9.254433039,
+              "csr_seconds": 8.585737014,
+              "total_seconds": 17.840170053,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": -1,
+              "build_seconds": 9.219948735,
+              "csr_seconds": 8.572019258,
+              "total_seconds": 17.791967993,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 0,
+              "build_seconds": 9.232462026,
+              "csr_seconds": 8.542283184,
+              "total_seconds": 17.77474521,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 1,
+              "build_seconds": 9.239094448,
+              "csr_seconds": 8.576448856,
+              "total_seconds": 17.815543304,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 2,
+              "build_seconds": 9.212936545,
+              "csr_seconds": 8.568117163,
+              "total_seconds": 17.781053708,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 3,
+              "build_seconds": 9.243688543,
+              "csr_seconds": 8.575168398,
+              "total_seconds": 17.818856941,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 4,
+              "build_seconds": 9.218297257,
+              "csr_seconds": 8.491478961,
+              "total_seconds": 17.709776218,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 5,
+              "build_seconds": 9.210174531,
+              "csr_seconds": 8.462447049,
+              "total_seconds": 17.67262158,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 6,
+              "build_seconds": 9.181021293,
+              "csr_seconds": 8.464840427,
+              "total_seconds": 17.64586172,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 7,
+              "build_seconds": 9.192071917,
+              "csr_seconds": 8.454043045,
+              "total_seconds": 17.646114962,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 8,
+              "build_seconds": 9.174400077,
+              "csr_seconds": 8.455871407,
+              "total_seconds": 17.630271484,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 9,
+              "build_seconds": 9.206877468,
+              "csr_seconds": 8.533524677,
+              "total_seconds": 17.740402145,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            }
+          ],
+          "final": {
+            "final": true,
+            "CGAL": "6.2.1",
+            "threads": 1,
+            "valid": true,
+            "validation_seconds": 17.016947727,
+            "peak_rss_bytes": 1256894464,
+            "cpu_quota_since_previous_sample": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "cpu_throttled": false
+          },
+          "mean_seconds": 17.723524727199994,
+          "median_seconds": 17.7250891815,
+          "mean_build_seconds": 9.2111024105,
+          "cpu_throttled": false,
+          "process_wall_seconds": 262.45326502248645,
+          "serialized_csr_sha256": "b1298bfcd4176e745c1a43be46004d7398f56b04f90d66c43a265beb76619f5f",
+          "graph_npz_sha256": "59d71780872bfa6b49589a210fd344867b65780dead09da3bb5e944f162b9ba3",
+          "scope": "Native CPU exact-predicate full-hull Delaunay plus two-pass CSR export; allocations included. Input decoding, final is_valid and disk export excluded. Sequential CSR export also used with parallel Delaunay."
+        },
+        "cgal-4thread": {
+          "backend": "cgal-4thread",
+          "command": [
+            "/home/horde/projects/power-diagram/.work/radfoam-comparison-20261109/cgal-adjacency-parallel",
+            "results/local/radfoam-comparison-20261109-v1/bonsai/input.f32",
+            "results/local/radfoam-comparison-20261109-v1/bonsai/cgal-4thread.bin",
+            "3",
+            "10",
+            "4"
+          ],
+          "binary_sha256": "5b42c60d5849adb0daeed19142b91d1fc73d2d6aa788c4533bfc8e4dff65495d",
+          "input_f32_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+          "warmups": 3,
+          "repeats": 10,
+          "samples": [
+            {
+              "iteration": -3,
+              "build_seconds": 3.764625364,
+              "csr_seconds": 7.498737916,
+              "total_seconds": 11.26336328,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 20,
+                  "throttled_usec": 49662
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 24,
+                  "throttled_usec": 88480
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": -2,
+              "build_seconds": 3.888579994,
+              "csr_seconds": 7.696408315,
+              "total_seconds": 11.584988309,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 25,
+                  "throttled_usec": 36539
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 30,
+                  "throttled_usec": 94227
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": -1,
+              "build_seconds": 3.784045962,
+              "csr_seconds": 7.624280304,
+              "total_seconds": 11.408326266,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 20,
+                  "throttled_usec": 82129
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 18,
+                  "throttled_usec": 79376
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 0,
+              "build_seconds": 4.104671289,
+              "csr_seconds": 7.55627548,
+              "total_seconds": 11.660946769,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 26,
+                  "throttled_usec": 212536
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 25,
+                  "throttled_usec": 214278
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 1,
+              "build_seconds": 3.703428368,
+              "csr_seconds": 7.773403422,
+              "total_seconds": 11.47683179,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 17,
+                  "throttled_usec": 17642
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 23,
+                  "throttled_usec": 54771
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 2,
+              "build_seconds": 3.631593797,
+              "csr_seconds": 7.727195065,
+              "total_seconds": 11.358788862,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 16,
+                  "throttled_usec": 29804
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 19,
+                  "throttled_usec": 70944
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 3,
+              "build_seconds": 3.682759676,
+              "csr_seconds": 7.611840151,
+              "total_seconds": 11.294599827,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 19,
+                  "throttled_usec": 66834
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 18,
+                  "throttled_usec": 66738
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 4,
+              "build_seconds": 3.583391618,
+              "csr_seconds": 7.442498622,
+              "total_seconds": 11.02589024,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 20,
+                  "throttled_usec": 51258
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 21,
+                  "throttled_usec": 67965
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 5,
+              "build_seconds": 3.699006515,
+              "csr_seconds": 7.519332767,
+              "total_seconds": 11.218339282,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 16,
+                  "throttled_usec": 3364
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 17,
+                  "throttled_usec": 36027
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 6,
+              "build_seconds": 4.063715101,
+              "csr_seconds": 7.433541731,
+              "total_seconds": 11.497256832,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 25,
+                  "throttled_usec": 57912
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 24,
+                  "throttled_usec": 73806
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 7,
+              "build_seconds": 4.006797623,
+              "csr_seconds": 7.590430304,
+              "total_seconds": 11.597227927,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 20,
+                  "throttled_usec": 39040
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 19,
+                  "throttled_usec": 70238
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 8,
+              "build_seconds": 3.800728668,
+              "csr_seconds": 7.576003821,
+              "total_seconds": 11.376732489,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 21,
+                  "throttled_usec": 72423
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 21,
+                  "throttled_usec": 72320
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 9,
+              "build_seconds": 3.933902069,
+              "csr_seconds": 7.517770361,
+              "total_seconds": 11.45167243,
+              "vertices": 1968522,
+              "tetrahedra": 13165611,
+              "directed_edges": 30268338,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 11,
+                  "throttled_usec": 15076
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 19,
+                  "throttled_usec": 64871
+                }
+              },
+              "cpu_throttled": true
+            }
+          ],
+          "final": {
+            "final": true,
+            "CGAL": "6.2.1",
+            "threads": 4,
+            "valid": true,
+            "validation_seconds": 16.28367249,
+            "peak_rss_bytes": 1318432768,
+            "cpu_quota_since_previous_sample": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "cpu_throttled": false
+          },
+          "mean_seconds": 11.395828644800002,
+          "median_seconds": 11.4142024595,
+          "mean_build_seconds": 3.8209994723999996,
+          "cpu_throttled": true,
+          "process_wall_seconds": 176.92084361240268,
+          "serialized_csr_sha256": "14831bf23c415fc73d880bc07ebed1f6c7d47b3a7fc7480d1db486a9bde38409",
+          "graph_npz_sha256": "0ffce2c6c4509c64b6f00d5a841ca47c2659adb84f7bc07176e0e57abb59e5ee",
+          "scope": "Native CPU exact-predicate full-hull Delaunay plus two-pass CSR export; allocations included. Input decoding, final is_valid and disk export excluded. Sequential CSR export also used with parallel Delaunay."
+        }
+      },
+      "comparison": {
+        "scope": "Full directed adjacency sets. GPU cells are box-clipped; CGAL is full-hull and can include zero-area dual faces at exact ties. Differences alone do not establish errors.",
+        "pairs": {
+          "paragram": {
+            "warpower_edges": 30267974,
+            "other_edges": 30274076,
+            "shared_edges": 30266910,
+            "only_warpower": 1064,
+            "only_other": 7166,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                2047,
+                25503
+              ],
+              [
+                2047,
+                1276927
+              ],
+              [
+                2047,
+                1923071
+              ],
+              [
+                25503,
+                2047
+              ],
+              [
+                170766,
+                182054
+              ],
+              [
+                182054,
+                170766
+              ],
+              [
+                185987,
+                237186
+              ],
+              [
+                187062,
+                212545
+              ],
+              [
+                191569,
+                199732
+              ],
+              [
+                199116,
+                202167
+              ],
+              [
+                199732,
+                191569
+              ],
+              [
+                202167,
+                199116
+              ],
+              [
+                212545,
+                187062
+              ],
+              [
+                212545,
+                237186
+              ],
+              [
+                224783,
+                237186
+              ],
+              [
+                237186,
+                185987
+              ]
+            ],
+            "only_other_examples": [
+              [
+                7181,
+                11287
+              ],
+              [
+                9581,
+                9630
+              ],
+              [
+                9630,
+                9581
+              ],
+              [
+                11287,
+                7181
+              ],
+              [
+                11287,
+                17424
+              ],
+              [
+                11405,
+                13508
+              ],
+              [
+                13508,
+                11405
+              ],
+              [
+                14516,
+                14538
+              ],
+              [
+                14538,
+                14516
+              ],
+              [
+                15848,
+                16850
+              ],
+              [
+                16154,
+                16187
+              ],
+              [
+                16187,
+                16154
+              ],
+              [
+                16850,
+                15848
+              ],
+              [
+                17424,
+                11287
+              ],
+              [
+                17474,
+                28823
+              ],
+              [
+                19496,
+                23674
+              ]
+            ],
+            "affected_rows": 5105,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 613
+          },
+          "cgal-1thread": {
+            "warpower_edges": 30267974,
+            "other_edges": 30268338,
+            "shared_edges": 30267972,
+            "only_warpower": 2,
+            "only_other": 366,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                199116,
+                202167
+              ],
+              [
+                202167,
+                199116
+              ]
+            ],
+            "only_other_examples": [
+              [
+                0,
+                35
+              ],
+              [
+                0,
+                105472
+              ],
+              [
+                0,
+                1952768
+              ],
+              [
+                2,
+                35
+              ],
+              [
+                2,
+                342
+              ],
+              [
+                2,
+                15375
+              ],
+              [
+                32,
+                275
+              ],
+              [
+                35,
+                0
+              ],
+              [
+                35,
+                2
+              ],
+              [
+                35,
+                121
+              ],
+              [
+                35,
+                259
+              ],
+              [
+                35,
+                105472
+              ],
+              [
+                121,
+                35
+              ],
+              [
+                121,
+                275
+              ],
+              [
+                121,
+                1023
+              ],
+              [
+                124,
+                15375
+              ]
+            ],
+            "affected_rows": 108,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          },
+          "cgal-4thread": {
+            "warpower_edges": 30267974,
+            "other_edges": 30268338,
+            "shared_edges": 30267972,
+            "only_warpower": 2,
+            "only_other": 366,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                199116,
+                202167
+              ],
+              [
+                202167,
+                199116
+              ]
+            ],
+            "only_other_examples": [
+              [
+                0,
+                35
+              ],
+              [
+                0,
+                105472
+              ],
+              [
+                0,
+                1952768
+              ],
+              [
+                2,
+                35
+              ],
+              [
+                2,
+                342
+              ],
+              [
+                2,
+                15375
+              ],
+              [
+                32,
+                275
+              ],
+              [
+                35,
+                0
+              ],
+              [
+                35,
+                2
+              ],
+              [
+                35,
+                121
+              ],
+              [
+                35,
+                259
+              ],
+              [
+                35,
+                105472
+              ],
+              [
+                121,
+                35
+              ],
+              [
+                121,
+                275
+              ],
+              [
+                121,
+                1023
+              ],
+              [
+                124,
+                15375
+              ]
+            ],
+            "affected_rows": 108,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          }
+        }
+      }
+    },
+    "garden": {
+      "input": {
+        "scene": "garden",
+        "checkpoint_version": "RadFoam checkpoints_v1",
+        "google_drive_id": "1lLEIfH7CBLAEmdqJrDmQ6flK5Qub7ttQ",
+        "checkpoint_sha256": "afefdb74d451f3ef4493a5ac79916a695ecb9b51a3a4c582ba2fe16721dbf359",
+        "n": 4064598,
+        "positions_sha256": "09fd9e0a85f683fb0646116ef381a1f8e28abdc8d2ec29f82a22c51facc1ce02",
+        "npz_sha256": "7e167917ac0ce1af97f848c37e38d8f97ed16a5803d7a84bebee227dcbc4c693",
+        "source": "https://github.com/theialab/radfoam#checkpoints"
+      },
+      "backends": {
+        "warpower": {
+          "backend": "warpower",
+          "points_sha256": "09fd9e0a85f683fb0646116ef381a1f8e28abdc8d2ec29f82a22c51facc1ce02",
+          "weights_sha256": null,
+          "distribution": "garden",
+          "n": 4064598,
+          "seed": 42,
+          "weighted": false,
+          "memory": {
+            "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+            "interval_seconds": 0.001,
+            "before_construction_bytes": 1171390464,
+            "peak_bytes": 15518007296,
+            "samples": 5440,
+            "error": null
+          },
+          "cpu_quota_during_measurement": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "cpu_throttled": false,
+          "mempool_retain_mb": 32768,
+          "warmup": 3,
+          "repeats": 10,
+          "seconds": [
+            0.44389134272933006,
+            0.4414934851229191,
+            0.4424438364803791,
+            0.4430501088500023,
+            0.4440646469593048,
+            0.44305943697690964,
+            0.4435296803712845,
+            0.4436270631849766,
+            0.44365471601486206,
+            0.4439043141901493
+          ],
+          "mean_seconds": 0.44327186308801175,
+          "median_seconds": 0.44357837177813053,
+          "nnz": 61963204,
+          "status_counts": {
+            "0": 4064598
+          },
+          "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+          "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+          "python": "3.10.12",
+          "versions": {
+            "warp": "1.19.0",
+            "warpower_source_sha256": "677b7c15d41be045411eefdf121c2e6e703c683bd54a90392b811cdca69be3e1",
+            "warpower_dirty": false,
+            "warpower_commit": "730ec233505bcc474c248d0ab237b10042fa029e",
+            "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+          },
+          "diagnostics": {
+            "retried_cells": 408,
+            "double_precision_cells": 1,
+            "consistency_retried_cells": 18,
+            "asymmetric_cells_remaining": 0,
+            "chunk_size": 4064598,
+            "leaf_size": 4,
+            "knn_requested": 8,
+            "knn_effective": 0,
+            "warm_start": "nearest leaf"
+          },
+          "command": [
+            "/home/horde/projects/power-diagram/.venv/bin/python",
+            "-m",
+            "benchmarks.run",
+            "--backend",
+            "warpower",
+            "--input",
+            "data/radfoam/garden.npz",
+            "--distribution",
+            "garden",
+            "--warmup",
+            "3",
+            "--repeats",
+            "10",
+            "--output",
+            "results/local/radfoam-comparison-20261109-v1/garden/warpower.json",
+            "--save-diagram",
+            "results/local/radfoam-comparison-20261109-v1/garden/warpower-graph.npz",
+            "--mempool-retain-mb",
+            "32768"
+          ],
+          "graph_npz_sha256": "84595426e68604716d411ffa2765d52e41f04779be270355658cdd555e9dda05"
+        },
+        "paragram": {
+          "backend": "paragram",
+          "points_sha256": "09fd9e0a85f683fb0646116ef381a1f8e28abdc8d2ec29f82a22c51facc1ce02",
+          "weights_sha256": null,
+          "distribution": "garden",
+          "n": 4064598,
+          "seed": 42,
+          "weighted": false,
+          "memory": {
+            "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+            "interval_seconds": 0.001,
+            "before_construction_bytes": 1154613248,
+            "peak_bytes": 13521518592,
+            "samples": 8948,
+            "error": null
+          },
+          "cpu_quota_during_measurement": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "cpu_throttled": false,
+          "mempool_retain_mb": null,
+          "warmup": 3,
+          "repeats": 10,
+          "seconds": [
+            0.70582564920187,
+            0.7054642587900162,
+            0.7036021016538143,
+            0.7041990831494331,
+            0.7041539624333382,
+            0.7049743197858334,
+            0.7045523002743721,
+            0.7038524560630322,
+            0.7085772044956684,
+            0.7070692256093025
+          ],
+          "mean_seconds": 0.705227056145668,
+          "median_seconds": 0.7047633100301027,
+          "nnz": 61975284,
+          "status_counts": {
+            "0": 4063484,
+            "1": 714,
+            "2": 220,
+            "3": 4,
+            "5": 176
+          },
+          "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+          "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+          "python": "3.10.12",
+          "versions": {
+            "torch": "2.7.1+cu126",
+            "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+            "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+          },
+          "command": [
+            "/home/horde/projects/power-diagram/.venv/bin/python",
+            "-m",
+            "benchmarks.run",
+            "--backend",
+            "paragram",
+            "--input",
+            "data/radfoam/garden.npz",
+            "--distribution",
+            "garden",
+            "--warmup",
+            "3",
+            "--repeats",
+            "10",
+            "--output",
+            "results/local/radfoam-comparison-20261109-v1/garden/paragram.json",
+            "--save-diagram",
+            "results/local/radfoam-comparison-20261109-v1/garden/paragram-graph.npz"
+          ],
+          "graph_npz_sha256": "72690b88e088bf5cd4f8d9c38eb60ac3f1c5ba6105e8e86089d84d75efc1ed0d"
+        },
+        "cgal-1thread": {
+          "backend": "cgal-1thread",
+          "command": [
+            "/home/horde/projects/power-diagram/.work/radfoam-comparison-20261109/cgal-adjacency",
+            "results/local/radfoam-comparison-20261109-v1/garden/input.f32",
+            "results/local/radfoam-comparison-20261109-v1/garden/cgal-1thread.bin",
+            "3",
+            "10",
+            "1"
+          ],
+          "binary_sha256": "9faaed9212e0e815f83033651072443c1d177c4e9a6cf86d7ec5ccbb9d040f50",
+          "input_f32_sha256": "09fd9e0a85f683fb0646116ef381a1f8e28abdc8d2ec29f82a22c51facc1ce02",
+          "warmups": 3,
+          "repeats": 10,
+          "samples": [
+            {
+              "iteration": -3,
+              "build_seconds": 19.273017215,
+              "csr_seconds": 17.944508137,
+              "total_seconds": 37.217525352,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": -2,
+              "build_seconds": 19.188761049,
+              "csr_seconds": 17.723896308,
+              "total_seconds": 36.912657357,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": -1,
+              "build_seconds": 19.405049063,
+              "csr_seconds": 17.959654018,
+              "total_seconds": 37.364703081,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 0,
+              "build_seconds": 19.289511527,
+              "csr_seconds": 17.468253248,
+              "total_seconds": 36.757764775,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 1,
+              "build_seconds": 19.167293807,
+              "csr_seconds": 17.70155395,
+              "total_seconds": 36.868847757,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 2,
+              "build_seconds": 19.189086808,
+              "csr_seconds": 18.150964453,
+              "total_seconds": 37.340051261,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 3,
+              "build_seconds": 19.441295417,
+              "csr_seconds": 18.017612463,
+              "total_seconds": 37.45890788,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 4,
+              "build_seconds": 19.546546229,
+              "csr_seconds": 17.784858465,
+              "total_seconds": 37.331404694,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 5,
+              "build_seconds": 20.025970318,
+              "csr_seconds": 17.626531216,
+              "total_seconds": 37.652501534,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 6,
+              "build_seconds": 19.38496912,
+              "csr_seconds": 17.758837625,
+              "total_seconds": 37.143806745,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 7,
+              "build_seconds": 19.468584639,
+              "csr_seconds": 17.626675647,
+              "total_seconds": 37.095260286,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 8,
+              "build_seconds": 19.202610562,
+              "csr_seconds": 17.57339156,
+              "total_seconds": 36.776002122,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 9,
+              "build_seconds": 19.218096078,
+              "csr_seconds": 17.804208885,
+              "total_seconds": 37.022304963,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            }
+          ],
+          "final": {
+            "final": true,
+            "CGAL": "6.2.1",
+            "threads": 1,
+            "valid": true,
+            "validation_seconds": 34.68068544,
+            "peak_rss_bytes": 2978197504,
+            "cpu_quota_since_previous_sample": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "cpu_throttled": false
+          },
+          "mean_seconds": 37.1446852017,
+          "median_seconds": 37.119533515499995,
+          "mean_build_seconds": 19.3933964505,
+          "cpu_throttled": false,
+          "process_wall_seconds": 546.4323718100786,
+          "serialized_csr_sha256": "f3cbcebdd2012c706cc76f76520797147ad002a076c04d445ff2e6cf250d044c",
+          "graph_npz_sha256": "56e26284d0594976748332544799d72a00b5ecf81b52550f6979b0a951432ede",
+          "scope": "Native CPU exact-predicate full-hull Delaunay plus two-pass CSR export; allocations included. Input decoding, final is_valid and disk export excluded. Sequential CSR export also used with parallel Delaunay."
+        },
+        "cgal-4thread": {
+          "backend": "cgal-4thread",
+          "command": [
+            "/home/horde/projects/power-diagram/.work/radfoam-comparison-20261109/cgal-adjacency-parallel",
+            "results/local/radfoam-comparison-20261109-v1/garden/input.f32",
+            "results/local/radfoam-comparison-20261109-v1/garden/cgal-4thread.bin",
+            "3",
+            "10",
+            "4"
+          ],
+          "binary_sha256": "5b42c60d5849adb0daeed19142b91d1fc73d2d6aa788c4533bfc8e4dff65495d",
+          "input_f32_sha256": "09fd9e0a85f683fb0646116ef381a1f8e28abdc8d2ec29f82a22c51facc1ce02",
+          "warmups": 3,
+          "repeats": 10,
+          "samples": [
+            {
+              "iteration": -3,
+              "build_seconds": 7.695655569,
+              "csr_seconds": 16.015118524,
+              "total_seconds": 23.710774093,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 44,
+                  "throttled_usec": 162316
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 42,
+                  "throttled_usec": 155462
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": -2,
+              "build_seconds": 7.51533703,
+              "csr_seconds": 14.75315678,
+              "total_seconds": 22.26849381,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 41,
+                  "throttled_usec": 133535
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 38,
+                  "throttled_usec": 147266
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": -1,
+              "build_seconds": 7.396545852,
+              "csr_seconds": 14.937225524,
+              "total_seconds": 22.333771376,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 42,
+                  "throttled_usec": 78460
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 40,
+                  "throttled_usec": 117032
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 0,
+              "build_seconds": 7.160319581,
+              "csr_seconds": 14.996630066,
+              "total_seconds": 22.156949647,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 24,
+                  "throttled_usec": 26355
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 35,
+                  "throttled_usec": 106407
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 1,
+              "build_seconds": 7.692524012,
+              "csr_seconds": 14.73237597,
+              "total_seconds": 22.424899982,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 43,
+                  "throttled_usec": 187323
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 42,
+                  "throttled_usec": 244674
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 2,
+              "build_seconds": 7.085257419,
+              "csr_seconds": 15.11211636,
+              "total_seconds": 22.197373779,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 35,
+                  "throttled_usec": 61397
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 33,
+                  "throttled_usec": 89388
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 3,
+              "build_seconds": 7.221645882,
+              "csr_seconds": 15.027536641,
+              "total_seconds": 22.249182523,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 35,
+                  "throttled_usec": 44432
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 38,
+                  "throttled_usec": 126448
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 4,
+              "build_seconds": 6.980261037,
+              "csr_seconds": 14.895498183,
+              "total_seconds": 21.87575922,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 31,
+                  "throttled_usec": 30461
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 44,
+                  "throttled_usec": 153998
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 5,
+              "build_seconds": 7.9512775,
+              "csr_seconds": 15.939238458,
+              "total_seconds": 23.890515958,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 31,
+                  "throttled_usec": 62936
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 45,
+                  "throttled_usec": 151000
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 6,
+              "build_seconds": 7.724418274,
+              "csr_seconds": 14.933768616,
+              "total_seconds": 22.65818689,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 38,
+                  "throttled_usec": 71774
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 40,
+                  "throttled_usec": 139495
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 7,
+              "build_seconds": 7.209212478,
+              "csr_seconds": 14.993949365,
+              "total_seconds": 22.203161843,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 30,
+                  "throttled_usec": 13063
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 45,
+                  "throttled_usec": 139527
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 8,
+              "build_seconds": 8.153679775,
+              "csr_seconds": 15.518752936,
+              "total_seconds": 23.672432711,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 47,
+                  "throttled_usec": 106360
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 37,
+                  "throttled_usec": 95352
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 9,
+              "build_seconds": 7.668019668,
+              "csr_seconds": 15.486268825,
+              "total_seconds": 23.154288493,
+              "vertices": 4064598,
+              "tetrahedra": 26917493,
+              "directed_edges": 61964386,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 44,
+                  "throttled_usec": 201502
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 46,
+                  "throttled_usec": 460800
+                }
+              },
+              "cpu_throttled": true
+            }
+          ],
+          "final": {
+            "final": true,
+            "CGAL": "6.2.1",
+            "threads": 4,
+            "valid": true,
+            "validation_seconds": 33.285000075,
+            "peak_rss_bytes": 2978197504,
+            "cpu_quota_since_previous_sample": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "cpu_throttled": false
+          },
+          "mean_seconds": 22.6482751046,
+          "median_seconds": 22.3370412525,
+          "mean_build_seconds": 7.4846615626,
+          "cpu_throttled": true,
+          "process_wall_seconds": 354.16449269652367,
+          "serialized_csr_sha256": "546cf87cc6fd94b25611592a35a3627bbfa2053e7fe5c8656817cf62632d41f4",
+          "graph_npz_sha256": "ca5e42cfe691368271543abcad84f29399897d1be62cb15c65cded98de4506d6",
+          "scope": "Native CPU exact-predicate full-hull Delaunay plus two-pass CSR export; allocations included. Input decoding, final is_valid and disk export excluded. Sequential CSR export also used with parallel Delaunay."
+        }
+      },
+      "comparison": {
+        "scope": "Full directed adjacency sets. GPU cells are box-clipped; CGAL is full-hull and can include zero-area dual faces at exact ties. Differences alone do not establish errors.",
+        "pairs": {
+          "paragram": {
+            "warpower_edges": 61963204,
+            "other_edges": 61975284,
+            "shared_edges": 61961864,
+            "only_warpower": 1340,
+            "only_other": 13420,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                5109,
+                41983
+              ],
+              [
+                15343,
+                41983
+              ],
+              [
+                15356,
+                41983
+              ],
+              [
+                17374,
+                41983
+              ],
+              [
+                17407,
+                41983
+              ],
+              [
+                18096,
+                32767
+              ],
+              [
+                19454,
+                41983
+              ],
+              [
+                25598,
+                41983
+              ],
+              [
+                32767,
+                18096
+              ],
+              [
+                32767,
+                475131
+              ],
+              [
+                32767,
+                4062909
+              ],
+              [
+                32767,
+                4064579
+              ],
+              [
+                33791,
+                41983
+              ],
+              [
+                39246,
+                111441
+              ],
+              [
+                39935,
+                41983
+              ],
+              [
+                41983,
+                5109
+              ]
+            ],
+            "only_other_examples": [
+              [
+                472,
+                3193
+              ],
+              [
+                982,
+                1021
+              ],
+              [
+                1002,
+                10943
+              ],
+              [
+                1021,
+                982
+              ],
+              [
+                1022,
+                7068
+              ],
+              [
+                3193,
+                472
+              ],
+              [
+                4277,
+                4397
+              ],
+              [
+                4397,
+                4277
+              ],
+              [
+                6277,
+                6287
+              ],
+              [
+                6287,
+                6277
+              ],
+              [
+                7068,
+                1022
+              ],
+              [
+                8990,
+                8999
+              ],
+              [
+                8999,
+                8990
+              ],
+              [
+                9746,
+                4062909
+              ],
+              [
+                10943,
+                1002
+              ],
+              [
+                14415,
+                17526
+              ]
+            ],
+            "affected_rows": 9737,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 1110
+          },
+          "cgal-1thread": {
+            "warpower_edges": 61963204,
+            "other_edges": 61964386,
+            "shared_edges": 61963204,
+            "only_warpower": 0,
+            "only_other": 1182,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [],
+            "only_other_examples": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                17
+              ],
+              [
+                0,
+                52
+              ],
+              [
+                0,
+                2048
+              ],
+              [
+                0,
+                2049
+              ],
+              [
+                0,
+                2051
+              ],
+              [
+                0,
+                2054
+              ],
+              [
+                0,
+                2057
+              ],
+              [
+                0,
+                2065
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                1,
+                8
+              ],
+              [
+                1,
+                33
+              ],
+              [
+                1,
+                37
+              ],
+              [
+                1,
+                38
+              ]
+            ],
+            "affected_rows": 307,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          },
+          "cgal-4thread": {
+            "warpower_edges": 61963204,
+            "other_edges": 61964386,
+            "shared_edges": 61963204,
+            "only_warpower": 0,
+            "only_other": 1182,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [],
+            "only_other_examples": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                17
+              ],
+              [
+                0,
+                52
+              ],
+              [
+                0,
+                2048
+              ],
+              [
+                0,
+                2049
+              ],
+              [
+                0,
+                2051
+              ],
+              [
+                0,
+                2054
+              ],
+              [
+                0,
+                2057
+              ],
+              [
+                0,
+                2065
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                1,
+                8
+              ],
+              [
+                1,
+                33
+              ],
+              [
+                1,
+                37
+              ],
+              [
+                1,
+                38
+              ]
+            ],
+            "affected_rows": 307,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          }
+        }
+      }
+    },
+    "bicycle": {
+      "input": {
+        "scene": "bicycle",
+        "checkpoint_version": "RadFoam checkpoints_v1",
+        "google_drive_id": "13e_DP83_bE_sI3D4iR8YDhomlb9PenYR",
+        "checkpoint_sha256": "cd720244c01923037648b92deadcd79295a17395505c2e401de1f16d32fd1a3b",
+        "n": 4199873,
+        "positions_sha256": "b18a5ecf4abecc9fb4094a4df36c886fcc310aa4db6372758fdff7b97aae8d4f",
+        "npz_sha256": "6a24f2c7dc7afb79feffcfa71353df06910c3492be068a60ffc88aff00e48d43",
+        "source": "https://github.com/theialab/radfoam#checkpoints"
+      },
+      "backends": {
+        "warpower": {
+          "backend": "warpower",
+          "points_sha256": "b18a5ecf4abecc9fb4094a4df36c886fcc310aa4db6372758fdff7b97aae8d4f",
+          "weights_sha256": null,
+          "distribution": "bicycle",
+          "n": 4199873,
+          "seed": 42,
+          "weighted": false,
+          "memory": {
+            "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+            "interval_seconds": 0.001,
+            "before_construction_bytes": 1171390464,
+            "peak_bytes": 15809511424,
+            "samples": 5813,
+            "error": null
+          },
+          "cpu_quota_during_measurement": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "cpu_throttled": false,
+          "mempool_retain_mb": 32768,
+          "warmup": 3,
+          "repeats": 10,
+          "seconds": [
+            0.46740107983350754,
+            0.4676220789551735,
+            0.470078032463789,
+            0.4696088321506977,
+            0.47213563695549965,
+            0.4700928293168545,
+            0.4709973372519016,
+            0.47046830132603645,
+            0.470631368458271,
+            0.4700178764760494
+          ],
+          "mean_seconds": 0.46990533731877804,
+          "median_seconds": 0.47008543089032173,
+          "nnz": 63717628,
+          "status_counts": {
+            "0": 4199873
+          },
+          "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+          "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+          "python": "3.10.12",
+          "versions": {
+            "warp": "1.19.0",
+            "warpower_source_sha256": "677b7c15d41be045411eefdf121c2e6e703c683bd54a90392b811cdca69be3e1",
+            "warpower_dirty": false,
+            "warpower_commit": "730ec233505bcc474c248d0ab237b10042fa029e",
+            "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+          },
+          "diagnostics": {
+            "retried_cells": 437,
+            "double_precision_cells": 0,
+            "consistency_retried_cells": 10,
+            "asymmetric_cells_remaining": 0,
+            "chunk_size": 4199873,
+            "leaf_size": 4,
+            "knn_requested": 8,
+            "knn_effective": 0,
+            "warm_start": "nearest leaf"
+          },
+          "command": [
+            "/home/horde/projects/power-diagram/.venv/bin/python",
+            "-m",
+            "benchmarks.run",
+            "--backend",
+            "warpower",
+            "--input",
+            "data/radfoam/bicycle.npz",
+            "--distribution",
+            "bicycle",
+            "--warmup",
+            "3",
+            "--repeats",
+            "10",
+            "--output",
+            "results/local/radfoam-comparison-20261109-v1/bicycle/warpower.json",
+            "--save-diagram",
+            "results/local/radfoam-comparison-20261109-v1/bicycle/warpower-graph.npz",
+            "--mempool-retain-mb",
+            "32768"
+          ],
+          "graph_npz_sha256": "4644b4995128f70df89a3ad616e6ee66a7a5bd2a367cbf3b0d60c17e360ef93d"
+        },
+        "paragram": {
+          "backend": "paragram",
+          "points_sha256": "b18a5ecf4abecc9fb4094a4df36c886fcc310aa4db6372758fdff7b97aae8d4f",
+          "weights_sha256": null,
+          "distribution": "bicycle",
+          "n": 4199873,
+          "seed": 42,
+          "weighted": false,
+          "memory": {
+            "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+            "interval_seconds": 0.001,
+            "before_construction_bytes": 1156710400,
+            "peak_bytes": 13955629056,
+            "samples": 9633,
+            "error": null
+          },
+          "cpu_quota_during_measurement": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "cpu_throttled": false,
+          "mempool_retain_mb": null,
+          "warmup": 3,
+          "repeats": 10,
+          "seconds": [
+            0.7568780034780502,
+            0.7567954584956169,
+            0.7564681135118008,
+            0.7587947063148022,
+            0.760644219815731,
+            0.7551549822092056,
+            0.7550766430795193,
+            0.755095724016428,
+            0.756377674639225,
+            0.7565219514071941
+          ],
+          "mean_seconds": 0.7567807476967573,
+          "median_seconds": 0.7564950324594975,
+          "nnz": 63733554,
+          "status_counts": {
+            "0": 4198395,
+            "1": 1102,
+            "2": 207,
+            "3": 1,
+            "5": 168
+          },
+          "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+          "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+          "python": "3.10.12",
+          "versions": {
+            "torch": "2.7.1+cu126",
+            "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+            "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+          },
+          "command": [
+            "/home/horde/projects/power-diagram/.venv/bin/python",
+            "-m",
+            "benchmarks.run",
+            "--backend",
+            "paragram",
+            "--input",
+            "data/radfoam/bicycle.npz",
+            "--distribution",
+            "bicycle",
+            "--warmup",
+            "3",
+            "--repeats",
+            "10",
+            "--output",
+            "results/local/radfoam-comparison-20261109-v1/bicycle/paragram.json",
+            "--save-diagram",
+            "results/local/radfoam-comparison-20261109-v1/bicycle/paragram-graph.npz"
+          ],
+          "graph_npz_sha256": "005f90d4786b00dd81be11223ba83cc5ff9f5aca9d084f4b691fcd4b78f0cffb"
+        },
+        "cgal-1thread": {
+          "backend": "cgal-1thread",
+          "command": [
+            "/home/horde/projects/power-diagram/.work/radfoam-comparison-20261109/cgal-adjacency",
+            "results/local/radfoam-comparison-20261109-v1/bicycle/input.f32",
+            "results/local/radfoam-comparison-20261109-v1/bicycle/cgal-1thread.bin",
+            "3",
+            "10",
+            "1"
+          ],
+          "binary_sha256": "9faaed9212e0e815f83033651072443c1d177c4e9a6cf86d7ec5ccbb9d040f50",
+          "input_f32_sha256": "b18a5ecf4abecc9fb4094a4df36c886fcc310aa4db6372758fdff7b97aae8d4f",
+          "warmups": 3,
+          "repeats": 10,
+          "samples": [
+            {
+              "iteration": -3,
+              "build_seconds": 20.223720985,
+              "csr_seconds": 18.246558958,
+              "total_seconds": 38.470279943,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": -2,
+              "build_seconds": 20.044863627,
+              "csr_seconds": 18.343648755,
+              "total_seconds": 38.388512382,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": -1,
+              "build_seconds": 20.121085375,
+              "csr_seconds": 18.382476775,
+              "total_seconds": 38.50356215,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 0,
+              "build_seconds": 20.060278019,
+              "csr_seconds": 18.186654817,
+              "total_seconds": 38.246932836,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 1,
+              "build_seconds": 20.146283864,
+              "csr_seconds": 18.475376668,
+              "total_seconds": 38.621660532,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 2,
+              "build_seconds": 20.107123147,
+              "csr_seconds": 18.422911961,
+              "total_seconds": 38.530035108,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 3,
+              "build_seconds": 20.172219431,
+              "csr_seconds": 18.540096314,
+              "total_seconds": 38.712315745,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 4,
+              "build_seconds": 20.157789363,
+              "csr_seconds": 18.616810171,
+              "total_seconds": 38.774599534,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 5,
+              "build_seconds": 20.215284623,
+              "csr_seconds": 18.497759089,
+              "total_seconds": 38.713043712,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 6,
+              "build_seconds": 20.127249963,
+              "csr_seconds": 18.222282597,
+              "total_seconds": 38.34953256,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 7,
+              "build_seconds": 20.280829259,
+              "csr_seconds": 18.374137177,
+              "total_seconds": 38.654966436,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 8,
+              "build_seconds": 20.244480095,
+              "csr_seconds": 18.634061545,
+              "total_seconds": 38.87854164,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 9,
+              "build_seconds": 20.277153906,
+              "csr_seconds": 18.313463871,
+              "total_seconds": 38.590617777,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            }
+          ],
+          "final": {
+            "final": true,
+            "CGAL": "6.2.1",
+            "threads": 1,
+            "valid": true,
+            "validation_seconds": 37.229712589,
+            "peak_rss_bytes": 6024941568,
+            "cpu_quota_since_previous_sample": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "cpu_throttled": false
+          },
+          "mean_seconds": 38.607224587999994,
+          "median_seconds": 38.638313484,
+          "mean_build_seconds": 20.178869167,
+          "cpu_throttled": false,
+          "process_wall_seconds": 570.7349188290536,
+          "serialized_csr_sha256": "945797c955d34a999da48852e5efb137a1e563342f40d48314429e9200b3d3b3",
+          "graph_npz_sha256": "1e8bc072432fef3dad75fb928d4eb61e70bdac0551e9e191a15bdd530b9abfa8",
+          "scope": "Native CPU exact-predicate full-hull Delaunay plus two-pass CSR export; allocations included. Input decoding, final is_valid and disk export excluded. Sequential CSR export also used with parallel Delaunay."
+        },
+        "cgal-4thread": {
+          "backend": "cgal-4thread",
+          "command": [
+            "/home/horde/projects/power-diagram/.work/radfoam-comparison-20261109/cgal-adjacency-parallel",
+            "results/local/radfoam-comparison-20261109-v1/bicycle/input.f32",
+            "results/local/radfoam-comparison-20261109-v1/bicycle/cgal-4thread.bin",
+            "3",
+            "10",
+            "4"
+          ],
+          "binary_sha256": "5b42c60d5849adb0daeed19142b91d1fc73d2d6aa788c4533bfc8e4dff65495d",
+          "input_f32_sha256": "b18a5ecf4abecc9fb4094a4df36c886fcc310aa4db6372758fdff7b97aae8d4f",
+          "warmups": 3,
+          "repeats": 10,
+          "samples": [
+            {
+              "iteration": -3,
+              "build_seconds": 8.279937494,
+              "csr_seconds": 16.707154278,
+              "total_seconds": 24.987091772,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 33,
+                  "throttled_usec": 10856
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 50,
+                  "throttled_usec": 165879
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": -2,
+              "build_seconds": 8.180019401,
+              "csr_seconds": 15.851079845,
+              "total_seconds": 24.031099246,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 44,
+                  "throttled_usec": 61683
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 44,
+                  "throttled_usec": 130232
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": -1,
+              "build_seconds": 8.786778665,
+              "csr_seconds": 15.576414558,
+              "total_seconds": 24.363193223,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 35,
+                  "throttled_usec": 53701
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 52,
+                  "throttled_usec": 172800
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 0,
+              "build_seconds": 8.724921804,
+              "csr_seconds": 15.822941835,
+              "total_seconds": 24.547863639,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 52,
+                  "throttled_usec": 233314
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 54,
+                  "throttled_usec": 402667
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 1,
+              "build_seconds": 8.668337855,
+              "csr_seconds": 16.142564325,
+              "total_seconds": 24.81090218,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 36,
+                  "throttled_usec": 55189
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 46,
+                  "throttled_usec": 189734
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 2,
+              "build_seconds": 8.570625977,
+              "csr_seconds": 16.099360601,
+              "total_seconds": 24.669986578,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 49,
+                  "throttled_usec": 122628
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 47,
+                  "throttled_usec": 136332
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 3,
+              "build_seconds": 8.278421385,
+              "csr_seconds": 16.77235992,
+              "total_seconds": 25.050781305,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 42,
+                  "throttled_usec": 105022
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 45,
+                  "throttled_usec": 141727
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 4,
+              "build_seconds": 9.117748792,
+              "csr_seconds": 16.586656867,
+              "total_seconds": 25.704405659,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 51,
+                  "throttled_usec": 88484
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 54,
+                  "throttled_usec": 163637
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 5,
+              "build_seconds": 8.971305786,
+              "csr_seconds": 16.178745178,
+              "total_seconds": 25.150050964,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 56,
+                  "throttled_usec": 311245
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 60,
+                  "throttled_usec": 450460
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 6,
+              "build_seconds": 7.961275494,
+              "csr_seconds": 15.781234643,
+              "total_seconds": 23.742510137,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 39,
+                  "throttled_usec": 206689
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 37,
+                  "throttled_usec": 203793
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 7,
+              "build_seconds": 8.085410293,
+              "csr_seconds": 15.801929779,
+              "total_seconds": 23.887340072,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 41,
+                  "throttled_usec": 60173
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 42,
+                  "throttled_usec": 111663
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 8,
+              "build_seconds": 8.647085166,
+              "csr_seconds": 15.852080399,
+              "total_seconds": 24.499165565,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 53,
+                  "throttled_usec": 110012
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 50,
+                  "throttled_usec": 115358
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 9,
+              "build_seconds": 8.681573767,
+              "csr_seconds": 15.73040639,
+              "total_seconds": 24.411980157,
+              "vertices": 4199873,
+              "tetrahedra": 27659640,
+              "directed_edges": 63719194,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 44,
+                  "throttled_usec": 75518
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 45,
+                  "throttled_usec": 130472
+                }
+              },
+              "cpu_throttled": true
+            }
+          ],
+          "final": {
+            "final": true,
+            "CGAL": "6.2.1",
+            "threads": 4,
+            "valid": true,
+            "validation_seconds": 33.993235969,
+            "peak_rss_bytes": 6024941568,
+            "cpu_quota_since_previous_sample": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "cpu_throttled": false
+          },
+          "mean_seconds": 24.647498625599997,
+          "median_seconds": 24.6089251085,
+          "mean_build_seconds": 8.5706706319,
+          "cpu_throttled": true,
+          "process_wall_seconds": 383.2883883304894,
+          "serialized_csr_sha256": "13c55ac0819b3e76bc13b39188d113f143856b861b662682f707a778b898dfa1",
+          "graph_npz_sha256": "e06ca3bde7ca996fcba4cf622fca536ecaf4cd49744e91b153e33ca287103e9a",
+          "scope": "Native CPU exact-predicate full-hull Delaunay plus two-pass CSR export; allocations included. Input decoding, final is_valid and disk export excluded. Sequential CSR export also used with parallel Delaunay."
+        }
+      },
+      "comparison": {
+        "scope": "Full directed adjacency sets. GPU cells are box-clipped; CGAL is full-hull and can include zero-area dual faces at exact ties. Differences alone do not establish errors.",
+        "pairs": {
+          "paragram": {
+            "warpower_edges": 63717628,
+            "other_edges": 63733554,
+            "shared_edges": 63715472,
+            "only_warpower": 2156,
+            "only_other": 18082,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                1030,
+                149224
+              ],
+              [
+                1033,
+                1045
+              ],
+              [
+                1036,
+                1661
+              ],
+              [
+                1036,
+                17658
+              ],
+              [
+                1045,
+                1033
+              ],
+              [
+                1047,
+                5326
+              ],
+              [
+                1047,
+                8802
+              ],
+              [
+                1052,
+                49807
+              ],
+              [
+                1052,
+                82176
+              ],
+              [
+                1424,
+                13708
+              ],
+              [
+                1424,
+                17658
+              ],
+              [
+                1661,
+                1036
+              ],
+              [
+                5237,
+                5504
+              ],
+              [
+                5326,
+                1047
+              ],
+              [
+                5326,
+                12804
+              ],
+              [
+                5504,
+                5237
+              ]
+            ],
+            "only_other_examples": [
+              [
+                1028,
+                1034
+              ],
+              [
+                1034,
+                1028
+              ],
+              [
+                1037,
+                1118
+              ],
+              [
+                1041,
+                5120
+              ],
+              [
+                1118,
+                1037
+              ],
+              [
+                1424,
+                10172
+              ],
+              [
+                1512,
+                1534
+              ],
+              [
+                1534,
+                1512
+              ],
+              [
+                1570,
+                1977
+              ],
+              [
+                1634,
+                5544
+              ],
+              [
+                1807,
+                9311
+              ],
+              [
+                1807,
+                13432
+              ],
+              [
+                1887,
+                6150
+              ],
+              [
+                1977,
+                1570
+              ],
+              [
+                5120,
+                1041
+              ],
+              [
+                5326,
+                8577
+              ]
+            ],
+            "affected_rows": 11920,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 1477
+          },
+          "cgal-1thread": {
+            "warpower_edges": 63717628,
+            "other_edges": 63719194,
+            "shared_edges": 63717628,
+            "only_warpower": 0,
+            "only_other": 1566,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [],
+            "only_other_examples": [
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                82
+              ],
+              [
+                0,
+                122
+              ],
+              [
+                0,
+                168
+              ],
+              [
+                0,
+                182
+              ],
+              [
+                0,
+                1024
+              ],
+              [
+                0,
+                1025
+              ],
+              [
+                0,
+                1027
+              ],
+              [
+                0,
+                1031
+              ],
+              [
+                0,
+                1032
+              ],
+              [
+                0,
+                2050
+              ],
+              [
+                0,
+                2059
+              ],
+              [
+                0,
+                2070
+              ],
+              [
+                0,
+                2078
+              ],
+              [
+                0,
+                2086
+              ],
+              [
+                0,
+                2107
+              ]
+            ],
+            "affected_rows": 387,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          },
+          "cgal-4thread": {
+            "warpower_edges": 63717628,
+            "other_edges": 63719194,
+            "shared_edges": 63717628,
+            "only_warpower": 0,
+            "only_other": 1566,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [],
+            "only_other_examples": [
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                82
+              ],
+              [
+                0,
+                122
+              ],
+              [
+                0,
+                168
+              ],
+              [
+                0,
+                182
+              ],
+              [
+                0,
+                1024
+              ],
+              [
+                0,
+                1025
+              ],
+              [
+                0,
+                1027
+              ],
+              [
+                0,
+                1031
+              ],
+              [
+                0,
+                1032
+              ],
+              [
+                0,
+                2050
+              ],
+              [
+                0,
+                2059
+              ],
+              [
+                0,
+                2070
+              ],
+              [
+                0,
+                2078
+              ],
+              [
+                0,
+                2086
+              ],
+              [
+                0,
+                2107
+              ]
+            ],
+            "affected_rows": 387,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          }
+        }
+      }
+    },
+    "playroom": {
+      "input": {
+        "scene": "playroom",
+        "checkpoint_version": "RadFoam checkpoints_v1",
+        "google_drive_id": "1hIlFwJmby7k0Mc_QqscH_w9BQCkfezmB",
+        "checkpoint_sha256": "181bcb08ee22359b70a702d9eab49b6fc202f387c5115f79975e95edd3eea616",
+        "n": 3181453,
+        "positions_sha256": "1ebc4e0405248284b8124069ecc93ca5c56d1ad66340809062a797721d7f6583",
+        "npz_sha256": "d5eab80655a12f88c90400e4bf753b2ac3f0898d1c829a468f0c0becaed6c99b",
+        "source": "https://github.com/theialab/radfoam#checkpoints"
+      },
+      "backends": {
+        "warpower": {
+          "backend": "warpower",
+          "points_sha256": "1ebc4e0405248284b8124069ecc93ca5c56d1ad66340809062a797721d7f6583",
+          "weights_sha256": null,
+          "distribution": "playroom",
+          "n": 3181453,
+          "seed": 42,
+          "weighted": false,
+          "memory": {
+            "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+            "interval_seconds": 0.001,
+            "before_construction_bytes": 1171390464,
+            "peak_bytes": 12632326144,
+            "samples": 4388,
+            "error": null
+          },
+          "cpu_quota_during_measurement": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "cpu_throttled": false,
+          "mempool_retain_mb": 32768,
+          "warmup": 3,
+          "repeats": 10,
+          "seconds": [
+            0.36004940047860146,
+            0.35228418931365013,
+            0.35217488557100296,
+            0.3571075461804867,
+            0.35399798676371574,
+            0.3525291122496128,
+            0.35341702029109,
+            0.3581164628267288,
+            0.3528871685266495,
+            0.35301976278424263
+          ],
+          "mean_seconds": 0.35455835349857806,
+          "median_seconds": 0.3532183915376663,
+          "nnz": 48973854,
+          "status_counts": {
+            "0": 3181453
+          },
+          "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+          "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+          "python": "3.10.12",
+          "versions": {
+            "warp": "1.19.0",
+            "warpower_source_sha256": "677b7c15d41be045411eefdf121c2e6e703c683bd54a90392b811cdca69be3e1",
+            "warpower_dirty": false,
+            "warpower_commit": "730ec233505bcc474c248d0ab237b10042fa029e",
+            "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+          },
+          "diagnostics": {
+            "retried_cells": 198,
+            "double_precision_cells": 3,
+            "consistency_retried_cells": 18,
+            "asymmetric_cells_remaining": 0,
+            "chunk_size": 3181453,
+            "leaf_size": 4,
+            "knn_requested": 8,
+            "knn_effective": 0,
+            "warm_start": "nearest leaf"
+          },
+          "command": [
+            "/home/horde/projects/power-diagram/.venv/bin/python",
+            "-m",
+            "benchmarks.run",
+            "--backend",
+            "warpower",
+            "--input",
+            "data/radfoam/playroom.npz",
+            "--distribution",
+            "playroom",
+            "--warmup",
+            "3",
+            "--repeats",
+            "10",
+            "--output",
+            "results/local/radfoam-comparison-20261109-v1/playroom/warpower.json",
+            "--save-diagram",
+            "results/local/radfoam-comparison-20261109-v1/playroom/warpower-graph.npz",
+            "--mempool-retain-mb",
+            "32768"
+          ],
+          "graph_npz_sha256": "1ce3dd8d9230c316d75fc26d27e21e20a1442daad200ed6be3e19a4fd8c16e1e"
+        },
+        "paragram": {
+          "backend": "paragram",
+          "points_sha256": "1ebc4e0405248284b8124069ecc93ca5c56d1ad66340809062a797721d7f6583",
+          "weights_sha256": null,
+          "distribution": "playroom",
+          "n": 3181453,
+          "seed": 42,
+          "weighted": false,
+          "memory": {
+            "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+            "interval_seconds": 0.001,
+            "before_construction_bytes": 1144127488,
+            "peak_bytes": 10862329856,
+            "samples": 5991,
+            "error": null
+          },
+          "cpu_quota_during_measurement": {
+            "4": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            },
+            "3": {
+              "cpu_cores": 4.0,
+              "throttled_periods": 0,
+              "throttled_usec": 0
+            }
+          },
+          "cpu_throttled": false,
+          "mempool_retain_mb": null,
+          "warmup": 3,
+          "repeats": 10,
+          "seconds": [
+            0.46068672090768814,
+            0.4621584713459015,
+            0.45991891622543335,
+            0.46100078895688057,
+            0.4611288458108902,
+            0.4600078985095024,
+            0.4611473083496094,
+            0.4591151438653469,
+            0.4620381295681,
+            0.4592432416975498
+          ],
+          "mean_seconds": 0.46064454652369025,
+          "median_seconds": 0.46084375493228436,
+          "nnz": 48979886,
+          "status_counts": {
+            "0": 3180841,
+            "1": 392,
+            "2": 109,
+            "3": 1,
+            "5": 110
+          },
+          "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+          "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+          "python": "3.10.12",
+          "versions": {
+            "torch": "2.7.1+cu126",
+            "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+            "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+          },
+          "command": [
+            "/home/horde/projects/power-diagram/.venv/bin/python",
+            "-m",
+            "benchmarks.run",
+            "--backend",
+            "paragram",
+            "--input",
+            "data/radfoam/playroom.npz",
+            "--distribution",
+            "playroom",
+            "--warmup",
+            "3",
+            "--repeats",
+            "10",
+            "--output",
+            "results/local/radfoam-comparison-20261109-v1/playroom/paragram.json",
+            "--save-diagram",
+            "results/local/radfoam-comparison-20261109-v1/playroom/paragram-graph.npz"
+          ],
+          "graph_npz_sha256": "49ff07fca705f06feac5163d3d112e6a8fb52ab0c4f5c03fdf38f03b8fd3a4ff"
+        },
+        "cgal-1thread": {
+          "backend": "cgal-1thread",
+          "command": [
+            "/home/horde/projects/power-diagram/.work/radfoam-comparison-20261109/cgal-adjacency",
+            "results/local/radfoam-comparison-20261109-v1/playroom/input.f32",
+            "results/local/radfoam-comparison-20261109-v1/playroom/cgal-1thread.bin",
+            "3",
+            "10",
+            "1"
+          ],
+          "binary_sha256": "9faaed9212e0e815f83033651072443c1d177c4e9a6cf86d7ec5ccbb9d040f50",
+          "input_f32_sha256": "1ebc4e0405248284b8124069ecc93ca5c56d1ad66340809062a797721d7f6583",
+          "warmups": 3,
+          "repeats": 10,
+          "samples": [
+            {
+              "iteration": -3,
+              "build_seconds": 15.08344793,
+              "csr_seconds": 14.0652136,
+              "total_seconds": 29.14866153,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": -2,
+              "build_seconds": 15.069227335,
+              "csr_seconds": 14.014301037,
+              "total_seconds": 29.083528372,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": -1,
+              "build_seconds": 14.976659312,
+              "csr_seconds": 14.092233472,
+              "total_seconds": 29.068892784,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 0,
+              "build_seconds": 15.022706496,
+              "csr_seconds": 14.011672487,
+              "total_seconds": 29.034378983,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 1,
+              "build_seconds": 15.007368658,
+              "csr_seconds": 14.088799674,
+              "total_seconds": 29.096168332,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 2,
+              "build_seconds": 14.983426057,
+              "csr_seconds": 13.971643132,
+              "total_seconds": 28.955069189,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 3,
+              "build_seconds": 14.996109246,
+              "csr_seconds": 13.985561735,
+              "total_seconds": 28.981670981,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 4,
+              "build_seconds": 14.991260358,
+              "csr_seconds": 13.905915752,
+              "total_seconds": 28.89717611,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 5,
+              "build_seconds": 14.975386458,
+              "csr_seconds": 13.932675843,
+              "total_seconds": 28.908062301,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 6,
+              "build_seconds": 15.334632672,
+              "csr_seconds": 14.456599514,
+              "total_seconds": 29.791232186,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 7,
+              "build_seconds": 15.016902409,
+              "csr_seconds": 13.849710915,
+              "total_seconds": 28.866613324,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 8,
+              "build_seconds": 15.027054916,
+              "csr_seconds": 13.866634395,
+              "total_seconds": 28.893689311,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            },
+            {
+              "iteration": 9,
+              "build_seconds": 15.01026124,
+              "csr_seconds": 13.873660949,
+              "total_seconds": 28.883922189,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 0,
+                  "throttled_usec": 0
+                }
+              },
+              "cpu_throttled": false
+            }
+          ],
+          "final": {
+            "final": true,
+            "CGAL": "6.2.1",
+            "threads": 1,
+            "valid": true,
+            "validation_seconds": 27.115933796,
+            "peak_rss_bytes": 6160904192,
+            "cpu_quota_since_previous_sample": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "cpu_throttled": false
+          },
+          "mean_seconds": 29.0307982906,
+          "median_seconds": 28.931565745,
+          "mean_build_seconds": 15.036510851,
+          "cpu_throttled": false,
+          "process_wall_seconds": 427.56068055331707,
+          "serialized_csr_sha256": "a33c8706cc4df9d1d900665f6687617efa6319e75b96ad107e0525b7889632ad",
+          "graph_npz_sha256": "40a3f5fe00bd3bd29b838f8afbab491a7d7a5e34bfdd39f5129af1c96833c2bf",
+          "scope": "Native CPU exact-predicate full-hull Delaunay plus two-pass CSR export; allocations included. Input decoding, final is_valid and disk export excluded. Sequential CSR export also used with parallel Delaunay."
+        },
+        "cgal-4thread": {
+          "backend": "cgal-4thread",
+          "command": [
+            "/home/horde/projects/power-diagram/.work/radfoam-comparison-20261109/cgal-adjacency-parallel",
+            "results/local/radfoam-comparison-20261109-v1/playroom/input.f32",
+            "results/local/radfoam-comparison-20261109-v1/playroom/cgal-4thread.bin",
+            "3",
+            "10",
+            "4"
+          ],
+          "binary_sha256": "5b42c60d5849adb0daeed19142b91d1fc73d2d6aa788c4533bfc8e4dff65495d",
+          "input_f32_sha256": "1ebc4e0405248284b8124069ecc93ca5c56d1ad66340809062a797721d7f6583",
+          "warmups": 3,
+          "repeats": 10,
+          "samples": [
+            {
+              "iteration": -3,
+              "build_seconds": 5.732699972,
+              "csr_seconds": 11.846283305,
+              "total_seconds": 17.578983277,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 30,
+                  "throttled_usec": 100469
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 30,
+                  "throttled_usec": 110743
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": -2,
+              "build_seconds": 6.092681024,
+              "csr_seconds": 11.840840824,
+              "total_seconds": 17.933521848,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 31,
+                  "throttled_usec": 199755
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 38,
+                  "throttled_usec": 403042
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": -1,
+              "build_seconds": 5.698060567,
+              "csr_seconds": 12.277540281,
+              "total_seconds": 17.975600848,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 32,
+                  "throttled_usec": 103652
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 28,
+                  "throttled_usec": 101224
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 0,
+              "build_seconds": 5.734546232,
+              "csr_seconds": 12.318674633,
+              "total_seconds": 18.053220865,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 28,
+                  "throttled_usec": 95549
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 29,
+                  "throttled_usec": 106090
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 1,
+              "build_seconds": 5.562358013,
+              "csr_seconds": 12.323065781,
+              "total_seconds": 17.885423794,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 29,
+                  "throttled_usec": 87684
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 28,
+                  "throttled_usec": 100263
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 2,
+              "build_seconds": 6.621716797,
+              "csr_seconds": 12.441772267,
+              "total_seconds": 19.063489064,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 34,
+                  "throttled_usec": 91481
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 35,
+                  "throttled_usec": 117624
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 3,
+              "build_seconds": 5.874004816,
+              "csr_seconds": 12.303003243,
+              "total_seconds": 18.177008059,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 26,
+                  "throttled_usec": 68909
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 27,
+                  "throttled_usec": 104814
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 4,
+              "build_seconds": 5.818556795,
+              "csr_seconds": 12.374019341,
+              "total_seconds": 18.192576136,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 33,
+                  "throttled_usec": 69207
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 33,
+                  "throttled_usec": 115268
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 5,
+              "build_seconds": 5.748184516,
+              "csr_seconds": 12.569224424,
+              "total_seconds": 18.31740894,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 37,
+                  "throttled_usec": 312775
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 37,
+                  "throttled_usec": 315009
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 6,
+              "build_seconds": 6.039391337,
+              "csr_seconds": 12.349988006,
+              "total_seconds": 18.389379343,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 17,
+                  "throttled_usec": 11535
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 30,
+                  "throttled_usec": 94520
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 7,
+              "build_seconds": 5.887676575,
+              "csr_seconds": 12.319268311,
+              "total_seconds": 18.206944886,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 31,
+                  "throttled_usec": 94690
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 26,
+                  "throttled_usec": 86743
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 8,
+              "build_seconds": 6.198819589,
+              "csr_seconds": 12.128128765,
+              "total_seconds": 18.326948354,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 42,
+                  "throttled_usec": 149108
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 37,
+                  "throttled_usec": 158173
+                }
+              },
+              "cpu_throttled": true
+            },
+            {
+              "iteration": 9,
+              "build_seconds": 5.736224072,
+              "csr_seconds": 12.440798311,
+              "total_seconds": 18.177022383,
+              "vertices": 3181453,
+              "tetrahedra": 21305667,
+              "directed_edges": 48974316,
+              "cpu_quota_since_previous_sample": {
+                "4": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 34,
+                  "throttled_usec": 43491
+                },
+                "3": {
+                  "cpu_cores": 4.0,
+                  "throttled_periods": 34,
+                  "throttled_usec": 90295
+                }
+              },
+              "cpu_throttled": true
+            }
+          ],
+          "final": {
+            "final": true,
+            "CGAL": "6.2.1",
+            "threads": 4,
+            "valid": true,
+            "validation_seconds": 26.429523277,
+            "peak_rss_bytes": 6160904192,
+            "cpu_quota_since_previous_sample": {
+              "4": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              },
+              "3": {
+                "cpu_cores": 4.0,
+                "throttled_periods": 0,
+                "throttled_usec": 0
+              }
+            },
+            "cpu_throttled": false
+          },
+          "mean_seconds": 18.2789421824,
+          "median_seconds": 18.199760511,
+          "mean_build_seconds": 5.9221478742,
+          "cpu_throttled": true,
+          "process_wall_seconds": 283.92633786052465,
+          "serialized_csr_sha256": "1288993801da32a9d79db1695ae1c931c1b5b63c71485bd2e75db10a66bd050e",
+          "graph_npz_sha256": "d9b9c49b3aeb022c6d32c28dcd77cc84e37e50ee273197cd237fdd51921cd71e",
+          "scope": "Native CPU exact-predicate full-hull Delaunay plus two-pass CSR export; allocations included. Input decoding, final is_valid and disk export excluded. Sequential CSR export also used with parallel Delaunay."
+        }
+      },
+      "comparison": {
+        "scope": "Full directed adjacency sets. GPU cells are box-clipped; CGAL is full-hull and can include zero-area dual faces at exact ties. Differences alone do not establish errors.",
+        "pairs": {
+          "paragram": {
+            "warpower_edges": 48973854,
+            "other_edges": 48979886,
+            "shared_edges": 48973546,
+            "only_warpower": 308,
+            "only_other": 6340,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                119263,
+                172414
+              ],
+              [
+                121984,
+                121987
+              ],
+              [
+                121987,
+                121984
+              ],
+              [
+                148523,
+                152616
+              ],
+              [
+                152616,
+                148523
+              ],
+              [
+                172414,
+                119263
+              ],
+              [
+                223688,
+                287055
+              ],
+              [
+                228495,
+                230585
+              ],
+              [
+                230585,
+                228495
+              ],
+              [
+                245413,
+                245438
+              ],
+              [
+                245438,
+                245413
+              ],
+              [
+                262458,
+                264488
+              ],
+              [
+                263095,
+                267195
+              ],
+              [
+                264488,
+                262458
+              ],
+              [
+                267195,
+                263095
+              ],
+              [
+                287055,
+                223688
+              ]
+            ],
+            "only_other_examples": [
+              [
+                21637,
+                29866
+              ],
+              [
+                25438,
+                31542
+              ],
+              [
+                28579,
+                32704
+              ],
+              [
+                28586,
+                32704
+              ],
+              [
+                29477,
+                33527
+              ],
+              [
+                29866,
+                21637
+              ],
+              [
+                29866,
+                40024
+              ],
+              [
+                30655,
+                32704
+              ],
+              [
+                31542,
+                25438
+              ],
+              [
+                31877,
+                38009
+              ],
+              [
+                32673,
+                34708
+              ],
+              [
+                32704,
+                28579
+              ],
+              [
+                32704,
+                28586
+              ],
+              [
+                32704,
+                30655
+              ],
+              [
+                32704,
+                32711
+              ],
+              [
+                32704,
+                38781
+              ]
+            ],
+            "affected_rows": 4773,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 611
+          },
+          "cgal-1thread": {
+            "warpower_edges": 48973854,
+            "other_edges": 48974316,
+            "shared_edges": 48973848,
+            "only_warpower": 6,
+            "only_other": 468,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                6244,
+                8262
+              ],
+              [
+                8262,
+                6244
+              ],
+              [
+                505391,
+                507437
+              ],
+              [
+                507437,
+                505391
+              ],
+              [
+                1326853,
+                1330910
+              ],
+              [
+                1330910,
+                1326853
+              ]
+            ],
+            "only_other_examples": [
+              [
+                1,
+                14
+              ],
+              [
+                1,
+                78
+              ],
+              [
+                1,
+                245760
+              ],
+              [
+                2,
+                14
+              ],
+              [
+                2,
+                1880064
+              ],
+              [
+                13,
+                28672
+              ],
+              [
+                13,
+                245760
+              ],
+              [
+                14,
+                1
+              ],
+              [
+                14,
+                2
+              ],
+              [
+                14,
+                78
+              ],
+              [
+                14,
+                1058
+              ],
+              [
+                14,
+                6144
+              ],
+              [
+                14,
+                60416
+              ],
+              [
+                14,
+                449536
+              ],
+              [
+                14,
+                1880064
+              ],
+              [
+                14,
+                3087360
+              ]
+            ],
+            "affected_rows": 125,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          },
+          "cgal-4thread": {
+            "warpower_edges": 48973854,
+            "other_edges": 48974316,
+            "shared_edges": 48973848,
+            "only_warpower": 6,
+            "only_other": 468,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                6244,
+                8262
+              ],
+              [
+                8262,
+                6244
+              ],
+              [
+                505391,
+                507437
+              ],
+              [
+                507437,
+                505391
+              ],
+              [
+                1326853,
+                1330910
+              ],
+              [
+                1330910,
+                1326853
+              ]
+            ],
+            "only_other_examples": [
+              [
+                1,
+                14
+              ],
+              [
+                1,
+                78
+              ],
+              [
+                1,
+                245760
+              ],
+              [
+                2,
+                14
+              ],
+              [
+                2,
+                1880064
+              ],
+              [
+                13,
+                28672
+              ],
+              [
+                13,
+                245760
+              ],
+              [
+                14,
+                1
+              ],
+              [
+                14,
+                2
+              ],
+              [
+                14,
+                78
+              ],
+              [
+                14,
+                1058
+              ],
+              [
+                14,
+                6144
+              ],
+              [
+                14,
+                60416
+              ],
+              [
+                14,
+                449536
+              ],
+              [
+                14,
+                1880064
+              ],
+              [
+                14,
+                3087360
+              ]
+            ],
+            "affected_rows": 125,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          }
+        }
+      }
+    }
+  },
+  "complete": true
+}

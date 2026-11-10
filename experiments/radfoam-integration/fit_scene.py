@@ -10,7 +10,7 @@ from types import SimpleNamespace
 
 import numpy as np
 import torch
-from integration import UPSTREAM, COLMAPDataset, Scene, checkpoint, initialize_runtime
+from integration import UPSTREAM, COLMAPDataset, RadFoamScene, Scene, checkpoint, initialize_runtime
 from PIL import Image
 
 from benchmarks.memory import MemorySampler
@@ -29,39 +29,102 @@ def main():
         required=True,
     )
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--steps", type=int, default=2000)
-    parser.add_argument("--initial-sites", type=int, default=8192)
-    parser.add_argument("--final-sites", type=int, default=65536)
-    parser.add_argument("--rays", type=int, default=16384)
-    parser.add_argument("--eval-every", type=int, default=500)
+    parser.add_argument("--recipe", choices=["small", "radfoam"], default="small")
+    parser.add_argument("--seed", type=int)
+    parser.add_argument("--steps", type=int)
+    parser.add_argument("--initial-sites", type=int, help="SfM sample count for the small recipe")
+    parser.add_argument("--final-sites", type=int)
+    parser.add_argument("--rays", type=int)
+    parser.add_argument("--eval-every", type=int)
     parser.add_argument("--densify-factor", type=float, default=1.15)
     parser.add_argument("--densify", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--save-trajectory", action="store_true")
     args = parser.parse_args()
+    official_recipe = args.recipe == "radfoam"
+    if official_recipe and args.initial_sites is not None:
+        parser.error(
+            "--initial-sites applies only to --recipe small; radfoam uses its SfM initializer"
+        )
+    defaults = {
+        "seed": 42 if official_recipe else 2026,
+        "steps": 20000 if official_recipe else 2000,
+        "initial_sites": None if official_recipe else 8192,
+        "final_sites": 262144 if official_recipe else 65536,
+        "rays": 65536 if official_recipe else 16384,
+        "eval_every": 5000 if official_recipe else 500,
+    }
+    for name, value in defaults.items():
+        if getattr(args, name) is None:
+            setattr(args, name, value)
     args.output.mkdir(parents=True, exist_ok=False)
     initialize_runtime()
-    torch.manual_seed(2026)
-    np.random.seed(2026)
+    torch.manual_seed(args.seed)
+    np.random.seed(args.seed)
     started = time.perf_counter()
     train = COLMAPDataset("data/radfoam-training/bonsai", "train", 4)
     test = COLMAPDataset("data/radfoam-training/bonsai", "test", 4)
     load_seconds = time.perf_counter() - started
-    # Same deterministic physical initialization for all backends.
-    generator = torch.Generator().manual_seed(2026)
-    ids = torch.randperm(len(train.points3D), generator=generator)[: args.initial_sites]
-    p = train.points3D[ids] + 0.01 * torch.randn((len(ids), 3), generator=generator)
-    guards = torch.randn((1024, 3), generator=generator) * 10
-    p = torch.cat([p, guards])
-    initial = {
-        "primal_points": p,
-        "density": torch.cat([torch.zeros((len(ids), 1)), torch.full((1024, 1), -0.5)]),
-        "att_dc": torch.zeros((len(p), 3)),
-        "att_sh": torch.zeros((len(p), 45)),
-    }
+    model_args = SimpleNamespace(
+        sh_degree=3, init_points=131072, final_points=args.final_sites, activation_scale=1.0
+    )
+    initialization_start = time.perf_counter()
+    if official_recipe:
+        # Reuse the pinned initializer verbatim, including its native point
+        # ordering and density assignment. Both geometry backends receive the
+        # same physical state. This one-time native bootstrap is setup cost.
+        bootstrap = RadFoamScene(
+            model_args,
+            points=train.points3D,
+            points_colors=train.points3D_color,
+            device=torch.device("cuda:0"),
+        )
+        initial = {
+            name: getattr(bootstrap, name).detach().cpu().clone()
+            for name in ["primal_points", "density", "att_dc", "att_sh"]
+        }
+        del bootstrap
+    else:
+        # Same deterministic physical initialization for all backends.
+        generator = torch.Generator().manual_seed(args.seed)
+        ids = torch.randperm(len(train.points3D), generator=generator)[: args.initial_sites]
+        p = train.points3D[ids] + 0.01 * torch.randn((len(ids), 3), generator=generator)
+        guards = torch.randn((1024, 3), generator=generator) * 10
+        p = torch.cat([p, guards])
+        initial = {
+            "primal_points": p,
+            "density": torch.cat([torch.zeros((len(ids), 1)), torch.full((1024, 1), -0.5)]),
+            "att_dc": torch.zeros((len(p), 3)),
+            "att_sh": torch.zeros((len(p), 45)),
+        }
+    torch.cuda.synchronize()
+    initialization_seconds = time.perf_counter() - initialization_start
+    if args.densify and args.final_sites <= len(initial["primal_points"]):
+        parser.error(
+            "--final-sites must exceed the initialized site count when densification is enabled"
+        )
     initial_hash = hashlib.sha256(
         b"".join(initial[k].numpy().tobytes() for k in sorted(initial))
     ).hexdigest()
-    model_args = SimpleNamespace(sh_degree=3, final_points=args.final_sites, activation_scale=1.0)
+    recipe = {
+        "name": args.recipe,
+        "seed": args.seed,
+        "initializer": "upstream RadFoamScene.initialize_from_pcd"
+        if official_recipe
+        else "small sampled SfM initialization",
+        "native_initialization_bootstrap": official_recipe,
+        "initial_sites": len(initial["primal_points"]),
+        "initial_sha256": initial_hash,
+        "error_map_views": len(train.all_rays) if official_recipe else 8,
+        "error_map_stride": 2 if official_recipe else 4,
+        "prune_and_densify": "inherited upstream RadFoamScene.prune_and_densify",
+    }
+    write(args.output / "recipe.json", recipe)
+    for source in [
+        Path(__file__),
+        Path(__file__).with_name("integration.py"),
+        Path(__file__).with_name("spatial.py"),
+    ]:
+        (args.output / f"executed-{source.name}").write_bytes(source.read_bytes())
     warmup = max(10, args.steps // 10)
     freeze = int(args.steps * 0.9)
     until = int(args.steps * 0.55)
@@ -117,6 +180,7 @@ def main():
     def evaluate(step, save=False):
         t = time.perf_counter()
         values = []
+        official_values = []
         with torch.no_grad():
             for view in range(len(test.all_rays)):
                 rays = test.all_rays[view].reshape(-1, 6).cuda()
@@ -128,6 +192,8 @@ def main():
                 pred = torch.cat(pred)
                 mse = (pred - target).square().mean().item()
                 values.append(-10 * np.log10(max(mse, 1e-12)))
+                channel_mse = (pred - target).square().mean(dim=0)
+                official_values.append(float((-10 * torch.log10(channel_mse)).mean()))
                 if save and view in [0, len(test.all_rays) // 2]:
                     h, w = test.all_rgbs.shape[1:3]
                     display = torch.cat([target.reshape(h, w, 3), pred.reshape(h, w, 3)], dim=1)
@@ -136,7 +202,13 @@ def main():
                     )
         torch.cuda.synchronize()
         stages["evaluation"] += time.perf_counter() - t
-        item = {"step": step, "mean_test_psnr": float(np.mean(values)), "per_view_psnr": values}
+        item = {
+            "step": step,
+            "mean_test_psnr": float(np.mean(values)),
+            "per_view_psnr": values,
+            "mean_official_psnr": float(np.mean(official_values)),
+            "per_view_official_psnr": official_values,
+        }
         evals.append(item)
         print(json.dumps({"evaluation": item}), flush=True)
         return item
@@ -215,10 +287,16 @@ def main():
             and len(model.primal_points) < 0.9 * args.final_sites
         ):
             t = time.perf_counter()
-            # Eight fixed views provide a bounded error-map pass in this example.
-            view_ids = torch.linspace(0, len(train.all_rays) - 1, 8).long()
-            handler = SimpleNamespace(rays=train.all_rays[view_ids], rgbs=train.all_rgbs[view_ids])
-            error, contribution = model.collect_error_map(handler, True, downsample=4)
+            if official_recipe:
+                handler = SimpleNamespace(rays=train.all_rays, rgbs=train.all_rgbs)
+            else:
+                view_ids = torch.linspace(0, len(train.all_rays) - 1, 8).long()
+                handler = SimpleNamespace(
+                    rays=train.all_rays[view_ids], rgbs=train.all_rgbs[view_ids]
+                )
+            error, contribution = model.collect_error_map(
+                handler, True, downsample=recipe["error_map_stride"]
+            )
             before = len(model.primal_points)
             model.prune_and_densify(error, contribution, args.densify_factor)
             stages["densification"] += time.perf_counter() - t
@@ -231,6 +309,8 @@ def main():
                     "kind": "densify_prune",
                     "before": before,
                     "after": len(model.primal_points),
+                    "error_map_views": recipe["error_map_views"],
+                    "error_map_stride": recipe["error_map_stride"],
                 }
             )
             period = 1
@@ -272,6 +352,10 @@ def main():
                 warmup,
                 defer_geometry=True,
             )
+            # Densification cadence uses the original count, not the size of
+            # the restored, already densified point cloud.
+            model.num_init_points = saved["num_init_points"]
+            assert model.num_init_points == recipe["initial_sites"]
             model.optimizer.load_state_dict(saved["optimizer"])
             model.update_triangulation(incremental=False)
             permutation = (
@@ -303,6 +387,7 @@ def main():
                     "kind": "checkpoint_fresh_scene_resume",
                     "render_max_abs_difference": resume_difference,
                     "adam_moments_identical": True,
+                    "initial_site_count_preserved": model.num_init_points,
                 }
             )
         row = {
@@ -345,7 +430,10 @@ def main():
         "complete": True,
         "backend": args.backend,
         "config": vars(args) | {"output": str(args.output)},
-        "scope": "Real Bonsai images_4 and standard every-eighth-view test split; reduced site/ray/iteration budget; eight-view densification error maps; synchronized stage profiling. Upstream RadFoam renderer, losses, optimizer schedules, pruning/densification and checkpoint format retained.",
+        "scope": "Real Bonsai images_4 and standard every-eighth-view test split; reduced site/ray budget; configurable iteration count (the reported 20,000-step runs match upstream); explicit initialization/error-map recipe; synchronized stage profiling. Upstream RadFoam renderer, losses, optimizer schedules, pruning/densification and checkpoint format retained.",
+        "recipe": recipe,
+        "psnr_metric": "mean per-view pooled-RGB PSNR; upstream channel-averaged PSNR reported separately",
+        "initialization_seconds": initialization_seconds,
         "initial_sha256": initial_hash,
         "load_seconds": load_seconds,
         "setup_seconds": setup_seconds,
@@ -372,6 +460,8 @@ def main():
                 Path(__file__),
                 Path(__file__).with_name("integration.py"),
                 Path(__file__).with_name("spatial.py"),
+                UPSTREAM / "radfoam_model/scene.py",
+                UPSTREAM / "configs/mipnerf360_indoor.yaml",
             ]
         },
         "warpower_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),

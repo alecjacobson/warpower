@@ -5,16 +5,55 @@ WarPower Voronoi adjacency and the upstream RadFoam renderer and backward pass.
 It also compares native incremental triangulation with current VTM fragment
 reuse. Production WarPower and VTM defaults are unchanged.
 
-The 20,000-step reduced-budget fit on NVIDIA L40 took 184.15 seconds with
+With `--recipe radfoam`, the harness now calls the upstream initializer and uses
+all training views for densification. On the same NVIDIA L40, paired 20,000-step
+fits with identical initial parameters produced:
+
+| Geometry backend | Fit seconds | Pooled-RGB PSNR | Upstream PSNR | Final sites |
+| --- | ---: | ---: | ---: | ---: |
+| Native incremental RadFoam | 311.18 | 29.1606 | 29.1929 | 251,525 |
+| WarPower, Morton order | 211.73 | 29.2091 | 29.2365 | 251,306 |
+
+This is an observed 1.47x fitting-loop speedup (32.0% less time) with similar
+quality. Geometry time fell from 113.91 to 28.62 seconds. Both runs used 65,536
+rays per step, a 262,144-site target, quarter-resolution images, the same four
+training evaluations, numerical audits, and checkpoint restoration. Loading,
+initialization, warmup and final serialization are outside the loop timer.
+These are single runs with different optimization trajectories and final counts.
+
+The official-loop control at this reduced workload scored 29.2363 pooled-RGB dB;
+the port recovers its quality closely. This timing comparison is between the
+two backends in our harness, not against the official loop's different loading
+and evaluation schedule. The full paper budget has not been reproduced.
+
+Both fits had zero nonfinite raw outputs/gradients and zero CPU quota throttling,
+and both restored identical rendering and Adam moments. Warp recorded one ray
+at the renderer's 1,024-cell traversal cap across its audited run; native recorded
+none. These counters cover warmup, training, error maps, evaluation and restore
+checks, without recording the phase of the hit.
+The saved models have no cap hits in any of the 37 held-out views (maximum
+traversal lengths 188 for Warp and 195 for native). The earlier hit remains
+unlocalized and unresolved; successful final evaluation does not clear it.
+
+[Ported-recipe results and validation](../../results/validation/radfoam/ported-recipe/summary.json)
+include both PSNR definitions, stage timings, numerical counters, exact executed
+sources and a checksum inventory of local raw outputs.
+
+## Earlier small-recipe fits
+
+The custom 20,000-step reduced-budget fit on NVIDIA L40 took 184.15 seconds with
 `warpower-morton`, versus 208.10 seconds with native RadFoam, an observed 1.13x
 speedup. Mean PSNR over 37 held-out views was 26.83 versus 26.73 dB. These are
 single full runs with slightly different final site counts; the component
 benchmarks use repeated, alternating-order samples. Loading, initial JIT/warmup
 and final checkpoint serialization are outside the fitting-loop timer.
+These PSNR values use pooled RGB squared error per image. Upstream RadFoam
+instead computes PSNR separately for each channel and then averages the three;
+the two definitions must not be compared without reevaluating the checkpoints.
 
 | Backend | Fit seconds | Held-out PSNR | Final sites |
 | --- | ---: | ---: | ---: |
-| Native RadFoam | 208.10 | 26.73 | 249,858 |
+| Native RadFoam geometry, custom loop | 208.10 | 26.73 | 249,858 |
 | WarPower, input order | 372.04 | 26.76 | 253,903 |
 | WarPower, Morton order | 184.15 | 26.83 | 247,608 |
 
@@ -23,6 +62,127 @@ restoration, with identical restored Adam moments and rendering. Raw renderer
 outputs and gradients had no nonfinite values or traversal-limit hits. The
 checkpoint check runs inside the fitting process; this is not a separate-process
 resume CLI, and the independent minibatch generator remains alive during it.
+
+## Official loop at the reduced workload
+
+Two complete official-loop controls and a shared evaluation of all four saved
+models give the following results on the same L40 and 37 held-out views:
+
+| Training loop and recipe | Pooled-RGB PSNR | Upstream PSNR | Final sites |
+| --- | ---: | ---: | ---: |
+| Official loop, reduced resolution/rays/final sites, official initialization and error maps | 29.2363 | 29.2646 | 251,477 |
+| Official loop, additionally matching our initialization and error-map settings | 26.8684 | 26.8934 | 250,084 |
+| Custom loop, native geometry | 26.7285 | 26.7559 | 249,858 |
+| Custom loop, WarPower Morton ordering | 26.8348 | 26.8623 | 247,608 |
+
+Matching the smaller recipe brings the official loop within 0.140 dB of the
+custom native fit and 0.034 dB of the custom WarPower fit. Matching only
+resolution, rays and final sites leaves a 2.508 dB gap relative to our native fit.
+The remaining initialization, seed and error-map choices matter collectively;
+these two controls do not isolate their individual effects. Single runs with
+different random-number sequences establish close quality agreement, not
+identical trajectories or a statistically significant backend quality gain.
+
+Both PSNR definitions are computed directly from the same rendered pixels.
+Reevaluation reproduces the earlier per-view pooled-RGB values within 3.5e-6 dB;
+the definition change adds only 0.025–0.028 dB to these models. All 148 evaluated
+view/model combinations have finite raw RGBA outputs. The official training
+controls retain upstream's gradient masking, without the custom harness's raw
+gradient audit. The official-initialization control logged one recoverable
+triangulation retry; the small-initialization control logged none.
+
+[Compact results and provenance](../../results/validation/radfoam/official-controls/summary.json),
+[common per-view evaluation](../../results/validation/radfoam/official-controls/shared-evaluation.json),
+and both complete learning curves are retained under `results/validation/radfoam/official-controls`.
+Models, images and logs remain local and checksum-inventoried. This is a
+reduced-budget quality control, not a reproduction of the paper's full-budget
+Bonsai result or a timing comparison against official training.
+
+`official_reduced.py` imports the pinned upstream `train.py` directly, with its
+native scene class, renderer, geometry, optimizer, initialization, asynchronous
+batch fetchers, pruning/densification and evaluation logic. It overrides the
+final-site target to 262,144, the image schedule to quarter resolution throughout,
+and the hardcoded training batch to 65,536 rays. The 20,000-step count and all
+learning-rate/loss settings already match our experiment.
+
+This first control retains the official seed 42, 190,951 initial sites, all-view
+densification error maps at stride 2, and evaluation every 100 steps. Our smaller
+harness instead uses seed 2026, 9,216 initial sites, eight-view error maps at
+stride 4, and four training evaluations. Thus this control tests whether the
+smaller resolution/ray/site budget explains the quality gap; it does not isolate
+every difference between the two harnesses or establish a speed comparison.
+The optional `--recipe adapter-settings` control additionally matches the small
+experiment's seed, initial positions and densities, and error-map view/stride
+settings. It records a hash of the initial physical parameters, allowing a check
+against the earlier runs. The upstream batch fetcher and random-number sequence,
+evaluation cadence, and lack of a mid-training checkpoint exercise still differ;
+this is a quality comparison, not an assertion of identical optimization paths.
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. \
+python experiments/radfoam-integration/official_reduced.py \
+  --output results/local/my-official-reduced-fit
+
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. \
+python experiments/radfoam-integration/official_reduced.py \
+  --recipe adapter-settings --output results/local/my-official-adapter-settings-fit
+
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. \
+python experiments/radfoam-integration/evaluate_shared.py \
+  --checkpoint official results/local/my-official-reduced-fit/output/fit/model.pt \
+  --checkpoint adapter results/local/my-bonsai-fit/model.pt \
+  --output results/local/my-shared-evaluation.json
+```
+
+The common evaluator renders all 37 held-out quarter-resolution views and reports
+both PSNR definitions from the same pixels. Each saved model retains its own
+geometry. The official control saves its source fingerprints, exact executed
+driver, configuration, TensorBoard curves, timing scope, CPU quota counters,
+checkpoint, PLY, and official target/render/error images. Its loop timer includes
+200 evaluations, so compare quality first; elapsed time is not directly
+comparable to the existing reduced-harness timings.
+
+## Upstream initialization and densification in our harness
+
+Select `--recipe radfoam` in `fit_scene.py` to use the upstream initializer and
+full-view densification passes in the custom fitting loop. This recipe defaults
+to seed 42, 20,000 steps, 65,536 rays per step, a 262,144-site target, and evaluation
+every 5,000 steps. Images remain at quarter resolution. `--recipe small` keeps the
+earlier lightweight initialization and eight-view error maps, with its original
+defaults; `--initial-sites` applies only to that recipe.
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. \
+python experiments/radfoam-integration/fit_scene.py \
+  --recipe radfoam --backend native --output results/local/my-radfoam-native
+
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. \
+python experiments/radfoam-integration/fit_scene.py \
+  --recipe radfoam --backend warpower-morton --output results/local/my-radfoam-warpower
+```
+
+The initializer is called directly from the pinned upstream scene class. It
+samples 90% of the SfM point count with replacement, adds positional noise and
+5,000 background sites, and sets the raw densities and zero SH coefficients.
+For Bonsai this yields 190,951 sites. Its point ordering and density assignment
+are preserved exactly, including their association in the upstream code; the
+adapter subsequently permutes parameters together. Both backends therefore have
+a one-time native initialization bootstrap, recorded in setup time and excluded
+from the fitting-loop timer. Geometry refreshes during fitting use the selected
+backend. The initial parameter hash allows comparison between the two runs.
+
+At each densification event, the inherited error-map routine processes all 255
+training views at stride 2. The inherited pruning/densification routine and its
+growth schedule are retained. Our resident GPU minibatch sampling, numerical
+audits, stage timers and mid-training checkpoint check remain active. Reports
+include the chosen recipe, error-map coverage, initialization cost, and both
+pooled-RGB and upstream channel-averaged PSNR.
+
+Checkpoint restoration now preserves the original initial-site count used by
+the densification schedule. A focused small-recipe run tests growth after the
+restore. The paired full-recipe measurements above finished densification
+before their checkpoint, so this subsequent bookkeeping correction does not
+change their growth schedule; their executed sources are preserved separately.
 
 ## Spatial ordering belongs to this adapter
 
@@ -153,9 +313,10 @@ paths named by the committed checksum inventories. This branch publishes compact
 evidence and reproduction source; it does not publish those raw files as a
 release bundle. One-off animation outputs and their driver are outside Git.
 
-The fitting example uses 65,536 rays per step, approximately 250,000 final sites,
-SH3 and eight-view densification error maps. It is a reduced-budget integration
-example, not a reproduction of the paper's quality numbers. WarPower returns
+The reported full-length fitting examples use 65,536 rays per step, approximately
+250,000 final sites and SH3. The small recipe uses eight-view densification error
+maps; the RadFoam recipe uses all training views. These are reduced-budget
+integration examples, not reproductions of the paper's quality numbers. WarPower returns
 bounded adjacency, while native triangulation returns a full-hull mesh and
 adjacency. The earlier exact audit found seven incorrect undirected WarPower
 pairs across four larger checkpoints; successful fitting does not resolve them.

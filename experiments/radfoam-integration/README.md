@@ -24,7 +24,7 @@ These are single runs with different optimization trajectories and final counts.
 The official-loop control at this reduced workload scored 29.2363 pooled-RGB dB;
 the port recovers its quality closely. This timing comparison is between the
 two backends in our harness, not against the official loop's different loading
-and evaluation schedule. The full paper budget has not been reproduced.
+and evaluation schedule. Full-budget results from the official loop are below.
 
 Both fits had zero nonfinite raw outputs/gradients and zero CPU quota throttling,
 and both restored identical rendering and Adam moments. Warp recorded one ray
@@ -72,8 +72,31 @@ written after both full fits and the common evaluation succeed.
 
 The paper's Bonsai reference is 32.15 dB and roughly 70 minutes on RTX 4090.
 Our primary timing comparison is native versus Warp on the same L40; comparison
-with 70 minutes is cross-hardware context. Full-budget quality and speed remain
-unmeasured until this run finishes. Training retains upstream gradient masking;
+with 70 minutes is cross-hardware context. The completed paired fits produced:
+
+| Geometry backend | Full-loop minutes | Upstream PSNR | Pooled-RGB PSNR | Final sites |
+| --- | ---: | ---: | ---: | ---: |
+| Native RadFoam | 89.234 | 32.4136 | 32.3808 | 1,968,116 |
+| WarPower, Morton order | 54.804 | 32.2511 | 32.1772 | 1,944,340 |
+
+Warp reduced full-loop time by 38.58% (1.628x speedup), with 0.1625 dB lower final
+PSNR. At the shared 32.25 dB target, the first recorded crossing was 70.86 minutes
+for native and 54.80 minutes for Warp, a 1.293x time-to-quality improvement.
+These crossings are sampled evaluations, without interpolation or saved
+intermediate models. Both final checkpoints exceeded the paper's 32.15 dB.
+
+The quality gap is concentrated in held-out views 36 and 10, accounting for 95.5%
+of the net deficit; the other 35 views average a -0.0077 dB difference. The worst
+saved Warp view has visible color bias and artifacts. One fit per backend cannot
+estimate seed variance, so the deficit is not dismissed as noise. Both final
+models have finite raw RGBA in all 37 views and no traversal-limit hits.
+Both ran with a four-core quota; recorded CPU throttling was 28.61 seconds for
+native and 16.04 seconds for Warp across their complete runs.
+
+[Full results, curves and provenance](../../results/validation/radfoam/full-budget/analysis.json),
+[shared per-view evaluation](../../results/validation/radfoam/full-budget/shared-evaluation.json),
+and the executed source snapshots are preserved under `results/validation/radfoam/full-budget`.
+Training retains upstream gradient masking;
 the shared evaluator checks raw final RGBA values and traversal caps. It does
 not provide the custom harness's per-call raw training-gradient audit.
 
@@ -352,10 +375,11 @@ paths named by the committed checksum inventories. This branch publishes compact
 evidence and reproduction source; it does not publish those raw files as a
 release bundle. One-off animation outputs and their driver are outside Git.
 
-The reported full-length fitting examples use 65,536 rays per step, approximately
-250,000 final sites and SH3. The small recipe uses eight-view densification error
+The earlier reduced-budget fitting examples use 65,536 rays per step,
+approximately 250,000 final sites and SH3. The small recipe uses eight-view densification error
 maps; the RadFoam recipe uses all training views. These are reduced-budget
-integration examples, not reproductions of the paper's quality numbers. WarPower returns
+integration examples; the full-budget comparison above uses one million rays and
+approximately two million final sites. WarPower returns
 bounded adjacency, while native triangulation returns a full-hull mesh and
 adjacency. The earlier exact audit found seven incorrect undirected WarPower
 pairs across four larger checkpoints; successful fitting does not resolve them.

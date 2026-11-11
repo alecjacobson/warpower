@@ -1,6 +1,6 @@
 # Representative geometry-update benchmark
 
-The replay suite contains **45 real full-hull update pairs** from six VTM instances and a live RadFoam Bonsai fit, plus **three large Bonsai adjacency pairs**. Each pair includes original float32 coordinates, stable IDs, displacements through correspondence, and an independently constructed CGAL initial mesh. Replaying the bundle requires neither optimizer, training images nor renderer.
+The replay suite contains **45 real full-hull update pairs** from six VTM instances and a live RadFoam Bonsai fit, plus **three large Bonsai adjacency pairs**. Each full-hull pair includes original float32 coordinates, stable IDs, displacements through correspondence, and an independently constructed CGAL initial mesh. Replaying the bundle requires neither optimizer, training images nor renderer.
 
 Caching oriented hull-face proofs within one geometry update improves complete 4,096-site VTM solves: **987.230 → 914.652 ms (7.35%)** for torus and **881.099 → 824.910 ms (6.38%)** for graded torus. Positions are bitwise identical, full tetrahedron sets and boundary roles match, iteration work is unchanged, and all four final meshes match CGAL. These are three alternating measured complete solves per variant after warm-up; they include sampling, growth, fitting, quality work, extraction and synchronization.
 

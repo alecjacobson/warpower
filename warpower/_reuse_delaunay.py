@@ -68,6 +68,7 @@ class ReuseDelaunayWorkspace(DelaunayWorkspace):
     """
 
     _facet_query_block_dim = 32
+    _cache_hull_support = True
 
     def __init__(self, *args, reuse_max_rounds=4, **kwargs):
         super().__init__(*args, **kwargs)
@@ -91,6 +92,7 @@ class ReuseDelaunayWorkspace(DelaunayWorkspace):
                 self._reuse_filter,
                 max_rounds=reuse_max_rounds,
                 query_block_dim=self._facet_query_block_dim,
+                cache_hull_support=self._cache_hull_support and self.n < 2**21,
             )
             # The filter just certified these cells against the current input.
             # Keep that proof through this completion even beyond the ordinary

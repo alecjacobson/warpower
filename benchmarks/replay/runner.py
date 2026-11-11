@@ -234,6 +234,7 @@ def run(
             str(path): digest(path)
             for path in [
                 *sorted(Path(__file__).parent.glob("*.py")),
+                *sorted((Path(__file__).parents[2] / "warpower").glob("*.py")),
                 Path(__file__).parents[1] / "incremental_replay.py",
             ]
         },

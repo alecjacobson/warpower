@@ -126,7 +126,9 @@ def winner(points, face):
 )
 @pytest.mark.parametrize("exponent", [-60, 0, 60])
 @pytest.mark.parametrize("block", [32, 256])
-def test_changed_inputs_match_exhaustive_and_rational_winners(case, exponent, block):
+def test_changed_inputs_match_exhaustive_and_rational_winners(
+    case, exponent, block, search_override=None
+):
     rng = np.random.default_rng(164)
     if case == "torus4096":
         saved = np.load(
@@ -190,6 +192,8 @@ def test_changed_inputs_match_exhaustive_and_rational_winners(case, exponent, bl
     for module in [__name__, "warpower._facet_completion", "warpower._proved_completion"]:
         wp.load_module(module=module, device=device, block_dim=block)
     wp.load_module(module=__name__, device=device)
+    if search_override is not None:
+        search_override.prepare(candidates[1], device)
     with wp.ScopedCapture() as cap:
         wp.launch(produce, n, inputs=[source, phase, points, count, len(faces)], device=device)
         table.fill_(-1)
@@ -202,24 +206,22 @@ def test_changed_inputs_match_exhaustive_and_rational_winners(case, exponent, bl
         statistics.zero_()
         for j, kernel in enumerate([reference_search, analytic_search]):
             tree = owners
-            wp.launch(
-                kernel,
-                32 * size,
-                inputs=[
-                    points,
-                    tree,
-                    tets,
-                    indices,
-                    count,
-                    candidates[j],
-                    32,
-                    errors[j : j + 1],
-                    supported,
-                    statistics,
-                ],
-                device=device,
-                block_dim=block,
-            )
+            inputs = [
+                points,
+                tree,
+                tets,
+                indices,
+                count,
+                candidates[j],
+                32,
+                errors[j : j + 1],
+                supported,
+                statistics,
+            ]
+            if j == 1 and search_override is not None:
+                search_override.launch(inputs, block)
+            else:
+                wp.launch(kernel, 32 * size, inputs=inputs, device=device, block_dim=block)
             wp.launch(
                 extend_faces,
                 size,
@@ -249,6 +251,8 @@ def test_changed_inputs_match_exhaustive_and_rational_winners(case, exponent, bl
         x, y = [v.numpy() for v in outputs]
         np.testing.assert_array_equal(x[a != 0], y[b != 0])
         active = len(faces) // 2 if value == 2 else 0 if value == 4 else len(faces)
+        if search_override is not None:
+            search_override.observe(value, active)
         for c in candidates:
             assert np.all(c.numpy().reshape(size, 32)[active:] == -1)
         if n <= 20:

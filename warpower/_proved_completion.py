@@ -342,6 +342,7 @@ class ProvedCertificate(DelaunayCertificate):
             self._face_supported = wp.empty_like(self._boundary)
             self.face_statistics = wp.zeros(2, dtype=int)
             self._prepared_unproved = None
+            self._hull_cache = None
             wp.load_module(module=__name__, device=self.device)
             wp.load_module(module=__name__, device=self.device, block_dim=32)
 
@@ -377,6 +378,9 @@ class ProvedCertificate(DelaunayCertificate):
         )
 
     def _hull_support(self, tree):
+        if self._hull_cache is not None:
+            self._hull_cache.check(self, tree)
+            return
         # This array belongs to the current boundary ordering only. A new
         # certificate always resets and recomputes it before any search.
         self._face_supported.fill_(1)
@@ -402,7 +406,7 @@ class SeededFacetCompletion(FacetCompletion):
 
     _certificate_type = ProvedCertificate
 
-    def __init__(self, seed_filter, **kwargs):
+    def __init__(self, seed_filter, *, cache_hull_support=False, **kwargs):
         self._seed_filter = seed_filter
         super().__init__(
             seed_filter.points,
@@ -411,6 +415,11 @@ class SeededFacetCompletion(FacetCompletion):
             seed_filter.tree,
             **kwargs,
         )
+        if cache_hull_support:
+            from ._completion_hull_cache import HullSupportCache
+
+            c = self._certificate
+            c._hull_cache = HullSupportCache(len(c.points), len(c._boundary), c.device)
         seed = seed_filter._prepared
         if seed is not None and 4096 < len(seed_filter.points) <= 16384:
             from ._stackless_seeds import StacklessSeedQueries
@@ -440,6 +449,8 @@ class SeededFacetCompletion(FacetCompletion):
                 )
 
     def run(self):
+        if self._certificate._hull_cache is not None:
+            self._certificate._hull_cache.reset()
         self._seed_filter.run()
         self._certificate._input_proved.fill_(1)
         self._certificate.proof_statistics.zero_()

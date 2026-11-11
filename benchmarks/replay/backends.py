@@ -146,6 +146,8 @@ class WarpBackend(Backend):
             from warpower._wall_reuse import WallReuseDelaunayWorkspace
 
             cls = WallReuseDelaunayWorkspace if self.name.startswith("vtm-") else DelaunayWorkspace
+            if self.name in ("vtm-fragment", "vtm-split-search"):
+                cls = type("UncachedWallReuse", (cls,), {"_cache_hull_support": False})
             kwargs = {}
             if self.options.get("tetrahedra_capacity") is not None:
                 kwargs["tetrahedra_capacity"] = self.options["tetrahedra_capacity"]
@@ -154,10 +156,6 @@ class WarpBackend(Backend):
             # The workspace borrows its input array and later updates it in place.
             # Own that storage so a prepared previous input remains replayable.
             self.workspace = cls(wp.clone(points), **kwargs)
-            if self.name in ("vtm-hull-cache", "vtm-combined"):
-                from .hull_cache_probe import install
-
-                install(self.workspace)
             if self.name in ("vtm-split-search", "vtm-combined"):
                 from .split_search_probe import install
 
@@ -227,9 +225,12 @@ class WarpBackend(Backend):
             self.diagnostics["runtime_certificate"] = (
                 "current-coordinate complete exact/symbolic certificate"
             )
-            if hasattr(workspace, "_hull_cache_probe"):
-                self.diagnostics["hull_cache_misses_hits"] = (
-                    workspace._hull_cache_probe.statistics.numpy().tolist()
+            completion = getattr(workspace, "_reuse_completion", None)
+            cache = completion._certificate._hull_cache if completion is not None else None
+            if cache is not None:
+                self.diagnostics["hull_cache_misses_hits"] = cache.statistics.numpy().tolist()
+                self.diagnostics["hull_cache_bytes"] = (
+                    cache.table.size * 8 + cache.hits.size * 4 + cache.statistics.size * 4
                 )
             if hasattr(workspace, "_split_search_probe"):
                 self.diagnostics["exact_search_lanes"] = int(

@@ -80,13 +80,17 @@ def select_transitions(frames, stages):
 
 
 def capture(args):
+    from warpower._reuse_delaunay import ReuseDelaunayWorkspace
+
+    if args.uncached_updates:
+        ReuseDelaunayWorkspace._cache_hull_support = False
     points, faces = surface(args.case, args.input)
     domain = SurfaceDomain(
         points,
         faces,
-        feature_angle=120,
-        surface_subdivisions=1,
-        crease_subdivisions=1,
+        feature_angle=args.feature_angle,
+        surface_subdivisions=args.subdivisions,
+        crease_subdivisions=args.crease_subdivisions,
         query_backend="native",
         validate_geometry=False,
     )
@@ -181,6 +185,10 @@ def capture(args):
             count=args.count,
             seed=args.seed,
             initial_count=256,
+            feature_angle=args.feature_angle,
+            surface_subdivisions=args.subdivisions,
+            crease_subdivisions=args.crease_subdivisions,
+            producer_hull_support_cache=ReuseDelaunayWorkspace._cache_hull_support,
             source_commit=subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
             source_sha256={
                 str(p): digest(p) for p in [Path(__file__), *sorted(Path("warpower").glob("*.py"))]
@@ -249,6 +257,12 @@ def main():
     parser.add_argument("--input", type=Path)
     parser.add_argument("--count", type=int, required=True)
     parser.add_argument("--seed", type=int, default=2026)
+    parser.add_argument("--feature-angle", type=float, default=120)
+    parser.add_argument("--subdivisions", type=int, default=1)
+    parser.add_argument("--crease-subdivisions", type=int, default=1)
+    parser.add_argument(
+        "--uncached-updates", action="store_true", help="capture the pre-optimization producer"
+    )
     parser.add_argument("--max-frames", type=int, default=512)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()

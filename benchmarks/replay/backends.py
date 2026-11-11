@@ -229,6 +229,10 @@ class WarpBackend(Backend):
             cache = completion._certificate._hull_cache if completion is not None else None
             if cache is not None:
                 self.diagnostics["hull_cache_misses_hits"] = cache.statistics.numpy().tolist()
+                self.diagnostics["hull_cache_statistics_scope"] = (
+                    "last executed completion, not update totals; wall completion replaces "
+                    "fragment statistics and skipped completion leaves earlier counters"
+                )
                 self.diagnostics["hull_cache_bytes"] = (
                     cache.table.size * 8 + cache.hits.size * 4 + cache.statistics.size * 4
                 )

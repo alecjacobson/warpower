@@ -81,28 +81,36 @@ def main():
         "scope": "Same Morton-sorted checkpoint, padded FP16 octmaps, 4x8 ray tiling; each timed call includes nearest-camera lookup and tracing but excludes ray generation and RGB compositing.",
     }
     report["starting_cells"] = []
-    for count in [65536, 1000000]:
-        torch.manual_seed(77)
-        origins = dataset.poses[:, :, 3].cuda()
-        queries = origins[torch.randint(len(origins), (count,), device="cuda")].contiguous()
+    training = ColmapConfig(data_path=str(args.data), scene="bonsai", init_points="original").load(
+        "train", downsample_factor=args.downsample
+    )
+    cameras = [("test", dataset.poses[:, :, 3].cuda()), ("train", training.poses[:, :, 3].cuda())]
+    del training
+    for split, origins in cameras:
+        for count in [65536, 1000000]:
+            torch.manual_seed(77)
+            queries = origins[torch.randint(len(origins), (count,), device="cuda")].contiguous()
 
-        def original_starts():
-            unique, inverse = torch.unique(queries, dim=0, return_inverse=True)
-            return native_nn.query(renderer.primal_points, unique).long()[inverse].to(torch.uint32)
+            def original_starts():
+                unique, inverse = torch.unique(queries, dim=0, return_inverse=True)
+                return (
+                    native_nn.query(renderer.primal_points, unique).long()[inverse].to(torch.uint32)
+                )
 
-        def warp_starts():
-            return warp_nn.query(renderer.primal_points, queries)
+            def warp_starts():
+                return warp_nn.query(renderer.primal_points, queries)
 
-        mismatch = int((original_starts().long() != warp_starts().long()).sum())
-        assert mismatch == 0
-        report["starting_cells"].append(
-            {
-                "rays": count,
-                "cameras": len(origins),
-                "mismatches": mismatch,
-                **paired_timing({"native": original_starts, "warp": warp_starts}, args.repeats),
-            }
-        )
+            mismatch = int((original_starts().long() != warp_starts().long()).sum())
+            assert mismatch == 0
+            report["starting_cells"].append(
+                {
+                    "split": split,
+                    "rays": count,
+                    "cameras": len(origins),
+                    "mismatches": mismatch,
+                    **paired_timing({"native": original_starts, "warp": warp_starts}, args.repeats),
+                }
+            )
     for view in args.views:
         batch = dataset[view]
         rays, target = batch["rays"].cuda(), batch["rgbs"].cuda()

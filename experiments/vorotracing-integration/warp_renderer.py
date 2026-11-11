@@ -126,15 +126,16 @@ def half_rgb(t: vec4h):
 
 
 @wp.func
-def half_texture(t: wp.array2d[wp.uint64], cell: int, s: Bilinear):
+def half_texture(t: wp.array[wp.uint64], cell: int, s: Bilinear):
     # Load an aligned 64-bit word, then reinterpret the four half channels.
     # A vec4h array has only two-byte type alignment and otherwise generates
     # separate channel loads, losing the paper's packed-texel optimization.
+    # R=8 is fixed by this adapter, so flattening also removes a dynamic stride.
     return (
-        s.weights[0] * half_rgb(wp.cast(t[cell, s.ids[0]], vec4h))
-        + s.weights[1] * half_rgb(wp.cast(t[cell, s.ids[1]], vec4h))
-        + s.weights[2] * half_rgb(wp.cast(t[cell, s.ids[2]], vec4h))
-        + s.weights[3] * half_rgb(wp.cast(t[cell, s.ids[3]], vec4h))
+        s.weights[0] * half_rgb(wp.cast(t[cell * 64 + s.ids[0]], vec4h))
+        + s.weights[1] * half_rgb(wp.cast(t[cell * 64 + s.ids[1]], vec4h))
+        + s.weights[2] * half_rgb(wp.cast(t[cell * 64 + s.ids[2]], vec4h))
+        + s.weights[3] * half_rgb(wp.cast(t[cell * 64 + s.ids[3]], vec4h))
     )
 
 
@@ -255,11 +256,12 @@ def intersection_grad(p: wp.vec3, q: wp.vec3, o: wp.vec3, d: wp.vec3):
     return (numerator * d + denominator * (o - p)) / (denominator * denominator)
 
 
-@wp.kernel
+# The full-checkpoint launch sweep favors this cap over 48/64/default on L40.
+@wp.kernel(cuda_max_registers=80)
 def trace_inference(
     points: wp.array[wp.vec3],
-    diffuse: wp.array2d[wp.uint64],
-    specular: wp.array2d[wp.uint64],
+    diffuse: wp.array[wp.uint64],
+    specular: wp.array[wp.uint64],
     density: wp.array[float],
     adj: wp.array[wp.uint32],
     offsets: wp.array[wp.uint32],
@@ -561,8 +563,8 @@ def infer(
         n,
         inputs=[
             tensor(points, wp.vec3),
-            tensor(diffuse_fp16.view(torch.int64).reshape(-1, 64), wp.uint64),
-            tensor(specular_fp16.view(torch.int64).reshape(-1, 64), wp.uint64),
+            tensor(diffuse_fp16.view(torch.int64).reshape(-1), wp.uint64),
+            tensor(specular_fp16.view(torch.int64).reshape(-1), wp.uint64),
             tensor(density.reshape(-1)),
             tensor(adjacency),
             tensor(offsets),

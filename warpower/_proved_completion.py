@@ -2,8 +2,8 @@
 
 Seed filtering, every completion round and proof consumption are recorded as one
 ordered operation. Points and canonical owners cannot change between them.
-Empty-sphere and immediately preceding hull-support results may be reused;
-every newly exposed face is globally checked before its result is consumed.
+Empty-sphere and current-input hull-support results may be reused within that
+operation. Every exposed face without a matching proof is globally checked.
 No proof survives a call to run(), and no caller-supplied trust mask is accepted.
 """
 

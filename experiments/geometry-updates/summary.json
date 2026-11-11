@@ -1,0 +1,807 @@
+{
+  "aggregation": "Median across pair medians; p95 across measured samples. Sum is the selected updates' medians, not a trajectory/training time. Failed rows are never assigned zero time.",
+  "cases": [
+    {
+      "report": "radfoam-bonsai-large.json",
+      "report_sha256": "fe2f52a1954f3162d91d6aa7844e75742f489873d75a30d0f0ec876c9880a8d9",
+      "fixture_manifest_sha256": "eff1e938ad61fdce5519001a9a6d5e4bfeee9a4baccb6709fb9e4de6bb4fe857",
+      "contract": "bounded-voronoi-adjacency",
+      "repeats": 5,
+      "groups": {
+        "all": {
+          "pairs": 3,
+          "variants": {
+            "warp-adjacency": {
+              "samples": 15,
+              "successful_samples": 15,
+              "reference_matches": null,
+              "previous_inputs_verified": null,
+              "geometrically_verified_samples": null,
+              "previous_inputs_geometrically_verified": null,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 34.219902008771896,
+              "sum_pair_medians_ms": 104.1516400873661,
+              "p95_sample_ms": 49.2542140185833,
+              "max_hull_cache_bytes": 0
+            },
+            "warp-hints": {
+              "samples": 15,
+              "successful_samples": 15,
+              "reference_matches": null,
+              "previous_inputs_verified": null,
+              "geometrically_verified_samples": null,
+              "previous_inputs_geometrically_verified": null,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 28.079606592655182,
+              "sum_pair_medians_ms": 91.56842157244682,
+              "p95_sample_ms": 43.84600892663002,
+              "max_hull_cache_bytes": 0
+            }
+          },
+          "peer_output_sets_agree": true
+        }
+      },
+      "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition."
+    },
+    {
+      "report": "radfoam-bonsai.json",
+      "report_sha256": "a8e91fd5a72a81262696dbdd7379d8de4a3d70ca947c3f7026f4c21d7ff1aa6e",
+      "fixture_manifest_sha256": "e07c3954cce26bd1da791c4bde9ddc7ea4760cdf22e97e4f614c5c704d9cf17f",
+      "contract": "full-hull-tetrahedra",
+      "repeats": 5,
+      "groups": {
+        "all": {
+          "pairs": 11,
+          "variants": {
+            "vtm-fragment": {
+              "samples": 55,
+              "successful_samples": 55,
+              "reference_matches": 55,
+              "previous_inputs_verified": 55,
+              "geometrically_verified_samples": 55,
+              "previous_inputs_geometrically_verified": 55,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 20.02200484275818,
+              "sum_pair_medians_ms": 501.51533260941505,
+              "p95_sample_ms": 111.57110780477524,
+              "max_hull_cache_bytes": 0
+            },
+            "vtm-hull-cache": {
+              "samples": 55,
+              "successful_samples": 55,
+              "reference_matches": 55,
+              "previous_inputs_verified": 55,
+              "geometrically_verified_samples": 55,
+              "previous_inputs_geometrically_verified": 55,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 19.969232380390167,
+              "sum_pair_medians_ms": 498.2142336666584,
+              "p95_sample_ms": 109.19179283082482,
+              "max_hull_cache_bytes": 4308232
+            },
+            "radfoam-incremental": {
+              "samples": 55,
+              "successful_samples": 55,
+              "reference_matches": 55,
+              "previous_inputs_verified": 55,
+              "geometrically_verified_samples": 55,
+              "previous_inputs_geometrically_verified": 55,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 6.725292652845383,
+              "sum_pair_medians_ms": 155.92241287231445,
+              "p95_sample_ms": 44.985294714569996,
+              "max_hull_cache_bytes": 0
+            },
+            "radfoam-full": {
+              "samples": 55,
+              "successful_samples": 55,
+              "reference_matches": 55,
+              "previous_inputs_verified": 55,
+              "geometrically_verified_samples": 55,
+              "previous_inputs_geometrically_verified": 55,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 22.889770567417145,
+              "sum_pair_medians_ms": 263.85293528437614,
+              "p95_sample_ms": 52.25567668676375,
+              "max_hull_cache_bytes": 0
+            },
+            "warp-full": {
+              "samples": 55,
+              "successful_samples": 55,
+              "reference_matches": 55,
+              "previous_inputs_verified": 55,
+              "geometrically_verified_samples": 55,
+              "previous_inputs_geometrically_verified": 55,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 286.97044402360916,
+              "sum_pair_medians_ms": 3345.7992412149906,
+              "p95_sample_ms": 581.1969425529242,
+              "max_hull_cache_bytes": 0
+            }
+          },
+          "peer_output_sets_agree": true
+        },
+        "optimizer": {
+          "pairs": 6,
+          "variants": {
+            "vtm-fragment": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 12.921765446662903,
+              "sum_pair_medians_ms": 83.39009806513786,
+              "p95_sample_ms": 27.041057869791985,
+              "max_hull_cache_bytes": 0
+            },
+            "vtm-hull-cache": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 12.90258951485157,
+              "sum_pair_medians_ms": 83.17939192056656,
+              "p95_sample_ms": 26.848390512168407,
+              "max_hull_cache_bytes": 4308232
+            },
+            "radfoam-incremental": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 5.154084414243698,
+              "sum_pair_medians_ms": 30.853822827339172,
+              "p95_sample_ms": 6.986189261078834,
+              "max_hull_cache_bytes": 0
+            },
+            "radfoam-full": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 21.195676177740097,
+              "sum_pair_medians_ms": 138.78373801708221,
+              "p95_sample_ms": 46.61021791398516,
+              "max_hull_cache_bytes": 0
+            },
+            "warp-full": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 156.80910274386406,
+              "sum_pair_medians_ms": 1209.014154970646,
+              "p95_sample_ms": 356.87701646238565,
+              "max_hull_cache_bytes": 0
+            }
+          },
+          "peer_output_sets_agree": true
+        },
+        "growth_or_reset": {
+          "pairs": 5,
+          "variants": {
+            "vtm-fragment": {
+              "samples": 25,
+              "successful_samples": 25,
+              "reference_matches": 25,
+              "previous_inputs_verified": 25,
+              "geometrically_verified_samples": 25,
+              "previous_inputs_geometrically_verified": 25,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 97.6417325437069,
+              "sum_pair_medians_ms": 418.1252345442772,
+              "p95_sample_ms": 114.28089663386343,
+              "max_hull_cache_bytes": 0
+            },
+            "vtm-hull-cache": {
+              "samples": 25,
+              "successful_samples": 25,
+              "reference_matches": 25,
+              "previous_inputs_verified": 25,
+              "geometrically_verified_samples": 25,
+              "previous_inputs_geometrically_verified": 25,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 95.87939083576202,
+              "sum_pair_medians_ms": 415.03484174609184,
+              "p95_sample_ms": 115.98519906401634,
+              "max_hull_cache_bytes": 4308232
+            },
+            "radfoam-incremental": {
+              "samples": 25,
+              "successful_samples": 25,
+              "reference_matches": 25,
+              "previous_inputs_verified": 25,
+              "geometrically_verified_samples": 25,
+              "previous_inputs_geometrically_verified": 25,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 25.963056832551956,
+              "sum_pair_medians_ms": 125.06859004497528,
+              "p95_sample_ms": 60.87481006979941,
+              "max_hull_cache_bytes": 0
+            },
+            "radfoam-full": {
+              "samples": 25,
+              "successful_samples": 25,
+              "reference_matches": 25,
+              "previous_inputs_verified": 25,
+              "geometrically_verified_samples": 25,
+              "previous_inputs_geometrically_verified": 25,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 25.881625711917877,
+              "sum_pair_medians_ms": 125.06919726729393,
+              "p95_sample_ms": 46.305407583713475,
+              "max_hull_cache_bytes": 0
+            },
+            "warp-full": {
+              "samples": 25,
+              "successful_samples": 25,
+              "reference_matches": 25,
+              "previous_inputs_verified": 25,
+              "geometrically_verified_samples": 25,
+              "previous_inputs_geometrically_verified": 25,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 465.3526097536087,
+              "sum_pair_medians_ms": 2136.7850862443447,
+              "p95_sample_ms": 591.9611558318137,
+              "max_hull_cache_bytes": 0
+            }
+          },
+          "peer_output_sets_agree": true
+        }
+      },
+      "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition."
+    },
+    {
+      "report": "vtm-armadillo-8192.json",
+      "report_sha256": "bc09a1d9aa05898299199233fb05d619991da4f2cb8ebab8c41033db34aaaa45",
+      "fixture_manifest_sha256": "cc196b3f26edd92a6f02c226a354089ff236e6aa24d95a4f1f555e93f99c1760",
+      "contract": "full-hull-tetrahedra",
+      "repeats": 5,
+      "groups": {
+        "all": {
+          "pairs": 7,
+          "variants": {
+            "vtm-fragment": {
+              "samples": 35,
+              "successful_samples": 35,
+              "reference_matches": 35,
+              "previous_inputs_verified": 35,
+              "geometrically_verified_samples": 35,
+              "previous_inputs_geometrically_verified": 35,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 4.3448880314826965,
+              "sum_pair_medians_ms": 45.035675168037415,
+              "p95_sample_ms": 14.375149458646774,
+              "max_hull_cache_bytes": 0
+            },
+            "vtm-hull-cache": {
+              "samples": 35,
+              "successful_samples": 35,
+              "reference_matches": 35,
+              "previous_inputs_verified": 35,
+              "geometrically_verified_samples": 35,
+              "previous_inputs_geometrically_verified": 35,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 4.055347293615341,
+              "sum_pair_medians_ms": 44.123683124780655,
+              "p95_sample_ms": 14.320377632975578,
+              "max_hull_cache_bytes": 1572872
+            },
+            "radfoam-incremental": {
+              "samples": 35,
+              "successful_samples": 35,
+              "reference_matches": 35,
+              "previous_inputs_verified": 35,
+              "geometrically_verified_samples": 35,
+              "previous_inputs_geometrically_verified": 35,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 4.602257162332535,
+              "sum_pair_medians_ms": 33.59748423099518,
+              "p95_sample_ms": 7.85074345767498,
+              "max_hull_cache_bytes": 0
+            },
+            "radfoam-full": {
+              "samples": 35,
+              "successful_samples": 35,
+              "reference_matches": 35,
+              "previous_inputs_verified": 35,
+              "geometrically_verified_samples": 35,
+              "previous_inputs_geometrically_verified": 35,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 16.573254019021988,
+              "sum_pair_medians_ms": 139.95227590203285,
+              "p95_sample_ms": 37.49919123947612,
+              "max_hull_cache_bytes": 0
+            },
+            "warp-full": {
+              "samples": 35,
+              "successful_samples": 35,
+              "reference_matches": 35,
+              "previous_inputs_verified": 35,
+              "geometrically_verified_samples": 35,
+              "previous_inputs_geometrically_verified": 35,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 107.49134421348572,
+              "sum_pair_medians_ms": 771.300882101059,
+              "p95_sample_ms": 131.97271265089512,
+              "max_hull_cache_bytes": 0
+            }
+          },
+          "peer_output_sets_agree": true
+        }
+      },
+      "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition."
+    },
+    {
+      "report": "vtm-graded-torus-4096.json",
+      "report_sha256": "4fe62c91238d714950b2ff9d38858347b2e3a0026ecef6fc4d2a2e8f546dc1eb",
+      "fixture_manifest_sha256": "c6751d26340b0c02c2fbb5887e42ed8240f1238e07527deaaa6aade3e1a9c7ef",
+      "contract": "full-hull-tetrahedra",
+      "repeats": 5,
+      "groups": {
+        "all": {
+          "pairs": 6,
+          "variants": {
+            "vtm-fragment": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 3.2090414315462112,
+              "sum_pair_medians_ms": 21.711237728595734,
+              "p95_sample_ms": 8.755746670067309,
+              "max_hull_cache_bytes": 0
+            },
+            "vtm-hull-cache": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 2.967061474919319,
+              "sum_pair_medians_ms": 20.624853670597076,
+              "p95_sample_ms": 8.460513316094875,
+              "max_hull_cache_bytes": 786440
+            },
+            "radfoam-incremental": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 5.116043612360954,
+              "sum_pair_medians_ms": 27.50169485807419,
+              "p95_sample_ms": 7.385796681046486,
+              "max_hull_cache_bytes": 0
+            },
+            "radfoam-full": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 13.592537492513657,
+              "sum_pair_medians_ms": 91.01992845535278,
+              "p95_sample_ms": 18.727254308760166,
+              "max_hull_cache_bytes": 0
+            },
+            "warp-full": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 32.107723876833916,
+              "sum_pair_medians_ms": 239.91864174604416,
+              "p95_sample_ms": 62.46231384575367,
+              "max_hull_cache_bytes": 0
+            }
+          },
+          "peer_output_sets_agree": true
+        }
+      },
+      "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition."
+    },
+    {
+      "report": "vtm-hand-features-1024.json",
+      "report_sha256": "695fd8e3f9826d2bdff36458433753099f2f0ad704923431536af079ca49a936",
+      "fixture_manifest_sha256": "307aec2a40319058fcb5aec2a3a937cb5e6f888bb98dfea300d0723e2df872f1",
+      "contract": "full-hull-tetrahedra",
+      "repeats": 5,
+      "groups": {
+        "all": {
+          "pairs": 6,
+          "variants": {
+            "vtm-fragment": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 0,
+              "previous_inputs_verified": 0,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 3.131372854113579,
+              "sum_pair_medians_ms": 26.533473283052444,
+              "p95_sample_ms": 9.23488400876522,
+              "max_hull_cache_bytes": 0
+            },
+            "vtm-hull-cache": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 0,
+              "previous_inputs_verified": 0,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 2.824399620294571,
+              "sum_pair_medians_ms": 25.625526905059814,
+              "p95_sample_ms": 9.078044816851616,
+              "max_hull_cache_bytes": 196616
+            },
+            "radfoam-incremental": {
+              "samples": 30,
+              "successful_samples": 0,
+              "reference_matches": 0,
+              "previous_inputs_verified": 0,
+              "geometrically_verified_samples": 0,
+              "previous_inputs_geometrically_verified": 0,
+              "failures": [
+                "TriangulationFailedError: ambiguous triangulation"
+              ],
+              "throttled_samples": 0,
+              "median_update_ms": null,
+              "sum_pair_medians_ms": null,
+              "p95_sample_ms": null,
+              "max_hull_cache_bytes": 0
+            },
+            "radfoam-full": {
+              "samples": 30,
+              "successful_samples": 0,
+              "reference_matches": 0,
+              "previous_inputs_verified": 0,
+              "geometrically_verified_samples": 0,
+              "previous_inputs_geometrically_verified": 0,
+              "failures": [
+                "TriangulationFailedError: ambiguous triangulation"
+              ],
+              "throttled_samples": 0,
+              "median_update_ms": null,
+              "sum_pair_medians_ms": null,
+              "p95_sample_ms": null,
+              "max_hull_cache_bytes": 0
+            },
+            "warp-full": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 0,
+              "previous_inputs_verified": 0,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 385.1251173764467,
+              "sum_pair_medians_ms": 2398.0595134198666,
+              "p95_sample_ms": 497.7904899045825,
+              "max_hull_cache_bytes": 0
+            }
+          },
+          "peer_output_sets_agree": true
+        }
+      },
+      "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition."
+    },
+    {
+      "report": "vtm-thin-hand-1024.json",
+      "report_sha256": "1379bf6e4e310a37f8602fed9b9ebe1155d3fe382114550de5b1d62688b77db6",
+      "fixture_manifest_sha256": "061e04ce44fc3f417a18f1735096a87473d98b0d38db93f4e1dbb8952abd3bd8",
+      "contract": "full-hull-tetrahedra",
+      "repeats": 5,
+      "groups": {
+        "all": {
+          "pairs": 4,
+          "variants": {
+            "vtm-fragment": {
+              "samples": 20,
+              "successful_samples": 20,
+              "reference_matches": 20,
+              "previous_inputs_verified": 20,
+              "geometrically_verified_samples": 20,
+              "previous_inputs_geometrically_verified": 20,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 1.0733306407928467,
+              "sum_pair_medians_ms": 4.843387752771378,
+              "p95_sample_ms": 2.1842652931809425,
+              "max_hull_cache_bytes": 0
+            },
+            "vtm-hull-cache": {
+              "samples": 20,
+              "successful_samples": 20,
+              "reference_matches": 20,
+              "previous_inputs_verified": 20,
+              "geometrically_verified_samples": 20,
+              "previous_inputs_geometrically_verified": 20,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 1.0648854076862335,
+              "sum_pair_medians_ms": 4.8236846923828125,
+              "p95_sample_ms": 2.1924789994955063,
+              "max_hull_cache_bytes": 196616
+            },
+            "radfoam-incremental": {
+              "samples": 20,
+              "successful_samples": 20,
+              "reference_matches": 20,
+              "previous_inputs_verified": 20,
+              "geometrically_verified_samples": 20,
+              "previous_inputs_geometrically_verified": 20,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 2.6334673166275024,
+              "sum_pair_medians_ms": 11.58098503947258,
+              "p95_sample_ms": 4.510761797428131,
+              "max_hull_cache_bytes": 0
+            },
+            "radfoam-full": {
+              "samples": 20,
+              "successful_samples": 20,
+              "reference_matches": 20,
+              "previous_inputs_verified": 20,
+              "geometrically_verified_samples": 20,
+              "previous_inputs_geometrically_verified": 20,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 9.061161428689957,
+              "sum_pair_medians_ms": 37.44377940893173,
+              "p95_sample_ms": 10.980270616710186,
+              "max_hull_cache_bytes": 0
+            },
+            "warp-full": {
+              "samples": 20,
+              "successful_samples": 20,
+              "reference_matches": 20,
+              "previous_inputs_verified": 20,
+              "geometrically_verified_samples": 20,
+              "previous_inputs_geometrically_verified": 20,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 11.402087286114693,
+              "sum_pair_medians_ms": 55.59493601322174,
+              "p95_sample_ms": 21.761534549295902,
+              "max_hull_cache_bytes": 0
+            }
+          },
+          "peer_output_sets_agree": true
+        }
+      },
+      "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition."
+    },
+    {
+      "report": "vtm-torus-1024.json",
+      "report_sha256": "866cc1040f9313f158807fd0962530283c01a7d3f67eee597fc99cc610b70b4b",
+      "fixture_manifest_sha256": "8d735a1f9cdaa40a348f6bb6276d3903d6f65aad93a222dab9b280c35bb752e6",
+      "contract": "full-hull-tetrahedra",
+      "repeats": 5,
+      "groups": {
+        "all": {
+          "pairs": 6,
+          "variants": {
+            "vtm-fragment": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 1.1914614588022232,
+              "sum_pair_medians_ms": 7.310371845960617,
+              "p95_sample_ms": 2.3101741448044777,
+              "max_hull_cache_bytes": 0
+            },
+            "vtm-hull-cache": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 1.1727400124073029,
+              "sum_pair_medians_ms": 7.199492305517197,
+              "p95_sample_ms": 2.3003406822681427,
+              "max_hull_cache_bytes": 196616
+            },
+            "radfoam-incremental": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 2.742566168308258,
+              "sum_pair_medians_ms": 16.483478248119354,
+              "p95_sample_ms": 4.404825903475285,
+              "max_hull_cache_bytes": 0
+            },
+            "radfoam-full": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 8.299488574266434,
+              "sum_pair_medians_ms": 51.49819701910019,
+              "p95_sample_ms": 9.39380880445242,
+              "max_hull_cache_bytes": 0
+            },
+            "warp-full": {
+              "samples": 30,
+              "successful_samples": 30,
+              "reference_matches": 30,
+              "previous_inputs_verified": 30,
+              "geometrically_verified_samples": 30,
+              "previous_inputs_geometrically_verified": 30,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 13.034714385867119,
+              "sum_pair_medians_ms": 87.15687692165375,
+              "p95_sample_ms": 23.49273730069399,
+              "max_hull_cache_bytes": 0
+            }
+          },
+          "peer_output_sets_agree": true
+        }
+      },
+      "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition."
+    },
+    {
+      "report": "vtm-torus-4096.json",
+      "report_sha256": "b1831472eece12704237fc01f7354784075153faee68d4430a9643b84077b036",
+      "fixture_manifest_sha256": "173c4bc607bc95e88976846da94882b6e7bae34520202e59f67e414f0cd45462",
+      "contract": "full-hull-tetrahedra",
+      "repeats": 5,
+      "groups": {
+        "all": {
+          "pairs": 5,
+          "variants": {
+            "vtm-fragment": {
+              "samples": 25,
+              "successful_samples": 25,
+              "reference_matches": 25,
+              "previous_inputs_verified": 25,
+              "geometrically_verified_samples": 25,
+              "previous_inputs_geometrically_verified": 25,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 3.615148365497589,
+              "sum_pair_medians_ms": 19.40547302365303,
+              "p95_sample_ms": 8.981999754905699,
+              "max_hull_cache_bytes": 0
+            },
+            "vtm-hull-cache": {
+              "samples": 25,
+              "successful_samples": 25,
+              "reference_matches": 25,
+              "previous_inputs_verified": 25,
+              "geometrically_verified_samples": 25,
+              "previous_inputs_geometrically_verified": 25,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 3.247920423746109,
+              "sum_pair_medians_ms": 18.42668280005455,
+              "p95_sample_ms": 8.601455390453339,
+              "max_hull_cache_bytes": 786440
+            },
+            "radfoam-incremental": {
+              "samples": 25,
+              "successful_samples": 25,
+              "reference_matches": 25,
+              "previous_inputs_verified": 25,
+              "geometrically_verified_samples": 25,
+              "previous_inputs_geometrically_verified": 25,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 3.980003297328949,
+              "sum_pair_medians_ms": 21.085597574710846,
+              "p95_sample_ms": 7.242854684591293,
+              "max_hull_cache_bytes": 0
+            },
+            "radfoam-full": {
+              "samples": 25,
+              "successful_samples": 25,
+              "reference_matches": 25,
+              "previous_inputs_verified": 25,
+              "geometrically_verified_samples": 25,
+              "previous_inputs_geometrically_verified": 25,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 13.261992484331131,
+              "sum_pair_medians_ms": 174.0015335381031,
+              "p95_sample_ms": 116.64669886231422,
+              "max_hull_cache_bytes": 0
+            },
+            "warp-full": {
+              "samples": 25,
+              "successful_samples": 25,
+              "reference_matches": 25,
+              "previous_inputs_verified": 25,
+              "geometrically_verified_samples": 25,
+              "previous_inputs_geometrically_verified": 25,
+              "failures": [],
+              "throttled_samples": 0,
+              "median_update_ms": 34.04531627893448,
+              "sum_pair_medians_ms": 156.3670076429844,
+              "p95_sample_ms": 34.26965922117233,
+              "max_hull_cache_bytes": 0
+            }
+          },
+          "peer_output_sets_agree": true
+        }
+      },
+      "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition."
+    }
+  ]
+}

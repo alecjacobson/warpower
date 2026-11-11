@@ -1,0 +1,64 @@
+{
+  "complete": true,
+  "matched_initial_parameters": true,
+  "native_over_warpower_loop_speedup": 1.6282481795106154,
+  "warpower_minus_native_official_psnr": -0.16248718467918621,
+  "runs": [
+    {
+      "backend": "native",
+      "loop_seconds": 5354.030951283872,
+      "total_seconds": 5428.547422740608,
+      "final_points": 1968116,
+      "official_psnr": 32.41362308811497,
+      "pooled_rgb_psnr": 32.38083019772091,
+      "raw_final_rgba_nonfinite": 0,
+      "final_traversal_cap_hits": 0,
+      "cpu_quota": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 8442,
+          "throttled_usec": 28610816
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 11998,
+          "throttled_usec": 26586144
+        }
+      }
+    },
+    {
+      "backend": "warpower",
+      "loop_seconds": 3288.2155304439366,
+      "total_seconds": 3362.912058416754,
+      "final_points": 1944340,
+      "official_psnr": 32.25113590343578,
+      "pooled_rgb_psnr": 32.17721691647091,
+      "raw_final_rgba_nonfinite": 0,
+      "final_traversal_cap_hits": 0,
+      "cpu_quota": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 6054,
+          "throttled_usec": 16042186
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 8454,
+          "throttled_usec": 15273093
+        }
+      }
+    }
+  ],
+  "paper_reference": {
+    "paper_bonsai_psnr": 32.15,
+    "paper_bonsai_training_seconds": 4200,
+    "paper_gpu": "RTX 4090",
+    "comparison_gpu": "L40",
+    "note": "Primary speed comparison is native versus Warp on this L40. Comparing to 70 minutes is cross-hardware context only."
+  },
+  "limitations": [
+    "Single full run per backend.",
+    "Training uses original upstream gradient masking; numerical counters here cover final evaluation only.",
+    "Do not interpret a shorter time than 70 minutes as a hardware-controlled paper speedup."
+  ]
+}

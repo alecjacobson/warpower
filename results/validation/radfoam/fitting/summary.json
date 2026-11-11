@@ -1,0 +1,937 @@
+{
+  "scope": "Complete reduced-budget Mip-NeRF360 Bonsai fitting: 20,000 optimizer steps, 65,536 rays/step, SH3, 8,192 SfM sites plus 1,024 initial guards, 262,144 target sites, 255 training views and 37 held-out views at 780x520. One end-to-end run per backend; synchronized profiling and raw numerical checks enabled equally. Native incremental geometry versus fresh Warpower geometry; repeated component measurements are separate.",
+  "fitting": [
+    {
+      "backend": "native",
+      "seconds": 208.10274604707956,
+      "test_psnr": 26.728470720921067,
+      "final_sites": 249858,
+      "geometry_seconds": 27.965979419648647,
+      "forward_seconds": 47.61419624835253,
+      "backward_seconds": 101.45572162419558,
+      "cpu_throttled": false,
+      "raw_checks": {
+        "forward_calls": 21490,
+        "backward_calls": 20193,
+        "nonfinite_rgba": 0,
+        "nonfinite_position_gradients": 0,
+        "nonfinite_attribute_gradients": 0,
+        "traversal_limit_rays": 0
+      }
+    },
+    {
+      "backend": "warpower",
+      "seconds": 372.043174020946,
+      "test_psnr": 26.7570099499936,
+      "final_sites": 253903,
+      "geometry_seconds": 18.320039715617895,
+      "forward_seconds": 212.33609891682863,
+      "backward_seconds": 100.85249376669526,
+      "cpu_throttled": false,
+      "raw_checks": {
+        "forward_calls": 21490,
+        "backward_calls": 20193,
+        "nonfinite_rgba": 0,
+        "nonfinite_position_gradients": 0,
+        "nonfinite_attribute_gradients": 0,
+        "traversal_limit_rays": 0
+      }
+    },
+    {
+      "backend": "warpower-morton",
+      "seconds": 184.1512759141624,
+      "test_psnr": 26.83482431448529,
+      "final_sites": 247608,
+      "geometry_seconds": 17.073370184749365,
+      "forward_seconds": 40.87698591500521,
+      "backward_seconds": 97.30482299625874,
+      "cpu_throttled": false,
+      "raw_checks": {
+        "forward_calls": 21490,
+        "backward_calls": 20193,
+        "nonfinite_rgba": 0,
+        "nonfinite_position_gradients": 0,
+        "nonfinite_attribute_gradients": 0,
+        "traversal_limit_rays": 0
+      }
+    }
+  ],
+  "native_over_warp_morton_wall_speedup": 1.1300641009084376,
+  "unordered_over_warp_morton_wall_speedup": 2.020312768261051,
+  "exact_same_scene_ordering": {
+    "scope": "Same fitted Bonsai parameters and exactly the same directed graph relabeled by Warp Morton order. Upstream RadFoam AABB/NN/renderer; 65536 identical rays. Three warm-ups, twenty alternating-order samples. Ordering and graph relabel preparation reported separately.",
+    "checkpoint_sha256": "3465fa9bacbaa54437509dbccdba97bd002a743fdd960366f2da9dac5b303028",
+    "sites": 253903,
+    "rays": 65536,
+    "cameras": 255,
+    "ordering_seconds": 0.017329975962638855,
+    "relabel_seconds": 0.02661997079849243,
+    "preparation_note": "The first preparation calls above include module loading; warm medians below exclude it.",
+    "warm_preparation_median_seconds": {
+      "ordering": 0.0004505738615989685,
+      "graph_relabel": 0.0005273036658763885
+    },
+    "gradient_checks": {
+      "position": {
+        "max_abs_difference": 2.3283064365386963e-10,
+        "relative_l2_difference": 8.796363637486593e-09
+      },
+      "attribute": {
+        "max_abs_difference": 4.6566128730773926e-09,
+        "relative_l2_difference": 2.594148611478886e-07
+      }
+    },
+    "raw_render_gradient_checks": {
+      "forward_calls": 2,
+      "backward_calls": 2,
+      "nonfinite_rgba": 0,
+      "nonfinite_position_gradients": 0,
+      "nonfinite_attribute_gradients": 0,
+      "traversal_limit_rays": 0
+    },
+    "same_start_sites": true,
+    "same_directed_graph": true,
+    "rgba_max_abs_difference": 0.0,
+    "cpu_quota": {
+      "4": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      },
+      "3": {
+        "cpu_cores": 4.0,
+        "throttled_periods": 0,
+        "throttled_usec": 0
+      }
+    },
+    "cpu_throttled": false,
+    "samples_seconds": {
+      "input_order": {
+        "aabb": [
+          2.2727996110916138e-05,
+          2.230331301689148e-05,
+          2.3331493139266968e-05,
+          2.545863389968872e-05,
+          2.3420900106430054e-05,
+          2.3964792490005493e-05,
+          2.2783875465393066e-05,
+          2.641230821609497e-05,
+          2.3912638425827026e-05,
+          2.222880721092224e-05,
+          2.3175030946731567e-05,
+          2.2236257791519165e-05,
+          2.3014843463897705e-05,
+          2.195686101913452e-05,
+          2.2891908884048462e-05,
+          2.2467225790023804e-05,
+          2.347305417060852e-05,
+          2.1338462829589844e-05,
+          2.291053533554077e-05,
+          2.3134052753448486e-05
+        ],
+        "nearest_cameras": [
+          0.012911632657051086,
+          0.012913048267364502,
+          0.012927945703268051,
+          0.01292203739285469,
+          0.012914430350065231,
+          0.012915734201669693,
+          0.01291225478053093,
+          0.01291525736451149,
+          0.012916747480630875,
+          0.012912072241306305,
+          0.012918822467327118,
+          0.012914814054965973,
+          0.012916240841150284,
+          0.012911152094602585,
+          0.012913890182971954,
+          0.01291569322347641,
+          0.012911070138216019,
+          0.01291312649846077,
+          0.012913543730974197,
+          0.01291632279753685
+        ],
+        "trace_known_starts": [
+          0.0012093856930732727,
+          0.0012063384056091309,
+          0.0012365169823169708,
+          0.001214340329170227,
+          0.0012122206389904022,
+          0.0012072958052158356,
+          0.0012113042175769806,
+          0.0012086741626262665,
+          0.001211516559123993,
+          0.0012059248983860016,
+          0.0012130439281463623,
+          0.001204703003168106,
+          0.001208573579788208,
+          0.0012096278369426727,
+          0.00120558962225914,
+          0.0012003704905509949,
+          0.0012130141258239746,
+          0.001201048493385315,
+          0.0012139827013015747,
+          0.001207202672958374
+        ],
+        "full_forward": [
+          0.01442403718829155,
+          0.014430027455091476,
+          0.014483325183391571,
+          0.01447085291147232,
+          0.014431022107601166,
+          0.014445535838603973,
+          0.014443527907133102,
+          0.014452539384365082,
+          0.014439258724451065,
+          0.01443614810705185,
+          0.014446120709180832,
+          0.014437634497880936,
+          0.014434225857257843,
+          0.01443251222372055,
+          0.014419302344322205,
+          0.014437977224588394,
+          0.014430925250053406,
+          0.014426946640014648,
+          0.014451291412115097,
+          0.014437157660722733
+        ]
+      },
+      "warp_morton": {
+        "aabb": [
+          2.2120773792266846e-05,
+          2.42479145526886e-05,
+          2.2139400243759155e-05,
+          2.508983016014099e-05,
+          2.2105872631072998e-05,
+          2.43261456489563e-05,
+          2.2511929273605347e-05,
+          2.4318695068359375e-05,
+          2.2485852241516113e-05,
+          2.386048436164856e-05,
+          2.1476298570632935e-05,
+          2.6211142539978027e-05,
+          2.2921711206436157e-05,
+          2.407282590866089e-05,
+          2.2113323211669922e-05,
+          2.716854214668274e-05,
+          2.1997839212417603e-05,
+          2.4456530809402466e-05,
+          2.1398067474365234e-05,
+          3.0800700187683105e-05
+        ],
+        "nearest_cameras": [
+          0.0002449899911880493,
+          0.0002461932599544525,
+          0.00024474412202835083,
+          0.00024791061878204346,
+          0.00024513527750968933,
+          0.0002452842891216278,
+          0.0002450607717037201,
+          0.0002464093267917633,
+          0.00024523213505744934,
+          0.00024617835879325867,
+          0.000245463103055954,
+          0.0002477988600730896,
+          0.00024513527750968933,
+          0.00024602562189102173,
+          0.00024513155221939087,
+          0.0002489015460014343,
+          0.0002446174621582031,
+          0.0002466142177581787,
+          0.0002444535493850708,
+          0.0002504698932170868
+        ],
+        "trace_known_starts": [
+          0.0010837092995643616,
+          0.0010914504528045654,
+          0.0010822676122188568,
+          0.0010978840291500092,
+          0.001087639480829239,
+          0.0011005960404872894,
+          0.0010839998722076416,
+          0.0010950490832328796,
+          0.0010849721729755402,
+          0.001097504049539566,
+          0.0010842867195606232,
+          0.0010952763259410858,
+          0.001081906259059906,
+          0.0010975785553455353,
+          0.0010836906731128693,
+          0.0010994262993335724,
+          0.0010891743004322052,
+          0.0010922439396381378,
+          0.0010855793952941895,
+          0.00109877809882164
+        ],
+        "full_forward": [
+          0.0016381777822971344,
+          0.0016590245068073273,
+          0.0016453079879283905,
+          0.001664143055677414,
+          0.0016440339386463165,
+          0.0016462616622447968,
+          0.001640819013118744,
+          0.0016580186784267426,
+          0.0016605928540229797,
+          0.0016440339386463165,
+          0.0016380473971366882,
+          0.0016511455178260803,
+          0.0016460977494716644,
+          0.0016389638185501099,
+          0.0016381852328777313,
+          0.0016541220247745514,
+          0.0016449987888336182,
+          0.0016420669853687286,
+          0.0016380026936531067,
+          0.0016550123691558838
+        ]
+      }
+    },
+    "median_seconds": {
+      "input_order": {
+        "aabb": 2.2962689399719238e-05,
+        "nearest_cameras": 0.012914622202515602,
+        "trace_known_starts": 0.0012090299278497696,
+        "full_forward": 0.014437396079301834
+      },
+      "warp_morton": {
+        "aabb": 2.339109778404236e-05,
+        "nearest_cameras": 0.0002453736960887909,
+        "trace_known_starts": 0.0010903123766183853,
+        "full_forward": 0.0016451533883810043
+      }
+    },
+    "source_sha256": {
+      "/home/horde/projects/power-diagram/experiments/radfoam-integration/compare_ordering.py": "12480c9946a389f420d2c60f8696fd1669a497938b425797478484f20fb4fee2",
+      "/home/horde/projects/power-diagram/experiments/radfoam-integration/spatial.py": "2643853f3cc9aaefc76e351049d14b367459507f2b6751f7ce2c9002f1cb57e5"
+    }
+  },
+  "geometry_replay": {
+    "scope": "Identical original-order recorded Warpower fitting sites. One warm-up and seven alternating-order samples; previous-state setup and readbacks excluded. Recorded frames may skip intermediate geometry refreshes; step gaps are explicit. Native computes a full tetrahedralization plus adjacency; Warpower returns bounded Voronoi adjacency. Zero status is not a full graph certificate; graph equivalence between those contracts is not asserted.",
+    "records": [
+      {
+        "frame": 1,
+        "previous_step": 0,
+        "step": 3,
+        "sites": 9216,
+        "input_sha256": "f9bde4f9e2b0482846af454e6c5c1370b7575d45ae8f9b96a13f2bbaaa1214ed",
+        "maximum_displacement": 0.0010411926778033376,
+        "cpu_quota": {
+          "4": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          },
+          "3": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          }
+        },
+        "cpu_throttled": false,
+        "variants": {
+          "native-full": {
+            "samples_seconds": [
+              0.02142338827252388,
+              0.021368641406297684,
+              0.022401932626962662,
+              0.021329659968614578,
+              0.021408725529909134,
+              0.021524783223867416,
+              0.021525349467992783
+            ],
+            "median_seconds": 0.02142338827252388,
+            "directed_edges": 133282,
+            "failure": null
+          },
+          "native-incremental": {
+            "samples_seconds": [
+              0.006380073726177216,
+              0.00635460764169693,
+              0.006602715700864792,
+              0.006325129419565201,
+              0.007022801786661148,
+              0.0063694193959236145,
+              0.0064198337495327
+            ],
+            "median_seconds": 0.006380073726177216,
+            "directed_edges": 133282,
+            "failure": null
+          },
+          "warpower-full": {
+            "samples_seconds": [
+              0.15321415290236473,
+              0.1518998071551323,
+              0.15629880875349045,
+              0.15292690321803093,
+              0.15341758728027344,
+              0.15442610904574394,
+              0.15322474762797356
+            ],
+            "median_seconds": 0.15322474762797356,
+            "directed_edges": 133112,
+            "failure": null
+          },
+          "warpower-hints": {
+            "samples_seconds": [
+              0.14257150143384933,
+              0.14174116775393486,
+              0.15673298761248589,
+              0.14524730294942856,
+              0.14242296293377876,
+              0.14464988186955452,
+              0.14340301603078842
+            ],
+            "median_seconds": 0.14340301603078842,
+            "directed_edges": 133112,
+            "failure": null
+          }
+        },
+        "native_incremental_matches_full_tetrahedra": true
+      },
+      {
+        "frame": 95,
+        "previous_step": 4805,
+        "step": 4814,
+        "sites": 84946,
+        "input_sha256": "5aeba76471cca7050e870037796a2b4e6eecabd067ef113e2e2863a400502baf",
+        "maximum_displacement": 0.015319004654884338,
+        "cpu_quota": {
+          "4": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          },
+          "3": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          }
+        },
+        "cpu_throttled": false,
+        "variants": {
+          "native-full": {
+            "samples_seconds": [
+              0.1107841320335865,
+              0.11075037345290184,
+              0.1108315959572792,
+              0.11079452931880951,
+              0.11088093370199203,
+              0.14101864770054817,
+              0.11107699945569038
+            ],
+            "median_seconds": 0.1108315959572792,
+            "directed_edges": 1279624,
+            "failure": null
+          },
+          "native-incremental": {
+            "samples_seconds": [
+              0.024815306067466736,
+              0.024769160896539688,
+              0.02476247027516365,
+              0.0248236246407032,
+              0.025067634880542755,
+              0.024802643805742264,
+              0.024799972772598267
+            ],
+            "median_seconds": 0.024802643805742264,
+            "directed_edges": 1279624,
+            "failure": null
+          },
+          "warpower-full": {
+            "samples_seconds": [
+              0.020093809813261032,
+              0.021854959428310394,
+              0.020386651158332825,
+              0.020602859556674957,
+              0.020533110946416855,
+              0.020210281014442444,
+              0.020271245390176773
+            ],
+            "median_seconds": 0.020386651158332825,
+            "directed_edges": 1279404,
+            "failure": null
+          },
+          "warpower-hints": {
+            "samples_seconds": [
+              0.018952984362840652,
+              0.019552424550056458,
+              0.018318340182304382,
+              0.018823888152837753,
+              0.020078711211681366,
+              0.01885054260492325,
+              0.018747277557849884
+            ],
+            "median_seconds": 0.01885054260492325,
+            "directed_edges": 1279404,
+            "failure": null
+          }
+        },
+        "native_incremental_matches_full_tetrahedra": true
+      },
+      {
+        "frame": 118,
+        "previous_step": 8309,
+        "step": 8401,
+        "sites": 168402,
+        "input_sha256": "2b784396ddbec9def569ca6e3d75c1148eef6ef55cb21a335f4576aa28148b49",
+        "maximum_displacement": 0.02255752682685852,
+        "cpu_quota": {
+          "4": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          },
+          "3": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          }
+        },
+        "cpu_throttled": false,
+        "variants": {
+          "native-full": {
+            "samples_seconds": [
+              0.26787643507122993,
+              0.2684747353196144,
+              0.2763376533985138,
+              0.26768656075000763,
+              0.2675844468176365,
+              0.2676605395972729,
+              0.27477382868528366
+            ],
+            "median_seconds": 0.26787643507122993,
+            "directed_edges": 2545020,
+            "failure": null
+          },
+          "native-incremental": {
+            "samples_seconds": [
+              0.0693611279129982,
+              0.06918153911828995,
+              0.0691506676375866,
+              0.06917094066739082,
+              0.06911389157176018,
+              0.06906326115131378,
+              0.06913839280605316
+            ],
+            "median_seconds": 0.0691506676375866,
+            "directed_edges": 2545020,
+            "failure": null
+          },
+          "warpower-full": {
+            "samples_seconds": [
+              0.033584125339984894,
+              0.034505445510149,
+              0.0328419953584671,
+              0.034409523010253906,
+              0.03332913666963577,
+              0.03342771157622337,
+              0.032334208488464355
+            ],
+            "median_seconds": 0.03342771157622337,
+            "directed_edges": 2544784,
+            "failure": null
+          },
+          "warpower-hints": {
+            "samples_seconds": [
+              0.028778523206710815,
+              0.02977762371301651,
+              0.029462825506925583,
+              0.02975529432296753,
+              0.02879500389099121,
+              0.029908519238233566,
+              0.03025609627366066
+            ],
+            "median_seconds": 0.02975529432296753,
+            "directed_edges": 2544784,
+            "failure": null
+          }
+        },
+        "native_incremental_matches_full_tetrahedra": true
+      },
+      {
+        "frame": 134,
+        "previous_step": 11015,
+        "step": 11103,
+        "sites": 253903,
+        "input_sha256": "43a08e8c3e3387c092b7cf3fec63b6c16648f60839d76c05656d9192e7ebbe39",
+        "maximum_displacement": 0.027710892260074615,
+        "cpu_quota": {
+          "4": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          },
+          "3": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          }
+        },
+        "cpu_throttled": false,
+        "variants": {
+          "native-full": {
+            "samples_seconds": [
+              0.5690509304404259,
+              0.5687758848071098,
+              0.5690619200468063,
+              0.576772652566433,
+              0.5681289844214916,
+              0.5685274973511696,
+              0.5915564745664597
+            ],
+            "median_seconds": 0.5690509304404259,
+            "directed_edges": 3837860,
+            "failure": null
+          },
+          "native-incremental": {
+            "samples_seconds": [
+              0.14654868841171265,
+              0.128536406904459,
+              0.128505889326334,
+              0.13312143832445145,
+              0.12848814949393272,
+              0.14024146273732185,
+              0.12845047563314438
+            ],
+            "median_seconds": 0.128536406904459,
+            "directed_edges": 3837860,
+            "failure": null
+          },
+          "warpower-full": {
+            "samples_seconds": [
+              0.048778943717479706,
+              0.04780080169439316,
+              0.04738877713680267,
+              0.0473884642124176,
+              0.0467551127076149,
+              0.048476964235305786,
+              0.04652426019310951
+            ],
+            "median_seconds": 0.04738877713680267,
+            "directed_edges": 3837616,
+            "failure": null
+          },
+          "warpower-hints": {
+            "samples_seconds": [
+              0.043453797698020935,
+              0.04524567350745201,
+              0.044400185346603394,
+              0.04394596815109253,
+              0.044353216886520386,
+              0.04444483295083046,
+              0.044941436499357224
+            ],
+            "median_seconds": 0.044400185346603394,
+            "directed_edges": 3837616,
+            "failure": null
+          }
+        },
+        "native_incremental_matches_full_tetrahedra": true
+      }
+    ],
+    "source_sha256": "fd5e50e003abace0f3955002c2f70ddfa00197c392d2588d33aeea2af9b26b62"
+  },
+  "vtm_updates": {
+    "scope": "Isolated transitions from an actual 8192-site Armadillo VTM trajectory. One warm-up plus five alternating-order wall-time samples. Previous-state construction, transfers and independent SciPy checking are outside timing. Native outputs tetrahedra AND adjacency; VTM produces an exactly certified tetrahedralization. Different correctness contracts; this is not adoption evidence for replacing VTM.",
+    "frames_sha256": "a425317960b2ab1419c9916915be39a207624280c04c082532f543a54615993e",
+    "records": [
+      {
+        "frame": 1,
+        "sites": 8192,
+        "maximum_site_displacement": 0.0,
+        "cpu_quota": {
+          "4": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          },
+          "3": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          }
+        },
+        "cpu_throttled": false,
+        "variants": {
+          "radfoam-full": {
+            "seconds": [
+              0.028442993760108948,
+              0.028355147689580917,
+              0.028441589325666428,
+              0.02860119938850403,
+              0.028456613421440125
+            ],
+            "median_seconds": 0.028442993760108948,
+            "tetrahedra": 50259,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          },
+          "radfoam-incremental": {
+            "seconds": [
+              0.0021437853574752808,
+              0.002128906548023224,
+              0.002126753330230713,
+              0.002114269882440567,
+              0.002145208418369293
+            ],
+            "median_seconds": 0.002128906548023224,
+            "tetrahedra": 50259,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          },
+          "vtm-fragment-reuse": {
+            "seconds": [
+              0.001681491732597351,
+              0.0017509162425994873,
+              0.001731816679239273,
+              0.0017114095389842987,
+              0.00176137313246727
+            ],
+            "median_seconds": 0.001731816679239273,
+            "tetrahedra": 50259,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          }
+        },
+        "vtm_reuse_accepted": 1,
+        "vtm_reuse_rounds": 0,
+        "cgal_reference": {
+          "CGAL": "6.2.1",
+          "vertices": 8192,
+          "tetrahedra": 50259,
+          "build_seconds": 0.0348967
+        }
+      },
+      {
+        "frame": 2,
+        "sites": 8192,
+        "maximum_site_displacement": 0.011750599598243733,
+        "cpu_quota": {
+          "4": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          },
+          "3": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          }
+        },
+        "cpu_throttled": false,
+        "variants": {
+          "radfoam-full": {
+            "seconds": [
+              0.02793654426932335,
+              0.03182363137602806,
+              0.06197505444288254,
+              0.028009232133626938,
+              0.028036516159772873
+            ],
+            "median_seconds": 0.028036516159772873,
+            "tetrahedra": 50418,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          },
+          "radfoam-incremental": {
+            "seconds": [
+              0.0073110610246658325,
+              0.007251527160406113,
+              0.007399067282676697,
+              0.0073355138301849365,
+              0.007348295301198959
+            ],
+            "median_seconds": 0.0073355138301849365,
+            "tetrahedra": 50418,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          },
+          "vtm-fragment-reuse": {
+            "seconds": [
+              0.014799673110246658,
+              0.01448109745979309,
+              0.014262668788433075,
+              0.014483429491519928,
+              0.01426883414387703
+            ],
+            "median_seconds": 0.01448109745979309,
+            "tetrahedra": 50418,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          }
+        },
+        "vtm_reuse_accepted": 1,
+        "vtm_reuse_rounds": 2,
+        "cgal_reference": {
+          "CGAL": "6.2.1",
+          "vertices": 8192,
+          "tetrahedra": 50418,
+          "build_seconds": 0.0342599
+        }
+      },
+      {
+        "frame": 162,
+        "sites": 8192,
+        "maximum_site_displacement": 0.002083903275900655,
+        "cpu_quota": {
+          "4": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          },
+          "3": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          }
+        },
+        "cpu_throttled": false,
+        "variants": {
+          "radfoam-full": {
+            "seconds": [
+              0.015821941196918488,
+              0.01585269719362259,
+              0.049146927893161774,
+              0.015811141580343246,
+              0.015926945954561234
+            ],
+            "median_seconds": 0.01585269719362259,
+            "tetrahedra": 49597,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          },
+          "radfoam-incremental": {
+            "seconds": [
+              0.0030293092131614685,
+              0.0030287839472293854,
+              0.0030277185142040253,
+              0.0030279159545898438,
+              0.0030446015298366547
+            ],
+            "median_seconds": 0.0030287839472293854,
+            "tetrahedra": 49597,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          },
+          "vtm-fragment-reuse": {
+            "seconds": [
+              0.002780333161354065,
+              0.0027821622788906097,
+              0.002856917679309845,
+              0.0027775838971138,
+              0.002830512821674347
+            ],
+            "median_seconds": 0.0027821622788906097,
+            "tetrahedra": 49597,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          }
+        },
+        "vtm_reuse_accepted": 1,
+        "vtm_reuse_rounds": 1,
+        "cgal_reference": {
+          "CGAL": "6.2.1",
+          "vertices": 8192,
+          "tetrahedra": 49597,
+          "build_seconds": 0.0348048
+        }
+      },
+      {
+        "frame": 179,
+        "sites": 8192,
+        "maximum_site_displacement": 1.0752743232728257,
+        "cpu_quota": {
+          "4": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          },
+          "3": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 0,
+            "throttled_usec": 0
+          }
+        },
+        "cpu_throttled": false,
+        "variants": {
+          "radfoam-full": {
+            "seconds": [
+              0.01615849882364273,
+              0.016029048711061478,
+              0.01610175147652626,
+              0.01605670154094696,
+              0.01614392176270485
+            ],
+            "median_seconds": 0.01610175147652626,
+            "tetrahedra": 49599,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          },
+          "radfoam-incremental": {
+            "seconds": [
+              0.0041368864476680756,
+              0.004130769520998001,
+              0.00409693643450737,
+              0.02918124943971634,
+              0.004128850996494293
+            ],
+            "median_seconds": 0.004130769520998001,
+            "tetrahedra": 49599,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          },
+          "vtm-fragment-reuse": {
+            "seconds": [
+              0.0042367614805698395,
+              0.004252567887306213,
+              0.004231944680213928,
+              0.004287071526050568,
+              0.004193272441625595
+            ],
+            "median_seconds": 0.0042367614805698395,
+            "tetrahedra": 49599,
+            "error": 0,
+            "matches_scipy": true,
+            "matches_cgal": true
+          }
+        },
+        "vtm_reuse_accepted": 1,
+        "vtm_reuse_rounds": 2,
+        "cgal_reference": {
+          "CGAL": "6.2.1",
+          "vertices": 8192,
+          "tetrahedra": 49599,
+          "build_seconds": 0.0348858
+        }
+      }
+    ],
+    "source_sha256": "92339475afd78840e55cb5ee8d49206338c15b789b53294e45a94ec7e1f2e91d",
+    "cgal_binary_sha256": "1e16643787b6ecbe3607841c37fd21c98dfdeae95e601656a6bb32ec3fce6c34"
+  },
+  "limitations": [
+    "Reduced site/iteration/ray budgets and eight-view densification error maps; this is not a paper-quality reproduction.",
+    "The same initial physical sites and ray RNG seed do not force identical optimization: reordering changes floating-point reductions and later stochastic densification choices. Final site counts and quality are reported separately.",
+    "One full run per backend cannot establish a general end-to-end speedup. Repeated same-input component benchmarks provide stronger evidence for their measured portions.",
+    "Warpower supplies bounded Voronoi adjacency; native RadFoam also constructs an unbounded full-hull tetrahedralization. Previous exact checkpoint audits found seven incorrect undirected Warpower pairs across four larger scenes. Successful fitting and zero numerical failures do not close that correctness issue.",
+    "RadFoam incremental updates do not supply VTM's complete exact/symbolic certificate. CGAL comparisons on these recorded transitions are independent evidence for these inputs, not equivalence of runtime correctness contracts.",
+    "CUDA default stream only. The experiment does not establish correctness for arbitrary stream interleaving.",
+    "Density is an optical attribute, not a power-diagram weight; weighted-cell scene fitting is not tested."
+  ],
+  "commands": [
+    ".venv/bin/python experiments/radfoam-integration/fetch_bonsai.py",
+    "CUDA_HOME=/usr/local/cuda-12.6 .venv/bin/python experiments/radfoam-integration/build_headless.py",
+    "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. .venv/bin/python experiments/radfoam-integration/fit_scene.py --backend warpower-morton --output results/local/my-bonsai-fit --steps 20000 --initial-sites 8192 --final-sites 262144 --rays 65536 --eval-every 5000 --save-trajectory"
+  ]
+}

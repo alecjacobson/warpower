@@ -1,0 +1,2102 @@
+{
+  "complete": true,
+  "date_utc": "2026-11-09",
+  "revision": "730ec233505bcc474c248d0ab237b10042fa029e",
+  "scope": "Unweighted construction on full public RadFoam v1 site arrays. Separate sequential backend processes; no rendering or training speed claim.",
+  "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+  "cpu": "Intel Xeon Platinum 8362 @ 2.80GHz; container quota 4 CPU cores",
+  "scenes": {
+    "bonsai": {
+      "sites": 1968522,
+      "input": {
+        "scene": "bonsai",
+        "checkpoint_version": "RadFoam checkpoints_v1",
+        "google_drive_id": "1QPT5soWRQ4JT8KGPrbT7mmviCVpYzsu9",
+        "checkpoint_sha256": "68811d6af93794843a3ddd201c04e91a1f3d7514d664d4a2832139c0795fd203",
+        "n": 1968522,
+        "positions_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+        "npz_sha256": "3faca2f9882c5a596e20c0380c3828845c0f8debfb9d08cdd02397e9792ab3cb",
+        "source": "https://github.com/theialab/radfoam#checkpoints"
+      },
+      "timing": {
+        "warpower": {
+          "scene": "bonsai",
+          "sites": 1968522,
+          "backend": "warpower",
+          "mean_seconds": 0.22464271448552608,
+          "median_seconds": 0.2246109787374735,
+          "min_seconds": 0.22334853559732437,
+          "max_seconds": 0.225717443972826,
+          "stddev_population_seconds": 0.000690292081456098,
+          "mean_build_seconds": "",
+          "mean_csr_export_seconds": "",
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": 0,
+          "empty_cells": 0,
+          "approx_device_peak_GiB": 7.9210205078125,
+          "native_process_peak_RSS_GiB": "",
+          "directed_edges": 30267974,
+          "tetrahedra": ""
+        },
+        "paragram": {
+          "scene": "bonsai",
+          "sites": 1968522,
+          "backend": "paragram",
+          "mean_seconds": 0.42107695937156675,
+          "median_seconds": 0.42103011533617973,
+          "min_seconds": 0.419675849378109,
+          "max_seconds": 0.42226897925138474,
+          "stddev_population_seconds": 0.0007739678796667561,
+          "mean_build_seconds": "",
+          "mean_csr_export_seconds": "",
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": 619,
+          "empty_cells": 6,
+          "approx_device_peak_GiB": 6.6866455078125,
+          "native_process_peak_RSS_GiB": "",
+          "directed_edges": 30274076,
+          "tetrahedra": ""
+        },
+        "cgal-1thread": {
+          "scene": "bonsai",
+          "sites": 1968522,
+          "backend": "cgal-1thread",
+          "mean_seconds": 17.7235247272,
+          "median_seconds": 17.7250891815,
+          "min_seconds": 17.630271484,
+          "max_seconds": 17.818856941,
+          "stddev_population_seconds": 0.06875591021077819,
+          "mean_build_seconds": 9.2111024105,
+          "mean_csr_export_seconds": 8.5124223167,
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": "",
+          "empty_cells": "",
+          "approx_device_peak_GiB": "",
+          "native_process_peak_RSS_GiB": 1.1705741882324219,
+          "directed_edges": 30268338,
+          "tetrahedra": 13165611
+        },
+        "cgal-4thread": {
+          "scene": "bonsai",
+          "sites": 1968522,
+          "backend": "cgal-4thread",
+          "mean_seconds": 11.3958286448,
+          "median_seconds": 11.4142024595,
+          "min_seconds": 11.02589024,
+          "max_seconds": 11.660946769,
+          "stddev_population_seconds": 0.17639665109319652,
+          "mean_build_seconds": 3.8209994724,
+          "mean_csr_export_seconds": 7.5748291724,
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": true,
+          "non_success_cells": "",
+          "empty_cells": "",
+          "approx_device_peak_GiB": "",
+          "native_process_peak_RSS_GiB": 1.2278861999511719,
+          "directed_edges": 30268338,
+          "tetrahedra": 13165611
+        }
+      },
+      "paragram_over_warpower_time": 1.8744296263331393,
+      "full_graph_comparison": {
+        "scope": "Full directed adjacency sets. GPU cells are box-clipped; CGAL is full-hull and can include zero-area dual faces at exact ties. Differences alone do not establish errors.",
+        "pairs": {
+          "paragram": {
+            "warpower_edges": 30267974,
+            "other_edges": 30274076,
+            "shared_edges": 30266910,
+            "only_warpower": 1064,
+            "only_other": 7166,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                2047,
+                25503
+              ],
+              [
+                2047,
+                1276927
+              ],
+              [
+                2047,
+                1923071
+              ],
+              [
+                25503,
+                2047
+              ],
+              [
+                170766,
+                182054
+              ],
+              [
+                182054,
+                170766
+              ],
+              [
+                185987,
+                237186
+              ],
+              [
+                187062,
+                212545
+              ],
+              [
+                191569,
+                199732
+              ],
+              [
+                199116,
+                202167
+              ],
+              [
+                199732,
+                191569
+              ],
+              [
+                202167,
+                199116
+              ],
+              [
+                212545,
+                187062
+              ],
+              [
+                212545,
+                237186
+              ],
+              [
+                224783,
+                237186
+              ],
+              [
+                237186,
+                185987
+              ]
+            ],
+            "only_other_examples": [
+              [
+                7181,
+                11287
+              ],
+              [
+                9581,
+                9630
+              ],
+              [
+                9630,
+                9581
+              ],
+              [
+                11287,
+                7181
+              ],
+              [
+                11287,
+                17424
+              ],
+              [
+                11405,
+                13508
+              ],
+              [
+                13508,
+                11405
+              ],
+              [
+                14516,
+                14538
+              ],
+              [
+                14538,
+                14516
+              ],
+              [
+                15848,
+                16850
+              ],
+              [
+                16154,
+                16187
+              ],
+              [
+                16187,
+                16154
+              ],
+              [
+                16850,
+                15848
+              ],
+              [
+                17424,
+                11287
+              ],
+              [
+                17474,
+                28823
+              ],
+              [
+                19496,
+                23674
+              ]
+            ],
+            "affected_rows": 5105,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 613
+          },
+          "cgal-1thread": {
+            "warpower_edges": 30267974,
+            "other_edges": 30268338,
+            "shared_edges": 30267972,
+            "only_warpower": 2,
+            "only_other": 366,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                199116,
+                202167
+              ],
+              [
+                202167,
+                199116
+              ]
+            ],
+            "only_other_examples": [
+              [
+                0,
+                35
+              ],
+              [
+                0,
+                105472
+              ],
+              [
+                0,
+                1952768
+              ],
+              [
+                2,
+                35
+              ],
+              [
+                2,
+                342
+              ],
+              [
+                2,
+                15375
+              ],
+              [
+                32,
+                275
+              ],
+              [
+                35,
+                0
+              ],
+              [
+                35,
+                2
+              ],
+              [
+                35,
+                121
+              ],
+              [
+                35,
+                259
+              ],
+              [
+                35,
+                105472
+              ],
+              [
+                121,
+                35
+              ],
+              [
+                121,
+                275
+              ],
+              [
+                121,
+                1023
+              ],
+              [
+                124,
+                15375
+              ]
+            ],
+            "affected_rows": 108,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          },
+          "cgal-4thread": {
+            "warpower_edges": 30267974,
+            "other_edges": 30268338,
+            "shared_edges": 30267972,
+            "only_warpower": 2,
+            "only_other": 366,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                199116,
+                202167
+              ],
+              [
+                202167,
+                199116
+              ]
+            ],
+            "only_other_examples": [
+              [
+                0,
+                35
+              ],
+              [
+                0,
+                105472
+              ],
+              [
+                0,
+                1952768
+              ],
+              [
+                2,
+                35
+              ],
+              [
+                2,
+                342
+              ],
+              [
+                2,
+                15375
+              ],
+              [
+                32,
+                275
+              ],
+              [
+                35,
+                0
+              ],
+              [
+                35,
+                2
+              ],
+              [
+                35,
+                121
+              ],
+              [
+                35,
+                259
+              ],
+              [
+                35,
+                105472
+              ],
+              [
+                121,
+                35
+              ],
+              [
+                121,
+                275
+              ],
+              [
+                121,
+                1023
+              ],
+              [
+                124,
+                15375
+              ]
+            ],
+            "affected_rows": 108,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          }
+        }
+      },
+      "quality": {
+        "warpower": {
+          "status_counts": {
+            "0": 1968522
+          },
+          "exact_facet_audit": {
+            "gpu_only": {
+              "population_directed_edges": 2,
+              "sampled": 2,
+              "positive_area_face": 0,
+              "no_positive_area_face": 2,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            },
+            "cgal_only": {
+              "population_directed_edges": 366,
+              "sampled": 366,
+              "positive_area_face": 2,
+              "no_positive_area_face": 364,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            },
+            "shared": {
+              "population_directed_edges": 30267972,
+              "sampled": 64,
+              "positive_area_face": 64,
+              "no_positive_area_face": 0,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            }
+          },
+          "all_disagreements_audited": true,
+          "confirmed_spurious_directed_edges_in_audit": 2,
+          "confirmed_spurious_undirected_pairs_in_audit": 1,
+          "confirmed_missing_directed_edges_in_audit": 2,
+          "confirmed_missing_undirected_pairs_in_audit": 1,
+          "scope": "All Warpower disagreements when their category has at most 20000 directed edges; otherwise uniform fixed-seed samples. Paragram disagreements and shared edges are sampled. Not a complete graph audit. Exact rational LP uses all CGAL neighbors of the owner; native CGAL full-hull triangulation has passed is_valid. Strict positive slack on the candidate bisector proves a positive-area facet inside the backend's float32 clipping box. Zero-area contacts are not adjacency."
+        },
+        "paragram": {
+          "status_counts": {
+            "0": 1967903,
+            "1": 348,
+            "2": 139,
+            "3": 6,
+            "5": 126
+          },
+          "exact_facet_audit": {
+            "gpu_only": {
+              "population_directed_edges": 7164,
+              "sampled": 64,
+              "positive_area_face": 0,
+              "no_positive_area_face": 64,
+              "owner_non_success": 20,
+              "candidate_non_success": 12
+            },
+            "cgal_only": {
+              "population_directed_edges": 1426,
+              "sampled": 64,
+              "positive_area_face": 42,
+              "no_positive_area_face": 22,
+              "owner_non_success": 12,
+              "candidate_non_success": 11
+            },
+            "shared": {
+              "population_directed_edges": 30266912,
+              "sampled": 64,
+              "positive_area_face": 64,
+              "no_positive_area_face": 0,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            }
+          },
+          "all_disagreements_audited": false,
+          "confirmed_spurious_directed_edges_in_audit": 64,
+          "confirmed_spurious_undirected_pairs_in_audit": 64,
+          "confirmed_missing_directed_edges_in_audit": 42,
+          "confirmed_missing_undirected_pairs_in_audit": 42,
+          "scope": "All Warpower disagreements when their category has at most 20000 directed edges; otherwise uniform fixed-seed samples. Paragram disagreements and shared edges are sampled. Not a complete graph audit. Exact rational LP uses all CGAL neighbors of the owner; native CGAL full-hull triangulation has passed is_valid. Strict positive slack on the candidate bisector proves a positive-area facet inside the backend's float32 clipping box. Zero-area contacts are not adjacency."
+        }
+      }
+    },
+    "garden": {
+      "sites": 4064598,
+      "input": {
+        "scene": "garden",
+        "checkpoint_version": "RadFoam checkpoints_v1",
+        "google_drive_id": "1lLEIfH7CBLAEmdqJrDmQ6flK5Qub7ttQ",
+        "checkpoint_sha256": "afefdb74d451f3ef4493a5ac79916a695ecb9b51a3a4c582ba2fe16721dbf359",
+        "n": 4064598,
+        "positions_sha256": "09fd9e0a85f683fb0646116ef381a1f8e28abdc8d2ec29f82a22c51facc1ce02",
+        "npz_sha256": "7e167917ac0ce1af97f848c37e38d8f97ed16a5803d7a84bebee227dcbc4c693",
+        "source": "https://github.com/theialab/radfoam#checkpoints"
+      },
+      "timing": {
+        "warpower": {
+          "scene": "garden",
+          "sites": 4064598,
+          "backend": "warpower",
+          "mean_seconds": 0.44327186308801175,
+          "median_seconds": 0.44357837177813053,
+          "min_seconds": 0.4414934851229191,
+          "max_seconds": 0.4440646469593048,
+          "stddev_population_seconds": 0.0007545876329260227,
+          "mean_build_seconds": "",
+          "mean_csr_export_seconds": "",
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": 0,
+          "empty_cells": 0,
+          "approx_device_peak_GiB": 14.4522705078125,
+          "native_process_peak_RSS_GiB": "",
+          "directed_edges": 61963204,
+          "tetrahedra": ""
+        },
+        "paragram": {
+          "scene": "garden",
+          "sites": 4064598,
+          "backend": "paragram",
+          "mean_seconds": 0.705227056145668,
+          "median_seconds": 0.7047633100301027,
+          "min_seconds": 0.7036021016538143,
+          "max_seconds": 0.7085772044956684,
+          "stddev_population_seconds": 0.0014929532236080125,
+          "mean_build_seconds": "",
+          "mean_csr_export_seconds": "",
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": 1114,
+          "empty_cells": 4,
+          "approx_device_peak_GiB": 12.5928955078125,
+          "native_process_peak_RSS_GiB": "",
+          "directed_edges": 61975284,
+          "tetrahedra": ""
+        },
+        "cgal-1thread": {
+          "scene": "garden",
+          "sites": 4064598,
+          "backend": "cgal-1thread",
+          "mean_seconds": 37.1446852017,
+          "median_seconds": 37.119533515499995,
+          "min_seconds": 36.757764775,
+          "max_seconds": 37.652501534,
+          "stddev_population_seconds": 0.28439177684940875,
+          "mean_build_seconds": 19.3933964505,
+          "mean_csr_export_seconds": 17.7512887512,
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": "",
+          "empty_cells": "",
+          "approx_device_peak_GiB": "",
+          "native_process_peak_RSS_GiB": 2.773662567138672,
+          "directed_edges": 61964386,
+          "tetrahedra": 26917493
+        },
+        "cgal-4thread": {
+          "scene": "garden",
+          "sites": 4064598,
+          "backend": "cgal-4thread",
+          "mean_seconds": 22.6482751046,
+          "median_seconds": 22.3370412525,
+          "min_seconds": 21.87575922,
+          "max_seconds": 23.890515958,
+          "stddev_population_seconds": 0.6555150330650487,
+          "mean_build_seconds": 7.4846615626,
+          "mean_csr_export_seconds": 15.163613542,
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": true,
+          "non_success_cells": "",
+          "empty_cells": "",
+          "approx_device_peak_GiB": "",
+          "native_process_peak_RSS_GiB": 2.773662567138672,
+          "directed_edges": 61964386,
+          "tetrahedra": 26917493
+        }
+      },
+      "paragram_over_warpower_time": 1.590958314459145,
+      "full_graph_comparison": {
+        "scope": "Full directed adjacency sets. GPU cells are box-clipped; CGAL is full-hull and can include zero-area dual faces at exact ties. Differences alone do not establish errors.",
+        "pairs": {
+          "paragram": {
+            "warpower_edges": 61963204,
+            "other_edges": 61975284,
+            "shared_edges": 61961864,
+            "only_warpower": 1340,
+            "only_other": 13420,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                5109,
+                41983
+              ],
+              [
+                15343,
+                41983
+              ],
+              [
+                15356,
+                41983
+              ],
+              [
+                17374,
+                41983
+              ],
+              [
+                17407,
+                41983
+              ],
+              [
+                18096,
+                32767
+              ],
+              [
+                19454,
+                41983
+              ],
+              [
+                25598,
+                41983
+              ],
+              [
+                32767,
+                18096
+              ],
+              [
+                32767,
+                475131
+              ],
+              [
+                32767,
+                4062909
+              ],
+              [
+                32767,
+                4064579
+              ],
+              [
+                33791,
+                41983
+              ],
+              [
+                39246,
+                111441
+              ],
+              [
+                39935,
+                41983
+              ],
+              [
+                41983,
+                5109
+              ]
+            ],
+            "only_other_examples": [
+              [
+                472,
+                3193
+              ],
+              [
+                982,
+                1021
+              ],
+              [
+                1002,
+                10943
+              ],
+              [
+                1021,
+                982
+              ],
+              [
+                1022,
+                7068
+              ],
+              [
+                3193,
+                472
+              ],
+              [
+                4277,
+                4397
+              ],
+              [
+                4397,
+                4277
+              ],
+              [
+                6277,
+                6287
+              ],
+              [
+                6287,
+                6277
+              ],
+              [
+                7068,
+                1022
+              ],
+              [
+                8990,
+                8999
+              ],
+              [
+                8999,
+                8990
+              ],
+              [
+                9746,
+                4062909
+              ],
+              [
+                10943,
+                1002
+              ],
+              [
+                14415,
+                17526
+              ]
+            ],
+            "affected_rows": 9737,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 1110
+          },
+          "cgal-1thread": {
+            "warpower_edges": 61963204,
+            "other_edges": 61964386,
+            "shared_edges": 61963204,
+            "only_warpower": 0,
+            "only_other": 1182,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [],
+            "only_other_examples": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                17
+              ],
+              [
+                0,
+                52
+              ],
+              [
+                0,
+                2048
+              ],
+              [
+                0,
+                2049
+              ],
+              [
+                0,
+                2051
+              ],
+              [
+                0,
+                2054
+              ],
+              [
+                0,
+                2057
+              ],
+              [
+                0,
+                2065
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                1,
+                8
+              ],
+              [
+                1,
+                33
+              ],
+              [
+                1,
+                37
+              ],
+              [
+                1,
+                38
+              ]
+            ],
+            "affected_rows": 307,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          },
+          "cgal-4thread": {
+            "warpower_edges": 61963204,
+            "other_edges": 61964386,
+            "shared_edges": 61963204,
+            "only_warpower": 0,
+            "only_other": 1182,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [],
+            "only_other_examples": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                8
+              ],
+              [
+                0,
+                17
+              ],
+              [
+                0,
+                52
+              ],
+              [
+                0,
+                2048
+              ],
+              [
+                0,
+                2049
+              ],
+              [
+                0,
+                2051
+              ],
+              [
+                0,
+                2054
+              ],
+              [
+                0,
+                2057
+              ],
+              [
+                0,
+                2065
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                1,
+                8
+              ],
+              [
+                1,
+                33
+              ],
+              [
+                1,
+                37
+              ],
+              [
+                1,
+                38
+              ]
+            ],
+            "affected_rows": 307,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          }
+        }
+      },
+      "quality": {
+        "warpower": {
+          "status_counts": {
+            "0": 4064598
+          },
+          "exact_facet_audit": {
+            "gpu_only": {
+              "population_directed_edges": 0,
+              "sampled": 0,
+              "positive_area_face": 0,
+              "no_positive_area_face": 0,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            },
+            "cgal_only": {
+              "population_directed_edges": 1182,
+              "sampled": 1182,
+              "positive_area_face": 2,
+              "no_positive_area_face": 1180,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            },
+            "shared": {
+              "population_directed_edges": 61963204,
+              "sampled": 64,
+              "positive_area_face": 64,
+              "no_positive_area_face": 0,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            }
+          },
+          "all_disagreements_audited": true,
+          "confirmed_spurious_directed_edges_in_audit": 0,
+          "confirmed_spurious_undirected_pairs_in_audit": 0,
+          "confirmed_missing_directed_edges_in_audit": 2,
+          "confirmed_missing_undirected_pairs_in_audit": 1,
+          "scope": "All Warpower disagreements when their category has at most 20000 directed edges; otherwise uniform fixed-seed samples. Paragram disagreements and shared edges are sampled. Not a complete graph audit. Exact rational LP uses all CGAL neighbors of the owner; native CGAL full-hull triangulation has passed is_valid. Strict positive slack on the candidate bisector proves a positive-area facet inside the backend's float32 clipping box. Zero-area contacts are not adjacency."
+        },
+        "paragram": {
+          "status_counts": {
+            "0": 4063484,
+            "1": 714,
+            "2": 220,
+            "3": 4,
+            "5": 176
+          },
+          "exact_facet_audit": {
+            "gpu_only": {
+              "population_directed_edges": 13418,
+              "sampled": 64,
+              "positive_area_face": 0,
+              "no_positive_area_face": 64,
+              "owner_non_success": 21,
+              "candidate_non_success": 15
+            },
+            "cgal_only": {
+              "population_directed_edges": 2520,
+              "sampled": 64,
+              "positive_area_face": 27,
+              "no_positive_area_face": 37,
+              "owner_non_success": 12,
+              "candidate_non_success": 5
+            },
+            "shared": {
+              "population_directed_edges": 61961866,
+              "sampled": 64,
+              "positive_area_face": 64,
+              "no_positive_area_face": 0,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            }
+          },
+          "all_disagreements_audited": false,
+          "confirmed_spurious_directed_edges_in_audit": 64,
+          "confirmed_spurious_undirected_pairs_in_audit": 64,
+          "confirmed_missing_directed_edges_in_audit": 27,
+          "confirmed_missing_undirected_pairs_in_audit": 27,
+          "scope": "All Warpower disagreements when their category has at most 20000 directed edges; otherwise uniform fixed-seed samples. Paragram disagreements and shared edges are sampled. Not a complete graph audit. Exact rational LP uses all CGAL neighbors of the owner; native CGAL full-hull triangulation has passed is_valid. Strict positive slack on the candidate bisector proves a positive-area facet inside the backend's float32 clipping box. Zero-area contacts are not adjacency."
+        }
+      }
+    },
+    "bicycle": {
+      "sites": 4199873,
+      "input": {
+        "scene": "bicycle",
+        "checkpoint_version": "RadFoam checkpoints_v1",
+        "google_drive_id": "13e_DP83_bE_sI3D4iR8YDhomlb9PenYR",
+        "checkpoint_sha256": "cd720244c01923037648b92deadcd79295a17395505c2e401de1f16d32fd1a3b",
+        "n": 4199873,
+        "positions_sha256": "b18a5ecf4abecc9fb4094a4df36c886fcc310aa4db6372758fdff7b97aae8d4f",
+        "npz_sha256": "6a24f2c7dc7afb79feffcfa71353df06910c3492be068a60ffc88aff00e48d43",
+        "source": "https://github.com/theialab/radfoam#checkpoints"
+      },
+      "timing": {
+        "warpower": {
+          "scene": "bicycle",
+          "sites": 4199873,
+          "backend": "warpower",
+          "mean_seconds": 0.46990533731877804,
+          "median_seconds": 0.47008543089032173,
+          "min_seconds": 0.46740107983350754,
+          "max_seconds": 0.47213563695549965,
+          "stddev_population_seconds": 0.0013660483724619197,
+          "mean_build_seconds": "",
+          "mean_csr_export_seconds": "",
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": 0,
+          "empty_cells": 0,
+          "approx_device_peak_GiB": 14.7237548828125,
+          "native_process_peak_RSS_GiB": "",
+          "directed_edges": 63717628,
+          "tetrahedra": ""
+        },
+        "paragram": {
+          "scene": "bicycle",
+          "sites": 4199873,
+          "backend": "paragram",
+          "mean_seconds": 0.7567807476967573,
+          "median_seconds": 0.7564950324594975,
+          "min_seconds": 0.7550766430795193,
+          "max_seconds": 0.760644219815731,
+          "stddev_population_seconds": 0.0016645027947397035,
+          "mean_build_seconds": "",
+          "mean_csr_export_seconds": "",
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": 1478,
+          "empty_cells": 1,
+          "approx_device_peak_GiB": 12.9971923828125,
+          "native_process_peak_RSS_GiB": "",
+          "directed_edges": 63733554,
+          "tetrahedra": ""
+        },
+        "cgal-1thread": {
+          "scene": "bicycle",
+          "sites": 4199873,
+          "backend": "cgal-1thread",
+          "mean_seconds": 38.607224588,
+          "median_seconds": 38.638313484,
+          "min_seconds": 38.246932836,
+          "max_seconds": 38.87854164,
+          "stddev_population_seconds": 0.18133013095348183,
+          "mean_build_seconds": 20.178869167,
+          "mean_csr_export_seconds": 18.428355421,
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": "",
+          "empty_cells": "",
+          "approx_device_peak_GiB": "",
+          "native_process_peak_RSS_GiB": 5.611164093017578,
+          "directed_edges": 63719194,
+          "tetrahedra": 27659640
+        },
+        "cgal-4thread": {
+          "scene": "bicycle",
+          "sites": 4199873,
+          "backend": "cgal-4thread",
+          "mean_seconds": 24.6474986256,
+          "median_seconds": 24.6089251085,
+          "min_seconds": 23.742510137,
+          "max_seconds": 25.704405659,
+          "stddev_population_seconds": 0.5516972581735953,
+          "mean_build_seconds": 8.5706706319,
+          "mean_csr_export_seconds": 16.0768279937,
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": true,
+          "non_success_cells": "",
+          "empty_cells": "",
+          "approx_device_peak_GiB": "",
+          "native_process_peak_RSS_GiB": 5.611164093017578,
+          "directed_edges": 63719194,
+          "tetrahedra": 27659640
+        }
+      },
+      "paragram_over_warpower_time": 1.610496173580098,
+      "full_graph_comparison": {
+        "scope": "Full directed adjacency sets. GPU cells are box-clipped; CGAL is full-hull and can include zero-area dual faces at exact ties. Differences alone do not establish errors.",
+        "pairs": {
+          "paragram": {
+            "warpower_edges": 63717628,
+            "other_edges": 63733554,
+            "shared_edges": 63715472,
+            "only_warpower": 2156,
+            "only_other": 18082,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                1030,
+                149224
+              ],
+              [
+                1033,
+                1045
+              ],
+              [
+                1036,
+                1661
+              ],
+              [
+                1036,
+                17658
+              ],
+              [
+                1045,
+                1033
+              ],
+              [
+                1047,
+                5326
+              ],
+              [
+                1047,
+                8802
+              ],
+              [
+                1052,
+                49807
+              ],
+              [
+                1052,
+                82176
+              ],
+              [
+                1424,
+                13708
+              ],
+              [
+                1424,
+                17658
+              ],
+              [
+                1661,
+                1036
+              ],
+              [
+                5237,
+                5504
+              ],
+              [
+                5326,
+                1047
+              ],
+              [
+                5326,
+                12804
+              ],
+              [
+                5504,
+                5237
+              ]
+            ],
+            "only_other_examples": [
+              [
+                1028,
+                1034
+              ],
+              [
+                1034,
+                1028
+              ],
+              [
+                1037,
+                1118
+              ],
+              [
+                1041,
+                5120
+              ],
+              [
+                1118,
+                1037
+              ],
+              [
+                1424,
+                10172
+              ],
+              [
+                1512,
+                1534
+              ],
+              [
+                1534,
+                1512
+              ],
+              [
+                1570,
+                1977
+              ],
+              [
+                1634,
+                5544
+              ],
+              [
+                1807,
+                9311
+              ],
+              [
+                1807,
+                13432
+              ],
+              [
+                1887,
+                6150
+              ],
+              [
+                1977,
+                1570
+              ],
+              [
+                5120,
+                1041
+              ],
+              [
+                5326,
+                8577
+              ]
+            ],
+            "affected_rows": 11920,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 1477
+          },
+          "cgal-1thread": {
+            "warpower_edges": 63717628,
+            "other_edges": 63719194,
+            "shared_edges": 63717628,
+            "only_warpower": 0,
+            "only_other": 1566,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [],
+            "only_other_examples": [
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                82
+              ],
+              [
+                0,
+                122
+              ],
+              [
+                0,
+                168
+              ],
+              [
+                0,
+                182
+              ],
+              [
+                0,
+                1024
+              ],
+              [
+                0,
+                1025
+              ],
+              [
+                0,
+                1027
+              ],
+              [
+                0,
+                1031
+              ],
+              [
+                0,
+                1032
+              ],
+              [
+                0,
+                2050
+              ],
+              [
+                0,
+                2059
+              ],
+              [
+                0,
+                2070
+              ],
+              [
+                0,
+                2078
+              ],
+              [
+                0,
+                2086
+              ],
+              [
+                0,
+                2107
+              ]
+            ],
+            "affected_rows": 387,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          },
+          "cgal-4thread": {
+            "warpower_edges": 63717628,
+            "other_edges": 63719194,
+            "shared_edges": 63717628,
+            "only_warpower": 0,
+            "only_other": 1566,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [],
+            "only_other_examples": [
+              [
+                0,
+                3
+              ],
+              [
+                0,
+                82
+              ],
+              [
+                0,
+                122
+              ],
+              [
+                0,
+                168
+              ],
+              [
+                0,
+                182
+              ],
+              [
+                0,
+                1024
+              ],
+              [
+                0,
+                1025
+              ],
+              [
+                0,
+                1027
+              ],
+              [
+                0,
+                1031
+              ],
+              [
+                0,
+                1032
+              ],
+              [
+                0,
+                2050
+              ],
+              [
+                0,
+                2059
+              ],
+              [
+                0,
+                2070
+              ],
+              [
+                0,
+                2078
+              ],
+              [
+                0,
+                2086
+              ],
+              [
+                0,
+                2107
+              ]
+            ],
+            "affected_rows": 387,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          }
+        }
+      },
+      "quality": {
+        "warpower": {
+          "status_counts": {
+            "0": 4199873
+          },
+          "exact_facet_audit": {
+            "gpu_only": {
+              "population_directed_edges": 0,
+              "sampled": 0,
+              "positive_area_face": 0,
+              "no_positive_area_face": 0,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            },
+            "cgal_only": {
+              "population_directed_edges": 1566,
+              "sampled": 1566,
+              "positive_area_face": 2,
+              "no_positive_area_face": 1564,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            },
+            "shared": {
+              "population_directed_edges": 63717628,
+              "sampled": 64,
+              "positive_area_face": 64,
+              "no_positive_area_face": 0,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            }
+          },
+          "all_disagreements_audited": true,
+          "confirmed_spurious_directed_edges_in_audit": 0,
+          "confirmed_spurious_undirected_pairs_in_audit": 0,
+          "confirmed_missing_directed_edges_in_audit": 2,
+          "confirmed_missing_undirected_pairs_in_audit": 1,
+          "scope": "All Warpower disagreements when their category has at most 20000 directed edges; otherwise uniform fixed-seed samples. Paragram disagreements and shared edges are sampled. Not a complete graph audit. Exact rational LP uses all CGAL neighbors of the owner; native CGAL full-hull triangulation has passed is_valid. Strict positive slack on the candidate bisector proves a positive-area facet inside the backend's float32 clipping box. Zero-area contacts are not adjacency."
+        },
+        "paragram": {
+          "status_counts": {
+            "0": 4198395,
+            "1": 1102,
+            "2": 207,
+            "3": 1,
+            "5": 168
+          },
+          "exact_facet_audit": {
+            "gpu_only": {
+              "population_directed_edges": 18076,
+              "sampled": 64,
+              "positive_area_face": 0,
+              "no_positive_area_face": 64,
+              "owner_non_success": 22,
+              "candidate_non_success": 22
+            },
+            "cgal_only": {
+              "population_directed_edges": 3716,
+              "sampled": 64,
+              "positive_area_face": 27,
+              "no_positive_area_face": 37,
+              "owner_non_success": 6,
+              "candidate_non_success": 8
+            },
+            "shared": {
+              "population_directed_edges": 63715478,
+              "sampled": 64,
+              "positive_area_face": 64,
+              "no_positive_area_face": 0,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            }
+          },
+          "all_disagreements_audited": false,
+          "confirmed_spurious_directed_edges_in_audit": 64,
+          "confirmed_spurious_undirected_pairs_in_audit": 64,
+          "confirmed_missing_directed_edges_in_audit": 27,
+          "confirmed_missing_undirected_pairs_in_audit": 27,
+          "scope": "All Warpower disagreements when their category has at most 20000 directed edges; otherwise uniform fixed-seed samples. Paragram disagreements and shared edges are sampled. Not a complete graph audit. Exact rational LP uses all CGAL neighbors of the owner; native CGAL full-hull triangulation has passed is_valid. Strict positive slack on the candidate bisector proves a positive-area facet inside the backend's float32 clipping box. Zero-area contacts are not adjacency."
+        }
+      }
+    },
+    "playroom": {
+      "sites": 3181453,
+      "input": {
+        "scene": "playroom",
+        "checkpoint_version": "RadFoam checkpoints_v1",
+        "google_drive_id": "1hIlFwJmby7k0Mc_QqscH_w9BQCkfezmB",
+        "checkpoint_sha256": "181bcb08ee22359b70a702d9eab49b6fc202f387c5115f79975e95edd3eea616",
+        "n": 3181453,
+        "positions_sha256": "1ebc4e0405248284b8124069ecc93ca5c56d1ad66340809062a797721d7f6583",
+        "npz_sha256": "d5eab80655a12f88c90400e4bf753b2ac3f0898d1c829a468f0c0becaed6c99b",
+        "source": "https://github.com/theialab/radfoam#checkpoints"
+      },
+      "timing": {
+        "warpower": {
+          "scene": "playroom",
+          "sites": 3181453,
+          "backend": "warpower",
+          "mean_seconds": 0.35455835349857806,
+          "median_seconds": 0.3532183915376663,
+          "min_seconds": 0.35217488557100296,
+          "max_seconds": 0.36004940047860146,
+          "stddev_population_seconds": 0.002665660469196676,
+          "mean_build_seconds": "",
+          "mean_csr_export_seconds": "",
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": 0,
+          "empty_cells": 0,
+          "approx_device_peak_GiB": 11.7647705078125,
+          "native_process_peak_RSS_GiB": "",
+          "directed_edges": 48973854,
+          "tetrahedra": ""
+        },
+        "paragram": {
+          "scene": "playroom",
+          "sites": 3181453,
+          "backend": "paragram",
+          "mean_seconds": 0.46064454652369025,
+          "median_seconds": 0.46084375493228436,
+          "min_seconds": 0.4591151438653469,
+          "max_seconds": 0.4621584713459015,
+          "stddev_population_seconds": 0.0010042227045261593,
+          "mean_build_seconds": "",
+          "mean_csr_export_seconds": "",
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": 612,
+          "empty_cells": 1,
+          "approx_device_peak_GiB": 10.1163330078125,
+          "native_process_peak_RSS_GiB": "",
+          "directed_edges": 48979886,
+          "tetrahedra": ""
+        },
+        "cgal-1thread": {
+          "scene": "playroom",
+          "sites": 3181453,
+          "backend": "cgal-1thread",
+          "mean_seconds": 29.0307982906,
+          "median_seconds": 28.931565745,
+          "min_seconds": 28.866613324,
+          "max_seconds": 29.791232186,
+          "stddev_population_seconds": 0.2628576301686133,
+          "mean_build_seconds": 15.036510851,
+          "mean_csr_export_seconds": 13.9942874396,
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": false,
+          "non_success_cells": "",
+          "empty_cells": "",
+          "approx_device_peak_GiB": "",
+          "native_process_peak_RSS_GiB": 5.737789154052734,
+          "directed_edges": 48974316,
+          "tetrahedra": 21305667
+        },
+        "cgal-4thread": {
+          "scene": "playroom",
+          "sites": 3181453,
+          "backend": "cgal-4thread",
+          "mean_seconds": 18.2789421824,
+          "median_seconds": 18.199760511,
+          "min_seconds": 17.885423794,
+          "max_seconds": 19.063489064,
+          "stddev_population_seconds": 0.29508002484785073,
+          "mean_build_seconds": 5.9221478742,
+          "mean_csr_export_seconds": 12.3567943082,
+          "warmups": 3,
+          "repeats": 10,
+          "cpu_throttled": true,
+          "non_success_cells": "",
+          "empty_cells": "",
+          "approx_device_peak_GiB": "",
+          "native_process_peak_RSS_GiB": 5.737789154052734,
+          "directed_edges": 48974316,
+          "tetrahedra": 21305667
+        }
+      },
+      "paragram_over_warpower_time": 1.2992065818738006,
+      "full_graph_comparison": {
+        "scope": "Full directed adjacency sets. GPU cells are box-clipped; CGAL is full-hull and can include zero-area dual faces at exact ties. Differences alone do not establish errors.",
+        "pairs": {
+          "paragram": {
+            "warpower_edges": 48973854,
+            "other_edges": 48979886,
+            "shared_edges": 48973546,
+            "only_warpower": 308,
+            "only_other": 6340,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                119263,
+                172414
+              ],
+              [
+                121984,
+                121987
+              ],
+              [
+                121987,
+                121984
+              ],
+              [
+                148523,
+                152616
+              ],
+              [
+                152616,
+                148523
+              ],
+              [
+                172414,
+                119263
+              ],
+              [
+                223688,
+                287055
+              ],
+              [
+                228495,
+                230585
+              ],
+              [
+                230585,
+                228495
+              ],
+              [
+                245413,
+                245438
+              ],
+              [
+                245438,
+                245413
+              ],
+              [
+                262458,
+                264488
+              ],
+              [
+                263095,
+                267195
+              ],
+              [
+                264488,
+                262458
+              ],
+              [
+                267195,
+                263095
+              ],
+              [
+                287055,
+                223688
+              ]
+            ],
+            "only_other_examples": [
+              [
+                21637,
+                29866
+              ],
+              [
+                25438,
+                31542
+              ],
+              [
+                28579,
+                32704
+              ],
+              [
+                28586,
+                32704
+              ],
+              [
+                29477,
+                33527
+              ],
+              [
+                29866,
+                21637
+              ],
+              [
+                29866,
+                40024
+              ],
+              [
+                30655,
+                32704
+              ],
+              [
+                31542,
+                25438
+              ],
+              [
+                31877,
+                38009
+              ],
+              [
+                32673,
+                34708
+              ],
+              [
+                32704,
+                28579
+              ],
+              [
+                32704,
+                28586
+              ],
+              [
+                32704,
+                30655
+              ],
+              [
+                32704,
+                32711
+              ],
+              [
+                32704,
+                38781
+              ]
+            ],
+            "affected_rows": 4773,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 611
+          },
+          "cgal-1thread": {
+            "warpower_edges": 48973854,
+            "other_edges": 48974316,
+            "shared_edges": 48973848,
+            "only_warpower": 6,
+            "only_other": 468,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                6244,
+                8262
+              ],
+              [
+                8262,
+                6244
+              ],
+              [
+                505391,
+                507437
+              ],
+              [
+                507437,
+                505391
+              ],
+              [
+                1326853,
+                1330910
+              ],
+              [
+                1330910,
+                1326853
+              ]
+            ],
+            "only_other_examples": [
+              [
+                1,
+                14
+              ],
+              [
+                1,
+                78
+              ],
+              [
+                1,
+                245760
+              ],
+              [
+                2,
+                14
+              ],
+              [
+                2,
+                1880064
+              ],
+              [
+                13,
+                28672
+              ],
+              [
+                13,
+                245760
+              ],
+              [
+                14,
+                1
+              ],
+              [
+                14,
+                2
+              ],
+              [
+                14,
+                78
+              ],
+              [
+                14,
+                1058
+              ],
+              [
+                14,
+                6144
+              ],
+              [
+                14,
+                60416
+              ],
+              [
+                14,
+                449536
+              ],
+              [
+                14,
+                1880064
+              ],
+              [
+                14,
+                3087360
+              ]
+            ],
+            "affected_rows": 125,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          },
+          "cgal-4thread": {
+            "warpower_edges": 48973854,
+            "other_edges": 48974316,
+            "shared_edges": 48973848,
+            "only_warpower": 6,
+            "only_other": 468,
+            "warpower_duplicate_edges": 0,
+            "other_duplicate_edges": 0,
+            "only_warpower_examples": [
+              [
+                6244,
+                8262
+              ],
+              [
+                8262,
+                6244
+              ],
+              [
+                505391,
+                507437
+              ],
+              [
+                507437,
+                505391
+              ],
+              [
+                1326853,
+                1330910
+              ],
+              [
+                1330910,
+                1326853
+              ]
+            ],
+            "only_other_examples": [
+              [
+                1,
+                14
+              ],
+              [
+                1,
+                78
+              ],
+              [
+                1,
+                245760
+              ],
+              [
+                2,
+                14
+              ],
+              [
+                2,
+                1880064
+              ],
+              [
+                13,
+                28672
+              ],
+              [
+                13,
+                245760
+              ],
+              [
+                14,
+                1
+              ],
+              [
+                14,
+                2
+              ],
+              [
+                14,
+                78
+              ],
+              [
+                14,
+                1058
+              ],
+              [
+                14,
+                6144
+              ],
+              [
+                14,
+                60416
+              ],
+              [
+                14,
+                449536
+              ],
+              [
+                14,
+                1880064
+              ],
+              [
+                14,
+                3087360
+              ]
+            ],
+            "affected_rows": 125,
+            "warpower_failed_cells": 0,
+            "other_failed_cells": 0
+          }
+        }
+      },
+      "quality": {
+        "warpower": {
+          "status_counts": {
+            "0": 3181453
+          },
+          "exact_facet_audit": {
+            "gpu_only": {
+              "population_directed_edges": 6,
+              "sampled": 6,
+              "positive_area_face": 0,
+              "no_positive_area_face": 6,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            },
+            "cgal_only": {
+              "population_directed_edges": 468,
+              "sampled": 468,
+              "positive_area_face": 0,
+              "no_positive_area_face": 468,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            },
+            "shared": {
+              "population_directed_edges": 48973848,
+              "sampled": 64,
+              "positive_area_face": 64,
+              "no_positive_area_face": 0,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            }
+          },
+          "all_disagreements_audited": true,
+          "confirmed_spurious_directed_edges_in_audit": 6,
+          "confirmed_spurious_undirected_pairs_in_audit": 3,
+          "confirmed_missing_directed_edges_in_audit": 0,
+          "confirmed_missing_undirected_pairs_in_audit": 0,
+          "scope": "All Warpower disagreements when their category has at most 20000 directed edges; otherwise uniform fixed-seed samples. Paragram disagreements and shared edges are sampled. Not a complete graph audit. Exact rational LP uses all CGAL neighbors of the owner; native CGAL full-hull triangulation has passed is_valid. Strict positive slack on the candidate bisector proves a positive-area facet inside the backend's float32 clipping box. Zero-area contacts are not adjacency."
+        },
+        "paragram": {
+          "status_counts": {
+            "0": 3180841,
+            "1": 392,
+            "2": 109,
+            "3": 1,
+            "5": 110
+          },
+          "exact_facet_audit": {
+            "gpu_only": {
+              "population_directed_edges": 6346,
+              "sampled": 64,
+              "positive_area_face": 0,
+              "no_positive_area_face": 64,
+              "owner_non_success": 24,
+              "candidate_non_success": 22
+            },
+            "cgal_only": {
+              "population_directed_edges": 776,
+              "sampled": 64,
+              "positive_area_face": 28,
+              "no_positive_area_face": 36,
+              "owner_non_success": 4,
+              "candidate_non_success": 3
+            },
+            "shared": {
+              "population_directed_edges": 48973540,
+              "sampled": 64,
+              "positive_area_face": 64,
+              "no_positive_area_face": 0,
+              "owner_non_success": 0,
+              "candidate_non_success": 0
+            }
+          },
+          "all_disagreements_audited": false,
+          "confirmed_spurious_directed_edges_in_audit": 64,
+          "confirmed_spurious_undirected_pairs_in_audit": 64,
+          "confirmed_missing_directed_edges_in_audit": 28,
+          "confirmed_missing_undirected_pairs_in_audit": 27,
+          "scope": "All Warpower disagreements when their category has at most 20000 directed edges; otherwise uniform fixed-seed samples. Paragram disagreements and shared edges are sampled. Not a complete graph audit. Exact rational LP uses all CGAL neighbors of the owner; native CGAL full-hull triangulation has passed is_valid. Strict positive slack on the candidate bisector proves a positive-area facet inside the backend's float32 clipping box. Zero-area contacts are not adjacency."
+        }
+      }
+    }
+  },
+  "controls": {
+    "native_smoke": [
+      {
+        "binary": "cgal-adjacency",
+        "n": 1000,
+        "directed_edges": 14940,
+        "scipy_edges_match": true,
+        "final": {
+          "final": true,
+          "CGAL": "6.2.1",
+          "threads": 1,
+          "valid": true,
+          "validation_seconds": 0.005565378,
+          "peak_rss_bytes": 72151040
+        }
+      },
+      {
+        "binary": "cgal-adjacency-parallel",
+        "n": 1000,
+        "directed_edges": 14940,
+        "scipy_edges_match": true,
+        "final": {
+          "final": true,
+          "CGAL": "6.2.1",
+          "threads": 4,
+          "valid": true,
+          "validation_seconds": 0.005524532,
+          "peak_rss_bytes": 72151040
+        }
+      }
+    ],
+    "exact_facets": {
+      "passed": 6,
+      "results": [
+        {
+          "query": 0,
+          "positive_area_face": true,
+          "feasible": true
+        },
+        {
+          "query": 1,
+          "positive_area_face": false,
+          "feasible": false
+        },
+        {
+          "query": 2,
+          "positive_area_face": false,
+          "feasible": false
+        },
+        {
+          "query": 3,
+          "positive_area_face": true,
+          "feasible": true
+        },
+        {
+          "query": 4,
+          "positive_area_face": false,
+          "feasible": true
+        },
+        {
+          "query": 5,
+          "positive_area_face": false,
+          "feasible": true
+        }
+      ]
+    }
+  },
+  "interpretation": [
+    "Times are arithmetic means of ten constructions after three warm-ups, with resident inputs. Compilation, disk I/O, graph comparison, exact LP audits and final CGAL is_valid are excluded.",
+    "GPU backends produce box-clipped Voronoi CSR adjacency. CGAL 6.2.1 EPICK constructs the full-hull Delaunay tetrahedralization; build and serial two-pass CSR export are reported separately.",
+    "Graph, status, exact facet and CGAL is_valid checks apply to the final measured construction from each backend, not every timed repetition.",
+    "Four-thread CGAL measurements encountered cgroup CPU throttling; consult the per-sample counters. Do not treat them as a clean unconstrained four-core performance result.",
+    "Full directed graph differences were computed. Exact rational facet LPs audit all Warpower disagreements up to 20000 per category and fixed-seed samples of Paragram disagreements and shared edges. This is not certification of every shared adjacency or a renderer-quality comparison.",
+    "Status 3 means empty, which is unexpected for these distinct unweighted sites inside the clipping box. Non-success counts include empty cells; historical failed-cell counts excluded them.",
+    "GPU peak memory is approximate device-wide NVML sampling including contexts and allocator reserves. Native CGAL RSS is a separate process metric and is not directly comparable."
+  ]
+}

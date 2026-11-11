@@ -1,0 +1,125 @@
+{
+  "completed_utc": "2026-11-10T00:01:36.212978+00:00",
+  "conclusion": "Feasible for a controlled training integration. Synthetic position/density/color fitting through the actual upstream CUDA renderer passed. Full scene training, densification/pruning/resume, clipping semantics and large-scene memory/performance remain unvalidated.",
+  "upstream_commit": "3e7b52cf74e37ab2ab5e695f53570f515f537e3d",
+  "upstream_url": "https://github.com/theialab/radfoam",
+  "paper_precedent": "https://arxiv.org/html/2605.06408v1#S5.SS3",
+  "probe": {
+    "sites": 72,
+    "trainable_sites": 64,
+    "fixed_zero_density_guard_sites": 8,
+    "rays": 1536,
+    "steps": 120,
+    "initial_photometric_mse": 0.20526234805583954,
+    "final_photometric_mse": 0.0027553685940802097,
+    "mse_reduction_factor": 74.49542268023117,
+    "actual_edge_set_changes": 108,
+    "distinct_topologies": 107,
+    "raw_backward_checks_finite": 122,
+    "position_displacement_norm": 1.662782907485962,
+    "fixed_geometry_control": {
+      "rgba_max_abs_difference": 2.5294721126556396e-06,
+      "position_gradient_max_abs_difference": 1.1175870895385742e-08,
+      "attribute_gradient_max_abs_difference": 2.9103830456733704e-08,
+      "full_hull_directed_edges": 934,
+      "clipped_directed_edges": 880
+    },
+    "scope": "Synthetic SH0 teacher fitting with unmodified upstream RadFoam CUDA forward/backward and Python TraceRays autograd; C ABI headless bridge; default stream; 64 trainable sites plus 8 fixed zero-density guard sites; 1536 rays; graph rebuilt every step. Not a full dataset run or upstream train.py/densification/resume test.",
+    "allocator": "Headless bridge uses cudaMalloc/cudaFree and explicit synchronization instead of the upstream Torch allocator. No training-performance or memory-performance claim."
+  },
+  "integration_surface": [
+    {
+      "component": "Geometry backend",
+      "source": "radfoam_model/scene.py:65,115,160",
+      "work": "Introduce a backend factory at both initialization paths and rebuild. Warpower initializes once with warp.init(), receives detached float32 CUDA sites under no_grad(), and returns stable-ID CSR adjacency. Keep native RadFoam and Paragram options for paired comparisons."
+    },
+    {
+      "component": "Autograd",
+      "source": "radfoam_model/render.py:10,114",
+      "work": "Retain TraceRays and existing position/appearance/density gradients. Adjacency is discrete and has no gradient. Keep each graph alive until its forward/backward finishes; rebuild after optimizer.step."
+    },
+    {
+      "component": "Index types and ownership",
+      "source": "torch_bindings/pipeline_bindings.cpp:52",
+      "work": "Use checked int32-to-uint32 tensor views for nonnegative compact indices and offsets; no data copy is needed. Retain tensor owners. Current Warpower signed-int32 capacity is the practical index limit."
+    },
+    {
+      "component": "Point ordering and optimizer state",
+      "source": "radfoam_model/scene.py:127",
+      "work": "An identity-permutation adapter avoids external index changes initially. If spatially sorting for AABB/renderer locality, permute positions, attributes, density and Adam moments together. Rebuild/invalidate adjacency and cached index hints after any pruning/densification."
+    },
+    {
+      "component": "Auxiliary GPU operations",
+      "source": "radfoam_model/scene.py:195,225,422",
+      "work": "Retain RadFoam AABB construction, nearest starting-cell queries, farthest-neighbor query, image batching, renderer and checkpoint paths. Identity point order is correct for AABB bounds but its performance needs measurement because leaves group contiguous points."
+    },
+    {
+      "component": "Update schedule",
+      "source": "train.py:157,243,268,289",
+      "work": "Start with the original cadence: interval grows from 1 by 2 until roughly 100, resets after densification, and forces rebuilds after densification and at the point-freeze boundary. Native incremental updates are not equivalent to full reconstruction. Warpower can initially fully rebuild at each requested update."
+    },
+    {
+      "component": "Stream behavior",
+      "source": "src/tracing/pipeline.cu:623,677; src/utils/common_kernels.cuh:26; torch_bindings/bindings.h:20",
+      "work": "Run initial integration on the CUDA default stream. Warpower honors the Torch current stream, while upstream renderer launches with a null stream; custom-stream production needs explicit event ordering or stream plumbing."
+    },
+    {
+      "component": "Unweighted semantics",
+      "source": "src/tracing/tracing_utils.cuh:65; radfoam_model/scene.py:202",
+      "work": "Use voronoi_diagram, not power_diagram with optical density as weights. Density is a rendering attribute. Weighted cells would require renderer plane and gradient changes."
+    }
+  ],
+  "validation_gates": [
+    "Turn the seven confirmed Warpower neighbor-pair errors in the prior full-checkpoint comparison into targeted render/gradient regression cases; zero status codes alone do not certify topology.",
+    "Resolve clipping semantics: Warpower adjacency is bounded by the site-derived box, while upstream tracing has no explicit box stop. Validate all camera and contributing ray domains, or add compatible domain handling. The inward-ray guard-site probe does not settle this for real scenes.",
+    "Run identical frozen scene/camera batches with native/Paragram/Warpower graphs. Compare RGBA, opacity, depth and raw gradients before upstream nonfinite masking, including rays through known problematic facets.",
+    "Run a small Bonsai image-fitting pilot that includes actual densification, pruning, frozen-point transition, checkpoint save/load and continued optimization. Start all backends from the same scene/optimizer snapshot and controlled ray batches.",
+    "Run matched full Bonsai then Garden fits; record quality versus wall time, native incremental/full updates separately, AABB/start queries, rendering/backward/optimizer, host synchronization, retry/failure counts and combined Torch/Warp memory."
+  ],
+  "performance_limits": [
+    "The prior static L40 construction comparison measured 1.30-1.87x over Paragram. It is not a predicted whole-training speedup, and native RadFoam incremental timings were not measured there.",
+    "Do not carry the standalone 32 GiB Warp allocator retention policy into training without budgeting for Torch parameters, gradients, Adam state and rendering buffers. Profile chunk sizes and combined allocator reservations.",
+    "The standalone 2-4.2M-site peaks were about 7.9-14.7 GiB for Warpower. A 48 GiB L40 makes a 2-4M-site pilot plausible but the full training peak is unmeasured; 20M-site scaling is not established."
+  ],
+  "available_assets": "Local data/radfoam NPZ files contain final site positions only. Real fitting needs RGB images, calibrated cameras and COLMAP sparse points (or another supported initialization), and checkpoint colors/densities if starting from a trained checkpoint.",
+  "build_command": [
+    "/usr/local/cuda-12.6/bin/nvcc",
+    "-O3",
+    "-std=c++17",
+    "-arch=sm_89",
+    "-DGPU_DEBUG=1",
+    "--extended-lambda",
+    "--expt-relaxed-constexpr",
+    "--shared",
+    "-Xcompiler",
+    "-fPIC",
+    "-Xlinker",
+    "--no-undefined",
+    "-I/usr/include/eigen3",
+    "-I/home/horde/references/radfoam/src",
+    "-I/home/horde/references/radfoam/external/include",
+    "/home/horde/references/radfoam/src/tracing/pipeline.cu",
+    "experiments/radfoam-integration/renderer_bridge.cpp",
+    "-lcuda",
+    "-o",
+    ".work/radfoam-feasibility-20261109/libradfoam_probe.so"
+  ],
+  "probe_command": [
+    ".venv/bin/python",
+    "experiments/radfoam-integration/probe.py",
+    "--binary",
+    ".work/radfoam-feasibility-20261109/libradfoam_probe.so",
+    "--output",
+    "results/local/radfoam-feasibility-20261109/probe.json"
+  ],
+  "environment": {
+    "PYTHONPATH": ".",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1"
+  },
+  "scope_exclusions": [
+    "No changes to Warpower library code or the upstream RadFoam checkout.",
+    "No full dataset training, native RadFoam triangulation benchmark, densification/pruning/resume run, or production stream/memory validation.",
+    "The first probe run is preserved separately; its graph-change count used raw CSR ordering. Use probe.json for canonical edge-set counts."
+  ]
+}

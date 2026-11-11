@@ -1,0 +1,131 @@
+{
+  "started_utc": "2026-11-10T05:27:55.478342+00:00",
+  "purpose": "Match PSNR while reducing training time at the official full budget.",
+  "source_commit": "4f69d74ae53cee5c6ab2cf12f7dff815136fac73",
+  "source_sha256": {
+    "official_reduced.py": "35a23bf2c6b14b0cdae8aa4ec005feb3bc6e0804df3f86bb96fd0180de4203a0",
+    "integration.py": "319026af974917da05d936a05d45cd34175a59cdeec805b25795af87b6aaecfe",
+    "spatial.py": "2643853f3cc9aaefc76e351049d14b367459507f2b6751f7ce2c9002f1cb57e5",
+    "evaluate_shared.py": "0e7665fe52a36ab1d3ce4d17ac6778fa158a6a50a2cd6bdb6647ecec42a01fa2",
+    "run_full_comparison.py": "830c05faed441a8562b37bcb88fef5ccb3aacb78a71b20c4c55cf0deb64a674d"
+  },
+  "dataset_manifest_sha256": {
+    "bonsai-manifest.json": "0b109563d4c86c4977475a184782a2df4afe3280a12798154661cda68726d017",
+    "bonsai-manifest-2.json": "77d1e5cefb49f95ebac965ec5e5b1ded2a7bd2258c27a8d2823029baa02f79cb"
+  },
+  "stages": [
+    {
+      "name": "preflight",
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/results/local/radfoam-full-20261110/driver-snapshot/official_reduced.py",
+        "--budget",
+        "full",
+        "--skip-ply",
+        "--data",
+        "/home/horde/projects/power-diagram/data/radfoam-training",
+        "--build",
+        "/home/horde/projects/power-diagram/.work/radfoam-fitting-20261110/native",
+        "--backend",
+        "warpower-morton",
+        "--steps",
+        "2",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/radfoam-full-20261110/preflight"
+      ]
+    },
+    {
+      "name": "native",
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/results/local/radfoam-full-20261110/driver-snapshot/official_reduced.py",
+        "--budget",
+        "full",
+        "--skip-ply",
+        "--data",
+        "/home/horde/projects/power-diagram/data/radfoam-training",
+        "--build",
+        "/home/horde/projects/power-diagram/.work/radfoam-fitting-20261110/native",
+        "--backend",
+        "native",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/radfoam-full-20261110/native"
+      ]
+    },
+    {
+      "name": "warpower",
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/results/local/radfoam-full-20261110/driver-snapshot/official_reduced.py",
+        "--budget",
+        "full",
+        "--skip-ply",
+        "--data",
+        "/home/horde/projects/power-diagram/data/radfoam-training",
+        "--build",
+        "/home/horde/projects/power-diagram/.work/radfoam-fitting-20261110/native",
+        "--backend",
+        "warpower-morton",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/radfoam-full-20261110/warpower"
+      ]
+    },
+    {
+      "name": "evaluation",
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "/home/horde/projects/power-diagram/.venv/bin/python",
+        "/home/horde/projects/power-diagram/results/local/radfoam-full-20261110/driver-snapshot/evaluate_shared.py",
+        "--downsample",
+        "2",
+        "--data",
+        "/home/horde/projects/power-diagram/data/radfoam-training",
+        "--build",
+        "/home/horde/projects/power-diagram/.work/radfoam-fitting-20261110/native",
+        "--checkpoint",
+        "native",
+        "/home/horde/projects/power-diagram/results/local/radfoam-full-20261110/native/output/fit/model.pt",
+        "--checkpoint",
+        "warpower",
+        "/home/horde/projects/power-diagram/results/local/radfoam-full-20261110/warpower/output/fit/model.pt",
+        "--output",
+        "/home/horde/projects/power-diagram/results/local/radfoam-full-20261110/shared-evaluation.json"
+      ]
+    }
+  ],
+  "workload": {
+    "steps": 20000,
+    "rays_per_step": 1000000,
+    "target_sites": 2097152,
+    "training_downsample": [
+      4,
+      2
+    ],
+    "downsample_iterations": [
+      0,
+      5000
+    ],
+    "evaluation_downsample": 2,
+    "evaluation_every": 100,
+    "seed": 42
+  },
+  "reference": {
+    "paper_bonsai_psnr": 32.15,
+    "paper_bonsai_training_seconds": 4200,
+    "paper_gpu": "RTX 4090",
+    "comparison_gpu": "L40",
+    "note": "Primary speed comparison is native versus Warp on this L40. Comparing to 70 minutes is cross-hardware context only."
+  },
+  "export_scope": "Both runs keep the original renderable PT checkpoint and final images. Redundant PLY exports are skipped to fit persistent storage; exports are outside the loop timer."
+}

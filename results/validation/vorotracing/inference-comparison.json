@@ -1,0 +1,279 @@
+{
+  "complete": true,
+  "gpu": "NVIDIA L40",
+  "inference_matrix": [
+    {
+      "checkpoint": "native",
+      "renderer": "native",
+      "evidence": "native-checkpoint-native-inference.json",
+      "name": "model",
+      "quantize": "fp16",
+      "sort_morton": true,
+      "use_warp_perm": true,
+      "weight_threshold": 0.01,
+      "cell_skip_threshold": 0.001,
+      "points": 2000000,
+      "psnr": 33.664485931396484,
+      "ssim": 0.9413540959358215,
+      "lpips": 0.20960856974124908,
+      "lpips_3dgs": 0.16613034904003143,
+      "ms_per_frame": 5.83724492047284,
+      "fps": 171.3136956944743
+    },
+    {
+      "checkpoint": "native",
+      "renderer": "warp",
+      "evidence": "native-checkpoint-tuned-inference.json",
+      "name": "model",
+      "quantize": "fp16",
+      "sort_morton": true,
+      "use_warp_perm": true,
+      "weight_threshold": 0.01,
+      "cell_skip_threshold": 0.001,
+      "points": 2000000,
+      "psnr": 33.664485931396484,
+      "ssim": 0.9413540959358215,
+      "lpips": 0.20960856974124908,
+      "lpips_3dgs": 0.16613034904003143,
+      "ms_per_frame": 5.611771681502058,
+      "fps": 178.19684348461197
+    },
+    {
+      "checkpoint": "warp",
+      "renderer": "native",
+      "evidence": "warp-checkpoint-native-inference.json",
+      "name": "model",
+      "quantize": "fp16",
+      "sort_morton": true,
+      "use_warp_perm": true,
+      "weight_threshold": 0.01,
+      "cell_skip_threshold": 0.001,
+      "points": 2000000,
+      "psnr": 33.69874954223633,
+      "ssim": 0.9413057565689087,
+      "lpips": 0.20986153185367584,
+      "lpips_3dgs": 0.16619804501533508,
+      "ms_per_frame": 5.052900077201225,
+      "fps": 197.90614987856534
+    },
+    {
+      "checkpoint": "warp",
+      "renderer": "warp",
+      "evidence": "warp-checkpoint-tuned-inference.json",
+      "name": "model",
+      "quantize": "fp16",
+      "sort_morton": true,
+      "use_warp_perm": true,
+      "weight_threshold": 0.01,
+      "cell_skip_threshold": 0.001,
+      "points": 2000000,
+      "psnr": 33.69874954223633,
+      "ssim": 0.9413057565689087,
+      "lpips": 0.20986153185367584,
+      "lpips_3dgs": 0.16619804501533508,
+      "ms_per_frame": 5.1705990662445895,
+      "fps": 193.40118759706905
+    }
+  ],
+  "paired_kernel_timings": [
+    {
+      "checkpoint": "native",
+      "views": [
+        0,
+        10,
+        20,
+        36
+      ],
+      "threshold": 0.001,
+      "skip": 0.0,
+      "bit_exact": true,
+      "gpu_ms": {
+        "native": 7.04327818552653,
+        "warp": 7.073674106597901
+      },
+      "native_over_warp_speedup": 0.9957029514488066
+    },
+    {
+      "checkpoint": "native",
+      "views": [
+        0,
+        10,
+        20,
+        36
+      ],
+      "threshold": 0.01,
+      "skip": 0.001,
+      "bit_exact": true,
+      "gpu_ms": {
+        "native": 5.817141628265381,
+        "warp": 5.742274411519369
+      },
+      "native_over_warp_speedup": 1.0130379029946435
+    },
+    {
+      "checkpoint": "warp",
+      "views": [
+        0,
+        10,
+        20,
+        36
+      ],
+      "threshold": 0.001,
+      "skip": 0.0,
+      "bit_exact": true,
+      "gpu_ms": {
+        "native": 6.39159278869629,
+        "warp": 6.644934558868408
+      },
+      "native_over_warp_speedup": 0.9618744521969739
+    },
+    {
+      "checkpoint": "warp",
+      "views": [
+        0,
+        10,
+        20,
+        36
+      ],
+      "threshold": 0.01,
+      "skip": 0.001,
+      "bit_exact": true,
+      "gpu_ms": {
+        "native": 5.285345172882081,
+        "warp": 5.421764246622721
+      },
+      "native_over_warp_speedup": 0.9748386193985441
+    }
+  ],
+  "camera_pipeline": [
+    {
+      "checkpoint": "native",
+      "renderer": "native",
+      "background": "white",
+      "views": 37,
+      "gpu_ms": 5.467317354356922,
+      "fps": 182.90505840183155,
+      "psnr": 33.652777594489024
+    },
+    {
+      "checkpoint": "warp",
+      "renderer": "warp",
+      "background": "white",
+      "views": 37,
+      "gpu_ms": 4.983515785835885,
+      "fps": 200.6615495915942,
+      "psnr": 33.689085316013646
+    }
+  ],
+  "radfoam": [
+    {
+      "checkpoint": "native",
+      "renderer": "native",
+      "generic": {
+        "views": 37,
+        "gpu_ms": 11.67464022249789,
+        "fps": 85.65574449762713,
+        "psnr": 32.4134573034338
+      },
+      "fast_camera_pipeline": [
+        {
+          "threshold": 0.001,
+          "views": 37,
+          "gpu_ms": 8.73970990567594,
+          "fps": 114.42027376109559,
+          "psnr": 32.37135443816314
+        },
+        {
+          "threshold": 0.01,
+          "views": 37,
+          "gpu_ms": 8.131485315271325,
+          "fps": 122.9787623328731,
+          "psnr": 32.31363409918708
+        },
+        {
+          "threshold": 0.05,
+          "views": 37,
+          "gpu_ms": 7.638667833482897,
+          "fps": 130.91287928723088,
+          "psnr": 31.43101558169803
+        }
+      ]
+    },
+    {
+      "checkpoint": "warp",
+      "renderer": "native",
+      "generic": {
+        "views": 37,
+        "gpu_ms": 10.158635752909893,
+        "fps": 98.43841479536805,
+        "psnr": 32.25101115252521
+      },
+      "fast_camera_pipeline": [
+        {
+          "threshold": 0.001,
+          "views": 37,
+          "gpu_ms": 7.9334188306653814,
+          "fps": 126.04906174052698,
+          "psnr": 32.21974800728463
+        },
+        {
+          "threshold": 0.01,
+          "views": 37,
+          "gpu_ms": 7.354177114125845,
+          "fps": 135.97714393894702,
+          "psnr": 32.170477738251556
+        },
+        {
+          "threshold": 0.05,
+          "views": 37,
+          "gpu_ms": 6.7246932261698955,
+          "fps": 148.70566825388974,
+          "psnr": 31.343283936784076
+        }
+      ]
+    }
+  ],
+  "high_fidelity": [
+    {
+      "checkpoint": "native",
+      "renderer": "native",
+      "name": "model",
+      "quantize": "fp16",
+      "sort_morton": true,
+      "use_warp_perm": true,
+      "weight_threshold": 0.001,
+      "cell_skip_threshold": 0.0,
+      "points": 2000000,
+      "psnr": 33.738380432128906,
+      "ssim": 0.9430147409439087,
+      "lpips": 0.21354204416275024,
+      "lpips_3dgs": 0.17082059383392334,
+      "ms_per_frame": 7.214762404158309,
+      "fps": 138.6047029661904
+    },
+    {
+      "checkpoint": "warp",
+      "renderer": "warp",
+      "name": "model",
+      "quantize": "fp16",
+      "sort_morton": true,
+      "use_warp_perm": true,
+      "weight_threshold": 0.001,
+      "cell_skip_threshold": 0.0,
+      "points": 2000000,
+      "psnr": 33.77348327636719,
+      "ssim": 0.9429509043693542,
+      "lpips": 0.2137393206357956,
+      "lpips_3dgs": 0.1708391010761261,
+      "ms_per_frame": 6.530374898137275,
+      "fps": 153.13056533480798
+    }
+  ],
+  "limitations": [
+    "One fitted model per backend and one scene; no estimate of seed variance.",
+    "Compare renderers on the same checkpoint to isolate implementation performance. Different fitted checkpoints also differ in geometry, appearance and memory layout.",
+    "All-view inference includes camera lookup, but excludes ray generation and RGB compositing, as in the upstream benchmark. Four-view paired timings alternate backend order; all-view benchmark jobs run serially.",
+    "Camera pipeline includes ray generation and RGB8 packing. VoroTracing uses its original white residual background, while RadFoam's native fused kernel uses black. Quality is measured on the actual output in each row.",
+    "FPS is the reciprocal of mean frame time, not the mean of per-view FPS. GPU clocks and workload affect timings; small differences are not established across repeated independent sessions."
+  ]
+}

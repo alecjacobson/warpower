@@ -78,7 +78,7 @@ def exact_check(frame, rows, binary):
     )
 
 
-def reference(frame, kind="scipy", cgal_binary=None):
+def reference(frame, kind="scipy", cgal_binary=None, *, preserve_orientation=False):
     from scipy.spatial import Delaunay, QhullError
 
     points, ids = frame.canonical()
@@ -114,7 +114,8 @@ def reference(frame, kind="scipy", cgal_binary=None):
             if int(target.read_text().splitlines()[0]) == 0:
                 return None, "reference has no full-dimensional tetrahedra", metadata
             values = np.loadtxt(target, skiprows=1, dtype=np.int64).reshape(-1, 4)
-            return canonical_rows(ids[values]), None, metadata
+            rows = ids[values]
+            return (rows if preserve_orientation else canonical_rows(rows)), None, metadata
     try:
         rows = canonical_rows(ids[Delaunay(points.astype(np.float64)).simplices])
         return rows, None, {}

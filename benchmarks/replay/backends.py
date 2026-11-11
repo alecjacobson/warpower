@@ -10,6 +10,9 @@ import numpy as np
 CONTRACTS = {
     "scipy-full": "full-hull-tetrahedra",
     "vtm-fragment": "full-hull-tetrahedra",
+    "vtm-hull-cache": "full-hull-tetrahedra",
+    "vtm-split-search": "full-hull-tetrahedra",
+    "vtm-combined": "full-hull-tetrahedra",
     "warp-full": "full-hull-tetrahedra",
     "radfoam-incremental": "full-hull-tetrahedra",
     "radfoam-full": "full-hull-tetrahedra",
@@ -142,19 +145,29 @@ class WarpBackend(Backend):
             from warpower._delaunay_recovery import DelaunayWorkspace
             from warpower._wall_reuse import WallReuseDelaunayWorkspace
 
-            cls = WallReuseDelaunayWorkspace if self.name == "vtm-fragment" else DelaunayWorkspace
+            cls = WallReuseDelaunayWorkspace if self.name.startswith("vtm-") else DelaunayWorkspace
             kwargs = {}
             if self.options.get("tetrahedra_capacity") is not None:
                 kwargs["tetrahedra_capacity"] = self.options["tetrahedra_capacity"]
             if self.name == "warp-full":
                 kwargs["cache_strategy"] = False
-            self.workspace = cls(points, **kwargs)
+            # The workspace borrows its input array and later updates it in place.
+            # Own that storage so a prepared previous input remains replayable.
+            self.workspace = cls(wp.clone(points), **kwargs)
+            if self.name in ("vtm-hull-cache", "vtm-combined"):
+                from .hull_cache_probe import install
+
+                install(self.workspace)
+            if self.name in ("vtm-split-search", "vtm-combined"):
+                from .split_search_probe import install
+
+                install(self.workspace)
             self.diagnostics["workspace_reallocated"] = True
             changed = True
         else:
             wp.copy(self.workspace.points, points)
             self.diagnostics["workspace_reallocated"] = False
-        if self.name == "vtm-fragment":
+        if self.name.startswith("vtm-"):
             if changed or explicit_reset:
                 self.workspace.clear_reuse()
             if "seed_rows" in prepared:
@@ -214,6 +227,14 @@ class WarpBackend(Backend):
             self.diagnostics["runtime_certificate"] = (
                 "current-coordinate complete exact/symbolic certificate"
             )
+            if hasattr(workspace, "_hull_cache_probe"):
+                self.diagnostics["hull_cache_misses_hits"] = (
+                    workspace._hull_cache_probe.statistics.numpy().tolist()
+                )
+            if hasattr(workspace, "_split_search_probe"):
+                self.diagnostics["exact_search_lanes"] = int(
+                    workspace._split_search_probe.statistics.numpy()[0]
+                )
         return Output(rows, self.error, self.diagnostics.copy())
 
     def close(self):

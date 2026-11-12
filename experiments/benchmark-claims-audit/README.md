@@ -27,6 +27,63 @@ acknowledges FP32 adjacency discrepancies. Its ranking cannot be combined with
 our L40 ratios and 9–17K-site updates as a transitive claim. These are separate
 workloads and accuracy contracts. [Paragram paper, §5.2–5.3 and Appendix D](https://arxiv.org/html/2605.06408v1).
 
+## Seven silent neighbor-pair errors: targeted diagnosis
+
+These seven undirected pairs are confirmed incorrect for the original float32
+inputs and Warpower's clipping box. The audit tests whether the two cells share
+a positive-area facet, using an exact rational LP and the constraints from a
+validated CGAL neighbor star. It therefore distinguishes actual errors from
+legitimate box-clipping differences and zero-area contacts.
+
+| Scene | Spurious pairs | Missing pairs |
+|---|---:|---:|
+| Bonsai | 1 | 1 |
+| Garden | 0 | 1 |
+| Bicycle | 0 | 1 |
+| Playroom | 3 | 0 |
+
+A follow-up recheck reproduced all 14 directed exact-LP answers. The current
+public API also reproduced all 14 incorrect directed edges, with successful
+statuses at every affected endpoint. Each error occurs in both directions, so
+the graph-symmetry check cannot expose it: both cells either include the same
+spurious neighbor relation or omit the same real one.
+
+Targeted reconstruction retained **every original input site**, rebuilding the
+hierarchy for each scene and evaluating only the affected cells. At matched
+cell/queue capacities of 512 and the same one-active-lane-per-warp dispatch:
+
+| Diagnostic | Incorrect selected directed edges | Nonzero selected statuses |
+|---|---:|---:|
+| Public API | 14 / 14 | 0 |
+| Targeted fresh cells, FP32 | 14 / 14 | 0 |
+| Targeted fresh cells, FP64 | 0 / 14 | 0 |
+
+This identifies **precision-sensitive construction errors that survive larger
+buffers**. It does not yet isolate the unstable predicate, clipping operation or
+traversal bound. The FP64 experiment fixes the selected pair decisions only;
+it is not an automatic recovery mechanism, a production fix or an exact
+certificate for the whole returned graph. The current kernel's success status
+means its internal checks passed, not that an independent geometric certificate
+was obtained. Unaffected shared edges were only sampled in the original audit,
+so seven is the confirmed count, not a proved total error count.
+
+These failures differ from the small-Bonsai capacity overflows discussed below:
+they do not report a failure that the retry dispatcher can act on. Correctness
+work must provide reliable detection/recovery or robust predicates, with these
+pairs as regressions, before qualifying performance changes. No rendering impact
+or causal connection to fitted PSNR has been measured.
+
+The [machine-readable diagnosis](seven-pairs.json) pins all site IDs, input hashes
+and outcomes. `seven-pairs-diagnosis-20261112.tar.gz` on the
+[evidence prerelease](https://github.com/alecjacobson/warpower/releases/tag/evidence-geometry-updates-4ceb748)
+contains the selected exact queries, prior-audit provenance, oracle source/binary,
+replay scripts and selected output rows. It excludes the large original point
+arrays, which remain the same public checkpoint inputs used in the comparison.
+Verify against the [manifest](seven-pairs-manifest.json);
+[remote verification](seven-pairs-remote-verification.json) checks a fresh download.
+These are untimed correctness diagnostics, with no production algorithm changes
+or fitting runs.
+
 ## New matched-input fresh-call probes
 
 All times below are means in milliseconds on the same L40. Each row uses

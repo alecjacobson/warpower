@@ -1,0 +1,134 @@
+{
+  "schema": "warpower.seven-pair-diagnosis",
+  "version": 1,
+  "date": "2026-11-12",
+  "source_revision": "99860532344c91e90f2b4501ab3d3a9efc3c3888",
+  "scope": "Untimed correctness diagnostics on four full original point sets. Seven known undirected pairs only; no complete exact graph certificate, speed claim, rendering test or production fix.",
+  "exact_audit": {
+    "replayed_directed_queries": 14,
+    "prior_answers_reproduced": true,
+    "method": "Exact rational LP against validated CGAL neighbor-star constraints, using original float32 inputs and the backend clipping box. Positive-area facet required."
+  },
+  "current_replay": {
+    "public_api_incorrect_directed_edges": 14,
+    "public_api_selected_statuses_all_zero": true,
+    "fp32_capacity512_queue512_incorrect_directed_edges": 14,
+    "fp64_capacity512_queue512_incorrect_directed_edges": 0,
+    "targeted_statuses_all_zero": true
+  },
+  "interpretation": "Selected errors are precision-sensitive and survive increased capacity. Their exact unstable predicate or arithmetic stage has not been isolated. Bilaterally wrong edges evade symmetry repair. FP64 targeted outcomes are not an automatic detection/fix or proof of full-graph exactness.",
+  "scenes": [
+    {
+      "scene": "bonsai",
+      "n": 1968522,
+      "points_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+      "pairs": [
+        {
+          "sites": [
+            199116,
+            202167
+          ],
+          "kind": "spurious",
+          "public_status": 0,
+          "public_has_edge": true,
+          "fp32_capacity512_has_edge": true,
+          "fp64_capacity512_has_edge": false,
+          "exact_expected_has_edge": false
+        },
+        {
+          "sites": [
+            360048,
+            360064
+          ],
+          "kind": "missing",
+          "public_status": 0,
+          "public_has_edge": false,
+          "fp32_capacity512_has_edge": false,
+          "fp64_capacity512_has_edge": true,
+          "exact_expected_has_edge": true
+        }
+      ]
+    },
+    {
+      "scene": "garden",
+      "n": 4064598,
+      "points_sha256": "09fd9e0a85f683fb0646116ef381a1f8e28abdc8d2ec29f82a22c51facc1ce02",
+      "pairs": [
+        {
+          "sites": [
+            2563822,
+            2580195
+          ],
+          "kind": "missing",
+          "public_status": 0,
+          "public_has_edge": false,
+          "fp32_capacity512_has_edge": false,
+          "fp64_capacity512_has_edge": true,
+          "exact_expected_has_edge": true
+        }
+      ]
+    },
+    {
+      "scene": "bicycle",
+      "n": 4199873,
+      "points_sha256": "b18a5ecf4abecc9fb4094a4df36c886fcc310aa4db6372758fdff7b97aae8d4f",
+      "pairs": [
+        {
+          "sites": [
+            203920,
+            204025
+          ],
+          "kind": "missing",
+          "public_status": 0,
+          "public_has_edge": false,
+          "fp32_capacity512_has_edge": false,
+          "fp64_capacity512_has_edge": true,
+          "exact_expected_has_edge": true
+        }
+      ]
+    },
+    {
+      "scene": "playroom",
+      "n": 3181453,
+      "points_sha256": "1ebc4e0405248284b8124069ecc93ca5c56d1ad66340809062a797721d7f6583",
+      "pairs": [
+        {
+          "sites": [
+            6244,
+            8262
+          ],
+          "kind": "spurious",
+          "public_status": 0,
+          "public_has_edge": true,
+          "fp32_capacity512_has_edge": true,
+          "fp64_capacity512_has_edge": false,
+          "exact_expected_has_edge": false
+        },
+        {
+          "sites": [
+            505391,
+            507437
+          ],
+          "kind": "spurious",
+          "public_status": 0,
+          "public_has_edge": true,
+          "fp32_capacity512_has_edge": true,
+          "fp64_capacity512_has_edge": false,
+          "exact_expected_has_edge": false
+        },
+        {
+          "sites": [
+            1326853,
+            1330910
+          ],
+          "kind": "spurious",
+          "public_status": 0,
+          "public_has_edge": true,
+          "fp32_capacity512_has_edge": true,
+          "fp64_capacity512_has_edge": false,
+          "exact_expected_has_edge": false
+        }
+      ]
+    }
+  ]
+}

@@ -63,9 +63,8 @@ outputs. It is not an equal-output correctness comparison. Native revision:
 
 The small case favors Paragram by **3.35×** and native by **7.21×** over the
 neighbor builder. Thus the separate tetrahedron driver is only part of the
-explanation for the slow small-Bonsai result. Warp's small graph has 131 retry
-cells and 18 FP64 cells; this audit does not separately time those stages or
-establish which dominates. The large checkpoint still favors Warpower over
+explanation for the slow small-Bonsai result. A subsequent profile below
+attributes the small-input time primarily to capacity retries. The large checkpoint still favors Warpower over
 Paragram by **1.874×**, and the flagship by **2.226×**. These ratios do not prove a
 crossover rule, general speedup, or all-case regression protection.
 
@@ -75,6 +74,46 @@ has 131,678 directed edges from Warp, 131,538 from Paragram and 131,850 from
 native; clipping and numerical differences must be audited before interpreting
 these differences. Raw statuses, counts, dispersions, memory observations,
 source hashes and input hashes are in [probe-summary.json](probe-summary.json).
+
+### Why 9,216 sites can take almost as long as 1.97 million
+
+Both neighbor timings use the same `voronoi_diagram` driver. The smaller cloud
+contains a few much more complex cells, and the retry policy handles them
+expensively. A subsequent Nsight profile of one call per input, after three
+warm-ups, gives this breakdown. These instrumented totals explain the earlier
+clean averages; they do not replace them.
+
+| Work | 9,216 sites (ms) | 1,968,522 sites (ms) |
+|---|---:|---:|
+| Initial FP32 cell construction | 8.964 | 199.329 |
+| Retry and consistency-repair construction | 127.892 | 11.122 |
+| Other kernels, transfers and host work | 4.296 | 16.426 |
+| Profiled wall total | 141.151 | 226.878 |
+
+In the small case, 131 cells exceed the initial 64-vertex capacity; 18 still
+exceed capacity 128 after the FP32 retry. The policy then switches all unresolved
+cells to FP64, including these capacity failures. The FP64 passes cost 3.647 ms
+at capacity 128, 46.799 ms at 256, and **69.042 ms at 512**. The last pass has
+**one active cell**, site 2021, which ends with **135 neighbors**. The kernel
+assigns one active CUDA thread per retry cell; this last expensive cell therefore
+has very little parallelism. The million-site checkpoint has at most 51 neighbors
+per cell and never reaches capacity 512.
+
+This identifies a capacity-recovery performance problem. More sites do not
+necessarily mean more difficult individual cells, and a few expensive serial
+retries can dominate. The 128-capacity FP64 pass resolves none of the 18 small-case
+failures. Optimizations to capacity selection, precision selection, reuse or
+parallelism still need correctness validation; removing recovery would change
+the output contract. This diagnosis does not certify the graphs or establish a
+general small-versus-large scaling rule.
+
+Kernel durations come from Nsight; active counts/statuses come from a separate
+untimed run with synchronous readbacks, using unchanged production kernels.
+The [stage summary](neighbor-scaling.json) records both sources. Raw traces,
+scripts and per-pass site IDs are in `neighbor-scaling-diagnosis-20261112.tar.gz`
+on the same [evidence prerelease](https://github.com/alecjacobson/warpower/releases/tag/evidence-geometry-updates-4ceb748),
+with a [manifest](neighbor-scaling-manifest.json) and
+[fresh download verification](neighbor-scaling-remote-verification.json).
 
 ## Shared clipper, different construction drivers
 

@@ -6,7 +6,7 @@ Caching oriented hull-face proofs within one geometry update improves complete 4
 
 The table reports milliseconds, using the median of each case's pair medians. Five randomized measured trials follow one warm-up. All measured CPU quota windows are unthrottled. Hardware: one NVIDIA L40 (48 GB), Warp 1.19.0, Torch 2.7.1+cu126, CGAL 6.2.1, four-core CPU quota. Setup, canonicalization, upload, readback, hashing and validation are outside update timing. Device copies, synchronization, point reordering, fallback and workspace recreation on count changes are inside it.
 
-| Case | Sites | Pairs | Warp fresh | Native fresh | Native incremental | Fragment before | Fragment optimized |
+| Case | Sites | Pairs | Warp cell rebuild | Native fresh | Native incremental | Fragment before | Fragment optimized |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Bonsai, live native fit | 9,216–17,274 | 11 | 286.970 | 22.890 | 6.725 | 20.022 | 19.969 |
 | Armadillo | 8,192 | 7 | 107.491 | 16.573 | 4.602 | 4.345 | 4.055 |
@@ -15,6 +15,8 @@ The table reports milliseconds, using the median of each case's pair medians. Fi
 | Thin hand (120°) | 1,024 | 4 | 11.402 | 9.061 | 2.633 | 1.073 | 1.065 |
 | Torus, 1K | 1,024 | 6 | 13.035 | 8.299 | 2.743 | 1.191 | 1.173 |
 | Torus, 4K | 4,096 | 5 | 34.045 | 13.262 | 3.980 | 3.615 | 3.248 |
+
+The `warp-full` column is the general full-hull FP64 cell/dual constructor, labeled **Warp cell rebuild** to distinguish it from the private VTM wall builder and the bounded adjacency path. A [follow-up profile](fresh-diagnosis.json) of Bonsai transition 3 (9,216 sites) attributes 282.773 of 286.592 ms of GPU kernel time (98.7%) to Voronoi cell construction. There are no normalized/symbolic recovery attempts or workspace reallocations on that update; the remaining kernels, including validation, total about 3.82 ms. This is one instrumented update, not a new aggregate timing. The general constructor's FP32 candidate path is gated at 32,768 sites, above this entire live Bonsai corpus. Native RadFoam instead seeds tetrahedra and grows an exposed-face frontier directly. The fresh column therefore measures a particular construction algorithm, not Warp language/runtime overhead.
 
 Bonsai's optimizer-only subset is **12.922 → 12.903 ms** for Warp versus **5.154 ms** for native incremental; the cache has no meaningful speed effect there. Growth/reset cases are recorded separately in [summary.json](summary.json). Native remains faster on nine of eleven Bonsai pairs. On Armadillo the median favors Warp, but native wins the expensive early repairs; summing these seven pair medians favors native (33.597 versus 44.124 ms). These sums describe selected updates, not training time.
 

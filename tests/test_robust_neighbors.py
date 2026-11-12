@@ -101,6 +101,7 @@ def test_cooperative_recovery_rows_match_independent_oracle(weighted, remapped):
             empty,
             empty,
             False,
+            wp.full(len(p), wp.vec2i(1, 64), dtype=wp.vec2i, device="cuda:0"),
         ],
         block_dim=32,
         device="cuda:0",
@@ -119,7 +120,18 @@ def test_bounded_precision_job_queue_retains_overflow_for_fallback():
     owners = wp.array(original, device="cuda:0")
     jobs = wp.full(capacity, -1, dtype=int, device="cuda:0")
     count = wp.zeros(1, dtype=int, device="cuda:0")
-    wp.launch(collect_precision_retry, n, inputs=[status, owners, jobs, count], device="cuda:0")
+    wp.launch(
+        collect_precision_retry,
+        n,
+        inputs=[
+            status,
+            owners,
+            jobs,
+            count,
+            wp.full(n, wp.vec2i(1, 64), dtype=wp.vec2i, device="cuda:0"),
+        ],
+        device="cuda:0",
+    )
     queued = jobs.numpy()
     assert count.numpy()[0] == n
     assert len(np.unique(queued)) == capacity
@@ -161,6 +173,7 @@ def test_cooperative_recovery_nonowning_duplicate():
             empty,
             empty,
             False,
+            wp.full(len(p), wp.vec2i(1, 64), dtype=wp.vec2i, device="cuda:0"),
         ],
         block_dim=32,
         device="cuda:0",

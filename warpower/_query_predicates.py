@@ -9,6 +9,7 @@ global exactness certificate for every output edge.
 import warp as wp
 
 from . import _filtered_predicates as fp
+from . import _retry
 from ._bvh import Tree
 
 wp.set_module_options({"enable_backward": False, "fast_math": False, "fuse_fp": False})
@@ -161,9 +162,22 @@ def check_queries(
 
 
 @wp.kernel(enable_backward=False)
-def collect_precision(status: wp.array[int], jobs: wp.array[int], count: wp.array[int]):
+def collect_precision(
+    status: wp.array[int],
+    jobs: wp.array[int],
+    count: wp.array[int],
+    states: wp.array[wp.vec2i],
+    initial_capacity: int,
+    initialize: bool,
+):
     i = wp.tid()
-    if status[i] == 6:
+    state = wp.vec2i(0, initial_capacity)
+    if initialize:
+        state = _retry.after_attempt(state, status[i], initial_capacity, False, False, True)
+    else:
+        state = _retry.promote(states[i], status[i])
+    states[i] = state
+    if _retry.cooperative_eligible(state, status[i]):
         k = wp.atomic_add(count, 0, 1)
         jobs[k] = i
         # A second counter records bounded cooperative attempts for eager diagnostics.
@@ -173,10 +187,17 @@ def collect_precision(status: wp.array[int], jobs: wp.array[int], count: wp.arra
 
 @wp.kernel(enable_backward=False)
 def collect_precision_retry(
-    status: wp.array[int], owners: wp.array[int], jobs: wp.array[int], count: wp.array[int]
+    status: wp.array[int],
+    owners: wp.array[int],
+    jobs: wp.array[int],
+    count: wp.array[int],
+    states: wp.array[wp.vec2i],
 ):
     row = wp.tid()
-    if status[row] == 6:
+    owner = owners[row]
+    state = _retry.promote(states[owner], status[row])
+    states[owner] = state
+    if _retry.cooperative_eligible(state, status[row]):
         k = wp.atomic_add(count, 0, 1)
         if k < jobs.shape[0]:
             jobs[k] = owners[row]

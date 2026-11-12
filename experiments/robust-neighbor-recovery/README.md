@@ -11,6 +11,12 @@ The 74-case geometric-mean speedup over `655412e` is
 previous builder. Small positive changes are retained in the table and raw data;
 passing the confidence-interval gate does not mean every case has zero overhead.
 
+The [retry-escalation follow-up](../retry-escalation/README.md) completes the
+precision/storage separation in ordinary and captured execution. In the version
+measured below, captured FP32 retries lacked the numerical guard and cooperative
+FP64 capacity failures could lose their precision history. The follow-up preserves
+these historical measurements and publishes a separate comparison against them.
+
 ## Implementation
 
 The ordinary FP32 clipper records a suspicious side test and a separate kernel checks

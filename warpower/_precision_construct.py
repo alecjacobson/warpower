@@ -8,6 +8,7 @@ from functools import lru_cache
 
 import warp as wp
 
+from . import _retry
 from ._bvh import Tree
 from ._construct import node_distance, node_radius
 from ._cooperative_cell import Cell64, Scratch64, clip, emit, init_cell
@@ -74,6 +75,7 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
         hints: wp.array[int],
         hint_offsets: wp.array[int],
         use_hints: bool,
+        retry_states: wp.array[wp.vec2i],
     ):
         slot = wp.tid() // stride
         job = chunk_offset + slot
@@ -85,7 +87,7 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
             output = i
             if remapped:
                 output = row_map[i]
-            if status[output] != 6:
+            if not _retry.cooperative_eligible(retry_states[i], status[output]):
                 return
         if tree.owners[i] != i:
             if wp.tid() % 32 == 0:
@@ -235,5 +237,13 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
                     node = candidate
         if wp.tid() % 32 == 0:
             emit(scratch, cell, output, neighbors, counts, status)
+            retry_states[i] = _retry.after_attempt(
+                retry_states[i],
+                status[output],
+                128,
+                True,
+                True,
+                _retry.capacity_failure(cell.status),
+            )
 
     return construct

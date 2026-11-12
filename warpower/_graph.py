@@ -8,9 +8,9 @@ from warp.utils import radix_sort_pairs
 from . import _adjacency as adj
 from . import _bvh as bvh
 from . import _canonical as canonical
-from . import _validation
+from . import _retry, _validation
 from ._api import _chunk_size, _points_array, _weights_array
-from ._cell import Scratch64, allocate_scratch
+from ._cell import Scratch, Scratch64, allocate_scratch
 from ._construct import collect_failures, make_construct_kernel
 from ._cooperative_cell import allocate_scratch as allocate_precision_scratch
 from ._graph_construct import make_retry_kernel
@@ -78,6 +78,7 @@ def prepare_repairs(
     retry: wp.array2d[int],
     sources: wp.array[int],
     status: wp.array[int],
+    retry_states: wp.array[wp.vec2i],
 ):
     slot = wp.tid()
     if slot >= active[0]:
@@ -90,6 +91,7 @@ def prepare_repairs(
         retry[i, k] = value
     sources[i] = i
     status[i] = 1
+    retry_states[i] = wp.vec2i(_retry.DOUBLE, retry_states[i][1])
 
 
 @wp.kernel
@@ -314,6 +316,7 @@ class DiagramWorkspace:
                 ptr=self.points.ptr, shape=(self.n, 3), dtype=wp.uint32, device=self.device
             )
             if self._adjacency:
+                self._retry_states = wp.empty(self.n, dtype=wp.vec2i)
                 self._base = wp.empty((self.n, 64), dtype=int)
                 self._retry = wp.empty((self.n, 512), dtype=int)
                 self._counts = wp.empty(self.n, dtype=int)
@@ -332,12 +335,19 @@ class DiagramWorkspace:
                         break
                     length = blocks
                 self._scratch = allocate_scratch(self.chunk_size, 64, self.device)
-                self._retry32 = allocate_scratch(self.retry_chunk, 128, self.device)
+                self._retry32_storage = allocate_scratch(self.retry_chunk, 512, self.device)
+                self._retry32 = {}
+                for capacity in (128, 256, 512):
+                    scratch = Scratch()
+                    for name in ("planes", "vertices", "positions", "next", "neighbors"):
+                        setattr(scratch, name, getattr(self._retry32_storage, name))
+                    scratch.capacity = capacity
+                    self._retry32[capacity] = scratch
                 self._query_capacity = max(1024, self.n // 16)
                 self._queries = wp.empty(self._query_capacity, dtype=wp.vec4i)
                 self._query_owners = wp.empty(self._query_capacity, dtype=int)
                 self._query_count = wp.zeros(1, dtype=int)
-                for scratch in (self._scratch, self._retry32):
+                for scratch in (self._scratch, *self._retry32.values()):
                     scratch.queries = self._queries
                     scratch.query_owners = self._query_owners
                     scratch.query_count = self._query_count
@@ -474,7 +484,7 @@ class DiagramWorkspace:
                     self._job_count,
                     self._source,
                     True,
-                    self._robust[capacity] if robust else self._retry32,
+                    self._robust[capacity] if robust else self._retry32[capacity],
                     self._retry,
                     self._counts,
                     self.status,
@@ -483,6 +493,7 @@ class DiagramWorkspace:
                     self._empty,
                     self._empty,
                     False,
+                    self._retry_states,
                 ],
                 block_dim=32,
             )
@@ -507,9 +518,17 @@ class DiagramWorkspace:
                     self._retry,
                     self._source,
                     self.status,
+                    self._retry_states,
                 ],
             )
-        for capacity, robust in ((128, False), (128, True), (256, True), (512, True)):
+        for capacity, robust in (
+            (128, False),
+            (256, False),
+            (512, False),
+            (128, True),
+            (256, True),
+            (512, True),
+        ):
             if repair and not robust:
                 continue
             self._retry_pass(capacity, robust)
@@ -525,7 +544,7 @@ class DiagramWorkspace:
         )
         self._launch(adj.gather_marked, self.n, [self._flags, self._jobs, self._job_count])
 
-    def _check_predicates(self, neighbors):
+    def _check_predicates(self, neighbors, initialize=False):
         self._launch(
             check_queries,
             self._query_capacity,
@@ -544,7 +563,11 @@ class DiagramWorkspace:
             ],
         )
         self._job_count.zero_()
-        self._launch(collect_precision, self.n, [self.status, self._jobs, self._job_count])
+        self._launch(
+            collect_precision,
+            self.n,
+            [self.status, self._jobs, self._job_count, self._retry_states, 64, initialize],
+        )
         self._launch(
             make_precision_kernel(self.weighted, 128, True, 32),
             self._precision_size * 32,
@@ -567,6 +590,7 @@ class DiagramWorkspace:
                 self._empty,
                 self._empty,
                 False,
+                self._retry_states,
             ],
             block_dim=32,
         )
@@ -576,7 +600,7 @@ class DiagramWorkspace:
         self._query_count.zero_()
         for start in range(0, self.n, self.chunk_size):
             self._launch(
-                make_construct_kernel(self.weighted, 96),
+                make_construct_kernel(self.weighted, 96, track_retries=False),
                 min(self.chunk_size, self.n - start),
                 [
                     self.points,
@@ -594,10 +618,11 @@ class DiagramWorkspace:
                     self._empty,
                     self._empty,
                     False,
+                    self._retry_states,
                 ],
                 block_dim=32,
             )
-        self._check_predicates(self._base)
+        self._check_predicates(self._base, initialize=True)
         self._failures(self.status)
         wp.capture_if(self._job_count, self._retries)
         self._asymmetry()

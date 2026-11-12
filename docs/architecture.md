@@ -62,9 +62,13 @@ and are retried with larger storage; traversal never silently discards a valid
 candidate to fit a queue.
 
 Construction starts with 64 plane/vertex slots and a 96-entry traversal queue.
-Capacity failures grow the FP32 buffers to 128, 256, and 512 before trying FP64.
-Numerical failures skip FP32 clipping in those attempts. Completed retry rows are retained;
-failed rows never expose partial adjacency.
+Each original site has separate retry state for precision and minimum storage
+capacity. Capacity failures grow buffers to 128, 256, and 512 at the current
+precision. Numerical failures promote to FP64 without resetting the storage floor.
+Neither reaching a size limit nor overflowing a buffer changes precision; once
+promoted, a cell cannot retry in FP32. The state is indexed by original site even
+when output rows are compacted, and is reset on each captured replay.
+Completed retry rows are retained; failed rows never expose partial adjacency.
 
 The FP32 clipper records a suspicious side test when cancellation is small
 relative to the sum of absolute products. It retains one pending predicate per
@@ -75,13 +79,23 @@ and exact integer predicates for interior vertices. Box-plane predicates use
 interval filters and request recovery if the sign remains uncertain. This
 separation keeps expensive predicates out of the ordinary clipping kernel.
 
-A bounded queue of up to 512 cells is rebuilt with FP64 geometry before host
-readback, and again after an FP32 capacity retry if necessary. One 32-thread block
+A bounded queue of up to 512 eligible cells is rebuilt with FP64 geometry before
+host readback, with newly ambiguous cells considered after FP32 capacity retries.
+Each cell gets at most one cooperative attempt. One 32-thread block
 cooperates on each cell: it classifies and compacts vertices, reconstructs and
 checks the clipping boundary, updates bounds, and tests hierarchy nodes. Its
 128-slot workspace has a separate layout from the interleaved ordinary clipper.
-Unprocessed or failed jobs remain pending for the larger fallback. Both eager
-construction and captured `DiagramWorkspace` execution use these checks.
+Cells requiring more than 128 slots bypass this queue. Capacity overflow during
+cooperative recovery advances the size floor while retaining FP64. Numerical
+failure can instead try the serial FP64 implementation at the same adequate
+capacity; if that numerical check also fails, growing buffers is not a remedy
+and the failure remains explicit. Output-row overflow is distinguished from
+scratch overflow when updating the size floor. Both eager construction and
+captured `DiagramWorkspace` execution share these retry rules.
+
+Retry state costs eight bytes per site. Captured execution preallocates FP32
+retry scratch through 512 slots, so capacity-only failures can grow without
+switching precision. Its memory cost is reported separately from replay time.
 
 FP32 vertices store Cartesian coordinates in three scalars. FP64 recovery keeps
 both homogeneous and cached Cartesian coordinates. Recovered cells are still

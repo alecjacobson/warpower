@@ -37,21 +37,30 @@ in each direction.
 | 5 | Inconsistent floating-point clipping boundary |
 | 6 | Uncertain clipping decision awaiting precision recovery |
 
-Capacity failures grow the FP32 buffers before switching precision. A cancellation
-screen sends suspicious clipping decisions to a separate kernel that checks the
-original site coordinates. Interior decisions use filtered/exact predicates;
-unresolved box-plane decisions and mismatches request FP64 cell recovery. Up to
-512 such cells per pass use cooperative recovery, with 32 threads per cell.
-Overflow and unsuccessful recovery remain pending for the larger fallback.
+Plane, vertex, and traversal capacity failures grow storage at the current
+precision. They do not trigger FP64 merely because the 512-slot limit is reached.
+Numerical failures require FP64 and retain the storage size already reached;
+subsequent capacity overflow cannot send that cell back to FP32. These rules
+apply to ordinary calls and captured execution, and reset for each construction.
+
+A cancellation screen sends suspicious clipping decisions to a separate kernel
+that checks the original site coordinates. Interior decisions use filtered/exact
+predicates; unresolved box-plane decisions and mismatches request FP64 recovery.
+Up to 512 eligible cells per pass use a 128-slot cooperative workspace, with 32
+threads per cell. Cells that already require more storage bypass it. Each cell
+gets at most one cooperative attempt, then uses the serial FP64 fallback when
+needed. A numerical failure in that fallback remains explicit; it does not grow
+buffers to try to resolve a precision problem. Output-row overflow widens the
+row without unnecessarily increasing clipping scratch capacity.
 Remaining failures are explicit and produce no partial neighbor list. The screen
 is heuristic and recovery uses floating-point geometry: successful statuses do
 not certify an exact diagram.
 
 `diagnostics["cooperative_precision_attempts"]` counts attempts in those bounded
-GPU recovery passes, including repeated visits after capacity retries.
+GPU recovery passes, at most one per site per construction.
 `retried_cells` counts the cells entering subsequent host-dispatched retries;
-`double_precision_cells` counts those still pending when that later schedule
-reaches FP64. These counters describe different stages and are not a count of
+`double_precision_cells` counts cells queued for that later serial FP64 phase.
+These counters describe different stages and are not a count of
 distinct cells that used FP64.
 
 One-sided facets also trigger double-precision recovery of both cells before

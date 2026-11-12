@@ -84,6 +84,59 @@ Verify against the [manifest](seven-pairs-manifest.json);
 These are untimed correctness diagnostics, with no production algorithm changes
 or fitting runs.
 
+### Paragram, native RadFoam and gDel3D on the same pairs
+
+Fresh reference constructions retain each complete original point set and judge
+the same seven pairs against the exact audit. Native RadFoam and gDel3D are
+separate implementations; both were tested explicitly.
+
+| Scene | Selected pairs | Current Warpower wrong | Paragram wrong | Native RadFoam wrong | gDel3D wrong |
+|---|---:|---:|---:|---:|---:|
+| Bonsai | 2 | 2 | 0 | 0 | 0 |
+| Garden | 1 | 1 | 1 | 0 | 0 |
+| Bicycle | 1 | 1 | 1 | 0 | 0 |
+| Playroom | 3 | 3 | 3 | 0 | 0 |
+| Total | 7 | 7 | 5 | 0 | 0 |
+
+Both directions were checked. Paragram gets the two Bonsai pairs right and
+repeats the other five silent errors, with status zero at every selected owner.
+Native RadFoam and gDel3D get all seven selected decisions right. Native
+RadFoam's permutation was inverted to recover original point IDs and checked
+for bijectivity; its input tensor remained bitwise unchanged. These calls use
+the native constructor without the training harness or jitter. Paragram also
+leaves its input unchanged.
+
+Paragram uses padding 1.0, whereas Warpower uses 1.00001. The exact facet oracle
+was rerun for Paragram's box: all 14 selected answers remain the same. The
+expected decisions also match the archived unbounded CGAL graph, allowing the
+same selected-pair expectations for native RadFoam and gDel3D.
+
+References are pinned to Paragram `4f36b1f2c8738912c5efc056a06023d4c1d2da07`,
+native RadFoam `3e7b52cf74e37ab2ab5e695f53570f515f537e3d`, and the authors'
+[gDel3D Release 271](https://www.comp.nus.edu.sg/~tants/gdel3d.html). gDel3D uses
+its default double precision, with the original float32 inputs promoted exactly,
+and CPU star-splaying repair enabled. Its standalone adapter passed all 8,128
+possible pair decisions on a seeded 128-point control against SciPy/Qhull.
+That control validates the adapter on generic data, not every large output.
+
+Building the 2014 gDel3D source with CUDA 12.6 required explicit Thrust includes,
+the `__int_as_float` intrinsic spelling, and a host/device annotation on the
+existing swap helper. A separate CMake driver targets sm89 and compiles all
+translation units through NVCC to align the modern Thrust ABI namespace.
+These changes, the original source archive, license, build logs and adapter are
+retained in the evidence; no geometry algorithm or default precision was changed.
+
+This is **a set selected for Warpower failures**, not an unbiased accuracy
+ranking. Paragram has other errors in the earlier audit, and neither native
+RadFoam nor gDel3D received an exhaustive exact audit of these million-site
+outputs. No timing, incremental-update or rendering claim follows from this table.
+
+The [reference comparison](seven-pairs-references.json) pins outcomes and build
+provenance. The evidence prerelease contains
+`seven-pairs-reference-comparison-20261112.tar.gz`, with a
+[manifest](seven-pairs-references-manifest.json) and
+[fresh download verification](seven-pairs-references-remote-verification.json).
+
 ## New matched-input fresh-call probes
 
 All times below are means in milliseconds on the same L40. Each row uses

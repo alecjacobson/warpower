@@ -1,0 +1,180 @@
+{
+  "schema": "warpower.benchmark-claims-audit",
+  "version": 1,
+  "date": "2026-11-12",
+  "tracking_issue": 300,
+  "raw_measurements_modified": false,
+  "matrix": {
+    "reference": "730ec233505bcc474c248d0ab237b10042fa029e",
+    "paired_cases": 74,
+    "raw_file_hashes_verified": 148,
+    "raw_mean_timings_recomputed": 148,
+    "pair_input_hardware_harness_policy_checks": true,
+    "aggregate": {
+      "cases": 74,
+      "geometric_mean_speedup": 1.2201853222246923,
+      "warpower_faster_cases": 62
+    },
+    "warmups": 3,
+    "repeats": 10,
+    "mempool_retention_mb": 32768,
+    "output": "box-clipped Voronoi/power neighbor CSR",
+    "correctness": "Disputed-row floating-point audits on three 100K cases; not complete exact certification"
+  },
+  "source_comparison": {
+    "baseline": "d38b80c908c9e4e83726241313f72862ca69581a",
+    "current": "51487623858210b17827e09d52e0e266fd305af7",
+    "files": [
+      {
+        "path": "warpower/_cell.py",
+        "baseline_sha256": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+        "current_sha256": "f0a37771038cd033735d01eeb3298e0df92456f36c39617658b0e7129acec9bf",
+        "identical": true
+      },
+      {
+        "path": "warpower/_construct.py",
+        "baseline_sha256": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+        "current_sha256": "4f2c3098bc603371ca55c2c3320741aea70ed4839dd239b63f6b834e27216b2f",
+        "identical": true
+      },
+      {
+        "path": "warpower/_bvh.py",
+        "baseline_sha256": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+        "current_sha256": "4049a1e4a52f2f975f005d94c84249e870f04d54840cd4da5849c8f23e401693",
+        "identical": true
+      },
+      {
+        "path": "warpower/_adjacency.py",
+        "baseline_sha256": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+        "current_sha256": "9eef8dec974b92b854c92994197d68416b8bd38473f000e496b0a490c4cad8f8",
+        "identical": true
+      },
+      {
+        "path": "warpower/_canonical.py",
+        "baseline_sha256": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+        "current_sha256": "48c9e0f8473afa955e78ca93db168e7f4d2b6de66c9d3c96db32982dc82bec42",
+        "identical": true
+      },
+      {
+        "path": "warpower/_validation.py",
+        "baseline_sha256": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75",
+        "current_sha256": "698a653c9d2ba57de07415afe5c749a1db31718f23f4220b1af0fa1f2a1e3b75",
+        "identical": true
+      }
+    ],
+    "api_functions": [
+      {
+        "name": "_build",
+        "ast_identical": true,
+        "sha256": "b2803b8e6323ac3ccf01b34ae526f8d2c5605bf5869b872384e2666dc7d52e3f"
+      },
+      {
+        "name": "_points_array",
+        "ast_identical": true,
+        "sha256": "8016d37054fc9298c1310fd12a5af52c847fcbf2d1d29471d9651a1c58b2de2c"
+      },
+      {
+        "name": "_weights_array",
+        "ast_identical": true,
+        "sha256": "f8f83825f6df46114764ad06fc8b1de30580cdbd8690276cc8bafc6002656ddf"
+      },
+      {
+        "name": "_hints_array",
+        "ast_identical": true,
+        "sha256": "a8abea042ad76ec37fa55eb02f32c40c149a9bf2c318572a2389ca7fb0b04e93"
+      },
+      {
+        "name": "_chunk_size",
+        "ast_identical": true,
+        "sha256": "c5f44b1b25ce062d721ccc3f0162397508a2fa2fdeae2372f764ec840f646644"
+      }
+    ],
+    "scope": "Six shared construction modules are byte-identical and five input/build functions are AST-identical. The API adds optional tetrahedra and lazy entrypoints. This establishes source continuity, not a timing regression gate or a correctness proof."
+  },
+  "checkpoint_comparison": {
+    "source": "results/validation/radfoam/checkpoint-comparison/summary.json",
+    "source_revision": "e37e00f693a26bee20928ba01f64a78d7906ed8a",
+    "source_sha256": "d381c3cdd3c79fb8180a8f6e4b163112467c712956dc902ed41648e7a3d30d5a",
+    "scenes": [
+      {
+        "scene": "bonsai",
+        "sites": 1968522,
+        "warpower_ms": 224.64271448552608,
+        "paragram_ms": 421.0769593715668,
+        "speedup": 1.8744296263331393,
+        "spurious_pairs": 1,
+        "missing_pairs": 1,
+        "all_disagreements_audited": true,
+        "full_graph_certified": false
+      },
+      {
+        "scene": "garden",
+        "sites": 4064598,
+        "warpower_ms": 443.27186308801174,
+        "paragram_ms": 705.227056145668,
+        "speedup": 1.590958314459145,
+        "spurious_pairs": 0,
+        "missing_pairs": 1,
+        "all_disagreements_audited": true,
+        "full_graph_certified": false
+      },
+      {
+        "scene": "bicycle",
+        "sites": 4199873,
+        "warpower_ms": 469.90533731877804,
+        "paragram_ms": 756.7807476967573,
+        "speedup": 1.610496173580098,
+        "spurious_pairs": 0,
+        "missing_pairs": 1,
+        "all_disagreements_audited": true,
+        "full_graph_certified": false
+      },
+      {
+        "scene": "playroom",
+        "sites": 3181453,
+        "warpower_ms": 354.5583534985781,
+        "paragram_ms": 460.6445465236902,
+        "speedup": 1.2992065818738006,
+        "spurious_pairs": 3,
+        "missing_pairs": 0,
+        "all_disagreements_audited": true,
+        "full_graph_certified": false
+      }
+    ],
+    "confirmed_incorrect_pairs": 7
+  },
+  "claim_dispositions": [
+    {
+      "claim": "WarPower is universally faster than Paragram or RadFoam",
+      "disposition": "unsupported; retract generalization"
+    },
+    {
+      "claim": "The new cell-constructor timing invalidates the 74-case matrix and 2.17x flagship",
+      "disposition": "not supported; recorded arithmetic/identity verified, retain narrowly scoped measurements"
+    },
+    {
+      "claim": "The four-scene timing wins establish equally exact output",
+      "disposition": "false; seven confirmed incorrect WarPower pairs, Paragram errors also present"
+    },
+    {
+      "claim": "287ms is the best fresh WarPower tetrahedron construction",
+      "disposition": "unsupported; single selected cell-based backend; forced-fresh wall path missing"
+    },
+    {
+      "claim": "Outputting tetrahedra inherently requires rebuilding every cell in FP64",
+      "disposition": "false; shared cell incidence already supplies candidates, with hull/tie/validation work still needed"
+    },
+    {
+      "claim": "Lowering the FP32 gate is a validated optimization",
+      "disposition": "false; issue270 contains failed 8K validation experiment"
+    },
+    {
+      "claim": "Full-budget RadFoam speedup matches final endpoint PSNR",
+      "disposition": "false; 0.1625dB lower endpoint, single runs; sampled time-to-quality is separate"
+    },
+    {
+      "claim": "200.7 vs 182.9FPS isolates renderer acceleration",
+      "disposition": "false; different fitted checkpoints, same-checkpoint comparisons near parity"
+    }
+  ]
+}

@@ -222,6 +222,9 @@ def main():
         writer.writeheader()
         writer.writerows(rows)
     summary = {
+        "output_contract": "box-clipped Voronoi/power neighbor CSR",
+        "comparison_scope": "fresh construction; not tetrahedron construction or incremental updates",
+        "correctness_scope": "status counts and disputed-row audits are not complete exact certification",
         "complete": not missing,
         "paired_cases": len(rows),
         "missing_cases": missing,
@@ -264,6 +267,13 @@ def main():
     lines = [
         "# NVIDIA L40 benchmark comparison",
         "",
+        "This matrix measures fresh **box-clipped Voronoi/power neighbor CSR construction**. "
+        "It does not measure Delaunay tetrahedron construction or incremental updates. "
+        "Rankings depend on workload and implementation; they cannot be chained with "
+        "RadFoam update timings or paper results on different GPUs. See the "
+        "[claim audit](../../experiments/benchmark-claims-audit/README.md) and "
+        "[regression tracking issue](https://github.com/alecjacobson/warpower/issues/300).",
+        "",
         f"{'Complete' if not missing else 'Partial'} matrix: {len(rows)} paired cases; "
         f"{len(missing)} missing. Geometric mean time ratio: "
         f"{summary['geometric_mean_speedup']:.3f}×; "
@@ -287,6 +297,12 @@ def main():
         "[benchmark reproduction](../../docs/benchmarks.md) and "
         "[independent audits](../../docs/numerical-audit.md). "
         "Memory is an approximate device-wide NVML peak including contexts and allocator reserves.",
+        "",
+        "A later exact facet audit of four scene checkpoints confirmed seven incorrect "
+        "WarPower neighbor pairs (four spurious, three missing). The recorded timing wins "
+        "therefore do not establish equally exact output. The claim audit links the "
+        "separate checkpoint measurements and their correctness evidence; historical "
+        "matrix timings below remain unchanged.",
         "",
         "![Synthetic construction times](synthetic-time.svg)",
         "",

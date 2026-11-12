@@ -1,5 +1,7 @@
 # NVIDIA L40 benchmark comparison
 
+This matrix measures fresh **box-clipped Voronoi/power neighbor CSR construction**. It does not measure Delaunay tetrahedron construction or incremental updates. Rankings depend on workload and implementation; they cannot be chained with RadFoam update timings or paper results on different GPUs. See the [claim audit](../../experiments/benchmark-claims-audit/README.md) and [regression tracking issue](https://github.com/alecjacobson/warpower/issues/300).
+
 Complete matrix: 74 paired cases; 0 missing. Geometric mean time ratio: 1.220×; Warpower is faster in 62 cases.
 
 Synthetic: 1.141× geometric mean, faster in 44/56 cases. Real scenes: 1.504× geometric mean, faster in 18/18 cases.
@@ -9,6 +11,8 @@ The lowest time ratio is 0.838× on uniform 1,000,000-site power. The largest re
 Ratios divide Paragram construction time by Warpower construction time; above 1 favors Warpower. Timings include allocation calls, hierarchy building, retries, and CSR output. Each case uses resident GPU inputs, three warm-ups, and ten measured calls. Warp retains 32 GiB in its allocator; PyTorch uses its normal cache. Every included measurement passed the CPU-throttling check. Exact package, driver, compiler, and chunking settings are in the [environment record](../environment-l40.json).
 
 Status and adjacency statistics describe the final measured call. Failure counts exclude cells marked empty. A successful status does not prove geometric correctness. The methods and numerical limits are documented in [benchmark reproduction](../../docs/benchmarks.md) and [independent audits](../../docs/numerical-audit.md). Memory is an approximate device-wide NVML peak including contexts and allocator reserves.
+
+A later exact facet audit of four scene checkpoints confirmed seven incorrect WarPower neighbor pairs (four spurious, three missing). The recorded timing wins therefore do not establish equally exact output. The claim audit links the separate checkpoint measurements and their correctness evidence; historical matrix timings below remain unchanged.
 
 ![Synthetic construction times](synthetic-time.svg)
 

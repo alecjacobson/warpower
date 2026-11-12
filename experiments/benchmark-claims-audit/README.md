@@ -9,6 +9,12 @@ tracks the corrections, missing comparisons, correctness regressions and
 optimization acceptance requirements. RadFoam and VoroTracing fitting runs are
 **deferred until the geometry work is settled**.
 
+The subsequent [predicate-recovery implementation](../robust-neighbor-recovery/README.md)
+fixes the seven known pairs and reruns all 74 historical inputs against the prior
+builder. Its tracked report contains the current correctness and performance
+results. The diagnosis and reference tables below preserve the pre-recovery
+measurements; their Warpower error counts describe that earlier implementation.
+
 ## What the evidence supports
 
 | Evidence | Retained result | Qualification or correction |
@@ -42,7 +48,7 @@ legitimate box-clipping differences and zero-area contacts.
 | Bicycle | 0 | 1 |
 | Playroom | 3 | 0 |
 
-A follow-up recheck reproduced all 14 directed exact-LP answers. The current
+A follow-up recheck reproduced all 14 directed exact-LP answers. The pre-recovery
 public API also reproduced all 14 incorrect directed edges, with successful
 statuses at every affected endpoint. Each error occurs in both directions, so
 the graph-symmetry check cannot expose it: both cells either include the same
@@ -90,7 +96,7 @@ Fresh reference constructions retain each complete original point set and judge
 the same seven pairs against the exact audit. Native RadFoam and gDel3D are
 separate implementations; both were tested explicitly.
 
-| Scene | Selected pairs | Current Warpower wrong | Paragram wrong | Native RadFoam wrong | gDel3D wrong |
+| Scene | Selected pairs | Pre-recovery Warpower wrong | Paragram wrong | Native RadFoam wrong | gDel3D wrong |
 |---|---:|---:|---:|---:|---:|
 | Bonsai | 2 | 2 | 0 | 0 | 0 |
 | Garden | 1 | 1 | 1 | 0 | 0 |
@@ -291,19 +297,22 @@ records an 8K Armadillo attempt that failed after repair. See the
   four-core reference. CGAL's constructor plus neighbor export also has a
   different output/work contract from bounded GPU adjacency.
 
-The full 74-case matrix has **not** been rerun on the current branch. Three
-probes and unchanged kernels cannot replace paired baseline/candidate testing.
-Issue #300 requires preserving the original weighted/unweighted inputs,
-per-case timing and memory checks, CPU-quota rejection and independent
-correctness regressions. Repeatable >2% per-case slowdowns beyond observed noise
-must block adoption or receive an explicit documented policy decision; aggregate
-improvements must not conceal them. No automated CI timing gate is claimed.
+At the initial audit checkpoint, the full 74-case matrix had not been rerun.
+The subsequent [recovery validation](../robust-neighbor-recovery/README.md) now
+contains all 74 paired baseline/candidate cases with matching input hashes,
+CPU-quota rejection and independent correctness regressions. Every case passes
+the existing gate: reject a paired 95% interval wholly above +2%. Small positive
+changes remain disclosed; this does not establish zero overhead in every case.
+Captured-workspace memory and separate tetrahedron/VTM timings are also recorded.
+No automated CI timing gate is claimed.
 
 Remaining geometry work includes a forced-fresh VTM wall baseline, candidate
-emission through the optimized clipper, repair/certification costs, the seven
-exact facet discrepancies, update identity changes and complete VTM solves.
+emission through the optimized clipper, broader repair/certification costs and
+update identity changes. The follow-up resolves the seven selected facet errors
+and adds complete VTM regression solves.
 Fitting integration is a deferred follow-up, not a prerequisite for publishing
-this audit. No production geometry algorithm is changed by this audit.
+this audit. The initial audit changed no production geometry algorithm; the
+subsequent predicate-recovery change is documented separately above.
 
 ## Evidence and reproduction
 

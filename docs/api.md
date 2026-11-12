@@ -35,11 +35,25 @@ in each direction.
 | 3 | Empty or non-owning coincident cell |
 | 4 | Traversal queue capacity exhausted |
 | 5 | Inconsistent floating-point clipping boundary |
+| 6 | Uncertain clipping decision awaiting precision recovery |
 
-Failed cells are retried with larger capacity and, when needed, double-precision
-clipping before return. Remaining failures
-are explicit; they produce no partial neighbor list. Inspect `status` when using
-difficult geometry. Floating-point predicates are not exact.
+Capacity failures grow the FP32 buffers before switching precision. A cancellation
+screen sends suspicious clipping decisions to a separate kernel that checks the
+original site coordinates. Interior decisions use filtered/exact predicates;
+unresolved box-plane decisions and mismatches request FP64 cell recovery. Up to
+512 such cells per pass use cooperative recovery, with 32 threads per cell.
+Overflow and unsuccessful recovery remain pending for the larger fallback.
+Remaining failures are explicit and produce no partial neighbor list. The screen
+is heuristic and recovery uses floating-point geometry: successful statuses do
+not certify an exact diagram.
+
+`diagnostics["cooperative_precision_attempts"]` counts attempts in those bounded
+GPU recovery passes, including repeated visits after capacity retries.
+`retried_cells` counts the cells entering subsequent host-dispatched retries;
+`double_precision_cells` counts those still pending when that later schedule
+reaches FP64. These counters describe different stages and are not a count of
+distinct cells that used FP64.
+
 One-sided facets also trigger double-precision recovery of both cells before
 symmetrization. `diagnostics["consistency_retried_cells"]` counts these recovery
 jobs, including repeated jobs, and `diagnostics["asymmetric_cells_remaining"]`

@@ -14,9 +14,12 @@ wp.set_module_options({"enable_backward": False})
 
 @wp.struct
 class Scratch:
+    queries: wp.array[wp.vec4i]
+    query_owners: wp.array[int]
+    query_count: wp.array[int]
     planes: wp.array[wp.vec4]
     vertices: wp.array[wp.uint32]
-    positions: wp.array[wp.vec4]
+    positions: wp.array[wp.vec3]
     next: wp.array[int]
     neighbors: wp.array[int]
     capacity: int
@@ -35,6 +38,8 @@ class Scratch64:
 
 @wp.struct
 class Cell:
+    query_vertex: int
+    query_candidate: int
     base: int
     nv: int
     np: int
@@ -57,7 +62,8 @@ class Cell64:
 
 @wp.func(inline=True)
 def set_position(s: Scratch, at: int, h: wp.vec4):
-    s.positions[at] = h
+    inverse_w = 1.0 / h[3]
+    s.positions[at] = wp.vec3(h[0] * inverse_w, h[1] * inverse_w, h[2] * inverse_w)
 
 
 @wp.func(inline=True)
@@ -70,7 +76,7 @@ def set_position(s: Scratch64, at: int, h: wp.vec4d):  # noqa: F811
 @wp.func(inline=True)
 def position(s: Scratch, at: int):
     h = s.positions[at]
-    return wp.vec3(h[0], h[1], h[2]) * (1.0 / h[3])
+    return wp.vec3(h[0], h[1], h[2])
 
 
 @wp.func(inline=True)
@@ -110,6 +116,25 @@ def coordinates(s: Any, base: int, v: wp.uint32):
     a = s.planes[base + 32 * plane_at(v, 0)]
     b = s.planes[base + 32 * plane_at(v, 1)]
     c = s.planes[base + 32 * plane_at(v, 2)]
+    m12 = b[0] * c[1] - b[1] * c[0]
+    m13 = b[0] * c[2] - b[2] * c[0]
+    m14 = b[0] * c[3] - b[3] * c[0]
+    m23 = b[1] * c[2] - b[2] * c[1]
+    m24 = b[1] * c[3] - b[3] * c[1]
+    m34 = b[2] * c[3] - b[3] * c[2]
+    return type(a)(
+        -a[3] * m23 - a[1] * m34 + a[2] * m24,
+        a[0] * m34 + a[3] * m13 - a[2] * m14,
+        -a[0] * m24 + a[1] * m14 - a[3] * m12,
+        a[0] * m23 - a[1] * m13 + a[2] * m12,
+    )
+
+
+@wp.func(inline=True)
+def coordinates(s: Scratch64, base: int, v: wp.uint32):  # noqa: F811
+    a = s.planes[base + 32 * plane_at(v, 0)]
+    b = s.planes[base + 32 * plane_at(v, 1)]
+    c = s.planes[base + 32 * plane_at(v, 2)]
     bc0 = b[1] * c[2] - b[2] * c[1]
     bc1 = b[2] * c[0] - b[0] * c[2]
     bc2 = b[0] * c[1] - b[1] * c[0]
@@ -120,11 +145,92 @@ def coordinates(s: Any, base: int, v: wp.uint32):
 
 
 @wp.func(inline=True)
+def init_query(cell: Cell):
+    cell.query_vertex = -1
+    return cell
+
+
+@wp.func(inline=True)
+def init_query(cell: Cell64):  # noqa: F811
+    return cell
+
+
+@wp.func(inline=True)
+def invalidate_query(cell: Cell):
+    if cell.query_vertex >= 0:
+        cell.query_vertex = -2
+    return cell
+
+
+@wp.func(inline=True)
+def invalidate_query(cell: Cell64):  # noqa: F811
+    return cell
+
+
+@wp.func(inline=True)
+def classify(s: Scratch, cell: Cell, i: int, j: int, at: int, plane: wp.vec4):
+    h = s.positions[at]
+    terms = wp.cw_mul(wp.vec3(h[0], h[1], h[2]), wp.vec3(plane[0], plane[1], plane[2]))
+    value = terms[0] + terms[1] + terms[2] + plane[3]
+    # A cancellation screen, not a proven error bound. Ambiguous decisions
+    # are checked later from original site coordinates. More than one such
+    # decision, or remapping its support planes, requires cell recovery.
+    if cell.query_vertex != -2:
+        if wp.abs(value) <= 1.0e-6 * (
+            wp.abs(terms[0]) + wp.abs(terms[1]) + wp.abs(terms[2]) + wp.abs(plane[3])
+        ):
+            v = int(s.vertices[at])
+            candidate = (j << 1) | int(value < 0.0)
+            if cell.query_vertex == -1:
+                cell.query_vertex = v
+                cell.query_candidate = candidate
+            elif cell.query_vertex != v or cell.query_candidate != candidate:
+                cell.query_vertex = -2
+    return cell, value < 0.0
+
+
+@wp.func(inline=True)
+def classify(s: Scratch64, cell: Cell64, i: int, j: int, at: int, plane: wp.vec4d):  # noqa: F811
+    return cell, outside(s.positions[at], plane)
+
+
+@wp.func(inline=True)
+def publish_query(s: Scratch, cell: Cell, owner: int):
+    if cell.status != 0 and cell.status != 3:
+        return cell
+    if cell.query_vertex == -1:
+        return cell
+    if cell.query_vertex == -2 or s.query_count.shape[0] == 0:
+        cell.status = 6
+        return cell
+    index = wp.atomic_add(s.query_count, 0, 1)
+    if index >= s.queries.shape[0]:
+        wp.atomic_min(s.query_count, 0, s.queries.shape[0])
+        cell.status = 6
+        return cell
+    v = wp.uint32(cell.query_vertex)
+    s.queries[index] = wp.vec4i(
+        s.neighbors[cell.base + 32 * plane_at(v, 0)],
+        s.neighbors[cell.base + 32 * plane_at(v, 1)],
+        s.neighbors[cell.base + 32 * plane_at(v, 2)],
+        cell.query_candidate >> 1,
+    )
+    s.query_owners[index] = (owner << 1) | (cell.query_candidate & 1)
+    return cell
+
+
+@wp.func(inline=True)
+def publish_query(s: Scratch64, cell: Cell64, owner: int):  # noqa: F811
+    return cell
+
+
+@wp.func(inline=True)
 def init_cell(s: Any, slot: int, seed: wp.vec3, lower: wp.vec3, upper: wp.vec3, cell: Any):
     cell.base = (slot // 32) * (32 * s.capacity) + slot % 32
     cell.nv = 8
     cell.np = 6
     cell.status = 0
+    cell = init_query(cell)
     cell.lo = type(cell.lo)(lower) - type(cell.lo)(seed)
     cell.hi = type(cell.hi)(upper) - type(cell.hi)(seed)
     cell.r2 = cell.lo.dtype(0.0)
@@ -148,7 +254,7 @@ def init_cell(s: Any, slot: int, seed: wp.vec3, lower: wp.vec3, upper: wp.vec3, 
     s.vertices[cell.base + 32 * 6] = encode(2, 4, 1)
     s.vertices[cell.base + 32 * 7] = encode(4, 3, 1)
     for i in range(6):
-        s.neighbors[cell.base + 32 * i] = -1
+        s.neighbors[cell.base + 32 * i] = -(i + 1)
     for i in range(8):
         at = cell.base + 32 * i
         set_position(s, at, coordinates(s, cell.base, s.vertices[at]))
@@ -173,6 +279,7 @@ def update_bounds(s: Any, cell: Any):
 
 @wp.func(inline=True)
 def collect_planes(s: Any, cell: Any):
+    cell = invalidate_query(cell)
     for i in range(cell.np):
         s.next[cell.base + 32 * i] = -1
     for i in range(cell.nv):
@@ -200,7 +307,12 @@ def collect_planes(s: Any, cell: Any):
 
 
 @wp.func(inline=True)
-def outside(h: Any, plane: Any):
+def outside(h: wp.vec3, plane: wp.vec4):
+    return h[0] * plane[0] + h[1] * plane[1] + h[2] * plane[2] + plane[3] < 0.0
+
+
+@wp.func(inline=True)
+def outside(h: wp.vec4d, plane: wp.vec4d):  # noqa: F811
     # Homogeneous determinants may have either orientation.
     value = wp.dot(h, plane)
     return (value > h.dtype(0.0) and h[3] < h.dtype(0.0)) or (
@@ -246,7 +358,8 @@ def clip(
     k = int(0)
     while k < cell.nv:
         at = cell.base + 32 * k
-        if outside(s.positions[at], plane):
+        cell, is_outside = classify(s, cell, i, j, at, plane)
+        if is_outside:
             cell.nv -= 1
             last = cell.base + 32 * cell.nv
             v = s.vertices[at]
@@ -355,10 +468,14 @@ def emit(
     neighbors: wp.array2d[int],
     counts: wp.array[int],
     status: wp.array[int],
+    owner: int = -1,
 ):
+    if owner < 0:
+        owner = index
+    cell = publish_query(s, cell, owner)
     status[index] = cell.status
     count = int(0)
-    if cell.status == 0:
+    if cell.status == 0 or cell.status == 6:
         for k in range(cell.np):
             s.next[cell.base + 32 * k] = 0
         for k in range(cell.nv):
@@ -383,6 +500,12 @@ def emit(
             if k < cell.np:
                 j = s.neighbors[cell.base + 32 * k]
             neighbors[index, k] = j
+    if cell.status == 6:
+        # The topology completed but a predicate needs checking. Seed recovery
+        # with live facets, avoiding the discarded planes from the traversal.
+        for k in range(count, neighbors.shape[1]):
+            neighbors[index, k] = -1
+        count = 0
     counts[index] = count
 
 
@@ -416,7 +539,7 @@ def allocate_scratch(n, capacity=64, device="cuda:0", robust=False):
     scratch.capacity = capacity
     size = ((n + 31) // 32) * 32 * capacity
     scratch.planes = wp.empty(size, dtype=vector, device=device)
-    scratch.positions = wp.empty(size, dtype=vector, device=device)
+    scratch.positions = wp.empty(size, dtype=wp.vec4d if robust else wp.vec3, device=device)
     if robust:
         scratch.cartesian = wp.empty(size, dtype=wp.vec3d, device=device)
     scratch.vertices = wp.empty(size, dtype=wp.uint32, device=device)

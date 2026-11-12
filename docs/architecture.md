@@ -1,8 +1,9 @@
 # Construction
 
-Diagrams are built by independent GPU threads. Each thread clips a
+Ordinary cells are built by independent GPU threads. Each thread clips a
 bounded convex cell against candidate bisectors, then emits its active neighbor
-planes. The final pass produces symmetric CSR adjacency. All project GPU code is
+planes. Numerically difficult cells can use a separate cooperative recovery
+kernel with 32 threads per cell. The final pass produces symmetric CSR adjacency. All project GPU code is
 written as NVIDIA Warp kernels; sorting and scans use Warp's supplied primitives.
 
 ## Comparison with Paragram
@@ -60,14 +61,32 @@ distances are handled before squaring. Failed cells produce explicit status code
 and are retried with larger storage; traversal never silently discards a valid
 candidate to fit a queue.
 
-Recovery first increases single-precision capacity, then retries unresolved cells
-with double-precision planes, homogeneous vertex coordinates, and clipping tests.
-The same generic Warp clipping algorithm serves both precisions. Valid candidate
-IDs from a failed attempt seed the retry; failed cells still emit no partial CSR
-row. Completed retry rows are retained. Sparse retry jobs use separate GPU warps
-so a few difficult cells can run across multiple multiprocessors. Double-precision
-Cartesian coordinates are cached when a vertex is created, avoiding repeated
-division during bounds updates and candidate rejection.
+Construction starts with 64 plane/vertex slots and a 96-entry traversal queue.
+Capacity failures grow the FP32 buffers to 128, 256, and 512 before trying FP64.
+Numerical failures skip FP32 clipping in those attempts. Completed retry rows are retained;
+failed rows never expose partial adjacency.
+
+The FP32 clipper records a suspicious side test when cancellation is small
+relative to the sum of absolute products. It retains one pending predicate per
+cell. Multiple distinct uncertain tests, remapped support planes, or queue
+overflow request precision recovery. A separate kernel evaluates the pending
+predicate from the original FP32 coordinates and weights, using filtered FP64
+and exact integer predicates for interior vertices. Box-plane predicates use
+interval filters and request recovery if the sign remains uncertain. This
+separation keeps expensive predicates out of the ordinary clipping kernel.
+
+A bounded queue of up to 512 cells is rebuilt with FP64 geometry before host
+readback, and again after an FP32 capacity retry if necessary. One 32-thread block
+cooperates on each cell: it classifies and compacts vertices, reconstructs and
+checks the clipping boundary, updates bounds, and tests hierarchy nodes. Its
+128-slot workspace has a separate layout from the interleaved ordinary clipper.
+Unprocessed or failed jobs remain pending for the larger fallback. Both eager
+construction and captured `DiagramWorkspace` execution use these checks.
+
+FP32 vertices store Cartesian coordinates in three scalars. FP64 recovery keeps
+both homogeneous and cached Cartesian coordinates. Recovered cells are still
+floating-point constructions: the cancellation screen is not a proved error
+bound, and this procedure does not certify every graph edge as exact.
 
 After explicit failures are recovered, a GPU pass checks whether each directed
 facet is present in the opposite cell. One-sided facets identify possible

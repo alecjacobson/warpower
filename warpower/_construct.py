@@ -94,6 +94,9 @@ def make_construct_kernel(weighted=False, queue_capacity=64, robust=False, lane_
             output = job
             if status[output] == 0 or status[output] == 3:
                 return
+            if wp.static(not robust):
+                if status[output] == 5 or status[output] == 6:
+                    return
         if tree.owners[i] != i:
             counts[output] = 0
             status[output] = 3
@@ -240,7 +243,7 @@ def make_construct_kernel(weighted=False, queue_capacity=64, robust=False, lane_
                     tree, candidate, p, wi, scratch, cell, wp.static(weighted_mode)
                 ):
                     node = candidate
-        emit(scratch, cell, output, neighbors, counts, status)
+        emit(scratch, cell, output, neighbors, counts, status, i)
 
     return construct
 
@@ -268,3 +271,34 @@ def merge_retry(
     counts[i] = retry_counts[j]
     status[i] = retry_status[j]
     source[i] = j
+
+
+@wp.kernel(enable_backward=False)
+def init_retries(
+    jobs: wp.array[int],
+    neighbors: wp.array2d[int],
+    status: wp.array[int],
+    retry_neighbors: wp.array2d[int],
+    retry_status: wp.array[int],
+    source: wp.array[int],
+):
+    row = wp.tid()
+    owner = jobs[row]
+    source[owner] = row
+    retry_status[row] = status[owner]
+    for k in range(retry_neighbors.shape[1]):
+        value = int(-1)
+        if k < neighbors.shape[1]:
+            value = neighbors[owner, k]
+        retry_neighbors[row, k] = value
+
+
+@wp.kernel(enable_backward=False)
+def retry_kinds(status: wp.array[int], counts: wp.array[int], precision_count: wp.array[int]):
+    if wp.tid() == 0:
+        counts[2] = precision_count[1]
+    s = status[wp.tid()]
+    if s != 0 and s != 3:
+        wp.atomic_add(counts, 0, 1)
+        if s == 1 or s == 2 or s == 4:
+            wp.atomic_add(counts, 1, 1)

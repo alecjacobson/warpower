@@ -12,9 +12,18 @@ from . import _validation
 from ._api import _chunk_size, _points_array, _weights_array
 from ._cell import Scratch64, allocate_scratch
 from ._construct import collect_failures, make_construct_kernel
+from ._cooperative_cell import allocate_scratch as allocate_precision_scratch
 from ._graph_construct import make_retry_kernel
+from ._precision_construct import make_precision_kernel
+from ._query_predicates import check_queries, collect_precision
 
 wp.set_module_options({"enable_backward": False})
+
+
+@wp.kernel
+def copy_counts(counts: wp.array[int], sizes: wp.array[int]):
+    i = wp.tid()
+    sizes[i + 1] = counts[i]
 
 
 @wp.kernel
@@ -324,6 +333,18 @@ class DiagramWorkspace:
                     length = blocks
                 self._scratch = allocate_scratch(self.chunk_size, 64, self.device)
                 self._retry32 = allocate_scratch(self.retry_chunk, 128, self.device)
+                self._query_capacity = max(1024, self.n // 16)
+                self._queries = wp.empty(self._query_capacity, dtype=wp.vec4i)
+                self._query_owners = wp.empty(self._query_capacity, dtype=int)
+                self._query_count = wp.zeros(1, dtype=int)
+                for scratch in (self._scratch, self._retry32):
+                    scratch.queries = self._queries
+                    scratch.query_owners = self._query_owners
+                    scratch.query_count = self._query_count
+                self._precision_size = min(self.n, 512)
+                self._precision_scratch = allocate_precision_scratch(
+                    self._precision_size, 128, self.device, robust=True
+                )
             self._scratch_owner = _scratch_owner
             self._scratch64 = (
                 allocate_scratch(
@@ -436,6 +457,8 @@ class DiagramWorkspace:
         self._launch(collect_failures, self.n, [status, self._jobs, self._job_count])
 
     def _retry_pass(self, capacity, robust):
+        if not robust:
+            self._query_count.zero_()
         self._launch(begin_chunks, 1, [self._job_count, self._cursor, self._chunks])
 
         def body():
@@ -468,6 +491,8 @@ class DiagramWorkspace:
             )
 
         wp.capture_while(self._chunks, body)
+        if not robust:
+            self._check_predicates(self._retry)
 
     def _retries(self, repair=False):
         if repair:
@@ -500,11 +525,58 @@ class DiagramWorkspace:
         )
         self._launch(adj.gather_marked, self.n, [self._flags, self._jobs, self._job_count])
 
+    def _check_predicates(self, neighbors):
+        self._launch(
+            check_queries,
+            self._query_capacity,
+            [
+                self.points,
+                self.weights,
+                self._hierarchy,
+                self._queries,
+                self._query_owners,
+                self._query_count,
+                self.status,
+                neighbors,
+                self._counts,
+                self._source,
+                False,
+            ],
+        )
+        self._job_count.zero_()
+        self._launch(collect_precision, self.n, [self.status, self._jobs, self._job_count])
+        self._launch(
+            make_precision_kernel(self.weighted, 128, True, 32),
+            self._precision_size * 32,
+            [
+                self.points,
+                self.weights,
+                self._hierarchy,
+                self._jobs,
+                0,
+                self._job_count,
+                self._source,
+                False,
+                True,
+                self._precision_scratch,
+                neighbors,
+                self._counts,
+                self.status,
+                neighbors,
+                False,
+                self._empty,
+                self._empty,
+                False,
+            ],
+            block_dim=32,
+        )
+
     def _record_adjacency(self):
         self._source.fill_(-1)
+        self._query_count.zero_()
         for start in range(0, self.n, self.chunk_size):
             self._launch(
-                make_construct_kernel(self.weighted, 128),
+                make_construct_kernel(self.weighted, 96),
                 min(self.chunk_size, self.n - start),
                 [
                     self.points,
@@ -525,6 +597,7 @@ class DiagramWorkspace:
                 ],
                 block_dim=32,
             )
+        self._check_predicates(self._base)
         self._failures(self.status)
         wp.capture_if(self._job_count, self._retries)
         self._asymmetry()
@@ -540,7 +613,10 @@ class DiagramWorkspace:
     def _compact(self, direct):
         self._sizes.zero_()
         if direct:
-            wp.copy(self._sizes, self._counts, dest_offset=1, count=self.n)
+            # A kernel keeps initialization checking inside the conditional
+            # graph: CUDA 12.6 initcheck checks a memcpy's source at launch,
+            # before this graph's producer has executed on its first replay.
+            self._launch(copy_counts, self.n, [self._counts, self._sizes])
         else:
             self._launch(
                 adj.count_symmetric,

@@ -106,6 +106,17 @@ for bijectivity; its input tensor remained bitwise unchanged. These calls use
 the native constructor without the training harness or jitter. Paragram also
 leaves its input unchanged.
 
+Native RadFoam requires FP32 coordinates. Its orientation and in-sphere
+predicates use an FP32 fast evaluation with error bounds, followed when needed
+by Shewchuk-style adaptive expansion arithmetic. The expansion components are
+also FP32 (`REAL` is `float`); retaining rounding-error terms supplies additional
+precision without promoting the predicate to FP64. See the pinned
+[tensor binding](https://github.com/theialab/radfoam/blob/3e7b52cf74e37ab2ab5e695f53570f515f537e3d/torch_bindings/triangulation_bindings.cpp#L18)
+and [predicate implementation](https://github.com/theialab/radfoam/blob/3e7b52cf74e37ab2ab5e695f53570f515f537e3d/src/delaunay/shewchuk.cuh#L124).
+Thus FP32 storage does not mean every decision uses only ordinary FP32
+arithmetic. These probes did not instrument fallback frequency or establish
+which predicate stages were necessary for the seven correct pair decisions.
+
 Paragram uses padding 1.0, whereas Warpower uses 1.00001. The exact facet oracle
 was rerun for Paragram's box: all 14 selected answers remain the same. The
 expected decisions also match the archived unbounded CGAL graph, allowing the

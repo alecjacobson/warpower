@@ -67,9 +67,14 @@ def test_weighted_capacity_retry_avoids_a_certified_false_facet():
 
 
 @wp.kernel
-def queue_requirement_kernel(status: wp.array[int], states: wp.array[wp.vec3i]):
+def queue_requirement_kernel(
+    status: wp.array[int], states: wp.array[wp.vec3i], neighbors: wp.array2d[int]
+):
+    """Inject a queue failure with a fully initialized empty seed row."""
     status[0] = 4
     states[0] = wp.vec3i(0, 64, 192)
+    for k in range(neighbors.shape[1]):
+        neighbors[0, k] = -1
 
 
 def test_mixed_queue_batch_finishes_remaining_clipping_retries(monkeypatch):
@@ -78,13 +83,20 @@ def test_mixed_queue_batch_finishes_remaining_clipping_retries(monkeypatch):
 
     points, owner = shell()
     original_launch = wp.launch
+    initial_neighbors = None
 
     def launch(kernel, dim, *args, **kwargs):
+        nonlocal initial_neighbors
         result = original_launch(kernel, dim, *args, **kwargs)
+        if kernel == _api.check_queries and not kwargs["inputs"][-1]:
+            initial_neighbors = kwargs["inputs"][7]
         if kernel == _api.collect_precision:
             inputs = kwargs["inputs"]
             original_launch(
-                queue_requirement_kernel, 1, inputs=[inputs[0], inputs[3]], device="cuda:0"
+                queue_requirement_kernel,
+                1,
+                inputs=[inputs[0], inputs[3], initial_neighbors],
+                device="cuda:0",
             )
         return result
 

@@ -62,7 +62,11 @@ def observe(points, weights=None, **options):
         start, scheduled = inputs[4], dim // stride
         if parallel:
             scheduled = max(0, min(scheduled, int(inputs[5].numpy()[0]) - start))
-        owners = inputs[3].numpy()[start : start + scheduled]
+        owners = (
+            inputs[3][start : start + scheduled].numpy()
+            if scheduled
+            else np.empty(0, dtype=np.int32)
+        )
         initial = not parallel and not inputs[5]
         if parallel:
             rows = inputs[6].numpy()[owners] if inputs[8] and inputs[7] else owners

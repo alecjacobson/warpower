@@ -13,6 +13,8 @@ from typing import Any
 
 import warp as wp
 
+from ._cell import intersect_planes_fp32
+
 wp.set_module_options({"enable_backward": False})
 
 
@@ -100,6 +102,15 @@ def coordinates(s: Any, base: int, v: wp.uint32):
     x1 = -a[3] * bc1 - b[3] * (c[2] * a[0] - c[0] * a[2]) - c[3] * (a[2] * b[0] - a[0] * b[2])
     x2 = -a[3] * bc2 - b[3] * (c[0] * a[1] - c[1] * a[0]) - c[3] * (a[0] * b[1] - a[1] * b[0])
     return type(a)(x0, x1, x2, a[0] * bc0 + a[1] * bc1 + a[2] * bc2)
+
+
+@wp.func(inline=True)
+def coordinates(s: Scratch, base: int, v: wp.uint32):  # noqa: F811
+    return intersect_planes_fp32(
+        s.planes[base + plane_at(v, 0)],
+        s.planes[base + plane_at(v, 1)],
+        s.planes[base + plane_at(v, 2)],
+    )
 
 
 @wp.func(inline=True)
@@ -298,13 +309,15 @@ def squared_position(k: int, p: Any, nv: int):
 
 
 @wp.func
-def ambiguous_flag(k: int, position: wp.vec3, nv: int, plane: wp.vec4):
+def classify_cartesian(k: int, position: wp.vec3, nv: int, plane: wp.vec4):
     if k >= nv:
         return 0
     terms = wp.cw_mul(position, wp.vec3(plane[0], plane[1], plane[2]))
     value = terms[0] + terms[1] + terms[2] + plane[3]
     scale = wp.abs(terms[0]) + wp.abs(terms[1]) + wp.abs(terms[2]) + wp.abs(plane[3])
-    return int(wp.abs(value) <= 1.0e-6 * scale)
+    if wp.abs(value) <= 1.0e-6 * scale:
+        return 2
+    return int(value < 0.0)
 
 
 @lru_cache(maxsize=None)
@@ -346,16 +359,22 @@ def make_clip(capacity=128, robust=True):
             duplicate = wp.tile_extract(wp.tile_max(matches), 0)
             if duplicate != 0:
                 return cell
-        plane = s.planes.dtype(-q[0], -q[1], -q[2], q.dtype(0.5) * numerator) / wp.sqrt(d2)
+        if wp.static(robust):
+            plane = s.planes.dtype(-q[0], -q[1], -q[2], q.dtype(0.5) * numerator) / wp.sqrt(d2)
+        else:
+            plane = s.planes.dtype(-q[0], -q[1], -q[2], q.dtype(0.5) * numerator) * (
+                q.dtype(1.0) / wp.sqrt(d2)
+            )
         positions = wp.tile_load(s.positions, shape=tile_capacity, offset=cell.base)
         vertices = wp.tile_load(s.vertices, shape=tile_capacity, offset=cell.base)
         cartesian = wp.tile_load(s.cartesian, shape=tile_capacity, offset=cell.base)
         if wp.static(not robust):
-            uncertain = wp.tile_map(ambiguous_flag, indices, cartesian, cell.nv, plane)
-            if wp.tile_extract(wp.tile_max(uncertain), 0) != 0:
+            removed = wp.tile_map(classify_cartesian, indices, cartesian, cell.nv, plane)
+            if wp.tile_extract(wp.tile_max(removed), 0) == 2:
                 cell.status = 6
                 return cell
-        removed = wp.tile_map(removed_flag, indices, positions, cell.nv, plane)
+        else:
+            removed = wp.tile_map(removed_flag, indices, positions, cell.nv, plane)
         scan = wp.tile_scan_inclusive(removed)
         count = wp.tile_extract(scan, tile_capacity - 1)
         if count == 0:

@@ -1,5 +1,10 @@
 """Exercise independent queue limits and parallel large-cell clipping."""
 
+import hashlib
+import json
+from fractions import Fraction
+from pathlib import Path
+
 import numpy as np
 import pytest
 import warp as wp
@@ -8,6 +13,57 @@ import warpower
 from benchmarks.replay.retry_diagnostics import observe
 from tests.oracle import reference_cells
 from tests.test_retry_escalation import RetryCell, shell
+
+
+def test_weighted_capacity_retry_avoids_a_certified_false_facet():
+    """Exclude a certified false facet without triggering consistency repair."""
+    from benchmarks.datasets import generate
+
+    fixture = json.loads((Path(__file__).parent / "data/weighted-capacity-facet.json").read_text())
+    points, weights = generate(**fixture["generator"])
+    for data, name in [(points, "points"), (weights, "weights")]:
+        np.testing.assert_equal(
+            hashlib.sha256(data.tobytes()).hexdigest(), fixture[name + "_sha256"]
+        )
+    owner, candidate = fixture["owner"], fixture["candidate"]
+    origin = [Fraction(float(value)) for value in points[owner]]
+    origin_weight = Fraction(float(weights[owner]))
+    normal = [Fraction(0)] * 3
+    bound = Fraction(0)
+    for term in fixture["certificate"]:
+        multiplier = Fraction(term["coefficient"])
+        site = term["site"]
+        if term["kind"] == "site":
+            np.testing.assert_equal(multiplier >= 0, True)
+        else:
+            np.testing.assert_equal(site, candidate)
+        delta = [Fraction(float(points[site, axis])) - origin[axis] for axis in range(3)]
+        for axis in range(3):
+            normal[axis] += multiplier * 2 * delta[axis]
+        bound += multiplier * (
+            sum(value * value for value in delta) + origin_weight - Fraction(float(weights[site]))
+        )
+    np.testing.assert_equal(normal, [Fraction(0)] * 3)
+    np.testing.assert_equal(bound < 0, True)
+    result, stages = observe(points, weights)
+    np.testing.assert_equal(result.diagnostics["consistency_retried_cells"], 0)
+    np.testing.assert_equal(
+        any(
+            stage["precision"] == "fp32"
+            and stage["threads_per_cell"] == 32
+            and candidate in stage.get("active_site_ids", [])
+            for stage in stages
+        ),
+        True,
+    )
+    adjacency, offsets, status = (
+        result.adjacency.numpy(),
+        result.offsets.numpy(),
+        result.status.numpy(),
+    )
+    for left, right in [(owner, candidate), (candidate, owner)]:
+        np.testing.assert_equal(status[left], 0)
+        np.testing.assert_equal(right in adjacency[offsets[left] : offsets[left + 1]], False)
 
 
 @wp.kernel

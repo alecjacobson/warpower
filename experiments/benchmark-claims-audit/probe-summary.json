@@ -1,0 +1,464 @@
+{
+  "schema": "warpower.benchmark-claims-probes",
+  "version": 1,
+  "date": "2026-11-12",
+  "source_revision": "51487623858210b17827e09d52e0e266fd305af7",
+  "hardware": "NVIDIA L40 48 GB; driver 570.158.01; four-core CPU quota",
+  "measurement_order": "serial processes; Warpower/Paragram per Bonsai case, then native v2 per case, then flagship Warpower/Paragram",
+  "correctness": "Timing/status probes only. Native returns tetrahedra and unbounded adjacency; no box restriction or shared exact certificate added. Warpower/Paragram return box-clipped adjacency; their success statuses do not prove geometric correctness.",
+  "exclusions": [
+    "Native v1 setup failed before recording any samples; see harness-correction.json.",
+    "Native v2 million-site window was CPU-throttled; retain raw samples but exclude from accepted timing comparisons."
+  ],
+  "scope": "Three targeted fresh-call probes, not a rerun of the 74-case regression matrix and not an optimization.",
+  "ratios": [
+    {
+      "case": "bonsai-live-9216",
+      "paragram_over_warpower": 0.29842409428790795
+    },
+    {
+      "case": "bonsai-checkpoint-1968522",
+      "paragram_over_warpower": 1.8738724099594042
+    },
+    {
+      "case": "cluster5-100000",
+      "paragram_over_warpower": 2.2262945531111
+    }
+  ],
+  "rows": [
+    {
+      "case": "bonsai-live-9216",
+      "backend": "warpower",
+      "n": 9216,
+      "points_sha256": "0a34c76e0ddcedee74e81e5490ff287570bb1aa489c692b381388a779f32d102",
+      "raw": "bonsai-live-9216-warpower.json",
+      "raw_sha256": "1eb589d1e3f84d2388cc15ac5fa73f5dc8705fce95ca490c30bd07f29689ad02",
+      "mean_ms": 141.2405401468277,
+      "median_ms": 141.07546210289001,
+      "stdev_ms": 0.8539575259931524,
+      "min_ms": 140.38505405187607,
+      "max_ms": 142.65122637152672,
+      "warmups": 3,
+      "repeats": 5,
+      "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+      "cpu_throttled": false,
+      "accepted_timing": true,
+      "nnz": 131678,
+      "output_contract": "box-clipped Voronoi neighbor CSR",
+      "independently_geometrically_validated": false,
+      "status_counts": {
+        "0": 9216
+      },
+      "diagnostics": {
+        "retried_cells": 131,
+        "double_precision_cells": 18,
+        "consistency_retried_cells": 0,
+        "asymmetric_cells_remaining": 0,
+        "chunk_size": 9216,
+        "leaf_size": 4,
+        "knn_requested": 8,
+        "knn_effective": 0,
+        "warm_start": "nearest leaf"
+      },
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "f19c3cb11cc0e70a0805adcd81bbfb925937fc017e6fffab8a8f6c3f01dca460",
+        "warpower_dirty": false,
+        "warpower_commit": "51487623858210b17827e09d52e0e266fd305af7",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "memory": {
+        "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+        "interval_seconds": 0.001,
+        "before_construction_bytes": 1137836032,
+        "peak_bytes": 2754740224,
+        "samples": 1157,
+        "error": null
+      },
+      "mempool_retain_mb": 32768,
+      "cpu_quota_during_measurement": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "case": "bonsai-live-9216",
+      "backend": "paragram",
+      "n": 9216,
+      "points_sha256": "0a34c76e0ddcedee74e81e5490ff287570bb1aa489c692b381388a779f32d102",
+      "raw": "bonsai-live-9216-paragram.json",
+      "raw_sha256": "6cc17728aa1c3120091e9e9d23d90c56721791bb613c225f49d8d2956ea7a7ee",
+      "mean_ms": 42.149580270051956,
+      "median_ms": 41.98955371975899,
+      "stdev_ms": 0.2779957548639381,
+      "min_ms": 41.91511496901512,
+      "max_ms": 42.52820461988449,
+      "warmups": 3,
+      "repeats": 5,
+      "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+      "cpu_throttled": false,
+      "accepted_timing": true,
+      "nnz": 131538,
+      "output_contract": "box-clipped Voronoi neighbor CSR",
+      "independently_geometrically_validated": false,
+      "status_counts": {
+        "0": 9073,
+        "1": 12,
+        "2": 33,
+        "5": 98
+      },
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "memory": {
+        "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+        "interval_seconds": 0.001,
+        "before_construction_bytes": 1106378752,
+        "peak_bytes": 1259470848,
+        "samples": 735,
+        "error": null
+      },
+      "mempool_retain_mb": null,
+      "cpu_quota_during_measurement": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "case": "bonsai-live-9216",
+      "backend": "native-radfoam-fresh",
+      "n": 9216,
+      "points_sha256": "0a34c76e0ddcedee74e81e5490ff287570bb1aa489c692b381388a779f32d102",
+      "raw": "bonsai-live-9216-native-v2.json",
+      "raw_sha256": "f8de95fbbe36138bbe723875cea6956b0a39a0af1e4de34d33bb9db81c7e2aaa",
+      "mean_ms": 19.57881674170494,
+      "median_ms": 19.568584859371185,
+      "stdev_ms": 0.01700238094452314,
+      "min_ms": 19.56530660390854,
+      "max_ms": 19.599739462137222,
+      "warmups": 3,
+      "repeats": 5,
+      "timing": "synchronized fresh constructor wall time including allocations, point reordering and adjacency export; resident input; setup/JIT/readback excluded",
+      "cpu_throttled": false,
+      "accepted_timing": true,
+      "nnz": 131850,
+      "output_contract": "Delaunay tetrahedra and unbounded point-neighbor CSR; no shared exact certificate added",
+      "independently_geometrically_validated": false,
+      "tetrahedra": 56674,
+      "native_revision": "3e7b52cf74e37ab2ab5e695f53570f515f537e3d",
+      "memory": {
+        "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+        "interval_seconds": 0.001,
+        "before_construction_bytes": 1106378752,
+        "peak_bytes": 11239817216,
+        "samples": 165,
+        "error": null
+      },
+      "cpu_quota_during_measurement": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "case": "bonsai-checkpoint-1968522",
+      "backend": "warpower",
+      "n": 1968522,
+      "points_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+      "raw": "bonsai-checkpoint-1968522-warpower.json",
+      "raw_sha256": "c21532ac726a28fd8cc4c115d0affa776c1bf30abff3d90dc43d8ef6afb0e3d0",
+      "mean_ms": 224.804225564003,
+      "median_ms": 224.30243715643883,
+      "stdev_ms": 1.0872429009853921,
+      "min_ms": 224.01006519794464,
+      "max_ms": 226.6935221850872,
+      "warmups": 3,
+      "repeats": 5,
+      "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+      "cpu_throttled": false,
+      "accepted_timing": true,
+      "nnz": 30267974,
+      "output_contract": "box-clipped Voronoi neighbor CSR",
+      "independently_geometrically_validated": false,
+      "status_counts": {
+        "0": 1968522
+      },
+      "diagnostics": {
+        "retried_cells": 288,
+        "double_precision_cells": 1,
+        "consistency_retried_cells": 4,
+        "asymmetric_cells_remaining": 0,
+        "chunk_size": 1968522,
+        "leaf_size": 4,
+        "knn_requested": 8,
+        "knn_effective": 0,
+        "warm_start": "nearest leaf"
+      },
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "f19c3cb11cc0e70a0805adcd81bbfb925937fc017e6fffab8a8f6c3f01dca460",
+        "warpower_dirty": false,
+        "warpower_commit": "51487623858210b17827e09d52e0e266fd305af7",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "memory": {
+        "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+        "interval_seconds": 0.001,
+        "before_construction_bytes": 1137836032,
+        "peak_bytes": 8505131008,
+        "samples": 1759,
+        "error": null
+      },
+      "mempool_retain_mb": 32768,
+      "cpu_quota_during_measurement": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "case": "bonsai-checkpoint-1968522",
+      "backend": "paragram",
+      "n": 1968522,
+      "points_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+      "raw": "bonsai-checkpoint-1968522-paragram.json",
+      "raw_sha256": "e979a1af634e00f08adb8985fdfbd465aa2c72cf3773f8e66b6a6efcaffc46f9",
+      "mean_ms": 421.2544359266758,
+      "median_ms": 421.21105268597603,
+      "stdev_ms": 0.4238695814255656,
+      "min_ms": 420.6993505358696,
+      "max_ms": 421.7507839202881,
+      "warmups": 3,
+      "repeats": 5,
+      "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+      "cpu_throttled": false,
+      "accepted_timing": true,
+      "nnz": 30274076,
+      "output_contract": "box-clipped Voronoi neighbor CSR",
+      "independently_geometrically_validated": false,
+      "status_counts": {
+        "0": 1967903,
+        "1": 348,
+        "2": 139,
+        "3": 6,
+        "5": 126
+      },
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "memory": {
+        "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+        "interval_seconds": 0.001,
+        "before_construction_bytes": 1129447424,
+        "peak_bytes": 7179730944,
+        "samples": 3553,
+        "error": null
+      },
+      "mempool_retain_mb": null,
+      "cpu_quota_during_measurement": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "case": "bonsai-checkpoint-1968522",
+      "backend": "native-radfoam-fresh",
+      "n": 1968522,
+      "points_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+      "raw": "bonsai-checkpoint-1968522-native-v2.json",
+      "raw_sha256": "e42d1be020551bb0130b783235b2e815cc71edd203a369dcb88f90e71690927e",
+      "mean_ms": 15956.05336651206,
+      "median_ms": 15937.974739819765,
+      "stdev_ms": 43.784769000311684,
+      "min_ms": 15931.97137862444,
+      "max_ms": 16033.980213105679,
+      "warmups": 3,
+      "repeats": 5,
+      "timing": "synchronized fresh constructor wall time including allocations, point reordering and adjacency export; resident input; setup/JIT/readback excluded",
+      "cpu_throttled": true,
+      "accepted_timing": false,
+      "nnz": 30268338,
+      "output_contract": "Delaunay tetrahedra and unbounded point-neighbor CSR; no shared exact certificate added",
+      "independently_geometrically_validated": false,
+      "tetrahedra": 13165611,
+      "native_revision": "3e7b52cf74e37ab2ab5e695f53570f515f537e3d",
+      "memory": {
+        "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+        "interval_seconds": 0.001,
+        "before_construction_bytes": 1129447424,
+        "peak_bytes": 19093651456,
+        "samples": 118648,
+        "error": null
+      },
+      "cpu_quota_during_measurement": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 3,
+          "throttled_usec": 7987911
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 3,
+          "throttled_usec": 7995818
+        }
+      }
+    },
+    {
+      "case": "cluster5-100000",
+      "backend": "warpower",
+      "n": 100000,
+      "points_sha256": "e9759410b554ee52e428ba05655d7b9e4ecdb2455852f8441514a442e456b56d",
+      "raw": "cluster5-100000-warpower.json",
+      "raw_sha256": "ae533afe797c4ab5560aff7e9a316d04e6a1e4963e5ccb0fa70ed83591c6b843",
+      "mean_ms": 29.335730895400047,
+      "median_ms": 29.346752911806107,
+      "stdev_ms": 0.4160781723381179,
+      "min_ms": 28.740793466567993,
+      "max_ms": 30.247386544942856,
+      "warmups": 3,
+      "repeats": 10,
+      "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+      "cpu_throttled": false,
+      "accepted_timing": true,
+      "nnz": 1545592,
+      "output_contract": "box-clipped Voronoi neighbor CSR",
+      "independently_geometrically_validated": false,
+      "status_counts": {
+        "0": 100000
+      },
+      "diagnostics": {
+        "retried_cells": 8,
+        "double_precision_cells": 0,
+        "consistency_retried_cells": 2,
+        "asymmetric_cells_remaining": 0,
+        "chunk_size": 100000,
+        "leaf_size": 4,
+        "knn_requested": 8,
+        "knn_effective": 0,
+        "warm_start": "nearest leaf"
+      },
+      "versions": {
+        "warp": "1.19.0",
+        "warpower_source_sha256": "f19c3cb11cc0e70a0805adcd81bbfb925937fc017e6fffab8a8f6c3f01dca460",
+        "warpower_dirty": false,
+        "warpower_commit": "51487623858210b17827e09d52e0e266fd305af7",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "memory": {
+        "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+        "interval_seconds": 0.001,
+        "before_construction_bytes": 1137836032,
+        "peak_bytes": 1750204416,
+        "samples": 419,
+        "error": null
+      },
+      "mempool_retain_mb": 32768,
+      "cpu_quota_during_measurement": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    },
+    {
+      "case": "cluster5-100000",
+      "backend": "paragram",
+      "n": 100000,
+      "points_sha256": "e9759410b554ee52e428ba05655d7b9e4ecdb2455852f8441514a442e456b56d",
+      "raw": "cluster5-100000-paragram.json",
+      "raw_sha256": "a9620438311d1f5ae7a3be3e95462599a63584b780f81715cc26c07ebcf968ec",
+      "mean_ms": 65.30997790396214,
+      "median_ms": 65.28135389089584,
+      "stdev_ms": 0.21693484867675755,
+      "min_ms": 65.04307687282562,
+      "max_ms": 65.67929685115814,
+      "warmups": 3,
+      "repeats": 10,
+      "timing": "synchronized wall time; construction allocations included; GPU inputs resident; compilation excluded",
+      "cpu_throttled": false,
+      "accepted_timing": true,
+      "nnz": 1545218,
+      "output_contract": "box-clipped Voronoi neighbor CSR",
+      "independently_geometrically_validated": false,
+      "status_counts": {
+        "0": 99995,
+        "3": 1,
+        "5": 4
+      },
+      "versions": {
+        "torch": "2.7.1+cu126",
+        "paragram_commit": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+        "benchmark_source_sha256": "71b0c9c9f5bd2748a31e6037b8b3a2cc29404fc2035d366bb80133fe40470826"
+      },
+      "memory": {
+        "method": "device-wide NVML sampling in a separate process; includes inputs, contexts, and allocator reserves; approximate peak",
+        "interval_seconds": 0.001,
+        "before_construction_bytes": 1125253120,
+        "peak_bytes": 1530003456,
+        "samples": 1200,
+        "error": null
+      },
+      "mempool_retain_mb": null,
+      "cpu_quota_during_measurement": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      }
+    }
+  ]
+}

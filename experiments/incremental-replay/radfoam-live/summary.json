@@ -1,0 +1,260 @@
+{
+  "complete": true,
+  "provenance": {
+    "producer": "pinned upstream train.py with explicit reduced workload and producer capture hooks",
+    "radfoam_revision": "3e7b52cf74e37ab2ab5e695f53570f515f537e3d",
+    "upstream_status": "",
+    "source_sha256": {
+      "/home/horde/projects/power-diagram/.work/issue-297/experiments/incremental-replay/capture_radfoam.py": "2350a183d93fe1e5cbc23594e0497acab805237720711abc29c5c34f943012ab",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/radfoam_capture.py": "8b027335553c31920b4daba6e1ef345b8b2936abe44b4c86902259d6bea24c17",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/fixture.py": "c3251731855c7046f4d76223d6df1495bafee3976ff04c21277b6523ef0601f7",
+      "/home/horde/references/radfoam/train.py": "cfdd7fbac5efca3c1c8d92b5981e128ad7b30c825aa09f3f82df103819479284",
+      "/home/horde/references/radfoam/radfoam_model/scene.py": "6d9aed3df3d96c022a2baaa55fc33664263871d9f4c386e9c7eb393930415e10",
+      "/home/horde/references/radfoam/radfoam_model/utils.py": "ce0a619715dc1b20cd19a5cb321ef80534f8852a6794514fafbf1801bd6152d6",
+      "/home/horde/references/radfoam/configs/mipnerf360_indoor.yaml": "f657e95e3283844f939b96610534f0a17ab9a56fd8c9653f6c14c9cc4edb8f6d",
+      "/home/horde/references/radfoam/data_loader/__init__.py": "fc9b183be8995eff2c46f7553b46ed5ff18f13297f3edc4a9c3c055b604de1e1",
+      "/home/horde/references/radfoam/data_loader/colmap.py": "cffd82ae7bfe06adac887a27e7f455da3f939ac48bcad7f8b3c26094febeda4b"
+    },
+    "native_binary_sha256": "550af729f9d6d52bc782f22766e0036c20ba89625664c3d967fcd03b78ebbfce",
+    "arguments": {
+      "output": "results/local/radfoam-live-20261111",
+      "source": "/home/horde/references/radfoam",
+      "build": "/home/horde/projects/power-diagram/.work/radfoam-fitting-20261110/native",
+      "data": "/home/horde/projects/power-diagram/data/radfoam-training",
+      "steps": 450,
+      "rays": 8192,
+      "initial_samples": 8192,
+      "background_sites": 1024,
+      "final_sites": 32768,
+      "densify_from": 40,
+      "densify_until": 250,
+      "freeze_points": 400,
+      "error_map_views": 8,
+      "error_map_stride": 4,
+      "seed": 2026,
+      "max_capture_mb": 150
+    },
+    "configuration": {
+      "iterations": 450,
+      "densify_from": 40,
+      "densify_until": 250,
+      "densify_factor": 1.15,
+      "white_background": true,
+      "quantile_weight": 0.0001,
+      "experiment_name": "capture",
+      "debug": false,
+      "viewer": false,
+      "sh_degree": 3,
+      "init_points": 131072,
+      "final_points": 32768,
+      "activation_scale": 1.0,
+      "device": "cuda",
+      "points_lr_init": 0.0002,
+      "points_lr_final": 5e-06,
+      "density_lr_init": 0.1,
+      "density_lr_final": 0.01,
+      "attributes_lr_init": 0.005,
+      "attributes_lr_final": 0.0005,
+      "sh_factor": 0.1,
+      "freeze_points": 400,
+      "dataset": "colmap",
+      "data_path": "/home/horde/projects/power-diagram/data/radfoam-training",
+      "scene": "bonsai",
+      "patch_based": false,
+      "downsample": [
+        4
+      ],
+      "downsample_iterations": [
+        0
+      ],
+      "config": "/home/horde/references/radfoam/configs/mipnerf360_indoor.yaml"
+    },
+    "config_overrides": {
+      "iterations": 450,
+      "final_points": 32768,
+      "data_path": "/home/horde/projects/power-diagram/data/radfoam-training",
+      "downsample": [
+        4
+      ],
+      "downsample_iterations": [
+        0
+      ],
+      "experiment_name": "capture",
+      "densify_from": 40,
+      "densify_until": 250,
+      "freeze_points": 400
+    },
+    "initializer": "SfM samples without replacement plus Gaussian background sites; exact recipe parameters recorded in arguments",
+    "identity": "IDs assigned before initial native ordering; producer permutation/prune/append operations tracked and their coordinate row semantics checked exactly",
+    "input_scope": "Every actual native constructor/rebuild input, including any retry perturbations; no synthetic motion",
+    "serialization": "Model/optimizer checkpoints, PLY, TensorBoard and final images disabled; fitting and evaluations still execute",
+    "timings": "Instrumented capture wall time only; synchronous input/output copies and compression preclude geometry or fitting speed claims"
+  },
+  "fixture": {
+    "frames": 56,
+    "manifest_sha256": "eb82c1d2bf06d88eb3d3b674ec49006f59055dcaa30b3793cf624d5b08ea592a",
+    "correspondence_valid": true
+  },
+  "native_inputs": 56,
+  "native_outputs": 56,
+  "native_failures": 0,
+  "input_events": {
+    "initial-native-construction": 1,
+    "optimizer-refresh": 49,
+    "prune-densify-refresh": 5,
+    "full-refresh": 1
+  },
+  "input_stages": {
+    "initialization": 1,
+    "optimizer-geometry-refresh": 49,
+    "post-prune-densify": 5,
+    "point-freeze": 1
+  },
+  "producer_events": {
+    "initialize-site-ids": 1,
+    "geometry-refresh-call": 57,
+    "permutation": 7,
+    "optimizer-step-completed": 450,
+    "insert": 5,
+    "prune": 5,
+    "checkpoint-export-disabled": 2
+  },
+  "inserted_sites": 8943,
+  "pruned_sites": 885,
+  "initial_sites": 9216,
+  "final_sites": 17274,
+  "optimizer_steps": 450,
+  "capture_bytes": 34496366,
+  "instrumented_wall_seconds": 46.720755249261856,
+  "gpu": "NVIDIA L40",
+  "torch_version": "2.7.1+cu126",
+  "source_commit": "7218403dba67603bd950f1128fa4d7ff8abafca1",
+  "training_observations": {
+    "train/rgb_loss": [
+      [
+        99,
+        0.019696354866027832
+      ],
+      [
+        199,
+        0.014944049529731274
+      ],
+      [
+        299,
+        0.013438314199447632
+      ],
+      [
+        399,
+        0.013491809368133545
+      ]
+    ],
+    "test/num_points": [
+      [
+        99,
+        10594.0
+      ],
+      [
+        199,
+        11619.0
+      ],
+      [
+        299,
+        13146.0
+      ],
+      [
+        399,
+        15062.0
+      ]
+    ],
+    "test/psnr": [
+      [
+        99,
+        14.165143013000488
+      ],
+      [
+        199,
+        15.421103477478027
+      ],
+      [
+        299,
+        15.832781791687012
+      ],
+      [
+        399,
+        15.951272964477539
+      ]
+    ],
+    "lr/points_lr": [
+      [
+        99,
+        0.00017198225559520754
+      ],
+      [
+        199,
+        0.00010326575533664936
+      ],
+      [
+        299,
+        3.410068598734157e-05
+      ],
+      [
+        399,
+        5.003007129633008e-06
+      ]
+    ],
+    "lr/density_lr": [
+      [
+        99,
+        0.09547926327649535
+      ],
+      [
+        199,
+        0.07053482333425057
+      ],
+      [
+        299,
+        0.036907088053706495
+      ],
+      [
+        399,
+        0.013392509168905189
+      ]
+    ],
+    "lr/attr_lr": [
+      [
+        99,
+        0.004483654796245526
+      ],
+      [
+        199,
+        0.00315616807681376
+      ],
+      [
+        299,
+        0.0016386308001854809
+      ],
+      [
+        399,
+        0.0006411155236432443
+      ]
+    ]
+  },
+  "geometry_refresh_calls": 56,
+  "omitted_image_exports": 37,
+  "independent_audit": {
+    "fixture_manifest_sha256": "eb82c1d2bf06d88eb3d3b674ec49006f59055dcaa30b3793cf624d5b08ea592a",
+    "frames": 56,
+    "producer_identity_chain_valid": true,
+    "final_sites": 17274,
+    "ids_ever_allocated": 18159,
+    "inserted_sites": 8943,
+    "deleted_sites": 885,
+    "trailing_mutations": 0,
+    "native_outputs": 56,
+    "cgal_comparisons": 56,
+    "cgal_matches": 56,
+    "cgal_mismatches": 0,
+    "cgal_binary_sha256": "1e16643787b6ecbe3607841c37fd21c98dfdeae95e601656a6bb32ec3fce6c34",
+    "scope": "Checks recorded producer operation semantics and observed native connectivity; CGAL set equality is an optional independent comparison, not an added native runtime certificate."
+  }
+}

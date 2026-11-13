@@ -5,6 +5,23 @@ cases, exported figures, failure and empty-cell counts, and memory measurements.
 The underlying [CSV](../results/summary/measurements.csv) and
 [JSON with provenance](../results/summary/summary.json) are available separately.
 
+The measured output is **box-clipped Voronoi/power neighbor CSR** from fresh
+construction. It is not an incremental-update or Delaunay-tetrahedron benchmark.
+The [claim audit](../experiments/benchmark-claims-audit/README.md) distinguishes
+these implementations, reproduces targeted timings, and records seven confirmed
+incorrect neighbor pairs in the later four-checkpoint audit. Keep these
+correctness limits adjacent to timing claims. A zero status count, graph
+symmetry, or a shared source hash is not an exactness or performance guarantee.
+
+Before adopting geometry optimizations, [issue #300](https://github.com/alecjacobson/warpower/issues/300)
+requires paired baseline/candidate runs of the original 74 cases, including
+weighted cases, with identical inputs/order, allocator and timing policies on
+the same idle GPU. Retain raw samples and CPU-quota observations; investigate
+repeatable per-case slowdowns above 2% and beyond observed noise, rather than
+hiding them in an aggregate. This is an acceptance requirement, not an automated
+CI gate already implemented. The audit's targeted reruns do not replace the
+complete matrix or correctness regressions.
+
 Run commands from the checkout using its Python environment. Install the optional
 dependencies with `pip install -e '.[dev,datasets]' ninja`. To build the CUDA
 reference, install a compatible CUDA toolkit and the pinned upstream source:

@@ -1,9 +1,10 @@
-"""Device-count retry variant of the existing traversal; eager kernels stay unchanged."""
+"""Device-count traversal with the same retry rules as eager construction."""
 
 from functools import lru_cache
 
 import warp as wp
 
+from . import _retry
 from ._bvh import Tree
 from ._cell import Cell, Cell64, Scratch, Scratch64, clip, emit, init_cell
 from ._construct import node_distance, node_may_clip, node_radius
@@ -37,6 +38,7 @@ def make_retry_kernel(weighted=False, queue_capacity=64, robust=False, lane_stri
         hints: wp.array[int],
         hint_offsets: wp.array[int],
         use_hints: bool,
+        retry_states: wp.array[wp.vec2i],
     ):
         if wp.tid() % stride != 0:
             return
@@ -48,7 +50,9 @@ def make_retry_kernel(weighted=False, queue_capacity=64, robust=False, lane_stri
         output = i
         if output_by_job:
             output = i
-            if status[output] == 0 or status[output] == 3:
+            if not _retry.eligible(
+                retry_states[i], status[output], scratch.capacity, wp.static(robust)
+            ):
                 return
         if tree.owners[i] != i:
             counts[output] = 0
@@ -201,6 +205,14 @@ def make_retry_kernel(weighted=False, queue_capacity=64, robust=False, lane_stri
                 ):
                     node = candidate
         emit(scratch, cell, output, neighbors, counts, status)
+        retry_states[i] = _retry.after_attempt(
+            retry_states[i],
+            status[output],
+            scratch.capacity,
+            wp.static(robust),
+            False,
+            _retry.capacity_failure(cell.status),
+        )
         sources[i] = i
 
     return construct

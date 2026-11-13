@@ -8,10 +8,19 @@ from dataclasses import dataclass, field
 import numpy as np
 import warp as wp
 
-from . import _bvh, _validation
+from . import _bvh, _retry, _validation
 from ._adjacency import asymmetric_cells, compact, gather_repair_seeds
 from ._cell import allocate_scratch
-from ._construct import collect_failures, make_construct_kernel, merge_retry
+from ._construct import (
+    collect_failures,
+    init_retries,
+    make_construct_kernel,
+    merge_retry,
+    retry_kinds,
+)
+from ._cooperative_cell import allocate_scratch as allocate_precision_scratch
+from ._precision_construct import make_precision_kernel
+from ._query_predicates import check_queries, collect_precision, collect_precision_retry
 
 
 @dataclass(frozen=True)
@@ -117,7 +126,7 @@ def _build(
     leaf_size=-1,
     chunk_size=None,
     _capacity=64,
-    _queue_capacity=128,
+    _queue_capacity=96,
 ):
     started = time.perf_counter()
     p, torch_output = _points_array(points)
@@ -168,10 +177,20 @@ def _build(
             neighbors = wp.empty((n, _capacity), dtype=int, device=device)
             counts = wp.empty(n, dtype=int, device=device)
             status = wp.empty(n, dtype=int, device=device)
+            retry_states = wp.empty(n, dtype=wp.vec2i, device=device)
             source = wp.full(n, -1, dtype=int, device=device)
             size = _chunk_size(n, _capacity, device, chunk_size)
             scratch = allocate_scratch(size, _capacity, device)
-            kernel = make_construct_kernel(weights is not None, _queue_capacity)
+            query_capacity = max(1024, n // 16)
+            queries = wp.empty(query_capacity, dtype=wp.vec4i, device=device)
+            query_owners = wp.empty(query_capacity, dtype=int, device=device)
+            query_count = wp.zeros(1, dtype=int, device=device)
+            scratch.queries = queries
+            scratch.query_owners = query_owners
+            scratch.query_count = query_count
+            kernel = make_construct_kernel(
+                weights is not None, _queue_capacity, track_retries=False
+            )
             for start in range(0, n, size):
                 wp.launch(
                     kernel,
@@ -192,14 +211,78 @@ def _build(
                         hints,
                         offsets,
                         use_hints,
+                        retry_states,
                     ],
                     block_dim=32,
                     device=device,
                 )
+            wp.launch(
+                check_queries,
+                query_capacity,
+                inputs=[
+                    p,
+                    w,
+                    hierarchy.tree,
+                    queries,
+                    query_owners,
+                    query_count,
+                    status,
+                    neighbors,
+                    counts,
+                    source,
+                    False,
+                ],
+                device=device,
+            )
             failures = wp.empty(n, dtype=int, device=device)
-            failure_count = wp.zeros(1, dtype=int, device=device)
-            wp.launch(collect_failures, n, inputs=[status, failures, failure_count], device=device)
-            failed = int(failure_count.numpy()[0])
+            failure_count = wp.zeros(4, dtype=int, device=device)
+            failure_size = failure_count[:1]
+            wp.launch(
+                collect_precision,
+                n,
+                inputs=[status, failures, failure_count, retry_states, _capacity, True],
+                device=device,
+            )
+            precision_size = min(n, 512)
+            precision_jobs = wp.empty(precision_size, dtype=int, device=device)
+            precision_scratch = allocate_precision_scratch(precision_size, 128, device, robust=True)
+            wp.launch(
+                make_precision_kernel(weights is not None, 128, True, 32),
+                precision_size * 32,
+                inputs=[
+                    p,
+                    w,
+                    hierarchy.tree,
+                    failures,
+                    0,
+                    failure_count,
+                    source,
+                    False,
+                    True,
+                    precision_scratch,
+                    neighbors,
+                    counts,
+                    status,
+                    neighbors,
+                    False,
+                    hints,
+                    offsets,
+                    use_hints,
+                    retry_states,
+                ],
+                block_dim=32,
+                device=device,
+            )
+            failure_size.zero_()
+            wp.launch(
+                _retry.collect_retries,
+                n,
+                inputs=[status, retry_states, failures, failure_count],
+                device=device,
+            )
+            failed, cooperative_attempts, capacity_remaining, precision_remaining = map(
+                int, failure_count.numpy()
+            )
             # The scalar transfer has synchronized construction. Release large
             # temporary buffers before allocating retry storage.
             del scratch
@@ -208,22 +291,45 @@ def _build(
             retried = 0
             robust_retried = 0
             if failed:
-                # First increase single-precision capacity, then use double
-                # precision for unresolved cells. Keep completed retry rows.
+                # Storage and precision have independent per-site requirements.
+                # Completed rows and established storage floors are retained.
                 retried = failed
                 retry_neighbors = wp.empty((failed, 512), dtype=int, device=device)
                 retry_counts = wp.empty(failed, dtype=int, device=device)
-                retry_status = wp.full(failed, 1, dtype=int, device=device)
+                retry_status = wp.empty(failed, dtype=int, device=device)
+                wp.launch(
+                    init_retries,
+                    failed,
+                    inputs=[failures, neighbors, status, retry_neighbors, retry_status, source],
+                    device=device,
+                )
+                retry_counts.zero_()
                 remaining = failed
                 for attempt, (capacity, queue, robust) in enumerate(
-                    ((128, 128, False), (128, 128, True), (256, 256, True), (512, 512, True))
+                    (
+                        (128, 128, False),
+                        (256, 256, False),
+                        (512, 512, False),
+                        (128, 128, True),
+                        (256, 256, True),
+                        (512, 512, True),
+                    )
                 ):
-                    if attempt == 1:
-                        robust_retried = remaining
+                    if not robust and capacity_remaining == 0:
+                        continue
+                    if robust and precision_remaining == 0:
+                        continue
+                    if attempt == 3:
+                        robust_retried = precision_remaining
                     retry_size = _chunk_size(
                         failed, capacity, device, chunk_size, bytes_per_slot=100 if robust else 44
                     )
                     retry_scratch = allocate_scratch(retry_size, capacity, device, robust=robust)
+                    if not robust:
+                        query_count.zero_()
+                        retry_scratch.queries = queries
+                        retry_scratch.query_owners = query_owners
+                        retry_scratch.query_count = query_count
                     retry_stride = 32
                     kernel = make_construct_kernel(
                         weights is not None, queue, robust=robust, lane_stride=retry_stride
@@ -243,11 +349,71 @@ def _build(
                                 retry_neighbors,
                                 retry_counts,
                                 retry_status,
-                                neighbors if attempt == 0 else retry_neighbors,
-                                attempt > 0,
+                                retry_neighbors,
+                                True,
                                 hints,
                                 offsets,
                                 use_hints,
+                                retry_states,
+                            ],
+                            block_dim=32,
+                            device=device,
+                        )
+                    if not robust:
+                        wp.launch(
+                            check_queries,
+                            query_capacity,
+                            inputs=[
+                                p,
+                                w,
+                                hierarchy.tree,
+                                queries,
+                                query_owners,
+                                query_count,
+                                retry_status,
+                                retry_neighbors,
+                                retry_counts,
+                                source,
+                                True,
+                            ],
+                            device=device,
+                        )
+                        failure_size.zero_()
+                        wp.launch(
+                            collect_precision_retry,
+                            failed,
+                            inputs=[
+                                retry_status,
+                                failures,
+                                precision_jobs,
+                                failure_count,
+                                retry_states,
+                            ],
+                            device=device,
+                        )
+                        wp.launch(
+                            make_precision_kernel(weights is not None, 128, True, 32),
+                            precision_size * 32,
+                            inputs=[
+                                p,
+                                w,
+                                hierarchy.tree,
+                                precision_jobs,
+                                0,
+                                failure_count,
+                                source,
+                                True,
+                                True,
+                                precision_scratch,
+                                retry_neighbors,
+                                retry_counts,
+                                retry_status,
+                                retry_neighbors,
+                                False,
+                                hints,
+                                offsets,
+                                use_hints,
+                                retry_states,
                             ],
                             block_dim=32,
                             device=device,
@@ -259,12 +425,16 @@ def _build(
                         device=device,
                     )
                     # Only a scalar diagnostic is copied, rather than all statuses.
-                    check = wp.zeros(1, dtype=int, device=device)
-                    tmp = wp.empty(failed, dtype=int, device=device)
+                    check = wp.zeros(4, dtype=int, device=device)
                     wp.launch(
-                        collect_failures, failed, inputs=[retry_status, tmp, check], device=device
+                        retry_kinds,
+                        failed,
+                        inputs=[retry_status, check, failure_count, failures, retry_states],
+                        device=device,
                     )
-                    remaining = int(check.numpy()[0])
+                    remaining, capacity_remaining, cooperative_attempts, precision_remaining = map(
+                        int, check.numpy()
+                    )
                     if remaining == 0:
                         break
             # A one-sided facet can survive single-precision clipping without
@@ -291,6 +461,13 @@ def _build(
                 )
                 repair_counts = wp.empty(total, dtype=int, device=device)
                 repair_status = wp.full(total, 1, dtype=int, device=device)
+                wp.launch(
+                    _retry.prepare_repairs,
+                    repair_count,
+                    inputs=[repair_jobs, retry_states],
+                    device=device,
+                )
+                repair_counts.zero_()
                 consistency_retried += repair_count
                 for capacity in (128, 256, 512):
                     repair_size = _chunk_size(
@@ -320,6 +497,7 @@ def _build(
                                 hints,
                                 offsets,
                                 use_hints,
+                                retry_states,
                             ],
                             block_dim=32,
                             device=device,
@@ -352,6 +530,9 @@ def _build(
             diagnostics = {
                 "retried_cells": retried,
                 "double_precision_cells": robust_retried,
+                # Each site gets at most one bounded cooperative attempt. The
+                # other counters describe the later host-dispatched stages.
+                "cooperative_precision_attempts": cooperative_attempts,
                 "consistency_retried_cells": consistency_retried,
                 "asymmetric_cells_remaining": repair_count,
                 "chunk_size": size,

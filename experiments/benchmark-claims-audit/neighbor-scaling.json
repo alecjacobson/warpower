@@ -1,0 +1,235 @@
+{
+  "schema": "warpower.neighbor-scaling-diagnosis",
+  "version": 1,
+  "source_revision": "befcbd40613fb7d1202025eb0378896026f01cb7",
+  "date": "2026-11-12",
+  "hardware": "NVIDIA L40 48 GB",
+  "scope": "One Nsight-profiled call per input after three warmups; capacity/active counts observed in a separate untimed run with synchronous readbacks. No production-kernel modifications. Timing attribution, not new clean averages or geometric correctness certification.",
+  "conclusion": "Small input is dominated by capacity retry escalation: 131 cells exceed 64 vertices, 18 remain at capacity128, one remains at256. FP64 capacity512 pass has one active cell with135 final neighbors and costs69ms. Large checkpoint maximum degree51 avoids that pass. Both use the same voronoi_diagram driver.",
+  "cases": [
+    {
+      "case": "small",
+      "n": 9216,
+      "points_sha256": "0a34c76e0ddcedee74e81e5490ff287570bb1aa489c692b381388a779f32d102",
+      "profiled_wall_ms": 141.1512829363346,
+      "initial_construction_ms": 8.963686,
+      "retries_and_repairs_ms": 127.892037,
+      "other_and_host_ms": 4.295559936334612,
+      "max_graph_neighbors": 135,
+      "diagnostics": {
+        "retried_cells": 131,
+        "double_precision_cells": 18,
+        "consistency_retried_cells": 0,
+        "asymmetric_cells_remaining": 0,
+        "chunk_size": 9216,
+        "leaf_size": 4,
+        "knn_requested": 8,
+        "knn_effective": 0,
+        "warm_start": "nearest leaf"
+      },
+      "passes": [
+        {
+          "precision": "float32",
+          "capacity": 64,
+          "queue_capacity": 128,
+          "lane_stride": 1,
+          "rows": 9216,
+          "active_before": 9216,
+          "failed_after": 131,
+          "status_after": {
+            "0": 9085,
+            "2": 131
+          },
+          "gpu_kernel_ms": 8.963686,
+          "kernel": "make_construct_kernel__locals__construct_edaddc80_cuda_kernel_forward",
+          "grid_x": 288,
+          "block_x": 32,
+          "local_memory_per_thread": 0
+        },
+        {
+          "precision": "float32",
+          "capacity": 128,
+          "queue_capacity": 128,
+          "lane_stride": 32,
+          "rows": 131,
+          "active_before": 131,
+          "failed_after": 18,
+          "status_after": {
+            "0": 113,
+            "2": 18
+          },
+          "gpu_kernel_ms": 8.40397,
+          "kernel": "make_construct_kernel__locals__construct_6bde596a_cuda_kernel_forward",
+          "grid_x": 131,
+          "block_x": 32,
+          "local_memory_per_thread": 0
+        },
+        {
+          "precision": "float64",
+          "capacity": 128,
+          "queue_capacity": 128,
+          "lane_stride": 32,
+          "rows": 131,
+          "active_before": 18,
+          "failed_after": 18,
+          "status_after": {
+            "0": 113,
+            "2": 18
+          },
+          "gpu_kernel_ms": 3.647261,
+          "kernel": "make_construct_kernel__locals__construct_b745c8a4_cuda_kernel_forward",
+          "grid_x": 131,
+          "block_x": 32,
+          "local_memory_per_thread": 0
+        },
+        {
+          "precision": "float64",
+          "capacity": 256,
+          "queue_capacity": 256,
+          "lane_stride": 32,
+          "rows": 131,
+          "active_before": 18,
+          "failed_after": 1,
+          "status_after": {
+            "0": 130,
+            "2": 1
+          },
+          "gpu_kernel_ms": 46.799244,
+          "kernel": "make_construct_kernel__locals__construct_e6212307_cuda_kernel_forward",
+          "grid_x": 131,
+          "block_x": 32,
+          "local_memory_per_thread": 0
+        },
+        {
+          "precision": "float64",
+          "capacity": 512,
+          "queue_capacity": 512,
+          "lane_stride": 32,
+          "rows": 131,
+          "active_before": 1,
+          "failed_after": 0,
+          "status_after": {
+            "0": 131
+          },
+          "gpu_kernel_ms": 69.041562,
+          "kernel": "make_construct_kernel__locals__construct_e5e79fd1_cuda_kernel_forward",
+          "grid_x": 131,
+          "block_x": 32,
+          "local_memory_per_thread": 0
+        }
+      ]
+    },
+    {
+      "case": "large",
+      "n": 1968522,
+      "points_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+      "profiled_wall_ms": 226.8776334822178,
+      "initial_construction_ms": 199.329026,
+      "retries_and_repairs_ms": 11.122456999999999,
+      "other_and_host_ms": 16.426150482217793,
+      "max_graph_neighbors": 51,
+      "diagnostics": {
+        "retried_cells": 288,
+        "double_precision_cells": 1,
+        "consistency_retried_cells": 4,
+        "asymmetric_cells_remaining": 0,
+        "chunk_size": 1968522,
+        "leaf_size": 4,
+        "knn_requested": 8,
+        "knn_effective": 0,
+        "warm_start": "nearest leaf"
+      },
+      "passes": [
+        {
+          "precision": "float32",
+          "capacity": 64,
+          "queue_capacity": 128,
+          "lane_stride": 1,
+          "rows": 1968522,
+          "active_before": 1968522,
+          "failed_after": 288,
+          "status_after": {
+            "0": 1968234,
+            "2": 287,
+            "4": 1
+          },
+          "gpu_kernel_ms": 199.329026,
+          "kernel": "make_construct_kernel__locals__construct_edaddc80_cuda_kernel_forward",
+          "grid_x": 61517,
+          "block_x": 32,
+          "local_memory_per_thread": 0
+        },
+        {
+          "precision": "float32",
+          "capacity": 128,
+          "queue_capacity": 128,
+          "lane_stride": 32,
+          "rows": 288,
+          "active_before": 288,
+          "failed_after": 1,
+          "status_after": {
+            "0": 287,
+            "4": 1
+          },
+          "gpu_kernel_ms": 7.522333,
+          "kernel": "make_construct_kernel__locals__construct_6bde596a_cuda_kernel_forward",
+          "grid_x": 288,
+          "block_x": 32,
+          "local_memory_per_thread": 0
+        },
+        {
+          "precision": "float64",
+          "capacity": 128,
+          "queue_capacity": 128,
+          "lane_stride": 32,
+          "rows": 288,
+          "active_before": 1,
+          "failed_after": 1,
+          "status_after": {
+            "0": 287,
+            "4": 1
+          },
+          "gpu_kernel_ms": 0.584068,
+          "kernel": "make_construct_kernel__locals__construct_b745c8a4_cuda_kernel_forward",
+          "grid_x": 288,
+          "block_x": 32,
+          "local_memory_per_thread": 0
+        },
+        {
+          "precision": "float64",
+          "capacity": 256,
+          "queue_capacity": 256,
+          "lane_stride": 32,
+          "rows": 288,
+          "active_before": 1,
+          "failed_after": 0,
+          "status_after": {
+            "0": 288
+          },
+          "gpu_kernel_ms": 2.105809,
+          "kernel": "make_construct_kernel__locals__construct_e6212307_cuda_kernel_forward",
+          "grid_x": 288,
+          "block_x": 32,
+          "local_memory_per_thread": 0
+        },
+        {
+          "precision": "float64",
+          "capacity": 128,
+          "queue_capacity": 128,
+          "lane_stride": 32,
+          "rows": 4,
+          "active_before": 4,
+          "failed_after": 0,
+          "status_after": {
+            "0": 4
+          },
+          "gpu_kernel_ms": 0.910247,
+          "kernel": "make_construct_kernel__locals__construct_b745c8a4_cuda_kernel_forward",
+          "grid_x": 4,
+          "block_x": 32,
+          "local_memory_per_thread": 0
+        }
+      ]
+    }
+  ]
+}

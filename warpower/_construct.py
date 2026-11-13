@@ -5,6 +5,7 @@ from typing import Any
 
 import warp as wp
 
+from . import _retry
 from ._bvh import Tree, directional_radius_squared, distance_squared
 from ._cell import Cell, Cell64, Scratch, Scratch64, clip, emit, init_cell, position
 
@@ -58,7 +59,9 @@ def node_may_clip(tree: Tree, node: int, p: wp.vec3, wi: float, s: Any, cell: An
 
 
 @lru_cache(maxsize=None)
-def make_construct_kernel(weighted=False, queue_capacity=64, robust=False, lane_stride=1):
+def make_construct_kernel(
+    weighted=False, queue_capacity=64, robust=False, lane_stride=1, track_retries=True
+):
     weighted_mode = wp.constant(weighted)
     queue_size = wp.constant(queue_capacity)
     vector = wp.vec3d if robust else wp.vec3
@@ -83,6 +86,7 @@ def make_construct_kernel(weighted=False, queue_capacity=64, robust=False, lane_
         hints: wp.array[int],
         hint_offsets: wp.array[int],
         use_hints: bool,
+        retry_states: wp.array[wp.vec2i],
     ):
         if wp.tid() % stride != 0:
             return
@@ -92,8 +96,11 @@ def make_construct_kernel(weighted=False, queue_capacity=64, robust=False, lane_
         output = i
         if output_by_job:
             output = job
-            if status[output] == 0 or status[output] == 3:
-                return
+            if wp.static(track_retries):
+                if not _retry.eligible(
+                    retry_states[i], status[output], scratch.capacity, wp.static(robust)
+                ):
+                    return
         if tree.owners[i] != i:
             counts[output] = 0
             status[output] = 3
@@ -240,7 +247,17 @@ def make_construct_kernel(weighted=False, queue_capacity=64, robust=False, lane_
                     tree, candidate, p, wi, scratch, cell, wp.static(weighted_mode)
                 ):
                     node = candidate
-        emit(scratch, cell, output, neighbors, counts, status)
+        emit(scratch, cell, output, neighbors, counts, status, i)
+        if wp.static(track_retries):
+            if output_by_job:
+                retry_states[i] = _retry.after_attempt(
+                    retry_states[i],
+                    status[output],
+                    scratch.capacity,
+                    wp.static(robust),
+                    False,
+                    _retry.capacity_failure(cell.status),
+                )
 
     return construct
 
@@ -268,3 +285,43 @@ def merge_retry(
     counts[i] = retry_counts[j]
     status[i] = retry_status[j]
     source[i] = j
+
+
+@wp.kernel(enable_backward=False)
+def init_retries(
+    jobs: wp.array[int],
+    neighbors: wp.array2d[int],
+    status: wp.array[int],
+    retry_neighbors: wp.array2d[int],
+    retry_status: wp.array[int],
+    source: wp.array[int],
+):
+    row = wp.tid()
+    owner = jobs[row]
+    source[owner] = row
+    retry_status[row] = status[owner]
+    for k in range(retry_neighbors.shape[1]):
+        value = int(-1)
+        if k < neighbors.shape[1]:
+            value = neighbors[owner, k]
+        retry_neighbors[row, k] = value
+
+
+@wp.kernel(enable_backward=False)
+def retry_kinds(
+    status: wp.array[int],
+    counts: wp.array[int],
+    precision_count: wp.array[int],
+    owners: wp.array[int],
+    states: wp.array[wp.vec2i],
+):
+    if wp.tid() == 0:
+        counts[2] = precision_count[1]
+    row = wp.tid()
+    s = status[row]
+    if s != 0 and s != 3:
+        wp.atomic_add(counts, 0, 1)
+        if _retry.eligible(states[owners[row]], s, 512, False):
+            wp.atomic_add(counts, 1, 1)
+        if _retry.eligible(states[owners[row]], s, 512, True):
+            wp.atomic_add(counts, 3, 1)

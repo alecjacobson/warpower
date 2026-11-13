@@ -1,0 +1,337 @@
+{
+  "date": "2026-11-10",
+  "base_warpower_revision": "730ec233505bcc474c248d0ab237b10042fa029e",
+  "radfoam_revision": "3e7b52cf74e37ab2ab5e695f53570f515f537e3d",
+  "native_extension": {
+    "path": "/home/horde/projects/power-diagram/.work/radfoam-fitting-20261110/native/radfoam_headless.so",
+    "bytes": 4898008,
+    "sha256": "550af729f9d6d52bc782f22766e0036c20ba89625664c3d967fcd03b78ebbfce"
+  },
+  "machine": {
+    "platform": "Linux-5.15.0-113-generic-x86_64-with-glibc2.35",
+    "gpu": "NVIDIA L40, 570.158.01, 49140 MiB",
+    "cpu_model": "Intel(R) Xeon(R) Platinum 8362 CPU @ 2.80GHz",
+    "cgroup_cpu_cores": 4,
+    "cgroup_memory_bytes": 68719476736
+  },
+  "environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "PYTHONUNBUFFERED": "1"
+  },
+  "fixtures": {
+    "vtm": {
+      "manifest": "/home/horde/projects/power-diagram/.work/issue-297/results/local/incremental-replay-297/vtm/manifest.json",
+      "bytes": 102836,
+      "sha256": "75a8baa2f093bd3246f869314deae4bee5b3d0262d094b132576eb1cc8c2f45b",
+      "frames": 180,
+      "minimum_sites": 8192,
+      "maximum_sites": 8192,
+      "identity_epochs": 1,
+      "events": {
+        "initial": 1,
+        "legacy-reconstruction": 178,
+        "restoration-observed": 1
+      },
+      "provenance": {
+        "source": "/home/horde/projects/power-diagram/results/local/neighbor-clipping-v2/actual-trials/frames.npy",
+        "source_sha256": "0e1ee4dab205690b17ed0a58f2329d2a0d1c6521b1490759b80c8f5553dcd5a3",
+        "producer": "benchmarks.neighbor_clipping_trials.record_trials",
+        "identity_basis": "The producer records the fixed full-budget site-array slots. It does not compact or reorder those slots during the captured reconstruction trials.",
+        "producer_record": {
+          "source_sha256": "b4e07d0cea859ec879b46ed632d11206db0d63705c2d4399edd88ead1e1a601a",
+          "frames": 180,
+          "shape": [
+            180,
+            8192,
+            3
+          ],
+          "frame_bytes_sha256": "a425317960b2ab1419c9916915be39a207624280c04c082532f543a54615993e",
+          "mesher_counts": [
+            8192,
+            49595,
+            39377,
+            6276
+          ],
+          "error": [
+            0
+          ],
+          "steps": [
+            126,
+            3
+          ],
+          "rounds": [
+            9,
+            3,
+            4
+          ],
+          "scope": "Actual full-budget VTM reconstruction inputs, including rejected line-search trials; one fresh native-query solve. Instrumented capture is not a performance measurement."
+        },
+        "producer_record_sha256": "83463c6450afebfd3497fb7fd5f6227199345afd2960cf05dd3f5c0265bcf759"
+      },
+      "limitations": [
+        "Legacy producer records full-budget reconstruction calls, including rejected trials, but does not label initialization/growth/refit/quality or acceptance decisions. Such phase labels are not reconstructed from motion.",
+        "Exact repeated snapshots can be identified as coordinate restoration; this alone does not establish the optimizer's acceptance/rejection cause."
+      ]
+    },
+    "radfoam": {
+      "manifest": "/home/horde/projects/power-diagram/.work/issue-297/results/local/incremental-replay-297/radfoam/manifest.json",
+      "bytes": 103464,
+      "sha256": "73d0b780f421cef2a554ccdf19c477b67d3349d65a70e86760981d9acf38a360",
+      "frames": 142,
+      "minimum_sites": 9216,
+      "maximum_sites": 253903,
+      "identity_epochs": 27,
+      "events": {
+        "identity-reset": 27,
+        "position-update": 115
+      },
+      "provenance": {
+        "source": "/home/horde/projects/power-diagram/results/local/radfoam-fitting-20261110/bonsai-warpower-20k/trajectory.npz",
+        "source_sha256": "4b27989c0c343c77418d52441b1cb3bf2647a82b54c685eaa144176b8d468501",
+        "metadata_sha256": "ffab98c3e184972a05f4643e8ea78e8733d21988267670bbf8b9007cb7444de8",
+        "producer": "experiments/radfoam-integration/fit_scene.py",
+        "identity_basis": "Original-order Warpower capture only. IDs are assigned within same-size incremental segments; full-refresh/count-change boundaries conservatively begin a new identity epoch.",
+        "run_backend": "warpower",
+        "producer_revision": "730ec233505bcc474c248d0ab237b10042fa029e",
+        "producer_source_sha256": {
+          "/home/horde/projects/power-diagram/experiments/radfoam-integration/fit_scene.py": "2586671f6e3d2f915c9257876b6b169f9faba72156720e18ed37430cc17eac5a",
+          "/home/horde/projects/power-diagram/experiments/radfoam-integration/integration.py": "555d11b08d120f5174b4c4a3504c5d4075518d83e51e34d24599c66d53c671fd"
+        },
+        "run_report_sha256": "73f69776a317788907b6265e13e4f7140feb8fa59aa2ca351f57790fa7fecdda"
+      },
+      "limitations": [
+        "Legacy snapshots omit persistent IDs and explicit prune/densify maps. Cross-boundary identity is unknown: replay resets instead of treating an index permutation as motion.",
+        "Snapshots skip some geometry refreshes. Continuous replay follows the retained snapshots, not every original optimizer update.",
+        "True insertion/deletion and rejected-proposal labels require new producer-side recording with Writer and SiteRegistry."
+      ]
+    },
+    "control-v2": {
+      "manifest": "/home/horde/projects/power-diagram/.work/issue-297/results/local/incremental-replay-297/control-v2/manifest.json",
+      "bytes": 10063,
+      "sha256": "b3a2072194e451f8f013c9fbbc159f3c735f4bc2a847a37c2fe72f0fe35b6e08",
+      "frames": 18,
+      "minimum_sites": 48,
+      "maximum_sites": 272,
+      "identity_epochs": 1,
+      "events": {
+        "initial": 1,
+        "unchanged": 1,
+        "reorder": 1,
+        "global-motion": 1,
+        "local-motion": 1,
+        "restore": 4,
+        "insert": 1,
+        "delete": 1,
+        "duplicate-coordinates": 1,
+        "nonfinite": 1,
+        "exact-cospherical": 1,
+        "one-ulp-perturbation": 1,
+        "thin": 1,
+        "corrupted-retained-state": 1,
+        "coplanar": 1
+      },
+      "provenance": {
+        "seed": 2026,
+        "initial_sites": 256,
+        "generator": "benchmarks.replay.exporters.synthetic"
+      },
+      "limitations": [
+        "Controlled cases extend the real-capture corpus; they do not replace real VTM/RadFoam trajectories.",
+        "Capacity exhaustion is selected separately by the replay CLI's tetrahedra-capacity option."
+      ]
+    }
+  },
+  "commands": {
+    "export-vtm": [
+      "python",
+      "-m",
+      "benchmarks.incremental_replay",
+      "export-vtm",
+      "--source",
+      "/home/horde/projects/power-diagram/results/local/neighbor-clipping-v2/actual-trials/frames.npy",
+      "--record",
+      "/home/horde/projects/power-diagram/results/local/neighbor-clipping-v2/actual-trials/record.json",
+      "--output",
+      "results/local/incremental-replay-297/vtm"
+    ],
+    "export-radfoam": [
+      "python",
+      "-m",
+      "benchmarks.incremental_replay",
+      "export-radfoam",
+      "--source",
+      "/home/horde/projects/power-diagram/results/local/radfoam-fitting-20261110/bonsai-warpower-20k/trajectory.npz",
+      "--metadata",
+      "/home/horde/projects/power-diagram/results/local/radfoam-fitting-20261110/bonsai-warpower-20k/trajectory.json",
+      "--report",
+      "/home/horde/projects/power-diagram/results/local/radfoam-fitting-20261110/bonsai-warpower-20k/report.json",
+      "--output",
+      "results/local/incremental-replay-297/radfoam"
+    ],
+    "synthetic": [
+      "python",
+      "-m",
+      "benchmarks.incremental_replay",
+      "synthetic",
+      "--count",
+      "256",
+      "--seed",
+      "2026",
+      "--output",
+      "results/local/incremental-replay-297/control-v2"
+    ],
+    "control-qualified": [
+      "python",
+      "-m",
+      "benchmarks.incremental_replay",
+      "run",
+      "results/local/incremental-replay-297/control-v2",
+      "--backends",
+      "vtm-fragment",
+      "warp-full",
+      "radfoam-incremental",
+      "radfoam-full",
+      "--mode",
+      "sequence",
+      "--repeats",
+      "2",
+      "--validate",
+      "cgal",
+      "--cgal-binary",
+      "/home/horde/projects/power-diagram/.work/vtm/cgal-delaunay-final",
+      "--exact-checker",
+      "/home/horde/projects/power-diagram/.work/vtm/check-delaunay",
+      "--native-module-dir",
+      "/home/horde/projects/power-diagram/.work/radfoam-fitting-20261110/native",
+      "--output",
+      "results/local/incremental-replay-297/control-qualified.json"
+    ],
+    "vtm-pairs": [
+      "python",
+      "-m",
+      "benchmarks.incremental_replay",
+      "run",
+      "results/local/incremental-replay-297/vtm",
+      "--backends",
+      "vtm-fragment",
+      "warp-full",
+      "radfoam-incremental",
+      "radfoam-full",
+      "--mode",
+      "pairs",
+      "--transitions",
+      "1",
+      "2",
+      "162",
+      "179",
+      "--repeats",
+      "5",
+      "--validate",
+      "cgal",
+      "--cgal-binary",
+      "/home/horde/projects/power-diagram/.work/vtm/cgal-delaunay-final",
+      "--exact-checker",
+      "/home/horde/projects/power-diagram/.work/vtm/check-delaunay",
+      "--native-module-dir",
+      "/home/horde/projects/power-diagram/.work/radfoam-fitting-20261110/native",
+      "--output",
+      "results/local/incremental-replay-297/vtm-pairs.json"
+    ],
+    "vtm-sequence": [
+      "python",
+      "-m",
+      "benchmarks.incremental_replay",
+      "run",
+      "results/local/incremental-replay-297/vtm",
+      "--backends",
+      "vtm-fragment",
+      "warp-full",
+      "radfoam-incremental",
+      "radfoam-full",
+      "--mode",
+      "sequence",
+      "--repeats",
+      "3",
+      "--validate",
+      "cgal",
+      "--cgal-binary",
+      "/home/horde/projects/power-diagram/.work/vtm/cgal-delaunay-final",
+      "--exact-checker",
+      "/home/horde/projects/power-diagram/.work/vtm/check-delaunay",
+      "--native-module-dir",
+      "/home/horde/projects/power-diagram/.work/radfoam-fitting-20261110/native",
+      "--output",
+      "results/local/incremental-replay-297/vtm-sequence.json"
+    ],
+    "radfoam-pairs": [
+      "python",
+      "-m",
+      "benchmarks.incremental_replay",
+      "run",
+      "results/local/incremental-replay-297/radfoam",
+      "--mode",
+      "pairs",
+      "--transitions",
+      "1",
+      "95",
+      "118",
+      "134",
+      "--backends",
+      "warp-adjacency",
+      "warp-hints",
+      "--validate",
+      "none",
+      "--repeats",
+      "5",
+      "--output",
+      "results/local/incremental-replay-297/radfoam-pairs.json"
+    ],
+    "capacity": [
+      "python",
+      "-m",
+      "benchmarks.incremental_replay",
+      "run",
+      "results/local/incremental-replay-297/control-v2",
+      "--mode",
+      "pairs",
+      "--transitions",
+      "1",
+      "2",
+      "--backends",
+      "vtm-fragment",
+      "warp-full",
+      "--validate",
+      "cgal",
+      "--cgal-binary",
+      "/home/horde/projects/power-diagram/.work/vtm/cgal-delaunay-final",
+      "--tetrahedra-capacity",
+      "4",
+      "--repeats",
+      "2",
+      "--output",
+      "results/local/incremental-replay-297/capacity.json"
+    ]
+  },
+  "interrupted_and_superseded_runs": [
+    {
+      "report": "control-smoke.json",
+      "reason": "Initial native custom exception escaped the adapter; native exception handling was corrected.",
+      "source": "failed-source-v1"
+    },
+    {
+      "report": "control-smoke-v2.json",
+      "reason": "Native full exact-planar construction was externally interrupted after over 90 seconds without completion. The planar adapter guard and process watchdog were added.",
+      "source": "failed-source-v2",
+      "observation": "native-coplanar-stall.json"
+    },
+    {
+      "report": "control-smoke-v3.json",
+      "reason": "Completed smoke run exposed incorrect retained-tetrahedra injection array shape/count in the harness. The mapping was fixed before control-qualified.",
+      "source": "failed-source-v3"
+    }
+  ],
+  "executed_source_snapshot": "/home/horde/projects/power-diagram/.work/issue-297/results/local/incremental-replay-297/executed-source",
+  "scope": "Local first-milestone evidence. No core geometry implementation or defaults changed. Native comparison does not supply VTM complete certification. Legacy RadFoam identity is known only within same-size incremental segments; the source fit used a shared reduced site/ray/resolution recipe, not the official full training recipe."
+}

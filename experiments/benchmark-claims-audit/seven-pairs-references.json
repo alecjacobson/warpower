@@ -1,0 +1,376 @@
+{
+  "schema": "warpower.seven-pairs-reference-comparison",
+  "version": 1,
+  "date": "2026-11-12",
+  "source_revision": "67d3c65c704dc0f272122781749897086ba14b18",
+  "scope": "Fresh construction on four full original point sets, seven selected undirected pairs / fourteen directed decisions. Untimed correctness checks, not an exhaustive graph audit or an accuracy ranking on unbiased samples.",
+  "scenes": [
+    {
+      "scene": "bonsai",
+      "n": 1968522,
+      "points_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+      "pairs_tested": 2,
+      "results": [
+        {
+          "backend": "paragram",
+          "incorrect_undirected_pairs": 0,
+          "incorrect_directed_decisions": 0,
+          "source": "bonsai-paragram.json",
+          "source_sha256": "ee1dde2b10ab33cd25fb33f7373f5de4b6b1e442a05854a82d0c44d9a8fda924"
+        },
+        {
+          "backend": "radfoam-native",
+          "incorrect_undirected_pairs": 0,
+          "incorrect_directed_decisions": 0,
+          "source": "bonsai-radfoam-native.json",
+          "source_sha256": "f91d32e56aed177b9ad8c50ddda9e111da7534fd38ba55da2a46a4ac2a38de42"
+        },
+        {
+          "backend": "gdel3d",
+          "incorrect_undirected_pairs": 0,
+          "incorrect_directed_decisions": 0,
+          "source": "bonsai-gdel3d.json",
+          "source_sha256": "ce3865eeb27650f9af3a133113e0571ac4e1402296249e03bc81ab29597c0919"
+        }
+      ]
+    },
+    {
+      "scene": "garden",
+      "n": 4064598,
+      "points_sha256": "09fd9e0a85f683fb0646116ef381a1f8e28abdc8d2ec29f82a22c51facc1ce02",
+      "pairs_tested": 1,
+      "results": [
+        {
+          "backend": "paragram",
+          "incorrect_undirected_pairs": 1,
+          "incorrect_directed_decisions": 2,
+          "source": "garden-paragram.json",
+          "source_sha256": "1af1a2b6f4cd53a11400e55365d0c3b6d5bb5a3c8325d619f2abdb83085ae9e5"
+        },
+        {
+          "backend": "radfoam-native",
+          "incorrect_undirected_pairs": 0,
+          "incorrect_directed_decisions": 0,
+          "source": "garden-radfoam-native.json",
+          "source_sha256": "bcd9c8e055190aebc1119b812e9e7bc4c9b3a140f2186b55de4d9a07be7776a4"
+        },
+        {
+          "backend": "gdel3d",
+          "incorrect_undirected_pairs": 0,
+          "incorrect_directed_decisions": 0,
+          "source": "garden-gdel3d.json",
+          "source_sha256": "1f8dd6759c0cbf676f395abaaca59ad5a08110a5356b4ac92f2bec6f086c427c"
+        }
+      ]
+    },
+    {
+      "scene": "bicycle",
+      "n": 4199873,
+      "points_sha256": "b18a5ecf4abecc9fb4094a4df36c886fcc310aa4db6372758fdff7b97aae8d4f",
+      "pairs_tested": 1,
+      "results": [
+        {
+          "backend": "paragram",
+          "incorrect_undirected_pairs": 1,
+          "incorrect_directed_decisions": 2,
+          "source": "bicycle-paragram.json",
+          "source_sha256": "34762687c8effa4cf0c44e6b4db8370cb2ae350d12db7288fbcf2d43b8eb6c8d"
+        },
+        {
+          "backend": "radfoam-native",
+          "incorrect_undirected_pairs": 0,
+          "incorrect_directed_decisions": 0,
+          "source": "bicycle-radfoam-native.json",
+          "source_sha256": "4eeddc9fe18173b556ec3c446fc27f934f12b26febb650fb74747b29f2fcb9f0"
+        },
+        {
+          "backend": "gdel3d",
+          "incorrect_undirected_pairs": 0,
+          "incorrect_directed_decisions": 0,
+          "source": "bicycle-gdel3d.json",
+          "source_sha256": "17c1c9c650d59f78c1ee32dbbff0e45c1dfb1367f375c137d1d82e96aa93a726"
+        }
+      ]
+    },
+    {
+      "scene": "playroom",
+      "n": 3181453,
+      "points_sha256": "1ebc4e0405248284b8124069ecc93ca5c56d1ad66340809062a797721d7f6583",
+      "pairs_tested": 3,
+      "results": [
+        {
+          "backend": "paragram",
+          "incorrect_undirected_pairs": 3,
+          "incorrect_directed_decisions": 6,
+          "source": "playroom-paragram.json",
+          "source_sha256": "b5b626df64cc6b496dc99b75fa9442a9e27e7c98489484a9059f46347fd69d92"
+        },
+        {
+          "backend": "radfoam-native",
+          "incorrect_undirected_pairs": 0,
+          "incorrect_directed_decisions": 0,
+          "source": "playroom-radfoam-native.json",
+          "source_sha256": "25491dd97194cb0afdab5c15f9f7f240781a95cd79624cf79ef5246c4bee435b"
+        },
+        {
+          "backend": "gdel3d",
+          "incorrect_undirected_pairs": 0,
+          "incorrect_directed_decisions": 0,
+          "source": "playroom-gdel3d.json",
+          "source_sha256": "f1cd21bd41b5173b0765ff2c3e87a3c157d8f4a025f827589030fa10bd16f98c"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "paragram": 5,
+    "radfoam-native": 0,
+    "gdel3d": 0
+  },
+  "warpower_prior_reproduced_incorrect_pairs": 7,
+  "domain_check": {
+    "paragram_box_exact_answers": [
+      {
+        "query": 0,
+        "positive_area_face": false,
+        "feasible": false
+      },
+      {
+        "query": 1,
+        "positive_area_face": false,
+        "feasible": false
+      },
+      {
+        "query": 2,
+        "positive_area_face": true,
+        "feasible": true
+      },
+      {
+        "query": 3,
+        "positive_area_face": true,
+        "feasible": true
+      },
+      {
+        "query": 4,
+        "positive_area_face": true,
+        "feasible": true
+      },
+      {
+        "query": 5,
+        "positive_area_face": true,
+        "feasible": true
+      },
+      {
+        "query": 6,
+        "positive_area_face": true,
+        "feasible": true
+      },
+      {
+        "query": 7,
+        "positive_area_face": true,
+        "feasible": true
+      },
+      {
+        "query": 8,
+        "positive_area_face": false,
+        "feasible": false
+      },
+      {
+        "query": 9,
+        "positive_area_face": false,
+        "feasible": false
+      },
+      {
+        "query": 10,
+        "positive_area_face": false,
+        "feasible": false
+      },
+      {
+        "query": 11,
+        "positive_area_face": false,
+        "feasible": false
+      },
+      {
+        "query": 12,
+        "positive_area_face": false,
+        "feasible": false
+      },
+      {
+        "query": 13,
+        "positive_area_face": false,
+        "feasible": false
+      }
+    ],
+    "paragram_boxes": {
+      "bonsai": [
+        [
+          -36.689937591552734,
+          -37.627784729003906,
+          -40.268775939941406
+        ],
+        [
+          40.3129768371582,
+          37.04859161376953,
+          60.371864318847656
+        ]
+      ],
+      "garden": [
+        [
+          -41.1318359375,
+          -39.03227996826172,
+          -40.268775939941406
+        ],
+        [
+          52.27553939819336,
+          37.07050323486328,
+          49.842681884765625
+        ]
+      ],
+      "bicycle": [
+        [
+          -63.68746566772461,
+          -37.62656021118164,
+          -74.25304412841797
+        ],
+        [
+          51.471435546875,
+          37.0860710144043,
+          76.84595489501953
+        ]
+      ],
+      "playroom": [
+        [
+          -46.96368408203125,
+          -43.585391998291016,
+          -91.01697540283203
+        ],
+        [
+          76.60585021972656,
+          37.13423156738281,
+          35.40062713623047
+        ]
+      ]
+    },
+    "cgal_unbounded_selected_rows": [
+      {
+        "scene": "bonsai",
+        "owner": 199116,
+        "candidate": 202167,
+        "neighbor": false
+      },
+      {
+        "scene": "bonsai",
+        "owner": 202167,
+        "candidate": 199116,
+        "neighbor": false
+      },
+      {
+        "scene": "bonsai",
+        "owner": 360048,
+        "candidate": 360064,
+        "neighbor": true
+      },
+      {
+        "scene": "bonsai",
+        "owner": 360064,
+        "candidate": 360048,
+        "neighbor": true
+      },
+      {
+        "scene": "garden",
+        "owner": 2563822,
+        "candidate": 2580195,
+        "neighbor": true
+      },
+      {
+        "scene": "garden",
+        "owner": 2580195,
+        "candidate": 2563822,
+        "neighbor": true
+      },
+      {
+        "scene": "bicycle",
+        "owner": 203920,
+        "candidate": 204025,
+        "neighbor": true
+      },
+      {
+        "scene": "bicycle",
+        "owner": 204025,
+        "candidate": 203920,
+        "neighbor": true
+      },
+      {
+        "scene": "playroom",
+        "owner": 6244,
+        "candidate": 8262,
+        "neighbor": false
+      },
+      {
+        "scene": "playroom",
+        "owner": 8262,
+        "candidate": 6244,
+        "neighbor": false
+      },
+      {
+        "scene": "playroom",
+        "owner": 505391,
+        "candidate": 507437,
+        "neighbor": false
+      },
+      {
+        "scene": "playroom",
+        "owner": 507437,
+        "candidate": 505391,
+        "neighbor": false
+      },
+      {
+        "scene": "playroom",
+        "owner": 1326853,
+        "candidate": 1330910,
+        "neighbor": false
+      },
+      {
+        "scene": "playroom",
+        "owner": 1330910,
+        "candidate": 1326853,
+        "neighbor": false
+      }
+    ],
+    "all_selected_expectations_agree_across_domains": true,
+    "query_sha256": "88139b884f0afb53b56c952c63d3d8b1a7d9ee6007f51224ae3b5ba8aa6c8916",
+    "oracle_sha256": "88809a09d2c98c76156c929608171d393a94400761f64b399a58e346964b2eb6"
+  },
+  "provenance": {
+    "source_url": "https://www.comp.nus.edu.sg/~tants/gdel3d_files/gDel3D-Release_271.zip",
+    "source_archive_sha256": "724518dbccd99a5739f3f71eecea3470055b8b5936dac79e6175470a1bd85c43",
+    "release": "gDel3D Release271 (2014-08-05)",
+    "precision": "Upstream default RealType=double; original float32 coordinates promoted exactly",
+    "cpu_star_splaying": true,
+    "compatibility_changes": [
+      "Explicit Thrust device_malloc and gather includes",
+      "int_as_float -> __int_as_float CUDA intrinsic spelling",
+      "cuSwap marked host/device to retain CPU use under NVCC",
+      "CMake targets sm89 and uses NVCC for all translation units to align modern Thrust ABI namespace"
+    ],
+    "modified_upstream_files": [
+      "gFlip3D-Release_271/GDelFlipping/src/gDel3D/GpuDelaunay.cu",
+      "gFlip3D-Release_271/GDelFlipping/src/gDel3D/GPU/CudaWrapper.h",
+      "gFlip3D-Release_271/GDelFlipping/src/gDel3D/GPU/GPUDecl.h",
+      "gFlip3D-Release_271/GDelFlipping/src/gDel3D/GPU/KerPredicates.cu"
+    ],
+    "binary_sha256": "81dc2cc7941d2c3088bc2414cb0f16f753ce2c6b36282de6bcd878bada9d2a1d",
+    "compiler": "/usr/local/cuda-12.6/bin/nvcc",
+    "smoke": {
+      "n": 128,
+      "pairs_tested": 8128,
+      "wrong": 0,
+      "reference": "SciPy/Qhull on generic seeded float32 points",
+      "seed": 271
+    },
+    "adapter_scope": "Read unchanged float32 input, promote to double, call upstream default GpuDel.compute including CPU repair, inspect selected original-index pairs in alive output tetrahedra. Separate adapter; no training or rendering.",
+    "native_revision": "3e7b52cf74e37ab2ab5e695f53570f515f537e3d",
+    "native_binary_sha256": "550af729f9d6d52bc782f22766e0036c20ba89625664c3d967fcd03b78ebbfce",
+    "paragram_revision": "4f36b1f2c8738912c5efc056a06023d4c1d2da07"
+  }
+}

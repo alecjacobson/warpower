@@ -1,0 +1,1354 @@
+{
+  "control-qualified": {
+    "report": {
+      "path": "results/local/incremental-replay-297/control-qualified.json",
+      "bytes": 431034,
+      "sha256": "c58a94c9b96e119fadb6c5c8bea24c3ef2d296e68b4da81fc899d08d5c4719f1"
+    },
+    "fixture_manifest_sha256": "b3a2072194e451f8f013c9fbbc159f3c735f4bc2a847a37c2fe72f0fe35b6e08",
+    "fixture_limitations": [
+      "Controlled cases extend the real-capture corpus; they do not replace real VTM/RadFoam trajectories.",
+      "Capacity exhaustion is selected separately by the replay CLI's tetrahedra-capacity option."
+    ],
+    "contract": "full-hull-tetrahedra",
+    "mode": "sequence",
+    "transitions": 17,
+    "warmups": 1,
+    "repeats": 2,
+    "reference": "cgal",
+    "reference_binary_sha256": "1e16643787b6ecbe3607841c37fd21c98dfdeae95e601656a6bb32ec3fce6c34",
+    "exact_checker_sha256": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition.",
+    "validation_scope": "SciPy is a floating-point reference; the optional CGAL executable constructs and validates an exact-predicate reference. Both comparisons require tetrahedron-set equality after canonical duplicate ownership. Cospherical alternatives may legitimately differ and are reported as mismatches, not accepted as equivalent. VTM's complete runtime exact/symbolic certificate stays enabled. No public API or default changes are implied.",
+    "warpower_commit": "730ec233505bcc474c248d0ab237b10042fa029e",
+    "source_sha256": {
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/__init__.py": "e3daee191559391382319a0bc910344ec2d3890df8c51957ac1cd25576c134e0",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/backends.py": "d388ffddc5eafe655bac7c23b1ab8d982c721af1ecc5fead0466db2e603060d1",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/exporters.py": "a2ce31e1580d767a8bf31edce74844f196ac4f91bd33d22a1b0775862eb2a3f7",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/fixture.py": "c3251731855c7046f4d76223d6df1495bafee3976ff04c21277b6523ef0601f7",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/runner.py": "7071ae5622b0d609472dbe8f8bcccc50fe8de69fc3a11b335fb5191a0b461371",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/incremental_replay.py": "981c209bb6e090e5825cd10116f14005311f2710c3a00cb9b6b1db4bc80dccfb"
+    },
+    "versions": {
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "warp-lang": "1.19.0+cu12",
+      "torch": "2.7.1+cu126"
+    },
+    "backends": {
+      "vtm-fragment": {
+        "measured_samples": 34,
+        "successful_samples": 30,
+        "failed_samples": 4,
+        "reference_matches": 26,
+        "reference_mismatches": 4,
+        "previous_input_reference_matches": 26,
+        "exact_valid_alternatives": 4,
+        "cpu_throttled_samples": 0,
+        "median_ms": 2.31073796749115,
+        "p95_ms": 2471.515646576881,
+        "maximum_ms": 2512.8730051219463,
+        "sum_of_transition_medians_ms": 5146.31680585444,
+        "failure_kinds": {
+          "reported-construction-failure": 4
+        }
+      },
+      "warp-full": {
+        "measured_samples": 34,
+        "successful_samples": 30,
+        "failed_samples": 4,
+        "reference_matches": 26,
+        "reference_mismatches": 4,
+        "previous_input_reference_matches": 26,
+        "exact_valid_alternatives": 4,
+        "cpu_throttled_samples": 0,
+        "median_ms": 5.91110996901989,
+        "p95_ms": 2464.325687661767,
+        "maximum_ms": 2499.7751265764236,
+        "sum_of_transition_medians_ms": 5213.246187195182,
+        "failure_kinds": {
+          "reported-construction-failure": 4
+        }
+      },
+      "radfoam-incremental": {
+        "measured_samples": 34,
+        "successful_samples": 24,
+        "failed_samples": 10,
+        "reference_matches": 24,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 24,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 3.788713365793228,
+        "p95_ms": 7.764999940991402,
+        "maximum_ms": 25.387607514858246,
+        "sum_of_transition_medians_ms": 66.0096500068903,
+        "failure_kinds": {
+          "reported-construction-failure": 6,
+          "unsupported-state": 4
+        }
+      },
+      "radfoam-full": {
+        "measured_samples": 34,
+        "successful_samples": 24,
+        "failed_samples": 10,
+        "reference_matches": 24,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 24,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 7.508426904678345,
+        "p95_ms": 14.169884286820873,
+        "maximum_ms": 41.789598762989044,
+        "sum_of_transition_medians_ms": 105.01064918935299,
+        "failure_kinds": {
+          "reported-construction-failure": 8,
+          "unsupported-state": 2
+        }
+      }
+    },
+    "outcomes": [
+      {
+        "frame": 1,
+        "event": "unchanged",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      },
+      {
+        "frame": 2,
+        "event": "reorder",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      },
+      {
+        "frame": 3,
+        "event": "global-motion",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      },
+      {
+        "frame": 4,
+        "event": "local-motion",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      },
+      {
+        "frame": 5,
+        "event": "restore",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      },
+      {
+        "frame": 6,
+        "event": "insert",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      },
+      {
+        "frame": 7,
+        "event": "delete",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      },
+      {
+        "frame": 8,
+        "event": "duplicate-coordinates",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "TriangulationFailedError: duplicate points found"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "TriangulationFailedError: duplicate points found"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "frame": 9,
+        "event": "restore",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      },
+      {
+        "frame": 10,
+        "event": "nonfinite",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 1"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 1"
+              }
+            ]
+          },
+          "warp-full": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 1"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 1"
+              }
+            ]
+          },
+          "radfoam-incremental": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "nonfinite input rejected by the native-reference adapter"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "nonfinite input rejected by the native-reference adapter"
+              }
+            ]
+          },
+          "radfoam-full": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "nonfinite input rejected by the native-reference adapter"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "nonfinite input rejected by the native-reference adapter"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "frame": 11,
+        "event": "restore",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      },
+      {
+        "frame": 12,
+        "event": "exact-cospherical",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": false,
+            "exact_valid_alternatives": 2,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": false,
+            "exact_valid_alternatives": 2,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "TriangulationFailedError: divergent growth iterations"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "TriangulationFailedError: divergent growth iterations"
+              }
+            ]
+          },
+          "radfoam-full": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "TriangulationFailedError: divergent growth iterations"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "TriangulationFailedError: divergent growth iterations"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "frame": 13,
+        "event": "one-ulp-perturbation",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": false,
+            "exact_valid_alternatives": 2,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": false,
+            "exact_valid_alternatives": 2,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "TriangulationFailedError: ambiguous triangulation"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "TriangulationFailedError: ambiguous triangulation"
+              }
+            ]
+          },
+          "radfoam-full": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "TriangulationFailedError: ambiguous triangulation"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "TriangulationFailedError: ambiguous triangulation"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "frame": 14,
+        "event": "thin",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      },
+      {
+        "frame": 15,
+        "event": "corrupted-retained-state",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "unsupported-state",
+                "error": "UnsupportedState: native RadFoam bindings cannot inject arbitrary retained connectivity"
+              },
+              {
+                "repeat": 1,
+                "kind": "unsupported-state",
+                "error": "UnsupportedState: native RadFoam bindings cannot inject arbitrary retained connectivity"
+              }
+            ]
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      },
+      {
+        "frame": 16,
+        "event": "coplanar",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              }
+            ]
+          },
+          "warp-full": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              }
+            ]
+          },
+          "radfoam-incremental": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "unsupported-state",
+                "error": "UnsupportedState: axis-aligned planar input guarded before native construction after an observed stall"
+              },
+              {
+                "repeat": 1,
+                "kind": "unsupported-state",
+                "error": "UnsupportedState: axis-aligned planar input guarded before native construction after an observed stall"
+              }
+            ]
+          },
+          "radfoam-full": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "unsupported-state",
+                "error": "UnsupportedState: axis-aligned planar input guarded before native construction after an observed stall"
+              },
+              {
+                "repeat": 1,
+                "kind": "unsupported-state",
+                "error": "UnsupportedState: axis-aligned planar input guarded before native construction after an observed stall"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "frame": 17,
+        "event": "restore",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "warp-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-incremental": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          },
+          "radfoam-full": {
+            "successful_samples": 2,
+            "reference_match": true,
+            "exact_valid_alternatives": 0,
+            "failures": []
+          }
+        }
+      }
+    ]
+  },
+  "vtm-pairs": {
+    "report": {
+      "path": "results/local/incremental-replay-297/vtm-pairs.json",
+      "bytes": 290167,
+      "sha256": "11d524e6a5310736b8b2db3f7d1c7f1cd28793088fcac90e2cfabca7dd32bba8"
+    },
+    "fixture_manifest_sha256": "75a8baa2f093bd3246f869314deae4bee5b3d0262d094b132576eb1cc8c2f45b",
+    "fixture_limitations": [
+      "Legacy producer records full-budget reconstruction calls, including rejected trials, but does not label initialization/growth/refit/quality or acceptance decisions. Such phase labels are not reconstructed from motion.",
+      "Exact repeated snapshots can be identified as coordinate restoration; this alone does not establish the optimizer's acceptance/rejection cause."
+    ],
+    "contract": "full-hull-tetrahedra",
+    "mode": "pairs",
+    "transitions": 4,
+    "warmups": 1,
+    "repeats": 5,
+    "reference": "cgal",
+    "reference_binary_sha256": "1e16643787b6ecbe3607841c37fd21c98dfdeae95e601656a6bb32ec3fce6c34",
+    "exact_checker_sha256": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition.",
+    "validation_scope": "SciPy is a floating-point reference; the optional CGAL executable constructs and validates an exact-predicate reference. Both comparisons require tetrahedron-set equality after canonical duplicate ownership. Cospherical alternatives may legitimately differ and are reported as mismatches, not accepted as equivalent. VTM's complete runtime exact/symbolic certificate stays enabled. No public API or default changes are implied.",
+    "warpower_commit": "730ec233505bcc474c248d0ab237b10042fa029e",
+    "source_sha256": {
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/__init__.py": "e3daee191559391382319a0bc910344ec2d3890df8c51957ac1cd25576c134e0",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/backends.py": "d388ffddc5eafe655bac7c23b1ab8d982c721af1ecc5fead0466db2e603060d1",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/exporters.py": "a2ce31e1580d767a8bf31edce74844f196ac4f91bd33d22a1b0775862eb2a3f7",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/fixture.py": "c3251731855c7046f4d76223d6df1495bafee3976ff04c21277b6523ef0601f7",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/runner.py": "7071ae5622b0d609472dbe8f8bcccc50fe8de69fc3a11b335fb5191a0b461371",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/incremental_replay.py": "981c209bb6e090e5825cd10116f14005311f2710c3a00cb9b6b1db4bc80dccfb"
+    },
+    "versions": {
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "warp-lang": "1.19.0+cu12",
+      "torch": "2.7.1+cu126"
+    },
+    "backends": {
+      "vtm-fragment": {
+        "measured_samples": 20,
+        "successful_samples": 20,
+        "failed_samples": 0,
+        "reference_matches": 20,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 20,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 3.5759955644607544,
+        "p95_ms": 14.40300066024065,
+        "maximum_ms": 14.516040682792664,
+        "sum_of_transition_medians_ms": 23.37700128555298,
+        "failure_kinds": {}
+      },
+      "warp-full": {
+        "measured_samples": 20,
+        "successful_samples": 20,
+        "failed_samples": 0,
+        "reference_matches": 20,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 20,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 109.47280004620552,
+        "p95_ms": 131.99042174965143,
+        "maximum_ms": 132.0147030055523,
+        "sum_of_transition_medians_ms": 441.3944408297539,
+        "failure_kinds": {}
+      },
+      "radfoam-incremental": {
+        "measured_samples": 20,
+        "successful_samples": 20,
+        "failed_samples": 0,
+        "reference_matches": 20,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 20,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 4.695640876889229,
+        "p95_ms": 8.324207551777363,
+        "maximum_ms": 9.293083101511002,
+        "sum_of_transition_medians_ms": 19.166145473718643,
+        "failure_kinds": {}
+      },
+      "radfoam-full": {
+        "measured_samples": 20,
+        "successful_samples": 20,
+        "failed_samples": 0,
+        "reference_matches": 20,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 20,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 28.478985652327538,
+        "p95_ms": 32.7922383323312,
+        "maximum_ms": 57.368893176317215,
+        "sum_of_transition_medians_ms": 90.64110368490219,
+        "failure_kinds": {}
+      }
+    },
+    "winner_counts_with_5_percent_margin": {
+      "vtm": 3,
+      "native-reference": 1
+    },
+    "scope": "Exploratory native-reference crossover on this captured trajectory, with unchanged VTM certification. Native does not provide the same certificate. Offline motion/churn analysis is not a measured routing policy. Sum of transition medians excludes initialization and offline work."
+  },
+  "vtm-sequence": {
+    "report": {
+      "path": "results/local/incremental-replay-297/vtm-sequence.json",
+      "bytes": 5855334,
+      "sha256": "f8b8f94dad3f03b09effdff64c80f9a8f0d80a8599e28cdaab2c039703c0b4d6"
+    },
+    "fixture_manifest_sha256": "75a8baa2f093bd3246f869314deae4bee5b3d0262d094b132576eb1cc8c2f45b",
+    "fixture_limitations": [
+      "Legacy producer records full-budget reconstruction calls, including rejected trials, but does not label initialization/growth/refit/quality or acceptance decisions. Such phase labels are not reconstructed from motion.",
+      "Exact repeated snapshots can be identified as coordinate restoration; this alone does not establish the optimizer's acceptance/rejection cause."
+    ],
+    "contract": "full-hull-tetrahedra",
+    "mode": "sequence",
+    "transitions": 179,
+    "warmups": 1,
+    "repeats": 3,
+    "reference": "cgal",
+    "reference_binary_sha256": "1e16643787b6ecbe3607841c37fd21c98dfdeae95e601656a6bb32ec3fce6c34",
+    "exact_checker_sha256": "db428239e8ab94fad60eb11dd7d262920d810face6bd114a81d6f34e5693e91e",
+    "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition.",
+    "validation_scope": "SciPy is a floating-point reference; the optional CGAL executable constructs and validates an exact-predicate reference. Both comparisons require tetrahedron-set equality after canonical duplicate ownership. Cospherical alternatives may legitimately differ and are reported as mismatches, not accepted as equivalent. VTM's complete runtime exact/symbolic certificate stays enabled. No public API or default changes are implied.",
+    "warpower_commit": "730ec233505bcc474c248d0ab237b10042fa029e",
+    "source_sha256": {
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/__init__.py": "e3daee191559391382319a0bc910344ec2d3890df8c51957ac1cd25576c134e0",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/backends.py": "d388ffddc5eafe655bac7c23b1ab8d982c721af1ecc5fead0466db2e603060d1",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/exporters.py": "a2ce31e1580d767a8bf31edce74844f196ac4f91bd33d22a1b0775862eb2a3f7",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/fixture.py": "c3251731855c7046f4d76223d6df1495bafee3976ff04c21277b6523ef0601f7",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/runner.py": "7071ae5622b0d609472dbe8f8bcccc50fe8de69fc3a11b335fb5191a0b461371",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/incremental_replay.py": "981c209bb6e090e5825cd10116f14005311f2710c3a00cb9b6b1db4bc80dccfb"
+    },
+    "versions": {
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "warp-lang": "1.19.0+cu12",
+      "torch": "2.7.1+cu126"
+    },
+    "backends": {
+      "vtm-fragment": {
+        "measured_samples": 537,
+        "successful_samples": 537,
+        "failed_samples": 0,
+        "reference_matches": 537,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 537,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 3.5535618662834167,
+        "p95_ms": 9.606259316205975,
+        "maximum_ms": 14.644745737314224,
+        "sum_of_transition_medians_ms": 726.1840291321278,
+        "failure_kinds": {}
+      },
+      "warp-full": {
+        "measured_samples": 537,
+        "successful_samples": 537,
+        "failed_samples": 0,
+        "reference_matches": 537,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 537,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 91.58669039607048,
+        "p95_ms": 145.51349580287933,
+        "maximum_ms": 255.7140365242958,
+        "sum_of_transition_medians_ms": 18337.100110948086,
+        "failure_kinds": {}
+      },
+      "radfoam-incremental": {
+        "measured_samples": 537,
+        "successful_samples": 537,
+        "failed_samples": 0,
+        "reference_matches": 537,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 537,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 4.298098385334015,
+        "p95_ms": 16.865704208612442,
+        "maximum_ms": 38.30980509519577,
+        "sum_of_transition_medians_ms": 802.716713398695,
+        "failure_kinds": {}
+      },
+      "radfoam-full": {
+        "measured_samples": 537,
+        "successful_samples": 537,
+        "failed_samples": 0,
+        "reference_matches": 537,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 537,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 16.636386513710022,
+        "p95_ms": 35.67371815443038,
+        "maximum_ms": 64.68917429447174,
+        "sum_of_transition_medians_ms": 3080.788269639015,
+        "failure_kinds": {}
+      }
+    },
+    "winner_counts_with_5_percent_margin": {
+      "vtm": 134,
+      "native-reference": 37,
+      "near-tie": 8
+    },
+    "scope": "Exploratory native-reference crossover on this captured trajectory, with unchanged VTM certification. Native does not provide the same certificate. Offline motion/churn analysis is not a measured routing policy. Sum of transition medians excludes initialization and offline work."
+  },
+  "radfoam-pairs": {
+    "report": {
+      "path": "results/local/incremental-replay-297/radfoam-pairs.json",
+      "bytes": 115202,
+      "sha256": "1f730ae9be930aa066c745b350ec6eb6772519e6b221dcc8e931b10bb34da4cd"
+    },
+    "fixture_manifest_sha256": "73d0b780f421cef2a554ccdf19c477b67d3349d65a70e86760981d9acf38a360",
+    "fixture_limitations": [
+      "Legacy snapshots omit persistent IDs and explicit prune/densify maps. Cross-boundary identity is unknown: replay resets instead of treating an index permutation as motion.",
+      "Snapshots skip some geometry refreshes. Continuous replay follows the retained snapshots, not every original optimizer update.",
+      "True insertion/deletion and rejected-proposal labels require new producer-side recording with Writer and SiteRegistry."
+    ],
+    "contract": "bounded-voronoi-adjacency",
+    "mode": "pairs",
+    "transitions": 4,
+    "warmups": 1,
+    "repeats": 5,
+    "reference": "none",
+    "reference_binary_sha256": null,
+    "exact_checker_sha256": null,
+    "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition.",
+    "validation_scope": "SciPy is a floating-point reference; the optional CGAL executable constructs and validates an exact-predicate reference. Both comparisons require tetrahedron-set equality after canonical duplicate ownership. Cospherical alternatives may legitimately differ and are reported as mismatches, not accepted as equivalent. VTM's complete runtime exact/symbolic certificate stays enabled. No public API or default changes are implied.",
+    "warpower_commit": "730ec233505bcc474c248d0ab237b10042fa029e",
+    "source_sha256": {
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/__init__.py": "e3daee191559391382319a0bc910344ec2d3890df8c51957ac1cd25576c134e0",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/backends.py": "d388ffddc5eafe655bac7c23b1ab8d982c721af1ecc5fead0466db2e603060d1",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/exporters.py": "a2ce31e1580d767a8bf31edce74844f196ac4f91bd33d22a1b0775862eb2a3f7",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/fixture.py": "c3251731855c7046f4d76223d6df1495bafee3976ff04c21277b6523ef0601f7",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/runner.py": "7071ae5622b0d609472dbe8f8bcccc50fe8de69fc3a11b335fb5191a0b461371",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/incremental_replay.py": "981c209bb6e090e5825cd10116f14005311f2710c3a00cb9b6b1db4bc80dccfb"
+    },
+    "versions": {
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "warp-lang": "1.19.0+cu12",
+      "torch": "2.7.1+cu126"
+    },
+    "backends": {
+      "warp-adjacency": {
+        "measured_samples": 20,
+        "successful_samples": 20,
+        "failed_samples": 0,
+        "reference_matches": 0,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 0,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 41.56067967414856,
+        "p95_ms": 151.43229067325592,
+        "maximum_ms": 152.36623957753181,
+        "sum_of_transition_medians_ms": 254.11970913410187,
+        "failure_kinds": {}
+      },
+      "warp-hints": {
+        "measured_samples": 20,
+        "successful_samples": 20,
+        "failed_samples": 0,
+        "reference_matches": 0,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 0,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": 36.67203523218632,
+        "p95_ms": 143.68291348218918,
+        "maximum_ms": 143.96004751324654,
+        "sum_of_transition_medians_ms": 235.25122553110123,
+        "failure_kinds": {}
+      }
+    },
+    "output_comparisons": [
+      {
+        "frame": 1,
+        "source_step": 3,
+        "sites": 9216,
+        "all_samples_successful": true,
+        "identical_output_hashes": true,
+        "backend_summary": {
+          "warp-adjacency": {
+            "measured_samples": 5,
+            "successful_samples": 5,
+            "median_seconds": 0.1509866677224636,
+            "p95_seconds": 0.152169618755579,
+            "max_seconds": 0.15236623957753181,
+            "failures": [],
+            "all_comparable_outputs_match_reference": null,
+            "comparable_outputs": 0,
+            "previous_inputs_validated": 0,
+            "independently_comparable_samples": 0,
+            "reference_validated_median_seconds": null
+          },
+          "warp-hints": {
+            "measured_samples": 5,
+            "successful_samples": 5,
+            "median_seconds": 0.14319290965795517,
+            "p95_seconds": 0.14390170350670814,
+            "max_seconds": 0.14396004751324654,
+            "failures": [],
+            "all_comparable_outputs_match_reference": null,
+            "comparable_outputs": 0,
+            "previous_inputs_validated": 0,
+            "independently_comparable_samples": 0,
+            "reference_validated_median_seconds": null
+          }
+        }
+      },
+      {
+        "frame": 95,
+        "source_step": 4814,
+        "sites": 84946,
+        "all_samples_successful": true,
+        "identical_output_hashes": true,
+        "backend_summary": {
+          "warp-adjacency": {
+            "measured_samples": 5,
+            "successful_samples": 5,
+            "median_seconds": 0.02118964120745659,
+            "p95_seconds": 0.021262673288583757,
+            "max_seconds": 0.021265022456645966,
+            "failures": [],
+            "all_comparable_outputs_match_reference": null,
+            "comparable_outputs": 0,
+            "previous_inputs_validated": 0,
+            "independently_comparable_samples": 0,
+            "reference_validated_median_seconds": null
+          },
+          "warp-hints": {
+            "measured_samples": 5,
+            "successful_samples": 5,
+            "median_seconds": 0.01930857077240944,
+            "p95_seconds": 0.01959342658519745,
+            "max_seconds": 0.019617535173892975,
+            "failures": [],
+            "all_comparable_outputs_match_reference": null,
+            "comparable_outputs": 0,
+            "previous_inputs_validated": 0,
+            "independently_comparable_samples": 0,
+            "reference_validated_median_seconds": null
+          }
+        }
+      },
+      {
+        "frame": 118,
+        "source_step": 8401,
+        "sites": 168402,
+        "all_samples_successful": true,
+        "identical_output_hashes": true,
+        "backend_summary": {
+          "warp-adjacency": {
+            "measured_samples": 5,
+            "successful_samples": 5,
+            "median_seconds": 0.033645257353782654,
+            "p95_seconds": 0.034947721660137175,
+            "max_seconds": 0.03495826572179794,
+            "failures": [],
+            "all_comparable_outputs_match_reference": null,
+            "comparable_outputs": 0,
+            "previous_inputs_validated": 0,
+            "independently_comparable_samples": 0,
+            "reference_validated_median_seconds": null
+          },
+          "warp-hints": {
+            "measured_samples": 5,
+            "successful_samples": 5,
+            "median_seconds": 0.028855647891759872,
+            "p95_seconds": 0.0298436239361763,
+            "max_seconds": 0.029969535768032074,
+            "failures": [],
+            "all_comparable_outputs_match_reference": null,
+            "comparable_outputs": 0,
+            "previous_inputs_validated": 0,
+            "independently_comparable_samples": 0,
+            "reference_validated_median_seconds": null
+          }
+        }
+      },
+      {
+        "frame": 134,
+        "source_step": 11103,
+        "sites": 253903,
+        "all_samples_successful": true,
+        "identical_output_hashes": true,
+        "backend_summary": {
+          "warp-adjacency": {
+            "measured_samples": 5,
+            "successful_samples": 5,
+            "median_seconds": 0.04829814285039902,
+            "p95_seconds": 0.04864964410662651,
+            "max_seconds": 0.04869256541132927,
+            "failures": [],
+            "all_comparable_outputs_match_reference": null,
+            "comparable_outputs": 0,
+            "previous_inputs_validated": 0,
+            "independently_comparable_samples": 0,
+            "reference_validated_median_seconds": null
+          },
+          "warp-hints": {
+            "measured_samples": 5,
+            "successful_samples": 5,
+            "median_seconds": 0.043894097208976746,
+            "p95_seconds": 0.050700878351926805,
+            "max_seconds": 0.052393317222595215,
+            "failures": [],
+            "all_comparable_outputs_match_reference": null,
+            "comparable_outputs": 0,
+            "previous_inputs_validated": 0,
+            "independently_comparable_samples": 0,
+            "reference_validated_median_seconds": null
+          }
+        }
+      }
+    ],
+    "scope": "Bounded adjacency only; cross-backend hash equality and zero statuses are not an independent exact completeness certificate."
+  },
+  "capacity": {
+    "report": {
+      "path": "results/local/incremental-replay-297/capacity.json",
+      "bytes": 42842,
+      "sha256": "77cc7dccd9f874404ddced8194e587d7d8ae238933a4b62057aa8681d88f65c8"
+    },
+    "fixture_manifest_sha256": "b3a2072194e451f8f013c9fbbc159f3c735f4bc2a847a37c2fe72f0fe35b6e08",
+    "fixture_limitations": [
+      "Controlled cases extend the real-capture corpus; they do not replace real VTM/RadFoam trajectories.",
+      "Capacity exhaustion is selected separately by the replay CLI's tetrahedra-capacity option."
+    ],
+    "contract": "full-hull-tetrahedra",
+    "mode": "pairs",
+    "transitions": 2,
+    "warmups": 1,
+    "repeats": 2,
+    "reference": "cgal",
+    "reference_binary_sha256": "1e16643787b6ecbe3607841c37fd21c98dfdeae95e601656a6bb32ec3fce6c34",
+    "exact_checker_sha256": null,
+    "timing_scope": "Original-coordinate canonicalization and host-to-device input staging occur before each timed update. Device copies, internal point reordering, workspace allocation on count changes, geometry work, synchronization, and state switching occur inside timing. Readback, output hashing, independent reference checking and offline motion features are outside. Sequence trials retain each backend's state across every frame; paired trials rebuild and check the previous input before timing each transition.",
+    "validation_scope": "SciPy is a floating-point reference; the optional CGAL executable constructs and validates an exact-predicate reference. Both comparisons require tetrahedron-set equality after canonical duplicate ownership. Cospherical alternatives may legitimately differ and are reported as mismatches, not accepted as equivalent. VTM's complete runtime exact/symbolic certificate stays enabled. No public API or default changes are implied.",
+    "warpower_commit": "730ec233505bcc474c248d0ab237b10042fa029e",
+    "source_sha256": {
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/__init__.py": "e3daee191559391382319a0bc910344ec2d3890df8c51957ac1cd25576c134e0",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/backends.py": "d388ffddc5eafe655bac7c23b1ab8d982c721af1ecc5fead0466db2e603060d1",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/exporters.py": "a2ce31e1580d767a8bf31edce74844f196ac4f91bd33d22a1b0775862eb2a3f7",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/fixture.py": "c3251731855c7046f4d76223d6df1495bafee3976ff04c21277b6523ef0601f7",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/replay/runner.py": "7071ae5622b0d609472dbe8f8bcccc50fe8de69fc3a11b335fb5191a0b461371",
+      "/home/horde/projects/power-diagram/.work/issue-297/benchmarks/incremental_replay.py": "981c209bb6e090e5825cd10116f14005311f2710c3a00cb9b6b1db4bc80dccfb"
+    },
+    "versions": {
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "warp-lang": "1.19.0+cu12",
+      "torch": "2.7.1+cu126"
+    },
+    "backends": {
+      "vtm-fragment": {
+        "measured_samples": 4,
+        "successful_samples": 0,
+        "failed_samples": 4,
+        "reference_matches": 0,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 0,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": null,
+        "p95_ms": null,
+        "maximum_ms": null,
+        "sum_of_transition_medians_ms": null,
+        "failure_kinds": {
+          "reported-construction-failure": 4
+        }
+      },
+      "warp-full": {
+        "measured_samples": 4,
+        "successful_samples": 0,
+        "failed_samples": 4,
+        "reference_matches": 0,
+        "reference_mismatches": 0,
+        "previous_input_reference_matches": 0,
+        "exact_valid_alternatives": 0,
+        "cpu_throttled_samples": 0,
+        "median_ms": null,
+        "p95_ms": null,
+        "maximum_ms": null,
+        "sum_of_transition_medians_ms": null,
+        "failure_kinds": {
+          "reported-construction-failure": 4
+        }
+      }
+    },
+    "outcomes": [
+      {
+        "frame": 1,
+        "event": "unchanged",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              }
+            ]
+          },
+          "warp-full": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "frame": 2,
+        "event": "reorder",
+        "variants": {
+          "vtm-fragment": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              }
+            ]
+          },
+          "warp-full": {
+            "successful_samples": 0,
+            "reference_match": null,
+            "exact_valid_alternatives": 0,
+            "failures": [
+              {
+                "repeat": 0,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              },
+              {
+                "repeat": 1,
+                "kind": "reported-construction-failure",
+                "error": "construction error bits: 2"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

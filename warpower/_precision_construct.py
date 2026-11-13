@@ -1,21 +1,22 @@
-"""Bounded GPU recovery queue, with one 32-thread block per difficult cell.
+"""Recover difficult cells with one 32-thread block at either precision.
 
 Threads share clipping and node-rejection work. They keep identical traversal
 control flow; only the leader emits the completed neighbor row.
 """
 
 from functools import lru_cache
+from typing import Any
 
 import warp as wp
 
 from . import _retry
 from ._bvh import Tree
 from ._construct import node_distance, node_radius
-from ._cooperative_cell import Cell64, Scratch64, clip, emit, init_cell
+from ._cooperative_cell import Cell, Cell64, Scratch, Scratch64, emit, init_cell, make_clip
 
 
 @wp.func
-def vertex_may_clip(k: int, value: wp.vec3d, nv: int, lower: wp.vec3, upper: wp.vec3, delta: float):
+def vertex_may_clip(k: int, value: Any, nv: int, lower: wp.vec3, upper: wp.vec3, delta: float):
     if k >= nv:
         return 0
     x = wp.vec3(value)
@@ -29,31 +30,37 @@ def vertex_may_clip(k: int, value: wp.vec3d, nv: int, lower: wp.vec3, upper: wp.
     return int(distance <= 1.0e-5 * (scale + 1.0e-20))
 
 
-@wp.func
-def node_may_clip(
-    tree: Tree, node: int, p: wp.vec3, wi: float, s: Scratch64, cell: Cell64, weighted: bool
-):
-    lower = tree.lower[node] - p
-    upper = tree.upper[node] - p
-    delta = float(0.0)
-    if weighted:
-        delta = wi - tree.weight[node]
-    positions = wp.tile_load(s.cartesian, shape=128, offset=cell.base)
-    indices = wp.tile_arange(128, dtype=int)
-    decisions = wp.tile_map(vertex_may_clip, indices, positions, cell.nv, lower, upper, delta)
-    return wp.tile_extract(wp.tile_max(decisions), 0) != 0
-
-
 @lru_cache(maxsize=None)
-def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_stride=32):
-    if queue_capacity != 128 or not robust or lane_stride != 32:
-        raise ValueError("cooperative recovery requires queue=128, FP64, and 32 lanes")
+def make_precision_kernel(
+    weighted=False, queue_capacity=128, robust=True, lane_stride=32, capacity=128, captured=False
+):
+    if capacity not in (128, 256, 512) or queue_capacity < 1 or lane_stride != 32:
+        raise ValueError(
+            "cooperative recovery requires capacity 128/256/512, a positive queue, and 32 lanes"
+        )
     weighted_mode = wp.constant(weighted)
     queue_size = wp.constant(queue_capacity)
-    vector = wp.vec3d
-    scratch_type = Scratch64
-    cell_type = Cell64
+    vector = wp.vec3d if robust else wp.vec3
+    scratch_type = Scratch64 if robust else Scratch
+    cell_type = Cell64 if robust else Cell
+    tile_capacity = wp.constant(capacity)
+    clip = make_clip(capacity, robust)
     stride = wp.constant(lane_stride)
+    offset_type = wp.array[int] if captured else int
+
+    @wp.func
+    def node_may_clip(
+        tree: Tree, node: int, p: wp.vec3, wi: float, s: Any, cell: Any, weighted: bool
+    ):
+        lower = tree.lower[node] - p
+        upper = tree.upper[node] - p
+        delta = float(0.0)
+        if weighted:
+            delta = wi - tree.weight[node]
+        positions = wp.tile_load(s.cartesian, shape=tile_capacity, offset=cell.base)
+        indices = wp.tile_arange(tile_capacity, dtype=int)
+        decisions = wp.tile_map(vertex_may_clip, indices, positions, cell.nv, lower, upper, delta)
+        return wp.tile_extract(wp.tile_max(decisions), 0) != 0
 
     @wp.kernel(enable_backward=False, module="unique", module_options={"fast_math": True})
     def construct(
@@ -61,7 +68,7 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
         weights: wp.array[float],
         tree: Tree,
         jobs: wp.array[int],
-        chunk_offset: int,
+        chunk_offset: offset_type,
         job_count: wp.array[int],
         row_map: wp.array[int],
         remapped: bool,
@@ -75,10 +82,14 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
         hints: wp.array[int],
         hint_offsets: wp.array[int],
         use_hints: bool,
-        retry_states: wp.array[wp.vec2i],
+        retry_states: wp.array[wp.vec3i],
     ):
         slot = wp.tid() // stride
-        job = chunk_offset + slot
+        job = int(0)
+        if wp.static(captured):
+            job = chunk_offset[0] + slot
+        else:
+            job = chunk_offset + slot
         if job >= job_count[0]:
             return
         i = jobs[job]
@@ -87,8 +98,16 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
             output = i
             if remapped:
                 output = row_map[i]
-            if not _retry.cooperative_eligible(retry_states[i], status[output]):
+            if not _retry.eligible(
+                retry_states[i], status[output], tile_capacity, wp.static(robust), queue_size
+            ):
                 return
+            if wp.static(robust):
+                if (
+                    _retry.numerical(status[output])
+                    and (retry_states[i][0] & _retry.COOPERATIVE_TRIED) != 0
+                ):
+                    return
         if tree.owners[i] != i:
             if wp.tid() % 32 == 0:
                 counts[output] = 0
@@ -102,10 +121,22 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
         upper = tree.upper[1] + wp.vec3(1.00001)
         scratch.lane = wp.tid() % 32
         cell = init_cell(scratch, slot, p, lower, upper, cell_type())
+        if status[output] == 4:
+            cell.capacity = wp.min(tile_capacity, wp.max(8, retry_states[i][1]))
         if output_by_job:
             seed_count = seed_neighbors.shape[1]
+            if wp.static(captured):
+                if row_map[i] >= 0:
+                    seed_count = neighbors.shape[1]
             for k in range(seed_count):
-                j = seed_neighbors[output, k]
+                j = int(-1)
+                if wp.static(captured):
+                    if row_map[i] >= 0:
+                        j = neighbors[output, k]
+                    else:
+                        j = seed_neighbors[output, k]
+                else:
+                    j = seed_neighbors[output, k]
                 if j >= 0:
                     wj = float(0.0)
                     if wp.static(weighted_mode):
@@ -125,6 +156,9 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
                 if cell.status != 0:
                     break
 
+        queue_limit = wp.min(queue_size, wp.max(1, retry_states[i][2]))
+        if status[output] == 4:
+            queue_limit = queue_size
         queue_nodes = wp.zeros(shape=queue_size, dtype=int)
         queue_dist = wp.zeros(shape=queue_size, dtype=float)
         size = int(0)
@@ -138,7 +172,7 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
                 right = tree.right[node]
                 dl = node_distance(tree, left, p, wi, wp.static(weighted_mode))
                 dr = node_distance(tree, right, p, wi, wp.static(weighted_mode))
-                if size == queue_size:
+                if size == queue_limit:
                     cell.status = 4
                     break
                 if dl < dr:
@@ -176,7 +210,7 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
                         far = left
                         far_d = dl
                 if far >= 0:
-                    if size == queue_size:
+                    if size == queue_limit:
                         kept = int(0)
                         for k in range(size):
                             queued = queue_nodes[k]
@@ -189,7 +223,7 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
                                 queue_dist[kept] = queue_dist[k]
                                 kept += 1
                         size = kept
-                        if size == queue_size:
+                        if size == queue_limit:
                             cell.status = 4
                             break
                     queue_nodes[size] = far
@@ -236,14 +270,17 @@ def make_precision_kernel(weighted=False, queue_capacity=128, robust=True, lane_
                 ):
                     node = candidate
         if wp.tid() % 32 == 0:
+            if wp.static(captured):
+                row_map[i] = i
             emit(scratch, cell, output, neighbors, counts, status)
             retry_states[i] = _retry.after_attempt(
                 retry_states[i],
                 status[output],
-                128,
-                True,
+                cell.capacity,
+                wp.static(robust),
                 True,
                 _retry.capacity_failure(cell.status),
+                queue_limit,
             )
 
     return construct

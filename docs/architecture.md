@@ -2,29 +2,29 @@
 
 Ordinary cells are built by independent GPU threads. Each thread clips a
 bounded convex cell against candidate bisectors, then emits its active neighbor
-planes. Numerically difficult cells can use a separate cooperative recovery
-kernel with 32 threads per cell. The final pass produces symmetric CSR adjacency. All project GPU code is
+planes. Capacity retries and eligible numerical recovery use cooperative kernels with
+32 threads per cell. The final pass produces symmetric CSR adjacency. All project GPU code is
 written as NVIDIA Warp kernels; sorting and scans use Warp's supplied primitives.
 
 ## Comparison with Paragram
 
 This comparison describes the code we benchmarked: Paragram
 [`4f36b1f`](https://github.com/zenseact/paragram/tree/4f36b1f2c8738912c5efc056a06023d4c1d2da07)
-and Warpower's implementation at
-[`d38b80c`](https://github.com/alecjacobson/warpower/tree/d38b80c).
+and the current Warpower implementation. Timing reports pin the exact source
+revision used for each measurement.
 GPU-dependent defaults below refer to the NVIDIA L40 path. Links in the table
 point to the corresponding source files.
 
 | Aspect | Paragram | Warpower |
 | --- | --- | --- |
 | GPU implementation and dependencies | Handwritten C++/CUDA extension loaded through PyTorch; cuBQL supplies the BVH builder. Source builds use NVCC. [Backend][p-backend] | Python-defined Warp kernels; Warp supplies compilation, radix sorting, and scans. No project C++/CUDA extension; PyTorch is optional. [Package dependencies](../pyproject.toml), [hierarchy](../warpower/_bvh.py) |
-| Shared construction method | One GPU thread clips each bounded convex cell against candidate bisectors, represents vertices by triples of incident planes, and exports active neighbor planes. Scratch storage is interleaved across 32 cells for coalesced access. [Clipper][p-cell] | Retains that construction method and 32-cell storage layout. One generic clipper serves Voronoi/power construction and float32/float64 recovery. Plane triples use three 10-bit indices packed into a `uint32`, allowing larger retry capacities. [Clipper](../warpower/_cell.py) |
+| Shared construction method | One GPU thread clips each bounded convex cell against candidate bisectors, represents vertices by triples of incident planes, and exports active neighbor planes. Scratch storage is interleaved across 32 cells for coalesced access. [Clipper][p-cell] | Retains that construction method and 32-cell storage layout. The ordinary clipper serves Voronoi/power construction and serial recovery; a separate cooperative clipper handles FP32 capacity retries and bounded FP64 recovery. Plane triples use three 10-bit indices packed into a `uint32`, allowing larger retry capacities. [Clipper](../warpower/_cell.py) |
 | Plane coordinates | Normalized plane equations in world coordinates, with the offset formed from the sum and difference of the two site positions. [Bisectors][p-cell] | Also normalizes planes, but expresses them relative to the seed, using position differences and weight differences. This reduces sensitivity to large world-coordinate offsets. [Clipping](../warpower/_cell.py) |
 | Spatial hierarchy | cuBQL's default spatial-median GPU builder; power diagrams add node maximum weights through bottom-up propagation with atomic arrival counters. [Builder][p-builder], [cuBQL configuration][p-cubql] | 63-bit Morton sorting followed by a Karras binary radix tree. A temporary segment tree supplies subtree bounds and maximum weights through ordered kernel launches. This adds temporary arrays and avoids a custom inter-block publication protocol. [Builder](../warpower/_bvh.py) |
 | Initialization and tuning | Default leaf threshold 17 on L40; the separate KNN pass is disabled on this path. Traversal first descends to a nearby leaf. CSR initial guesses are supported. [Entry point][p-entry], [traversal][p-traversal] | Default leaf threshold 4; starts with a nearby leaf and supports CSR initial guesses. Accepts `knn` for compatibility but keeps the separate KNN pass disabled on all devices; reports requested/effective values in diagnostics. [API](../warpower/_api.py), [traversal](../warpower/_construct.py) |
 | Candidate rejection | Directional cell-box bounds and distance-to-bisector tests; weighted traversal also uses each node's maximum weight. [Traversal][p-power-traversal], [clipper][p-cell] | Uses directional bounds plus an extra test minimizing the bisector expression over a node box for every current cell vertex. Weighted rejection checks the signed numerator before squaring. [Bounds and traversal](../warpower/_construct.py), [clipper](../warpower/_cell.py) |
-| Traversal queue overflow | Best-first traversal uses 64 entries. When full, a nearer incoming entry replaces the farthest queued entry; otherwise the incoming entry is discarded. [Voronoi][p-traversal], [power][p-power-traversal] | Starts with 128 entries. Compacts entries rejected by the updated cell bounds; if still full, records failure and retries with capacity up to 512. Does not evict a potentially valid candidate to fit the queue. [Traversal](../warpower/_construct.py), [retry schedule](../warpower/_api.py) |
-| Capacity and precision recovery | Float32 clipping with fixed limits of 64 planes and 64 vertices. The public construction call returns statuses without an automatic larger-capacity or float64 retry. [Clipper][p-cell], [entry point][p-entry] | Starts at 64 slots in float32. Capacity failures grow to 128/256/512 at the current precision; numerical failures promote to float64 while retaining the required capacity. Eligible numerical recovery uses a cooperative 128-slot kernel. Larger retries still use one active thread per cell. Successful rows and retry seeds are retained. [Retry policy](../warpower/_retry.py), [retry schedule](../warpower/_api.py), [cooperative recovery](../warpower/_precision_construct.py) |
+| Traversal queue overflow | Best-first traversal uses 64 entries. When full, a nearer incoming entry replaces the farthest queued entry; otherwise the incoming entry is discarded. [Voronoi][p-traversal], [power][p-power-traversal] | Starts with 96 entries. Compacts entries rejected by the updated cell bounds; if still full, records failure and retries with capacity up to 512. Does not evict a potentially valid candidate to fit the queue. [Traversal](../warpower/_construct.py), [retry schedule](../warpower/_api.py) |
+| Capacity and precision recovery | Float32 clipping with fixed limits of 64 planes and 64 vertices. The public construction call returns statuses without an automatic larger-capacity or float64 retry. [Clipper][p-cell], [entry point][p-entry] | Starts at 64 slots in float32. Capacity failures grow to 128/256/512 at the current precision; numerical failures promote to float64 while retaining the required capacity. FP32 capacity retries use 32 cooperating threads at 128/256/512 slots. Eligible numerical recovery uses a cooperative FP64 128-slot kernel, followed when needed by serial FP64 recovery. Traversal-queue growth is independent of clipping capacity. Successful rows and retry seeds are retained. [Retry policy](../warpower/_retry.py), [retry schedule](../warpower/_api.py), [cooperative recovery](../warpower/_precision_construct.py) |
 | Failed-cell output | Exports active neighbor planes even when a cell's final status is unsuccessful; callers must inspect status. [Power entry point][p-entry], [Voronoi entry point][p-voronoi-entry] | Unresolved failed cells have explicit statuses and empty CSR rows. Candidate IDs retained for retries are never emitted as partial failed-cell adjacency. [Emission](../warpower/_cell.py) |
 | Adjacency consistency and CSR | Gathers and reorders raw rows, scans counts, then checks reverse connections and inserts missing reverse edges with atomics. Does not reclip cells to resolve one-sided facets. [Assembly][p-adjacency], [entry point][p-entry] | Checks raw facet reciprocity first and retries both endpoints of one-sided facets in float64, for up to three passes. If reciprocal, scans counts and copies rows directly; otherwise uses the general symmetric compactor and reports unresolved asymmetry. [Assembly](../warpower/_adjacency.py), [recovery](../warpower/_api.py) |
 | Exactly coincident sites | No global duplicate-ownership pass in the construction pipeline. [Entry point][p-entry] | GPU hash pass selects the greatest weight, then the lowest input index. Other coincident sites are empty and excluded from neighbors; signed zeros are treated as the same position. [Ownership](../warpower/_canonical.py) |
@@ -62,9 +62,11 @@ and are retried with larger storage; traversal never silently discards a valid
 candidate to fit a queue.
 
 Construction starts with 64 plane/vertex slots and a 96-entry traversal queue.
-Each original site has separate retry state for precision and minimum storage
-capacity. Capacity failures grow buffers to 128, 256, and 512 at the current
-precision. Numerical failures promote to FP64 without resetting the storage floor.
+Each original site retains precision, a clipping-storage floor, and a separate
+traversal-queue floor. Plane/vertex exhaustion grows clipping capacity to 128,
+256, or 512 at the current precision. Queue exhaustion increases the traversal
+queue without increasing the cell's logical clipping limit. Plane and vertex
+storage still share a capacity class; they are independent of the traversal queue. Numerical failures promote to FP64 without resetting the storage floor.
 Neither reaching a size limit nor overflowing a buffer changes precision; once
 promoted, a cell cannot retry in FP32. The state is indexed by original site even
 when output rows are compacted, and is reset on each captured replay.
@@ -72,8 +74,9 @@ Completed retry rows are retained; failed rows never expose partial adjacency.
 
 The FP32 clipper records a suspicious side test when cancellation is small
 relative to the sum of absolute products. It retains one pending predicate per
-cell. Multiple distinct uncertain tests, remapped support planes, or queue
-overflow request precision recovery. A separate kernel evaluates the pending
+cell. Multiple distinct uncertain tests, remapped support planes, or exhaustion
+of the deferred-predicate buffer request precision recovery. Traversal-queue
+exhaustion is a separate capacity failure. A separate kernel evaluates the pending
 predicate from the original FP32 coordinates and weights, using filtered FP64
 and exact integer predicates for interior vertices. Box-plane predicates use
 interval filters and request recovery if the sign remains uncertain. This
@@ -81,7 +84,7 @@ separation keeps expensive predicates out of the ordinary clipping kernel.
 
 A bounded queue of up to 512 eligible cells is rebuilt with FP64 geometry before
 host readback, with newly ambiguous cells considered after FP32 capacity retries.
-Each cell gets at most one cooperative attempt. One 32-thread block
+Each cell gets at most one such cooperative FP64 attempt. One 32-thread block
 cooperates on each cell: it classifies and compacts vertices, reconstructs and
 checks the clipping boundary, updates bounds, and tests hierarchy nodes. Its
 128-slot workspace has a separate layout from the interleaved ordinary clipper.
@@ -93,12 +96,19 @@ and the failure remains explicit. Output-row overflow is distinguished from
 scratch overflow when updating the size floor. Both eager construction and
 captured `DiagramWorkspace` execution share these retry rules.
 
-Retry state costs eight bytes per site. Captured execution preallocates FP32
-retry scratch through 512 slots, so capacity-only failures can grow without
-switching precision. Its memory cost is reported separately from replay time.
+FP32 capacity retries also use 32 cooperating threads, at 128, 256, or 512
+allocated slots. The vertex classification, compaction, boundary reconstruction,
+and bounds reductions are shared with the FP64 implementation. Uncertain FP32
+side tests request precision recovery. Queue-only retries retain the established
+logical clipping limit, including a 64-slot limit within a 128-slot allocation.
+Larger queues are allocated only for pending queue requirements in ordinary
+calls; captured execution conditionally enters those stages on the device.
 
-FP32 vertices store Cartesian coordinates in three scalars. FP64 recovery keeps
-both homogeneous and cached Cartesian coordinates. Recovered cells are still
+Retry state costs twelve bytes per site. Captured execution preallocates FP32
+cooperative scratch through 512 slots. Workspace memory is reported separately
+from replay time. The ordinary FP32 clipper stores Cartesian coordinates in
+three scalars; cooperative clipping and serial FP64 recovery keep both
+homogeneous and cached Cartesian coordinates. Recovered cells are still
 floating-point constructions: the cancellation screen is not a proved error
 bound, and this procedure does not certify every graph edge as exact.
 

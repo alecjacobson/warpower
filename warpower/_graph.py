@@ -10,8 +10,9 @@ from . import _bvh as bvh
 from . import _canonical as canonical
 from . import _retry, _validation
 from ._api import _chunk_size, _points_array, _weights_array
-from ._cell import Scratch, Scratch64, allocate_scratch
+from ._cell import Scratch64, allocate_scratch
 from ._construct import collect_failures, make_construct_kernel
+from ._cooperative_cell import Scratch as CooperativeScratch
 from ._cooperative_cell import allocate_scratch as allocate_precision_scratch
 from ._graph_construct import make_retry_kernel
 from ._precision_construct import make_precision_kernel
@@ -78,7 +79,7 @@ def prepare_repairs(
     retry: wp.array2d[int],
     sources: wp.array[int],
     status: wp.array[int],
-    retry_states: wp.array[wp.vec2i],
+    retry_states: wp.array[wp.vec3i],
 ):
     slot = wp.tid()
     if slot >= active[0]:
@@ -91,7 +92,7 @@ def prepare_repairs(
         retry[i, k] = value
     sources[i] = i
     status[i] = 1
-    retry_states[i] = wp.vec2i(_retry.DOUBLE, retry_states[i][1])
+    retry_states[i] = wp.vec3i(_retry.DOUBLE, retry_states[i][1], retry_states[i][2])
 
 
 @wp.kernel
@@ -316,7 +317,8 @@ class DiagramWorkspace:
                 ptr=self.points.ptr, shape=(self.n, 3), dtype=wp.uint32, device=self.device
             )
             if self._adjacency:
-                self._retry_states = wp.empty(self.n, dtype=wp.vec2i)
+                self._retry_states = wp.empty(self.n, dtype=wp.vec3i)
+                self._large_queue_pending = wp.zeros(1, dtype=int)
                 self._base = wp.empty((self.n, 64), dtype=int)
                 self._retry = wp.empty((self.n, 512), dtype=int)
                 self._counts = wp.empty(self.n, dtype=int)
@@ -335,11 +337,21 @@ class DiagramWorkspace:
                         break
                     length = blocks
                 self._scratch = allocate_scratch(self.chunk_size, 64, self.device)
-                self._retry32_storage = allocate_scratch(self.retry_chunk, 512, self.device)
+                self._retry32_storage = allocate_precision_scratch(
+                    self.retry_chunk, 512, self.device, robust=False
+                )
                 self._retry32 = {}
                 for capacity in (128, 256, 512):
-                    scratch = Scratch()
-                    for name in ("planes", "vertices", "positions", "next", "neighbors"):
+                    scratch = CooperativeScratch()
+                    for name in (
+                        "planes",
+                        "vertices",
+                        "positions",
+                        "cartesian",
+                        "next",
+                        "neighbors",
+                        "meta",
+                    ):
                         setattr(scratch, name, getattr(self._retry32_storage, name))
                     scratch.capacity = capacity
                     self._retry32[capacity] = scratch
@@ -347,7 +359,7 @@ class DiagramWorkspace:
                 self._queries = wp.empty(self._query_capacity, dtype=wp.vec4i)
                 self._query_owners = wp.empty(self._query_capacity, dtype=int)
                 self._query_count = wp.zeros(1, dtype=int)
-                for scratch in (self._scratch, *self._retry32.values()):
+                for scratch in (self._scratch,):
                     scratch.queries = self._queries
                     scratch.query_owners = self._query_owners
                     scratch.query_count = self._query_count
@@ -466,37 +478,65 @@ class DiagramWorkspace:
         self._job_count.zero_()
         self._launch(collect_failures, self.n, [status, self._jobs, self._job_count])
 
-    def _retry_pass(self, capacity, robust):
+    def _retry_pass(self, capacity, robust, queue=128):
         if not robust:
             self._query_count.zero_()
         self._launch(begin_chunks, 1, [self._job_count, self._cursor, self._chunks])
 
         def body():
-            self._launch(
-                make_retry_kernel(self.weighted, capacity, robust, 32),
-                self.retry_chunk * 32,
-                [
-                    self.points,
-                    self.weights,
-                    self._hierarchy,
-                    self._jobs,
-                    self._cursor,
-                    self._job_count,
-                    self._source,
-                    True,
-                    self._robust[capacity] if robust else self._retry32[capacity],
-                    self._retry,
-                    self._counts,
-                    self.status,
-                    self._base,
-                    False,
-                    self._empty,
-                    self._empty,
-                    False,
-                    self._retry_states,
-                ],
-                block_dim=32,
-            )
+            if not robust:
+                self._launch(
+                    make_precision_kernel(self.weighted, queue, False, 32, capacity, True),
+                    self.retry_chunk * 32,
+                    [
+                        self.points,
+                        self.weights,
+                        self._hierarchy,
+                        self._jobs,
+                        self._cursor,
+                        self._job_count,
+                        self._source,
+                        False,
+                        True,
+                        self._retry32[capacity],
+                        self._retry,
+                        self._counts,
+                        self.status,
+                        self._base,
+                        False,
+                        self._empty,
+                        self._empty,
+                        False,
+                        self._retry_states,
+                    ],
+                    block_dim=32,
+                )
+            else:
+                self._launch(
+                    make_retry_kernel(self.weighted, queue, robust, 32),
+                    self.retry_chunk * 32,
+                    [
+                        self.points,
+                        self.weights,
+                        self._hierarchy,
+                        self._jobs,
+                        self._cursor,
+                        self._job_count,
+                        self._source,
+                        True,
+                        self._robust[capacity] if robust else self._retry32[capacity],
+                        self._retry,
+                        self._counts,
+                        self.status,
+                        self._base,
+                        False,
+                        self._empty,
+                        self._empty,
+                        False,
+                        self._retry_states,
+                    ],
+                    block_dim=32,
+                )
             self._launch(
                 next_chunk, 1, [self._job_count, self._cursor, self._chunks, self.retry_chunk]
             )
@@ -521,18 +561,26 @@ class DiagramWorkspace:
                     self._retry_states,
                 ],
             )
-        for capacity, robust in (
-            (128, False),
-            (256, False),
-            (512, False),
-            (128, True),
-            (256, True),
-            (512, True),
-        ):
+        for robust in (False, True):
             if repair and not robust:
                 continue
-            self._retry_pass(capacity, robust)
-            self._failures(self.status)
+            for capacity in (128, 256, 512):
+                self._retry_pass(capacity, robust)
+                self._failures(self.status)
+            self._large_queue_pending.zero_()
+            self._launch(
+                _retry.pending_large_queue,
+                self.n,
+                [self.status, self._retry_states, robust, self._large_queue_pending],
+            )
+
+            def queue_retries(robust=robust):
+                for queue in (256, 512):
+                    for capacity in (128, 256, 512):
+                        self._retry_pass(capacity, robust, queue)
+                        self._failures(self.status)
+
+            wp.capture_if(self._large_queue_pending, queue_retries)
 
     def _asymmetry(self):
         self._flags.zero_()
@@ -566,7 +614,7 @@ class DiagramWorkspace:
         self._launch(
             collect_precision,
             self.n,
-            [self.status, self._jobs, self._job_count, self._retry_states, 64, initialize],
+            [self.status, self._jobs, self._job_count, self._retry_states, 64, initialize, 96],
         )
         self._launch(
             make_precision_kernel(self.weighted, 128, True, 32),

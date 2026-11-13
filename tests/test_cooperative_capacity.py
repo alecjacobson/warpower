@@ -216,7 +216,7 @@ def test_captured_default_uses_large_fp32_recovery():
     np.testing.assert_equal(state[1], 512)
     offsets = workspace.offsets.numpy()
     np.testing.assert_array_equal(
-        np.sort(workspace.adjacency.numpy()[offsets[owner] : offsets[owner + 1]]),
+        np.sort(workspace.adjacency[int(offsets[owner]) : int(offsets[owner + 1])].numpy()),
         np.delete(np.arange(len(points)), owner),
     )
 
@@ -254,7 +254,7 @@ def test_captured_queue_dispatch_retains_cell_limit(queue_requirement):
         expected, _ = reference_cells(points)
         count = int(workspace._counts.numpy()[owner])
         np.testing.assert_array_equal(
-            np.sort(workspace._retry.numpy()[owner, :count]), sorted(expected[owner])
+            np.sort(workspace._retry[owner, :count].numpy()), sorted(expected[owner])
         )
 
 

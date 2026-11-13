@@ -112,21 +112,28 @@ def plane_at(v: wp.uint32, i: int):
 
 
 @wp.func(inline=True)
-def coordinates(s: Any, base: int, v: wp.uint32):
-    a = s.planes[base + 32 * plane_at(v, 0)]
-    b = s.planes[base + 32 * plane_at(v, 1)]
-    c = s.planes[base + 32 * plane_at(v, 2)]
+def intersect_planes_fp32(a: wp.vec4, b: wp.vec4, c: wp.vec4):
+    """Intersect three FP32 planes with the shared minor expansion."""
     m12 = b[0] * c[1] - b[1] * c[0]
     m13 = b[0] * c[2] - b[2] * c[0]
     m14 = b[0] * c[3] - b[3] * c[0]
     m23 = b[1] * c[2] - b[2] * c[1]
     m24 = b[1] * c[3] - b[3] * c[1]
     m34 = b[2] * c[3] - b[3] * c[2]
-    return type(a)(
+    return wp.vec4(
         -a[3] * m23 - a[1] * m34 + a[2] * m24,
         a[0] * m34 + a[3] * m13 - a[2] * m14,
         -a[0] * m24 + a[1] * m14 - a[3] * m12,
         a[0] * m23 - a[1] * m13 + a[2] * m12,
+    )
+
+
+@wp.func(inline=True)
+def coordinates(s: Any, base: int, v: wp.uint32):
+    return intersect_planes_fp32(
+        s.planes[base + 32 * plane_at(v, 0)],
+        s.planes[base + 32 * plane_at(v, 1)],
+        s.planes[base + 32 * plane_at(v, 2)],
     )
 
 

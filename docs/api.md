@@ -30,28 +30,32 @@ in each direction.
 | Status | Meaning |
 | --- | --- |
 | 0 | Construction succeeded |
-| 1 | Plane capacity exhausted |
+| 1 | Plane or neighbor-output capacity exhausted |
 | 2 | Vertex capacity exhausted |
 | 3 | Empty or non-owning coincident cell |
 | 4 | Traversal queue capacity exhausted |
 | 5 | Inconsistent floating-point clipping boundary |
 | 6 | Uncertain clipping decision awaiting precision recovery |
 
-Plane, vertex, and traversal capacity failures grow storage at the current
-precision. They do not trigger FP64 merely because the 512-slot limit is reached.
+Plane/vertex capacity failures grow clipping storage at the current precision.
+Traversal-queue failures grow the queue while retaining the clipping limit. They do not trigger FP64 merely because the 512-slot limit is reached.
 Numerical failures require FP64 and retain the storage size already reached;
 subsequent capacity overflow cannot send that cell back to FP32. These rules
 apply to ordinary calls and captured execution, and reset for each construction.
 
-A cancellation screen sends suspicious clipping decisions to a separate kernel
+The initial FP32 pass sends suspicious clipping decisions to a separate kernel
 that checks the original site coordinates. Interior decisions use filtered/exact
 predicates; unresolved box-plane decisions and mismatches request FP64 recovery.
 Up to 512 eligible cells per pass use a 128-slot cooperative workspace, with 32
 threads per cell. Cells that already require more storage bypass it. Each cell
-gets at most one cooperative attempt, then uses the serial FP64 fallback when
+gets at most one cooperative FP64 attempt, then uses the serial FP64 fallback when
 needed. A numerical failure in that fallback remains explicit; it does not grow
 buffers to try to resolve a precision problem. Output-row overflow widens the
 row without unnecessarily increasing clipping scratch capacity.
+FP32 capacity retries use 32 cooperating threads at 128, 256, or 512 slots;
+using more threads does not require FP64. Ambiguous side tests in these retries
+request FP64 recovery directly. Queue and clipping limits are tracked
+separately, while plane and vertex storage still share a clipping-capacity class.
 Remaining failures are explicit and produce no partial neighbor list. The screen
 is heuristic and recovery uses floating-point geometry: successful statuses do
 not certify an exact diagram.
@@ -61,7 +65,19 @@ GPU recovery passes, at most one per site per construction.
 `retried_cells` counts the cells entering subsequent host-dispatched retries;
 `double_precision_cells` counts cells queued for that later serial FP64 phase.
 These counters describe different stages and are not a count of
-distinct cells that used FP64.
+distinct cells that used FP64. FP32 cooperative capacity retries are not included
+in `cooperative_precision_attempts`.
+
+For per-stage reasons, active counts, and outcomes, run the untimed diagnostic:
+
+```bash
+python -m benchmarks.replay.retry_diagnostics input.npz retry-stages.json
+```
+
+The input contains a `points` array; `--weighted` also reads `weights`.
+This instrumented ordinary-construction run performs synchronous readbacks and
+must be kept separate from timing and CUDA graph capture. It distinguishes
+scheduled rows from eligible active cells and records their storage requirements.
 
 One-sided facets also trigger double-precision recovery of both cells before
 symmetrization. `diagnostics["consistency_retried_cells"]` counts these recovery

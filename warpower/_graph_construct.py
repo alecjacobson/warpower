@@ -38,7 +38,7 @@ def make_retry_kernel(weighted=False, queue_capacity=64, robust=False, lane_stri
         hints: wp.array[int],
         hint_offsets: wp.array[int],
         use_hints: bool,
-        retry_states: wp.array[wp.vec2i],
+        retry_states: wp.array[wp.vec3i],
     ):
         if wp.tid() % stride != 0:
             return
@@ -51,7 +51,7 @@ def make_retry_kernel(weighted=False, queue_capacity=64, robust=False, lane_stri
         if output_by_job:
             output = i
             if not _retry.eligible(
-                retry_states[i], status[output], scratch.capacity, wp.static(robust)
+                retry_states[i], status[output], scratch.capacity, wp.static(robust), queue_size
             ):
                 return
         if tree.owners[i] != i:
@@ -65,6 +65,10 @@ def make_retry_kernel(weighted=False, queue_capacity=64, robust=False, lane_stri
         lower = tree.lower[1] - wp.vec3(1.00001)
         upper = tree.upper[1] + wp.vec3(1.00001)
         cell = init_cell(scratch, slot, p, lower, upper, cell_type())
+        # Fix the physical row address before applying a smaller logical limit.
+        # Different limits must never change the pitch between 32-cell groups.
+        if output_by_job and status[output] == 4:
+            scratch.capacity = wp.min(scratch.capacity, retry_states[i][1])
         if output_by_job:
             seed_count = seed_neighbors.shape[1]
             if sources[i] >= 0:
@@ -94,6 +98,11 @@ def make_retry_kernel(weighted=False, queue_capacity=64, robust=False, lane_stri
                 if cell.status != 0:
                     break
 
+        queue_limit = int(queue_size)
+        if output_by_job:
+            queue_limit = wp.min(queue_size, wp.max(1, retry_states[i][2]))
+            if status[output] == 4:
+                queue_limit = queue_size
         queue_nodes = wp.zeros(shape=queue_size, dtype=int)
         queue_dist = wp.zeros(shape=queue_size, dtype=float)
         size = int(0)
@@ -107,7 +116,7 @@ def make_retry_kernel(weighted=False, queue_capacity=64, robust=False, lane_stri
                 right = tree.right[node]
                 dl = node_distance(tree, left, p, wi, wp.static(weighted_mode))
                 dr = node_distance(tree, right, p, wi, wp.static(weighted_mode))
-                if size == queue_size:
+                if size == queue_limit:
                     cell.status = 4
                     break
                 if dl < dr:
@@ -145,7 +154,7 @@ def make_retry_kernel(weighted=False, queue_capacity=64, robust=False, lane_stri
                         far = left
                         far_d = dl
                 if far >= 0:
-                    if size == queue_size:
+                    if size == queue_limit:
                         kept = int(0)
                         for k in range(size):
                             queued = queue_nodes[k]
@@ -158,7 +167,7 @@ def make_retry_kernel(weighted=False, queue_capacity=64, robust=False, lane_stri
                                 queue_dist[kept] = queue_dist[k]
                                 kept += 1
                         size = kept
-                        if size == queue_size:
+                        if size == queue_limit:
                             cell.status = 4
                             break
                     queue_nodes[size] = far
@@ -212,6 +221,7 @@ def make_retry_kernel(weighted=False, queue_capacity=64, robust=False, lane_stri
             wp.static(robust),
             False,
             _retry.capacity_failure(cell.status),
+            queue_limit,
         )
         sources[i] = i
 

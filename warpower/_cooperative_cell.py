@@ -365,8 +365,10 @@ def make_clip(capacity=128, robust=True):
             cell.nv = 0
             return cell
         if cell.np == cell.capacity:
-            cell.status = 1
-            return cell
+            if cell.capacity == s.capacity:
+                cell.status = 1
+                return cell
+            cell.capacity = wp.min(s.capacity, 2 * cell.capacity)
         destinations = wp.tile_map(
             partition_index, indices, removed, scan, cell.nv, count, cell.base
         )
@@ -407,7 +409,7 @@ def make_clip(capacity=128, robust=True):
                     wp.atomic_max(s.meta, slot, 1, 5)
                 wp.atomic_min(s.meta, slot, 2, a)
                 at = cell.nv + wp.atomic_add(s.meta, slot, 0, 1)
-                if at >= cell.capacity:
+                if at >= s.capacity:
                     wp.atomic_max(s.meta, slot, 1, 2)
                 else:
                     new_vertex = encode(new_plane, a, b)
@@ -430,6 +432,10 @@ def make_clip(capacity=128, robust=True):
         cell.status = barrier(0)
         created = s.meta[slot, 0]
         error = s.meta[slot, 1]
+        # Queue retries can start below the allocated tile capacity. Grow the
+        # logical clipping limit only when needed, reusing the current cell.
+        while cell.nv + created > cell.capacity and cell.capacity < s.capacity:
+            cell.capacity = wp.min(s.capacity, 2 * cell.capacity)
         if lane == 0 and error == 0:
             first = s.meta[slot, 2]
             cursor = first

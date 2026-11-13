@@ -101,6 +101,9 @@ allocated slots. The vertex classification, compaction, boundary reconstruction,
 and bounds reductions are shared with the FP64 implementation. Uncertain FP32
 side tests request precision recovery. Queue-only retries retain the established
 logical clipping limit, including a 64-slot limit within a 128-slot allocation.
+If clipping subsequently exhausts that limit, cooperative recovery can grow it
+within the allocated tile without restarting the cell. The recorded requirement
+only grows when clipping actually needs those slots.
 Larger queues are allocated only for pending queue requirements in ordinary
 calls; captured execution conditionally enters those stages on the device.
 

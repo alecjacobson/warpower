@@ -152,6 +152,22 @@ def test_fp64_cooperative_retry_rejects_undersized_queue():
         np.testing.assert_array_equal(actual, expected)
 
 
+@pytest.mark.parametrize("route,robust", [("eager", False), ("graph", True)])
+def test_queue_retry_grows_clipping_only_when_needed(route, robust):
+    """Reuse allocated slots when queue recovery encounters actual clipping exhaustion."""
+    points, owner = shell(80)
+    cell = RetryCell(points, owner, route, 4, (int(robust), 64, 192))
+    code, state = cell.run(256, robust, cooperative=True, queue=256)
+    np.testing.assert_equal(code, 0)
+    np.testing.assert_equal(state[0] & 1, int(robust))
+    np.testing.assert_equal(state[1:], [256, 256])
+    count = int(cell.counts.numpy()[cell.row])
+    np.testing.assert_array_equal(
+        np.sort(cell.neighbors.numpy()[cell.row, :count]),
+        np.delete(np.arange(len(points)), owner),
+    )
+
+
 @pytest.mark.parametrize("route", ["eager", "graph"])
 def test_serial_queue_retry_keeps_physical_scratch_rows_disjoint(route):
     """Preserve independent scratch rows when queue retries retain different limits."""

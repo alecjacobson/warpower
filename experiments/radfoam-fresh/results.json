@@ -1,0 +1,1844 @@
+{
+  "warpower_revision": "b324c6e71b4ea976fe8650c7cbb7e3772de8f199",
+  "native_revision": "3e7b52cf74e37ab2ab5e695f53570f515f537e3d",
+  "paragram_revision": "4f36b1f2c8738912c5efc056a06023d4c1d2da07",
+  "method": "One L40, resident identical FP32 inputs, fresh construction in separate sequential processes. Three warmups and five synchronized measured calls per backend/case, except native Bicycle and Playroom: one warmup and three measured calls. That fixed long-case schedule was selected after a 174-second native Bicycle warmup, before collecting its timed samples; the preliminary warmup record is retained. Allocation included; preceding result destroyed before each call; JIT/upload/download/validation excluded. Warp allocator retains 32 GiB. Torch intra/inter-op and OMP/MKL/OpenBLAS thread counts are one. Both visible CPU quotas are four cores. All 86 primary measured calls have zero throttled periods; only the benchmark CUDA process was observed at each GPU snapshot. GPU events are elapsed spans, including idle gaps, not kernel sums.",
+  "qualification": "WarPower and Paragram return bounded Voronoi neighbor CSR in original input order, using box padding 1.00001 and 1.0 respectively. Native RadFoam returns unbounded neighbor CSR plus tetrahedra and a permutation, in internally sorted order. Native-to-Warp ratios compare these construction calls, not identical outputs, incremental updates, tetrahedron construction alone, or fitting speed.",
+  "preflight": "A separate 10-call Bonsai native preflight recorded CPU throttling in one call; all ten calls and its runner are retained. An initial Garden native window overlapped another agent's Warp tests and recorded CPU throttling; it is excluded. Bicycle's following run was interrupted during warmup when competing GPU activity was observed. Both records are retained. Primary results use the fixed windows described above after contention ends. Profiling is separate from primary timing.",
+  "rows": [
+    {
+      "case": "live-bonsai",
+      "backends": {
+        "warpower": {
+          "summary": {
+            "wall_ms": {
+              "mean": 80.75549453496933,
+              "median": 81.03048801422119,
+              "min": 79.80012893676758,
+              "max": 81.24391734600067
+            },
+            "cuda_span_ms": {
+              "mean": 80.7298568725586,
+              "median": 81.00559997558594,
+              "min": 79.77734375,
+              "max": 81.2113265991211
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 131678,
+          "max_degree": 135,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 0,
+          "status_counts": {
+            "0": 9216
+          },
+          "source_record_sha256": "5d6fc903238a145e6dface30af0e667ebb2e6c53169cc20d227ba167dd0ce665",
+          "audit": {
+            "candidate": "live-bonsai-warpower-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 9216,
+              "directed_edges": 131678,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "d5b3260c2e1fd2d0244a26084c74e36904d985b3517230b7b11704ba471dc9f8"
+            },
+            "reference_info": {
+              "n": 9216,
+              "directed_edges": 131850,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "e2ed591160d657288fd3efdbe98393ceaa41e85119bcf3f8c12d4c25fcb2de6c"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 0,
+            "reference_only_count": 172,
+            "previous_exact_audit": {
+              "source": "live-bonsai.json",
+              "sha256": "6c31673b9d9d849b733a60fbd9ff9c6233ed31a7f930d58a9a8c2f3f136e740c",
+              "directed_pairs_checked": 172,
+              "incorrect_directed_pairs": [],
+              "all_current_cgal_disagreements_covered": true,
+              "scope": "Reuse recorded exact rational bounded-facet answers on identical inputs and CGAL graph; all current discrepancies are covered. Shared unchanged edges outside these queries remain uncertified."
+            }
+          }
+        },
+        "paragram": {
+          "summary": {
+            "wall_ms": {
+              "mean": 41.9723741710186,
+              "median": 41.98027029633522,
+              "min": 41.90273955464363,
+              "max": 42.042531073093414
+            },
+            "cuda_span_ms": {
+              "mean": 41.928436279296875,
+              "median": 41.9422721862793,
+              "min": 41.86115264892578,
+              "max": 41.98515319824219
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 131538,
+          "max_degree": 127,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 143,
+          "status_counts": {
+            "0": 9073,
+            "1": 12,
+            "2": 33,
+            "5": 98
+          },
+          "source_record_sha256": "a612449dbd21327f8baa6c14e2a9cc4b023ff378acf9fcb0e7aa485ae5eb2b36"
+        },
+        "radfoam": {
+          "summary": {
+            "wall_ms": {
+              "mean": 19.34044659137726,
+              "median": 19.29676905274391,
+              "min": 19.214417785406113,
+              "max": 19.493818283081055
+            },
+            "cuda_span_ms": {
+              "mean": 19.28961944580078,
+              "median": 19.250783920288086,
+              "min": 19.174560546875,
+              "max": 19.4420166015625
+            }
+          },
+          "output_contract": "Unbounded Delaunay neighbor CSR and tetrahedra in internal sorted order, plus original-index permutation; no original-order export",
+          "nnz": 131850,
+          "max_degree": 135,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "tetrahedra": 56674,
+          "source_record_sha256": "c8e2f5e94f1c70e91c72cccb6c8285370b67d2be4ccdde42690e9a103706760f"
+        }
+      },
+      "n": 9216,
+      "points_sha256": "0a34c76e0ddcedee74e81e5490ff287570bb1aa489c692b381388a779f32d102",
+      "native_to_warpower_median_ratio": 0.23814208115539484
+    },
+    {
+      "case": "uniform-1000000",
+      "backends": {
+        "warpower": {
+          "summary": {
+            "wall_ms": {
+              "mean": 100.29437243938446,
+              "median": 100.27773305773735,
+              "min": 100.16285628080368,
+              "max": 100.52556544542313
+            },
+            "cuda_span_ms": {
+              "mean": 100.2668670654297,
+              "median": 100.2528305053711,
+              "min": 100.1364517211914,
+              "max": 100.5000991821289
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 15436274,
+          "max_degree": 36,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 0,
+          "status_counts": {
+            "0": 1000000
+          },
+          "source_record_sha256": "db6fac4532d15c57ff6d68b74dca25078fbfabf57106efe6b6f62f51b4ae23e3"
+        },
+        "paragram": {
+          "summary": {
+            "wall_ms": {
+              "mean": 94.72181126475334,
+              "median": 94.6979857981205,
+              "min": 94.1079929471016,
+              "max": 95.25058791041374
+            },
+            "cuda_span_ms": {
+              "mean": 94.67795257568359,
+              "median": 94.6588134765625,
+              "min": 94.0481948852539,
+              "max": 95.21151733398438
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 15436404,
+          "max_degree": 36,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 5,
+          "status_counts": {
+            "0": 999995,
+            "1": 3,
+            "2": 2
+          },
+          "source_record_sha256": "92044605a92253915a9d1d5d1ad5274a54a73519e462065053867fac343b8fd5"
+        },
+        "radfoam": {
+          "summary": {
+            "wall_ms": {
+              "mean": 4781.289178133011,
+              "median": 4780.672967433929,
+              "min": 4775.925226509571,
+              "max": 4787.218902260065
+            },
+            "cuda_span_ms": {
+              "mean": 4781.1865234375,
+              "median": 4780.5546875,
+              "min": 4775.822265625,
+              "max": 4787.12646484375
+            }
+          },
+          "output_contract": "Unbounded Delaunay neighbor CSR and tetrahedra in internal sorted order, plus original-index permutation; no original-order export",
+          "nnz": 15498904,
+          "max_degree": 61,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "tetrahedra": 6749146,
+          "source_record_sha256": "2f7ddf11d82ee51e6af7cd2dcafac1ac57190a27acac11e7d6a0e69c30894d75"
+        }
+      },
+      "n": 1000000,
+      "points_sha256": "4038ac6008224d1fb95fdcc930acc6ec6a635131ff82caa6c3da28fb65fe39cb",
+      "native_to_warpower_median_ratio": 47.67432232120106
+    },
+    {
+      "case": "bonsai",
+      "backends": {
+        "warpower": {
+          "summary": {
+            "wall_ms": {
+              "mean": 216.18714407086372,
+              "median": 216.1596491932869,
+              "min": 215.65239876508713,
+              "max": 216.84109792113304
+            },
+            "cuda_span_ms": {
+              "mean": 216.14840393066407,
+              "median": 216.11903381347656,
+              "min": 215.62200927734375,
+              "max": 216.78086853027344
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 30267974,
+          "max_degree": 51,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 0,
+          "status_counts": {
+            "0": 1968522
+          },
+          "source_record_sha256": "3eb973999dca35372fc8c6b9d1959ed3eeda869a9b984aad3f97c47ddcb56d9c",
+          "audit": {
+            "candidate": "bonsai-warpower-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 1968522,
+              "directed_edges": 30267974,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "186e8ae8761ef82bfb41852197eec9f70b18406e481429ab43338ff3c707f740"
+            },
+            "reference_info": {
+              "n": 1968522,
+              "directed_edges": 30268338,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "abed087e72bed3ba495f6e73e8abf963ba0c4a7f112ef667c7fde9c3d14b7910"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 0,
+            "reference_only_count": 364,
+            "selected_pairs": [
+              {
+                "owner": 199116,
+                "candidate": 202167,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 202167,
+                "candidate": 199116,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 360048,
+                "candidate": 360064,
+                "expected": true,
+                "observed": true
+              },
+              {
+                "owner": 360064,
+                "candidate": 360048,
+                "expected": true,
+                "observed": true
+              }
+            ],
+            "selected_pair_errors": 0,
+            "previous_exact_audit": {
+              "source": "bonsai.json",
+              "sha256": "269437bca47259708b4d1106fafb4c1babf91b8312a6a91c6e5fd015fc6933de",
+              "directed_pairs_checked": 368,
+              "incorrect_directed_pairs": [],
+              "all_current_cgal_disagreements_covered": true,
+              "scope": "Reuse recorded exact rational bounded-facet answers on identical inputs and CGAL graph; all current discrepancies are covered. Shared unchanged edges outside these queries remain uncertified."
+            }
+          }
+        },
+        "paragram": {
+          "summary": {
+            "wall_ms": {
+              "mean": 420.98776176571846,
+              "median": 421.2088733911514,
+              "min": 419.693049043417,
+              "max": 421.987596899271
+            },
+            "cuda_span_ms": {
+              "mean": 420.9259521484375,
+              "median": 421.1484375,
+              "min": 419.6266174316406,
+              "max": 421.9172058105469
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 30274076,
+          "max_degree": 53,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 613,
+          "status_counts": {
+            "0": 1967903,
+            "1": 348,
+            "2": 139,
+            "3": 6,
+            "5": 126
+          },
+          "source_record_sha256": "189ba4029707b4ceee885307d53a0176a5788b8e69ec3680a4cc27a89672fb10",
+          "audit": {
+            "candidate": "bonsai-paragram-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 1968522,
+              "directed_edges": 30274076,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "4bf80b46f6873edbc246dfe44ab8a1f6208564c2c5256df2fe2d4317013a881b"
+            },
+            "reference_info": {
+              "n": 1968522,
+              "directed_edges": 30268338,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "abed087e72bed3ba495f6e73e8abf963ba0c4a7f112ef667c7fde9c3d14b7910"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 7164,
+            "reference_only_count": 1426,
+            "selected_pairs": [
+              {
+                "owner": 199116,
+                "candidate": 202167,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 202167,
+                "candidate": 199116,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 360048,
+                "candidate": 360064,
+                "expected": true,
+                "observed": true
+              },
+              {
+                "owner": 360064,
+                "candidate": 360048,
+                "expected": true,
+                "observed": true
+              }
+            ],
+            "selected_pair_errors": 0
+          }
+        },
+        "radfoam": {
+          "summary": {
+            "wall_ms": {
+              "mean": 15942.050372064114,
+              "median": 15944.31433826685,
+              "min": 15936.416171491146,
+              "max": 15946.192730218172
+            },
+            "cuda_span_ms": {
+              "mean": 15941.8126953125,
+              "median": 15944.0869140625,
+              "min": 15936.185546875,
+              "max": 15945.9375
+            }
+          },
+          "output_contract": "Unbounded Delaunay neighbor CSR and tetrahedra in internal sorted order, plus original-index permutation; no original-order export",
+          "nnz": 30268338,
+          "max_degree": 51,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "tetrahedra": 13165611,
+          "source_record_sha256": "d0ecb3fcb70fdcec35388a18dee32bd2ae8575d75afbb03f60cd8db10dabd140",
+          "audit": {
+            "candidate": "bonsai-radfoam-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 1968522,
+              "directed_edges": 30268338,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "abed087e72bed3ba495f6e73e8abf963ba0c4a7f112ef667c7fde9c3d14b7910"
+            },
+            "reference_info": {
+              "n": 1968522,
+              "directed_edges": 30268338,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "abed087e72bed3ba495f6e73e8abf963ba0c4a7f112ef667c7fde9c3d14b7910"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 0,
+            "reference_only_count": 0,
+            "selected_pairs": [
+              {
+                "owner": 199116,
+                "candidate": 202167,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 202167,
+                "candidate": 199116,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 360048,
+                "candidate": 360064,
+                "expected": true,
+                "observed": true
+              },
+              {
+                "owner": 360064,
+                "candidate": 360048,
+                "expected": true,
+                "observed": true
+              }
+            ],
+            "selected_pair_errors": 0
+          }
+        }
+      },
+      "n": 1968522,
+      "points_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+      "native_to_warpower_median_ratio": 73.76175154693034
+    },
+    {
+      "case": "garden",
+      "backends": {
+        "warpower": {
+          "summary": {
+            "wall_ms": {
+              "mean": 430.23079335689545,
+              "median": 427.7818575501442,
+              "min": 425.6924018263817,
+              "max": 440.45814126729965
+            },
+            "cuda_span_ms": {
+              "mean": 430.1970275878906,
+              "median": 427.7475280761719,
+              "min": 425.6518249511719,
+              "max": 440.4253845214844
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 61963206,
+          "max_degree": 52,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 0,
+          "status_counts": {
+            "0": 4064598
+          },
+          "source_record_sha256": "a740f282960bf4d85b7396afc8fdf3593c4a20f843135d656840154fbbd43713",
+          "audit": {
+            "candidate": "garden-warpower-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 4064598,
+              "directed_edges": 61963206,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "432eb580a1a04e02ef94e6053e952c4e24ece9597c2427fd84b267e50cec627f"
+            },
+            "reference_info": {
+              "n": 4064598,
+              "directed_edges": 61964386,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "3f6fb8bfa88b1b5cf32790e1395ee7502266370ce55eb73875436b6513d9fa49"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 0,
+            "reference_only_count": 1180,
+            "selected_pairs": [
+              {
+                "owner": 2563822,
+                "candidate": 2580195,
+                "expected": true,
+                "observed": true
+              },
+              {
+                "owner": 2580195,
+                "candidate": 2563822,
+                "expected": true,
+                "observed": true
+              }
+            ],
+            "selected_pair_errors": 0,
+            "previous_exact_audit": {
+              "source": "garden.json",
+              "sha256": "e37ce7c285c5c4524004fcdb71c5f54c1fe5df636742a4cad5958838ab452ba8",
+              "directed_pairs_checked": 1182,
+              "incorrect_directed_pairs": [],
+              "all_current_cgal_disagreements_covered": true,
+              "scope": "Reuse recorded exact rational bounded-facet answers on identical inputs and CGAL graph; all current discrepancies are covered. Shared unchanged edges outside these queries remain uncertified."
+            }
+          }
+        },
+        "paragram": {
+          "summary": {
+            "wall_ms": {
+              "mean": 705.7239979505539,
+              "median": 705.5160254240036,
+              "min": 703.2625563442707,
+              "max": 710.3783749043941
+            },
+            "cuda_span_ms": {
+              "mean": 705.6485473632813,
+              "median": 705.460205078125,
+              "min": 703.1983642578125,
+              "max": 710.3085327148438
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 61975284,
+          "max_degree": 56,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 1110,
+          "status_counts": {
+            "0": 4063484,
+            "1": 714,
+            "2": 220,
+            "3": 4,
+            "5": 176
+          },
+          "source_record_sha256": "8b52dc7c765af910e5e3f7fd6817e3ad555b2b07d1aaae6a32b32c3e7ab296a9",
+          "audit": {
+            "candidate": "garden-paragram-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 4064598,
+              "directed_edges": 61975284,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "dc9e60e7d1feda7ac8eafe046033089ca48381c744ae8dc0f6de3089fccfa7e7"
+            },
+            "reference_info": {
+              "n": 4064598,
+              "directed_edges": 61964386,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "3f6fb8bfa88b1b5cf32790e1395ee7502266370ce55eb73875436b6513d9fa49"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 13418,
+            "reference_only_count": 2520,
+            "selected_pairs": [
+              {
+                "owner": 2563822,
+                "candidate": 2580195,
+                "expected": true,
+                "observed": false
+              },
+              {
+                "owner": 2580195,
+                "candidate": 2563822,
+                "expected": true,
+                "observed": false
+              }
+            ],
+            "selected_pair_errors": 2
+          }
+        },
+        "radfoam": {
+          "summary": {
+            "wall_ms": {
+              "mean": 27065.200226008892,
+              "median": 27063.018657267094,
+              "min": 27058.75100195408,
+              "max": 27077.775560319424
+            },
+            "cuda_span_ms": {
+              "mean": 27064.832421875,
+              "median": 27062.646484375,
+              "min": 27058.380859375,
+              "max": 27077.40625
+            }
+          },
+          "output_contract": "Unbounded Delaunay neighbor CSR and tetrahedra in internal sorted order, plus original-index permutation; no original-order export",
+          "nnz": 61964386,
+          "max_degree": 52,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "tetrahedra": 26917493,
+          "source_record_sha256": "7e29a803f70c788637cca2e98d2035f5ef31dcaa68db03918a810aff63268ec4",
+          "audit": {
+            "candidate": "garden-radfoam-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 4064598,
+              "directed_edges": 61964386,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "3f6fb8bfa88b1b5cf32790e1395ee7502266370ce55eb73875436b6513d9fa49"
+            },
+            "reference_info": {
+              "n": 4064598,
+              "directed_edges": 61964386,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "3f6fb8bfa88b1b5cf32790e1395ee7502266370ce55eb73875436b6513d9fa49"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 0,
+            "reference_only_count": 0,
+            "selected_pairs": [
+              {
+                "owner": 2563822,
+                "candidate": 2580195,
+                "expected": true,
+                "observed": true
+              },
+              {
+                "owner": 2580195,
+                "candidate": 2563822,
+                "expected": true,
+                "observed": true
+              }
+            ],
+            "selected_pair_errors": 0
+          }
+        }
+      },
+      "n": 4064598,
+      "points_sha256": "09fd9e0a85f683fb0646116ef381a1f8e28abdc8d2ec29f82a22c51facc1ce02",
+      "native_to_warpower_median_ratio": 63.26359610539302
+    },
+    {
+      "case": "bicycle",
+      "backends": {
+        "warpower": {
+          "summary": {
+            "wall_ms": {
+              "mean": 453.48503962159157,
+              "median": 454.17192205786705,
+              "min": 451.53237134218216,
+              "max": 454.5142203569412
+            },
+            "cuda_span_ms": {
+              "mean": 453.447607421875,
+              "median": 454.1390380859375,
+              "min": 451.4791564941406,
+              "max": 454.4830627441406
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 63717630,
+          "max_degree": 53,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 0,
+          "status_counts": {
+            "0": 4199873
+          },
+          "source_record_sha256": "5dfc4363c864451e5b0ec3f0d4e1a35c85f507111527513cccd658ecc67e8ed4",
+          "audit": {
+            "candidate": "bicycle-warpower-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 4199873,
+              "directed_edges": 63717630,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "2122e6c2fbedb9a6029760963959780cbe52d4e1d00f06d1752e980db8ffefdb"
+            },
+            "reference_info": {
+              "n": 4199873,
+              "directed_edges": 63719194,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "8523208c675a58f880ba8d5bf39a816b476b3e4da7b7e9143610326410ab7265"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 0,
+            "reference_only_count": 1564,
+            "selected_pairs": [
+              {
+                "owner": 203920,
+                "candidate": 204025,
+                "expected": true,
+                "observed": true
+              },
+              {
+                "owner": 204025,
+                "candidate": 203920,
+                "expected": true,
+                "observed": true
+              }
+            ],
+            "selected_pair_errors": 0,
+            "previous_exact_audit": {
+              "source": "bicycle.json",
+              "sha256": "1103b29211bf0836530112556d79c31160137b25a47b16836bb57b6d52589539",
+              "directed_pairs_checked": 1566,
+              "incorrect_directed_pairs": [],
+              "all_current_cgal_disagreements_covered": true,
+              "scope": "Reuse recorded exact rational bounded-facet answers on identical inputs and CGAL graph; all current discrepancies are covered. Shared unchanged edges outside these queries remain uncertified."
+            }
+          }
+        },
+        "paragram": {
+          "summary": {
+            "wall_ms": {
+              "mean": 758.3034791052341,
+              "median": 758.0752745270729,
+              "min": 756.0217119753361,
+              "max": 760.3705190122128
+            },
+            "cuda_span_ms": {
+              "mean": 758.2340942382813,
+              "median": 758.0113525390625,
+              "min": 755.93505859375,
+              "max": 760.3135986328125
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 63733554,
+          "max_degree": 51,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 1477,
+          "status_counts": {
+            "0": 4198395,
+            "1": 1102,
+            "2": 207,
+            "3": 1,
+            "5": 168
+          },
+          "source_record_sha256": "e5698ecfc1911499583e178d0459a588c19d09aa8151eb1aa7332e4a90f3d885",
+          "audit": {
+            "candidate": "bicycle-paragram-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 4199873,
+              "directed_edges": 63733554,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "e561b46fc93625df2edc0aa1031802488e8ff56e9f41dfe56a24bf31a2366010"
+            },
+            "reference_info": {
+              "n": 4199873,
+              "directed_edges": 63719194,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "8523208c675a58f880ba8d5bf39a816b476b3e4da7b7e9143610326410ab7265"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 18076,
+            "reference_only_count": 3716,
+            "selected_pairs": [
+              {
+                "owner": 203920,
+                "candidate": 204025,
+                "expected": true,
+                "observed": false
+              },
+              {
+                "owner": 204025,
+                "candidate": 203920,
+                "expected": true,
+                "observed": false
+              }
+            ],
+            "selected_pair_errors": 2
+          }
+        },
+        "radfoam": {
+          "summary": {
+            "wall_ms": {
+              "mean": 173972.91487207016,
+              "median": 173955.22275567055,
+              "min": 173893.59927549958,
+              "max": 174069.92258504033
+            },
+            "cuda_span_ms": {
+              "mean": 173970.76041666666,
+              "median": 173953.078125,
+              "min": 173891.421875,
+              "max": 174067.78125
+            }
+          },
+          "output_contract": "Unbounded Delaunay neighbor CSR and tetrahedra in internal sorted order, plus original-index permutation; no original-order export",
+          "nnz": 63719194,
+          "max_degree": 54,
+          "cpu_throttled": false,
+          "warmups": 1,
+          "repeats": 3,
+          "tetrahedra": 27659640,
+          "source_record_sha256": "3a745f70f4ce7d22ae4f59aff3e4cdae9347c8ebe05f602a994f93b50ec05c88",
+          "audit": {
+            "candidate": "bicycle-radfoam-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 4199873,
+              "directed_edges": 63719194,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "8523208c675a58f880ba8d5bf39a816b476b3e4da7b7e9143610326410ab7265"
+            },
+            "reference_info": {
+              "n": 4199873,
+              "directed_edges": 63719194,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "8523208c675a58f880ba8d5bf39a816b476b3e4da7b7e9143610326410ab7265"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 0,
+            "reference_only_count": 0,
+            "selected_pairs": [
+              {
+                "owner": 203920,
+                "candidate": 204025,
+                "expected": true,
+                "observed": true
+              },
+              {
+                "owner": 204025,
+                "candidate": 203920,
+                "expected": true,
+                "observed": true
+              }
+            ],
+            "selected_pair_errors": 0
+          }
+        }
+      },
+      "n": 4199873,
+      "points_sha256": "b18a5ecf4abecc9fb4094a4df36c886fcc310aa4db6372758fdff7b97aae8d4f",
+      "native_to_warpower_median_ratio": 383.0162418836331
+    },
+    {
+      "case": "playroom",
+      "backends": {
+        "warpower": {
+          "summary": {
+            "wall_ms": {
+              "mean": 350.92367976903915,
+              "median": 349.0002900362015,
+              "min": 347.3919630050659,
+              "max": 358.14591869711876
+            },
+            "cuda_span_ms": {
+              "mean": 350.8786682128906,
+              "median": 348.9543151855469,
+              "min": 347.3595275878906,
+              "max": 358.1095886230469
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 48973848,
+          "max_degree": 43,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 0,
+          "status_counts": {
+            "0": 3181453
+          },
+          "source_record_sha256": "7c022625d9f619491b0217d692377bf2068b9a08ab2fbf5a86d2324616cbb8f9",
+          "audit": {
+            "candidate": "playroom-warpower-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 3181453,
+              "directed_edges": 48973848,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "c775c09c497cb5e2963bebd8a1fde1ae85ddcc902823f78a4a2965785a93040d"
+            },
+            "reference_info": {
+              "n": 3181453,
+              "directed_edges": 48974316,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "9f0232a4066c66884a565d7e847ef856b8f02f8a86a481b1357e025ece02e08f"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 0,
+            "reference_only_count": 468,
+            "selected_pairs": [
+              {
+                "owner": 6244,
+                "candidate": 8262,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 8262,
+                "candidate": 6244,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 505391,
+                "candidate": 507437,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 507437,
+                "candidate": 505391,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 1326853,
+                "candidate": 1330910,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 1330910,
+                "candidate": 1326853,
+                "expected": false,
+                "observed": false
+              }
+            ],
+            "selected_pair_errors": 0,
+            "previous_exact_audit": {
+              "source": "playroom.json",
+              "sha256": "d458e51a96c8a416e92ce484187298d16725ef34e69cb293c83e90f471f170f8",
+              "directed_pairs_checked": 474,
+              "incorrect_directed_pairs": [],
+              "all_current_cgal_disagreements_covered": true,
+              "scope": "Reuse recorded exact rational bounded-facet answers on identical inputs and CGAL graph; all current discrepancies are covered. Shared unchanged edges outside these queries remain uncertified."
+            }
+          }
+        },
+        "paragram": {
+          "summary": {
+            "wall_ms": {
+              "mean": 465.2004137635231,
+              "median": 464.52899277210236,
+              "min": 464.28433433175087,
+              "max": 466.81660413742065
+            },
+            "cuda_span_ms": {
+              "mean": 465.14014892578126,
+              "median": 464.4725036621094,
+              "min": 464.2323303222656,
+              "max": 466.7547912597656
+            }
+          },
+          "output_contract": "Bounded Voronoi neighbor CSR in original input order; no tetrahedra",
+          "nnz": 48979886,
+          "max_degree": 45,
+          "cpu_throttled": false,
+          "warmups": 3,
+          "repeats": 5,
+          "failed_cells": 611,
+          "status_counts": {
+            "0": 3180841,
+            "1": 392,
+            "2": 109,
+            "3": 1,
+            "5": 110
+          },
+          "source_record_sha256": "861cdcec51e243fa5bf9e1f9a53fed8496477849421697569adaea545bf75c9e",
+          "audit": {
+            "candidate": "playroom-paragram-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 3181453,
+              "directed_edges": 48979886,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "2043e24965075ce988f8826d2d6f5f6d93f8531613a2d4d4c87c1082a5d411d9"
+            },
+            "reference_info": {
+              "n": 3181453,
+              "directed_edges": 48974316,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "9f0232a4066c66884a565d7e847ef856b8f02f8a86a481b1357e025ece02e08f"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 6346,
+            "reference_only_count": 776,
+            "selected_pairs": [
+              {
+                "owner": 6244,
+                "candidate": 8262,
+                "expected": false,
+                "observed": true
+              },
+              {
+                "owner": 8262,
+                "candidate": 6244,
+                "expected": false,
+                "observed": true
+              },
+              {
+                "owner": 505391,
+                "candidate": 507437,
+                "expected": false,
+                "observed": true
+              },
+              {
+                "owner": 507437,
+                "candidate": 505391,
+                "expected": false,
+                "observed": true
+              },
+              {
+                "owner": 1326853,
+                "candidate": 1330910,
+                "expected": false,
+                "observed": true
+              },
+              {
+                "owner": 1330910,
+                "candidate": 1326853,
+                "expected": false,
+                "observed": true
+              }
+            ],
+            "selected_pair_errors": 6
+          }
+        },
+        "radfoam": {
+          "summary": {
+            "wall_ms": {
+              "mean": 79246.85355896752,
+              "median": 79150.64542368054,
+              "min": 79145.20068839192,
+              "max": 79444.71456483006
+            },
+            "cuda_span_ms": {
+              "mean": 79245.95572916667,
+              "median": 79149.765625,
+              "min": 79144.2578125,
+              "max": 79443.84375
+            }
+          },
+          "output_contract": "Unbounded Delaunay neighbor CSR and tetrahedra in internal sorted order, plus original-index permutation; no original-order export",
+          "nnz": 48974316,
+          "max_degree": 43,
+          "cpu_throttled": false,
+          "warmups": 1,
+          "repeats": 3,
+          "tetrahedra": 21305667,
+          "source_record_sha256": "d597f6aba588136288c5eac319485bb0c579d4ab6210ef57933a6f2031ae75da",
+          "audit": {
+            "candidate": "playroom-radfoam-graph.npz",
+            "reference": "cgal-1thread-graph.npz",
+            "candidate_info": {
+              "n": 3181453,
+              "directed_edges": 48974316,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "9f0232a4066c66884a565d7e847ef856b8f02f8a86a481b1357e025ece02e08f"
+            },
+            "reference_info": {
+              "n": 3181453,
+              "directed_edges": 48974316,
+              "duplicate_directed_edges": 0,
+              "self_edges": 0,
+              "sorted_edge_keys_sha256": "9f0232a4066c66884a565d7e847ef856b8f02f8a86a481b1357e025ece02e08f"
+            },
+            "audit_runner_sha256": "09f9b117ac33ef503a12ad2997aa5bab269280d5d34a8452af8759b2c122aba5",
+            "scope": "Whole directed neighbor graph comparison to saved CGAL graph. Agreement is not an independent exact geometric certificate; bounded/unbounded domain differences must be considered for mismatches.",
+            "candidate_only_count": 0,
+            "reference_only_count": 0,
+            "selected_pairs": [
+              {
+                "owner": 6244,
+                "candidate": 8262,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 8262,
+                "candidate": 6244,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 505391,
+                "candidate": 507437,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 507437,
+                "candidate": 505391,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 1326853,
+                "candidate": 1330910,
+                "expected": false,
+                "observed": false
+              },
+              {
+                "owner": 1330910,
+                "candidate": 1326853,
+                "expected": false,
+                "observed": false
+              }
+            ],
+            "selected_pair_errors": 0
+          }
+        }
+      },
+      "n": 3181453,
+      "points_sha256": "1ebc4e0405248284b8124069ecc93ca5c56d1ad66340809062a797721d7f6583",
+      "native_to_warpower_median_ratio": 226.7924918213401
+    }
+  ],
+  "profiles": {
+    "bonsai-radfoam": {
+      "scope": "Separate warmed instrumented call; not the primary performance result. GPU intervals are unioned so overlap is not double-counted.",
+      "wall_ms": 15952.90682464838,
+      "cuda_span_ms": 15952.60546875,
+      "kernel_sum_ms": 15946.213805,
+      "memcpy_sum_ms": 0.481605,
+      "memset_sum_ms": 0.400452,
+      "kernel_union_ms": 15946.213805,
+      "all_gpu_activity_union_ms": 15947.095862,
+      "wall_minus_gpu_activity_ms": 5.810962648380155,
+      "kernel_fraction_of_wall": 0.9995804514047534,
+      "kernel_streams": [
+        7
+      ],
+      "top_kernels": [
+        {
+          "name": "radfoam::growth_iteration_kernel(const Eigen::Matrix<float, (int)3, (int)1, (int)0, (int)3, (int)1> *, unsigned int, const radfoam::AABB<float> *, const radfoam::IndexedTriangle *, unsigned int, radfoam::IndexedTet *, radfoam::IndexedTriangle *)",
+          "calls": 6,
+          "sum_ms": 10016.657019
+        },
+        {
+          "name": "radfoam::sample_initial_tets_kernel(const Eigen::Matrix<float, (int)3, (int)1, (int)0, (int)3, (int)1> *, unsigned int, const radfoam::AABB<float> *, radfoam::IndexedTet *, radfoam::IndexedTriangle *, unsigned int)",
+          "calls": 1,
+          "sum_ms": 5669.909816
+        },
+        {
+          "name": "void cub::CUB_200500_890_NS::DeviceMergeSortMergeKernel<cub::CUB_200500_890_NS::DeviceMergeSortPolicy<radfoam::IndexedTriangle *>::Policy600, radfoam::IndexedTriangle *, cub::CUB_200500_890_NS::NullType *, radfoam::IndexedTriangle *, cub::CUB_200500_890_NS::NullType *, unsigned int, std::less<radfoam::IndexedTriangle>, radfoam::IndexedTriangle, cub::CUB_200500_890_NS::NullType>(bool, T4, T5, T6, T8 *, T9 *, T7, T6 *, T6, cub::CUB_200500_890_NS::detail::vsmem_t)",
+          "calls": 164,
+          "sum_ms": 102.382406
+        },
+        {
+          "name": "void cub::CUB_200500_890_NS::DeviceMergeSortMergeKernel<cub::CUB_200500_890_NS::DeviceMergeSortPolicy<radfoam::IndexedTet *>::Policy600, radfoam::IndexedTet *, cub::CUB_200500_890_NS::NullType *, radfoam::IndexedTet *, cub::CUB_200500_890_NS::NullType *, unsigned int, std::less<radfoam::IndexedTet>, radfoam::IndexedTet, cub::CUB_200500_890_NS::NullType>(bool, T4, T5, T6, T8 *, T9 *, T7, T6 *, T6, cub::CUB_200500_890_NS::detail::vsmem_t)",
+          "calls": 150,
+          "sum_ms": 52.170204
+        },
+        {
+          "name": "void cub::CUB_200500_890_NS::DeviceMergeSortMergeKernel<cub::CUB_200500_890_NS::DeviceMergeSortPolicy<radfoam::IndexedEdge *>::Policy600, radfoam::IndexedEdge *, cub::CUB_200500_890_NS::NullType *, radfoam::IndexedEdge *, cub::CUB_200500_890_NS::NullType *, unsigned int, std::less<radfoam::IndexedEdge>, radfoam::IndexedEdge, cub::CUB_200500_890_NS::NullType>(bool, T4, T5, T6, T8 *, T9 *, T7, T6 *, T6, cub::CUB_200500_890_NS::detail::vsmem_t)",
+          "calls": 16,
+          "sum_ms": 25.629703
+        },
+        {
+          "name": "void cub::CUB_200500_890_NS::DeviceMergeSortPartitionKernel<radfoam::IndexedTriangle *, unsigned int, std::less<radfoam::IndexedTriangle>, radfoam::IndexedTriangle>(bool, T1, T4 *, T2, T2, T2 *, T3, T2, int)",
+          "calls": 164,
+          "sum_ms": 8.25862
+        },
+        {
+          "name": "void cub::CUB_200500_890_NS::DeviceMergeSortMergeKernel<cub::CUB_200500_890_NS::DeviceMergeSortPolicy<unsigned int *>::Policy600, unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int, std::less<unsigned int>, unsigned int, unsigned int>(bool, T4, T5, T6, T8 *, T9 *, T7, T6 *, T6, cub::CUB_200500_890_NS::detail::vsmem_t)",
+          "calls": 13,
+          "sum_ms": 7.9647
+        },
+        {
+          "name": "void cub::CUB_200500_890_NS::DeviceSelectSweepKernel<cub::CUB_200500_890_NS::detail::device_select_policy_hub<cub::CUB_200500_890_NS::KeyValuePair<long, radfoam::IndexedTriangle>, cub::CUB_200500_890_NS::NullType, int, (bool)0, (bool)0>::Policy900, cub::CUB_200500_890_NS::ArgIndexInputIterator<radfoam::IndexedTriangle *, long, radfoam::IndexedTriangle>, cub::CUB_200500_890_NS::NullType *, radfoam::UnenumerateIterator<radfoam::IndexedTriangle>, unsigned long *, cub::CUB_200500_890_NS::ScanTileState<int, (bool)1>, radfoam::SortedMap<radfoam::IndexedTriangle, unsigned int>::insert(radfoam::IndexedTriangle *, unsigned int *, unsigned int)::[lambda(cub::CUB_200500_890_NS::KeyValuePair<long, radfoam::IndexedTriangle>) (instance 1)], cub::CUB_200500_890_NS::NullType, int, (bool)0>(T2, T3, T4, T5, T6, T7, T8, T9, int, cub::CUB_200500_890_NS::detail::vsmem_t)",
+          "calls": 13,
+          "sum_ms": 7.568344
+        },
+        {
+          "name": "void cub::CUB_200500_890_NS::DeviceMergeSortBlockSortKernel<cub::CUB_200500_890_NS::DeviceMergeSortPolicy<radfoam::IndexedTriangle *>::Policy600, radfoam::IndexedTriangle *, cub::CUB_200500_890_NS::NullType *, radfoam::IndexedTriangle *, cub::CUB_200500_890_NS::NullType *, unsigned int, std::less<radfoam::IndexedTriangle>, radfoam::IndexedTriangle, cub::CUB_200500_890_NS::NullType>(bool, T2, T3, T4, T5, T6, T8 *, T9 *, T7, cub::CUB_200500_890_NS::detail::vsmem_t)",
+          "calls": 13,
+          "sum_ms": 7.315029
+        },
+        {
+          "name": "void radfoam::for_n_kernel<cub::CUB_200500_890_NS::CountingInputIterator<unsigned int, long>, radfoam::find_adjacency(radfoam::SortedMap<radfoam::IndexedTet, unsigned int> &, radfoam::SortedMap<radfoam::IndexedTriangle, unsigned int> &, unsigned int, radfoam::CUDAArray<unsigned int> &, radfoam::CUDAArray<unsigned int> &, radfoam::CUDAArray<unsigned int> &, radfoam::CUDAArray<unsigned int> &, radfoam::CUDAArray<unsigned int> &)::[lambda(unsigned int) (instance 2)]>(T1, unsigned long, T2)",
+          "calls": 1,
+          "sum_ms": 5.132315
+        }
+      ],
+      "cpu_throttled": false
+    },
+    "bonsai-warpower": {
+      "scope": "Separate warmed instrumented call; not the primary performance result. GPU intervals are unioned so overlap is not double-counted.",
+      "wall_ms": 215.1590697467327,
+      "cuda_span_ms": 215.06842041015625,
+      "kernel_sum_ms": 211.884922,
+      "memcpy_sum_ms": 0.017952,
+      "memset_sum_ms": 0.026528,
+      "kernel_union_ms": 211.884922,
+      "all_gpu_activity_union_ms": 211.929402,
+      "wall_minus_gpu_activity_ms": 3.2296677467327015,
+      "kernel_fraction_of_wall": 0.9847826645161332,
+      "kernel_streams": [
+        20
+      ],
+      "top_kernels": [
+        {
+          "name": "make_construct_kernel__locals__construct_d4fac96d_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 195.056077,
+          "construction_configuration": {
+            "key": "make_construct_kernel__locals__construct",
+            "kind": "serial cell",
+            "weighted": false,
+            "queue_capacity": 96,
+            "robust": false,
+            "lane_stride": 1,
+            "track_retries": false,
+            "symbol": "make_construct_kernel__locals__construct_d4fac96d",
+            "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+          }
+        },
+        {
+          "name": "make_construct_kernel__locals__construct_92dd3d45_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 7.751537,
+          "construction_configuration": {
+            "key": "make_construct_kernel__locals__construct",
+            "kind": "serial cell",
+            "weighted": false,
+            "queue_capacity": 128,
+            "robust": false,
+            "lane_stride": 32,
+            "track_retries": true,
+            "symbol": "make_construct_kernel__locals__construct_92dd3d45",
+            "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+          }
+        },
+        {
+          "name": "mark_asymmetric_b1bde75e_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 4.483695
+        },
+        {
+          "name": "make_construct_kernel__locals__construct_3204562a_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 1.311598,
+          "construction_configuration": {
+            "key": "make_construct_kernel__locals__construct",
+            "kind": "serial cell",
+            "weighted": false,
+            "queue_capacity": 256,
+            "robust": false,
+            "lane_stride": 32,
+            "track_retries": true,
+            "symbol": "make_construct_kernel__locals__construct_3204562a",
+            "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+          }
+        },
+        {
+          "name": "make_precision_kernel__locals__construct_d12a0ef6_cuda_kernel_forward",
+          "calls": 3,
+          "sum_ms": 1.089067,
+          "construction_configuration": {
+            "key": "make_precision_kernel__locals__construct",
+            "kind": "cooperative cell",
+            "weighted": false,
+            "queue_capacity": 128,
+            "robust": true,
+            "lane_stride": 32,
+            "symbol": "make_precision_kernel__locals__construct_d12a0ef6",
+            "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+          }
+        },
+        {
+          "name": "fill_direct_19acd87e_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 0.783688
+        },
+        {
+          "name": "void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortOnesweepKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, SortPayload<(int)4>, unsigned int, int, int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T7 *, T7 *, T5 *, const T5 *, T3 *, const T3 *, T4 *, const T4 *, T6, int, int, T8)",
+          "calls": 8,
+          "sum_ms": 0.335492
+        },
+        {
+          "name": "radix_nodes_88f453dc_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 0.248675
+        },
+        {
+          "name": "radix_leaves_0a68034c_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 0.143969
+        },
+        {
+          "name": "init_retries_50a95471_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 0.116865
+        }
+      ],
+      "cpu_throttled": false,
+      "construction_configurations": {
+        "make_construct_kernel__locals__construct_81ba2b8d": {
+          "key": "make_construct_kernel__locals__construct",
+          "kind": "serial cell",
+          "weighted": false,
+          "queue_capacity": 96,
+          "robust": false,
+          "lane_stride": 1,
+          "track_retries": false,
+          "symbol": "make_construct_kernel__locals__construct_d4fac96d",
+          "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+        },
+        "make_precision_kernel__locals__construct_2018fb22": {
+          "key": "make_precision_kernel__locals__construct",
+          "kind": "cooperative cell",
+          "weighted": false,
+          "queue_capacity": 128,
+          "robust": true,
+          "lane_stride": 32,
+          "symbol": "make_precision_kernel__locals__construct_d12a0ef6",
+          "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+        },
+        "make_construct_kernel__locals__construct_24ca3c64": {
+          "key": "make_construct_kernel__locals__construct",
+          "kind": "serial cell",
+          "weighted": false,
+          "queue_capacity": 128,
+          "robust": false,
+          "lane_stride": 32,
+          "track_retries": true,
+          "symbol": "make_construct_kernel__locals__construct_92dd3d45",
+          "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+        },
+        "make_construct_kernel__locals__construct_9a1268de": {
+          "key": "make_construct_kernel__locals__construct",
+          "kind": "serial cell",
+          "weighted": false,
+          "queue_capacity": 256,
+          "robust": false,
+          "lane_stride": 32,
+          "track_retries": true,
+          "symbol": "make_construct_kernel__locals__construct_3204562a",
+          "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+        }
+      }
+    },
+    "live-bonsai-warpower": {
+      "scope": "Separate warmed instrumented call; not the primary performance result. GPU intervals are unioned so overlap is not double-counted.",
+      "wall_ms": 80.76582103967667,
+      "cuda_span_ms": 80.70806121826172,
+      "kernel_sum_ms": 77.033858,
+      "memcpy_sum_ms": 0.0096,
+      "memset_sum_ms": 0.016928,
+      "kernel_union_ms": 77.033858,
+      "all_gpu_activity_union_ms": 77.060386,
+      "wall_minus_gpu_activity_ms": 3.705435039676672,
+      "kernel_fraction_of_wall": 0.9537927926487205,
+      "kernel_streams": [
+        20
+      ],
+      "top_kernels": [
+        {
+          "name": "make_construct_kernel__locals__construct_34afbdc7_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 33.941665,
+          "construction_configuration": {
+            "key": "make_construct_kernel__locals__construct",
+            "kind": "serial cell",
+            "weighted": false,
+            "queue_capacity": 512,
+            "robust": false,
+            "lane_stride": 32,
+            "track_retries": true,
+            "symbol": "make_construct_kernel__locals__construct_34afbdc7",
+            "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+          }
+        },
+        {
+          "name": "make_construct_kernel__locals__construct_3204562a_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 23.027631,
+          "construction_configuration": {
+            "key": "make_construct_kernel__locals__construct",
+            "kind": "serial cell",
+            "weighted": false,
+            "queue_capacity": 256,
+            "robust": false,
+            "lane_stride": 32,
+            "track_retries": true,
+            "symbol": "make_construct_kernel__locals__construct_3204562a",
+            "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+          }
+        },
+        {
+          "name": "make_construct_kernel__locals__construct_d4fac96d_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 9.256865,
+          "construction_configuration": {
+            "key": "make_construct_kernel__locals__construct",
+            "kind": "serial cell",
+            "weighted": false,
+            "queue_capacity": 96,
+            "robust": false,
+            "lane_stride": 1,
+            "track_retries": false,
+            "symbol": "make_construct_kernel__locals__construct_d4fac96d",
+            "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+          }
+        },
+        {
+          "name": "make_construct_kernel__locals__construct_92dd3d45_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 8.952157,
+          "construction_configuration": {
+            "key": "make_construct_kernel__locals__construct",
+            "kind": "serial cell",
+            "weighted": false,
+            "queue_capacity": 128,
+            "robust": false,
+            "lane_stride": 32,
+            "track_retries": true,
+            "symbol": "make_construct_kernel__locals__construct_92dd3d45",
+            "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+          }
+        },
+        {
+          "name": "make_precision_kernel__locals__construct_d12a0ef6_cuda_kernel_forward",
+          "calls": 4,
+          "sum_ms": 1.353966,
+          "construction_configuration": {
+            "key": "make_precision_kernel__locals__construct",
+            "kind": "cooperative cell",
+            "weighted": false,
+            "queue_capacity": 128,
+            "robust": true,
+            "lane_stride": 32,
+            "symbol": "make_precision_kernel__locals__construct_d12a0ef6",
+            "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+          }
+        },
+        {
+          "name": "mark_asymmetric_b1bde75e_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 0.263555
+        },
+        {
+          "name": "init_retries_50a95471_cuda_kernel_forward",
+          "calls": 1,
+          "sum_ms": 0.057729
+        },
+        {
+          "name": "void cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::DeviceRadixSortOnesweepKernel<cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::radix::policy_hub<unsigned long, SortPayload<(int)4>, unsigned int>::Policy1000, (bool)0, unsigned long, SortPayload<(int)4>, unsigned int, int, int, cub::CUB_200802_SM_520_600_610_700_750_800_860_890_900_1000_1200_1210::detail::identity_decomposer_t>(T7 *, T7 *, T5 *, const T5 *, T3 *, const T3 *, T4 *, const T4 *, T6, int, int, T8)",
+          "calls": 8,
+          "sum_ms": 0.053313
+        },
+        {
+          "name": "check_queries_d4cc9e49_cuda_kernel_forward",
+          "calls": 4,
+          "sum_ms": 0.02384
+        },
+        {
+          "name": "merge_level_4d0d6c23_cuda_kernel_forward",
+          "calls": 14,
+          "sum_ms": 0.023585
+        }
+      ],
+      "cpu_throttled": false,
+      "construction_configurations": {
+        "make_construct_kernel__locals__construct_81ba2b8d": {
+          "key": "make_construct_kernel__locals__construct",
+          "kind": "serial cell",
+          "weighted": false,
+          "queue_capacity": 96,
+          "robust": false,
+          "lane_stride": 1,
+          "track_retries": false,
+          "symbol": "make_construct_kernel__locals__construct_d4fac96d",
+          "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+        },
+        "make_precision_kernel__locals__construct_2018fb22": {
+          "key": "make_precision_kernel__locals__construct",
+          "kind": "cooperative cell",
+          "weighted": false,
+          "queue_capacity": 128,
+          "robust": true,
+          "lane_stride": 32,
+          "symbol": "make_precision_kernel__locals__construct_d12a0ef6",
+          "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+        },
+        "make_construct_kernel__locals__construct_24ca3c64": {
+          "key": "make_construct_kernel__locals__construct",
+          "kind": "serial cell",
+          "weighted": false,
+          "queue_capacity": 128,
+          "robust": false,
+          "lane_stride": 32,
+          "track_retries": true,
+          "symbol": "make_construct_kernel__locals__construct_92dd3d45",
+          "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+        },
+        "make_construct_kernel__locals__construct_9a1268de": {
+          "key": "make_construct_kernel__locals__construct",
+          "kind": "serial cell",
+          "weighted": false,
+          "queue_capacity": 256,
+          "robust": false,
+          "lane_stride": 32,
+          "track_retries": true,
+          "symbol": "make_construct_kernel__locals__construct_3204562a",
+          "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+        },
+        "make_construct_kernel__locals__construct_c807be0d": {
+          "key": "make_construct_kernel__locals__construct",
+          "kind": "serial cell",
+          "weighted": false,
+          "queue_capacity": 512,
+          "robust": false,
+          "lane_stride": 32,
+          "track_retries": true,
+          "symbol": "make_construct_kernel__locals__construct_34afbdc7",
+          "symbol_resolution": "Resolve the existing specialization's 32-thread executable; no construction call rerun."
+        }
+      }
+    }
+  },
+  "retry_diagnostics": {
+    "live-bonsai": {
+      "scope": "Untimed diagnostic with synchronous readbacks after construction kernels; production geometry kernels are unchanged. Scheduled rows include rows skipped by retry-state eligibility and must not be called active cells. No performance claim from this run.",
+      "n": 9216,
+      "points_sha256": "0a34c76e0ddcedee74e81e5490ff287570bb1aa489c692b381388a779f32d102",
+      "diagnostics": {
+        "retried_cells": 131,
+        "double_precision_cells": 0,
+        "cooperative_precision_attempts": 2,
+        "consistency_retried_cells": 0,
+        "asymmetric_cells_remaining": 0,
+        "chunk_size": 9216,
+        "leaf_size": 4,
+        "knn_requested": 8,
+        "knn_effective": 0,
+        "warm_start": "nearest leaf"
+      },
+      "nnz": 131678,
+      "max_degree": 135,
+      "passes": [
+        {
+          "kind": "serial",
+          "queue_capacity": 96,
+          "robust": false,
+          "lane_stride": 1,
+          "track_retries": false,
+          "module": "make_construct_kernel__locals__construct_81ba2b8d",
+          "cell_capacity": 64,
+          "scheduled_rows": 9216,
+          "status_before": null,
+          "status_after": {
+            "0": 9083,
+            "2": 130,
+            "4": 1,
+            "6": 2
+          },
+          "unsuccessful_rows_after": 133,
+          "max_degree_successful": 34
+        },
+        {
+          "kind": "cooperative",
+          "queue_capacity": 128,
+          "robust": true,
+          "lane_stride": 32,
+          "module": "make_precision_kernel__locals__construct_2018fb22",
+          "cell_capacity": 128,
+          "scheduled_rows": 2,
+          "status_before": {
+            "6": 2
+          },
+          "status_after": {
+            "0": 2
+          },
+          "unsuccessful_rows_after": 0,
+          "max_degree_successful": 27
+        },
+        {
+          "kind": "serial",
+          "queue_capacity": 128,
+          "robust": false,
+          "lane_stride": 32,
+          "track_retries": true,
+          "module": "make_construct_kernel__locals__construct_24ca3c64",
+          "cell_capacity": 128,
+          "scheduled_rows": 131,
+          "status_before": {
+            "2": 130,
+            "4": 1
+          },
+          "status_after": {
+            "0": 113,
+            "2": 18
+          },
+          "unsuccessful_rows_after": 18,
+          "max_degree_successful": 66
+        },
+        {
+          "kind": "cooperative",
+          "queue_capacity": 128,
+          "robust": true,
+          "lane_stride": 32,
+          "module": "make_precision_kernel__locals__construct_2018fb22",
+          "cell_capacity": 128,
+          "scheduled_rows": 0,
+          "status_before": {},
+          "status_after": {},
+          "unsuccessful_rows_after": 0,
+          "max_degree_successful": 0
+        },
+        {
+          "kind": "serial",
+          "queue_capacity": 256,
+          "robust": false,
+          "lane_stride": 32,
+          "track_retries": true,
+          "module": "make_construct_kernel__locals__construct_9a1268de",
+          "cell_capacity": 256,
+          "scheduled_rows": 131,
+          "status_before": {
+            "0": 113,
+            "2": 18
+          },
+          "status_after": {
+            "0": 130,
+            "2": 1
+          },
+          "unsuccessful_rows_after": 1,
+          "max_degree_successful": 107
+        },
+        {
+          "kind": "cooperative",
+          "queue_capacity": 128,
+          "robust": true,
+          "lane_stride": 32,
+          "module": "make_precision_kernel__locals__construct_2018fb22",
+          "cell_capacity": 128,
+          "scheduled_rows": 0,
+          "status_before": {},
+          "status_after": {},
+          "unsuccessful_rows_after": 0,
+          "max_degree_successful": 0
+        },
+        {
+          "kind": "serial",
+          "queue_capacity": 512,
+          "robust": false,
+          "lane_stride": 32,
+          "track_retries": true,
+          "module": "make_construct_kernel__locals__construct_c807be0d",
+          "cell_capacity": 512,
+          "scheduled_rows": 131,
+          "status_before": {
+            "0": 130,
+            "2": 1
+          },
+          "status_after": {
+            "0": 131
+          },
+          "unsuccessful_rows_after": 0,
+          "max_degree_successful": 135
+        },
+        {
+          "kind": "cooperative",
+          "queue_capacity": 128,
+          "robust": true,
+          "lane_stride": 32,
+          "module": "make_precision_kernel__locals__construct_2018fb22",
+          "cell_capacity": 128,
+          "scheduled_rows": 0,
+          "status_before": {},
+          "status_after": {},
+          "unsuccessful_rows_after": 0,
+          "max_degree_successful": 0
+        }
+      ]
+    },
+    "bonsai": {
+      "scope": "Untimed diagnostic with synchronous readbacks after construction kernels; production geometry kernels are unchanged. Scheduled rows include rows skipped by retry-state eligibility and must not be called active cells. No performance claim from this run.",
+      "n": 1968522,
+      "points_sha256": "df1993a6288961f608a25996ba4efd35a9a3c5965b9ca256de25eef983a44ef8",
+      "diagnostics": {
+        "retried_cells": 346,
+        "double_precision_cells": 0,
+        "cooperative_precision_attempts": 43,
+        "consistency_retried_cells": 0,
+        "asymmetric_cells_remaining": 0,
+        "chunk_size": 1968522,
+        "leaf_size": 4,
+        "knn_requested": 8,
+        "knn_effective": 0,
+        "warm_start": "nearest leaf"
+      },
+      "nnz": 30267974,
+      "max_degree": 51,
+      "passes": [
+        {
+          "kind": "serial",
+          "queue_capacity": 96,
+          "robust": false,
+          "lane_stride": 1,
+          "track_retries": false,
+          "module": "make_construct_kernel__locals__construct_81ba2b8d",
+          "cell_capacity": 64,
+          "scheduled_rows": 1968522,
+          "status_before": null,
+          "status_after": {
+            "0": 1968167,
+            "2": 286,
+            "4": 60,
+            "6": 9
+          },
+          "unsuccessful_rows_after": 355,
+          "max_degree_successful": 34
+        },
+        {
+          "kind": "cooperative",
+          "queue_capacity": 128,
+          "robust": true,
+          "lane_stride": 32,
+          "module": "make_precision_kernel__locals__construct_2018fb22",
+          "cell_capacity": 128,
+          "scheduled_rows": 43,
+          "status_before": {
+            "6": 43
+          },
+          "status_after": {
+            "0": 43
+          },
+          "unsuccessful_rows_after": 0,
+          "max_degree_successful": 28
+        },
+        {
+          "kind": "serial",
+          "queue_capacity": 128,
+          "robust": false,
+          "lane_stride": 32,
+          "track_retries": true,
+          "module": "make_construct_kernel__locals__construct_24ca3c64",
+          "cell_capacity": 128,
+          "scheduled_rows": 346,
+          "status_before": {
+            "2": 286,
+            "4": 60
+          },
+          "status_after": {
+            "0": 345,
+            "4": 1
+          },
+          "unsuccessful_rows_after": 1,
+          "max_degree_successful": 51
+        },
+        {
+          "kind": "cooperative",
+          "queue_capacity": 128,
+          "robust": true,
+          "lane_stride": 32,
+          "module": "make_precision_kernel__locals__construct_2018fb22",
+          "cell_capacity": 128,
+          "scheduled_rows": 0,
+          "status_before": {},
+          "status_after": {},
+          "unsuccessful_rows_after": 0,
+          "max_degree_successful": 0
+        },
+        {
+          "kind": "serial",
+          "queue_capacity": 256,
+          "robust": false,
+          "lane_stride": 32,
+          "track_retries": true,
+          "module": "make_construct_kernel__locals__construct_9a1268de",
+          "cell_capacity": 256,
+          "scheduled_rows": 346,
+          "status_before": {
+            "0": 345,
+            "4": 1
+          },
+          "status_after": {
+            "0": 346
+          },
+          "unsuccessful_rows_after": 0,
+          "max_degree_successful": 51
+        },
+        {
+          "kind": "cooperative",
+          "queue_capacity": 128,
+          "robust": true,
+          "lane_stride": 32,
+          "module": "make_precision_kernel__locals__construct_2018fb22",
+          "cell_capacity": 128,
+          "scheduled_rows": 0,
+          "status_before": {},
+          "status_after": {},
+          "unsuccessful_rows_after": 0,
+          "max_degree_successful": 0
+        }
+      ]
+    }
+  }
+}

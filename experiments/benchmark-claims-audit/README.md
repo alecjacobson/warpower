@@ -15,6 +15,13 @@ builder. Its tracked report contains the current correctness and performance
 results. The diagnosis and reference tables below preserve the pre-recovery
 measurements; their Warpower error counts describe that earlier implementation.
 
+The [large-input native RadFoam comparison](../radfoam-fresh/README.md) adds
+fresh measurements on the four saved checkpoints, a million-site uniform
+control and the small live frame. It records wall time and CUDA event spans,
+separate GPU profiles, CPU quota observations and neighbor-graph checks.
+Its constructor/output qualifications remain explicit; it does not measure
+incremental updates or fitting speed.
+
 ## What the evidence supports
 
 | Evidence | Retained result | Qualification or correction |

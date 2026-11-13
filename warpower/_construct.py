@@ -336,8 +336,8 @@ def retry_kinds(
         if _retry.eligible(states[owners[row]], s, 512, False):
             wp.atomic_add(counts, 1, 1)
             if counts.shape[0] > 4 and states[owners[row]][2] > 128:
-                wp.atomic_add(counts, 4, 1)
+                wp.atomic_max(counts, 4, states[owners[row]][2])
         if _retry.eligible(states[owners[row]], s, 512, True):
             wp.atomic_add(counts, 3, 1)
             if counts.shape[0] > 5 and states[owners[row]][2] > 128:
-                wp.atomic_add(counts, 5, 1)
+                wp.atomic_max(counts, 5, states[owners[row]][2])

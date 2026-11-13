@@ -10,6 +10,54 @@ from tests.oracle import reference_cells
 from tests.test_retry_escalation import RetryCell, shell
 
 
+@wp.kernel
+def queue_requirement_kernel(status: wp.array[int], states: wp.array[wp.vec3i]):
+    status[0] = 4
+    states[0] = wp.vec3i(0, 64, 192)
+
+
+def test_mixed_queue_batch_finishes_remaining_clipping_retries(monkeypatch):
+    """Keep a mixed recovery batch together until its large clipping cell succeeds."""
+    from warpower import _api
+
+    points, owner = shell()
+    original_launch = wp.launch
+
+    def launch(kernel, dim, *args, **kwargs):
+        result = original_launch(kernel, dim, *args, **kwargs)
+        if kernel == _api.collect_precision:
+            inputs = kwargs["inputs"]
+            original_launch(
+                queue_requirement_kernel, 1, inputs=[inputs[0], inputs[3]], device="cuda:0"
+            )
+        return result
+
+    monkeypatch.setattr(wp, "launch", launch)
+    result, stages = observe(points)
+    first = next(
+        stage
+        for stage in stages
+        if stage["precision"] == "fp32" and stage["threads_per_cell"] == 32
+    )
+    np.testing.assert_equal(first["allocated_queue_capacity"], 256)
+    np.testing.assert_equal({0, owner}.issubset(first["active_site_ids"]), True)
+    np.testing.assert_equal(
+        any(
+            stage["precision"] == "fp32"
+            and stage["allocated_cell_capacity"] == 512
+            and owner in stage.get("active_site_ids", [])
+            for stage in stages
+        ),
+        True,
+    )
+    np.testing.assert_array_equal(result.status.numpy(), np.zeros(len(points), np.int32))
+    offsets = result.offsets.numpy()
+    np.testing.assert_array_equal(
+        np.sort(result.adjacency.numpy()[offsets[owner] : offsets[owner + 1]]),
+        np.delete(np.arange(len(points)), owner),
+    )
+
+
 @pytest.mark.parametrize("route", ["eager", "graph"])
 @pytest.mark.parametrize("robust", [False, True])
 @pytest.mark.parametrize("weighted", [False, True])
@@ -105,7 +153,7 @@ def test_captured_default_uses_large_fp32_recovery():
     )
 
 
-@pytest.mark.parametrize("queue_requirement", [192, 1024])
+@pytest.mark.parametrize("queue_requirement", [192, 384, 1024])
 def test_captured_queue_dispatch_retains_cell_limit(queue_requirement):
     """Exercise conditional larger-queue recovery and its explicit terminal limit."""
     points = np.random.default_rng(51).normal(size=(24, 3)).astype(np.float32)
@@ -134,7 +182,7 @@ def test_captured_queue_dispatch_retains_cell_limit(queue_requirement):
         np.testing.assert_equal(workspace._counts.numpy()[owner], 0)
     else:
         np.testing.assert_equal(workspace.status.numpy()[owner], 0)
-        np.testing.assert_equal(state[2], 256)
+        np.testing.assert_equal(state[2], 256 if queue_requirement <= 256 else 512)
         expected, _ = reference_cells(points)
         count = int(workspace._counts.numpy()[owner])
         np.testing.assert_array_equal(

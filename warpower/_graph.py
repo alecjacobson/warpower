@@ -319,6 +319,7 @@ class DiagramWorkspace:
             if self._adjacency:
                 self._retry_states = wp.empty(self.n, dtype=wp.vec3i)
                 self._large_queue_pending = wp.zeros(1, dtype=int)
+                self._largest_queue_pending = wp.zeros(1, dtype=int)
                 self._base = wp.empty((self.n, 64), dtype=int)
                 self._retry = wp.empty((self.n, 512), dtype=int)
                 self._counts = wp.empty(self.n, dtype=int)
@@ -564,23 +565,46 @@ class DiagramWorkspace:
         for robust in (False, True):
             if repair and not robust:
                 continue
-            for capacity in (128, 256, 512):
-                self._retry_pass(capacity, robust)
-                self._failures(self.status)
-            self._large_queue_pending.zero_()
-            self._launch(
-                _retry.pending_large_queue,
-                self.n,
-                [self.status, self._retry_states, robust, self._large_queue_pending],
-            )
 
-            def queue_retries(robust=robust):
-                for queue in (256, 512):
-                    for capacity in (128, 256, 512):
-                        self._retry_pass(capacity, robust, queue)
-                        self._failures(self.status)
+            def find_pending(robust=robust):
+                self._large_queue_pending.zero_()
+                self._largest_queue_pending.zero_()
+                self._launch(
+                    _retry.pending_large_queue,
+                    self.n,
+                    [
+                        self.status,
+                        self._retry_states,
+                        robust,
+                        self._large_queue_pending,
+                        self._largest_queue_pending,
+                    ],
+                )
 
-            wp.capture_if(self._large_queue_pending, queue_retries)
+            def capacity_passes(queue, robust=robust):
+                for capacity in (128, 256, 512):
+                    self._retry_pass(capacity, robust, queue)
+                    self._failures(self.status)
+
+            def queue_retries():
+                def medium_queue():
+                    capacity_passes(256)
+                    capacity_passes(512)
+
+                wp.capture_if(
+                    self._largest_queue_pending, lambda: capacity_passes(512), medium_queue
+                )
+
+            def ordinary_retries():
+                capacity_passes(128)
+                find_pending()
+                wp.capture_if(self._large_queue_pending, queue_retries)
+
+            # Share the larger physical queue allocation across pending cells
+            # so different failure reasons can execute in the same launch.
+            # Each cell still honors its own logical resource limits.
+            find_pending()
+            wp.capture_if(self._large_queue_pending, queue_retries, ordinary_retries)
 
     def _asymmetry(self):
         self._flags.zero_()

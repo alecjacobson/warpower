@@ -96,11 +96,11 @@ def collect_retries(
         if eligible(states[i], s, 512, False):
             wp.atomic_add(counts, 2, 1)
             if counts.shape[0] > 4 and states[i][2] > 128:
-                wp.atomic_add(counts, 4, 1)
+                wp.atomic_max(counts, 4, states[i][2])
         if eligible(states[i], s, 512, True):
             wp.atomic_add(counts, 3, 1)
             if counts.shape[0] > 5 and states[i][2] > 128:
-                wp.atomic_add(counts, 5, 1)
+                wp.atomic_max(counts, 5, states[i][2])
 
 
 @wp.kernel
@@ -113,8 +113,14 @@ def prepare_repairs(jobs: wp.array[int], states: wp.array[wp.vec3i]):
 
 @wp.kernel
 def pending_large_queue(
-    status: wp.array[int], states: wp.array[wp.vec3i], robust: bool, pending: wp.array[int]
+    status: wp.array[int],
+    states: wp.array[wp.vec3i],
+    robust: bool,
+    pending: wp.array[int],
+    largest: wp.array[int],
 ):
     i = wp.tid()
     if states[i][2] > 128 and eligible(states[i], status[i], 512, robust):
         wp.atomic_max(pending, 0, 1)
+        if states[i][2] > 256:
+            wp.atomic_max(largest, 0, 1)

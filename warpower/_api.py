@@ -293,8 +293,8 @@ def _build(
                 cooperative_attempts,
                 capacity_remaining,
                 precision_remaining,
-                queue32_remaining,
-                queue64_remaining,
+                queue32_required,
+                queue64_required,
             ) = map(int, failure_count.numpy())
             # The scalar transfer has synchronized construction. Release large
             # temporary buffers before allocating retry storage.
@@ -328,7 +328,8 @@ def _build(
                         continue
                     if robust and precision_remaining == 0:
                         continue
-                    if queue > 128 and (queue64_remaining if robust else queue32_remaining) == 0:
+                    required_queue = queue64_required if robust else queue32_required
+                    if required_queue > queue:
                         continue
                     if robust and robust_retried == 0:
                         robust_retried = precision_remaining
@@ -481,8 +482,8 @@ def _build(
                         capacity_remaining,
                         cooperative_attempts,
                         precision_remaining,
-                        queue32_remaining,
-                        queue64_remaining,
+                        queue32_required,
+                        queue64_required,
                     ) = map(int, check.numpy())
                     if remaining == 0:
                         break

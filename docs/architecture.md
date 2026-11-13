@@ -106,6 +106,9 @@ within the allocated tile without restarting the cell. The recorded requirement
 only grows when clipping actually needs those slots.
 Larger queues are allocated only for pending queue requirements in ordinary
 calls; captured execution conditionally enters those stages on the device.
+When a pending cell needs a larger queue, the same launch also processes other
+eligible capacity failures. Each cell retains its own logical limits, while
+sharing the larger physical allocation avoids serializing separate batches.
 
 Retry state costs twelve bytes per site. Captured execution preallocates FP32
 cooperative scratch through 512 slots. Workspace memory is reported separately

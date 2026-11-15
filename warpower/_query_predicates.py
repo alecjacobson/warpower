@@ -166,14 +166,17 @@ def collect_precision(
     status: wp.array[int],
     jobs: wp.array[int],
     count: wp.array[int],
-    states: wp.array[wp.vec2i],
+    states: wp.array[wp.vec3i],
     initial_capacity: int,
     initialize: bool,
+    initial_queue: int,
 ):
     i = wp.tid()
-    state = wp.vec2i(0, initial_capacity)
+    state = wp.vec3i(0, initial_capacity, initial_queue)
     if initialize:
-        state = _retry.after_attempt(state, status[i], initial_capacity, False, False, True)
+        state = _retry.after_attempt(
+            state, status[i], initial_capacity, False, False, True, initial_queue
+        )
     else:
         state = _retry.promote(states[i], status[i])
     states[i] = state
@@ -191,7 +194,7 @@ def collect_precision_retry(
     owners: wp.array[int],
     jobs: wp.array[int],
     count: wp.array[int],
-    states: wp.array[wp.vec2i],
+    states: wp.array[wp.vec3i],
 ):
     row = wp.tid()
     owner = owners[row]

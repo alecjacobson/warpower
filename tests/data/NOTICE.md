@@ -33,3 +33,14 @@ sampling. Fresh-solve tests separately generate their inputs on device.
 
 Source snapshots and independent geometric checks are retained in the
 [proven exterior recovery evidence](../../results/validation/vtm/proven-exterior-recovery/manifest.json).
+
+# Weighted capacity facet certificate
+
+`weighted-capacity-facet.json` contains an exact rational infeasibility certificate
+for a power-cell facet in the procedural 100K five-cluster input (seed 42).
+It contains no third-party data. The certificate was obtained with CGAL rational
+linear programming against all other input sites, after ten analytic oracle
+controls passed. The test independently verifies the certificate with Python
+`Fraction` arithmetic and regenerates the input, checking both coordinate and
+weight hashes. Three inequalities and the candidate equality yield a zero
+normal and a strictly negative bound, proving that the facet cannot exist.

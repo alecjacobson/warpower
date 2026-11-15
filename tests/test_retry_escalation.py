@@ -31,10 +31,15 @@ def shell(n=160):
 
 
 class RetryCell:
-    def __init__(self, points, owner, route, code, state, width=512):
+    def __init__(self, points, owner, route, code, state, width=512, weights=None):
         self.route, self.owner = route, owner
+        self.weighted = weights is not None
         self.p = wp.array(points, dtype=wp.vec3, device="cuda:0")
-        self.w = wp.zeros(len(points), dtype=float, device="cuda:0")
+        self.w = (
+            wp.zeros(len(points), dtype=float, device="cuda:0")
+            if weights is None
+            else wp.array(weights, dtype=float, device="cuda:0")
+        )
         self.tree = _bvh.build(self.p, self.w, 4)
         self.jobs = wp.array([owner], dtype=int, device="cuda:0")
         self.job_count = wp.array([1], dtype=int, device="cuda:0")
@@ -51,12 +56,15 @@ class RetryCell:
         self.status = wp.array(status, device="cuda:0")
         self.counts = wp.zeros(rows, dtype=int, device="cuda:0")
         self.neighbors = wp.full((rows, width), -1, dtype=int, device="cuda:0")
-        self.states = wp.full(len(points), wp.vec2i(*state), dtype=wp.vec2i, device="cuda:0")
+        if len(state) == 2:
+            state = (*state, 128)
+        self.states = wp.full(len(points), wp.vec3i(*state), dtype=wp.vec3i, device="cuda:0")
 
-    def run(self, capacity, robust, cooperative=False):
+    def run(self, capacity, robust, cooperative=False, queue=None):
+        queue = capacity if queue is None else queue
         if cooperative:
-            scratch = cooperative_scratch(1, 128, "cuda:0", robust=True)
-            kernel = make_precision_kernel(False, 128, True, 32)
+            scratch = cooperative_scratch(1, capacity, "cuda:0", robust=robust)
+            kernel = make_precision_kernel(self.weighted, queue, robust, 32, capacity)
             args = [
                 self.p,
                 self.w,
@@ -81,7 +89,7 @@ class RetryCell:
         else:
             scratch = allocate_scratch(1, capacity, "cuda:0", robust=robust)
             if self.route == "eager":
-                kernel = make_construct_kernel(False, capacity, robust=robust, lane_stride=32)
+                kernel = make_construct_kernel(self.weighted, queue, robust=robust, lane_stride=32)
                 args = [
                     self.p,
                     self.w,
@@ -101,7 +109,7 @@ class RetryCell:
                     self.states,
                 ]
             else:
-                kernel = make_retry_kernel(False, capacity, robust, 32)
+                kernel = make_retry_kernel(self.weighted, queue, robust, 32)
                 args = [
                     self.p,
                     self.w,
@@ -191,7 +199,7 @@ def test_output_row_overflow_does_not_double_scratch_capacity(route):
     cell = RetryCell(points, 7, route, 6, (1, 64), width=1)
     code, state = cell.run(128, True, cooperative=True)
     assert code == 1
-    assert state == [3, 128]
+    assert state[:2] == [3, 128]
     # The cell fit in scratch; only the emitted row was too small. Widening
     # that row must preserve FP64 and permit the same 128-slot scratch.
     cell.neighbors = wp.full((cell.neighbors.shape[0], 512), -1, dtype=int, device="cuda:0")
@@ -199,7 +207,7 @@ def test_output_row_overflow_does_not_double_scratch_capacity(route):
     cell.run(512, False)
     cell.assert_unchanged(before)
     code, state = cell.run(128, True)
-    assert code == 0 and state == [3, 128]
+    assert code == 0 and state[:2] == [3, 128]
 
 
 @pytest.mark.parametrize("route", ["eager", "graph"])
@@ -209,7 +217,7 @@ def test_reaching_storage_limit_does_not_promote_precision(route):
     for capacity in (128, 256, 512):
         code, state = cell.run(capacity, False)
         assert code in (1, 2, 4)
-        assert state == [0, 2 * capacity]
+        assert state[:2] == [0, 2 * capacity]
     before = cell.snapshot()
     cell.run(512, True)
     cell.assert_unchanged(before)

@@ -1,5 +1,8 @@
 # Captured variational tetrahedral meshing
 
+The [public API reference](api.md#variationalmeshingworkspace) lists the complete
+constructor signature and shared input, output-lifetime and capture contracts.
+
 `VariationalMeshingWorkspace` composes initial sampling, progressive refinement,
 global ODT/boundary fitting, selective optimization, boundary jitter, interior
 teleportation, and material extraction in one reusable device graph. It accepts
@@ -100,6 +103,7 @@ recovery; it is not a free preprocessing operation.
 | `quality_rounds` | 4 | Maximum selective/jitter/interior rounds; zero omits all three stages and their storage |
 | `quality_threshold` | 0.3 | Radius-ratio threshold selecting poor elements |
 | `local_quality_retries` | 0 | Additional [local rollback trials](local-quality-backtracking.md) per selective step; opt-in, shape-dependent tradeoff |
+| `local_topology_retries` | 0 | Additional [topology rollback trials](local-topology-backtracking.md); requires positive quality rounds and material recovery; mutually exclusive with local quality retries |
 | `jitter_attempts` | 8 | Bounded boundary proposal attempts per round |
 | `extraction_tolerance` | 0.4 | Circumcenter thickening tolerance, `distance/radius` |
 | `containment_recovery` | `True` | Bounded addition of proven wholly material cells around bad boundary edges |
@@ -109,11 +113,15 @@ recovery; it is not a free preprocessing operation.
 | `sampling_resolution` | 32 | Proposal grid resolution per axis |
 | `sampling_max_attempts` | 4096 | Rejection-sampling budget per initial site |
 | `seed` | 2026 | Signed int32 or device int32[1]; caller-owned seed is never incremented |
+| `boundary_query_precision` | `"float64"` | Boundary assignment using `"float64"`, `"float32"` or `"mixed"`; all retain FP64 accumulation |
 
 `tetrahedra_capacity`, `tetrahedra_cell_capacity` (default 1024), and `chunk_size`
 configure the underlying reconstruction reserves. Allocations scale with capacity,
 not the current target. Iteration and round budgets are setup constants; loop
 termination and stage selection use device counters and CUDA conditional nodes.
+Both local retry options require positive quality rounds. Boundary query
+precision is independent of the domain's `query_backend`; see
+[query precision](boundary-query-precision.md) and [mixed queries](mixed-boundary-queries.md).
 Zero polish iterations disable ordinary additional-fitting rounds. The final
 proven-exterior fallback has a separate one-step budget; disable it with
 `proven_exterior_recovery=False` to suppress that step too. The independent

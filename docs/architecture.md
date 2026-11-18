@@ -1,5 +1,9 @@
 # Construction
 
+For supported signatures and caller contracts, see the [public API reference](api.md).
+This page explains implementation; linked measurement reports retain their
+original revision and scope.
+
 Ordinary cells are built by independent GPU threads. Each thread clips a
 bounded convex cell against candidate bisectors, then emits its active neighbor
 planes. Capacity retries and eligible numerical recovery use cooperative kernels with

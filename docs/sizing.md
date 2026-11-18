@@ -65,9 +65,10 @@ must check error scalars before using results.
 
 ## Graded VTM core
 
-The developing internal `warpower._vtm.VTMWorkspace` accepts `sizing=field`.
-Its public full-mesher API remains tracked in #38. The caller refits the field
-before each optimization run when sample inputs change. The field stays fixed
+The public [`VariationalMeshingWorkspace`](api.md#variationalmeshingworkspace)
+accepts `sizing=field` and composes the internal graded VTM core with sampling,
+growth and extraction. The caller refits an external field before each
+optimization run when sample inputs change. The field stays fixed
 through that run; a captured producer can change it between runs.
 
 The graded kernel evaluates sizing at each tetrahedron centroid and weights
@@ -289,8 +290,10 @@ Standalone diagram, Delaunay, regular-mesh, and uniform-optimizer computation
 therefore uses the same implementation validated in the preceding milestone.
 
 
-The final [full suite](../results/validation/vtm/initialization-full-tests.txt)
-passes 261 tests, including 15 automatic-sizing and 18 sampling cases. The
+The recorded initialization-milestone
+[full suite](../results/validation/vtm/initialization-full-tests.txt)
+passed 261 tests, including 15 automatic-sizing and 18 sampling cases. This is
+historical coverage, not the current suite size. The
 [padded memory run](../results/validation/vtm/initialization-memcheck.txt) passes
 22 selected cases with zero errors: all 18 sampler cases plus cube/sphere poles,
 captured automatic-field recovery, and failed control-mesh invalidation. The

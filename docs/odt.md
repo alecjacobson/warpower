@@ -58,8 +58,10 @@ numerical reconstruction without allowing stale/partial output to escape.
 
 The underlying full-hull builder still has the documented degeneracy limitations.
 Initial failure propagates through `error`; a failure on a proposed step may be
-recovered through backtracking. Robust construction is separately tracked in
-[#32](https://github.com/alecjacobson/warpower/issues/32).
+recovered through backtracking. The independent
+[`DelaunayWorkspace`](api.md#delaunayworkspace) provides certified construction
+and degeneracy recovery; this standalone optimizer still uses the floating-point
+builder. The [complete mesher](mesher.md) uses certified reconstruction.
 
 ## Parameters and results
 

@@ -1,6 +1,6 @@
 # Reproduction
 
-The [complete L40 comparison](../results/summary/report.md) contains all 74 paired
+The [historical L40 comparison](../results/summary/report.md) contains all 74 paired
 cases, exported figures, failure and empty-cell counts, and memory measurements.
 The underlying [CSV](../results/summary/measurements.csv) and
 [JSON with provenance](../results/summary/summary.json) are available separately.
@@ -9,8 +9,15 @@ The measured output is **box-clipped Voronoi/power neighbor CSR** from fresh
 construction. It is not an incremental-update or Delaunay-tetrahedron benchmark.
 The [claim audit](../experiments/benchmark-claims-audit/README.md) distinguishes
 these implementations, reproduces targeted timings, and records seven confirmed
-incorrect neighbor pairs in the later four-checkpoint audit. Keep these
-correctness limits adjacent to timing claims. A zero status count, graph
+incorrect neighbor pairs in a later four-checkpoint audit. Subsequent
+[numerical recovery](../experiments/robust-neighbor-recovery/README.md) fixed
+those pairs. The latest merged
+[capacity-recovery report](../experiments/cell-capacity-recovery/README.md)
+contains the complete 74-case regression comparison and 3,762 exact
+directed-facet audits with zero errors, including the original pairs. It also
+updates the small live-Bonsai ranking and records unresolved broader
+captured-workspace sanitizer findings. Keep each measurement's revision, output
+contract and correctness scope adjacent to timing claims. A zero status count, graph
 symmetry, or a shared source hash is not an exactness or performance guarantee.
 
 Before adopting geometry optimizations, [issue #300](https://github.com/alecjacobson/warpower/issues/300)
@@ -19,8 +26,9 @@ weighted cases, with identical inputs/order, allocator and timing policies on
 the same idle GPU. Retain raw samples and CPU-quota observations; investigate
 repeatable per-case slowdowns above 2% and beyond observed noise, rather than
 hiding them in an aggregate. This is an acceptance requirement, not an automated
-CI gate already implemented. The audit's targeted reruns do not replace the
-complete matrix or correctness regressions.
+CI gate already implemented. The latest capacity-recovery change completed that
+matrix; future changes must repeat the applicable gate. Targeted reruns alone do
+not replace the complete matrix or correctness regressions.
 
 Run commands from the checkout using its Python environment. Install the optional
 dependencies with `pip install -e '.[dev,datasets]' ninja`. To build the CUDA
@@ -36,8 +44,11 @@ python -m benchmarks.matrix
 python -m benchmarks.summarize --require-complete
 ```
 
-The runner defaults to the local L40's CUDA architecture (`8.9`) and toolkit path
-(`/usr/local/cuda-12.6`). Set `CUDA_HOME` and `TORCH_CUDA_ARCH_LIST` when needed.
+The runner's historical defaults are CUDA architecture `8.9` (L40) and toolkit
+path `/usr/local/cuda-12.6`. Set `CUDA_HOME` to an existing complete toolkit
+and `TORCH_CUDA_ARCH_LIST` for the actual GPU before building the reference.
+On the shared benchmark machine, the complete toolkit is
+`/home/horde/warp-cuda/12.6`; the old `/usr/local` path is incomplete.
 The [environment record](../results/environment-l40.json) includes exact package
 versions (including the CUDA 12 Warp wheel), GPU driver, reference compiler and
 submodule revision, and the chunking environment used for the measurements.

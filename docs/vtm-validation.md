@@ -1,5 +1,12 @@
 # VTM development validation
 
+This is a chronological milestone record. Test totals, implementation isolation
+claims and timings describe the revisions linked in each section. For the
+available pipeline and supported options, use the [mesher guide](mesher.md) and
+[public API reference](api.md). The
+[latest geometry regression record](../experiments/cell-capacity-recovery/README.md)
+also covers captured construction and two complete VTM solves.
+
 ## Standalone geometry baseline
 
 The first VTM preparation change (#41) added lazy standalone `delaunay_tetrahedra`
@@ -163,10 +170,11 @@ throttling ([measurements](../results/validation/vtm/large-cell-default-performa
 
 ## Captured surface-domain services
 
-The domain milestone supplies `SurfaceDomain` and `DomainQueryWorkspace`, with
+The domain milestone supplied `SurfaceDomain` and `DomainQueryWorkspace`, with
 pure-Warp triangle hierarchy refitting, float64 closest-point and oriented-ray
 queries, surface quadrature, crease/corner detection, and device input validation.
-It does not yet perform boundary-fitted tetrahedral meshing.
+Boundary-fitted tetrahedral meshing was added later through the
+[public mesher](mesher.md); the measurements here describe the domain milestone.
 
 The full suite passes **133 tests**. All **22 domain tests** pass CUDA memcheck
 with zero errors. Independent references include brute-force triangle-distance

@@ -152,5 +152,6 @@ python -m benchmarks.extraction --reference --output results/local/extraction.js
 python -m benchmarks.extraction --combined --reference --output results/local/combined.json
 ```
 
-Graded sizing, initialization/refinement, and worst-element improvement remain
-part of the [full mesher development goal](vtm.md).
+The [public mesher](mesher.md) combines extraction with graded sizing,
+initialization/refinement and optional worst-element improvement.
+Comparable-quality CPU outperformance remains a [development goal](vtm.md).

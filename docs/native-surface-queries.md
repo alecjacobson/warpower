@@ -46,8 +46,10 @@ accuracy contract for this explicitly selected mode.
 The reference surface hierarchy remains for input validation, initial sampling
 and containment/exterior recovery. The native BVH is additional setup storage.
 Native selection avoids allocating the reference query cache. This backend does
-not change the nearest-site quadrature accumulation; selectable accumulation
-precision is tracked separately in [#266](https://github.com/alecjacobson/warpower/issues/266).
+not change nearest-site quadrature assignment. That has separate
+[float32/float64](boundary-query-precision.md) and [mixed](mixed-boundary-queries.md)
+query options, all retaining FP64 accumulation. Reduced-precision accumulation
+research remains tracked in [#266](https://github.com/alecjacobson/warpower/issues/266).
 
 ## Capture limitation in Warp 1.19
 

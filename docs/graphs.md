@@ -1,5 +1,8 @@
 # Device-resident CUDA graph loops
 
+See the [public API reference](api.md#diagramworkspace) for the complete
+constructor signature, defaults and related workspace APIs.
+
 `DiagramWorkspace` preallocates storage and captures the construction once.
 Every `run()` then enqueues GPU work without reading counts, bounds, or status
 back to the CPU. It supports bounded Voronoi/power adjacency and optional full-hull
@@ -44,6 +47,9 @@ intervention between iterations.
 
 All outputs are CUDA Warp arrays with stable addresses for the workspace lifetime.
 Their physical shapes are capacities, not the current number of valid entries.
+Unused slots may be uninitialized or stale. Even for a host snapshot, slice the
+device buffer to its valid count before copying; copying the entire reserve and
+slicing afterward reads unused storage.
 
 | Field | Meaning |
 |---|---|
@@ -67,7 +73,7 @@ def consume_tets(tets: wp.array2d[int], count: wp.array[int], error: wp.array[in
         # Use this tetrahedron; do not read beyond count[0].
 ```
 
-Default capacities are `48*N` adjacency entries and `max(16, 8*N)` tetrahedra.
+Default capacities are `max(1, 48*N)` adjacency entries and `max(16, 8*N)` tetrahedra.
 They are practical reserves, not theoretical bounds on arbitrary 3D input.
 Set `adjacency_capacity=` and `tetrahedra_capacity=` to reserve more before
 capture. The tetrahedron capacity also bounds the intermediate candidate list.
@@ -91,7 +97,7 @@ The `status` field is then unused, initialized to -1.
 As in the eager API, the bounded adjacency can omit boundary edges of the full
 tetrahedralization. Weighted sites with globally empty power cells are omitted
 from the regular mesh. The mesh has the same floating-point and degeneracy
-[limitations](api.md#optional-full-tetrahedral-mesh) as the eager optional output.
+[limitations](api.md#optional-tetrahedron-output) as the eager optional output.
 
 ## Failure handling on the device
 

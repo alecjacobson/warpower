@@ -4,6 +4,7 @@ from ._api import Diagram, power_diagram, voronoi_diagram
 
 __all__ = [
     "AutomaticSizingWorkspace",
+    "BoundaryFitter",
     "BoundaryWorkspace",
     "DelaunayWorkspace",
     "Diagram",
@@ -15,6 +16,9 @@ __all__ = [
     "SizingField",
     "SizingQueryWorkspace",
     "SurfaceDomain",
+    "UpdatableDelaunay",
+    "UpdatableDiagram",
+    "VariationalMesher",
     "VariationalMeshingWorkspace",
     "delaunay_tetrahedra",
     "power_diagram",
@@ -22,12 +26,29 @@ __all__ = [
     "voronoi_diagram",
 ]
 
+_DEPRECATED_NAMES = {
+    "BoundaryWorkspace": "BoundaryFitter",
+    "DelaunayWorkspace": "UpdatableDelaunay",
+    "DiagramWorkspace": "UpdatableDiagram",
+    "VariationalMeshingWorkspace": "VariationalMesher",
+}
+
 
 def __getattr__(name):
-    if name == "VariationalMeshingWorkspace":
-        from ._mesher import VariationalMeshingWorkspace
+    if name in _DEPRECATED_NAMES:
+        import warnings
 
-        return VariationalMeshingWorkspace
+        replacement = _DEPRECATED_NAMES[name]
+        warnings.warn(
+            f"warpower.{name} is deprecated; use warpower.{replacement} instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        name = replacement
+    if name == "VariationalMesher":
+        from ._mesher import VariationalMesher
+
+        return VariationalMesher
     if name == "AutomaticSizingWorkspace":
         from ._automatic_sizing import AutomaticSizingWorkspace
 
@@ -40,18 +61,18 @@ def __getattr__(name):
         from . import _sizing
 
         return getattr(_sizing, name)
-    if name == "DelaunayWorkspace":
-        from ._delaunay_recovery import DelaunayWorkspace
+    if name == "UpdatableDelaunay":
+        from ._delaunay_recovery import UpdatableDelaunay
 
-        return DelaunayWorkspace
+        return UpdatableDelaunay
     if name == "ExtractionWorkspace":
         from ._extraction import ExtractionWorkspace
 
         return ExtractionWorkspace
-    if name == "BoundaryWorkspace":
-        from ._boundary import BoundaryWorkspace
+    if name == "BoundaryFitter":
+        from ._boundary import BoundaryFitter
 
-        return BoundaryWorkspace
+        return BoundaryFitter
     if name in ("SurfaceDomain", "DomainQueryWorkspace"):
         from . import _domain
 
@@ -60,10 +81,10 @@ def __getattr__(name):
         from ._odt import ODTWorkspace
 
         return ODTWorkspace
-    if name == "DiagramWorkspace":
-        from ._graph import DiagramWorkspace
+    if name == "UpdatableDiagram":
+        from ._graph import UpdatableDiagram
 
-        return DiagramWorkspace
+        return UpdatableDiagram
     if name in ("delaunay_tetrahedra", "regular_tetrahedra"):
         from . import _mesh_api
 

@@ -1,9 +1,9 @@
 # Mixed boundary nearest-site queries
 
-`BoundaryWorkspace(..., query_precision="mixed")` uses conservative FP32 lower
+`BoundaryFitter(..., query_precision="mixed")` uses conservative FP32 lower
 bounds during the site-hierarchy search, then evaluates possible winners in FP64
 with the reference index tie rule. `VTMWorkspace` and
-`VariationalMeshingWorkspace` accept `boundary_query_precision="mixed"`; the gallery
+`VariationalMesher` accept `boundary_query_precision="mixed"`; the gallery
 accepts `--boundary-query-precision mixed`. The default remains `float64`.
 Masses, moments, energy, corner matching and topology arithmetic remain unchanged.
 This option searches moving sites for fixed surface/crease samples, independently

@@ -314,11 +314,14 @@ def fast_invalid_reset(error: wp.array[int], available: wp.array[int]):
         available[0] = 1
 
 
-class DelaunayWorkspace:
-    """Exact-certified ordinary Delaunay output, with bounded recovery attempts.
+class UpdatableDelaunay:
+    """Update certified unweighted Delaunay connectivity from changing sites.
 
     Setup allocates construction/certificate storage and optional facet scratch.
-    Replay leaves input positions untouched and performs no host decisions.
+    Call ``update()`` after changing the bound point array in place. Each
+    update constructs and certifies connectivity for the current sites, leaving
+    their positions untouched and performing no host geometry decisions.
+    ``run()`` remains an alias for ``update()``.
     Exhaustion is explicit: error != 0 and tetrahedra_count == 0. This is not
     a universal exact constructor; finite candidate generation can still fail.
     """
@@ -744,7 +747,15 @@ class DelaunayWorkspace:
             self._certificate._local.zero_()
             self._certificate._global.fill_(1)
 
-    def run(self, stream=None):
+    def update(self, stream=None):
+        """Reconstruct and certify connectivity for the current bound sites.
+
+        Args:
+            stream: Warp stream on the input device, or its current stream.
+
+        Returns:
+            This object with refreshed outputs queued on the selected stream.
+        """
         stream = wp.get_stream(self.device) if stream is None else stream
         if stream.device != self.device:
             raise ValueError("Workspace stream must use the input device")
@@ -758,3 +769,8 @@ class DelaunayWorkspace:
             else:
                 wp.capture_launch(self.graph, stream=stream)
         return self
+
+    run = update
+
+
+DelaunayWorkspace = UpdatableDelaunay

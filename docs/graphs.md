@@ -1,31 +1,40 @@
 # Device-resident CUDA graph loops
 
-`DiagramWorkspace` preallocates storage and captures the construction once.
-Every `run()` then enqueues GPU work without reading counts, bounds, or status
+See the [public API reference](api.md#updatablediagram) for the complete
+constructor signature, defaults and related workspace APIs.
+
+`UpdatableDiagram` preallocates storage and captures the construction once.
+Every `update()` then enqueues GPU work without reading counts, bounds, or status
 back to the CPU. It supports bounded Voronoi/power adjacency and optional full-hull
 Delaunay/regular tetrahedra. The existing convenience functions retain their
 exact-size results and host orchestration; use the workspace for captured loops.
+
+Update the bound position/weight arrays in place before calling `update()`.
+Each call reconstructs the diagram while reusing storage and execution setup;
+it does not perform incremental neighbor repair. The site count stays fixed.
+`DiagramWorkspace` remains a deprecated class alias, and `run()` remains a
+supported method alias.
 
 ```python
 import warp as wp
 import warpower
 
 # points: contiguous CUDA wp.vec3 array; weights: optional float32 CUDA array.
-workspace = warpower.DiagramWorkspace(
+workspace = warpower.UpdatableDiagram(
     points, weights,
     return_tetrahedra=True,
 )
 
 with wp.ScopedCapture() as capture:
     # Launch an upstream kernel that writes points/weights in place here.
-    workspace.run()
+    workspace.update()
     # Launch downstream kernels reading workspace outputs here.
 
 for _ in range(100):
     wp.capture_launch(capture.graph)
 ```
 
-`workspace.run()` also works outside an enclosing capture: it asynchronously
+`workspace.update()` also works outside an enclosing capture: it asynchronously
 launches its internally captured graph. Python is used for setup and graph
 submission, not for convergence decisions during execution. Setup may allocate,
 compile, upload NumPy inputs, and prepare native sorting scratch. Replays keep
@@ -35,7 +44,7 @@ so the prepared workspace can then be used on another properly ordered stream.
 CUDA conditional graphs require Warp's CUDA toolkit and the NVIDIA driver to
 support CUDA 12.4 or newer.
 
-`run()` can also be nested inside a `wp.capture_while` body alongside producer
+`update()` can also be nested inside a `wp.capture_while` body alongside producer
 and consumer kernels. Updating that loop's condition on the GPU allows multiple
 construction/consumption iterations in a single graph launch, with no host
 intervention between iterations.
@@ -44,6 +53,9 @@ intervention between iterations.
 
 All outputs are CUDA Warp arrays with stable addresses for the workspace lifetime.
 Their physical shapes are capacities, not the current number of valid entries.
+Unused slots may be uninitialized or stale. Even for a host snapshot, slice the
+device buffer to its valid count before copying; copying the entire reserve and
+slicing afterward reads unused storage.
 
 | Field | Meaning |
 |---|---|
@@ -67,7 +79,7 @@ def consume_tets(tets: wp.array2d[int], count: wp.array[int], error: wp.array[in
         # Use this tetrahedron; do not read beyond count[0].
 ```
 
-Default capacities are `48*N` adjacency entries and `max(16, 8*N)` tetrahedra.
+Default capacities are `max(1, 48*N)` adjacency entries and `max(16, 8*N)` tetrahedra.
 They are practical reserves, not theoretical bounds on arbitrary 3D input.
 Set `adjacency_capacity=` and `tetrahedra_capacity=` to reserve more before
 capture. The tetrahedron capacity also bounds the intermediate candidate list.
@@ -91,7 +103,7 @@ The `status` field is then unused, initialized to -1.
 As in the eager API, the bounded adjacency can omit boundary edges of the full
 tetrahedralization. Weighted sites with globally empty power cells are omitted
 from the regular mesh. The mesh has the same floating-point and degeneracy
-[limitations](api.md#optional-full-tetrahedral-mesh) as the eager optional output.
+[limitations](api.md#optional-tetrahedron-output) as the eager optional output.
 
 ## Failure handling on the device
 
@@ -124,7 +136,7 @@ replay. Noncontiguous CUDA inputs are rejected to preserve pointer identity.
 NumPy inputs are uploaded during setup; later changes to the NumPy source do not
 update the device copy.
 
-By default `run()` uses the current Warp stream. Pass `stream=` or use
+By default `update()` uses the current Warp stream. Pass `stream=` or use
 `wp.ScopedStream` to select another. For CUDA tensors, wrap the PyTorch stream with
 `wp.stream_from_torch()` and put both frameworks' producer and consumer operations
 on that shared stream. Use **Warp `ScopedCapture`** for the enclosing capture so

@@ -1,20 +1,26 @@
 # Certified Delaunay construction
 
-`DelaunayWorkspace` is an optional, independently callable ordinary Delaunay
+`UpdatableDelaunay` is an optional, independently callable ordinary Delaunay
 constructor. It certifies connectivity against the original float32 sites and
 recovers some configurations rejected by the existing floating-point builder,
 including cube corners and regular lattices. Input positions are never moved.
 The existing `delaunay_tetrahedra`, `regular_tetrahedra`, diagram functions, and
-`DiagramWorkspace` retain their implementations and performance characteristics.
+`UpdatableDiagram` retain their implementations and performance characteristics.
+
+Call `update()` after changing the bound site array in place. Input size and
+addresses stay fixed. Each update constructs and certifies current connectivity;
+reuse of storage and strategy hints does not imply incremental topology repair.
+`DelaunayWorkspace` remains a deprecated class alias and `run()` remains a
+supported method alias.
 
 ```python
 import warp as wp
-from warpower import DelaunayWorkspace
+from warpower import UpdatableDelaunay
 
-mesh = DelaunayWorkspace(sites, tetrahedra_cell_capacity=1024)
+mesh = UpdatableDelaunay(sites, tetrahedra_cell_capacity=1024)
 with wp.ScopedCapture() as capture:
     produce_sites(mesh.points)  # Your Warp launches, writing the shared buffer.
-    mesh.run()
+    mesh.update()
     consume_mesh(mesh.points, mesh.tetrahedra, mesh.tetrahedra_count, mesh.error)
 wp.capture_launch(capture.graph)
 ```
@@ -22,7 +28,7 @@ wp.capture_launch(capture.graph)
 Consumer kernels must check `error[0] == 0` and use only the prefix delimited by
 `tetrahedra_count[0]`. These are device arrays. The example's producer/consumer
 functions stand for application kernel launches, not host copies. Setup allocates,
-compiles, captures, and synchronizes; `run(stream=None)` and captured replay use
+compiles, captures, and synchronizes; `update(stream=None)` and captured replay use
 fixed storage and device decisions. Establish stream dependencies when sharing
 inputs with other processes. Warp scoped capture is required for conditional
 nodes; see [graph execution](graphs.md).
@@ -186,7 +192,7 @@ that completion supplied the public result. `facet_seeds`, `facet_rounds`, and
 
 The default tetrahedron capacity is `8*N`; the worst-case Delaunay size can be
 quadratic, so applications may need `tetrahedra_capacity`. Cell capacity is 1024
-by default here, while the older `DiagramWorkspace` default remains 512. Two
+by default here, while the older `UpdatableDiagram` default remains 512. Two
 construction workspaces, an additional original-site hierarchy for cached
 recovery, and certificate buffers are reserved at setup. This
 robustness path has measurable extra cost. Recovery and certification optimization

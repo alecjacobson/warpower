@@ -342,7 +342,7 @@ def publish(
             metrics[k] = wp.float64(0.0)
 
 
-class VariationalMeshingWorkspace:
+class VariationalMesher:
     """Fixed-capacity, device-resident Alliez-style variational tetrahedral mesher."""
 
     def __init__(
@@ -933,3 +933,6 @@ class VariationalMeshingWorkspace:
             else:
                 wp.capture_launch(self.graph, stream=stream)
         return self
+
+
+VariationalMeshingWorkspace = VariationalMesher

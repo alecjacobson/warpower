@@ -211,12 +211,15 @@ def _positive(value, name):
     return value
 
 
-class DiagramWorkspace:
-    """Preallocate once; call ``run()`` inside a Warp capture or asynchronously.
+class UpdatableDiagram:
+    """Update a diagram from changing positions and weights in fixed buffers.
 
-    Inputs keep fixed addresses and shapes. Outputs are capacity arrays plus
-    device counts. ``error[0] == 0`` means valid output. Setup may allocate and
-    synchronize; run/captured replay never copies results to the CPU.
+    Preallocate once, then call ``update()`` inside a Warp capture or
+    asynchronously. Each update reconstructs geometry from current inputs;
+    input addresses and shapes stay fixed. Outputs are capacity arrays plus
+    device counts. ``error[0] == 0`` means valid output. Setup may allocate
+    and synchronize; updates never copy results to the CPU. ``run()`` remains
+    an alias for ``update()``.
     """
 
     def __init__(
@@ -238,9 +241,9 @@ class DiagramWorkspace:
         self.points, self._torch = _points_array(points)
         self.device = self.points.device
         if not self.device.is_cuda:
-            raise ValueError("DiagramWorkspace requires CUDA inputs")
+            raise ValueError("UpdatableDiagram requires CUDA inputs")
         if not wp.is_conditional_graph_supported():
-            raise RuntimeError("DiagramWorkspace requires CUDA conditional graphs (CUDA 12.4+)")
+            raise RuntimeError("UpdatableDiagram requires CUDA conditional graphs (CUDA 12.4+)")
         # Copies would sever the producer's pointer relationship.
         if isinstance(points, wp.array) and not points.is_contiguous:
             raise ValueError("Workspace inputs must be contiguous")
@@ -929,8 +932,15 @@ class DiagramWorkspace:
             block_dim=32,
         )
 
-    def run(self, stream=None):
-        """Enqueue on a Warp stream, or inline into its active Warp capture."""
+    def update(self, stream=None):
+        """Reconstruct the diagram from the current bound input arrays.
+
+        Args:
+            stream: Warp stream on the input device, or its current stream.
+
+        Returns:
+            This object with refreshed outputs queued on the selected stream.
+        """
         stream = wp.get_stream(self.device) if stream is None else stream
         if stream.device != self.device:
             raise ValueError("Workspace stream must use the input device")
@@ -944,3 +954,8 @@ class DiagramWorkspace:
             else:
                 wp.capture_launch(self.graph, stream=stream)
         return self
+
+    run = update
+
+
+DiagramWorkspace = UpdatableDiagram

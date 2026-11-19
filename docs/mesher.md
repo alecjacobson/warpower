@@ -1,6 +1,9 @@
 # Captured variational tetrahedral meshing
 
-`VariationalMeshingWorkspace` composes initial sampling, progressive refinement,
+The [public API reference](api.md#variationalmesher) lists the complete
+constructor signature and shared input, output-lifetime and capture contracts.
+
+`VariationalMesher` composes initial sampling, progressive refinement,
 global ODT/boundary fitting, selective optimization, boundary jitter, interior
 teleportation, and material extraction in one reusable device graph. It accepts
 a closed oriented `SurfaceDomain` and returns a tetrahedral approximation of its
@@ -16,7 +19,7 @@ import warp as wp
 domain = warpower.SurfaceDomain(vertices, faces, surface_subdivisions=4)
 target = wp.full(1, 1000, dtype=int, device=domain.device)
 seed = wp.full(1, 2026, dtype=int, device=domain.device)
-mesher = warpower.VariationalMeshingWorkspace(
+mesher = warpower.VariationalMesher(
     domain, capacity=2000, target_count=target, initial_count=256, seed=seed
 )
 
@@ -39,7 +42,7 @@ features. Refit an explicit sizing field before the mesher if its samples change
 Each fresh sample generation resets the core's reconstruction preference. Strategy
 reuse continues within that optimization trajectory; a difficult final state from
 the preceding solve does not force its expensive strategy onto new initial sites.
-This policy belongs to the full mesher. Independently used `DelaunayWorkspace`
+This policy belongs to the full mesher. Independently used `UpdatableDelaunay`
 keeps its existing strategy caching.
 
 Keep the workspace, domain, sizing providers, and caller-owned input arrays alive
@@ -51,7 +54,7 @@ while another solve reads them. Construction is a host setup operation and must
 finish before entering the enclosing capture. There is no CPU geometry fallback.
 
 The independent [diagram and full-hull routines](architecture.md),
-[`DelaunayWorkspace`](delaunay-recovery.md), [ODT optimizer](odt.md),
+[`UpdatableDelaunay`](delaunay-recovery.md), [ODT optimizer](odt.md),
 [boundary fitter](boundary.md), and [extractor](extraction.md) remain callable
 without constructing this mesher. Importing or using them does not load the new
 scheduler or add meshing stages to their graphs.
@@ -100,6 +103,7 @@ recovery; it is not a free preprocessing operation.
 | `quality_rounds` | 4 | Maximum selective/jitter/interior rounds; zero omits all three stages and their storage |
 | `quality_threshold` | 0.3 | Radius-ratio threshold selecting poor elements |
 | `local_quality_retries` | 0 | Additional [local rollback trials](local-quality-backtracking.md) per selective step; opt-in, shape-dependent tradeoff |
+| `local_topology_retries` | 0 | Additional [topology rollback trials](local-topology-backtracking.md); requires positive quality rounds and material recovery; mutually exclusive with local quality retries |
 | `jitter_attempts` | 8 | Bounded boundary proposal attempts per round |
 | `extraction_tolerance` | 0.4 | Circumcenter thickening tolerance, `distance/radius` |
 | `containment_recovery` | `True` | Bounded addition of proven wholly material cells around bad boundary edges |
@@ -109,11 +113,15 @@ recovery; it is not a free preprocessing operation.
 | `sampling_resolution` | 32 | Proposal grid resolution per axis |
 | `sampling_max_attempts` | 4096 | Rejection-sampling budget per initial site |
 | `seed` | 2026 | Signed int32 or device int32[1]; caller-owned seed is never incremented |
+| `boundary_query_precision` | `"float64"` | Boundary assignment using `"float64"`, `"float32"` or `"mixed"`; all retain FP64 accumulation |
 
 `tetrahedra_capacity`, `tetrahedra_cell_capacity` (default 1024), and `chunk_size`
 configure the underlying reconstruction reserves. Allocations scale with capacity,
 not the current target. Iteration and round budgets are setup constants; loop
 termination and stage selection use device counters and CUDA conditional nodes.
+Both local retry options require positive quality rounds. Boundary query
+precision is independent of the domain's `query_backend`; see
+[query precision](boundary-query-precision.md) and [mixed queries](mixed-boundary-queries.md).
 Zero polish iterations disable ordinary additional-fitting rounds. The final
 proven-exterior fallback has a separate one-step budget; disable it with
 `proven_exterior_recovery=False` to suppress that step too. The independent

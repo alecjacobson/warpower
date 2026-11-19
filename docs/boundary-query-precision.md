@@ -6,11 +6,11 @@ in energy diagnostics, and global energy sums remain FP64. Distinct-corner
 matching and topology predicates retain their existing arithmetic.
 
 ```python
-from warpower import BoundaryWorkspace, VariationalMeshingWorkspace
+from warpower import BoundaryFitter, VariationalMesher
 
-fit = BoundaryWorkspace(domain, sites, query_precision="float32")
-mesh = VariationalMeshingWorkspace(domain, 8192,
-                                  boundary_query_precision="float32")
+fit = BoundaryFitter(domain, sites, query_precision="float32")
+mesh = VariationalMesher(domain, 8192,
+                         boundary_query_precision="float32")
 ```
 
 `VTMWorkspace` also accepts `boundary_query_precision`. The gallery option is

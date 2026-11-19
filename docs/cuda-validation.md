@@ -1,5 +1,13 @@
 # CUDA validation environment
 
+This page records the instrumented VTM milestones and their diagnostic settings.
+The latest merged [geometry recovery validation](../experiments/cell-capacity-recovery/README.md)
+adds scoped memcheck, initcheck, racecheck and synccheck runs. It also records
+broader captured-workspace findings reproduced on baseline and candidate that
+remain open in [issue #300](https://github.com/alecjacobson/warpower/issues/300).
+The passing runs below do not imply that every current workspace passes every
+sanitizer configuration.
+
 Tests run on the NVIDIA L40 with Warp 1.19.0 and CUDA driver 570.158.01.
 Ordinary execution and performance measurements use the default CUDA context
 settings. The geometry runtime contains no native CUDA extension or driver calls.

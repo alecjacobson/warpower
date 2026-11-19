@@ -6,12 +6,12 @@ and boundary-distance metrics. The default is `query_backend="reference"`.
 This work follows the [smooth-input performance plan](https://github.com/alecjacobson/warpower/issues/264).
 
 ```python
-from warpower import SurfaceDomain, VariationalMeshingWorkspace
+from warpower import SurfaceDomain, VariationalMesher
 import warp as wp
 
 domain = SurfaceDomain(vertices, triangles, query_backend="native",
                        validate_geometry=False)  # Trusted valid input.
-mesher = VariationalMeshingWorkspace(domain, 8192, initial_count=256)
+mesher = VariationalMesher(domain, 8192, initial_count=256)
 with wp.ScopedCapture() as capture:
     # The input surface stays fixed; upstream device kernels may update the
     # mesher's documented live controls, and downstream kernels consume output.
@@ -46,8 +46,10 @@ accuracy contract for this explicitly selected mode.
 The reference surface hierarchy remains for input validation, initial sampling
 and containment/exterior recovery. The native BVH is additional setup storage.
 Native selection avoids allocating the reference query cache. This backend does
-not change the nearest-site quadrature accumulation; selectable accumulation
-precision is tracked separately in [#266](https://github.com/alecjacobson/warpower/issues/266).
+not change nearest-site quadrature assignment. That has separate
+[float32/float64](boundary-query-precision.md) and [mixed](mixed-boundary-queries.md)
+query options, all retaining FP64 accumulation. Reduced-precision accumulation
+research remains tracked in [#266](https://github.com/alecjacobson/warpower/issues/266).
 
 ## Capture limitation in Warp 1.19
 

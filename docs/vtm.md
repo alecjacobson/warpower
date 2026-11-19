@@ -1,5 +1,8 @@
 # Variational tetrahedral meshing development
 
+For supported entry points and defaults, see the [public API reference](api.md).
+This page describes the implemented pipeline and the remaining research goals.
+
 The [implementation goal](https://github.com/alecjacobson/warpower/issues/29)
 tracks a pure-Warp, device-resident implementation of
 [Alliez et al., Variational Tetrahedral Meshing (2005)](https://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Alliez05.pdf).
@@ -29,7 +32,7 @@ research is deferred; existing public API and standalone geometry tests remain
 release gates. The [native query backend](native-surface-queries.md) is explicitly
 selected, with the reference backend still the default.
 Boundary sample assignment has an independent [query precision option](boundary-query-precision.md),
-with FP64 accumulation retained in both modes.
+with FP64 accumulation retained in float64, float32 and mixed query modes.
 The [previous-neighbor clipping experiment](neighbor-clipping.md) improves some
 fresh scan reconstructions but loses to the existing tetrahedron reuse path on
 the tested VTM transitions; it remains outside the public runtime.
@@ -58,14 +61,17 @@ of the method. Exact preservation of every input facet is outside this scope.
 
 ## Compatibility and performance contract
 
-The baseline is commit `3091289464af368d2a61f843d169d7f4863d1cfd`.
-`voronoi_diagram`, `power_diagram`, and `DiagramWorkspace` remain independently
+The original VTM compatibility baseline is commit
+`3091289464af368d2a61f843d169d7f4863d1cfd`. Later geometry changes also have
+paired comparisons against their immediate main-branch baselines; see the
+[latest geometry regression record](../experiments/cell-capacity-recovery/README.md).
+`voronoi_diagram`, `power_diagram`, and `UpdatableDiagram` remain independently
 usable. New meshing modules are lazy imports, and their optional computation is
 separate from the existing default diagram path. The standalone
 `delaunay_tetrahedra` and `regular_tetrahedra` convenience functions return the
 full-hull mesh without constructing bounded adjacency. For captured standalone
-certified unweighted meshing, use [`DelaunayWorkspace`](delaunay-recovery.md).
-`DiagramWorkspace(adjacency=False, return_tetrahedra=True)` also exposes the
+certified unweighted meshing, use [`UpdatableDelaunay`](delaunay-recovery.md).
+`UpdatableDiagram(adjacency=False, return_tetrahedra=True)` also exposes the
 diagram-based tetrahedral output, including weighted regular triangulations.
 
 Changes to shared geometry code require independent correctness checks and
@@ -77,16 +83,18 @@ reporting a speedup in another.
 
 The full-mesher performance target is at least **10x** versus a native CPU
 implementation on substantial examples at comparable mesh quality. This is a
-goal, not a measured result. CGAL Mesh_3/ODT, including parallel CPU operation
-where available, is the planned comparison. Report total time and resident-device
+goal, not a measured result. Native [CGAL Mesh_3 controls](cpu-mesher-baseline.md),
+[CPU quality optimizers](cpu-quality-optimizers.md), and
+[size/quality studies](cpu-size-frontier.md) are available, including parallel
+CPU configurations where supported. Report total time and resident-device
 replay separately, alongside boundary error, element-quality distributions,
 topology checks, hardware, and thread limits. A Python reference is useful for
 correctness but is not sufficient evidence for the CPU speedup claim.
 
-Examples will include a torus, a graded scanned shape, thin features, a
-fandisk-like part, a cavity, and disconnected components, with asset provenance
-and reproducible generation. The main README remains limited to installation
-and the best measured flagship result.
+The [example gallery](examples.md) includes a torus, graded scanned shape,
+thin features, a fandisk-like part, a cavity and disconnected components, with
+asset provenance and reproducible generation. The [README](../README.md)
+links the public API, quick start and qualified benchmark records.
 
 Run the baseline gate from the repository root:
 
@@ -110,7 +118,9 @@ not release performance evidence.
 
 The [fixed-boundary ODT workspace](odt.md) provides the interior optimizer and
 captured failure recovery. See [validation and known limits](vtm-validation.md).
-It is not yet the full boundary-fitted mesher or a CPU speedup result.
+It is the fixed-hull component; use the available
+[`VariationalMesher`](mesher.md) for boundary-fitted meshing.
+Its existence does not establish the outstanding CPU performance goal.
 
 The [surface-domain layer](domains.md) provides captured refits, geometric queries,
 device input validation, and surface/feature quadrature. It supports nonconvex

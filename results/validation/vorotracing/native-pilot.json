@@ -1,0 +1,211 @@
+{
+  "complete": true,
+  "backend": "native",
+  "options": {
+    "backend": "native",
+    "output": "/home/horde/projects/power-diagram/results/local/vorotracing-20261110/native-pilot",
+    "initialization": "results/local/vorotracing-20261110/initialization/dense-points.pt",
+    "data": "data/radfoam-training",
+    "sites": 262144,
+    "rays": 65536,
+    "steps": 1000,
+    "downsample": 4,
+    "eval_every": 1000,
+    "morton": false,
+    "no_save": false
+  },
+  "initial_base_sha256": "546846d1a5f7eece9abe8b22f4213181e3d440b592bda024d3077e4d64240e2d",
+  "initial_hash_scope": "Original sampled positions, log densities and repeated diffuse RGB logit palette; specular texture is zero.",
+  "source_commit": "75910484d6d46af25e180044ca6b9091204fe6fa",
+  "training": "Original upstream loop; cached upstream dense initialization and isolated generator for the original uniform random-ray sampler; no external logging or viewer.",
+  "gpu": "NVIDIA L40",
+  "torch": "2.7.1+cu126",
+  "cpu_affinity": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_sha256": {
+    "warp_renderer.py": "39b3c2054c036a6654997bd288869c4416cb7d82d3bd4b643e9b85833045ad98",
+    "validate_renderer.py": "5448d89f254b127ec24bb066d32f17f7adbcad74b769dc5c68f3c48093d7a88e",
+    "prepare_scene.py": "af858dec25b4eb384b4573c5c07c0d93588db270c8c3ec2399519d6c8b750d59",
+    "upstream.py": "fa92c3fbd85d3da023aa3ff699e5d53d96ef8e46d4dce31ac9fbbdf26d164463",
+    "run_fit.py": "db2158ac901e60e4f4c7abd33f1072370d517f4a818ba6cad4f2658c7ea4f06e",
+    "numerics.py": "1132505a3712447b49da16a71b9a28fcb8367ddcdbc83ceefb5c8b2c4c59b1ef"
+  },
+  "total_seconds": 77.2181123867631,
+  "loop_seconds": 22.135994125157595,
+  "evaluations": [
+    {
+      "step": 999,
+      "seconds": 22.135110769420862,
+      "metrics": {
+        "psnr": 27.355764389038086,
+        "ssim": 0.8238493800163269,
+        "lpips": 0.3233898878097534,
+        "lpips_3dgs": 0.26668187975883484
+      },
+      "numerics": {
+        "points_gradient": 0,
+        "diffuse_gradient": 0,
+        "specular_gradient": 0,
+        "density_gradient": 0,
+        "rgba": 0,
+        "distortion": 0,
+        "capped_rays": 0
+      }
+    }
+  ],
+  "geometry": [
+    {
+      "step": 1,
+      "seconds": 0.1702546700835228
+    },
+    {
+      "step": 4,
+      "seconds": 0.16653935611248016
+    },
+    {
+      "step": 9,
+      "seconds": 0.1705605313181877
+    },
+    {
+      "step": 16,
+      "seconds": 0.16881267353892326
+    },
+    {
+      "step": 25,
+      "seconds": 0.172066792845726
+    },
+    {
+      "step": 36,
+      "seconds": 0.1653430499136448
+    },
+    {
+      "step": 49,
+      "seconds": 0.16545014828443527
+    },
+    {
+      "step": 64,
+      "seconds": 0.16852987930178642
+    },
+    {
+      "step": 81,
+      "seconds": 0.16173005104064941
+    },
+    {
+      "step": 100,
+      "seconds": 0.16191205754876137
+    },
+    {
+      "step": 121,
+      "seconds": 0.15869801491498947
+    },
+    {
+      "step": 144,
+      "seconds": 0.16249600797891617
+    },
+    {
+      "step": 169,
+      "seconds": 0.15895260125398636
+    },
+    {
+      "step": 196,
+      "seconds": 0.16216454282402992
+    },
+    {
+      "step": 225,
+      "seconds": 0.17026060819625854
+    },
+    {
+      "step": 256,
+      "seconds": 0.1549306884407997
+    },
+    {
+      "step": 289,
+      "seconds": 0.15394436195492744
+    },
+    {
+      "step": 324,
+      "seconds": 0.15545960143208504
+    },
+    {
+      "step": 361,
+      "seconds": 0.15150778368115425
+    },
+    {
+      "step": 400,
+      "seconds": 0.14685114845633507
+    },
+    {
+      "step": 441,
+      "seconds": 0.146766796708107
+    },
+    {
+      "step": 484,
+      "seconds": 0.1490487903356552
+    },
+    {
+      "step": 529,
+      "seconds": 0.15327811241149902
+    },
+    {
+      "step": 576,
+      "seconds": 0.15008410811424255
+    },
+    {
+      "step": 625,
+      "seconds": 0.13702747970819473
+    },
+    {
+      "step": 676,
+      "seconds": 0.15923693031072617
+    },
+    {
+      "step": 729,
+      "seconds": 0.14655740186572075
+    },
+    {
+      "step": 784,
+      "seconds": 0.14764780178666115
+    },
+    {
+      "step": 841,
+      "seconds": 0.155210230499506
+    },
+    {
+      "step": 900,
+      "seconds": 0.15236248075962067
+    },
+    {
+      "step": 961,
+      "seconds": 0.14496678486466408
+    }
+  ],
+  "sites": 262144,
+  "peak_torch_bytes": 2841488384,
+  "native_extension_loaded": true,
+  "checkpoint": "/home/horde/projects/power-diagram/results/local/vorotracing-20261110/native-pilot/model/model.pt",
+  "numerics": {
+    "points_gradient": 0,
+    "diffuse_gradient": 0,
+    "specular_gradient": 0,
+    "density_gradient": 0,
+    "rgba": 0,
+    "distortion": 0,
+    "capped_rays": 0
+  },
+  "cpu_quota": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 31,
+      "throttled_usec": 131015
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 40,
+      "throttled_usec": 213758
+    }
+  }
+}

@@ -1,0 +1,288 @@
+{
+  "scope": "Isolated transitions from an actual 8192-site Armadillo VTM trajectory. One warm-up plus five alternating-order wall-time samples. Previous-state construction, transfers and independent SciPy checking are outside timing. Native outputs tetrahedra AND adjacency; VTM produces an exactly certified tetrahedralization. Different correctness contracts; this is not adoption evidence for replacing VTM.",
+  "frames_sha256": "a425317960b2ab1419c9916915be39a207624280c04c082532f543a54615993e",
+  "records": [
+    {
+      "frame": 1,
+      "sites": 8192,
+      "maximum_site_displacement": 0.0,
+      "cpu_quota": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "cpu_throttled": false,
+      "variants": {
+        "radfoam-full": {
+          "seconds": [
+            0.028442993760108948,
+            0.028355147689580917,
+            0.028441589325666428,
+            0.02860119938850403,
+            0.028456613421440125
+          ],
+          "median_seconds": 0.028442993760108948,
+          "tetrahedra": 50259,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        },
+        "radfoam-incremental": {
+          "seconds": [
+            0.0021437853574752808,
+            0.002128906548023224,
+            0.002126753330230713,
+            0.002114269882440567,
+            0.002145208418369293
+          ],
+          "median_seconds": 0.002128906548023224,
+          "tetrahedra": 50259,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        },
+        "vtm-fragment-reuse": {
+          "seconds": [
+            0.001681491732597351,
+            0.0017509162425994873,
+            0.001731816679239273,
+            0.0017114095389842987,
+            0.00176137313246727
+          ],
+          "median_seconds": 0.001731816679239273,
+          "tetrahedra": 50259,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        }
+      },
+      "vtm_reuse_accepted": 1,
+      "vtm_reuse_rounds": 0,
+      "cgal_reference": {
+        "CGAL": "6.2.1",
+        "vertices": 8192,
+        "tetrahedra": 50259,
+        "build_seconds": 0.0348967
+      }
+    },
+    {
+      "frame": 2,
+      "sites": 8192,
+      "maximum_site_displacement": 0.011750599598243733,
+      "cpu_quota": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "cpu_throttled": false,
+      "variants": {
+        "radfoam-full": {
+          "seconds": [
+            0.02793654426932335,
+            0.03182363137602806,
+            0.06197505444288254,
+            0.028009232133626938,
+            0.028036516159772873
+          ],
+          "median_seconds": 0.028036516159772873,
+          "tetrahedra": 50418,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        },
+        "radfoam-incremental": {
+          "seconds": [
+            0.0073110610246658325,
+            0.007251527160406113,
+            0.007399067282676697,
+            0.0073355138301849365,
+            0.007348295301198959
+          ],
+          "median_seconds": 0.0073355138301849365,
+          "tetrahedra": 50418,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        },
+        "vtm-fragment-reuse": {
+          "seconds": [
+            0.014799673110246658,
+            0.01448109745979309,
+            0.014262668788433075,
+            0.014483429491519928,
+            0.01426883414387703
+          ],
+          "median_seconds": 0.01448109745979309,
+          "tetrahedra": 50418,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        }
+      },
+      "vtm_reuse_accepted": 1,
+      "vtm_reuse_rounds": 2,
+      "cgal_reference": {
+        "CGAL": "6.2.1",
+        "vertices": 8192,
+        "tetrahedra": 50418,
+        "build_seconds": 0.0342599
+      }
+    },
+    {
+      "frame": 162,
+      "sites": 8192,
+      "maximum_site_displacement": 0.002083903275900655,
+      "cpu_quota": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "cpu_throttled": false,
+      "variants": {
+        "radfoam-full": {
+          "seconds": [
+            0.015821941196918488,
+            0.01585269719362259,
+            0.049146927893161774,
+            0.015811141580343246,
+            0.015926945954561234
+          ],
+          "median_seconds": 0.01585269719362259,
+          "tetrahedra": 49597,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        },
+        "radfoam-incremental": {
+          "seconds": [
+            0.0030293092131614685,
+            0.0030287839472293854,
+            0.0030277185142040253,
+            0.0030279159545898438,
+            0.0030446015298366547
+          ],
+          "median_seconds": 0.0030287839472293854,
+          "tetrahedra": 49597,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        },
+        "vtm-fragment-reuse": {
+          "seconds": [
+            0.002780333161354065,
+            0.0027821622788906097,
+            0.002856917679309845,
+            0.0027775838971138,
+            0.002830512821674347
+          ],
+          "median_seconds": 0.0027821622788906097,
+          "tetrahedra": 49597,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        }
+      },
+      "vtm_reuse_accepted": 1,
+      "vtm_reuse_rounds": 1,
+      "cgal_reference": {
+        "CGAL": "6.2.1",
+        "vertices": 8192,
+        "tetrahedra": 49597,
+        "build_seconds": 0.0348048
+      }
+    },
+    {
+      "frame": 179,
+      "sites": 8192,
+      "maximum_site_displacement": 1.0752743232728257,
+      "cpu_quota": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 0,
+          "throttled_usec": 0
+        }
+      },
+      "cpu_throttled": false,
+      "variants": {
+        "radfoam-full": {
+          "seconds": [
+            0.01615849882364273,
+            0.016029048711061478,
+            0.01610175147652626,
+            0.01605670154094696,
+            0.01614392176270485
+          ],
+          "median_seconds": 0.01610175147652626,
+          "tetrahedra": 49599,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        },
+        "radfoam-incremental": {
+          "seconds": [
+            0.0041368864476680756,
+            0.004130769520998001,
+            0.00409693643450737,
+            0.02918124943971634,
+            0.004128850996494293
+          ],
+          "median_seconds": 0.004130769520998001,
+          "tetrahedra": 49599,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        },
+        "vtm-fragment-reuse": {
+          "seconds": [
+            0.0042367614805698395,
+            0.004252567887306213,
+            0.004231944680213928,
+            0.004287071526050568,
+            0.004193272441625595
+          ],
+          "median_seconds": 0.0042367614805698395,
+          "tetrahedra": 49599,
+          "error": 0,
+          "matches_scipy": true,
+          "matches_cgal": true
+        }
+      },
+      "vtm_reuse_accepted": 1,
+      "vtm_reuse_rounds": 2,
+      "cgal_reference": {
+        "CGAL": "6.2.1",
+        "vertices": 8192,
+        "tetrahedra": 49599,
+        "build_seconds": 0.0348858
+      }
+    }
+  ],
+  "source_sha256": "92339475afd78840e55cb5ee8d49206338c15b789b53294e45a94ec7e1f2e91d",
+  "cgal_binary_sha256": "1e16643787b6ecbe3607841c37fd21c98dfdeae95e601656a6bb32ec3fce6c34"
+}

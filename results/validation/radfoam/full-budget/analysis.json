@@ -1,0 +1,3349 @@
+{
+  "reviewed_utc": "2026-11-10T20:49:20.252565+00:00",
+  "conclusion": "Warp reduced full-loop time by 38.58%, but did not reach the native final PSNR. It reached the shared 32.25 dB target 1.293 times faster.",
+  "time_to_quality": [
+    {
+      "official_psnr_target": 32.0,
+      "first_recorded_at_or_above": {
+        "native": {
+          "step": 12499,
+          "official_psnr": 32.00279998779297,
+          "sites": 1968116,
+          "elapsed_seconds": 3506.3744824826717,
+          "backend": "native",
+          "budget": "full"
+        },
+        "warpower": {
+          "step": 13299,
+          "official_psnr": 32.02973556518555,
+          "sites": 1944340,
+          "elapsed_seconds": 2087.041188094765,
+          "backend": "warpower-morton",
+          "budget": "full"
+        }
+      },
+      "native_over_warp_time_ratio": 1.680069613615819
+    },
+    {
+      "official_psnr_target": 32.15,
+      "first_recorded_at_or_above": {
+        "native": {
+          "step": 13999,
+          "official_psnr": 32.15021514892578,
+          "sites": 1968116,
+          "elapsed_seconds": 3881.3532676026225,
+          "backend": "native",
+          "budget": "full"
+        },
+        "warpower": {
+          "step": 16499,
+          "official_psnr": 32.1597900390625,
+          "sites": 1944340,
+          "elapsed_seconds": 2664.8348586037755,
+          "backend": "warpower-morton",
+          "budget": "full"
+        }
+      },
+      "native_over_warp_time_ratio": 1.456507991506924
+    },
+    {
+      "official_psnr_target": 32.25,
+      "first_recorded_at_or_above": {
+        "native": {
+          "step": 15499,
+          "official_psnr": 32.252906799316406,
+          "sites": 1968116,
+          "elapsed_seconds": 4251.809262394905,
+          "backend": "native",
+          "budget": "full"
+        },
+        "warpower": {
+          "step": 19999,
+          "official_psnr": 32.25114059448242,
+          "sites": 1944340,
+          "elapsed_seconds": 3288.214531324804,
+          "backend": "warpower-morton",
+          "budget": "full"
+        }
+      },
+      "native_over_warp_time_ratio": 1.2930449707251535
+    }
+  ],
+  "measurement_scope": "Official mean-channel PSNR sampled every 100 steps on all 37 held-out half-resolution views. First observed threshold crossing, without interpolation or a saved intermediate checkpoint; single run per backend.",
+  "final_results": {
+    "complete": true,
+    "matched_initial_parameters": true,
+    "native_over_warpower_loop_speedup": 1.6282481795106154,
+    "warpower_minus_native_official_psnr": -0.16248718467918621,
+    "runs": [
+      {
+        "backend": "native",
+        "loop_seconds": 5354.030951283872,
+        "total_seconds": 5428.547422740608,
+        "final_points": 1968116,
+        "official_psnr": 32.41362308811497,
+        "pooled_rgb_psnr": 32.38083019772091,
+        "raw_final_rgba_nonfinite": 0,
+        "final_traversal_cap_hits": 0,
+        "cpu_quota": {
+          "4": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 8442,
+            "throttled_usec": 28610816
+          },
+          "3": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 11998,
+            "throttled_usec": 26586144
+          }
+        }
+      },
+      {
+        "backend": "warpower",
+        "loop_seconds": 3288.2155304439366,
+        "total_seconds": 3362.912058416754,
+        "final_points": 1944340,
+        "official_psnr": 32.25113590343578,
+        "pooled_rgb_psnr": 32.17721691647091,
+        "raw_final_rgba_nonfinite": 0,
+        "final_traversal_cap_hits": 0,
+        "cpu_quota": {
+          "4": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 6054,
+            "throttled_usec": 16042186
+          },
+          "3": {
+            "cpu_cores": 4.0,
+            "throttled_periods": 8454,
+            "throttled_usec": 15273093
+          }
+        }
+      }
+    ],
+    "paper_reference": {
+      "paper_bonsai_psnr": 32.15,
+      "paper_bonsai_training_seconds": 4200,
+      "paper_gpu": "RTX 4090",
+      "comparison_gpu": "L40",
+      "note": "Primary speed comparison is native versus Warp on this L40. Comparing to 70 minutes is cross-hardware context only."
+    },
+    "limitations": [
+      "Single full run per backend.",
+      "Training uses original upstream gradient masking; numerical counters here cover final evaluation only.",
+      "Do not interpret a shorter time than 70 minutes as a hardware-controlled paper speedup."
+    ]
+  },
+  "learning_curves": {
+    "native": [
+      {
+        "step": 99,
+        "official_psnr": 12.516183853149414,
+        "sites": 190951,
+        "elapsed_seconds": 10.661165792495012,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 199,
+        "official_psnr": 17.112926483154297,
+        "sites": 190951,
+        "elapsed_seconds": 20.90945314243436,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 299,
+        "official_psnr": 20.78272247314453,
+        "sites": 190951,
+        "elapsed_seconds": 29.409383051097393,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 399,
+        "official_psnr": 21.790435791015625,
+        "sites": 190951,
+        "elapsed_seconds": 37.07410377264023,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 499,
+        "official_psnr": 23.250864028930664,
+        "sites": 190951,
+        "elapsed_seconds": 45.239046812057495,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 599,
+        "official_psnr": 23.75038719177246,
+        "sites": 190951,
+        "elapsed_seconds": 52.834828428924084,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 699,
+        "official_psnr": 24.03228187561035,
+        "sites": 190951,
+        "elapsed_seconds": 60.6507711969316,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 799,
+        "official_psnr": 24.535900115966797,
+        "sites": 190951,
+        "elapsed_seconds": 68.12008956447244,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 899,
+        "official_psnr": 24.348220825195312,
+        "sites": 190951,
+        "elapsed_seconds": 75.22632879391313,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 999,
+        "official_psnr": 25.038131713867188,
+        "sites": 190951,
+        "elapsed_seconds": 82.39736659824848,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 1099,
+        "official_psnr": 25.444530487060547,
+        "sites": 190951,
+        "elapsed_seconds": 89.60176938772202,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 1199,
+        "official_psnr": 25.38446617126465,
+        "sites": 190951,
+        "elapsed_seconds": 96.72009596973658,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 1299,
+        "official_psnr": 25.711868286132812,
+        "sites": 190951,
+        "elapsed_seconds": 103.9754304625094,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 1399,
+        "official_psnr": 25.95335578918457,
+        "sites": 190951,
+        "elapsed_seconds": 110.66109105199575,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 1499,
+        "official_psnr": 25.981489181518555,
+        "sites": 190951,
+        "elapsed_seconds": 117.39443028345704,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 1599,
+        "official_psnr": 25.923852920532227,
+        "sites": 190951,
+        "elapsed_seconds": 124.18594112992287,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 1699,
+        "official_psnr": 26.39282989501953,
+        "sites": 190951,
+        "elapsed_seconds": 131.0917561687529,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 1799,
+        "official_psnr": 26.47453498840332,
+        "sites": 190951,
+        "elapsed_seconds": 137.78717175498605,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 1899,
+        "official_psnr": 26.58735466003418,
+        "sites": 190951,
+        "elapsed_seconds": 144.21193455904722,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 1999,
+        "official_psnr": 26.594139099121094,
+        "sites": 190951,
+        "elapsed_seconds": 150.89662352204323,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 2099,
+        "official_psnr": 26.235820770263672,
+        "sites": 219459,
+        "elapsed_seconds": 164.9024332202971,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 2199,
+        "official_psnr": 26.266794204711914,
+        "sites": 252234,
+        "elapsed_seconds": 187.04375363886356,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 2299,
+        "official_psnr": 26.973834991455078,
+        "sites": 252234,
+        "elapsed_seconds": 197.6031049862504,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 2399,
+        "official_psnr": 27.09905433654785,
+        "sites": 289881,
+        "elapsed_seconds": 223.65791707113385,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 2499,
+        "official_psnr": 27.52223777770996,
+        "sites": 289881,
+        "elapsed_seconds": 234.07800497114658,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 2599,
+        "official_psnr": 27.57176399230957,
+        "sites": 333047,
+        "elapsed_seconds": 262.23005687072873,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 2699,
+        "official_psnr": 27.959457397460938,
+        "sites": 333047,
+        "elapsed_seconds": 274.44275322556496,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 2799,
+        "official_psnr": 27.663646697998047,
+        "sites": 382550,
+        "elapsed_seconds": 305.8378011509776,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 2899,
+        "official_psnr": 28.342945098876953,
+        "sites": 382550,
+        "elapsed_seconds": 320.1925954297185,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 2999,
+        "official_psnr": 28.55227279663086,
+        "sites": 382550,
+        "elapsed_seconds": 333.3266112729907,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 3099,
+        "official_psnr": 28.470226287841797,
+        "sites": 439275,
+        "elapsed_seconds": 367.9321166984737,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 3199,
+        "official_psnr": 28.804506301879883,
+        "sites": 439275,
+        "elapsed_seconds": 383.11412828043103,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 3299,
+        "official_psnr": 28.960222244262695,
+        "sites": 439275,
+        "elapsed_seconds": 397.5801847912371,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 3399,
+        "official_psnr": 28.732389450073242,
+        "sites": 504190,
+        "elapsed_seconds": 435.1556024104357,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 3499,
+        "official_psnr": 29.054460525512695,
+        "sites": 504190,
+        "elapsed_seconds": 452.8963471017778,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 3599,
+        "official_psnr": 29.207983016967773,
+        "sites": 504190,
+        "elapsed_seconds": 467.8241656050086,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 3699,
+        "official_psnr": 29.35735321044922,
+        "sites": 504190,
+        "elapsed_seconds": 483.0258432030678,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 3799,
+        "official_psnr": 29.301023483276367,
+        "sites": 578356,
+        "elapsed_seconds": 527.8156763017178,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 3899,
+        "official_psnr": 29.471750259399414,
+        "sites": 578356,
+        "elapsed_seconds": 545.3679096028209,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 3999,
+        "official_psnr": 29.407405853271484,
+        "sites": 578356,
+        "elapsed_seconds": 561.7485518828034,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 4099,
+        "official_psnr": 29.62360191345215,
+        "sites": 578356,
+        "elapsed_seconds": 578.1311097219586,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 4199,
+        "official_psnr": 29.445627212524414,
+        "sites": 663064,
+        "elapsed_seconds": 628.4209784753621,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 4299,
+        "official_psnr": 29.744062423706055,
+        "sites": 663064,
+        "elapsed_seconds": 649.6306835152209,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 4399,
+        "official_psnr": 29.80121421813965,
+        "sites": 663064,
+        "elapsed_seconds": 667.6041936017573,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 4499,
+        "official_psnr": 29.915441513061523,
+        "sites": 663064,
+        "elapsed_seconds": 685.9295626170933,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 4599,
+        "official_psnr": 29.014028549194336,
+        "sites": 760139,
+        "elapsed_seconds": 734.4497594200075,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 4699,
+        "official_psnr": 29.912076950073242,
+        "sites": 760139,
+        "elapsed_seconds": 760.7573075667024,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 4799,
+        "official_psnr": 30.049297332763672,
+        "sites": 760139,
+        "elapsed_seconds": 782.0741352327168,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 4899,
+        "official_psnr": 30.077709197998047,
+        "sites": 760139,
+        "elapsed_seconds": 801.4975026734173,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 4999,
+        "official_psnr": 30.205322265625,
+        "sites": 760139,
+        "elapsed_seconds": 822.1611184030771,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 5099,
+        "official_psnr": 30.177032470703125,
+        "sites": 760139,
+        "elapsed_seconds": 867.96609056741,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 5199,
+        "official_psnr": 30.035219192504883,
+        "sites": 871332,
+        "elapsed_seconds": 1061.8790251426399,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 5299,
+        "official_psnr": 30.2142276763916,
+        "sites": 871332,
+        "elapsed_seconds": 1113.0556517355144,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 5399,
+        "official_psnr": 30.23710060119629,
+        "sites": 871332,
+        "elapsed_seconds": 1133.7402867786586,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 5499,
+        "official_psnr": 30.359586715698242,
+        "sites": 871332,
+        "elapsed_seconds": 1154.8969844169915,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 5599,
+        "official_psnr": 30.379932403564453,
+        "sites": 871332,
+        "elapsed_seconds": 1173.7551814429462,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 5699,
+        "official_psnr": 30.340452194213867,
+        "sites": 871332,
+        "elapsed_seconds": 1192.6203355155885,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 5799,
+        "official_psnr": 30.22646713256836,
+        "sites": 998412,
+        "elapsed_seconds": 1265.5576776899397,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 5899,
+        "official_psnr": 30.440414428710938,
+        "sites": 998412,
+        "elapsed_seconds": 1292.9623174667358,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 5999,
+        "official_psnr": 30.398401260375977,
+        "sites": 998412,
+        "elapsed_seconds": 1316.2205335237086,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 6099,
+        "official_psnr": 30.488628387451172,
+        "sites": 998412,
+        "elapsed_seconds": 1339.3819727264345,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 6199,
+        "official_psnr": 30.641357421875,
+        "sites": 998412,
+        "elapsed_seconds": 1362.3271851316094,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 6299,
+        "official_psnr": 30.6240177154541,
+        "sites": 998412,
+        "elapsed_seconds": 1383.152696467936,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 6399,
+        "official_psnr": 30.683795928955078,
+        "sites": 998412,
+        "elapsed_seconds": 1403.7456666827202,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 6499,
+        "official_psnr": 30.28285789489746,
+        "sites": 1143883,
+        "elapsed_seconds": 1482.463577453047,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 6599,
+        "official_psnr": 30.691551208496094,
+        "sites": 1143883,
+        "elapsed_seconds": 1514.3968689069152,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 6699,
+        "official_psnr": 30.69159507751465,
+        "sites": 1143883,
+        "elapsed_seconds": 1539.0115776620805,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 6799,
+        "official_psnr": 30.78680419921875,
+        "sites": 1143883,
+        "elapsed_seconds": 1563.5234836116433,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 6899,
+        "official_psnr": 30.879566192626953,
+        "sites": 1143883,
+        "elapsed_seconds": 1588.7404033020139,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 6999,
+        "official_psnr": 30.914630889892578,
+        "sites": 1143883,
+        "elapsed_seconds": 1610.8909203745425,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 7099,
+        "official_psnr": 30.929515838623047,
+        "sites": 1143883,
+        "elapsed_seconds": 1633.504878513515,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 7199,
+        "official_psnr": 30.96595573425293,
+        "sites": 1143883,
+        "elapsed_seconds": 1655.6910089179873,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 7299,
+        "official_psnr": 30.59478759765625,
+        "sites": 1309521,
+        "elapsed_seconds": 1743.6834989003837,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 7399,
+        "official_psnr": 30.839561462402344,
+        "sites": 1309521,
+        "elapsed_seconds": 1775.288210619241,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 7499,
+        "official_psnr": 30.95672607421875,
+        "sites": 1309521,
+        "elapsed_seconds": 1804.8275823518634,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 7599,
+        "official_psnr": 31.038034439086914,
+        "sites": 1309521,
+        "elapsed_seconds": 1831.2741310447454,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 7699,
+        "official_psnr": 31.040088653564453,
+        "sites": 1309521,
+        "elapsed_seconds": 1855.0777074024081,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 7799,
+        "official_psnr": 31.116832733154297,
+        "sites": 1309521,
+        "elapsed_seconds": 1882.1234243512154,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 7899,
+        "official_psnr": 31.145227432250977,
+        "sites": 1309521,
+        "elapsed_seconds": 1906.6636342667043,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 7999,
+        "official_psnr": 31.188209533691406,
+        "sites": 1309521,
+        "elapsed_seconds": 1930.2956872582436,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 8099,
+        "official_psnr": 31.090837478637695,
+        "sites": 1309521,
+        "elapsed_seconds": 1951.1243764087558,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 8199,
+        "official_psnr": 30.32496452331543,
+        "sites": 1499833,
+        "elapsed_seconds": 2043.5100572258234,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 8299,
+        "official_psnr": 31.012121200561523,
+        "sites": 1499833,
+        "elapsed_seconds": 2085.657570336014,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 8399,
+        "official_psnr": 31.131319046020508,
+        "sites": 1499833,
+        "elapsed_seconds": 2117.745956774801,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 8499,
+        "official_psnr": 31.178672790527344,
+        "sites": 1499833,
+        "elapsed_seconds": 2147.2401079535484,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 8599,
+        "official_psnr": 31.239269256591797,
+        "sites": 1499833,
+        "elapsed_seconds": 2176.48948404938,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 8699,
+        "official_psnr": 31.261709213256836,
+        "sites": 1499833,
+        "elapsed_seconds": 2202.175512135029,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 8799,
+        "official_psnr": 31.266212463378906,
+        "sites": 1499833,
+        "elapsed_seconds": 2228.747230090201,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 8899,
+        "official_psnr": 31.376300811767578,
+        "sites": 1499833,
+        "elapsed_seconds": 2254.4419570043683,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 8999,
+        "official_psnr": 31.409549713134766,
+        "sites": 1499833,
+        "elapsed_seconds": 2280.876802559942,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 9099,
+        "official_psnr": 31.441654205322266,
+        "sites": 1499833,
+        "elapsed_seconds": 2306.669493380934,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 9199,
+        "official_psnr": 31.365991592407227,
+        "sites": 1499833,
+        "elapsed_seconds": 2329.3174163475633,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 9299,
+        "official_psnr": 31.126934051513672,
+        "sites": 1717884,
+        "elapsed_seconds": 2444.3183877430856,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 9399,
+        "official_psnr": 31.33840560913086,
+        "sites": 1717884,
+        "elapsed_seconds": 2483.2772214226425,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 9499,
+        "official_psnr": 31.393747329711914,
+        "sites": 1717884,
+        "elapsed_seconds": 2516.326656792313,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 9599,
+        "official_psnr": 31.5135498046875,
+        "sites": 1717884,
+        "elapsed_seconds": 2548.5400826334953,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 9699,
+        "official_psnr": 31.527442932128906,
+        "sites": 1717884,
+        "elapsed_seconds": 2582.0106049776077,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 9799,
+        "official_psnr": 31.588260650634766,
+        "sites": 1717884,
+        "elapsed_seconds": 2609.7271990925074,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 9899,
+        "official_psnr": 31.591758728027344,
+        "sites": 1717884,
+        "elapsed_seconds": 2637.8403745666146,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 9999,
+        "official_psnr": 31.62735939025879,
+        "sites": 1717884,
+        "elapsed_seconds": 2666.636239718646,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 10099,
+        "official_psnr": 31.649852752685547,
+        "sites": 1717884,
+        "elapsed_seconds": 2695.267581719905,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 10199,
+        "official_psnr": 31.653486251831055,
+        "sites": 1717884,
+        "elapsed_seconds": 2718.908322542906,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 10299,
+        "official_psnr": 31.696365356445312,
+        "sites": 1717884,
+        "elapsed_seconds": 2748.1978881545365,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 10399,
+        "official_psnr": 31.68189811706543,
+        "sites": 1717884,
+        "elapsed_seconds": 2771.97136227414,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 10499,
+        "official_psnr": 31.216747283935547,
+        "sites": 1968116,
+        "elapsed_seconds": 2894.2418320141733,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 10599,
+        "official_psnr": 31.545440673828125,
+        "sites": 1968116,
+        "elapsed_seconds": 2943.0298729874194,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 10699,
+        "official_psnr": 31.637418746948242,
+        "sites": 1968116,
+        "elapsed_seconds": 2982.1983678750694,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 10799,
+        "official_psnr": 31.687950134277344,
+        "sites": 1968116,
+        "elapsed_seconds": 3018.1426537260413,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 10899,
+        "official_psnr": 31.70645523071289,
+        "sites": 1968116,
+        "elapsed_seconds": 3048.4168337769806,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 10999,
+        "official_psnr": 31.754329681396484,
+        "sites": 1968116,
+        "elapsed_seconds": 3085.0268972963095,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 11099,
+        "official_psnr": 31.784496307373047,
+        "sites": 1968116,
+        "elapsed_seconds": 3115.73067432642,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 11199,
+        "official_psnr": 31.81390380859375,
+        "sites": 1968116,
+        "elapsed_seconds": 3146.358622007072,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 11299,
+        "official_psnr": 31.81400489807129,
+        "sites": 1968116,
+        "elapsed_seconds": 3171.761817187071,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 11399,
+        "official_psnr": 31.843324661254883,
+        "sites": 1968116,
+        "elapsed_seconds": 3202.446771286428,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 11499,
+        "official_psnr": 31.868141174316406,
+        "sites": 1968116,
+        "elapsed_seconds": 3233.1573248505592,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 11599,
+        "official_psnr": 31.873199462890625,
+        "sites": 1968116,
+        "elapsed_seconds": 3258.398849695921,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 11699,
+        "official_psnr": 31.896808624267578,
+        "sites": 1968116,
+        "elapsed_seconds": 3289.9390417709947,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 11799,
+        "official_psnr": 31.9146728515625,
+        "sites": 1968116,
+        "elapsed_seconds": 3316.1771292984486,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 11899,
+        "official_psnr": 31.922119140625,
+        "sites": 1968116,
+        "elapsed_seconds": 3343.0048156417906,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 11999,
+        "official_psnr": 31.932445526123047,
+        "sites": 1968116,
+        "elapsed_seconds": 3374.5106159225106,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 12099,
+        "official_psnr": 31.953250885009766,
+        "sites": 1968116,
+        "elapsed_seconds": 3400.5005258135498,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 12199,
+        "official_psnr": 31.95984649658203,
+        "sites": 1968116,
+        "elapsed_seconds": 3425.5324342362583,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 12299,
+        "official_psnr": 31.961116790771484,
+        "sites": 1968116,
+        "elapsed_seconds": 3450.6297137886286,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 12399,
+        "official_psnr": 31.97265625,
+        "sites": 1968116,
+        "elapsed_seconds": 3475.9121838361025,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 12499,
+        "official_psnr": 32.00279998779297,
+        "sites": 1968116,
+        "elapsed_seconds": 3506.3744824826717,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 12599,
+        "official_psnr": 32.015220642089844,
+        "sites": 1968116,
+        "elapsed_seconds": 3531.3957102000713,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 12699,
+        "official_psnr": 32.025875091552734,
+        "sites": 1968116,
+        "elapsed_seconds": 3556.6711345389485,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 12799,
+        "official_psnr": 32.032466888427734,
+        "sites": 1968116,
+        "elapsed_seconds": 3581.7327801398933,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 12899,
+        "official_psnr": 32.04633331298828,
+        "sites": 1968116,
+        "elapsed_seconds": 3606.706130243838,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 12999,
+        "official_psnr": 32.051631927490234,
+        "sites": 1968116,
+        "elapsed_seconds": 3631.265071980655,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 13099,
+        "official_psnr": 32.05982971191406,
+        "sites": 1968116,
+        "elapsed_seconds": 3657.1059214398265,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 13199,
+        "official_psnr": 32.07775115966797,
+        "sites": 1968116,
+        "elapsed_seconds": 3682.3265364915133,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 13299,
+        "official_psnr": 32.07648468017578,
+        "sites": 1968116,
+        "elapsed_seconds": 3707.3512688949704,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 13399,
+        "official_psnr": 32.101200103759766,
+        "sites": 1968116,
+        "elapsed_seconds": 3732.3602464534342,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 13499,
+        "official_psnr": 32.11673355102539,
+        "sites": 1968116,
+        "elapsed_seconds": 3757.194245547056,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 13599,
+        "official_psnr": 32.11388397216797,
+        "sites": 1968116,
+        "elapsed_seconds": 3782.588685274124,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 13699,
+        "official_psnr": 32.127410888671875,
+        "sites": 1968116,
+        "elapsed_seconds": 3807.5478256084025,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 13799,
+        "official_psnr": 32.12995147705078,
+        "sites": 1968116,
+        "elapsed_seconds": 3831.941884122789,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 13899,
+        "official_psnr": 32.138545989990234,
+        "sites": 1968116,
+        "elapsed_seconds": 3856.7482501342893,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 13999,
+        "official_psnr": 32.15021514892578,
+        "sites": 1968116,
+        "elapsed_seconds": 3881.3532676026225,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 14099,
+        "official_psnr": 32.13910675048828,
+        "sites": 1968116,
+        "elapsed_seconds": 3905.959579780698,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 14199,
+        "official_psnr": 32.16796875,
+        "sites": 1968116,
+        "elapsed_seconds": 3931.7406977303326,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 14299,
+        "official_psnr": 32.17446517944336,
+        "sites": 1968116,
+        "elapsed_seconds": 3956.0454753302038,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 14399,
+        "official_psnr": 32.189693450927734,
+        "sites": 1968116,
+        "elapsed_seconds": 3980.600873205811,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 14499,
+        "official_psnr": 32.19988250732422,
+        "sites": 1968116,
+        "elapsed_seconds": 4005.428451459855,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 14599,
+        "official_psnr": 32.2021484375,
+        "sites": 1968116,
+        "elapsed_seconds": 4030.2782931551337,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 14699,
+        "official_psnr": 32.20602798461914,
+        "sites": 1968116,
+        "elapsed_seconds": 4055.029859818518,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 14799,
+        "official_psnr": 32.21004104614258,
+        "sites": 1968116,
+        "elapsed_seconds": 4080.3676848486066,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 14899,
+        "official_psnr": 32.2182502746582,
+        "sites": 1968116,
+        "elapsed_seconds": 4104.6364166513085,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 14999,
+        "official_psnr": 32.217594146728516,
+        "sites": 1968116,
+        "elapsed_seconds": 4128.964000467211,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 15099,
+        "official_psnr": 32.23733139038086,
+        "sites": 1968116,
+        "elapsed_seconds": 4153.498581733555,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 15199,
+        "official_psnr": 32.23766326904297,
+        "sites": 1968116,
+        "elapsed_seconds": 4178.242138769478,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 15299,
+        "official_psnr": 32.243408203125,
+        "sites": 1968116,
+        "elapsed_seconds": 4202.5929566547275,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 15399,
+        "official_psnr": 32.240379333496094,
+        "sites": 1968116,
+        "elapsed_seconds": 4227.062230851501,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 15499,
+        "official_psnr": 32.252906799316406,
+        "sites": 1968116,
+        "elapsed_seconds": 4251.809262394905,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 15599,
+        "official_psnr": 32.2643928527832,
+        "sites": 1968116,
+        "elapsed_seconds": 4276.583571266383,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 15699,
+        "official_psnr": 32.269874572753906,
+        "sites": 1968116,
+        "elapsed_seconds": 4300.504159115255,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 15799,
+        "official_psnr": 32.26222229003906,
+        "sites": 1968116,
+        "elapsed_seconds": 4324.927580971271,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 15899,
+        "official_psnr": 32.28838348388672,
+        "sites": 1968116,
+        "elapsed_seconds": 4348.724707785994,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 15999,
+        "official_psnr": 32.28131103515625,
+        "sites": 1968116,
+        "elapsed_seconds": 4372.718055859208,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 16099,
+        "official_psnr": 32.278541564941406,
+        "sites": 1968116,
+        "elapsed_seconds": 4396.748732570559,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 16199,
+        "official_psnr": 32.293540954589844,
+        "sites": 1968116,
+        "elapsed_seconds": 4420.619538426399,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 16299,
+        "official_psnr": 32.30868911743164,
+        "sites": 1968116,
+        "elapsed_seconds": 4444.675274852663,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 16399,
+        "official_psnr": 32.30009078979492,
+        "sites": 1968116,
+        "elapsed_seconds": 4464.587973084301,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 16499,
+        "official_psnr": 32.30497741699219,
+        "sites": 1968116,
+        "elapsed_seconds": 4488.018078058958,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 16599,
+        "official_psnr": 32.303260803222656,
+        "sites": 1968116,
+        "elapsed_seconds": 4512.233289431781,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 16699,
+        "official_psnr": 32.31547164916992,
+        "sites": 1968116,
+        "elapsed_seconds": 4537.078435648233,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 16799,
+        "official_psnr": 32.321170806884766,
+        "sites": 1968116,
+        "elapsed_seconds": 4560.976440180093,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 16899,
+        "official_psnr": 32.3307991027832,
+        "sites": 1968116,
+        "elapsed_seconds": 4584.901047006249,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 16999,
+        "official_psnr": 32.3288688659668,
+        "sites": 1968116,
+        "elapsed_seconds": 4608.132505685091,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 17099,
+        "official_psnr": 32.34183883666992,
+        "sites": 1968116,
+        "elapsed_seconds": 4631.931338228285,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 17199,
+        "official_psnr": 32.337589263916016,
+        "sites": 1968116,
+        "elapsed_seconds": 4655.998843379319,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 17299,
+        "official_psnr": 32.34962844848633,
+        "sites": 1968116,
+        "elapsed_seconds": 4679.665263496339,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 17399,
+        "official_psnr": 32.355857849121094,
+        "sites": 1968116,
+        "elapsed_seconds": 4703.707741394639,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 17499,
+        "official_psnr": 32.33628845214844,
+        "sites": 1968116,
+        "elapsed_seconds": 4727.954077903181,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 17599,
+        "official_psnr": 32.34588623046875,
+        "sites": 1968116,
+        "elapsed_seconds": 4752.492287945002,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 17699,
+        "official_psnr": 32.34614181518555,
+        "sites": 1968116,
+        "elapsed_seconds": 4776.340649276972,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 17799,
+        "official_psnr": 32.34956741333008,
+        "sites": 1968116,
+        "elapsed_seconds": 4800.657269835472,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 17899,
+        "official_psnr": 32.35731887817383,
+        "sites": 1968116,
+        "elapsed_seconds": 4824.951639752835,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 17999,
+        "official_psnr": 32.3580436706543,
+        "sites": 1968116,
+        "elapsed_seconds": 4848.20856577903,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 18099,
+        "official_psnr": 32.3531379699707,
+        "sites": 1968116,
+        "elapsed_seconds": 4933.413348920643,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 18199,
+        "official_psnr": 32.35829544067383,
+        "sites": 1968116,
+        "elapsed_seconds": 4955.663809563965,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 18299,
+        "official_psnr": 32.363460540771484,
+        "sites": 1968116,
+        "elapsed_seconds": 4977.658613692969,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 18399,
+        "official_psnr": 32.37175750732422,
+        "sites": 1968116,
+        "elapsed_seconds": 4999.860809504986,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 18499,
+        "official_psnr": 32.369911193847656,
+        "sites": 1968116,
+        "elapsed_seconds": 5022.080322023481,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 18599,
+        "official_psnr": 32.37672805786133,
+        "sites": 1968116,
+        "elapsed_seconds": 5044.144630685449,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 18699,
+        "official_psnr": 32.378814697265625,
+        "sites": 1968116,
+        "elapsed_seconds": 5066.358937397599,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 18799,
+        "official_psnr": 32.39419174194336,
+        "sites": 1968116,
+        "elapsed_seconds": 5088.4939171262085,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 18899,
+        "official_psnr": 32.381839752197266,
+        "sites": 1968116,
+        "elapsed_seconds": 5110.519071079791,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 18999,
+        "official_psnr": 32.39679718017578,
+        "sites": 1968116,
+        "elapsed_seconds": 5132.705484110862,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 19099,
+        "official_psnr": 32.38652801513672,
+        "sites": 1968116,
+        "elapsed_seconds": 5154.753963459283,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 19199,
+        "official_psnr": 32.38399887084961,
+        "sites": 1968116,
+        "elapsed_seconds": 5176.752450875938,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 19299,
+        "official_psnr": 32.38887023925781,
+        "sites": 1968116,
+        "elapsed_seconds": 5198.810395501554,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 19399,
+        "official_psnr": 32.38580322265625,
+        "sites": 1968116,
+        "elapsed_seconds": 5220.990385744721,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 19499,
+        "official_psnr": 32.39328384399414,
+        "sites": 1968116,
+        "elapsed_seconds": 5243.300670105964,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 19599,
+        "official_psnr": 32.416927337646484,
+        "sites": 1968116,
+        "elapsed_seconds": 5265.318023916334,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 19699,
+        "official_psnr": 32.40554428100586,
+        "sites": 1968116,
+        "elapsed_seconds": 5287.48289507255,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 19799,
+        "official_psnr": 32.39605712890625,
+        "sites": 1968116,
+        "elapsed_seconds": 5309.727657787502,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 19899,
+        "official_psnr": 32.40388107299805,
+        "sites": 1968116,
+        "elapsed_seconds": 5331.794212225825,
+        "backend": "native",
+        "budget": "full"
+      },
+      {
+        "step": 19999,
+        "official_psnr": 32.41362762451172,
+        "sites": 1968116,
+        "elapsed_seconds": 5354.029096931219,
+        "backend": "native",
+        "budget": "full"
+      }
+    ],
+    "warpower": [
+      {
+        "step": 99,
+        "official_psnr": 12.51723575592041,
+        "sites": 190951,
+        "elapsed_seconds": 9.796275913715363,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 199,
+        "official_psnr": 17.084226608276367,
+        "sites": 190951,
+        "elapsed_seconds": 17.636326886713505,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 299,
+        "official_psnr": 20.824539184570312,
+        "sites": 190951,
+        "elapsed_seconds": 25.000521942973137,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 399,
+        "official_psnr": 21.737110137939453,
+        "sites": 190951,
+        "elapsed_seconds": 32.06884218379855,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 499,
+        "official_psnr": 23.338117599487305,
+        "sites": 190951,
+        "elapsed_seconds": 39.53334591910243,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 599,
+        "official_psnr": 23.801090240478516,
+        "sites": 190951,
+        "elapsed_seconds": 46.54969437420368,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 699,
+        "official_psnr": 24.185321807861328,
+        "sites": 190951,
+        "elapsed_seconds": 53.629110887646675,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 799,
+        "official_psnr": 24.641347885131836,
+        "sites": 190951,
+        "elapsed_seconds": 60.841799929738045,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 899,
+        "official_psnr": 24.026058197021484,
+        "sites": 190951,
+        "elapsed_seconds": 67.56109266355634,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 999,
+        "official_psnr": 25.03799819946289,
+        "sites": 190951,
+        "elapsed_seconds": 74.60457294806838,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 1099,
+        "official_psnr": 25.354713439941406,
+        "sites": 190951,
+        "elapsed_seconds": 81.50069482624531,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 1199,
+        "official_psnr": 25.49553108215332,
+        "sites": 190951,
+        "elapsed_seconds": 88.19759950041771,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 1299,
+        "official_psnr": 25.762208938598633,
+        "sites": 190951,
+        "elapsed_seconds": 95.08865490555763,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 1399,
+        "official_psnr": 25.911155700683594,
+        "sites": 190951,
+        "elapsed_seconds": 101.58249758183956,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 1499,
+        "official_psnr": 25.895366668701172,
+        "sites": 190951,
+        "elapsed_seconds": 108.30517827346921,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 1599,
+        "official_psnr": 25.946979522705078,
+        "sites": 190951,
+        "elapsed_seconds": 115.02729433402419,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 1699,
+        "official_psnr": 26.410938262939453,
+        "sites": 190951,
+        "elapsed_seconds": 121.92774906009436,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 1799,
+        "official_psnr": 26.538061141967773,
+        "sites": 190951,
+        "elapsed_seconds": 128.69921101629734,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 1899,
+        "official_psnr": 26.562963485717773,
+        "sites": 190951,
+        "elapsed_seconds": 135.163564696908,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 1999,
+        "official_psnr": 26.542552947998047,
+        "sites": 190951,
+        "elapsed_seconds": 141.81472340971231,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 2099,
+        "official_psnr": 26.24835205078125,
+        "sites": 219420,
+        "elapsed_seconds": 154.17077897116542,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 2199,
+        "official_psnr": 26.250606536865234,
+        "sites": 252131,
+        "elapsed_seconds": 166.73792131990194,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 2299,
+        "official_psnr": 26.938922882080078,
+        "sites": 252131,
+        "elapsed_seconds": 174.04986046999693,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 2399,
+        "official_psnr": 27.059410095214844,
+        "sites": 289689,
+        "elapsed_seconds": 187.6134487055242,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 2499,
+        "official_psnr": 27.467134475708008,
+        "sites": 289689,
+        "elapsed_seconds": 195.55383237823844,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 2599,
+        "official_psnr": 27.511669158935547,
+        "sites": 332760,
+        "elapsed_seconds": 210.32634393498302,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 2699,
+        "official_psnr": 27.936094284057617,
+        "sites": 332760,
+        "elapsed_seconds": 219.19539061933756,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 2799,
+        "official_psnr": 27.59716033935547,
+        "sites": 382038,
+        "elapsed_seconds": 234.7094598300755,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 2899,
+        "official_psnr": 28.256080627441406,
+        "sites": 382038,
+        "elapsed_seconds": 244.70508728176355,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 2999,
+        "official_psnr": 28.461854934692383,
+        "sites": 382038,
+        "elapsed_seconds": 254.4631935209036,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 3099,
+        "official_psnr": 28.390361785888672,
+        "sites": 438378,
+        "elapsed_seconds": 271.15051556378603,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 3199,
+        "official_psnr": 28.727846145629883,
+        "sites": 438378,
+        "elapsed_seconds": 281.8798048980534,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 3299,
+        "official_psnr": 28.86906623840332,
+        "sites": 438378,
+        "elapsed_seconds": 292.439273044467,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 3399,
+        "official_psnr": 28.6700439453125,
+        "sites": 502815,
+        "elapsed_seconds": 309.8746068738401,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 3499,
+        "official_psnr": 29.0600528717041,
+        "sites": 502815,
+        "elapsed_seconds": 321.6812334433198,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 3599,
+        "official_psnr": 29.186996459960938,
+        "sites": 502815,
+        "elapsed_seconds": 332.9720299318433,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 3699,
+        "official_psnr": 29.26148223876953,
+        "sites": 502815,
+        "elapsed_seconds": 344.0899428986013,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 3799,
+        "official_psnr": 29.25963020324707,
+        "sites": 576376,
+        "elapsed_seconds": 363.2314842194319,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 3899,
+        "official_psnr": 29.408916473388672,
+        "sites": 576376,
+        "elapsed_seconds": 375.47763672471046,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 3999,
+        "official_psnr": 29.58378028869629,
+        "sites": 576376,
+        "elapsed_seconds": 387.4506960436702,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 4099,
+        "official_psnr": 29.58160972595215,
+        "sites": 576376,
+        "elapsed_seconds": 399.15201410651207,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 4199,
+        "official_psnr": 29.554651260375977,
+        "sites": 660208,
+        "elapsed_seconds": 419.3953995555639,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 4299,
+        "official_psnr": 29.72796630859375,
+        "sites": 660208,
+        "elapsed_seconds": 432.29520759359,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 4399,
+        "official_psnr": 29.75344467163086,
+        "sites": 660208,
+        "elapsed_seconds": 444.86666994541883,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 4499,
+        "official_psnr": 29.88470458984375,
+        "sites": 660208,
+        "elapsed_seconds": 457.45739137381315,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 4599,
+        "official_psnr": 29.071645736694336,
+        "sites": 755860,
+        "elapsed_seconds": 477.0623922906816,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 4699,
+        "official_psnr": 29.83476448059082,
+        "sites": 755860,
+        "elapsed_seconds": 491.07478887215257,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 4799,
+        "official_psnr": 29.94887924194336,
+        "sites": 755860,
+        "elapsed_seconds": 504.43113175034523,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 4899,
+        "official_psnr": 30.017993927001953,
+        "sites": 755860,
+        "elapsed_seconds": 517.3377043493092,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 4999,
+        "official_psnr": 30.153671264648438,
+        "sites": 755860,
+        "elapsed_seconds": 530.384219314903,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 5099,
+        "official_psnr": 30.031923294067383,
+        "sites": 755860,
+        "elapsed_seconds": 572.9532374367118,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 5199,
+        "official_psnr": 29.973934173583984,
+        "sites": 865818,
+        "elapsed_seconds": 600.5458868034184,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 5299,
+        "official_psnr": 30.239215850830078,
+        "sites": 865818,
+        "elapsed_seconds": 614.6663312986493,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 5399,
+        "official_psnr": 30.244104385375977,
+        "sites": 865818,
+        "elapsed_seconds": 628.3108959048986,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 5499,
+        "official_psnr": 30.36041831970215,
+        "sites": 865818,
+        "elapsed_seconds": 642.0453118868172,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 5599,
+        "official_psnr": 30.300735473632812,
+        "sites": 865818,
+        "elapsed_seconds": 655.3575301580131,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 5699,
+        "official_psnr": 30.481534957885742,
+        "sites": 865818,
+        "elapsed_seconds": 668.8518186286092,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 5799,
+        "official_psnr": 30.281864166259766,
+        "sites": 990942,
+        "elapsed_seconds": 698.0559715479612,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 5899,
+        "official_psnr": 30.384502410888672,
+        "sites": 990942,
+        "elapsed_seconds": 712.5724025294185,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 5999,
+        "official_psnr": 30.559785842895508,
+        "sites": 990942,
+        "elapsed_seconds": 727.1427969262004,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 6099,
+        "official_psnr": 30.62952423095703,
+        "sites": 990942,
+        "elapsed_seconds": 741.501063644886,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 6199,
+        "official_psnr": 30.610300064086914,
+        "sites": 990942,
+        "elapsed_seconds": 755.71476855129,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 6299,
+        "official_psnr": 30.64676856994629,
+        "sites": 990942,
+        "elapsed_seconds": 769.6866611614823,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 6399,
+        "official_psnr": 30.611204147338867,
+        "sites": 990942,
+        "elapsed_seconds": 783.7830275893211,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 6499,
+        "official_psnr": 30.50513458251953,
+        "sites": 1134006,
+        "elapsed_seconds": 814.5210917256773,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 6599,
+        "official_psnr": 30.60590171813965,
+        "sites": 1134006,
+        "elapsed_seconds": 829.986389156431,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 6699,
+        "official_psnr": 30.75514030456543,
+        "sites": 1134006,
+        "elapsed_seconds": 845.4846746437252,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 6799,
+        "official_psnr": 30.821067810058594,
+        "sites": 1134006,
+        "elapsed_seconds": 860.7541564255953,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 6899,
+        "official_psnr": 30.826129913330078,
+        "sites": 1134006,
+        "elapsed_seconds": 876.1629660502076,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 6999,
+        "official_psnr": 30.841135025024414,
+        "sites": 1134006,
+        "elapsed_seconds": 891.0238411985338,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 7099,
+        "official_psnr": 30.843008041381836,
+        "sites": 1134006,
+        "elapsed_seconds": 905.8705075532198,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 7199,
+        "official_psnr": 30.90212631225586,
+        "sites": 1134006,
+        "elapsed_seconds": 920.6500900648534,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 7299,
+        "official_psnr": 30.569026947021484,
+        "sites": 1297554,
+        "elapsed_seconds": 952.2806324847043,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 7399,
+        "official_psnr": 30.876155853271484,
+        "sites": 1297554,
+        "elapsed_seconds": 969.2052480317652,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 7499,
+        "official_psnr": 31.018314361572266,
+        "sites": 1297554,
+        "elapsed_seconds": 986.0052834749222,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 7599,
+        "official_psnr": 31.07635498046875,
+        "sites": 1297554,
+        "elapsed_seconds": 1002.3466677255929,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 7699,
+        "official_psnr": 31.061431884765625,
+        "sites": 1297554,
+        "elapsed_seconds": 1018.3999518975616,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 7799,
+        "official_psnr": 31.08360481262207,
+        "sites": 1297554,
+        "elapsed_seconds": 1034.630531039089,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 7899,
+        "official_psnr": 31.10757064819336,
+        "sites": 1297554,
+        "elapsed_seconds": 1050.6827428415418,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 7999,
+        "official_psnr": 31.17885398864746,
+        "sites": 1297554,
+        "elapsed_seconds": 1066.5654726438224,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 8099,
+        "official_psnr": 31.199796676635742,
+        "sites": 1297554,
+        "elapsed_seconds": 1082.3686905577779,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 8199,
+        "official_psnr": 30.8504581451416,
+        "sites": 1484534,
+        "elapsed_seconds": 1115.6641508340836,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 8299,
+        "official_psnr": 31.138463973999023,
+        "sites": 1484534,
+        "elapsed_seconds": 1133.861951366067,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 8399,
+        "official_psnr": 31.144195556640625,
+        "sites": 1484534,
+        "elapsed_seconds": 1151.440133113414,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 8499,
+        "official_psnr": 31.221508026123047,
+        "sites": 1484534,
+        "elapsed_seconds": 1168.6535269543529,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 8599,
+        "official_psnr": 31.30763816833496,
+        "sites": 1484534,
+        "elapsed_seconds": 1185.9198770038784,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 8699,
+        "official_psnr": 31.335302352905273,
+        "sites": 1484534,
+        "elapsed_seconds": 1203.032744050026,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 8799,
+        "official_psnr": 31.360681533813477,
+        "sites": 1484534,
+        "elapsed_seconds": 1219.8788163252175,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 8899,
+        "official_psnr": 31.383773803710938,
+        "sites": 1484534,
+        "elapsed_seconds": 1236.7454160526395,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 8999,
+        "official_psnr": 31.41978645324707,
+        "sites": 1484534,
+        "elapsed_seconds": 1253.541737690568,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 9099,
+        "official_psnr": 31.402124404907227,
+        "sites": 1484534,
+        "elapsed_seconds": 1270.0639008767903,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 9199,
+        "official_psnr": 31.45830535888672,
+        "sites": 1484534,
+        "elapsed_seconds": 1286.853677548468,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 9299,
+        "official_psnr": 31.12930679321289,
+        "sites": 1698820,
+        "elapsed_seconds": 1323.0779123939574,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 9399,
+        "official_psnr": 31.26283073425293,
+        "sites": 1698820,
+        "elapsed_seconds": 1342.0754275545478,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 9499,
+        "official_psnr": 31.406248092651367,
+        "sites": 1698820,
+        "elapsed_seconds": 1361.022284179926,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 9599,
+        "official_psnr": 31.388696670532227,
+        "sites": 1698820,
+        "elapsed_seconds": 1379.3337593972683,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 9699,
+        "official_psnr": 31.454389572143555,
+        "sites": 1698820,
+        "elapsed_seconds": 1397.903984233737,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 9799,
+        "official_psnr": 31.503150939941406,
+        "sites": 1698820,
+        "elapsed_seconds": 1416.0338597781956,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 9899,
+        "official_psnr": 31.531408309936523,
+        "sites": 1698820,
+        "elapsed_seconds": 1434.152111619711,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 9999,
+        "official_psnr": 31.565767288208008,
+        "sites": 1698820,
+        "elapsed_seconds": 1452.6111012473702,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 10099,
+        "official_psnr": 31.556774139404297,
+        "sites": 1698820,
+        "elapsed_seconds": 1470.164828646928,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 10199,
+        "official_psnr": 31.580352783203125,
+        "sites": 1698820,
+        "elapsed_seconds": 1488.1189618073404,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 10299,
+        "official_psnr": 31.634838104248047,
+        "sites": 1698820,
+        "elapsed_seconds": 1506.0379509218037,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 10399,
+        "official_psnr": 31.632360458374023,
+        "sites": 1698820,
+        "elapsed_seconds": 1523.5888386182487,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 10499,
+        "official_psnr": 31.45937156677246,
+        "sites": 1944340,
+        "elapsed_seconds": 1562.006728760898,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 10599,
+        "official_psnr": 31.555770874023438,
+        "sites": 1944340,
+        "elapsed_seconds": 1582.0636257231236,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 10699,
+        "official_psnr": 31.603622436523438,
+        "sites": 1944340,
+        "elapsed_seconds": 1602.159880604595,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 10799,
+        "official_psnr": 31.62990951538086,
+        "sites": 1944340,
+        "elapsed_seconds": 1621.5024043396115,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 10899,
+        "official_psnr": 31.702306747436523,
+        "sites": 1944340,
+        "elapsed_seconds": 1640.8287261351943,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 10999,
+        "official_psnr": 31.706579208374023,
+        "sites": 1944340,
+        "elapsed_seconds": 1659.954039722681,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 11099,
+        "official_psnr": 31.709932327270508,
+        "sites": 1944340,
+        "elapsed_seconds": 1679.3099872283638,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 11199,
+        "official_psnr": 31.731149673461914,
+        "sites": 1944340,
+        "elapsed_seconds": 1698.2932776585221,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 11299,
+        "official_psnr": 31.718080520629883,
+        "sites": 1944340,
+        "elapsed_seconds": 1716.9052822887897,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 11399,
+        "official_psnr": 31.743696212768555,
+        "sites": 1944340,
+        "elapsed_seconds": 1735.912337180227,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 11499,
+        "official_psnr": 31.768152236938477,
+        "sites": 1944340,
+        "elapsed_seconds": 1755.0473646111786,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 11599,
+        "official_psnr": 31.763349533081055,
+        "sites": 1944340,
+        "elapsed_seconds": 1773.475596819073,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 11699,
+        "official_psnr": 31.784223556518555,
+        "sites": 1944340,
+        "elapsed_seconds": 1792.020636241883,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 11799,
+        "official_psnr": 31.804582595825195,
+        "sites": 1944340,
+        "elapsed_seconds": 1810.837836112827,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 11899,
+        "official_psnr": 31.793031692504883,
+        "sites": 1944340,
+        "elapsed_seconds": 1829.279090512544,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 11999,
+        "official_psnr": 31.826894760131836,
+        "sites": 1944340,
+        "elapsed_seconds": 1847.8316917419434,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 12099,
+        "official_psnr": 31.819719314575195,
+        "sites": 1944340,
+        "elapsed_seconds": 1866.4925419427454,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 12199,
+        "official_psnr": 31.829086303710938,
+        "sites": 1944340,
+        "elapsed_seconds": 1884.8846169412136,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 12299,
+        "official_psnr": 31.87610626220703,
+        "sites": 1944340,
+        "elapsed_seconds": 1903.6313066519797,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 12399,
+        "official_psnr": 31.854482650756836,
+        "sites": 1944340,
+        "elapsed_seconds": 1921.8737637773156,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 12499,
+        "official_psnr": 31.86517906188965,
+        "sites": 1944340,
+        "elapsed_seconds": 1940.3488500118256,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 12599,
+        "official_psnr": 31.840856552124023,
+        "sites": 1944340,
+        "elapsed_seconds": 1958.8915965259075,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 12699,
+        "official_psnr": 31.9112548828125,
+        "sites": 1944340,
+        "elapsed_seconds": 1977.0852250158787,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 12799,
+        "official_psnr": 31.965343475341797,
+        "sites": 1944340,
+        "elapsed_seconds": 1995.2638300918043,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 12899,
+        "official_psnr": 31.984699249267578,
+        "sites": 1944340,
+        "elapsed_seconds": 2013.7020346447825,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 12999,
+        "official_psnr": 31.97034454345703,
+        "sites": 1944340,
+        "elapsed_seconds": 2031.9977314397693,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 13099,
+        "official_psnr": 31.993253707885742,
+        "sites": 1944340,
+        "elapsed_seconds": 2050.2051427178085,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 13199,
+        "official_psnr": 31.989721298217773,
+        "sites": 1944340,
+        "elapsed_seconds": 2068.9061483107507,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 13299,
+        "official_psnr": 32.02973556518555,
+        "sites": 1944340,
+        "elapsed_seconds": 2087.041188094765,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 13399,
+        "official_psnr": 32.00020980834961,
+        "sites": 1944340,
+        "elapsed_seconds": 2105.2245668284595,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 13499,
+        "official_psnr": 32.03110885620117,
+        "sites": 1944340,
+        "elapsed_seconds": 2123.6334182806313,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 13599,
+        "official_psnr": 32.03964614868164,
+        "sites": 1944340,
+        "elapsed_seconds": 2141.780357193202,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 13699,
+        "official_psnr": 32.058990478515625,
+        "sites": 1944340,
+        "elapsed_seconds": 2159.923472933471,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 13799,
+        "official_psnr": 32.037288665771484,
+        "sites": 1944340,
+        "elapsed_seconds": 2178.1484325006604,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 13899,
+        "official_psnr": 31.978641510009766,
+        "sites": 1944340,
+        "elapsed_seconds": 2196.351537324488,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 13999,
+        "official_psnr": 31.997037887573242,
+        "sites": 1944340,
+        "elapsed_seconds": 2214.3459167070687,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 14099,
+        "official_psnr": 31.997461318969727,
+        "sites": 1944340,
+        "elapsed_seconds": 2232.4154386520386,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 14199,
+        "official_psnr": 31.999950408935547,
+        "sites": 1944340,
+        "elapsed_seconds": 2250.5356343239546,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 14299,
+        "official_psnr": 31.985164642333984,
+        "sites": 1944340,
+        "elapsed_seconds": 2268.5350109674037,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 14399,
+        "official_psnr": 31.997051239013672,
+        "sites": 1944340,
+        "elapsed_seconds": 2286.644848894328,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 14499,
+        "official_psnr": 31.994338989257812,
+        "sites": 1944340,
+        "elapsed_seconds": 2304.998561348766,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 14599,
+        "official_psnr": 32.063499450683594,
+        "sites": 1944340,
+        "elapsed_seconds": 2323.0178330913186,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 14699,
+        "official_psnr": 32.02201843261719,
+        "sites": 1944340,
+        "elapsed_seconds": 2341.087727267295,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 14799,
+        "official_psnr": 32.02201843261719,
+        "sites": 1944340,
+        "elapsed_seconds": 2359.268726300448,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 14899,
+        "official_psnr": 32.032501220703125,
+        "sites": 1944340,
+        "elapsed_seconds": 2377.311525903642,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 14999,
+        "official_psnr": 32.049468994140625,
+        "sites": 1944340,
+        "elapsed_seconds": 2395.3577135801315,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 15099,
+        "official_psnr": 32.04113006591797,
+        "sites": 1944340,
+        "elapsed_seconds": 2413.3802789226174,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 15199,
+        "official_psnr": 32.03639602661133,
+        "sites": 1944340,
+        "elapsed_seconds": 2431.33276925236,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 15299,
+        "official_psnr": 32.04489517211914,
+        "sites": 1944340,
+        "elapsed_seconds": 2449.3263771757483,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 15399,
+        "official_psnr": 32.05186080932617,
+        "sites": 1944340,
+        "elapsed_seconds": 2467.3072902336717,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 15499,
+        "official_psnr": 32.07058334350586,
+        "sites": 1944340,
+        "elapsed_seconds": 2485.1776113547385,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 15599,
+        "official_psnr": 32.07001495361328,
+        "sites": 1944340,
+        "elapsed_seconds": 2503.1356927007437,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 15699,
+        "official_psnr": 32.11334991455078,
+        "sites": 1944340,
+        "elapsed_seconds": 2521.0834603644907,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 15799,
+        "official_psnr": 32.07011413574219,
+        "sites": 1944340,
+        "elapsed_seconds": 2539.0997440107167,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 15899,
+        "official_psnr": 32.081336975097656,
+        "sites": 1944340,
+        "elapsed_seconds": 2557.166352517903,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 15999,
+        "official_psnr": 32.070220947265625,
+        "sites": 1944340,
+        "elapsed_seconds": 2575.050644315779,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 16099,
+        "official_psnr": 32.07951354980469,
+        "sites": 1944340,
+        "elapsed_seconds": 2593.063833218068,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 16199,
+        "official_psnr": 32.084903717041016,
+        "sites": 1944340,
+        "elapsed_seconds": 2611.0155544504523,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 16299,
+        "official_psnr": 32.086578369140625,
+        "sites": 1944340,
+        "elapsed_seconds": 2628.977427907288,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 16399,
+        "official_psnr": 32.09641647338867,
+        "sites": 1944340,
+        "elapsed_seconds": 2647.0902370102704,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 16499,
+        "official_psnr": 32.1597900390625,
+        "sites": 1944340,
+        "elapsed_seconds": 2664.8348586037755,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 16599,
+        "official_psnr": 32.16893768310547,
+        "sites": 1944340,
+        "elapsed_seconds": 2682.7569333054125,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 16699,
+        "official_psnr": 32.13188171386719,
+        "sites": 1944340,
+        "elapsed_seconds": 2700.9811209104955,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 16799,
+        "official_psnr": 32.134437561035156,
+        "sites": 1944340,
+        "elapsed_seconds": 2718.926292423159,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 16899,
+        "official_psnr": 32.14423370361328,
+        "sites": 1944340,
+        "elapsed_seconds": 2736.8949934355915,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 16999,
+        "official_psnr": 32.13971710205078,
+        "sites": 1944340,
+        "elapsed_seconds": 2755.0615068785846,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 17099,
+        "official_psnr": 32.15028762817383,
+        "sites": 1944340,
+        "elapsed_seconds": 2772.9082929864526,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 17199,
+        "official_psnr": 32.150657653808594,
+        "sites": 1944340,
+        "elapsed_seconds": 2790.640130959451,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 17299,
+        "official_psnr": 32.149967193603516,
+        "sites": 1944340,
+        "elapsed_seconds": 2808.6308734938502,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 17399,
+        "official_psnr": 32.15497589111328,
+        "sites": 1944340,
+        "elapsed_seconds": 2826.5077219493687,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 17499,
+        "official_psnr": 32.157073974609375,
+        "sites": 1944340,
+        "elapsed_seconds": 2844.306108403951,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 17599,
+        "official_psnr": 32.16814041137695,
+        "sites": 1944340,
+        "elapsed_seconds": 2862.2932114340365,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 17699,
+        "official_psnr": 32.16908645629883,
+        "sites": 1944340,
+        "elapsed_seconds": 2880.1684921085835,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 17799,
+        "official_psnr": 32.17255401611328,
+        "sites": 1944340,
+        "elapsed_seconds": 2898.183654706925,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 17899,
+        "official_psnr": 32.188331604003906,
+        "sites": 1944340,
+        "elapsed_seconds": 2916.157245501876,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 17999,
+        "official_psnr": 32.19304656982422,
+        "sites": 1944340,
+        "elapsed_seconds": 2934.1816936060786,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 18099,
+        "official_psnr": 32.19734573364258,
+        "sites": 1944340,
+        "elapsed_seconds": 2952.1749826446176,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 18199,
+        "official_psnr": 32.19438171386719,
+        "sites": 1944340,
+        "elapsed_seconds": 2969.8098195642233,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 18299,
+        "official_psnr": 32.19363021850586,
+        "sites": 1944340,
+        "elapsed_seconds": 2987.5390047058463,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 18399,
+        "official_psnr": 32.221473693847656,
+        "sites": 1944340,
+        "elapsed_seconds": 3005.2265078276396,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 18499,
+        "official_psnr": 32.21520233154297,
+        "sites": 1944340,
+        "elapsed_seconds": 3022.8440797142684,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 18599,
+        "official_psnr": 32.2198486328125,
+        "sites": 1944340,
+        "elapsed_seconds": 3040.660923127085,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 18699,
+        "official_psnr": 32.21467208862305,
+        "sites": 1944340,
+        "elapsed_seconds": 3058.336280349642,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 18799,
+        "official_psnr": 32.22270965576172,
+        "sites": 1944340,
+        "elapsed_seconds": 3075.9159234426916,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 18899,
+        "official_psnr": 32.219295501708984,
+        "sites": 1944340,
+        "elapsed_seconds": 3093.7057906351984,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 18999,
+        "official_psnr": 32.22068786621094,
+        "sites": 1944340,
+        "elapsed_seconds": 3111.315873630345,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 19099,
+        "official_psnr": 32.22242736816406,
+        "sites": 1944340,
+        "elapsed_seconds": 3128.957601118833,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 19199,
+        "official_psnr": 32.2196044921875,
+        "sites": 1944340,
+        "elapsed_seconds": 3146.673604082316,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 19299,
+        "official_psnr": 32.225276947021484,
+        "sites": 1944340,
+        "elapsed_seconds": 3164.4106230027974,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 19399,
+        "official_psnr": 32.23072052001953,
+        "sites": 1944340,
+        "elapsed_seconds": 3182.008501227945,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 19499,
+        "official_psnr": 32.227928161621094,
+        "sites": 1944340,
+        "elapsed_seconds": 3199.7604972720146,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 19599,
+        "official_psnr": 32.22636795043945,
+        "sites": 1944340,
+        "elapsed_seconds": 3217.560669030994,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 19699,
+        "official_psnr": 32.21892166137695,
+        "sites": 1944340,
+        "elapsed_seconds": 3235.2308326661587,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 19799,
+        "official_psnr": 32.22802734375,
+        "sites": 1944340,
+        "elapsed_seconds": 3252.8933952115476,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 19899,
+        "official_psnr": 32.23843765258789,
+        "sites": 1944340,
+        "elapsed_seconds": 3270.59817828238,
+        "backend": "warpower-morton",
+        "budget": "full"
+      },
+      {
+        "step": 19999,
+        "official_psnr": 32.25114059448242,
+        "sites": 1944340,
+        "elapsed_seconds": 3288.214531324804,
+        "backend": "warpower-morton",
+        "budget": "full"
+      }
+    ]
+  },
+  "source_log_sha256": {
+    "native": "693f480ab569f36d3d3ccb94845816034266beef86d794ae225268c46b073566",
+    "warpower": "95cb4e7bdb2b1909890446cf445dba5e3546e8c39cb3d76b67c0ee9f3c95aa6a"
+  },
+  "paper_source": "https://arxiv.org/html/2502.01157v1",
+  "paper_metric_note": "Paper reports Bonsai 32.15 dB. Final Warp is 32.2511 with upstream mean-channel PSNR and 32.1772 with pooled-RGB PSNR. Paper timing uses RTX 4090; our paired measurements use L40."
+}

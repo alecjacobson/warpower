@@ -1,0 +1,10 @@
+{
+  "warp_fit_source_commit": "d40269a9ecfc85e20c00924b46d17c98c024b6fc",
+  "warp_fit_all_source_hashes_match_commit": true,
+  "inference_tuning_base_commit": "d40269a9ecfc85e20c00924b46d17c98c024b6fc",
+  "inference_tuning_source": "inference-tuning-source.py",
+  "inference_tuning_note": "The frozen sweep script reads warp_renderer.py from its driver directory. Restore that file from the base commit before reproducing the sweep; final tuned inference changes its array layout and register cap. The generator was corrected before this complete sweep to transform only FP16 texture indexing.",
+  "native_fit_used_sources": "native-source/ contains the native run driver, adapter, initializer and audit instrumentation matching native-fit.json. It never uses warp_renderer.py.",
+  "training_unchanged_by_final_tuning": true,
+  "outputs": "Unique checkpoints/previews/plots remain on persistent ignored results/local/vorotracing-20261110. JSON evidence is retained here."
+}

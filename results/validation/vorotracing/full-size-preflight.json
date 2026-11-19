@@ -1,0 +1,741 @@
+{
+  "complete": true,
+  "backend": "warp",
+  "options": {
+    "backend": "warp",
+    "output": "/home/horde/projects/power-diagram/results/local/vorotracing-20261110/warp-full-preflight",
+    "initialization": "results/local/vorotracing-20261110/initialization/dense-points.pt",
+    "data": "data/radfoam-training",
+    "sites": 2000000,
+    "rays": 1000000,
+    "steps": 2,
+    "downsample": 2,
+    "eval_every": 2,
+    "morton": false,
+    "no_save": true
+  },
+  "initial_base_sha256": "2b265177bf9a0b6e8673ecffa42b069d96cdd5ed0008a0464684f9b32db2004f",
+  "initial_hash_scope": "Original sampled positions, log densities and repeated diffuse RGB logit palette; specular texture is zero.",
+  "source_commit": "75910484d6d46af25e180044ca6b9091204fe6fa",
+  "training": "Original upstream loop; cached upstream dense initialization and isolated generator for the original uniform random-ray sampler; no external logging or viewer.",
+  "native_instrumentation": "Same counted nonfinite-gradient replacement for both backends; native tracing, backward, Paragram geometry and cuBQL nearest queries unchanged.",
+  "warp_starting_cells": "Warp camera-origin representative hash with exact equality check and direct nearest fallback for collisions; no torch.unique.",
+  "gpu": "NVIDIA L40",
+  "torch": "2.7.1+cu126",
+  "cpu_affinity": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_sha256": {
+    "warp_renderer.py": "0b54cf54855a41c0d26d104b720f8be92395d15cf44c48964cad832a6307029b",
+    "validate_renderer.py": "153a0b50206d4c65c31c88e8829f6d20c1df7276c318f52255b74e202a5a5561",
+    "prepare_scene.py": "13e3345989a82f0d0840101fc70a1d0ba418c5dade8ada3ebb083b57110bd94b",
+    "upstream.py": "da7efb7178f4d1fdd84a793d8c00f339fb14daec1ae690c5e3340ee0d682de03",
+    "run_fit.py": "d2ee885bbba1a833bd3374eb7e5c5a20c376e0086e65587326afbc2460d8071d",
+    "numerics.py": "1132505a3712447b49da16a71b9a28fcb8367ddcdbc83ceefb5c8b2c4c59b1ef",
+    "benchmark_renderer.py": "a86ba1a13c952926a7b155cf62fb0e8ff352f53963d1214160b573094ae0d7c5",
+    "validate_contract.py": "b2d8d3faac0d56351140a03083a5ee29a84bde21eca12b88dbbc00f3597f6549",
+    "evaluate_inference.py": "40350f9d358f221562c5f8eca5ee2dcb49a4187843ce655167839a9795522391",
+    "benchmark_radfoam.py": "83580eb4fda7eecaec237535c3ee9c3f343f38f23aeebfbf13b4be6744d8c104",
+    "compare_fits.py": "ecdffd95d945ac973f26a4f5cfcff259e05b87e0b82847b73ae02306044db9fd",
+    "evaluate_checkpoint.py": "bd0a5b0e527d57cba9c429d27b68977ea6c7a4a7f257c0197f46e4c69d326f6f",
+    "plot_fits.py": "5ede7e879e660cd75f3762153613945edee847d892ebbd1284a31064f2a16263"
+  },
+  "warmup_batch_sha256": "dc0bf86bf5722dfeeeffbfd7d13f25347fe00fc9956f5752672817c576d95e0d",
+  "total_seconds": 29.05408300086856,
+  "loop_seconds": 8.33709466457367,
+  "evaluations": [
+    {
+      "step": 1,
+      "seconds": 7.574839107692242,
+      "metrics": {
+        "psnr": 12.523368835449219,
+        "ssim": 0.45918574929237366,
+        "lpips": 0.8071926236152649,
+        "lpips_3dgs": 0.6078199744224548
+      },
+      "numerics": {
+        "points_gradient": 0,
+        "diffuse_gradient": 0,
+        "specular_gradient": 0,
+        "density_gradient": 0,
+        "rgba": 0,
+        "distortion": 0,
+        "capped_rays": 1
+      },
+      "evaluation_numerics": {
+        "points_gradient": 0,
+        "diffuse_gradient": 0,
+        "specular_gradient": 0,
+        "density_gradient": 0,
+        "rgba": 0,
+        "distortion": 0,
+        "capped_rays": 1
+      },
+      "per_view": [
+        {
+          "view": 0,
+          "pooled_psnr": 12.0106782913208,
+          "psnr": 12.046285629272461,
+          "ssim": 0.44371017813682556,
+          "lpips": 0.7641934156417847,
+          "lpips_3dgs": 0.5733274221420288,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 1,
+          "pooled_psnr": 14.77507495880127,
+          "psnr": 14.846057891845703,
+          "ssim": 0.4369000792503357,
+          "lpips": 0.8037184476852417,
+          "lpips_3dgs": 0.6159399151802063,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 2,
+          "pooled_psnr": 13.755961418151855,
+          "psnr": 13.816171646118164,
+          "ssim": 0.4016062617301941,
+          "lpips": 0.7852763533592224,
+          "lpips_3dgs": 0.5942108631134033,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 3,
+          "pooled_psnr": 12.767934799194336,
+          "psnr": 12.791524887084961,
+          "ssim": 0.4002150893211365,
+          "lpips": 0.7688056826591492,
+          "lpips_3dgs": 0.5803217887878418,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 4,
+          "pooled_psnr": 13.872841835021973,
+          "psnr": 13.9083251953125,
+          "ssim": 0.383436381816864,
+          "lpips": 0.7895911335945129,
+          "lpips_3dgs": 0.6147359609603882,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 5,
+          "pooled_psnr": 13.096670150756836,
+          "psnr": 13.116493225097656,
+          "ssim": 0.3643764853477478,
+          "lpips": 0.7815306186676025,
+          "lpips_3dgs": 0.5934750437736511,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 6,
+          "pooled_psnr": 12.431255340576172,
+          "psnr": 12.448379516601562,
+          "ssim": 0.4333365559577942,
+          "lpips": 0.8049731254577637,
+          "lpips_3dgs": 0.6176602840423584,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 7,
+          "pooled_psnr": 14.094964981079102,
+          "psnr": 14.10753059387207,
+          "ssim": 0.3871743679046631,
+          "lpips": 0.7927929162979126,
+          "lpips_3dgs": 0.6221981644630432,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 8,
+          "pooled_psnr": 12.541130065917969,
+          "psnr": 12.567240715026855,
+          "ssim": 0.3854508399963379,
+          "lpips": 0.7967129945755005,
+          "lpips_3dgs": 0.6035404205322266,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 9,
+          "pooled_psnr": 11.126209259033203,
+          "psnr": 11.149760246276855,
+          "ssim": 0.33549052476882935,
+          "lpips": 0.780051052570343,
+          "lpips_3dgs": 0.5832614302635193,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 10,
+          "pooled_psnr": 12.19868278503418,
+          "psnr": 12.22271728515625,
+          "ssim": 0.3048362731933594,
+          "lpips": 0.8193953633308411,
+          "lpips_3dgs": 0.6345652341842651,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 11,
+          "pooled_psnr": 10.4752836227417,
+          "psnr": 10.499061584472656,
+          "ssim": 0.3355553150177002,
+          "lpips": 0.8043225407600403,
+          "lpips_3dgs": 0.6052876710891724,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 12,
+          "pooled_psnr": 9.95108413696289,
+          "psnr": 9.961830139160156,
+          "ssim": 0.38468557596206665,
+          "lpips": 0.7863585948944092,
+          "lpips_3dgs": 0.5902721881866455,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 13,
+          "pooled_psnr": 11.014704704284668,
+          "psnr": 11.027921676635742,
+          "ssim": 0.2648354470729828,
+          "lpips": 0.8174881339073181,
+          "lpips_3dgs": 0.6370790600776672,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 14,
+          "pooled_psnr": 10.812088012695312,
+          "psnr": 10.825607299804688,
+          "ssim": 0.28333356976509094,
+          "lpips": 0.8185257315635681,
+          "lpips_3dgs": 0.6208627223968506,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 15,
+          "pooled_psnr": 10.069632530212402,
+          "psnr": 10.075523376464844,
+          "ssim": 0.3711444139480591,
+          "lpips": 0.7836527228355408,
+          "lpips_3dgs": 0.5634302496910095,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 16,
+          "pooled_psnr": 9.299036026000977,
+          "psnr": 9.322839736938477,
+          "ssim": 0.3034530282020569,
+          "lpips": 0.8044292330741882,
+          "lpips_3dgs": 0.6074522137641907,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 17,
+          "pooled_psnr": 12.073636054992676,
+          "psnr": 12.116947174072266,
+          "ssim": 0.3939806818962097,
+          "lpips": 0.8535395860671997,
+          "lpips_3dgs": 0.6494659185409546,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 18,
+          "pooled_psnr": 10.997334480285645,
+          "psnr": 11.064563751220703,
+          "ssim": 0.37213966250419617,
+          "lpips": 0.8133680820465088,
+          "lpips_3dgs": 0.6097061634063721,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 19,
+          "pooled_psnr": 14.639904022216797,
+          "psnr": 14.743738174438477,
+          "ssim": 0.45240458846092224,
+          "lpips": 0.823647677898407,
+          "lpips_3dgs": 0.6045836806297302,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 20,
+          "pooled_psnr": 12.433521270751953,
+          "psnr": 12.650835037231445,
+          "ssim": 0.5111162662506104,
+          "lpips": 0.8971368074417114,
+          "lpips_3dgs": 0.6552358269691467,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 21,
+          "pooled_psnr": 13.272172927856445,
+          "psnr": 13.320658683776855,
+          "ssim": 0.4979082942008972,
+          "lpips": 0.854322075843811,
+          "lpips_3dgs": 0.6343709826469421,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 22,
+          "pooled_psnr": 13.631081581115723,
+          "psnr": 13.635050773620605,
+          "ssim": 0.523729681968689,
+          "lpips": 0.8063146471977234,
+          "lpips_3dgs": 0.6139837503433228,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 23,
+          "pooled_psnr": 14.876700401306152,
+          "psnr": 15.046339988708496,
+          "ssim": 0.5520570278167725,
+          "lpips": 0.8416863679885864,
+          "lpips_3dgs": 0.6543965339660645,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 24,
+          "pooled_psnr": 14.984504699707031,
+          "psnr": 15.157679557800293,
+          "ssim": 0.6623302698135376,
+          "lpips": 0.8258028030395508,
+          "lpips_3dgs": 0.6079912781715393,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 25,
+          "pooled_psnr": 12.354954719543457,
+          "psnr": 12.524462699890137,
+          "ssim": 0.6279265880584717,
+          "lpips": 0.7830653786659241,
+          "lpips_3dgs": 0.5813742876052856,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 26,
+          "pooled_psnr": 12.755309104919434,
+          "psnr": 13.03643798828125,
+          "ssim": 0.6215662360191345,
+          "lpips": 0.8708029985427856,
+          "lpips_3dgs": 0.6423404216766357,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 27,
+          "pooled_psnr": 11.924800872802734,
+          "psnr": 12.059629440307617,
+          "ssim": 0.619598388671875,
+          "lpips": 0.8031822443008423,
+          "lpips_3dgs": 0.6102395057678223,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 1
+          }
+        },
+        {
+          "view": 28,
+          "pooled_psnr": 8.496841430664062,
+          "psnr": 8.517936706542969,
+          "ssim": 0.514200747013092,
+          "lpips": 0.7467962503433228,
+          "lpips_3dgs": 0.5828198194503784,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 29,
+          "pooled_psnr": 11.540852546691895,
+          "psnr": 11.6043119430542,
+          "ssim": 0.5925368666648865,
+          "lpips": 0.8052718639373779,
+          "lpips_3dgs": 0.6171392202377319,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 30,
+          "pooled_psnr": 12.428163528442383,
+          "psnr": 12.575616836547852,
+          "ssim": 0.6305879950523376,
+          "lpips": 0.8021696209907532,
+          "lpips_3dgs": 0.6021677255630493,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 31,
+          "pooled_psnr": 10.952712059020996,
+          "psnr": 10.984973907470703,
+          "ssim": 0.5576620101928711,
+          "lpips": 0.7592854499816895,
+          "lpips_3dgs": 0.5738744139671326,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 32,
+          "pooled_psnr": 15.656221389770508,
+          "psnr": 15.742856979370117,
+          "ssim": 0.5873509645462036,
+          "lpips": 0.8239661455154419,
+          "lpips_3dgs": 0.6060819625854492,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 33,
+          "pooled_psnr": 13.667078971862793,
+          "psnr": 13.729034423828125,
+          "ssim": 0.5249144434928894,
+          "lpips": 0.7972814440727234,
+          "lpips_3dgs": 0.5734537839889526,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 34,
+          "pooled_psnr": 10.337362289428711,
+          "psnr": 10.500991821289062,
+          "ssim": 0.3721732497215271,
+          "lpips": 0.7915186285972595,
+          "lpips_3dgs": 0.580793023109436,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 35,
+          "pooled_psnr": 14.6549711227417,
+          "psnr": 14.745128631591797,
+          "ssim": 0.485962450504303,
+          "lpips": 0.8256000876426697,
+          "lpips_3dgs": 0.6023350358009338,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        },
+        {
+          "view": 36,
+          "pooled_psnr": 14.834012031555176,
+          "psnr": 14.874195098876953,
+          "ssim": 0.6701850295066833,
+          "lpips": 0.8395490646362305,
+          "lpips_3dgs": 0.6293643116950989,
+          "numerics": {
+            "points_gradient": 0,
+            "diffuse_gradient": 0,
+            "specular_gradient": 0,
+            "density_gradient": 0,
+            "rgba": 0,
+            "distortion": 0,
+            "capped_rays": 0
+          }
+        }
+      ]
+    }
+  ],
+  "geometry": [
+    {
+      "step": 1,
+      "seconds": 0.7592814452946186
+    }
+  ],
+  "sites": 2000000,
+  "peak_torch_bytes": 17104301568,
+  "native_extension_loaded": false,
+  "checkpoint": null,
+  "numerics": {
+    "points_gradient": 0,
+    "diffuse_gradient": 0,
+    "specular_gradient": 0,
+    "density_gradient": 0,
+    "rgba": 0,
+    "distortion": 0,
+    "capped_rays": 1
+  },
+  "cpu_quota": {
+    "4": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    },
+    "3": {
+      "cpu_cores": 4.0,
+      "throttled_periods": 0,
+      "throttled_usec": 0
+    }
+  }
+}

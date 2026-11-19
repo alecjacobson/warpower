@@ -1,0 +1,110 @@
+{
+  "created_utc": "2026-11-10T03:42:01.293396+00:00",
+  "purpose": "Test official RadFoam training at the smaller workload, then additionally match the custom harness initialization and error-map settings.",
+  "matched_workload": {
+    "scene": "Mip-NeRF 360 Bonsai",
+    "train_views": 255,
+    "test_views": 37,
+    "resolution": [
+      780,
+      520
+    ],
+    "steps": 20000,
+    "rays_per_step": 65536,
+    "target_final_sites": 262144,
+    "sh_degree": 3,
+    "gpu": "NVIDIA L40"
+  },
+  "results": [
+    {
+      "name": "official-reduced",
+      "sites": 251477,
+      "official_psnr": 29.264633488010716,
+      "pooled_rgb_psnr": 29.236281008333773,
+      "nonfinite_rgba": 0,
+      "checkpoint_sha256": "651c7b266d83dc5ffe62d0baedc2d7e4bacd0914472a36c391e3b369c0efe0ab"
+    },
+    {
+      "name": "official-adapter-settings",
+      "sites": 250084,
+      "official_psnr": 26.893377716476852,
+      "pooled_rgb_psnr": 26.868380108395137,
+      "nonfinite_rgba": 0,
+      "checkpoint_sha256": "73a1d0d81251cf1741c0c8efc67cbbda9e432d7ad1c8c1f6aafbfef1109ad9b8"
+    },
+    {
+      "name": "adapter-native",
+      "sites": 249858,
+      "official_psnr": 26.755893758825355,
+      "pooled_rgb_psnr": 26.728471292031777,
+      "nonfinite_rgba": 0,
+      "checkpoint_sha256": "4bbe7d70640a977cce566864ce9c52c613034427ce77512529042b2b929df430"
+    },
+    {
+      "name": "adapter-warpower-morton",
+      "sites": 247608,
+      "official_psnr": 26.862270922274202,
+      "pooled_rgb_psnr": 26.834825051797402,
+      "nonfinite_rgba": 0,
+      "checkpoint_sha256": "e070b0f4e60efe8bbbfa5f5970ae7cbacb5dcfaf29dc5f8c6c361a5c8227354b"
+    }
+  ],
+  "pooled_rgb_differences_db": {
+    "official_matched_minus_custom_native": 0.13990881636335928,
+    "official_matched_minus_custom_warpower": 0.03355505659773428,
+    "official_original_initialization_and_error_maps_minus_custom_native": 2.5078097163019955,
+    "difference_between_official_controls": 2.367900899938636
+  },
+  "initial_physical_sha256": "a1372db569edf7542b743a821757e5a693513e8ca05efd4a7804240ff359cf86",
+  "initial_parameters_exactly_match_previous_fits": true,
+  "validation": {
+    "official-reduced": {
+      "executed_driver_matches_recorded_hash": true,
+      "upstream_clean": true,
+      "training_vs_shared_evaluation_psnr_abs_difference": 3.0929977867799607e-07,
+      "triangulation_retry_messages": 1
+    },
+    "official-adapter-settings": {
+      "executed_driver_matches_recorded_hash": true,
+      "upstream_clean": true,
+      "training_vs_shared_evaluation_psnr_abs_difference": 4.1239970371975687e-07,
+      "triangulation_retry_messages": 0
+    },
+    "adapter-native": {
+      "max_per_view_reevaluation_difference_db": 3.017978919217512e-06
+    },
+    "adapter-warpower-morton": {
+      "max_per_view_reevaluation_difference_db": 3.469399779021387e-06
+    }
+  },
+  "interpretation": "Matching initialization, seed, and error-map settings as well as resource budgets produces close final PSNR agreement with the custom harness. Resource budgets alone do not explain its lower quality. These controls change the remaining recipe choices together, so do not identify their individual contributions.",
+  "limitations": [
+    "One run per recipe, with different sampling/RNG sequences and final site counts.",
+    "Official controls retain original BatchFetcher, evaluation every 100 steps, and no mid-training restore; custom harness uses resident GPU sampling, four evaluations, and a restore test.",
+    "No runtime speedup inference: official controls include 200 evaluations and have some CPU quota throttling.",
+    "Official training retains upstream gradient masking without custom raw gradient audits; finite RGBA checks here cover shared evaluation only.",
+    "These are reduced-budget controls, not a full-budget paper reproduction.",
+    "New controls use native geometry; the WarPower model is the previously measured run, reevaluated on identical views."
+  ],
+  "execution": {
+    "environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "PYTHONPATH": "."
+    },
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "commands": [
+      ".venv/bin/python experiments/radfoam-integration/official_reduced.py --output results/local/radfoam-official-reduced-20261110",
+      ".venv/bin/python experiments/radfoam-integration/official_reduced.py --recipe adapter-settings --output results/local/radfoam-official-adapter-settings-20261110"
+    ],
+    "prefix": "taskset -c 0-3",
+    "upstream_commit": "3e7b52cf74e37ab2ab5e695f53570f515f537e3d"
+  },
+  "provenance_note": "First control used its retained executed source before the optional adapter-settings recipe was added. A pre-training configuration-parser failure is retained locally. Ledger capture is unavailable in this runtime."
+}

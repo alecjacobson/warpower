@@ -1,0 +1,66 @@
+{
+  "complete": true,
+  "stage": "Full Bonsai fitting, saved-checkpoint evaluation, inference tuning and reference comparisons complete.",
+  "training": {
+    "native_psnr": 33.738555908203125,
+    "warp_psnr": 33.773658752441406,
+    "native_loop_seconds": 5201.535154227167,
+    "warp_loop_seconds": 4430.82938959077,
+    "speedup": 1.1739416476849676,
+    "time_reduction_percent": 14.816890433011153,
+    "all_raw_nonfinite_counts_zero": true,
+    "final_heldout_traversal_limit_counts_zero": true,
+    "cumulative_conservative_traversal_limit_counts": {
+      "native": 131,
+      "warp": 33
+    }
+  },
+  "warp_backend_scope": "Warp geometry, nearest-site queries, FP32 renderer/manual backward, FP16 inference, camera ray generation and RGB8 packing. Original Torch model/loss/optimizer and RoMa preprocessing remain. Warp evaluations do not load the native VoroTracing extension.",
+  "evidence": {
+    "fitting": "full-comparison.json",
+    "inference": "inference-comparison.json",
+    "final_parity": "final-renderer-parity.json",
+    "contract": "contract.json",
+    "native_graph_swap": "native-graph-warpower.json",
+    "warp_graph_swap": "warp-graph-paragram.json",
+    "provenance": "provenance.json"
+  },
+  "limitations": [
+    "One full fit per backend; no estimate of seed variance.",
+    "Threshold crossings are first recorded observations, with no interpolation or intermediate checkpoint guarantee.",
+    "VoroTracing and RadFoam use different published recipes and validation schedules; only native-vs-Warp within VoroTracing is the matched implementation comparison.",
+    "Numerical masking is counted for both VoroTracing runs. The older full RadFoam runs did not record raw training-gradient nonfinites.",
+    "Successful fitting does not certify all WarPower adjacency edges.",
+    "Warp fit uses initial Morton ordering in addition to changing GPU backends.",
+    "Same-checkpoint rendering agrees; the alternative geometry builders do not always produce identical adjacency. Exact geometric correctness remains a separate unresolved audit.",
+    "The L40 measurements do not reproduce the paper's RTX 5090 timing claims or its full multi-scene evaluation."
+  ],
+  "final_driver_sha256": {
+    "audit_checkpoint_graph.py": "a57db1b8e84f6b4ab726ba0dad6a63f8d62349b8c2763a5531dee5da4483fc75",
+    "benchmark_camera_pipeline.py": "38168e62934dbd5f95558956b49bbf8b28259852a37cc97a3b3047e8f7a4c3c1",
+    "benchmark_radfoam.py": "83580eb4fda7eecaec237535c3ee9c3f343f38f23aeebfbf13b4be6744d8c104",
+    "benchmark_renderer.py": "d39d32fec66184e141111a13095aed50574413fb672ac93f9d2e2a06acabb8ee",
+    "benchmark_training_blocks.py": "02189888220f9242616234442c3841a28b8bf9ed6835a3869d45ac6d91a05a28",
+    "compare_fits.py": "ecdffd95d945ac973f26a4f5cfcff259e05b87e0b82847b73ae02306044db9fd",
+    "compare_inference.py": "0e1edf70efcab457a088de41170954926f56b7afa78da3c0ea29cd887bf546f6",
+    "evaluate_checkpoint.py": "bd0a5b0e527d57cba9c429d27b68977ea6c7a4a7f257c0197f46e4c69d326f6f",
+    "evaluate_inference.py": "40350f9d358f221562c5f8eca5ee2dcb49a4187843ce655167839a9795522391",
+    "numerics.py": "1132505a3712447b49da16a71b9a28fcb8367ddcdbc83ceefb5c8b2c4c59b1ef",
+    "plot_fits.py": "5ede7e879e660cd75f3762153613945edee847d892ebbd1284a31064f2a16263",
+    "prepare_scene.py": "13e3345989a82f0d0840101fc70a1d0ba418c5dade8ada3ebb083b57110bd94b",
+    "run_fit.py": "d2ee885bbba1a833bd3374eb7e5c5a20c376e0086e65587326afbc2460d8071d",
+    "upstream.py": "da7efb7178f4d1fdd84a793d8c00f339fb14daec1ae690c5e3340ee0d682de03",
+    "validate_contract.py": "b2d8d3faac0d56351140a03083a5ee29a84bde21eca12b88dbbc00f3597f6549",
+    "validate_renderer.py": "153a0b50206d4c65c31c88e8829f6d20c1df7276c318f52255b74e202a5a5561",
+    "warp_renderer.py": "d42dae4827fbf1053fed6930ef6ca5dd490de97b9c43e61c516decb51a78f3d3"
+  },
+  "local_artifacts": {
+    "root": "results/local/vorotracing-20261110",
+    "checkpoints": [
+      "native-full/model/model.pt",
+      "warp-full/model/model.pt"
+    ],
+    "plot": "fitting-curves.png",
+    "previews": "previews/"
+  }
+}

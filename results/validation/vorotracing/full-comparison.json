@@ -1,0 +1,426 @@
+{
+  "complete": true,
+  "paired_initialization_and_warmup": true,
+  "fits": [
+    {
+      "backend": "native",
+      "loop_seconds": 5201.535154227167,
+      "reported_trainer_wall_seconds": 5224.919022846967,
+      "process": {
+        "wall_seconds": 5232.481576066464,
+        "pid": 1355712,
+        "protocol": "Linux process start ticks to pidfd exit notification; includes imports, initializer, loading, fit and final serialization."
+      },
+      "sites": 2000000,
+      "psnr": 33.738555908203125,
+      "ssim": 0.9430230855941772,
+      "lpips": 0.21364647150039673,
+      "lpips_3dgs": 0.17087745666503906,
+      "pooled_psnr": 33.710415659724056,
+      "geometry_update_seconds": 126.70039014518261,
+      "geometry_updates": 223,
+      "numerics": {
+        "points_gradient": 0,
+        "diffuse_gradient": 0,
+        "specular_gradient": 0,
+        "density_gradient": 0,
+        "rgba": 0,
+        "distortion": 0,
+        "capped_rays": 131
+      },
+      "cpu_quota": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 16,
+          "throttled_usec": 10400066
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 15,
+          "throttled_usec": 9998314
+        }
+      },
+      "native_extension_loaded": true,
+      "checkpoint_sha256": "6a72226ced549f8f1a68636167165478d2a25ad4c0732025f41c847353f2ab78"
+    },
+    {
+      "backend": "warp",
+      "loop_seconds": 4430.82938959077,
+      "reported_trainer_wall_seconds": 4455.330731123686,
+      "process": {
+        "wall_seconds": 4462.57363050431,
+        "pid": 1359765,
+        "protocol": "Linux process start ticks to pidfd exit notification; includes imports, initializer, loading, fit and final serialization."
+      },
+      "sites": 2000000,
+      "psnr": 33.773658752441406,
+      "ssim": 0.9429592490196228,
+      "lpips": 0.21384654939174652,
+      "lpips_3dgs": 0.17089629173278809,
+      "pooled_psnr": 33.74528642602869,
+      "geometry_update_seconds": 115.68381782621145,
+      "geometry_updates": 223,
+      "numerics": {
+        "points_gradient": 0,
+        "diffuse_gradient": 0,
+        "specular_gradient": 0,
+        "density_gradient": 0,
+        "rgba": 0,
+        "distortion": 0,
+        "capped_rays": 33
+      },
+      "cpu_quota": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 16,
+          "throttled_usec": 10854924
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 16,
+          "throttled_usec": 10852753
+        }
+      },
+      "native_extension_loaded": false,
+      "checkpoint_sha256": "331b6719ca3fcfbafc16e1d00142fd5b24aaa5ea59e2fdf6ad3e8ef1979d8c75"
+    }
+  ],
+  "radfoam_baselines": [
+    {
+      "backend": "native",
+      "loop_seconds": 5354.030951283872,
+      "total_seconds": 5428.547422740608,
+      "final_points": 1968116,
+      "official_psnr": 32.41362308811497,
+      "pooled_rgb_psnr": 32.38083019772091,
+      "raw_final_rgba_nonfinite": 0,
+      "final_traversal_cap_hits": 0,
+      "cpu_quota": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 8442,
+          "throttled_usec": 28610816
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 11998,
+          "throttled_usec": 26586144
+        }
+      }
+    },
+    {
+      "backend": "warpower",
+      "loop_seconds": 3288.2155304439366,
+      "total_seconds": 3362.912058416754,
+      "final_points": 1944340,
+      "official_psnr": 32.25113590343578,
+      "pooled_rgb_psnr": 32.17721691647091,
+      "raw_final_rgba_nonfinite": 0,
+      "final_traversal_cap_hits": 0,
+      "cpu_quota": {
+        "4": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 6054,
+          "throttled_usec": 16042186
+        },
+        "3": {
+          "cpu_cores": 4.0,
+          "throttled_periods": 8454,
+          "throttled_usec": 15273093
+        }
+      }
+    }
+  ],
+  "native_over_warp_loop_speedup": 1.1739416476849676,
+  "warp_minus_native_final_psnr_db": 0.03510284423828125,
+  "per_view": [
+    {
+      "view": 0,
+      "native_psnr": 29.45615005493164,
+      "warp_psnr": 29.34286880493164,
+      "warp_minus_native_db": -0.11328125
+    },
+    {
+      "view": 1,
+      "native_psnr": 30.951793670654297,
+      "warp_psnr": 31.227718353271484,
+      "warp_minus_native_db": 0.2759246826171875
+    },
+    {
+      "view": 2,
+      "native_psnr": 34.67161178588867,
+      "warp_psnr": 34.60997772216797,
+      "warp_minus_native_db": -0.061634063720703125
+    },
+    {
+      "view": 3,
+      "native_psnr": 34.613136291503906,
+      "warp_psnr": 34.54632568359375,
+      "warp_minus_native_db": -0.06681060791015625
+    },
+    {
+      "view": 4,
+      "native_psnr": 35.64228057861328,
+      "warp_psnr": 35.616798400878906,
+      "warp_minus_native_db": -0.025482177734375
+    },
+    {
+      "view": 5,
+      "native_psnr": 36.23698043823242,
+      "warp_psnr": 36.260406494140625,
+      "warp_minus_native_db": 0.023426055908203125
+    },
+    {
+      "view": 6,
+      "native_psnr": 34.59477615356445,
+      "warp_psnr": 34.543209075927734,
+      "warp_minus_native_db": -0.05156707763671875
+    },
+    {
+      "view": 7,
+      "native_psnr": 35.70128631591797,
+      "warp_psnr": 35.7862548828125,
+      "warp_minus_native_db": 0.08496856689453125
+    },
+    {
+      "view": 8,
+      "native_psnr": 35.0334587097168,
+      "warp_psnr": 35.0294189453125,
+      "warp_minus_native_db": -0.004039764404296875
+    },
+    {
+      "view": 9,
+      "native_psnr": 29.416866302490234,
+      "warp_psnr": 29.41024398803711,
+      "warp_minus_native_db": -0.006622314453125
+    },
+    {
+      "view": 10,
+      "native_psnr": 32.98979568481445,
+      "warp_psnr": 32.985939025878906,
+      "warp_minus_native_db": -0.003856658935546875
+    },
+    {
+      "view": 11,
+      "native_psnr": 32.34226989746094,
+      "warp_psnr": 32.284645080566406,
+      "warp_minus_native_db": -0.05762481689453125
+    },
+    {
+      "view": 12,
+      "native_psnr": 30.241130828857422,
+      "warp_psnr": 30.13531494140625,
+      "warp_minus_native_db": -0.10581588745117188
+    },
+    {
+      "view": 13,
+      "native_psnr": 32.506797790527344,
+      "warp_psnr": 32.402259826660156,
+      "warp_minus_native_db": -0.1045379638671875
+    },
+    {
+      "view": 14,
+      "native_psnr": 34.710960388183594,
+      "warp_psnr": 34.742279052734375,
+      "warp_minus_native_db": 0.03131866455078125
+    },
+    {
+      "view": 15,
+      "native_psnr": 29.992589950561523,
+      "warp_psnr": 30.142627716064453,
+      "warp_minus_native_db": 0.1500377655029297
+    },
+    {
+      "view": 16,
+      "native_psnr": 32.502540588378906,
+      "warp_psnr": 32.486873626708984,
+      "warp_minus_native_db": -0.015666961669921875
+    },
+    {
+      "view": 17,
+      "native_psnr": 33.27845764160156,
+      "warp_psnr": 33.27471923828125,
+      "warp_minus_native_db": -0.0037384033203125
+    },
+    {
+      "view": 18,
+      "native_psnr": 33.724857330322266,
+      "warp_psnr": 33.85407257080078,
+      "warp_minus_native_db": 0.12921524047851562
+    },
+    {
+      "view": 19,
+      "native_psnr": 33.74163055419922,
+      "warp_psnr": 33.79026412963867,
+      "warp_minus_native_db": 0.048633575439453125
+    },
+    {
+      "view": 20,
+      "native_psnr": 35.593849182128906,
+      "warp_psnr": 35.580955505371094,
+      "warp_minus_native_db": -0.0128936767578125
+    },
+    {
+      "view": 21,
+      "native_psnr": 35.87582778930664,
+      "warp_psnr": 35.870025634765625,
+      "warp_minus_native_db": -0.005802154541015625
+    },
+    {
+      "view": 22,
+      "native_psnr": 35.44166564941406,
+      "warp_psnr": 35.439430236816406,
+      "warp_minus_native_db": -0.00223541259765625
+    },
+    {
+      "view": 23,
+      "native_psnr": 35.05007553100586,
+      "warp_psnr": 35.03917694091797,
+      "warp_minus_native_db": -0.010898590087890625
+    },
+    {
+      "view": 24,
+      "native_psnr": 35.179664611816406,
+      "warp_psnr": 35.20855712890625,
+      "warp_minus_native_db": 0.02889251708984375
+    },
+    {
+      "view": 25,
+      "native_psnr": 32.88765335083008,
+      "warp_psnr": 32.8160285949707,
+      "warp_minus_native_db": -0.071624755859375
+    },
+    {
+      "view": 26,
+      "native_psnr": 36.11722946166992,
+      "warp_psnr": 36.12873840332031,
+      "warp_minus_native_db": 0.011508941650390625
+    },
+    {
+      "view": 27,
+      "native_psnr": 35.790470123291016,
+      "warp_psnr": 35.81316375732422,
+      "warp_minus_native_db": 0.022693634033203125
+    },
+    {
+      "view": 28,
+      "native_psnr": 34.683807373046875,
+      "warp_psnr": 34.678321838378906,
+      "warp_minus_native_db": -0.00548553466796875
+    },
+    {
+      "view": 29,
+      "native_psnr": 35.11624526977539,
+      "warp_psnr": 35.040367126464844,
+      "warp_minus_native_db": -0.07587814331054688
+    },
+    {
+      "view": 30,
+      "native_psnr": 36.15122604370117,
+      "warp_psnr": 36.130958557128906,
+      "warp_minus_native_db": -0.020267486572265625
+    },
+    {
+      "view": 31,
+      "native_psnr": 32.48330307006836,
+      "warp_psnr": 32.75510025024414,
+      "warp_minus_native_db": 0.27179718017578125
+    },
+    {
+      "view": 32,
+      "native_psnr": 36.589454650878906,
+      "warp_psnr": 36.57585906982422,
+      "warp_minus_native_db": -0.0135955810546875
+    },
+    {
+      "view": 33,
+      "native_psnr": 36.6197624206543,
+      "warp_psnr": 36.54207229614258,
+      "warp_minus_native_db": -0.07769012451171875
+    },
+    {
+      "view": 34,
+      "native_psnr": 25.18117332458496,
+      "warp_psnr": 25.385723114013672,
+      "warp_minus_native_db": 0.20454978942871094
+    },
+    {
+      "view": 35,
+      "native_psnr": 34.68074035644531,
+      "warp_psnr": 34.700660705566406,
+      "warp_minus_native_db": 0.01992034912109375
+    },
+    {
+      "view": 36,
+      "native_psnr": 32.53501892089844,
+      "warp_psnr": 33.448020935058594,
+      "warp_minus_native_db": 0.9130020141601562
+    }
+  ],
+  "per_view_delta_summary": {
+    "mean_db": 0.03510377213761613,
+    "median_db": -0.00548553466796875,
+    "warp_better_views": 14,
+    "native_better_views": 23,
+    "largest_warp_deficit": {
+      "view": 0,
+      "native_psnr": 29.45615005493164,
+      "warp_psnr": 29.34286880493164,
+      "warp_minus_native_db": -0.11328125
+    },
+    "largest_warp_gain": {
+      "view": 36,
+      "native_psnr": 32.53501892089844,
+      "warp_psnr": 33.448020935058594,
+      "warp_minus_native_db": 0.9130020141601562
+    }
+  },
+  "time_to_quality": [
+    {
+      "target_psnr": 32.25113590343578,
+      "native": {
+        "step": 7000,
+        "seconds": 1908.872739419341,
+        "psnr": 32.542236328125
+      },
+      "warp": {
+        "step": 7000,
+        "seconds": 1602.8906387612224,
+        "psnr": 32.40416717529297
+      }
+    },
+    {
+      "target_psnr": 32.41362308811497,
+      "native": {
+        "step": 7000,
+        "seconds": 1908.872739419341,
+        "psnr": 32.542236328125
+      },
+      "warp": {
+        "step": 8000,
+        "seconds": 1820.704737368971,
+        "psnr": 32.80155563354492
+      }
+    },
+    {
+      "target_psnr": 33.738555908203125,
+      "native": {
+        "step": 20000,
+        "seconds": 5201.533791389316,
+        "psnr": 33.738555908203125
+      },
+      "warp": {
+        "step": 18000,
+        "seconds": 3999.1991470977664,
+        "psnr": 33.75795364379883
+      }
+    }
+  ],
+  "limitations": [
+    "One full fit per backend; no estimate of seed variance.",
+    "Threshold crossings are first recorded observations, with no interpolation or intermediate checkpoint guarantee.",
+    "VoroTracing and RadFoam use different published recipes and validation schedules; only native-vs-Warp within VoroTracing is the matched implementation comparison.",
+    "Numerical masking is counted for both VoroTracing runs. The older full RadFoam runs did not record raw training-gradient nonfinites.",
+    "Successful fitting does not certify all WarPower adjacency edges."
+  ]
+}

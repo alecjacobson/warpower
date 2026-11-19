@@ -1,0 +1,90 @@
+{
+  "date_utc": "2026-11-10",
+  "repositories": {
+    "warpower": {
+      "path": ".",
+      "commit": "730ec233505bcc474c248d0ab237b10042fa029e",
+      "tracked_changes": ""
+    },
+    "radfoam": {
+      "path": "/home/horde/references/radfoam",
+      "commit": "3e7b52cf74e37ab2ab5e695f53570f515f537e3d",
+      "tracked_changes": ""
+    },
+    "atomic_queue": {
+      "path": "/home/horde/references/atomic_queue",
+      "commit": "b7f1befe89446752767243c5e5550779a9a5eed2",
+      "tracked_changes": ""
+    }
+  },
+  "python": "3.10.12",
+  "packages": {
+    "torch": "2.7.1+cu126",
+    "warp-lang": "1.19.0+cu12",
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "pycolmap": "3.11.1",
+    "plyfile": "1.0.3",
+    "configargparse": "1.7",
+    "einops": "0.8.1",
+    "tensorboard": "2.19.0",
+    "Pillow": "12.3.0",
+    "matplotlib": "3.10.9"
+  },
+  "gpu": "NVIDIA L40 48 GB",
+  "cuda_toolkit": "12.6",
+  "cuda_driver": "570.158.01",
+  "cpu": "Intel Xeon Platinum 8362 at 2.8 GHz; cgroup quota 4 cores",
+  "benchmark_environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "PYTHONPATH": "."
+  },
+  "data_manifest": "data/radfoam-training/bonsai-manifest.json",
+  "data_manifest_sha256": "0b109563d4c86c4977475a184782a2df4afe3280a12798154661cda68726d017",
+  "native_extension": ".work/radfoam-fitting-20261110/native/radfoam_headless.so",
+  "native_extension_sha256": "550af729f9d6d52bc782f22766e0036c20ba89625664c3d967fcd03b78ebbfce",
+  "headless_build": {
+    "sources": [
+      "/home/horde/references/radfoam/src/aabb_tree/aabb_tree.cu",
+      "/home/horde/references/radfoam/src/delaunay/delaunay.cu",
+      "/home/horde/references/radfoam/src/delaunay/sample_initial_tets.cu",
+      "/home/horde/references/radfoam/src/delaunay/growth_iteration.cu",
+      "/home/horde/references/radfoam/src/delaunay/delete_violations.cu",
+      "/home/horde/references/radfoam/src/delaunay/triangulation_ops.cu",
+      "/home/horde/references/radfoam/src/tracing/pipeline.cu",
+      "/home/horde/references/radfoam/src/utils/batch_fetcher.cpp",
+      "/home/horde/projects/power-diagram/.work/radfoam-fitting-20261110/native/pipeline_bindings_headless.cpp",
+      "/home/horde/projects/power-diagram/.work/radfoam-fitting-20261110/native/module.cpp",
+      "/home/horde/references/radfoam/torch_bindings/triangulation_bindings.cpp"
+    ],
+    "include_paths": [
+      "/usr/include/eigen3",
+      "/home/horde/references/radfoam/src",
+      "/home/horde/references/radfoam/torch_bindings",
+      "/home/horde/references/radfoam/external/include",
+      "/home/horde/references/atomic_queue/include"
+    ],
+    "scope": "Only viewer bindings removed; upstream renderer, AABB, native full/incremental Delaunay, farthest-neighbor, allocator and batch-fetcher code retained."
+  },
+  "executed_sources": "Per-fit source hashes match the preserved v1 and v2 snapshots; component scripts are preserved in executed-sources-v3.",
+  "source_sha256": {
+    "results/local/radfoam-fitting-20261110/executed-sources-v3/build_headless.py": "e5856b627aa1c4cc28d1737ec9d664e40b2cdde3d221c6e430497ca8a49b5fdd",
+    "results/local/radfoam-fitting-20261110/executed-sources-v3/compare_geometry.py": "fd5e50e003abace0f3955002c2f70ddfa00197c392d2588d33aeea2af9b26b62",
+    "results/local/radfoam-fitting-20261110/executed-sources-v3/compare_ordering.py": "12480c9946a389f420d2c60f8696fd1669a497938b425797478484f20fb4fee2",
+    "results/local/radfoam-fitting-20261110/executed-sources-v3/compare_updates.py": "92339475afd78840e55cb5ee8d49206338c15b789b53294e45a94ec7e1f2e91d",
+    "results/local/radfoam-fitting-20261110/executed-sources-v3/fetch_bonsai.py": "b19bf27fb259baea175c93224f7ed84759943f59dd8a2248c5080822f8bf54a2",
+    "results/local/radfoam-fitting-20261110/executed-sources-v3/fit_scene.py": "aa197386cd6c645d500977db0f21312742033ee68edd2fbb87734e8b4bf6c44a",
+    "results/local/radfoam-fitting-20261110/executed-sources-v3/integration.py": "4d870774c2a800134df75690b1a8604de42c77922bd1fd58eb48e9b83ec50fab",
+    "results/local/radfoam-fitting-20261110/executed-sources-v3/probe.py": "0367c5ac9e2e1751cdfe996785e1de0c1342871fc1eb56d37612f0742c607cda",
+    "results/local/radfoam-fitting-20261110/executed-sources-v3/renderer_bridge.cpp": "f9f825c933029b425c154978851277bb0151a5134d5b83eb64d4bf2067b37deb",
+    "results/local/radfoam-fitting-20261110/executed-sources-v3/spatial.py": "2643853f3cc9aaefc76e351049d14b367459507f2b6751f7ce2c9002f1cb57e5",
+    "results/local/radfoam-fitting-20261110/executed-sources-v3/summarize.py": "127722f02799bbf139c9bf701688138daf8ed1aaf915d3d61767abb1026e4e94"
+  },
+  "verification_scope": "Fresh Scene restoration inside each fitting process checks both Adam moment tensors and rendering. This is not a separate-process command-line resume test; the minibatch generator remains alive in the fitting process.",
+  "ledger_capture": {
+    "complete": false,
+    "reason": "Managed Ledger tools are unavailable; compatibility CLI has no configured scoped Ledger origin/grant."
+  }
+}

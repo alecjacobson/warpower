@@ -1,0 +1,129 @@
+{
+  "created_utc": "2026-11-10T04:03:40.414916+00:00",
+  "scope": "Port official RadFoam initialization and full-view error maps into our custom fitting harness; paired native incremental and WarPower Morton geometry runs on the same NVIDIA L40.",
+  "workload": {
+    "scene": "Mip-NeRF 360 Bonsai",
+    "train_views": 255,
+    "test_views": 37,
+    "resolution": [
+      780,
+      520
+    ],
+    "steps": 20000,
+    "rays_per_step": 65536,
+    "target_sites": 262144,
+    "initial_sites": 190951,
+    "seed": 42,
+    "ray_rng_seed": 12345,
+    "error_map_views": 255,
+    "error_map_stride": 2,
+    "evaluation_every": 5000,
+    "sh_degree": 3
+  },
+  "initial_sha256": "9f02fbd51345ec4f059b6aa73084536607e6edf3874fe158708b14a419c2a832",
+  "identical_initial_parameters": true,
+  "identical_executed_fit_sources": true,
+  "fitting": [
+    {
+      "backend": "native",
+      "fit_seconds": 311.17586827650666,
+      "pooled_rgb_psnr": 29.160588290240312,
+      "official_psnr": 29.19289490983293,
+      "final_sites": 251525,
+      "initialization_seconds": 0.7752703912556171,
+      "geometry_seconds": 113.91096326708794,
+      "forward_seconds": 51.77409242466092,
+      "backward_seconds": 106.29936867207289,
+      "raw_render_gradient_checks": {
+        "forward_calls": 21808,
+        "backward_calls": 20511,
+        "nonfinite_rgba": 0,
+        "nonfinite_position_gradients": 0,
+        "nonfinite_attribute_gradients": 0,
+        "traversal_limit_rays": 0
+      },
+      "final_held_out_traversal_limit_rays": 0,
+      "final_held_out_max_intersections": 195,
+      "checkpoint_render_max_abs_difference": 0.0,
+      "geometry_retries": 0,
+      "cpu_throttled": false
+    },
+    {
+      "backend": "warpower-morton",
+      "fit_seconds": 211.7264357842505,
+      "pooled_rgb_psnr": 29.20905113220215,
+      "official_psnr": 29.236482568689294,
+      "final_sites": 251306,
+      "initialization_seconds": 0.7751297205686569,
+      "geometry_seconds": 28.622312862426043,
+      "forward_seconds": 43.56185070797801,
+      "backward_seconds": 102.47454673424363,
+      "raw_render_gradient_checks": {
+        "forward_calls": 21808,
+        "backward_calls": 20511,
+        "nonfinite_rgba": 0,
+        "nonfinite_position_gradients": 0,
+        "nonfinite_attribute_gradients": 0,
+        "traversal_limit_rays": 1
+      },
+      "final_held_out_traversal_limit_rays": 0,
+      "final_held_out_max_intersections": 188,
+      "checkpoint_render_max_abs_difference": 0.0,
+      "geometry_retries": 0,
+      "cpu_throttled": false
+    }
+  ],
+  "native_over_warpower_fit_speedup": 1.4697072055451557,
+  "warpower_time_reduction_percent": 31.95923676314345,
+  "native_over_warpower_geometry_speedup": 3.9797958961109887,
+  "official_loop_reference": {
+    "pooled_rgb_psnr": 29.236281008333773,
+    "official_psnr": 29.264633488010716,
+    "checkpoint_sha256": "651c7b266d83dc5ffe62d0baedc2d7e4bacd0914472a36c391e3b369c0efe0ab"
+  },
+  "timing_scope": "Paired custom-loop timers include training, geometry updates, full-view densification, four evaluations, raw numerical audits, and midpoint checkpoint/restore. Exclude loading, native initialization bootstrap, setup, warmup, initial evaluation, and final serialization. The official-loop reference has a different batching/evaluation schedule and is used only for quality comparison.",
+  "validation": {
+    "full_runs_completed": 2,
+    "steps_per_run": 20000,
+    "cpu_quota_throttling": false,
+    "raw_nonfinite_outputs_and_gradients": 0,
+    "final_shared_evaluation_view_model_pairs": 111,
+    "final_shared_evaluation_cap_hits": 0,
+    "initialization_uses_unmodified_upstream_scene_class": true,
+    "source_fingerprints_verified": true,
+    "checkpoint_metadata_regression": {
+      "steps": 2000,
+      "initial_sites": 1536,
+      "sites_at_restore": 3548,
+      "restore_step": 1000,
+      "post_restore_densification_step": 1019,
+      "initial_count_saved_in_resume_and_final_checkpoint": 1536,
+      "render_max_abs_difference": 0.0,
+      "adam_moments_identical": true,
+      "numerical_audit_clean": true
+    },
+    "lint": "passed",
+    "artifact_unit_tests": 8
+  },
+  "traversal_cap_observation": {
+    "native_audited_cap_hits": 0,
+    "warpower_audited_cap_hits": 1,
+    "maximum_steps": 1024,
+    "meaning": "Upstream trace increments its count then breaks when n > 1024, so this is a real cap stop. Audit counters cover warmup, training, error-map passes, evaluation and restore; exact phase/ray was not captured. Cause remains unresolved. Final held-out evaluation is separately clean.",
+    "source": "/home/horde/references/radfoam/src/tracing/tracing_utils.cuh",
+    "source_sha256": "8fe560813388ded7855552d199a057ef4beb856363f19b80db5d8e23599e83a5"
+  },
+  "post_measurement_fix": "Current entrypoint additionally stores/restores the original initial-site count so later densification cadence survives checkpoint restoration. Full-recipe paired fits completed their last densification before step 10000, so this bookkeeping correction does not change their schedules. Their exact executed sources are retained; a separate 2000-step small-recipe regression exercises growth after restoration.",
+  "limitations": [
+    "One full run per geometry backend; small PSNR differences do not establish systematic quality superiority.",
+    "One unlocalized traversal-cap hit in the WarPower audited run remains unresolved.",
+    "No claim of speedup over the differently scheduled official training loop, or reproduction of full-budget paper numbers.",
+    "Both backends use a one-time native initialization bootstrap to preserve upstream density/position associations exactly.",
+    "WarPower bounded adjacency and native full-hull triangulation have different contracts; previous exact geometry discrepancies are not resolved by this fitting result."
+  ],
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. .venv/bin/python experiments/radfoam-integration/fit_scene.py --recipe radfoam --backend native --output results/local/radfoam-ported-recipe-native-20261110",
+    "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=. .venv/bin/python experiments/radfoam-integration/fit_scene.py --recipe radfoam --backend warpower-morton --output results/local/radfoam-ported-recipe-warpower-20261110"
+  ],
+  "ledger": "Managed Ledger capture unavailable; local provenance retained."
+}

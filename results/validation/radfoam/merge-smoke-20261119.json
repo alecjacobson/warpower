@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "purpose": "Correctness smoke after rebase; no timing or fitting-quality claim",
+  "cases": [
+    {
+      "backend": "native",
+      "sites": 128,
+      "rays": 64,
+      "geometry_updates": 2,
+      "finite_outputs_and_gradients": true,
+      "nonfinite_counters": {
+        "forward_calls": 1,
+        "backward_calls": 1,
+        "nonfinite_rgba": 0,
+        "nonfinite_position_gradients": 0,
+        "nonfinite_attribute_gradients": 0,
+        "traversal_limit_rays": 0
+      },
+      "geometry_status_counts": {}
+    },
+    {
+      "backend": "warpower-morton",
+      "sites": 128,
+      "rays": 64,
+      "geometry_updates": 2,
+      "finite_outputs_and_gradients": true,
+      "nonfinite_counters": {
+        "forward_calls": 1,
+        "backward_calls": 1,
+        "nonfinite_rgba": 0,
+        "nonfinite_position_gradients": 0,
+        "nonfinite_attribute_gradients": 0,
+        "traversal_limit_rays": 0
+      },
+      "geometry_status_counts": {
+        "0": 128
+      }
+    }
+  ]
+}

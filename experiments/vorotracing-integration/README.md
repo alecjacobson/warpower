@@ -1,5 +1,14 @@
 # VoroTracing in Warp
 
+The fitting and inference tables describe the executed sources in their
+provenance manifests, preserved at
+[`evidence-fitting-6f34cfd`](https://github.com/alecjacobson/warpower/tree/evidence-fitting-6f34cfd).
+After rebasing onto the current geometry/API code on 2026-11-19,
+[compatibility validation](../../results/validation/vorotracing/merge-validation-20261119.json)
+passed all seven native/Warp renderer cases, nine derivative probes and both
+camera-query cases. Full fits and throughput measurements were not repeated;
+the historical tables remain unchanged.
+
 This experiment implements the GPU geometry, nearest-site queries, textured
 Voronoi ray tracing, replay backward pass, and FP16 inference of
 [VoroTracing](https://arxiv.org/abs/2608.17682) in Warp. It uses the original

@@ -1,5 +1,14 @@
 # RadFoam fitting integration
 
+The fitting tables record the executed revisions in their provenance manifests;
+the final historical branch is preserved at
+[`evidence-fitting-6f34cfd`](https://github.com/alecjacobson/warpower/tree/evidence-fitting-6f34cfd).
+On 2026-11-19 the integration was rebased onto the current geometry/API code.
+[Compatibility checks](../../results/validation/vorotracing/merge-validation-20261119.json)
+passed, including native and Warp-geometry rendering/backpropagation smoke tests.
+Full fits and performance measurements were not repeated. Later geometry fixes
+do not retroactively certify the graphs used by these historical fits.
+
 This experimental adapter runs real Mip-NeRF 360 Bonsai scene fitting with
 WarPower Voronoi adjacency and the upstream RadFoam renderer and backward pass.
 It also compares native incremental triangulation with current VTM fragment

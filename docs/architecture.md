@@ -98,7 +98,7 @@ failure can instead try the serial FP64 implementation at the same adequate
 capacity; if that numerical check also fails, growing buffers is not a remedy
 and the failure remains explicit. Output-row overflow is distinguished from
 scratch overflow when updating the size floor. Both eager construction and
-captured `DiagramWorkspace` execution share these retry rules.
+captured `UpdatableDiagram` execution share these retry rules.
 
 FP32 capacity retries also use 32 cooperating threads, at 128, 256, or 512
 allocated slots. The vertex classification, compaction, boundary reconstruction,
@@ -217,7 +217,7 @@ the complete tetrahedral dual.
 The [validation report](tetrahedra-validation.md) records independent mesh
 comparisons and paired default-performance checks.
 
-The newer optional [`DelaunayWorkspace`](delaunay-recovery.md) adds exact
+The newer optional [`UpdatableDelaunay`](delaunay-recovery.md) adds exact
 original-coordinate certification, consistent symbolic lifting for ties, and
 finite normalized/weighted candidate recovery, and an original-coordinate
 symbolic cell fallback. That fallback defines topology with incident plane IDs
@@ -241,7 +241,7 @@ remain available to downstream automatic sizing and meshing on device.
 
 ## Captured device execution
 
-The optional [`DiagramWorkspace`](graphs.md) API owns persistent arrays and
+The optional [`UpdatableDiagram`](graphs.md) API owns persistent arrays and
 captures construction with CUDA conditional nodes. Scalar counts, input errors,
 retry decisions, bounding-box expansion, and mesh validation outcomes remain on
 the device. Output capacities are fixed at setup; GPU counts delimit their valid
@@ -278,7 +278,7 @@ per leaf; device refits gather exact range bounds from a segment tree. Precomput
 escape links support stackless ray, contact and sampler-box traversal while
 closest queries retain near-first child ordering.
 
-The independent [`BoundaryWorkspace`](boundary.md) rebuilds a site hierarchy,
+The independent [`BoundaryFitter`](boundary.md) rebuilds a site hierarchy,
 assigns surface/crease quadrature, and accumulates weighted centroid targets.
 Device conflict resolution reserves distinct corner sites; crease and surface
 membership evolves with the positions. An internal VTM core combines these
@@ -350,7 +350,7 @@ bounded cells; signed circumcentric flags provide actual Voronoi volumes for
 sizing-normalized donor selection. It shares the quality transaction and
 restores the active prefix and all geometry if the candidate fails its guards.
 
-The public [`VariationalMeshingWorkspace`](mesher.md) owns these stages and a
+The public [`VariationalMesher`](mesher.md) owns these stages and a
 single reusable optimization core. Device budgets and conditional loops control
 initialization, growth, fitting, extraction recovery, and quality rounds.
 Input/output topology counts gate publication; optional quality-stage checkpoints

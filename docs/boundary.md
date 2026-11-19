@@ -1,6 +1,6 @@
 # Sampled boundary fitting
 
-`BoundaryWorkspace` implements the sampled centroid update used for boundary and
+`BoundaryFitter` implements the sampled centroid update used for boundary and
 feature fitting in Alliez et al. It is independently callable, and does not
 construct tetrahedra. Current surface and crease samples are assigned to their
 nearest active sites; weighted moments determine targets. Site roles can change
@@ -10,10 +10,10 @@ assignment while retaining FP64 accumulation; the default remains FP64 throughou
 
 ```python
 import warp as wp
-from warpower import SurfaceDomain, BoundaryWorkspace
+from warpower import SurfaceDomain, BoundaryFitter
 
 domain = SurfaceDomain(vertices, triangles, surface_subdivisions=4)
-fit = BoundaryWorkspace(domain, sites)
+fit = BoundaryFitter(domain, sites)
 with wp.ScopedCapture() as capture:
     for _ in range(10):
         fit.run()                 # Compute targets and roles from current sites.
@@ -100,7 +100,7 @@ subject to the [surface-domain contract](domains.md).
 The internal `warpower._vtm.VTMWorkspace` combines these evolving boundary roles
 with uniform or graded interior ODT displacements, reconstruction, device backtracking,
 and complete point/connectivity rollback. The public
-[`VariationalMeshingWorkspace`](mesher.md) composes this core with initialization,
+[`VariationalMesher`](mesher.md) composes this core with initialization,
 growth, quality improvement and final material extraction. Independent
 [sizing and initial sampling](sizing.md), internal
 [progressive refinement](refinement.md), and optional [selective updates](selective.md)

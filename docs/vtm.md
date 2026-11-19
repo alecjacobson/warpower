@@ -65,13 +65,13 @@ The original VTM compatibility baseline is commit
 `3091289464af368d2a61f843d169d7f4863d1cfd`. Later geometry changes also have
 paired comparisons against their immediate main-branch baselines; see the
 [latest geometry regression record](../experiments/cell-capacity-recovery/README.md).
-`voronoi_diagram`, `power_diagram`, and `DiagramWorkspace` remain independently
+`voronoi_diagram`, `power_diagram`, and `UpdatableDiagram` remain independently
 usable. New meshing modules are lazy imports, and their optional computation is
 separate from the existing default diagram path. The standalone
 `delaunay_tetrahedra` and `regular_tetrahedra` convenience functions return the
 full-hull mesh without constructing bounded adjacency. For captured standalone
-certified unweighted meshing, use [`DelaunayWorkspace`](delaunay-recovery.md).
-`DiagramWorkspace(adjacency=False, return_tetrahedra=True)` also exposes the
+certified unweighted meshing, use [`UpdatableDelaunay`](delaunay-recovery.md).
+`UpdatableDiagram(adjacency=False, return_tetrahedra=True)` also exposes the
 diagram-based tetrahedral output, including weighted regular triangulations.
 
 Changes to shared geometry code require independent correctness checks and
@@ -119,7 +119,7 @@ not release performance evidence.
 The [fixed-boundary ODT workspace](odt.md) provides the interior optimizer and
 captured failure recovery. See [validation and known limits](vtm-validation.md).
 It is the fixed-hull component; use the available
-[`VariationalMeshingWorkspace`](mesher.md) for boundary-fitted meshing.
+[`VariationalMesher`](mesher.md) for boundary-fitted meshing.
 Its existence does not establish the outstanding CPU performance goal.
 
 The [surface-domain layer](domains.md) provides captured refits, geometric queries,

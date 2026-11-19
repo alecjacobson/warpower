@@ -3,6 +3,7 @@
 This is the consolidated reference for every symbol exported by
 `warpower.__all__`. Import these names from `warpower`. Underscore-prefixed
 modules, constructor arguments, and attributes are implementation details.
+There are 17 primary exports and four [deprecated compatibility names](#deprecated-names).
 Detailed guides and recorded experiments are indexed in the
 [documentation guide](README.md).
 
@@ -12,22 +13,45 @@ Detailed guides and recorded experiments are indexed in the
 |---|---|
 | Bounded Voronoi or power neighbors, ordinary call | [`voronoi_diagram`, `power_diagram`, `Diagram`](#diagrams) |
 | Convex-hull Delaunay or regular tetrahedra, ordinary call | [`delaunay_tetrahedra`, `regular_tetrahedra`](#tetrahedron-convenience-functions) |
-| Repeated bounded neighbors and/or tetrahedra in a GPU loop | [`DiagramWorkspace`](#diagramworkspace) |
-| Certified unweighted Delaunay construction with degeneracy recovery | [`DelaunayWorkspace`](#delaunayworkspace) |
+| Repeated bounded neighbors and/or tetrahedra in a GPU loop | [`UpdatableDiagram`](#updatablediagram) |
+| Certified unweighted Delaunay construction with degeneracy recovery | [`UpdatableDelaunay`](#updatabledelaunay) |
 | Triangle boundary, closest points and inside/outside queries | [`SurfaceDomain`, `DomainQueryWorkspace`](#surfacedomain) |
 | Relative element sizes from samples | [`SizingField`, `SizingQueryWorkspace`](#sizingfield) |
 | Pole-based automatic sizing | [`AutomaticSizingWorkspace`](#automaticsizingworkspace) |
 | Initial interior sites | [`InitialSamplingWorkspace`](#initialsamplingworkspace) |
-| Boundary and sharp-feature fitting | [`BoundaryWorkspace`](#boundaryworkspace) |
+| Boundary and sharp-feature fitting | [`BoundaryFitter`](#boundaryfitter) |
 | Uniform optimization with the initial convex hull fixed | [`ODTWorkspace`](#odtworkspace) |
 | Select and inspect a material tetrahedral subcomplex | [`ExtractionWorkspace`](#extractionworkspace) |
-| Initialize, grow, fit and extract a boundary-fitted mesh | [`VariationalMeshingWorkspace`](#variationalmeshingworkspace) |
+| Initialize, grow, fit and extract a boundary-fitted mesh | [`VariationalMesher`](#variationalmesher) |
 
 Bounded neighbors and convex-hull tetrahedra describe different domains.
 Neighbors are dual to Delaunay edges, but clipping Voronoi cells can remove a
 dual facet outside the clipping box. Do not derive complete convex-hull
 connectivity from bounded neighbor CSR. Material tetrahedra are a selected
 subcomplex approximating a supplied triangle domain.
+
+## Updating geometry
+
+`UpdatableDiagram` and `UpdatableDelaunay` retain their input arrays and
+output storage so the same object can refresh geometry after positions or power
+weights change:
+
+```python
+import warpower
+
+# points and weights are contiguous CUDA arrays.
+diagram = warpower.UpdatableDiagram(points, weights)
+diagram.update()
+# An upstream kernel can modify points or weights in place.
+diagram.update()
+```
+
+Each `update()` reconstructs from the current inputs, reusing allocated
+storage and prepared execution. The name does not promise incremental neighbor
+repair. Input shapes and addresses remain fixed; changing the site count
+requires a new object. `run()` remains a supported alias for `update()`
+on these two classes. Other services retain their documented `run()`,
+`refit()` and `apply()` methods.
 
 ## Common contracts
 
@@ -47,8 +71,8 @@ Workspaces require contiguous device inputs and retain their storage, so
 producers can update it in place. NumPy inputs upload once; later NumPy edits
 are not observed. Workspace outputs are always Warp arrays. Constructors may
 allocate, compile, synchronize, and prepare captured graphs. The operations
-`run(stream=None)` and `refit(stream=None)` enqueue device work and return
-the object; `BoundaryWorkspace.apply(...)` does likewise. Operations can be
+`update(stream=None)`, `run(stream=None)` and `refit(stream=None)` enqueue device work and return
+the object; `BoundaryFitter.apply(...)` does likewise. Operations can be
 composed with Warp capture. Conditional graphs require CUDA 12.4+ support from
 the Warp build and driver; use `wp.ScopedCapture` when conditional nodes are
 involved. The native surface-refit exception is described [below](#surfacedomain).
@@ -67,7 +91,7 @@ storage may be uninitialized or stale. For a host snapshot outside capture,
 read the count first and copy only the valid device slice:
 
 ```python
-# mesh is a DiagramWorkspace or DelaunayWorkspace that has already run.
+# mesh is an UpdatableDiagram or UpdatableDelaunay that has already updated.
 if int(mesh.error.numpy()[0]) != 0:
     raise ValueError("Tetrahedralization failed")
 count = int(mesh.tetrahedra_count.numpy()[0])
@@ -184,7 +208,7 @@ near-coplanar cells, unsupported lower-dimensional input, and exhausted
 capacity/expansion budgets raise `ValueError`; no partial tetrahedralization
 is returned as complete. Fewer than four sites or all-coincident sites return
 an empty `(0,4)` array. For certified unweighted recovery, use
-[`DelaunayWorkspace`](#delaunayworkspace).
+[`UpdatableDelaunay`](#updatabledelaunay).
 
 The default `False` allocates and runs no tetrahedron construction.
 
@@ -202,16 +226,18 @@ bounded adjacency. `regular_tetrahedra` requires weights. `chunk_size`
 and `leaf_size` follow the diagram rules. These allocate and synchronize;
 use a workspace for capture.
 
-## DiagramWorkspace
+<a id="diagramworkspace"></a>
+
+## UpdatableDiagram
 
 ```python
-DiagramWorkspace(
+UpdatableDiagram(
     points, weights=None, *, return_tetrahedra=False, adjacency=True,
     adjacency_capacity=None, tetrahedra_capacity=None,
     tetrahedra_cell_capacity=512, chunk_size=None, leaf_size=4,
     max_expansions=12,
 )
-workspace.run(stream=None)
+diagram.update(stream=None)
 ```
 
 Reconstruct the requested bounded CSR and/or convex-hull tetrahedra from the
@@ -252,16 +278,18 @@ The floating-point tetrahedron limitations above still apply.
 
 See [graph execution](graphs.md) for capture, memory and stream details.
 
-## DelaunayWorkspace
+<a id="delaunayworkspace"></a>
+
+## UpdatableDelaunay
 
 ```python
-DelaunayWorkspace(
+UpdatableDelaunay(
     points, *, tetrahedra_capacity=None, tetrahedra_cell_capacity=1024,
     chunk_size=None, max_attempts=6, cache_strategy=True,
     fast_candidates=True, symbolic_recovery=True,
     symbolic_max_expansions=16, facet_recovery=None, facet_max_rounds=64,
 )
-workspace.run(stream=None)
+mesh.update(stream=None)
 ```
 
 Construct and certify an unweighted Delaunay tetrahedralization against the
@@ -447,10 +475,12 @@ Error bits: 1 domain, 2 sizing, 4 proposal CDF, 8 exhausted attempts,
 16 duplicate samples, 32 invalid sizing bound.
 See [initial sampling](sizing.md).
 
-## BoundaryWorkspace
+<a id="boundaryworkspace"></a>
+
+## BoundaryFitter
 
 ```python
-BoundaryWorkspace(
+BoundaryFitter(
     domain, points, *, active_count=None, surface_sizing=None,
     crease_sizing=None, query_precision="float64",
 )
@@ -578,10 +608,12 @@ valid; check the count if a nonempty mesh is required.
 Validity does not certify equality with input topology, exact boundary
 preservation, a minimum radius ratio, or a Hausdorff bound.
 
-## VariationalMeshingWorkspace
+<a id="variationalmeshingworkspace"></a>
+
+## VariationalMesher
 
 ```python
-VariationalMeshingWorkspace(
+VariationalMesher(
     domain, capacity, *, target_count=None, initial_count=None,
     sizing=None, automatic_sizing=False, automatic_control_subdivisions=0,
     seed=2026, growth_iterations=5, polish_iterations=20,
@@ -669,3 +701,23 @@ Matching topology invariants is not a proof of homeomorphism. Validity does not
 guarantee minimum element quality or a Hausdorff error bound. Read the
 [mesher guide](mesher.md) for stopping, rollback and diagnostic details, and
 [examples](examples.md) for complete inputs, exports and independent checks.
+
+## Deprecated names
+
+The following public names still resolve to the same classes and preserve
+existing constructor signatures, output buffers and methods. Accessing them
+through `warpower` emits `DeprecationWarning`; new code should use the
+replacement names.
+
+| Deprecated name | Replacement |
+|---|---|
+| `DiagramWorkspace` | `UpdatableDiagram` |
+| `DelaunayWorkspace` | `UpdatableDelaunay` |
+| `BoundaryWorkspace` | `BoundaryFitter` |
+| `VariationalMeshingWorkspace` | `VariationalMesher` |
+
+For diagram and Delaunay objects, prefer `update()`; existing `run()` calls
+remain supported without a method-deprecation warning. The fitting classes
+retain `run()`, and `BoundaryFitter` also retains `apply()`.
+Historical experiment reports use the names available at their recorded
+revisions.

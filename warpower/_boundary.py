@@ -255,7 +255,7 @@ def _sizing(value, n, device):
     return value
 
 
-class BoundaryWorkspace:
+class BoundaryFitter:
     """Compute sampled surface/crease centroids and distinct corner targets.
 
     ``run()`` computes targets without changing input sites. ``apply()`` applies
@@ -532,3 +532,6 @@ class BoundaryWorkspace:
                 device=self.device,
             )
         return self
+
+
+BoundaryWorkspace = BoundaryFitter

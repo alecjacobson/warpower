@@ -65,7 +65,7 @@ must check error scalars before using results.
 
 ## Graded VTM core
 
-The public [`VariationalMeshingWorkspace`](api.md#variationalmeshingworkspace)
+The public [`VariationalMesher`](api.md#variationalmesher)
 accepts `sizing=field` and composes the internal graded VTM core with sampling,
 growth and extraction. The caller refits an external field before each
 optimization run when sample inputs change. The field stays fixed

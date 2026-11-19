@@ -53,9 +53,9 @@ start, end = map(int, offsets[:2])
 neighbors_of_site_zero = diagram.adjacency[start:end].numpy()
 ```
 
-This constructs bounded neighbor CSR. Use [`DelaunayWorkspace`](docs/api.md#delaunayworkspace)
+This constructs bounded neighbor CSR. Use [`UpdatableDelaunay`](docs/api.md#updatabledelaunay)
 for certified unweighted convex-hull tetrahedra, and
-[`VariationalMeshingWorkspace`](docs/api.md#variationalmeshingworkspace)
+[`VariationalMesher`](docs/api.md#variationalmesher)
 to fit a supplied triangle boundary. Repeated device loops use preallocated
 [workspaces and Warp CUDA capture](docs/graphs.md).
 

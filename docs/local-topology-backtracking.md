@@ -1,6 +1,6 @@
 # Optional local rollback for material topology failures
 
-`VariationalMeshingWorkspace(..., local_topology_retries=1)` enables a bounded
+`VariationalMesher(..., local_topology_retries=1)` enables a bounded
 retry that freezes moved endpoints of current invalid material edges. The default
 is zero. It adds no arrays or graph operations when disabled, and standalone power
 diagrams and Delaunay workspaces do not import the helper.

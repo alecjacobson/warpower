@@ -2,20 +2,20 @@
 
 `ExtractionWorkspace` selects a domain subcomplex from an existing tetrahedral
 mesh. It is independently callable, preserves the input connectivity, and
-composes with `DiagramWorkspace` or the internal VTM core in a captured loop.
+composes with `UpdatableDiagram` or the internal VTM core in a captured loop.
 
 ```python
 import warp as wp
-from warpower import DiagramWorkspace, ExtractionWorkspace, SurfaceDomain
+from warpower import ExtractionWorkspace, SurfaceDomain, UpdatableDiagram
 
 domain = SurfaceDomain(vertices, triangles)
-mesh = DiagramWorkspace(sites, adjacency=False, return_tetrahedra=True)
+mesh = UpdatableDiagram(sites, adjacency=False, return_tetrahedra=True)
 extract = ExtractionWorkspace(
     domain, mesh.points, mesh.tetrahedra, mesh.tetrahedra_count,
     source_error=mesh.error, tolerance=0.4,
 )
 with wp.ScopedCapture() as capture:
-    mesh.run()
+    mesh.update()
     extract.run()
     # A downstream kernel reads extract.valid, tetrahedra and tetrahedra_count.
 wp.capture_launch(capture.graph)
@@ -72,7 +72,7 @@ finite circumcenter calculations. Cancellation-prone cells use a
 [wide integer-geometry fallback](extraction-geometry.md) for physical determinant
 and circumcenter estimates; extraction centers remain float64. It does **not**
 independently certify empty spheres or test arbitrary tetrahedron intersections.
-`DelaunayWorkspace` provides separate original-coordinate full-hull certification.
+`UpdatableDelaunay` provides separate original-coordinate full-hull certification.
 Weighted regular tetrahedra can be
 passed as connectivity, but this extractor always uses **ordinary geometric
 circumcenters**, not power centers.

@@ -1,13 +1,13 @@
 # Optional local quality backtracking
 
-`VariationalMeshingWorkspace(..., local_quality_retries=12)` can keep a
+`VariationalMesher(..., local_quality_retries=12)` can keep a
 selective proposal moving when a few tetrahedra reject the shared step. The
 default is zero: it retains the original proposal kernels, storage and graph.
 This is an optional optimization heuristic, with shape-dependent quality/time
 tradeoffs. It does not change the fitting objective or add surface projection.
 
 ```python
-mesher = warpower.VariationalMeshingWorkspace(
+mesher = warpower.VariationalMesher(
     domain, 4096, local_quality_retries=12,
 )
 with wp.ScopedCapture() as capture:

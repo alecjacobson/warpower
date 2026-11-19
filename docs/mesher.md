@@ -1,9 +1,9 @@
 # Captured variational tetrahedral meshing
 
-The [public API reference](api.md#variationalmeshingworkspace) lists the complete
+The [public API reference](api.md#variationalmesher) lists the complete
 constructor signature and shared input, output-lifetime and capture contracts.
 
-`VariationalMeshingWorkspace` composes initial sampling, progressive refinement,
+`VariationalMesher` composes initial sampling, progressive refinement,
 global ODT/boundary fitting, selective optimization, boundary jitter, interior
 teleportation, and material extraction in one reusable device graph. It accepts
 a closed oriented `SurfaceDomain` and returns a tetrahedral approximation of its
@@ -19,7 +19,7 @@ import warp as wp
 domain = warpower.SurfaceDomain(vertices, faces, surface_subdivisions=4)
 target = wp.full(1, 1000, dtype=int, device=domain.device)
 seed = wp.full(1, 2026, dtype=int, device=domain.device)
-mesher = warpower.VariationalMeshingWorkspace(
+mesher = warpower.VariationalMesher(
     domain, capacity=2000, target_count=target, initial_count=256, seed=seed
 )
 
@@ -42,7 +42,7 @@ features. Refit an explicit sizing field before the mesher if its samples change
 Each fresh sample generation resets the core's reconstruction preference. Strategy
 reuse continues within that optimization trajectory; a difficult final state from
 the preceding solve does not force its expensive strategy onto new initial sites.
-This policy belongs to the full mesher. Independently used `DelaunayWorkspace`
+This policy belongs to the full mesher. Independently used `UpdatableDelaunay`
 keeps its existing strategy caching.
 
 Keep the workspace, domain, sizing providers, and caller-owned input arrays alive
@@ -54,7 +54,7 @@ while another solve reads them. Construction is a host setup operation and must
 finish before entering the enclosing capture. There is no CPU geometry fallback.
 
 The independent [diagram and full-hull routines](architecture.md),
-[`DelaunayWorkspace`](delaunay-recovery.md), [ODT optimizer](odt.md),
+[`UpdatableDelaunay`](delaunay-recovery.md), [ODT optimizer](odt.md),
 [boundary fitter](boundary.md), and [extractor](extraction.md) remain callable
 without constructing this mesher. Importing or using them does not load the new
 scheduler or add meshing stages to their graphs.

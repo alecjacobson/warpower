@@ -11,7 +11,7 @@ import warp as wp
 
 from benchmarks.run import cpu_quota_delta, cpu_quota_snapshot
 from examples.vtm_inputs import surface, write_off
-from warpower import SizingField, SurfaceDomain, VariationalMeshingWorkspace
+from warpower import SizingField, SurfaceDomain, VariationalMesher
 
 
 def write_vtu(path, points, tets, quality):
@@ -158,7 +158,7 @@ def main():
             minimum=0.35,
             maximum=1.0,
         )
-    mesh = VariationalMeshingWorkspace(
+    mesh = VariationalMesher(
         domain,
         args.n,
         initial_count=args.initial,

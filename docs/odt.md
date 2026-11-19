@@ -20,7 +20,7 @@ with wp.ScopedCapture() as capture:
 wp.capture_launch(capture.graph)
 ```
 
-As with `DiagramWorkspace`, allocation, compilation, and capture occur during
+As with `UpdatableDiagram`, allocation, compilation, and capture occur during
 setup. All optimization decisions, tetrahedralization, reductions, rejection,
 rollback, and convergence checks run on the device. `run()` also works inside an
 enclosing `wp.capture_while` loop. Output buffers have stable pointers and device
@@ -59,7 +59,7 @@ numerical reconstruction without allowing stale/partial output to escape.
 The underlying full-hull builder still has the documented degeneracy limitations.
 Initial failure propagates through `error`; a failure on a proposed step may be
 recovered through backtracking. The independent
-[`DelaunayWorkspace`](api.md#delaunayworkspace) provides certified construction
+[`UpdatableDelaunay`](api.md#updatabledelaunay) provides certified construction
 and degeneracy recovery; this standalone optimizer still uses the floating-point
 builder. The [complete mesher](mesher.md) uses certified reconstruction.
 
